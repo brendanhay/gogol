@@ -38,13 +38,13 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
     , CoursesTeachersDelete
 
     -- * Request Lenses
-    , ctdXgafv
-    , ctdUploadProtocol
-    , ctdCourseId
-    , ctdAccessToken
-    , ctdUploadType
-    , ctdUserId
-    , ctdCallback
+    , ctdtXgafv
+    , ctdtUploadProtocol
+    , ctdtCourseId
+    , ctdtAccessToken
+    , ctdtUploadType
+    , ctdtUserId
+    , ctdtCallback
     ) where
 
 import           Network.Google.Classroom.Types
@@ -75,13 +75,13 @@ type CoursesTeachersDeleteResource =
 -- /See:/ 'coursesTeachersDelete' smart constructor.
 data CoursesTeachersDelete =
   CoursesTeachersDelete'
-    { _ctdXgafv          :: !(Maybe Xgafv)
-    , _ctdUploadProtocol :: !(Maybe Text)
-    , _ctdCourseId       :: !Text
-    , _ctdAccessToken    :: !(Maybe Text)
-    , _ctdUploadType     :: !(Maybe Text)
-    , _ctdUserId         :: !Text
-    , _ctdCallback       :: !(Maybe Text)
+    { _ctdtXgafv          :: !(Maybe Xgafv)
+    , _ctdtUploadProtocol :: !(Maybe Text)
+    , _ctdtCourseId       :: !Text
+    , _ctdtAccessToken    :: !(Maybe Text)
+    , _ctdtUploadType     :: !(Maybe Text)
+    , _ctdtUserId         :: !Text
+    , _ctdtCallback       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,85 +90,86 @@ data CoursesTeachersDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctdXgafv'
+-- * 'ctdtXgafv'
 --
--- * 'ctdUploadProtocol'
+-- * 'ctdtUploadProtocol'
 --
--- * 'ctdCourseId'
+-- * 'ctdtCourseId'
 --
--- * 'ctdAccessToken'
+-- * 'ctdtAccessToken'
 --
--- * 'ctdUploadType'
+-- * 'ctdtUploadType'
 --
--- * 'ctdUserId'
+-- * 'ctdtUserId'
 --
--- * 'ctdCallback'
+-- * 'ctdtCallback'
 coursesTeachersDelete
-    :: Text -- ^ 'ctdCourseId'
-    -> Text -- ^ 'ctdUserId'
+    :: Text -- ^ 'ctdtCourseId'
+    -> Text -- ^ 'ctdtUserId'
     -> CoursesTeachersDelete
-coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
+coursesTeachersDelete pCtdtCourseId_ pCtdtUserId_ =
   CoursesTeachersDelete'
-    { _ctdXgafv = Nothing
-    , _ctdUploadProtocol = Nothing
-    , _ctdCourseId = pCtdCourseId_
-    , _ctdAccessToken = Nothing
-    , _ctdUploadType = Nothing
-    , _ctdUserId = pCtdUserId_
-    , _ctdCallback = Nothing
+    { _ctdtXgafv = Nothing
+    , _ctdtUploadProtocol = Nothing
+    , _ctdtCourseId = pCtdtCourseId_
+    , _ctdtAccessToken = Nothing
+    , _ctdtUploadType = Nothing
+    , _ctdtUserId = pCtdtUserId_
+    , _ctdtCallback = Nothing
     }
 
 
 -- | V1 error format.
-ctdXgafv :: Lens' CoursesTeachersDelete (Maybe Xgafv)
-ctdXgafv = lens _ctdXgafv (\ s a -> s{_ctdXgafv = a})
+ctdtXgafv :: Lens' CoursesTeachersDelete (Maybe Xgafv)
+ctdtXgafv
+  = lens _ctdtXgafv (\ s a -> s{_ctdtXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ctdUploadProtocol :: Lens' CoursesTeachersDelete (Maybe Text)
-ctdUploadProtocol
-  = lens _ctdUploadProtocol
-      (\ s a -> s{_ctdUploadProtocol = a})
+ctdtUploadProtocol :: Lens' CoursesTeachersDelete (Maybe Text)
+ctdtUploadProtocol
+  = lens _ctdtUploadProtocol
+      (\ s a -> s{_ctdtUploadProtocol = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-ctdCourseId :: Lens' CoursesTeachersDelete Text
-ctdCourseId
-  = lens _ctdCourseId (\ s a -> s{_ctdCourseId = a})
+ctdtCourseId :: Lens' CoursesTeachersDelete Text
+ctdtCourseId
+  = lens _ctdtCourseId (\ s a -> s{_ctdtCourseId = a})
 
 -- | OAuth access token.
-ctdAccessToken :: Lens' CoursesTeachersDelete (Maybe Text)
-ctdAccessToken
-  = lens _ctdAccessToken
-      (\ s a -> s{_ctdAccessToken = a})
+ctdtAccessToken :: Lens' CoursesTeachersDelete (Maybe Text)
+ctdtAccessToken
+  = lens _ctdtAccessToken
+      (\ s a -> s{_ctdtAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ctdUploadType :: Lens' CoursesTeachersDelete (Maybe Text)
-ctdUploadType
-  = lens _ctdUploadType
-      (\ s a -> s{_ctdUploadType = a})
+ctdtUploadType :: Lens' CoursesTeachersDelete (Maybe Text)
+ctdtUploadType
+  = lens _ctdtUploadType
+      (\ s a -> s{_ctdtUploadType = a})
 
 -- | Identifier of the teacher to delete. The identifier can be one of the
 -- following: * the numeric identifier for the user * the email address of
 -- the user * the string literal \`\"me\"\`, indicating the requesting user
-ctdUserId :: Lens' CoursesTeachersDelete Text
-ctdUserId
-  = lens _ctdUserId (\ s a -> s{_ctdUserId = a})
+ctdtUserId :: Lens' CoursesTeachersDelete Text
+ctdtUserId
+  = lens _ctdtUserId (\ s a -> s{_ctdtUserId = a})
 
 -- | JSONP
-ctdCallback :: Lens' CoursesTeachersDelete (Maybe Text)
-ctdCallback
-  = lens _ctdCallback (\ s a -> s{_ctdCallback = a})
+ctdtCallback :: Lens' CoursesTeachersDelete (Maybe Text)
+ctdtCallback
+  = lens _ctdtCallback (\ s a -> s{_ctdtCallback = a})
 
 instance GoogleRequest CoursesTeachersDelete where
         type Rs CoursesTeachersDelete = Empty
         type Scopes CoursesTeachersDelete =
              '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient CoursesTeachersDelete'{..}
-          = go _ctdCourseId _ctdUserId _ctdXgafv
-              _ctdUploadProtocol
-              _ctdAccessToken
-              _ctdUploadType
-              _ctdCallback
+          = go _ctdtCourseId _ctdtUserId _ctdtXgafv
+              _ctdtUploadProtocol
+              _ctdtAccessToken
+              _ctdtUploadType
+              _ctdtCallback
               (Just AltJSON)
               classroomService
           where go

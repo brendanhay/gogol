@@ -162,8 +162,8 @@ diualUploadType
   = lens _diualUploadType
       (\ s a -> s{_diualUploadType = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 diualDebugOptionsEnableDebugging :: Lens' DebugIdentitysourcesUnmAppedidsList (Maybe Bool)
 diualDebugOptionsEnableDebugging
   = lens _diualDebugOptionsEnableDebugging

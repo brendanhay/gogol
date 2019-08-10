@@ -827,7 +827,7 @@ clusterState
 clusterState = ClusterState' {_csReplicationState = Nothing}
 
 
--- | (\`OutputOnly\`) The state of replication for the table in this cluster.
+-- | Output only. The state of replication for the table in this cluster.
 csReplicationState :: Lens' ClusterState (Maybe ClusterStateReplicationState)
 csReplicationState
   = lens _csReplicationState
@@ -1039,11 +1039,11 @@ instance ToJSON ListAppProFilesResponse where
                   ("failedLocations" .=) <$> _lapfrFailedLocations,
                   ("appProfiles" .=) <$> _lapfrAppProFiles])
 
--- | (\`OutputOnly\`) Map from cluster ID to per-cluster table state. If it
--- could not be determined whether or not the table has data in a
--- particular cluster (for example, if its zone is unavailable), then there
--- will be an entry for the cluster with UNKNOWN \`replication_status\`.
--- Views: \`REPLICATION_VIEW\`, \`FULL\`
+-- | Output only. Map from cluster ID to per-cluster table state. If it could
+-- not be determined whether or not the table has data in a particular
+-- cluster (for example, if its zone is unavailable), then there will be an
+-- entry for the cluster with UNKNOWN \`replication_status\`. Views:
+-- \`REPLICATION_VIEW\`, \`FULL\`
 --
 -- /See:/ 'tableClusterStates' smart constructor.
 newtype TableClusterStates =
@@ -2842,22 +2842,22 @@ table =
 -- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
 -- are stored in this table. Timestamps not matching the granularity will
 -- be rejected. If unspecified at creation time, the value will be set to
--- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`
+-- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`.
 tGranularity :: Lens' Table (Maybe TableGranularity)
 tGranularity
   = lens _tGranularity (\ s a -> s{_tGranularity = a})
 
--- | (\`OutputOnly\`) The unique name of the table. Values are of the form
+-- | Output only. The unique name of the table. Values are of the form
 -- \`projects\/\/instances\/\/tables\/_a-zA-Z0-9*\`. Views: \`NAME_ONLY\`,
 -- \`SCHEMA_VIEW\`, \`REPLICATION_VIEW\`, \`FULL\`
 tName :: Lens' Table (Maybe Text)
 tName = lens _tName (\ s a -> s{_tName = a})
 
--- | (\`OutputOnly\`) Map from cluster ID to per-cluster table state. If it
--- could not be determined whether or not the table has data in a
--- particular cluster (for example, if its zone is unavailable), then there
--- will be an entry for the cluster with UNKNOWN \`replication_status\`.
--- Views: \`REPLICATION_VIEW\`, \`FULL\`
+-- | Output only. Map from cluster ID to per-cluster table state. If it could
+-- not be determined whether or not the table has data in a particular
+-- cluster (for example, if its zone is unavailable), then there will be an
+-- entry for the cluster with UNKNOWN \`replication_status\`. Views:
+-- \`REPLICATION_VIEW\`, \`FULL\`
 tClusterStates :: Lens' Table (Maybe TableClusterStates)
 tClusterStates
   = lens _tClusterStates
@@ -2969,8 +2969,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -2983,10 +2983,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

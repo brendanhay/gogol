@@ -391,14 +391,16 @@ data GoogleCloudMlV1__PredictionInputDataFormat
       -- Deprecated. Use JSON instead.
     | TfRecord
       -- ^ @TF_RECORD@
-      -- INPUT ONLY. The source file is a TFRecord file.
+      -- The source file is a TFRecord file. Currently available only for input
+      -- data.
     | TfRecordGzip
       -- ^ @TF_RECORD_GZIP@
-      -- INPUT ONLY. The source file is a GZIP-compressed TFRecord file.
+      -- The source file is a GZIP-compressed TFRecord file. Currently available
+      -- only for input data.
     | CSV
       -- ^ @CSV@
-      -- OUTPUT ONLY. Output values will be in comma-separated rows, with keys in
-      -- a separate file.
+      -- Values are comma-separated rows, with keys in a separate file. Currently
+      -- available only for output data.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__PredictionInputDataFormat
@@ -475,14 +477,16 @@ data GoogleCloudMlV1__PredictionInputOutputDataFormat
       -- Deprecated. Use JSON instead.
     | GCMVPIODFTfRecord
       -- ^ @TF_RECORD@
-      -- INPUT ONLY. The source file is a TFRecord file.
+      -- The source file is a TFRecord file. Currently available only for input
+      -- data.
     | GCMVPIODFTfRecordGzip
       -- ^ @TF_RECORD_GZIP@
-      -- INPUT ONLY. The source file is a GZIP-compressed TFRecord file.
+      -- The source file is a GZIP-compressed TFRecord file. Currently available
+      -- only for input data.
     | GCMVPIODFCSV
       -- ^ @CSV@
-      -- OUTPUT ONLY. Output values will be in comma-separated rows, with keys in
-      -- a separate file.
+      -- Values are comma-separated rows, with keys in a separate file. Currently
+      -- available only for output data.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__PredictionInputOutputDataFormat
@@ -669,7 +673,7 @@ instance FromJSON GoogleCloudMlV1__OperationMetadataOperationType where
 instance ToJSON GoogleCloudMlV1__OperationMetadataOperationType where
     toJSON = toJSONText
 
--- | The available types of accelerators.
+-- | The type of accelerator to use.
 data GoogleCloudMlV1__AcceleratorConfigType
     = AcceleratorTypeUnspecified
       -- ^ @ACCELERATOR_TYPE_UNSPECIFIED@
@@ -688,7 +692,7 @@ data GoogleCloudMlV1__AcceleratorConfigType
       -- Nvidia Tesla P4 GPU.
     | TpuV2
       -- ^ @TPU_V2@
-      -- TPU V2
+      -- TPU v2.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__AcceleratorConfigType

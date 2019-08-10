@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns a list of activities visible to the current logged in user.
--- Visible activities are determined by the visiblity settings of the
+-- Visible activities are determined by the visibility settings of the
 -- object that was acted on, e.g. Drive files a user can see. An activity
 -- is a record of past events. Multiple events may be merged if they are
 -- similar. A request is scoped to activities from a given Google service
@@ -69,7 +69,7 @@ type ActivitiesListResource =
                            Get '[JSON] ListActivitiesResponse
 
 -- | Returns a list of activities visible to the current logged in user.
--- Visible activities are determined by the visiblity settings of the
+-- Visible activities are determined by the visibility settings of the
 -- object that was acted on, e.g. Drive files a user can see. An activity
 -- is a record of past events. Multiple events may be merged if they are
 -- similar. A request is scoped to activities from a given Google service
@@ -140,8 +140,9 @@ alGroupingStrategy
   = lens _alGroupingStrategy
       (\ s a -> s{_alGroupingStrategy = a})
 
--- | Indicates the user to return activity for. Use the special value me to
--- indicate the currently authenticated user.
+-- | The ID used for ACL checks (does not filter the resulting event list by
+-- the assigned value). Use the special value me to indicate the currently
+-- authenticated user.
 alUserId :: Lens' ActivitiesList Text
 alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
 

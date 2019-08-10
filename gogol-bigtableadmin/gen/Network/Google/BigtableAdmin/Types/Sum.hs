@@ -53,7 +53,7 @@ instance FromJSON ClusterDefaultStorageType where
 instance ToJSON ClusterDefaultStorageType where
     toJSON = toJSONText
 
--- | (\`OutputOnly\`) The state of replication for the table in this cluster.
+-- | Output only. The state of replication for the table in this cluster.
 data ClusterStateReplicationState
     = StateNotKnown
       -- ^ @STATE_NOT_KNOWN@
@@ -260,7 +260,7 @@ instance ToJSON Xgafv where
 -- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
 -- are stored in this table. Timestamps not matching the granularity will
 -- be rejected. If unspecified at creation time, the value will be set to
--- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`
+-- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`.
 data TableGranularity
     = TimestampGranularityUnspecified
       -- ^ @TIMESTAMP_GRANULARITY_UNSPECIFIED@

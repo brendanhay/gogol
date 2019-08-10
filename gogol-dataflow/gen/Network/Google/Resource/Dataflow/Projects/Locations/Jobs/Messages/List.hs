@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Request the job status.
+-- Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.messages.list\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.messages.list\` is not recommended, as you can
+-- only request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.messages.list@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
@@ -75,7 +80,12 @@ type ProjectsLocationsJobsMessagesListResource =
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListJobMessagesResponse
 
--- | Request the job status.
+-- | Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.messages.list\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.messages.list\` is not recommended, as you can
+-- only request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsMessagesList' smart constructor.
 data ProjectsLocationsJobsMessagesList =
@@ -165,7 +175,9 @@ pljmlUploadProtocol
   = lens _pljmlUploadProtocol
       (\ s a -> s{_pljmlUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pljmlLocation :: Lens' ProjectsLocationsJobsMessagesList Text
 pljmlLocation
   = lens _pljmlLocation

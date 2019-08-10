@@ -83,9 +83,6 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.enterprises.setAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
 
-    -- ** androidenterprise.enterprises.setAndroidDevicePolicyConfig
-    , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAndroidDevicePolicyConfig
-
     -- ** androidenterprise.enterprises.setStoreLayout
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
 
@@ -507,6 +504,7 @@ module Network.Google.AndroidEnterprise
     , ProductPolicy
     , productPolicy
     , ppTracks
+    , ppManagedConfiguration
     , ppTrackIds
     , ppAutoInstallPolicy
     , ppProductId
@@ -564,12 +562,6 @@ module Network.Google.AndroidEnterprise
     , groupLicensesListResponse
     , gllrGroupLicense
     , gllrKind
-
-    -- ** AndroidDevicePolicyConfig
-    , AndroidDevicePolicyConfig
-    , androidDevicePolicyConfig
-    , adpcState
-    , adpcKind
 
     -- ** ProductSet
     , ProductSet
@@ -909,7 +901,6 @@ import           Network.Google.Resource.AndroidEnterprise.Enterprises.List
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.PullNotificationSet
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
-import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAndroidDevicePolicyConfig
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
 import           Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
@@ -1023,7 +1014,6 @@ type AndroidEnterpriseAPI =
        :<|> EnterprisesListResource
        :<|> EnterprisesUnenrollResource
        :<|> EnterprisesGetStoreLayoutResource
-       :<|> EnterprisesSetAndroidDevicePolicyConfigResource
        :<|> EnterprisesSetAccountResource
        :<|> EnterprisesEnrollResource
        :<|> EnterprisesGetResource

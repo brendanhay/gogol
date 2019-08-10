@@ -75,6 +75,7 @@ library
         , Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
         , Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
         , Network.Google.Resource.Gmail.Users.Settings.GetImap
+        , Network.Google.Resource.Gmail.Users.Settings.GetLanguage
         , Network.Google.Resource.Gmail.Users.Settings.GetPop
         , Network.Google.Resource.Gmail.Users.Settings.GetVacation
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
@@ -91,6 +92,7 @@ library
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
         , Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
         , Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+        , Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
         , Network.Google.Resource.Gmail.Users.Settings.UpdatePop
         , Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
         , Network.Google.Resource.Gmail.Users.Stop

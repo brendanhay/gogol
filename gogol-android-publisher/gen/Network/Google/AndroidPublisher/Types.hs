@@ -245,10 +245,17 @@ module Network.Google.AndroidPublisher.Types
     , trStatus
     , trReleaseNotes
     , trUserFraction
+    , trCountryTargeting
     , trName
 
     -- * EditsImagesListImageType
     , EditsImagesListImageType (..)
+
+    -- * CountryTargeting
+    , CountryTargeting
+    , countryTargeting
+    , ctIncludeRestOfWorld
+    , ctCountries
 
     -- * Bundle
     , Bundle

@@ -136,8 +136,8 @@ iddsUploadType
 iddsName :: Lens' IndexingDatasourcesDeleteSchema Text
 iddsName = lens _iddsName (\ s a -> s{_iddsName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 iddsDebugOptionsEnableDebugging :: Lens' IndexingDatasourcesDeleteSchema (Maybe Bool)
 iddsDebugOptionsEnableDebugging
   = lens _iddsDebugOptionsEnableDebugging

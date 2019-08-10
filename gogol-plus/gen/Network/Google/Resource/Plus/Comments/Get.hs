@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get a comment.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.comments.get@.
 module Network.Google.Resource.Plus.Comments.Get
@@ -48,7 +49,8 @@ type CommentsGetResource =
            Capture "commentId" Text :>
              QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
--- | Get a comment.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'commentsGet' smart constructor.
 newtype CommentsGet =

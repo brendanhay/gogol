@@ -92,8 +92,7 @@ editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
     }
 
 
--- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
--- \"production\", \"rollout\" or \"internal\".
+-- | The track to read or modify.
 etutTrack :: Lens' EditsTestersUpdate Text
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})

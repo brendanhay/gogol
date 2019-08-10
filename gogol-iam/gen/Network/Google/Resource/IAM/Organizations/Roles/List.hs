@@ -161,7 +161,10 @@ orlShowDeleted
   = lens _orlShowDeleted
       (\ s a -> s{_orlShowDeleted = a})
 
--- | Optional view for the returned Role objects.
+-- | Optional view for the returned Role objects. When \`FULL\` is specified,
+-- the \`includedPermissions\` field is returned, which includes a list of
+-- all permissions in the role. The default value is \`BASIC\`, which does
+-- not return the \`includedPermissions\` field.
 orlView :: Lens' OrganizationsRolesList (Maybe Text)
 orlView = lens _orlView (\ s a -> s{_orlView = a})
 

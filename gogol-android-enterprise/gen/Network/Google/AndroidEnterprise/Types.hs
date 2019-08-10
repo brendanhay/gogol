@@ -240,6 +240,7 @@ module Network.Google.AndroidEnterprise.Types
     , ProductPolicy
     , productPolicy
     , ppTracks
+    , ppManagedConfiguration
     , ppTrackIds
     , ppAutoInstallPolicy
     , ppProductId
@@ -297,12 +298,6 @@ module Network.Google.AndroidEnterprise.Types
     , groupLicensesListResponse
     , gllrGroupLicense
     , gllrKind
-
-    -- * AndroidDevicePolicyConfig
-    , AndroidDevicePolicyConfig
-    , androidDevicePolicyConfig
-    , adpcState
-    , adpcKind
 
     -- * ProductSet
     , ProductSet

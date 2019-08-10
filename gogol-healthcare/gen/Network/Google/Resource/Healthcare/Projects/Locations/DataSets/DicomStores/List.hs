@@ -38,6 +38,7 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdslUploadProtocol
     , pldsdslAccessToken
     , pldsdslUploadType
+    , pldsdslFilter
     , pldsdslPageToken
     , pldsdslPageSize
     , pldsdslCallback
@@ -50,18 +51,19 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsDicomStoresList' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresListResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "dicomStores" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListDicomStoresResponse
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListDicomStoresResponse
 
 -- | Lists the DICOM stores in the given dataset.
 --
@@ -73,6 +75,7 @@ data ProjectsLocationsDataSetsDicomStoresList =
     , _pldsdslUploadProtocol :: !(Maybe Text)
     , _pldsdslAccessToken    :: !(Maybe Text)
     , _pldsdslUploadType     :: !(Maybe Text)
+    , _pldsdslFilter         :: !(Maybe Text)
     , _pldsdslPageToken      :: !(Maybe Text)
     , _pldsdslPageSize       :: !(Maybe (Textual Int32))
     , _pldsdslCallback       :: !(Maybe Text)
@@ -94,6 +97,8 @@ data ProjectsLocationsDataSetsDicomStoresList =
 --
 -- * 'pldsdslUploadType'
 --
+-- * 'pldsdslFilter'
+--
 -- * 'pldsdslPageToken'
 --
 -- * 'pldsdslPageSize'
@@ -109,6 +114,7 @@ projectsLocationsDataSetsDicomStoresList pPldsdslParent_ =
     , _pldsdslUploadProtocol = Nothing
     , _pldsdslAccessToken = Nothing
     , _pldsdslUploadType = Nothing
+    , _pldsdslFilter = Nothing
     , _pldsdslPageToken = Nothing
     , _pldsdslPageSize = Nothing
     , _pldsdslCallback = Nothing
@@ -144,6 +150,14 @@ pldsdslUploadType
   = lens _pldsdslUploadType
       (\ s a -> s{_pldsdslUploadType = a})
 
+-- | Restricts stores returned to those matching a filter. Syntax:
+-- https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search\/query_strings
+-- Only filtering on labels is supported, for example \`labels.key=value\`.
+pldsdslFilter :: Lens' ProjectsLocationsDataSetsDicomStoresList (Maybe Text)
+pldsdslFilter
+  = lens _pldsdslFilter
+      (\ s a -> s{_pldsdslFilter = a})
+
 -- | The next_page_token value returned from the previous List request, if
 -- any.
 pldsdslPageToken :: Lens' ProjectsLocationsDataSetsDicomStoresList (Maybe Text)
@@ -178,6 +192,7 @@ instance GoogleRequest
               _pldsdslUploadProtocol
               _pldsdslAccessToken
               _pldsdslUploadType
+              _pldsdslFilter
               _pldsdslPageToken
               _pldsdslPageSize
               _pldsdslCallback

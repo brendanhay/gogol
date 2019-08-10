@@ -458,6 +458,59 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | PullRequestFilter contains filter properties for matching GitHub Pull
+-- Requests.
+--
+-- /See:/ 'pullRequestFilter' smart constructor.
+data PullRequestFilter =
+  PullRequestFilter'
+    { _prfCommentControl :: !(Maybe PullRequestFilterCommentControl)
+    , _prfBranch         :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PullRequestFilter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prfCommentControl'
+--
+-- * 'prfBranch'
+pullRequestFilter
+    :: PullRequestFilter
+pullRequestFilter =
+  PullRequestFilter' {_prfCommentControl = Nothing, _prfBranch = Nothing}
+
+
+-- | Whether to block builds on a \"\/gcbrun\" comment from a repository
+-- owner or collaborator.
+prfCommentControl :: Lens' PullRequestFilter (Maybe PullRequestFilterCommentControl)
+prfCommentControl
+  = lens _prfCommentControl
+      (\ s a -> s{_prfCommentControl = a})
+
+-- | Regex of branches to match. The syntax of the regular expressions
+-- accepted is the syntax accepted by RE2 and described at
+-- https:\/\/github.com\/google\/re2\/wiki\/Syntax
+prfBranch :: Lens' PullRequestFilter (Maybe Text)
+prfBranch
+  = lens _prfBranch (\ s a -> s{_prfBranch = a})
+
+instance FromJSON PullRequestFilter where
+        parseJSON
+          = withObject "PullRequestFilter"
+              (\ o ->
+                 PullRequestFilter' <$>
+                   (o .:? "commentControl") <*> (o .:? "branch"))
+
+instance ToJSON PullRequestFilter where
+        toJSON PullRequestFilter'{..}
+          = object
+              (catMaybes
+                 [("commentControl" .=) <$> _prfCommentControl,
+                  ("branch" .=) <$> _prfBranch])
+
 -- | Specifies a build to retry.
 --
 -- /See:/ 'retryBuildRequest' smart constructor.
@@ -612,6 +665,7 @@ data Results =
     , _rArtifactManifest :: !(Maybe Text)
     , _rBuildStepOutputs :: !(Maybe [Bytes])
     , _rNumArtifacts     :: !(Maybe (Textual Int64))
+    , _rArtifactTiming   :: !(Maybe TimeSpan)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -629,6 +683,8 @@ data Results =
 -- * 'rBuildStepOutputs'
 --
 -- * 'rNumArtifacts'
+--
+-- * 'rArtifactTiming'
 results
     :: Results
 results =
@@ -638,6 +694,7 @@ results =
     , _rArtifactManifest = Nothing
     , _rBuildStepOutputs = Nothing
     , _rNumArtifacts = Nothing
+    , _rArtifactTiming = Nothing
     }
 
 
@@ -683,6 +740,12 @@ rNumArtifacts
       (\ s a -> s{_rNumArtifacts = a})
       . mapping _Coerce
 
+-- | Time to push all non-container artifacts.
+rArtifactTiming :: Lens' Results (Maybe TimeSpan)
+rArtifactTiming
+  = lens _rArtifactTiming
+      (\ s a -> s{_rArtifactTiming = a})
+
 instance FromJSON Results where
         parseJSON
           = withObject "Results"
@@ -692,7 +755,8 @@ instance FromJSON Results where
                      (o .:? "buildStepImages" .!= mempty)
                      <*> (o .:? "artifactManifest")
                      <*> (o .:? "buildStepOutputs" .!= mempty)
-                     <*> (o .:? "numArtifacts"))
+                     <*> (o .:? "numArtifacts")
+                     <*> (o .:? "artifactTiming"))
 
 instance ToJSON Results where
         toJSON Results'{..}
@@ -702,7 +766,8 @@ instance ToJSON Results where
                   ("buildStepImages" .=) <$> _rBuildStepImages,
                   ("artifactManifest" .=) <$> _rArtifactManifest,
                   ("buildStepOutputs" .=) <$> _rBuildStepOutputs,
-                  ("numArtifacts" .=) <$> _rNumArtifacts])
+                  ("numArtifacts" .=) <$> _rNumArtifacts,
+                  ("artifactTiming" .=) <$> _rArtifactTiming])
 
 -- | Substitutions data for Build resource.
 --
@@ -1055,6 +1120,30 @@ instance ToJSON Artifacts where
                  [("images" .=) <$> _aImages,
                   ("objects" .=) <$> _aObjects])
 
+-- | A CheckSuiteFilter is a filter that indicates that we should build on
+-- all check suite events.
+--
+-- /See:/ 'checkSuiteFilter' smart constructor.
+data CheckSuiteFilter =
+  CheckSuiteFilter'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CheckSuiteFilter' with the minimum fields required to make a request.
+--
+checkSuiteFilter
+    :: CheckSuiteFilter
+checkSuiteFilter = CheckSuiteFilter'
+
+
+instance FromJSON CheckSuiteFilter where
+        parseJSON
+          = withObject "CheckSuiteFilter"
+              (\ o -> pure CheckSuiteFilter')
+
+instance ToJSON CheckSuiteFilter where
+        toJSON = const emptyObject
+
 -- | Files in the workspace to upload to Cloud Storage upon successful
 -- completion of all build steps.
 --
@@ -1118,6 +1207,106 @@ instance ToJSON ArtifactObjects where
                  [("location" .=) <$> _aoLocation,
                   ("timing" .=) <$> _aoTiming,
                   ("paths" .=) <$> _aoPaths])
+
+-- | GitHubEventsConfig describes the configuration of a trigger that creates
+-- a build whenever a GitHub event is received. This message is
+-- experimental.
+--
+-- /See:/ 'gitHubEventsConfig' smart constructor.
+data GitHubEventsConfig =
+  GitHubEventsConfig'
+    { _ghecOwner          :: !(Maybe Text)
+    , _ghecPullRequest    :: !(Maybe PullRequestFilter)
+    , _ghecName           :: !(Maybe Text)
+    , _ghecCheckSuite     :: !(Maybe CheckSuiteFilter)
+    , _ghecPush           :: !(Maybe PushFilter)
+    , _ghecInstallationId :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GitHubEventsConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ghecOwner'
+--
+-- * 'ghecPullRequest'
+--
+-- * 'ghecName'
+--
+-- * 'ghecCheckSuite'
+--
+-- * 'ghecPush'
+--
+-- * 'ghecInstallationId'
+gitHubEventsConfig
+    :: GitHubEventsConfig
+gitHubEventsConfig =
+  GitHubEventsConfig'
+    { _ghecOwner = Nothing
+    , _ghecPullRequest = Nothing
+    , _ghecName = Nothing
+    , _ghecCheckSuite = Nothing
+    , _ghecPush = Nothing
+    , _ghecInstallationId = Nothing
+    }
+
+
+-- | Owner of the repository.
+ghecOwner :: Lens' GitHubEventsConfig (Maybe Text)
+ghecOwner
+  = lens _ghecOwner (\ s a -> s{_ghecOwner = a})
+
+-- | filter to match changes in pull requests.
+ghecPullRequest :: Lens' GitHubEventsConfig (Maybe PullRequestFilter)
+ghecPullRequest
+  = lens _ghecPullRequest
+      (\ s a -> s{_ghecPullRequest = a})
+
+-- | Name of the repository.
+ghecName :: Lens' GitHubEventsConfig (Maybe Text)
+ghecName = lens _ghecName (\ s a -> s{_ghecName = a})
+
+-- | Output only. Indicates that a build was generated from a check suite
+-- event.
+ghecCheckSuite :: Lens' GitHubEventsConfig (Maybe CheckSuiteFilter)
+ghecCheckSuite
+  = lens _ghecCheckSuite
+      (\ s a -> s{_ghecCheckSuite = a})
+
+-- | filter to match changes in refs like branches, tags.
+ghecPush :: Lens' GitHubEventsConfig (Maybe PushFilter)
+ghecPush = lens _ghecPush (\ s a -> s{_ghecPush = a})
+
+-- | The installationID that emmits the GitHub event.
+ghecInstallationId :: Lens' GitHubEventsConfig (Maybe Int64)
+ghecInstallationId
+  = lens _ghecInstallationId
+      (\ s a -> s{_ghecInstallationId = a})
+      . mapping _Coerce
+
+instance FromJSON GitHubEventsConfig where
+        parseJSON
+          = withObject "GitHubEventsConfig"
+              (\ o ->
+                 GitHubEventsConfig' <$>
+                   (o .:? "owner") <*> (o .:? "pullRequest") <*>
+                     (o .:? "name")
+                     <*> (o .:? "checkSuite")
+                     <*> (o .:? "push")
+                     <*> (o .:? "installationId"))
+
+instance ToJSON GitHubEventsConfig where
+        toJSON GitHubEventsConfig'{..}
+          = object
+              (catMaybes
+                 [("owner" .=) <$> _ghecOwner,
+                  ("pullRequest" .=) <$> _ghecPullRequest,
+                  ("name" .=) <$> _ghecName,
+                  ("checkSuite" .=) <$> _ghecCheckSuite,
+                  ("push" .=) <$> _ghecPush,
+                  ("installationId" .=) <$> _ghecInstallationId])
 
 -- | Volume describes a Docker container volume which is mounted into build
 -- steps in order to persist files across build step execution.
@@ -1602,6 +1791,53 @@ instance ToJSON Secret where
                  [("kmsKeyName" .=) <$> _sKmsKeyName,
                   ("secretEnv" .=) <$> _sSecretEnv])
 
+-- | Push contains filter properties for matching GitHub git pushes.
+--
+-- /See:/ 'pushFilter' smart constructor.
+data PushFilter =
+  PushFilter'
+    { _pfTag    :: !(Maybe Text)
+    , _pfBranch :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PushFilter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pfTag'
+--
+-- * 'pfBranch'
+pushFilter
+    :: PushFilter
+pushFilter = PushFilter' {_pfTag = Nothing, _pfBranch = Nothing}
+
+
+-- | Regexes of tags to match. The syntax of the regular expressions accepted
+-- is the syntax accepted by RE2 and described at
+-- https:\/\/github.com\/google\/re2\/wiki\/Syntax
+pfTag :: Lens' PushFilter (Maybe Text)
+pfTag = lens _pfTag (\ s a -> s{_pfTag = a})
+
+-- | Regexes of branches to match. The syntax of the regular expressions
+-- accepted is the syntax accepted by RE2 and described at
+-- https:\/\/github.com\/google\/re2\/wiki\/Syntax
+pfBranch :: Lens' PushFilter (Maybe Text)
+pfBranch = lens _pfBranch (\ s a -> s{_pfBranch = a})
+
+instance FromJSON PushFilter where
+        parseJSON
+          = withObject "PushFilter"
+              (\ o ->
+                 PushFilter' <$> (o .:? "tag") <*> (o .:? "branch"))
+
+instance ToJSON PushFilter where
+        toJSON PushFilter'{..}
+          = object
+              (catMaybes
+                 [("tag" .=) <$> _pfTag, ("branch" .=) <$> _pfBranch])
+
 -- | Request to cancel an ongoing build.
 --
 -- /See:/ 'cancelBuildRequest' smart constructor.
@@ -1738,9 +1974,10 @@ instance ToJSON StorageSource where
 -- | Response containing existing \`BuildTriggers\`.
 --
 -- /See:/ 'listBuildTriggersResponse' smart constructor.
-newtype ListBuildTriggersResponse =
+data ListBuildTriggersResponse =
   ListBuildTriggersResponse'
-    { _lbtrTriggers :: Maybe [BuildTrigger]
+    { _lbtrNextPageToken :: !(Maybe Text)
+    , _lbtrTriggers      :: !(Maybe [BuildTrigger])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1749,11 +1986,21 @@ newtype ListBuildTriggersResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lbtrNextPageToken'
+--
 -- * 'lbtrTriggers'
 listBuildTriggersResponse
     :: ListBuildTriggersResponse
-listBuildTriggersResponse = ListBuildTriggersResponse' {_lbtrTriggers = Nothing}
+listBuildTriggersResponse =
+  ListBuildTriggersResponse'
+    {_lbtrNextPageToken = Nothing, _lbtrTriggers = Nothing}
 
+
+-- | Token to receive the next page of results.
+lbtrNextPageToken :: Lens' ListBuildTriggersResponse (Maybe Text)
+lbtrNextPageToken
+  = lens _lbtrNextPageToken
+      (\ s a -> s{_lbtrNextPageToken = a})
 
 -- | \`BuildTriggers\` for the project, sorted by \`create_time\` descending.
 lbtrTriggers :: Lens' ListBuildTriggersResponse [BuildTrigger]
@@ -1767,12 +2014,15 @@ instance FromJSON ListBuildTriggersResponse where
           = withObject "ListBuildTriggersResponse"
               (\ o ->
                  ListBuildTriggersResponse' <$>
-                   (o .:? "triggers" .!= mempty))
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "triggers" .!= mempty))
 
 instance ToJSON ListBuildTriggersResponse where
         toJSON ListBuildTriggersResponse'{..}
           = object
-              (catMaybes [("triggers" .=) <$> _lbtrTriggers])
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbtrNextPageToken,
+                  ("triggers" .=) <$> _lbtrTriggers])
 
 -- | An artifact that was uploaded during a build. This is a single record in
 -- the artifact manifest JSON file.
@@ -2303,6 +2553,7 @@ data BuildTrigger =
     , _btBuild           :: !(Maybe Build)
     , _btIgnoredFiles    :: !(Maybe [Text])
     , _btId              :: !(Maybe Text)
+    , _btGithub          :: !(Maybe GitHubEventsConfig)
     , _btDescription     :: !(Maybe Text)
     , _btFilename        :: !(Maybe Text)
     , _btCreateTime      :: !(Maybe DateTime')
@@ -2328,6 +2579,8 @@ data BuildTrigger =
 --
 -- * 'btId'
 --
+-- * 'btGithub'
+--
 -- * 'btDescription'
 --
 -- * 'btFilename'
@@ -2344,6 +2597,7 @@ buildTrigger =
     , _btBuild = Nothing
     , _btIgnoredFiles = Nothing
     , _btId = Nothing
+    , _btGithub = Nothing
     , _btDescription = Nothing
     , _btFilename = Nothing
     , _btCreateTime = Nothing
@@ -2405,6 +2659,11 @@ btIgnoredFiles
 btId :: Lens' BuildTrigger (Maybe Text)
 btId = lens _btId (\ s a -> s{_btId = a})
 
+-- | GitHubEventsConfig describes the configuration of a trigger that creates
+-- a build whenever a GitHub event is received.
+btGithub :: Lens' BuildTrigger (Maybe GitHubEventsConfig)
+btGithub = lens _btGithub (\ s a -> s{_btGithub = a})
+
 -- | Human-readable description of this trigger.
 btDescription :: Lens' BuildTrigger (Maybe Text)
 btDescription
@@ -2435,6 +2694,7 @@ instance FromJSON BuildTrigger where
                      <*> (o .:? "build")
                      <*> (o .:? "ignoredFiles" .!= mempty)
                      <*> (o .:? "id")
+                     <*> (o .:? "github")
                      <*> (o .:? "description")
                      <*> (o .:? "filename")
                      <*> (o .:? "createTime"))
@@ -2449,7 +2709,7 @@ instance ToJSON BuildTrigger where
                   ("triggerTemplate" .=) <$> _btTriggerTemplate,
                   ("build" .=) <$> _btBuild,
                   ("ignoredFiles" .=) <$> _btIgnoredFiles,
-                  ("id" .=) <$> _btId,
+                  ("id" .=) <$> _btId, ("github" .=) <$> _btGithub,
                   ("description" .=) <$> _btDescription,
                   ("filename" .=) <$> _btFilename,
                   ("createTime" .=) <$> _btCreateTime])

@@ -107,16 +107,9 @@ module Network.Google.FirebaseDynamicLinks.Types
     , dliDynamicLinkDomain
     , dliLink
     , dliIosInfo
-    , dliAppPreview
     , dliDomainURIPrefix
     , dliAndroidInfo
     , dliAnalyticsInfo
-
-    -- * AppPreview
-    , AppPreview
-    , appPreview
-    , apOpenButtonText
-    , apSavePositionText
 
     -- * GetIosPostInstallAttributionRequestVisualStyle
     , GetIosPostInstallAttributionRequestVisualStyle (..)
@@ -146,9 +139,11 @@ module Network.Google.FirebaseDynamicLinks.Types
     , getIosReopenAttributionResponse
     , girarIosMinAppVersion
     , girarDeepLink
+    , girarUtmContent
     , girarResolvedLink
     , girarUtmMedium
     , girarInvitationId
+    , girarUtmTerm
     , girarUtmCampaign
     , girarUtmSource
 
@@ -206,12 +201,14 @@ module Network.Google.FirebaseDynamicLinks.Types
     , gipiarAppMinimumVersion
     , gipiarAttributionConfidence
     , gipiarExternalBrowserDestinationLink
+    , gipiarUtmContent
     , gipiarResolvedLink
     , gipiarRequestedLink
     , gipiarUtmMedium
     , gipiarFallbackLink
     , gipiarInvitationId
     , gipiarIsStrongMatchExecutable
+    , gipiarUtmTerm
     , gipiarUtmCampaign
     , gipiarMatchMessage
     , gipiarUtmSource

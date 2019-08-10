@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a refund invoice for one or more shipment groups, and triggers a
--- refund for non-facilitated payment orders. This can only be used for
--- line items that have previously been charged using createChargeInvoice.
--- All amounts (except for the summary) are incremental with respect to the
+-- refund for orderinvoice enabled orders. This can only be used for line
+-- items that have previously been charged using createChargeInvoice. All
+-- amounts (except for the summary) are incremental with respect to the
 -- previous invoice.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderinvoices.createrefundinvoice@.
@@ -61,9 +61,9 @@ type OrderinvoicesCreaterefundinvoiceResource =
                      Post '[JSON] OrderinvoicesCreateRefundInvoiceResponse
 
 -- | Creates a refund invoice for one or more shipment groups, and triggers a
--- refund for non-facilitated payment orders. This can only be used for
--- line items that have previously been charged using createChargeInvoice.
--- All amounts (except for the summary) are incremental with respect to the
+-- refund for orderinvoice enabled orders. This can only be used for line
+-- items that have previously been charged using createChargeInvoice. All
+-- amounts (except for the summary) are incremental with respect to the
 -- previous invoice.
 --
 -- /See:/ 'orderinvoicesCreaterefundinvoice' smart constructor.

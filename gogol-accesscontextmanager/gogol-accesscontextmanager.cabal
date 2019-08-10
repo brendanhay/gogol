@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -51,7 +51,10 @@ library
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Get
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.List
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+        , Network.Google.Resource.AccessContextManager.Operations.Cancel
+        , Network.Google.Resource.AccessContextManager.Operations.Delete
         , Network.Google.Resource.AccessContextManager.Operations.Get
+        , Network.Google.Resource.AccessContextManager.Operations.List
 
     other-modules:
           Network.Google.AccessContextManager.Types.Product

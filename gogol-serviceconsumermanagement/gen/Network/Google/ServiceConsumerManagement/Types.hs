@@ -44,6 +44,10 @@ module Network.Google.ServiceConsumerManagement.Types
     -- * BackendRulePathTranslation
     , BackendRulePathTranslation (..)
 
+    -- * V1Beta1RefreshConsumerResponse
+    , V1Beta1RefreshConsumerResponse
+    , v1Beta1RefreshConsumerResponse
+
     -- * DocumentationRule
     , DocumentationRule
     , documentationRule
@@ -160,6 +164,11 @@ module Network.Google.ServiceConsumerManagement.Types
     -- * EnumSyntax
     , EnumSyntax (..)
 
+    -- * V1Beta1QuotaOverrideDimensions
+    , V1Beta1QuotaOverrideDimensions
+    , v1Beta1QuotaOverrideDimensions
+    , vbqodAddtional
+
     -- * Service
     , Service
     , service
@@ -205,11 +214,20 @@ module Network.Google.ServiceConsumerManagement.Types
     , Empty
     , empty
 
+    -- * V1Beta1ImportProducerOverridesResponse
+    , V1Beta1ImportProducerOverridesResponse
+    , v1Beta1ImportProducerOverridesResponse
+    , vbiporOverrides
+
     -- * CustomErrorRule
     , CustomErrorRule
     , customErrorRule
     , cerIsErrorType
     , cerSelector
+
+    -- * V1Beta1EnableConsumerResponse
+    , V1Beta1EnableConsumerResponse
+    , v1Beta1EnableConsumerResponse
 
     -- * OptionValue
     , OptionValue
@@ -231,6 +249,10 @@ module Network.Google.ServiceConsumerManagement.Types
 
     -- * MetricDescriptorMetadataLaunchStage
     , MetricDescriptorMetadataLaunchStage (..)
+
+    -- * V1EnableConsumerResponse
+    , V1EnableConsumerResponse
+    , v1EnableConsumerResponse
 
     -- * Mixin
     , Mixin
@@ -263,6 +285,11 @@ module Network.Google.ServiceConsumerManagement.Types
     , pContent
     , pName
 
+    -- * V1GenerateServiceAccountResponse
+    , V1GenerateServiceAccountResponse
+    , v1GenerateServiceAccountResponse
+    , vgsarAccount
+
     -- * AuthenticationRule
     , AuthenticationRule
     , authenticationRule
@@ -271,11 +298,25 @@ module Network.Google.ServiceConsumerManagement.Types
     , arAllowWithoutCredential
     , arOAuth
 
+    -- * V1AddVisibilityLabelsResponse
+    , V1AddVisibilityLabelsResponse
+    , v1AddVisibilityLabelsResponse
+    , vavlrLabels
+
     -- * ServiceAccountConfig
     , ServiceAccountConfig
     , serviceAccountConfig
     , sacAccountId
     , sacTenantProjectRoles
+
+    -- * V1Beta1QuotaOverride
+    , V1Beta1QuotaOverride
+    , v1Beta1QuotaOverride
+    , vbqoMetric
+    , vbqoOverrideValue
+    , vbqoName
+    , vbqoDimensions
+    , vbqoUnit
 
     -- * LabelDescriptorValueType
     , LabelDescriptorValueType (..)
@@ -289,6 +330,11 @@ module Network.Google.ServiceConsumerManagement.Types
     , AuthorizationConfig
     , authorizationConfig
     , acProvider
+
+    -- * DeleteTenantProjectRequest
+    , DeleteTenantProjectRequest
+    , deleteTenantProjectRequest
+    , dtprTag
 
     -- * TenantProjectPolicy
     , TenantProjectPolicy
@@ -351,6 +397,10 @@ module Network.Google.ServiceConsumerManagement.Types
     , metOptions
     , metSyntax
 
+    -- * V1RefreshConsumerResponse
+    , V1RefreshConsumerResponse
+    , v1RefreshConsumerResponse
+
     -- * SystemParameters
     , SystemParameters
     , systemParameters
@@ -375,6 +425,11 @@ module Network.Google.ServiceConsumerManagement.Types
     , mdmIngestDelay
     , mdmLaunchStage
 
+    -- * UndeleteTenantProjectRequest
+    , UndeleteTenantProjectRequest
+    , undeleteTenantProjectRequest
+    , utprTag
+
     -- * SystemParameterRule
     , SystemParameterRule
     , systemParameterRule
@@ -388,6 +443,10 @@ module Network.Google.ServiceConsumerManagement.Types
     , lValueType
     , lDescription
 
+    -- * V1Beta1DisableConsumerResponse
+    , V1Beta1DisableConsumerResponse
+    , v1Beta1DisableConsumerResponse
+
     -- * Usage
     , Usage
     , usage
@@ -397,6 +456,11 @@ module Network.Google.ServiceConsumerManagement.Types
 
     -- * FieldCardinality
     , FieldCardinality (..)
+
+    -- * V1Beta1BatchCreateProducerOverridesResponse
+    , V1Beta1BatchCreateProducerOverridesResponse
+    , v1Beta1BatchCreateProducerOverridesResponse
+    , vbbcporOverrides
 
     -- * HTTP
     , HTTP
@@ -504,6 +568,15 @@ module Network.Google.ServiceConsumerManagement.Types
     , quotaLimitValues
     , qlvAddtional
 
+    -- * V1ServiceAccount
+    , V1ServiceAccount
+    , v1ServiceAccount
+    , vsaEmail
+    , vsaTag
+    , vsaIAMAccountName
+    , vsaUniqueId
+    , vsaName
+
     -- * AttachTenantProjectRequest
     , AttachTenantProjectRequest
     , attachTenantProjectRequest
@@ -544,6 +617,10 @@ module Network.Google.ServiceConsumerManagement.Types
     , quota
     , qLimits
     , qMetricRules
+
+    -- * V1DisableConsumerResponse
+    , V1DisableConsumerResponse
+    , v1DisableConsumerResponse
 
     -- * HTTPRule
     , HTTPRule
@@ -587,6 +664,11 @@ module Network.Google.ServiceConsumerManagement.Types
     , TenantProjectConfigLabels
     , tenantProjectConfigLabels
     , tpclAddtional
+
+    -- * V1RemoveVisibilityLabelsResponse
+    , V1RemoveVisibilityLabelsResponse
+    , v1RemoveVisibilityLabelsResponse
+    , vrvlrLabels
 
     -- * AuthProvider
     , AuthProvider

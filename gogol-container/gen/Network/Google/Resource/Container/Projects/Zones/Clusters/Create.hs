@@ -24,11 +24,11 @@
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
 -- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the cluster creates
+-- is added for the cluster. After cluster creation, the Kubelet creates
 -- routes for each node to allow the containers on that node to communicate
 -- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range is being used
--- by the cluster.
+-- the project\'s global metadata indicating which CIDR range the cluster
+-- is using.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
@@ -76,11 +76,11 @@ type ProjectsZonesClustersCreateResource =
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
 -- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the cluster creates
+-- is added for the cluster. After cluster creation, the Kubelet creates
 -- routes for each node to allow the containers on that node to communicate
 -- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range is being used
--- by the cluster.
+-- the project\'s global metadata indicating which CIDR range the cluster
+-- is using.
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
 data ProjectsZonesClustersCreate =

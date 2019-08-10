@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes specified project resource identified by tenant resource tag. It
--- will remove project lien with \'TenantManager\' origin if that was
--- added. It will then attempt to delete the project. If that operation
--- fails, this method fails. Calls to remove already removed or
--- non-existent tenant project will succeed. After the project has been
--- deleted, or if was already in DELETED state, resource metadata is
+-- Removes the specified project resource identified by a tenant resource
+-- tag. The method removes the project lien with \'TenantManager\' origin
+-- if that was added. It then attempts to delete the project. If that
+-- operation fails, this method also fails. Calls to remove already removed
+-- or non-existent tenant project succeed. After the project has been
+-- deleted, or if was already in a DELETED state, resource metadata is
 -- permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.removeProject@.
@@ -65,12 +65,12 @@ type ServicesTenancyUnitsRemoveProjectResource =
                      ReqBody '[JSON] RemoveTenantProjectRequest :>
                        Post '[JSON] Operation
 
--- | Removes specified project resource identified by tenant resource tag. It
--- will remove project lien with \'TenantManager\' origin if that was
--- added. It will then attempt to delete the project. If that operation
--- fails, this method fails. Calls to remove already removed or
--- non-existent tenant project will succeed. After the project has been
--- deleted, or if was already in DELETED state, resource metadata is
+-- | Removes the specified project resource identified by a tenant resource
+-- tag. The method removes the project lien with \'TenantManager\' origin
+-- if that was added. It then attempts to delete the project. If that
+-- operation fails, this method also fails. Calls to remove already removed
+-- or non-existent tenant project succeed. After the project has been
+-- deleted, or if was already in a DELETED state, resource metadata is
 -- permanently removed from the tenancy unit. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsRemoveProject' smart constructor.

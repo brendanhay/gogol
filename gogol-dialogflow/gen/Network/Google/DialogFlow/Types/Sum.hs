@@ -86,6 +86,105 @@ instance FromJSON GoogleCloudDialogflowV2beta1IntentTrainingPhraseType where
 instance ToJSON GoogleCloudDialogflowV2beta1IntentTrainingPhraseType where
     toJSON = toJSONText
 
+-- | Optional. Which variant of the Speech model to use.
+data GoogleCloudDialogflowV2InputAudioConfigModelVariant
+    = SpeechModelVariantUnspecified
+      -- ^ @SPEECH_MODEL_VARIANT_UNSPECIFIED@
+      -- No model variant specified. In this case we default to
+      -- USE_BEST_AVAILABLE.
+    | UseBestAvailable
+      -- ^ @USE_BEST_AVAILABLE@
+      -- Use the best available variant of the Speech model that the caller is
+      -- eligible for. Please see the [Dialogflow
+      -- docs](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/data-logging)
+      -- for how to make your project eligible for enhanced models.
+    | UseStandard
+      -- ^ @USE_STANDARD@
+      -- Use standard model variant even if an enhanced model is available. See
+      -- the [Cloud Speech
+      -- documentation](https:\/\/cloud.google.com\/speech-to-text\/docs\/enhanced-models)
+      -- for details about enhanced models.
+    | UseEnhanced
+      -- ^ @USE_ENHANCED@
+      -- Use an enhanced model variant: * If an enhanced variant does not exist
+      -- for the given model and request language, we fall back to the standard
+      -- variant. The [Cloud Speech
+      -- documentation](https:\/\/cloud.google.com\/speech-to-text\/docs\/enhanced-models)
+      -- describes which models have enhanced variants. * If the API caller
+      -- isn\'t eligible for enhanced models, we return an error. Please see the
+      -- [Dialogflow
+      -- docs](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/data-logging)
+      -- for how to make your project eligible.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudDialogflowV2InputAudioConfigModelVariant
+
+instance FromHttpApiData GoogleCloudDialogflowV2InputAudioConfigModelVariant where
+    parseQueryParam = \case
+        "SPEECH_MODEL_VARIANT_UNSPECIFIED" -> Right SpeechModelVariantUnspecified
+        "USE_BEST_AVAILABLE" -> Right UseBestAvailable
+        "USE_STANDARD" -> Right UseStandard
+        "USE_ENHANCED" -> Right UseEnhanced
+        x -> Left ("Unable to parse GoogleCloudDialogflowV2InputAudioConfigModelVariant from: " <> x)
+
+instance ToHttpApiData GoogleCloudDialogflowV2InputAudioConfigModelVariant where
+    toQueryParam = \case
+        SpeechModelVariantUnspecified -> "SPEECH_MODEL_VARIANT_UNSPECIFIED"
+        UseBestAvailable -> "USE_BEST_AVAILABLE"
+        UseStandard -> "USE_STANDARD"
+        UseEnhanced -> "USE_ENHANCED"
+
+instance FromJSON GoogleCloudDialogflowV2InputAudioConfigModelVariant where
+    parseJSON = parseJSONText "GoogleCloudDialogflowV2InputAudioConfigModelVariant"
+
+instance ToJSON GoogleCloudDialogflowV2InputAudioConfigModelVariant where
+    toJSON = toJSONText
+
+-- | Optional. The preferred gender of the voice. If not set, the service
+-- will choose a voice based on the other parameters such as language_code
+-- and name. Note that this is only a preference, not requirement. If a
+-- voice of the appropriate gender is not available, the synthesizer should
+-- substitute a voice with a different gender rather than failing the
+-- request.
+data GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender
+    = SsmlVoiceGenderUnspecified
+      -- ^ @SSML_VOICE_GENDER_UNSPECIFIED@
+      -- An unspecified gender, which means that the client doesn\'t care which
+      -- gender the selected voice will have.
+    | SsmlVoiceGenderMale
+      -- ^ @SSML_VOICE_GENDER_MALE@
+      -- A male voice.
+    | SsmlVoiceGenderFemale
+      -- ^ @SSML_VOICE_GENDER_FEMALE@
+      -- A female voice.
+    | SsmlVoiceGenderNeutral
+      -- ^ @SSML_VOICE_GENDER_NEUTRAL@
+      -- A gender-neutral voice.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender
+
+instance FromHttpApiData GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender where
+    parseQueryParam = \case
+        "SSML_VOICE_GENDER_UNSPECIFIED" -> Right SsmlVoiceGenderUnspecified
+        "SSML_VOICE_GENDER_MALE" -> Right SsmlVoiceGenderMale
+        "SSML_VOICE_GENDER_FEMALE" -> Right SsmlVoiceGenderFemale
+        "SSML_VOICE_GENDER_NEUTRAL" -> Right SsmlVoiceGenderNeutral
+        x -> Left ("Unable to parse GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender from: " <> x)
+
+instance ToHttpApiData GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender where
+    toQueryParam = \case
+        SsmlVoiceGenderUnspecified -> "SSML_VOICE_GENDER_UNSPECIFIED"
+        SsmlVoiceGenderMale -> "SSML_VOICE_GENDER_MALE"
+        SsmlVoiceGenderFemale -> "SSML_VOICE_GENDER_FEMALE"
+        SsmlVoiceGenderNeutral -> "SSML_VOICE_GENDER_NEUTRAL"
+
+instance FromJSON GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender where
+    parseJSON = parseJSONText "GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender"
+
+instance ToJSON GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender where
+    toJSON = toJSONText
+
 -- | The system\'s confidence level that this knowledge answer is a good
 -- match for this conversational query. NOTE: The confidence level for a
 -- given \`\` pair may change without notice, as it depends on models that
@@ -636,6 +735,49 @@ instance FromJSON GoogleCloudDialogflowV2beta1IntentWebhookState where
     parseJSON = parseJSONText "GoogleCloudDialogflowV2beta1IntentWebhookState"
 
 instance ToJSON GoogleCloudDialogflowV2beta1IntentWebhookState where
+    toJSON = toJSONText
+
+-- | Required. Audio encoding of the synthesized audio content.
+data GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding
+    = OutputAudioEncodingUnspecified
+      -- ^ @OUTPUT_AUDIO_ENCODING_UNSPECIFIED@
+      -- Not specified.
+    | OutputAudioEncodingLinear16
+      -- ^ @OUTPUT_AUDIO_ENCODING_LINEAR_16@
+      -- Uncompressed 16-bit signed little-endian samples (Linear PCM). Audio
+      -- content returned as LINEAR16 also contains a WAV header.
+    | OutputAudioEncodingMP3
+      -- ^ @OUTPUT_AUDIO_ENCODING_MP3@
+      -- MP3 audio.
+    | OutputAudioEncodingOggOpus
+      -- ^ @OUTPUT_AUDIO_ENCODING_OGG_OPUS@
+      -- Opus encoded audio wrapped in an ogg container. The result will be a
+      -- file which can be played natively on Android, and in browsers (at least
+      -- Chrome and Firefox). The quality of the encoding is considerably higher
+      -- than MP3 while using approximately the same bitrate.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding
+
+instance FromHttpApiData GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding where
+    parseQueryParam = \case
+        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED" -> Right OutputAudioEncodingUnspecified
+        "OUTPUT_AUDIO_ENCODING_LINEAR_16" -> Right OutputAudioEncodingLinear16
+        "OUTPUT_AUDIO_ENCODING_MP3" -> Right OutputAudioEncodingMP3
+        "OUTPUT_AUDIO_ENCODING_OGG_OPUS" -> Right OutputAudioEncodingOggOpus
+        x -> Left ("Unable to parse GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding from: " <> x)
+
+instance ToHttpApiData GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding where
+    toQueryParam = \case
+        OutputAudioEncodingUnspecified -> "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
+        OutputAudioEncodingLinear16 -> "OUTPUT_AUDIO_ENCODING_LINEAR_16"
+        OutputAudioEncodingMP3 -> "OUTPUT_AUDIO_ENCODING_MP3"
+        OutputAudioEncodingOggOpus -> "OUTPUT_AUDIO_ENCODING_OGG_OPUS"
+
+instance FromJSON GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding where
+    parseJSON = parseJSONText "GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding"
+
+instance ToJSON GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding where
     toJSON = toJSONText
 
 -- | Optional. Indicates whether the entity type can be automatically

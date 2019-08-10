@@ -1,0 +1,63 @@
+name:                  gogol-accessapproval
+version:               0.5.0
+synopsis:              Google Access Approval SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    An API for controlling access to data by Google personnel.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1beta1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AccessApproval
+        , Network.Google.AccessApproval.Types
+        , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Approve
+        , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Dismiss
+        , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Get
+        , Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.List
+        , Network.Google.Resource.AccessApproval.Folders.GetAccessApprovalSettings
+        , Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettings
+        , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Approve
+        , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Dismiss
+        , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Get
+        , Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.List
+        , Network.Google.Resource.AccessApproval.Organizations.GetAccessApprovalSettings
+        , Network.Google.Resource.AccessApproval.Organizations.UpdateAccessApprovalSettings
+        , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Approve
+        , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Dismiss
+        , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Get
+        , Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.List
+        , Network.Google.Resource.AccessApproval.Projects.GetAccessApprovalSettings
+        , Network.Google.Resource.AccessApproval.Projects.UpdateAccessApprovalSettings
+
+    other-modules:
+          Network.Google.AccessApproval.Types.Product
+        , Network.Google.AccessApproval.Types.Sum
+
+    build-depends:
+          gogol-core == 0.5.0.*
+        , base       >= 4.7 && < 5

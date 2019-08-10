@@ -202,45 +202,6 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | Service-specific metadata associated with the operation. It typically
--- contains progress information and common metadata such as create time.
--- Some services might not provide such metadata. Any method that returns a
--- long-running operation should document the metadata type, if any.
---
--- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema =
-  OperationSchema'
-    { _osAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'osAddtional'
-operationSchema
-    :: HashMap Text JSONValue -- ^ 'osAddtional'
-    -> OperationSchema
-operationSchema pOsAddtional_ =
-  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
-
-
--- | Properties of the object. Contains field \'type with type URL.
-osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
-osAddtional
-  = lens _osAddtional (\ s a -> s{_osAddtional = a}) .
-      _Coerce
-
-instance FromJSON OperationSchema where
-        parseJSON
-          = withObject "OperationSchema"
-              (\ o -> OperationSchema' <$> (parseJSONObject o))
-
-instance ToJSON OperationSchema where
-        toJSON = toJSON . _osAddtional
-
 -- | Service-specific metadata. For example the available capacity at the
 -- given location.
 --
@@ -1184,6 +1145,40 @@ instance ToJSON AuthorizedCertificate where
                   ("visibleDomainMappings" .=) <$>
                     _acVisibleDomainMAppings])
 
+-- | VPC access connector specification.
+--
+-- /See:/ 'vpcAccessConnector' smart constructor.
+newtype VPCAccessConnector =
+  VPCAccessConnector'
+    { _vacName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VPCAccessConnector' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vacName'
+vpcAccessConnector
+    :: VPCAccessConnector
+vpcAccessConnector = VPCAccessConnector' {_vacName = Nothing}
+
+
+-- | Full Serverless VPC Access Connector name e.g.
+-- \/projects\/my-project\/locations\/us-central1\/connectors\/c1.
+vacName :: Lens' VPCAccessConnector (Maybe Text)
+vacName = lens _vacName (\ s a -> s{_vacName = a})
+
+instance FromJSON VPCAccessConnector where
+        parseJSON
+          = withObject "VPCAccessConnector"
+              (\ o -> VPCAccessConnector' <$> (o .:? "name"))
+
+instance ToJSON VPCAccessConnector where
+        toJSON VPCAccessConnector'{..}
+          = object (catMaybes [("name" .=) <$> _vacName])
+
 -- | Google Cloud Endpoints
 -- (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/)
 -- configuration for API handlers.
@@ -1792,7 +1787,7 @@ data Operation =
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe OperationSchema)
+    , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1853,7 +1848,7 @@ oName = lens _oName (\ s a -> s{_oName = a})
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
 -- long-running operation should document the metadata type, if any.
-oMetadata :: Lens' Operation (Maybe OperationSchema)
+oMetadata :: Lens' Operation (Maybe OperationMetadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
@@ -2650,90 +2645,6 @@ instance ToJSON AutomaticScaling where
                   ("standardSchedulerSettings" .=) <$>
                     _asStandardSchedulerSettings])
 
--- | Metadata for the given google.longrunning.Operation.
---
--- /See:/ 'operationMetadataV1Beta5' smart constructor.
-data OperationMetadataV1Beta5 =
-  OperationMetadataV1Beta5'
-    { _oInsertTime :: !(Maybe DateTime')
-    , _oUser       :: !(Maybe Text)
-    , _oMethod     :: !(Maybe Text)
-    , _oEndTime    :: !(Maybe DateTime')
-    , _oTarget     :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationMetadataV1Beta5' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oInsertTime'
---
--- * 'oUser'
---
--- * 'oMethod'
---
--- * 'oEndTime'
---
--- * 'oTarget'
-operationMetadataV1Beta5
-    :: OperationMetadataV1Beta5
-operationMetadataV1Beta5 =
-  OperationMetadataV1Beta5'
-    { _oInsertTime = Nothing
-    , _oUser = Nothing
-    , _oMethod = Nothing
-    , _oEndTime = Nothing
-    , _oTarget = Nothing
-    }
-
-
--- | Timestamp that this operation was created.\'OutputOnly
-oInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe UTCTime)
-oInsertTime
-  = lens _oInsertTime (\ s a -> s{_oInsertTime = a}) .
-      mapping _DateTime
-
--- | User who requested this operation.\'OutputOnly
-oUser :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-oUser = lens _oUser (\ s a -> s{_oUser = a})
-
--- | API method name that initiated this operation. Example:
--- google.appengine.v1beta5.Version.CreateVersion.\'OutputOnly
-oMethod :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-oMethod = lens _oMethod (\ s a -> s{_oMethod = a})
-
--- | Timestamp that this operation completed.\'OutputOnly
-oEndTime :: Lens' OperationMetadataV1Beta5 (Maybe UTCTime)
-oEndTime
-  = lens _oEndTime (\ s a -> s{_oEndTime = a}) .
-      mapping _DateTime
-
--- | Name of the resource that this operation is acting on. Example:
--- apps\/myapp\/services\/default.\'OutputOnly
-oTarget :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-oTarget = lens _oTarget (\ s a -> s{_oTarget = a})
-
-instance FromJSON OperationMetadataV1Beta5 where
-        parseJSON
-          = withObject "OperationMetadataV1Beta5"
-              (\ o ->
-                 OperationMetadataV1Beta5' <$>
-                   (o .:? "insertTime") <*> (o .:? "user") <*>
-                     (o .:? "method")
-                     <*> (o .:? "endTime")
-                     <*> (o .:? "target"))
-
-instance ToJSON OperationMetadataV1Beta5 where
-        toJSON OperationMetadataV1Beta5'{..}
-          = object
-              (catMaybes
-                 [("insertTime" .=) <$> _oInsertTime,
-                  ("user" .=) <$> _oUser, ("method" .=) <$> _oMethod,
-                  ("endTime" .=) <$> _oEndTime,
-                  ("target" .=) <$> _oTarget])
-
 -- | Volumes mounted within the app container. Only applicable in the App
 -- Engine flexible environment.
 --
@@ -3344,9 +3255,10 @@ instance ToJSON Resources where
 -- define behaviors that are user configurable.
 --
 -- /See:/ 'featureSettings' smart constructor.
-newtype FeatureSettings =
+data FeatureSettings =
   FeatureSettings'
-    { _fsSplitHealthChecks :: Maybe Bool
+    { _fsUseContainerOptimizedOS :: !(Maybe Bool)
+    , _fsSplitHealthChecks       :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3355,11 +3267,23 @@ newtype FeatureSettings =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fsUseContainerOptimizedOS'
+--
 -- * 'fsSplitHealthChecks'
 featureSettings
     :: FeatureSettings
-featureSettings = FeatureSettings' {_fsSplitHealthChecks = Nothing}
+featureSettings =
+  FeatureSettings'
+    {_fsUseContainerOptimizedOS = Nothing, _fsSplitHealthChecks = Nothing}
 
+
+-- | If true, use Container-Optimized OS
+-- (https:\/\/cloud.google.com\/container-optimized-os\/) base image for
+-- VMs, rather than a base Debian image.
+fsUseContainerOptimizedOS :: Lens' FeatureSettings (Maybe Bool)
+fsUseContainerOptimizedOS
+  = lens _fsUseContainerOptimizedOS
+      (\ s a -> s{_fsUseContainerOptimizedOS = a})
 
 -- | Boolean value indicating if split health checks should be used instead
 -- of the legacy health checks. At an app.yaml level, this means defaulting
@@ -3375,13 +3299,17 @@ instance FromJSON FeatureSettings where
         parseJSON
           = withObject "FeatureSettings"
               (\ o ->
-                 FeatureSettings' <$> (o .:? "splitHealthChecks"))
+                 FeatureSettings' <$>
+                   (o .:? "useContainerOptimizedOs") <*>
+                     (o .:? "splitHealthChecks"))
 
 instance ToJSON FeatureSettings where
         toJSON FeatureSettings'{..}
           = object
               (catMaybes
-                 [("splitHealthChecks" .=) <$> _fsSplitHealthChecks])
+                 [("useContainerOptimizedOs" .=) <$>
+                    _fsUseContainerOptimizedOS,
+                  ("splitHealthChecks" .=) <$> _fsSplitHealthChecks])
 
 -- | An SSL certificate obtained from a certificate authority.
 --
@@ -4033,6 +3961,7 @@ data Version =
     , _verInstanceClass             :: !(Maybe Text)
     , _verRuntimeChannel            :: !(Maybe Text)
     , _verRuntimeMainExecutablePath :: !(Maybe Text)
+    , _verVPCAccessConnector        :: !(Maybe VPCAccessConnector)
     , _verHealthCheck               :: !(Maybe HealthCheck)
     , _verEndpointsAPIService       :: !(Maybe EndpointsAPIService)
     , _verEnv                       :: !(Maybe Text)
@@ -4081,6 +4010,8 @@ data Version =
 -- * 'verRuntimeChannel'
 --
 -- * 'verRuntimeMainExecutablePath'
+--
+-- * 'verVPCAccessConnector'
 --
 -- * 'verHealthCheck'
 --
@@ -4152,6 +4083,7 @@ version =
     , _verInstanceClass = Nothing
     , _verRuntimeChannel = Nothing
     , _verRuntimeMainExecutablePath = Nothing
+    , _verVPCAccessConnector = Nothing
     , _verHealthCheck = Nothing
     , _verEndpointsAPIService = Nothing
     , _verEnv = Nothing
@@ -4221,6 +4153,12 @@ verRuntimeMainExecutablePath
   = lens _verRuntimeMainExecutablePath
       (\ s a -> s{_verRuntimeMainExecutablePath = a})
 
+-- | Enables VPC connectivity for standard apps.
+verVPCAccessConnector :: Lens' Version (Maybe VPCAccessConnector)
+verVPCAccessConnector
+  = lens _verVPCAccessConnector
+      (\ s a -> s{_verVPCAccessConnector = a})
+
 -- | Configures health checking for instances. Unhealthy instances are
 -- stopped and replaced with new instances. Only applicable in the App
 -- Engine flexible environment.Only returned in GET requests if view=FULL
@@ -4243,7 +4181,7 @@ verEnv :: Lens' Version (Maybe Text)
 verEnv = lens _verEnv (\ s a -> s{_verEnv = a})
 
 -- | The Google Compute Engine zones that are supported by this version in
--- the App Engine flexible environment.
+-- the App Engine flexible environment. Deprecated.
 verZones :: Lens' Version [Text]
 verZones
   = lens _verZones (\ s a -> s{_verZones = a}) .
@@ -4455,6 +4393,7 @@ instance FromJSON Version where
                      (o .:? "instanceClass")
                      <*> (o .:? "runtimeChannel")
                      <*> (o .:? "runtimeMainExecutablePath")
+                     <*> (o .:? "vpcAccessConnector")
                      <*> (o .:? "healthCheck")
                      <*> (o .:? "endpointsApiService")
                      <*> (o .:? "env")
@@ -4497,6 +4436,7 @@ instance ToJSON Version where
                   ("runtimeChannel" .=) <$> _verRuntimeChannel,
                   ("runtimeMainExecutablePath" .=) <$>
                     _verRuntimeMainExecutablePath,
+                  ("vpcAccessConnector" .=) <$> _verVPCAccessConnector,
                   ("healthCheck" .=) <$> _verHealthCheck,
                   ("endpointsApiService" .=) <$>
                     _verEndpointsAPIService,
@@ -5038,17 +4978,15 @@ instance ToJSON LocationMetadata where
                   ("flexibleEnvironmentAvailable" .=) <$>
                     _lmFlexibleEnvironmentAvailable])
 
--- | Metadata for the given google.longrunning.Operation.
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata =
+newtype OperationMetadata =
   OperationMetadata'
-    { _omInsertTime    :: !(Maybe DateTime')
-    , _omUser          :: !(Maybe Text)
-    , _omMethod        :: !(Maybe Text)
-    , _omEndTime       :: !(Maybe DateTime')
-    , _omOperationType :: !(Maybe Text)
-    , _omTarget        :: !(Maybe Text)
+    { _omAddtional :: HashMap Text JSONValue
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5057,83 +4995,27 @@ data OperationMetadata =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'omInsertTime'
---
--- * 'omUser'
---
--- * 'omMethod'
---
--- * 'omEndTime'
---
--- * 'omOperationType'
---
--- * 'omTarget'
+-- * 'omAddtional'
 operationMetadata
-    :: OperationMetadata
-operationMetadata =
-  OperationMetadata'
-    { _omInsertTime = Nothing
-    , _omUser = Nothing
-    , _omMethod = Nothing
-    , _omEndTime = Nothing
-    , _omOperationType = Nothing
-    , _omTarget = Nothing
-    }
+    :: HashMap Text JSONValue -- ^ 'omAddtional'
+    -> OperationMetadata
+operationMetadata pOmAddtional_ =
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 
--- | Timestamp that this operation was created.\'OutputOnly
-omInsertTime :: Lens' OperationMetadata (Maybe UTCTime)
-omInsertTime
-  = lens _omInsertTime (\ s a -> s{_omInsertTime = a})
-      . mapping _DateTime
-
--- | User who requested this operation.\'OutputOnly
-omUser :: Lens' OperationMetadata (Maybe Text)
-omUser = lens _omUser (\ s a -> s{_omUser = a})
-
--- | API method that initiated this operation. Example:
--- google.appengine.v1beta4.Version.CreateVersion.\'OutputOnly
-omMethod :: Lens' OperationMetadata (Maybe Text)
-omMethod = lens _omMethod (\ s a -> s{_omMethod = a})
-
--- | Timestamp that this operation completed.\'OutputOnly
-omEndTime :: Lens' OperationMetadata (Maybe UTCTime)
-omEndTime
-  = lens _omEndTime (\ s a -> s{_omEndTime = a}) .
-      mapping _DateTime
-
--- | Type of this operation. Deprecated, use method field instead. Example:
--- \"create_version\".\'OutputOnly
-omOperationType :: Lens' OperationMetadata (Maybe Text)
-omOperationType
-  = lens _omOperationType
-      (\ s a -> s{_omOperationType = a})
-
--- | Name of the resource that this operation is acting on. Example:
--- apps\/myapp\/modules\/default.\'OutputOnly
-omTarget :: Lens' OperationMetadata (Maybe Text)
-omTarget = lens _omTarget (\ s a -> s{_omTarget = a})
+-- | Properties of the object. Contains field \'type with type URL.
+omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
+omAddtional
+  = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
-              (\ o ->
-                 OperationMetadata' <$>
-                   (o .:? "insertTime") <*> (o .:? "user") <*>
-                     (o .:? "method")
-                     <*> (o .:? "endTime")
-                     <*> (o .:? "operationType")
-                     <*> (o .:? "target"))
+              (\ o -> OperationMetadata' <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadata where
-        toJSON OperationMetadata'{..}
-          = object
-              (catMaybes
-                 [("insertTime" .=) <$> _omInsertTime,
-                  ("user" .=) <$> _omUser, ("method" .=) <$> _omMethod,
-                  ("endTime" .=) <$> _omEndTime,
-                  ("operationType" .=) <$> _omOperationType,
-                  ("target" .=) <$> _omTarget])
+        toJSON = toJSON . _omAddtional
 
 -- | Response message for Instances.ListInstances.
 --

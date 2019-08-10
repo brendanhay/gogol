@@ -20,6 +20,49 @@ module Network.Google.Redis.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.Redis.Types.Sum
 
+-- | Request for Failover.
+--
+-- /See:/ 'failoverInstanceRequest' smart constructor.
+newtype FailoverInstanceRequest =
+  FailoverInstanceRequest'
+    { _firDataProtectionMode :: Maybe FailoverInstanceRequestDataProtectionMode
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FailoverInstanceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'firDataProtectionMode'
+failoverInstanceRequest
+    :: FailoverInstanceRequest
+failoverInstanceRequest =
+  FailoverInstanceRequest' {_firDataProtectionMode = Nothing}
+
+
+-- | Optional. Available data protection modes that the user can choose. If
+-- it\'s unspecified, data protection mode will be LIMITED_DATA_LOSS by
+-- default.
+firDataProtectionMode :: Lens' FailoverInstanceRequest (Maybe FailoverInstanceRequestDataProtectionMode)
+firDataProtectionMode
+  = lens _firDataProtectionMode
+      (\ s a -> s{_firDataProtectionMode = a})
+
+instance FromJSON FailoverInstanceRequest where
+        parseJSON
+          = withObject "FailoverInstanceRequest"
+              (\ o ->
+                 FailoverInstanceRequest' <$>
+                   (o .:? "dataProtectionMode"))
+
+instance ToJSON FailoverInstanceRequest where
+        toJSON FailoverInstanceRequest'{..}
+          = object
+              (catMaybes
+                 [("dataProtectionMode" .=) <$>
+                    _firDataProtectionMode])
+
 -- | Resource labels to represent user provided metadata
 --
 -- /See:/ 'instanceLabels' smart constructor.

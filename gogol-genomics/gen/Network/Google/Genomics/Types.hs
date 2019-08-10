@@ -315,16 +315,6 @@ module Network.Google.Genomics.Types
     , pResources
     , pTimeout
 
-    -- * ImportVariantsResponse
-    , ImportVariantsResponse
-    , importVariantsResponse
-    , ivrCallSetIds
-
-    -- * ImportReadGroupSetsResponse
-    , ImportReadGroupSetsResponse
-    , importReadGroupSetsResponse
-    , irgsrReadGroupSetIds
-
     -- * Metadata
     , Metadata
     , metadata

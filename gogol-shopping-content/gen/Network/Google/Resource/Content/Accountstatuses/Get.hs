@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the status of a Merchant Center account. Multi-client accounts
--- can only call this method for sub-accounts.
+-- Retrieves the status of a Merchant Center account. No itemLevelIssues
+-- are returned for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.get@.
 module Network.Google.Resource.Content.Accountstatuses.Get
@@ -53,8 +53,8 @@ type AccountstatusesGetResource =
                QueryParams "destinations" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] AccountStatus
 
--- | Retrieves the status of a Merchant Center account. Multi-client accounts
--- can only call this method for sub-accounts.
+-- | Retrieves the status of a Merchant Center account. No itemLevelIssues
+-- are returned for multi-client accounts.
 --
 -- /See:/ 'accountstatusesGet' smart constructor.
 data AccountstatusesGet =

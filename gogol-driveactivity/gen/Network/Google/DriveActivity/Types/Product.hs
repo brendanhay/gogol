@@ -53,6 +53,61 @@ instance ToJSON Suggestion where
         toJSON Suggestion'{..}
           = object (catMaybes [("subtype" .=) <$> _sSubtype])
 
+-- | Information about a shared drive.
+--
+-- /See:/ 'drive' smart constructor.
+data Drive =
+  Drive'
+    { _dRoot  :: !(Maybe DriveItem)
+    , _dName  :: !(Maybe Text)
+    , _dTitle :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Drive' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dRoot'
+--
+-- * 'dName'
+--
+-- * 'dTitle'
+drive
+    :: Drive
+drive = Drive' {_dRoot = Nothing, _dName = Nothing, _dTitle = Nothing}
+
+
+-- | The root of this shared drive.
+dRoot :: Lens' Drive (Maybe DriveItem)
+dRoot = lens _dRoot (\ s a -> s{_dRoot = a})
+
+-- | The resource name of the shared drive. The format is
+-- \"COLLECTION_ID\/DRIVE_ID\". Clients should not assume a specific
+-- collection ID for this resource name.
+dName :: Lens' Drive (Maybe Text)
+dName = lens _dName (\ s a -> s{_dName = a})
+
+-- | The title of the shared drive.
+dTitle :: Lens' Drive (Maybe Text)
+dTitle = lens _dTitle (\ s a -> s{_dTitle = a})
+
+instance FromJSON Drive where
+        parseJSON
+          = withObject "Drive"
+              (\ o ->
+                 Drive' <$>
+                   (o .:? "root") <*> (o .:? "name") <*>
+                     (o .:? "title"))
+
+instance ToJSON Drive where
+        toJSON Drive'{..}
+          = object
+              (catMaybes
+                 [("root" .=) <$> _dRoot, ("name" .=) <$> _dName,
+                  ("title" .=) <$> _dTitle])
+
 -- | Information about an impersonation, where an admin acts on behalf of an
 -- end user. Information about the acting admin is not currently available.
 --
@@ -260,6 +315,52 @@ instance ToJSON ActionDetail where
                   ("delete" .=) <$> _adDelete,
                   ("move" .=) <$> _adMove])
 
+-- | A lightweight reference to a shared drive.
+--
+-- /See:/ 'driveReference' smart constructor.
+data DriveReference =
+  DriveReference'
+    { _drName  :: !(Maybe Text)
+    , _drTitle :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DriveReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drName'
+--
+-- * 'drTitle'
+driveReference
+    :: DriveReference
+driveReference = DriveReference' {_drName = Nothing, _drTitle = Nothing}
+
+
+-- | The resource name of the shared drive. The format is
+-- \"COLLECTION_ID\/DRIVE_ID\". Clients should not assume a specific
+-- collection ID for this resource name.
+drName :: Lens' DriveReference (Maybe Text)
+drName = lens _drName (\ s a -> s{_drName = a})
+
+-- | The title of the shared drive.
+drTitle :: Lens' DriveReference (Maybe Text)
+drTitle = lens _drTitle (\ s a -> s{_drTitle = a})
+
+instance FromJSON DriveReference where
+        parseJSON
+          = withObject "DriveReference"
+              (\ o ->
+                 DriveReference' <$>
+                   (o .:? "name") <*> (o .:? "title"))
+
+instance ToJSON DriveReference where
+        toJSON DriveReference'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _drName, ("title" .=) <$> _drTitle])
+
 -- | Information about a group.
 --
 -- /See:/ 'group'' smart constructor.
@@ -302,6 +403,28 @@ instance ToJSON Group where
           = object
               (catMaybes
                  [("email" .=) <$> _gEmail, ("title" .=) <$> _gTitle])
+
+-- | A Drive item which is a file.
+--
+-- /See:/ 'driveFile' smart constructor.
+data DriveFile =
+  DriveFile'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DriveFile' with the minimum fields required to make a request.
+--
+driveFile
+    :: DriveFile
+driveFile = DriveFile'
+
+
+instance FromJSON DriveFile where
+        parseJSON
+          = withObject "DriveFile" (\ o -> pure DriveFile')
+
+instance ToJSON DriveFile where
+        toJSON = const emptyObject
 
 -- | Information about time ranges.
 --
@@ -472,10 +595,12 @@ instance ToJSON QueryDriveActivityRequest where
 -- /See:/ 'driveItemReference' smart constructor.
 data DriveItemReference =
   DriveItemReference'
-    { _dirFolder :: !(Maybe Folder)
-    , _dirName   :: !(Maybe Text)
-    , _dirTitle  :: !(Maybe Text)
-    , _dirFile   :: !(Maybe File)
+    { _dirDriveFile   :: !(Maybe DriveFile)
+    , _dirFolder      :: !(Maybe Folder)
+    , _dirName        :: !(Maybe Text)
+    , _dirDriveFolder :: !(Maybe DriveFolder)
+    , _dirTitle       :: !(Maybe Text)
+    , _dirFile        :: !(Maybe File)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -484,9 +609,13 @@ data DriveItemReference =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dirDriveFile'
+--
 -- * 'dirFolder'
 --
 -- * 'dirName'
+--
+-- * 'dirDriveFolder'
 --
 -- * 'dirTitle'
 --
@@ -495,14 +624,21 @@ driveItemReference
     :: DriveItemReference
 driveItemReference =
   DriveItemReference'
-    { _dirFolder = Nothing
+    { _dirDriveFile = Nothing
+    , _dirFolder = Nothing
     , _dirName = Nothing
+    , _dirDriveFolder = Nothing
     , _dirTitle = Nothing
     , _dirFile = Nothing
     }
 
 
--- | The Drive item is a folder.
+-- | The Drive item is a file.
+dirDriveFile :: Lens' DriveItemReference (Maybe DriveFile)
+dirDriveFile
+  = lens _dirDriveFile (\ s a -> s{_dirDriveFile = a})
+
+-- | This field is deprecated; please use the \`driveFolder\` field instead.
 dirFolder :: Lens' DriveItemReference (Maybe Folder)
 dirFolder
   = lens _dirFolder (\ s a -> s{_dirFolder = a})
@@ -511,11 +647,17 @@ dirFolder
 dirName :: Lens' DriveItemReference (Maybe Text)
 dirName = lens _dirName (\ s a -> s{_dirName = a})
 
+-- | The Drive item is a folder.
+dirDriveFolder :: Lens' DriveItemReference (Maybe DriveFolder)
+dirDriveFolder
+  = lens _dirDriveFolder
+      (\ s a -> s{_dirDriveFolder = a})
+
 -- | The title of the Drive item.
 dirTitle :: Lens' DriveItemReference (Maybe Text)
 dirTitle = lens _dirTitle (\ s a -> s{_dirTitle = a})
 
--- | The Drive item is a file.
+-- | This field is deprecated; please use the \`driveFile\` field instead.
 dirFile :: Lens' DriveItemReference (Maybe File)
 dirFile = lens _dirFile (\ s a -> s{_dirFile = a})
 
@@ -524,16 +666,21 @@ instance FromJSON DriveItemReference where
           = withObject "DriveItemReference"
               (\ o ->
                  DriveItemReference' <$>
-                   (o .:? "folder") <*> (o .:? "name") <*>
-                     (o .:? "title")
+                   (o .:? "driveFile") <*> (o .:? "folder") <*>
+                     (o .:? "name")
+                     <*> (o .:? "driveFolder")
+                     <*> (o .:? "title")
                      <*> (o .:? "file"))
 
 instance ToJSON DriveItemReference where
         toJSON DriveItemReference'{..}
           = object
               (catMaybes
-                 [("folder" .=) <$> _dirFolder,
-                  ("name" .=) <$> _dirName, ("title" .=) <$> _dirTitle,
+                 [("driveFile" .=) <$> _dirDriveFile,
+                  ("folder" .=) <$> _dirFolder,
+                  ("name" .=) <$> _dirName,
+                  ("driveFolder" .=) <$> _dirDriveFolder,
+                  ("title" .=) <$> _dirTitle,
                   ("file" .=) <$> _dirFile])
 
 -- | A known user.
@@ -591,7 +738,8 @@ instance ToJSON KnownUser where
 -- /See:/ 'targetReference' smart constructor.
 data TargetReference =
   TargetReference'
-    { _trTeamDrive :: !(Maybe TeamDriveReference)
+    { _trDrive     :: !(Maybe DriveReference)
+    , _trTeamDrive :: !(Maybe TeamDriveReference)
     , _trDriveItem :: !(Maybe DriveItemReference)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -601,16 +749,23 @@ data TargetReference =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'trDrive'
+--
 -- * 'trTeamDrive'
 --
 -- * 'trDriveItem'
 targetReference
     :: TargetReference
 targetReference =
-  TargetReference' {_trTeamDrive = Nothing, _trDriveItem = Nothing}
+  TargetReference'
+    {_trDrive = Nothing, _trTeamDrive = Nothing, _trDriveItem = Nothing}
 
 
--- | The target is a Team Drive.
+-- | The target is a shared drive.
+trDrive :: Lens' TargetReference (Maybe DriveReference)
+trDrive = lens _trDrive (\ s a -> s{_trDrive = a})
+
+-- | This field is deprecated; please use the \`drive\` field instead.
 trTeamDrive :: Lens' TargetReference (Maybe TeamDriveReference)
 trTeamDrive
   = lens _trTeamDrive (\ s a -> s{_trTeamDrive = a})
@@ -625,13 +780,15 @@ instance FromJSON TargetReference where
           = withObject "TargetReference"
               (\ o ->
                  TargetReference' <$>
-                   (o .:? "teamDrive") <*> (o .:? "driveItem"))
+                   (o .:? "drive") <*> (o .:? "teamDrive") <*>
+                     (o .:? "driveItem"))
 
 instance ToJSON TargetReference where
         toJSON TargetReference'{..}
           = object
               (catMaybes
-                 [("teamDrive" .=) <$> _trTeamDrive,
+                 [("drive" .=) <$> _trDrive,
+                  ("teamDrive" .=) <$> _trTeamDrive,
                   ("driveItem" .=) <$> _trDriveItem])
 
 -- | An object was created by copying an existing object.
@@ -853,8 +1010,8 @@ instance ToJSON Restore where
 -- /See:/ 'domain' smart constructor.
 data Domain =
   Domain'
-    { _dLegacyId :: !(Maybe Text)
-    , _dName     :: !(Maybe Text)
+    { _domLegacyId :: !(Maybe Text)
+    , _domName     :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -863,22 +1020,22 @@ data Domain =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dLegacyId'
+-- * 'domLegacyId'
 --
--- * 'dName'
+-- * 'domName'
 domain
     :: Domain
-domain = Domain' {_dLegacyId = Nothing, _dName = Nothing}
+domain = Domain' {_domLegacyId = Nothing, _domName = Nothing}
 
 
 -- | An opaque string used to identify this domain.
-dLegacyId :: Lens' Domain (Maybe Text)
-dLegacyId
-  = lens _dLegacyId (\ s a -> s{_dLegacyId = a})
+domLegacyId :: Lens' Domain (Maybe Text)
+domLegacyId
+  = lens _domLegacyId (\ s a -> s{_domLegacyId = a})
 
 -- | The name of the domain, e.g. \"google.com\".
-dName :: Lens' Domain (Maybe Text)
-dName = lens _dName (\ s a -> s{_dName = a})
+domName :: Lens' Domain (Maybe Text)
+domName = lens _domName (\ s a -> s{_domName = a})
 
 instance FromJSON Domain where
         parseJSON
@@ -890,8 +1047,8 @@ instance ToJSON Domain where
         toJSON Domain'{..}
           = object
               (catMaybes
-                 [("legacyId" .=) <$> _dLegacyId,
-                  ("name" .=) <$> _dName])
+                 [("legacyId" .=) <$> _domLegacyId,
+                  ("name" .=) <$> _domName])
 
 -- | Empty message representing an administrator.
 --
@@ -1033,7 +1190,7 @@ instance ToJSON Actor where
                   ("user" .=) <$> _aUser,
                   ("anonymous" .=) <$> _aAnonymous])
 
--- | A Drive item which is a folder.
+-- | This item is deprecated; please see \`DriveFolder\` instead.
 --
 -- /See:/ 'folder' smart constructor.
 newtype Folder =
@@ -1053,7 +1210,7 @@ folder
 folder = Folder' {_fType = Nothing}
 
 
--- | The type of Drive folder.
+-- | This field is deprecated; please see \`DriveFolder.type\` instead.
 fType :: Lens' Folder (Maybe FolderType)
 fType = lens _fType (\ s a -> s{_fType = a})
 
@@ -1151,7 +1308,7 @@ instance ToJSON Action where
                   ("target" .=) <$> _aTarget,
                   ("detail" .=) <$> _aDetail])
 
--- | Information about a Team Drive.
+-- | This item is deprecated; please see \`Drive\` instead.
 --
 -- /See:/ 'teamDrive' smart constructor.
 data TeamDrive =
@@ -1178,16 +1335,15 @@ teamDrive =
   TeamDrive' {_tdRoot = Nothing, _tdName = Nothing, _tdTitle = Nothing}
 
 
--- | The root of this Team Drive.
+-- | This field is deprecated; please see \`Drive.root\` instead.
 tdRoot :: Lens' TeamDrive (Maybe DriveItem)
 tdRoot = lens _tdRoot (\ s a -> s{_tdRoot = a})
 
--- | The resource name of the Team Drive. The format is
--- \"teamDrives\/TEAM_DRIVE_ID\".
+-- | This field is deprecated; please see \`Drive.name\` instead.
 tdName :: Lens' TeamDrive (Maybe Text)
 tdName = lens _tdName (\ s a -> s{_tdName = a})
 
--- | The title of the Team Drive.
+-- | This field is deprecated; please see \`Drive.title\` instead.
 tdTitle :: Lens' TeamDrive (Maybe Text)
 tdTitle = lens _tdTitle (\ s a -> s{_tdTitle = a})
 
@@ -1233,7 +1389,8 @@ instance ToJSON UnknownUser where
 -- /See:/ 'owner' smart constructor.
 data Owner =
   Owner'
-    { _oDomain    :: !(Maybe Domain)
+    { _oDrive     :: !(Maybe DriveReference)
+    , _oDomain    :: !(Maybe Domain)
     , _oTeamDrive :: !(Maybe TeamDriveReference)
     , _oUser      :: !(Maybe User)
     }
@@ -1244,6 +1401,8 @@ data Owner =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'oDrive'
+--
 -- * 'oDomain'
 --
 -- * 'oTeamDrive'
@@ -1251,14 +1410,24 @@ data Owner =
 -- * 'oUser'
 owner
     :: Owner
-owner = Owner' {_oDomain = Nothing, _oTeamDrive = Nothing, _oUser = Nothing}
+owner =
+  Owner'
+    { _oDrive = Nothing
+    , _oDomain = Nothing
+    , _oTeamDrive = Nothing
+    , _oUser = Nothing
+    }
 
+
+-- | The drive that owns the item.
+oDrive :: Lens' Owner (Maybe DriveReference)
+oDrive = lens _oDrive (\ s a -> s{_oDrive = a})
 
 -- | The domain of the Drive item owner.
 oDomain :: Lens' Owner (Maybe Domain)
 oDomain = lens _oDomain (\ s a -> s{_oDomain = a})
 
--- | The Team Drive that owns the Drive item.
+-- | This field is deprecated; please use the \`drive\` field instead.
 oTeamDrive :: Lens' Owner (Maybe TeamDriveReference)
 oTeamDrive
   = lens _oTeamDrive (\ s a -> s{_oTeamDrive = a})
@@ -1272,14 +1441,16 @@ instance FromJSON Owner where
           = withObject "Owner"
               (\ o ->
                  Owner' <$>
-                   (o .:? "domain") <*> (o .:? "teamDrive") <*>
-                     (o .:? "user"))
+                   (o .:? "drive") <*> (o .:? "domain") <*>
+                     (o .:? "teamDrive")
+                     <*> (o .:? "user"))
 
 instance ToJSON Owner where
         toJSON Owner'{..}
           = object
               (catMaybes
-                 [("domain" .=) <$> _oDomain,
+                 [("drive" .=) <$> _oDrive,
+                  ("domain" .=) <$> _oDomain,
                   ("teamDrive" .=) <$> _oTeamDrive,
                   ("user" .=) <$> _oUser])
 
@@ -1524,7 +1695,7 @@ instance FromJSON New where
 instance ToJSON New where
         toJSON = const emptyObject
 
--- | A lightweight reference to a Team Drive.
+-- | This item is deprecated; please see \`DriveReference\` instead.
 --
 -- /See:/ 'teamDriveReference' smart constructor.
 data TeamDriveReference =
@@ -1548,12 +1719,11 @@ teamDriveReference =
   TeamDriveReference' {_tdrName = Nothing, _tdrTitle = Nothing}
 
 
--- | The resource name of the Team Drive. The format is
--- \"teamDrives\/TEAM_DRIVE_ID\".
+-- | This field is deprecated; please see \`DriveReference.name\` instead.
 tdrName :: Lens' TeamDriveReference (Maybe Text)
 tdrName = lens _tdrName (\ s a -> s{_tdrName = a})
 
--- | The title of the Team Drive.
+-- | This field is deprecated; please see \`DriveReference.title\` instead.
 tdrTitle :: Lens' TeamDriveReference (Maybe Text)
 tdrTitle = lens _tdrTitle (\ s a -> s{_tdrTitle = a})
 
@@ -1594,6 +1764,39 @@ instance FromJSON AnonymousUser where
 
 instance ToJSON AnonymousUser where
         toJSON = const emptyObject
+
+-- | A Drive item which is a folder.
+--
+-- /See:/ 'driveFolder' smart constructor.
+newtype DriveFolder =
+  DriveFolder'
+    { _dfType :: Maybe DriveFolderType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DriveFolder' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfType'
+driveFolder
+    :: DriveFolder
+driveFolder = DriveFolder' {_dfType = Nothing}
+
+
+-- | The type of Drive folder.
+dfType :: Lens' DriveFolder (Maybe DriveFolderType)
+dfType = lens _dfType (\ s a -> s{_dfType = a})
+
+instance FromJSON DriveFolder where
+        parseJSON
+          = withObject "DriveFolder"
+              (\ o -> DriveFolder' <$> (o .:? "type"))
+
+instance ToJSON DriveFolder where
+        toJSON DriveFolder'{..}
+          = object (catMaybes [("type" .=) <$> _dfType])
 
 -- | Represents any user (including a logged out user).
 --
@@ -2105,7 +2308,7 @@ instance ToJSON Permission where
                   ("role" .=) <$> _pRole, ("anyone" .=) <$> _pAnyone,
                   ("allowDiscovery" .=) <$> _pAllowDiscovery])
 
--- | A Drive item which is a file.
+-- | This item is deprecated; please see \`DriveFile\` instead.
 --
 -- /See:/ 'file' smart constructor.
 data File =
@@ -2164,7 +2367,8 @@ instance ToJSON Delete' where
 -- /See:/ 'target' smart constructor.
 data Target =
   Target'
-    { _tTeamDrive   :: !(Maybe TeamDrive)
+    { _tDrive       :: !(Maybe Drive)
+    , _tTeamDrive   :: !(Maybe TeamDrive)
     , _tFileComment :: !(Maybe FileComment)
     , _tDriveItem   :: !(Maybe DriveItem)
     }
@@ -2175,6 +2379,8 @@ data Target =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tDrive'
+--
 -- * 'tTeamDrive'
 --
 -- * 'tFileComment'
@@ -2184,10 +2390,18 @@ target
     :: Target
 target =
   Target'
-    {_tTeamDrive = Nothing, _tFileComment = Nothing, _tDriveItem = Nothing}
+    { _tDrive = Nothing
+    , _tTeamDrive = Nothing
+    , _tFileComment = Nothing
+    , _tDriveItem = Nothing
+    }
 
 
--- | The target is a Team Drive.
+-- | The target is a shared drive.
+tDrive :: Lens' Target (Maybe Drive)
+tDrive = lens _tDrive (\ s a -> s{_tDrive = a})
+
+-- | This field is deprecated; please use the \`drive\` field instead.
 tTeamDrive :: Lens' Target (Maybe TeamDrive)
 tTeamDrive
   = lens _tTeamDrive (\ s a -> s{_tTeamDrive = a})
@@ -2207,14 +2421,16 @@ instance FromJSON Target where
           = withObject "Target"
               (\ o ->
                  Target' <$>
-                   (o .:? "teamDrive") <*> (o .:? "fileComment") <*>
-                     (o .:? "driveItem"))
+                   (o .:? "drive") <*> (o .:? "teamDrive") <*>
+                     (o .:? "fileComment")
+                     <*> (o .:? "driveItem"))
 
 instance ToJSON Target where
         toJSON Target'{..}
           = object
               (catMaybes
-                 [("teamDrive" .=) <$> _tTeamDrive,
+                 [("drive" .=) <$> _tDrive,
+                  ("teamDrive" .=) <$> _tTeamDrive,
                   ("fileComment" .=) <$> _tFileComment,
                   ("driveItem" .=) <$> _tDriveItem])
 
@@ -2340,8 +2556,8 @@ daActors
       _Default
       . _Coerce
 
--- | All Drive objects this activity is about (e.g. file, folder, Team
--- Drive). This represents the state of the target immediately after the
+-- | All Google Drive objects this activity is about (e.g. file, folder,
+-- drive). This represents the state of the target immediately after the
 -- actions occurred.
 daTargets :: Lens' DriveActivity [Target]
 daTargets
@@ -2391,12 +2607,14 @@ instance ToJSON DriveActivity where
 -- /See:/ 'driveItem' smart constructor.
 data DriveItem =
   DriveItem'
-    { _diFolder   :: !(Maybe Folder)
-    , _diOwner    :: !(Maybe Owner)
-    , _diMimeType :: !(Maybe Text)
-    , _diName     :: !(Maybe Text)
-    , _diTitle    :: !(Maybe Text)
-    , _diFile     :: !(Maybe File)
+    { _diDriveFile   :: !(Maybe DriveFile)
+    , _diFolder      :: !(Maybe Folder)
+    , _diOwner       :: !(Maybe Owner)
+    , _diMimeType    :: !(Maybe Text)
+    , _diName        :: !(Maybe Text)
+    , _diDriveFolder :: !(Maybe DriveFolder)
+    , _diTitle       :: !(Maybe Text)
+    , _diFile        :: !(Maybe File)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2404,6 +2622,8 @@ data DriveItem =
 -- | Creates a value of 'DriveItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diDriveFile'
 --
 -- * 'diFolder'
 --
@@ -2413,6 +2633,8 @@ data DriveItem =
 --
 -- * 'diName'
 --
+-- * 'diDriveFolder'
+--
 -- * 'diTitle'
 --
 -- * 'diFile'
@@ -2420,16 +2642,23 @@ driveItem
     :: DriveItem
 driveItem =
   DriveItem'
-    { _diFolder = Nothing
+    { _diDriveFile = Nothing
+    , _diFolder = Nothing
     , _diOwner = Nothing
     , _diMimeType = Nothing
     , _diName = Nothing
+    , _diDriveFolder = Nothing
     , _diTitle = Nothing
     , _diFile = Nothing
     }
 
 
--- | The Drive item is a folder.
+-- | The Drive item is a file.
+diDriveFile :: Lens' DriveItem (Maybe DriveFile)
+diDriveFile
+  = lens _diDriveFile (\ s a -> s{_diDriveFile = a})
+
+-- | This field is deprecated; please use the \`driveFolder\` field instead.
 diFolder :: Lens' DriveItem (Maybe Folder)
 diFolder = lens _diFolder (\ s a -> s{_diFolder = a})
 
@@ -2447,11 +2676,17 @@ diMimeType
 diName :: Lens' DriveItem (Maybe Text)
 diName = lens _diName (\ s a -> s{_diName = a})
 
+-- | The Drive item is a folder.
+diDriveFolder :: Lens' DriveItem (Maybe DriveFolder)
+diDriveFolder
+  = lens _diDriveFolder
+      (\ s a -> s{_diDriveFolder = a})
+
 -- | The title of the Drive item.
 diTitle :: Lens' DriveItem (Maybe Text)
 diTitle = lens _diTitle (\ s a -> s{_diTitle = a})
 
--- | The Drive item is a file.
+-- | This field is deprecated; please use the \`driveFile\` field instead.
 diFile :: Lens' DriveItem (Maybe File)
 diFile = lens _diFile (\ s a -> s{_diFile = a})
 
@@ -2460,9 +2695,11 @@ instance FromJSON DriveItem where
           = withObject "DriveItem"
               (\ o ->
                  DriveItem' <$>
-                   (o .:? "folder") <*> (o .:? "owner") <*>
-                     (o .:? "mimeType")
+                   (o .:? "driveFile") <*> (o .:? "folder") <*>
+                     (o .:? "owner")
+                     <*> (o .:? "mimeType")
                      <*> (o .:? "name")
+                     <*> (o .:? "driveFolder")
                      <*> (o .:? "title")
                      <*> (o .:? "file"))
 
@@ -2470,11 +2707,13 @@ instance ToJSON DriveItem where
         toJSON DriveItem'{..}
           = object
               (catMaybes
-                 [("folder" .=) <$> _diFolder,
+                 [("driveFile" .=) <$> _diDriveFile,
+                  ("folder" .=) <$> _diFolder,
                   ("owner" .=) <$> _diOwner,
                   ("mimeType" .=) <$> _diMimeType,
-                  ("name" .=) <$> _diName, ("title" .=) <$> _diTitle,
-                  ("file" .=) <$> _diFile])
+                  ("name" .=) <$> _diName,
+                  ("driveFolder" .=) <$> _diDriveFolder,
+                  ("title" .=) <$> _diTitle, ("file" .=) <$> _diFile])
 
 -- | Event triggered by system operations instead of end users.
 --

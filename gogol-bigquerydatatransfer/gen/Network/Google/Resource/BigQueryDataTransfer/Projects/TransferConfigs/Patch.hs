@@ -41,6 +41,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Pat
     , ptcpUploadType
     , ptcpAuthorizationCode
     , ptcpPayload
+    , ptcpVersionInfo
     , ptcpName
     , ptcpCallback
     ) where
@@ -59,10 +60,11 @@ type ProjectsTransferConfigsPatchResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "authorizationCode" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TransferConfig :>
-                           Patch '[JSON] TransferConfig
+                     QueryParam "versionInfo" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TransferConfig :>
+                             Patch '[JSON] TransferConfig
 
 -- | Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
@@ -77,6 +79,7 @@ data ProjectsTransferConfigsPatch =
     , _ptcpUploadType        :: !(Maybe Text)
     , _ptcpAuthorizationCode :: !(Maybe Text)
     , _ptcpPayload           :: !TransferConfig
+    , _ptcpVersionInfo       :: !(Maybe Text)
     , _ptcpName              :: !Text
     , _ptcpCallback          :: !(Maybe Text)
     }
@@ -101,6 +104,8 @@ data ProjectsTransferConfigsPatch =
 --
 -- * 'ptcpPayload'
 --
+-- * 'ptcpVersionInfo'
+--
 -- * 'ptcpName'
 --
 -- * 'ptcpCallback'
@@ -117,6 +122,7 @@ projectsTransferConfigsPatch pPtcpPayload_ pPtcpName_ =
     , _ptcpUploadType = Nothing
     , _ptcpAuthorizationCode = Nothing
     , _ptcpPayload = pPtcpPayload_
+    , _ptcpVersionInfo = Nothing
     , _ptcpName = pPtcpName_
     , _ptcpCallback = Nothing
     }
@@ -175,6 +181,17 @@ ptcpPayload :: Lens' ProjectsTransferConfigsPatch TransferConfig
 ptcpPayload
   = lens _ptcpPayload (\ s a -> s{_ptcpPayload = a})
 
+-- | Optional version info. If users want to find a very recent access token,
+-- that is, immediately after approving access, users have to set the
+-- version_info claim in the token request. To obtain the version_info,
+-- users must use the “none+gsession” response type. which be return a
+-- version_info back in the authorization response which be be put in a JWT
+-- claim in the token request.
+ptcpVersionInfo :: Lens' ProjectsTransferConfigsPatch (Maybe Text)
+ptcpVersionInfo
+  = lens _ptcpVersionInfo
+      (\ s a -> s{_ptcpVersionInfo = a})
+
 -- | The resource name of the transfer config. Transfer config names have the
 -- form of
 -- \`projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}\`.
@@ -201,6 +218,7 @@ instance GoogleRequest ProjectsTransferConfigsPatch
               _ptcpAccessToken
               _ptcpUploadType
               _ptcpAuthorizationCode
+              _ptcpVersionInfo
               _ptcpCallback
               (Just AltJSON)
               _ptcpPayload

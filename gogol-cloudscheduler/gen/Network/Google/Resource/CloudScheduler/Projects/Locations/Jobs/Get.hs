@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.get@ method which the
 -- 'ProjectsLocationsJobsGet' request conforms to.
 type ProjectsLocationsJobsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

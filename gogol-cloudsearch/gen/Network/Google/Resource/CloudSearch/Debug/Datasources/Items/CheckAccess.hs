@@ -148,8 +148,8 @@ ddicaName :: Lens' DebugDatasourcesItemsCheckAccess Text
 ddicaName
   = lens _ddicaName (\ s a -> s{_ddicaName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ddicaDebugOptionsEnableDebugging :: Lens' DebugDatasourcesItemsCheckAccess (Maybe Bool)
 ddicaDebugOptionsEnableDebugging
   = lens _ddicaDebugOptionsEnableDebugging

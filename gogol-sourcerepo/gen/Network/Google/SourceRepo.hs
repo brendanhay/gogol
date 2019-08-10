@@ -56,6 +56,9 @@ module Network.Google.SourceRepo
     -- ** sourcerepo.projects.repos.setIamPolicy
     , module Network.Google.Resource.SourceRepo.Projects.Repos.SetIAMPolicy
 
+    -- ** sourcerepo.projects.repos.sync
+    , module Network.Google.Resource.SourceRepo.Projects.Repos.Sync
+
     -- ** sourcerepo.projects.repos.testIamPermissions
     , module Network.Google.Resource.SourceRepo.Projects.Repos.TestIAMPermissions
 
@@ -63,6 +66,13 @@ module Network.Google.SourceRepo
     , module Network.Google.Resource.SourceRepo.Projects.UpdateConfig
 
     -- * Types
+
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
     -- ** AuditConfig
     , AuditConfig
@@ -91,6 +101,15 @@ module Network.Google.SourceRepo
     , lrrNextPageToken
     , lrrRepos
 
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
     -- ** Empty
     , Empty
     , empty
@@ -100,6 +119,11 @@ module Network.Google.SourceRepo
     , updateRepoRequest
     , urrUpdateMask
     , urrRepo
+
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -166,6 +190,11 @@ module Network.Google.SourceRepo
     , pVersion
     , pBindings
 
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
     -- ** AuditLogConfig
     , AuditLogConfig
     , auditLogConfig
@@ -178,6 +207,15 @@ module Network.Google.SourceRepo
     , mcURL
     , mcDeployKeyId
     , mcWebhookId
+
+    -- ** SyncRepoRequest
+    , SyncRepoRequest
+    , syncRepoRequest
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- ** Binding
     , Binding
@@ -196,6 +234,7 @@ import           Network.Google.Resource.SourceRepo.Projects.Repos.GetIAMPolicy
 import           Network.Google.Resource.SourceRepo.Projects.Repos.List
 import           Network.Google.Resource.SourceRepo.Projects.Repos.Patch
 import           Network.Google.Resource.SourceRepo.Projects.Repos.SetIAMPolicy
+import           Network.Google.Resource.SourceRepo.Projects.Repos.Sync
 import           Network.Google.Resource.SourceRepo.Projects.Repos.TestIAMPermissions
 import           Network.Google.Resource.SourceRepo.Projects.UpdateConfig
 import           Network.Google.SourceRepo.Types
@@ -212,6 +251,7 @@ type SourceRepoAPI =
        :<|> ProjectsReposGetResource
        :<|> ProjectsReposCreateResource
        :<|> ProjectsReposSetIAMPolicyResource
+       :<|> ProjectsReposSyncResource
        :<|> ProjectsReposTestIAMPermissionsResource
        :<|> ProjectsReposDeleteResource
        :<|> ProjectsGetConfigResource

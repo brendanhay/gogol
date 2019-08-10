@@ -153,8 +153,8 @@ prlName = lens _prlName (\ s a -> s{_prlName = a})
 -- | \`Ruleset\` filter. The list method supports filters with restrictions
 -- on \`Ruleset.name\`. Filters on \`Ruleset.create_time\` should use the
 -- \`date\` function which parses strings that conform to the RFC 3339
--- date\/time specifications. Example: \`create_time > date(\"2017-01-01\")
--- AND name=UUID-*\`
+-- date\/time specifications. Example: \`create_time >
+-- date(\"2017-01-01T00:00:00Z\") AND name=UUID-*\`
 prlFilter :: Lens' ProjectsRulesetsList (Maybe Text)
 prlFilter
   = lens _prlFilter (\ s a -> s{_prlFilter = a})

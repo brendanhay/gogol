@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the FHIR store.
+-- Updates the configuration of the specified FHIR store.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.patch@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Patch
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresPatch' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresPatchResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,7 +61,7 @@ type ProjectsLocationsDataSetsFhirStoresPatchResource
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] FhirStore :> Patch '[JSON] FhirStore
 
--- | Updates the FHIR store.
+-- | Updates the configuration of the specified FHIR store.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresPatch' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresPatch =

@@ -168,7 +168,8 @@ slConsumerId :: Lens' ServicesList (Maybe Text)
 slConsumerId
   = lens _slConsumerId (\ s a -> s{_slConsumerId = a})
 
--- | Requested size of the next page of data.
+-- | The max number of items to include in the response list. Page size is 50
+-- if not specified. Maximum value is 100.
 slPageSize :: Lens' ServicesList (Maybe Int32)
 slPageSize
   = lens _slPageSize (\ s a -> s{_slPageSize = a}) .

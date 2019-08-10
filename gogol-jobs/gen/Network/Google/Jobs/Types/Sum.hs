@@ -206,6 +206,12 @@ data CommuteFilterCommuteMethod
       -- ^ @TRANSIT@
       -- Commute time is calculated based on public transit including bus, metro,
       -- subway, etc.
+    | Walking
+      -- ^ @WALKING@
+      -- Commute time is calculated based on walking time.
+    | Cycling
+      -- ^ @CYCLING@
+      -- Commute time is calculated based on biking time.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommuteFilterCommuteMethod
@@ -215,6 +221,8 @@ instance FromHttpApiData CommuteFilterCommuteMethod where
         "COMMUTE_METHOD_UNSPECIFIED" -> Right CommuteMethodUnspecified
         "DRIVING" -> Right Driving
         "TRANSIT" -> Right Transit
+        "WALKING" -> Right Walking
+        "CYCLING" -> Right Cycling
         x -> Left ("Unable to parse CommuteFilterCommuteMethod from: " <> x)
 
 instance ToHttpApiData CommuteFilterCommuteMethod where
@@ -222,6 +230,8 @@ instance ToHttpApiData CommuteFilterCommuteMethod where
         CommuteMethodUnspecified -> "COMMUTE_METHOD_UNSPECIFIED"
         Driving -> "DRIVING"
         Transit -> "TRANSIT"
+        Walking -> "WALKING"
+        Cycling -> "CYCLING"
 
 instance FromJSON CommuteFilterCommuteMethod where
     parseJSON = parseJSONText "CommuteFilterCommuteMethod"
@@ -1287,12 +1297,12 @@ data SearchJobsRequestJobView
     | JobViewMinimal
       -- ^ @JOB_VIEW_MINIMAL@
       -- A minimal view of the job, with the following attributes: Job.name,
-      -- Job.requisition_id, Job.job_title, Job.company_name,
+      -- Job.requisition_id, Job.title, Job.company_name,
       -- Job.DerivedInfo.locations, Job.language_code.
     | JobViewSmall
       -- ^ @JOB_VIEW_SMALL@
       -- A small view of the job, with the following attributes in the search
-      -- results: Job.name, Job.requisition_id, Job.job_title, Job.company_name,
+      -- results: Job.name, Job.requisition_id, Job.title, Job.company_name,
       -- Job.DerivedInfo.locations, Job.visibility, Job.language_code,
       -- Job.description.
     | JobViewFull

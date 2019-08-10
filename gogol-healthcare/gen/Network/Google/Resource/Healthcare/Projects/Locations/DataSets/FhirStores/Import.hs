@@ -21,10 +21,22 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Import resources to the FHIR store by loading data from the specified
--- sources. Fatal errors will be populated in the error field. Otherwise a
--- detailed response will be returned as of type ImportResourcesResponse
--- contained in the response field when the operation finishes. The
--- metadata field type is OperationMetadata.
+-- sources. Each resource must have a client-supplied ID, which is retained
+-- by the server. The import operation is idempotent. Upon retry, the most
+-- recent data (matching the client-supplied ID) is overwritten, without
+-- creating a new resource version. If partial failures occur during the
+-- import, successful changes are not rolled back. If history imports are
+-- enabled (enable_history_import is set in the FHIR store\'s
+-- configuration), you can import historical versions of a resource by
+-- supplying a bundle of type \`history\`. The historical versions in the
+-- bundle must have \`lastUpdated\` timestamps. If a current or historical
+-- version with the supplied resource ID already exists, the bundle is
+-- rejected. This method returns an Operation that can be used to track the
+-- status of the import by calling GetOperation. Immediate fatal errors
+-- appear in the error field. Otherwise, when the operation finishes, a
+-- detailed response of type ImportResourcesResponse is returned in the
+-- response field. The metadata field type for this operation is
+-- OperationMetadata.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.import@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Import
@@ -53,7 +65,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresImport' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresImportResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "name" "import" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,10 +77,22 @@ type ProjectsLocationsDataSetsFhirStoresImportResource
                        Post '[JSON] Operation
 
 -- | Import resources to the FHIR store by loading data from the specified
--- sources. Fatal errors will be populated in the error field. Otherwise a
--- detailed response will be returned as of type ImportResourcesResponse
--- contained in the response field when the operation finishes. The
--- metadata field type is OperationMetadata.
+-- sources. Each resource must have a client-supplied ID, which is retained
+-- by the server. The import operation is idempotent. Upon retry, the most
+-- recent data (matching the client-supplied ID) is overwritten, without
+-- creating a new resource version. If partial failures occur during the
+-- import, successful changes are not rolled back. If history imports are
+-- enabled (enable_history_import is set in the FHIR store\'s
+-- configuration), you can import historical versions of a resource by
+-- supplying a bundle of type \`history\`. The historical versions in the
+-- bundle must have \`lastUpdated\` timestamps. If a current or historical
+-- version with the supplied resource ID already exists, the bundle is
+-- rejected. This method returns an Operation that can be used to track the
+-- status of the import by calling GetOperation. Immediate fatal errors
+-- appear in the error field. Otherwise, when the operation finishes, a
+-- detailed response of type ImportResourcesResponse is returned in the
+-- response field. The metadata field type for this operation is
+-- OperationMetadata.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresImport' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresImport =
@@ -146,8 +170,8 @@ pldsfsiPayload
   = lens _pldsfsiPayload
       (\ s a -> s{_pldsfsiPayload = a})
 
--- | The FHIR store name to import FHIR resources to. The name should be in
--- the format
+-- | The name of the FHIR store to import FHIR resources to. The name should
+-- be in the format of
 -- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\`.
 pldsfsiName :: Lens' ProjectsLocationsDataSetsFhirStoresImport Text
 pldsfsiName

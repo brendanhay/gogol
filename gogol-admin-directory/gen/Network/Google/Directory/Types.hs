@@ -550,11 +550,9 @@ module Network.Google.Directory.Types
     , useIncludeInGlobalAddressList
     , useGender
     , usePhones
-    , useRecoveryEmail
     , useName
     , usePassword
     , useEmails
-    , useRecoveryPhone
     , useIms
     , useKeywords
     , useIsAdmin

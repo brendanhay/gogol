@@ -138,7 +138,9 @@ gmgCallback
 
 instance GoogleRequest GroupsMembershipsGet where
         type Rs GroupsMembershipsGet = Membership
-        type Scopes GroupsMembershipsGet = '[]
+        type Scopes GroupsMembershipsGet =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsMembershipsGet'{..}
           = go _gmgName _gmgXgafv _gmgUploadProtocol
               _gmgAccessToken

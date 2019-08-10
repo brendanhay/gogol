@@ -155,7 +155,9 @@ glCallback
 
 instance GoogleRequest GroupsLookup where
         type Rs GroupsLookup = LookupGroupNameResponse
-        type Scopes GroupsLookup = '[]
+        type Scopes GroupsLookup =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsLookup'{..}
           = go _glXgafv _glUploadProtocol _glAccessToken
               _glGroupKeyId

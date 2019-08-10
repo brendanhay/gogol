@@ -171,6 +171,21 @@ module Network.Google.Storage
     -- ** storage.objects.watchAll
     , module Network.Google.Resource.Storage.Objects.WatchAll
 
+    -- ** storage.projects.hmacKeys.create
+    , module Network.Google.Resource.Storage.Projects.HmacKeys.Create
+
+    -- ** storage.projects.hmacKeys.delete
+    , module Network.Google.Resource.Storage.Projects.HmacKeys.Delete
+
+    -- ** storage.projects.hmacKeys.get
+    , module Network.Google.Resource.Storage.Projects.HmacKeys.Get
+
+    -- ** storage.projects.hmacKeys.list
+    , module Network.Google.Resource.Storage.Projects.HmacKeys.List
+
+    -- ** storage.projects.hmacKeys.update
+    , module Network.Google.Resource.Storage.Projects.HmacKeys.Update
+
     -- ** storage.projects.serviceAccount.get
     , module Network.Google.Resource.Storage.Projects.ServiceAccount.Get
 
@@ -221,6 +236,20 @@ module Network.Google.Storage
     , bNextPageToken
     , bKind
     , bItems
+
+    -- ** HmacKeyMetadata
+    , HmacKeyMetadata
+    , hmacKeyMetadata
+    , hkmEtag
+    , hkmState
+    , hkmKind
+    , hkmSelfLink
+    , hkmTimeCreated
+    , hkmId
+    , hkmUpdated
+    , hkmServiceAccountEmail
+    , hkmProjectId
+    , hkmAccessId
 
     -- ** BucketBilling
     , BucketBilling
@@ -362,6 +391,13 @@ module Network.Google.Storage
 
     -- ** BucketsPatchProjection
     , BucketsPatchProjection (..)
+
+    -- ** HmacKeysMetadata
+    , HmacKeysMetadata
+    , hmacKeysMetadata
+    , hNextPageToken
+    , hKind
+    , hItems
 
     -- ** BucketAccessControls
     , BucketAccessControls
@@ -536,6 +572,13 @@ module Network.Google.Storage
     , tiprKind
     , tiprPermissions
 
+    -- ** HmacKey
+    , HmacKey
+    , hmacKey
+    , hkKind
+    , hkSecret
+    , hkMetadata
+
     -- ** Policy
     , Policy
     , policy
@@ -650,6 +693,11 @@ import           Network.Google.Resource.Storage.Objects.SetIAMPolicy
 import           Network.Google.Resource.Storage.Objects.TestIAMPermissions
 import           Network.Google.Resource.Storage.Objects.Update
 import           Network.Google.Resource.Storage.Objects.WatchAll
+import           Network.Google.Resource.Storage.Projects.HmacKeys.Create
+import           Network.Google.Resource.Storage.Projects.HmacKeys.Delete
+import           Network.Google.Resource.Storage.Projects.HmacKeys.Get
+import           Network.Google.Resource.Storage.Projects.HmacKeys.List
+import           Network.Google.Resource.Storage.Projects.HmacKeys.Update
 import           Network.Google.Resource.Storage.Projects.ServiceAccount.Get
 import           Network.Google.Storage.Types
 
@@ -704,4 +752,9 @@ type StorageAPI =
        :<|> NotificationsListResource
        :<|> NotificationsGetResource
        :<|> NotificationsDeleteResource
+       :<|> ProjectsHmacKeysListResource
+       :<|> ProjectsHmacKeysGetResource
+       :<|> ProjectsHmacKeysCreateResource
+       :<|> ProjectsHmacKeysDeleteResource
+       :<|> ProjectsHmacKeysUpdateResource
        :<|> ProjectsServiceAccountGetResource

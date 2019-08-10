@@ -276,8 +276,8 @@ googleIAMV1__Binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 givbMembers :: Lens' GoogleIAMV1__Binding [Text]
 givbMembers
@@ -290,10 +290,9 @@ givbMembers
 givbRole :: Lens' GoogleIAMV1__Binding (Maybe Text)
 givbRole = lens _givbRole (\ s a -> s{_givbRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 givbCondition :: Lens' GoogleIAMV1__Binding (Maybe GoogleType__Expr)
 givbCondition
   = lens _givbCondition

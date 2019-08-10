@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the people in the specified collection for a particular
--- activity.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.listByActivity@.
 module Network.Google.Resource.Plus.People.ListByActivity
@@ -57,8 +57,8 @@ type PeopleListByActivityResource =
                    QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
--- | List all of the people in the specified collection for a particular
--- activity.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'peopleListByActivity' smart constructor.
 data PeopleListByActivity =

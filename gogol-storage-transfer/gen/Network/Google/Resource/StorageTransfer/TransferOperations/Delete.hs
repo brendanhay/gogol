@@ -22,7 +22,7 @@
 --
 -- This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     (
     -- * REST Resource

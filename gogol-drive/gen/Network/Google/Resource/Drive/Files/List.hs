@@ -39,10 +39,13 @@ module Network.Google.Resource.Drive.Files.List
     , flQ
     , flTeamDriveId
     , flSpaces
+    , flIncludeItemsFromAllDrives
+    , flSupportsAllDrives
     , flCorpus
     , flPageToken
     , flPageSize
     , flSupportsTeamDrives
+    , flDriveId
     ) where
 
 import           Network.Google.Drive.Types
@@ -60,27 +63,34 @@ type FilesListResource =
                  QueryParam "q" Text :>
                    QueryParam "teamDriveId" Text :>
                      QueryParam "spaces" Text :>
-                       QueryParam "corpus" FilesListCorpus :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "supportsTeamDrives" Bool :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] FileList
+                       QueryParam "includeItemsFromAllDrives" Bool :>
+                         QueryParam "supportsAllDrives" Bool :>
+                           QueryParam "corpus" FilesListCorpus :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pageSize" (Textual Int32) :>
+                                 QueryParam "supportsTeamDrives" Bool :>
+                                   QueryParam "driveId" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] FileList
 
 -- | Lists or searches files.
 --
 -- /See:/ 'filesList' smart constructor.
 data FilesList =
   FilesList'
-    { _flCorpora               :: !(Maybe Text)
-    , _flOrderBy               :: !(Maybe Text)
-    , _flIncludeTeamDriveItems :: !Bool
-    , _flQ                     :: !(Maybe Text)
-    , _flTeamDriveId           :: !(Maybe Text)
-    , _flSpaces                :: !Text
-    , _flCorpus                :: !(Maybe FilesListCorpus)
-    , _flPageToken             :: !(Maybe Text)
-    , _flPageSize              :: !(Textual Int32)
-    , _flSupportsTeamDrives    :: !Bool
+    { _flCorpora                   :: !(Maybe Text)
+    , _flOrderBy                   :: !(Maybe Text)
+    , _flIncludeTeamDriveItems     :: !Bool
+    , _flQ                         :: !(Maybe Text)
+    , _flTeamDriveId               :: !(Maybe Text)
+    , _flSpaces                    :: !Text
+    , _flIncludeItemsFromAllDrives :: !Bool
+    , _flSupportsAllDrives         :: !Bool
+    , _flCorpus                    :: !(Maybe FilesListCorpus)
+    , _flPageToken                 :: !(Maybe Text)
+    , _flPageSize                  :: !(Textual Int32)
+    , _flSupportsTeamDrives        :: !Bool
+    , _flDriveId                   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -101,6 +111,10 @@ data FilesList =
 --
 -- * 'flSpaces'
 --
+-- * 'flIncludeItemsFromAllDrives'
+--
+-- * 'flSupportsAllDrives'
+--
 -- * 'flCorpus'
 --
 -- * 'flPageToken'
@@ -108,6 +122,8 @@ data FilesList =
 -- * 'flPageSize'
 --
 -- * 'flSupportsTeamDrives'
+--
+-- * 'flDriveId'
 filesList
     :: FilesList
 filesList =
@@ -118,18 +134,19 @@ filesList =
     , _flQ = Nothing
     , _flTeamDriveId = Nothing
     , _flSpaces = "drive"
+    , _flIncludeItemsFromAllDrives = False
+    , _flSupportsAllDrives = False
     , _flCorpus = Nothing
     , _flPageToken = Nothing
     , _flPageSize = 100
     , _flSupportsTeamDrives = False
+    , _flDriveId = Nothing
     }
 
 
--- | Comma-separated list of bodies of items (files\/documents) to which the
--- query applies. Supported bodies are \'user\', \'domain\', \'teamDrive\'
--- and \'allTeamDrives\'. \'allTeamDrives\' must be combined with \'user\';
--- all other values must be used in isolation. Prefer \'user\' or
--- \'teamDrive\' to \'allTeamDrives\' for efficiency.
+-- | Bodies of items (files\/documents) to which the query applies. Supported
+-- bodies are \'user\', \'domain\', \'drive\' and \'allDrives\'. Prefer
+-- \'user\' or \'drive\' to \'allDrives\' for efficiency.
 flCorpora :: Lens' FilesList (Maybe Text)
 flCorpora
   = lens _flCorpora (\ s a -> s{_flCorpora = a})
@@ -146,7 +163,7 @@ flOrderBy :: Lens' FilesList (Maybe Text)
 flOrderBy
   = lens _flOrderBy (\ s a -> s{_flOrderBy = a})
 
--- | Whether Team Drive items should be included in results.
+-- | Deprecated use includeItemsFromAllDrives instead.
 flIncludeTeamDriveItems :: Lens' FilesList Bool
 flIncludeTeamDriveItems
   = lens _flIncludeTeamDriveItems
@@ -157,7 +174,7 @@ flIncludeTeamDriveItems
 flQ :: Lens' FilesList (Maybe Text)
 flQ = lens _flQ (\ s a -> s{_flQ = a})
 
--- | ID of Team Drive to search.
+-- | Deprecated use driveId instead.
 flTeamDriveId :: Lens' FilesList (Maybe Text)
 flTeamDriveId
   = lens _flTeamDriveId
@@ -167,6 +184,20 @@ flTeamDriveId
 -- values are \'drive\', \'appDataFolder\' and \'photos\'.
 flSpaces :: Lens' FilesList Text
 flSpaces = lens _flSpaces (\ s a -> s{_flSpaces = a})
+
+-- | Whether both My Drive and shared drive items should be included in
+-- results.
+flIncludeItemsFromAllDrives :: Lens' FilesList Bool
+flIncludeItemsFromAllDrives
+  = lens _flIncludeItemsFromAllDrives
+      (\ s a -> s{_flIncludeItemsFromAllDrives = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+flSupportsAllDrives :: Lens' FilesList Bool
+flSupportsAllDrives
+  = lens _flSupportsAllDrives
+      (\ s a -> s{_flSupportsAllDrives = a})
 
 -- | The source of files to list. Deprecated: use \'corpora\' instead.
 flCorpus :: Lens' FilesList (Maybe FilesListCorpus)
@@ -187,11 +218,16 @@ flPageSize
   = lens _flPageSize (\ s a -> s{_flPageSize = a}) .
       _Coerce
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 flSupportsTeamDrives :: Lens' FilesList Bool
 flSupportsTeamDrives
   = lens _flSupportsTeamDrives
       (\ s a -> s{_flSupportsTeamDrives = a})
+
+-- | ID of the shared drive to search.
+flDriveId :: Lens' FilesList (Maybe Text)
+flDriveId
+  = lens _flDriveId (\ s a -> s{_flDriveId = a})
 
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList
@@ -209,10 +245,13 @@ instance GoogleRequest FilesList where
               _flQ
               _flTeamDriveId
               (Just _flSpaces)
+              (Just _flIncludeItemsFromAllDrives)
+              (Just _flSupportsAllDrives)
               _flCorpus
               _flPageToken
               (Just _flPageSize)
               (Just _flSupportsTeamDrives)
+              _flDriveId
               (Just AltJSON)
               driveService
           where go

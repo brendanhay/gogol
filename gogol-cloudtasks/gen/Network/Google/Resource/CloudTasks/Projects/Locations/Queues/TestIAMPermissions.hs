@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsQueuesTestIAMPermissions' request conforms to.
 type ProjectsLocationsQueuesTestIAMPermissionsResource
      =
-     "v2beta3" :>
+     "v2" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

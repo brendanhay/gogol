@@ -136,8 +136,8 @@ ssagUploadType
 ssagName :: Lens' SettingsSearchApplicationsGet Text
 ssagName = lens _ssagName (\ s a -> s{_ssagName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ssagDebugOptionsEnableDebugging :: Lens' SettingsSearchApplicationsGet (Maybe Bool)
 ssagDebugOptionsEnableDebugging
   = lens _ssagDebugOptionsEnableDebugging

@@ -20,7 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the jobs of a project in a given region.
+-- List the jobs of a project. To list the jobs of a project in a region,
+-- we recommend using \`projects.locations.jobs.get\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- To list the all jobs across all regions, use
+-- \`projects.jobs.aggregated\`. Using \`projects.jobs.list\` is not
+-- recommended, as you can only get the list of jobs that are running in
+-- \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.list@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.List
@@ -69,7 +76,14 @@ type ProjectsJobsListResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListJobsResponse
 
--- | List the jobs of a project in a given region.
+-- | List the jobs of a project. To list the jobs of a project in a region,
+-- we recommend using \`projects.locations.jobs.get\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- To list the all jobs across all regions, use
+-- \`projects.jobs.aggregated\`. Using \`projects.jobs.list\` is not
+-- recommended, as you can only get the list of jobs that are running in
+-- \`us-central1\`.
 --
 -- /See:/ 'projectsJobsList' smart constructor.
 data ProjectsJobsList =
@@ -143,7 +157,9 @@ pjlUploadProtocol
   = lens _pjlUploadProtocol
       (\ s a -> s{_pjlUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pjlLocation :: Lens' ProjectsJobsList (Maybe Text)
 pjlLocation
   = lens _pjlLocation (\ s a -> s{_pjlLocation = a})

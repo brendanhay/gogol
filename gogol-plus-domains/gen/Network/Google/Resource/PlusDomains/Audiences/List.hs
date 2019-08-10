@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the audiences to which a user can share.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.audiences.list@.
 module Network.Google.Resource.PlusDomains.Audiences.List
@@ -53,7 +54,8 @@ type AudiencesListResource =
                  QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] AudiencesFeed
 
--- | List all of the audiences to which a user can share.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'audiencesList' smart constructor.
 data AudiencesList =

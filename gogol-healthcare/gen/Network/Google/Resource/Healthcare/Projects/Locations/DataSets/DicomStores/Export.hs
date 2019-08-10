@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsDicomStoresExport' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresExportResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "name" "export" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

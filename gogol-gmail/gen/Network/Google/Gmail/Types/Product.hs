@@ -1716,6 +1716,55 @@ instance ToJSON ListSendAsResponse where
         toJSON ListSendAsResponse'{..}
           = object (catMaybes [("sendAs" .=) <$> _lsarSendAs])
 
+-- | Language settings for an account. These settings correspond to the
+-- \"Language settings\" feature in the web interface.
+--
+-- /See:/ 'languageSettings' smart constructor.
+newtype LanguageSettings =
+  LanguageSettings'
+    { _lsDisplayLanguage :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LanguageSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsDisplayLanguage'
+languageSettings
+    :: LanguageSettings
+languageSettings = LanguageSettings' {_lsDisplayLanguage = Nothing}
+
+
+-- | The language to display Gmail in, formatted as an RFC 3066 Language Tag
+-- (for example en-GB, fr or ja for British English, French, or Japanese
+-- respectively). The set of languages supported by Gmail evolves over
+-- time, so please refer to the \"Language\" dropdown in the Gmail settings
+-- for all available options, as described in the language settings help
+-- article. A table of sample values is also provided in the Managing
+-- Language Settings guide Not all Gmail clients can display the same set
+-- of languages. In the case that a user\'s display language is not
+-- available for use on a particular client, said client automatically
+-- chooses to display in the closest supported variant (or a reasonable
+-- default).
+lsDisplayLanguage :: Lens' LanguageSettings (Maybe Text)
+lsDisplayLanguage
+  = lens _lsDisplayLanguage
+      (\ s a -> s{_lsDisplayLanguage = a})
+
+instance FromJSON LanguageSettings where
+        parseJSON
+          = withObject "LanguageSettings"
+              (\ o ->
+                 LanguageSettings' <$> (o .:? "displayLanguage"))
+
+instance ToJSON LanguageSettings where
+        toJSON LanguageSettings'{..}
+          = object
+              (catMaybes
+                 [("displayLanguage" .=) <$> _lsDisplayLanguage])
+
 -- | Push notification watch response.
 --
 -- /See:/ 'watchResponse' smart constructor.

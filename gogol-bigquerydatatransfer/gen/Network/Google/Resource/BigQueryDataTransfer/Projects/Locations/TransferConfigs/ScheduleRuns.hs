@@ -23,7 +23,7 @@
 -- Creates transfer runs for a time range [start_time, end_time]. For each
 -- date - or whatever granularity the data source supports - in the range,
 -- one transfer run is created. Note that runs are created per UTC time in
--- the time range.
+-- the time range. DEPRECATED: use StartManualTransferRuns instead.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
@@ -66,7 +66,7 @@ type ProjectsLocationsTransferConfigsScheduleRunsResource
 -- | Creates transfer runs for a time range [start_time, end_time]. For each
 -- date - or whatever granularity the data source supports - in the range,
 -- one transfer run is created. Note that runs are created per UTC time in
--- the time range.
+-- the time range. DEPRECATED: use StartManualTransferRuns instead.
 --
 -- /See:/ 'projectsLocationsTransferConfigsScheduleRuns' smart constructor.
 data ProjectsLocationsTransferConfigsScheduleRuns =

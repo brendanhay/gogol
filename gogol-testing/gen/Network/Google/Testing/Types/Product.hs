@@ -902,25 +902,25 @@ iosDevice =
 
 
 -- | Required. The locale the test device used for testing. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idLocale :: Lens' IosDevice (Maybe Text)
 idLocale = lens _idLocale (\ s a -> s{_idLocale = a})
 
 -- | Required. The id of the iOS device to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idIosModelId :: Lens' IosDevice (Maybe Text)
 idIosModelId
   = lens _idIosModelId (\ s a -> s{_idIosModelId = a})
 
 -- | Required. The id of the iOS major software version to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idIosVersionId :: Lens' IosDevice (Maybe Text)
 idIosVersionId
   = lens _idIosVersionId
       (\ s a -> s{_idIosVersionId = a})
 
 -- | Required. How the device is oriented during the test. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idOrientation :: Lens' IosDevice (Maybe Text)
 idOrientation
   = lens _idOrientation
@@ -1486,7 +1486,6 @@ data TestSpecification =
     { _tsIosTestSetup               :: !(Maybe IosTestSetup)
     , _tsTestTimeout                :: !(Maybe GDuration)
     , _tsAndroidRoboTest            :: !(Maybe AndroidRoboTest)
-    , _tsAutoGoogleLogin            :: !(Maybe Bool)
     , _tsDisableVideoRecording      :: !(Maybe Bool)
     , _tsAndroidInstrumentationTest :: !(Maybe AndroidInstrumentationTest)
     , _tsIosXcTest                  :: !(Maybe IosXcTest)
@@ -1507,8 +1506,6 @@ data TestSpecification =
 --
 -- * 'tsAndroidRoboTest'
 --
--- * 'tsAutoGoogleLogin'
---
 -- * 'tsDisableVideoRecording'
 --
 -- * 'tsAndroidInstrumentationTest'
@@ -1527,7 +1524,6 @@ testSpecification =
     { _tsIosTestSetup = Nothing
     , _tsTestTimeout = Nothing
     , _tsAndroidRoboTest = Nothing
-    , _tsAutoGoogleLogin = Nothing
     , _tsDisableVideoRecording = Nothing
     , _tsAndroidInstrumentationTest = Nothing
     , _tsIosXcTest = Nothing
@@ -1556,17 +1552,6 @@ tsAndroidRoboTest :: Lens' TestSpecification (Maybe AndroidRoboTest)
 tsAndroidRoboTest
   = lens _tsAndroidRoboTest
       (\ s a -> s{_tsAndroidRoboTest = a})
-
--- | Enables automatic Google account login. If set, the service will
--- automatically generate a Google test account and add it to the device,
--- before executing the test. Note that test accounts might be reused. Many
--- applications show their full set of functionalities when an account is
--- present on the device. Logging into the device with these generated
--- accounts allows testing more functionalities. Default is false.
-tsAutoGoogleLogin :: Lens' TestSpecification (Maybe Bool)
-tsAutoGoogleLogin
-  = lens _tsAutoGoogleLogin
-      (\ s a -> s{_tsAutoGoogleLogin = a})
 
 -- | Disables video recording; may reduce test latency.
 tsDisableVideoRecording :: Lens' TestSpecification (Maybe Bool)
@@ -1610,7 +1595,6 @@ instance FromJSON TestSpecification where
                  TestSpecification' <$>
                    (o .:? "iosTestSetup") <*> (o .:? "testTimeout") <*>
                      (o .:? "androidRoboTest")
-                     <*> (o .:? "autoGoogleLogin")
                      <*> (o .:? "disableVideoRecording")
                      <*> (o .:? "androidInstrumentationTest")
                      <*> (o .:? "iosXcTest")
@@ -1625,7 +1609,6 @@ instance ToJSON TestSpecification where
                  [("iosTestSetup" .=) <$> _tsIosTestSetup,
                   ("testTimeout" .=) <$> _tsTestTimeout,
                   ("androidRoboTest" .=) <$> _tsAndroidRoboTest,
-                  ("autoGoogleLogin" .=) <$> _tsAutoGoogleLogin,
                   ("disableVideoRecording" .=) <$>
                     _tsDisableVideoRecording,
                   ("androidInstrumentationTest" .=) <$>
@@ -2436,6 +2419,7 @@ data APKManifest =
   APKManifest'
     { _apkmApplicationLabel :: !(Maybe Text)
     , _apkmMinSdkVersion    :: !(Maybe (Textual Int32))
+    , _apkmTargetSdkVersion :: !(Maybe (Textual Int32))
     , _apkmPackageName      :: !(Maybe Text)
     , _apkmIntentFilters    :: !(Maybe [IntentFilter])
     , _apkmMaxSdkVersion    :: !(Maybe (Textual Int32))
@@ -2451,6 +2435,8 @@ data APKManifest =
 --
 -- * 'apkmMinSdkVersion'
 --
+-- * 'apkmTargetSdkVersion'
+--
 -- * 'apkmPackageName'
 --
 -- * 'apkmIntentFilters'
@@ -2462,6 +2448,7 @@ aPKManifest =
   APKManifest'
     { _apkmApplicationLabel = Nothing
     , _apkmMinSdkVersion = Nothing
+    , _apkmTargetSdkVersion = Nothing
     , _apkmPackageName = Nothing
     , _apkmIntentFilters = Nothing
     , _apkmMaxSdkVersion = Nothing
@@ -2479,6 +2466,13 @@ apkmMinSdkVersion :: Lens' APKManifest (Maybe Int32)
 apkmMinSdkVersion
   = lens _apkmMinSdkVersion
       (\ s a -> s{_apkmMinSdkVersion = a})
+      . mapping _Coerce
+
+-- | Specifies the API Level on which the application is designed to run.
+apkmTargetSdkVersion :: Lens' APKManifest (Maybe Int32)
+apkmTargetSdkVersion
+  = lens _apkmTargetSdkVersion
+      (\ s a -> s{_apkmTargetSdkVersion = a})
       . mapping _Coerce
 
 -- | Full Java-style package name for this application, e.g.
@@ -2509,6 +2503,7 @@ instance FromJSON APKManifest where
                  APKManifest' <$>
                    (o .:? "applicationLabel") <*>
                      (o .:? "minSdkVersion")
+                     <*> (o .:? "targetSdkVersion")
                      <*> (o .:? "packageName")
                      <*> (o .:? "intentFilters" .!= mempty)
                      <*> (o .:? "maxSdkVersion"))
@@ -2519,6 +2514,7 @@ instance ToJSON APKManifest where
               (catMaybes
                  [("applicationLabel" .=) <$> _apkmApplicationLabel,
                   ("minSdkVersion" .=) <$> _apkmMinSdkVersion,
+                  ("targetSdkVersion" .=) <$> _apkmTargetSdkVersion,
                   ("packageName" .=) <$> _apkmPackageName,
                   ("intentFilters" .=) <$> _apkmIntentFilters,
                   ("maxSdkVersion" .=) <$> _apkmMaxSdkVersion])
@@ -3026,8 +3022,8 @@ ixtXctestrun
   = lens _ixtXctestrun (\ s a -> s{_ixtXctestrun = a})
 
 -- | The Xcode version that should be used for the test. Use the
--- EnvironmentDiscoveryService to get supported options. Defaults to the
--- latest Xcode version Firebase Test Lab supports.
+-- TestEnvironmentDiscoveryService to get supported options. Defaults to
+-- the latest Xcode version Firebase Test Lab supports.
 ixtXcodeVersion :: Lens' IosXcTest (Maybe Text)
 ixtXcodeVersion
   = lens _ixtXcodeVersion
@@ -3173,7 +3169,7 @@ androidMatrix =
 
 
 -- | Required. The ids of the set of Android device to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 amAndroidModelIds :: Lens' AndroidMatrix [Text]
 amAndroidModelIds
   = lens _amAndroidModelIds
@@ -3182,7 +3178,7 @@ amAndroidModelIds
       . _Coerce
 
 -- | Required. The ids of the set of Android OS version to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 amAndroidVersionIds :: Lens' AndroidMatrix [Text]
 amAndroidVersionIds
   = lens _amAndroidVersionIds
@@ -3191,7 +3187,7 @@ amAndroidVersionIds
       . _Coerce
 
 -- | Required. The set of orientations to test with. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 amOrientations :: Lens' AndroidMatrix [Text]
 amOrientations
   = lens _amOrientations
@@ -3200,7 +3196,7 @@ amOrientations
       . _Coerce
 
 -- | Required. The set of locales the test device will enable for testing.
--- Use the EnvironmentDiscoveryService to get supported options.
+-- Use the TestEnvironmentDiscoveryService to get supported options.
 amLocales :: Lens' AndroidMatrix [Text]
 amLocales
   = lens _amLocales (\ s a -> s{_amLocales = a}) .
@@ -3396,26 +3392,26 @@ androidDevice =
 
 
 -- | Required. The id of the Android OS version to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adAndroidVersionId :: Lens' AndroidDevice (Maybe Text)
 adAndroidVersionId
   = lens _adAndroidVersionId
       (\ s a -> s{_adAndroidVersionId = a})
 
 -- | Required. The locale the test device used for testing. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adLocale :: Lens' AndroidDevice (Maybe Text)
 adLocale = lens _adLocale (\ s a -> s{_adLocale = a})
 
 -- | Required. The id of the Android device to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adAndroidModelId :: Lens' AndroidDevice (Maybe Text)
 adAndroidModelId
   = lens _adAndroidModelId
       (\ s a -> s{_adAndroidModelId = a})
 
 -- | Required. How the device is oriented during the test. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adOrientation :: Lens' AndroidDevice (Maybe Text)
 adOrientation
   = lens _adOrientation

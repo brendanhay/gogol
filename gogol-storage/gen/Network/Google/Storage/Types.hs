@@ -72,6 +72,20 @@ module Network.Google.Storage.Types
     , bKind
     , bItems
 
+    -- * HmacKeyMetadata
+    , HmacKeyMetadata
+    , hmacKeyMetadata
+    , hkmEtag
+    , hkmState
+    , hkmKind
+    , hkmSelfLink
+    , hkmTimeCreated
+    , hkmId
+    , hkmUpdated
+    , hkmServiceAccountEmail
+    , hkmProjectId
+    , hkmAccessId
+
     -- * BucketBilling
     , BucketBilling
     , bucketBilling
@@ -212,6 +226,13 @@ module Network.Google.Storage.Types
 
     -- * BucketsPatchProjection
     , BucketsPatchProjection (..)
+
+    -- * HmacKeysMetadata
+    , HmacKeysMetadata
+    , hmacKeysMetadata
+    , hNextPageToken
+    , hKind
+    , hItems
 
     -- * BucketAccessControls
     , BucketAccessControls
@@ -385,6 +406,13 @@ module Network.Google.Storage.Types
     , testIAMPermissionsResponse
     , tiprKind
     , tiprPermissions
+
+    -- * HmacKey
+    , HmacKey
+    , hmacKey
+    , hkKind
+    , hkSecret
+    , hkMetadata
 
     -- * Policy
     , Policy

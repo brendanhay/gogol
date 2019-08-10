@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/reference/rest/ Service Networking API Reference> for @servicenetworking.operations.cancel@.
+-- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.operations.cancel@.
 module Network.Google.Resource.ServiceNetworking.Operations.Cancel
     (
     -- * REST Resource

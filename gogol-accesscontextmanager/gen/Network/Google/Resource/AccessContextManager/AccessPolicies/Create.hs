@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.create@ method which the
 -- 'AccessPoliciesCreate' request conforms to.
 type AccessPoliciesCreateResource =
-     "v1beta" :>
+     "v1" :>
        "accessPolicies" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

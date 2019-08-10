@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.resume@ method which the
 -- 'ProjectsLocationsJobsResume' request conforms to.
 type ProjectsLocationsJobsResumeResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "resume" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

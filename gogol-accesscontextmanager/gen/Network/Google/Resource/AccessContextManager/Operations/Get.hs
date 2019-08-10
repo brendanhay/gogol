@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
 type OperationsGetResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

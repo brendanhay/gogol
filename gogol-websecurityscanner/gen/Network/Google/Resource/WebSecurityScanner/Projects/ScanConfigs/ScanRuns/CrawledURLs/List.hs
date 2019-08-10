@@ -50,7 +50,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- 'ProjectsScanConfigsScanRunsCrawledURLsList' request conforms to.
 type ProjectsScanConfigsScanRunsCrawledURLsListResource
      =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "parent" Text :>
          "crawledUrls" :>
            QueryParam "$.xgafv" Xgafv :>

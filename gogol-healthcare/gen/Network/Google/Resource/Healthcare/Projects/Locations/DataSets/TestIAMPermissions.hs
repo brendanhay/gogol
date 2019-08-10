@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsTestIAMPermissions' request conforms to.
 type ProjectsLocationsDataSetsTestIAMPermissionsResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

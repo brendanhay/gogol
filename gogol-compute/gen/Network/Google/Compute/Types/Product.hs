@@ -2115,9 +2115,10 @@ deprecationStatus =
     }
 
 
--- | The deprecation state of this resource. This can be DEPRECATED,
--- OBSOLETE, or DELETED. Operations which create a new resource using a
--- DEPRECATED resource will return successfully, but with a warning
+-- | The deprecation state of this resource. This can be ACTIVE, DEPRECATED,
+-- OBSOLETE, or DELETED. Operations which communicate the end of life date
+-- for an image, can use ACTIVE. Operations which create a new resource
+-- using a DEPRECATED resource will return successfully, but with a warning
 -- indicating the deprecated resource and recommending its replacement.
 -- Operations which use OBSOLETE or DELETED resources will be rejected and
 -- result in an error.
@@ -2245,6 +2246,7 @@ data Snapshot =
     , _sSelfLink                :: !(Maybe Text)
     , _sSnapshotEncryptionKey   :: !(Maybe CustomerEncryptionKey)
     , _sName                    :: !(Maybe Text)
+    , _sStorageLocations        :: !(Maybe [Text])
     , _sCreationTimestamp       :: !(Maybe Text)
     , _sLicenseCodes            :: !(Maybe [Textual Int64])
     , _sId                      :: !(Maybe (Textual Word64))
@@ -2281,6 +2283,8 @@ data Snapshot =
 --
 -- * 'sName'
 --
+-- * 'sStorageLocations'
+--
 -- * 'sCreationTimestamp'
 --
 -- * 'sLicenseCodes'
@@ -2310,6 +2314,7 @@ snapshot =
     , _sSelfLink = Nothing
     , _sSnapshotEncryptionKey = Nothing
     , _sName = Nothing
+    , _sStorageLocations = Nothing
     , _sCreationTimestamp = Nothing
     , _sLicenseCodes = Nothing
     , _sId = Nothing
@@ -2399,6 +2404,15 @@ sSnapshotEncryptionKey
 sName :: Lens' Snapshot (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
+-- | GCS bucket storage location of the snapshot (regional or
+-- multi-regional).
+sStorageLocations :: Lens' Snapshot [Text]
+sStorageLocations
+  = lens _sStorageLocations
+      (\ s a -> s{_sStorageLocations = a})
+      . _Default
+      . _Coerce
+
 -- | [Output Only] Creation timestamp in RFC3339 text format.
 sCreationTimestamp :: Lens' Snapshot (Maybe Text)
 sCreationTimestamp
@@ -2472,6 +2486,7 @@ instance FromJSON Snapshot where
                      <*> (o .:? "selfLink")
                      <*> (o .:? "snapshotEncryptionKey")
                      <*> (o .:? "name")
+                     <*> (o .:? "storageLocations" .!= mempty)
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "licenseCodes" .!= mempty)
                      <*> (o .:? "id")
@@ -2497,6 +2512,7 @@ instance ToJSON Snapshot where
                   ("snapshotEncryptionKey" .=) <$>
                     _sSnapshotEncryptionKey,
                   ("name" .=) <$> _sName,
+                  ("storageLocations" .=) <$> _sStorageLocations,
                   ("creationTimestamp" .=) <$> _sCreationTimestamp,
                   ("licenseCodes" .=) <$> _sLicenseCodes,
                   ("id" .=) <$> _sId, ("labels" .=) <$> _sLabels,
@@ -2780,7 +2796,10 @@ instance ToJSON ForwardingRuleList where
                   ("warning" .=) <$> _frlWarning,
                   ("id" .=) <$> _frlId])
 
--- | A NodeGroup resource.
+-- | A NodeGroup resource. To create a node group, you must first create a
+-- node templates. To learn more about node groups and sole-tenant nodes,
+-- read the Sole-tenant nodes documentation. (== resource_for
+-- beta.nodeGroups ==) (== resource_for v1.nodeGroups ==)
 --
 -- /See:/ 'nodeGroup' smart constructor.
 data NodeGroup =
@@ -2951,7 +2970,7 @@ vpnTunnelsScopedList =
   VPNTunnelsScopedList' {_vtslVPNTunnels = Nothing, _vtslWarning = Nothing}
 
 
--- | A list of vpn tunnels contained in this scope.
+-- | A list of VPN tunnels contained in this scope.
 vtslVPNTunnels :: Lens' VPNTunnelsScopedList [VPNTunnel]
 vtslVPNTunnels
   = lens _vtslVPNTunnels
@@ -3155,6 +3174,55 @@ instance ToJSON
                  [("data" .=) <$> _rigliwData,
                   ("code" .=) <$> _rigliwCode,
                   ("message" .=) <$> _rigliwMessage])
+
+--
+-- /See:/ 'networkEndpointGroupsDetachEndpointsRequest' smart constructor.
+newtype NetworkEndpointGroupsDetachEndpointsRequest =
+  NetworkEndpointGroupsDetachEndpointsRequest'
+    { _negderNetworkEndpoints :: Maybe [NetworkEndpoint]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsDetachEndpointsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negderNetworkEndpoints'
+networkEndpointGroupsDetachEndpointsRequest
+    :: NetworkEndpointGroupsDetachEndpointsRequest
+networkEndpointGroupsDetachEndpointsRequest =
+  NetworkEndpointGroupsDetachEndpointsRequest'
+    {_negderNetworkEndpoints = Nothing}
+
+
+-- | The list of network endpoints to be detached.
+negderNetworkEndpoints :: Lens' NetworkEndpointGroupsDetachEndpointsRequest [NetworkEndpoint]
+negderNetworkEndpoints
+  = lens _negderNetworkEndpoints
+      (\ s a -> s{_negderNetworkEndpoints = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           NetworkEndpointGroupsDetachEndpointsRequest
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsDetachEndpointsRequest"
+              (\ o ->
+                 NetworkEndpointGroupsDetachEndpointsRequest' <$>
+                   (o .:? "networkEndpoints" .!= mempty))
+
+instance ToJSON
+           NetworkEndpointGroupsDetachEndpointsRequest
+         where
+        toJSON
+          NetworkEndpointGroupsDetachEndpointsRequest'{..}
+          = object
+              (catMaybes
+                 [("networkEndpoints" .=) <$>
+                    _negderNetworkEndpoints])
 
 -- | Specifies the audit configuration for a service. The configuration
 -- determines which permission types are logged, and what identities, if
@@ -3666,6 +3734,77 @@ instance ToJSON DiskList where
                   Just ("kind" .= _dlKind), ("items" .=) <$> _dlItems,
                   ("selfLink" .=) <$> _dlSelfLink,
                   ("warning" .=) <$> _dlWarning, ("id" .=) <$> _dlId])
+
+-- | [Output Only] Informational warning message.
+--
+-- /See:/ 'networkEndpointGroupsListNetworkEndpointsWarning' smart constructor.
+data NetworkEndpointGroupsListNetworkEndpointsWarning =
+  NetworkEndpointGroupsListNetworkEndpointsWarning'
+    { _neglnewData    :: !(Maybe [NetworkEndpointGroupsListNetworkEndpointsWarningDataItem])
+    , _neglnewCode    :: !(Maybe NetworkEndpointGroupsListNetworkEndpointsWarningCode)
+    , _neglnewMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsListNetworkEndpointsWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglnewData'
+--
+-- * 'neglnewCode'
+--
+-- * 'neglnewMessage'
+networkEndpointGroupsListNetworkEndpointsWarning
+    :: NetworkEndpointGroupsListNetworkEndpointsWarning
+networkEndpointGroupsListNetworkEndpointsWarning =
+  NetworkEndpointGroupsListNetworkEndpointsWarning'
+    {_neglnewData = Nothing, _neglnewCode = Nothing, _neglnewMessage = Nothing}
+
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+neglnewData :: Lens' NetworkEndpointGroupsListNetworkEndpointsWarning [NetworkEndpointGroupsListNetworkEndpointsWarningDataItem]
+neglnewData
+  = lens _neglnewData (\ s a -> s{_neglnewData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+neglnewCode :: Lens' NetworkEndpointGroupsListNetworkEndpointsWarning (Maybe NetworkEndpointGroupsListNetworkEndpointsWarningCode)
+neglnewCode
+  = lens _neglnewCode (\ s a -> s{_neglnewCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+neglnewMessage :: Lens' NetworkEndpointGroupsListNetworkEndpointsWarning (Maybe Text)
+neglnewMessage
+  = lens _neglnewMessage
+      (\ s a -> s{_neglnewMessage = a})
+
+instance FromJSON
+           NetworkEndpointGroupsListNetworkEndpointsWarning
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsListNetworkEndpointsWarning"
+              (\ o ->
+                 NetworkEndpointGroupsListNetworkEndpointsWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+           NetworkEndpointGroupsListNetworkEndpointsWarning
+         where
+        toJSON
+          NetworkEndpointGroupsListNetworkEndpointsWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _neglnewData,
+                  ("code" .=) <$> _neglnewCode,
+                  ("message" .=) <$> _neglnewMessage])
 
 --
 -- /See:/ 'targetPoolsAddInstanceRequest' smart constructor.
@@ -4204,6 +4343,10 @@ instanceGroupManagerVersion =
     }
 
 
+-- | The URL of the instance template that is specified for this managed
+-- instance group. The group uses this template to create new instances in
+-- the managed instance group until the \`targetSize\` for this version is
+-- reached.
 igmvInstanceTemplate :: Lens' InstanceGroupManagerVersion (Maybe Text)
 igmvInstanceTemplate
   = lens _igmvInstanceTemplate
@@ -4243,6 +4386,76 @@ instance ToJSON InstanceGroupManagerVersion where
                  [("instanceTemplate" .=) <$> _igmvInstanceTemplate,
                   ("targetSize" .=) <$> _igmvTargetSize,
                   ("name" .=) <$> _igmvName])
+
+-- | [Output Only] An informational warning that replaces the list of network
+-- endpoint groups when the list is empty.
+--
+-- /See:/ 'networkEndpointGroupsScopedListWarning' smart constructor.
+data NetworkEndpointGroupsScopedListWarning =
+  NetworkEndpointGroupsScopedListWarning'
+    { _negslwData    :: !(Maybe [NetworkEndpointGroupsScopedListWarningDataItem])
+    , _negslwCode    :: !(Maybe NetworkEndpointGroupsScopedListWarningCode)
+    , _negslwMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negslwData'
+--
+-- * 'negslwCode'
+--
+-- * 'negslwMessage'
+networkEndpointGroupsScopedListWarning
+    :: NetworkEndpointGroupsScopedListWarning
+networkEndpointGroupsScopedListWarning =
+  NetworkEndpointGroupsScopedListWarning'
+    {_negslwData = Nothing, _negslwCode = Nothing, _negslwMessage = Nothing}
+
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+negslwData :: Lens' NetworkEndpointGroupsScopedListWarning [NetworkEndpointGroupsScopedListWarningDataItem]
+negslwData
+  = lens _negslwData (\ s a -> s{_negslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+negslwCode :: Lens' NetworkEndpointGroupsScopedListWarning (Maybe NetworkEndpointGroupsScopedListWarningCode)
+negslwCode
+  = lens _negslwCode (\ s a -> s{_negslwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+negslwMessage :: Lens' NetworkEndpointGroupsScopedListWarning (Maybe Text)
+negslwMessage
+  = lens _negslwMessage
+      (\ s a -> s{_negslwMessage = a})
+
+instance FromJSON
+           NetworkEndpointGroupsScopedListWarning
+         where
+        parseJSON
+          = withObject "NetworkEndpointGroupsScopedListWarning"
+              (\ o ->
+                 NetworkEndpointGroupsScopedListWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+           NetworkEndpointGroupsScopedListWarning
+         where
+        toJSON NetworkEndpointGroupsScopedListWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _negslwData,
+                  ("code" .=) <$> _negslwCode,
+                  ("message" .=) <$> _negslwMessage])
 
 -- | An informational warning that appears when the list of addresses is
 -- empty.
@@ -4825,7 +5038,8 @@ instance ToJSON Image where
 -- /See:/ 'networksAddPeeringRequest' smart constructor.
 data NetworksAddPeeringRequest =
   NetworksAddPeeringRequest'
-    { _naprPeerNetwork      :: !(Maybe Text)
+    { _naprNetworkPeering   :: !(Maybe NetworkPeering)
+    , _naprPeerNetwork      :: !(Maybe Text)
     , _naprName             :: !(Maybe Text)
     , _naprAutoCreateRoutes :: !(Maybe Bool)
     }
@@ -4836,6 +5050,8 @@ data NetworksAddPeeringRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'naprNetworkPeering'
+--
 -- * 'naprPeerNetwork'
 --
 -- * 'naprName'
@@ -4845,11 +5061,22 @@ networksAddPeeringRequest
     :: NetworksAddPeeringRequest
 networksAddPeeringRequest =
   NetworksAddPeeringRequest'
-    { _naprPeerNetwork = Nothing
+    { _naprNetworkPeering = Nothing
+    , _naprPeerNetwork = Nothing
     , _naprName = Nothing
     , _naprAutoCreateRoutes = Nothing
     }
 
+
+-- | Network peering parameters. In order to specify route policies for
+-- peering using import\/export custom routes, you will have to fill all
+-- peering related parameters (name, peer network, exchange_subnet_routes)
+-- in network_peeringfield. Corresponding fields in
+-- NetworksAddPeeringRequest will be deprecated soon.
+naprNetworkPeering :: Lens' NetworksAddPeeringRequest (Maybe NetworkPeering)
+naprNetworkPeering
+  = lens _naprNetworkPeering
+      (\ s a -> s{_naprNetworkPeering = a})
 
 -- | URL of the peer network. It can be either full URL or partial URL. The
 -- peer network may belong to a different project. If the partial URL does
@@ -4864,7 +5091,9 @@ naprPeerNetwork
 naprName :: Lens' NetworksAddPeeringRequest (Maybe Text)
 naprName = lens _naprName (\ s a -> s{_naprName = a})
 
--- | Whether Google Compute Engine manages the routes automatically.
+-- | This field will be deprecated soon. Prefer using exchange_subnet_routes
+-- in network_peering instead. Whether Google Compute Engine manages the
+-- routes automatically.
 naprAutoCreateRoutes :: Lens' NetworksAddPeeringRequest (Maybe Bool)
 naprAutoCreateRoutes
   = lens _naprAutoCreateRoutes
@@ -4875,14 +5104,16 @@ instance FromJSON NetworksAddPeeringRequest where
           = withObject "NetworksAddPeeringRequest"
               (\ o ->
                  NetworksAddPeeringRequest' <$>
-                   (o .:? "peerNetwork") <*> (o .:? "name") <*>
-                     (o .:? "autoCreateRoutes"))
+                   (o .:? "networkPeering") <*> (o .:? "peerNetwork")
+                     <*> (o .:? "name")
+                     <*> (o .:? "autoCreateRoutes"))
 
 instance ToJSON NetworksAddPeeringRequest where
         toJSON NetworksAddPeeringRequest'{..}
           = object
               (catMaybes
-                 [("peerNetwork" .=) <$> _naprPeerNetwork,
+                 [("networkPeering" .=) <$> _naprNetworkPeering,
+                  ("peerNetwork" .=) <$> _naprPeerNetwork,
                   ("name" .=) <$> _naprName,
                   ("autoCreateRoutes" .=) <$> _naprAutoCreateRoutes])
 
@@ -6399,6 +6630,71 @@ instance ToJSON SubnetworkListWarning where
                  [("data" .=) <$> _slwData, ("code" .=) <$> _slwCode,
                   ("message" .=) <$> _slwMessage])
 
+-- | [Output Only] Informational warning message.
+--
+-- /See:/ 'networkEndpointGroupListWarning' smart constructor.
+data NetworkEndpointGroupListWarning =
+  NetworkEndpointGroupListWarning'
+    { _neglwData    :: !(Maybe [NetworkEndpointGroupListWarningDataItem])
+    , _neglwCode    :: !(Maybe NetworkEndpointGroupListWarningCode)
+    , _neglwMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglwData'
+--
+-- * 'neglwCode'
+--
+-- * 'neglwMessage'
+networkEndpointGroupListWarning
+    :: NetworkEndpointGroupListWarning
+networkEndpointGroupListWarning =
+  NetworkEndpointGroupListWarning'
+    {_neglwData = Nothing, _neglwCode = Nothing, _neglwMessage = Nothing}
+
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+neglwData :: Lens' NetworkEndpointGroupListWarning [NetworkEndpointGroupListWarningDataItem]
+neglwData
+  = lens _neglwData (\ s a -> s{_neglwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+neglwCode :: Lens' NetworkEndpointGroupListWarning (Maybe NetworkEndpointGroupListWarningCode)
+neglwCode
+  = lens _neglwCode (\ s a -> s{_neglwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+neglwMessage :: Lens' NetworkEndpointGroupListWarning (Maybe Text)
+neglwMessage
+  = lens _neglwMessage (\ s a -> s{_neglwMessage = a})
+
+instance FromJSON NetworkEndpointGroupListWarning
+         where
+        parseJSON
+          = withObject "NetworkEndpointGroupListWarning"
+              (\ o ->
+                 NetworkEndpointGroupListWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON NetworkEndpointGroupListWarning where
+        toJSON NetworkEndpointGroupListWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _neglwData,
+                  ("code" .=) <$> _neglwCode,
+                  ("message" .=) <$> _neglwMessage])
+
 -- | An HealthCheck resource. This resource defines a template for how
 -- individual virtual machines should be checked for health, via one of the
 -- supported protocols.
@@ -6408,6 +6704,7 @@ data HealthCheck =
   HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hcTCPHealthCheck     :: !(Maybe TCPHealthCheck)
+    , _hcHTTP2HealthCheck   :: !(Maybe HTTP2HealthCheck)
     , _hcKind               :: !Text
     , _hcSSLHealthCheck     :: !(Maybe SSLHealthCheck)
     , _hcSelfLink           :: !(Maybe Text)
@@ -6432,6 +6729,8 @@ data HealthCheck =
 -- * 'hcHealthyThreshold'
 --
 -- * 'hcTCPHealthCheck'
+--
+-- * 'hcHTTP2HealthCheck'
 --
 -- * 'hcKind'
 --
@@ -6464,6 +6763,7 @@ healthCheck =
   HealthCheck'
     { _hcHealthyThreshold = Nothing
     , _hcTCPHealthCheck = Nothing
+    , _hcHTTP2HealthCheck = Nothing
     , _hcKind = "compute#healthCheck"
     , _hcSSLHealthCheck = Nothing
     , _hcSelfLink = Nothing
@@ -6492,6 +6792,11 @@ hcTCPHealthCheck :: Lens' HealthCheck (Maybe TCPHealthCheck)
 hcTCPHealthCheck
   = lens _hcTCPHealthCheck
       (\ s a -> s{_hcTCPHealthCheck = a})
+
+hcHTTP2HealthCheck :: Lens' HealthCheck (Maybe HTTP2HealthCheck)
+hcHTTP2HealthCheck
+  = lens _hcHTTP2HealthCheck
+      (\ s a -> s{_hcHTTP2HealthCheck = a})
 
 -- | Type of the resource.
 hcKind :: Lens' HealthCheck Text
@@ -6543,8 +6848,8 @@ hcId
   = lens _hcId (\ s a -> s{_hcId = a}) .
       mapping _Coerce
 
--- | Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS.
--- If not specified, the default is TCP. Exactly one of the
+-- | Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or
+-- HTTP2. If not specified, the default is TCP. Exactly one of the
 -- protocol-specific health check field must be specified, which must match
 -- type field.
 hcType :: Lens' HealthCheck (Maybe HealthCheckType)
@@ -6585,6 +6890,7 @@ instance FromJSON HealthCheck where
                  HealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "tcpHealthCheck")
+                     <*> (o .:? "http2HealthCheck")
                      <*> (o .:? "kind" .!= "compute#healthCheck")
                      <*> (o .:? "sslHealthCheck")
                      <*> (o .:? "selfLink")
@@ -6605,6 +6911,7 @@ instance ToJSON HealthCheck where
               (catMaybes
                  [("healthyThreshold" .=) <$> _hcHealthyThreshold,
                   ("tcpHealthCheck" .=) <$> _hcTCPHealthCheck,
+                  ("http2HealthCheck" .=) <$> _hcHTTP2HealthCheck,
                   Just ("kind" .= _hcKind),
                   ("sslHealthCheck" .=) <$> _hcSSLHealthCheck,
                   ("selfLink" .=) <$> _hcSelfLink,
@@ -7351,6 +7658,52 @@ instance ToJSON NamedPort where
                  [("name" .=) <$> _npName, ("port" .=) <$> _npPort])
 
 --
+-- /See:/ 'networkEndpointGroupsListEndpointsRequest' smart constructor.
+newtype NetworkEndpointGroupsListEndpointsRequest =
+  NetworkEndpointGroupsListEndpointsRequest'
+    { _neglerHealthStatus :: Maybe NetworkEndpointGroupsListEndpointsRequestHealthStatus
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsListEndpointsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglerHealthStatus'
+networkEndpointGroupsListEndpointsRequest
+    :: NetworkEndpointGroupsListEndpointsRequest
+networkEndpointGroupsListEndpointsRequest =
+  NetworkEndpointGroupsListEndpointsRequest' {_neglerHealthStatus = Nothing}
+
+
+-- | Optional query parameter for showing the health status of each network
+-- endpoint. Valid options are SKIP or SHOW. If you don\'t specifiy this
+-- parameter, the health status of network endpoints will not be provided.
+neglerHealthStatus :: Lens' NetworkEndpointGroupsListEndpointsRequest (Maybe NetworkEndpointGroupsListEndpointsRequestHealthStatus)
+neglerHealthStatus
+  = lens _neglerHealthStatus
+      (\ s a -> s{_neglerHealthStatus = a})
+
+instance FromJSON
+           NetworkEndpointGroupsListEndpointsRequest
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsListEndpointsRequest"
+              (\ o ->
+                 NetworkEndpointGroupsListEndpointsRequest' <$>
+                   (o .:? "healthStatus"))
+
+instance ToJSON
+           NetworkEndpointGroupsListEndpointsRequest
+         where
+        toJSON NetworkEndpointGroupsListEndpointsRequest'{..}
+          = object
+              (catMaybes
+                 [("healthStatus" .=) <$> _neglerHealthStatus])
+
+--
 -- /See:/ 'subnetworkAggregatedListWarningDataItem' smart constructor.
 data SubnetworkAggregatedListWarningDataItem =
   SubnetworkAggregatedListWarningDataItem'
@@ -7456,6 +7809,8 @@ idlsLacpStatus
   = lens _idlsLacpStatus
       (\ s a -> s{_idlsLacpStatus = a})
 
+-- | An InterconnectDiagnostics.LinkOpticalPower object, describing the
+-- current value and status of the received light level.
 idlsReceivingOpticalPower :: Lens' InterconnectDiagnosticsLinkStatus (Maybe InterconnectDiagnosticsLinkOpticalPower)
 idlsReceivingOpticalPower
   = lens _idlsReceivingOpticalPower
@@ -7483,6 +7838,8 @@ idlsArpCaches
       . _Default
       . _Coerce
 
+-- | An InterconnectDiagnostics.LinkOpticalPower object, describing the
+-- current value and status of the transmitted light level.
 idlsTransmittingOpticalPower :: Lens' InterconnectDiagnosticsLinkStatus (Maybe InterconnectDiagnosticsLinkOpticalPower)
 idlsTransmittingOpticalPower
   = lens _idlsTransmittingOpticalPower
@@ -7514,6 +7871,105 @@ instance ToJSON InterconnectDiagnosticsLinkStatus
                   ("arpCaches" .=) <$> _idlsArpCaches,
                   ("transmittingOpticalPower" .=) <$>
                     _idlsTransmittingOpticalPower])
+
+--
+-- /See:/ 'backendServiceReference' smart constructor.
+newtype BackendServiceReference =
+  BackendServiceReference'
+    { _bsrBackendService :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BackendServiceReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsrBackendService'
+backendServiceReference
+    :: BackendServiceReference
+backendServiceReference =
+  BackendServiceReference' {_bsrBackendService = Nothing}
+
+
+bsrBackendService :: Lens' BackendServiceReference (Maybe Text)
+bsrBackendService
+  = lens _bsrBackendService
+      (\ s a -> s{_bsrBackendService = a})
+
+instance FromJSON BackendServiceReference where
+        parseJSON
+          = withObject "BackendServiceReference"
+              (\ o ->
+                 BackendServiceReference' <$>
+                   (o .:? "backendService"))
+
+instance ToJSON BackendServiceReference where
+        toJSON BackendServiceReference'{..}
+          = object
+              (catMaybes
+                 [("backendService" .=) <$> _bsrBackendService])
+
+--
+-- /See:/ 'networkEndpointGroupAggregatedListWarningDataItem' smart constructor.
+data NetworkEndpointGroupAggregatedListWarningDataItem =
+  NetworkEndpointGroupAggregatedListWarningDataItem'
+    { _negalwdiValue :: !(Maybe Text)
+    , _negalwdiKey   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupAggregatedListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negalwdiValue'
+--
+-- * 'negalwdiKey'
+networkEndpointGroupAggregatedListWarningDataItem
+    :: NetworkEndpointGroupAggregatedListWarningDataItem
+networkEndpointGroupAggregatedListWarningDataItem =
+  NetworkEndpointGroupAggregatedListWarningDataItem'
+    {_negalwdiValue = Nothing, _negalwdiKey = Nothing}
+
+
+-- | [Output Only] A warning data value corresponding to the key.
+negalwdiValue :: Lens' NetworkEndpointGroupAggregatedListWarningDataItem (Maybe Text)
+negalwdiValue
+  = lens _negalwdiValue
+      (\ s a -> s{_negalwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+negalwdiKey :: Lens' NetworkEndpointGroupAggregatedListWarningDataItem (Maybe Text)
+negalwdiKey
+  = lens _negalwdiKey (\ s a -> s{_negalwdiKey = a})
+
+instance FromJSON
+           NetworkEndpointGroupAggregatedListWarningDataItem
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupAggregatedListWarningDataItem"
+              (\ o ->
+                 NetworkEndpointGroupAggregatedListWarningDataItem'
+                   <$> (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+           NetworkEndpointGroupAggregatedListWarningDataItem
+         where
+        toJSON
+          NetworkEndpointGroupAggregatedListWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _negalwdiValue,
+                  ("key" .=) <$> _negalwdiKey])
 
 -- | Contains a list of TargetInstance resources.
 --
@@ -9402,6 +9858,7 @@ data ForwardingRule =
     , _frLoadBalancingScheme :: !(Maybe ForwardingRuleLoadBalancingScheme)
     , _frKind                :: !Text
     , _frIPVersion           :: !(Maybe ForwardingRuleIPVersion)
+    , _frAllPorts            :: !(Maybe Bool)
     , _frNetwork             :: !(Maybe Text)
     , _frPortRange           :: !(Maybe Text)
     , _frSelfLink            :: !(Maybe Text)
@@ -9434,6 +9891,8 @@ data ForwardingRule =
 -- * 'frKind'
 --
 -- * 'frIPVersion'
+--
+-- * 'frAllPorts'
 --
 -- * 'frNetwork'
 --
@@ -9473,6 +9932,7 @@ forwardingRule =
     , _frLoadBalancingScheme = Nothing
     , _frKind = "compute#forwardingRule"
     , _frIPVersion = Nothing
+    , _frAllPorts = Nothing
     , _frNetwork = Nothing
     , _frPortRange = Nothing
     , _frSelfLink = Nothing
@@ -9553,6 +10013,16 @@ frKind = lens _frKind (\ s a -> s{_frKind = a})
 frIPVersion :: Lens' ForwardingRule (Maybe ForwardingRuleIPVersion)
 frIPVersion
   = lens _frIPVersion (\ s a -> s{_frIPVersion = a})
+
+-- | This field is used along with the backend_service field for internal
+-- load balancing or with the target field for internal TargetInstance.
+-- This field cannot be used with port or portRange fields. When the load
+-- balancing scheme is INTERNAL and protocol is TCP\/UDP, specify this
+-- field to allow packets addressed to any ports will be forwarded to the
+-- backends configured with this forwarding rule.
+frAllPorts :: Lens' ForwardingRule (Maybe Bool)
+frAllPorts
+  = lens _frAllPorts (\ s a -> s{_frAllPorts = a})
 
 -- | This field is not used for external load balancing. For INTERNAL and
 -- INTERNAL_SELF_MANAGED load balancing, this field identifies the network
@@ -9671,7 +10141,7 @@ frDescription
 -- regional forwarding rules, this target must live in the same region as
 -- the forwarding rule. For global forwarding rules, this target must be a
 -- global load balancing resource. The forwarded traffic must be of a type
--- appropriate to the target object. For INTERNAL_SELF_MANAGED\" load
+-- appropriate to the target object. For INTERNAL_SELF_MANAGED load
 -- balancing, only HTTP and HTTPS targets are valid.
 frTarget :: Lens' ForwardingRule (Maybe Text)
 frTarget = lens _frTarget (\ s a -> s{_frTarget = a})
@@ -9693,6 +10163,7 @@ instance FromJSON ForwardingRule where
                      (o .:? "loadBalancingScheme")
                      <*> (o .:? "kind" .!= "compute#forwardingRule")
                      <*> (o .:? "ipVersion")
+                     <*> (o .:? "allPorts")
                      <*> (o .:? "network")
                      <*> (o .:? "portRange")
                      <*> (o .:? "selfLink")
@@ -9719,6 +10190,7 @@ instance ToJSON ForwardingRule where
                     _frLoadBalancingScheme,
                   Just ("kind" .= _frKind),
                   ("ipVersion" .=) <$> _frIPVersion,
+                  ("allPorts" .=) <$> _frAllPorts,
                   ("network" .=) <$> _frNetwork,
                   ("portRange" .=) <$> _frPortRange,
                   ("selfLink" .=) <$> _frSelfLink,
@@ -10072,6 +10544,62 @@ instance ToJSON SubnetworksScopedList where
               (catMaybes
                  [("subnetworks" .=) <$> _sslSubnetworks,
                   ("warning" .=) <$> _sslWarning])
+
+--
+-- /See:/ 'networkEndpointGroupsScopedList' smart constructor.
+data NetworkEndpointGroupsScopedList =
+  NetworkEndpointGroupsScopedList'
+    { _negslNetworkEndpointGroups :: !(Maybe [NetworkEndpointGroup])
+    , _negslWarning               :: !(Maybe NetworkEndpointGroupsScopedListWarning)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsScopedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negslNetworkEndpointGroups'
+--
+-- * 'negslWarning'
+networkEndpointGroupsScopedList
+    :: NetworkEndpointGroupsScopedList
+networkEndpointGroupsScopedList =
+  NetworkEndpointGroupsScopedList'
+    {_negslNetworkEndpointGroups = Nothing, _negslWarning = Nothing}
+
+
+-- | [Output Only] The list of network endpoint groups that are contained in
+-- this scope.
+negslNetworkEndpointGroups :: Lens' NetworkEndpointGroupsScopedList [NetworkEndpointGroup]
+negslNetworkEndpointGroups
+  = lens _negslNetworkEndpointGroups
+      (\ s a -> s{_negslNetworkEndpointGroups = a})
+      . _Default
+      . _Coerce
+
+-- | [Output Only] An informational warning that replaces the list of network
+-- endpoint groups when the list is empty.
+negslWarning :: Lens' NetworkEndpointGroupsScopedList (Maybe NetworkEndpointGroupsScopedListWarning)
+negslWarning
+  = lens _negslWarning (\ s a -> s{_negslWarning = a})
+
+instance FromJSON NetworkEndpointGroupsScopedList
+         where
+        parseJSON
+          = withObject "NetworkEndpointGroupsScopedList"
+              (\ o ->
+                 NetworkEndpointGroupsScopedList' <$>
+                   (o .:? "networkEndpointGroups" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON NetworkEndpointGroupsScopedList where
+        toJSON NetworkEndpointGroupsScopedList'{..}
+          = object
+              (catMaybes
+                 [("networkEndpointGroups" .=) <$>
+                    _negslNetworkEndpointGroups,
+                  ("warning" .=) <$> _negslWarning])
 
 -- | Contains a list of accelerator types.
 --
@@ -10973,6 +11501,75 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
+-- | The network endpoint.
+--
+-- /See:/ 'networkEndpoint' smart constructor.
+data NetworkEndpoint =
+  NetworkEndpoint'
+    { _neIPAddress :: !(Maybe Text)
+    , _nePort      :: !(Maybe (Textual Int32))
+    , _neInstance  :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neIPAddress'
+--
+-- * 'nePort'
+--
+-- * 'neInstance'
+networkEndpoint
+    :: NetworkEndpoint
+networkEndpoint =
+  NetworkEndpoint'
+    {_neIPAddress = Nothing, _nePort = Nothing, _neInstance = Nothing}
+
+
+-- | Optional IPv4 address of network endpoint. The IP address must belong to
+-- a VM in GCE (either the primary IP or as part of an aliased IP range).
+-- If the IP address is not specified, then the primary IP address for the
+-- VM instance in the network that the network endpoint group belongs to
+-- will be used.
+neIPAddress :: Lens' NetworkEndpoint (Maybe Text)
+neIPAddress
+  = lens _neIPAddress (\ s a -> s{_neIPAddress = a})
+
+-- | Optional port number of network endpoint. If not specified and the
+-- NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the
+-- defaultPort for the network endpoint group will be used.
+nePort :: Lens' NetworkEndpoint (Maybe Int32)
+nePort
+  = lens _nePort (\ s a -> s{_nePort = a}) .
+      mapping _Coerce
+
+-- | The name for a specific VM instance that the IP address belongs to. This
+-- is required for network endpoints of type GCE_VM_IP_PORT. The instance
+-- must be in the same zone of network endpoint group. The name must be
+-- 1-63 characters long, and comply with RFC1035.
+neInstance :: Lens' NetworkEndpoint (Maybe Text)
+neInstance
+  = lens _neInstance (\ s a -> s{_neInstance = a})
+
+instance FromJSON NetworkEndpoint where
+        parseJSON
+          = withObject "NetworkEndpoint"
+              (\ o ->
+                 NetworkEndpoint' <$>
+                   (o .:? "ipAddress") <*> (o .:? "port") <*>
+                     (o .:? "instance"))
+
+instance ToJSON NetworkEndpoint where
+        toJSON NetworkEndpoint'{..}
+          = object
+              (catMaybes
+                 [("ipAddress" .=) <$> _neIPAddress,
+                  ("port" .=) <$> _nePort,
+                  ("instance" .=) <$> _neInstance])
+
 --
 -- /See:/ 'disksScopedListWarningDataItem' smart constructor.
 data DisksScopedListWarningDataItem =
@@ -11784,6 +12381,105 @@ instance ToJSON
                     _aplbuUtilizationTarget])
 
 --
+-- /See:/ 'networkEndpointGroupsListNetworkEndpoints' smart constructor.
+data NetworkEndpointGroupsListNetworkEndpoints =
+  NetworkEndpointGroupsListNetworkEndpoints'
+    { _neglneNextPageToken :: !(Maybe Text)
+    , _neglneKind          :: !Text
+    , _neglneItems         :: !(Maybe [NetworkEndpointWithHealthStatus])
+    , _neglneWarning       :: !(Maybe NetworkEndpointGroupsListNetworkEndpointsWarning)
+    , _neglneId            :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsListNetworkEndpoints' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglneNextPageToken'
+--
+-- * 'neglneKind'
+--
+-- * 'neglneItems'
+--
+-- * 'neglneWarning'
+--
+-- * 'neglneId'
+networkEndpointGroupsListNetworkEndpoints
+    :: NetworkEndpointGroupsListNetworkEndpoints
+networkEndpointGroupsListNetworkEndpoints =
+  NetworkEndpointGroupsListNetworkEndpoints'
+    { _neglneNextPageToken = Nothing
+    , _neglneKind = "compute#networkEndpointGroupsListNetworkEndpoints"
+    , _neglneItems = Nothing
+    , _neglneWarning = Nothing
+    , _neglneId = Nothing
+    }
+
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+neglneNextPageToken :: Lens' NetworkEndpointGroupsListNetworkEndpoints (Maybe Text)
+neglneNextPageToken
+  = lens _neglneNextPageToken
+      (\ s a -> s{_neglneNextPageToken = a})
+
+-- | [Output Only] The resource type, which is always
+-- compute#networkEndpointGroupsListNetworkEndpoints for the list of
+-- network endpoints in the specified network endpoint group.
+neglneKind :: Lens' NetworkEndpointGroupsListNetworkEndpoints Text
+neglneKind
+  = lens _neglneKind (\ s a -> s{_neglneKind = a})
+
+-- | A list of NetworkEndpointWithHealthStatus resources.
+neglneItems :: Lens' NetworkEndpointGroupsListNetworkEndpoints [NetworkEndpointWithHealthStatus]
+neglneItems
+  = lens _neglneItems (\ s a -> s{_neglneItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Informational warning message.
+neglneWarning :: Lens' NetworkEndpointGroupsListNetworkEndpoints (Maybe NetworkEndpointGroupsListNetworkEndpointsWarning)
+neglneWarning
+  = lens _neglneWarning
+      (\ s a -> s{_neglneWarning = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+neglneId :: Lens' NetworkEndpointGroupsListNetworkEndpoints (Maybe Text)
+neglneId = lens _neglneId (\ s a -> s{_neglneId = a})
+
+instance FromJSON
+           NetworkEndpointGroupsListNetworkEndpoints
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsListNetworkEndpoints"
+              (\ o ->
+                 NetworkEndpointGroupsListNetworkEndpoints' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#networkEndpointGroupsListNetworkEndpoints")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "warning")
+                     <*> (o .:? "id"))
+
+instance ToJSON
+           NetworkEndpointGroupsListNetworkEndpoints
+         where
+        toJSON NetworkEndpointGroupsListNetworkEndpoints'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _neglneNextPageToken,
+                  Just ("kind" .= _neglneKind),
+                  ("items" .=) <$> _neglneItems,
+                  ("warning" .=) <$> _neglneWarning,
+                  ("id" .=) <$> _neglneId])
+
+--
 -- /See:/ 'forwardingRuleAggregatedListWarningDataItem' smart constructor.
 data ForwardingRuleAggregatedListWarningDataItem =
   ForwardingRuleAggregatedListWarningDataItem'
@@ -12052,12 +12748,12 @@ igmAutoHealingPolicies
       . _Coerce
 
 -- | Specifies the instance templates used by this managed instance group to
--- create instances. Each version is defined by an instanceTemplate. Every
--- template can appear at most once per instance group. This field
--- overrides the top-level instanceTemplate field. Read more about the
--- relationships between these fields. Exactly one version must leave the
--- targetSize field unset. That version will be applied to all remaining
--- instances. For more information, read about canary updates.
+-- create instances. Each version is defined by an instanceTemplate and a
+-- name. Every version can appear at most once per instance group. This
+-- field overrides the top-level instanceTemplate field. Read more about
+-- the relationships between these fields. Exactly one version must leave
+-- the targetSize field unset. That version will be applied to all
+-- remaining instances. For more information, read about canary updates.
 igmVersions :: Lens' InstanceGroupManager [InstanceGroupManagerVersion]
 igmVersions
   = lens _igmVersions (\ s a -> s{_igmVersions = a}) .
@@ -12453,11 +13149,12 @@ instance ToJSON DiskListWarning where
 -- /See:/ 'tcpHealthCheck' smart constructor.
 data TCPHealthCheck =
   TCPHealthCheck'
-    { _thcResponse    :: !(Maybe Text)
-    , _thcProxyHeader :: !(Maybe TCPHealthCheckProxyHeader)
-    , _thcPortName    :: !(Maybe Text)
-    , _thcPort        :: !(Maybe (Textual Int32))
-    , _thcRequest     :: !(Maybe Text)
+    { _thcResponse          :: !(Maybe Text)
+    , _thcPortSpecification :: !(Maybe TCPHealthCheckPortSpecification)
+    , _thcProxyHeader       :: !(Maybe TCPHealthCheckProxyHeader)
+    , _thcPortName          :: !(Maybe Text)
+    , _thcPort              :: !(Maybe (Textual Int32))
+    , _thcRequest           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -12467,6 +13164,8 @@ data TCPHealthCheck =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'thcResponse'
+--
+-- * 'thcPortSpecification'
 --
 -- * 'thcProxyHeader'
 --
@@ -12480,6 +13179,7 @@ tcpHealthCheck
 tcpHealthCheck =
   TCPHealthCheck'
     { _thcResponse = Nothing
+    , _thcPortSpecification = Nothing
     , _thcProxyHeader = Nothing
     , _thcPortName = Nothing
     , _thcPort = Nothing
@@ -12493,6 +13193,19 @@ tcpHealthCheck =
 thcResponse :: Lens' TCPHealthCheck (Maybe Text)
 thcResponse
   = lens _thcResponse (\ s a -> s{_thcResponse = a})
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, TCP health check follows
+-- behavior specified in port and portName fields.
+thcPortSpecification :: Lens' TCPHealthCheck (Maybe TCPHealthCheckPortSpecification)
+thcPortSpecification
+  = lens _thcPortSpecification
+      (\ s a -> s{_thcPortSpecification = a})
 
 -- | Specifies the type of proxy header to append before sending data to the
 -- backend, either NONE or PROXY_V1. The default is NONE.
@@ -12527,8 +13240,9 @@ instance FromJSON TCPHealthCheck where
           = withObject "TCPHealthCheck"
               (\ o ->
                  TCPHealthCheck' <$>
-                   (o .:? "response") <*> (o .:? "proxyHeader") <*>
-                     (o .:? "portName")
+                   (o .:? "response") <*> (o .:? "portSpecification")
+                     <*> (o .:? "proxyHeader")
+                     <*> (o .:? "portName")
                      <*> (o .:? "port")
                      <*> (o .:? "request"))
 
@@ -12537,6 +13251,7 @@ instance ToJSON TCPHealthCheck where
           = object
               (catMaybes
                  [("response" .=) <$> _thcResponse,
+                  ("portSpecification" .=) <$> _thcPortSpecification,
                   ("proxyHeader" .=) <$> _thcProxyHeader,
                   ("portName" .=) <$> _thcPortName,
                   ("port" .=) <$> _thcPort,
@@ -14283,7 +14998,7 @@ fixedOrPercent =
 
 
 -- | [Output Only] Absolute value of VM instances calculated based on the
--- specific mode. - If the value is fixed, then the caculated value is
+-- specific mode. - If the value is fixed, then the calculated value is
 -- equal to the fixed value. - If the value is a percent, then the
 -- calculated value is percent\/100 * targetSize. For example, the
 -- calculated value of a 80% of a managed instance group with 150 instances
@@ -14359,6 +15074,50 @@ instance FromJSON FirewallLogConfig where
 instance ToJSON FirewallLogConfig where
         toJSON FirewallLogConfig'{..}
           = object (catMaybes [("enable" .=) <$> _flcEnable])
+
+-- | The policy describes the baseline against which Instance boot integrity
+-- is measured.
+--
+-- /See:/ 'shieldedInstanceIntegrityPolicy' smart constructor.
+newtype ShieldedInstanceIntegrityPolicy =
+  ShieldedInstanceIntegrityPolicy'
+    { _siipUpdateAutoLearnPolicy :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ShieldedInstanceIntegrityPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siipUpdateAutoLearnPolicy'
+shieldedInstanceIntegrityPolicy
+    :: ShieldedInstanceIntegrityPolicy
+shieldedInstanceIntegrityPolicy =
+  ShieldedInstanceIntegrityPolicy' {_siipUpdateAutoLearnPolicy = Nothing}
+
+
+-- | Updates the integrity policy baseline using the measurements from the VM
+-- instance\'s most recent boot.
+siipUpdateAutoLearnPolicy :: Lens' ShieldedInstanceIntegrityPolicy (Maybe Bool)
+siipUpdateAutoLearnPolicy
+  = lens _siipUpdateAutoLearnPolicy
+      (\ s a -> s{_siipUpdateAutoLearnPolicy = a})
+
+instance FromJSON ShieldedInstanceIntegrityPolicy
+         where
+        parseJSON
+          = withObject "ShieldedInstanceIntegrityPolicy"
+              (\ o ->
+                 ShieldedInstanceIntegrityPolicy' <$>
+                   (o .:? "updateAutoLearnPolicy"))
+
+instance ToJSON ShieldedInstanceIntegrityPolicy where
+        toJSON ShieldedInstanceIntegrityPolicy'{..}
+          = object
+              (catMaybes
+                 [("updateAutoLearnPolicy" .=) <$>
+                    _siipUpdateAutoLearnPolicy])
 
 -- | Represents a Nat resource. It enables the VMs within the specified
 -- subnetworks to access Internet without external IP addresses. It
@@ -14863,7 +15622,7 @@ instance ToJSON ManagedInstanceLastAttemptErrors
         toJSON ManagedInstanceLastAttemptErrors'{..}
           = object (catMaybes [("errors" .=) <$> _milaeErrors])
 
--- | Status of a NAT contained in this router.
+-- | Status of a NAT contained in this router. Next tag: 9
 --
 -- /See:/ 'routerStatusNATStatus' smart constructor.
 data RouterStatusNATStatus =
@@ -15717,18 +16476,19 @@ instance ToJSON
 -- /See:/ 'instanceProperties' smart constructor.
 data InstanceProperties =
   InstanceProperties'
-    { _ipServiceAccounts   :: !(Maybe [ServiceAccount])
-    , _ipNetworkInterfaces :: !(Maybe [NetworkInterface])
-    , _ipGuestAccelerators :: !(Maybe [AcceleratorConfig])
-    , _ipMachineType       :: !(Maybe Text)
-    , _ipMetadata          :: !(Maybe Metadata)
-    , _ipLabels            :: !(Maybe InstancePropertiesLabels)
-    , _ipScheduling        :: !(Maybe Scheduling)
-    , _ipMinCPUPlatform    :: !(Maybe Text)
-    , _ipDisks             :: !(Maybe [AttachedDisk])
-    , _ipCanIPForward      :: !(Maybe Bool)
-    , _ipDescription       :: !(Maybe Text)
-    , _ipTags              :: !(Maybe Tags)
+    { _ipServiceAccounts        :: !(Maybe [ServiceAccount])
+    , _ipNetworkInterfaces      :: !(Maybe [NetworkInterface])
+    , _ipGuestAccelerators      :: !(Maybe [AcceleratorConfig])
+    , _ipMachineType            :: !(Maybe Text)
+    , _ipMetadata               :: !(Maybe Metadata)
+    , _ipShieldedInstanceConfig :: !(Maybe ShieldedInstanceConfig)
+    , _ipLabels                 :: !(Maybe InstancePropertiesLabels)
+    , _ipScheduling             :: !(Maybe Scheduling)
+    , _ipMinCPUPlatform         :: !(Maybe Text)
+    , _ipDisks                  :: !(Maybe [AttachedDisk])
+    , _ipCanIPForward           :: !(Maybe Bool)
+    , _ipDescription            :: !(Maybe Text)
+    , _ipTags                   :: !(Maybe Tags)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -15746,6 +16506,8 @@ data InstanceProperties =
 -- * 'ipMachineType'
 --
 -- * 'ipMetadata'
+--
+-- * 'ipShieldedInstanceConfig'
 --
 -- * 'ipLabels'
 --
@@ -15769,6 +16531,7 @@ instanceProperties =
     , _ipGuestAccelerators = Nothing
     , _ipMachineType = Nothing
     , _ipMetadata = Nothing
+    , _ipShieldedInstanceConfig = Nothing
     , _ipLabels = Nothing
     , _ipScheduling = Nothing
     , _ipMinCPUPlatform = Nothing
@@ -15820,6 +16583,11 @@ ipMachineType
 ipMetadata :: Lens' InstanceProperties (Maybe Metadata)
 ipMetadata
   = lens _ipMetadata (\ s a -> s{_ipMetadata = a})
+
+ipShieldedInstanceConfig :: Lens' InstanceProperties (Maybe ShieldedInstanceConfig)
+ipShieldedInstanceConfig
+  = lens _ipShieldedInstanceConfig
+      (\ s a -> s{_ipShieldedInstanceConfig = a})
 
 -- | Labels to apply to instances that are created from this template.
 ipLabels :: Lens' InstanceProperties (Maybe InstancePropertiesLabels)
@@ -15883,6 +16651,7 @@ instance FromJSON InstanceProperties where
                      <*> (o .:? "guestAccelerators" .!= mempty)
                      <*> (o .:? "machineType")
                      <*> (o .:? "metadata")
+                     <*> (o .:? "shieldedInstanceConfig")
                      <*> (o .:? "labels")
                      <*> (o .:? "scheduling")
                      <*> (o .:? "minCpuPlatform")
@@ -15900,6 +16669,8 @@ instance ToJSON InstanceProperties where
                   ("guestAccelerators" .=) <$> _ipGuestAccelerators,
                   ("machineType" .=) <$> _ipMachineType,
                   ("metadata" .=) <$> _ipMetadata,
+                  ("shieldedInstanceConfig" .=) <$>
+                    _ipShieldedInstanceConfig,
                   ("labels" .=) <$> _ipLabels,
                   ("scheduling" .=) <$> _ipScheduling,
                   ("minCpuPlatform" .=) <$> _ipMinCPUPlatform,
@@ -16009,6 +16780,133 @@ instance ToJSON RegionListWarning where
               (catMaybes
                  [("data" .=) <$> _rlwData, ("code" .=) <$> _rlwCode,
                   ("message" .=) <$> _rlwMessage])
+
+--
+-- /See:/ 'hTTP2HealthCheck' smart constructor.
+data HTTP2HealthCheck =
+  HTTP2HealthCheck'
+    { _httphcResponse          :: !(Maybe Text)
+    , _httphcPortSpecification :: !(Maybe HTTP2HealthCheckPortSpecification)
+    , _httphcRequestPath       :: !(Maybe Text)
+    , _httphcHost              :: !(Maybe Text)
+    , _httphcProxyHeader       :: !(Maybe HTTP2HealthCheckProxyHeader)
+    , _httphcPortName          :: !(Maybe Text)
+    , _httphcPort              :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HTTP2HealthCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'httphcResponse'
+--
+-- * 'httphcPortSpecification'
+--
+-- * 'httphcRequestPath'
+--
+-- * 'httphcHost'
+--
+-- * 'httphcProxyHeader'
+--
+-- * 'httphcPortName'
+--
+-- * 'httphcPort'
+hTTP2HealthCheck
+    :: HTTP2HealthCheck
+hTTP2HealthCheck =
+  HTTP2HealthCheck'
+    { _httphcResponse = Nothing
+    , _httphcPortSpecification = Nothing
+    , _httphcRequestPath = Nothing
+    , _httphcHost = Nothing
+    , _httphcProxyHeader = Nothing
+    , _httphcPortName = Nothing
+    , _httphcPort = Nothing
+    }
+
+
+-- | The string to match anywhere in the first 1024 bytes of the response
+-- body. If left empty (the default value), the status code determines
+-- health. The response data can only be ASCII.
+httphcResponse :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcResponse
+  = lens _httphcResponse
+      (\ s a -> s{_httphcResponse = a})
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, HTTP2 health check follows
+-- behavior specified in port and portName fields.
+httphcPortSpecification :: Lens' HTTP2HealthCheck (Maybe HTTP2HealthCheckPortSpecification)
+httphcPortSpecification
+  = lens _httphcPortSpecification
+      (\ s a -> s{_httphcPortSpecification = a})
+
+-- | The request path of the HTTP\/2 health check request. The default value
+-- is \/.
+httphcRequestPath :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcRequestPath
+  = lens _httphcRequestPath
+      (\ s a -> s{_httphcRequestPath = a})
+
+-- | The value of the host header in the HTTP\/2 health check request. If
+-- left empty (default value), the IP on behalf of which this health check
+-- is performed will be used.
+httphcHost :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcHost
+  = lens _httphcHost (\ s a -> s{_httphcHost = a})
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+httphcProxyHeader :: Lens' HTTP2HealthCheck (Maybe HTTP2HealthCheckProxyHeader)
+httphcProxyHeader
+  = lens _httphcProxyHeader
+      (\ s a -> s{_httphcProxyHeader = a})
+
+-- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
+-- port_name are defined, port takes precedence.
+httphcPortName :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcPortName
+  = lens _httphcPortName
+      (\ s a -> s{_httphcPortName = a})
+
+-- | The TCP port number for the health check request. The default value is
+-- 443. Valid values are 1 through 65535.
+httphcPort :: Lens' HTTP2HealthCheck (Maybe Int32)
+httphcPort
+  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
+      mapping _Coerce
+
+instance FromJSON HTTP2HealthCheck where
+        parseJSON
+          = withObject "HTTP2HealthCheck"
+              (\ o ->
+                 HTTP2HealthCheck' <$>
+                   (o .:? "response") <*> (o .:? "portSpecification")
+                     <*> (o .:? "requestPath")
+                     <*> (o .:? "host")
+                     <*> (o .:? "proxyHeader")
+                     <*> (o .:? "portName")
+                     <*> (o .:? "port"))
+
+instance ToJSON HTTP2HealthCheck where
+        toJSON HTTP2HealthCheck'{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _httphcResponse,
+                  ("portSpecification" .=) <$>
+                    _httphcPortSpecification,
+                  ("requestPath" .=) <$> _httphcRequestPath,
+                  ("host" .=) <$> _httphcHost,
+                  ("proxyHeader" .=) <$> _httphcProxyHeader,
+                  ("portName" .=) <$> _httphcPortName,
+                  ("port" .=) <$> _httphcPort])
 
 --
 -- /See:/ 'nodeGroupsScopedList' smart constructor.
@@ -16388,6 +17286,55 @@ instance ToJSON UsableSubnetworkSecondaryRange where
               (catMaybes
                  [("rangeName" .=) <$> _ussrRangeName,
                   ("ipCidrRange" .=) <$> _ussrIPCIdRRange])
+
+--
+-- /See:/ 'networkEndpointGroupsAttachEndpointsRequest' smart constructor.
+newtype NetworkEndpointGroupsAttachEndpointsRequest =
+  NetworkEndpointGroupsAttachEndpointsRequest'
+    { _negaerNetworkEndpoints :: Maybe [NetworkEndpoint]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsAttachEndpointsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negaerNetworkEndpoints'
+networkEndpointGroupsAttachEndpointsRequest
+    :: NetworkEndpointGroupsAttachEndpointsRequest
+networkEndpointGroupsAttachEndpointsRequest =
+  NetworkEndpointGroupsAttachEndpointsRequest'
+    {_negaerNetworkEndpoints = Nothing}
+
+
+-- | The list of network endpoints to be attached.
+negaerNetworkEndpoints :: Lens' NetworkEndpointGroupsAttachEndpointsRequest [NetworkEndpoint]
+negaerNetworkEndpoints
+  = lens _negaerNetworkEndpoints
+      (\ s a -> s{_negaerNetworkEndpoints = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           NetworkEndpointGroupsAttachEndpointsRequest
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsAttachEndpointsRequest"
+              (\ o ->
+                 NetworkEndpointGroupsAttachEndpointsRequest' <$>
+                   (o .:? "networkEndpoints" .!= mempty))
+
+instance ToJSON
+           NetworkEndpointGroupsAttachEndpointsRequest
+         where
+        toJSON
+          NetworkEndpointGroupsAttachEndpointsRequest'{..}
+          = object
+              (catMaybes
+                 [("networkEndpoints" .=) <$>
+                    _negaerNetworkEndpoints])
 
 --
 -- /See:/ 'addressesScopedListWarningDataItem' smart constructor.
@@ -18607,9 +19554,10 @@ nSubnetworks
       . _Default
       . _Coerce
 
--- | The range of internal addresses that are legal on this network. This
--- range is a CIDR specification, for example: 192.168.0.0\/16. Provided by
--- the client when the network is created.
+-- | Deprecated in favor of subnet mode networks. The range of internal
+-- addresses that are legal on this network. This range is a CIDR
+-- specification, for example: 192.168.0.0\/16. Provided by the client when
+-- the network is created.
 nIPv4Range :: Lens' Network (Maybe Text)
 nIPv4Range
   = lens _nIPv4Range (\ s a -> s{_nIPv4Range = a})
@@ -19213,7 +20161,7 @@ irdSource :: Lens' ImageRawDisk (Maybe Text)
 irdSource
   = lens _irdSource (\ s a -> s{_irdSource = a})
 
--- | An optional SHA1 checksum of the disk image before unpackaging; provided
+-- | An optional SHA1 checksum of the disk image before unpackaging provided
 -- by the client when the disk image is created.
 irdSha1Checksum :: Lens' ImageRawDisk (Maybe Text)
 irdSha1Checksum
@@ -19335,6 +20283,44 @@ instance ToJSON InstanceAggregatedList where
                   ("id" .=) <$> _ialId])
 
 --
+-- /See:/ 'forwardingRuleReference' smart constructor.
+newtype ForwardingRuleReference =
+  ForwardingRuleReference'
+    { _frrForwardingRule :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ForwardingRuleReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frrForwardingRule'
+forwardingRuleReference
+    :: ForwardingRuleReference
+forwardingRuleReference =
+  ForwardingRuleReference' {_frrForwardingRule = Nothing}
+
+
+frrForwardingRule :: Lens' ForwardingRuleReference (Maybe Text)
+frrForwardingRule
+  = lens _frrForwardingRule
+      (\ s a -> s{_frrForwardingRule = a})
+
+instance FromJSON ForwardingRuleReference where
+        parseJSON
+          = withObject "ForwardingRuleReference"
+              (\ o ->
+                 ForwardingRuleReference' <$>
+                   (o .:? "forwardingRule"))
+
+instance ToJSON ForwardingRuleReference where
+        toJSON ForwardingRuleReference'{..}
+          = object
+              (catMaybes
+                 [("forwardingRule" .=) <$> _frrForwardingRule])
+
+--
 -- /See:/ 'targetTCPProxiesSetBackendServiceRequest' smart constructor.
 newtype TargetTCPProxiesSetBackendServiceRequest =
   TargetTCPProxiesSetBackendServiceRequest'
@@ -19381,11 +20367,12 @@ instance ToJSON
 -- /See:/ 'sslHealthCheck' smart constructor.
 data SSLHealthCheck =
   SSLHealthCheck'
-    { _shcResponse    :: !(Maybe Text)
-    , _shcProxyHeader :: !(Maybe SSLHealthCheckProxyHeader)
-    , _shcPortName    :: !(Maybe Text)
-    , _shcPort        :: !(Maybe (Textual Int32))
-    , _shcRequest     :: !(Maybe Text)
+    { _shcResponse          :: !(Maybe Text)
+    , _shcPortSpecification :: !(Maybe SSLHealthCheckPortSpecification)
+    , _shcProxyHeader       :: !(Maybe SSLHealthCheckProxyHeader)
+    , _shcPortName          :: !(Maybe Text)
+    , _shcPort              :: !(Maybe (Textual Int32))
+    , _shcRequest           :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -19395,6 +20382,8 @@ data SSLHealthCheck =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'shcResponse'
+--
+-- * 'shcPortSpecification'
 --
 -- * 'shcProxyHeader'
 --
@@ -19408,6 +20397,7 @@ sslHealthCheck
 sslHealthCheck =
   SSLHealthCheck'
     { _shcResponse = Nothing
+    , _shcPortSpecification = Nothing
     , _shcProxyHeader = Nothing
     , _shcPortName = Nothing
     , _shcPort = Nothing
@@ -19421,6 +20411,19 @@ sslHealthCheck =
 shcResponse :: Lens' SSLHealthCheck (Maybe Text)
 shcResponse
   = lens _shcResponse (\ s a -> s{_shcResponse = a})
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, SSL health check follows
+-- behavior specified in port and portName fields.
+shcPortSpecification :: Lens' SSLHealthCheck (Maybe SSLHealthCheckPortSpecification)
+shcPortSpecification
+  = lens _shcPortSpecification
+      (\ s a -> s{_shcPortSpecification = a})
 
 -- | Specifies the type of proxy header to append before sending data to the
 -- backend, either NONE or PROXY_V1. The default is NONE.
@@ -19455,8 +20458,9 @@ instance FromJSON SSLHealthCheck where
           = withObject "SSLHealthCheck"
               (\ o ->
                  SSLHealthCheck' <$>
-                   (o .:? "response") <*> (o .:? "proxyHeader") <*>
-                     (o .:? "portName")
+                   (o .:? "response") <*> (o .:? "portSpecification")
+                     <*> (o .:? "proxyHeader")
+                     <*> (o .:? "portName")
                      <*> (o .:? "port")
                      <*> (o .:? "request"))
 
@@ -19465,6 +20469,7 @@ instance ToJSON SSLHealthCheck where
           = object
               (catMaybes
                  [("response" .=) <$> _shcResponse,
+                  ("portSpecification" .=) <$> _shcPortSpecification,
                   ("proxyHeader" .=) <$> _shcProxyHeader,
                   ("portName" .=) <$> _shcPortName,
                   ("port" .=) <$> _shcPort,
@@ -19857,7 +20862,7 @@ instance ToJSON AttachedDiskInitializeParamsLabels
         toJSON = toJSON . _adiplAddtional
 
 -- | A Zone resource. (== resource_for beta.zones ==) (== resource_for
--- v1.zones ==)
+-- v1.zones ==) Next ID: 17
 --
 -- /See:/ 'zone' smart constructor.
 data Zone =
@@ -20295,6 +21300,87 @@ instance ToJSON
           = object
               (catMaybes
                  [("sslCertificates" .=) <$> _tspsscrSSLCertificates])
+
+--
+-- /See:/ 'healthStatusForNetworkEndpoint' smart constructor.
+data HealthStatusForNetworkEndpoint =
+  HealthStatusForNetworkEndpoint'
+    { _hsfneHealthCheck    :: !(Maybe HealthCheckReference)
+    , _hsfneForwardingRule :: !(Maybe ForwardingRuleReference)
+    , _hsfneHealthState    :: !(Maybe HealthStatusForNetworkEndpointHealthState)
+    , _hsfneBackendService :: !(Maybe BackendServiceReference)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HealthStatusForNetworkEndpoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hsfneHealthCheck'
+--
+-- * 'hsfneForwardingRule'
+--
+-- * 'hsfneHealthState'
+--
+-- * 'hsfneBackendService'
+healthStatusForNetworkEndpoint
+    :: HealthStatusForNetworkEndpoint
+healthStatusForNetworkEndpoint =
+  HealthStatusForNetworkEndpoint'
+    { _hsfneHealthCheck = Nothing
+    , _hsfneForwardingRule = Nothing
+    , _hsfneHealthState = Nothing
+    , _hsfneBackendService = Nothing
+    }
+
+
+-- | URL of the health check associated with the health state of the network
+-- endpoint.
+hsfneHealthCheck :: Lens' HealthStatusForNetworkEndpoint (Maybe HealthCheckReference)
+hsfneHealthCheck
+  = lens _hsfneHealthCheck
+      (\ s a -> s{_hsfneHealthCheck = a})
+
+-- | URL of the forwarding rule associated with the health state of the
+-- network endpoint.
+hsfneForwardingRule :: Lens' HealthStatusForNetworkEndpoint (Maybe ForwardingRuleReference)
+hsfneForwardingRule
+  = lens _hsfneForwardingRule
+      (\ s a -> s{_hsfneForwardingRule = a})
+
+-- | Health state of the network endpoint determined based on the health
+-- checks configured.
+hsfneHealthState :: Lens' HealthStatusForNetworkEndpoint (Maybe HealthStatusForNetworkEndpointHealthState)
+hsfneHealthState
+  = lens _hsfneHealthState
+      (\ s a -> s{_hsfneHealthState = a})
+
+-- | URL of the backend service associated with the health state of the
+-- network endpoint.
+hsfneBackendService :: Lens' HealthStatusForNetworkEndpoint (Maybe BackendServiceReference)
+hsfneBackendService
+  = lens _hsfneBackendService
+      (\ s a -> s{_hsfneBackendService = a})
+
+instance FromJSON HealthStatusForNetworkEndpoint
+         where
+        parseJSON
+          = withObject "HealthStatusForNetworkEndpoint"
+              (\ o ->
+                 HealthStatusForNetworkEndpoint' <$>
+                   (o .:? "healthCheck") <*> (o .:? "forwardingRule")
+                     <*> (o .:? "healthState")
+                     <*> (o .:? "backendService"))
+
+instance ToJSON HealthStatusForNetworkEndpoint where
+        toJSON HealthStatusForNetworkEndpoint'{..}
+          = object
+              (catMaybes
+                 [("healthCheck" .=) <$> _hsfneHealthCheck,
+                  ("forwardingRule" .=) <$> _hsfneForwardingRule,
+                  ("healthState" .=) <$> _hsfneHealthState,
+                  ("backendService" .=) <$> _hsfneBackendService])
 
 -- | [Output Only] Informational warning message.
 --
@@ -22109,7 +23195,8 @@ targetVPNGateway =
     }
 
 
--- | [Output Only] The status of the VPN gateway.
+-- | [Output Only] The status of the VPN gateway, which can be one of the
+-- following: CREATING, READY, FAILED, or DELETING.
 tvgStatus :: Lens' TargetVPNGateway (Maybe TargetVPNGatewayStatus)
 tvgStatus
   = lens _tvgStatus (\ s a -> s{_tvgStatus = a})
@@ -22161,8 +23248,8 @@ tvgRegion
   = lens _tvgRegion (\ s a -> s{_tvgRegion = a})
 
 -- | [Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are
--- created using compute.vpntunnels.insert method and associated to a VPN
--- gateway.
+-- created using the compute.vpntunnels.insert method and associated with a
+-- VPN gateway.
 tvgTunnels :: Lens' TargetVPNGateway [Text]
 tvgTunnels
   = lens _tvgTunnels (\ s a -> s{_tvgTunnels = a}) .
@@ -22178,7 +23265,7 @@ tvgDescription
 
 -- | [Output Only] A list of URLs to the ForwardingRule resources.
 -- ForwardingRules are created using compute.forwardingRules.insert and
--- associated to a VPN gateway.
+-- associated with a VPN gateway.
 tvgForwardingRules :: Lens' TargetVPNGateway [Text]
 tvgForwardingRules
   = lens _tvgForwardingRules
@@ -23541,6 +24628,7 @@ data ManagedInstance =
   ManagedInstance'
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
+    , _miVersion        :: !(Maybe ManagedInstanceVersion)
     , _miId             :: !(Maybe (Textual Word64))
     , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
     , _miInstance       :: !(Maybe Text)
@@ -23556,6 +24644,8 @@ data ManagedInstance =
 --
 -- * 'miCurrentAction'
 --
+-- * 'miVersion'
+--
 -- * 'miId'
 --
 -- * 'miInstanceStatus'
@@ -23567,6 +24657,7 @@ managedInstance =
   ManagedInstance'
     { _miLastAttempt = Nothing
     , _miCurrentAction = Nothing
+    , _miVersion = Nothing
     , _miId = Nothing
     , _miInstanceStatus = Nothing
     , _miInstance = Nothing
@@ -23605,6 +24696,11 @@ miCurrentAction
   = lens _miCurrentAction
       (\ s a -> s{_miCurrentAction = a})
 
+-- | [Output Only] Intended version of this instance.
+miVersion :: Lens' ManagedInstance (Maybe ManagedInstanceVersion)
+miVersion
+  = lens _miVersion (\ s a -> s{_miVersion = a})
+
 -- | [Output only] The unique identifier for this resource. This field is
 -- empty when instance does not exist.
 miId :: Lens' ManagedInstance (Maybe Word64)
@@ -23631,7 +24727,8 @@ instance FromJSON ManagedInstance where
               (\ o ->
                  ManagedInstance' <$>
                    (o .:? "lastAttempt") <*> (o .:? "currentAction") <*>
-                     (o .:? "id")
+                     (o .:? "version")
+                     <*> (o .:? "id")
                      <*> (o .:? "instanceStatus")
                      <*> (o .:? "instance"))
 
@@ -23641,7 +24738,7 @@ instance ToJSON ManagedInstance where
               (catMaybes
                  [("lastAttempt" .=) <$> _miLastAttempt,
                   ("currentAction" .=) <$> _miCurrentAction,
-                  ("id" .=) <$> _miId,
+                  ("version" .=) <$> _miVersion, ("id" .=) <$> _miId,
                   ("instanceStatus" .=) <$> _miInstanceStatus,
                   ("instance" .=) <$> _miInstance])
 
@@ -23749,6 +24846,8 @@ data Backend =
     , _bMaxRate                   :: !(Maybe (Textual Int32))
     , _bMaxConnections            :: !(Maybe (Textual Int32))
     , _bMaxConnectionsPerInstance :: !(Maybe (Textual Int32))
+    , _bMaxRatePerEndpoint        :: !(Maybe (Textual Double))
+    , _bMaxConnectionsPerEndpoint :: !(Maybe (Textual Int32))
     , _bMaxRatePerInstance        :: !(Maybe (Textual Double))
     , _bDescription               :: !(Maybe Text)
     , _bCapacityScaler            :: !(Maybe (Textual Double))
@@ -23772,6 +24871,10 @@ data Backend =
 --
 -- * 'bMaxConnectionsPerInstance'
 --
+-- * 'bMaxRatePerEndpoint'
+--
+-- * 'bMaxConnectionsPerEndpoint'
+--
 -- * 'bMaxRatePerInstance'
 --
 -- * 'bDescription'
@@ -23787,6 +24890,8 @@ backend =
     , _bMaxRate = Nothing
     , _bMaxConnections = Nothing
     , _bMaxConnectionsPerInstance = Nothing
+    , _bMaxRatePerEndpoint = Nothing
+    , _bMaxConnectionsPerEndpoint = Nothing
     , _bMaxRatePerInstance = Nothing
     , _bDescription = Nothing
     , _bCapacityScaler = Nothing
@@ -23860,6 +24965,28 @@ bMaxConnectionsPerInstance
       (\ s a -> s{_bMaxConnectionsPerInstance = a})
       . mapping _Coerce
 
+-- | The max requests per second (RPS) that a single backend network endpoint
+-- can handle. This is used to calculate the capacity of the group. Can be
+-- used in either balancing mode. For RATE mode, either maxRate or
+-- maxRatePerEndpoint must be set. This cannot be used for internal load
+-- balancing.
+bMaxRatePerEndpoint :: Lens' Backend (Maybe Double)
+bMaxRatePerEndpoint
+  = lens _bMaxRatePerEndpoint
+      (\ s a -> s{_bMaxRatePerEndpoint = a})
+      . mapping _Coerce
+
+-- | The max number of simultaneous connections that a single backend network
+-- endpoint can handle. This is used to calculate the capacity of the
+-- group. Can be used in either CONNECTION or UTILIZATION balancing modes.
+-- For CONNECTION mode, either maxConnections or maxConnectionsPerEndpoint
+-- must be set. This cannot be used for internal load balancing.
+bMaxConnectionsPerEndpoint :: Lens' Backend (Maybe Int32)
+bMaxConnectionsPerEndpoint
+  = lens _bMaxConnectionsPerEndpoint
+      (\ s a -> s{_bMaxConnectionsPerEndpoint = a})
+      . mapping _Coerce
+
 -- | The max requests per second (RPS) that a single backend instance can
 -- handle. This is used to calculate the capacity of the group. Can be used
 -- in either balancing mode. For RATE mode, either maxRate or
@@ -23899,6 +25026,8 @@ instance FromJSON Backend where
                      <*> (o .:? "maxRate")
                      <*> (o .:? "maxConnections")
                      <*> (o .:? "maxConnectionsPerInstance")
+                     <*> (o .:? "maxRatePerEndpoint")
+                     <*> (o .:? "maxConnectionsPerEndpoint")
                      <*> (o .:? "maxRatePerInstance")
                      <*> (o .:? "description")
                      <*> (o .:? "capacityScaler"))
@@ -23914,6 +25043,9 @@ instance ToJSON Backend where
                   ("maxConnections" .=) <$> _bMaxConnections,
                   ("maxConnectionsPerInstance" .=) <$>
                     _bMaxConnectionsPerInstance,
+                  ("maxRatePerEndpoint" .=) <$> _bMaxRatePerEndpoint,
+                  ("maxConnectionsPerEndpoint" .=) <$>
+                    _bMaxConnectionsPerEndpoint,
                   ("maxRatePerInstance" .=) <$> _bMaxRatePerInstance,
                   ("description" .=) <$> _bDescription,
                   ("capacityScaler" .=) <$> _bCapacityScaler])
@@ -24914,11 +26046,12 @@ instance ToJSON NetworkList where
 -- /See:/ 'networkPeering' smart constructor.
 data NetworkPeering =
   NetworkPeering'
-    { _netState            :: !(Maybe NetworkPeeringState)
-    , _netStateDetails     :: !(Maybe Text)
-    , _netNetwork          :: !(Maybe Text)
-    , _netName             :: !(Maybe Text)
-    , _netAutoCreateRoutes :: !(Maybe Bool)
+    { _netState                :: !(Maybe NetworkPeeringState)
+    , _netExchangeSubnetRoutes :: !(Maybe Bool)
+    , _netStateDetails         :: !(Maybe Text)
+    , _netNetwork              :: !(Maybe Text)
+    , _netName                 :: !(Maybe Text)
+    , _netAutoCreateRoutes     :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -24928,6 +26061,8 @@ data NetworkPeering =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'netState'
+--
+-- * 'netExchangeSubnetRoutes'
 --
 -- * 'netStateDetails'
 --
@@ -24941,6 +26076,7 @@ networkPeering
 networkPeering =
   NetworkPeering'
     { _netState = Nothing
+    , _netExchangeSubnetRoutes = Nothing
     , _netStateDetails = Nothing
     , _netNetwork = Nothing
     , _netName = Nothing
@@ -24951,6 +26087,16 @@ networkPeering =
 -- | [Output Only] State for the peering.
 netState :: Lens' NetworkPeering (Maybe NetworkPeeringState)
 netState = lens _netState (\ s a -> s{_netState = a})
+
+-- | Whether full mesh connectivity is created and managed automatically.
+-- When it is set to true, Google Compute Engine will automatically create
+-- and manage the routes between two networks when the peering state is
+-- ACTIVE. Otherwise, user needs to create routes manually to route packets
+-- to peer network.
+netExchangeSubnetRoutes :: Lens' NetworkPeering (Maybe Bool)
+netExchangeSubnetRoutes
+  = lens _netExchangeSubnetRoutes
+      (\ s a -> s{_netExchangeSubnetRoutes = a})
 
 -- | [Output Only] Details about the current state of the peering.
 netStateDetails :: Lens' NetworkPeering (Maybe Text)
@@ -24976,7 +26122,8 @@ netNetwork
 netName :: Lens' NetworkPeering (Maybe Text)
 netName = lens _netName (\ s a -> s{_netName = a})
 
--- | Indicates whether full mesh connectivity is created and managed
+-- | This field will be deprecated soon. Prefer using exchange_subnet_routes
+-- instead. Indicates whether full mesh connectivity is created and managed
 -- automatically. When it is set to true, Google Compute Engine will
 -- automatically create and manage the routes between two networks when the
 -- state is ACTIVE. Otherwise, user needs to create routes manually to
@@ -24991,8 +26138,9 @@ instance FromJSON NetworkPeering where
           = withObject "NetworkPeering"
               (\ o ->
                  NetworkPeering' <$>
-                   (o .:? "state") <*> (o .:? "stateDetails") <*>
-                     (o .:? "network")
+                   (o .:? "state") <*> (o .:? "exchangeSubnetRoutes")
+                     <*> (o .:? "stateDetails")
+                     <*> (o .:? "network")
                      <*> (o .:? "name")
                      <*> (o .:? "autoCreateRoutes"))
 
@@ -25001,6 +26149,8 @@ instance ToJSON NetworkPeering where
           = object
               (catMaybes
                  [("state" .=) <$> _netState,
+                  ("exchangeSubnetRoutes" .=) <$>
+                    _netExchangeSubnetRoutes,
                   ("stateDetails" .=) <$> _netStateDetails,
                   ("network" .=) <$> _netNetwork,
                   ("name" .=) <$> _netName,
@@ -25912,6 +27062,65 @@ instance ToJSON SubnetworkListWarningDataItem where
                  [("value" .=) <$> _sValue, ("key" .=) <$> _sKey])
 
 --
+-- /See:/ 'networkEndpointGroupListWarningDataItem' smart constructor.
+data NetworkEndpointGroupListWarningDataItem =
+  NetworkEndpointGroupListWarningDataItem'
+    { _neglwdiValue :: !(Maybe Text)
+    , _neglwdiKey   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglwdiValue'
+--
+-- * 'neglwdiKey'
+networkEndpointGroupListWarningDataItem
+    :: NetworkEndpointGroupListWarningDataItem
+networkEndpointGroupListWarningDataItem =
+  NetworkEndpointGroupListWarningDataItem'
+    {_neglwdiValue = Nothing, _neglwdiKey = Nothing}
+
+
+-- | [Output Only] A warning data value corresponding to the key.
+neglwdiValue :: Lens' NetworkEndpointGroupListWarningDataItem (Maybe Text)
+neglwdiValue
+  = lens _neglwdiValue (\ s a -> s{_neglwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+neglwdiKey :: Lens' NetworkEndpointGroupListWarningDataItem (Maybe Text)
+neglwdiKey
+  = lens _neglwdiKey (\ s a -> s{_neglwdiKey = a})
+
+instance FromJSON
+           NetworkEndpointGroupListWarningDataItem
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupListWarningDataItem"
+              (\ o ->
+                 NetworkEndpointGroupListWarningDataItem' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+           NetworkEndpointGroupListWarningDataItem
+         where
+        toJSON NetworkEndpointGroupListWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _neglwdiValue,
+                  ("key" .=) <$> _neglwdiKey])
+
+--
 -- /See:/ 'projectsDisableXpnResourceRequest' smart constructor.
 newtype ProjectsDisableXpnResourceRequest =
   ProjectsDisableXpnResourceRequest'
@@ -26090,6 +27299,76 @@ instance ToJSON AutoscalerList where
                   ("selfLink" .=) <$> _autSelfLink,
                   ("warning" .=) <$> _autWarning,
                   ("id" .=) <$> _autId])
+
+-- | [Output Only] Informational warning message.
+--
+-- /See:/ 'networkEndpointGroupAggregatedListWarning' smart constructor.
+data NetworkEndpointGroupAggregatedListWarning =
+  NetworkEndpointGroupAggregatedListWarning'
+    { _negalwData    :: !(Maybe [NetworkEndpointGroupAggregatedListWarningDataItem])
+    , _negalwCode    :: !(Maybe NetworkEndpointGroupAggregatedListWarningCode)
+    , _negalwMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupAggregatedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negalwData'
+--
+-- * 'negalwCode'
+--
+-- * 'negalwMessage'
+networkEndpointGroupAggregatedListWarning
+    :: NetworkEndpointGroupAggregatedListWarning
+networkEndpointGroupAggregatedListWarning =
+  NetworkEndpointGroupAggregatedListWarning'
+    {_negalwData = Nothing, _negalwCode = Nothing, _negalwMessage = Nothing}
+
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+negalwData :: Lens' NetworkEndpointGroupAggregatedListWarning [NetworkEndpointGroupAggregatedListWarningDataItem]
+negalwData
+  = lens _negalwData (\ s a -> s{_negalwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+negalwCode :: Lens' NetworkEndpointGroupAggregatedListWarning (Maybe NetworkEndpointGroupAggregatedListWarningCode)
+negalwCode
+  = lens _negalwCode (\ s a -> s{_negalwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+negalwMessage :: Lens' NetworkEndpointGroupAggregatedListWarning (Maybe Text)
+negalwMessage
+  = lens _negalwMessage
+      (\ s a -> s{_negalwMessage = a})
+
+instance FromJSON
+           NetworkEndpointGroupAggregatedListWarning
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupAggregatedListWarning"
+              (\ o ->
+                 NetworkEndpointGroupAggregatedListWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+           NetworkEndpointGroupAggregatedListWarning
+         where
+        toJSON NetworkEndpointGroupAggregatedListWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _negalwData,
+                  ("code" .=) <$> _negalwCode,
+                  ("message" .=) <$> _negalwMessage])
 
 --
 -- /See:/ 'interconnectListWarningDataItem' smart constructor.
@@ -27300,6 +28579,59 @@ instance ToJSON ProjectsGetXpnResources where
                   Just ("kind" .= _pgxrKind),
                   ("resources" .=) <$> _pgxrResources])
 
+--
+-- /See:/ 'networkEndpointWithHealthStatus' smart constructor.
+data NetworkEndpointWithHealthStatus =
+  NetworkEndpointWithHealthStatus'
+    { _newhsHealths         :: !(Maybe [HealthStatusForNetworkEndpoint])
+    , _newhsNetworkEndpoint :: !(Maybe NetworkEndpoint)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointWithHealthStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'newhsHealths'
+--
+-- * 'newhsNetworkEndpoint'
+networkEndpointWithHealthStatus
+    :: NetworkEndpointWithHealthStatus
+networkEndpointWithHealthStatus =
+  NetworkEndpointWithHealthStatus'
+    {_newhsHealths = Nothing, _newhsNetworkEndpoint = Nothing}
+
+
+-- | [Output only] The health status of network endpoint;
+newhsHealths :: Lens' NetworkEndpointWithHealthStatus [HealthStatusForNetworkEndpoint]
+newhsHealths
+  = lens _newhsHealths (\ s a -> s{_newhsHealths = a})
+      . _Default
+      . _Coerce
+
+-- | [Output only] The network endpoint;
+newhsNetworkEndpoint :: Lens' NetworkEndpointWithHealthStatus (Maybe NetworkEndpoint)
+newhsNetworkEndpoint
+  = lens _newhsNetworkEndpoint
+      (\ s a -> s{_newhsNetworkEndpoint = a})
+
+instance FromJSON NetworkEndpointWithHealthStatus
+         where
+        parseJSON
+          = withObject "NetworkEndpointWithHealthStatus"
+              (\ o ->
+                 NetworkEndpointWithHealthStatus' <$>
+                   (o .:? "healths" .!= mempty) <*>
+                     (o .:? "networkEndpoint"))
+
+instance ToJSON NetworkEndpointWithHealthStatus where
+        toJSON NetworkEndpointWithHealthStatus'{..}
+          = object
+              (catMaybes
+                 [("healths" .=) <$> _newhsHealths,
+                  ("networkEndpoint" .=) <$> _newhsNetworkEndpoint])
+
 -- | Contains a list of machine types.
 --
 -- /See:/ 'machineTypeList' smart constructor.
@@ -28490,12 +29822,13 @@ instance ToJSON DiskTypeAggregatedList where
 -- /See:/ 'hTTPHealthCheck' smart constructor.
 data HTTPHealthCheck =
   HTTPHealthCheck'
-    { _httphcResponse    :: !(Maybe Text)
-    , _httphcRequestPath :: !(Maybe Text)
-    , _httphcHost        :: !(Maybe Text)
-    , _httphcProxyHeader :: !(Maybe HTTPHealthCheckProxyHeader)
-    , _httphcPortName    :: !(Maybe Text)
-    , _httphcPort        :: !(Maybe (Textual Int32))
+    { _hResponse          :: !(Maybe Text)
+    , _hPortSpecification :: !(Maybe HTTPHealthCheckPortSpecification)
+    , _hRequestPath       :: !(Maybe Text)
+    , _hHost              :: !(Maybe Text)
+    , _hProxyHeader       :: !(Maybe HTTPHealthCheckProxyHeader)
+    , _hPortName          :: !(Maybe Text)
+    , _hPort              :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -28504,71 +29837,82 @@ data HTTPHealthCheck =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'httphcResponse'
+-- * 'hResponse'
 --
--- * 'httphcRequestPath'
+-- * 'hPortSpecification'
 --
--- * 'httphcHost'
+-- * 'hRequestPath'
 --
--- * 'httphcProxyHeader'
+-- * 'hHost'
 --
--- * 'httphcPortName'
+-- * 'hProxyHeader'
 --
--- * 'httphcPort'
+-- * 'hPortName'
+--
+-- * 'hPort'
 hTTPHealthCheck
     :: HTTPHealthCheck
 hTTPHealthCheck =
   HTTPHealthCheck'
-    { _httphcResponse = Nothing
-    , _httphcRequestPath = Nothing
-    , _httphcHost = Nothing
-    , _httphcProxyHeader = Nothing
-    , _httphcPortName = Nothing
-    , _httphcPort = Nothing
+    { _hResponse = Nothing
+    , _hPortSpecification = Nothing
+    , _hRequestPath = Nothing
+    , _hHost = Nothing
+    , _hProxyHeader = Nothing
+    , _hPortName = Nothing
+    , _hPort = Nothing
     }
 
 
 -- | The string to match anywhere in the first 1024 bytes of the response
 -- body. If left empty (the default value), the status code determines
 -- health. The response data can only be ASCII.
-httphcResponse :: Lens' HTTPHealthCheck (Maybe Text)
-httphcResponse
-  = lens _httphcResponse
-      (\ s a -> s{_httphcResponse = a})
+hResponse :: Lens' HTTPHealthCheck (Maybe Text)
+hResponse
+  = lens _hResponse (\ s a -> s{_hResponse = a})
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, HTTP health check follows
+-- behavior specified in port and portName fields.
+hPortSpecification :: Lens' HTTPHealthCheck (Maybe HTTPHealthCheckPortSpecification)
+hPortSpecification
+  = lens _hPortSpecification
+      (\ s a -> s{_hPortSpecification = a})
 
 -- | The request path of the HTTP health check request. The default value is
 -- \/.
-httphcRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
-httphcRequestPath
-  = lens _httphcRequestPath
-      (\ s a -> s{_httphcRequestPath = a})
+hRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
+hRequestPath
+  = lens _hRequestPath (\ s a -> s{_hRequestPath = a})
 
 -- | The value of the host header in the HTTP health check request. If left
 -- empty (default value), the IP on behalf of which this health check is
 -- performed will be used.
-httphcHost :: Lens' HTTPHealthCheck (Maybe Text)
-httphcHost
-  = lens _httphcHost (\ s a -> s{_httphcHost = a})
+hHost :: Lens' HTTPHealthCheck (Maybe Text)
+hHost = lens _hHost (\ s a -> s{_hHost = a})
 
 -- | Specifies the type of proxy header to append before sending data to the
 -- backend, either NONE or PROXY_V1. The default is NONE.
-httphcProxyHeader :: Lens' HTTPHealthCheck (Maybe HTTPHealthCheckProxyHeader)
-httphcProxyHeader
-  = lens _httphcProxyHeader
-      (\ s a -> s{_httphcProxyHeader = a})
+hProxyHeader :: Lens' HTTPHealthCheck (Maybe HTTPHealthCheckProxyHeader)
+hProxyHeader
+  = lens _hProxyHeader (\ s a -> s{_hProxyHeader = a})
 
 -- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
 -- port_name are defined, port takes precedence.
-httphcPortName :: Lens' HTTPHealthCheck (Maybe Text)
-httphcPortName
-  = lens _httphcPortName
-      (\ s a -> s{_httphcPortName = a})
+hPortName :: Lens' HTTPHealthCheck (Maybe Text)
+hPortName
+  = lens _hPortName (\ s a -> s{_hPortName = a})
 
 -- | The TCP port number for the health check request. The default value is
 -- 80. Valid values are 1 through 65535.
-httphcPort :: Lens' HTTPHealthCheck (Maybe Int32)
-httphcPort
-  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
+hPort :: Lens' HTTPHealthCheck (Maybe Int32)
+hPort
+  = lens _hPort (\ s a -> s{_hPort = a}) .
       mapping _Coerce
 
 instance FromJSON HTTPHealthCheck where
@@ -28576,8 +29920,9 @@ instance FromJSON HTTPHealthCheck where
           = withObject "HTTPHealthCheck"
               (\ o ->
                  HTTPHealthCheck' <$>
-                   (o .:? "response") <*> (o .:? "requestPath") <*>
-                     (o .:? "host")
+                   (o .:? "response") <*> (o .:? "portSpecification")
+                     <*> (o .:? "requestPath")
+                     <*> (o .:? "host")
                      <*> (o .:? "proxyHeader")
                      <*> (o .:? "portName")
                      <*> (o .:? "port"))
@@ -28586,12 +29931,13 @@ instance ToJSON HTTPHealthCheck where
         toJSON HTTPHealthCheck'{..}
           = object
               (catMaybes
-                 [("response" .=) <$> _httphcResponse,
-                  ("requestPath" .=) <$> _httphcRequestPath,
-                  ("host" .=) <$> _httphcHost,
-                  ("proxyHeader" .=) <$> _httphcProxyHeader,
-                  ("portName" .=) <$> _httphcPortName,
-                  ("port" .=) <$> _httphcPort])
+                 [("response" .=) <$> _hResponse,
+                  ("portSpecification" .=) <$> _hPortSpecification,
+                  ("requestPath" .=) <$> _hRequestPath,
+                  ("host" .=) <$> _hHost,
+                  ("proxyHeader" .=) <$> _hProxyHeader,
+                  ("portName" .=) <$> _hPortName,
+                  ("port" .=) <$> _hPort])
 
 --
 -- /See:/ 'urlMapListWarningDataItem' smart constructor.
@@ -30167,7 +31513,7 @@ iiSelfLink
 iiName :: Lens' Interconnect (Maybe Text)
 iiName = lens _iiName (\ s a -> s{_iiName = a})
 
--- | [Output Only] Google reference ID; to be used when raising support
+-- | [Output Only] Google reference ID to be used when raising support
 -- tickets with Google or otherwise to debug backend connectivity issues.
 iiGoogleReferenceId :: Lens' Interconnect (Maybe Text)
 iiGoogleReferenceId
@@ -30336,6 +31682,67 @@ instance ToJSON MachineTypeScratchDisksItem where
           = object (catMaybes [("diskGb" .=) <$> _mtsdiDiskGb])
 
 --
+-- /See:/ 'networkEndpointGroupsScopedListWarningDataItem' smart constructor.
+data NetworkEndpointGroupsScopedListWarningDataItem =
+  NetworkEndpointGroupsScopedListWarningDataItem'
+    { _negslwdiValue :: !(Maybe Text)
+    , _negslwdiKey   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsScopedListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negslwdiValue'
+--
+-- * 'negslwdiKey'
+networkEndpointGroupsScopedListWarningDataItem
+    :: NetworkEndpointGroupsScopedListWarningDataItem
+networkEndpointGroupsScopedListWarningDataItem =
+  NetworkEndpointGroupsScopedListWarningDataItem'
+    {_negslwdiValue = Nothing, _negslwdiKey = Nothing}
+
+
+-- | [Output Only] A warning data value corresponding to the key.
+negslwdiValue :: Lens' NetworkEndpointGroupsScopedListWarningDataItem (Maybe Text)
+negslwdiValue
+  = lens _negslwdiValue
+      (\ s a -> s{_negslwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+negslwdiKey :: Lens' NetworkEndpointGroupsScopedListWarningDataItem (Maybe Text)
+negslwdiKey
+  = lens _negslwdiKey (\ s a -> s{_negslwdiKey = a})
+
+instance FromJSON
+           NetworkEndpointGroupsScopedListWarningDataItem
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsScopedListWarningDataItem"
+              (\ o ->
+                 NetworkEndpointGroupsScopedListWarningDataItem' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+           NetworkEndpointGroupsScopedListWarningDataItem
+         where
+        toJSON
+          NetworkEndpointGroupsScopedListWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _negslwdiValue,
+                  ("key" .=) <$> _negslwdiKey])
+
+--
 -- /See:/ 'subnetworksScopedListWarningDataItem' smart constructor.
 data SubnetworksScopedListWarningDataItem =
   SubnetworksScopedListWarningDataItem'
@@ -30443,6 +31850,187 @@ instance ToJSON MachineTypesScopedList where
               (catMaybes
                  [("machineTypes" .=) <$> _mtslMachineTypes,
                   ("warning" .=) <$> _mtslWarning])
+
+-- | Represents a collection of network endpoints.
+--
+-- /See:/ 'networkEndpointGroup' smart constructor.
+data NetworkEndpointGroup =
+  NetworkEndpointGroup'
+    { _negSize                :: !(Maybe (Textual Int32))
+    , _negKind                :: !Text
+    , _negNetwork             :: !(Maybe Text)
+    , _negZone                :: !(Maybe Text)
+    , _negSelfLink            :: !(Maybe Text)
+    , _negName                :: !(Maybe Text)
+    , _negCreationTimestamp   :: !(Maybe Text)
+    , _negDefaultPort         :: !(Maybe (Textual Int32))
+    , _negSubnetwork          :: !(Maybe Text)
+    , _negNetworkEndpointType :: !(Maybe NetworkEndpointGroupNetworkEndpointType)
+    , _negId                  :: !(Maybe (Textual Word64))
+    , _negDescription         :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroup' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negSize'
+--
+-- * 'negKind'
+--
+-- * 'negNetwork'
+--
+-- * 'negZone'
+--
+-- * 'negSelfLink'
+--
+-- * 'negName'
+--
+-- * 'negCreationTimestamp'
+--
+-- * 'negDefaultPort'
+--
+-- * 'negSubnetwork'
+--
+-- * 'negNetworkEndpointType'
+--
+-- * 'negId'
+--
+-- * 'negDescription'
+networkEndpointGroup
+    :: NetworkEndpointGroup
+networkEndpointGroup =
+  NetworkEndpointGroup'
+    { _negSize = Nothing
+    , _negKind = "compute#networkEndpointGroup"
+    , _negNetwork = Nothing
+    , _negZone = Nothing
+    , _negSelfLink = Nothing
+    , _negName = Nothing
+    , _negCreationTimestamp = Nothing
+    , _negDefaultPort = Nothing
+    , _negSubnetwork = Nothing
+    , _negNetworkEndpointType = Nothing
+    , _negId = Nothing
+    , _negDescription = Nothing
+    }
+
+
+-- | [Output only] Number of network endpoints in the network endpoint group.
+negSize :: Lens' NetworkEndpointGroup (Maybe Int32)
+negSize
+  = lens _negSize (\ s a -> s{_negSize = a}) .
+      mapping _Coerce
+
+-- | [Output Only] Type of the resource. Always compute#networkEndpointGroup
+-- for network endpoint group.
+negKind :: Lens' NetworkEndpointGroup Text
+negKind = lens _negKind (\ s a -> s{_negKind = a})
+
+-- | The URL of the network to which all network endpoints in the NEG belong.
+-- Uses \"default\" project network if unspecified.
+negNetwork :: Lens' NetworkEndpointGroup (Maybe Text)
+negNetwork
+  = lens _negNetwork (\ s a -> s{_negNetwork = a})
+
+-- | [Output Only] The URL of the zone where the network endpoint group is
+-- located.
+negZone :: Lens' NetworkEndpointGroup (Maybe Text)
+negZone = lens _negZone (\ s a -> s{_negZone = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+negSelfLink :: Lens' NetworkEndpointGroup (Maybe Text)
+negSelfLink
+  = lens _negSelfLink (\ s a -> s{_negSelfLink = a})
+
+-- | Name of the resource; provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression \`[a-z]([-a-z0-9]*[a-z0-9])?\` which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+negName :: Lens' NetworkEndpointGroup (Maybe Text)
+negName = lens _negName (\ s a -> s{_negName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+negCreationTimestamp :: Lens' NetworkEndpointGroup (Maybe Text)
+negCreationTimestamp
+  = lens _negCreationTimestamp
+      (\ s a -> s{_negCreationTimestamp = a})
+
+-- | The default port used if the port number is not specified in the network
+-- endpoint.
+negDefaultPort :: Lens' NetworkEndpointGroup (Maybe Int32)
+negDefaultPort
+  = lens _negDefaultPort
+      (\ s a -> s{_negDefaultPort = a})
+      . mapping _Coerce
+
+-- | Optional URL of the subnetwork to which all network endpoints in the NEG
+-- belong.
+negSubnetwork :: Lens' NetworkEndpointGroup (Maybe Text)
+negSubnetwork
+  = lens _negSubnetwork
+      (\ s a -> s{_negSubnetwork = a})
+
+-- | Type of network endpoints in this network endpoint group. Currently the
+-- only supported value is GCE_VM_IP_PORT.
+negNetworkEndpointType :: Lens' NetworkEndpointGroup (Maybe NetworkEndpointGroupNetworkEndpointType)
+negNetworkEndpointType
+  = lens _negNetworkEndpointType
+      (\ s a -> s{_negNetworkEndpointType = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+negId :: Lens' NetworkEndpointGroup (Maybe Word64)
+negId
+  = lens _negId (\ s a -> s{_negId = a}) .
+      mapping _Coerce
+
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
+negDescription :: Lens' NetworkEndpointGroup (Maybe Text)
+negDescription
+  = lens _negDescription
+      (\ s a -> s{_negDescription = a})
+
+instance FromJSON NetworkEndpointGroup where
+        parseJSON
+          = withObject "NetworkEndpointGroup"
+              (\ o ->
+                 NetworkEndpointGroup' <$>
+                   (o .:? "size") <*>
+                     (o .:? "kind" .!= "compute#networkEndpointGroup")
+                     <*> (o .:? "network")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "defaultPort")
+                     <*> (o .:? "subnetwork")
+                     <*> (o .:? "networkEndpointType")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON NetworkEndpointGroup where
+        toJSON NetworkEndpointGroup'{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _negSize, Just ("kind" .= _negKind),
+                  ("network" .=) <$> _negNetwork,
+                  ("zone" .=) <$> _negZone,
+                  ("selfLink" .=) <$> _negSelfLink,
+                  ("name" .=) <$> _negName,
+                  ("creationTimestamp" .=) <$> _negCreationTimestamp,
+                  ("defaultPort" .=) <$> _negDefaultPort,
+                  ("subnetwork" .=) <$> _negSubnetwork,
+                  ("networkEndpointType" .=) <$>
+                    _negNetworkEndpointType,
+                  ("id" .=) <$> _negId,
+                  ("description" .=) <$> _negDescription])
 
 -- | A Subnetwork resource. (== resource_for beta.subnetworks ==) (==
 -- resource_for v1.subnetworks ==)
@@ -30833,6 +32421,67 @@ instance ToJSON MachineTypeAggregatedList where
                   ("selfLink" .=) <$> _mtalSelfLink,
                   ("warning" .=) <$> _mtalWarning,
                   ("id" .=) <$> _mtalId])
+
+--
+-- /See:/ 'networkEndpointGroupsListNetworkEndpointsWarningDataItem' smart constructor.
+data NetworkEndpointGroupsListNetworkEndpointsWarningDataItem =
+  NetworkEndpointGroupsListNetworkEndpointsWarningDataItem'
+    { _neglnewdiValue :: !(Maybe Text)
+    , _neglnewdiKey   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupsListNetworkEndpointsWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglnewdiValue'
+--
+-- * 'neglnewdiKey'
+networkEndpointGroupsListNetworkEndpointsWarningDataItem
+    :: NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
+networkEndpointGroupsListNetworkEndpointsWarningDataItem =
+  NetworkEndpointGroupsListNetworkEndpointsWarningDataItem'
+    {_neglnewdiValue = Nothing, _neglnewdiKey = Nothing}
+
+
+-- | [Output Only] A warning data value corresponding to the key.
+neglnewdiValue :: Lens' NetworkEndpointGroupsListNetworkEndpointsWarningDataItem (Maybe Text)
+neglnewdiValue
+  = lens _neglnewdiValue
+      (\ s a -> s{_neglnewdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+neglnewdiKey :: Lens' NetworkEndpointGroupsListNetworkEndpointsWarningDataItem (Maybe Text)
+neglnewdiKey
+  = lens _neglnewdiKey (\ s a -> s{_neglnewdiKey = a})
+
+instance FromJSON
+           NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupsListNetworkEndpointsWarningDataItem"
+              (\ o ->
+                 NetworkEndpointGroupsListNetworkEndpointsWarningDataItem'
+                   <$> (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+           NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
+         where
+        toJSON
+          NetworkEndpointGroupsListNetworkEndpointsWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _neglnewdiValue,
+                  ("key" .=) <$> _neglnewdiKey])
 
 -- | [Output Only] An informational warning that appears when the nodeGroup
 -- list is empty.
@@ -32567,6 +34216,73 @@ instance ToJSON TargetHTTPProxy where
                   ("id" .=) <$> _thttppId,
                   ("description" .=) <$> _thttppDescription])
 
+-- | A set of Shielded Instance options.
+--
+-- /See:/ 'shieldedInstanceConfig' smart constructor.
+data ShieldedInstanceConfig =
+  ShieldedInstanceConfig'
+    { _sicEnableVtpm                :: !(Maybe Bool)
+    , _sicEnableIntegrityMonitoring :: !(Maybe Bool)
+    , _sicEnableSecureBoot          :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ShieldedInstanceConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sicEnableVtpm'
+--
+-- * 'sicEnableIntegrityMonitoring'
+--
+-- * 'sicEnableSecureBoot'
+shieldedInstanceConfig
+    :: ShieldedInstanceConfig
+shieldedInstanceConfig =
+  ShieldedInstanceConfig'
+    { _sicEnableVtpm = Nothing
+    , _sicEnableIntegrityMonitoring = Nothing
+    , _sicEnableSecureBoot = Nothing
+    }
+
+
+-- | Defines whether the instance has the vTPM enabled.
+sicEnableVtpm :: Lens' ShieldedInstanceConfig (Maybe Bool)
+sicEnableVtpm
+  = lens _sicEnableVtpm
+      (\ s a -> s{_sicEnableVtpm = a})
+
+-- | Defines whether the instance has integrity monitoring enabled.
+sicEnableIntegrityMonitoring :: Lens' ShieldedInstanceConfig (Maybe Bool)
+sicEnableIntegrityMonitoring
+  = lens _sicEnableIntegrityMonitoring
+      (\ s a -> s{_sicEnableIntegrityMonitoring = a})
+
+-- | Defines whether the instance has Secure Boot enabled.
+sicEnableSecureBoot :: Lens' ShieldedInstanceConfig (Maybe Bool)
+sicEnableSecureBoot
+  = lens _sicEnableSecureBoot
+      (\ s a -> s{_sicEnableSecureBoot = a})
+
+instance FromJSON ShieldedInstanceConfig where
+        parseJSON
+          = withObject "ShieldedInstanceConfig"
+              (\ o ->
+                 ShieldedInstanceConfig' <$>
+                   (o .:? "enableVtpm") <*>
+                     (o .:? "enableIntegrityMonitoring")
+                     <*> (o .:? "enableSecureBoot"))
+
+instance ToJSON ShieldedInstanceConfig where
+        toJSON ShieldedInstanceConfig'{..}
+          = object
+              (catMaybes
+                 [("enableVtpm" .=) <$> _sicEnableVtpm,
+                  ("enableIntegrityMonitoring" .=) <$>
+                    _sicEnableIntegrityMonitoring,
+                  ("enableSecureBoot" .=) <$> _sicEnableSecureBoot])
+
 -- | A Machine Type resource. (== resource_for v1.machineTypes ==) (==
 -- resource_for beta.machineTypes ==)
 --
@@ -33134,6 +34850,111 @@ instance ToJSON TargetInstancesScopedListWarning
                   ("message" .=) <$> _tislwMessage])
 
 --
+-- /See:/ 'networkEndpointGroupAggregatedList' smart constructor.
+data NetworkEndpointGroupAggregatedList =
+  NetworkEndpointGroupAggregatedList'
+    { _negalNextPageToken :: !(Maybe Text)
+    , _negalKind          :: !Text
+    , _negalItems         :: !(Maybe NetworkEndpointGroupAggregatedListItems)
+    , _negalSelfLink      :: !(Maybe Text)
+    , _negalWarning       :: !(Maybe NetworkEndpointGroupAggregatedListWarning)
+    , _negalId            :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupAggregatedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negalNextPageToken'
+--
+-- * 'negalKind'
+--
+-- * 'negalItems'
+--
+-- * 'negalSelfLink'
+--
+-- * 'negalWarning'
+--
+-- * 'negalId'
+networkEndpointGroupAggregatedList
+    :: NetworkEndpointGroupAggregatedList
+networkEndpointGroupAggregatedList =
+  NetworkEndpointGroupAggregatedList'
+    { _negalNextPageToken = Nothing
+    , _negalKind = "compute#networkEndpointGroupAggregatedList"
+    , _negalItems = Nothing
+    , _negalSelfLink = Nothing
+    , _negalWarning = Nothing
+    , _negalId = Nothing
+    }
+
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+negalNextPageToken :: Lens' NetworkEndpointGroupAggregatedList (Maybe Text)
+negalNextPageToken
+  = lens _negalNextPageToken
+      (\ s a -> s{_negalNextPageToken = a})
+
+-- | [Output Only] The resource type, which is always
+-- compute#networkEndpointGroupAggregatedList for aggregated lists of
+-- network endpoint groups.
+negalKind :: Lens' NetworkEndpointGroupAggregatedList Text
+negalKind
+  = lens _negalKind (\ s a -> s{_negalKind = a})
+
+-- | A list of NetworkEndpointGroupsScopedList resources.
+negalItems :: Lens' NetworkEndpointGroupAggregatedList (Maybe NetworkEndpointGroupAggregatedListItems)
+negalItems
+  = lens _negalItems (\ s a -> s{_negalItems = a})
+
+-- | [Output Only] Server-defined URL for this resource.
+negalSelfLink :: Lens' NetworkEndpointGroupAggregatedList (Maybe Text)
+negalSelfLink
+  = lens _negalSelfLink
+      (\ s a -> s{_negalSelfLink = a})
+
+-- | [Output Only] Informational warning message.
+negalWarning :: Lens' NetworkEndpointGroupAggregatedList (Maybe NetworkEndpointGroupAggregatedListWarning)
+negalWarning
+  = lens _negalWarning (\ s a -> s{_negalWarning = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+negalId :: Lens' NetworkEndpointGroupAggregatedList (Maybe Text)
+negalId = lens _negalId (\ s a -> s{_negalId = a})
+
+instance FromJSON NetworkEndpointGroupAggregatedList
+         where
+        parseJSON
+          = withObject "NetworkEndpointGroupAggregatedList"
+              (\ o ->
+                 NetworkEndpointGroupAggregatedList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#networkEndpointGroupAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "warning")
+                     <*> (o .:? "id"))
+
+instance ToJSON NetworkEndpointGroupAggregatedList
+         where
+        toJSON NetworkEndpointGroupAggregatedList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _negalNextPageToken,
+                  Just ("kind" .= _negalKind),
+                  ("items" .=) <$> _negalItems,
+                  ("selfLink" .=) <$> _negalSelfLink,
+                  ("warning" .=) <$> _negalWarning,
+                  ("id" .=) <$> _negalId])
+
+--
 -- /See:/ 'subnetworkAggregatedList' smart constructor.
 data SubnetworkAggregatedList =
   SubnetworkAggregatedList'
@@ -33308,14 +35129,21 @@ interconnectDiagnosticsLinkOpticalPower =
     {_idlopState = Nothing, _idlopValue = Nothing}
 
 
+-- | The status of the current value when compared to the warning and alarm
+-- levels for the receiving or transmitting transceiver. Possible states
+-- include: - OK: The value has not crossed a warning threshold. -
+-- LOW_WARNING: The value has crossed below the low warning threshold. -
+-- HIGH_WARNING: The value has crossed above the high warning threshold. -
+-- LOW_ALARM: The value has crossed below the low alarm threshold. -
+-- HIGH_ALARM: The value has crossed above the high alarm threshold.
 idlopState :: Lens' InterconnectDiagnosticsLinkOpticalPower (Maybe InterconnectDiagnosticsLinkOpticalPowerState)
 idlopState
   = lens _idlopState (\ s a -> s{_idlopState = a})
 
--- | Value of the current optical power, read in dBm. Take a known good
--- optical value, give it a 10% margin and trigger warnings relative to
--- that value. In general, a -7dBm warning and a -11dBm alarm are good
--- optical value estimates for most links.
+-- | Value of the current receiving or transmitting optical power, read in
+-- dBm. Take a known good optical value, give it a 10% margin and trigger
+-- warnings relative to that value. In general, a -7dBm warning and a
+-- -11dBm alarm are good optical value estimates for most links.
 idlopValue :: Lens' InterconnectDiagnosticsLinkOpticalPower (Maybe Double)
 idlopValue
   = lens _idlopValue (\ s a -> s{_idlopValue = a}) .
@@ -33549,6 +35377,54 @@ instance ToJSON DiskTypeAggregatedListWarningDataItem
               (catMaybes
                  [("value" .=) <$> _dtalwdiValue,
                   ("key" .=) <$> _dtalwdiKey])
+
+-- | A Shielded Instance Identity Entry.
+--
+-- /See:/ 'shieldedInstanceIdentityEntry' smart constructor.
+data ShieldedInstanceIdentityEntry =
+  ShieldedInstanceIdentityEntry'
+    { _siieEkCert :: !(Maybe Text)
+    , _siieEkPub  :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ShieldedInstanceIdentityEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siieEkCert'
+--
+-- * 'siieEkPub'
+shieldedInstanceIdentityEntry
+    :: ShieldedInstanceIdentityEntry
+shieldedInstanceIdentityEntry =
+  ShieldedInstanceIdentityEntry' {_siieEkCert = Nothing, _siieEkPub = Nothing}
+
+
+-- | A PEM-encoded X.509 certificate. This field can be empty.
+siieEkCert :: Lens' ShieldedInstanceIdentityEntry (Maybe Text)
+siieEkCert
+  = lens _siieEkCert (\ s a -> s{_siieEkCert = a})
+
+-- | A PEM-encoded public key.
+siieEkPub :: Lens' ShieldedInstanceIdentityEntry (Maybe Text)
+siieEkPub
+  = lens _siieEkPub (\ s a -> s{_siieEkPub = a})
+
+instance FromJSON ShieldedInstanceIdentityEntry where
+        parseJSON
+          = withObject "ShieldedInstanceIdentityEntry"
+              (\ o ->
+                 ShieldedInstanceIdentityEntry' <$>
+                   (o .:? "ekCert") <*> (o .:? "ekPub"))
+
+instance ToJSON ShieldedInstanceIdentityEntry where
+        toJSON ShieldedInstanceIdentityEntry'{..}
+          = object
+              (catMaybes
+                 [("ekCert" .=) <$> _siieEkCert,
+                  ("ekPub" .=) <$> _siieEkPub])
 
 -- | [Output Only] Informational warning message.
 --
@@ -35400,13 +37276,25 @@ vtDetailedStatus
   = lens _vtDetailedStatus
       (\ s a -> s{_vtDetailedStatus = a})
 
--- | [Output Only] The status of the VPN tunnel.
+-- | [Output Only] The status of the VPN tunnel, which can be one of the
+-- following: - PROVISIONING: Resource is being allocated for the VPN
+-- tunnel. - WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related
+-- configs from the user. Network, TargetVpnGateway, VpnTunnel,
+-- ForwardingRule, and Route resources are needed to setup the VPN tunnel.
+-- - FIRST_HANDSHAKE: Successful first handshake with the peer VPN. -
+-- ESTABLISHED: Secure session is successfully established with the peer
+-- VPN. - NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS -
+-- AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). -
+-- NEGOTIATION_FAILURE: Handshake failed. - DEPROVISIONING: Resources are
+-- being deallocated for the VPN tunnel. - FAILED: Tunnel creation has
+-- failed and the tunnel is not ready to be used.
 vtStatus :: Lens' VPNTunnel (Maybe VPNTunnelStatus)
 vtStatus = lens _vtStatus (\ s a -> s{_vtStatus = a})
 
--- | Local traffic selector to use when establishing the VPN tunnel with peer
--- VPN gateway. The value should be a CIDR formatted string, for example:
--- 192.168.0.0\/16. The ranges should be disjoint. Only IPv4 is supported.
+-- | Local traffic selector to use when establishing the VPN tunnel with the
+-- peer VPN gateway. The value should be a CIDR formatted string, for
+-- example: 192.168.0.0\/16. The ranges must be disjoint. Only IPv4 is
+-- supported.
 vtLocalTrafficSelector :: Lens' VPNTunnel [Text]
 vtLocalTrafficSelector
   = lens _vtLocalTrafficSelector
@@ -35423,7 +37311,7 @@ vtKind = lens _vtKind (\ s a -> s{_vtKind = a})
 vtPeerIP :: Lens' VPNTunnel (Maybe Text)
 vtPeerIP = lens _vtPeerIP (\ s a -> s{_vtPeerIP = a})
 
--- | URL of router resource to be used for dynamic routing.
+-- | URL of the router resource to be used for dynamic routing.
 vtRouter :: Lens' VPNTunnel (Maybe Text)
 vtRouter = lens _vtRouter (\ s a -> s{_vtRouter = a})
 
@@ -35435,7 +37323,7 @@ vtTargetVPNGateway
       (\ s a -> s{_vtTargetVPNGateway = a})
 
 -- | Remote traffic selectors to use when establishing the VPN tunnel with
--- peer VPN gateway. The value should be a CIDR formatted string, for
+-- the peer VPN gateway. The value should be a CIDR formatted string, for
 -- example: 192.168.0.0\/16. The ranges should be disjoint. Only IPv4 is
 -- supported.
 vtRemoteTrafficSelector :: Lens' VPNTunnel [Text]
@@ -35486,8 +37374,9 @@ vtId
   = lens _vtId (\ s a -> s{_vtId = a}) .
       mapping _Coerce
 
--- | IKE protocol version to use when establishing the VPN tunnel with peer
--- VPN gateway. Acceptable IKE versions are 1 or 2. Default version is 2.
+-- | IKE protocol version to use when establishing the VPN tunnel with the
+-- peer VPN gateway. Acceptable IKE versions are 1 or 2. The default
+-- version is 2.
 vtIkeVersion :: Lens' VPNTunnel (Maybe Int32)
 vtIkeVersion
   = lens _vtIkeVersion (\ s a -> s{_vtIkeVersion = a})
@@ -36839,7 +38728,10 @@ instance ToJSON TargetPoolListWarningDataItem where
                  [("value" .=) <$> _tplwdiValue,
                   ("key" .=) <$> _tplwdiKey])
 
--- | A Node Template resource.
+-- | A Node Template resource. To learn more about node templates and
+-- sole-tenant nodes, read the Sole-tenant nodes documentation. (==
+-- resource_for beta.nodeTemplates ==) (== resource_for v1.nodeTemplates
+-- ==)
 --
 -- /See:/ 'nodeTemplate' smart constructor.
 data NodeTemplate =
@@ -37021,6 +38913,107 @@ instance ToJSON NodeTemplate where
                   ("nodeType" .=) <$> _nttNodeType,
                   ("region" .=) <$> _nttRegion,
                   ("description" .=) <$> _nttDescription])
+
+--
+-- /See:/ 'networkEndpointGroupList' smart constructor.
+data NetworkEndpointGroupList =
+  NetworkEndpointGroupList'
+    { _neglNextPageToken :: !(Maybe Text)
+    , _neglKind          :: !Text
+    , _neglItems         :: !(Maybe [NetworkEndpointGroup])
+    , _neglSelfLink      :: !(Maybe Text)
+    , _neglWarning       :: !(Maybe NetworkEndpointGroupListWarning)
+    , _neglId            :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neglNextPageToken'
+--
+-- * 'neglKind'
+--
+-- * 'neglItems'
+--
+-- * 'neglSelfLink'
+--
+-- * 'neglWarning'
+--
+-- * 'neglId'
+networkEndpointGroupList
+    :: NetworkEndpointGroupList
+networkEndpointGroupList =
+  NetworkEndpointGroupList'
+    { _neglNextPageToken = Nothing
+    , _neglKind = "compute#networkEndpointGroupList"
+    , _neglItems = Nothing
+    , _neglSelfLink = Nothing
+    , _neglWarning = Nothing
+    , _neglId = Nothing
+    }
+
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+neglNextPageToken :: Lens' NetworkEndpointGroupList (Maybe Text)
+neglNextPageToken
+  = lens _neglNextPageToken
+      (\ s a -> s{_neglNextPageToken = a})
+
+-- | [Output Only] The resource type, which is always
+-- compute#networkEndpointGroupList for network endpoint group lists.
+neglKind :: Lens' NetworkEndpointGroupList Text
+neglKind = lens _neglKind (\ s a -> s{_neglKind = a})
+
+-- | A list of NetworkEndpointGroup resources.
+neglItems :: Lens' NetworkEndpointGroupList [NetworkEndpointGroup]
+neglItems
+  = lens _neglItems (\ s a -> s{_neglItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+neglSelfLink :: Lens' NetworkEndpointGroupList (Maybe Text)
+neglSelfLink
+  = lens _neglSelfLink (\ s a -> s{_neglSelfLink = a})
+
+-- | [Output Only] Informational warning message.
+neglWarning :: Lens' NetworkEndpointGroupList (Maybe NetworkEndpointGroupListWarning)
+neglWarning
+  = lens _neglWarning (\ s a -> s{_neglWarning = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+neglId :: Lens' NetworkEndpointGroupList (Maybe Text)
+neglId = lens _neglId (\ s a -> s{_neglId = a})
+
+instance FromJSON NetworkEndpointGroupList where
+        parseJSON
+          = withObject "NetworkEndpointGroupList"
+              (\ o ->
+                 NetworkEndpointGroupList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#networkEndpointGroupList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "warning")
+                     <*> (o .:? "id"))
+
+instance ToJSON NetworkEndpointGroupList where
+        toJSON NetworkEndpointGroupList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _neglNextPageToken,
+                  Just ("kind" .= _neglKind),
+                  ("items" .=) <$> _neglItems,
+                  ("selfLink" .=) <$> _neglSelfLink,
+                  ("warning" .=) <$> _neglWarning,
+                  ("id" .=) <$> _neglId])
 
 -- | Contains a list of Subnetwork resources.
 --
@@ -39329,6 +41322,51 @@ instance FromJSON SubnetworkAggregatedListItems where
 instance ToJSON SubnetworkAggregatedListItems where
         toJSON = toJSON . _saliAddtional
 
+-- | A list of NetworkEndpointGroupsScopedList resources.
+--
+-- /See:/ 'networkEndpointGroupAggregatedListItems' smart constructor.
+newtype NetworkEndpointGroupAggregatedListItems =
+  NetworkEndpointGroupAggregatedListItems'
+    { _negaliAddtional :: HashMap Text NetworkEndpointGroupsScopedList
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkEndpointGroupAggregatedListItems' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'negaliAddtional'
+networkEndpointGroupAggregatedListItems
+    :: HashMap Text NetworkEndpointGroupsScopedList -- ^ 'negaliAddtional'
+    -> NetworkEndpointGroupAggregatedListItems
+networkEndpointGroupAggregatedListItems pNegaliAddtional_ =
+  NetworkEndpointGroupAggregatedListItems'
+    {_negaliAddtional = _Coerce # pNegaliAddtional_}
+
+
+-- | The name of the scope that contains this set of network endpoint groups.
+negaliAddtional :: Lens' NetworkEndpointGroupAggregatedListItems (HashMap Text NetworkEndpointGroupsScopedList)
+negaliAddtional
+  = lens _negaliAddtional
+      (\ s a -> s{_negaliAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           NetworkEndpointGroupAggregatedListItems
+         where
+        parseJSON
+          = withObject
+              "NetworkEndpointGroupAggregatedListItems"
+              (\ o ->
+                 NetworkEndpointGroupAggregatedListItems' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           NetworkEndpointGroupAggregatedListItems
+         where
+        toJSON = toJSON . _negaliAddtional
+
 --
 -- /See:/ 'interconnectAttachmentAggregatedListWarningDataItem' smart constructor.
 data InterconnectAttachmentAggregatedListWarningDataItem =
@@ -39460,7 +41498,6 @@ data Condition =
     { _cOp     :: !(Maybe ConditionOp)
     , _cIAM    :: !(Maybe ConditionIAM)
     , _cValues :: !(Maybe [Text])
-    , _cValue  :: !(Maybe Text)
     , _cSys    :: !(Maybe ConditionSys)
     , _cSvc    :: !(Maybe Text)
     }
@@ -39477,8 +41514,6 @@ data Condition =
 --
 -- * 'cValues'
 --
--- * 'cValue'
---
 -- * 'cSys'
 --
 -- * 'cSvc'
@@ -39489,7 +41524,6 @@ condition =
     { _cOp = Nothing
     , _cIAM = Nothing
     , _cValues = Nothing
-    , _cValue = Nothing
     , _cSys = Nothing
     , _cSvc = Nothing
     }
@@ -39503,15 +41537,11 @@ cOp = lens _cOp (\ s a -> s{_cOp = a})
 cIAM :: Lens' Condition (Maybe ConditionIAM)
 cIAM = lens _cIAM (\ s a -> s{_cIAM = a})
 
--- | The objects of the condition. This is mutually exclusive with \'value\'.
+-- | The objects of the condition.
 cValues :: Lens' Condition [Text]
 cValues
   = lens _cValues (\ s a -> s{_cValues = a}) . _Default
       . _Coerce
-
--- | DEPRECATED. Use \'values\' instead.
-cValue :: Lens' Condition (Maybe Text)
-cValue = lens _cValue (\ s a -> s{_cValue = a})
 
 -- | Trusted attributes supplied by any service that owns resources and uses
 -- the IAM system for access control.
@@ -39529,7 +41559,6 @@ instance FromJSON Condition where
                  Condition' <$>
                    (o .:? "op") <*> (o .:? "iam") <*>
                      (o .:? "values" .!= mempty)
-                     <*> (o .:? "value")
                      <*> (o .:? "sys")
                      <*> (o .:? "svc"))
 
@@ -39538,8 +41567,8 @@ instance ToJSON Condition where
           = object
               (catMaybes
                  [("op" .=) <$> _cOp, ("iam" .=) <$> _cIAM,
-                  ("values" .=) <$> _cValues, ("value" .=) <$> _cValue,
-                  ("sys" .=) <$> _cSys, ("svc" .=) <$> _cSvc])
+                  ("values" .=) <$> _cValues, ("sys" .=) <$> _cSys,
+                  ("svc" .=) <$> _cSvc])
 
 -- | [Output Only] Informational warning message.
 --
@@ -41996,6 +44025,54 @@ instance ToJSON CommitmentListWarningDataItem where
                  [("value" .=) <$> _clwdiValue,
                   ("key" .=) <$> _clwdiKey])
 
+--
+-- /See:/ 'managedInstanceVersion' smart constructor.
+data ManagedInstanceVersion =
+  ManagedInstanceVersion'
+    { _mivInstanceTemplate :: !(Maybe Text)
+    , _mivName             :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ManagedInstanceVersion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mivInstanceTemplate'
+--
+-- * 'mivName'
+managedInstanceVersion
+    :: ManagedInstanceVersion
+managedInstanceVersion =
+  ManagedInstanceVersion' {_mivInstanceTemplate = Nothing, _mivName = Nothing}
+
+
+-- | [Output Only] The intended template of the instance. This field is empty
+-- when current_action is one of { DELETING, ABANDONING }.
+mivInstanceTemplate :: Lens' ManagedInstanceVersion (Maybe Text)
+mivInstanceTemplate
+  = lens _mivInstanceTemplate
+      (\ s a -> s{_mivInstanceTemplate = a})
+
+-- | [Output Only] Name of the version.
+mivName :: Lens' ManagedInstanceVersion (Maybe Text)
+mivName = lens _mivName (\ s a -> s{_mivName = a})
+
+instance FromJSON ManagedInstanceVersion where
+        parseJSON
+          = withObject "ManagedInstanceVersion"
+              (\ o ->
+                 ManagedInstanceVersion' <$>
+                   (o .:? "instanceTemplate") <*> (o .:? "name"))
+
+instance ToJSON ManagedInstanceVersion where
+        toJSON ManagedInstanceVersion'{..}
+          = object
+              (catMaybes
+                 [("instanceTemplate" .=) <$> _mivInstanceTemplate,
+                  ("name" .=) <$> _mivName])
+
 -- | [Output Only] Informational warning which replaces the list of
 -- commitments when the list is empty.
 --
@@ -42822,7 +44899,7 @@ targetVPNGatewaysScopedList =
     {_tvgslTargetVPNGateways = Nothing, _tvgslWarning = Nothing}
 
 
--- | [Output Only] A list of target vpn gateways contained in this scope.
+-- | [Output Only] A list of target VPN gateways contained in this scope.
 tvgslTargetVPNGateways :: Lens' TargetVPNGatewaysScopedList [TargetVPNGateway]
 tvgslTargetVPNGateways
   = lens _tvgslTargetVPNGateways
@@ -43500,6 +45577,7 @@ data BackendService =
     , _bsEnableCDN            :: !(Maybe Bool)
     , _bsFingerprint          :: !(Maybe Bytes)
     , _bsProtocol             :: !(Maybe BackendServiceProtocol)
+    , _bsCustomRequestHeaders :: !(Maybe [Text])
     , _bsSecurityPolicy       :: !(Maybe Text)
     , _bsCdnPolicy            :: !(Maybe BackendServiceCdnPolicy)
     , _bsSelfLink             :: !(Maybe Text)
@@ -43539,6 +45617,8 @@ data BackendService =
 --
 -- * 'bsProtocol'
 --
+-- * 'bsCustomRequestHeaders'
+--
 -- * 'bsSecurityPolicy'
 --
 -- * 'bsCdnPolicy'
@@ -43577,6 +45657,7 @@ backendService =
     , _bsEnableCDN = Nothing
     , _bsFingerprint = Nothing
     , _bsProtocol = Nothing
+    , _bsCustomRequestHeaders = Nothing
     , _bsSecurityPolicy = Nothing
     , _bsCdnPolicy = Nothing
     , _bsSelfLink = Nothing
@@ -43663,6 +45744,14 @@ bsFingerprint
 bsProtocol :: Lens' BackendService (Maybe BackendServiceProtocol)
 bsProtocol
   = lens _bsProtocol (\ s a -> s{_bsProtocol = a})
+
+-- | Headers that the HTTP\/S load balancer should add to proxied requests.
+bsCustomRequestHeaders :: Lens' BackendService [Text]
+bsCustomRequestHeaders
+  = lens _bsCustomRequestHeaders
+      (\ s a -> s{_bsCustomRequestHeaders = a})
+      . _Default
+      . _Coerce
 
 -- | [Output Only] The resource URL for the security policy associated with
 -- this backend service.
@@ -43773,6 +45862,7 @@ instance FromJSON BackendService where
                      <*> (o .:? "enableCDN")
                      <*> (o .:? "fingerprint")
                      <*> (o .:? "protocol")
+                     <*> (o .:? "customRequestHeaders" .!= mempty)
                      <*> (o .:? "securityPolicy")
                      <*> (o .:? "cdnPolicy")
                      <*> (o .:? "selfLink")
@@ -43802,6 +45892,8 @@ instance ToJSON BackendService where
                   ("enableCDN" .=) <$> _bsEnableCDN,
                   ("fingerprint" .=) <$> _bsFingerprint,
                   ("protocol" .=) <$> _bsProtocol,
+                  ("customRequestHeaders" .=) <$>
+                    _bsCustomRequestHeaders,
                   ("securityPolicy" .=) <$> _bsSecurityPolicy,
                   ("cdnPolicy" .=) <$> _bsCdnPolicy,
                   ("selfLink" .=) <$> _bsSelfLink,
@@ -43986,6 +46078,71 @@ instance ToJSON InterconnectDiagnosticsARPEntry where
               (catMaybes
                  [("ipAddress" .=) <$> _idarpeIPAddress,
                   ("macAddress" .=) <$> _idarpeMACAddress])
+
+-- | A shielded Instance identity entry.
+--
+-- /See:/ 'shieldedInstanceIdentity' smart constructor.
+data ShieldedInstanceIdentity =
+  ShieldedInstanceIdentity'
+    { _siiSigningKey    :: !(Maybe ShieldedInstanceIdentityEntry)
+    , _siiKind          :: !Text
+    , _siiEncryptionKey :: !(Maybe ShieldedInstanceIdentityEntry)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ShieldedInstanceIdentity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siiSigningKey'
+--
+-- * 'siiKind'
+--
+-- * 'siiEncryptionKey'
+shieldedInstanceIdentity
+    :: ShieldedInstanceIdentity
+shieldedInstanceIdentity =
+  ShieldedInstanceIdentity'
+    { _siiSigningKey = Nothing
+    , _siiKind = "compute#shieldedInstanceIdentity"
+    , _siiEncryptionKey = Nothing
+    }
+
+
+-- | An Attestation Key (AK) issued to the Shielded Instance\'s vTPM.
+siiSigningKey :: Lens' ShieldedInstanceIdentity (Maybe ShieldedInstanceIdentityEntry)
+siiSigningKey
+  = lens _siiSigningKey
+      (\ s a -> s{_siiSigningKey = a})
+
+-- | [Output Only] Type of the resource. Always
+-- compute#shieldedInstanceIdentity for shielded Instance identity entry.
+siiKind :: Lens' ShieldedInstanceIdentity Text
+siiKind = lens _siiKind (\ s a -> s{_siiKind = a})
+
+-- | An Endorsement Key (EK) issued to the Shielded Instance\'s vTPM.
+siiEncryptionKey :: Lens' ShieldedInstanceIdentity (Maybe ShieldedInstanceIdentityEntry)
+siiEncryptionKey
+  = lens _siiEncryptionKey
+      (\ s a -> s{_siiEncryptionKey = a})
+
+instance FromJSON ShieldedInstanceIdentity where
+        parseJSON
+          = withObject "ShieldedInstanceIdentity"
+              (\ o ->
+                 ShieldedInstanceIdentity' <$>
+                   (o .:? "signingKey") <*>
+                     (o .:? "kind" .!= "compute#shieldedInstanceIdentity")
+                     <*> (o .:? "encryptionKey"))
+
+instance ToJSON ShieldedInstanceIdentity where
+        toJSON ShieldedInstanceIdentity'{..}
+          = object
+              (catMaybes
+                 [("signingKey" .=) <$> _siiSigningKey,
+                  Just ("kind" .= _siiKind),
+                  ("encryptionKey" .=) <$> _siiEncryptionKey])
 
 -- | Contains a list of Commitment resources.
 --
@@ -44229,12 +46386,13 @@ instance ToJSON
 -- /See:/ 'httpsHealthCheck' smart constructor.
 data HTTPSHealthCheck =
   HTTPSHealthCheck'
-    { _hhcResponse    :: !(Maybe Text)
-    , _hhcRequestPath :: !(Maybe Text)
-    , _hhcHost        :: !(Maybe Text)
-    , _hhcProxyHeader :: !(Maybe HTTPSHealthCheckProxyHeader)
-    , _hhcPortName    :: !(Maybe Text)
-    , _hhcPort        :: !(Maybe (Textual Int32))
+    { _hhcResponse          :: !(Maybe Text)
+    , _hhcPortSpecification :: !(Maybe HTTPSHealthCheckPortSpecification)
+    , _hhcRequestPath       :: !(Maybe Text)
+    , _hhcHost              :: !(Maybe Text)
+    , _hhcProxyHeader       :: !(Maybe HTTPSHealthCheckProxyHeader)
+    , _hhcPortName          :: !(Maybe Text)
+    , _hhcPort              :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -44244,6 +46402,8 @@ data HTTPSHealthCheck =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'hhcResponse'
+--
+-- * 'hhcPortSpecification'
 --
 -- * 'hhcRequestPath'
 --
@@ -44259,6 +46419,7 @@ httpsHealthCheck
 httpsHealthCheck =
   HTTPSHealthCheck'
     { _hhcResponse = Nothing
+    , _hhcPortSpecification = Nothing
     , _hhcRequestPath = Nothing
     , _hhcHost = Nothing
     , _hhcProxyHeader = Nothing
@@ -44273,6 +46434,19 @@ httpsHealthCheck =
 hhcResponse :: Lens' HTTPSHealthCheck (Maybe Text)
 hhcResponse
   = lens _hhcResponse (\ s a -> s{_hhcResponse = a})
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, HTTPS health check follows
+-- behavior specified in port and portName fields.
+hhcPortSpecification :: Lens' HTTPSHealthCheck (Maybe HTTPSHealthCheckPortSpecification)
+hhcPortSpecification
+  = lens _hhcPortSpecification
+      (\ s a -> s{_hhcPortSpecification = a})
 
 -- | The request path of the HTTPS health check request. The default value is
 -- \/.
@@ -44312,8 +46486,9 @@ instance FromJSON HTTPSHealthCheck where
           = withObject "HTTPSHealthCheck"
               (\ o ->
                  HTTPSHealthCheck' <$>
-                   (o .:? "response") <*> (o .:? "requestPath") <*>
-                     (o .:? "host")
+                   (o .:? "response") <*> (o .:? "portSpecification")
+                     <*> (o .:? "requestPath")
+                     <*> (o .:? "host")
                      <*> (o .:? "proxyHeader")
                      <*> (o .:? "portName")
                      <*> (o .:? "port"))
@@ -44323,6 +46498,7 @@ instance ToJSON HTTPSHealthCheck where
           = object
               (catMaybes
                  [("response" .=) <$> _hhcResponse,
+                  ("portSpecification" .=) <$> _hhcPortSpecification,
                   ("requestPath" .=) <$> _hhcRequestPath,
                   ("host" .=) <$> _hhcHost,
                   ("proxyHeader" .=) <$> _hhcProxyHeader,
@@ -44351,7 +46527,7 @@ vpnTunnelAggregatedListItems pVtaliAddtional_ =
   VPNTunnelAggregatedListItems' {_vtaliAddtional = _Coerce # pVtaliAddtional_}
 
 
--- | Name of the scope containing this set of vpn tunnels.
+-- | Name of the scope containing this set of VPN tunnels.
 vtaliAddtional :: Lens' VPNTunnelAggregatedListItems (HashMap Text VPNTunnelsScopedList)
 vtaliAddtional
   = lens _vtaliAddtional
@@ -44778,8 +46954,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -44792,10 +46968,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -45180,31 +47355,33 @@ instance ToJSON
 -- /See:/ 'instance'' smart constructor.
 data Instance =
   Instance'
-    { _i1Status             :: !(Maybe InstanceStatus)
-    , _i1ServiceAccounts    :: !(Maybe [ServiceAccount])
-    , _i1DeletionProtection :: !(Maybe Bool)
-    , _i1Hostname           :: !(Maybe Text)
-    , _i1NetworkInterfaces  :: !(Maybe [NetworkInterface])
-    , _i1Kind               :: !Text
-    , _i1Zone               :: !(Maybe Text)
-    , _i1CPUPlatform        :: !(Maybe Text)
-    , _i1SelfLink           :: !(Maybe Text)
-    , _i1GuestAccelerators  :: !(Maybe [AcceleratorConfig])
-    , _i1Name               :: !(Maybe Text)
-    , _i1StatusMessage      :: !(Maybe Text)
-    , _i1CreationTimestamp  :: !(Maybe Text)
-    , _i1MachineType        :: !(Maybe Text)
-    , _i1Metadata           :: !(Maybe Metadata)
-    , _i1Id                 :: !(Maybe (Textual Word64))
-    , _i1Labels             :: !(Maybe InstanceLabels)
-    , _i1StartRestricted    :: !(Maybe Bool)
-    , _i1Scheduling         :: !(Maybe Scheduling)
-    , _i1MinCPUPlatform     :: !(Maybe Text)
-    , _i1Disks              :: !(Maybe [AttachedDisk])
-    , _i1CanIPForward       :: !(Maybe Bool)
-    , _i1LabelFingerprint   :: !(Maybe Bytes)
-    , _i1Description        :: !(Maybe Text)
-    , _i1Tags               :: !(Maybe Tags)
+    { _i1Status                          :: !(Maybe InstanceStatus)
+    , _i1ServiceAccounts                 :: !(Maybe [ServiceAccount])
+    , _i1DeletionProtection              :: !(Maybe Bool)
+    , _i1Hostname                        :: !(Maybe Text)
+    , _i1NetworkInterfaces               :: !(Maybe [NetworkInterface])
+    , _i1ShieldedInstanceIntegrityPolicy :: !(Maybe ShieldedInstanceIntegrityPolicy)
+    , _i1Kind                            :: !Text
+    , _i1Zone                            :: !(Maybe Text)
+    , _i1CPUPlatform                     :: !(Maybe Text)
+    , _i1SelfLink                        :: !(Maybe Text)
+    , _i1GuestAccelerators               :: !(Maybe [AcceleratorConfig])
+    , _i1Name                            :: !(Maybe Text)
+    , _i1StatusMessage                   :: !(Maybe Text)
+    , _i1CreationTimestamp               :: !(Maybe Text)
+    , _i1MachineType                     :: !(Maybe Text)
+    , _i1Metadata                        :: !(Maybe Metadata)
+    , _i1ShieldedInstanceConfig          :: !(Maybe ShieldedInstanceConfig)
+    , _i1Id                              :: !(Maybe (Textual Word64))
+    , _i1Labels                          :: !(Maybe InstanceLabels)
+    , _i1StartRestricted                 :: !(Maybe Bool)
+    , _i1Scheduling                      :: !(Maybe Scheduling)
+    , _i1MinCPUPlatform                  :: !(Maybe Text)
+    , _i1Disks                           :: !(Maybe [AttachedDisk])
+    , _i1CanIPForward                    :: !(Maybe Bool)
+    , _i1LabelFingerprint                :: !(Maybe Bytes)
+    , _i1Description                     :: !(Maybe Text)
+    , _i1Tags                            :: !(Maybe Tags)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -45222,6 +47399,8 @@ data Instance =
 -- * 'i1Hostname'
 --
 -- * 'i1NetworkInterfaces'
+--
+-- * 'i1ShieldedInstanceIntegrityPolicy'
 --
 -- * 'i1Kind'
 --
@@ -45242,6 +47421,8 @@ data Instance =
 -- * 'i1MachineType'
 --
 -- * 'i1Metadata'
+--
+-- * 'i1ShieldedInstanceConfig'
 --
 -- * 'i1Id'
 --
@@ -45271,6 +47452,7 @@ instance' =
     , _i1DeletionProtection = Nothing
     , _i1Hostname = Nothing
     , _i1NetworkInterfaces = Nothing
+    , _i1ShieldedInstanceIntegrityPolicy = Nothing
     , _i1Kind = "compute#instance"
     , _i1Zone = Nothing
     , _i1CPUPlatform = Nothing
@@ -45281,6 +47463,7 @@ instance' =
     , _i1CreationTimestamp = Nothing
     , _i1MachineType = Nothing
     , _i1Metadata = Nothing
+    , _i1ShieldedInstanceConfig = Nothing
     , _i1Id = Nothing
     , _i1Labels = Nothing
     , _i1StartRestricted = Nothing
@@ -45332,6 +47515,11 @@ i1NetworkInterfaces
       (\ s a -> s{_i1NetworkInterfaces = a})
       . _Default
       . _Coerce
+
+i1ShieldedInstanceIntegrityPolicy :: Lens' Instance (Maybe ShieldedInstanceIntegrityPolicy)
+i1ShieldedInstanceIntegrityPolicy
+  = lens _i1ShieldedInstanceIntegrityPolicy
+      (\ s a -> s{_i1ShieldedInstanceIntegrityPolicy = a})
 
 -- | [Output Only] Type of the resource. Always compute#instance for
 -- instances.
@@ -45408,6 +47596,11 @@ i1MachineType
 i1Metadata :: Lens' Instance (Maybe Metadata)
 i1Metadata
   = lens _i1Metadata (\ s a -> s{_i1Metadata = a})
+
+i1ShieldedInstanceConfig :: Lens' Instance (Maybe ShieldedInstanceConfig)
+i1ShieldedInstanceConfig
+  = lens _i1ShieldedInstanceConfig
+      (\ s a -> s{_i1ShieldedInstanceConfig = a})
 
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
@@ -45494,6 +47687,7 @@ instance FromJSON Instance where
                      <*> (o .:? "deletionProtection")
                      <*> (o .:? "hostname")
                      <*> (o .:? "networkInterfaces" .!= mempty)
+                     <*> (o .:? "shieldedInstanceIntegrityPolicy")
                      <*> (o .:? "kind" .!= "compute#instance")
                      <*> (o .:? "zone")
                      <*> (o .:? "cpuPlatform")
@@ -45504,6 +47698,7 @@ instance FromJSON Instance where
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "machineType")
                      <*> (o .:? "metadata")
+                     <*> (o .:? "shieldedInstanceConfig")
                      <*> (o .:? "id")
                      <*> (o .:? "labels")
                      <*> (o .:? "startRestricted")
@@ -45524,6 +47719,8 @@ instance ToJSON Instance where
                   ("deletionProtection" .=) <$> _i1DeletionProtection,
                   ("hostname" .=) <$> _i1Hostname,
                   ("networkInterfaces" .=) <$> _i1NetworkInterfaces,
+                  ("shieldedInstanceIntegrityPolicy" .=) <$>
+                    _i1ShieldedInstanceIntegrityPolicy,
                   Just ("kind" .= _i1Kind), ("zone" .=) <$> _i1Zone,
                   ("cpuPlatform" .=) <$> _i1CPUPlatform,
                   ("selfLink" .=) <$> _i1SelfLink,
@@ -45532,8 +47729,10 @@ instance ToJSON Instance where
                   ("statusMessage" .=) <$> _i1StatusMessage,
                   ("creationTimestamp" .=) <$> _i1CreationTimestamp,
                   ("machineType" .=) <$> _i1MachineType,
-                  ("metadata" .=) <$> _i1Metadata, ("id" .=) <$> _i1Id,
-                  ("labels" .=) <$> _i1Labels,
+                  ("metadata" .=) <$> _i1Metadata,
+                  ("shieldedInstanceConfig" .=) <$>
+                    _i1ShieldedInstanceConfig,
+                  ("id" .=) <$> _i1Id, ("labels" .=) <$> _i1Labels,
                   ("startRestricted" .=) <$> _i1StartRestricted,
                   ("scheduling" .=) <$> _i1Scheduling,
                   ("minCpuPlatform" .=) <$> _i1MinCPUPlatform,

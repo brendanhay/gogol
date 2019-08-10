@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Performs an action on a link between a Merchant Center account and
--- another account.
+-- Performs an action on a link between two Merchant Center accounts,
+-- namely accountId and linkedAccountId.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.link@.
 module Network.Google.Resource.Content.Accounts.Link
@@ -55,8 +55,8 @@ type AccountsLinkResource =
                    ReqBody '[JSON] AccountsLinkRequest :>
                      Post '[JSON] AccountsLinkResponse
 
--- | Performs an action on a link between a Merchant Center account and
--- another account.
+-- | Performs an action on a link between two Merchant Center accounts,
+-- namely accountId and linkedAccountId.
 --
 -- /See:/ 'accountsLink' smart constructor.
 data AccountsLink =

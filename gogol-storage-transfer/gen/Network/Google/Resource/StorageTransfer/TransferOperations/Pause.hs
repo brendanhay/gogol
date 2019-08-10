@@ -22,7 +22,7 @@
 --
 -- Pauses a transfer operation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     (
     -- * REST Resource

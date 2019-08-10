@@ -31,7 +31,7 @@
 -- name binding is the parent resource, without the operations collection
 -- id.
 --
--- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/reference/rest/ Service Networking API Reference> for @servicenetworking.operations.list@.
+-- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.operations.list@.
 module Network.Google.Resource.ServiceNetworking.Operations.List
     (
     -- * REST Resource

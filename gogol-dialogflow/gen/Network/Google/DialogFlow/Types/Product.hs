@@ -236,6 +236,119 @@ instance ToJSON
                  [("simpleResponses" .=) <$>
                     _gcdvimsrSimpleResponses])
 
+-- | Configuration of how speech should be synthesized.
+--
+-- /See:/ 'googleCloudDialogflowV2SynthesizeSpeechConfig' smart constructor.
+data GoogleCloudDialogflowV2SynthesizeSpeechConfig =
+  GoogleCloudDialogflowV2SynthesizeSpeechConfig'
+    { _gcdvsscVolumeGainDB     :: !(Maybe (Textual Double))
+    , _gcdvsscEffectsProFileId :: !(Maybe [Text])
+    , _gcdvsscVoice            :: !(Maybe GoogleCloudDialogflowV2VoiceSelectionParams)
+    , _gcdvsscSpeakingRate     :: !(Maybe (Textual Double))
+    , _gcdvsscPitch            :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SynthesizeSpeechConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvsscVolumeGainDB'
+--
+-- * 'gcdvsscEffectsProFileId'
+--
+-- * 'gcdvsscVoice'
+--
+-- * 'gcdvsscSpeakingRate'
+--
+-- * 'gcdvsscPitch'
+googleCloudDialogflowV2SynthesizeSpeechConfig
+    :: GoogleCloudDialogflowV2SynthesizeSpeechConfig
+googleCloudDialogflowV2SynthesizeSpeechConfig =
+  GoogleCloudDialogflowV2SynthesizeSpeechConfig'
+    { _gcdvsscVolumeGainDB = Nothing
+    , _gcdvsscEffectsProFileId = Nothing
+    , _gcdvsscVoice = Nothing
+    , _gcdvsscSpeakingRate = Nothing
+    , _gcdvsscPitch = Nothing
+    }
+
+
+-- | Optional. Volume gain (in dB) of the normal native volume supported by
+-- the specific voice, in the range [-96.0, 16.0]. If unset, or set to a
+-- value of 0.0 (dB), will play at normal native signal amplitude. A value
+-- of -6.0 (dB) will play at approximately half the amplitude of the normal
+-- native signal amplitude. A value of +6.0 (dB) will play at approximately
+-- twice the amplitude of the normal native signal amplitude. We strongly
+-- recommend not to exceed +10 (dB) as there\'s usually no effective
+-- increase in loudness for any value greater than that.
+gcdvsscVolumeGainDB :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe Double)
+gcdvsscVolumeGainDB
+  = lens _gcdvsscVolumeGainDB
+      (\ s a -> s{_gcdvsscVolumeGainDB = a})
+      . mapping _Coerce
+
+-- | Optional. An identifier which selects \'audio effects\' profiles that
+-- are applied on (post synthesized) text to speech. Effects are applied on
+-- top of each other in the order they are given.
+gcdvsscEffectsProFileId :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig [Text]
+gcdvsscEffectsProFileId
+  = lens _gcdvsscEffectsProFileId
+      (\ s a -> s{_gcdvsscEffectsProFileId = a})
+      . _Default
+      . _Coerce
+
+-- | Optional. The desired voice of the synthesized audio.
+gcdvsscVoice :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe GoogleCloudDialogflowV2VoiceSelectionParams)
+gcdvsscVoice
+  = lens _gcdvsscVoice (\ s a -> s{_gcdvsscVoice = a})
+
+-- | Optional. Speaking rate\/speed, in the range [0.25, 4.0]. 1.0 is the
+-- normal native speed supported by the specific voice. 2.0 is twice as
+-- fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0
+-- speed. Any other values \< 0.25 or > 4.0 will return an error.
+gcdvsscSpeakingRate :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe Double)
+gcdvsscSpeakingRate
+  = lens _gcdvsscSpeakingRate
+      (\ s a -> s{_gcdvsscSpeakingRate = a})
+      . mapping _Coerce
+
+-- | Optional. Speaking pitch, in the range [-20.0, 20.0]. 20 means increase
+-- 20 semitones from the original pitch. -20 means decrease 20 semitones
+-- from the original pitch.
+gcdvsscPitch :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe Double)
+gcdvsscPitch
+  = lens _gcdvsscPitch (\ s a -> s{_gcdvsscPitch = a})
+      . mapping _Coerce
+
+instance FromJSON
+           GoogleCloudDialogflowV2SynthesizeSpeechConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2SynthesizeSpeechConfig"
+              (\ o ->
+                 GoogleCloudDialogflowV2SynthesizeSpeechConfig' <$>
+                   (o .:? "volumeGainDb") <*>
+                     (o .:? "effectsProfileId" .!= mempty)
+                     <*> (o .:? "voice")
+                     <*> (o .:? "speakingRate")
+                     <*> (o .:? "pitch"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2SynthesizeSpeechConfig
+         where
+        toJSON
+          GoogleCloudDialogflowV2SynthesizeSpeechConfig'{..}
+          = object
+              (catMaybes
+                 [("volumeGainDb" .=) <$> _gcdvsscVolumeGainDB,
+                  ("effectsProfileId" .=) <$> _gcdvsscEffectsProFileId,
+                  ("voice" .=) <$> _gcdvsscVoice,
+                  ("speakingRate" .=) <$> _gcdvsscSpeakingRate,
+                  ("pitch" .=) <$> _gcdvsscPitch])
+
 -- | Instructs the speech recognizer how to process the audio content.
 --
 -- /See:/ 'googleCloudDialogflowV2InputAudioConfig' smart constructor.
@@ -244,6 +357,7 @@ data GoogleCloudDialogflowV2InputAudioConfig =
     { _gcdviacLanguageCode    :: !(Maybe Text)
     , _gcdviacPhraseHints     :: !(Maybe [Text])
     , _gcdviacSampleRateHertz :: !(Maybe (Textual Int32))
+    , _gcdviacModelVariant    :: !(Maybe GoogleCloudDialogflowV2InputAudioConfigModelVariant)
     , _gcdviacAudioEncoding   :: !(Maybe GoogleCloudDialogflowV2InputAudioConfigAudioEncoding)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -259,6 +373,8 @@ data GoogleCloudDialogflowV2InputAudioConfig =
 --
 -- * 'gcdviacSampleRateHertz'
 --
+-- * 'gcdviacModelVariant'
+--
 -- * 'gcdviacAudioEncoding'
 googleCloudDialogflowV2InputAudioConfig
     :: GoogleCloudDialogflowV2InputAudioConfig
@@ -267,15 +383,17 @@ googleCloudDialogflowV2InputAudioConfig =
     { _gcdviacLanguageCode = Nothing
     , _gcdviacPhraseHints = Nothing
     , _gcdviacSampleRateHertz = Nothing
+    , _gcdviacModelVariant = Nothing
     , _gcdviacAudioEncoding = Nothing
     }
 
 
 -- | Required. The language of the supplied audio. Dialogflow does not do
 -- translations. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gcdviacLanguageCode :: Lens' GoogleCloudDialogflowV2InputAudioConfig (Maybe Text)
 gcdviacLanguageCode
   = lens _gcdviacLanguageCode
@@ -302,6 +420,12 @@ gcdviacSampleRateHertz
       (\ s a -> s{_gcdviacSampleRateHertz = a})
       . mapping _Coerce
 
+-- | Optional. Which variant of the Speech model to use.
+gcdviacModelVariant :: Lens' GoogleCloudDialogflowV2InputAudioConfig (Maybe GoogleCloudDialogflowV2InputAudioConfigModelVariant)
+gcdviacModelVariant
+  = lens _gcdviacModelVariant
+      (\ s a -> s{_gcdviacModelVariant = a})
+
 -- | Required. Audio encoding of the audio content to process.
 gcdviacAudioEncoding :: Lens' GoogleCloudDialogflowV2InputAudioConfig (Maybe GoogleCloudDialogflowV2InputAudioConfigAudioEncoding)
 gcdviacAudioEncoding
@@ -319,6 +443,7 @@ instance FromJSON
                    (o .:? "languageCode") <*>
                      (o .:? "phraseHints" .!= mempty)
                      <*> (o .:? "sampleRateHertz")
+                     <*> (o .:? "modelVariant")
                      <*> (o .:? "audioEncoding"))
 
 instance ToJSON
@@ -330,6 +455,7 @@ instance ToJSON
                  [("languageCode" .=) <$> _gcdviacLanguageCode,
                   ("phraseHints" .=) <$> _gcdviacPhraseHints,
                   ("sampleRateHertz" .=) <$> _gcdviacSampleRateHertz,
+                  ("modelVariant" .=) <$> _gcdviacModelVariant,
                   ("audioEncoding" .=) <$> _gcdviacAudioEncoding])
 
 -- | The response message for Intents.BatchUpdateIntents.
@@ -635,9 +761,10 @@ googleCloudDialogflowV2EventInput =
 
 
 -- | Required. The language of this query. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gcdveiLanguageCode :: Lens' GoogleCloudDialogflowV2EventInput (Maybe Text)
 gcdveiLanguageCode
   = lens _gcdveiLanguageCode
@@ -826,9 +953,19 @@ googleCloudDialogflowV2IntentTrainingPhrase =
     }
 
 
--- | Required. The collection of training phrase parts (can be annotated).
--- Fields: \`entity_type\`, \`alias\` and \`user_defined\` should be
--- populated only for the annotated parts of the training phrase.
+-- | Required. The ordered list of training phrase parts. The parts are
+-- concatenated in order to form the training phrase. Note: The API does
+-- not automatically annotate training phrases like the Dialogflow Console
+-- does. Note: Do not forget to include whitespace at part boundaries, so
+-- the training phrase is well formatted when the parts are concatenated.
+-- If the training phrase does not need to be annotated with parameters,
+-- you just need a single part with only the Part.text field set. If you
+-- want to annotate the training phrase, you must create multiple parts,
+-- where the fields of each part are populated in one of two ways: -
+-- \`Part.text\` is set to a part of the phrase that has no parameters. -
+-- \`Part.text\` is set to a part of the phrase that you want to annotate,
+-- and the \`entity_type\`, \`alias\`, and \`user_defined\` fields are all
+-- set.
 gcdvitpParts :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrase [GoogleCloudDialogflowV2IntentTrainingPhrasePart]
 gcdvitpParts
   = lens _gcdvitpParts (\ s a -> s{_gcdvitpParts = a})
@@ -1470,6 +1607,55 @@ instance ToJSON
                  [("openUriAction" .=) <$> _gcdvimbcbOpenURIAction,
                   ("title" .=) <$> _gcdvimbcbTitle])
 
+-- | The result of sentiment analysis as configured by
+-- \`sentiment_analysis_request_config\`.
+--
+-- /See:/ 'googleCloudDialogflowV2SentimentAnalysisResult' smart constructor.
+newtype GoogleCloudDialogflowV2SentimentAnalysisResult =
+  GoogleCloudDialogflowV2SentimentAnalysisResult'
+    { _gcdvsarQueryTextSentiment :: Maybe GoogleCloudDialogflowV2Sentiment
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SentimentAnalysisResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvsarQueryTextSentiment'
+googleCloudDialogflowV2SentimentAnalysisResult
+    :: GoogleCloudDialogflowV2SentimentAnalysisResult
+googleCloudDialogflowV2SentimentAnalysisResult =
+  GoogleCloudDialogflowV2SentimentAnalysisResult'
+    {_gcdvsarQueryTextSentiment = Nothing}
+
+
+-- | The sentiment analysis result for \`query_text\`.
+gcdvsarQueryTextSentiment :: Lens' GoogleCloudDialogflowV2SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2Sentiment)
+gcdvsarQueryTextSentiment
+  = lens _gcdvsarQueryTextSentiment
+      (\ s a -> s{_gcdvsarQueryTextSentiment = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2SentimentAnalysisResult
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2SentimentAnalysisResult"
+              (\ o ->
+                 GoogleCloudDialogflowV2SentimentAnalysisResult' <$>
+                   (o .:? "queryTextSentiment"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2SentimentAnalysisResult
+         where
+        toJSON
+          GoogleCloudDialogflowV2SentimentAnalysisResult'{..}
+          = object
+              (catMaybes
+                 [("queryTextSentiment" .=) <$>
+                    _gcdvsarQueryTextSentiment])
+
 -- | The request message for EntityTypes.BatchCreateEntities.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchCreateEntitiesRequest' smart constructor.
@@ -1496,10 +1682,10 @@ googleCloudDialogflowV2BatchCreateEntitiesRequest =
 
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbcerLanguageCode :: Lens' GoogleCloudDialogflowV2BatchCreateEntitiesRequest (Maybe Text)
 gcdvbcerLanguageCode
   = lens _gcdvbcerLanguageCode
@@ -1644,6 +1830,7 @@ data GoogleCloudDialogflowV2QueryResult =
     , _gcdvqrSpeechRecognitionConfidence :: !(Maybe (Textual Double))
     , _gcdvqrAction                      :: !(Maybe Text)
     , _gcdvqrIntent                      :: !(Maybe GoogleCloudDialogflowV2Intent)
+    , _gcdvqrSentimentAnalysisResult     :: !(Maybe GoogleCloudDialogflowV2SentimentAnalysisResult)
     , _gcdvqrQueryText                   :: !(Maybe Text)
     , _gcdvqrFulfillmentText             :: !(Maybe Text)
     , _gcdvqrParameters                  :: !(Maybe GoogleCloudDialogflowV2QueryResultParameters)
@@ -1673,6 +1860,8 @@ data GoogleCloudDialogflowV2QueryResult =
 --
 -- * 'gcdvqrIntent'
 --
+-- * 'gcdvqrSentimentAnalysisResult'
+--
 -- * 'gcdvqrQueryText'
 --
 -- * 'gcdvqrFulfillmentText'
@@ -1697,6 +1886,7 @@ googleCloudDialogflowV2QueryResult =
     , _gcdvqrSpeechRecognitionConfidence = Nothing
     , _gcdvqrAction = Nothing
     , _gcdvqrIntent = Nothing
+    , _gcdvqrSentimentAnalysisResult = Nothing
     , _gcdvqrQueryText = Nothing
     , _gcdvqrFulfillmentText = Nothing
     , _gcdvqrParameters = Nothing
@@ -1708,8 +1898,8 @@ googleCloudDialogflowV2QueryResult =
 
 
 -- | The language that was triggered during intent detection. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/reference\/language) for a list
--- of the currently supported language codes.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes.
 gcdvqrLanguageCode :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe Text)
 gcdvqrLanguageCode
   = lens _gcdvqrLanguageCode
@@ -1767,6 +1957,13 @@ gcdvqrAction
 gcdvqrIntent :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe GoogleCloudDialogflowV2Intent)
 gcdvqrIntent
   = lens _gcdvqrIntent (\ s a -> s{_gcdvqrIntent = a})
+
+-- | The sentiment analysis result, which depends on the
+-- \`sentiment_analysis_request_config\` specified in the request.
+gcdvqrSentimentAnalysisResult :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe GoogleCloudDialogflowV2SentimentAnalysisResult)
+gcdvqrSentimentAnalysisResult
+  = lens _gcdvqrSentimentAnalysisResult
+      (\ s a -> s{_gcdvqrSentimentAnalysisResult = a})
 
 -- | The original conversational query text: - If natural language text was
 -- provided as input, \`query_text\` contains a copy of the input. - If
@@ -1837,6 +2034,7 @@ instance FromJSON GoogleCloudDialogflowV2QueryResult
                      <*> (o .:? "speechRecognitionConfidence")
                      <*> (o .:? "action")
                      <*> (o .:? "intent")
+                     <*> (o .:? "sentimentAnalysisResult")
                      <*> (o .:? "queryText")
                      <*> (o .:? "fulfillmentText")
                      <*> (o .:? "parameters")
@@ -1861,6 +2059,8 @@ instance ToJSON GoogleCloudDialogflowV2QueryResult
                     _gcdvqrSpeechRecognitionConfidence,
                   ("action" .=) <$> _gcdvqrAction,
                   ("intent" .=) <$> _gcdvqrIntent,
+                  ("sentimentAnalysisResult" .=) <$>
+                    _gcdvqrSentimentAnalysisResult,
                   ("queryText" .=) <$> _gcdvqrQueryText,
                   ("fulfillmentText" .=) <$> _gcdvqrFulfillmentText,
                   ("parameters" .=) <$> _gcdvqrParameters,
@@ -1910,10 +2110,10 @@ googleCloudDialogflowV2BatchUpdateIntentsRequest =
 
 -- | Optional. The language of training phrases, parameters and rich messages
 -- defined in \`intents\`. If not specified, the agent\'s default language
--- is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbuirLanguageCode :: Lens' GoogleCloudDialogflowV2BatchUpdateIntentsRequest (Maybe Text)
 gcdvbuirLanguageCode
   = lens _gcdvbuirLanguageCode
@@ -2451,7 +2651,8 @@ instance ToJSON
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1ContextParameters' smart constructor.
 newtype GoogleCloudDialogflowV2beta1ContextParameters =
@@ -2656,6 +2857,56 @@ instance ToJSON
           = object
               (catMaybes [("audioUri" .=) <$> _gcdvimtpaAudioURI])
 
+-- | Configures the types of sentiment analysis to perform.
+--
+-- /See:/ 'googleCloudDialogflowV2SentimentAnalysisRequestConfig' smart constructor.
+newtype GoogleCloudDialogflowV2SentimentAnalysisRequestConfig =
+  GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'
+    { _gcdvsarcAnalyzeQueryTextSentiment :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SentimentAnalysisRequestConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvsarcAnalyzeQueryTextSentiment'
+googleCloudDialogflowV2SentimentAnalysisRequestConfig
+    :: GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+googleCloudDialogflowV2SentimentAnalysisRequestConfig =
+  GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'
+    {_gcdvsarcAnalyzeQueryTextSentiment = Nothing}
+
+
+-- | Optional. Instructs the service to perform sentiment analysis on
+-- \`query_text\`. If not provided, sentiment analysis is not performed on
+-- \`query_text\`.
+gcdvsarcAnalyzeQueryTextSentiment :: Lens' GoogleCloudDialogflowV2SentimentAnalysisRequestConfig (Maybe Bool)
+gcdvsarcAnalyzeQueryTextSentiment
+  = lens _gcdvsarcAnalyzeQueryTextSentiment
+      (\ s a -> s{_gcdvsarcAnalyzeQueryTextSentiment = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2SentimentAnalysisRequestConfig"
+              (\ o ->
+                 GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'
+                   <$> (o .:? "analyzeQueryTextSentiment"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+         where
+        toJSON
+          GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'{..}
+          = object
+              (catMaybes
+                 [("analyzeQueryTextSentiment" .=) <$>
+                    _gcdvsarcAnalyzeQueryTextSentiment])
+
 -- | Represents a part of a training phrase.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentTrainingPhrasePart' smart constructor.
@@ -2691,30 +2942,30 @@ googleCloudDialogflowV2IntentTrainingPhrasePart =
     }
 
 
--- | Required. The text corresponding to the example, if there are no
--- annotations. For annotated examples, it is the text for one of the
--- example\'s parts.
+-- | Required. The text for this part.
 gcdvitppText :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppText
   = lens _gcdvitppText (\ s a -> s{_gcdvitppText = a})
 
--- | Optional. Indicates whether the text was manually annotated by the
--- developer.
+-- | Optional. Indicates whether the text was manually annotated. This field
+-- is set to true when the Dialogflow Console is used to manually annotate
+-- the part. When creating an annotated part with the API, you must set
+-- this to true.
 gcdvitppUserDefined :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Bool)
 gcdvitppUserDefined
   = lens _gcdvitppUserDefined
       (\ s a -> s{_gcdvitppUserDefined = a})
 
 -- | Optional. The entity type name prefixed with \`\'\`. This field is
--- required for the annotated part of the text and applies only to
--- examples.
+-- required for annotated parts of the training phrase.
 gcdvitppEntityType :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppEntityType
   = lens _gcdvitppEntityType
       (\ s a -> s{_gcdvitppEntityType = a})
 
 -- | Optional. The parameter name for the value extracted from the annotated
--- part of the example.
+-- part of the example. This field is required for annotated parts of the
+-- training phrase.
 gcdvitppAlias :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppAlias
   = lens _gcdvitppAlias
@@ -3116,7 +3367,8 @@ instance ToJSON
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 --
 -- /See:/ 'googleCloudDialogflowV2ContextParameters' smart constructor.
 newtype GoogleCloudDialogflowV2ContextParameters =
@@ -3523,12 +3775,13 @@ instance ToJSON
 -- /See:/ 'googleCloudDialogflowV2QueryParameters' smart constructor.
 data GoogleCloudDialogflowV2QueryParameters =
   GoogleCloudDialogflowV2QueryParameters'
-    { _gcdvqpContexts           :: !(Maybe [GoogleCloudDialogflowV2Context])
-    , _gcdvqpPayload            :: !(Maybe GoogleCloudDialogflowV2QueryParametersPayload)
-    , _gcdvqpGeoLocation        :: !(Maybe GoogleTypeLatLng)
-    , _gcdvqpTimeZone           :: !(Maybe Text)
-    , _gcdvqpSessionEntityTypes :: !(Maybe [GoogleCloudDialogflowV2SessionEntityType])
-    , _gcdvqpResetContexts      :: !(Maybe Bool)
+    { _gcdvqpContexts                       :: !(Maybe [GoogleCloudDialogflowV2Context])
+    , _gcdvqpSentimentAnalysisRequestConfig :: !(Maybe GoogleCloudDialogflowV2SentimentAnalysisRequestConfig)
+    , _gcdvqpPayload                        :: !(Maybe GoogleCloudDialogflowV2QueryParametersPayload)
+    , _gcdvqpGeoLocation                    :: !(Maybe GoogleTypeLatLng)
+    , _gcdvqpTimeZone                       :: !(Maybe Text)
+    , _gcdvqpSessionEntityTypes             :: !(Maybe [GoogleCloudDialogflowV2SessionEntityType])
+    , _gcdvqpResetContexts                  :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3538,6 +3791,8 @@ data GoogleCloudDialogflowV2QueryParameters =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gcdvqpContexts'
+--
+-- * 'gcdvqpSentimentAnalysisRequestConfig'
 --
 -- * 'gcdvqpPayload'
 --
@@ -3553,6 +3808,7 @@ googleCloudDialogflowV2QueryParameters
 googleCloudDialogflowV2QueryParameters =
   GoogleCloudDialogflowV2QueryParameters'
     { _gcdvqpContexts = Nothing
+    , _gcdvqpSentimentAnalysisRequestConfig = Nothing
     , _gcdvqpPayload = Nothing
     , _gcdvqpGeoLocation = Nothing
     , _gcdvqpTimeZone = Nothing
@@ -3569,6 +3825,14 @@ gcdvqpContexts
       (\ s a -> s{_gcdvqpContexts = a})
       . _Default
       . _Coerce
+
+-- | Optional. Configures the type of sentiment analysis to perform. If not
+-- provided, sentiment analysis is not performed.
+gcdvqpSentimentAnalysisRequestConfig :: Lens' GoogleCloudDialogflowV2QueryParameters (Maybe GoogleCloudDialogflowV2SentimentAnalysisRequestConfig)
+gcdvqpSentimentAnalysisRequestConfig
+  = lens _gcdvqpSentimentAnalysisRequestConfig
+      (\ s a ->
+         s{_gcdvqpSentimentAnalysisRequestConfig = a})
 
 -- | Optional. This field can be used to pass custom data into the webhook
 -- associated with the agent. Arbitrary JSON objects are supported.
@@ -3616,7 +3880,9 @@ instance FromJSON
           = withObject "GoogleCloudDialogflowV2QueryParameters"
               (\ o ->
                  GoogleCloudDialogflowV2QueryParameters' <$>
-                   (o .:? "contexts" .!= mempty) <*> (o .:? "payload")
+                   (o .:? "contexts" .!= mempty) <*>
+                     (o .:? "sentimentAnalysisRequestConfig")
+                     <*> (o .:? "payload")
                      <*> (o .:? "geoLocation")
                      <*> (o .:? "timeZone")
                      <*> (o .:? "sessionEntityTypes" .!= mempty)
@@ -3629,6 +3895,8 @@ instance ToJSON
           = object
               (catMaybes
                  [("contexts" .=) <$> _gcdvqpContexts,
+                  ("sentimentAnalysisRequestConfig" .=) <$>
+                    _gcdvqpSentimentAnalysisRequestConfig,
                   ("payload" .=) <$> _gcdvqpPayload,
                   ("geoLocation" .=) <$> _gcdvqpGeoLocation,
                   ("timeZone" .=) <$> _gcdvqpTimeZone,
@@ -3820,9 +4088,11 @@ instance ToJSON
 -- /See:/ 'googleCloudDialogflowV2DetectIntentResponse' smart constructor.
 data GoogleCloudDialogflowV2DetectIntentResponse =
   GoogleCloudDialogflowV2DetectIntentResponse'
-    { _gcdvdirResponseId    :: !(Maybe Text)
-    , _gcdvdirWebhookStatus :: !(Maybe GoogleRpcStatus)
-    , _gcdvdirQueryResult   :: !(Maybe GoogleCloudDialogflowV2QueryResult)
+    { _gcdvdirOutputAudioConfig :: !(Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+    , _gcdvdirResponseId        :: !(Maybe Text)
+    , _gcdvdirOutputAudio       :: !(Maybe Bytes)
+    , _gcdvdirWebhookStatus     :: !(Maybe GoogleRpcStatus)
+    , _gcdvdirQueryResult       :: !(Maybe GoogleCloudDialogflowV2QueryResult)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3831,7 +4101,11 @@ data GoogleCloudDialogflowV2DetectIntentResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gcdvdirOutputAudioConfig'
+--
 -- * 'gcdvdirResponseId'
+--
+-- * 'gcdvdirOutputAudio'
 --
 -- * 'gcdvdirWebhookStatus'
 --
@@ -3840,11 +4114,19 @@ googleCloudDialogflowV2DetectIntentResponse
     :: GoogleCloudDialogflowV2DetectIntentResponse
 googleCloudDialogflowV2DetectIntentResponse =
   GoogleCloudDialogflowV2DetectIntentResponse'
-    { _gcdvdirResponseId = Nothing
+    { _gcdvdirOutputAudioConfig = Nothing
+    , _gcdvdirResponseId = Nothing
+    , _gcdvdirOutputAudio = Nothing
     , _gcdvdirWebhookStatus = Nothing
     , _gcdvdirQueryResult = Nothing
     }
 
+
+-- | The config used by the speech synthesizer to generate the output audio.
+gcdvdirOutputAudioConfig :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+gcdvdirOutputAudioConfig
+  = lens _gcdvdirOutputAudioConfig
+      (\ s a -> s{_gcdvdirOutputAudioConfig = a})
 
 -- | The unique identifier of the response. It can be used to locate a
 -- response in the training example set or for reporting issues.
@@ -3852,6 +4134,18 @@ gcdvdirResponseId :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe Te
 gcdvdirResponseId
   = lens _gcdvdirResponseId
       (\ s a -> s{_gcdvdirResponseId = a})
+
+-- | The audio data bytes encoded as specified in the request. Note: The
+-- output audio is generated based on the values of default platform text
+-- responses found in the \`query_result.fulfillment_messages\` field. If
+-- multiple default text responses exist, they will be concatenated when
+-- generating audio. If no default platform text responses exist, the
+-- generated audio content will be empty.
+gcdvdirOutputAudio :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe ByteString)
+gcdvdirOutputAudio
+  = lens _gcdvdirOutputAudio
+      (\ s a -> s{_gcdvdirOutputAudio = a})
+      . mapping _Bytes
 
 -- | Specifies the status of the webhook request.
 gcdvdirWebhookStatus :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe GoogleRpcStatus)
@@ -3874,8 +4168,10 @@ instance FromJSON
               "GoogleCloudDialogflowV2DetectIntentResponse"
               (\ o ->
                  GoogleCloudDialogflowV2DetectIntentResponse' <$>
-                   (o .:? "responseId") <*> (o .:? "webhookStatus") <*>
-                     (o .:? "queryResult"))
+                   (o .:? "outputAudioConfig") <*> (o .:? "responseId")
+                     <*> (o .:? "outputAudio")
+                     <*> (o .:? "webhookStatus")
+                     <*> (o .:? "queryResult"))
 
 instance ToJSON
            GoogleCloudDialogflowV2DetectIntentResponse
@@ -3884,7 +4180,10 @@ instance ToJSON
           GoogleCloudDialogflowV2DetectIntentResponse'{..}
           = object
               (catMaybes
-                 [("responseId" .=) <$> _gcdvdirResponseId,
+                 [("outputAudioConfig" .=) <$>
+                    _gcdvdirOutputAudioConfig,
+                  ("responseId" .=) <$> _gcdvdirResponseId,
+                  ("outputAudio" .=) <$> _gcdvdirOutputAudio,
                   ("webhookStatus" .=) <$> _gcdvdirWebhookStatus,
                   ("queryResult" .=) <$> _gcdvdirQueryResult])
 
@@ -3978,7 +4277,7 @@ instance ToJSON
 -- /See:/ 'googleCloudDialogflowV2beta1SentimentAnalysisResult' smart constructor.
 newtype GoogleCloudDialogflowV2beta1SentimentAnalysisResult =
   GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
-    { _gcdvsarQueryTextSentiment :: Maybe GoogleCloudDialogflowV2beta1Sentiment
+    { _gQueryTextSentiment :: Maybe GoogleCloudDialogflowV2beta1Sentiment
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3987,19 +4286,19 @@ newtype GoogleCloudDialogflowV2beta1SentimentAnalysisResult =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcdvsarQueryTextSentiment'
+-- * 'gQueryTextSentiment'
 googleCloudDialogflowV2beta1SentimentAnalysisResult
     :: GoogleCloudDialogflowV2beta1SentimentAnalysisResult
 googleCloudDialogflowV2beta1SentimentAnalysisResult =
   GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
-    {_gcdvsarQueryTextSentiment = Nothing}
+    {_gQueryTextSentiment = Nothing}
 
 
 -- | The sentiment analysis result for \`query_text\`.
-gcdvsarQueryTextSentiment :: Lens' GoogleCloudDialogflowV2beta1SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2beta1Sentiment)
-gcdvsarQueryTextSentiment
-  = lens _gcdvsarQueryTextSentiment
-      (\ s a -> s{_gcdvsarQueryTextSentiment = a})
+gQueryTextSentiment :: Lens' GoogleCloudDialogflowV2beta1SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2beta1Sentiment)
+gQueryTextSentiment
+  = lens _gQueryTextSentiment
+      (\ s a -> s{_gQueryTextSentiment = a})
 
 instance FromJSON
            GoogleCloudDialogflowV2beta1SentimentAnalysisResult
@@ -4018,8 +4317,7 @@ instance ToJSON
           GoogleCloudDialogflowV2beta1SentimentAnalysisResult'{..}
           = object
               (catMaybes
-                 [("queryTextSentiment" .=) <$>
-                    _gcdvsarQueryTextSentiment])
+                 [("queryTextSentiment" .=) <$> _gQueryTextSentiment])
 
 -- | This message is a wrapper around a collection of entity types.
 --
@@ -4066,6 +4364,68 @@ instance ToJSON
           = object
               (catMaybes
                  [("entityTypes" .=) <$> _gcdvetbEntityTypes])
+
+-- | Description of which voice to use for speech synthesis.
+--
+-- /See:/ 'googleCloudDialogflowV2VoiceSelectionParams' smart constructor.
+data GoogleCloudDialogflowV2VoiceSelectionParams =
+  GoogleCloudDialogflowV2VoiceSelectionParams'
+    { _gcdvvspSsmlGender :: !(Maybe GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender)
+    , _gcdvvspName       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2VoiceSelectionParams' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvvspSsmlGender'
+--
+-- * 'gcdvvspName'
+googleCloudDialogflowV2VoiceSelectionParams
+    :: GoogleCloudDialogflowV2VoiceSelectionParams
+googleCloudDialogflowV2VoiceSelectionParams =
+  GoogleCloudDialogflowV2VoiceSelectionParams'
+    {_gcdvvspSsmlGender = Nothing, _gcdvvspName = Nothing}
+
+
+-- | Optional. The preferred gender of the voice. If not set, the service
+-- will choose a voice based on the other parameters such as language_code
+-- and name. Note that this is only a preference, not requirement. If a
+-- voice of the appropriate gender is not available, the synthesizer should
+-- substitute a voice with a different gender rather than failing the
+-- request.
+gcdvvspSsmlGender :: Lens' GoogleCloudDialogflowV2VoiceSelectionParams (Maybe GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender)
+gcdvvspSsmlGender
+  = lens _gcdvvspSsmlGender
+      (\ s a -> s{_gcdvvspSsmlGender = a})
+
+-- | Optional. The name of the voice. If not set, the service will choose a
+-- voice based on the other parameters such as language_code and gender.
+gcdvvspName :: Lens' GoogleCloudDialogflowV2VoiceSelectionParams (Maybe Text)
+gcdvvspName
+  = lens _gcdvvspName (\ s a -> s{_gcdvvspName = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2VoiceSelectionParams
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2VoiceSelectionParams"
+              (\ o ->
+                 GoogleCloudDialogflowV2VoiceSelectionParams' <$>
+                   (o .:? "ssmlGender") <*> (o .:? "name"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2VoiceSelectionParams
+         where
+        toJSON
+          GoogleCloudDialogflowV2VoiceSelectionParams'{..}
+          = object
+              (catMaybes
+                 [("ssmlGender" .=) <$> _gcdvvspSsmlGender,
+                  ("name" .=) <$> _gcdvvspName])
 
 -- | The free-form diagnostic info. For example, this field could contain
 -- webhook call latency. The string keys of the Struct\'s fields map can
@@ -4163,9 +4523,10 @@ instance ToJSON
 -- /See:/ 'googleCloudDialogflowV2DetectIntentRequest' smart constructor.
 data GoogleCloudDialogflowV2DetectIntentRequest =
   GoogleCloudDialogflowV2DetectIntentRequest'
-    { _gcdvdirQueryInput  :: !(Maybe GoogleCloudDialogflowV2QueryInput)
-    , _gcdvdirInputAudio  :: !(Maybe Bytes)
-    , _gcdvdirQueryParams :: !(Maybe GoogleCloudDialogflowV2QueryParameters)
+    { _gQueryInput        :: !(Maybe GoogleCloudDialogflowV2QueryInput)
+    , _gOutputAudioConfig :: !(Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+    , _gInputAudio        :: !(Maybe Bytes)
+    , _gQueryParams       :: !(Maybe GoogleCloudDialogflowV2QueryParameters)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4174,18 +4535,21 @@ data GoogleCloudDialogflowV2DetectIntentRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcdvdirQueryInput'
+-- * 'gQueryInput'
 --
--- * 'gcdvdirInputAudio'
+-- * 'gOutputAudioConfig'
 --
--- * 'gcdvdirQueryParams'
+-- * 'gInputAudio'
+--
+-- * 'gQueryParams'
 googleCloudDialogflowV2DetectIntentRequest
     :: GoogleCloudDialogflowV2DetectIntentRequest
 googleCloudDialogflowV2DetectIntentRequest =
   GoogleCloudDialogflowV2DetectIntentRequest'
-    { _gcdvdirQueryInput = Nothing
-    , _gcdvdirInputAudio = Nothing
-    , _gcdvdirQueryParams = Nothing
+    { _gQueryInput = Nothing
+    , _gOutputAudioConfig = Nothing
+    , _gInputAudio = Nothing
+    , _gQueryParams = Nothing
     }
 
 
@@ -4193,25 +4557,30 @@ googleCloudDialogflowV2DetectIntentRequest =
 -- which instructs the speech recognizer how to process the speech audio,
 -- 2. a conversational query in the form of text, or 3. an event that
 -- specifies which intent to trigger.
-gcdvdirQueryInput :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryInput)
-gcdvdirQueryInput
-  = lens _gcdvdirQueryInput
-      (\ s a -> s{_gcdvdirQueryInput = a})
+gQueryInput :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryInput)
+gQueryInput
+  = lens _gQueryInput (\ s a -> s{_gQueryInput = a})
+
+-- | Optional. Instructs the speech synthesizer how to generate the output
+-- audio. If this field is not set and agent-level speech synthesizer is
+-- not configured, no output audio is generated.
+gOutputAudioConfig :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+gOutputAudioConfig
+  = lens _gOutputAudioConfig
+      (\ s a -> s{_gOutputAudioConfig = a})
 
 -- | Optional. The natural language speech audio to be processed. This field
 -- should be populated iff \`query_input\` is set to an input audio config.
 -- A single request can contain up to 1 minute of speech audio data.
-gcdvdirInputAudio :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe ByteString)
-gcdvdirInputAudio
-  = lens _gcdvdirInputAudio
-      (\ s a -> s{_gcdvdirInputAudio = a})
-      . mapping _Bytes
+gInputAudio :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe ByteString)
+gInputAudio
+  = lens _gInputAudio (\ s a -> s{_gInputAudio = a}) .
+      mapping _Bytes
 
 -- | Optional. The parameters of this query.
-gcdvdirQueryParams :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryParameters)
-gcdvdirQueryParams
-  = lens _gcdvdirQueryParams
-      (\ s a -> s{_gcdvdirQueryParams = a})
+gQueryParams :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryParameters)
+gQueryParams
+  = lens _gQueryParams (\ s a -> s{_gQueryParams = a})
 
 instance FromJSON
            GoogleCloudDialogflowV2DetectIntentRequest
@@ -4221,8 +4590,9 @@ instance FromJSON
               "GoogleCloudDialogflowV2DetectIntentRequest"
               (\ o ->
                  GoogleCloudDialogflowV2DetectIntentRequest' <$>
-                   (o .:? "queryInput") <*> (o .:? "inputAudio") <*>
-                     (o .:? "queryParams"))
+                   (o .:? "queryInput") <*> (o .:? "outputAudioConfig")
+                     <*> (o .:? "inputAudio")
+                     <*> (o .:? "queryParams"))
 
 instance ToJSON
            GoogleCloudDialogflowV2DetectIntentRequest
@@ -4231,9 +4601,10 @@ instance ToJSON
           GoogleCloudDialogflowV2DetectIntentRequest'{..}
           = object
               (catMaybes
-                 [("queryInput" .=) <$> _gcdvdirQueryInput,
-                  ("inputAudio" .=) <$> _gcdvdirInputAudio,
-                  ("queryParams" .=) <$> _gcdvdirQueryParams])
+                 [("queryInput" .=) <$> _gQueryInput,
+                  ("outputAudioConfig" .=) <$> _gOutputAudioConfig,
+                  ("inputAudio" .=) <$> _gInputAudio,
+                  ("queryParams" .=) <$> _gQueryParams])
 
 -- | The collection of extracted parameters.
 --
@@ -4413,9 +4784,19 @@ googleCloudDialogflowV2beta1IntentTrainingPhrase =
     }
 
 
--- | Required. The collection of training phrase parts (can be annotated).
--- Fields: \`entity_type\`, \`alias\` and \`user_defined\` should be
--- populated only for the annotated parts of the training phrase.
+-- | Required. The ordered list of training phrase parts. The parts are
+-- concatenated in order to form the training phrase. Note: The API does
+-- not automatically annotate training phrases like the Dialogflow Console
+-- does. Note: Do not forget to include whitespace at part boundaries, so
+-- the training phrase is well formatted when the parts are concatenated.
+-- If the training phrase does not need to be annotated with parameters,
+-- you just need a single part with only the Part.text field set. If you
+-- want to annotate the training phrase, you must create multiple parts,
+-- where the fields of each part are populated in one of two ways: -
+-- \`Part.text\` is set to a part of the phrase that has no parameters. -
+-- \`Part.text\` is set to a part of the phrase that you want to annotate,
+-- and the \`entity_type\`, \`alias\`, and \`user_defined\` fields are all
+-- set.
 gParts :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase [GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart]
 gParts
   = lens _gParts (\ s a -> s{_gParts = a}) . _Default .
@@ -4606,9 +4987,10 @@ googleCloudDialogflowV2beta1EventInput =
 
 
 -- | Required. The language of this query. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gooLanguageCode :: Lens' GoogleCloudDialogflowV2beta1EventInput (Maybe Text)
 gooLanguageCode
   = lens _gooLanguageCode
@@ -4676,10 +5058,10 @@ googleCloudDialogflowV2BatchUpdateEntitiesRequest =
 
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbuerLanguageCode :: Lens' GoogleCloudDialogflowV2BatchUpdateEntitiesRequest (Maybe Text)
 gcdvbuerLanguageCode
   = lens _gcdvbuerLanguageCode
@@ -5190,10 +5572,10 @@ googleCloudDialogflowV2BatchDeleteEntitiesRequest =
 
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbderLanguageCode :: Lens' GoogleCloudDialogflowV2BatchDeleteEntitiesRequest (Maybe Text)
 gcdvbderLanguageCode
   = lens _gcdvbderLanguageCode
@@ -5403,7 +5785,8 @@ gcdvaParent
   = lens _gcdvaParent (\ s a -> s{_gcdvaParent = a})
 
 -- | Required. The default language of the agent as a language tag. See
--- [Language Support](https:\/\/dialogflow.com\/docs\/reference\/language)
+-- [Language
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
 -- for a list of the currently supported language codes. This field cannot
 -- be set by the \`Update\` method.
 gcdvaDefaultLanguageCode :: Lens' GoogleCloudDialogflowV2Agent (Maybe Text)
@@ -5420,10 +5803,10 @@ gcdvaEnableLogging
 -- | Optional. To filter out false positive results and still get variety in
 -- matched natural language inputs for your agent, you can tune the machine
 -- learning classification threshold. If the returned score value is less
--- than the threshold value, then a fallback intent is be triggered or, if
--- there are no fallback intents defined, no intent will be triggered. The
--- score values range from 0.0 (completely uncertain) to 1.0 (completely
--- certain). If set to 0.0, the default of 0.3 is used.
+-- than the threshold value, then a fallback intent will be triggered or,
+-- if there are no fallback intents defined, no intent will be triggered.
+-- The score values range from 0.0 (completely uncertain) to 1.0
+-- (completely certain). If set to 0.0, the default of 0.3 is used.
 gcdvaClassificationThreshold :: Lens' GoogleCloudDialogflowV2Agent (Maybe Double)
 gcdvaClassificationThreshold
   = lens _gcdvaClassificationThreshold
@@ -5432,7 +5815,7 @@ gcdvaClassificationThreshold
 
 -- | Optional. The URI of the agent\'s avatar. Avatars are used throughout
 -- the Dialogflow console and in the self-hosted [Web
--- Demo](https:\/\/dialogflow.com\/docs\/integrations\/web-demo)
+-- Demo](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/integrations\/web-demo)
 -- integration.
 gcdvaAvatarURI :: Lens' GoogleCloudDialogflowV2Agent (Maybe Text)
 gcdvaAvatarURI
@@ -6092,8 +6475,8 @@ googleCloudDialogflowV2beta1Context =
 
 -- | Optional. The number of conversational query requests after which the
 -- context expires. If set to \`0\` (the default) the context expires
--- immediately. Contexts expire automatically after 10 minutes even if
--- there are no matching queries.
+-- immediately. Contexts expire automatically after 20 minutes if there are
+-- no matching queries.
 gcdvcLifespanCount :: Lens' GoogleCloudDialogflowV2beta1Context (Maybe Int32)
 gcdvcLifespanCount
   = lens _gcdvcLifespanCount
@@ -6114,7 +6497,8 @@ gcdvcName
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 gcdvcParameters :: Lens' GoogleCloudDialogflowV2beta1Context (Maybe GoogleCloudDialogflowV2beta1ContextParameters)
 gcdvcParameters
   = lens _gcdvcParameters
@@ -6174,9 +6558,9 @@ googleCloudDialogflowV2BatchUpdateEntityTypesRequest =
 
 
 -- | Optional. The language of entity synonyms defined in \`entity_types\`.
--- If not specified, the agent\'s default language is used. [More than a
--- dozen languages](https:\/\/dialogflow.com\/docs\/reference\/language)
--- are supported. Note: languages must be enabled in the agent, before they
+-- If not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
 -- can be used.
 gcdvbuetrLanguageCode :: Lens' GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest (Maybe Text)
 gcdvbuetrLanguageCode
@@ -6660,9 +7044,10 @@ googleCloudDialogflowV2TextInput =
 
 
 -- | Required. The language of this conversational query. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gcdvtiLanguageCode :: Lens' GoogleCloudDialogflowV2TextInput (Maybe Text)
 gcdvtiLanguageCode
   = lens _gcdvtiLanguageCode
@@ -6959,6 +7344,84 @@ instance ToJSON
                  [("accessibilityText" .=) <$>
                     _gcdvimiAccessibilityText,
                   ("imageUri" .=) <$> _gcdvimiImageURI])
+
+-- | Instructs the speech synthesizer how to generate the output audio
+-- content.
+--
+-- /See:/ 'googleCloudDialogflowV2OutputAudioConfig' smart constructor.
+data GoogleCloudDialogflowV2OutputAudioConfig =
+  GoogleCloudDialogflowV2OutputAudioConfig'
+    { _gcdvoacSampleRateHertz        :: !(Maybe (Textual Int32))
+    , _gcdvoacSynthesizeSpeechConfig :: !(Maybe GoogleCloudDialogflowV2SynthesizeSpeechConfig)
+    , _gcdvoacAudioEncoding          :: !(Maybe GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2OutputAudioConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvoacSampleRateHertz'
+--
+-- * 'gcdvoacSynthesizeSpeechConfig'
+--
+-- * 'gcdvoacAudioEncoding'
+googleCloudDialogflowV2OutputAudioConfig
+    :: GoogleCloudDialogflowV2OutputAudioConfig
+googleCloudDialogflowV2OutputAudioConfig =
+  GoogleCloudDialogflowV2OutputAudioConfig'
+    { _gcdvoacSampleRateHertz = Nothing
+    , _gcdvoacSynthesizeSpeechConfig = Nothing
+    , _gcdvoacAudioEncoding = Nothing
+    }
+
+
+-- | Optional. The synthesis sample rate (in hertz) for this audio. If not
+-- provided, then the synthesizer will use the default sample rate based on
+-- the audio encoding. If this is different from the voice\'s natural
+-- sample rate, then the synthesizer will honor this request by converting
+-- to the desired sample rate (which might result in worse audio quality).
+gcdvoacSampleRateHertz :: Lens' GoogleCloudDialogflowV2OutputAudioConfig (Maybe Int32)
+gcdvoacSampleRateHertz
+  = lens _gcdvoacSampleRateHertz
+      (\ s a -> s{_gcdvoacSampleRateHertz = a})
+      . mapping _Coerce
+
+-- | Optional. Configuration of how speech should be synthesized.
+gcdvoacSynthesizeSpeechConfig :: Lens' GoogleCloudDialogflowV2OutputAudioConfig (Maybe GoogleCloudDialogflowV2SynthesizeSpeechConfig)
+gcdvoacSynthesizeSpeechConfig
+  = lens _gcdvoacSynthesizeSpeechConfig
+      (\ s a -> s{_gcdvoacSynthesizeSpeechConfig = a})
+
+-- | Required. Audio encoding of the synthesized audio content.
+gcdvoacAudioEncoding :: Lens' GoogleCloudDialogflowV2OutputAudioConfig (Maybe GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding)
+gcdvoacAudioEncoding
+  = lens _gcdvoacAudioEncoding
+      (\ s a -> s{_gcdvoacAudioEncoding = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2OutputAudioConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2OutputAudioConfig"
+              (\ o ->
+                 GoogleCloudDialogflowV2OutputAudioConfig' <$>
+                   (o .:? "sampleRateHertz") <*>
+                     (o .:? "synthesizeSpeechConfig")
+                     <*> (o .:? "audioEncoding"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2OutputAudioConfig
+         where
+        toJSON GoogleCloudDialogflowV2OutputAudioConfig'{..}
+          = object
+              (catMaybes
+                 [("sampleRateHertz" .=) <$> _gcdvoacSampleRateHertz,
+                  ("synthesizeSpeechConfig" .=) <$>
+                    _gcdvoacSynthesizeSpeechConfig,
+                  ("audioEncoding" .=) <$> _gcdvoacAudioEncoding])
 
 -- | The response message for Agents.ExportAgent.
 --
@@ -7671,31 +8134,31 @@ googleCloudDialogflowV2beta1IntentTrainingPhrasePart =
     }
 
 
--- | Required. The text corresponding to the example, if there are no
--- annotations. For annotated examples, it is the text for one of the
--- example\'s parts.
+-- | Required. The text for this part.
 gcdvitppcText :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcText
   = lens _gcdvitppcText
       (\ s a -> s{_gcdvitppcText = a})
 
--- | Optional. Indicates whether the text was manually annotated by the
--- developer.
+-- | Optional. Indicates whether the text was manually annotated. This field
+-- is set to true when the Dialogflow Console is used to manually annotate
+-- the part. When creating an annotated part with the API, you must set
+-- this to true.
 gcdvitppcUserDefined :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Bool)
 gcdvitppcUserDefined
   = lens _gcdvitppcUserDefined
       (\ s a -> s{_gcdvitppcUserDefined = a})
 
 -- | Optional. The entity type name prefixed with \`\'\`. This field is
--- required for the annotated part of the text and applies only to
--- examples.
+-- required for annotated parts of the training phrase.
 gcdvitppcEntityType :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcEntityType
   = lens _gcdvitppcEntityType
       (\ s a -> s{_gcdvitppcEntityType = a})
 
 -- | Optional. The parameter name for the value extracted from the annotated
--- part of the example.
+-- part of the example. This field is required for annotated parts of the
+-- training phrase.
 gcdvitppcAlias :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcAlias
   = lens _gcdvitppcAlias
@@ -8196,8 +8659,8 @@ googleCloudDialogflowV2beta1QueryResult =
 
 
 -- | The language that was triggered during intent detection. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/reference\/language) for a list
--- of the currently supported language codes.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes.
 gLanguageCode :: Lens' GoogleCloudDialogflowV2beta1QueryResult (Maybe Text)
 gLanguageCode
   = lens _gLanguageCode
@@ -9180,6 +9643,62 @@ instance ToJSON
           GoogleCloudDialogflowV2IntentMessageCarouselSelect'{..}
           = object (catMaybes [("items" .=) <$> _gItems])
 
+-- | The sentiment, such as positive\/negative feeling or association, for a
+-- unit of analysis, such as the query text.
+--
+-- /See:/ 'googleCloudDialogflowV2Sentiment' smart constructor.
+data GoogleCloudDialogflowV2Sentiment =
+  GoogleCloudDialogflowV2Sentiment'
+    { _gScore     :: !(Maybe (Textual Double))
+    , _gMagnitude :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2Sentiment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gScore'
+--
+-- * 'gMagnitude'
+googleCloudDialogflowV2Sentiment
+    :: GoogleCloudDialogflowV2Sentiment
+googleCloudDialogflowV2Sentiment =
+  GoogleCloudDialogflowV2Sentiment' {_gScore = Nothing, _gMagnitude = Nothing}
+
+
+-- | Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
+-- sentiment).
+gScore :: Lens' GoogleCloudDialogflowV2Sentiment (Maybe Double)
+gScore
+  = lens _gScore (\ s a -> s{_gScore = a}) .
+      mapping _Coerce
+
+-- | A non-negative number in the [0, +inf) range, which represents the
+-- absolute magnitude of sentiment, regardless of score (positive or
+-- negative).
+gMagnitude :: Lens' GoogleCloudDialogflowV2Sentiment (Maybe Double)
+gMagnitude
+  = lens _gMagnitude (\ s a -> s{_gMagnitude = a}) .
+      mapping _Coerce
+
+instance FromJSON GoogleCloudDialogflowV2Sentiment
+         where
+        parseJSON
+          = withObject "GoogleCloudDialogflowV2Sentiment"
+              (\ o ->
+                 GoogleCloudDialogflowV2Sentiment' <$>
+                   (o .:? "score") <*> (o .:? "magnitude"))
+
+instance ToJSON GoogleCloudDialogflowV2Sentiment
+         where
+        toJSON GoogleCloudDialogflowV2Sentiment'{..}
+          = object
+              (catMaybes
+                 [("score" .=) <$> _gScore,
+                  ("magnitude" .=) <$> _gMagnitude])
+
 -- | Additional info about the select item for when it is triggered in a
 -- dialog.
 --
@@ -9603,8 +10122,8 @@ googleCloudDialogflowV2Context =
 
 -- | Optional. The number of conversational query requests after which the
 -- context expires. If set to \`0\` (the default) the context expires
--- immediately. Contexts expire automatically after 20 minutes even if
--- there are no matching queries.
+-- immediately. Contexts expire automatically after 20 minutes if there are
+-- no matching queries.
 gcdvccLifespanCount :: Lens' GoogleCloudDialogflowV2Context (Maybe Int32)
 gcdvccLifespanCount
   = lens _gcdvccLifespanCount
@@ -9621,7 +10140,8 @@ gcdvccName
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 gcdvccParameters :: Lens' GoogleCloudDialogflowV2Context (Maybe GoogleCloudDialogflowV2ContextParameters)
 gcdvccParameters
   = lens _gcdvccParameters

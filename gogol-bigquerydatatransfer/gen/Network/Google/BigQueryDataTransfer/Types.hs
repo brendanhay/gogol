@@ -40,22 +40,28 @@ module Network.Google.BigQueryDataTransfer.Types
     , llrNextPageToken
     , llrLocations
 
+    -- * TimeRange
+    , TimeRange
+    , timeRange
+    , trStartTime
+    , trEndTime
+
     -- * TransferRun
     , TransferRun
     , transferRun
-    , trRunTime
-    , trErrorStatus
-    , trState
-    , trSchedule
-    , trStartTime
-    , trScheduleTime
-    , trDataSourceId
-    , trParams
-    , trUserId
-    , trUpdateTime
-    , trName
-    , trEndTime
-    , trDestinationDataSetId
+    , tRunTime
+    , tErrorStatus
+    , tState
+    , tSchedule
+    , tStartTime
+    , tScheduleTime
+    , tDataSourceId
+    , tParams
+    , tUserId
+    , tUpdateTime
+    , tName
+    , tEndTime
+    , tDestinationDataSetId
 
     -- * CheckValidCredsRequest
     , CheckValidCredsRequest
@@ -152,6 +158,12 @@ module Network.Google.BigQueryDataTransfer.Types
     , ldsrNextPageToken
     , ldsrDataSources
 
+    -- * StartManualTransferRunsRequest
+    , StartManualTransferRunsRequest
+    , startManualTransferRunsRequest
+    , smtrrRequestedRunTime
+    , smtrrRequestedTimeRange
+
     -- * Xgafv
     , Xgafv (..)
 
@@ -197,6 +209,11 @@ module Network.Google.BigQueryDataTransfer.Types
     , LocationLabels
     , locationLabels
     , llAddtional
+
+    -- * StartManualTransferRunsResponse
+    , StartManualTransferRunsResponse
+    , startManualTransferRunsResponse
+    , smtrrRuns
 
     -- * LocationMetadata
     , LocationMetadata

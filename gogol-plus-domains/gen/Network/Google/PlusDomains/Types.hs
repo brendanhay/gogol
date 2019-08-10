@@ -24,12 +24,10 @@ module Network.Google.PlusDomains.Types
     , plusLoginScope
     , plusProFilesReadScope
     , userInfoEmailScope
-    , plusStreamWriteScope
     , plusStreamReadScope
     , plusMeScope
     , plusCirclesReadScope
     , plusMediaUploadScope
-    , plusCirclesWriteScope
 
     -- * Audience
     , Audience
@@ -582,11 +580,12 @@ plusDomainsService
   = defaultService (ServiceId "plusDomains:v1")
       "www.googleapis.com"
 
--- | View your basic profile info
+-- | See your personal info, including any personal info you\'ve made
+-- publicly available
 userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
 userInfoProFileScope = Proxy
 
--- | Know the list of people in your circles, your age range, and language
+-- | View your basic profile info, including your age range and language
 plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
 plusLoginScope = Proxy
 
@@ -598,15 +597,11 @@ plusProFilesReadScope = Proxy
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
 userInfoEmailScope = Proxy
 
--- | Manage your Google+ posts, comments, and stream
-plusStreamWriteScope :: Proxy '["https://www.googleapis.com/auth/plus.stream.write"]
-plusStreamWriteScope = Proxy
-
 -- | View your Google+ posts, comments, and stream
 plusStreamReadScope :: Proxy '["https://www.googleapis.com/auth/plus.stream.read"]
 plusStreamReadScope = Proxy
 
--- | Know who you are on Google
+-- | Associate you with your personal info on Google
 plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
 plusMeScope = Proxy
 
@@ -617,9 +612,3 @@ plusCirclesReadScope = Proxy
 -- | Send your photos and videos to Google+
 plusMediaUploadScope :: Proxy '["https://www.googleapis.com/auth/plus.media.upload"]
 plusMediaUploadScope = Proxy
-
--- | Manage your circles and add people and pages. People and pages you add
--- to your circles will be notified. Others may see this information
--- publicly. People you add to circles can use Hangouts with you.
-plusCirclesWriteScope :: Proxy '["https://www.googleapis.com/auth/plus.circles.write"]
-plusCirclesWriteScope = Proxy

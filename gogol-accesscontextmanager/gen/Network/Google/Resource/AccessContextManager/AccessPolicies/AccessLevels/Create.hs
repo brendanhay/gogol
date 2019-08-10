@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.create@ method which the
 -- 'AccessPoliciesAccessLevelsCreate' request conforms to.
 type AccessPoliciesAccessLevelsCreateResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "accessLevels" :>
            QueryParam "$.xgafv" Xgafv :>

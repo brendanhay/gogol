@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
 type ProjectsLocationsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "locations" :>
            QueryParam "$.xgafv" Xgafv :>

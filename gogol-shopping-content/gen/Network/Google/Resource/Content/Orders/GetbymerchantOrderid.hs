@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves an order using merchant order id.
+-- Retrieves an order using merchant order ID.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.getbymerchantorderid@.
 module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
@@ -51,7 +51,7 @@ type OrdersGetbymerchantOrderidResource =
                QueryParam "alt" AltJSON :>
                  Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
--- | Retrieves an order using merchant order id.
+-- | Retrieves an order using merchant order ID.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
 data OrdersGetbymerchantOrderid =
@@ -88,7 +88,7 @@ ogogMerchantId
       (\ s a -> s{_ogogMerchantId = a})
       . _Coerce
 
--- | The merchant order id to be looked for.
+-- | The merchant order ID to be looked for.
 ogogMerchantOrderId :: Lens' OrdersGetbymerchantOrderid Text
 ogogMerchantOrderId
   = lens _ogogMerchantOrderId

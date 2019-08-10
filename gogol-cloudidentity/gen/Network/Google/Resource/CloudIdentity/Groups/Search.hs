@@ -156,8 +156,8 @@ gsPageToken :: Lens' GroupsSearch (Maybe Text)
 gsPageToken
   = lens _gsPageToken (\ s a -> s{_gsPageToken = a})
 
--- | Maximum number of groups to return. View | Default | Maximum ----- |
--- ------- | ------- BASIC | 200 | 1000 FULL | 50 | 500
+-- | The default page size is 200 (max 1000) for the BASIC view, and 50 (max
+-- 500) for the FULL view.
 gsPageSize :: Lens' GroupsSearch (Maybe Int32)
 gsPageSize
   = lens _gsPageSize (\ s a -> s{_gsPageSize = a}) .
@@ -170,7 +170,9 @@ gsCallback
 
 instance GoogleRequest GroupsSearch where
         type Rs GroupsSearch = SearchGroupsResponse
-        type Scopes GroupsSearch = '[]
+        type Scopes GroupsSearch =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsSearch'{..}
           = go _gsXgafv _gsUploadProtocol _gsAccessToken
               _gsUploadType

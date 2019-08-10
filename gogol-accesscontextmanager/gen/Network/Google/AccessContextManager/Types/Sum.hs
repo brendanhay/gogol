@@ -55,9 +55,8 @@ instance ToJSON BasicLevelCombiningFunction where
 -- | Perimeter type indicator. A single project is allowed to be a member of
 -- single regular perimeter, but multiple service perimeter bridges. A
 -- project cannot be a included in a perimeter bridge without being
--- included in regular perimeter. For perimeter bridges,
--- restricted\/unrestricted service lists as well as access lists must be
--- empty.
+-- included in regular perimeter. For perimeter bridges, the restricted
+-- service list as well as access level lists must be empty.
 data ServicePerimeterPerimeterType
     = PerimeterTypeRegular
       -- ^ @PERIMETER_TYPE_REGULAR@
@@ -103,12 +102,6 @@ data OSConstraintOSType
     | DesktopChromeOS
       -- ^ @DESKTOP_CHROME_OS@
       -- A desktop ChromeOS operating system.
-    | Android
-      -- ^ @ANDROID@
-      -- An Android operating system.
-    | Ios
-      -- ^ @IOS@
-      -- An iOS operating system.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OSConstraintOSType
@@ -120,8 +113,6 @@ instance FromHttpApiData OSConstraintOSType where
         "DESKTOP_WINDOWS" -> Right DesktopWindows
         "DESKTOP_LINUX" -> Right DesktopLinux
         "DESKTOP_CHROME_OS" -> Right DesktopChromeOS
-        "ANDROID" -> Right Android
-        "IOS" -> Right Ios
         x -> Left ("Unable to parse OSConstraintOSType from: " <> x)
 
 instance ToHttpApiData OSConstraintOSType where
@@ -131,8 +122,6 @@ instance ToHttpApiData OSConstraintOSType where
         DesktopWindows -> "DESKTOP_WINDOWS"
         DesktopLinux -> "DESKTOP_LINUX"
         DesktopChromeOS -> "DESKTOP_CHROME_OS"
-        Android -> "ANDROID"
-        Ios -> "IOS"
 
 instance FromJSON OSConstraintOSType where
     parseJSON = parseJSONText "OSConstraintOSType"

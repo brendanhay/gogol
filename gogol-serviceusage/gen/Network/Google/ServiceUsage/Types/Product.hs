@@ -618,8 +618,9 @@ documentationRule =
 -- qualified name of the element which may end in \"*\", indicating a
 -- wildcard. Wildcards are only allowed at the end and for a whole
 -- component of the qualified name, i.e. \"foo.*\" is ok, but not
--- \"foo.b*\" or \"foo.*.bar\". To specify a default for all applicable
--- elements, the whole pattern \"*\" is used.
+-- \"foo.b*\" or \"foo.*.bar\". A wildcard will match one or more
+-- components. To specify a default for all applicable elements, the whole
+-- pattern \"*\" is used.
 drSelector :: Lens' DocumentationRule (Maybe Text)
 drSelector
   = lens _drSelector (\ s a -> s{_drSelector = a})
@@ -2161,6 +2162,49 @@ instance ToJSON Authentication where
                  [("rules" .=) <$> _aRules,
                   ("providers" .=) <$> _aProviders])
 
+-- | Response message for BatchCreateAdminOverrides
+--
+-- /See:/ 'batchCreateAdminOverridesResponse' smart constructor.
+newtype BatchCreateAdminOverridesResponse =
+  BatchCreateAdminOverridesResponse'
+    { _bcaorOverrides :: Maybe [QuotaOverride]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchCreateAdminOverridesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcaorOverrides'
+batchCreateAdminOverridesResponse
+    :: BatchCreateAdminOverridesResponse
+batchCreateAdminOverridesResponse =
+  BatchCreateAdminOverridesResponse' {_bcaorOverrides = Nothing}
+
+
+-- | The overrides that were created.
+bcaorOverrides :: Lens' BatchCreateAdminOverridesResponse [QuotaOverride]
+bcaorOverrides
+  = lens _bcaorOverrides
+      (\ s a -> s{_bcaorOverrides = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BatchCreateAdminOverridesResponse
+         where
+        parseJSON
+          = withObject "BatchCreateAdminOverridesResponse"
+              (\ o ->
+                 BatchCreateAdminOverridesResponse' <$>
+                   (o .:? "overrides" .!= mempty))
+
+instance ToJSON BatchCreateAdminOverridesResponse
+         where
+        toJSON BatchCreateAdminOverridesResponse'{..}
+          = object
+              (catMaybes [("overrides" .=) <$> _bcaorOverrides])
+
 -- | Declares an API Interface to be included in this interface. The
 -- including interface must redeclare all the methods from the included
 -- interface, but documentation and options are inherited as follows: - If
@@ -2636,6 +2680,56 @@ instance ToJSON AuthorizationConfig where
         toJSON AuthorizationConfig'{..}
           = object
               (catMaybes [("provider" .=) <$> _acProvider])
+
+-- | If this map is nonempty, then this override applies only to specific
+-- values for dimensions defined in the limit unit. For example, an
+-- override on a limit with the unit 1\/{project}\/{region} could contain
+-- an entry with the key \"region\" and the value \"us-east-1\"; the
+-- override is only applied to quota consumed in that region. This map has
+-- the following restrictions: - Keys that are not defined in the limit\'s
+-- unit are not valid keys. Any string appearing in {brackets} in the unit
+-- (besides {project} or {user}) is a defined key. - \"project\" is not a
+-- valid key; the project is already specified in the parent resource name.
+-- - \"user\" is not a valid key; the API does not support quota overrides
+-- that apply only to a specific user. - If \"region\" appears as a key,
+-- its value must be a valid Cloud region. - If \"zone\" appears as a key,
+-- its value must be a valid Cloud zone. - If any valid key other than
+-- \"region\" or \"zone\" appears in the map, then all valid keys other
+-- than \"region\" or \"zone\" must also appear in the map.
+--
+-- /See:/ 'quotaOverrideDimensions' smart constructor.
+newtype QuotaOverrideDimensions =
+  QuotaOverrideDimensions'
+    { _qodAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'QuotaOverrideDimensions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qodAddtional'
+quotaOverrideDimensions
+    :: HashMap Text Text -- ^ 'qodAddtional'
+    -> QuotaOverrideDimensions
+quotaOverrideDimensions pQodAddtional_ =
+  QuotaOverrideDimensions' {_qodAddtional = _Coerce # pQodAddtional_}
+
+
+qodAddtional :: Lens' QuotaOverrideDimensions (HashMap Text Text)
+qodAddtional
+  = lens _qodAddtional (\ s a -> s{_qodAddtional = a})
+      . _Coerce
+
+instance FromJSON QuotaOverrideDimensions where
+        parseJSON
+          = withObject "QuotaOverrideDimensions"
+              (\ o ->
+                 QuotaOverrideDimensions' <$> (parseJSONObject o))
+
+instance ToJSON QuotaOverrideDimensions where
+        toJSON = toJSON . _qodAddtional
 
 -- | Provides error messages for the failing services.
 --
@@ -3131,6 +3225,131 @@ instance ToJSON EnableServiceResponse where
         toJSON EnableServiceResponse'{..}
           = object (catMaybes [("service" .=) <$> _esrService])
 
+-- | A quota override
+--
+-- /See:/ 'quotaOverride' smart constructor.
+data QuotaOverride =
+  QuotaOverride'
+    { _qoOverrideValue :: !(Maybe (Textual Int64))
+    , _qoName          :: !(Maybe Text)
+    , _qoDimensions    :: !(Maybe QuotaOverrideDimensions)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'QuotaOverride' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qoOverrideValue'
+--
+-- * 'qoName'
+--
+-- * 'qoDimensions'
+quotaOverride
+    :: QuotaOverride
+quotaOverride =
+  QuotaOverride'
+    {_qoOverrideValue = Nothing, _qoName = Nothing, _qoDimensions = Nothing}
+
+
+-- | The overriding quota limit value. Can be any nonnegative integer, or -1
+-- (unlimited quota).
+qoOverrideValue :: Lens' QuotaOverride (Maybe Int64)
+qoOverrideValue
+  = lens _qoOverrideValue
+      (\ s a -> s{_qoOverrideValue = a})
+      . mapping _Coerce
+
+-- | The resource name of the override. This name is generated by the server
+-- when the override is created. Example names would be:
+-- \`projects\/123\/services\/compute.googleapis.com\/consumerQuotaMetrics\/compute.googleapis.com%2Fcpus\/limits\/%2Fproject%2Fregion\/adminOverrides\/4a3f2c1d\`
+-- \`projects\/123\/services\/compute.googleapis.com\/consumerQuotaMetrics\/compute.googleapis.com%2Fcpus\/limits\/%2Fproject%2Fregion\/consumerOverrides\/4a3f2c1d\`
+-- The resource name is intended to be opaque and should not be parsed for
+-- its component strings, since its representation could change in the
+-- future.
+qoName :: Lens' QuotaOverride (Maybe Text)
+qoName = lens _qoName (\ s a -> s{_qoName = a})
+
+-- | If this map is nonempty, then this override applies only to specific
+-- values for dimensions defined in the limit unit. For example, an
+-- override on a limit with the unit 1\/{project}\/{region} could contain
+-- an entry with the key \"region\" and the value \"us-east-1\"; the
+-- override is only applied to quota consumed in that region. This map has
+-- the following restrictions: - Keys that are not defined in the limit\'s
+-- unit are not valid keys. Any string appearing in {brackets} in the unit
+-- (besides {project} or {user}) is a defined key. - \"project\" is not a
+-- valid key; the project is already specified in the parent resource name.
+-- - \"user\" is not a valid key; the API does not support quota overrides
+-- that apply only to a specific user. - If \"region\" appears as a key,
+-- its value must be a valid Cloud region. - If \"zone\" appears as a key,
+-- its value must be a valid Cloud zone. - If any valid key other than
+-- \"region\" or \"zone\" appears in the map, then all valid keys other
+-- than \"region\" or \"zone\" must also appear in the map.
+qoDimensions :: Lens' QuotaOverride (Maybe QuotaOverrideDimensions)
+qoDimensions
+  = lens _qoDimensions (\ s a -> s{_qoDimensions = a})
+
+instance FromJSON QuotaOverride where
+        parseJSON
+          = withObject "QuotaOverride"
+              (\ o ->
+                 QuotaOverride' <$>
+                   (o .:? "overrideValue") <*> (o .:? "name") <*>
+                     (o .:? "dimensions"))
+
+instance ToJSON QuotaOverride where
+        toJSON QuotaOverride'{..}
+          = object
+              (catMaybes
+                 [("overrideValue" .=) <$> _qoOverrideValue,
+                  ("name" .=) <$> _qoName,
+                  ("dimensions" .=) <$> _qoDimensions])
+
+-- | Response message for BatchCreateConsumerOverrides
+--
+-- /See:/ 'batchCreateConsumerOverridesResponse' smart constructor.
+newtype BatchCreateConsumerOverridesResponse =
+  BatchCreateConsumerOverridesResponse'
+    { _bccorOverrides :: Maybe [QuotaOverride]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchCreateConsumerOverridesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bccorOverrides'
+batchCreateConsumerOverridesResponse
+    :: BatchCreateConsumerOverridesResponse
+batchCreateConsumerOverridesResponse =
+  BatchCreateConsumerOverridesResponse' {_bccorOverrides = Nothing}
+
+
+-- | The overrides that were created.
+bccorOverrides :: Lens' BatchCreateConsumerOverridesResponse [QuotaOverride]
+bccorOverrides
+  = lens _bccorOverrides
+      (\ s a -> s{_bccorOverrides = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           BatchCreateConsumerOverridesResponse
+         where
+        parseJSON
+          = withObject "BatchCreateConsumerOverridesResponse"
+              (\ o ->
+                 BatchCreateConsumerOverridesResponse' <$>
+                   (o .:? "overrides" .!= mempty))
+
+instance ToJSON BatchCreateConsumerOverridesResponse
+         where
+        toJSON BatchCreateConsumerOverridesResponse'{..}
+          = object
+              (catMaybes [("overrides" .=) <$> _bccorOverrides])
+
 -- | \`Documentation\` provides the information for describing a service.
 -- Example:
 --
@@ -3625,8 +3844,8 @@ hRules
   = lens _hRules (\ s a -> s{_hRules = a}) . _Default .
       _Coerce
 
--- | When set to true, URL path parmeters will be fully URI-decoded except in
--- cases of single segment matches in reserved expansion, where \"%2F\"
+-- | When set to true, URL path parameters will be fully URI-decoded except
+-- in cases of single segment matches in reserved expansion, where \"%2F\"
 -- will be left encoded. The default behavior is to not decode RFC 6570
 -- reserved characters in multi segment matches.
 hFullyDecodeReservedExpansion :: Lens' HTTP (Maybe Bool)
@@ -4881,8 +5100,8 @@ instance ToJSON SourceInfoSourceFilesItem where
         toJSON = toJSON . _sisfiAddtional
 
 -- | Quota configuration helps to achieve fairness and budgeting in service
--- usage. The quota configuration works this way: - The service
--- configuration defines a set of metrics. - For API calls, the
+-- usage. The metric based quota configuration works this way: - The
+-- service configuration defines a set of metrics. - For API calls, the
 -- quota.metric_rules maps methods to metrics with corresponding costs. -
 -- The quota.limits defines limits on the metrics, which will be used for
 -- quota checks at runtime. An example quota configuration in yaml format:
@@ -5350,7 +5569,7 @@ instance ToJSON
               (catMaybes
                  [("resourceNames" .=) <$> _gasvomResourceNames])
 
--- | Configuration for an anthentication provider, including support for
+-- | Configuration for an authentication provider, including support for
 -- [JSON Web Token
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --

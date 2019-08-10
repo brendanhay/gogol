@@ -33,6 +33,9 @@ module Network.Google.AnalyticsReporting
     -- ** analyticsreporting.reports.batchGet
     , module Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
 
+    -- ** analyticsreporting.userActivity.search
+    , module Network.Google.Resource.AnalyticsReporting.UserActivity.Search
+
     -- * Types
 
     -- ** MetricFilter
@@ -42,6 +45,15 @@ module Network.Google.AnalyticsReporting
     , mfOperator
     , mfMetricName
     , mfComparisonValue
+
+    -- ** EventData
+    , EventData
+    , eventData
+    , edEventCategory
+    , edEventCount
+    , edEventValue
+    , edEventLabel
+    , edEventAction
 
     -- ** MetricFilterOperator
     , MetricFilterOperator (..)
@@ -91,6 +103,11 @@ module Network.Google.AnalyticsReporting
     , mheName
     , mheType
 
+    -- ** GoalSetData
+    , GoalSetData
+    , goalSetData
+    , gsdGoals
+
     -- ** CohortGroup
     , CohortGroup
     , cohortGroup
@@ -139,6 +156,16 @@ module Network.Google.AnalyticsReporting
     , phTotalPivotGroupsCount
     , phPivotHeaderEntries
 
+    -- ** SearchUserActivityRequest
+    , SearchUserActivityRequest
+    , searchUserActivityRequest
+    , suarViewId
+    , suarDateRange
+    , suarUser
+    , suarPageToken
+    , suarPageSize
+    , suarActivityTypes
+
     -- ** MetricHeader
     , MetricHeader
     , metricHeader
@@ -167,6 +194,15 @@ module Network.Google.AnalyticsReporting
     , rNextPageToken
     , rData
     , rColumnHeader
+
+    -- ** PageviewData
+    , PageviewData
+    , pageviewData
+    , pdPageTitle
+    , pdPagePath
+
+    -- ** EcommerceDataActionType
+    , EcommerceDataActionType (..)
 
     -- ** ReportData
     , ReportData
@@ -207,6 +243,12 @@ module Network.Google.AnalyticsReporting
     -- ** OrderBySortOrder
     , OrderBySortOrder (..)
 
+    -- ** User
+    , User
+    , user
+    , uUserId
+    , uType
+
     -- ** Pivot
     , Pivot
     , pivot
@@ -215,6 +257,14 @@ module Network.Google.AnalyticsReporting
     , pMaxGroupCount
     , pDimensions
     , pDimensionFilterClauses
+
+    -- ** TransactionData
+    , TransactionData
+    , transactionData
+    , tdTransactionId
+    , tdTransactionTax
+    , tdTransactionShipping
+    , tdTransactionRevenue
 
     -- ** SequenceSegment
     , SequenceSegment
@@ -256,8 +306,49 @@ module Network.Google.AnalyticsReporting
     , grrUseResourceQuotas
     , grrReportRequests
 
+    -- ** UserActivitySession
+    , UserActivitySession
+    , userActivitySession
+    , uasPlatform
+    , uasDeviceCategory
+    , uasActivities
+    , uasSessionDate
+    , uasDataSource
+    , uasSessionId
+
     -- ** SegmentSequenceStepMatchType
     , SegmentSequenceStepMatchType (..)
+
+    -- ** GoalData
+    , GoalData
+    , goalData
+    , gdGoalPreviousStep2
+    , gdGoalName
+    , gdGoalPreviousStep3
+    , gdGoalIndex
+    , gdGoalCompletionLocation
+    , gdGoalPreviousStep1
+    , gdGoalCompletions
+    , gdGoalValue
+
+    -- ** Activity
+    , Activity
+    , activity
+    , aEvent
+    , aHostname
+    , aActivityType
+    , aMedium
+    , aPageview
+    , aCampaign
+    , aGoals
+    , aChannelGrouping
+    , aAppview
+    , aSource
+    , aActivityTime
+    , aEcommerce
+    , aCustomDimension
+    , aKeyword
+    , aLandingPagePath
 
     -- ** Cohort
     , Cohort
@@ -268,6 +359,17 @@ module Network.Google.AnalyticsReporting
 
     -- ** SegmentMetricFilterScope
     , SegmentMetricFilterScope (..)
+
+    -- ** EcommerceData
+    , EcommerceData
+    , ecommerceData
+    , edEcommerceType
+    , edTransaction
+    , edProducts
+    , edActionType
+
+    -- ** EcommerceDataEcommerceType
+    , EcommerceDataEcommerceType (..)
 
     -- ** DimensionFilter
     , DimensionFilter
@@ -288,14 +390,31 @@ module Network.Google.AnalyticsReporting
     -- ** DimensionFilterOperator
     , DimensionFilterOperator (..)
 
+    -- ** ActivityActivityType
+    , ActivityActivityType (..)
+
     -- ** MetricFormattingType
     , MetricFormattingType (..)
+
+    -- ** CustomDimension
+    , CustomDimension
+    , customDimension
+    , cdValue
+    , cdIndex
 
     -- ** Segment
     , Segment
     , segment
     , sDynamicSegment
     , sSegmentId
+
+    -- ** ProductData
+    , ProductData
+    , productData
+    , pdProductName
+    , pdProductSKU
+    , pdItemRevenue
+    , pdProductQuantity
 
     -- ** SegmentDimensionFilterOperator
     , SegmentDimensionFilterOperator (..)
@@ -332,20 +451,42 @@ module Network.Google.AnalyticsReporting
     -- ** MetricFilterClauseOperator
     , MetricFilterClauseOperator (..)
 
+    -- ** UserType
+    , UserType (..)
+
     -- ** ColumnHeader
     , ColumnHeader
     , columnHeader
     , chMetricHeader
     , chDimensions
+
+    -- ** SearchUserActivityResponse
+    , SearchUserActivityResponse
+    , searchUserActivityResponse
+    , suarNextPageToken
+    , suarSampleRate
+    , suarSessions
+    , suarTotalRows
+
+    -- ** ScreenviewData
+    , ScreenviewData
+    , screenviewData
+    , sdMobileDeviceModel
+    , sdMobileDeviceBranding
+    , sdAppName
+    , sdScreenName
     ) where
 
 import           Network.Google.AnalyticsReporting.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
+import           Network.Google.Resource.AnalyticsReporting.UserActivity.Search
 
 {- $resources
 TODO
 -}
 
 -- | Represents the entirety of the methods and resources available for the Analytics Reporting API service.
-type AnalyticsReportingAPI = ReportsBatchGetResource
+type AnalyticsReportingAPI =
+     ReportsBatchGetResource :<|>
+       UserActivitySearchResource

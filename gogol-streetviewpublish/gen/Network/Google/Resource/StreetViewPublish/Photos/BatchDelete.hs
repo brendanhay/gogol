@@ -21,12 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes a list of Photos and their metadata. Note that if
--- BatchDeletePhotos fails, either critical fields are missing or there was
--- an authentication error. Even if BatchDeletePhotos succeeds, there may
--- have been failures for single photos in the batch. These failures will
--- be specified in each PhotoResponse.status in
--- BatchDeletePhotosResponse.results. See DeletePhoto for specific failures
--- that can occur per photo.
+-- BatchDeletePhotos fails, either critical fields are missing or there is
+-- an authentication error. Even if BatchDeletePhotos succeeds, individual
+-- photos in the batch may have failures. These failures are specified in
+-- each PhotoResponse.status in BatchDeletePhotosResponse.results. See
+-- DeletePhoto for specific failures that can occur per photo.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.batchDelete@.
 module Network.Google.Resource.StreetViewPublish.Photos.BatchDelete
@@ -65,12 +64,11 @@ type PhotosBatchDeleteResource =
                        Post '[JSON] BatchDeletePhotosResponse
 
 -- | Deletes a list of Photos and their metadata. Note that if
--- BatchDeletePhotos fails, either critical fields are missing or there was
--- an authentication error. Even if BatchDeletePhotos succeeds, there may
--- have been failures for single photos in the batch. These failures will
--- be specified in each PhotoResponse.status in
--- BatchDeletePhotosResponse.results. See DeletePhoto for specific failures
--- that can occur per photo.
+-- BatchDeletePhotos fails, either critical fields are missing or there is
+-- an authentication error. Even if BatchDeletePhotos succeeds, individual
+-- photos in the batch may have failures. These failures are specified in
+-- each PhotoResponse.status in BatchDeletePhotosResponse.results. See
+-- DeletePhoto for specific failures that can occur per photo.
 --
 -- /See:/ 'photosBatchDelete' smart constructor.
 data PhotosBatchDelete =

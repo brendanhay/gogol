@@ -23,7 +23,9 @@
 -- Performs asynchronous speech recognition: receive results via the
 -- google.longrunning.Operations interface. Returns either an
 -- \`Operation.error\` or an \`Operation.response\` which contains a
--- \`LongRunningRecognizeResponse\` message.
+-- \`LongRunningRecognizeResponse\` message. For more information on
+-- asynchronous speech recognition, see the
+-- [how-to](https:\/\/cloud.google.com\/speech-to-text\/docs\/async-recognize).
 --
 -- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.speech.longrunningrecognize@.
 module Network.Google.Resource.Speech.Speech.Longrunningrecognize
@@ -64,7 +66,9 @@ type SpeechLongrunningrecognizeResource =
 -- | Performs asynchronous speech recognition: receive results via the
 -- google.longrunning.Operations interface. Returns either an
 -- \`Operation.error\` or an \`Operation.response\` which contains a
--- \`LongRunningRecognizeResponse\` message.
+-- \`LongRunningRecognizeResponse\` message. For more information on
+-- asynchronous speech recognition, see the
+-- [how-to](https:\/\/cloud.google.com\/speech-to-text\/docs\/async-recognize).
 --
 -- /See:/ 'speechLongrunningrecognize' smart constructor.
 data SpeechLongrunningrecognize =

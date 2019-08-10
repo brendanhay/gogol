@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the activities in the specified collection for a particular
--- user.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.list@.
 module Network.Google.Resource.Plus.Activities.List
@@ -56,8 +56,8 @@ type ActivitiesListResource =
                    QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
--- | List all of the activities in the specified collection for a particular
--- user.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'activitiesList' smart constructor.
 data ActivitiesList =

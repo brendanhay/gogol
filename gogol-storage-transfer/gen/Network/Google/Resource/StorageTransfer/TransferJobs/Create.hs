@@ -22,7 +22,7 @@
 --
 -- Creates a transfer job that runs periodically.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.create@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.create@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     (
     -- * REST Resource

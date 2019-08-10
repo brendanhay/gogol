@@ -51,7 +51,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- 'ProjectsScanConfigsScanRunsFindingsList' request conforms to.
 type ProjectsScanConfigsScanRunsFindingsListResource
      =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "parent" Text :>
          "findings" :>
            QueryParam "$.xgafv" Xgafv :>

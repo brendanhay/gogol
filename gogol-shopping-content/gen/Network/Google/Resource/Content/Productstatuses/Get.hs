@@ -101,7 +101,7 @@ pgDestinations
       . _Default
       . _Coerce
 
--- | The REST id of the product.
+-- | The REST ID of the product.
 pgProductId :: Lens' ProductstatusesGet Text
 pgProductId
   = lens _pgProductId (\ s a -> s{_pgProductId = a})

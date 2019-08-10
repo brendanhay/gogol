@@ -180,8 +180,7 @@ polPageToken :: Lens' ProjectsOperationsList (Maybe Text)
 polPageToken
   = lens _polPageToken (\ s a -> s{_polPageToken = a})
 
--- | The maximum number of results to return. If unspecified, defaults to
--- 256. The maximum value is 2048.
+-- | The maximum number of results to return. The maximum value is 256.
 polPageSize :: Lens' ProjectsOperationsList (Maybe Int32)
 polPageSize
   = lens _polPageSize (\ s a -> s{_polPageSize = a}) .

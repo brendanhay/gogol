@@ -129,7 +129,9 @@ plwmUploadProtocol
   = lens _plwmUploadProtocol
       (\ s a -> s{_plwmUploadProtocol = a})
 
--- | The location which contains the job
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job.
 plwmLocation :: Lens' ProjectsLocationsWorkerMessages Text
 plwmLocation
   = lens _plwmLocation (\ s a -> s{_plwmLocation = a})

@@ -5435,8 +5435,8 @@ gdravwcDiskSizeGb
       (\ s a -> s{_gdravwcDiskSizeGb = a})
       . mapping _Coerce
 
--- | Determines whether the worker is reserved (and therefore won\'t be
--- preempted). See [Preemptible
+-- | Determines whether the worker is reserved (equivalent to a Compute
+-- Engine on-demand VM and therefore won\'t be preempted). See [Preemptible
 -- VMs](https:\/\/cloud.google.com\/preemptible-vms\/) for more details.
 gdravwcReserved :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig (Maybe Bool)
 gdravwcReserved
@@ -5656,7 +5656,8 @@ instance ToJSON
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandTaskInputs' smart constructor.
 data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
-    { _gdrvctiArguments            :: !(Maybe [Text])
+    { _gdrvctiWorkingDirectory     :: !(Maybe Text)
+    , _gdrvctiArguments            :: !(Maybe [Text])
     , _gdrvctiFiles                :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2Digest])
     , _gdrvctiEnvironmentVariables :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable])
     , _gdrvctiInlineBlobs          :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2Blob])
@@ -5667,6 +5668,8 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs =
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdrvctiWorkingDirectory'
 --
 -- * 'gdrvctiArguments'
 --
@@ -5679,12 +5682,22 @@ googleDevtoolsRemoteworkersV1test2CommandTaskInputs
     :: GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
 googleDevtoolsRemoteworkersV1test2CommandTaskInputs =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
-    { _gdrvctiArguments = Nothing
+    { _gdrvctiWorkingDirectory = Nothing
+    , _gdrvctiArguments = Nothing
     , _gdrvctiFiles = Nothing
     , _gdrvctiEnvironmentVariables = Nothing
     , _gdrvctiInlineBlobs = Nothing
     }
 
+
+-- | Directory from which a command is executed. It is a relative directory
+-- with respect to the bot\'s working directory (i.e., \".\/\"). If it is
+-- non-empty, then it must exist under \".\/\". Otherwise, \".\/\" will be
+-- used.
+gdrvctiWorkingDirectory :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs (Maybe Text)
+gdrvctiWorkingDirectory
+  = lens _gdrvctiWorkingDirectory
+      (\ s a -> s{_gdrvctiWorkingDirectory = a})
 
 -- | The command itself to run (e.g., argv). This field should be passed
 -- directly to the underlying operating system, and so it must be sensible
@@ -5743,8 +5756,9 @@ instance FromJSON
               (\ o ->
                  GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
                    <$>
-                   (o .:? "arguments" .!= mempty) <*>
-                     (o .:? "files" .!= mempty)
+                   (o .:? "workingDirectory") <*>
+                     (o .:? "arguments" .!= mempty)
+                     <*> (o .:? "files" .!= mempty)
                      <*> (o .:? "environmentVariables" .!= mempty)
                      <*> (o .:? "inlineBlobs" .!= mempty))
 
@@ -5755,7 +5769,9 @@ instance ToJSON
           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'{..}
           = object
               (catMaybes
-                 [("arguments" .=) <$> _gdrvctiArguments,
+                 [("workingDirectory" .=) <$>
+                    _gdrvctiWorkingDirectory,
+                  ("arguments" .=) <$> _gdrvctiArguments,
                   ("files" .=) <$> _gdrvctiFiles,
                   ("environmentVariables" .=) <$>
                     _gdrvctiEnvironmentVariables,
@@ -6632,6 +6648,7 @@ data GoogleDevtoolsRemotebuildbotCommandEvents =
   GoogleDevtoolsRemotebuildbotCommandEvents'
     { _gdrceDockerCacheHit :: !(Maybe Bool)
     , _gdrceNumErrors      :: !(Maybe (Textual Word64))
+    , _gdrceInputCacheMiss :: !(Maybe (Textual Double))
     , _gdrceNumWarnings    :: !(Maybe (Textual Word64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6645,6 +6662,8 @@ data GoogleDevtoolsRemotebuildbotCommandEvents =
 --
 -- * 'gdrceNumErrors'
 --
+-- * 'gdrceInputCacheMiss'
+--
 -- * 'gdrceNumWarnings'
 googleDevtoolsRemotebuildbotCommandEvents
     :: GoogleDevtoolsRemotebuildbotCommandEvents
@@ -6652,6 +6671,7 @@ googleDevtoolsRemotebuildbotCommandEvents =
   GoogleDevtoolsRemotebuildbotCommandEvents'
     { _gdrceDockerCacheHit = Nothing
     , _gdrceNumErrors = Nothing
+    , _gdrceInputCacheMiss = Nothing
     , _gdrceNumWarnings = Nothing
     }
 
@@ -6670,6 +6690,13 @@ gdrceNumErrors
       (\ s a -> s{_gdrceNumErrors = a})
       . mapping _Coerce
 
+-- | The input cache miss ratio.
+gdrceInputCacheMiss :: Lens' GoogleDevtoolsRemotebuildbotCommandEvents (Maybe Double)
+gdrceInputCacheMiss
+  = lens _gdrceInputCacheMiss
+      (\ s a -> s{_gdrceInputCacheMiss = a})
+      . mapping _Coerce
+
 -- | The number of warnings reported.
 gdrceNumWarnings :: Lens' GoogleDevtoolsRemotebuildbotCommandEvents (Maybe Word64)
 gdrceNumWarnings
@@ -6686,7 +6713,8 @@ instance FromJSON
               (\ o ->
                  GoogleDevtoolsRemotebuildbotCommandEvents' <$>
                    (o .:? "dockerCacheHit") <*> (o .:? "numErrors") <*>
-                     (o .:? "numWarnings"))
+                     (o .:? "inputCacheMiss")
+                     <*> (o .:? "numWarnings"))
 
 instance ToJSON
            GoogleDevtoolsRemotebuildbotCommandEvents
@@ -6696,6 +6724,7 @@ instance ToJSON
               (catMaybes
                  [("dockerCacheHit" .=) <$> _gdrceDockerCacheHit,
                   ("numErrors" .=) <$> _gdrceNumErrors,
+                  ("inputCacheMiss" .=) <$> _gdrceInputCacheMiss,
                   ("numWarnings" .=) <$> _gdrceNumWarnings])
 
 -- | Describes the expected outputs of the command.

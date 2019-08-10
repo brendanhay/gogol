@@ -79,6 +79,37 @@ instance FromJSON BuildStepStatus where
 instance ToJSON BuildStepStatus where
     toJSON = toJSONText
 
+-- | Whether to block builds on a \"\/gcbrun\" comment from a repository
+-- owner or collaborator.
+data PullRequestFilterCommentControl
+    = CommentsDisabled
+      -- ^ @COMMENTS_DISABLED@
+      -- Do not require comments on Pull Requests before builds are triggered.
+    | CommentsEnabled
+      -- ^ @COMMENTS_ENABLED@
+      -- Enforce that repository owners or collaborators must comment on Pull
+      -- Requests before builds are triggered.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PullRequestFilterCommentControl
+
+instance FromHttpApiData PullRequestFilterCommentControl where
+    parseQueryParam = \case
+        "COMMENTS_DISABLED" -> Right CommentsDisabled
+        "COMMENTS_ENABLED" -> Right CommentsEnabled
+        x -> Left ("Unable to parse PullRequestFilterCommentControl from: " <> x)
+
+instance ToHttpApiData PullRequestFilterCommentControl where
+    toQueryParam = \case
+        CommentsDisabled -> "COMMENTS_DISABLED"
+        CommentsEnabled -> "COMMENTS_ENABLED"
+
+instance FromJSON PullRequestFilterCommentControl where
+    parseJSON = parseJSONText "PullRequestFilterCommentControl"
+
+instance ToJSON PullRequestFilterCommentControl where
+    toJSON = toJSONText
+
 -- | Requested verifiability options.
 data BuildOptionsRequestedVerifyOption
     = NotVerified

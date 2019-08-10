@@ -20,19 +20,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an upload session to start uploading photo bytes. The upload URL
--- of the returned UploadRef is used to upload the bytes for the Photo. In
--- addition to the photo requirements shown in
+-- Creates an upload session to start uploading photo bytes. The method
+-- uses the upload URL of the returned UploadRef to upload the bytes for
+-- the Photo. In addition to the photo requirements shown in
 -- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
--- the photo must also meet the following requirements: * Photo Sphere XMP
+-- the photo must meet the following requirements: * Photo Sphere XMP
 -- metadata must be included in the photo medadata. See
 -- https:\/\/developers.google.com\/streetview\/spherical-metadata for the
 -- required fields. * The pixel size of the photo must meet the size
 -- requirements listed in
 -- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
--- and the photo must be a full 360 horizontally. After the upload is
--- complete, the UploadRef is used with CreatePhoto to create the Photo
--- object entry.
+-- and the photo must be a full 360 horizontally. After the upload
+-- completes, the method uses UploadRef with CreatePhoto to create the
+-- Photo object entry.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photo.startUpload@.
 module Network.Google.Resource.StreetViewPublish.Photo.StartUpload
@@ -69,19 +69,19 @@ type PhotoStartUploadResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Empty :> Post '[JSON] UploadRef
 
--- | Creates an upload session to start uploading photo bytes. The upload URL
--- of the returned UploadRef is used to upload the bytes for the Photo. In
--- addition to the photo requirements shown in
+-- | Creates an upload session to start uploading photo bytes. The method
+-- uses the upload URL of the returned UploadRef to upload the bytes for
+-- the Photo. In addition to the photo requirements shown in
 -- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
--- the photo must also meet the following requirements: * Photo Sphere XMP
+-- the photo must meet the following requirements: * Photo Sphere XMP
 -- metadata must be included in the photo medadata. See
 -- https:\/\/developers.google.com\/streetview\/spherical-metadata for the
 -- required fields. * The pixel size of the photo must meet the size
 -- requirements listed in
 -- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
--- and the photo must be a full 360 horizontally. After the upload is
--- complete, the UploadRef is used with CreatePhoto to create the Photo
--- object entry.
+-- and the photo must be a full 360 horizontally. After the upload
+-- completes, the method uses UploadRef with CreatePhoto to create the
+-- Photo object entry.
 --
 -- /See:/ 'photoStartUpload' smart constructor.
 data PhotoStartUpload =

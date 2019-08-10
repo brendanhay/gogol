@@ -36,6 +36,7 @@ library
     exposed-modules:
           Network.Google.Container
         , Network.Google.Container.Types
+        , Network.Google.Resource.Container.Projects.Aggregated.UsableSubnetworks.List
         , Network.Google.Resource.Container.Projects.Locations.Clusters.CompleteIPRotation
         , Network.Google.Resource.Container.Projects.Locations.Clusters.Create
         , Network.Google.Resource.Container.Projects.Locations.Clusters.Delete

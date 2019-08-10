@@ -53,6 +53,8 @@ library
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
         , Network.Google.Resource.ToolResults.Projects.Histories.Get
         , Network.Google.Resource.ToolResults.Projects.Histories.List

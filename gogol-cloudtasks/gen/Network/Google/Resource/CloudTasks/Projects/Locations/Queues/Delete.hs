@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.delete@ method which the
 -- 'ProjectsLocationsQueuesDelete' request conforms to.
 type ProjectsLocationsQueuesDeleteResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

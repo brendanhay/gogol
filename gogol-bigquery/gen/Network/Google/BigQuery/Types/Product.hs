@@ -1053,6 +1053,7 @@ data JobStatistics =
     { _jsCreationTime        :: !(Maybe (Textual Int64))
     , _jsStartTime           :: !(Maybe (Textual Int64))
     , _jsCompletionRatio     :: !(Maybe (Textual Double))
+    , _jsNumChildJobs        :: !(Maybe (Textual Int64))
     , _jsTotalSlotMs         :: !(Maybe (Textual Int64))
     , _jsLoad                :: !(Maybe JobStatistics3)
     , _jsTotalBytesProcessed :: !(Maybe (Textual Int64))
@@ -1061,6 +1062,7 @@ data JobStatistics =
     , _jsQuery               :: !(Maybe JobStatistics2)
     , _jsExtract             :: !(Maybe JobStatistics4)
     , _jsReservationUsage    :: !(Maybe [JobStatisticsReservationUsageItem])
+    , _jsParentJobId         :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1074,6 +1076,8 @@ data JobStatistics =
 -- * 'jsStartTime'
 --
 -- * 'jsCompletionRatio'
+--
+-- * 'jsNumChildJobs'
 --
 -- * 'jsTotalSlotMs'
 --
@@ -1090,6 +1094,8 @@ data JobStatistics =
 -- * 'jsExtract'
 --
 -- * 'jsReservationUsage'
+--
+-- * 'jsParentJobId'
 jobStatistics
     :: JobStatistics
 jobStatistics =
@@ -1097,6 +1103,7 @@ jobStatistics =
     { _jsCreationTime = Nothing
     , _jsStartTime = Nothing
     , _jsCompletionRatio = Nothing
+    , _jsNumChildJobs = Nothing
     , _jsTotalSlotMs = Nothing
     , _jsLoad = Nothing
     , _jsTotalBytesProcessed = Nothing
@@ -1105,6 +1112,7 @@ jobStatistics =
     , _jsQuery = Nothing
     , _jsExtract = Nothing
     , _jsReservationUsage = Nothing
+    , _jsParentJobId = Nothing
     }
 
 
@@ -1130,6 +1138,13 @@ jsCompletionRatio :: Lens' JobStatistics (Maybe Double)
 jsCompletionRatio
   = lens _jsCompletionRatio
       (\ s a -> s{_jsCompletionRatio = a})
+      . mapping _Coerce
+
+-- | [Output-only] Number of child jobs executed.
+jsNumChildJobs :: Lens' JobStatistics (Maybe Int64)
+jsNumChildJobs
+  = lens _jsNumChildJobs
+      (\ s a -> s{_jsNumChildJobs = a})
       . mapping _Coerce
 
 -- | [Output-only] Slot-milliseconds for the job.
@@ -1183,6 +1198,12 @@ jsReservationUsage
       . _Default
       . _Coerce
 
+-- | [Output-only] If this is a child job, the id of the parent.
+jsParentJobId :: Lens' JobStatistics (Maybe Text)
+jsParentJobId
+  = lens _jsParentJobId
+      (\ s a -> s{_jsParentJobId = a})
+
 instance FromJSON JobStatistics where
         parseJSON
           = withObject "JobStatistics"
@@ -1190,6 +1211,7 @@ instance FromJSON JobStatistics where
                  JobStatistics' <$>
                    (o .:? "creationTime") <*> (o .:? "startTime") <*>
                      (o .:? "completionRatio")
+                     <*> (o .:? "numChildJobs")
                      <*> (o .:? "totalSlotMs")
                      <*> (o .:? "load")
                      <*> (o .:? "totalBytesProcessed")
@@ -1197,7 +1219,8 @@ instance FromJSON JobStatistics where
                      <*> (o .:? "endTime")
                      <*> (o .:? "query")
                      <*> (o .:? "extract")
-                     <*> (o .:? "reservationUsage" .!= mempty))
+                     <*> (o .:? "reservationUsage" .!= mempty)
+                     <*> (o .:? "parentJobId"))
 
 instance ToJSON JobStatistics where
         toJSON JobStatistics'{..}
@@ -1206,6 +1229,7 @@ instance ToJSON JobStatistics where
                  [("creationTime" .=) <$> _jsCreationTime,
                   ("startTime" .=) <$> _jsStartTime,
                   ("completionRatio" .=) <$> _jsCompletionRatio,
+                  ("numChildJobs" .=) <$> _jsNumChildJobs,
                   ("totalSlotMs" .=) <$> _jsTotalSlotMs,
                   ("load" .=) <$> _jsLoad,
                   ("totalBytesProcessed" .=) <$>
@@ -1214,7 +1238,8 @@ instance ToJSON JobStatistics where
                   ("endTime" .=) <$> _jsEndTime,
                   ("query" .=) <$> _jsQuery,
                   ("extract" .=) <$> _jsExtract,
-                  ("reservationUsage" .=) <$> _jsReservationUsage])
+                  ("reservationUsage" .=) <$> _jsReservationUsage,
+                  ("parentJobId" .=) <$> _jsParentJobId])
 
 -- | The labels associated with this job. You can use these to organize and
 -- group your jobs. Label keys and values can be no longer than 63
@@ -2043,6 +2068,66 @@ instance ToJSON ModelDefinitionModelOptions where
                   ("lossType" .=) <$> _mdmoLossType])
 
 --
+-- /See:/ 'routineReference' smart constructor.
+data RoutineReference =
+  RoutineReference'
+    { _rrDataSetId :: !(Maybe Text)
+    , _rrProjectId :: !(Maybe Text)
+    , _rrRoutineId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RoutineReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrDataSetId'
+--
+-- * 'rrProjectId'
+--
+-- * 'rrRoutineId'
+routineReference
+    :: RoutineReference
+routineReference =
+  RoutineReference'
+    {_rrDataSetId = Nothing, _rrProjectId = Nothing, _rrRoutineId = Nothing}
+
+
+-- | [Required] The ID of the dataset containing this routine.
+rrDataSetId :: Lens' RoutineReference (Maybe Text)
+rrDataSetId
+  = lens _rrDataSetId (\ s a -> s{_rrDataSetId = a})
+
+-- | [Required] The ID of the project containing this routine.
+rrProjectId :: Lens' RoutineReference (Maybe Text)
+rrProjectId
+  = lens _rrProjectId (\ s a -> s{_rrProjectId = a})
+
+-- | [Required] The ID of the routine. The ID must contain only letters (a-z,
+-- A-Z), numbers (0-9), or underscores (_). The maximum length is 256
+-- characters.
+rrRoutineId :: Lens' RoutineReference (Maybe Text)
+rrRoutineId
+  = lens _rrRoutineId (\ s a -> s{_rrRoutineId = a})
+
+instance FromJSON RoutineReference where
+        parseJSON
+          = withObject "RoutineReference"
+              (\ o ->
+                 RoutineReference' <$>
+                   (o .:? "datasetId") <*> (o .:? "projectId") <*>
+                     (o .:? "routineId"))
+
+instance ToJSON RoutineReference where
+        toJSON RoutineReference'{..}
+          = object
+              (catMaybes
+                 [("datasetId" .=) <$> _rrDataSetId,
+                  ("projectId" .=) <$> _rrProjectId,
+                  ("routineId" .=) <$> _rrRoutineId])
+
+--
 -- /See:/ 'rangePartitioning' smart constructor.
 data RangePartitioning =
   RangePartitioning'
@@ -2657,6 +2742,146 @@ instance ToJSON QueryRequest where
                   ("maxResults" .=) <$> _qrMaxResults,
                   ("defaultDataset" .=) <$> _qrDefaultDataSet])
 
+-- | [Output-only, Beta] Training options used by this training run. These
+-- options are mutable for subsequent training runs. Default values are
+-- explicitly stored for options not specified in the input query of the
+-- first training run. For subsequent training runs, any option not
+-- explicitly specified in the input query will be copied from the previous
+-- training run.
+--
+-- /See:/ 'bqmlTrainingRunTrainingOptions' smart constructor.
+data BqmlTrainingRunTrainingOptions =
+  BqmlTrainingRunTrainingOptions'
+    { _btrtoLineSearchInitLearnRate :: !(Maybe (Textual Double))
+    , _btrtoMinRelProgress          :: !(Maybe (Textual Double))
+    , _btrtoL1Reg                   :: !(Maybe (Textual Double))
+    , _btrtoLearnRate               :: !(Maybe (Textual Double))
+    , _btrtoLearnRateStrategy       :: !(Maybe Text)
+    , _btrtoMaxIteration            :: !(Maybe (Textual Int64))
+    , _btrtoEarlyStop               :: !(Maybe Bool)
+    , _btrtoL2Reg                   :: !(Maybe (Textual Double))
+    , _btrtoWarmStart               :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BqmlTrainingRunTrainingOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'btrtoLineSearchInitLearnRate'
+--
+-- * 'btrtoMinRelProgress'
+--
+-- * 'btrtoL1Reg'
+--
+-- * 'btrtoLearnRate'
+--
+-- * 'btrtoLearnRateStrategy'
+--
+-- * 'btrtoMaxIteration'
+--
+-- * 'btrtoEarlyStop'
+--
+-- * 'btrtoL2Reg'
+--
+-- * 'btrtoWarmStart'
+bqmlTrainingRunTrainingOptions
+    :: BqmlTrainingRunTrainingOptions
+bqmlTrainingRunTrainingOptions =
+  BqmlTrainingRunTrainingOptions'
+    { _btrtoLineSearchInitLearnRate = Nothing
+    , _btrtoMinRelProgress = Nothing
+    , _btrtoL1Reg = Nothing
+    , _btrtoLearnRate = Nothing
+    , _btrtoLearnRateStrategy = Nothing
+    , _btrtoMaxIteration = Nothing
+    , _btrtoEarlyStop = Nothing
+    , _btrtoL2Reg = Nothing
+    , _btrtoWarmStart = Nothing
+    }
+
+
+btrtoLineSearchInitLearnRate :: Lens' BqmlTrainingRunTrainingOptions (Maybe Double)
+btrtoLineSearchInitLearnRate
+  = lens _btrtoLineSearchInitLearnRate
+      (\ s a -> s{_btrtoLineSearchInitLearnRate = a})
+      . mapping _Coerce
+
+btrtoMinRelProgress :: Lens' BqmlTrainingRunTrainingOptions (Maybe Double)
+btrtoMinRelProgress
+  = lens _btrtoMinRelProgress
+      (\ s a -> s{_btrtoMinRelProgress = a})
+      . mapping _Coerce
+
+btrtoL1Reg :: Lens' BqmlTrainingRunTrainingOptions (Maybe Double)
+btrtoL1Reg
+  = lens _btrtoL1Reg (\ s a -> s{_btrtoL1Reg = a}) .
+      mapping _Coerce
+
+btrtoLearnRate :: Lens' BqmlTrainingRunTrainingOptions (Maybe Double)
+btrtoLearnRate
+  = lens _btrtoLearnRate
+      (\ s a -> s{_btrtoLearnRate = a})
+      . mapping _Coerce
+
+btrtoLearnRateStrategy :: Lens' BqmlTrainingRunTrainingOptions (Maybe Text)
+btrtoLearnRateStrategy
+  = lens _btrtoLearnRateStrategy
+      (\ s a -> s{_btrtoLearnRateStrategy = a})
+
+btrtoMaxIteration :: Lens' BqmlTrainingRunTrainingOptions (Maybe Int64)
+btrtoMaxIteration
+  = lens _btrtoMaxIteration
+      (\ s a -> s{_btrtoMaxIteration = a})
+      . mapping _Coerce
+
+btrtoEarlyStop :: Lens' BqmlTrainingRunTrainingOptions (Maybe Bool)
+btrtoEarlyStop
+  = lens _btrtoEarlyStop
+      (\ s a -> s{_btrtoEarlyStop = a})
+
+btrtoL2Reg :: Lens' BqmlTrainingRunTrainingOptions (Maybe Double)
+btrtoL2Reg
+  = lens _btrtoL2Reg (\ s a -> s{_btrtoL2Reg = a}) .
+      mapping _Coerce
+
+btrtoWarmStart :: Lens' BqmlTrainingRunTrainingOptions (Maybe Bool)
+btrtoWarmStart
+  = lens _btrtoWarmStart
+      (\ s a -> s{_btrtoWarmStart = a})
+
+instance FromJSON BqmlTrainingRunTrainingOptions
+         where
+        parseJSON
+          = withObject "BqmlTrainingRunTrainingOptions"
+              (\ o ->
+                 BqmlTrainingRunTrainingOptions' <$>
+                   (o .:? "lineSearchInitLearnRate") <*>
+                     (o .:? "minRelProgress")
+                     <*> (o .:? "l1Reg")
+                     <*> (o .:? "learnRate")
+                     <*> (o .:? "learnRateStrategy")
+                     <*> (o .:? "maxIteration")
+                     <*> (o .:? "earlyStop")
+                     <*> (o .:? "l2Reg")
+                     <*> (o .:? "warmStart"))
+
+instance ToJSON BqmlTrainingRunTrainingOptions where
+        toJSON BqmlTrainingRunTrainingOptions'{..}
+          = object
+              (catMaybes
+                 [("lineSearchInitLearnRate" .=) <$>
+                    _btrtoLineSearchInitLearnRate,
+                  ("minRelProgress" .=) <$> _btrtoMinRelProgress,
+                  ("l1Reg" .=) <$> _btrtoL1Reg,
+                  ("learnRate" .=) <$> _btrtoLearnRate,
+                  ("learnRateStrategy" .=) <$> _btrtoLearnRateStrategy,
+                  ("maxIteration" .=) <$> _btrtoMaxIteration,
+                  ("earlyStop" .=) <$> _btrtoEarlyStop,
+                  ("l2Reg" .=) <$> _btrtoL2Reg,
+                  ("warmStart" .=) <$> _btrtoWarmStart])
+
 --
 -- /See:/ 'queryParameter' smart constructor.
 data QueryParameter =
@@ -2718,108 +2943,11 @@ instance ToJSON QueryParameter where
                   ("name" .=) <$> _qpName])
 
 --
--- /See:/ 'iterationResult' smart constructor.
-data IterationResult =
-  IterationResult'
-    { _irDurationMs   :: !(Maybe (Textual Int64))
-    , _irLearnRate    :: !(Maybe (Textual Double))
-    , _irEvalLoss     :: !(Maybe (Textual Double))
-    , _irTrainingLoss :: !(Maybe (Textual Double))
-    , _irIndex        :: !(Maybe (Textual Int32))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'IterationResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'irDurationMs'
---
--- * 'irLearnRate'
---
--- * 'irEvalLoss'
---
--- * 'irTrainingLoss'
---
--- * 'irIndex'
-iterationResult
-    :: IterationResult
-iterationResult =
-  IterationResult'
-    { _irDurationMs = Nothing
-    , _irLearnRate = Nothing
-    , _irEvalLoss = Nothing
-    , _irTrainingLoss = Nothing
-    , _irIndex = Nothing
-    }
-
-
--- | [Output-only, Beta] Time taken to run the training iteration in
--- milliseconds.
-irDurationMs :: Lens' IterationResult (Maybe Int64)
-irDurationMs
-  = lens _irDurationMs (\ s a -> s{_irDurationMs = a})
-      . mapping _Coerce
-
--- | [Output-only, Beta] Learning rate used for this iteration, it varies for
--- different training iterations if learn_rate_strategy option is not
--- constant.
-irLearnRate :: Lens' IterationResult (Maybe Double)
-irLearnRate
-  = lens _irLearnRate (\ s a -> s{_irLearnRate = a}) .
-      mapping _Coerce
-
--- | [Output-only, Beta] Eval loss computed on the eval data at the end of
--- the iteration. The eval loss is used for early stopping to avoid
--- overfitting. No eval loss if eval_split_method option is specified as
--- no_split or auto_split with input data size less than 500 rows.
-irEvalLoss :: Lens' IterationResult (Maybe Double)
-irEvalLoss
-  = lens _irEvalLoss (\ s a -> s{_irEvalLoss = a}) .
-      mapping _Coerce
-
--- | [Output-only, Beta] Training loss computed on the training data at the
--- end of the iteration. The training loss function is defined by model
--- type.
-irTrainingLoss :: Lens' IterationResult (Maybe Double)
-irTrainingLoss
-  = lens _irTrainingLoss
-      (\ s a -> s{_irTrainingLoss = a})
-      . mapping _Coerce
-
--- | [Output-only, Beta] Index of the ML training iteration, starting from
--- zero for each training run.
-irIndex :: Lens' IterationResult (Maybe Int32)
-irIndex
-  = lens _irIndex (\ s a -> s{_irIndex = a}) .
-      mapping _Coerce
-
-instance FromJSON IterationResult where
-        parseJSON
-          = withObject "IterationResult"
-              (\ o ->
-                 IterationResult' <$>
-                   (o .:? "durationMs") <*> (o .:? "learnRate") <*>
-                     (o .:? "evalLoss")
-                     <*> (o .:? "trainingLoss")
-                     <*> (o .:? "index"))
-
-instance ToJSON IterationResult where
-        toJSON IterationResult'{..}
-          = object
-              (catMaybes
-                 [("durationMs" .=) <$> _irDurationMs,
-                  ("learnRate" .=) <$> _irLearnRate,
-                  ("evalLoss" .=) <$> _irEvalLoss,
-                  ("trainingLoss" .=) <$> _irTrainingLoss,
-                  ("index" .=) <$> _irIndex])
-
---
 -- /See:/ 'jobStatistics4' smart constructor.
-newtype JobStatistics4 =
+data JobStatistics4 =
   JobStatistics4'
-    { _jsDestinationURIFileCounts :: Maybe [Textual Int64]
+    { _jsInputBytes               :: !(Maybe (Textual Int64))
+    , _jsDestinationURIFileCounts :: !(Maybe [Textual Int64])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2828,11 +2956,22 @@ newtype JobStatistics4 =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'jsInputBytes'
+--
 -- * 'jsDestinationURIFileCounts'
 jobStatistics4
     :: JobStatistics4
-jobStatistics4 = JobStatistics4' {_jsDestinationURIFileCounts = Nothing}
+jobStatistics4 =
+  JobStatistics4'
+    {_jsInputBytes = Nothing, _jsDestinationURIFileCounts = Nothing}
 
+
+-- | [Output-only] Number of user bytes extracted into the result. This is
+-- the byte count as computed by BigQuery for billing purposes.
+jsInputBytes :: Lens' JobStatistics4 (Maybe Int64)
+jsInputBytes
+  = lens _jsInputBytes (\ s a -> s{_jsInputBytes = a})
+      . mapping _Coerce
 
 -- | [Output-only] Number of files per destination URI or URI pattern
 -- specified in the extract configuration. These values will be in the same
@@ -2849,13 +2988,15 @@ instance FromJSON JobStatistics4 where
           = withObject "JobStatistics4"
               (\ o ->
                  JobStatistics4' <$>
-                   (o .:? "destinationUriFileCounts" .!= mempty))
+                   (o .:? "inputBytes") <*>
+                     (o .:? "destinationUriFileCounts" .!= mempty))
 
 instance ToJSON JobStatistics4 where
         toJSON JobStatistics4'{..}
           = object
               (catMaybes
-                 [("destinationUriFileCounts" .=) <$>
+                 [("inputBytes" .=) <$> _jsInputBytes,
+                  ("destinationUriFileCounts" .=) <$>
                     _jsDestinationURIFileCounts])
 
 --
@@ -3289,145 +3430,6 @@ instance ToJSON ExplainQueryStage where
                   ("startMs" .=) <$> _eqsStartMs,
                   ("endMs" .=) <$> _eqsEndMs,
                   ("waitMsMax" .=) <$> _eqsWaitMsMax])
-
--- | [Output-only, Beta] Training options used by this training run. These
--- options are mutable for subsequent training runs. Default values are
--- explicitly stored for options not specified in the input query of the
--- first training run. For subsequent training runs, any option not
--- explicitly specified in the input query will be copied from the previous
--- training run.
---
--- /See:/ 'trainingRunTrainingOptions' smart constructor.
-data TrainingRunTrainingOptions =
-  TrainingRunTrainingOptions'
-    { _trtoLineSearchInitLearnRate :: !(Maybe (Textual Double))
-    , _trtoMinRelProgress          :: !(Maybe (Textual Double))
-    , _trtoL1Reg                   :: !(Maybe (Textual Double))
-    , _trtoLearnRate               :: !(Maybe (Textual Double))
-    , _trtoLearnRateStrategy       :: !(Maybe Text)
-    , _trtoMaxIteration            :: !(Maybe (Textual Int64))
-    , _trtoEarlyStop               :: !(Maybe Bool)
-    , _trtoL2Reg                   :: !(Maybe (Textual Double))
-    , _trtoWarmStart               :: !(Maybe Bool)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'TrainingRunTrainingOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'trtoLineSearchInitLearnRate'
---
--- * 'trtoMinRelProgress'
---
--- * 'trtoL1Reg'
---
--- * 'trtoLearnRate'
---
--- * 'trtoLearnRateStrategy'
---
--- * 'trtoMaxIteration'
---
--- * 'trtoEarlyStop'
---
--- * 'trtoL2Reg'
---
--- * 'trtoWarmStart'
-trainingRunTrainingOptions
-    :: TrainingRunTrainingOptions
-trainingRunTrainingOptions =
-  TrainingRunTrainingOptions'
-    { _trtoLineSearchInitLearnRate = Nothing
-    , _trtoMinRelProgress = Nothing
-    , _trtoL1Reg = Nothing
-    , _trtoLearnRate = Nothing
-    , _trtoLearnRateStrategy = Nothing
-    , _trtoMaxIteration = Nothing
-    , _trtoEarlyStop = Nothing
-    , _trtoL2Reg = Nothing
-    , _trtoWarmStart = Nothing
-    }
-
-
-trtoLineSearchInitLearnRate :: Lens' TrainingRunTrainingOptions (Maybe Double)
-trtoLineSearchInitLearnRate
-  = lens _trtoLineSearchInitLearnRate
-      (\ s a -> s{_trtoLineSearchInitLearnRate = a})
-      . mapping _Coerce
-
-trtoMinRelProgress :: Lens' TrainingRunTrainingOptions (Maybe Double)
-trtoMinRelProgress
-  = lens _trtoMinRelProgress
-      (\ s a -> s{_trtoMinRelProgress = a})
-      . mapping _Coerce
-
-trtoL1Reg :: Lens' TrainingRunTrainingOptions (Maybe Double)
-trtoL1Reg
-  = lens _trtoL1Reg (\ s a -> s{_trtoL1Reg = a}) .
-      mapping _Coerce
-
-trtoLearnRate :: Lens' TrainingRunTrainingOptions (Maybe Double)
-trtoLearnRate
-  = lens _trtoLearnRate
-      (\ s a -> s{_trtoLearnRate = a})
-      . mapping _Coerce
-
-trtoLearnRateStrategy :: Lens' TrainingRunTrainingOptions (Maybe Text)
-trtoLearnRateStrategy
-  = lens _trtoLearnRateStrategy
-      (\ s a -> s{_trtoLearnRateStrategy = a})
-
-trtoMaxIteration :: Lens' TrainingRunTrainingOptions (Maybe Int64)
-trtoMaxIteration
-  = lens _trtoMaxIteration
-      (\ s a -> s{_trtoMaxIteration = a})
-      . mapping _Coerce
-
-trtoEarlyStop :: Lens' TrainingRunTrainingOptions (Maybe Bool)
-trtoEarlyStop
-  = lens _trtoEarlyStop
-      (\ s a -> s{_trtoEarlyStop = a})
-
-trtoL2Reg :: Lens' TrainingRunTrainingOptions (Maybe Double)
-trtoL2Reg
-  = lens _trtoL2Reg (\ s a -> s{_trtoL2Reg = a}) .
-      mapping _Coerce
-
-trtoWarmStart :: Lens' TrainingRunTrainingOptions (Maybe Bool)
-trtoWarmStart
-  = lens _trtoWarmStart
-      (\ s a -> s{_trtoWarmStart = a})
-
-instance FromJSON TrainingRunTrainingOptions where
-        parseJSON
-          = withObject "TrainingRunTrainingOptions"
-              (\ o ->
-                 TrainingRunTrainingOptions' <$>
-                   (o .:? "lineSearchInitLearnRate") <*>
-                     (o .:? "minRelProgress")
-                     <*> (o .:? "l1Reg")
-                     <*> (o .:? "learnRate")
-                     <*> (o .:? "learnRateStrategy")
-                     <*> (o .:? "maxIteration")
-                     <*> (o .:? "earlyStop")
-                     <*> (o .:? "l2Reg")
-                     <*> (o .:? "warmStart"))
-
-instance ToJSON TrainingRunTrainingOptions where
-        toJSON TrainingRunTrainingOptions'{..}
-          = object
-              (catMaybes
-                 [("lineSearchInitLearnRate" .=) <$>
-                    _trtoLineSearchInitLearnRate,
-                  ("minRelProgress" .=) <$> _trtoMinRelProgress,
-                  ("l1Reg" .=) <$> _trtoL1Reg,
-                  ("learnRate" .=) <$> _trtoLearnRate,
-                  ("learnRateStrategy" .=) <$> _trtoLearnRateStrategy,
-                  ("maxIteration" .=) <$> _trtoMaxIteration,
-                  ("earlyStop" .=) <$> _trtoEarlyStop,
-                  ("l2Reg" .=) <$> _trtoL2Reg,
-                  ("warmStart" .=) <$> _trtoWarmStart])
 
 --
 -- /See:/ 'bigQueryModelTraining' smart constructor.
@@ -4278,6 +4280,105 @@ instance ToJSON ProjectListProjectsItem where
                   ("projectReference" .=) <$> _plpiProjectReference,
                   ("id" .=) <$> _plpiId,
                   ("numericId" .=) <$> _plpiNumericId])
+
+--
+-- /See:/ 'bqmlIterationResult' smart constructor.
+data BqmlIterationResult =
+  BqmlIterationResult'
+    { _birDurationMs   :: !(Maybe (Textual Int64))
+    , _birLearnRate    :: !(Maybe (Textual Double))
+    , _birEvalLoss     :: !(Maybe (Textual Double))
+    , _birTrainingLoss :: !(Maybe (Textual Double))
+    , _birIndex        :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BqmlIterationResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'birDurationMs'
+--
+-- * 'birLearnRate'
+--
+-- * 'birEvalLoss'
+--
+-- * 'birTrainingLoss'
+--
+-- * 'birIndex'
+bqmlIterationResult
+    :: BqmlIterationResult
+bqmlIterationResult =
+  BqmlIterationResult'
+    { _birDurationMs = Nothing
+    , _birLearnRate = Nothing
+    , _birEvalLoss = Nothing
+    , _birTrainingLoss = Nothing
+    , _birIndex = Nothing
+    }
+
+
+-- | [Output-only, Beta] Time taken to run the training iteration in
+-- milliseconds.
+birDurationMs :: Lens' BqmlIterationResult (Maybe Int64)
+birDurationMs
+  = lens _birDurationMs
+      (\ s a -> s{_birDurationMs = a})
+      . mapping _Coerce
+
+-- | [Output-only, Beta] Learning rate used for this iteration, it varies for
+-- different training iterations if learn_rate_strategy option is not
+-- constant.
+birLearnRate :: Lens' BqmlIterationResult (Maybe Double)
+birLearnRate
+  = lens _birLearnRate (\ s a -> s{_birLearnRate = a})
+      . mapping _Coerce
+
+-- | [Output-only, Beta] Eval loss computed on the eval data at the end of
+-- the iteration. The eval loss is used for early stopping to avoid
+-- overfitting. No eval loss if eval_split_method option is specified as
+-- no_split or auto_split with input data size less than 500 rows.
+birEvalLoss :: Lens' BqmlIterationResult (Maybe Double)
+birEvalLoss
+  = lens _birEvalLoss (\ s a -> s{_birEvalLoss = a}) .
+      mapping _Coerce
+
+-- | [Output-only, Beta] Training loss computed on the training data at the
+-- end of the iteration. The training loss function is defined by model
+-- type.
+birTrainingLoss :: Lens' BqmlIterationResult (Maybe Double)
+birTrainingLoss
+  = lens _birTrainingLoss
+      (\ s a -> s{_birTrainingLoss = a})
+      . mapping _Coerce
+
+-- | [Output-only, Beta] Index of the ML training iteration, starting from
+-- zero for each training run.
+birIndex :: Lens' BqmlIterationResult (Maybe Int32)
+birIndex
+  = lens _birIndex (\ s a -> s{_birIndex = a}) .
+      mapping _Coerce
+
+instance FromJSON BqmlIterationResult where
+        parseJSON
+          = withObject "BqmlIterationResult"
+              (\ o ->
+                 BqmlIterationResult' <$>
+                   (o .:? "durationMs") <*> (o .:? "learnRate") <*>
+                     (o .:? "evalLoss")
+                     <*> (o .:? "trainingLoss")
+                     <*> (o .:? "index"))
+
+instance ToJSON BqmlIterationResult where
+        toJSON BqmlIterationResult'{..}
+          = object
+              (catMaybes
+                 [("durationMs" .=) <$> _birDurationMs,
+                  ("learnRate" .=) <$> _birLearnRate,
+                  ("evalLoss" .=) <$> _birEvalLoss,
+                  ("trainingLoss" .=) <$> _birTrainingLoss,
+                  ("index" .=) <$> _birIndex])
 
 --
 -- /See:/ 'bigtableColumn' smart constructor.
@@ -5267,7 +5368,7 @@ instance ToJSON JobConfigurationExtract where
 data ModelDefinition =
   ModelDefinition'
     { _mdModelOptions :: !(Maybe ModelDefinitionModelOptions)
-    , _mdTrainingRuns :: !(Maybe [TrainingRun])
+    , _mdTrainingRuns :: !(Maybe [BqmlTrainingRun])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5297,7 +5398,7 @@ mdModelOptions
 -- run comprises of multiple iterations and there may be multiple training
 -- runs for the model if warm start is used or if a user decides to
 -- continue a previously cancelled query.
-mdTrainingRuns :: Lens' ModelDefinition [TrainingRun]
+mdTrainingRuns :: Lens' ModelDefinition [BqmlTrainingRun]
 mdTrainingRuns
   = lens _mdTrainingRuns
       (\ s a -> s{_mdTrainingRuns = a})
@@ -6262,6 +6363,7 @@ data JobStatistics2 =
     { _jModelTrainingExpectedTotalIteration :: !(Maybe (Textual Int64))
     , _jModelTraining                       :: !(Maybe BigQueryModelTraining)
     , _jTotalSlotMs                         :: !(Maybe (Textual Int64))
+    , _jDdlTargetRoutine                    :: !(Maybe RoutineReference)
     , _jDdlTargetTable                      :: !(Maybe TableReference)
     , _jEstimatedBytesProcessed             :: !(Maybe (Textual Int64))
     , _jModelTrainingCurrentIteration       :: !(Maybe (Textual Int32))
@@ -6293,6 +6395,8 @@ data JobStatistics2 =
 -- * 'jModelTraining'
 --
 -- * 'jTotalSlotMs'
+--
+-- * 'jDdlTargetRoutine'
 --
 -- * 'jDdlTargetTable'
 --
@@ -6336,6 +6440,7 @@ jobStatistics2 =
     { _jModelTrainingExpectedTotalIteration = Nothing
     , _jModelTraining = Nothing
     , _jTotalSlotMs = Nothing
+    , _jDdlTargetRoutine = Nothing
     , _jDdlTargetTable = Nothing
     , _jEstimatedBytesProcessed = Nothing
     , _jModelTrainingCurrentIteration = Nothing
@@ -6376,6 +6481,13 @@ jTotalSlotMs :: Lens' JobStatistics2 (Maybe Int64)
 jTotalSlotMs
   = lens _jTotalSlotMs (\ s a -> s{_jTotalSlotMs = a})
       . mapping _Coerce
+
+-- | The DDL target routine. Present only for CREATE\/DROP
+-- FUNCTION\/PROCEDURE queries.
+jDdlTargetRoutine :: Lens' JobStatistics2 (Maybe RoutineReference)
+jDdlTargetRoutine
+  = lens _jDdlTargetRoutine
+      (\ s a -> s{_jDdlTargetRoutine = a})
 
 -- | The DDL target table. Present only for CREATE\/DROP TABLE\/VIEW queries.
 jDdlTargetTable :: Lens' JobStatistics2 (Maybe TableReference)
@@ -6419,7 +6531,7 @@ jBillingTier
 -- this field specifies the accuracy of the estimate. Possible values can
 -- be: UNKNOWN: accuracy of the estimate is unknown. PRECISE: estimate is
 -- precise. LOWER_BOUND: estimate is lower bound of what the query would
--- cost. UPPER_BOUND: estiamte is upper bound of what the query would cost.
+-- cost. UPPER_BOUND: estimate is upper bound of what the query would cost.
 jTotalBytesProcessedAccuracy :: Lens' JobStatistics2 (Maybe Text)
 jTotalBytesProcessedAccuracy
   = lens _jTotalBytesProcessedAccuracy
@@ -6457,7 +6569,9 @@ jReferencedTables
 -- \"CREATE_TABLE_AS_SELECT\": CREATE [OR REPLACE] TABLE ... AS SELECT ...
 -- . \"DROP_TABLE\": DROP TABLE query. \"CREATE_VIEW\": CREATE [OR REPLACE]
 -- VIEW ... AS SELECT ... . \"DROP_VIEW\": DROP VIEW query.
--- \"ALTER_TABLE\": ALTER TABLE query. \"ALTER_VIEW\": ALTER VIEW query.
+-- \"CREATE_FUNCTION\": CREATE FUNCTION query. \"DROP_FUNCTION\" : DROP
+-- FUNCTION query. \"ALTER_TABLE\": ALTER TABLE query. \"ALTER_VIEW\":
+-- ALTER VIEW query.
 jStatementType :: Lens' JobStatistics2 (Maybe Text)
 jStatementType
   = lens _jStatementType
@@ -6534,6 +6648,7 @@ instance FromJSON JobStatistics2 where
                    (o .:? "modelTrainingExpectedTotalIteration") <*>
                      (o .:? "modelTraining")
                      <*> (o .:? "totalSlotMs")
+                     <*> (o .:? "ddlTargetRoutine")
                      <*> (o .:? "ddlTargetTable")
                      <*> (o .:? "estimatedBytesProcessed")
                      <*> (o .:? "modelTrainingCurrentIteration")
@@ -6561,6 +6676,7 @@ instance ToJSON JobStatistics2 where
                     _jModelTrainingExpectedTotalIteration,
                   ("modelTraining" .=) <$> _jModelTraining,
                   ("totalSlotMs" .=) <$> _jTotalSlotMs,
+                  ("ddlTargetRoutine" .=) <$> _jDdlTargetRoutine,
                   ("ddlTargetTable" .=) <$> _jDdlTargetTable,
                   ("estimatedBytesProcessed" .=) <$>
                     _jEstimatedBytesProcessed,
@@ -6735,6 +6851,7 @@ instance ToJSON TableLabels where
 data DestinationTableProperties =
   DestinationTableProperties'
     { _dtpFriendlyName :: !(Maybe Text)
+    , _dtpLabels       :: !(Maybe DestinationTablePropertiesLabels)
     , _dtpDescription  :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6746,12 +6863,17 @@ data DestinationTableProperties =
 --
 -- * 'dtpFriendlyName'
 --
+-- * 'dtpLabels'
+--
 -- * 'dtpDescription'
 destinationTableProperties
     :: DestinationTableProperties
 destinationTableProperties =
   DestinationTableProperties'
-    {_dtpFriendlyName = Nothing, _dtpDescription = Nothing}
+    { _dtpFriendlyName = Nothing
+    , _dtpLabels = Nothing
+    , _dtpDescription = Nothing
+    }
 
 
 -- | [Optional] The friendly name for the destination table. This will only
@@ -6762,6 +6884,15 @@ dtpFriendlyName :: Lens' DestinationTableProperties (Maybe Text)
 dtpFriendlyName
   = lens _dtpFriendlyName
       (\ s a -> s{_dtpFriendlyName = a})
+
+-- | [Optional] The labels associated with this table. You can use these to
+-- organize and group your tables. This will only be used if the
+-- destination table is newly created. If the table already exists and
+-- labels are different than the current labels are provided, the job will
+-- fail.
+dtpLabels :: Lens' DestinationTableProperties (Maybe DestinationTablePropertiesLabels)
+dtpLabels
+  = lens _dtpLabels (\ s a -> s{_dtpLabels = a})
 
 -- | [Optional] The description for the destination table. This will only be
 -- used if the destination table is newly created. If the table already
@@ -6777,13 +6908,15 @@ instance FromJSON DestinationTableProperties where
           = withObject "DestinationTableProperties"
               (\ o ->
                  DestinationTableProperties' <$>
-                   (o .:? "friendlyName") <*> (o .:? "description"))
+                   (o .:? "friendlyName") <*> (o .:? "labels") <*>
+                     (o .:? "description"))
 
 instance ToJSON DestinationTableProperties where
         toJSON DestinationTableProperties'{..}
           = object
               (catMaybes
                  [("friendlyName" .=) <$> _dtpFriendlyName,
+                  ("labels" .=) <$> _dtpLabels,
                   ("description" .=) <$> _dtpDescription])
 
 --
@@ -6856,9 +6989,13 @@ dsaiSpecialGroup
   = lens _dsaiSpecialGroup
       (\ s a -> s{_dsaiSpecialGroup = a})
 
--- | [Required] Describes the rights granted to the user specified by the
--- other member of the access object. The following string values are
--- supported: READER, WRITER, OWNER.
+-- | [Required] An IAM role ID that should be granted to the user, group, or
+-- domain specified in this access entry. The following legacy mappings
+-- will be applied: OWNER roles\/bigquery.dataOwner WRITER
+-- roles\/bigquery.dataEditor READER roles\/bigquery.dataViewer This field
+-- will accept any of the above formats, but will return only the legacy
+-- format. For example, if you set this field to
+-- \"roles\/bigquery.dataOwner\", it will be returned back as \"OWNER\".
 dsaiRole :: Lens' DataSetAccessItem (Maybe Text)
 dsaiRole = lens _dsaiRole (\ s a -> s{_dsaiRole = a})
 
@@ -6908,6 +7045,91 @@ instance ToJSON DataSetAccessItem where
                   ("iamMember" .=) <$> _dsaiIAMMember,
                   ("view" .=) <$> _dsaiView,
                   ("userByEmail" .=) <$> _dsaiUserByEmail])
+
+--
+-- /See:/ 'bqmlTrainingRun' smart constructor.
+data BqmlTrainingRun =
+  BqmlTrainingRun'
+    { _btrState            :: !(Maybe Text)
+    , _btrStartTime        :: !(Maybe DateTime')
+    , _btrIterationResults :: !(Maybe [BqmlIterationResult])
+    , _btrTrainingOptions  :: !(Maybe BqmlTrainingRunTrainingOptions)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BqmlTrainingRun' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'btrState'
+--
+-- * 'btrStartTime'
+--
+-- * 'btrIterationResults'
+--
+-- * 'btrTrainingOptions'
+bqmlTrainingRun
+    :: BqmlTrainingRun
+bqmlTrainingRun =
+  BqmlTrainingRun'
+    { _btrState = Nothing
+    , _btrStartTime = Nothing
+    , _btrIterationResults = Nothing
+    , _btrTrainingOptions = Nothing
+    }
+
+
+-- | [Output-only, Beta] Different state applicable for a training run. IN
+-- PROGRESS: Training run is in progress. FAILED: Training run ended due to
+-- a non-retryable failure. SUCCEEDED: Training run successfully completed.
+-- CANCELLED: Training run cancelled by the user.
+btrState :: Lens' BqmlTrainingRun (Maybe Text)
+btrState = lens _btrState (\ s a -> s{_btrState = a})
+
+-- | [Output-only, Beta] Training run start time in milliseconds since the
+-- epoch.
+btrStartTime :: Lens' BqmlTrainingRun (Maybe UTCTime)
+btrStartTime
+  = lens _btrStartTime (\ s a -> s{_btrStartTime = a})
+      . mapping _DateTime
+
+-- | [Output-only, Beta] List of each iteration results.
+btrIterationResults :: Lens' BqmlTrainingRun [BqmlIterationResult]
+btrIterationResults
+  = lens _btrIterationResults
+      (\ s a -> s{_btrIterationResults = a})
+      . _Default
+      . _Coerce
+
+-- | [Output-only, Beta] Training options used by this training run. These
+-- options are mutable for subsequent training runs. Default values are
+-- explicitly stored for options not specified in the input query of the
+-- first training run. For subsequent training runs, any option not
+-- explicitly specified in the input query will be copied from the previous
+-- training run.
+btrTrainingOptions :: Lens' BqmlTrainingRun (Maybe BqmlTrainingRunTrainingOptions)
+btrTrainingOptions
+  = lens _btrTrainingOptions
+      (\ s a -> s{_btrTrainingOptions = a})
+
+instance FromJSON BqmlTrainingRun where
+        parseJSON
+          = withObject "BqmlTrainingRun"
+              (\ o ->
+                 BqmlTrainingRun' <$>
+                   (o .:? "state") <*> (o .:? "startTime") <*>
+                     (o .:? "iterationResults" .!= mempty)
+                     <*> (o .:? "trainingOptions"))
+
+instance ToJSON BqmlTrainingRun where
+        toJSON BqmlTrainingRun'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _btrState,
+                  ("startTime" .=) <$> _btrStartTime,
+                  ("iterationResults" .=) <$> _btrIterationResults,
+                  ("trainingOptions" .=) <$> _btrTrainingOptions])
 
 --
 -- /See:/ 'tableDataInsertAllResponse' smart constructor.
@@ -7606,6 +7828,50 @@ instance ToJSON CSVOptions where
                   ("encoding" .=) <$> _coEncoding,
                   ("fieldDelimiter" .=) <$> _coFieldDelimiter])
 
+-- | [Optional] The labels associated with this table. You can use these to
+-- organize and group your tables. This will only be used if the
+-- destination table is newly created. If the table already exists and
+-- labels are different than the current labels are provided, the job will
+-- fail.
+--
+-- /See:/ 'destinationTablePropertiesLabels' smart constructor.
+newtype DestinationTablePropertiesLabels =
+  DestinationTablePropertiesLabels'
+    { _dtplAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DestinationTablePropertiesLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtplAddtional'
+destinationTablePropertiesLabels
+    :: HashMap Text Text -- ^ 'dtplAddtional'
+    -> DestinationTablePropertiesLabels
+destinationTablePropertiesLabels pDtplAddtional_ =
+  DestinationTablePropertiesLabels' {_dtplAddtional = _Coerce # pDtplAddtional_}
+
+
+dtplAddtional :: Lens' DestinationTablePropertiesLabels (HashMap Text Text)
+dtplAddtional
+  = lens _dtplAddtional
+      (\ s a -> s{_dtplAddtional = a})
+      . _Coerce
+
+instance FromJSON DestinationTablePropertiesLabels
+         where
+        parseJSON
+          = withObject "DestinationTablePropertiesLabels"
+              (\ o ->
+                 DestinationTablePropertiesLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON DestinationTablePropertiesLabels
+         where
+        toJSON = toJSON . _dtplAddtional
+
 --
 -- /See:/ 'jobStatistics3' smart constructor.
 data JobStatistics3 =
@@ -7912,91 +8178,6 @@ instance FromJSON DataSetListDataSetsItemLabels where
 
 instance ToJSON DataSetListDataSetsItemLabels where
         toJSON = toJSON . _dsldsilAddtional
-
---
--- /See:/ 'trainingRun' smart constructor.
-data TrainingRun =
-  TrainingRun'
-    { _trState            :: !(Maybe Text)
-    , _trStartTime        :: !(Maybe DateTime')
-    , _trIterationResults :: !(Maybe [IterationResult])
-    , _trTrainingOptions  :: !(Maybe TrainingRunTrainingOptions)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'TrainingRun' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'trState'
---
--- * 'trStartTime'
---
--- * 'trIterationResults'
---
--- * 'trTrainingOptions'
-trainingRun
-    :: TrainingRun
-trainingRun =
-  TrainingRun'
-    { _trState = Nothing
-    , _trStartTime = Nothing
-    , _trIterationResults = Nothing
-    , _trTrainingOptions = Nothing
-    }
-
-
--- | [Output-only, Beta] Different state applicable for a training run. IN
--- PROGRESS: Training run is in progress. FAILED: Training run ended due to
--- a non-retryable failure. SUCCEEDED: Training run successfully completed.
--- CANCELLED: Training run cancelled by the user.
-trState :: Lens' TrainingRun (Maybe Text)
-trState = lens _trState (\ s a -> s{_trState = a})
-
--- | [Output-only, Beta] Training run start time in milliseconds since the
--- epoch.
-trStartTime :: Lens' TrainingRun (Maybe UTCTime)
-trStartTime
-  = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
-      mapping _DateTime
-
--- | [Output-only, Beta] List of each iteration results.
-trIterationResults :: Lens' TrainingRun [IterationResult]
-trIterationResults
-  = lens _trIterationResults
-      (\ s a -> s{_trIterationResults = a})
-      . _Default
-      . _Coerce
-
--- | [Output-only, Beta] Training options used by this training run. These
--- options are mutable for subsequent training runs. Default values are
--- explicitly stored for options not specified in the input query of the
--- first training run. For subsequent training runs, any option not
--- explicitly specified in the input query will be copied from the previous
--- training run.
-trTrainingOptions :: Lens' TrainingRun (Maybe TrainingRunTrainingOptions)
-trTrainingOptions
-  = lens _trTrainingOptions
-      (\ s a -> s{_trTrainingOptions = a})
-
-instance FromJSON TrainingRun where
-        parseJSON
-          = withObject "TrainingRun"
-              (\ o ->
-                 TrainingRun' <$>
-                   (o .:? "state") <*> (o .:? "startTime") <*>
-                     (o .:? "iterationResults" .!= mempty)
-                     <*> (o .:? "trainingOptions"))
-
-instance ToJSON TrainingRun where
-        toJSON TrainingRun'{..}
-          = object
-              (catMaybes
-                 [("state" .=) <$> _trState,
-                  ("startTime" .=) <$> _trStartTime,
-                  ("iterationResults" .=) <$> _trIterationResults,
-                  ("trainingOptions" .=) <$> _trTrainingOptions])
 
 -- | Additional details for a view.
 --

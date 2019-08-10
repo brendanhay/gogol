@@ -20,12 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a FHIR store or security label within
--- a FHIR store. Returns NOT_FOUND error if the resource does not exist.
--- Returns an empty policy if the resource exists but does not have a
--- policy set. Authorization requires the Google IAM permission
--- \'healthcare.fhirStores.getIamPolicy\' for a FHIR store or
--- \'healthcare.securityLabels.getIamPolicy\' for a security label
+-- Gets the access control policy for a resource. Returns an empty policy
+-- if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.getIamPolicy@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.GetIAMPolicy
@@ -42,7 +38,6 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfsgipUploadProtocol
     , pldsfsgipAccessToken
     , pldsfsgipUploadType
-    , pldsfsgipPayload
     , pldsfsgipResource
     , pldsfsgipCallback
     ) where
@@ -54,23 +49,17 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresGetIAMPolicy' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresGetIAMPolicyResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] GetIAMPolicyRequest :>
-                       Post '[JSON] Policy
+                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the access control policy for a FHIR store or security label within
--- a FHIR store. Returns NOT_FOUND error if the resource does not exist.
--- Returns an empty policy if the resource exists but does not have a
--- policy set. Authorization requires the Google IAM permission
--- \'healthcare.fhirStores.getIamPolicy\' for a FHIR store or
--- \'healthcare.securityLabels.getIamPolicy\' for a security label
+-- | Gets the access control policy for a resource. Returns an empty policy
+-- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresGetIAMPolicy' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresGetIAMPolicy =
@@ -79,7 +68,6 @@ data ProjectsLocationsDataSetsFhirStoresGetIAMPolicy =
     , _pldsfsgipUploadProtocol :: !(Maybe Text)
     , _pldsfsgipAccessToken    :: !(Maybe Text)
     , _pldsfsgipUploadType     :: !(Maybe Text)
-    , _pldsfsgipPayload        :: !GetIAMPolicyRequest
     , _pldsfsgipResource       :: !Text
     , _pldsfsgipCallback       :: !(Maybe Text)
     }
@@ -98,22 +86,18 @@ data ProjectsLocationsDataSetsFhirStoresGetIAMPolicy =
 --
 -- * 'pldsfsgipUploadType'
 --
--- * 'pldsfsgipPayload'
---
 -- * 'pldsfsgipResource'
 --
 -- * 'pldsfsgipCallback'
 projectsLocationsDataSetsFhirStoresGetIAMPolicy
-    :: GetIAMPolicyRequest -- ^ 'pldsfsgipPayload'
-    -> Text -- ^ 'pldsfsgipResource'
+    :: Text -- ^ 'pldsfsgipResource'
     -> ProjectsLocationsDataSetsFhirStoresGetIAMPolicy
-projectsLocationsDataSetsFhirStoresGetIAMPolicy pPldsfsgipPayload_ pPldsfsgipResource_ =
+projectsLocationsDataSetsFhirStoresGetIAMPolicy pPldsfsgipResource_ =
   ProjectsLocationsDataSetsFhirStoresGetIAMPolicy'
     { _pldsfsgipXgafv = Nothing
     , _pldsfsgipUploadProtocol = Nothing
     , _pldsfsgipAccessToken = Nothing
     , _pldsfsgipUploadType = Nothing
-    , _pldsfsgipPayload = pPldsfsgipPayload_
     , _pldsfsgipResource = pPldsfsgipResource_
     , _pldsfsgipCallback = Nothing
     }
@@ -142,12 +126,6 @@ pldsfsgipUploadType :: Lens' ProjectsLocationsDataSetsFhirStoresGetIAMPolicy (Ma
 pldsfsgipUploadType
   = lens _pldsfsgipUploadType
       (\ s a -> s{_pldsfsgipUploadType = a})
-
--- | Multipart request metadata.
-pldsfsgipPayload :: Lens' ProjectsLocationsDataSetsFhirStoresGetIAMPolicy GetIAMPolicyRequest
-pldsfsgipPayload
-  = lens _pldsfsgipPayload
-      (\ s a -> s{_pldsfsgipPayload = a})
 
 -- | REQUIRED: The resource for which the policy is being requested. See the
 -- operation documentation for the appropriate value for this field.
@@ -179,7 +157,6 @@ instance GoogleRequest
               _pldsfsgipUploadType
               _pldsfsgipCallback
               (Just AltJSON)
-              _pldsfsgipPayload
               healthcareService
           where go
                   = buildClient

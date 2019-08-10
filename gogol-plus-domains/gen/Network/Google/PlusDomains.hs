@@ -26,12 +26,10 @@ module Network.Google.PlusDomains
     , plusLoginScope
     , plusProFilesReadScope
     , userInfoEmailScope
-    , plusStreamWriteScope
     , plusStreamReadScope
     , plusMeScope
     , plusCirclesReadScope
     , plusMediaUploadScope
-    , plusCirclesWriteScope
 
     -- * API Declaration
     , PlusDomainsAPI
@@ -41,44 +39,17 @@ module Network.Google.PlusDomains
     -- ** plusDomains.activities.get
     , module Network.Google.Resource.PlusDomains.Activities.Get
 
-    -- ** plusDomains.activities.insert
-    , module Network.Google.Resource.PlusDomains.Activities.Insert
-
     -- ** plusDomains.activities.list
     , module Network.Google.Resource.PlusDomains.Activities.List
 
     -- ** plusDomains.audiences.list
     , module Network.Google.Resource.PlusDomains.Audiences.List
 
-    -- ** plusDomains.circles.addPeople
-    , module Network.Google.Resource.PlusDomains.Circles.AddPeople
-
-    -- ** plusDomains.circles.get
-    , module Network.Google.Resource.PlusDomains.Circles.Get
-
-    -- ** plusDomains.circles.insert
-    , module Network.Google.Resource.PlusDomains.Circles.Insert
-
     -- ** plusDomains.circles.list
     , module Network.Google.Resource.PlusDomains.Circles.List
 
-    -- ** plusDomains.circles.patch
-    , module Network.Google.Resource.PlusDomains.Circles.Patch
-
-    -- ** plusDomains.circles.remove
-    , module Network.Google.Resource.PlusDomains.Circles.Remove
-
-    -- ** plusDomains.circles.removePeople
-    , module Network.Google.Resource.PlusDomains.Circles.RemovePeople
-
-    -- ** plusDomains.circles.update
-    , module Network.Google.Resource.PlusDomains.Circles.Update
-
     -- ** plusDomains.comments.get
     , module Network.Google.Resource.PlusDomains.Comments.Get
-
-    -- ** plusDomains.comments.insert
-    , module Network.Google.Resource.PlusDomains.Comments.Insert
 
     -- ** plusDomains.comments.list
     , module Network.Google.Resource.PlusDomains.Comments.List
@@ -94,9 +65,6 @@ module Network.Google.PlusDomains
 
     -- ** plusDomains.people.listByActivity
     , module Network.Google.Resource.PlusDomains.People.ListByActivity
-
-    -- ** plusDomains.people.listByCircle
-    , module Network.Google.Resource.PlusDomains.People.ListByCircle
 
     -- * Types
 
@@ -644,25 +612,15 @@ module Network.Google.PlusDomains
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.PlusDomains.Activities.Get
-import           Network.Google.Resource.PlusDomains.Activities.Insert
 import           Network.Google.Resource.PlusDomains.Activities.List
 import           Network.Google.Resource.PlusDomains.Audiences.List
-import           Network.Google.Resource.PlusDomains.Circles.AddPeople
-import           Network.Google.Resource.PlusDomains.Circles.Get
-import           Network.Google.Resource.PlusDomains.Circles.Insert
 import           Network.Google.Resource.PlusDomains.Circles.List
-import           Network.Google.Resource.PlusDomains.Circles.Patch
-import           Network.Google.Resource.PlusDomains.Circles.Remove
-import           Network.Google.Resource.PlusDomains.Circles.RemovePeople
-import           Network.Google.Resource.PlusDomains.Circles.Update
 import           Network.Google.Resource.PlusDomains.Comments.Get
-import           Network.Google.Resource.PlusDomains.Comments.Insert
 import           Network.Google.Resource.PlusDomains.Comments.List
 import           Network.Google.Resource.PlusDomains.Media.Insert
 import           Network.Google.Resource.PlusDomains.People.Get
 import           Network.Google.Resource.PlusDomains.People.List
 import           Network.Google.Resource.PlusDomains.People.ListByActivity
-import           Network.Google.Resource.PlusDomains.People.ListByCircle
 
 {- $resources
 TODO
@@ -670,22 +628,12 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google+ Domains API service.
 type PlusDomainsAPI =
-     ActivitiesInsertResource :<|> ActivitiesListResource
-       :<|> ActivitiesGetResource
+     ActivitiesListResource :<|> ActivitiesGetResource
        :<|> PeopleListResource
-       :<|> PeopleListByCircleResource
        :<|> PeopleGetResource
        :<|> PeopleListByActivityResource
        :<|> MediaInsertResource
        :<|> AudiencesListResource
-       :<|> CommentsInsertResource
        :<|> CommentsListResource
        :<|> CommentsGetResource
-       :<|> CirclesInsertResource
-       :<|> CirclesAddPeopleResource
        :<|> CirclesListResource
-       :<|> CirclesPatchResource
-       :<|> CirclesGetResource
-       :<|> CirclesRemoveResource
-       :<|> CirclesRemovePeopleResource
-       :<|> CirclesUpdateResource

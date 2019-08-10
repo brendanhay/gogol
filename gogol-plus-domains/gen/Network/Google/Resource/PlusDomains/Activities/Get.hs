@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an activity.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.activities.get@.
 module Network.Google.Resource.PlusDomains.Activities.Get
@@ -48,7 +49,8 @@ type ActivitiesGetResource =
            Capture "activityId" Text :>
              QueryParam "alt" AltJSON :> Get '[JSON] Activity
 
--- | Get an activity.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'activitiesGet' smart constructor.
 newtype ActivitiesGet =

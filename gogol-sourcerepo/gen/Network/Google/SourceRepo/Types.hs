@@ -25,6 +25,13 @@ module Network.Google.SourceRepo.Types
     , cloudPlatformScope
     , sourceReadWriteScope
 
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
     -- * AuditConfig
     , AuditConfig
     , auditConfig
@@ -52,6 +59,15 @@ module Network.Google.SourceRepo.Types
     , lrrNextPageToken
     , lrrRepos
 
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
     -- * Empty
     , Empty
     , empty
@@ -61,6 +77,11 @@ module Network.Google.SourceRepo.Types
     , updateRepoRequest
     , urrUpdateMask
     , urrRepo
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -127,6 +148,11 @@ module Network.Google.SourceRepo.Types
     , pVersion
     , pBindings
 
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
     -- * AuditLogConfig
     , AuditLogConfig
     , auditLogConfig
@@ -139,6 +165,15 @@ module Network.Google.SourceRepo.Types
     , mcURL
     , mcDeployKeyId
     , mcWebhookId
+
+    -- * SyncRepoRequest
+    , SyncRepoRequest
+    , syncRepoRequest
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- * Binding
     , Binding

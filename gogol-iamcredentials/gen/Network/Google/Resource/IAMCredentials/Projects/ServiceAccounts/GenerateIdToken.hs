@@ -139,7 +139,9 @@ psagitPayload
 
 -- | The resource name of the service account for which the credentials are
 -- requested, in the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`.
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 psagitName :: Lens' ProjectsServiceAccountsGenerateIdToken Text
 psagitName
   = lens _psagitName (\ s a -> s{_psagitName = a})

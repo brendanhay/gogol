@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.purge@ method which the
 -- 'ProjectsLocationsQueuesPurge' request conforms to.
 type ProjectsLocationsQueuesPurgeResource =
-     "v2beta3" :>
+     "v2" :>
        CaptureMode "name" "purge" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

@@ -472,9 +472,11 @@ instance ToJSON DeviceMetadataEntries where
 -- /See:/ 'partnerUnclaim' smart constructor.
 data PartnerUnclaim =
   PartnerUnclaim'
-    { _puDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _puSectionType      :: !(Maybe PartnerUnclaimSectionType)
-    , _puDeviceId         :: !(Maybe (Textual Int64))
+    { _puDeviceIdentifier       :: !(Maybe DeviceIdentifier)
+    , _puSectionType            :: !(Maybe PartnerUnclaimSectionType)
+    , _puVacationModeExpireTime :: !(Maybe DateTime')
+    , _puVacationModeDays       :: !(Maybe (Textual Int32))
+    , _puDeviceId               :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -487,6 +489,10 @@ data PartnerUnclaim =
 --
 -- * 'puSectionType'
 --
+-- * 'puVacationModeExpireTime'
+--
+-- * 'puVacationModeDays'
+--
 -- * 'puDeviceId'
 partnerUnclaim
     :: PartnerUnclaim
@@ -494,6 +500,8 @@ partnerUnclaim =
   PartnerUnclaim'
     { _puDeviceIdentifier = Nothing
     , _puSectionType = Nothing
+    , _puVacationModeExpireTime = Nothing
+    , _puVacationModeDays = Nothing
     , _puDeviceId = Nothing
     }
 
@@ -510,6 +518,21 @@ puSectionType
   = lens _puSectionType
       (\ s a -> s{_puSectionType = a})
 
+-- | The expiration time of the vacation unlock.
+puVacationModeExpireTime :: Lens' PartnerUnclaim (Maybe UTCTime)
+puVacationModeExpireTime
+  = lens _puVacationModeExpireTime
+      (\ s a -> s{_puVacationModeExpireTime = a})
+      . mapping _DateTime
+
+-- | The duration of the vacation unlock starting from when the request is
+-- processed. (1 day is treated as 24 hours)
+puVacationModeDays :: Lens' PartnerUnclaim (Maybe Int32)
+puVacationModeDays
+  = lens _puVacationModeDays
+      (\ s a -> s{_puVacationModeDays = a})
+      . mapping _Coerce
+
 -- | Device ID of the device.
 puDeviceId :: Lens' PartnerUnclaim (Maybe Int64)
 puDeviceId
@@ -522,6 +545,8 @@ instance FromJSON PartnerUnclaim where
               (\ o ->
                  PartnerUnclaim' <$>
                    (o .:? "deviceIdentifier") <*> (o .:? "sectionType")
+                     <*> (o .:? "vacationModeExpireTime")
+                     <*> (o .:? "vacationModeDays")
                      <*> (o .:? "deviceId"))
 
 instance ToJSON PartnerUnclaim where
@@ -530,6 +555,9 @@ instance ToJSON PartnerUnclaim where
               (catMaybes
                  [("deviceIdentifier" .=) <$> _puDeviceIdentifier,
                   ("sectionType" .=) <$> _puSectionType,
+                  ("vacationModeExpireTime" .=) <$>
+                    _puVacationModeExpireTime,
+                  ("vacationModeDays" .=) <$> _puVacationModeDays,
                   ("deviceId" .=) <$> _puDeviceId])
 
 -- | An EMM\'s DPC ([device policy
@@ -1760,9 +1788,11 @@ instance ToJSON CustomerListCustomersResponse where
 -- /See:/ 'deviceClaim' smart constructor.
 data DeviceClaim =
   DeviceClaim'
-    { _dcSectionType    :: !(Maybe DeviceClaimSectionType)
-    , _dcOwnerCompanyId :: !(Maybe (Textual Int64))
-    , _dcResellerId     :: !(Maybe (Textual Int64))
+    { _dcSectionType            :: !(Maybe DeviceClaimSectionType)
+    , _dcVacationModeExpireTime :: !(Maybe DateTime')
+    , _dcVacationModeStartTime  :: !(Maybe DateTime')
+    , _dcOwnerCompanyId         :: !(Maybe (Textual Int64))
+    , _dcResellerId             :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1773,6 +1803,10 @@ data DeviceClaim =
 --
 -- * 'dcSectionType'
 --
+-- * 'dcVacationModeExpireTime'
+--
+-- * 'dcVacationModeStartTime'
+--
 -- * 'dcOwnerCompanyId'
 --
 -- * 'dcResellerId'
@@ -1781,6 +1815,8 @@ deviceClaim
 deviceClaim =
   DeviceClaim'
     { _dcSectionType = Nothing
+    , _dcVacationModeExpireTime = Nothing
+    , _dcVacationModeStartTime = Nothing
     , _dcOwnerCompanyId = Nothing
     , _dcResellerId = Nothing
     }
@@ -1791,6 +1827,22 @@ dcSectionType :: Lens' DeviceClaim (Maybe DeviceClaimSectionType)
 dcSectionType
   = lens _dcSectionType
       (\ s a -> s{_dcSectionType = a})
+
+-- | The timestamp when the device will exit ‘vacation mode’. This value is
+-- present iff the device is in \'vacation mode\'.
+dcVacationModeExpireTime :: Lens' DeviceClaim (Maybe UTCTime)
+dcVacationModeExpireTime
+  = lens _dcVacationModeExpireTime
+      (\ s a -> s{_dcVacationModeExpireTime = a})
+      . mapping _DateTime
+
+-- | The timestamp when the device was put into ‘vacation mode’. This value
+-- is present iff the device is in \'vacation mode\'.
+dcVacationModeStartTime :: Lens' DeviceClaim (Maybe UTCTime)
+dcVacationModeStartTime
+  = lens _dcVacationModeStartTime
+      (\ s a -> s{_dcVacationModeStartTime = a})
+      . mapping _DateTime
 
 -- | The ID of the Customer that purchased the device.
 dcOwnerCompanyId :: Lens' DeviceClaim (Maybe Int64)
@@ -1810,7 +1862,10 @@ instance FromJSON DeviceClaim where
           = withObject "DeviceClaim"
               (\ o ->
                  DeviceClaim' <$>
-                   (o .:? "sectionType") <*> (o .:? "ownerCompanyId")
+                   (o .:? "sectionType") <*>
+                     (o .:? "vacationModeExpireTime")
+                     <*> (o .:? "vacationModeStartTime")
+                     <*> (o .:? "ownerCompanyId")
                      <*> (o .:? "resellerId"))
 
 instance ToJSON DeviceClaim where
@@ -1818,6 +1873,10 @@ instance ToJSON DeviceClaim where
           = object
               (catMaybes
                  [("sectionType" .=) <$> _dcSectionType,
+                  ("vacationModeExpireTime" .=) <$>
+                    _dcVacationModeExpireTime,
+                  ("vacationModeStartTime" .=) <$>
+                    _dcVacationModeStartTime,
                   ("ownerCompanyId" .=) <$> _dcOwnerCompanyId,
                   ("resellerId" .=) <$> _dcResellerId])
 
@@ -2054,9 +2113,11 @@ instance ToJSON FindDevicesByDeviceIdentifierResponse
 -- /See:/ 'unclaimDeviceRequest' smart constructor.
 data UnclaimDeviceRequest =
   UnclaimDeviceRequest'
-    { _udrDeviceIdentifier :: !(Maybe DeviceIdentifier)
-    , _udrSectionType      :: !(Maybe UnclaimDeviceRequestSectionType)
-    , _udrDeviceId         :: !(Maybe (Textual Int64))
+    { _udrDeviceIdentifier       :: !(Maybe DeviceIdentifier)
+    , _udrSectionType            :: !(Maybe UnclaimDeviceRequestSectionType)
+    , _udrVacationModeExpireTime :: !(Maybe DateTime')
+    , _udrVacationModeDays       :: !(Maybe (Textual Int32))
+    , _udrDeviceId               :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2069,6 +2130,10 @@ data UnclaimDeviceRequest =
 --
 -- * 'udrSectionType'
 --
+-- * 'udrVacationModeExpireTime'
+--
+-- * 'udrVacationModeDays'
+--
 -- * 'udrDeviceId'
 unclaimDeviceRequest
     :: UnclaimDeviceRequest
@@ -2076,6 +2141,8 @@ unclaimDeviceRequest =
   UnclaimDeviceRequest'
     { _udrDeviceIdentifier = Nothing
     , _udrSectionType = Nothing
+    , _udrVacationModeExpireTime = Nothing
+    , _udrVacationModeDays = Nothing
     , _udrDeviceId = Nothing
     }
 
@@ -2092,6 +2159,21 @@ udrSectionType
   = lens _udrSectionType
       (\ s a -> s{_udrSectionType = a})
 
+-- | The expiration time of the vacation unlock.
+udrVacationModeExpireTime :: Lens' UnclaimDeviceRequest (Maybe UTCTime)
+udrVacationModeExpireTime
+  = lens _udrVacationModeExpireTime
+      (\ s a -> s{_udrVacationModeExpireTime = a})
+      . mapping _DateTime
+
+-- | The duration of the vacation unlock starting from when the request is
+-- processed. (1 day is treated as 24 hours)
+udrVacationModeDays :: Lens' UnclaimDeviceRequest (Maybe Int32)
+udrVacationModeDays
+  = lens _udrVacationModeDays
+      (\ s a -> s{_udrVacationModeDays = a})
+      . mapping _Coerce
+
 -- | The device ID returned by \`ClaimDevice\`.
 udrDeviceId :: Lens' UnclaimDeviceRequest (Maybe Int64)
 udrDeviceId
@@ -2104,6 +2186,8 @@ instance FromJSON UnclaimDeviceRequest where
               (\ o ->
                  UnclaimDeviceRequest' <$>
                    (o .:? "deviceIdentifier") <*> (o .:? "sectionType")
+                     <*> (o .:? "vacationModeExpireTime")
+                     <*> (o .:? "vacationModeDays")
                      <*> (o .:? "deviceId"))
 
 instance ToJSON UnclaimDeviceRequest where
@@ -2112,6 +2196,9 @@ instance ToJSON UnclaimDeviceRequest where
               (catMaybes
                  [("deviceIdentifier" .=) <$> _udrDeviceIdentifier,
                   ("sectionType" .=) <$> _udrSectionType,
+                  ("vacationModeExpireTime" .=) <$>
+                    _udrVacationModeExpireTime,
+                  ("vacationModeDays" .=) <$> _udrVacationModeDays,
                   ("deviceId" .=) <$> _udrDeviceId])
 
 -- | Tracks the status of a long-running operation to claim, unclaim, or

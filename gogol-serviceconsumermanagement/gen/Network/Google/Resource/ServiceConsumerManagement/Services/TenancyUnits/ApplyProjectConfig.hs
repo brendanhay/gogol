@@ -20,19 +20,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Apply configuration to an existing tenant project. This project must
--- exist in active state and have the original owner account. Caller must
--- have the permission to add a project to the given tenancy unit.
--- Configuration will be applied, but any existing settings on the project
--- will not be modified. Specified policy bindings will be applied.
--- Existing binding will not be modified. Specified services will be
--- activated. No service will be deactivated. New billing configuration
--- will be applied if specified. Omit billing configuration to keep the
--- existing one. Service account in the project will be created if
--- previously non existing. Specified folder will be ignored, moving tenant
--- project to a different folder is not supported. Operation fails if any
--- of the steps fail, but no rollback of already applied configuration
--- changes is attempted. Operation.
+-- Apply a configuration to an existing tenant project. This project must
+-- exist in an active state and have the original owner account. The caller
+-- must have permission to add a project to the given tenancy unit. The
+-- configuration is applied, but any existing settings on the project
+-- aren\'t modified. Specified policy bindings are applied. Existing
+-- bindings aren\'t modified. Specified services are activated. No service
+-- is deactivated. If specified, new billing configuration is applied. Omit
+-- a billing configuration to keep the existing one. A service account in
+-- the project is created if previously non existed. Specified labels will
+-- be appended to tenant project, note that the value of existing label key
+-- will be updated if the same label key is requested. The specified folder
+-- is ignored, as moving a tenant project to a different folder isn\'t
+-- supported. The operation fails if any of the steps fail, but no rollback
+-- of already applied configuration changes is attempted. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.applyProjectConfig@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.ApplyProjectConfig
@@ -71,19 +72,20 @@ type ServicesTenancyUnitsApplyProjectConfigResource =
                      ReqBody '[JSON] ApplyTenantProjectConfigRequest :>
                        Post '[JSON] Operation
 
--- | Apply configuration to an existing tenant project. This project must
--- exist in active state and have the original owner account. Caller must
--- have the permission to add a project to the given tenancy unit.
--- Configuration will be applied, but any existing settings on the project
--- will not be modified. Specified policy bindings will be applied.
--- Existing binding will not be modified. Specified services will be
--- activated. No service will be deactivated. New billing configuration
--- will be applied if specified. Omit billing configuration to keep the
--- existing one. Service account in the project will be created if
--- previously non existing. Specified folder will be ignored, moving tenant
--- project to a different folder is not supported. Operation fails if any
--- of the steps fail, but no rollback of already applied configuration
--- changes is attempted. Operation.
+-- | Apply a configuration to an existing tenant project. This project must
+-- exist in an active state and have the original owner account. The caller
+-- must have permission to add a project to the given tenancy unit. The
+-- configuration is applied, but any existing settings on the project
+-- aren\'t modified. Specified policy bindings are applied. Existing
+-- bindings aren\'t modified. Specified services are activated. No service
+-- is deactivated. If specified, new billing configuration is applied. Omit
+-- a billing configuration to keep the existing one. A service account in
+-- the project is created if previously non existed. Specified labels will
+-- be appended to tenant project, note that the value of existing label key
+-- will be updated if the same label key is requested. The specified folder
+-- is ignored, as moving a tenant project to a different folder isn\'t
+-- supported. The operation fails if any of the steps fail, but no rollback
+-- of already applied configuration changes is attempted. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsApplyProjectConfig' smart constructor.
 data ServicesTenancyUnitsApplyProjectConfig =
@@ -161,7 +163,8 @@ stuapcPayload
   = lens _stuapcPayload
       (\ s a -> s{_stuapcPayload = a})
 
--- | Name of the tenancy unit.
+-- | Name of the tenancy unit. Such as
+-- \'services\/service.googleapis.com\/projects\/12345\/tenancyUnits\/abcd\'.
 stuapcName :: Lens' ServicesTenancyUnitsApplyProjectConfig Text
 stuapcName
   = lens _stuapcName (\ s a -> s{_stuapcName = a})

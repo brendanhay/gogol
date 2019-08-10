@@ -51,6 +51,7 @@ library
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Commit
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Create
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Delete
+        , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteSQL
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSQL
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Get

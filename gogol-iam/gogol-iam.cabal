@@ -54,6 +54,8 @@ library
         , Network.Google.Resource.IAM.Projects.Roles.Undelete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
@@ -61,10 +63,12 @@ library
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.List
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
         , Network.Google.Resource.IAM.Roles.Get
         , Network.Google.Resource.IAM.Roles.List

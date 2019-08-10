@@ -1,0 +1,69 @@
+name:                  gogol-securitycenter
+version:               0.5.0
+synopsis:              Google Cloud Security Command Center SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Cloud Security Command Center API provides access to temporal views of
+    assets and findings within an organization.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.SecurityCenter.Organizations.Assets.Group
+        , Network.Google.Resource.SecurityCenter.Organizations.Assets.List
+        , Network.Google.Resource.SecurityCenter.Organizations.Assets.RunDiscovery
+        , Network.Google.Resource.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
+        , Network.Google.Resource.SecurityCenter.Organizations.GetOrganizationSettings
+        , Network.Google.Resource.SecurityCenter.Organizations.Operations.Cancel
+        , Network.Google.Resource.SecurityCenter.Organizations.Operations.Delete
+        , Network.Google.Resource.SecurityCenter.Organizations.Operations.Get
+        , Network.Google.Resource.SecurityCenter.Organizations.Operations.List
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Create
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Create
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Group
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.List
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Patch
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.SetState
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Get
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.GetIAMPolicy
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.List
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.Patch
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.SetIAMPolicy
+        , Network.Google.Resource.SecurityCenter.Organizations.Sources.TestIAMPermissions
+        , Network.Google.Resource.SecurityCenter.Organizations.UpdateOrganizationSettings
+        , Network.Google.SecurityCenter
+        , Network.Google.SecurityCenter.Types
+
+    other-modules:
+          Network.Google.SecurityCenter.Types.Product
+        , Network.Google.SecurityCenter.Types.Sum
+
+    build-depends:
+          gogol-core == 0.5.0.*
+        , base       >= 4.7 && < 5

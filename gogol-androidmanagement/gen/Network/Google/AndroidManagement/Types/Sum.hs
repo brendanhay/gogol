@@ -380,6 +380,51 @@ instance FromJSON DeviceManagementMode where
 instance ToJSON DeviceManagementMode where
     toJSON = toJSONText
 
+-- | The display mode of the web app.
+data WebAppDisplayMode
+    = DisplayModeUnspecified
+      -- ^ @DISPLAY_MODE_UNSPECIFIED@
+      -- Not used.
+    | MinimalUi
+      -- ^ @MINIMAL_UI@
+      -- Opens the web app with a minimal set of browser UI elements for
+      -- controlling navigation and viewing the page URL.
+    | Standalone
+      -- ^ @STANDALONE@
+      -- Opens the web app to look and feel like a standalone native application.
+      -- The browser UI elements and page URL are not visible, however the system
+      -- status bar and back button are visible.
+    | FullScreen
+      -- ^ @FULL_SCREEN@
+      -- Opens the web app in full screen without any visible controls. The
+      -- browser UI elements, page URL, system status bar and back button are not
+      -- visible, and the web app takes up the entirety of the available display
+      -- area.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable WebAppDisplayMode
+
+instance FromHttpApiData WebAppDisplayMode where
+    parseQueryParam = \case
+        "DISPLAY_MODE_UNSPECIFIED" -> Right DisplayModeUnspecified
+        "MINIMAL_UI" -> Right MinimalUi
+        "STANDALONE" -> Right Standalone
+        "FULL_SCREEN" -> Right FullScreen
+        x -> Left ("Unable to parse WebAppDisplayMode from: " <> x)
+
+instance ToHttpApiData WebAppDisplayMode where
+    toQueryParam = \case
+        DisplayModeUnspecified -> "DISPLAY_MODE_UNSPECIFIED"
+        MinimalUi -> "MINIMAL_UI"
+        Standalone -> "STANDALONE"
+        FullScreen -> "FULL_SCREEN"
+
+instance FromJSON WebAppDisplayMode where
+    parseJSON = parseJSONText "WebAppDisplayMode"
+
+instance ToJSON WebAppDisplayMode where
+    toJSON = toJSONText
+
 -- | The source of the package.
 data ApplicationReportApplicationSource
     = ApplicationSourceUnspecified
@@ -1167,6 +1212,41 @@ instance FromJSON PolicyDefaultPermissionPolicy where
     parseJSON = parseJSONText "PolicyDefaultPermissionPolicy"
 
 instance ToJSON PolicyDefaultPermissionPolicy where
+    toJSON = toJSONText
+
+-- | The severity of the app state.
+data KeyedAppStateSeverity
+    = SeverityUnspecified
+      -- ^ @SEVERITY_UNSPECIFIED@
+      -- Unspecified severity level.
+    | Info
+      -- ^ @INFO@
+      -- Information severity level.
+    | Error'
+      -- ^ @ERROR@
+      -- Error severity level. This should only be set for genuine error
+      -- conditions that a management organization needs to take action to fix.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable KeyedAppStateSeverity
+
+instance FromHttpApiData KeyedAppStateSeverity where
+    parseQueryParam = \case
+        "SEVERITY_UNSPECIFIED" -> Right SeverityUnspecified
+        "INFO" -> Right Info
+        "ERROR" -> Right Error'
+        x -> Left ("Unable to parse KeyedAppStateSeverity from: " <> x)
+
+instance ToHttpApiData KeyedAppStateSeverity where
+    toQueryParam = \case
+        SeverityUnspecified -> "SEVERITY_UNSPECIFIED"
+        Info -> "INFO"
+        Error' -> "ERROR"
+
+instance FromJSON KeyedAppStateSeverity where
+    parseJSON = parseJSONText "KeyedAppStateSeverity"
+
+instance ToJSON KeyedAppStateSeverity where
     toJSON = toJSONText
 
 -- | Application state.

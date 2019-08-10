@@ -45,7 +45,6 @@ library
         , Network.Google.Resource.Fitness.Users.DataSources.Delete
         , Network.Google.Resource.Fitness.Users.DataSources.Get
         , Network.Google.Resource.Fitness.Users.DataSources.List
-        , Network.Google.Resource.Fitness.Users.DataSources.Patch
         , Network.Google.Resource.Fitness.Users.DataSources.Update
         , Network.Google.Resource.Fitness.Users.Sessions.Delete
         , Network.Google.Resource.Fitness.Users.Sessions.List

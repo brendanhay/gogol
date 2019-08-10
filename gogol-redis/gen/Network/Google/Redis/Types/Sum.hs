@@ -18,6 +18,44 @@ module Network.Google.Redis.Types.Sum where
 
 import           Network.Google.Prelude hiding (Bytes)
 
+-- | Optional. Available data protection modes that the user can choose. If
+-- it\'s unspecified, data protection mode will be LIMITED_DATA_LOSS by
+-- default.
+data FailoverInstanceRequestDataProtectionMode
+    = DataProtectionModeUnspecified
+      -- ^ @DATA_PROTECTION_MODE_UNSPECIFIED@
+    | LimitedDataLoss
+      -- ^ @LIMITED_DATA_LOSS@
+      -- Instance failover will be protected with data loss control. More
+      -- specifically, the failover will only be performed if the current
+      -- replication offset diff between master and replica is under a certain
+      -- threshold.
+    | ForceDataLoss
+      -- ^ @FORCE_DATA_LOSS@
+      -- Instance failover will be performed without data loss control.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FailoverInstanceRequestDataProtectionMode
+
+instance FromHttpApiData FailoverInstanceRequestDataProtectionMode where
+    parseQueryParam = \case
+        "DATA_PROTECTION_MODE_UNSPECIFIED" -> Right DataProtectionModeUnspecified
+        "LIMITED_DATA_LOSS" -> Right LimitedDataLoss
+        "FORCE_DATA_LOSS" -> Right ForceDataLoss
+        x -> Left ("Unable to parse FailoverInstanceRequestDataProtectionMode from: " <> x)
+
+instance ToHttpApiData FailoverInstanceRequestDataProtectionMode where
+    toQueryParam = \case
+        DataProtectionModeUnspecified -> "DATA_PROTECTION_MODE_UNSPECIFIED"
+        LimitedDataLoss -> "LIMITED_DATA_LOSS"
+        ForceDataLoss -> "FORCE_DATA_LOSS"
+
+instance FromJSON FailoverInstanceRequestDataProtectionMode where
+    parseJSON = parseJSONText "FailoverInstanceRequestDataProtectionMode"
+
+instance ToJSON FailoverInstanceRequestDataProtectionMode where
+    toJSON = toJSONText
+
 -- | Required. The service tier of the instance.
 data InstanceTier
     = TierUnspecified
@@ -106,6 +144,9 @@ data InstanceState
     | Maintenance
       -- ^ @MAINTENANCE@
       -- Maintenance is being performed on this Redis instance.
+    | FailingOver
+      -- ^ @FAILING_OVER@
+      -- Redis instance is failing over (availability may be affected).
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceState
@@ -119,6 +160,7 @@ instance FromHttpApiData InstanceState where
         "DELETING" -> Right Deleting
         "REPAIRING" -> Right Repairing
         "MAINTENANCE" -> Right Maintenance
+        "FAILING_OVER" -> Right FailingOver
         x -> Left ("Unable to parse InstanceState from: " <> x)
 
 instance ToHttpApiData InstanceState where
@@ -130,6 +172,7 @@ instance ToHttpApiData InstanceState where
         Deleting -> "DELETING"
         Repairing -> "REPAIRING"
         Maintenance -> "MAINTENANCE"
+        FailingOver -> "FAILING_OVER"
 
 instance FromJSON InstanceState where
     parseJSON = parseJSONText "InstanceState"

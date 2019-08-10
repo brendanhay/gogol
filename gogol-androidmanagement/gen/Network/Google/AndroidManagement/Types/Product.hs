@@ -2511,6 +2511,7 @@ data ApplicationReport =
     , _arVersionName                :: !(Maybe Text)
     , _arPackageName                :: !(Maybe Text)
     , _arPackageSha256Hash          :: !(Maybe Text)
+    , _arKeyedAppStates             :: !(Maybe [KeyedAppState])
     , _arApplicationSource          :: !(Maybe ApplicationReportApplicationSource)
     , _arEvents                     :: !(Maybe [ApplicationEvent])
     , _arDisplayName                :: !(Maybe Text)
@@ -2535,6 +2536,8 @@ data ApplicationReport =
 --
 -- * 'arPackageSha256Hash'
 --
+-- * 'arKeyedAppStates'
+--
 -- * 'arApplicationSource'
 --
 -- * 'arEvents'
@@ -2552,6 +2555,7 @@ applicationReport =
     , _arVersionName = Nothing
     , _arPackageName = Nothing
     , _arPackageSha256Hash = Nothing
+    , _arKeyedAppStates = Nothing
     , _arApplicationSource = Nothing
     , _arEvents = Nothing
     , _arDisplayName = Nothing
@@ -2602,6 +2606,14 @@ arPackageSha256Hash
   = lens _arPackageSha256Hash
       (\ s a -> s{_arPackageSha256Hash = a})
 
+-- | List of keyed app states reported by the app.
+arKeyedAppStates :: Lens' ApplicationReport [KeyedAppState]
+arKeyedAppStates
+  = lens _arKeyedAppStates
+      (\ s a -> s{_arKeyedAppStates = a})
+      . _Default
+      . _Coerce
+
 -- | The source of the package.
 arApplicationSource :: Lens' ApplicationReport (Maybe ApplicationReportApplicationSource)
 arApplicationSource
@@ -2638,6 +2650,7 @@ instance FromJSON ApplicationReport where
                      <*> (o .:? "versionName")
                      <*> (o .:? "packageName")
                      <*> (o .:? "packageSha256Hash")
+                     <*> (o .:? "keyedAppStates" .!= mempty)
                      <*> (o .:? "applicationSource")
                      <*> (o .:? "events" .!= mempty)
                      <*> (o .:? "displayName")
@@ -2654,6 +2667,7 @@ instance ToJSON ApplicationReport where
                   ("versionName" .=) <$> _arVersionName,
                   ("packageName" .=) <$> _arPackageName,
                   ("packageSha256Hash" .=) <$> _arPackageSha256Hash,
+                  ("keyedAppStates" .=) <$> _arKeyedAppStates,
                   ("applicationSource" .=) <$> _arApplicationSource,
                   ("events" .=) <$> _arEvents,
                   ("displayName" .=) <$> _arDisplayName,
@@ -2890,6 +2904,7 @@ data StatusReportingSettings =
     , _srsMemoryInfoEnabled            :: !(Maybe Bool)
     , _srsNetworkInfoEnabled           :: !(Maybe Bool)
     , _srsDeviceSettingsEnabled        :: !(Maybe Bool)
+    , _srsApplicationReportingSettings :: !(Maybe ApplicationReportingSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2913,6 +2928,8 @@ data StatusReportingSettings =
 -- * 'srsNetworkInfoEnabled'
 --
 -- * 'srsDeviceSettingsEnabled'
+--
+-- * 'srsApplicationReportingSettings'
 statusReportingSettings
     :: StatusReportingSettings
 statusReportingSettings =
@@ -2925,6 +2942,7 @@ statusReportingSettings =
     , _srsMemoryInfoEnabled = Nothing
     , _srsNetworkInfoEnabled = Nothing
     , _srsDeviceSettingsEnabled = Nothing
+    , _srsApplicationReportingSettings = Nothing
     }
 
 
@@ -2976,6 +2994,13 @@ srsDeviceSettingsEnabled
   = lens _srsDeviceSettingsEnabled
       (\ s a -> s{_srsDeviceSettingsEnabled = a})
 
+-- | Application reporting settings. Only applicable if
+-- application_reports_enabled is true.
+srsApplicationReportingSettings :: Lens' StatusReportingSettings (Maybe ApplicationReportingSettings)
+srsApplicationReportingSettings
+  = lens _srsApplicationReportingSettings
+      (\ s a -> s{_srsApplicationReportingSettings = a})
+
 instance FromJSON StatusReportingSettings where
         parseJSON
           = withObject "StatusReportingSettings"
@@ -2988,7 +3013,8 @@ instance FromJSON StatusReportingSettings where
                      <*> (o .:? "applicationReportsEnabled")
                      <*> (o .:? "memoryInfoEnabled")
                      <*> (o .:? "networkInfoEnabled")
-                     <*> (o .:? "deviceSettingsEnabled"))
+                     <*> (o .:? "deviceSettingsEnabled")
+                     <*> (o .:? "applicationReportingSettings"))
 
 instance ToJSON StatusReportingSettings where
         toJSON StatusReportingSettings'{..}
@@ -3006,7 +3032,50 @@ instance ToJSON StatusReportingSettings where
                   ("memoryInfoEnabled" .=) <$> _srsMemoryInfoEnabled,
                   ("networkInfoEnabled" .=) <$> _srsNetworkInfoEnabled,
                   ("deviceSettingsEnabled" .=) <$>
-                    _srsDeviceSettingsEnabled])
+                    _srsDeviceSettingsEnabled,
+                  ("applicationReportingSettings" .=) <$>
+                    _srsApplicationReportingSettings])
+
+-- | An icon for a web app. Supported formats are: png, jpg and webp.
+--
+-- /See:/ 'webAppIcon' smart constructor.
+newtype WebAppIcon =
+  WebAppIcon'
+    { _waiImageData :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WebAppIcon' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'waiImageData'
+webAppIcon
+    :: WebAppIcon
+webAppIcon = WebAppIcon' {_waiImageData = Nothing}
+
+
+-- | The actual bytes of the image in a base64url encoded string (c.f.
+-- RFC4648, section 5 \"Base 64 Encoding with URL and Filename Safe
+-- Alphabet\").
+--
+-- -   The image type can be png or jpg.
+-- -   The image should ideally be square.
+-- -   The image should ideally have a size of 512x512.
+waiImageData :: Lens' WebAppIcon (Maybe Text)
+waiImageData
+  = lens _waiImageData (\ s a -> s{_waiImageData = a})
+
+instance FromJSON WebAppIcon where
+        parseJSON
+          = withObject "WebAppIcon"
+              (\ o -> WebAppIcon' <$> (o .:? "imageData"))
+
+instance ToJSON WebAppIcon where
+        toJSON WebAppIcon'{..}
+          = object
+              (catMaybes [("imageData" .=) <$> _waiImageData])
 
 -- | Policy for an individual app.
 --
@@ -4966,6 +5035,109 @@ instance ToJSON NonComplianceDetailCondition where
                     _ncdcNonComplianceReason,
                   ("settingName" .=) <$> _ncdcSettingName])
 
+-- | Keyed app state reported by the app.
+--
+-- /See:/ 'keyedAppState' smart constructor.
+data KeyedAppState =
+  KeyedAppState'
+    { _kasData           :: !(Maybe Text)
+    , _kasSeverity       :: !(Maybe KeyedAppStateSeverity)
+    , _kasKey            :: !(Maybe Text)
+    , _kasMessage        :: !(Maybe Text)
+    , _kasLastUpdateTime :: !(Maybe DateTime')
+    , _kasCreateTime     :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KeyedAppState' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kasData'
+--
+-- * 'kasSeverity'
+--
+-- * 'kasKey'
+--
+-- * 'kasMessage'
+--
+-- * 'kasLastUpdateTime'
+--
+-- * 'kasCreateTime'
+keyedAppState
+    :: KeyedAppState
+keyedAppState =
+  KeyedAppState'
+    { _kasData = Nothing
+    , _kasSeverity = Nothing
+    , _kasKey = Nothing
+    , _kasMessage = Nothing
+    , _kasLastUpdateTime = Nothing
+    , _kasCreateTime = Nothing
+    }
+
+
+-- | Optionally, a machine-readable value to be read by the EMM. For example,
+-- setting values that the admin can choose to query against in the EMM
+-- console (e.g. “notify me if the battery_warning data \< 10”).
+kasData :: Lens' KeyedAppState (Maybe Text)
+kasData = lens _kasData (\ s a -> s{_kasData = a})
+
+-- | The severity of the app state.
+kasSeverity :: Lens' KeyedAppState (Maybe KeyedAppStateSeverity)
+kasSeverity
+  = lens _kasSeverity (\ s a -> s{_kasSeverity = a})
+
+-- | The key for the app state. Acts as a point of reference for what the app
+-- is providing state for. For example, when providing managed
+-- configuration feedback, this key could be the managed configuration key.
+kasKey :: Lens' KeyedAppState (Maybe Text)
+kasKey = lens _kasKey (\ s a -> s{_kasKey = a})
+
+-- | Optionally, a free-form message string to explain the app state. If the
+-- state was triggered by a particular value (e.g. a managed configuration
+-- value), it should be included in the message.
+kasMessage :: Lens' KeyedAppState (Maybe Text)
+kasMessage
+  = lens _kasMessage (\ s a -> s{_kasMessage = a})
+
+-- | The time the app state was most recently updated.
+kasLastUpdateTime :: Lens' KeyedAppState (Maybe UTCTime)
+kasLastUpdateTime
+  = lens _kasLastUpdateTime
+      (\ s a -> s{_kasLastUpdateTime = a})
+      . mapping _DateTime
+
+-- | The creation time of the app state on the device.
+kasCreateTime :: Lens' KeyedAppState (Maybe UTCTime)
+kasCreateTime
+  = lens _kasCreateTime
+      (\ s a -> s{_kasCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON KeyedAppState where
+        parseJSON
+          = withObject "KeyedAppState"
+              (\ o ->
+                 KeyedAppState' <$>
+                   (o .:? "data") <*> (o .:? "severity") <*>
+                     (o .:? "key")
+                     <*> (o .:? "message")
+                     <*> (o .:? "lastUpdateTime")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON KeyedAppState where
+        toJSON KeyedAppState'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _kasData,
+                  ("severity" .=) <$> _kasSeverity,
+                  ("key" .=) <$> _kasKey,
+                  ("message" .=) <$> _kasMessage,
+                  ("lastUpdateTime" .=) <$> _kasLastUpdateTime,
+                  ("createTime" .=) <$> _kasCreateTime])
+
 -- | Service-specific metadata associated with the operation. It typically
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
@@ -5176,6 +5348,58 @@ instance ToJSON ComplianceRule where
                     _crPackageNamesToDisable,
                   ("nonComplianceDetailCondition" .=) <$>
                     _crNonComplianceDetailCondition])
+
+-- | Response to a request to list web apps for a given enterprise.
+--
+-- /See:/ 'listWebAppsResponse' smart constructor.
+data ListWebAppsResponse =
+  ListWebAppsResponse'
+    { _lwarNextPageToken :: !(Maybe Text)
+    , _lwarWebApps       :: !(Maybe [WebApp])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListWebAppsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lwarNextPageToken'
+--
+-- * 'lwarWebApps'
+listWebAppsResponse
+    :: ListWebAppsResponse
+listWebAppsResponse =
+  ListWebAppsResponse' {_lwarNextPageToken = Nothing, _lwarWebApps = Nothing}
+
+
+-- | If there are more results, a token to retrieve next page of results.
+lwarNextPageToken :: Lens' ListWebAppsResponse (Maybe Text)
+lwarNextPageToken
+  = lens _lwarNextPageToken
+      (\ s a -> s{_lwarNextPageToken = a})
+
+-- | The list of web apps.
+lwarWebApps :: Lens' ListWebAppsResponse [WebApp]
+lwarWebApps
+  = lens _lwarWebApps (\ s a -> s{_lwarWebApps = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListWebAppsResponse where
+        parseJSON
+          = withObject "ListWebAppsResponse"
+              (\ o ->
+                 ListWebAppsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "webApps" .!= mempty))
+
+instance ToJSON ListWebAppsResponse where
+        toJSON ListWebAppsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lwarNextPageToken,
+                  ("webApps" .=) <$> _lwarWebApps])
 
 -- | Requirements for the password used to unlock a device.
 --
@@ -5856,6 +6080,47 @@ instance ToJSON SoftwareInfo where
                   ("androidBuildNumber" .=) <$> _siAndroidBuildNumber,
                   ("androidVersion" .=) <$> _siAndroidVersion])
 
+-- | Settings controlling the behavior of application reports.
+--
+-- /See:/ 'applicationReportingSettings' smart constructor.
+newtype ApplicationReportingSettings =
+  ApplicationReportingSettings'
+    { _arsIncludeRemovedApps :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ApplicationReportingSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arsIncludeRemovedApps'
+applicationReportingSettings
+    :: ApplicationReportingSettings
+applicationReportingSettings =
+  ApplicationReportingSettings' {_arsIncludeRemovedApps = Nothing}
+
+
+-- | Whether removed apps are included in application reports.
+arsIncludeRemovedApps :: Lens' ApplicationReportingSettings (Maybe Bool)
+arsIncludeRemovedApps
+  = lens _arsIncludeRemovedApps
+      (\ s a -> s{_arsIncludeRemovedApps = a})
+
+instance FromJSON ApplicationReportingSettings where
+        parseJSON
+          = withObject "ApplicationReportingSettings"
+              (\ o ->
+                 ApplicationReportingSettings' <$>
+                   (o .:? "includeRemovedApps"))
+
+instance ToJSON ApplicationReportingSettings where
+        toJSON ApplicationReportingSettings'{..}
+          = object
+              (catMaybes
+                 [("includeRemovedApps" .=) <$>
+                    _arsIncludeRemovedApps])
+
 -- | A permission required by the app.
 --
 -- /See:/ 'applicationPermission' smart constructor.
@@ -5975,3 +6240,107 @@ instance ToJSON SetupAction where
                  [("launchApp" .=) <$> _saLaunchApp,
                   ("title" .=) <$> _saTitle,
                   ("description" .=) <$> _saDescription])
+
+-- | A web app.
+--
+-- /See:/ 'webApp' smart constructor.
+data WebApp =
+  WebApp'
+    { _waVersionCode :: !(Maybe (Textual Int64))
+    , _waIcons       :: !(Maybe [WebAppIcon])
+    , _waStartURL    :: !(Maybe Text)
+    , _waDisplayMode :: !(Maybe WebAppDisplayMode)
+    , _waName        :: !(Maybe Text)
+    , _waTitle       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WebApp' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'waVersionCode'
+--
+-- * 'waIcons'
+--
+-- * 'waStartURL'
+--
+-- * 'waDisplayMode'
+--
+-- * 'waName'
+--
+-- * 'waTitle'
+webApp
+    :: WebApp
+webApp =
+  WebApp'
+    { _waVersionCode = Nothing
+    , _waIcons = Nothing
+    , _waStartURL = Nothing
+    , _waDisplayMode = Nothing
+    , _waName = Nothing
+    , _waTitle = Nothing
+    }
+
+
+-- | The current version of the app.
+--
+-- Note that the version can automatically increase during the lifetime of
+-- the web app, while Google does internal housekeeping to keep the web app
+-- up-to-date.
+waVersionCode :: Lens' WebApp (Maybe Int64)
+waVersionCode
+  = lens _waVersionCode
+      (\ s a -> s{_waVersionCode = a})
+      . mapping _Coerce
+
+-- | A list of icons for the web app. Must have at least one element.
+waIcons :: Lens' WebApp [WebAppIcon]
+waIcons
+  = lens _waIcons (\ s a -> s{_waIcons = a}) . _Default
+      . _Coerce
+
+-- | The start URL, i.e. the URL that should load when the user opens the
+-- application.
+waStartURL :: Lens' WebApp (Maybe Text)
+waStartURL
+  = lens _waStartURL (\ s a -> s{_waStartURL = a})
+
+-- | The display mode of the web app.
+waDisplayMode :: Lens' WebApp (Maybe WebAppDisplayMode)
+waDisplayMode
+  = lens _waDisplayMode
+      (\ s a -> s{_waDisplayMode = a})
+
+-- | The name of the web app, which is generated by the server during
+-- creation in the form
+-- enterprises\/{enterpriseId}\/webApps\/{packageName}.
+waName :: Lens' WebApp (Maybe Text)
+waName = lens _waName (\ s a -> s{_waName = a})
+
+-- | The title of the web app as displayed to the user (e.g., amongst a list
+-- of other applications, or as a label for an icon).
+waTitle :: Lens' WebApp (Maybe Text)
+waTitle = lens _waTitle (\ s a -> s{_waTitle = a})
+
+instance FromJSON WebApp where
+        parseJSON
+          = withObject "WebApp"
+              (\ o ->
+                 WebApp' <$>
+                   (o .:? "versionCode") <*> (o .:? "icons" .!= mempty)
+                     <*> (o .:? "startUrl")
+                     <*> (o .:? "displayMode")
+                     <*> (o .:? "name")
+                     <*> (o .:? "title"))
+
+instance ToJSON WebApp where
+        toJSON WebApp'{..}
+          = object
+              (catMaybes
+                 [("versionCode" .=) <$> _waVersionCode,
+                  ("icons" .=) <$> _waIcons,
+                  ("startUrl" .=) <$> _waStartURL,
+                  ("displayMode" .=) <$> _waDisplayMode,
+                  ("name" .=) <$> _waName, ("title" .=) <$> _waTitle])

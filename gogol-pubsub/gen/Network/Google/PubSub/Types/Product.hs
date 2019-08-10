@@ -25,7 +25,8 @@ import           Network.Google.PubSub.Types.Sum
 -- /See:/ 'pushConfig' smart constructor.
 data PushConfig =
   PushConfig'
-    { _pcAttributes   :: !(Maybe PushConfigAttributes)
+    { _pcOidcToken    :: !(Maybe OidcToken)
+    , _pcAttributes   :: !(Maybe PushConfigAttributes)
     , _pcPushEndpoint :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -35,13 +36,23 @@ data PushConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pcOidcToken'
+--
 -- * 'pcAttributes'
 --
 -- * 'pcPushEndpoint'
 pushConfig
     :: PushConfig
-pushConfig = PushConfig' {_pcAttributes = Nothing, _pcPushEndpoint = Nothing}
+pushConfig =
+  PushConfig'
+    {_pcOidcToken = Nothing, _pcAttributes = Nothing, _pcPushEndpoint = Nothing}
 
+
+-- | If specified, Pub\/Sub will generate and attach an OIDC JWT token as an
+-- \`Authorization\` header in the HTTP request for every pushed message.
+pcOidcToken :: Lens' PushConfig (Maybe OidcToken)
+pcOidcToken
+  = lens _pcOidcToken (\ s a -> s{_pcOidcToken = a})
 
 -- | Endpoint configuration attributes. Every endpoint has a set of API
 -- supported attributes that can be used to control different aspects of
@@ -74,13 +85,15 @@ instance FromJSON PushConfig where
           = withObject "PushConfig"
               (\ o ->
                  PushConfig' <$>
-                   (o .:? "attributes") <*> (o .:? "pushEndpoint"))
+                   (o .:? "oidcToken") <*> (o .:? "attributes") <*>
+                     (o .:? "pushEndpoint"))
 
 instance ToJSON PushConfig where
         toJSON PushConfig'{..}
           = object
               (catMaybes
-                 [("attributes" .=) <$> _pcAttributes,
+                 [("oidcToken" .=) <$> _pcOidcToken,
+                  ("attributes" .=) <$> _pcAttributes,
                   ("pushEndpoint" .=) <$> _pcPushEndpoint])
 
 -- | A message and its corresponding acknowledgment ID.
@@ -134,9 +147,6 @@ instance ToJSON ReceivedMessage where
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'snapshot' smart constructor.
 data Snapshot =
@@ -217,9 +227,6 @@ instance ToJSON Snapshot where
                   ("expireTime" .=) <$> _sExpireTime])
 
 -- | Response for the \`ListTopicSnapshots\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'listTopicSnapshotsResponse' smart constructor.
 data ListTopicSnapshotsResponse =
@@ -354,6 +361,66 @@ instance ToJSON Expr where
                   ("expression" .=) <$> _eExpression,
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
+
+-- | Contains information needed for generating an [OpenID Connect
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect).
+--
+-- /See:/ 'oidcToken' smart constructor.
+data OidcToken =
+  OidcToken'
+    { _otAudience            :: !(Maybe Text)
+    , _otServiceAccountEmail :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OidcToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'otAudience'
+--
+-- * 'otServiceAccountEmail'
+oidcToken
+    :: OidcToken
+oidcToken = OidcToken' {_otAudience = Nothing, _otServiceAccountEmail = Nothing}
+
+
+-- | Audience to be used when generating OIDC token. The audience claim
+-- identifies the recipients that the JWT is intended for. The audience
+-- value is a single case-sensitive string. Having multiple values (array)
+-- for the audience field is not supported. More info about the OIDC JWT
+-- token audience here:
+-- https:\/\/tools.ietf.org\/html\/rfc7519#section-4.1.3 Note: if not
+-- specified, the Push endpoint URL will be used.
+otAudience :: Lens' OidcToken (Maybe Text)
+otAudience
+  = lens _otAudience (\ s a -> s{_otAudience = a})
+
+-- | [Service account
+-- email](https:\/\/cloud.google.com\/iam\/docs\/service-accounts) to be
+-- used for generating the OIDC token. The caller (for CreateSubscription,
+-- UpdateSubscription, and ModifyPushConfig RPCs) must have the
+-- iam.serviceAccounts.actAs permission for the service account.
+otServiceAccountEmail :: Lens' OidcToken (Maybe Text)
+otServiceAccountEmail
+  = lens _otServiceAccountEmail
+      (\ s a -> s{_otServiceAccountEmail = a})
+
+instance FromJSON OidcToken where
+        parseJSON
+          = withObject "OidcToken"
+              (\ o ->
+                 OidcToken' <$>
+                   (o .:? "audience") <*> (o .:? "serviceAccountEmail"))
+
+instance ToJSON OidcToken where
+        toJSON OidcToken'{..}
+          = object
+              (catMaybes
+                 [("audience" .=) <$> _otAudience,
+                  ("serviceAccountEmail" .=) <$>
+                    _otServiceAccountEmail])
 
 -- | Request for the ModifyAckDeadline method.
 --
@@ -729,9 +796,6 @@ instance ToJSON PullResponse where
                  [("receivedMessages" .=) <$> _prReceivedMessages])
 
 -- | Response for the \`ListSnapshots\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'listSnapshotsResponse' smart constructor.
 data ListSnapshotsResponse =
@@ -822,9 +886,6 @@ instance ToJSON SetIAMPolicyRequest where
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | Request for the \`CreateSnapshot\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'createSnapshotRequest' smart constructor.
 data CreateSnapshotRequest =
@@ -882,9 +943,6 @@ instance ToJSON CreateSnapshotRequest where
                   ("subscription" .=) <$> _csrSubscription])
 
 -- | Request for the \`Seek\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'seekRequest' smart constructor.
 data SeekRequest =
@@ -1068,9 +1126,6 @@ instance ToJSON CreateSnapshotRequestLabels where
         toJSON = toJSON . _csrlAddtional
 
 -- | Request for the UpdateSnapshot method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'updateSnapshotRequest' smart constructor.
 data UpdateSnapshotRequest =
@@ -1642,9 +1697,6 @@ subPushConfig
 -- retention of acknowledged messages, and thus configures how far back in
 -- time a \`Seek\` can be done. Defaults to 7 days. Cannot be more than 7
 -- days or less than 10 minutes.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 subMessageRetentionDuration :: Lens' Subscription (Maybe Scientific)
 subMessageRetentionDuration
   = lens _subMessageRetentionDuration
@@ -1679,9 +1731,6 @@ subLabels
 -- \`message_retention_duration\` window. This must be true if you would
 -- like to
 -- <https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time Seek to a timestamp>.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 subRetainAckedMessages :: Lens' Subscription (Maybe Bool)
 subRetainAckedMessages
   = lens _subRetainAckedMessages
@@ -1967,8 +2016,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1981,10 +2030,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

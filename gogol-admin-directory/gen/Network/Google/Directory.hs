@@ -899,11 +899,9 @@ module Network.Google.Directory
     , useIncludeInGlobalAddressList
     , useGender
     , usePhones
-    , useRecoveryEmail
     , useName
     , usePassword
     , useEmails
-    , useRecoveryPhone
     , useIms
     , useKeywords
     , useIsAdmin

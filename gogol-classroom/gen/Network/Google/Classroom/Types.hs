@@ -24,6 +24,7 @@ module Network.Google.Classroom.Types
     , classroomCoursesScope
     , classroomPushNotificationsScope
     , classroomCourseworkStudentsReadOnlyScope
+    , classroomTopicsReadOnlyScope
     , classroomProFileEmailsScope
     , classroomProFilePhotosScope
     , classroomCourseworkMeScope
@@ -34,6 +35,7 @@ module Network.Google.Classroom.Types
     , classroomRostersScope
     , classroomCoursesReadOnlyScope
     , classroomCourseworkStudentsScope
+    , classroomTopicsScope
     , classroomAnnouncementsScope
     , classroomCourseworkMeReadOnlyScope
     , classroomStudentSubmissionsMeReadOnlyScope
@@ -60,6 +62,7 @@ module Network.Google.Classroom.Types
     , cwDueTime
     , cwAssociatedWithDeveloper
     , cwUpdateTime
+    , cwTopicId
     , cwMultipleChoiceQuestion
     , cwId
     , cwSubmissionModificationMode
@@ -163,6 +166,12 @@ module Network.Google.Classroom.Types
     , GlobalPermission
     , globalPermission
     , gpPermission
+
+    -- * ListTopicResponse
+    , ListTopicResponse
+    , listTopicResponse
+    , ltrNextPageToken
+    , ltrTopic
 
     -- * Link
     , Link
@@ -269,6 +278,14 @@ module Network.Google.Classroom.Types
     , aYouTubeVideo
     , aForm
 
+    -- * Topic
+    , Topic
+    , topic
+    , tCourseId
+    , tUpdateTime
+    , tTopicId
+    , tName
+
     -- * Announcement
     , Announcement
     , announcement
@@ -330,9 +347,9 @@ module Network.Google.Classroom.Types
     -- * Teacher
     , Teacher
     , teacher
-    , tCourseId
-    , tProFile
-    , tUserId
+    , teaCourseId
+    , teaProFile
+    , teaUserId
 
     -- * CourseMaterialSet
     , CourseMaterialSet
@@ -495,8 +512,8 @@ module Network.Google.Classroom.Types
     -- * ListTeachersResponse
     , ListTeachersResponse
     , listTeachersResponse
-    , ltrNextPageToken
-    , ltrTeachers
+    , lNextPageToken
+    , lTeachers
 
     -- * Student
     , Student
@@ -545,6 +562,10 @@ classroomPushNotificationsScope = Proxy
 classroomCourseworkStudentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.students.readonly"]
 classroomCourseworkStudentsReadOnlyScope = Proxy
 
+-- | View topics in Google Classroom
+classroomTopicsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.topics.readonly"]
+classroomTopicsReadOnlyScope = Proxy
+
 -- | View the email addresses of people in your classes
 classroomProFileEmailsScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.emails"]
 classroomProFileEmailsScope = Proxy
@@ -587,6 +608,10 @@ classroomCoursesReadOnlyScope = Proxy
 -- administer
 classroomCourseworkStudentsScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.students"]
 classroomCourseworkStudentsScope = Proxy
+
+-- | See, create, and edit topics in Google Classroom
+classroomTopicsScope :: Proxy '["https://www.googleapis.com/auth/classroom.topics"]
+classroomTopicsScope = Proxy
 
 -- | View and manage announcements in Google Classroom
 classroomAnnouncementsScope :: Proxy '["https://www.googleapis.com/auth/classroom.announcements"]

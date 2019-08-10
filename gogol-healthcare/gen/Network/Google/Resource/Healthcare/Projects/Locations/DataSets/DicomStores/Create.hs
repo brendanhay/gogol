@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsDicomStoresCreate' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresCreateResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "parent" Text :>
          "dicomStores" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -150,8 +150,8 @@ pldsdscPayload
   = lens _pldsdscPayload
       (\ s a -> s{_pldsdscPayload = a})
 
--- | The ID of the DICOM store that is being created. The string must match
--- the following regex: \`[\\p{L}\\p{N}_\\-\\.]{1,256}\`.
+-- | The ID of the DICOM store that is being created. Any string value up to
+-- 256 characters in length.
 pldsdscDicomStoreId :: Lens' ProjectsLocationsDataSetsDicomStoresCreate (Maybe Text)
 pldsdscDicomStoreId
   = lens _pldsdscDicomStoreId

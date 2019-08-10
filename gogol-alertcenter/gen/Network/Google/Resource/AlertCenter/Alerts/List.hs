@@ -138,8 +138,8 @@ alUploadProtocol
 -- | Optional. The sort order of the list results. If not specified results
 -- may be returned in arbitrary order. You can sort the results in
 -- descending order based on the creation timestamp using
--- \`order_by=\"create_time desc\"\`. Currently, only sorting by
--- \`create_time desc\` is supported.
+-- \`order_by=\"create_time desc\"\`. Currently, supported sorting are
+-- \`create_time asc\`, \`create_time desc\`, \`update_time desc\`
 alOrderBy :: Lens' AlertsList (Maybe Text)
 alOrderBy
   = lens _alOrderBy (\ s a -> s{_alOrderBy = a})

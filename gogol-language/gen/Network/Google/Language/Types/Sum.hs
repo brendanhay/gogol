@@ -190,7 +190,7 @@ data AnalyzeSyntaxRequestEncodingType
     | UTF16
       -- ^ @UTF16@
       -- Encoding-dependent information (such as \`begin_offset\`) is calculated
-      -- based on the UTF-16 encoding of the input. Java and Javascript are
+      -- based on the UTF-16 encoding of the input. Java and JavaScript are
       -- examples of languages that use this encoding natively.
     | UTF32
       -- ^ @UTF32@
@@ -236,7 +236,7 @@ data AnalyzeEntitySentimentRequestEncodingType
     | AESRETUTF16
       -- ^ @UTF16@
       -- Encoding-dependent information (such as \`begin_offset\`) is calculated
-      -- based on the UTF-16 encoding of the input. Java and Javascript are
+      -- based on the UTF-16 encoding of the input. Java and JavaScript are
       -- examples of languages that use this encoding natively.
     | AESRETUTF32
       -- ^ @UTF32@
@@ -883,13 +883,43 @@ data EntityType
       -- Event
     | ETWorkOfArt
       -- ^ @WORK_OF_ART@
-      -- Work of art
+      -- Artwork
     | ETConsumerGood
       -- ^ @CONSUMER_GOOD@
-      -- Consumer goods
+      -- Consumer product
     | ETOther
       -- ^ @OTHER@
-      -- Other types
+      -- Other types of entities
+    | ETPhoneNumber
+      -- ^ @PHONE_NUMBER@
+      -- Phone number The metadata lists the phone number, formatted according to
+      -- local convention, plus whichever additional elements appear in the text:
+      -- * \`number\` - the actual number, broken down into sections as per local
+      -- convention * \`national_prefix\` - country code, if detected *
+      -- \`area_code\` - region or area code, if detected * \`extension\` - phone
+      -- extension (to be dialed after connection), if detected
+    | ETAddress
+      -- ^ @ADDRESS@
+      -- Address The metadata identifies the street number and locality plus
+      -- whichever additional elements appear in the text: * \`street_number\` -
+      -- street number * \`locality\` - city or town * \`street_name\` -
+      -- street\/route name, if detected * \`postal_code\` - postal code, if
+      -- detected * \`country\` - country, if detected\< * \`broad_region\` -
+      -- administrative area, such as the state, if detected * \`narrow_region\`
+      -- - smaller administrative area, such as county, if detected *
+      -- \`sublocality\` - used in Asian addresses to demark a district within a
+      -- city, if detected
+    | ETDate
+      -- ^ @DATE@
+      -- Date The metadata identifies the components of the date: * \`year\` -
+      -- four digit year, if detected * \`month\` - two digit month number, if
+      -- detected * \`day\` - two digit day number, if detected
+    | ETNumber
+      -- ^ @NUMBER@
+      -- Number The metadata is the number itself.
+    | ETPrice
+      -- ^ @PRICE@
+      -- Price The metadata identifies the \`value\` and \`currency\`.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EntityType
@@ -904,6 +934,11 @@ instance FromHttpApiData EntityType where
         "WORK_OF_ART" -> Right ETWorkOfArt
         "CONSUMER_GOOD" -> Right ETConsumerGood
         "OTHER" -> Right ETOther
+        "PHONE_NUMBER" -> Right ETPhoneNumber
+        "ADDRESS" -> Right ETAddress
+        "DATE" -> Right ETDate
+        "NUMBER" -> Right ETNumber
+        "PRICE" -> Right ETPrice
         x -> Left ("Unable to parse EntityType from: " <> x)
 
 instance ToHttpApiData EntityType where
@@ -916,6 +951,11 @@ instance ToHttpApiData EntityType where
         ETWorkOfArt -> "WORK_OF_ART"
         ETConsumerGood -> "CONSUMER_GOOD"
         ETOther -> "OTHER"
+        ETPhoneNumber -> "PHONE_NUMBER"
+        ETAddress -> "ADDRESS"
+        ETDate -> "DATE"
+        ETNumber -> "NUMBER"
+        ETPrice -> "PRICE"
 
 instance FromJSON EntityType where
     parseJSON = parseJSONText "EntityType"
@@ -1168,7 +1208,7 @@ data AnnotateTextRequestEncodingType
     | ATRETUTF16
       -- ^ @UTF16@
       -- Encoding-dependent information (such as \`begin_offset\`) is calculated
-      -- based on the UTF-16 encoding of the input. Java and Javascript are
+      -- based on the UTF-16 encoding of the input. Java and JavaScript are
       -- examples of languages that use this encoding natively.
     | ATRETUTF32
       -- ^ @UTF32@
@@ -1253,7 +1293,7 @@ data AnalyzeEntitiesRequestEncodingType
     | AERETUTF16
       -- ^ @UTF16@
       -- Encoding-dependent information (such as \`begin_offset\`) is calculated
-      -- based on the UTF-16 encoding of the input. Java and Javascript are
+      -- based on the UTF-16 encoding of the input. Java and JavaScript are
       -- examples of languages that use this encoding natively.
     | AERETUTF32
       -- ^ @UTF32@
@@ -1412,7 +1452,7 @@ data AnalyzeSentimentRequestEncodingType
     | ASRETUTF16
       -- ^ @UTF16@
       -- Encoding-dependent information (such as \`begin_offset\`) is calculated
-      -- based on the UTF-16 encoding of the input. Java and Javascript are
+      -- based on the UTF-16 encoding of the input. Java and JavaScript are
       -- examples of languages that use this encoding natively.
     | ASRETUTF32
       -- ^ @UTF32@

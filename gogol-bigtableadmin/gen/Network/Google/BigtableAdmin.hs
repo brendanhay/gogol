@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- |
+-- Administer your Cloud Bigtable tables and instances.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference>
 module Network.Google.BigtableAdmin
@@ -118,11 +118,20 @@ module Network.Google.BigtableAdmin
     -- ** bigtableadmin.projects.instances.tables.get
     , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Get
 
+    -- ** bigtableadmin.projects.instances.tables.getIamPolicy
+    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
+
     -- ** bigtableadmin.projects.instances.tables.list
     , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
 
     -- ** bigtableadmin.projects.instances.tables.modifyColumnFamilies
     , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+
+    -- ** bigtableadmin.projects.instances.tables.setIamPolicy
+    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.SetIAMPolicy
+
+    -- ** bigtableadmin.projects.instances.tables.testIamPermissions
+    , module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPermissions
 
     -- ** bigtableadmin.projects.instances.testIamPermissions
     , module Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
@@ -521,8 +530,11 @@ import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.DropRowRange
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Get
+import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.SetIAMPolicy
+import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPermissions
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
 import           Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
 
@@ -543,13 +555,17 @@ type BigtableAdminAPI =
        :<|> ProjectsInstancesAppProFilesDeleteResource
        :<|> ProjectsInstancesTablesDropRowRangeResource
        :<|> ProjectsInstancesTablesListResource
+       :<|> ProjectsInstancesTablesGetIAMPolicyResource
        :<|>
        ProjectsInstancesTablesGenerateConsistencyTokenResource
        :<|> ProjectsInstancesTablesGetResource
        :<|>
        ProjectsInstancesTablesModifyColumnFamiliesResource
        :<|> ProjectsInstancesTablesCreateResource
+       :<|> ProjectsInstancesTablesSetIAMPolicyResource
        :<|> ProjectsInstancesTablesCheckConsistencyResource
+       :<|>
+       ProjectsInstancesTablesTestIAMPermissionsResource
        :<|> ProjectsInstancesTablesDeleteResource
        :<|> ProjectsInstancesClustersListResource
        :<|> ProjectsInstancesClustersGetResource

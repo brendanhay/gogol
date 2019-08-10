@@ -85,8 +85,7 @@ editsTestersGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
     }
 
 
--- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
--- \"production\", \"rollout\" or \"internal\".
+-- | The track to read or modify.
 etgTrack :: Lens' EditsTestersGet Text
 etgTrack = lens _etgTrack (\ s a -> s{_etgTrack = a})
 

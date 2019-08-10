@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Used to set master auth materials. Currently supports :- Changing the
--- admin password for a specific cluster. This can be either via password
--- generation or explicitly set the password.
+-- Sets master auth materials. Currently supports changing the admin
+-- password or a specific cluster, either via password generation or
+-- explicitly setting the password.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.setMasterAuth@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.SetMasterAuth
@@ -61,9 +61,9 @@ type ProjectsLocationsClustersSetMasterAuthResource =
                      ReqBody '[JSON] SetMasterAuthRequest :>
                        Post '[JSON] Operation
 
--- | Used to set master auth materials. Currently supports :- Changing the
--- admin password for a specific cluster. This can be either via password
--- generation or explicitly set the password.
+-- | Sets master auth materials. Currently supports changing the admin
+-- password or a specific cluster, either via password generation or
+-- explicitly setting the password.
 --
 -- /See:/ 'projectsLocationsClustersSetMasterAuth' smart constructor.
 data ProjectsLocationsClustersSetMasterAuth =

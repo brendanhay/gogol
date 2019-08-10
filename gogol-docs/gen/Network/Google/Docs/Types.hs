@@ -231,6 +231,12 @@ module Network.Google.Docs.Types
     , rcGreen
     , rcBlue
 
+    -- * InsertPageBreakRequest
+    , InsertPageBreakRequest
+    , insertPageBreakRequest
+    , ipbrLocation
+    , ipbrEndOfSegmentLocation
+
     -- * CreateParagraphBulletsRequestBulletPreset
     , CreateParagraphBulletsRequestBulletPreset (..)
 
@@ -757,6 +763,7 @@ module Network.Google.Docs.Types
     , WriteControl
     , writeControl
     , wcRequiredRevisionId
+    , wcTargetRevisionId
 
     -- * TextStyle
     , TextStyle
@@ -926,6 +933,14 @@ module Network.Google.Docs.Types
     , eossDescriptionSuggested
     , eossMarginRightSuggested
 
+    -- * InsertTableRequest
+    , InsertTableRequest
+    , insertTableRequest
+    , itrLocation
+    , itrEndOfSegmentLocation
+    , itrRows
+    , itrColumns
+
     -- * SuggestedInlineObjectProperties
     , SuggestedInlineObjectProperties
     , suggestedInlineObjectProperties
@@ -974,9 +989,9 @@ module Network.Google.Docs.Types
     -- * InsertTextRequest
     , InsertTextRequest
     , insertTextRequest
-    , itrLocation
-    , itrText
-    , itrEndOfSegmentLocation
+    , iLocation
+    , iText
+    , iEndOfSegmentLocation
 
     -- * NestingLevelBulletAlignment
     , NestingLevelBulletAlignment (..)
@@ -1171,11 +1186,13 @@ module Network.Google.Docs.Types
     , reqReplaceAllText
     , reqUpdateParagraphStyle
     , reqCreateNamedRange
+    , reqInsertPageBreak
     , reqDeleteTableColumn
     , reqInsertInlineImage
     , reqDeleteContentRange
     , reqInsertTableRow
     , reqUpdateTextStyle
+    , reqInsertTable
 
     -- * PositionedObjectSuggestedPositionedObjectPropertiesChanges
     , PositionedObjectSuggestedPositionedObjectPropertiesChanges

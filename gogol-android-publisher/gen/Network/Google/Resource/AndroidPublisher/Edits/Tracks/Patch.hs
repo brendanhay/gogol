@@ -20,10 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume. This method supports patch
--- semantics.
+-- Updates the track configuration for the specified track type. This
+-- method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
@@ -59,10 +57,8 @@ type EditsTracksPatchResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Track :> Patch '[JSON] Track
 
--- | Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume. This method supports patch
--- semantics.
+-- | Updates the track configuration for the specified track type. This
+-- method supports patch semantics.
 --
 -- /See:/ 'editsTracksPatch' smart constructor.
 data EditsTracksPatch =

@@ -75,8 +75,17 @@ module Network.Google.AccessContextManager
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.patch
     , module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
 
+    -- ** accesscontextmanager.operations.cancel
+    , module Network.Google.Resource.AccessContextManager.Operations.Cancel
+
+    -- ** accesscontextmanager.operations.delete
+    , module Network.Google.Resource.AccessContextManager.Operations.Delete
+
     -- ** accesscontextmanager.operations.get
     , module Network.Google.Resource.AccessContextManager.Operations.Get
+
+    -- ** accesscontextmanager.operations.list
+    , module Network.Google.Resource.AccessContextManager.Operations.List
 
     -- * Types
 
@@ -92,6 +101,16 @@ module Network.Google.AccessContextManager
     , basicLevel
     , blConditions
     , blCombiningFunction
+
+    -- ** ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- ** CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
     -- ** AccessLevel
     , AccessLevel
@@ -109,7 +128,6 @@ module Network.Google.AccessContextManager
     -- ** ServicePerimeterConfig
     , ServicePerimeterConfig
     , servicePerimeterConfig
-    , spcUnrestrictedServices
     , spcResources
     , spcRestrictedServices
     , spcAccessLevels
@@ -125,6 +143,10 @@ module Network.Google.AccessContextManager
 
     -- ** ServicePerimeterPerimeterType
     , ServicePerimeterPerimeterType (..)
+
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** OSConstraintOSType
     , OSConstraintOSType (..)
@@ -156,6 +178,7 @@ module Network.Google.AccessContextManager
     , osConstraint
     , ocOSType
     , ocMinimumVersion
+    , ocRequireVerifiedChromeOS
 
     -- ** AccessPolicy
     , AccessPolicy
@@ -190,6 +213,8 @@ module Network.Google.AccessContextManager
     , DevicePolicy
     , devicePolicy
     , dpOSConstraints
+    , dpRequireAdminApproval
+    , dpRequireCorpOwned
     , dpRequireScreenlock
     , dpAllowedEncryptionStatuses
     , dpAllowedDeviceManagementLevels
@@ -198,6 +223,7 @@ module Network.Google.AccessContextManager
     , Condition
     , condition
     , cMembers
+    , cRegions
     , cNegate
     , cIPSubnetworks
     , cDevicePolicy
@@ -226,7 +252,10 @@ import           Network.Google.Resource.AccessContextManager.AccessPolicies.Ser
 import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Get
 import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.List
 import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+import           Network.Google.Resource.AccessContextManager.Operations.Cancel
+import           Network.Google.Resource.AccessContextManager.Operations.Delete
 import           Network.Google.Resource.AccessContextManager.Operations.Get
+import           Network.Google.Resource.AccessContextManager.Operations.List
 
 {- $resources
 TODO
@@ -249,4 +278,7 @@ type AccessContextManagerAPI =
        :<|> AccessPoliciesGetResource
        :<|> AccessPoliciesCreateResource
        :<|> AccessPoliciesDeleteResource
+       :<|> OperationsListResource
        :<|> OperationsGetResource
+       :<|> OperationsCancelResource
+       :<|> OperationsDeleteResource

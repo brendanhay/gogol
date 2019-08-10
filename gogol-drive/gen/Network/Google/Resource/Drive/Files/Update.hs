@@ -38,6 +38,7 @@ module Network.Google.Resource.Drive.Files.Update
     , fuUseContentAsIndexableText
     , fuOCRLanguage
     , fuKeepRevisionForever
+    , fuSupportsAllDrives
     , fuFileId
     , fuAddParents
     , fuSupportsTeamDrives
@@ -57,10 +58,11 @@ type FilesUpdateResource =
                QueryParam "useContentAsIndexableText" Bool :>
                  QueryParam "ocrLanguage" Text :>
                    QueryParam "keepRevisionForever" Bool :>
-                     QueryParam "addParents" Text :>
-                       QueryParam "supportsTeamDrives" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] File :> Patch '[JSON] File
+                     QueryParam "supportsAllDrives" Bool :>
+                       QueryParam "addParents" Text :>
+                         QueryParam "supportsTeamDrives" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] File :> Patch '[JSON] File
        :<|>
        "upload" :>
          "drive" :>
@@ -71,12 +73,13 @@ type FilesUpdateResource =
                    QueryParam "useContentAsIndexableText" Bool :>
                      QueryParam "ocrLanguage" Text :>
                        QueryParam "keepRevisionForever" Bool :>
-                         QueryParam "addParents" Text :>
-                           QueryParam "supportsTeamDrives" Bool :>
-                             QueryParam "alt" AltJSON :>
-                               QueryParam "uploadType" Multipart :>
-                                 MultipartRelated '[JSON] File :>
-                                   Patch '[JSON] File
+                         QueryParam "supportsAllDrives" Bool :>
+                           QueryParam "addParents" Text :>
+                             QueryParam "supportsTeamDrives" Bool :>
+                               QueryParam "alt" AltJSON :>
+                                 QueryParam "uploadType" Multipart :>
+                                   MultipartRelated '[JSON] File :>
+                                     Patch '[JSON] File
 
 -- | Updates a file\'s metadata and\/or content with patch semantics.
 --
@@ -88,6 +91,7 @@ data FilesUpdate =
     , _fuUseContentAsIndexableText :: !Bool
     , _fuOCRLanguage               :: !(Maybe Text)
     , _fuKeepRevisionForever       :: !Bool
+    , _fuSupportsAllDrives         :: !Bool
     , _fuFileId                    :: !Text
     , _fuAddParents                :: !(Maybe Text)
     , _fuSupportsTeamDrives        :: !Bool
@@ -109,6 +113,8 @@ data FilesUpdate =
 --
 -- * 'fuKeepRevisionForever'
 --
+-- * 'fuSupportsAllDrives'
+--
 -- * 'fuFileId'
 --
 -- * 'fuAddParents'
@@ -125,6 +131,7 @@ filesUpdate pFuPayload_ pFuFileId_ =
     , _fuUseContentAsIndexableText = False
     , _fuOCRLanguage = Nothing
     , _fuKeepRevisionForever = False
+    , _fuSupportsAllDrives = False
     , _fuFileId = pFuFileId_
     , _fuAddParents = Nothing
     , _fuSupportsTeamDrives = False
@@ -155,11 +162,18 @@ fuOCRLanguage
       (\ s a -> s{_fuOCRLanguage = a})
 
 -- | Whether to set the \'keepForever\' field in the new head revision. This
--- is only applicable to files with binary content in Drive.
+-- is only applicable to files with binary content in Google Drive.
 fuKeepRevisionForever :: Lens' FilesUpdate Bool
 fuKeepRevisionForever
   = lens _fuKeepRevisionForever
       (\ s a -> s{_fuKeepRevisionForever = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+fuSupportsAllDrives :: Lens' FilesUpdate Bool
+fuSupportsAllDrives
+  = lens _fuSupportsAllDrives
+      (\ s a -> s{_fuSupportsAllDrives = a})
 
 -- | The ID of the file.
 fuFileId :: Lens' FilesUpdate Text
@@ -170,7 +184,7 @@ fuAddParents :: Lens' FilesUpdate (Maybe Text)
 fuAddParents
   = lens _fuAddParents (\ s a -> s{_fuAddParents = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 fuSupportsTeamDrives :: Lens' FilesUpdate Bool
 fuSupportsTeamDrives
   = lens _fuSupportsTeamDrives
@@ -189,6 +203,7 @@ instance GoogleRequest FilesUpdate where
               (Just _fuUseContentAsIndexableText)
               _fuOCRLanguage
               (Just _fuKeepRevisionForever)
+              (Just _fuSupportsAllDrives)
               _fuAddParents
               (Just _fuSupportsTeamDrives)
               (Just AltJSON)
@@ -208,6 +223,7 @@ instance GoogleRequest (MediaUpload FilesUpdate)
               (Just _fuUseContentAsIndexableText)
               _fuOCRLanguage
               (Just _fuKeepRevisionForever)
+              (Just _fuSupportsAllDrives)
               _fuAddParents
               (Just _fuSupportsTeamDrives)
               (Just AltJSON)

@@ -36,6 +36,7 @@ library
           Network.Google.AnalyticsReporting
         , Network.Google.AnalyticsReporting.Types
         , Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
+        , Network.Google.Resource.AnalyticsReporting.UserActivity.Search
 
     other-modules:
           Network.Google.AnalyticsReporting.Types.Product

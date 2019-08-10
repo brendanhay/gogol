@@ -20,7 +20,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the IAM access control policy for a ServiceAccount.
+-- Sets the Cloud IAM access control policy for a ServiceAccount. Note:
+-- Service accounts are both [resources and
+-- identities](\/iam\/docs\/service-accounts#service_account_permissions).
+-- This method treats the service account as a resource. Use it to grant
+-- members access to the service account, such as when they need to
+-- impersonate it. This method does not grant the service account access to
+-- other resources, such as projects. To grant a service account access to
+-- resources, include the service account in the Cloud IAM policy for the
+-- desired resource, then call the appropriate \`setIamPolicy\` method on
+-- the target resource. For example, to grant a service account access to a
+-- project, call the
+-- [projects.setIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/setIamPolicy)
+-- method.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.setIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
@@ -59,7 +71,19 @@ type ProjectsServiceAccountsSetIAMPolicyResource =
                      ReqBody '[JSON] SetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Sets the IAM access control policy for a ServiceAccount.
+-- | Sets the Cloud IAM access control policy for a ServiceAccount. Note:
+-- Service accounts are both [resources and
+-- identities](\/iam\/docs\/service-accounts#service_account_permissions).
+-- This method treats the service account as a resource. Use it to grant
+-- members access to the service account, such as when they need to
+-- impersonate it. This method does not grant the service account access to
+-- other resources, such as projects. To grant a service account access to
+-- resources, include the service account in the Cloud IAM policy for the
+-- desired resource, then call the appropriate \`setIamPolicy\` method on
+-- the target resource. For example, to grant a service account access to a
+-- project, call the
+-- [projects.setIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/setIamPolicy)
+-- method.
 --
 -- /See:/ 'projectsServiceAccountsSetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsSetIAMPolicy =

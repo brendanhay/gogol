@@ -25,10 +25,7 @@
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy. When
--- the snapshot is deleted, all messages retained in the snapshot are
+-- When the snapshot is deleted, all messages retained in the snapshot are
 -- immediately dropped. After a snapshot is deleted, a new one may be
 -- created with the same name, but the new one has no association with the
 -- old snapshot or its subscription, unless the same subscription is
@@ -73,10 +70,7 @@ type ProjectsSnapshotsDeleteResource =
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy. When
--- the snapshot is deleted, all messages retained in the snapshot are
+-- When the snapshot is deleted, all messages retained in the snapshot are
 -- immediately dropped. After a snapshot is deleted, a new one may be
 -- created with the same name, but the new one has no association with the
 -- old snapshot or its subscription, unless the same subscription is

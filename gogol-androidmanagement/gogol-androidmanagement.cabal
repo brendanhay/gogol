@@ -55,6 +55,11 @@ library
         , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get
         , Network.Google.Resource.AndroidManagement.Enterprises.Policies.List
         , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
+        , Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Create
+        , Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Delete
+        , Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.WebApps.List
+        , Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Patch
         , Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
         , Network.Google.Resource.AndroidManagement.SignupURLs.Create
 

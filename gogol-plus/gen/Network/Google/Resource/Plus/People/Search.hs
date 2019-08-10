@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search all public profiles.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.search@.
 module Network.Google.Resource.Plus.People.Search
@@ -54,7 +55,8 @@ type PeopleSearchResource =
                  QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
--- | Search all public profiles.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'peopleSearch' smart constructor.
 data PeopleSearch =

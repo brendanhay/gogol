@@ -168,24 +168,80 @@ instance ToJSON ListLocationsResponse where
                  [("nextPageToken" .=) <$> _llrNextPageToken,
                   ("locations" .=) <$> _llrLocations])
 
+-- | A specification for a time range, this will request transfer runs with
+-- run_time between start_time (inclusive) and end_time (exclusive).
+--
+-- /See:/ 'timeRange' smart constructor.
+data TimeRange =
+  TimeRange'
+    { _trStartTime :: !(Maybe DateTime')
+    , _trEndTime   :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'trStartTime'
+--
+-- * 'trEndTime'
+timeRange
+    :: TimeRange
+timeRange = TimeRange' {_trStartTime = Nothing, _trEndTime = Nothing}
+
+
+-- | Start time of the range of transfer runs. For example,
+-- \`\"2017-05-25T00:00:00+00:00\"\`. The start_time must be strictly less
+-- than the end_time. Creates transfer runs where run_time is in the range
+-- betwen start_time (inclusive) and end_time (exlusive).
+trStartTime :: Lens' TimeRange (Maybe UTCTime)
+trStartTime
+  = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
+      mapping _DateTime
+
+-- | End time of the range of transfer runs. For example,
+-- \`\"2017-05-30T00:00:00+00:00\"\`. The end_time must not be in the
+-- future. Creates transfer runs where run_time is in the range betwen
+-- start_time (inclusive) and end_time (exlusive).
+trEndTime :: Lens' TimeRange (Maybe UTCTime)
+trEndTime
+  = lens _trEndTime (\ s a -> s{_trEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON TimeRange where
+        parseJSON
+          = withObject "TimeRange"
+              (\ o ->
+                 TimeRange' <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON TimeRange where
+        toJSON TimeRange'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _trStartTime,
+                  ("endTime" .=) <$> _trEndTime])
+
 -- | Represents a data transfer run.
 --
 -- /See:/ 'transferRun' smart constructor.
 data TransferRun =
   TransferRun'
-    { _trRunTime              :: !(Maybe DateTime')
-    , _trErrorStatus          :: !(Maybe Status)
-    , _trState                :: !(Maybe TransferRunState)
-    , _trSchedule             :: !(Maybe Text)
-    , _trStartTime            :: !(Maybe DateTime')
-    , _trScheduleTime         :: !(Maybe DateTime')
-    , _trDataSourceId         :: !(Maybe Text)
-    , _trParams               :: !(Maybe TransferRunParams)
-    , _trUserId               :: !(Maybe (Textual Int64))
-    , _trUpdateTime           :: !(Maybe DateTime')
-    , _trName                 :: !(Maybe Text)
-    , _trEndTime              :: !(Maybe DateTime')
-    , _trDestinationDataSetId :: !(Maybe Text)
+    { _tRunTime              :: !(Maybe DateTime')
+    , _tErrorStatus          :: !(Maybe Status)
+    , _tState                :: !(Maybe TransferRunState)
+    , _tSchedule             :: !(Maybe Text)
+    , _tStartTime            :: !(Maybe DateTime')
+    , _tScheduleTime         :: !(Maybe DateTime')
+    , _tDataSourceId         :: !(Maybe Text)
+    , _tParams               :: !(Maybe TransferRunParams)
+    , _tUserId               :: !(Maybe (Textual Int64))
+    , _tUpdateTime           :: !(Maybe DateTime')
+    , _tName                 :: !(Maybe Text)
+    , _tEndTime              :: !(Maybe DateTime')
+    , _tDestinationDataSetId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -194,131 +250,130 @@ data TransferRun =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'trRunTime'
+-- * 'tRunTime'
 --
--- * 'trErrorStatus'
+-- * 'tErrorStatus'
 --
--- * 'trState'
+-- * 'tState'
 --
--- * 'trSchedule'
+-- * 'tSchedule'
 --
--- * 'trStartTime'
+-- * 'tStartTime'
 --
--- * 'trScheduleTime'
+-- * 'tScheduleTime'
 --
--- * 'trDataSourceId'
+-- * 'tDataSourceId'
 --
--- * 'trParams'
+-- * 'tParams'
 --
--- * 'trUserId'
+-- * 'tUserId'
 --
--- * 'trUpdateTime'
+-- * 'tUpdateTime'
 --
--- * 'trName'
+-- * 'tName'
 --
--- * 'trEndTime'
+-- * 'tEndTime'
 --
--- * 'trDestinationDataSetId'
+-- * 'tDestinationDataSetId'
 transferRun
     :: TransferRun
 transferRun =
   TransferRun'
-    { _trRunTime = Nothing
-    , _trErrorStatus = Nothing
-    , _trState = Nothing
-    , _trSchedule = Nothing
-    , _trStartTime = Nothing
-    , _trScheduleTime = Nothing
-    , _trDataSourceId = Nothing
-    , _trParams = Nothing
-    , _trUserId = Nothing
-    , _trUpdateTime = Nothing
-    , _trName = Nothing
-    , _trEndTime = Nothing
-    , _trDestinationDataSetId = Nothing
+    { _tRunTime = Nothing
+    , _tErrorStatus = Nothing
+    , _tState = Nothing
+    , _tSchedule = Nothing
+    , _tStartTime = Nothing
+    , _tScheduleTime = Nothing
+    , _tDataSourceId = Nothing
+    , _tParams = Nothing
+    , _tUserId = Nothing
+    , _tUpdateTime = Nothing
+    , _tName = Nothing
+    , _tEndTime = Nothing
+    , _tDestinationDataSetId = Nothing
     }
 
 
 -- | For batch transfer runs, specifies the date and time that data should be
 -- ingested.
-trRunTime :: Lens' TransferRun (Maybe UTCTime)
-trRunTime
-  = lens _trRunTime (\ s a -> s{_trRunTime = a}) .
+tRunTime :: Lens' TransferRun (Maybe UTCTime)
+tRunTime
+  = lens _tRunTime (\ s a -> s{_tRunTime = a}) .
       mapping _DateTime
 
 -- | Status of the transfer run.
-trErrorStatus :: Lens' TransferRun (Maybe Status)
-trErrorStatus
-  = lens _trErrorStatus
-      (\ s a -> s{_trErrorStatus = a})
+tErrorStatus :: Lens' TransferRun (Maybe Status)
+tErrorStatus
+  = lens _tErrorStatus (\ s a -> s{_tErrorStatus = a})
 
 -- | Data transfer run state. Ignored for input requests.
-trState :: Lens' TransferRun (Maybe TransferRunState)
-trState = lens _trState (\ s a -> s{_trState = a})
+tState :: Lens' TransferRun (Maybe TransferRunState)
+tState = lens _tState (\ s a -> s{_tState = a})
 
 -- | Output only. Describes the schedule of this transfer run if it was
 -- created as part of a regular schedule. For batch transfer runs that are
 -- scheduled manually, this is empty. NOTE: the system might choose to
 -- delay the schedule depending on the current load, so \`schedule_time\`
 -- doesn\'t always match this.
-trSchedule :: Lens' TransferRun (Maybe Text)
-trSchedule
-  = lens _trSchedule (\ s a -> s{_trSchedule = a})
+tSchedule :: Lens' TransferRun (Maybe Text)
+tSchedule
+  = lens _tSchedule (\ s a -> s{_tSchedule = a})
 
 -- | Output only. Time when transfer run was started. Parameter ignored by
 -- server for input requests.
-trStartTime :: Lens' TransferRun (Maybe UTCTime)
-trStartTime
-  = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
+tStartTime :: Lens' TransferRun (Maybe UTCTime)
+tStartTime
+  = lens _tStartTime (\ s a -> s{_tStartTime = a}) .
       mapping _DateTime
 
 -- | Minimum time after which a transfer run can be started.
-trScheduleTime :: Lens' TransferRun (Maybe UTCTime)
-trScheduleTime
-  = lens _trScheduleTime
-      (\ s a -> s{_trScheduleTime = a})
+tScheduleTime :: Lens' TransferRun (Maybe UTCTime)
+tScheduleTime
+  = lens _tScheduleTime
+      (\ s a -> s{_tScheduleTime = a})
       . mapping _DateTime
 
 -- | Output only. Data source id.
-trDataSourceId :: Lens' TransferRun (Maybe Text)
-trDataSourceId
-  = lens _trDataSourceId
-      (\ s a -> s{_trDataSourceId = a})
+tDataSourceId :: Lens' TransferRun (Maybe Text)
+tDataSourceId
+  = lens _tDataSourceId
+      (\ s a -> s{_tDataSourceId = a})
 
 -- | Output only. Data transfer specific parameters.
-trParams :: Lens' TransferRun (Maybe TransferRunParams)
-trParams = lens _trParams (\ s a -> s{_trParams = a})
+tParams :: Lens' TransferRun (Maybe TransferRunParams)
+tParams = lens _tParams (\ s a -> s{_tParams = a})
 
 -- | Deprecated. Unique ID of the user on whose behalf transfer is done.
-trUserId :: Lens' TransferRun (Maybe Int64)
-trUserId
-  = lens _trUserId (\ s a -> s{_trUserId = a}) .
+tUserId :: Lens' TransferRun (Maybe Int64)
+tUserId
+  = lens _tUserId (\ s a -> s{_tUserId = a}) .
       mapping _Coerce
 
 -- | Output only. Last time the data transfer run state was updated.
-trUpdateTime :: Lens' TransferRun (Maybe UTCTime)
-trUpdateTime
-  = lens _trUpdateTime (\ s a -> s{_trUpdateTime = a})
-      . mapping _DateTime
+tUpdateTime :: Lens' TransferRun (Maybe UTCTime)
+tUpdateTime
+  = lens _tUpdateTime (\ s a -> s{_tUpdateTime = a}) .
+      mapping _DateTime
 
 -- | The resource name of the transfer run. Transfer run names have the form
 -- \`projects\/{project_id}\/locations\/{location}\/transferConfigs\/{config_id}\/runs\/{run_id}\`.
 -- The name is ignored when creating a transfer run.
-trName :: Lens' TransferRun (Maybe Text)
-trName = lens _trName (\ s a -> s{_trName = a})
+tName :: Lens' TransferRun (Maybe Text)
+tName = lens _tName (\ s a -> s{_tName = a})
 
 -- | Output only. Time when transfer run ended. Parameter ignored by server
 -- for input requests.
-trEndTime :: Lens' TransferRun (Maybe UTCTime)
-trEndTime
-  = lens _trEndTime (\ s a -> s{_trEndTime = a}) .
+tEndTime :: Lens' TransferRun (Maybe UTCTime)
+tEndTime
+  = lens _tEndTime (\ s a -> s{_tEndTime = a}) .
       mapping _DateTime
 
 -- | Output only. The BigQuery target dataset id.
-trDestinationDataSetId :: Lens' TransferRun (Maybe Text)
-trDestinationDataSetId
-  = lens _trDestinationDataSetId
-      (\ s a -> s{_trDestinationDataSetId = a})
+tDestinationDataSetId :: Lens' TransferRun (Maybe Text)
+tDestinationDataSetId
+  = lens _tDestinationDataSetId
+      (\ s a -> s{_tDestinationDataSetId = a})
 
 instance FromJSON TransferRun where
         parseJSON
@@ -342,20 +397,19 @@ instance ToJSON TransferRun where
         toJSON TransferRun'{..}
           = object
               (catMaybes
-                 [("runTime" .=) <$> _trRunTime,
-                  ("errorStatus" .=) <$> _trErrorStatus,
-                  ("state" .=) <$> _trState,
-                  ("schedule" .=) <$> _trSchedule,
-                  ("startTime" .=) <$> _trStartTime,
-                  ("scheduleTime" .=) <$> _trScheduleTime,
-                  ("dataSourceId" .=) <$> _trDataSourceId,
-                  ("params" .=) <$> _trParams,
-                  ("userId" .=) <$> _trUserId,
-                  ("updateTime" .=) <$> _trUpdateTime,
-                  ("name" .=) <$> _trName,
-                  ("endTime" .=) <$> _trEndTime,
+                 [("runTime" .=) <$> _tRunTime,
+                  ("errorStatus" .=) <$> _tErrorStatus,
+                  ("state" .=) <$> _tState,
+                  ("schedule" .=) <$> _tSchedule,
+                  ("startTime" .=) <$> _tStartTime,
+                  ("scheduleTime" .=) <$> _tScheduleTime,
+                  ("dataSourceId" .=) <$> _tDataSourceId,
+                  ("params" .=) <$> _tParams,
+                  ("userId" .=) <$> _tUserId,
+                  ("updateTime" .=) <$> _tUpdateTime,
+                  ("name" .=) <$> _tName, ("endTime" .=) <$> _tEndTime,
                   ("destinationDatasetId" .=) <$>
-                    _trDestinationDataSetId])
+                    _tDestinationDataSetId])
 
 -- | A request to determine whether the user has valid credentials. This
 -- method is used to limit the number of OAuth popups in the user
@@ -1136,6 +1190,62 @@ instance ToJSON ListDataSourcesResponse where
                  [("nextPageToken" .=) <$> _ldsrNextPageToken,
                   ("dataSources" .=) <$> _ldsrDataSources])
 
+-- | A request to start manual transfer runs.
+--
+-- /See:/ 'startManualTransferRunsRequest' smart constructor.
+data StartManualTransferRunsRequest =
+  StartManualTransferRunsRequest'
+    { _smtrrRequestedRunTime   :: !(Maybe DateTime')
+    , _smtrrRequestedTimeRange :: !(Maybe TimeRange)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StartManualTransferRunsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smtrrRequestedRunTime'
+--
+-- * 'smtrrRequestedTimeRange'
+startManualTransferRunsRequest
+    :: StartManualTransferRunsRequest
+startManualTransferRunsRequest =
+  StartManualTransferRunsRequest'
+    {_smtrrRequestedRunTime = Nothing, _smtrrRequestedTimeRange = Nothing}
+
+
+-- | Specific run_time for a transfer run to be started. The
+-- requested_run_time must not be in the future.
+smtrrRequestedRunTime :: Lens' StartManualTransferRunsRequest (Maybe UTCTime)
+smtrrRequestedRunTime
+  = lens _smtrrRequestedRunTime
+      (\ s a -> s{_smtrrRequestedRunTime = a})
+      . mapping _DateTime
+
+-- | Time range for the transfer runs that should be started.
+smtrrRequestedTimeRange :: Lens' StartManualTransferRunsRequest (Maybe TimeRange)
+smtrrRequestedTimeRange
+  = lens _smtrrRequestedTimeRange
+      (\ s a -> s{_smtrrRequestedTimeRange = a})
+
+instance FromJSON StartManualTransferRunsRequest
+         where
+        parseJSON
+          = withObject "StartManualTransferRunsRequest"
+              (\ o ->
+                 StartManualTransferRunsRequest' <$>
+                   (o .:? "requestedRunTime") <*>
+                     (o .:? "requestedTimeRange"))
+
+instance ToJSON StartManualTransferRunsRequest where
+        toJSON StartManualTransferRunsRequest'{..}
+          = object
+              (catMaybes
+                 [("requestedRunTime" .=) <$> _smtrrRequestedRunTime,
+                  ("requestedTimeRange" .=) <$>
+                    _smtrrRequestedTimeRange])
+
 -- | Represents data source metadata. Metadata is sufficient to render UI and
 -- request proper OAuth tokens.
 --
@@ -1553,6 +1663,46 @@ instance FromJSON LocationLabels where
 
 instance ToJSON LocationLabels where
         toJSON = toJSON . _llAddtional
+
+-- | A response to start manual transfer runs.
+--
+-- /See:/ 'startManualTransferRunsResponse' smart constructor.
+newtype StartManualTransferRunsResponse =
+  StartManualTransferRunsResponse'
+    { _smtrrRuns :: Maybe [TransferRun]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StartManualTransferRunsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smtrrRuns'
+startManualTransferRunsResponse
+    :: StartManualTransferRunsResponse
+startManualTransferRunsResponse =
+  StartManualTransferRunsResponse' {_smtrrRuns = Nothing}
+
+
+-- | The transfer runs that were created.
+smtrrRuns :: Lens' StartManualTransferRunsResponse [TransferRun]
+smtrrRuns
+  = lens _smtrrRuns (\ s a -> s{_smtrrRuns = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StartManualTransferRunsResponse
+         where
+        parseJSON
+          = withObject "StartManualTransferRunsResponse"
+              (\ o ->
+                 StartManualTransferRunsResponse' <$>
+                   (o .:? "runs" .!= mempty))
+
+instance ToJSON StartManualTransferRunsResponse where
+        toJSON StartManualTransferRunsResponse'{..}
+          = object (catMaybes [("runs" .=) <$> _smtrrRuns])
 
 -- | Service-specific metadata. For example the available capacity at the
 -- given location.

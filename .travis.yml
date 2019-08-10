@@ -93,6 +93,8 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-acceleratedmobilepageurl
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-accessapproval
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-accesscontextmanager
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-adexchange-buyer
@@ -171,6 +173,10 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-cloudkms
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-cloudprivatecatalog
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-cloudprivatecatalogproducer
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-cloudprofiler
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-cloudscheduler
@@ -182,6 +188,8 @@ matrix:
     - env: GHCVER=8.2.2 LIBRARY=gogol-cloudtasks
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-cloudtrace
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-commentanalyzer
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-composer
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
@@ -196,6 +204,8 @@ matrix:
     - env: GHCVER=8.2.2 LIBRARY=gogol-customsearch
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-dataflow
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-datafusion
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-dataproc
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
@@ -224,6 +234,8 @@ matrix:
     - env: GHCVER=8.2.2 LIBRARY=gogol-doubleclick-search
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-driveactivity
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-factchecktools
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-file
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
@@ -293,8 +305,6 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-people
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.2.2 LIBRARY=gogol-photoslibrary
-      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-playcustomapp
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-play-moviespartner
@@ -323,6 +333,8 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-resourcemanager
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-run
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-runtimeconfig
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-safebrowsing
@@ -330,6 +342,8 @@ matrix:
     - env: GHCVER=8.2.2 LIBRARY=gogol-script
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-searchconsole
+      addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.2.2 LIBRARY=gogol-securitycenter
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-servicebroker
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }

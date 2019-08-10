@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @healthcare.projects.locations.datasets.delete@ method which the
 -- 'ProjectsLocationsDataSetsDelete' request conforms to.
 type ProjectsLocationsDataSetsDeleteResource =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

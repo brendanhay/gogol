@@ -71,7 +71,6 @@ library
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Update
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.Get
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.List
-        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.Creatives.Delete
         , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
         , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponseErrors.List
         , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBids.List

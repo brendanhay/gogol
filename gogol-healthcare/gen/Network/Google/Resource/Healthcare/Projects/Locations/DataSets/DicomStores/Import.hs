@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsDicomStoresImport' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresImportResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "name" "import" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

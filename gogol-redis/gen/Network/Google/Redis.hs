@@ -38,6 +38,9 @@ module Network.Google.Redis
     -- ** redis.projects.locations.instances.delete
     , module Network.Google.Resource.Redis.Projects.Locations.Instances.Delete
 
+    -- ** redis.projects.locations.instances.failover
+    , module Network.Google.Resource.Redis.Projects.Locations.Instances.Failover
+
     -- ** redis.projects.locations.instances.get
     , module Network.Google.Resource.Redis.Projects.Locations.Instances.Get
 
@@ -64,10 +67,18 @@ module Network.Google.Redis
 
     -- * Types
 
+    -- ** FailoverInstanceRequest
+    , FailoverInstanceRequest
+    , failoverInstanceRequest
+    , firDataProtectionMode
+
     -- ** InstanceLabels
     , InstanceLabels
     , instanceLabels
     , ilAddtional
+
+    -- ** FailoverInstanceRequestDataProtectionMode
+    , FailoverInstanceRequestDataProtectionMode (..)
 
     -- ** Status
     , Status
@@ -208,6 +219,7 @@ import           Network.Google.Redis.Types
 import           Network.Google.Resource.Redis.Projects.Locations.Get
 import           Network.Google.Resource.Redis.Projects.Locations.Instances.Create
 import           Network.Google.Resource.Redis.Projects.Locations.Instances.Delete
+import           Network.Google.Resource.Redis.Projects.Locations.Instances.Failover
 import           Network.Google.Resource.Redis.Projects.Locations.Instances.Get
 import           Network.Google.Resource.Redis.Projects.Locations.Instances.List
 import           Network.Google.Resource.Redis.Projects.Locations.Instances.Patch
@@ -227,6 +239,7 @@ type RedisAPI =
        ProjectsLocationsInstancesPatchResource
        :<|> ProjectsLocationsInstancesGetResource
        :<|> ProjectsLocationsInstancesCreateResource
+       :<|> ProjectsLocationsInstancesFailoverResource
        :<|> ProjectsLocationsInstancesDeleteResource
        :<|> ProjectsLocationsOperationsListResource
        :<|> ProjectsLocationsOperationsGetResource

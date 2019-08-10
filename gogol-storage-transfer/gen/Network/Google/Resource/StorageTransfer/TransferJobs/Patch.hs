@@ -24,7 +24,7 @@
 -- transfer operations that are running already. Updating the scheduling of
 -- a job is not allowed.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     (
     -- * REST Resource

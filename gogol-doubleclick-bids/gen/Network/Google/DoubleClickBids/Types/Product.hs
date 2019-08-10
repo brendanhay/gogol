@@ -549,16 +549,18 @@ downloadRequest =
     }
 
 
--- | File types that will be returned. Acceptable values are: - \"AD\" -
--- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"LINE_ITEM\" -
--- \"INVENTORY_SOURCE\"
+-- | File types that will be returned. If INVENTORY_SOURCE is requested, no
+-- other file types may be requested. Acceptable values are: - \"AD\" -
+-- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"INVENTORY_SOURCE\"
+-- - \"LINE_ITEM\"
 drFileTypes :: Lens' DownloadRequest [DownloadRequestFileTypesItem]
 drFileTypes
   = lens _drFileTypes (\ s a -> s{_drFileTypes = a}) .
       _Default
       . _Coerce
 
--- | Filter type used to filter entities to fetch.
+-- | Filter type used to filter entities to fetch. PARTNER_ID and
+-- INVENTORY_SOURCE_ID may only be used when downloading inventory sources.
 drFilterType :: Lens' DownloadRequest (Maybe DownloadRequestFilterType)
 drFilterType
   = lens _drFilterType (\ s a -> s{_drFilterType = a})
@@ -1486,7 +1488,7 @@ pMetrics
       _Default
       . _Coerce
 
--- | Whether to include data from Invite Media.
+-- | Deprecated. This field is no longer in use.
 pIncludeInviteData :: Lens' Parameters (Maybe Bool)
 pIncludeInviteData
   = lens _pIncludeInviteData

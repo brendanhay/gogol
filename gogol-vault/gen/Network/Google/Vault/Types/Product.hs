@@ -27,8 +27,11 @@ import           Network.Google.Vault.Types.Sum
 -- /See:/ 'heldAccount' smart constructor.
 data HeldAccount =
   HeldAccount'
-    { _haAccountId :: !(Maybe Text)
+    { _haEmail     :: !(Maybe Text)
+    , _haLastName  :: !(Maybe Text)
+    , _haAccountId :: !(Maybe Text)
     , _haHoldTime  :: !(Maybe DateTime')
+    , _haFirstName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -37,13 +40,36 @@ data HeldAccount =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'haEmail'
+--
+-- * 'haLastName'
+--
 -- * 'haAccountId'
 --
 -- * 'haHoldTime'
+--
+-- * 'haFirstName'
 heldAccount
     :: HeldAccount
-heldAccount = HeldAccount' {_haAccountId = Nothing, _haHoldTime = Nothing}
+heldAccount =
+  HeldAccount'
+    { _haEmail = Nothing
+    , _haLastName = Nothing
+    , _haAccountId = Nothing
+    , _haHoldTime = Nothing
+    , _haFirstName = Nothing
+    }
 
+
+-- | The primary email address of the account. If used as an input, this
+-- takes precedence over account ID.
+haEmail :: Lens' HeldAccount (Maybe Text)
+haEmail = lens _haEmail (\ s a -> s{_haEmail = a})
+
+-- | Output only. The last name of the account holder.
+haLastName :: Lens' HeldAccount (Maybe Text)
+haLastName
+  = lens _haLastName (\ s a -> s{_haLastName = a})
 
 -- | The account\'s ID as provided by the
 -- <https://developers.google.com/admin-sdk/ Admin SDK>.
@@ -51,25 +77,36 @@ haAccountId :: Lens' HeldAccount (Maybe Text)
 haAccountId
   = lens _haAccountId (\ s a -> s{_haAccountId = a})
 
--- | When the account was put on hold.
+-- | Output only. When the account was put on hold.
 haHoldTime :: Lens' HeldAccount (Maybe UTCTime)
 haHoldTime
   = lens _haHoldTime (\ s a -> s{_haHoldTime = a}) .
       mapping _DateTime
+
+-- | Output only. The first name of the account holder.
+haFirstName :: Lens' HeldAccount (Maybe Text)
+haFirstName
+  = lens _haFirstName (\ s a -> s{_haFirstName = a})
 
 instance FromJSON HeldAccount where
         parseJSON
           = withObject "HeldAccount"
               (\ o ->
                  HeldAccount' <$>
-                   (o .:? "accountId") <*> (o .:? "holdTime"))
+                   (o .:? "email") <*> (o .:? "lastName") <*>
+                     (o .:? "accountId")
+                     <*> (o .:? "holdTime")
+                     <*> (o .:? "firstName"))
 
 instance ToJSON HeldAccount where
         toJSON HeldAccount'{..}
           = object
               (catMaybes
-                 [("accountId" .=) <$> _haAccountId,
-                  ("holdTime" .=) <$> _haHoldTime])
+                 [("email" .=) <$> _haEmail,
+                  ("lastName" .=) <$> _haLastName,
+                  ("accountId" .=) <$> _haAccountId,
+                  ("holdTime" .=) <$> _haHoldTime,
+                  ("firstName" .=) <$> _haFirstName])
 
 -- | Query options for hangouts chat holds.
 --
@@ -2273,9 +2310,10 @@ instance ToJSON AddHeldAccountsResponse where
 -- | The options for mail export.
 --
 -- /See:/ 'mailExportOptions' smart constructor.
-newtype MailExportOptions =
+data MailExportOptions =
   MailExportOptions'
-    { _meoExportFormat :: Maybe MailExportOptionsExportFormat
+    { _meoExportFormat                :: !(Maybe MailExportOptionsExportFormat)
+    , _meoShowConfidentialModeContent :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2285,9 +2323,13 @@ newtype MailExportOptions =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'meoExportFormat'
+--
+-- * 'meoShowConfidentialModeContent'
 mailExportOptions
     :: MailExportOptions
-mailExportOptions = MailExportOptions' {_meoExportFormat = Nothing}
+mailExportOptions =
+  MailExportOptions'
+    {_meoExportFormat = Nothing, _meoShowConfidentialModeContent = Nothing}
 
 
 -- | The export file format.
@@ -2296,17 +2338,27 @@ meoExportFormat
   = lens _meoExportFormat
       (\ s a -> s{_meoExportFormat = a})
 
+-- | Set to true to export confidential mode content.
+meoShowConfidentialModeContent :: Lens' MailExportOptions (Maybe Bool)
+meoShowConfidentialModeContent
+  = lens _meoShowConfidentialModeContent
+      (\ s a -> s{_meoShowConfidentialModeContent = a})
+
 instance FromJSON MailExportOptions where
         parseJSON
           = withObject "MailExportOptions"
               (\ o ->
-                 MailExportOptions' <$> (o .:? "exportFormat"))
+                 MailExportOptions' <$>
+                   (o .:? "exportFormat") <*>
+                     (o .:? "showConfidentialModeContent"))
 
 instance ToJSON MailExportOptions where
         toJSON MailExportOptions'{..}
           = object
               (catMaybes
-                 [("exportFormat" .=) <$> _meoExportFormat])
+                 [("exportFormat" .=) <$> _meoExportFormat,
+                  ("showConfidentialModeContent" .=) <$>
+                    _meoShowConfidentialModeContent])
 
 -- | The holds for a matter.
 --

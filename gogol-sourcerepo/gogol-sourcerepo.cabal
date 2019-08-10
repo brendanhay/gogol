@@ -41,6 +41,7 @@ library
         , Network.Google.Resource.SourceRepo.Projects.Repos.List
         , Network.Google.Resource.SourceRepo.Projects.Repos.Patch
         , Network.Google.Resource.SourceRepo.Projects.Repos.SetIAMPolicy
+        , Network.Google.Resource.SourceRepo.Projects.Repos.Sync
         , Network.Google.Resource.SourceRepo.Projects.Repos.TestIAMPermissions
         , Network.Google.Resource.SourceRepo.Projects.UpdateConfig
         , Network.Google.SourceRepo

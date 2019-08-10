@@ -34,6 +34,7 @@ module Network.Google.Resource.Drive.Permissions.Update
 
     -- * Request Lenses
     , puPayload
+    , puSupportsAllDrives
     , puRemoveExpiration
     , puUseDomainAdminAccess
     , puTransferOwnership
@@ -54,13 +55,14 @@ type PermissionsUpdateResource =
            Capture "fileId" Text :>
              "permissions" :>
                Capture "permissionId" Text :>
-                 QueryParam "removeExpiration" Bool :>
-                   QueryParam "useDomainAdminAccess" Bool :>
-                     QueryParam "transferOwnership" Bool :>
-                       QueryParam "supportsTeamDrives" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Permission :>
-                             Patch '[JSON] Permission
+                 QueryParam "supportsAllDrives" Bool :>
+                   QueryParam "removeExpiration" Bool :>
+                     QueryParam "useDomainAdminAccess" Bool :>
+                       QueryParam "transferOwnership" Bool :>
+                         QueryParam "supportsTeamDrives" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Permission :>
+                               Patch '[JSON] Permission
 
 -- | Updates a permission with patch semantics.
 --
@@ -68,6 +70,7 @@ type PermissionsUpdateResource =
 data PermissionsUpdate =
   PermissionsUpdate'
     { _puPayload              :: !Permission
+    , _puSupportsAllDrives    :: !Bool
     , _puRemoveExpiration     :: !Bool
     , _puUseDomainAdminAccess :: !Bool
     , _puTransferOwnership    :: !Bool
@@ -83,6 +86,8 @@ data PermissionsUpdate =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'puPayload'
+--
+-- * 'puSupportsAllDrives'
 --
 -- * 'puRemoveExpiration'
 --
@@ -103,6 +108,7 @@ permissionsUpdate
 permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
   PermissionsUpdate'
     { _puPayload = pPuPayload_
+    , _puSupportsAllDrives = False
     , _puRemoveExpiration = False
     , _puUseDomainAdminAccess = False
     , _puTransferOwnership = False
@@ -117,6 +123,13 @@ puPayload :: Lens' PermissionsUpdate Permission
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+puSupportsAllDrives :: Lens' PermissionsUpdate Bool
+puSupportsAllDrives
+  = lens _puSupportsAllDrives
+      (\ s a -> s{_puSupportsAllDrives = a})
+
 -- | Whether to remove the expiration date.
 puRemoveExpiration :: Lens' PermissionsUpdate Bool
 puRemoveExpiration
@@ -124,8 +137,9 @@ puRemoveExpiration
       (\ s a -> s{_puRemoveExpiration = a})
 
 -- | Issue the request as a domain administrator; if set to true, then the
--- requester will be granted access if they are an administrator of the
--- domain to which the item belongs.
+-- requester will be granted access if the file ID parameter refers to a
+-- shared drive and the requester is an administrator of the domain to
+-- which the shared drive belongs.
 puUseDomainAdminAccess :: Lens' PermissionsUpdate Bool
 puUseDomainAdminAccess
   = lens _puUseDomainAdminAccess
@@ -139,11 +153,11 @@ puTransferOwnership
   = lens _puTransferOwnership
       (\ s a -> s{_puTransferOwnership = a})
 
--- | The ID of the file or Team Drive.
+-- | The ID of the file or shared drive.
 puFileId :: Lens' PermissionsUpdate Text
 puFileId = lens _puFileId (\ s a -> s{_puFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 puSupportsTeamDrives :: Lens' PermissionsUpdate Bool
 puSupportsTeamDrives
   = lens _puSupportsTeamDrives
@@ -162,6 +176,7 @@ instance GoogleRequest PermissionsUpdate where
                "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsUpdate'{..}
           = go _puFileId _puPermissionId
+              (Just _puSupportsAllDrives)
               (Just _puRemoveExpiration)
               (Just _puUseDomainAdminAccess)
               (Just _puTransferOwnership)

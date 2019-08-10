@@ -38,6 +38,7 @@ library
         , Network.Google.Resource.Redis.Projects.Locations.Get
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Create
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Delete
+        , Network.Google.Resource.Redis.Projects.Locations.Instances.Failover
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Get
         , Network.Google.Resource.Redis.Projects.Locations.Instances.List
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Patch

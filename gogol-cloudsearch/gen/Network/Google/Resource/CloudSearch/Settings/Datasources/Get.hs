@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a data source.
+-- Gets a datasource.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.get@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Get
@@ -59,7 +59,7 @@ type SettingsDatasourcesGetResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
--- | Gets a data source.
+-- | Gets a datasource.
 --
 -- /See:/ 'settingsDatasourcesGet' smart constructor.
 data SettingsDatasourcesGet =
@@ -129,12 +129,12 @@ sdgUploadType
   = lens _sdgUploadType
       (\ s a -> s{_sdgUploadType = a})
 
--- | Name of the data source resource. Format: datasources\/{source_id}.
+-- | Name of the datasource resource. Format: datasources\/{source_id}.
 sdgName :: Lens' SettingsDatasourcesGet Text
 sdgName = lens _sdgName (\ s a -> s{_sdgName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 sdgDebugOptionsEnableDebugging :: Lens' SettingsDatasourcesGet (Maybe Bool)
 sdgDebugOptionsEnableDebugging
   = lens _sdgDebugOptionsEnableDebugging

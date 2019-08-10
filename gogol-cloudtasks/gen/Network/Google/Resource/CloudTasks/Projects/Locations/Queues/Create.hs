@@ -55,7 +55,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.create@ method which the
 -- 'ProjectsLocationsQueuesCreate' request conforms to.
 type ProjectsLocationsQueuesCreateResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "parent" Text :>
          "queues" :>
            QueryParam "$.xgafv" Xgafv :>

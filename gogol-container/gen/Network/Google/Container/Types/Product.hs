@@ -57,6 +57,65 @@ instance ToJSON NetworkPolicyConfig where
           = object
               (catMaybes [("disabled" .=) <$> _npcDisabled])
 
+-- | ListUsableSubnetworksResponse is the response of
+-- ListUsableSubnetworksRequest.
+--
+-- /See:/ 'listUsableSubnetworksResponse' smart constructor.
+data ListUsableSubnetworksResponse =
+  ListUsableSubnetworksResponse'
+    { _lusrNextPageToken :: !(Maybe Text)
+    , _lusrSubnetworks   :: !(Maybe [UsableSubnetwork])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListUsableSubnetworksResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lusrNextPageToken'
+--
+-- * 'lusrSubnetworks'
+listUsableSubnetworksResponse
+    :: ListUsableSubnetworksResponse
+listUsableSubnetworksResponse =
+  ListUsableSubnetworksResponse'
+    {_lusrNextPageToken = Nothing, _lusrSubnetworks = Nothing}
+
+
+-- | This token allows you to get the next page of results for list requests.
+-- If the number of results is larger than \`page_size\`, use the
+-- \`next_page_token\` as a value for the query parameter \`page_token\` in
+-- the next request. The value will become empty when there are no more
+-- pages.
+lusrNextPageToken :: Lens' ListUsableSubnetworksResponse (Maybe Text)
+lusrNextPageToken
+  = lens _lusrNextPageToken
+      (\ s a -> s{_lusrNextPageToken = a})
+
+-- | A list of usable subnetworks in the specified network project.
+lusrSubnetworks :: Lens' ListUsableSubnetworksResponse [UsableSubnetwork]
+lusrSubnetworks
+  = lens _lusrSubnetworks
+      (\ s a -> s{_lusrSubnetworks = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListUsableSubnetworksResponse where
+        parseJSON
+          = withObject "ListUsableSubnetworksResponse"
+              (\ o ->
+                 ListUsableSubnetworksResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "subnetworks" .!= mempty))
+
+instance ToJSON ListUsableSubnetworksResponse where
+        toJSON ListUsableSubnetworksResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lusrNextPageToken,
+                  ("subnetworks" .=) <$> _lusrSubnetworks])
+
 -- | UpdateNodePoolRequests update a node pool\'s image and\/or version.
 --
 -- /See:/ 'updateNodePoolRequest' smart constructor.
@@ -742,6 +801,7 @@ data Cluster =
     , _cNodePools                      :: !(Maybe [NodePool])
     , _cEnableKubernetesAlpha          :: !(Maybe Bool)
     , _cResourceLabels                 :: !(Maybe ClusterResourceLabels)
+    , _cTpuIPv4CIdRBlock               :: !(Maybe Text)
     , _cNodeConfig                     :: !(Maybe NodeConfig)
     , _cNodeIPv4CIdRSize               :: !(Maybe (Textual Int32))
     , _cClusterIPv4CIdR                :: !(Maybe Text)
@@ -762,11 +822,13 @@ data Cluster =
     , _cName                           :: !(Maybe Text)
     , _cCurrentMasterVersion           :: !(Maybe Text)
     , _cStatusMessage                  :: !(Maybe Text)
+    , _cDefaultMaxPodsConstraint       :: !(Maybe MaxPodsConstraint)
     , _cSubnetwork                     :: !(Maybe Text)
     , _cCurrentNodeCount               :: !(Maybe (Textual Int32))
     , _cPrivateClusterConfig           :: !(Maybe PrivateClusterConfig)
     , _cMaintenancePolicy              :: !(Maybe MaintenancePolicy)
     , _cConditions                     :: !(Maybe [StatusCondition])
+    , _cEnableTpu                      :: !(Maybe Bool)
     , _cEndpoint                       :: !(Maybe Text)
     , _cExpireTime                     :: !(Maybe Text)
     , _cNetworkPolicy                  :: !(Maybe NetworkPolicy)
@@ -792,6 +854,8 @@ data Cluster =
 -- * 'cEnableKubernetesAlpha'
 --
 -- * 'cResourceLabels'
+--
+-- * 'cTpuIPv4CIdRBlock'
 --
 -- * 'cNodeConfig'
 --
@@ -833,6 +897,8 @@ data Cluster =
 --
 -- * 'cStatusMessage'
 --
+-- * 'cDefaultMaxPodsConstraint'
+--
 -- * 'cSubnetwork'
 --
 -- * 'cCurrentNodeCount'
@@ -842,6 +908,8 @@ data Cluster =
 -- * 'cMaintenancePolicy'
 --
 -- * 'cConditions'
+--
+-- * 'cEnableTpu'
 --
 -- * 'cEndpoint'
 --
@@ -870,6 +938,7 @@ cluster =
     , _cNodePools = Nothing
     , _cEnableKubernetesAlpha = Nothing
     , _cResourceLabels = Nothing
+    , _cTpuIPv4CIdRBlock = Nothing
     , _cNodeConfig = Nothing
     , _cNodeIPv4CIdRSize = Nothing
     , _cClusterIPv4CIdR = Nothing
@@ -890,11 +959,13 @@ cluster =
     , _cName = Nothing
     , _cCurrentMasterVersion = Nothing
     , _cStatusMessage = Nothing
+    , _cDefaultMaxPodsConstraint = Nothing
     , _cSubnetwork = Nothing
     , _cCurrentNodeCount = Nothing
     , _cPrivateClusterConfig = Nothing
     , _cMaintenancePolicy = Nothing
     , _cConditions = Nothing
+    , _cEnableTpu = Nothing
     , _cEndpoint = Nothing
     , _cExpireTime = Nothing
     , _cNetworkPolicy = Nothing
@@ -936,6 +1007,14 @@ cResourceLabels :: Lens' Cluster (Maybe ClusterResourceLabels)
 cResourceLabels
   = lens _cResourceLabels
       (\ s a -> s{_cResourceLabels = a})
+
+-- | [Output only] The IP address range of the Cloud TPUs in this cluster, in
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`1.2.3.4\/29\`).
+cTpuIPv4CIdRBlock :: Lens' Cluster (Maybe Text)
+cTpuIPv4CIdRBlock
+  = lens _cTpuIPv4CIdRBlock
+      (\ s a -> s{_cTpuIPv4CIdRBlock = a})
 
 -- | Parameters used in creating the cluster\'s nodes. See \`nodeConfig\` for
 -- the description of its properties. For requests, this field should only
@@ -990,7 +1069,7 @@ cInitialNodeCount
       . mapping _Coerce
 
 -- | [Output only] Deprecated, use
--- [NodePool.version](\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.zones.clusters.nodePool)
+-- [NodePools.version](\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.zones.clusters.nodePools)
 -- instead. The current version of the node software components. If they
 -- are currently at multiple versions because they\'re in the process of
 -- being upgraded, this reflects the minimum version of all nodes.
@@ -1100,6 +1179,14 @@ cStatusMessage
   = lens _cStatusMessage
       (\ s a -> s{_cStatusMessage = a})
 
+-- | The default constraint on the maximum number of pods that can be run
+-- simultaneously on a node in the node pool of this cluster. Only honored
+-- if cluster created with IP Alias support.
+cDefaultMaxPodsConstraint :: Lens' Cluster (Maybe MaxPodsConstraint)
+cDefaultMaxPodsConstraint
+  = lens _cDefaultMaxPodsConstraint
+      (\ s a -> s{_cDefaultMaxPodsConstraint = a})
+
 -- | The name of the Google Compute Engine
 -- [subnetwork](\/compute\/docs\/subnetworks) to which the cluster is
 -- connected.
@@ -1133,6 +1220,11 @@ cConditions
   = lens _cConditions (\ s a -> s{_cConditions = a}) .
       _Default
       . _Coerce
+
+-- | Enable the ability to use Cloud TPUs in this cluster.
+cEnableTpu :: Lens' Cluster (Maybe Bool)
+cEnableTpu
+  = lens _cEnableTpu (\ s a -> s{_cEnableTpu = a})
 
 -- | [Output only] The IP address of this cluster\'s master endpoint. The
 -- endpoint can be accessed from the internet at
@@ -1215,6 +1307,7 @@ instance FromJSON Cluster where
                    (o .:? "status") <*> (o .:? "nodePools" .!= mempty)
                      <*> (o .:? "enableKubernetesAlpha")
                      <*> (o .:? "resourceLabels")
+                     <*> (o .:? "tpuIpv4CidrBlock")
                      <*> (o .:? "nodeConfig")
                      <*> (o .:? "nodeIpv4CidrSize")
                      <*> (o .:? "clusterIpv4Cidr")
@@ -1235,11 +1328,13 @@ instance FromJSON Cluster where
                      <*> (o .:? "name")
                      <*> (o .:? "currentMasterVersion")
                      <*> (o .:? "statusMessage")
+                     <*> (o .:? "defaultMaxPodsConstraint")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "currentNodeCount")
                      <*> (o .:? "privateClusterConfig")
                      <*> (o .:? "maintenancePolicy")
                      <*> (o .:? "conditions" .!= mempty)
+                     <*> (o .:? "enableTpu")
                      <*> (o .:? "endpoint")
                      <*> (o .:? "expireTime")
                      <*> (o .:? "networkPolicy")
@@ -1260,6 +1355,7 @@ instance ToJSON Cluster where
                   ("enableKubernetesAlpha" .=) <$>
                     _cEnableKubernetesAlpha,
                   ("resourceLabels" .=) <$> _cResourceLabels,
+                  ("tpuIpv4CidrBlock" .=) <$> _cTpuIPv4CIdRBlock,
                   ("nodeConfig" .=) <$> _cNodeConfig,
                   ("nodeIpv4CidrSize" .=) <$> _cNodeIPv4CIdRSize,
                   ("clusterIpv4Cidr" .=) <$> _cClusterIPv4CIdR,
@@ -1283,12 +1379,15 @@ instance ToJSON Cluster where
                   ("currentMasterVersion" .=) <$>
                     _cCurrentMasterVersion,
                   ("statusMessage" .=) <$> _cStatusMessage,
+                  ("defaultMaxPodsConstraint" .=) <$>
+                    _cDefaultMaxPodsConstraint,
                   ("subnetwork" .=) <$> _cSubnetwork,
                   ("currentNodeCount" .=) <$> _cCurrentNodeCount,
                   ("privateClusterConfig" .=) <$>
                     _cPrivateClusterConfig,
                   ("maintenancePolicy" .=) <$> _cMaintenancePolicy,
                   ("conditions" .=) <$> _cConditions,
+                  ("enableTpu" .=) <$> _cEnableTpu,
                   ("endpoint" .=) <$> _cEndpoint,
                   ("expireTime" .=) <$> _cExpireTime,
                   ("networkPolicy" .=) <$> _cNetworkPolicy,
@@ -1714,12 +1813,13 @@ ncMachineType
 -- Additionally, to avoid ambiguity, keys must not conflict with any other
 -- metadata keys for the project or be one of the reserved keys:
 -- \"cluster-location\" \"cluster-name\" \"cluster-uid\" \"configure-sh\"
--- \"enable-os-login\" \"gci-update-strategy\" \"gci-ensure-gke-docker\"
--- \"instance-template\" \"kube-env\" \"startup-script\" \"user-data\"
--- Values are free-form strings, and only have meaning as interpreted by
--- the image running in the instance. The only restriction placed on them
--- is that each value\'s size must be less than or equal to 32 KB. The
--- total size of all keys and values must be less than 512 KB.
+-- \"containerd-configure-sh\" \"enable-os-login\" \"gci-update-strategy\"
+-- \"gci-ensure-gke-docker\" \"instance-template\" \"kube-env\"
+-- \"startup-script\" \"user-data\" Values are free-form strings, and only
+-- have meaning as interpreted by the image running in the instance. The
+-- only restriction placed on them is that each value\'s size must be less
+-- than or equal to 32 KB. The total size of all keys and values must be
+-- less than 512 KB.
 ncMetadata :: Lens' NodeConfig (Maybe NodeConfigMetadata)
 ncMetadata
   = lens _ncMetadata (\ s a -> s{_ncMetadata = a})
@@ -2282,6 +2382,73 @@ instance ToJSON CompleteIPRotationRequest where
                   ("clusterId" .=) <$> _cirrClusterId,
                   ("projectId" .=) <$> _cirrProjectId])
 
+-- | Secondary IP range of a usable subnetwork.
+--
+-- /See:/ 'usableSubnetworkSecondaryRange' smart constructor.
+data UsableSubnetworkSecondaryRange =
+  UsableSubnetworkSecondaryRange'
+    { _ussrStatus      :: !(Maybe UsableSubnetworkSecondaryRangeStatus)
+    , _ussrRangeName   :: !(Maybe Text)
+    , _ussrIPCIdRRange :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UsableSubnetworkSecondaryRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ussrStatus'
+--
+-- * 'ussrRangeName'
+--
+-- * 'ussrIPCIdRRange'
+usableSubnetworkSecondaryRange
+    :: UsableSubnetworkSecondaryRange
+usableSubnetworkSecondaryRange =
+  UsableSubnetworkSecondaryRange'
+    { _ussrStatus = Nothing
+    , _ussrRangeName = Nothing
+    , _ussrIPCIdRRange = Nothing
+    }
+
+
+-- | This field is to determine the status of the secondary range
+-- programmably.
+ussrStatus :: Lens' UsableSubnetworkSecondaryRange (Maybe UsableSubnetworkSecondaryRangeStatus)
+ussrStatus
+  = lens _ussrStatus (\ s a -> s{_ussrStatus = a})
+
+-- | The name associated with this subnetwork secondary range, used when
+-- adding an alias IP range to a VM instance.
+ussrRangeName :: Lens' UsableSubnetworkSecondaryRange (Maybe Text)
+ussrRangeName
+  = lens _ussrRangeName
+      (\ s a -> s{_ussrRangeName = a})
+
+-- | The range of IP addresses belonging to this subnetwork secondary range.
+ussrIPCIdRRange :: Lens' UsableSubnetworkSecondaryRange (Maybe Text)
+ussrIPCIdRRange
+  = lens _ussrIPCIdRRange
+      (\ s a -> s{_ussrIPCIdRRange = a})
+
+instance FromJSON UsableSubnetworkSecondaryRange
+         where
+        parseJSON
+          = withObject "UsableSubnetworkSecondaryRange"
+              (\ o ->
+                 UsableSubnetworkSecondaryRange' <$>
+                   (o .:? "status") <*> (o .:? "rangeName") <*>
+                     (o .:? "ipCidrRange"))
+
+instance ToJSON UsableSubnetworkSecondaryRange where
+        toJSON UsableSubnetworkSecondaryRange'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ussrStatus,
+                  ("rangeName" .=) <$> _ussrRangeName,
+                  ("ipCidrRange" .=) <$> _ussrIPCIdRRange])
+
 -- | NodeManagement defines the set of node management services turned on for
 -- the node pool.
 --
@@ -2568,6 +2735,101 @@ instance ToJSON SetMaintenancePolicyRequest where
                   ("clusterId" .=) <$> _smprClusterId,
                   ("maintenancePolicy" .=) <$> _smprMaintenancePolicy,
                   ("projectId" .=) <$> _smprProjectId])
+
+-- | UsableSubnetwork resource returns the subnetwork name, its associated
+-- network and the primary CIDR range.
+--
+-- /See:/ 'usableSubnetwork' smart constructor.
+data UsableSubnetwork =
+  UsableSubnetwork'
+    { _usNetwork           :: !(Maybe Text)
+    , _usStatusMessage     :: !(Maybe Text)
+    , _usSecondaryIPRanges :: !(Maybe [UsableSubnetworkSecondaryRange])
+    , _usIPCIdRRange       :: !(Maybe Text)
+    , _usSubnetwork        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UsableSubnetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usNetwork'
+--
+-- * 'usStatusMessage'
+--
+-- * 'usSecondaryIPRanges'
+--
+-- * 'usIPCIdRRange'
+--
+-- * 'usSubnetwork'
+usableSubnetwork
+    :: UsableSubnetwork
+usableSubnetwork =
+  UsableSubnetwork'
+    { _usNetwork = Nothing
+    , _usStatusMessage = Nothing
+    , _usSecondaryIPRanges = Nothing
+    , _usIPCIdRRange = Nothing
+    , _usSubnetwork = Nothing
+    }
+
+
+-- | Network Name. Example:
+-- projects\/my-project\/global\/networks\/my-network
+usNetwork :: Lens' UsableSubnetwork (Maybe Text)
+usNetwork
+  = lens _usNetwork (\ s a -> s{_usNetwork = a})
+
+-- | A human readable status message representing the reasons for cases where
+-- the caller cannot use the secondary ranges under the subnet. For example
+-- if the secondary_ip_ranges is empty due to a permission issue, an
+-- insufficient permission message will be given by status_message.
+usStatusMessage :: Lens' UsableSubnetwork (Maybe Text)
+usStatusMessage
+  = lens _usStatusMessage
+      (\ s a -> s{_usStatusMessage = a})
+
+-- | Secondary IP ranges.
+usSecondaryIPRanges :: Lens' UsableSubnetwork [UsableSubnetworkSecondaryRange]
+usSecondaryIPRanges
+  = lens _usSecondaryIPRanges
+      (\ s a -> s{_usSecondaryIPRanges = a})
+      . _Default
+      . _Coerce
+
+-- | The range of internal addresses that are owned by this subnetwork.
+usIPCIdRRange :: Lens' UsableSubnetwork (Maybe Text)
+usIPCIdRRange
+  = lens _usIPCIdRRange
+      (\ s a -> s{_usIPCIdRRange = a})
+
+-- | Subnetwork Name. Example:
+-- projects\/my-project\/regions\/us-central1\/subnetworks\/my-subnet
+usSubnetwork :: Lens' UsableSubnetwork (Maybe Text)
+usSubnetwork
+  = lens _usSubnetwork (\ s a -> s{_usSubnetwork = a})
+
+instance FromJSON UsableSubnetwork where
+        parseJSON
+          = withObject "UsableSubnetwork"
+              (\ o ->
+                 UsableSubnetwork' <$>
+                   (o .:? "network") <*> (o .:? "statusMessage") <*>
+                     (o .:? "secondaryIpRanges" .!= mempty)
+                     <*> (o .:? "ipCidrRange")
+                     <*> (o .:? "subnetwork"))
+
+instance ToJSON UsableSubnetwork where
+        toJSON UsableSubnetwork'{..}
+          = object
+              (catMaybes
+                 [("network" .=) <$> _usNetwork,
+                  ("statusMessage" .=) <$> _usStatusMessage,
+                  ("secondaryIpRanges" .=) <$> _usSecondaryIPRanges,
+                  ("ipCidrRange" .=) <$> _usIPCIdRRange,
+                  ("subnetwork" .=) <$> _usSubnetwork])
 
 -- | Configuration for the Kubernetes Dashboard.
 --
@@ -3034,12 +3296,52 @@ instance ToJSON MaintenanceWindow where
                  [("dailyMaintenanceWindow" .=) <$>
                     _mwDailyMaintenanceWindow])
 
+-- | Constraints applied to pods.
+--
+-- /See:/ 'maxPodsConstraint' smart constructor.
+newtype MaxPodsConstraint =
+  MaxPodsConstraint'
+    { _mpcMaxPodsPerNode :: Maybe (Textual Int64)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MaxPodsConstraint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mpcMaxPodsPerNode'
+maxPodsConstraint
+    :: MaxPodsConstraint
+maxPodsConstraint = MaxPodsConstraint' {_mpcMaxPodsPerNode = Nothing}
+
+
+-- | Constraint enforced on the max num of pods per node.
+mpcMaxPodsPerNode :: Lens' MaxPodsConstraint (Maybe Int64)
+mpcMaxPodsPerNode
+  = lens _mpcMaxPodsPerNode
+      (\ s a -> s{_mpcMaxPodsPerNode = a})
+      . mapping _Coerce
+
+instance FromJSON MaxPodsConstraint where
+        parseJSON
+          = withObject "MaxPodsConstraint"
+              (\ o ->
+                 MaxPodsConstraint' <$> (o .:? "maxPodsPerNode"))
+
+instance ToJSON MaxPodsConstraint where
+        toJSON MaxPodsConstraint'{..}
+          = object
+              (catMaybes
+                 [("maxPodsPerNode" .=) <$> _mpcMaxPodsPerNode])
+
 -- | Configuration for controlling how IPs are allocated in the cluster.
 --
 -- /See:/ 'ipAllocationPolicy' smart constructor.
 data IPAllocationPolicy =
   IPAllocationPolicy'
     { _iapServicesSecondaryRangeName :: !(Maybe Text)
+    , _iapTpuIPv4CIdRBlock           :: !(Maybe Text)
     , _iapNodeIPv4CIdR               :: !(Maybe Text)
     , _iapUseIPAliases               :: !(Maybe Bool)
     , _iapClusterIPv4CIdR            :: !(Maybe Text)
@@ -3059,6 +3361,8 @@ data IPAllocationPolicy =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'iapServicesSecondaryRangeName'
+--
+-- * 'iapTpuIPv4CIdRBlock'
 --
 -- * 'iapNodeIPv4CIdR'
 --
@@ -3084,6 +3388,7 @@ ipAllocationPolicy
 ipAllocationPolicy =
   IPAllocationPolicy'
     { _iapServicesSecondaryRangeName = Nothing
+    , _iapTpuIPv4CIdRBlock = Nothing
     , _iapNodeIPv4CIdR = Nothing
     , _iapUseIPAliases = Nothing
     , _iapClusterIPv4CIdR = Nothing
@@ -3106,6 +3411,20 @@ iapServicesSecondaryRangeName :: Lens' IPAllocationPolicy (Maybe Text)
 iapServicesSecondaryRangeName
   = lens _iapServicesSecondaryRangeName
       (\ s a -> s{_iapServicesSecondaryRangeName = a})
+
+-- | The IP address range of the Cloud TPUs in this cluster. If unspecified,
+-- a range will be automatically chosen with the default size. This field
+-- is only applicable when \`use_ip_aliases\` is true. If unspecified, the
+-- range will use the default size. Set to \/netmask (e.g. \`\/14\`) to
+-- have a range chosen with a specific netmask. Set to a
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`10.96.0.0\/14\`) from the RFC-1918 private networks
+-- (e.g. \`10.0.0.0\/8\`, \`172.16.0.0\/12\`, \`192.168.0.0\/16\`) to pick
+-- a specific range to use.
+iapTpuIPv4CIdRBlock :: Lens' IPAllocationPolicy (Maybe Text)
+iapTpuIPv4CIdRBlock
+  = lens _iapTpuIPv4CIdRBlock
+      (\ s a -> s{_iapTpuIPv4CIdRBlock = a})
 
 -- | This field is deprecated, use node_ipv4_cidr_block.
 iapNodeIPv4CIdR :: Lens' IPAllocationPolicy (Maybe Text)
@@ -3203,7 +3522,8 @@ instance FromJSON IPAllocationPolicy where
               (\ o ->
                  IPAllocationPolicy' <$>
                    (o .:? "servicesSecondaryRangeName") <*>
-                     (o .:? "nodeIpv4Cidr")
+                     (o .:? "tpuIpv4CidrBlock")
+                     <*> (o .:? "nodeIpv4Cidr")
                      <*> (o .:? "useIpAliases")
                      <*> (o .:? "clusterIpv4Cidr")
                      <*> (o .:? "subnetworkName")
@@ -3220,6 +3540,7 @@ instance ToJSON IPAllocationPolicy where
               (catMaybes
                  [("servicesSecondaryRangeName" .=) <$>
                     _iapServicesSecondaryRangeName,
+                  ("tpuIpv4CidrBlock" .=) <$> _iapTpuIPv4CIdRBlock,
                   ("nodeIpv4Cidr" .=) <$> _iapNodeIPv4CIdR,
                   ("useIpAliases" .=) <$> _iapUseIPAliases,
                   ("clusterIpv4Cidr" .=) <$> _iapClusterIPv4CIdR,
@@ -3389,6 +3710,7 @@ data NodePool =
     , _npConfig            :: !(Maybe NodeConfig)
     , _npInitialNodeCount  :: !(Maybe (Textual Int32))
     , _npManagement        :: !(Maybe NodeManagement)
+    , _npMaxPodsConstraint :: !(Maybe MaxPodsConstraint)
     , _npSelfLink          :: !(Maybe Text)
     , _npName              :: !(Maybe Text)
     , _npStatusMessage     :: !(Maybe Text)
@@ -3413,6 +3735,8 @@ data NodePool =
 --
 -- * 'npManagement'
 --
+-- * 'npMaxPodsConstraint'
+--
 -- * 'npSelfLink'
 --
 -- * 'npName'
@@ -3433,6 +3757,7 @@ nodePool =
     , _npConfig = Nothing
     , _npInitialNodeCount = Nothing
     , _npManagement = Nothing
+    , _npMaxPodsConstraint = Nothing
     , _npSelfLink = Nothing
     , _npName = Nothing
     , _npStatusMessage = Nothing
@@ -3471,6 +3796,13 @@ npInitialNodeCount
 npManagement :: Lens' NodePool (Maybe NodeManagement)
 npManagement
   = lens _npManagement (\ s a -> s{_npManagement = a})
+
+-- | The constraint on the maximum number of pods that can be run
+-- simultaneously on a node in the node pool.
+npMaxPodsConstraint :: Lens' NodePool (Maybe MaxPodsConstraint)
+npMaxPodsConstraint
+  = lens _npMaxPodsConstraint
+      (\ s a -> s{_npMaxPodsConstraint = a})
 
 -- | [Output only] Server-defined URL for the resource.
 npSelfLink :: Lens' NodePool (Maybe Text)
@@ -3519,6 +3851,7 @@ instance FromJSON NodePool where
                      (o .:? "config")
                      <*> (o .:? "initialNodeCount")
                      <*> (o .:? "management")
+                     <*> (o .:? "maxPodsConstraint")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "statusMessage")
@@ -3535,6 +3868,7 @@ instance ToJSON NodePool where
                   ("config" .=) <$> _npConfig,
                   ("initialNodeCount" .=) <$> _npInitialNodeCount,
                   ("management" .=) <$> _npManagement,
+                  ("maxPodsConstraint" .=) <$> _npMaxPodsConstraint,
                   ("selfLink" .=) <$> _npSelfLink,
                   ("name" .=) <$> _npName,
                   ("statusMessage" .=) <$> _npStatusMessage,
@@ -3912,12 +4246,13 @@ instance ToJSON StatusCondition where
 -- Additionally, to avoid ambiguity, keys must not conflict with any other
 -- metadata keys for the project or be one of the reserved keys:
 -- \"cluster-location\" \"cluster-name\" \"cluster-uid\" \"configure-sh\"
--- \"enable-os-login\" \"gci-update-strategy\" \"gci-ensure-gke-docker\"
--- \"instance-template\" \"kube-env\" \"startup-script\" \"user-data\"
--- Values are free-form strings, and only have meaning as interpreted by
--- the image running in the instance. The only restriction placed on them
--- is that each value\'s size must be less than or equal to 32 KB. The
--- total size of all keys and values must be less than 512 KB.
+-- \"containerd-configure-sh\" \"enable-os-login\" \"gci-update-strategy\"
+-- \"gci-ensure-gke-docker\" \"instance-template\" \"kube-env\"
+-- \"startup-script\" \"user-data\" Values are free-form strings, and only
+-- have meaning as interpreted by the image running in the instance. The
+-- only restriction placed on them is that each value\'s size must be less
+-- than or equal to 32 KB. The total size of all keys and values must be
+-- less than 512 KB.
 --
 -- /See:/ 'nodeConfigMetadata' smart constructor.
 newtype NodeConfigMetadata =

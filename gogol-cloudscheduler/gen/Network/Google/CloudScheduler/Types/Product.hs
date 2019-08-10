@@ -1040,8 +1040,12 @@ jRetryConfig :: Lens' Job (Maybe RetryConfig)
 jRetryConfig
   = lens _jRetryConfig (\ s a -> s{_jRetryConfig = a})
 
--- | Required. Describes the schedule on which the job will be executed. As a
--- general rule, execution \`n + 1\` of a job will not begin until
+-- | Required, except when used with UpdateJob. Describes the schedule on
+-- which the job will be executed. The schedule can be either of the
+-- following types: *
+-- [Crontab](http:\/\/en.wikipedia.org\/wiki\/Cron#Overview) * English-like
+-- [schedule](https:\/\/cloud.google.com\/scheduler\/docs\/configuring\/cron-job-schedules)
+-- As a general rule, execution \`n + 1\` of a job will not begin until
 -- execution \`n\` has finished. Cloud Scheduler will never allow two
 -- simultaneously outstanding executions. For example, this implies that if
 -- the \`n+1\`th execution is scheduled to run at 16:00 but the \`n\`th
@@ -1050,9 +1054,6 @@ jRetryConfig
 -- execution has not ended when its scheduled time occurs. If retry_count >
 -- 0 and a job attempt fails, the job will be tried a total of retry_count
 -- times, with exponential backoff, until the next scheduled start time.
--- The schedule can be either of the following types: *
--- [Crontab](http:\/\/en.wikipedia.org\/wiki\/Cron#Overview) * English-like
--- [schedule](https:\/\/cloud.google.com\/scheduler\/docs\/configuring\/cron-job-schedules)
 jSchedule :: Lens' Job (Maybe Text)
 jSchedule
   = lens _jSchedule (\ s a -> s{_jSchedule = a})
@@ -1077,7 +1078,8 @@ jHTTPTarget :: Lens' Job (Maybe HTTPTarget)
 jHTTPTarget
   = lens _jHTTPTarget (\ s a -> s{_jHTTPTarget = a})
 
--- | The job name. For example:
+-- | Optionally caller-specified in CreateJob, after which it becomes output
+-- only. The job name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID\`. *
 -- \`PROJECT_ID\` can contain letters ([A-Za-z]), numbers ([0-9]), hyphens
 -- (-), colons (:), or periods (.). For more information, see [Identifying
@@ -1114,8 +1116,9 @@ jTimeZone :: Lens' Job (Maybe Text)
 jTimeZone
   = lens _jTimeZone (\ s a -> s{_jTimeZone = a})
 
--- | A human-readable description for the job. This string must not contain
--- more than 500 characters.
+-- | Optionally caller-specified in CreateJob or UpdateJob. A human-readable
+-- description for the job. This string must not contain more than 500
+-- characters.
 jDescription :: Lens' Job (Maybe Text)
 jDescription
   = lens _jDescription (\ s a -> s{_jDescription = a})

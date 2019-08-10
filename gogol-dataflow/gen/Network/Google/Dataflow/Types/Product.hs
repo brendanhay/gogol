@@ -402,7 +402,9 @@ createJobFromTemplateRequest =
     }
 
 
--- | The location to which to direct the request.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- to which to direct the request.
 cjftrLocation :: Lens' CreateJobFromTemplateRequest (Maybe Text)
 cjftrLocation
   = lens _cjftrLocation
@@ -1452,7 +1454,9 @@ rwisrCurrentWorkerTime
       (\ s a -> s{_rwisrCurrentWorkerTime = a})
       . mapping _DateTime
 
--- | The location which contains the WorkItem\'s job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the WorkItem\'s job.
 rwisrLocation :: Lens' ReportWorkItemStatusRequest (Maybe Text)
 rwisrLocation
   = lens _rwisrLocation
@@ -1954,7 +1958,7 @@ smMessageText
   = lens _smMessageText
       (\ s a -> s{_smMessageText = a})
 
--- | Idenfier for this message type. Used by external systems to
+-- | Identifier for this message type. Used by external systems to
 -- internationalize or personalize message.
 smMessageKey :: Lens' StructuredMessage (Maybe Text)
 smMessageKey
@@ -2352,7 +2356,7 @@ instance ToJSON CounterStructuredName where
                   ("workerId" .=) <$> _csnWorkerId])
 
 -- | Metadata available primarily for filtering jobs. Will be included in the
--- ListJob response and Job SUMMARY view+.
+-- ListJob response and Job SUMMARY view.
 --
 -- /See:/ 'jobMetadata' smart constructor.
 data JobMetadata =
@@ -2476,6 +2480,42 @@ instance ToJSON JobMetadata where
                   ("fileDetails" .=) <$> _jmFileDetails,
                   ("bigqueryDetails" .=) <$> _jmBigQueryDetails,
                   ("datastoreDetails" .=) <$> _jmDatastoreDetails])
+
+-- | Response to the validation request.
+--
+-- /See:/ 'validateResponse' smart constructor.
+newtype ValidateResponse =
+  ValidateResponse'
+    { _vrErrorMessage :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vrErrorMessage'
+validateResponse
+    :: ValidateResponse
+validateResponse = ValidateResponse' {_vrErrorMessage = Nothing}
+
+
+-- | Will be empty if validation succeeds.
+vrErrorMessage :: Lens' ValidateResponse (Maybe Text)
+vrErrorMessage
+  = lens _vrErrorMessage
+      (\ s a -> s{_vrErrorMessage = a})
+
+instance FromJSON ValidateResponse where
+        parseJSON
+          = withObject "ValidateResponse"
+              (\ o -> ValidateResponse' <$> (o .:? "errorMessage"))
+
+instance ToJSON ValidateResponse where
+        toJSON ValidateResponse'{..}
+          = object
+              (catMaybes [("errorMessage" .=) <$> _vrErrorMessage])
 
 -- | The response to a GetTemplate request.
 --
@@ -2952,16 +2992,18 @@ instance ToJSON TemplateMetadata where
 -- /See:/ 'environment' smart constructor.
 data Environment =
   Environment'
-    { _eDataSet                  :: !(Maybe Text)
-    , _eExperiments              :: !(Maybe [Text])
-    , _eWorkerPools              :: !(Maybe [WorkerPool])
-    , _eClusterManagerAPIService :: !(Maybe Text)
-    , _eVersion                  :: !(Maybe EnvironmentVersion)
-    , _eInternalExperiments      :: !(Maybe EnvironmentInternalExperiments)
-    , _eTempStoragePrefix        :: !(Maybe Text)
-    , _eServiceAccountEmail      :: !(Maybe Text)
-    , _eUserAgent                :: !(Maybe EnvironmentUserAgent)
-    , _eSdkPipelineOptions       :: !(Maybe EnvironmentSdkPipelineOptions)
+    { _eDataSet                    :: !(Maybe Text)
+    , _eExperiments                :: !(Maybe [Text])
+    , _eFlexResourceSchedulingGoal :: !(Maybe EnvironmentFlexResourceSchedulingGoal)
+    , _eWorkerPools                :: !(Maybe [WorkerPool])
+    , _eClusterManagerAPIService   :: !(Maybe Text)
+    , _eVersion                    :: !(Maybe EnvironmentVersion)
+    , _eInternalExperiments        :: !(Maybe EnvironmentInternalExperiments)
+    , _eTempStoragePrefix          :: !(Maybe Text)
+    , _eServiceAccountEmail        :: !(Maybe Text)
+    , _eUserAgent                  :: !(Maybe EnvironmentUserAgent)
+    , _eServiceKmsKeyName          :: !(Maybe Text)
+    , _eSdkPipelineOptions         :: !(Maybe EnvironmentSdkPipelineOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2973,6 +3015,8 @@ data Environment =
 -- * 'eDataSet'
 --
 -- * 'eExperiments'
+--
+-- * 'eFlexResourceSchedulingGoal'
 --
 -- * 'eWorkerPools'
 --
@@ -2988,6 +3032,8 @@ data Environment =
 --
 -- * 'eUserAgent'
 --
+-- * 'eServiceKmsKeyName'
+--
 -- * 'eSdkPipelineOptions'
 environment
     :: Environment
@@ -2995,6 +3041,7 @@ environment =
   Environment'
     { _eDataSet = Nothing
     , _eExperiments = Nothing
+    , _eFlexResourceSchedulingGoal = Nothing
     , _eWorkerPools = Nothing
     , _eClusterManagerAPIService = Nothing
     , _eVersion = Nothing
@@ -3002,6 +3049,7 @@ environment =
     , _eTempStoragePrefix = Nothing
     , _eServiceAccountEmail = Nothing
     , _eUserAgent = Nothing
+    , _eServiceKmsKeyName = Nothing
     , _eSdkPipelineOptions = Nothing
     }
 
@@ -3018,6 +3066,12 @@ eExperiments
   = lens _eExperiments (\ s a -> s{_eExperiments = a})
       . _Default
       . _Coerce
+
+-- | Which Flexible Resource Scheduling mode to run in.
+eFlexResourceSchedulingGoal :: Lens' Environment (Maybe EnvironmentFlexResourceSchedulingGoal)
+eFlexResourceSchedulingGoal
+  = lens _eFlexResourceSchedulingGoal
+      (\ s a -> s{_eFlexResourceSchedulingGoal = a})
 
 -- | The worker pools. At least one \"harness\" worker pool must be specified
 -- in order for the job to have workers.
@@ -3071,6 +3125,14 @@ eUserAgent :: Lens' Environment (Maybe EnvironmentUserAgent)
 eUserAgent
   = lens _eUserAgent (\ s a -> s{_eUserAgent = a})
 
+-- | If set, contains the Cloud KMS key identifier used to encrypt data at
+-- rest, AKA a Customer Managed Encryption Key (CMEK). Format:
+-- projects\/PROJECT_ID\/locations\/LOCATION\/keyRings\/KEY_RING\/cryptoKeys\/KEY
+eServiceKmsKeyName :: Lens' Environment (Maybe Text)
+eServiceKmsKeyName
+  = lens _eServiceKmsKeyName
+      (\ s a -> s{_eServiceKmsKeyName = a})
+
 -- | The Cloud Dataflow SDK pipeline options specified by the user. These
 -- options are passed through the service and are used to recreate the SDK
 -- pipeline options on the worker in a language agnostic and platform
@@ -3087,6 +3149,7 @@ instance FromJSON Environment where
                  Environment' <$>
                    (o .:? "dataset") <*>
                      (o .:? "experiments" .!= mempty)
+                     <*> (o .:? "flexResourceSchedulingGoal")
                      <*> (o .:? "workerPools" .!= mempty)
                      <*> (o .:? "clusterManagerApiService")
                      <*> (o .:? "version")
@@ -3094,6 +3157,7 @@ instance FromJSON Environment where
                      <*> (o .:? "tempStoragePrefix")
                      <*> (o .:? "serviceAccountEmail")
                      <*> (o .:? "userAgent")
+                     <*> (o .:? "serviceKmsKeyName")
                      <*> (o .:? "sdkPipelineOptions"))
 
 instance ToJSON Environment where
@@ -3102,6 +3166,8 @@ instance ToJSON Environment where
               (catMaybes
                  [("dataset" .=) <$> _eDataSet,
                   ("experiments" .=) <$> _eExperiments,
+                  ("flexResourceSchedulingGoal" .=) <$>
+                    _eFlexResourceSchedulingGoal,
                   ("workerPools" .=) <$> _eWorkerPools,
                   ("clusterManagerApiService" .=) <$>
                     _eClusterManagerAPIService,
@@ -3110,6 +3176,7 @@ instance ToJSON Environment where
                   ("tempStoragePrefix" .=) <$> _eTempStoragePrefix,
                   ("serviceAccountEmail" .=) <$> _eServiceAccountEmail,
                   ("userAgent" .=) <$> _eUserAgent,
+                  ("serviceKmsKeyName" .=) <$> _eServiceKmsKeyName,
                   ("sdkPipelineOptions" .=) <$> _eSdkPipelineOptions])
 
 -- | A position that encapsulates an inner position and an index for the
@@ -3546,7 +3613,7 @@ instance ToJSON DerivedSource where
                  [("derivationMode" .=) <$> _dsDerivationMode,
                   ("source" .=) <$> _dsSource])
 
--- | JobMetrics contains a collection of metrics descibing the detailed
+-- | JobMetrics contains a collection of metrics describing the detailed
 -- progress of a Dataflow job. Metrics correspond to user-defined and
 -- system-defined metrics in the job. This resource captures only the most
 -- recent values of each metric; time-series data can be queried for them
@@ -3636,7 +3703,9 @@ sendDebugCaptureRequest =
     }
 
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 sdcrLocation :: Lens' SendDebugCaptureRequest (Maybe Text)
 sdcrLocation
   = lens _sdcrLocation (\ s a -> s{_sdcrLocation = a})
@@ -4929,7 +4998,9 @@ lwirCurrentWorkerTime
       (\ s a -> s{_lwirCurrentWorkerTime = a})
       . mapping _DateTime
 
--- | The location which contains the WorkItem\'s job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the WorkItem\'s job.
 lwirLocation :: Lens' LeaseWorkItemRequest (Maybe Text)
 lwirLocation
   = lens _lwirLocation (\ s a -> s{_lwirLocation = a})
@@ -5673,7 +5744,7 @@ instance ToJSON GetDebugConfigResponse where
         toJSON GetDebugConfigResponse'{..}
           = object (catMaybes [("config" .=) <$> _gdcrConfig])
 
--- | The version of the SDK used to run the jobl
+-- | The version of the SDK used to run the job.
 --
 -- /See:/ 'sdkVersion' smart constructor.
 data SdkVersion =
@@ -5710,7 +5781,7 @@ svSdkSupportStatus
   = lens _svSdkSupportStatus
       (\ s a -> s{_svSdkSupportStatus = a})
 
--- | A readable string describing the version of the sdk.
+-- | A readable string describing the version of the SDK.
 svVersionDisplayName :: Lens' SdkVersion (Maybe Text)
 svVersionDisplayName
   = lens _svVersionDisplayName
@@ -5779,6 +5850,29 @@ instance FromJSON WorkItemServiceStateHarnessData
 
 instance ToJSON WorkItemServiceStateHarnessData where
         toJSON = toJSON . _wisshdAddtional
+
+-- | Response from deleting a snapshot.
+--
+-- /See:/ 'deleteSnapshotResponse' smart constructor.
+data DeleteSnapshotResponse =
+  DeleteSnapshotResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeleteSnapshotResponse' with the minimum fields required to make a request.
+--
+deleteSnapshotResponse
+    :: DeleteSnapshotResponse
+deleteSnapshotResponse = DeleteSnapshotResponse'
+
+
+instance FromJSON DeleteSnapshotResponse where
+        parseJSON
+          = withObject "DeleteSnapshotResponse"
+              (\ o -> pure DeleteSnapshotResponse')
+
+instance ToJSON DeleteSnapshotResponse where
+        toJSON = const emptyObject
 
 -- | Data disk assignment for a given VM instance.
 --
@@ -5876,7 +5970,9 @@ instance ToJSON ResourceUtilizationReport where
         toJSON ResourceUtilizationReport'{..}
           = object (catMaybes [("cpuTime" .=) <$> _rurCPUTime])
 
--- | Indicates which location failed to respond to a request for data.
+-- | Indicates which [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- failed to respond to a request for data.
 --
 -- /See:/ 'failedLocation' smart constructor.
 newtype FailedLocation =
@@ -5896,7 +5992,9 @@ failedLocation
 failedLocation = FailedLocation' {_flName = Nothing}
 
 
--- | The name of the failed location.
+-- | The name of the [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that failed to respond.
 flName :: Lens' FailedLocation (Maybe Text)
 flName = lens _flName (\ s a -> s{_flName = a})
 
@@ -5908,6 +6006,45 @@ instance FromJSON FailedLocation where
 instance ToJSON FailedLocation where
         toJSON FailedLocation'{..}
           = object (catMaybes [("name" .=) <$> _flName])
+
+-- | List of snapshots.
+--
+-- /See:/ 'listSnapshotsResponse' smart constructor.
+newtype ListSnapshotsResponse =
+  ListSnapshotsResponse'
+    { _lsrSnapshots :: Maybe [Snapshot]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListSnapshotsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrSnapshots'
+listSnapshotsResponse
+    :: ListSnapshotsResponse
+listSnapshotsResponse = ListSnapshotsResponse' {_lsrSnapshots = Nothing}
+
+
+-- | Returned snapshots.
+lsrSnapshots :: Lens' ListSnapshotsResponse [Snapshot]
+lsrSnapshots
+  = lens _lsrSnapshots (\ s a -> s{_lsrSnapshots = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListSnapshotsResponse where
+        parseJSON
+          = withObject "ListSnapshotsResponse"
+              (\ o ->
+                 ListSnapshotsResponse' <$>
+                   (o .:? "snapshots" .!= mempty))
+
+instance ToJSON ListSnapshotsResponse where
+        toJSON ListSnapshotsResponse'{..}
+          = object
+              (catMaybes [("snapshots" .=) <$> _lsrSnapshots])
 
 -- | A worker_message response allows the server to pass information to the
 -- sender.
@@ -6970,7 +7107,10 @@ reMachineType
   = lens _reMachineType
       (\ s a -> s{_reMachineType = a})
 
--- | Additional user labels attached to the job.
+-- | Additional user labels to be specified for the job. Keys and values
+-- should follow the restrictions specified in the [labeling
+-- restrictions](https:\/\/cloud.google.com\/compute\/docs\/labeling-resources#restrictions)
+-- page.
 reAdditionalUserLabels :: Lens' RuntimeEnvironment (Maybe RuntimeEnvironmentAdditionalUserLabels)
 reAdditionalUserLabels
   = lens _reAdditionalUserLabels
@@ -7237,7 +7377,9 @@ getDebugConfigRequest =
     }
 
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 gdcrLocation :: Lens' GetDebugConfigRequest (Maybe Text)
 gdcrLocation
   = lens _gdcrLocation (\ s a -> s{_gdcrLocation = a})
@@ -7430,7 +7572,7 @@ instance ToJSON StreamingComputationTask where
 
 -- | A descriptive representation of submitted pipeline as well as the
 -- executed form. This data is provided by the Dataflow service for ease of
--- visualizing the pipeline and interpretting Dataflow provided metrics.
+-- visualizing the pipeline and interpreting Dataflow provided metrics.
 --
 -- /See:/ 'pipelineDescription' smart constructor.
 data PipelineDescription =
@@ -7694,7 +7836,10 @@ instance ToJSON
          where
         toJSON = toJSON . _rAddtional
 
--- | Additional user labels attached to the job.
+-- | Additional user labels to be specified for the job. Keys and values
+-- should follow the restrictions specified in the [labeling
+-- restrictions](https:\/\/cloud.google.com\/compute\/docs\/labeling-resources#restrictions)
+-- page.
 --
 -- /See:/ 'runtimeEnvironmentAdditionalUserLabels' smart constructor.
 newtype RuntimeEnvironmentAdditionalUserLabels =
@@ -8119,7 +8264,9 @@ jJobMetadata :: Lens' Job (Maybe JobMetadata)
 jJobMetadata
   = lens _jJobMetadata (\ s a -> s{_jJobMetadata = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 jLocation :: Lens' Job (Maybe Text)
 jLocation
   = lens _jLocation (\ s a -> s{_jLocation = a})
@@ -9526,7 +9673,9 @@ ljrNextPageToken
   = lens _ljrNextPageToken
       (\ s a -> s{_ljrNextPageToken = a})
 
--- | Zero or more messages describing locations that failed to respond.
+-- | Zero or more messages describing the [regional endpoints]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that failed to respond.
 ljrFailedLocation :: Lens' ListJobsResponse [FailedLocation]
 ljrFailedLocation
   = lens _ljrFailedLocation
@@ -10666,6 +10815,7 @@ data StreamingConfigTask =
     , _sctStreamingComputationConfigs  :: !(Maybe [StreamingComputationConfig])
     , _sctWindmillServiceEndpoint      :: !(Maybe Text)
     , _sctWindmillServicePort          :: !(Maybe (Textual Int64))
+    , _sctMaxWorkItemCommitBytes       :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10681,6 +10831,8 @@ data StreamingConfigTask =
 -- * 'sctWindmillServiceEndpoint'
 --
 -- * 'sctWindmillServicePort'
+--
+-- * 'sctMaxWorkItemCommitBytes'
 streamingConfigTask
     :: StreamingConfigTask
 streamingConfigTask =
@@ -10689,6 +10841,7 @@ streamingConfigTask =
     , _sctStreamingComputationConfigs = Nothing
     , _sctWindmillServiceEndpoint = Nothing
     , _sctWindmillServicePort = Nothing
+    , _sctMaxWorkItemCommitBytes = Nothing
     }
 
 
@@ -10723,6 +10876,13 @@ sctWindmillServicePort
       (\ s a -> s{_sctWindmillServicePort = a})
       . mapping _Coerce
 
+-- | Maximum size for work item commit supported windmill storage layer.
+sctMaxWorkItemCommitBytes :: Lens' StreamingConfigTask (Maybe Int64)
+sctMaxWorkItemCommitBytes
+  = lens _sctMaxWorkItemCommitBytes
+      (\ s a -> s{_sctMaxWorkItemCommitBytes = a})
+      . mapping _Coerce
+
 instance FromJSON StreamingConfigTask where
         parseJSON
           = withObject "StreamingConfigTask"
@@ -10731,7 +10891,8 @@ instance FromJSON StreamingConfigTask where
                    (o .:? "userStepToStateFamilyNameMap") <*>
                      (o .:? "streamingComputationConfigs" .!= mempty)
                      <*> (o .:? "windmillServiceEndpoint")
-                     <*> (o .:? "windmillServicePort"))
+                     <*> (o .:? "windmillServicePort")
+                     <*> (o .:? "maxWorkItemCommitBytes"))
 
 instance ToJSON StreamingConfigTask where
         toJSON StreamingConfigTask'{..}
@@ -10744,7 +10905,9 @@ instance ToJSON StreamingConfigTask where
                   ("windmillServiceEndpoint" .=) <$>
                     _sctWindmillServiceEndpoint,
                   ("windmillServicePort" .=) <$>
-                    _sctWindmillServicePort])
+                    _sctWindmillServicePort,
+                  ("maxWorkItemCommitBytes" .=) <$>
+                    _sctMaxWorkItemCommitBytes])
 
 -- | The metric short id is returned to the user alongside an offset into
 -- ReportWorkItemStatusRequest
@@ -10824,7 +10987,9 @@ sendWorkerMessagesRequest =
     {_swmrLocation = Nothing, _swmrWorkerMessages = Nothing}
 
 
--- | The location which contains the job
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job.
 swmrLocation :: Lens' SendWorkerMessagesRequest (Maybe Text)
 swmrLocation
   = lens _swmrLocation (\ s a -> s{_swmrLocation = a})

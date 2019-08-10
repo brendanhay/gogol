@@ -20,6 +20,92 @@ module Network.Google.ServiceNetworking.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.ServiceNetworking.Types.Sum
 
+-- | Represents a subnet that was created or discovered by a private access
+-- management service.
+--
+-- /See:/ 'googleCloudServicenetworkingV1betaSubnetwork' smart constructor.
+data GoogleCloudServicenetworkingV1betaSubnetwork =
+  GoogleCloudServicenetworkingV1betaSubnetwork'
+    { _gcsvsOutsideAllocation :: !(Maybe Bool)
+    , _gcsvsNetwork           :: !(Maybe Text)
+    , _gcsvsName              :: !(Maybe Text)
+    , _gcsvsIPCIdRRange       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudServicenetworkingV1betaSubnetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvsOutsideAllocation'
+--
+-- * 'gcsvsNetwork'
+--
+-- * 'gcsvsName'
+--
+-- * 'gcsvsIPCIdRRange'
+googleCloudServicenetworkingV1betaSubnetwork
+    :: GoogleCloudServicenetworkingV1betaSubnetwork
+googleCloudServicenetworkingV1betaSubnetwork =
+  GoogleCloudServicenetworkingV1betaSubnetwork'
+    { _gcsvsOutsideAllocation = Nothing
+    , _gcsvsNetwork = Nothing
+    , _gcsvsName = Nothing
+    , _gcsvsIPCIdRRange = Nothing
+    }
+
+
+-- | This is a discovered subnet that is not within the current consumer
+-- allocated ranges.
+gcsvsOutsideAllocation :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Bool)
+gcsvsOutsideAllocation
+  = lens _gcsvsOutsideAllocation
+      (\ s a -> s{_gcsvsOutsideAllocation = a})
+
+-- | In the Shared VPC host project, the VPC network that\'s peered with the
+-- consumer network. For example:
+-- \`projects\/1234321\/global\/networks\/host-network\`
+gcsvsNetwork :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Text)
+gcsvsNetwork
+  = lens _gcsvsNetwork (\ s a -> s{_gcsvsNetwork = a})
+
+-- | Subnetwork name. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/
+gcsvsName :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Text)
+gcsvsName
+  = lens _gcsvsName (\ s a -> s{_gcsvsName = a})
+
+-- | Subnetwork CIDR range in \`10.x.x.x\/y\` format.
+gcsvsIPCIdRRange :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Text)
+gcsvsIPCIdRRange
+  = lens _gcsvsIPCIdRRange
+      (\ s a -> s{_gcsvsIPCIdRRange = a})
+
+instance FromJSON
+           GoogleCloudServicenetworkingV1betaSubnetwork
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudServicenetworkingV1betaSubnetwork"
+              (\ o ->
+                 GoogleCloudServicenetworkingV1betaSubnetwork' <$>
+                   (o .:? "outsideAllocation") <*> (o .:? "network") <*>
+                     (o .:? "name")
+                     <*> (o .:? "ipCidrRange"))
+
+instance ToJSON
+           GoogleCloudServicenetworkingV1betaSubnetwork
+         where
+        toJSON
+          GoogleCloudServicenetworkingV1betaSubnetwork'{..}
+          = object
+              (catMaybes
+                 [("outsideAllocation" .=) <$>
+                    _gcsvsOutsideAllocation,
+                  ("network" .=) <$> _gcsvsNetwork,
+                  ("name" .=) <$> _gcsvsName,
+                  ("ipCidrRange" .=) <$> _gcsvsIPCIdRRange])
+
 -- | Define a parameter\'s name and location. The parameter may be passed as
 -- either an HTTP header or a URL query parameter, and if both are passed
 -- the behavior is implementation-dependent.
@@ -191,6 +277,47 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("type" .=) <$> _mrdType,
                   ("description" .=) <$> _mrdDescription])
 
+-- | ListConnectionsResponse is the response to list peering states for the
+-- given service and consumer project.
+--
+-- /See:/ 'listConnectionsResponse' smart constructor.
+newtype ListConnectionsResponse =
+  ListConnectionsResponse'
+    { _lcrConnections :: Maybe [Connection]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListConnectionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcrConnections'
+listConnectionsResponse
+    :: ListConnectionsResponse
+listConnectionsResponse = ListConnectionsResponse' {_lcrConnections = Nothing}
+
+
+-- | The list of Connections.
+lcrConnections :: Lens' ListConnectionsResponse [Connection]
+lcrConnections
+  = lens _lcrConnections
+      (\ s a -> s{_lcrConnections = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListConnectionsResponse where
+        parseJSON
+          = withObject "ListConnectionsResponse"
+              (\ o ->
+                 ListConnectionsResponse' <$>
+                   (o .:? "connections" .!= mempty))
+
+instance ToJSON ListConnectionsResponse where
+        toJSON ListConnectionsResponse'{..}
+          = object
+              (catMaybes [("connections" .=) <$> _lcrConnections])
+
 -- | A documentation rule provides information about individual API elements.
 --
 -- /See:/ 'documentationRule' smart constructor.
@@ -226,8 +353,9 @@ documentationRule =
 -- qualified name of the element which may end in \"*\", indicating a
 -- wildcard. Wildcards are only allowed at the end and for a whole
 -- component of the qualified name, i.e. \"foo.*\" is ok, but not
--- \"foo.b*\" or \"foo.*.bar\". To specify a default for all applicable
--- elements, the whole pattern \"*\" is used.
+-- \"foo.b*\" or \"foo.*.bar\". A wildcard will match one or more
+-- components. To specify a default for all applicable elements, the whole
+-- pattern \"*\" is used.
 drSelector :: Lens' DocumentationRule (Maybe Text)
 drSelector
   = lens _drSelector (\ s a -> s{_drSelector = a})
@@ -874,10 +1002,13 @@ instance ToJSON CancelOperationRequest where
 -- /See:/ 'backendRule' smart constructor.
 data BackendRule =
   BackendRule'
-    { _brSelector    :: !(Maybe Text)
-    , _brMinDeadline :: !(Maybe (Textual Double))
-    , _brAddress     :: !(Maybe Text)
-    , _brDeadline    :: !(Maybe (Textual Double))
+    { _brJwtAudience       :: !(Maybe Text)
+    , _brSelector          :: !(Maybe Text)
+    , _brMinDeadline       :: !(Maybe (Textual Double))
+    , _brAddress           :: !(Maybe Text)
+    , _brOperationDeadline :: !(Maybe (Textual Double))
+    , _brDeadline          :: !(Maybe (Textual Double))
+    , _brPathTranslation   :: !(Maybe BackendRulePathTranslation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -886,23 +1017,38 @@ data BackendRule =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'brJwtAudience'
+--
 -- * 'brSelector'
 --
 -- * 'brMinDeadline'
 --
 -- * 'brAddress'
 --
+-- * 'brOperationDeadline'
+--
 -- * 'brDeadline'
+--
+-- * 'brPathTranslation'
 backendRule
     :: BackendRule
 backendRule =
   BackendRule'
-    { _brSelector = Nothing
+    { _brJwtAudience = Nothing
+    , _brSelector = Nothing
     , _brMinDeadline = Nothing
     , _brAddress = Nothing
+    , _brOperationDeadline = Nothing
     , _brDeadline = Nothing
+    , _brPathTranslation = Nothing
     }
 
+
+-- | The JWT audience is used when generating a JWT id token for the backend.
+brJwtAudience :: Lens' BackendRule (Maybe Text)
+brJwtAudience
+  = lens _brJwtAudience
+      (\ s a -> s{_brJwtAudience = a})
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -923,6 +1069,14 @@ brAddress :: Lens' BackendRule (Maybe Text)
 brAddress
   = lens _brAddress (\ s a -> s{_brAddress = a})
 
+-- | The number of seconds to wait for the completion of a long running
+-- operation. The default is no deadline.
+brOperationDeadline :: Lens' BackendRule (Maybe Double)
+brOperationDeadline
+  = lens _brOperationDeadline
+      (\ s a -> s{_brOperationDeadline = a})
+      . mapping _Coerce
+
 -- | The number of seconds to wait for a response from a request. The default
 -- deadline for gRPC is infinite (no deadline) and HTTP requests is 5
 -- seconds.
@@ -931,23 +1085,34 @@ brDeadline
   = lens _brDeadline (\ s a -> s{_brDeadline = a}) .
       mapping _Coerce
 
+brPathTranslation :: Lens' BackendRule (Maybe BackendRulePathTranslation)
+brPathTranslation
+  = lens _brPathTranslation
+      (\ s a -> s{_brPathTranslation = a})
+
 instance FromJSON BackendRule where
         parseJSON
           = withObject "BackendRule"
               (\ o ->
                  BackendRule' <$>
-                   (o .:? "selector") <*> (o .:? "minDeadline") <*>
-                     (o .:? "address")
-                     <*> (o .:? "deadline"))
+                   (o .:? "jwtAudience") <*> (o .:? "selector") <*>
+                     (o .:? "minDeadline")
+                     <*> (o .:? "address")
+                     <*> (o .:? "operationDeadline")
+                     <*> (o .:? "deadline")
+                     <*> (o .:? "pathTranslation"))
 
 instance ToJSON BackendRule where
         toJSON BackendRule'{..}
           = object
               (catMaybes
-                 [("selector" .=) <$> _brSelector,
+                 [("jwtAudience" .=) <$> _brJwtAudience,
+                  ("selector" .=) <$> _brSelector,
                   ("minDeadline" .=) <$> _brMinDeadline,
                   ("address" .=) <$> _brAddress,
-                  ("deadline" .=) <$> _brDeadline])
+                  ("operationDeadline" .=) <$> _brOperationDeadline,
+                  ("deadline" .=) <$> _brDeadline,
+                  ("pathTranslation" .=) <$> _brPathTranslation])
 
 -- | \`SourceContext\` represents information about the source of a protobuf
 -- element, like the file in which it is defined.
@@ -1402,8 +1567,10 @@ sMonitoring :: Lens' Service (Maybe Monitoring)
 sMonitoring
   = lens _sMonitoring (\ s a -> s{_sMonitoring = a})
 
--- | The DNS address at which this service is available, e.g.
--- \`calendar.googleapis.com\`.
+-- | The service name, which is a DNS-like logical identifier for the
+-- service, such as \`calendar.googleapis.com\`. The service name typically
+-- goes through DNS verification to make sure the owner of the service also
+-- owns the DNS name.
 sName :: Lens' Service (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
@@ -2289,6 +2456,96 @@ instance ToJSON AuthenticationRule where
                     _arAllowWithoutCredential,
                   ("oauth" .=) <$> _arOAuth])
 
+-- | Represents a private connection resource. A private connection is
+-- implemented as a VPC Network Peering connection between a service
+-- producer\'s VPC network and a service consumer\'s VPC network.
+--
+-- /See:/ 'connection' smart constructor.
+data Connection =
+  Connection'
+    { _cPeering               :: !(Maybe Text)
+    , _cReservedPeeringRanges :: !(Maybe [Text])
+    , _cService               :: !(Maybe Text)
+    , _cNetwork               :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Connection' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cPeering'
+--
+-- * 'cReservedPeeringRanges'
+--
+-- * 'cService'
+--
+-- * 'cNetwork'
+connection
+    :: Connection
+connection =
+  Connection'
+    { _cPeering = Nothing
+    , _cReservedPeeringRanges = Nothing
+    , _cService = Nothing
+    , _cNetwork = Nothing
+    }
+
+
+-- | Output only. The name of the VPC Network Peering connection that was
+-- created by the service producer.
+cPeering :: Lens' Connection (Maybe Text)
+cPeering = lens _cPeering (\ s a -> s{_cPeering = a})
+
+-- | The name of one or more allocated IP address ranges for this service
+-- producer of type \`PEERING\`. Note that invoking CreateConnection method
+-- with a different range when connection is already established will not
+-- modify already provisioned service producer subnetworks. If
+-- CreateConnection method is invoked repeatedly to reconnect when peering
+-- connection had been disconnected on the consumer side, leaving this
+-- field empty will restore previously allocated IP ranges.
+cReservedPeeringRanges :: Lens' Connection [Text]
+cReservedPeeringRanges
+  = lens _cReservedPeeringRanges
+      (\ s a -> s{_cReservedPeeringRanges = a})
+      . _Default
+      . _Coerce
+
+-- | Output only. The name of the peering service that\'s associated with
+-- this connection, in the following format: \`services\/{service name}\`.
+cService :: Lens' Connection (Maybe Text)
+cService = lens _cService (\ s a -> s{_cService = a})
+
+-- | The name of service consumer\'s VPC network that\'s connected with
+-- service producer network, in the following format:
+-- \`projects\/{project}\/global\/networks\/{network}\`. \`{project}\` is a
+-- project number, such as in \`12345\` that includes the VPC service
+-- consumer\'s VPC network. \`{network}\` is the name of the service
+-- consumer\'s VPC network.
+cNetwork :: Lens' Connection (Maybe Text)
+cNetwork = lens _cNetwork (\ s a -> s{_cNetwork = a})
+
+instance FromJSON Connection where
+        parseJSON
+          = withObject "Connection"
+              (\ o ->
+                 Connection' <$>
+                   (o .:? "peering") <*>
+                     (o .:? "reservedPeeringRanges" .!= mempty)
+                     <*> (o .:? "service")
+                     <*> (o .:? "network"))
+
+instance ToJSON Connection where
+        toJSON Connection'{..}
+          = object
+              (catMaybes
+                 [("peering" .=) <$> _cPeering,
+                  ("reservedPeeringRanges" .=) <$>
+                    _cReservedPeeringRanges,
+                  ("service" .=) <$> _cService,
+                  ("network" .=) <$> _cNetwork])
+
 -- | Metrics to update when the selected methods are called, and the
 -- associated cost applied to each metric. The key of the map is the metric
 -- name, and the values are the amount increased for the metric against
@@ -2488,9 +2745,11 @@ monitoring =
 
 
 -- | Monitoring configurations for sending metrics to the producer project.
--- There can be multiple producer destinations, each one must have a
--- different monitored resource type. A metric can be used in at most one
--- producer destination.
+-- There can be multiple producer destinations. A monitored resouce type
+-- may appear in multiple monitoring destinations if different aggregations
+-- are needed for different sets of metrics associated with that monitored
+-- resource type. A monitored resource and metric pair may only be used
+-- once in the Monitoring configuration.
 mProducerDestinations :: Lens' Monitoring [MonitoringDestination]
 mProducerDestinations
   = lens _mProducerDestinations
@@ -2499,9 +2758,11 @@ mProducerDestinations
       . _Coerce
 
 -- | Monitoring configurations for sending metrics to the consumer project.
--- There can be multiple consumer destinations, each one must have a
--- different monitored resource type. A metric can be used in at most one
--- consumer destination.
+-- There can be multiple consumer destinations. A monitored resouce type
+-- may appear in multiple monitoring destinations if different aggregations
+-- are needed for different sets of metrics associated with that monitored
+-- resource type. A monitored resource and metric pair may only be used
+-- once in the Monitoring configuration.
 mConsumerDestinations :: Lens' Monitoring [MonitoringDestination]
 mConsumerDestinations
   = lens _mConsumerDestinations
@@ -2723,6 +2984,55 @@ instance ToJSON Method where
                   ("requestTypeUrl" .=) <$> _metRequestTypeURL,
                   ("options" .=) <$> _metOptions,
                   ("syntax" .=) <$> _metSyntax])
+
+-- | Represents a found unused range.
+--
+-- /See:/ 'range' smart constructor.
+data Range =
+  Range'
+    { _rNetwork     :: !(Maybe Text)
+    , _rIPCIdRRange :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Range' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rNetwork'
+--
+-- * 'rIPCIdRRange'
+range
+    :: Range
+range = Range' {_rNetwork = Nothing, _rIPCIdRRange = Nothing}
+
+
+-- | In the Shared VPC host project, the VPC network that\'s peered with the
+-- consumer network. For example:
+-- \`projects\/1234321\/global\/networks\/host-network\`
+rNetwork :: Lens' Range (Maybe Text)
+rNetwork = lens _rNetwork (\ s a -> s{_rNetwork = a})
+
+-- | CIDR range in \"10.x.x.x\/y\" format that is within the allocated ranges
+-- and currently unused.
+rIPCIdRRange :: Lens' Range (Maybe Text)
+rIPCIdRRange
+  = lens _rIPCIdRRange (\ s a -> s{_rIPCIdRRange = a})
+
+instance FromJSON Range where
+        parseJSON
+          = withObject "Range"
+              (\ o ->
+                 Range' <$>
+                   (o .:? "network") <*> (o .:? "ipCidrRange"))
+
+instance ToJSON Range where
+        toJSON Range'{..}
+          = object
+              (catMaybes
+                 [("network" .=) <$> _rNetwork,
+                  ("ipCidrRange" .=) <$> _rIPCIdRRange])
 
 -- | ### System parameter configuration A system parameter is a special kind
 -- of parameter defined by the API system, not by an individual API. It is
@@ -3004,13 +3314,16 @@ instance ToJSON MetricDescriptorMetadata where
                   ("ingestDelay" .=) <$> _mdmIngestDelay,
                   ("launchStage" .=) <$> _mdmLaunchStage])
 
--- | Message returning the created service subnetwork.
+-- | Represents a subnet that was created or discovered by a private access
+-- management service.
 --
 -- /See:/ 'subnetwork' smart constructor.
 data Subnetwork =
   Subnetwork'
-    { _subName        :: !(Maybe Text)
-    , _subIPCIdRRange :: !(Maybe Text)
+    { _subOutsideAllocation :: !(Maybe Bool)
+    , _subNetwork           :: !(Maybe Text)
+    , _subName              :: !(Maybe Text)
+    , _subIPCIdRRange       :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3019,19 +3332,43 @@ data Subnetwork =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'subOutsideAllocation'
+--
+-- * 'subNetwork'
+--
 -- * 'subName'
 --
 -- * 'subIPCIdRRange'
 subnetwork
     :: Subnetwork
-subnetwork = Subnetwork' {_subName = Nothing, _subIPCIdRRange = Nothing}
+subnetwork =
+  Subnetwork'
+    { _subOutsideAllocation = Nothing
+    , _subNetwork = Nothing
+    , _subName = Nothing
+    , _subIPCIdRRange = Nothing
+    }
 
+
+-- | This is a discovered subnet that is not within the current consumer
+-- allocated ranges.
+subOutsideAllocation :: Lens' Subnetwork (Maybe Bool)
+subOutsideAllocation
+  = lens _subOutsideAllocation
+      (\ s a -> s{_subOutsideAllocation = a})
+
+-- | In the Shared VPC host project, the VPC network that\'s peered with the
+-- consumer network. For example:
+-- \`projects\/1234321\/global\/networks\/host-network\`
+subNetwork :: Lens' Subnetwork (Maybe Text)
+subNetwork
+  = lens _subNetwork (\ s a -> s{_subNetwork = a})
 
 -- | Subnetwork name. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/
 subName :: Lens' Subnetwork (Maybe Text)
 subName = lens _subName (\ s a -> s{_subName = a})
 
--- | Subnetwork CIDR range in \"10.x.x.x\/y\" format.
+-- | Subnetwork CIDR range in \`10.x.x.x\/y\` format.
 subIPCIdRRange :: Lens' Subnetwork (Maybe Text)
 subIPCIdRRange
   = lens _subIPCIdRRange
@@ -3042,14 +3379,166 @@ instance FromJSON Subnetwork where
           = withObject "Subnetwork"
               (\ o ->
                  Subnetwork' <$>
-                   (o .:? "name") <*> (o .:? "ipCidrRange"))
+                   (o .:? "outsideAllocation") <*> (o .:? "network") <*>
+                     (o .:? "name")
+                     <*> (o .:? "ipCidrRange"))
 
 instance ToJSON Subnetwork where
         toJSON Subnetwork'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _subName,
+                 [("outsideAllocation" .=) <$> _subOutsideAllocation,
+                  ("network" .=) <$> _subNetwork,
+                  ("name" .=) <$> _subName,
                   ("ipCidrRange" .=) <$> _subIPCIdRRange])
+
+-- | Request to create a subnetwork in a previously peered service network.
+--
+-- /See:/ 'addSubnetworkRequest' smart constructor.
+data AddSubnetworkRequest =
+  AddSubnetworkRequest'
+    { _asrIPPrefixLength   :: !(Maybe (Textual Int32))
+    , _asrRequestedAddress :: !(Maybe Text)
+    , _asrSubnetwork       :: !(Maybe Text)
+    , _asrRegion           :: !(Maybe Text)
+    , _asrSubnetworkUsers  :: !(Maybe [Text])
+    , _asrConsumerNetwork  :: !(Maybe Text)
+    , _asrConsumer         :: !(Maybe Text)
+    , _asrDescription      :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddSubnetworkRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asrIPPrefixLength'
+--
+-- * 'asrRequestedAddress'
+--
+-- * 'asrSubnetwork'
+--
+-- * 'asrRegion'
+--
+-- * 'asrSubnetworkUsers'
+--
+-- * 'asrConsumerNetwork'
+--
+-- * 'asrConsumer'
+--
+-- * 'asrDescription'
+addSubnetworkRequest
+    :: AddSubnetworkRequest
+addSubnetworkRequest =
+  AddSubnetworkRequest'
+    { _asrIPPrefixLength = Nothing
+    , _asrRequestedAddress = Nothing
+    , _asrSubnetwork = Nothing
+    , _asrRegion = Nothing
+    , _asrSubnetworkUsers = Nothing
+    , _asrConsumerNetwork = Nothing
+    , _asrConsumer = Nothing
+    , _asrDescription = Nothing
+    }
+
+
+-- | Required. The prefix length of the subnet\'s IP address range. Use CIDR
+-- range notation, such as \`30\` to provision a subnet with an
+-- \`x.x.x.x\/30\` CIDR range. The IP address range is drawn from a pool of
+-- available ranges in the service consumer\'s allocated range.
+asrIPPrefixLength :: Lens' AddSubnetworkRequest (Maybe Int32)
+asrIPPrefixLength
+  = lens _asrIPPrefixLength
+      (\ s a -> s{_asrIPPrefixLength = a})
+      . mapping _Coerce
+
+-- | Optional. The starting address of a range. The address must be a valid
+-- IPv4 address in the x.x.x.x format. This value combined with the IP
+-- prefix range is the CIDR range for the subnet. The range must be within
+-- the allocated range that is assigned to the private connection. If the
+-- CIDR range isn\'t available, the call fails.
+asrRequestedAddress :: Lens' AddSubnetworkRequest (Maybe Text)
+asrRequestedAddress
+  = lens _asrRequestedAddress
+      (\ s a -> s{_asrRequestedAddress = a})
+
+-- | Required. A name for the new subnet. For information about the naming
+-- requirements, see
+-- [subnetwork](\/compute\/docs\/reference\/rest\/v1\/subnetworks) in the
+-- Compute API documentation.
+asrSubnetwork :: Lens' AddSubnetworkRequest (Maybe Text)
+asrSubnetwork
+  = lens _asrSubnetwork
+      (\ s a -> s{_asrSubnetwork = a})
+
+-- | Required. The name of a [region](\/compute\/docs\/regions-zones) for the
+-- subnet, such \`europe-west1\`.
+asrRegion :: Lens' AddSubnetworkRequest (Maybe Text)
+asrRegion
+  = lens _asrRegion (\ s a -> s{_asrRegion = a})
+
+-- | A list of members that are granted the \`compute.networkUser\` role on
+-- the subnet.
+asrSubnetworkUsers :: Lens' AddSubnetworkRequest [Text]
+asrSubnetworkUsers
+  = lens _asrSubnetworkUsers
+      (\ s a -> s{_asrSubnetworkUsers = a})
+      . _Default
+      . _Coerce
+
+-- | Required. The name of the service consumer\'s VPC network. The network
+-- must have an existing private connection that was provisioned through
+-- the connections.create method. The name must be in the following format:
+-- \`projects\/{project}\/global\/networks\/{network}\`, where {project} is
+-- a project number, such as \`12345\`. {network} is the name of a VPC
+-- network in the project.
+asrConsumerNetwork :: Lens' AddSubnetworkRequest (Maybe Text)
+asrConsumerNetwork
+  = lens _asrConsumerNetwork
+      (\ s a -> s{_asrConsumerNetwork = a})
+
+-- | Required. A resource that represents the service consumer, such as
+-- \`projects\/123456\`. The project number can be different from the value
+-- in the consumer network parameter. For example, the network might be
+-- part of a Shared VPC network. In those cases, Service Networking
+-- validates that this resource belongs to that Shared VPC.
+asrConsumer :: Lens' AddSubnetworkRequest (Maybe Text)
+asrConsumer
+  = lens _asrConsumer (\ s a -> s{_asrConsumer = a})
+
+-- | An optional description of the subnet.
+asrDescription :: Lens' AddSubnetworkRequest (Maybe Text)
+asrDescription
+  = lens _asrDescription
+      (\ s a -> s{_asrDescription = a})
+
+instance FromJSON AddSubnetworkRequest where
+        parseJSON
+          = withObject "AddSubnetworkRequest"
+              (\ o ->
+                 AddSubnetworkRequest' <$>
+                   (o .:? "ipPrefixLength") <*>
+                     (o .:? "requestedAddress")
+                     <*> (o .:? "subnetwork")
+                     <*> (o .:? "region")
+                     <*> (o .:? "subnetworkUsers" .!= mempty)
+                     <*> (o .:? "consumerNetwork")
+                     <*> (o .:? "consumer")
+                     <*> (o .:? "description"))
+
+instance ToJSON AddSubnetworkRequest where
+        toJSON AddSubnetworkRequest'{..}
+          = object
+              (catMaybes
+                 [("ipPrefixLength" .=) <$> _asrIPPrefixLength,
+                  ("requestedAddress" .=) <$> _asrRequestedAddress,
+                  ("subnetwork" .=) <$> _asrSubnetwork,
+                  ("region" .=) <$> _asrRegion,
+                  ("subnetworkUsers" .=) <$> _asrSubnetworkUsers,
+                  ("consumerNetwork" .=) <$> _asrConsumerNetwork,
+                  ("consumer" .=) <$> _asrConsumer,
+                  ("description" .=) <$> _asrDescription])
 
 -- | Define a system parameter rule mapping system parameter definitions to
 -- methods.
@@ -3244,6 +3733,63 @@ instance ToJSON Usage where
                   ("producerNotificationChannel" .=) <$>
                     _uProducerNotificationChannel])
 
+-- | Request to search for an unused range within allocated ranges.
+--
+-- /See:/ 'searchRangeRequest' smart constructor.
+data SearchRangeRequest =
+  SearchRangeRequest'
+    { _srrIPPrefixLength :: !(Maybe (Textual Int32))
+    , _srrNetwork        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SearchRangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srrIPPrefixLength'
+--
+-- * 'srrNetwork'
+searchRangeRequest
+    :: SearchRangeRequest
+searchRangeRequest =
+  SearchRangeRequest' {_srrIPPrefixLength = Nothing, _srrNetwork = Nothing}
+
+
+-- | Required. The prefix length of the IP range. Use usual CIDR range
+-- notation. For example, \'30\' to find unused x.x.x.x\/30 CIDR range.
+-- Actual range will be determined using allocated range for the consumer
+-- peered network and returned in the result.
+srrIPPrefixLength :: Lens' SearchRangeRequest (Maybe Int32)
+srrIPPrefixLength
+  = lens _srrIPPrefixLength
+      (\ s a -> s{_srrIPPrefixLength = a})
+      . mapping _Coerce
+
+-- | Network name in the consumer project. This network must have been
+-- already peered with a shared VPC network using CreateConnection method.
+-- Must be in a form \'projects\/{project}\/global\/networks\/{network}\'.
+-- {project} is a project number, as in \'12345\' {network} is network
+-- name.
+srrNetwork :: Lens' SearchRangeRequest (Maybe Text)
+srrNetwork
+  = lens _srrNetwork (\ s a -> s{_srrNetwork = a})
+
+instance FromJSON SearchRangeRequest where
+        parseJSON
+          = withObject "SearchRangeRequest"
+              (\ o ->
+                 SearchRangeRequest' <$>
+                   (o .:? "ipPrefixLength") <*> (o .:? "network"))
+
+instance ToJSON SearchRangeRequest where
+        toJSON SearchRangeRequest'{..}
+          = object
+              (catMaybes
+                 [("ipPrefixLength" .=) <$> _srrIPPrefixLength,
+                  ("network" .=) <$> _srrNetwork])
+
 -- | Defines the HTTP configuration for an API service. It contains a list of
 -- HttpRule, each specifying the mapping of an RPC method to one or more
 -- HTTP REST API methods.
@@ -3277,8 +3823,8 @@ hRules
   = lens _hRules (\ s a -> s{_hRules = a}) . _Default .
       _Coerce
 
--- | When set to true, URL path parmeters will be fully URI-decoded except in
--- cases of single segment matches in reserved expansion, where \"%2F\"
+-- | When set to true, URL path parameters will be fully URI-decoded except
+-- in cases of single segment matches in reserved expansion, where \"%2F\"
 -- will be left encoded. The default behavior is to not decode RFC 6570
 -- reserved characters in multi segment matches.
 hFullyDecodeReservedExpansion :: Lens' HTTP (Maybe Bool)
@@ -3301,54 +3847,6 @@ instance ToJSON HTTP where
                  [("rules" .=) <$> _hRules,
                   ("fullyDecodeReservedExpansion" .=) <$>
                     _hFullyDecodeReservedExpansion])
-
--- | Message returning the name of the created service subnetwork.
---
--- /See:/ 'addSubnetworkResponse' smart constructor.
-data AddSubnetworkResponse =
-  AddSubnetworkResponse'
-    { _asrName        :: !(Maybe Text)
-    , _asrIPCIdRRange :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AddSubnetworkResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'asrName'
---
--- * 'asrIPCIdRRange'
-addSubnetworkResponse
-    :: AddSubnetworkResponse
-addSubnetworkResponse =
-  AddSubnetworkResponse' {_asrName = Nothing, _asrIPCIdRRange = Nothing}
-
-
--- | Subnetwork name. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/
-asrName :: Lens' AddSubnetworkResponse (Maybe Text)
-asrName = lens _asrName (\ s a -> s{_asrName = a})
-
--- | Subnetwork CIDR range in \"10.x.x.x\/y\" format.
-asrIPCIdRRange :: Lens' AddSubnetworkResponse (Maybe Text)
-asrIPCIdRRange
-  = lens _asrIPCIdRRange
-      (\ s a -> s{_asrIPCIdRRange = a})
-
-instance FromJSON AddSubnetworkResponse where
-        parseJSON
-          = withObject "AddSubnetworkResponse"
-              (\ o ->
-                 AddSubnetworkResponse' <$>
-                   (o .:? "name") <*> (o .:? "ipCidrRange"))
-
-instance ToJSON AddSubnetworkResponse where
-        toJSON AddSubnetworkResponse'{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _asrName,
-                  ("ipCidrRange" .=) <$> _asrIPCIdRRange])
 
 -- | A protocol buffer message type.
 --
@@ -3606,7 +4104,7 @@ monitoringDestination =
   MonitoringDestination' {_mdMetrics = Nothing, _mdMonitoredResource = Nothing}
 
 
--- | Names of the metrics to report to this monitoring destination. Each name
+-- | Types of the metrics to report to this monitoring destination. Each type
 -- must be defined in Service.metrics section.
 mdMetrics :: Lens' MonitoringDestination [Text]
 mdMetrics
@@ -4454,8 +4952,8 @@ instance ToJSON SourceInfoSourceFilesItem where
         toJSON = toJSON . _sisfiAddtional
 
 -- | Quota configuration helps to achieve fairness and budgeting in service
--- usage. The quota configuration works this way: - The service
--- configuration defines a set of metrics. - For API calls, the
+-- usage. The metric based quota configuration works this way: - The
+-- service configuration defines a set of metrics. - For API calls, the
 -- quota.metric_rules maps methods to metrics with corresponding costs. -
 -- The quota.limits defines limits on the metrics, which will be used for
 -- quota checks at runtime. An example quota configuration in yaml format:
@@ -4546,7 +5044,7 @@ instance ToJSON Quota where
 -- a primitive (non-message) type. The path template controls how fields of
 -- the request message are mapped to the URL path. Example: service
 -- Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option
--- (google.api.http) = { get: \"\/v1\/{name=messages\/*\"}\" }; } } message
+-- (google.api.http) = { get: \"\/v1\/{name=messages\/*}\" }; } } message
 -- GetMessageRequest { string name = 1; \/\/ Mapped to URL path. } message
 -- Message { string text = 1; \/\/ The resource content. } This enables an
 -- HTTP REST to gRPC mapping as below: HTTP | gRPC -----|----- \`GET
@@ -4875,7 +5373,7 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | Configuration for an anthentication provider, including support for
+-- | Configuration for an authentication provider, including support for
 -- [JSON Web Token
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
@@ -4947,7 +5445,7 @@ apAudiences
 apId :: Lens' AuthProvider (Maybe Text)
 apId = lens _apId (\ s a -> s{_apId = a})
 
--- | Redirect URL if JWT token is required but no present or is expired.
+-- | Redirect URL if JWT token is required but not present or is expired.
 -- Implement authorizationUrl of securityDefinitions in OpenAPI spec.
 apAuthorizationURL :: Lens' AuthProvider (Maybe Text)
 apAuthorizationURL

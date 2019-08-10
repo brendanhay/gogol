@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables\/Disables Network Policy for a cluster.
+-- Enables or disables Network Policy for a cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.setNetworkPolicy@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.SetNetworkPolicy
@@ -60,7 +60,7 @@ type ProjectsLocationsClustersSetNetworkPolicyResource
                      ReqBody '[JSON] SetNetworkPolicyRequest :>
                        Post '[JSON] Operation
 
--- | Enables\/Disables Network Policy for a cluster.
+-- | Enables or disables Network Policy for a cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetNetworkPolicy' smart constructor.
 data ProjectsLocationsClustersSetNetworkPolicy =

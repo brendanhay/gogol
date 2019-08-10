@@ -39,10 +39,13 @@ module Network.Google.Resource.Drive.Changes.Watch
     , cwTeamDriveId
     , cwRestrictToMyDrive
     , cwSpaces
+    , cwIncludeItemsFromAllDrives
+    , cwSupportsAllDrives
     , cwPageToken
     , cwPageSize
     , cwIncludeRemoved
     , cwSupportsTeamDrives
+    , cwDriveId
     ) where
 
 import           Network.Google.Drive.Types
@@ -61,27 +64,34 @@ type ChangesWatchResource =
                    QueryParam "teamDriveId" Text :>
                      QueryParam "restrictToMyDrive" Bool :>
                        QueryParam "spaces" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "includeRemoved" Bool :>
-                             QueryParam "supportsTeamDrives" Bool :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Channel :> Post '[JSON] Channel
+                         QueryParam "includeItemsFromAllDrives" Bool :>
+                           QueryParam "supportsAllDrives" Bool :>
+                             QueryParam "pageSize" (Textual Int32) :>
+                               QueryParam "includeRemoved" Bool :>
+                                 QueryParam "supportsTeamDrives" Bool :>
+                                   QueryParam "driveId" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Channel :>
+                                         Post '[JSON] Channel
 
 -- | Subscribes to changes for a user.
 --
 -- /See:/ 'changesWatch' smart constructor.
 data ChangesWatch =
   ChangesWatch'
-    { _cwIncludeTeamDriveItems :: !Bool
-    , _cwPayload               :: !Channel
-    , _cwIncludeCorpusRemovals :: !Bool
-    , _cwTeamDriveId           :: !(Maybe Text)
-    , _cwRestrictToMyDrive     :: !Bool
-    , _cwSpaces                :: !Text
-    , _cwPageToken             :: !Text
-    , _cwPageSize              :: !(Textual Int32)
-    , _cwIncludeRemoved        :: !Bool
-    , _cwSupportsTeamDrives    :: !Bool
+    { _cwIncludeTeamDriveItems     :: !Bool
+    , _cwPayload                   :: !Channel
+    , _cwIncludeCorpusRemovals     :: !Bool
+    , _cwTeamDriveId               :: !(Maybe Text)
+    , _cwRestrictToMyDrive         :: !Bool
+    , _cwSpaces                    :: !Text
+    , _cwIncludeItemsFromAllDrives :: !Bool
+    , _cwSupportsAllDrives         :: !Bool
+    , _cwPageToken                 :: !Text
+    , _cwPageSize                  :: !(Textual Int32)
+    , _cwIncludeRemoved            :: !Bool
+    , _cwSupportsTeamDrives        :: !Bool
+    , _cwDriveId                   :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -102,6 +112,10 @@ data ChangesWatch =
 --
 -- * 'cwSpaces'
 --
+-- * 'cwIncludeItemsFromAllDrives'
+--
+-- * 'cwSupportsAllDrives'
+--
 -- * 'cwPageToken'
 --
 -- * 'cwPageSize'
@@ -109,6 +123,8 @@ data ChangesWatch =
 -- * 'cwIncludeRemoved'
 --
 -- * 'cwSupportsTeamDrives'
+--
+-- * 'cwDriveId'
 changesWatch
     :: Channel -- ^ 'cwPayload'
     -> Text -- ^ 'cwPageToken'
@@ -121,14 +137,17 @@ changesWatch pCwPayload_ pCwPageToken_ =
     , _cwTeamDriveId = Nothing
     , _cwRestrictToMyDrive = False
     , _cwSpaces = "drive"
+    , _cwIncludeItemsFromAllDrives = False
+    , _cwSupportsAllDrives = False
     , _cwPageToken = pCwPageToken_
     , _cwPageSize = 100
     , _cwIncludeRemoved = True
     , _cwSupportsTeamDrives = False
+    , _cwDriveId = Nothing
     }
 
 
--- | Whether Team Drive files or changes should be included in results.
+-- | Deprecated use includeItemsFromAllDrives instead.
 cwIncludeTeamDriveItems :: Lens' ChangesWatch Bool
 cwIncludeTeamDriveItems
   = lens _cwIncludeTeamDriveItems
@@ -148,9 +167,7 @@ cwIncludeCorpusRemovals
   = lens _cwIncludeCorpusRemovals
       (\ s a -> s{_cwIncludeCorpusRemovals = a})
 
--- | The Team Drive from which changes will be returned. If specified the
--- change IDs will be reflective of the Team Drive; use the combined Team
--- Drive ID and change ID as an identifier.
+-- | Deprecated use driveId instead.
 cwTeamDriveId :: Lens' ChangesWatch (Maybe Text)
 cwTeamDriveId
   = lens _cwTeamDriveId
@@ -168,6 +185,20 @@ cwRestrictToMyDrive
 -- Supported values are \'drive\', \'appDataFolder\' and \'photos\'.
 cwSpaces :: Lens' ChangesWatch Text
 cwSpaces = lens _cwSpaces (\ s a -> s{_cwSpaces = a})
+
+-- | Whether both My Drive and shared drive items should be included in
+-- results.
+cwIncludeItemsFromAllDrives :: Lens' ChangesWatch Bool
+cwIncludeItemsFromAllDrives
+  = lens _cwIncludeItemsFromAllDrives
+      (\ s a -> s{_cwIncludeItemsFromAllDrives = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+cwSupportsAllDrives :: Lens' ChangesWatch Bool
+cwSupportsAllDrives
+  = lens _cwSupportsAllDrives
+      (\ s a -> s{_cwSupportsAllDrives = a})
 
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous
@@ -189,11 +220,18 @@ cwIncludeRemoved
   = lens _cwIncludeRemoved
       (\ s a -> s{_cwIncludeRemoved = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 cwSupportsTeamDrives :: Lens' ChangesWatch Bool
 cwSupportsTeamDrives
   = lens _cwSupportsTeamDrives
       (\ s a -> s{_cwSupportsTeamDrives = a})
+
+-- | The shared drive from which changes will be returned. If specified the
+-- change IDs will be reflective of the shared drive; use the combined
+-- drive ID and change ID as an identifier.
+cwDriveId :: Lens' ChangesWatch (Maybe Text)
+cwDriveId
+  = lens _cwDriveId (\ s a -> s{_cwDriveId = a})
 
 instance GoogleRequest ChangesWatch where
         type Rs ChangesWatch = Channel
@@ -212,9 +250,12 @@ instance GoogleRequest ChangesWatch where
               _cwTeamDriveId
               (Just _cwRestrictToMyDrive)
               (Just _cwSpaces)
+              (Just _cwIncludeItemsFromAllDrives)
+              (Just _cwSupportsAllDrives)
               (Just _cwPageSize)
               (Just _cwIncludeRemoved)
               (Just _cwSupportsTeamDrives)
+              _cwDriveId
               (Just AltJSON)
               _cwPayload
               driveService

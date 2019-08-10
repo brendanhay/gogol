@@ -144,7 +144,7 @@ insPayload
   = lens _insPayload (\ s a -> s{_insPayload = a})
 
 -- | Whether to force attach the disk even if it\'s currently attached to
--- another instance. This is only available for regional disks.
+-- another instance.
 insForceAttach :: Lens' InstancesAttachDisk (Maybe Bool)
 insForceAttach
   = lens _insForceAttach

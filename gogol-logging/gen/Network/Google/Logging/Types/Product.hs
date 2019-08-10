@@ -2665,9 +2665,7 @@ llerOrderBy
 
 -- | Deprecated. Use resource_names instead. One or more project identifiers
 -- or project numbers from which to retrieve log entries. Example:
--- \"my-project-1A\". If present, these project identifiers are converted
--- to resource name format and added to the list of resources in
--- resource_names.
+-- \"my-project-1A\".
 llerProjectIds :: Lens' ListLogEntriesRequest [Text]
 llerProjectIds
   = lens _llerProjectIds
@@ -3154,9 +3152,14 @@ leInsertId :: Lens' LogEntry (Maybe Text)
 leInsertId
   = lens _leInsertId (\ s a -> s{_leInsertId = a})
 
--- | Output only. Additional metadata about the monitored resource.Only
--- k8s_container, k8s_pod, and k8s_node MonitoredResources have this field
--- populated.
+-- | Deprecated. Output only. Additional metadata about the monitored
+-- resource.Only k8s_container, k8s_pod, and k8s_node MonitoredResources
+-- have this field populated for GKE versions older than 1.12.6. For GKE
+-- versions 1.12.6 and above, the metadata field has been deprecated. The
+-- Kubernetes pod labels that used to be in metadata.userLabels will now be
+-- present in the labels field with a key prefix of k8s-pod\/. The
+-- Stackdriver system labels that were present in the metadata.systemLabels
+-- field will no longer be available in the LogEntry.
 leMetadata :: Lens' LogEntry (Maybe MonitoredResourceMetadata)
 leMetadata
   = lens _leMetadata (\ s a -> s{_leMetadata = a})

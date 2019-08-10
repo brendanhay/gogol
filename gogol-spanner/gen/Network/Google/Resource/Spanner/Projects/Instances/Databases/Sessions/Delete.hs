@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Ends a session, releasing server resources associated with it.
+-- Ends a session, releasing server resources associated with it. This will
+-- asynchronously trigger cancellation of any operations that are running
+-- with this session.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.sessions.delete@.
 module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Delete
@@ -57,7 +59,9 @@ type ProjectsInstancesDatabasesSessionsDeleteResource
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Ends a session, releasing server resources associated with it.
+-- | Ends a session, releasing server resources associated with it. This will
+-- asynchronously trigger cancellation of any operations that are running
+-- with this session.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsDelete' smart constructor.
 data ProjectsInstancesDatabasesSessionsDelete =

@@ -176,6 +176,40 @@ instance FromJSON WorkerPoolTeardownPolicy where
 instance ToJSON WorkerPoolTeardownPolicy where
     toJSON = toJSONText
 
+-- | Which Flexible Resource Scheduling mode to run in.
+data EnvironmentFlexResourceSchedulingGoal
+    = FlexrsUnspecified
+      -- ^ @FLEXRS_UNSPECIFIED@
+      -- Run in the default mode.
+    | FlexrsSpeedOptimized
+      -- ^ @FLEXRS_SPEED_OPTIMIZED@
+      -- Optimize for lower execution time.
+    | FlexrsCostOptimized
+      -- ^ @FLEXRS_COST_OPTIMIZED@
+      -- Optimize for lower cost.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EnvironmentFlexResourceSchedulingGoal
+
+instance FromHttpApiData EnvironmentFlexResourceSchedulingGoal where
+    parseQueryParam = \case
+        "FLEXRS_UNSPECIFIED" -> Right FlexrsUnspecified
+        "FLEXRS_SPEED_OPTIMIZED" -> Right FlexrsSpeedOptimized
+        "FLEXRS_COST_OPTIMIZED" -> Right FlexrsCostOptimized
+        x -> Left ("Unable to parse EnvironmentFlexResourceSchedulingGoal from: " <> x)
+
+instance ToHttpApiData EnvironmentFlexResourceSchedulingGoal where
+    toQueryParam = \case
+        FlexrsUnspecified -> "FLEXRS_UNSPECIFIED"
+        FlexrsSpeedOptimized -> "FLEXRS_SPEED_OPTIMIZED"
+        FlexrsCostOptimized -> "FLEXRS_COST_OPTIMIZED"
+
+instance FromJSON EnvironmentFlexResourceSchedulingGoal where
+    parseJSON = parseJSONText "EnvironmentFlexResourceSchedulingGoal"
+
+instance ToJSON EnvironmentFlexResourceSchedulingGoal where
+    toJSON = toJSONText
+
 -- | The algorithm to use for autoscaling.
 data AutoscalingSettingsAlgorithm
     = AutoscalingAlgorithmUnknown

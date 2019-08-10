@@ -116,6 +116,34 @@ instance FromJSON ManagedZoneDNSSecConfigState where
 instance ToJSON ManagedZoneDNSSecConfigState where
     toJSON = toJSONText
 
+-- | The zone\'s visibility: public zones are exposed to the Internet, while
+-- private zones are visible only to Virtual Private Cloud resources.
+data ManagedZoneVisibility
+    = Private
+      -- ^ @PRIVATE@
+    | Public
+      -- ^ @PUBLIC@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ManagedZoneVisibility
+
+instance FromHttpApiData ManagedZoneVisibility where
+    parseQueryParam = \case
+        "PRIVATE" -> Right Private
+        "PUBLIC" -> Right Public
+        x -> Left ("Unable to parse ManagedZoneVisibility from: " <> x)
+
+instance ToHttpApiData ManagedZoneVisibility where
+    toQueryParam = \case
+        Private -> "PRIVATE"
+        Public -> "PUBLIC"
+
+instance FromJSON ManagedZoneVisibility where
+    parseJSON = parseJSONText "ManagedZoneVisibility"
+
+instance ToJSON ManagedZoneVisibility where
+    toJSON = toJSONText
+
 -- | Sorting criterion. The only supported value is change sequence.
 data ChangesListSortBy
     = ChangeSequence

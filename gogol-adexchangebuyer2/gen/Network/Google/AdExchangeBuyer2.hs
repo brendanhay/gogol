@@ -133,9 +133,6 @@ module Network.Google.AdExchangeBuyer2
     -- ** adexchangebuyer2.accounts.publisherProfiles.list
     , module Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.List
 
-    -- ** adexchangebuyer2.bidders.accounts.creatives.delete
-    , module Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.Creatives.Delete
-
     -- ** adexchangebuyer2.bidders.accounts.filterSets.bidMetrics.list
     , module Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
 
@@ -1167,7 +1164,6 @@ import           Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Res
 import           Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Update
 import           Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.Get
 import           Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.List
-import           Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.Creatives.Delete
 import           Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
 import           Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponseErrors.List
 import           Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBids.List
@@ -1203,8 +1199,7 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Ad Exchange Buyer API II service.
 type AdExchangeBuyer2API =
-     BiddersAccountsCreativesDeleteResource :<|>
-       BiddersAccountsFilterSetsFilteredBidRequestsListResource
+     BiddersAccountsFilterSetsFilteredBidRequestsListResource
        :<|>
        BiddersAccountsFilterSetsBidResponsesWithoutBidsListResource
        :<|>

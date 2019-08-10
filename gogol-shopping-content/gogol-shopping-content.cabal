@@ -110,6 +110,8 @@ library
         , Network.Google.Resource.Content.Productstatuses.Custombatch
         , Network.Google.Resource.Content.Productstatuses.Get
         , Network.Google.Resource.Content.Productstatuses.List
+        , Network.Google.Resource.Content.Regionalinventory.Custombatch
+        , Network.Google.Resource.Content.Regionalinventory.Insert
         , Network.Google.Resource.Content.ShippingSettings.Custombatch
         , Network.Google.Resource.Content.ShippingSettings.Get
         , Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers

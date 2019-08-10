@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the FHIR store and removes all resources that are contained
--- within it.
+-- Deletes the specified FHIR store and removes all resources within it.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.delete@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Delete
@@ -49,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsFhirStoresDelete' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresDeleteResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -58,8 +57,7 @@ type ProjectsLocationsDataSetsFhirStoresDeleteResource
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes the FHIR store and removes all resources that are contained
--- within it.
+-- | Deletes the specified FHIR store and removes all resources within it.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresDelete' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresDelete =

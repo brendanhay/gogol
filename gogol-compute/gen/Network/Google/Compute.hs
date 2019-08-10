@@ -451,6 +451,9 @@ module Network.Google.Compute
     -- ** compute.instances.getSerialPortOutput
     , module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
 
+    -- ** compute.instances.getShieldedInstanceIdentity
+    , module Network.Google.Resource.Compute.Instances.GetShieldedInstanceIdentity
+
     -- ** compute.instances.insert
     , module Network.Google.Resource.Compute.Instances.Insert
 
@@ -493,6 +496,9 @@ module Network.Google.Compute
     -- ** compute.instances.setServiceAccount
     , module Network.Google.Resource.Compute.Instances.SetServiceAccount
 
+    -- ** compute.instances.setShieldedInstanceIntegrityPolicy
+    , module Network.Google.Resource.Compute.Instances.SetShieldedInstanceIntegrityPolicy
+
     -- ** compute.instances.setTags
     , module Network.Google.Resource.Compute.Instances.SetTags
 
@@ -516,6 +522,9 @@ module Network.Google.Compute
 
     -- ** compute.instances.updateNetworkInterface
     , module Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
+
+    -- ** compute.instances.updateShieldedInstanceConfig
+    , module Network.Google.Resource.Compute.Instances.UpdateShieldedInstanceConfig
 
     -- ** compute.interconnectAttachments.aggregatedList
     , module Network.Google.Resource.Compute.InterconnectAttachments.AggregatedList
@@ -594,6 +603,33 @@ module Network.Google.Compute
 
     -- ** compute.machineTypes.list
     , module Network.Google.Resource.Compute.MachineTypes.List
+
+    -- ** compute.networkEndpointGroups.aggregatedList
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.AggregatedList
+
+    -- ** compute.networkEndpointGroups.attachNetworkEndpoints
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
+
+    -- ** compute.networkEndpointGroups.delete
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.Delete
+
+    -- ** compute.networkEndpointGroups.detachNetworkEndpoints
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
+
+    -- ** compute.networkEndpointGroups.get
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.Get
+
+    -- ** compute.networkEndpointGroups.insert
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.Insert
+
+    -- ** compute.networkEndpointGroups.list
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.List
+
+    -- ** compute.networkEndpointGroups.listNetworkEndpoints
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.ListNetworkEndpoints
+
+    -- ** compute.networkEndpointGroups.testIamPermissions
+    , module Network.Google.Resource.Compute.NetworkEndpointGroups.TestIAMPermissions
 
     -- ** compute.networks.addPeering
     , module Network.Google.Resource.Compute.Networks.AddPeering
@@ -1499,6 +1535,7 @@ module Network.Google.Compute
     , sSelfLink
     , sSnapshotEncryptionKey
     , sName
+    , sStorageLocations
     , sCreationTimestamp
     , sLicenseCodes
     , sId
@@ -1579,12 +1616,20 @@ module Network.Google.Compute
     , rigliwCode
     , rigliwMessage
 
+    -- ** NetworkEndpointGroupsDetachEndpointsRequest
+    , NetworkEndpointGroupsDetachEndpointsRequest
+    , networkEndpointGroupsDetachEndpointsRequest
+    , negderNetworkEndpoints
+
     -- ** AuditConfig
     , AuditConfig
     , auditConfig
     , acService
     , acAuditLogConfigs
     , acExemptedMembers
+
+    -- ** NetworkEndpointGroupNetworkEndpointType
+    , NetworkEndpointGroupNetworkEndpointType (..)
 
     -- ** BackendBucketListWarningCode
     , BackendBucketListWarningCode (..)
@@ -1635,6 +1680,13 @@ module Network.Google.Compute
     , dlSelfLink
     , dlWarning
     , dlId
+
+    -- ** NetworkEndpointGroupsListNetworkEndpointsWarning
+    , NetworkEndpointGroupsListNetworkEndpointsWarning
+    , networkEndpointGroupsListNetworkEndpointsWarning
+    , neglnewData
+    , neglnewCode
+    , neglnewMessage
 
     -- ** NodeGroupsScopedListWarningCode
     , NodeGroupsScopedListWarningCode (..)
@@ -1704,6 +1756,13 @@ module Network.Google.Compute
     , igmvTargetSize
     , igmvName
 
+    -- ** NetworkEndpointGroupsScopedListWarning
+    , NetworkEndpointGroupsScopedListWarning
+    , networkEndpointGroupsScopedListWarning
+    , negslwData
+    , negslwCode
+    , negslwMessage
+
     -- ** SubnetworksScopedListWarning
     , SubnetworksScopedListWarning
     , subnetworksScopedListWarning
@@ -1770,6 +1829,7 @@ module Network.Google.Compute
     -- ** NetworksAddPeeringRequest
     , NetworksAddPeeringRequest
     , networksAddPeeringRequest
+    , naprNetworkPeering
     , naprPeerNetwork
     , naprName
     , naprAutoCreateRoutes
@@ -1941,11 +2001,19 @@ module Network.Google.Compute
     , slwCode
     , slwMessage
 
+    -- ** NetworkEndpointGroupListWarning
+    , NetworkEndpointGroupListWarning
+    , networkEndpointGroupListWarning
+    , neglwData
+    , neglwCode
+    , neglwMessage
+
     -- ** HealthCheck
     , HealthCheck
     , healthCheck
     , hcHealthyThreshold
     , hcTCPHealthCheck
+    , hcHTTP2HealthCheck
     , hcKind
     , hcSSLHealthCheck
     , hcSelfLink
@@ -2054,6 +2122,11 @@ module Network.Google.Compute
     , npName
     , npPort
 
+    -- ** NetworkEndpointGroupsListEndpointsRequest
+    , NetworkEndpointGroupsListEndpointsRequest
+    , networkEndpointGroupsListEndpointsRequest
+    , neglerHealthStatus
+
     -- ** InterconnectLocationListWarningCode
     , InterconnectLocationListWarningCode (..)
 
@@ -2081,6 +2154,20 @@ module Network.Google.Compute
     , idlsCircuitId
     , idlsArpCaches
     , idlsTransmittingOpticalPower
+
+    -- ** BackendServiceReference
+    , BackendServiceReference
+    , backendServiceReference
+    , bsrBackendService
+
+    -- ** NetworkEndpointGroupAggregatedListWarningDataItem
+    , NetworkEndpointGroupAggregatedListWarningDataItem
+    , networkEndpointGroupAggregatedListWarningDataItem
+    , negalwdiValue
+    , negalwdiKey
+
+    -- ** SSLHealthCheckPortSpecification
+    , SSLHealthCheckPortSpecification (..)
 
     -- ** TargetInstanceList
     , TargetInstanceList
@@ -2166,6 +2253,9 @@ module Network.Google.Compute
     , InstancesSetMinCPUPlatformRequest
     , instancesSetMinCPUPlatformRequest
     , ismcprMinCPUPlatform
+
+    -- ** NetworkEndpointGroupAggregatedListWarningCode
+    , NetworkEndpointGroupAggregatedListWarningCode (..)
 
     -- ** ForwardingRuleAggregatedList
     , ForwardingRuleAggregatedList
@@ -2275,6 +2365,9 @@ module Network.Google.Compute
     -- ** ForwardingRulesScopedListWarningCode
     , ForwardingRulesScopedListWarningCode (..)
 
+    -- ** HealthStatusForNetworkEndpointHealthState
+    , HealthStatusForNetworkEndpointHealthState (..)
+
     -- ** LicenseResourceRequirements
     , LicenseResourceRequirements
     , licenseResourceRequirements
@@ -2307,6 +2400,7 @@ module Network.Google.Compute
     , frLoadBalancingScheme
     , frKind
     , frIPVersion
+    , frAllPorts
     , frNetwork
     , frPortRange
     , frSelfLink
@@ -2357,6 +2451,12 @@ module Network.Google.Compute
     , subnetworksScopedList
     , sslSubnetworks
     , sslWarning
+
+    -- ** NetworkEndpointGroupsScopedList
+    , NetworkEndpointGroupsScopedList
+    , networkEndpointGroupsScopedList
+    , negslNetworkEndpointGroups
+    , negslWarning
 
     -- ** DiskAggregatedListWarningCode
     , DiskAggregatedListWarningCode (..)
@@ -2452,6 +2552,13 @@ module Network.Google.Compute
     , oTargetLink
     , oClientOperationId
 
+    -- ** NetworkEndpoint
+    , NetworkEndpoint
+    , networkEndpoint
+    , neIPAddress
+    , nePort
+    , neInstance
+
     -- ** DisksScopedListWarningDataItem
     , DisksScopedListWarningDataItem
     , disksScopedListWarningDataItem
@@ -2536,6 +2643,15 @@ module Network.Google.Compute
     -- ** TargetPoolAggregatedListWarningCode
     , TargetPoolAggregatedListWarningCode (..)
 
+    -- ** NetworkEndpointGroupsListNetworkEndpoints
+    , NetworkEndpointGroupsListNetworkEndpoints
+    , networkEndpointGroupsListNetworkEndpoints
+    , neglneNextPageToken
+    , neglneKind
+    , neglneItems
+    , neglneWarning
+    , neglneId
+
     -- ** ForwardingRuleAggregatedListWarningDataItem
     , ForwardingRuleAggregatedListWarningDataItem
     , forwardingRuleAggregatedListWarningDataItem
@@ -2601,6 +2717,7 @@ module Network.Google.Compute
     , TCPHealthCheck
     , tcpHealthCheck
     , thcResponse
+    , thcPortSpecification
     , thcProxyHeader
     , thcPortName
     , thcPort
@@ -2843,6 +2960,11 @@ module Network.Google.Compute
     , firewallLogConfig
     , flcEnable
 
+    -- ** ShieldedInstanceIntegrityPolicy
+    , ShieldedInstanceIntegrityPolicy
+    , shieldedInstanceIntegrityPolicy
+    , siipUpdateAutoLearnPolicy
+
     -- ** TargetHTTPProxyListWarningCode
     , TargetHTTPProxyListWarningCode (..)
 
@@ -3007,6 +3129,7 @@ module Network.Google.Compute
     , ipGuestAccelerators
     , ipMachineType
     , ipMetadata
+    , ipShieldedInstanceConfig
     , ipLabels
     , ipScheduling
     , ipMinCPUPlatform
@@ -3026,6 +3149,17 @@ module Network.Google.Compute
     , rlwData
     , rlwCode
     , rlwMessage
+
+    -- ** HTTP2HealthCheck
+    , HTTP2HealthCheck
+    , hTTP2HealthCheck
+    , httphcResponse
+    , httphcPortSpecification
+    , httphcRequestPath
+    , httphcHost
+    , httphcProxyHeader
+    , httphcPortName
+    , httphcPort
 
     -- ** NodeTemplateAggregatedListWarningCode
     , NodeTemplateAggregatedListWarningCode (..)
@@ -3071,6 +3205,11 @@ module Network.Google.Compute
     , usableSubnetworkSecondaryRange
     , ussrRangeName
     , ussrIPCIdRRange
+
+    -- ** NetworkEndpointGroupsAttachEndpointsRequest
+    , NetworkEndpointGroupsAttachEndpointsRequest
+    , networkEndpointGroupsAttachEndpointsRequest
+    , negaerNetworkEndpoints
 
     -- ** AddressesScopedListWarningDataItem
     , AddressesScopedListWarningDataItem
@@ -3428,6 +3567,11 @@ module Network.Google.Compute
     , ialWarning
     , ialId
 
+    -- ** ForwardingRuleReference
+    , ForwardingRuleReference
+    , forwardingRuleReference
+    , frrForwardingRule
+
     -- ** TargetTCPProxiesSetBackendServiceRequest
     , TargetTCPProxiesSetBackendServiceRequest
     , targetTCPProxiesSetBackendServiceRequest
@@ -3437,6 +3581,7 @@ module Network.Google.Compute
     , SSLHealthCheck
     , sslHealthCheck
     , shcResponse
+    , shcPortSpecification
     , shcProxyHeader
     , shcPortName
     , shcPort
@@ -3530,6 +3675,14 @@ module Network.Google.Compute
     , TargetSSLProxiesSetSSLCertificatesRequest
     , targetSSLProxiesSetSSLCertificatesRequest
     , tspsscrSSLCertificates
+
+    -- ** HealthStatusForNetworkEndpoint
+    , HealthStatusForNetworkEndpoint
+    , healthStatusForNetworkEndpoint
+    , hsfneHealthCheck
+    , hsfneForwardingRule
+    , hsfneHealthState
+    , hsfneBackendService
 
     -- ** RouterAggregatedListWarning
     , RouterAggregatedListWarning
@@ -3659,6 +3812,9 @@ module Network.Google.Compute
     , ilriLocationPresence
     , ilriExpectedRttMs
     , ilriRegion
+
+    -- ** TCPHealthCheckPortSpecification
+    , TCPHealthCheckPortSpecification (..)
 
     -- ** TargetVPNGatewaysScopedListWarningCode
     , TargetVPNGatewaysScopedListWarningCode (..)
@@ -3931,6 +4087,7 @@ module Network.Google.Compute
     , managedInstance
     , miLastAttempt
     , miCurrentAction
+    , miVersion
     , miId
     , miInstanceStatus
     , miInstance
@@ -3954,6 +4111,8 @@ module Network.Google.Compute
     , bMaxRate
     , bMaxConnections
     , bMaxConnectionsPerInstance
+    , bMaxRatePerEndpoint
+    , bMaxConnectionsPerEndpoint
     , bMaxRatePerInstance
     , bDescription
     , bCapacityScaler
@@ -3988,6 +4147,9 @@ module Network.Google.Compute
     , ForwardingRuleAggregatedListItems
     , forwardingRuleAggregatedListItems
     , fraliAddtional
+
+    -- ** HTTP2HealthCheckPortSpecification
+    , HTTP2HealthCheckPortSpecification (..)
 
     -- ** InterconnectAttachmentAggregatedList
     , InterconnectAttachmentAggregatedList
@@ -4080,6 +4242,7 @@ module Network.Google.Compute
     , NetworkPeering
     , networkPeering
     , netState
+    , netExchangeSubnetRoutes
     , netStateDetails
     , netNetwork
     , netName
@@ -4185,6 +4348,9 @@ module Network.Google.Compute
     , tislWarning
     , tislTargetInstances
 
+    -- ** NetworkEndpointGroupListWarningCode
+    , NetworkEndpointGroupListWarningCode (..)
+
     -- ** NetworkRoutingConfigRoutingMode
     , NetworkRoutingConfigRoutingMode (..)
 
@@ -4196,6 +4362,12 @@ module Network.Google.Compute
     , subnetworkListWarningDataItem
     , sValue
     , sKey
+
+    -- ** NetworkEndpointGroupListWarningDataItem
+    , NetworkEndpointGroupListWarningDataItem
+    , networkEndpointGroupListWarningDataItem
+    , neglwdiValue
+    , neglwdiKey
 
     -- ** ProjectsDisableXpnResourceRequest
     , ProjectsDisableXpnResourceRequest
@@ -4222,6 +4394,13 @@ module Network.Google.Compute
     , autSelfLink
     , autWarning
     , autId
+
+    -- ** NetworkEndpointGroupAggregatedListWarning
+    , NetworkEndpointGroupAggregatedListWarning
+    , networkEndpointGroupAggregatedListWarning
+    , negalwData
+    , negalwCode
+    , negalwMessage
 
     -- ** SSLPolicyMinTLSVersion
     , SSLPolicyMinTLSVersion (..)
@@ -4355,6 +4534,12 @@ module Network.Google.Compute
     , pgxrKind
     , pgxrResources
 
+    -- ** NetworkEndpointWithHealthStatus
+    , NetworkEndpointWithHealthStatus
+    , networkEndpointWithHealthStatus
+    , newhsHealths
+    , newhsNetworkEndpoint
+
     -- ** MachineTypeList
     , MachineTypeList
     , machineTypeList
@@ -4428,6 +4613,9 @@ module Network.Google.Compute
     , dtslDiskTypes
     , dtslWarning
 
+    -- ** NetworkEndpointGroupsListEndpointsRequestHealthStatus
+    , NetworkEndpointGroupsListEndpointsRequestHealthStatus (..)
+
     -- ** LogConfigCloudAuditOptions
     , LogConfigCloudAuditOptions
     , logConfigCloudAuditOptions
@@ -4495,12 +4683,13 @@ module Network.Google.Compute
     -- ** HTTPHealthCheck
     , HTTPHealthCheck
     , hTTPHealthCheck
-    , httphcResponse
-    , httphcRequestPath
-    , httphcHost
-    , httphcProxyHeader
-    , httphcPortName
-    , httphcPort
+    , hResponse
+    , hPortSpecification
+    , hRequestPath
+    , hHost
+    , hProxyHeader
+    , hPortName
+    , hPort
 
     -- ** URLMapListWarningDataItem
     , URLMapListWarningDataItem
@@ -4713,11 +4902,20 @@ module Network.Google.Compute
     , machineTypeScratchDisksItem
     , mtsdiDiskGb
 
+    -- ** NetworkEndpointGroupsScopedListWarningDataItem
+    , NetworkEndpointGroupsScopedListWarningDataItem
+    , networkEndpointGroupsScopedListWarningDataItem
+    , negslwdiValue
+    , negslwdiKey
+
     -- ** SubnetworksScopedListWarningDataItem
     , SubnetworksScopedListWarningDataItem
     , subnetworksScopedListWarningDataItem
     , sslwdiValue
     , sslwdiKey
+
+    -- ** NetworkEndpointGroupsScopedListWarningCode
+    , NetworkEndpointGroupsScopedListWarningCode (..)
 
     -- ** MachineTypesScopedList
     , MachineTypesScopedList
@@ -4727,6 +4925,25 @@ module Network.Google.Compute
 
     -- ** SubnetworksScopedListWarningCode
     , SubnetworksScopedListWarningCode (..)
+
+    -- ** NetworkEndpointGroup
+    , NetworkEndpointGroup
+    , networkEndpointGroup
+    , negSize
+    , negKind
+    , negNetwork
+    , negZone
+    , negSelfLink
+    , negName
+    , negCreationTimestamp
+    , negDefaultPort
+    , negSubnetwork
+    , negNetworkEndpointType
+    , negId
+    , negDescription
+
+    -- ** NetworkEndpointGroupsListNetworkEndpointsWarningCode
+    , NetworkEndpointGroupsListNetworkEndpointsWarningCode (..)
 
     -- ** Subnetwork
     , Subnetwork
@@ -4762,6 +4979,12 @@ module Network.Google.Compute
     , mtalSelfLink
     , mtalWarning
     , mtalId
+
+    -- ** NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
+    , NetworkEndpointGroupsListNetworkEndpointsWarningDataItem
+    , networkEndpointGroupsListNetworkEndpointsWarningDataItem
+    , neglnewdiValue
+    , neglnewdiKey
 
     -- ** NodeGroupsScopedListWarning
     , NodeGroupsScopedListWarning
@@ -4968,6 +5191,13 @@ module Network.Google.Compute
     , thttppId
     , thttppDescription
 
+    -- ** ShieldedInstanceConfig
+    , ShieldedInstanceConfig
+    , shieldedInstanceConfig
+    , sicEnableVtpm
+    , sicEnableIntegrityMonitoring
+    , sicEnableSecureBoot
+
     -- ** MachineType
     , MachineType
     , machineType
@@ -5034,6 +5264,16 @@ module Network.Google.Compute
     , tislwCode
     , tislwMessage
 
+    -- ** NetworkEndpointGroupAggregatedList
+    , NetworkEndpointGroupAggregatedList
+    , networkEndpointGroupAggregatedList
+    , negalNextPageToken
+    , negalKind
+    , negalItems
+    , negalSelfLink
+    , negalWarning
+    , negalId
+
     -- ** SubnetworkAggregatedList
     , SubnetworkAggregatedList
     , subnetworkAggregatedList
@@ -5089,11 +5329,20 @@ module Network.Google.Compute
     -- ** AutoscalersScopedListWarningCode
     , AutoscalersScopedListWarningCode (..)
 
+    -- ** HTTPSHealthCheckPortSpecification
+    , HTTPSHealthCheckPortSpecification (..)
+
     -- ** DiskTypeAggregatedListWarningDataItem
     , DiskTypeAggregatedListWarningDataItem
     , diskTypeAggregatedListWarningDataItem
     , dtalwdiValue
     , dtalwdiKey
+
+    -- ** ShieldedInstanceIdentityEntry
+    , ShieldedInstanceIdentityEntry
+    , shieldedInstanceIdentityEntry
+    , siieEkCert
+    , siieEkPub
 
     -- ** ForwardingRuleLoadBalancingScheme
     , ForwardingRuleLoadBalancingScheme (..)
@@ -5488,6 +5737,16 @@ module Network.Google.Compute
     , nttRegion
     , nttDescription
 
+    -- ** NetworkEndpointGroupList
+    , NetworkEndpointGroupList
+    , networkEndpointGroupList
+    , neglNextPageToken
+    , neglKind
+    , neglItems
+    , neglSelfLink
+    , neglWarning
+    , neglId
+
     -- ** SubnetworkList
     , SubnetworkList
     , subnetworkList
@@ -5742,6 +6001,11 @@ module Network.Google.Compute
     , subnetworkAggregatedListItems
     , saliAddtional
 
+    -- ** NetworkEndpointGroupAggregatedListItems
+    , NetworkEndpointGroupAggregatedListItems
+    , networkEndpointGroupAggregatedListItems
+    , negaliAddtional
+
     -- ** InterconnectAttachmentAggregatedListWarningDataItem
     , InterconnectAttachmentAggregatedListWarningDataItem
     , interconnectAttachmentAggregatedListWarningDataItem
@@ -5770,7 +6034,6 @@ module Network.Google.Compute
     , cOp
     , cIAM
     , cValues
-    , cValue
     , cSys
     , cSvc
 
@@ -5798,6 +6061,9 @@ module Network.Google.Compute
     , autoscalerStatusDetails
     , asdType
     , asdMessage
+
+    -- ** HTTP2HealthCheckProxyHeader
+    , HTTP2HealthCheckProxyHeader (..)
 
     -- ** BackendServiceList
     , BackendServiceList
@@ -6027,6 +6293,9 @@ module Network.Google.Compute
     -- ** CommitmentListWarningCode
     , CommitmentListWarningCode (..)
 
+    -- ** HTTPHealthCheckPortSpecification
+    , HTTPHealthCheckPortSpecification (..)
+
     -- ** LicenseCode
     , LicenseCode
     , licenseCode
@@ -6056,6 +6325,12 @@ module Network.Google.Compute
 
     -- ** ConditionIAM
     , ConditionIAM (..)
+
+    -- ** ManagedInstanceVersion
+    , ManagedInstanceVersion
+    , managedInstanceVersion
+    , mivInstanceTemplate
+    , mivName
 
     -- ** CommitmentsScopedListWarning
     , CommitmentsScopedListWarning
@@ -6234,6 +6509,7 @@ module Network.Google.Compute
     , bsEnableCDN
     , bsFingerprint
     , bsProtocol
+    , bsCustomRequestHeaders
     , bsSecurityPolicy
     , bsCdnPolicy
     , bsSelfLink
@@ -6269,6 +6545,13 @@ module Network.Google.Compute
     , interconnectDiagnosticsARPEntry
     , idarpeIPAddress
     , idarpeMACAddress
+
+    -- ** ShieldedInstanceIdentity
+    , ShieldedInstanceIdentity
+    , shieldedInstanceIdentity
+    , siiSigningKey
+    , siiKind
+    , siiEncryptionKey
 
     -- ** BackendServicesScopedListWarningCode
     , BackendServicesScopedListWarningCode (..)
@@ -6306,6 +6589,7 @@ module Network.Google.Compute
     , HTTPSHealthCheck
     , httpsHealthCheck
     , hhcResponse
+    , hhcPortSpecification
     , hhcRequestPath
     , hhcHost
     , hhcProxyHeader
@@ -6426,6 +6710,7 @@ module Network.Google.Compute
     , i1DeletionProtection
     , i1Hostname
     , i1NetworkInterfaces
+    , i1ShieldedInstanceIntegrityPolicy
     , i1Kind
     , i1Zone
     , i1CPUPlatform
@@ -6436,6 +6721,7 @@ module Network.Google.Compute
     , i1CreationTimestamp
     , i1MachineType
     , i1Metadata
+    , i1ShieldedInstanceConfig
     , i1Id
     , i1Labels
     , i1StartRestricted
@@ -6603,6 +6889,7 @@ import           Network.Google.Resource.Compute.Instances.DetachDisk
 import           Network.Google.Resource.Compute.Instances.Get
 import           Network.Google.Resource.Compute.Instances.GetIAMPolicy
 import           Network.Google.Resource.Compute.Instances.GetSerialPortOutput
+import           Network.Google.Resource.Compute.Instances.GetShieldedInstanceIdentity
 import           Network.Google.Resource.Compute.Instances.Insert
 import           Network.Google.Resource.Compute.Instances.List
 import           Network.Google.Resource.Compute.Instances.ListReferrers
@@ -6617,6 +6904,7 @@ import           Network.Google.Resource.Compute.Instances.SetMetadata
 import           Network.Google.Resource.Compute.Instances.SetMinCPUPlatform
 import           Network.Google.Resource.Compute.Instances.SetScheduling
 import           Network.Google.Resource.Compute.Instances.SetServiceAccount
+import           Network.Google.Resource.Compute.Instances.SetShieldedInstanceIntegrityPolicy
 import           Network.Google.Resource.Compute.Instances.SetTags
 import           Network.Google.Resource.Compute.Instances.SimulateMaintenanceEvent
 import           Network.Google.Resource.Compute.Instances.Start
@@ -6625,6 +6913,7 @@ import           Network.Google.Resource.Compute.Instances.Stop
 import           Network.Google.Resource.Compute.Instances.TestIAMPermissions
 import           Network.Google.Resource.Compute.Instances.UpdateAccessConfig
 import           Network.Google.Resource.Compute.Instances.UpdateNetworkInterface
+import           Network.Google.Resource.Compute.Instances.UpdateShieldedInstanceConfig
 import           Network.Google.Resource.Compute.InstanceTemplates.Delete
 import           Network.Google.Resource.Compute.InstanceTemplates.Get
 import           Network.Google.Resource.Compute.InstanceTemplates.GetIAMPolicy
@@ -6658,6 +6947,15 @@ import           Network.Google.Resource.Compute.Licenses.TestIAMPermissions
 import           Network.Google.Resource.Compute.MachineTypes.AggregatedList
 import           Network.Google.Resource.Compute.MachineTypes.Get
 import           Network.Google.Resource.Compute.MachineTypes.List
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.AggregatedList
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.Delete
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.Get
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.Insert
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.List
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.ListNetworkEndpoints
+import           Network.Google.Resource.Compute.NetworkEndpointGroups.TestIAMPermissions
 import           Network.Google.Resource.Compute.Networks.AddPeering
 import           Network.Google.Resource.Compute.Networks.Delete
 import           Network.Google.Resource.Compute.Networks.Get
@@ -7074,6 +7372,18 @@ type ComputeAPI =
        :<|> SubnetworksSetPrivateIPGoogleAccessResource
        :<|> SubnetworksListUsableResource
        :<|> SubnetworksDeleteResource
+       :<|>
+       NetworkEndpointGroupsListNetworkEndpointsResource
+       :<|> NetworkEndpointGroupsAggregatedListResource
+       :<|> NetworkEndpointGroupsInsertResource
+       :<|> NetworkEndpointGroupsListResource
+       :<|>
+       NetworkEndpointGroupsAttachNetworkEndpointsResource
+       :<|> NetworkEndpointGroupsGetResource
+       :<|>
+       NetworkEndpointGroupsDetachNetworkEndpointsResource
+       :<|> NetworkEndpointGroupsTestIAMPermissionsResource
+       :<|> NetworkEndpointGroupsDeleteResource
        :<|> InterconnectsInsertResource
        :<|> InterconnectsGetDiagnosticsResource
        :<|> InterconnectsListResource
@@ -7109,6 +7419,8 @@ type ComputeAPI =
        :<|> SSLPoliciesPatchResource
        :<|> SSLPoliciesGetResource
        :<|> SSLPoliciesDeleteResource
+       :<|> InstancesUpdateShieldedInstanceConfigResource
+       :<|> InstancesGetShieldedInstanceIdentityResource
        :<|> InstancesAddAccessConfigResource
        :<|> InstancesSimulateMaintenanceEventResource
        :<|> InstancesAggregatedListResource
@@ -7116,6 +7428,8 @@ type ComputeAPI =
        :<|> InstancesListReferrersResource
        :<|> InstancesDetachDiskResource
        :<|> InstancesListResource
+       :<|>
+       InstancesSetShieldedInstanceIntegrityPolicyResource
        :<|> InstancesSetDeletionProtectionResource
        :<|> InstancesStartResource
        :<|> InstancesGetIAMPolicyResource

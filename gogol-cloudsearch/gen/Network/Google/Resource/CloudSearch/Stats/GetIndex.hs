@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets indexed item statistics aggreggated across all data sources.
+-- Gets indexed item statistics aggreggated across all data sources. This
+-- API only returns statistics for previous dates; it doesn\'t return
+-- statistics for the current day.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.stats.getIndex@.
 module Network.Google.Resource.CloudSearch.Stats.GetIndex
@@ -69,7 +71,9 @@ type StatsGetIndexResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] GetCustomerIndexStatsResponse
 
--- | Gets indexed item statistics aggreggated across all data sources.
+-- | Gets indexed item statistics aggreggated across all data sources. This
+-- API only returns statistics for previous dates; it doesn\'t return
+-- statistics for the current day.
 --
 -- /See:/ 'statsGetIndex' smart constructor.
 data StatsGetIndex =

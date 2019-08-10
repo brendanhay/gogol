@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the node pool requested.
+-- Retrieves the requested node pool.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
@@ -69,7 +69,7 @@ type ProjectsZonesClustersNodePoolsGetResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] NodePool
 
--- | Retrieves the node pool requested.
+-- | Retrieves the requested node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsGet' smart constructor.
 data ProjectsZonesClustersNodePoolsGet =

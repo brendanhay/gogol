@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Permanently deletes a file owned by the user without moving it to the
--- trash. If the file belongs to a Team Drive the user must be an organizer
--- on the parent. If the target is a folder, all descendants owned by the
--- user are also deleted.
+-- trash. If the file belongs to a shared drive the user must be an
+-- organizer on the parent. If the target is a folder, all descendants
+-- owned by the user are also deleted.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.delete@.
 module Network.Google.Resource.Drive.Files.Delete
@@ -36,6 +36,7 @@ module Network.Google.Resource.Drive.Files.Delete
     , FilesDelete
 
     -- * Request Lenses
+    , fdSupportsAllDrives
     , fdFileId
     , fdSupportsTeamDrives
     ) where
@@ -50,18 +51,20 @@ type FilesDeleteResource =
        "v3" :>
          "files" :>
            Capture "fileId" Text :>
-             QueryParam "supportsTeamDrives" Bool :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "supportsAllDrives" Bool :>
+               QueryParam "supportsTeamDrives" Bool :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes a file owned by the user without moving it to the
--- trash. If the file belongs to a Team Drive the user must be an organizer
--- on the parent. If the target is a folder, all descendants owned by the
--- user are also deleted.
+-- trash. If the file belongs to a shared drive the user must be an
+-- organizer on the parent. If the target is a folder, all descendants
+-- owned by the user are also deleted.
 --
 -- /See:/ 'filesDelete' smart constructor.
 data FilesDelete =
   FilesDelete'
-    { _fdFileId             :: !Text
+    { _fdSupportsAllDrives  :: !Bool
+    , _fdFileId             :: !Text
     , _fdSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -71,6 +74,8 @@ data FilesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fdSupportsAllDrives'
+--
 -- * 'fdFileId'
 --
 -- * 'fdSupportsTeamDrives'
@@ -78,14 +83,25 @@ filesDelete
     :: Text -- ^ 'fdFileId'
     -> FilesDelete
 filesDelete pFdFileId_ =
-  FilesDelete' {_fdFileId = pFdFileId_, _fdSupportsTeamDrives = False}
+  FilesDelete'
+    { _fdSupportsAllDrives = False
+    , _fdFileId = pFdFileId_
+    , _fdSupportsTeamDrives = False
+    }
 
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+fdSupportsAllDrives :: Lens' FilesDelete Bool
+fdSupportsAllDrives
+  = lens _fdSupportsAllDrives
+      (\ s a -> s{_fdSupportsAllDrives = a})
 
 -- | The ID of the file.
 fdFileId :: Lens' FilesDelete Text
 fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 fdSupportsTeamDrives :: Lens' FilesDelete Bool
 fdSupportsTeamDrives
   = lens _fdSupportsTeamDrives
@@ -98,7 +114,8 @@ instance GoogleRequest FilesDelete where
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesDelete'{..}
-          = go _fdFileId (Just _fdSupportsTeamDrives)
+          = go _fdFileId (Just _fdSupportsAllDrives)
+              (Just _fdSupportsTeamDrives)
               (Just AltJSON)
               driveService
           where go

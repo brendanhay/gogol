@@ -113,7 +113,7 @@ servicesTenancyUnitsCreate pStucParent_ pStucPayload_ =
 -- the cloud resource collection type representing the service consumer,
 -- for example \'projects\', or \'organizations\'. {resource id} is the
 -- consumer numeric id, such as project number: \'123456\'. {service} the
--- name of a service, for example \'service.googleapis.com\'. Enabled
+-- name of a managed service, such as \'service.googleapis.com\'. Enables
 -- service binding using the new tenancy unit.
 stucParent :: Lens' ServicesTenancyUnitsCreate Text
 stucParent

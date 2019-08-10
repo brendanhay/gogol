@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.list@ method which the
 -- 'AccessPoliciesList' request conforms to.
 type AccessPoliciesListResource =
-     "v1beta" :>
+     "v1" :>
        "accessPolicies" :>
          QueryParam "parent" Text :>
            QueryParam "$.xgafv" Xgafv :>

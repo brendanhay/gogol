@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @healthcare.projects.locations.datasets.deidentify@ method which the
 -- 'ProjectsLocationsDataSetsDeidentify' request conforms to.
 type ProjectsLocationsDataSetsDeidentifyResource =
-     "v1alpha" :>
+     "v1beta1" :>
        CaptureMode "sourceDataset" "deidentify" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

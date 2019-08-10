@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'ProjectsLocationsDataSetsDicomStoresDelete' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresDeleteResource
      =
-     "v1alpha" :>
+     "v1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>

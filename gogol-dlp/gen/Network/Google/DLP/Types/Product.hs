@@ -1618,6 +1618,8 @@ instance ToJSON
                   ("bucketValueCount" .=) <$>
                     _gpdvcshbBucketValueCount])
 
+-- | All result fields mentioned below are updated while the job is
+-- processing.
 --
 -- /See:/ 'googlePrivacyDlpV2Result' smart constructor.
 data GooglePrivacyDlpV2Result =
@@ -2816,7 +2818,7 @@ googlePrivacyDlpV2CreateInspectTemplateRequest =
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcitrTemplateId :: Lens' GooglePrivacyDlpV2CreateInspectTemplateRequest (Maybe Text)
 gpdvcitrTemplateId
@@ -3008,8 +3010,7 @@ googlePrivacyDlpV2InspectJobConfig =
     }
 
 
--- | Actions to execute at the completion of the job. Are executed in the
--- order provided.
+-- | Actions to execute at the completion of the job.
 gpdvijcActions :: Lens' GooglePrivacyDlpV2InspectJobConfig [GooglePrivacyDlpV2Action]
 gpdvijcActions
   = lens _gpdvijcActions
@@ -3394,7 +3395,7 @@ googlePrivacyDlpV2FindingLimits =
 
 
 -- | Max number of findings that will be returned for each item scanned. When
--- set within \`InspectDataSourceRequest\`, the maximum returned is 1000
+-- set within \`InspectDataSourceRequest\`, the maximum returned is 2000
 -- regardless if this is set higher. When set within
 -- \`InspectContentRequest\`, this field is ignored.
 gpdvflMaxFindingsPerItem :: Lens' GooglePrivacyDlpV2FindingLimits (Maybe Int32)
@@ -3412,7 +3413,7 @@ gpdvflMaxFindingsPerInfoType
       . _Coerce
 
 -- | Max number of findings that will be returned per request\/job. When set
--- within \`InspectContentRequest\`, the maximum returned is 1000
+-- within \`InspectContentRequest\`, the maximum returned is 2000
 -- regardless if this is set higher.
 gpdvflMaxFindingsPerRequest :: Lens' GooglePrivacyDlpV2FindingLimits (Maybe Int32)
 gpdvflMaxFindingsPerRequest
@@ -3442,7 +3443,9 @@ instance ToJSON GooglePrivacyDlpV2FindingLimits where
                     _gpdvflMaxFindingsPerRequest])
 
 -- | The field type of \`value\` and \`field\` do not need to match to be
--- considered equal, but not all comparisons are possible. A \`value\` of
+-- considered equal, but not all comparisons are possible. EQUAL_TO and
+-- NOT_EQUAL_TO attempt to compare even with incompatible types, but all
+-- other comparisons are invalid with incompatible types. A \`value\` of
 -- type: - \`string\` can be compared against all other types - \`boolean\`
 -- can only be compared against other booleans - \`integer\` can be
 -- compared against doubles or a string if the string value can be parsed
@@ -3633,7 +3636,7 @@ googlePrivacyDlpV2CreateDeidentifyTemplateRequest =
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcdtrTemplateId :: Lens' GooglePrivacyDlpV2CreateDeidentifyTemplateRequest (Maybe Text)
 gpdvcdtrTemplateId
@@ -4213,7 +4216,7 @@ gpdvcsitrConfig
 
 -- | The storedInfoType ID can contain uppercase and lowercase letters,
 -- numbers, and hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcsitrStoredInfoTypeId :: Lens' GooglePrivacyDlpV2CreateStoredInfoTypeRequest (Maybe Text)
 gpdvcsitrStoredInfoTypeId
@@ -4584,7 +4587,7 @@ instance ToJSON
                  [("kMapEstimationHistogram" .=) <$>
                     _gpdvkmerKMapEstimationHistogram])
 
--- | Summary of a single tranformation. Only one of \'transformation\',
+-- | Summary of a single transformation. Only one of \'transformation\',
 -- \'field_transformation\', or \'record_suppress\' will be set.
 --
 -- /See:/ 'googlePrivacyDlpV2TransformationSummary' smart constructor.
@@ -5821,7 +5824,7 @@ gpdvcdjrRiskJob
 
 -- | The job id can contain uppercase and lowercase letters, numbers, and
 -- hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcdjrJobId :: Lens' GooglePrivacyDlpV2CreateDlpJobRequest (Maybe Text)
 gpdvcdjrJobId
@@ -6528,6 +6531,36 @@ instance ToJSON
                   ("numDistinctSensitiveValues" .=) <$>
                     _gpdvldecNumDistinctSensitiveValues,
                   ("quasiIdsValues" .=) <$> _gpdvldecQuasiIdsValues])
+
+-- | Request message for ActivateJobTrigger.
+--
+-- /See:/ 'googlePrivacyDlpV2ActivateJobTriggerRequest' smart constructor.
+data GooglePrivacyDlpV2ActivateJobTriggerRequest =
+  GooglePrivacyDlpV2ActivateJobTriggerRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2ActivateJobTriggerRequest' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2ActivateJobTriggerRequest
+    :: GooglePrivacyDlpV2ActivateJobTriggerRequest
+googlePrivacyDlpV2ActivateJobTriggerRequest =
+  GooglePrivacyDlpV2ActivateJobTriggerRequest'
+
+
+instance FromJSON
+           GooglePrivacyDlpV2ActivateJobTriggerRequest
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2ActivateJobTriggerRequest"
+              (\ o ->
+                 pure GooglePrivacyDlpV2ActivateJobTriggerRequest')
+
+instance ToJSON
+           GooglePrivacyDlpV2ActivateJobTriggerRequest
+         where
+        toJSON = const emptyObject
 
 -- | The configuration that controls how the data will change.
 --
@@ -7795,9 +7828,10 @@ instance ToJSON
               (catMaybes
                  [("transformations" .=) <$> _gpdvittTransformations])
 
--- | Include to use an existing data crypto key wrapped by KMS. Authorization
--- requires the following IAM permissions when sending a request to perform
--- a crypto transformation using a kms-wrapped crypto key: dlp.kms.encrypt
+-- | Include to use an existing data crypto key wrapped by KMS. The wrapped
+-- key must be a 128\/192\/256 bit key. Authorization requires the
+-- following IAM permissions when sending a request to perform a crypto
+-- transformation using a kms-wrapped crypto key: dlp.kms.encrypt
 --
 -- /See:/ 'googlePrivacyDlpV2KmsWrAppedCryptoKey' smart constructor.
 data GooglePrivacyDlpV2KmsWrAppedCryptoKey =
@@ -8391,7 +8425,7 @@ googlePrivacyDlpV2Action =
     }
 
 
--- | Enable email notification to project owners and editors on job‘s
+-- | Enable email notification to project owners and editors on job\'s
 -- completion\/failure.
 gpdvaJobNotificationEmails :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2JobNotificationEmails)
 gpdvaJobNotificationEmails
@@ -8725,15 +8759,18 @@ instance ToJSON
                   ("regionCode" .=) <$> _gpdvkmecRegionCode,
                   ("quasiIds" .=) <$> _gpdvkmecQuasiIds])
 
--- | Replaces an identifier with a surrogate using FPE with the FFX mode of
--- operation; however when used in the \`ReidentifyContent\` API method, it
--- serves the opposite function by reversing the surrogate back into the
--- original identifier. The identifier must be encoded as ASCII. For a
--- given crypto key and context, the same identifier will be replaced with
--- the same surrogate. Identifiers must be at least two characters long. In
--- the case that the identifier is the empty string, it will be skipped.
--- See https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization to learn
--- more.
+-- | Replaces an identifier with a surrogate using Format Preserving
+-- Encryption (FPE) with the FFX mode of operation; however when used in
+-- the \`ReidentifyContent\` API method, it serves the opposite function by
+-- reversing the surrogate back into the original identifier. The
+-- identifier must be encoded as ASCII. For a given crypto key and context,
+-- the same identifier will be replaced with the same surrogate.
+-- Identifiers must be at least two characters long. In the case that the
+-- identifier is the empty string, it will be skipped. See
+-- https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization to learn more.
+-- Note: We recommend using CryptoDeterministicConfig for all use cases
+-- which do not require preserving the input alphabet space and size, plus
+-- warrant referential integrity.
 --
 -- /See:/ 'googlePrivacyDlpV2CryptoReplaceFfxFpeConfig' smart constructor.
 data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig =
@@ -10228,6 +10265,7 @@ data GooglePrivacyDlpV2PrimitiveTransformation =
     , _gpdvptDateShiftConfig           :: !(Maybe GooglePrivacyDlpV2DateShiftConfig)
     , _gpdvptBucketingConfig           :: !(Maybe GooglePrivacyDlpV2BucketingConfig)
     , _gpdvptReplaceWithInfoTypeConfig :: !(Maybe GooglePrivacyDlpV2ReplaceWithInfoTypeConfig)
+    , _gpdvptCryptoDeterministicConfig :: !(Maybe GooglePrivacyDlpV2CryptoDeterministicConfig)
     , _gpdvptCryptoHashConfig          :: !(Maybe GooglePrivacyDlpV2CryptoHashConfig)
     , _gpdvptReplaceConfig             :: !(Maybe GooglePrivacyDlpV2ReplaceValueConfig)
     , _gpdvptCryptoReplaceFfxFpeConfig :: !(Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig)
@@ -10253,6 +10291,8 @@ data GooglePrivacyDlpV2PrimitiveTransformation =
 --
 -- * 'gpdvptReplaceWithInfoTypeConfig'
 --
+-- * 'gpdvptCryptoDeterministicConfig'
+--
 -- * 'gpdvptCryptoHashConfig'
 --
 -- * 'gpdvptReplaceConfig'
@@ -10269,6 +10309,7 @@ googlePrivacyDlpV2PrimitiveTransformation =
     , _gpdvptDateShiftConfig = Nothing
     , _gpdvptBucketingConfig = Nothing
     , _gpdvptReplaceWithInfoTypeConfig = Nothing
+    , _gpdvptCryptoDeterministicConfig = Nothing
     , _gpdvptCryptoHashConfig = Nothing
     , _gpdvptReplaceConfig = Nothing
     , _gpdvptCryptoReplaceFfxFpeConfig = Nothing
@@ -10310,6 +10351,11 @@ gpdvptReplaceWithInfoTypeConfig
   = lens _gpdvptReplaceWithInfoTypeConfig
       (\ s a -> s{_gpdvptReplaceWithInfoTypeConfig = a})
 
+gpdvptCryptoDeterministicConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2CryptoDeterministicConfig)
+gpdvptCryptoDeterministicConfig
+  = lens _gpdvptCryptoDeterministicConfig
+      (\ s a -> s{_gpdvptCryptoDeterministicConfig = a})
+
 gpdvptCryptoHashConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2CryptoHashConfig)
 gpdvptCryptoHashConfig
   = lens _gpdvptCryptoHashConfig
@@ -10340,6 +10386,7 @@ instance FromJSON
                      <*> (o .:? "dateShiftConfig")
                      <*> (o .:? "bucketingConfig")
                      <*> (o .:? "replaceWithInfoTypeConfig")
+                     <*> (o .:? "cryptoDeterministicConfig")
                      <*> (o .:? "cryptoHashConfig")
                      <*> (o .:? "replaceConfig")
                      <*> (o .:? "cryptoReplaceFfxFpeConfig"))
@@ -10360,6 +10407,8 @@ instance ToJSON
                   ("bucketingConfig" .=) <$> _gpdvptBucketingConfig,
                   ("replaceWithInfoTypeConfig" .=) <$>
                     _gpdvptReplaceWithInfoTypeConfig,
+                  ("cryptoDeterministicConfig" .=) <$>
+                    _gpdvptCryptoDeterministicConfig,
                   ("cryptoHashConfig" .=) <$> _gpdvptCryptoHashConfig,
                   ("replaceConfig" .=) <$> _gpdvptReplaceConfig,
                   ("cryptoReplaceFfxFpeConfig" .=) <$>
@@ -10580,6 +10629,112 @@ instance ToJSON GooglePrivacyDlpV2StoredInfoType
                  [("currentVersion" .=) <$> _gpdvsitCurrentVersion,
                   ("name" .=) <$> _gpdvsitName,
                   ("pendingVersions" .=) <$> _gpdvsitPendingVersions])
+
+-- | Pseudonymization method that generates deterministic encryption for the
+-- given input. Outputs a base64 encoded representation of the encrypted
+-- output. Uses AES-SIV based on the RFC
+-- https:\/\/tools.ietf.org\/html\/rfc5297.
+--
+-- /See:/ 'googlePrivacyDlpV2CryptoDeterministicConfig' smart constructor.
+data GooglePrivacyDlpV2CryptoDeterministicConfig =
+  GooglePrivacyDlpV2CryptoDeterministicConfig'
+    { _gpdvcdcContext           :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvcdcSurrogateInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvcdcCryptoKey         :: !(Maybe GooglePrivacyDlpV2CryptoKey)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2CryptoDeterministicConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvcdcContext'
+--
+-- * 'gpdvcdcSurrogateInfoType'
+--
+-- * 'gpdvcdcCryptoKey'
+googlePrivacyDlpV2CryptoDeterministicConfig
+    :: GooglePrivacyDlpV2CryptoDeterministicConfig
+googlePrivacyDlpV2CryptoDeterministicConfig =
+  GooglePrivacyDlpV2CryptoDeterministicConfig'
+    { _gpdvcdcContext = Nothing
+    , _gpdvcdcSurrogateInfoType = Nothing
+    , _gpdvcdcCryptoKey = Nothing
+    }
+
+
+-- | Optional. A context may be used for higher security and maintaining
+-- referential integrity such that the same identifier in two different
+-- contexts will be given a distinct surrogate. The context is appended to
+-- plaintext value being encrypted. On decryption the provided context is
+-- validated against the value used during encryption. If a context was
+-- provided during encryption, same context must be provided during
+-- decryption as well. If the context is not set, plaintext would be used
+-- as is for encryption. If the context is set but: 1. there is no record
+-- present when transforming a given value or 2. the field is not present
+-- when transforming a given value, plaintext would be used as is for
+-- encryption. Note that case (1) is expected when an
+-- \`InfoTypeTransformation\` is applied to both structured and
+-- non-structured \`ContentItem\`s.
+gpdvcdcContext :: Lens' GooglePrivacyDlpV2CryptoDeterministicConfig (Maybe GooglePrivacyDlpV2FieldId)
+gpdvcdcContext
+  = lens _gpdvcdcContext
+      (\ s a -> s{_gpdvcdcContext = a})
+
+-- | The custom info type to annotate the surrogate with. This annotation
+-- will be applied to the surrogate by prefixing it with the name of the
+-- custom info type followed by the number of characters comprising the
+-- surrogate. The following scheme defines the format: (): For example, if
+-- the name of custom info type is \'MY_TOKEN_INFO_TYPE\' and the surrogate
+-- is \'abc\', the full replacement value will be:
+-- \'MY_TOKEN_INFO_TYPE(3):abc\' This annotation identifies the surrogate
+-- when inspecting content using the custom info type \'Surrogate\'. This
+-- facilitates reversal of the surrogate when it occurs in free text. In
+-- order for inspection to work properly, the name of this info type must
+-- not occur naturally anywhere in your data; otherwise, inspection may
+-- either - reverse a surrogate that does not correspond to an actual
+-- identifier - be unable to parse the surrogate and result in an error
+-- Therefore, choose your custom info type name carefully after considering
+-- what your data looks like. One way to select a name that has a high
+-- chance of yielding reliable detection is to include one or more unicode
+-- characters that are highly improbable to exist in your data. For
+-- example, assuming your data is entered from a regular ASCII keyboard,
+-- the symbol with the hex code point 29DD might be used like so:
+-- ⧝MY_TOKEN_TYPE
+gpdvcdcSurrogateInfoType :: Lens' GooglePrivacyDlpV2CryptoDeterministicConfig (Maybe GooglePrivacyDlpV2InfoType)
+gpdvcdcSurrogateInfoType
+  = lens _gpdvcdcSurrogateInfoType
+      (\ s a -> s{_gpdvcdcSurrogateInfoType = a})
+
+-- | The key used by the encryption function.
+gpdvcdcCryptoKey :: Lens' GooglePrivacyDlpV2CryptoDeterministicConfig (Maybe GooglePrivacyDlpV2CryptoKey)
+gpdvcdcCryptoKey
+  = lens _gpdvcdcCryptoKey
+      (\ s a -> s{_gpdvcdcCryptoKey = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2CryptoDeterministicConfig
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2CryptoDeterministicConfig"
+              (\ o ->
+                 GooglePrivacyDlpV2CryptoDeterministicConfig' <$>
+                   (o .:? "context") <*> (o .:? "surrogateInfoType") <*>
+                     (o .:? "cryptoKey"))
+
+instance ToJSON
+           GooglePrivacyDlpV2CryptoDeterministicConfig
+         where
+        toJSON
+          GooglePrivacyDlpV2CryptoDeterministicConfig'{..}
+          = object
+              (catMaybes
+                 [("context" .=) <$> _gpdvcdcContext,
+                  ("surrogateInfoType" .=) <$>
+                    _gpdvcdcSurrogateInfoType,
+                  ("cryptoKey" .=) <$> _gpdvcdcCryptoKey])
 
 -- | An auxiliary table containing statistical information on the relative
 -- frequency of different quasi-identifiers values. It has one or several
@@ -11146,7 +11301,7 @@ googlePrivacyDlpV2CreateJobTriggerRequest =
 
 -- | The trigger id can contain uppercase and lowercase letters, numbers, and
 -- hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcjtrTriggerId :: Lens' GooglePrivacyDlpV2CreateJobTriggerRequest (Maybe Text)
 gpdvcjtrTriggerId
@@ -11447,7 +11602,7 @@ googlePrivacyDlpV2UnwrAppedCryptoKey =
   GooglePrivacyDlpV2UnwrAppedCryptoKey' {_gpdvuackKey = Nothing}
 
 
--- | The AES 128\/192\/256 bit key. [required]
+-- | A 128\/192\/256 bit key. [required]
 gpdvuackKey :: Lens' GooglePrivacyDlpV2UnwrAppedCryptoKey (Maybe ByteString)
 gpdvuackKey
   = lens _gpdvuackKey (\ s a -> s{_gpdvuackKey = a}) .

@@ -173,7 +173,9 @@ gmlCallback
 instance GoogleRequest GroupsMembershipsLookup where
         type Rs GroupsMembershipsLookup =
              LookupMembershipNameResponse
-        type Scopes GroupsMembershipsLookup = '[]
+        type Scopes GroupsMembershipsLookup =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsMembershipsLookup'{..}
           = go _gmlParent _gmlXgafv _gmlUploadProtocol
               _gmlAccessToken

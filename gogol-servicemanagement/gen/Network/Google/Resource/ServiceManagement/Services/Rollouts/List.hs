@@ -168,7 +168,8 @@ srlPageToken :: Lens' ServicesRolloutsList (Maybe Text)
 srlPageToken
   = lens _srlPageToken (\ s a -> s{_srlPageToken = a})
 
--- | The max number of items to include in the response list.
+-- | The max number of items to include in the response list. Page size is 50
+-- if not specified. Maximum value is 100.
 srlPageSize :: Lens' ServicesRolloutsList (Maybe Int32)
 srlPageSize
   = lens _srlPageSize (\ s a -> s{_srlPageSize = a}) .

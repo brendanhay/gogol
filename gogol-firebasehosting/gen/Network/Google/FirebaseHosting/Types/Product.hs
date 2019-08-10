@@ -1171,11 +1171,12 @@ instance ToJSON Redirect where
                   ("glob" .=) <$> _rGlob,
                   ("statusCode" .=) <$> _rStatusCode])
 
--- | A configured rewrite that will direct any requests to a Cloud Run
--- service. If the Cloud Run service does not exist when setting or
--- updating your Firebase Hosting configuration then the request will fail.
--- Any errors from the Cloud Run service (including when the service has
--- been deleted) will be passed back down to the end user.
+-- | A configured rewrite that directs requests to a Cloud Run service. If
+-- the Cloud Run service does not exist when setting or updating your
+-- Firebase Hosting configuration, then the request fails. Any errors from
+-- the Cloud Run service are passed to the end user (for example, if you
+-- delete a service, any requests directed to that service receive a
+-- \`404\` error).
 --
 -- /See:/ 'cloudRunRewrite' smart constructor.
 data CloudRunRewrite =
@@ -1199,13 +1200,13 @@ cloudRunRewrite =
   CloudRunRewrite' {_crrServiceId = Nothing, _crrRegion = Nothing}
 
 
--- | Required. User supplied ID of the Cloud Run service.
+-- | Required. User-defined ID of the Cloud Run service.
 crrServiceId :: Lens' CloudRunRewrite (Maybe Text)
 crrServiceId
   = lens _crrServiceId (\ s a -> s{_crrServiceId = a})
 
--- | Optional. The region where the Cloud Run service is hosted. Defaults to
--- \`us-central1\` if not supplied.
+-- | Optional. User-provided region where the Cloud Run service is hosted.
+-- Defaults to \`us-central1\` if not supplied.
 crrRegion :: Lens' CloudRunRewrite (Maybe Text)
 crrRegion
   = lens _crrRegion (\ s a -> s{_crrRegion = a})

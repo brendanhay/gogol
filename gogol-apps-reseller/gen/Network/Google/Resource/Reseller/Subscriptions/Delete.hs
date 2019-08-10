@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancel, suspend or transfer a subscription to direct.
+-- Cancel or transfer a subscription to direct.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.delete@.
 module Network.Google.Resource.Reseller.Subscriptions.Delete
@@ -55,7 +55,7 @@ type SubscriptionsDeleteResource =
                      SubscriptionsDeleteDeletionType
                      :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Cancel, suspend or transfer a subscription to direct.
+-- | Cancel or transfer a subscription to direct.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
 data SubscriptionsDelete =

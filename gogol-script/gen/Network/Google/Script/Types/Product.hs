@@ -258,7 +258,6 @@ data GoogleAppsScriptTypeProcess =
     , _gastpFunctionName    :: !(Maybe Text)
     , _gastpUserAccessLevel :: !(Maybe GoogleAppsScriptTypeProcessUserAccessLevel)
     , _gastpProcessType     :: !(Maybe GoogleAppsScriptTypeProcessProcessType)
-    , _gastpExecutingUser   :: !(Maybe Text)
     , _gastpDuration        :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -280,8 +279,6 @@ data GoogleAppsScriptTypeProcess =
 --
 -- * 'gastpProcessType'
 --
--- * 'gastpExecutingUser'
---
 -- * 'gastpDuration'
 googleAppsScriptTypeProcess
     :: GoogleAppsScriptTypeProcess
@@ -293,7 +290,6 @@ googleAppsScriptTypeProcess =
     , _gastpFunctionName = Nothing
     , _gastpUserAccessLevel = Nothing
     , _gastpProcessType = Nothing
-    , _gastpExecutingUser = Nothing
     , _gastpDuration = Nothing
     }
 
@@ -335,12 +331,6 @@ gastpProcessType
   = lens _gastpProcessType
       (\ s a -> s{_gastpProcessType = a})
 
--- | User-facing name for the user executing the script.
-gastpExecutingUser :: Lens' GoogleAppsScriptTypeProcess (Maybe Text)
-gastpExecutingUser
-  = lens _gastpExecutingUser
-      (\ s a -> s{_gastpExecutingUser = a})
-
 -- | Duration the execution spent executing.
 gastpDuration :: Lens' GoogleAppsScriptTypeProcess (Maybe Scientific)
 gastpDuration
@@ -358,7 +348,6 @@ instance FromJSON GoogleAppsScriptTypeProcess where
                      <*> (o .:? "functionName")
                      <*> (o .:? "userAccessLevel")
                      <*> (o .:? "processType")
-                     <*> (o .:? "executingUser")
                      <*> (o .:? "duration"))
 
 instance ToJSON GoogleAppsScriptTypeProcess where
@@ -371,7 +360,6 @@ instance ToJSON GoogleAppsScriptTypeProcess where
                   ("functionName" .=) <$> _gastpFunctionName,
                   ("userAccessLevel" .=) <$> _gastpUserAccessLevel,
                   ("processType" .=) <$> _gastpProcessType,
-                  ("executingUser" .=) <$> _gastpExecutingUser,
                   ("duration" .=) <$> _gastpDuration])
 
 -- | The script project resource.

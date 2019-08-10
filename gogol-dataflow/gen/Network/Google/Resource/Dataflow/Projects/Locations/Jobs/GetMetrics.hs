@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Request the job status.
+-- Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.getMetrics\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.getMetrics\` is not recommended, as you can only
+-- request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.getMetrics@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
@@ -67,7 +71,11 @@ type ProjectsLocationsJobsGetMetricsResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] JobMetrics
 
--- | Request the job status.
+-- | Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.getMetrics\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.getMetrics\` is not recommended, as you can only
+-- request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsGetMetrics' smart constructor.
 data ProjectsLocationsJobsGetMetrics =
@@ -141,7 +149,9 @@ pljgmUploadProtocol
   = lens _pljgmUploadProtocol
       (\ s a -> s{_pljgmUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pljgmLocation :: Lens' ProjectsLocationsJobsGetMetrics Text
 pljgmLocation
   = lens _pljgmLocation

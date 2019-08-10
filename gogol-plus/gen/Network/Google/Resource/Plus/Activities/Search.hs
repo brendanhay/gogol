@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search public activities.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.search@.
 module Network.Google.Resource.Plus.Activities.Search
@@ -56,7 +57,8 @@ type ActivitiesSearchResource =
                    QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
--- | Search public activities.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'activitiesSearch' smart constructor.
 data ActivitiesSearch =

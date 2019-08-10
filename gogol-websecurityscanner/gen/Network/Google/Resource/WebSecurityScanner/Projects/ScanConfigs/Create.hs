@@ -48,7 +48,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.create@ method which the
 -- 'ProjectsScanConfigsCreate' request conforms to.
 type ProjectsScanConfigsCreateResource =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "parent" Text :>
          "scanConfigs" :>
            QueryParam "$.xgafv" Xgafv :>

@@ -134,7 +134,8 @@ gcCallback
 
 instance GoogleRequest GroupsCreate where
         type Rs GroupsCreate = Operation
-        type Scopes GroupsCreate = '[]
+        type Scopes GroupsCreate =
+             '["https://www.googleapis.com/auth/cloud-identity.groups"]
         requestClient GroupsCreate'{..}
           = go _gcXgafv _gcUploadProtocol _gcAccessToken
               _gcUploadType

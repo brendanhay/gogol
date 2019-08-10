@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.list@ method which the
 -- 'ProjectsLocationsQueuesTasksList' request conforms to.
 type ProjectsLocationsQueuesTasksListResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "parent" Text :>
          "tasks" :>
            QueryParam "$.xgafv" Xgafv :>

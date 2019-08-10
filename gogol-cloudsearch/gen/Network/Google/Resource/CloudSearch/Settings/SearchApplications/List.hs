@@ -137,8 +137,8 @@ ssalUploadType
   = lens _ssalUploadType
       (\ s a -> s{_ssalUploadType = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ssalDebugOptionsEnableDebugging :: Lens' SettingsSearchApplicationsList (Maybe Bool)
 ssalDebugOptionsEnableDebugging
   = lens _ssalDebugOptionsEnableDebugging

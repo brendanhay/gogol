@@ -473,11 +473,12 @@ plusService
   = defaultService (ServiceId "plus:v1")
       "www.googleapis.com"
 
--- | View your basic profile info
+-- | See your personal info, including any personal info you\'ve made
+-- publicly available
 userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
 userInfoProFileScope = Proxy
 
--- | Know the list of people in your circles, your age range, and language
+-- | View your basic profile info, including your age range and language
 plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
 plusLoginScope = Proxy
 
@@ -485,6 +486,6 @@ plusLoginScope = Proxy
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
 userInfoEmailScope = Proxy
 
--- | Know who you are on Google
+-- | Associate you with your personal info on Google
 plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
 plusMeScope = Proxy
