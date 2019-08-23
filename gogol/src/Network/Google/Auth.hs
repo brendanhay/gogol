@@ -39,6 +39,7 @@ module Network.Google.Auth
     , Store
     , initStore
     , retrieveAuthFromStore
+    , retrieveTokenFromStore
 
     , Auth           (..)
     , authToAuthorizedUser
@@ -131,19 +132,22 @@ initStore :: (MonadIO m, MonadCatch m, AllowScopes s)
 initStore c l m = exchange c l m >>= fmap Store . liftIO . newMVar
 
 -- | Retrieve auth from storage
-retrieveAuthFromStore :: (MonadIO m, MonadCatch m, AllowScopes s)
-             => Store s
-             -> m (Auth s)
-retrieveAuthFromStore (Store s) = liftIO (readMVar s)
+retrieveAuthFromStore
+    :: (MonadIO m, AllowScopes s)
+    => Store s
+    -> m (Auth s)
+retrieveAuthFromStore (Store s) =
+    liftIO (readMVar s)
 
 -- | Concurrently read the current token, and if expired, then
 -- safely perform a single serial refresh.
-getToken :: (MonadIO m, MonadCatch m, AllowScopes s)
-         => Store s
-         -> Logger
-         -> Manager
-         -> m (OAuthToken s)
-getToken (Store s) l m = do
+retrieveTokenFromStore
+    :: (MonadIO m, MonadCatch m, AllowScopes s)
+    => Store s
+    -> Logger
+    -> Manager
+    -> m (OAuthToken s)
+retrieveTokenFromStore (Store s) l m = do
     x  <- liftIO (readMVar s)
     mx <- validate x
     if mx
@@ -193,7 +197,7 @@ authorize :: (MonadIO m, MonadCatch m, AllowScopes s)
           -> Logger
           -> Manager
           -> m Client.Request
-authorize rq s l m = bearer <$> getToken s l m
+authorize rq s l m = bearer <$> retrieveTokenFromStore s l m
   where
     bearer t = rq
         { Client.requestHeaders =
