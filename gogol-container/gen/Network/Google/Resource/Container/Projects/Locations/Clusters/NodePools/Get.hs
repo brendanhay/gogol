@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the node pool requested.
+-- Retrieves the requested node pool.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.get@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Get
@@ -64,10 +64,11 @@ type ProjectsLocationsClustersNodePoolsGetResource =
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :> Get '[JSON] NodePool
 
--- | Retrieves the node pool requested.
+-- | Retrieves the requested node pool.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsGet' smart constructor.
-data ProjectsLocationsClustersNodePoolsGet = ProjectsLocationsClustersNodePoolsGet'
+data ProjectsLocationsClustersNodePoolsGet =
+  ProjectsLocationsClustersNodePoolsGet'
     { _plcnpgXgafv          :: !(Maybe Xgafv)
     , _plcnpgUploadProtocol :: !(Maybe Text)
     , _plcnpgAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsLocationsClustersNodePoolsGet = ProjectsLocationsClustersNodePoolsG
     , _plcnpgClusterId      :: !(Maybe Text)
     , _plcnpgProjectId      :: !(Maybe Text)
     , _plcnpgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsGet' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsLocationsClustersNodePoolsGet
     :: Text -- ^ 'plcnpgName'
     -> ProjectsLocationsClustersNodePoolsGet
 projectsLocationsClustersNodePoolsGet pPlcnpgName_ =
-    ProjectsLocationsClustersNodePoolsGet'
+  ProjectsLocationsClustersNodePoolsGet'
     { _plcnpgXgafv = Nothing
     , _plcnpgUploadProtocol = Nothing
     , _plcnpgAccessToken = Nothing
@@ -119,6 +122,7 @@ projectsLocationsClustersNodePoolsGet pPlcnpgName_ =
     , _plcnpgProjectId = Nothing
     , _plcnpgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpgXgafv :: Lens' ProjectsLocationsClustersNodePoolsGet (Maybe Xgafv)
@@ -186,7 +190,8 @@ plcnpgCallback
       (\ s a -> s{_plcnpgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsGet where
+           ProjectsLocationsClustersNodePoolsGet
+         where
         type Rs ProjectsLocationsClustersNodePoolsGet =
              NodePool
         type Scopes ProjectsLocationsClustersNodePoolsGet =

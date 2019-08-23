@@ -69,7 +69,8 @@ type AlertsListResource =
 -- | Lists the alerts.
 --
 -- /See:/ 'alertsList' smart constructor.
-data AlertsList = AlertsList'
+data AlertsList =
+  AlertsList'
     { _alXgafv          :: !(Maybe Xgafv)
     , _alUploadProtocol :: !(Maybe Text)
     , _alOrderBy        :: !(Maybe Text)
@@ -80,7 +81,9 @@ data AlertsList = AlertsList'
     , _alPageToken      :: !(Maybe Text)
     , _alPageSize       :: !(Maybe (Textual Int32))
     , _alCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertsList' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ data AlertsList = AlertsList'
 alertsList
     :: AlertsList
 alertsList =
-    AlertsList'
+  AlertsList'
     { _alXgafv = Nothing
     , _alUploadProtocol = Nothing
     , _alOrderBy = Nothing
@@ -120,6 +123,7 @@ alertsList =
     , _alPageSize = Nothing
     , _alCallback = Nothing
     }
+
 
 -- | V1 error format.
 alXgafv :: Lens' AlertsList (Maybe Xgafv)
@@ -134,8 +138,8 @@ alUploadProtocol
 -- | Optional. The sort order of the list results. If not specified results
 -- may be returned in arbitrary order. You can sort the results in
 -- descending order based on the creation timestamp using
--- \`order_by=\"create_time desc\"\`. Currently, only sorting by
--- \`create_time desc\` is supported.
+-- \`order_by=\"create_time desc\"\`. Currently, supported sorting are
+-- \`create_time asc\`, \`create_time desc\`, \`update_time desc\`
 alOrderBy :: Lens' AlertsList (Maybe Text)
 alOrderBy
   = lens _alOrderBy (\ s a -> s{_alOrderBy = a})

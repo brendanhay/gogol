@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsGet' request conforms to.
 type CreativeGroupsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -54,10 +54,13 @@ type CreativeGroupsGetResource =
 -- | Gets one creative group by ID.
 --
 -- /See:/ 'creativeGroupsGet' smart constructor.
-data CreativeGroupsGet = CreativeGroupsGet'
+data CreativeGroupsGet =
+  CreativeGroupsGet'
     { _cgggProFileId :: !(Textual Int64)
     , _cgggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeGroupsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ creativeGroupsGet
     -> Int64 -- ^ 'cgggId'
     -> CreativeGroupsGet
 creativeGroupsGet pCgggProFileId_ pCgggId_ =
-    CreativeGroupsGet'
-    { _cgggProFileId = _Coerce # pCgggProFileId_
-    , _cgggId = _Coerce # pCgggId_
-    }
+  CreativeGroupsGet'
+    {_cgggProFileId = _Coerce # pCgggProFileId_, _cgggId = _Coerce # pCgggId_}
+
 
 -- | User profile ID associated with this request.
 cgggProFileId :: Lens' CreativeGroupsGet Int64

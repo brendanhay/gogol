@@ -68,7 +68,8 @@ type ProjectsRegionsClustersCreateResource =
 -- | Creates a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersCreate' smart constructor.
-data ProjectsRegionsClustersCreate = ProjectsRegionsClustersCreate'
+data ProjectsRegionsClustersCreate =
+  ProjectsRegionsClustersCreate'
     { _prccXgafv          :: !(Maybe Xgafv)
     , _prccRequestId      :: !(Maybe Text)
     , _prccUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsRegionsClustersCreate = ProjectsRegionsClustersCreate'
     , _prccRegion         :: !Text
     , _prccProjectId      :: !Text
     , _prccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsClustersCreate' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsRegionsClustersCreate
     -> Text -- ^ 'prccProjectId'
     -> ProjectsRegionsClustersCreate
 projectsRegionsClustersCreate pPrccPayload_ pPrccRegion_ pPrccProjectId_ =
-    ProjectsRegionsClustersCreate'
+  ProjectsRegionsClustersCreate'
     { _prccXgafv = Nothing
     , _prccRequestId = Nothing
     , _prccUploadProtocol = Nothing
@@ -118,6 +121,7 @@ projectsRegionsClustersCreate pPrccPayload_ pPrccRegion_ pPrccProjectId_ =
     , _prccProjectId = pPrccProjectId_
     , _prccCallback = Nothing
     }
+
 
 -- | V1 error format.
 prccXgafv :: Lens' ProjectsRegionsClustersCreate (Maybe Xgafv)

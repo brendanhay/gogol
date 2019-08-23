@@ -75,7 +75,8 @@ type ScoresGetResource =
 -- same request; only one parameter may be set to \'ALL\'.
 --
 -- /See:/ 'scoresGet' smart constructor.
-data ScoresGet = ScoresGet'
+data ScoresGet =
+  ScoresGet'
     { _sgTimeSpan        :: !ScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
     , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
@@ -83,7 +84,9 @@ data ScoresGet = ScoresGet'
     , _sgPageToken       :: !(Maybe Text)
     , _sgPlayerId        :: !Text
     , _sgMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoresGet' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ scoresGet
     -> Text -- ^ 'sgPlayerId'
     -> ScoresGet
 scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
-    ScoresGet'
+  ScoresGet'
     { _sgTimeSpan = pSgTimeSpan_
     , _sgLeaderboardId = pSgLeaderboardId_
     , _sgIncludeRankType = Nothing
@@ -117,6 +120,7 @@ scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
     , _sgPlayerId = pSgPlayerId_
     , _sgMaxResults = Nothing
     }
+
 
 -- | The time span for the scores and ranks you\'re requesting.
 sgTimeSpan :: Lens' ScoresGet ScoresGetTimeSpan
@@ -165,7 +169,8 @@ instance GoogleRequest ScoresGet where
         type Rs ScoresGet =
              PlayerLeaderboardScoreListResponse
         type Scopes ScoresGet =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ScoresGet'{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
               _sgIncludeRankType

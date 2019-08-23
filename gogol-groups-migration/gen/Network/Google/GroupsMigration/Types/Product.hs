@@ -23,10 +23,13 @@ import           Network.Google.Prelude
 -- | JSON response template for groups migration API.
 --
 -- /See:/ 'groups' smart constructor.
-data Groups = Groups'
+data Groups =
+  Groups'
     { _gKind         :: !Text
     , _gResponseCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
@@ -37,11 +40,8 @@ data Groups = Groups'
 -- * 'gResponseCode'
 groups
     :: Groups
-groups =
-    Groups'
-    { _gKind = "groupsmigration#groups"
-    , _gResponseCode = Nothing
-    }
+groups = Groups' {_gKind = "groupsmigration#groups", _gResponseCode = Nothing}
+
 
 -- | The kind of insert resource this is.
 gKind :: Lens' Groups Text

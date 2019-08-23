@@ -1,5 +1,5 @@
 name:                  gogol-container
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Kubernetes Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -36,10 +36,12 @@ library
     exposed-modules:
           Network.Google.Container
         , Network.Google.Container.Types
+        , Network.Google.Resource.Container.Projects.Aggregated.UsableSubnetworks.List
         , Network.Google.Resource.Container.Projects.Locations.Clusters.CompleteIPRotation
         , Network.Google.Resource.Container.Projects.Locations.Clusters.Create
         , Network.Google.Resource.Container.Projects.Locations.Clusters.Delete
         , Network.Google.Resource.Container.Projects.Locations.Clusters.Get
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.GetJWKs
         , Network.Google.Resource.Container.Projects.Locations.Clusters.List
         , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Create
         , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Delete
@@ -62,6 +64,7 @@ library
         , Network.Google.Resource.Container.Projects.Locations.Clusters.StartIPRotation
         , Network.Google.Resource.Container.Projects.Locations.Clusters.Update
         , Network.Google.Resource.Container.Projects.Locations.Clusters.UpdateMaster
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.WellKnown.GetOpenidConfiguration
         , Network.Google.Resource.Container.Projects.Locations.GetServerConfig
         , Network.Google.Resource.Container.Projects.Locations.Operations.Cancel
         , Network.Google.Resource.Container.Projects.Locations.Operations.Get
@@ -102,5 +105,5 @@ library
         , Network.Google.Container.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

@@ -63,7 +63,8 @@ type ProjectsDatabasesDocumentsListCollectionIdsResource
 -- | Lists all the collection IDs underneath a document.
 --
 -- /See:/ 'projectsDatabasesDocumentsListCollectionIds' smart constructor.
-data ProjectsDatabasesDocumentsListCollectionIds = ProjectsDatabasesDocumentsListCollectionIds'
+data ProjectsDatabasesDocumentsListCollectionIds =
+  ProjectsDatabasesDocumentsListCollectionIds'
     { _pddlciParent         :: !Text
     , _pddlciXgafv          :: !(Maybe Xgafv)
     , _pddlciUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsDatabasesDocumentsListCollectionIds = ProjectsDatabasesDocumentsLis
     , _pddlciUploadType     :: !(Maybe Text)
     , _pddlciPayload        :: !ListCollectionIdsRequest
     , _pddlciCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsListCollectionIds' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsDatabasesDocumentsListCollectionIds
     -> ListCollectionIdsRequest -- ^ 'pddlciPayload'
     -> ProjectsDatabasesDocumentsListCollectionIds
 projectsDatabasesDocumentsListCollectionIds pPddlciParent_ pPddlciPayload_ =
-    ProjectsDatabasesDocumentsListCollectionIds'
+  ProjectsDatabasesDocumentsListCollectionIds'
     { _pddlciParent = pPddlciParent_
     , _pddlciXgafv = Nothing
     , _pddlciUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsDatabasesDocumentsListCollectionIds pPddlciParent_ pPddlciPayload_ =
     , _pddlciPayload = pPddlciPayload_
     , _pddlciCallback = Nothing
     }
+
 
 -- | The parent document. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
@@ -149,7 +153,8 @@ pddlciCallback
       (\ s a -> s{_pddlciCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsListCollectionIds where
+           ProjectsDatabasesDocumentsListCollectionIds
+         where
         type Rs ProjectsDatabasesDocumentsListCollectionIds =
              ListCollectionIdsResponse
         type Scopes

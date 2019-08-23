@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/reference/rest/ Service Networking API Reference> for @servicenetworking.operations.cancel@.
+-- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.operations.cancel@.
 module Network.Google.Resource.ServiceNetworking.Operations.Cancel
     (
     -- * REST Resource
@@ -78,7 +78,8 @@ type OperationsCancelResource =
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ 'operationsCancel' smart constructor.
-data OperationsCancel = OperationsCancel'
+data OperationsCancel =
+  OperationsCancel'
     { _ocXgafv          :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
     , _ocAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data OperationsCancel = OperationsCancel'
     , _ocPayload        :: !CancelOperationRequest
     , _ocName           :: !Text
     , _ocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsCancel' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ operationsCancel
     -> Text -- ^ 'ocName'
     -> OperationsCancel
 operationsCancel pOcPayload_ pOcName_ =
-    OperationsCancel'
+  OperationsCancel'
     { _ocXgafv = Nothing
     , _ocUploadProtocol = Nothing
     , _ocAccessToken = Nothing
@@ -119,6 +122,7 @@ operationsCancel pOcPayload_ pOcName_ =
     , _ocName = pOcName_
     , _ocCallback = Nothing
     }
+
 
 -- | V1 error format.
 ocXgafv :: Lens' OperationsCancel (Maybe Xgafv)

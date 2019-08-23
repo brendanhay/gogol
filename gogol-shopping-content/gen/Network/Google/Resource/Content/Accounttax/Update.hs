@@ -55,11 +55,14 @@ type AccounttaxUpdateResource =
 -- | Updates the tax settings of the account.
 --
 -- /See:/ 'accounttaxUpdate' smart constructor.
-data AccounttaxUpdate = AccounttaxUpdate'
+data AccounttaxUpdate =
+  AccounttaxUpdate'
     { _auMerchantId :: !(Textual Word64)
     , _auPayload    :: !AccountTax
     , _auAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccounttaxUpdate' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ accounttaxUpdate
     -> Word64 -- ^ 'auAccountId'
     -> AccounttaxUpdate
 accounttaxUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
-    AccounttaxUpdate'
+  AccounttaxUpdate'
     { _auMerchantId = _Coerce # pAuMerchantId_
     , _auPayload = pAuPayload_
     , _auAccountId = _Coerce # pAuAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

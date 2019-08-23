@@ -61,12 +61,15 @@ type ManagementGoalsInsertResource =
 -- | Create a new goal.
 --
 -- /See:/ 'managementGoalsInsert' smart constructor.
-data ManagementGoalsInsert = ManagementGoalsInsert'
+data ManagementGoalsInsert =
+  ManagementGoalsInsert'
     { _mgiWebPropertyId :: !Text
     , _mgiProFileId     :: !Text
     , _mgiPayload       :: !Goal
     , _mgiAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementGoalsInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ managementGoalsInsert
     -> Text -- ^ 'mgiAccountId'
     -> ManagementGoalsInsert
 managementGoalsInsert pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
-    ManagementGoalsInsert'
+  ManagementGoalsInsert'
     { _mgiWebPropertyId = pMgiWebPropertyId_
     , _mgiProFileId = pMgiProFileId_
     , _mgiPayload = pMgiPayload_
     , _mgiAccountId = pMgiAccountId_
     }
+
 
 -- | Web property ID to create the goal for.
 mgiWebPropertyId :: Lens' ManagementGoalsInsert Text

@@ -139,6 +139,7 @@ module Network.Google.AndroidEnterprise.Types
     , awtsWebApps
     , awtsPermission
     , awtsStoreBuilder
+    , awtsManagedConfigurations
 
     -- * ProductVisibility
     , ProductVisibility
@@ -239,6 +240,7 @@ module Network.Google.AndroidEnterprise.Types
     , ProductPolicy
     , productPolicy
     , ppTracks
+    , ppManagedConfiguration
     , ppTrackIds
     , ppAutoInstallPolicy
     , ppProductId
@@ -296,12 +298,6 @@ module Network.Google.AndroidEnterprise.Types
     , groupLicensesListResponse
     , gllrGroupLicense
     , gllrKind
-
-    -- * AndroidDevicePolicyConfig
-    , AndroidDevicePolicyConfig
-    , androidDevicePolicyConfig
-    , adpcState
-    , adpcKind
 
     -- * ProductSet
     , ProductSet
@@ -561,6 +557,11 @@ module Network.Google.AndroidEnterprise.Types
     , ppsPermission
     , ppsProductId
 
+    -- * AdministratorWebTokenSpecManagedConfigurations
+    , AdministratorWebTokenSpecManagedConfigurations
+    , administratorWebTokenSpecManagedConfigurations
+    , awtsmcEnabled
+
     -- * Permission
     , Permission
     , permission
@@ -628,4 +629,4 @@ androidEnterpriseService
 
 -- | Manage corporate Android devices
 androidEnterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
-androidEnterpriseScope = Proxy;
+androidEnterpriseScope = Proxy

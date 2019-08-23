@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesList' request conforms to.
 type TargetingTemplatesListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
@@ -73,7 +73,8 @@ type TargetingTemplatesListResource =
 -- method supports paging.
 --
 -- /See:/ 'targetingTemplatesList' smart constructor.
-data TargetingTemplatesList = TargetingTemplatesList'
+data TargetingTemplatesList =
+  TargetingTemplatesList'
     { _ttlAdvertiserId :: !(Maybe (Textual Int64))
     , _ttlSearchString :: !(Maybe Text)
     , _ttlIds          :: !(Maybe [Textual Int64])
@@ -82,7 +83,9 @@ data TargetingTemplatesList = TargetingTemplatesList'
     , _ttlPageToken    :: !(Maybe Text)
     , _ttlSortField    :: !TargetingTemplatesListSortField
     , _ttlMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetingTemplatesList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ targetingTemplatesList
     :: Int64 -- ^ 'ttlProFileId'
     -> TargetingTemplatesList
 targetingTemplatesList pTtlProFileId_ =
-    TargetingTemplatesList'
+  TargetingTemplatesList'
     { _ttlAdvertiserId = Nothing
     , _ttlSearchString = Nothing
     , _ttlIds = Nothing
@@ -117,6 +120,7 @@ targetingTemplatesList pTtlProFileId_ =
     , _ttlSortField = TTLSFID
     , _ttlMaxResults = 1000
     }
+
 
 -- | Select only targeting templates with this advertiser ID.
 ttlAdvertiserId :: Lens' TargetingTemplatesList (Maybe Int64)

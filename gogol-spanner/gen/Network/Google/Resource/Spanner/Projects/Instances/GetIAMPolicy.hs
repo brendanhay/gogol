@@ -66,7 +66,8 @@ type ProjectsInstancesGetIAMPolicyResource =
 -- Authorization requires \`spanner.instances.getIamPolicy\` on resource.
 --
 -- /See:/ 'projectsInstancesGetIAMPolicy' smart constructor.
-data ProjectsInstancesGetIAMPolicy = ProjectsInstancesGetIAMPolicy'
+data ProjectsInstancesGetIAMPolicy =
+  ProjectsInstancesGetIAMPolicy'
     { _pigipXgafv          :: !(Maybe Xgafv)
     , _pigipUploadProtocol :: !(Maybe Text)
     , _pigipAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsInstancesGetIAMPolicy = ProjectsInstancesGetIAMPolicy'
     , _pigipPayload        :: !GetIAMPolicyRequest
     , _pigipResource       :: !Text
     , _pigipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsInstancesGetIAMPolicy
     -> Text -- ^ 'pigipResource'
     -> ProjectsInstancesGetIAMPolicy
 projectsInstancesGetIAMPolicy pPigipPayload_ pPigipResource_ =
-    ProjectsInstancesGetIAMPolicy'
+  ProjectsInstancesGetIAMPolicy'
     { _pigipXgafv = Nothing
     , _pigipUploadProtocol = Nothing
     , _pigipAccessToken = Nothing
@@ -107,6 +110,7 @@ projectsInstancesGetIAMPolicy pPigipPayload_ pPigipResource_ =
     , _pigipResource = pPigipResource_
     , _pigipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pigipXgafv :: Lens' ProjectsInstancesGetIAMPolicy (Maybe Xgafv)

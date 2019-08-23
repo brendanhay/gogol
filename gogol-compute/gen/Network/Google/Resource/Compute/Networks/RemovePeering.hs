@@ -61,12 +61,15 @@ type NetworksRemovePeeringResource =
 -- | Removes a peering from the specified network.
 --
 -- /See:/ 'networksRemovePeering' smart constructor.
-data NetworksRemovePeering = NetworksRemovePeering'
+data NetworksRemovePeering =
+  NetworksRemovePeering'
     { _nrpRequestId :: !(Maybe Text)
     , _nrpProject   :: !Text
     , _nrpNetwork   :: !Text
     , _nrpPayload   :: !NetworksRemovePeeringRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworksRemovePeering' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ networksRemovePeering
     -> NetworksRemovePeeringRequest -- ^ 'nrpPayload'
     -> NetworksRemovePeering
 networksRemovePeering pNrpProject_ pNrpNetwork_ pNrpPayload_ =
-    NetworksRemovePeering'
+  NetworksRemovePeering'
     { _nrpRequestId = Nothing
     , _nrpProject = pNrpProject_
     , _nrpNetwork = pNrpNetwork_
     , _nrpPayload = pNrpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

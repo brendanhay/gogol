@@ -59,14 +59,17 @@ type GroupsMembershipsGetResource =
 -- | Retrieves a Membership.
 --
 -- /See:/ 'groupsMembershipsGet' smart constructor.
-data GroupsMembershipsGet = GroupsMembershipsGet'
+data GroupsMembershipsGet =
+  GroupsMembershipsGet'
     { _gmgXgafv          :: !(Maybe Xgafv)
     , _gmgUploadProtocol :: !(Maybe Text)
     , _gmgAccessToken    :: !(Maybe Text)
     , _gmgUploadType     :: !(Maybe Text)
     , _gmgName           :: !Text
     , _gmgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsMembershipsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ groupsMembershipsGet
     :: Text -- ^ 'gmgName'
     -> GroupsMembershipsGet
 groupsMembershipsGet pGmgName_ =
-    GroupsMembershipsGet'
+  GroupsMembershipsGet'
     { _gmgXgafv = Nothing
     , _gmgUploadProtocol = Nothing
     , _gmgAccessToken = Nothing
@@ -95,6 +98,7 @@ groupsMembershipsGet pGmgName_ =
     , _gmgName = pGmgName_
     , _gmgCallback = Nothing
     }
+
 
 -- | V1 error format.
 gmgXgafv :: Lens' GroupsMembershipsGet (Maybe Xgafv)
@@ -134,7 +138,9 @@ gmgCallback
 
 instance GoogleRequest GroupsMembershipsGet where
         type Rs GroupsMembershipsGet = Membership
-        type Scopes GroupsMembershipsGet = '[]
+        type Scopes GroupsMembershipsGet =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsMembershipsGet'{..}
           = go _gmgName _gmgXgafv _gmgUploadProtocol
               _gmgAccessToken

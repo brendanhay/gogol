@@ -25,9 +25,6 @@
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.snapshots.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
@@ -74,12 +71,10 @@ type ProjectsTopicsSnapshotsListResource =
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsTopicsSnapshotsList' smart constructor.
-data ProjectsTopicsSnapshotsList = ProjectsTopicsSnapshotsList'
+data ProjectsTopicsSnapshotsList =
+  ProjectsTopicsSnapshotsList'
     { _ptsltXgafv          :: !(Maybe Xgafv)
     , _ptsltUploadProtocol :: !(Maybe Text)
     , _ptsltAccessToken    :: !(Maybe Text)
@@ -88,7 +83,9 @@ data ProjectsTopicsSnapshotsList = ProjectsTopicsSnapshotsList'
     , _ptsltPageToken      :: !(Maybe Text)
     , _ptsltPageSize       :: !(Maybe (Textual Int32))
     , _ptsltCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTopicsSnapshotsList' with the minimum fields required to make a request.
 --
@@ -113,7 +110,7 @@ projectsTopicsSnapshotsList
     :: Text -- ^ 'ptsltTopic'
     -> ProjectsTopicsSnapshotsList
 projectsTopicsSnapshotsList pPtsltTopic_ =
-    ProjectsTopicsSnapshotsList'
+  ProjectsTopicsSnapshotsList'
     { _ptsltXgafv = Nothing
     , _ptsltUploadProtocol = Nothing
     , _ptsltAccessToken = Nothing
@@ -123,6 +120,7 @@ projectsTopicsSnapshotsList pPtsltTopic_ =
     , _ptsltPageSize = Nothing
     , _ptsltCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptsltXgafv :: Lens' ProjectsTopicsSnapshotsList (Maybe Xgafv)

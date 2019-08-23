@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a data source.
+-- Deletes a datasource.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.delete@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Delete
@@ -59,10 +59,11 @@ type SettingsDatasourcesDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a data source.
+-- | Deletes a datasource.
 --
 -- /See:/ 'settingsDatasourcesDelete' smart constructor.
-data SettingsDatasourcesDelete = SettingsDatasourcesDelete'
+data SettingsDatasourcesDelete =
+  SettingsDatasourcesDelete'
     { _sddXgafv                       :: !(Maybe Xgafv)
     , _sddUploadProtocol              :: !(Maybe Text)
     , _sddAccessToken                 :: !(Maybe Text)
@@ -70,7 +71,9 @@ data SettingsDatasourcesDelete = SettingsDatasourcesDelete'
     , _sddName                        :: !Text
     , _sddDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _sddCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsDatasourcesDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ settingsDatasourcesDelete
     :: Text -- ^ 'sddName'
     -> SettingsDatasourcesDelete
 settingsDatasourcesDelete pSddName_ =
-    SettingsDatasourcesDelete'
+  SettingsDatasourcesDelete'
     { _sddXgafv = Nothing
     , _sddUploadProtocol = Nothing
     , _sddAccessToken = Nothing
@@ -102,6 +105,7 @@ settingsDatasourcesDelete pSddName_ =
     , _sddDebugOptionsEnableDebugging = Nothing
     , _sddCallback = Nothing
     }
+
 
 -- | V1 error format.
 sddXgafv :: Lens' SettingsDatasourcesDelete (Maybe Xgafv)
@@ -125,12 +129,12 @@ sddUploadType
   = lens _sddUploadType
       (\ s a -> s{_sddUploadType = a})
 
--- | Name of the data source. Format: datasources\/{source_id}.
+-- | Name of the datasource. Format: datasources\/{source_id}.
 sddName :: Lens' SettingsDatasourcesDelete Text
 sddName = lens _sddName (\ s a -> s{_sddName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 sddDebugOptionsEnableDebugging :: Lens' SettingsDatasourcesDelete (Maybe Bool)
 sddDebugOptionsEnableDebugging
   = lens _sddDebugOptionsEnableDebugging

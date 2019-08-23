@@ -65,7 +65,8 @@ type NamespacesUpdateResource =
 -- namespace visibility can be updated.
 --
 -- /See:/ 'namespacesUpdate' smart constructor.
-data NamespacesUpdate = NamespacesUpdate'
+data NamespacesUpdate =
+  NamespacesUpdate'
     { _nuXgafv          :: !(Maybe Xgafv)
     , _nuUploadProtocol :: !(Maybe Text)
     , _nuAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data NamespacesUpdate = NamespacesUpdate'
     , _nuNamespaceName  :: !Text
     , _nuProjectId      :: !(Maybe Text)
     , _nuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NamespacesUpdate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ namespacesUpdate
     -> Text -- ^ 'nuNamespaceName'
     -> NamespacesUpdate
 namespacesUpdate pNuPayload_ pNuNamespaceName_ =
-    NamespacesUpdate'
+  NamespacesUpdate'
     { _nuXgafv = Nothing
     , _nuUploadProtocol = Nothing
     , _nuAccessToken = Nothing
@@ -110,6 +113,7 @@ namespacesUpdate pNuPayload_ pNuNamespaceName_ =
     , _nuProjectId = Nothing
     , _nuCallback = Nothing
     }
+
 
 -- | V1 error format.
 nuXgafv :: Lens' NamespacesUpdate (Maybe Xgafv)

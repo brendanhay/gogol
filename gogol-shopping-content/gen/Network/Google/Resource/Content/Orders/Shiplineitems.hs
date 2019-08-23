@@ -57,11 +57,14 @@ type OrdersShiplineitemsResource =
 -- | Marks line item(s) as shipped.
 --
 -- /See:/ 'ordersShiplineitems' smart constructor.
-data OrdersShiplineitems = OrdersShiplineitems'
+data OrdersShiplineitems =
+  OrdersShiplineitems'
     { _osMerchantId :: !(Textual Word64)
     , _osPayload    :: !OrdersShipLineItemsRequest
     , _osOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersShiplineitems' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ ordersShiplineitems
     -> Text -- ^ 'osOrderId'
     -> OrdersShiplineitems
 ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
-    OrdersShiplineitems'
+  OrdersShiplineitems'
     { _osMerchantId = _Coerce # pOsMerchantId_
     , _osPayload = pOsPayload_
     , _osOrderId = pOsOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

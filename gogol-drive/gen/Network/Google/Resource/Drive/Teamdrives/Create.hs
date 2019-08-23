@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new Team Drive.
+-- Deprecated use drives.create instead.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.create@.
 module Network.Google.Resource.Drive.Teamdrives.Create
@@ -50,13 +50,16 @@ type TeamdrivesCreateResource =
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] TeamDrive :> Post '[JSON] TeamDrive
 
--- | Creates a new Team Drive.
+-- | Deprecated use drives.create instead.
 --
 -- /See:/ 'teamdrivesCreate' smart constructor.
-data TeamdrivesCreate = TeamdrivesCreate'
+data TeamdrivesCreate =
+  TeamdrivesCreate'
     { _tcRequestId :: !Text
     , _tcPayload   :: !TeamDrive
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamdrivesCreate' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ teamdrivesCreate
     -> TeamDrive -- ^ 'tcPayload'
     -> TeamdrivesCreate
 teamdrivesCreate pTcRequestId_ pTcPayload_ =
-    TeamdrivesCreate'
-    { _tcRequestId = pTcRequestId_
-    , _tcPayload = pTcPayload_
-    }
+  TeamdrivesCreate' {_tcRequestId = pTcRequestId_, _tcPayload = pTcPayload_}
+
 
 -- | An ID, such as a random UUID, which uniquely identifies this user\'s
 -- request for idempotent creation of a Team Drive. A repeated request by

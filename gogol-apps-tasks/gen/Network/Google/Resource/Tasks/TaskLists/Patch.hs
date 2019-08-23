@@ -57,10 +57,13 @@ type TaskListsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'taskListsPatch' smart constructor.
-data TaskListsPatch = TaskListsPatch'
+data TaskListsPatch =
+  TaskListsPatch'
     { _tlpPayload  :: !TaskList
     , _tlpTaskList :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TaskListsPatch' with the minimum fields required to make a request.
 --
@@ -74,10 +77,8 @@ taskListsPatch
     -> Text -- ^ 'tlpTaskList'
     -> TaskListsPatch
 taskListsPatch pTlpPayload_ pTlpTaskList_ =
-    TaskListsPatch'
-    { _tlpPayload = pTlpPayload_
-    , _tlpTaskList = pTlpTaskList_
-    }
+  TaskListsPatch' {_tlpPayload = pTlpPayload_, _tlpTaskList = pTlpTaskList_}
+
 
 -- | Multipart request metadata.
 tlpPayload :: Lens' TaskListsPatch TaskList

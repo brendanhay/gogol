@@ -22,6 +22,12 @@ module Network.Google.BinaryAuthorization.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * PkixPublicKey
+    , PkixPublicKey
+    , pkixPublicKey
+    , ppkPublicKeyPem
+    , ppkSignatureAlgorithm
+
     -- * Expr
     , Expr
     , expr
@@ -44,6 +50,9 @@ module Network.Google.BinaryAuthorization.Types
     -- * AdmissionRuleEnforcementMode
     , AdmissionRuleEnforcementMode (..)
 
+    -- * PolicyGlobalPolicyEvaluationMode
+    , PolicyGlobalPolicyEvaluationMode (..)
+
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
@@ -59,6 +68,9 @@ module Network.Google.BinaryAuthorization.Types
     , AdmissionWhiteListPattern
     , admissionWhiteListPattern
     , awlpNamePattern
+
+    -- * PkixPublicKeySignatureAlgorithm
+    , PkixPublicKeySignatureAlgorithm (..)
 
     -- * AdmissionRule
     , AdmissionRule
@@ -88,6 +100,7 @@ module Network.Google.BinaryAuthorization.Types
     -- * AttestorPublicKey
     , AttestorPublicKey
     , attestorPublicKey
+    , apkPkixPublicKey
     , apkAsciiArmoredPgpPublicKey
     , apkId
     , apkComment
@@ -105,6 +118,7 @@ module Network.Google.BinaryAuthorization.Types
     , pClusterAdmissionRules
     , pUpdateTime
     , pName
+    , pGlobalPolicyEvaluationMode
     , pDescription
 
     -- * PolicyClusterAdmissionRules
@@ -141,4 +155,4 @@ binaryAuthorizationService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

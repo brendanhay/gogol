@@ -62,7 +62,8 @@ type ProjectsServiceAccountsSignBlobResource =
 -- | Signs a blob using a service account\'s system-managed private key.
 --
 -- /See:/ 'projectsServiceAccountsSignBlob' smart constructor.
-data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
+data ProjectsServiceAccountsSignBlob =
+  ProjectsServiceAccountsSignBlob'
     { _psasbXgafv          :: !(Maybe Xgafv)
     , _psasbUploadProtocol :: !(Maybe Text)
     , _psasbAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
     , _psasbPayload        :: !SignBlobRequest
     , _psasbName           :: !Text
     , _psasbCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsSignBlob' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsServiceAccountsSignBlob
     -> Text -- ^ 'psasbName'
     -> ProjectsServiceAccountsSignBlob
 projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
-    ProjectsServiceAccountsSignBlob'
+  ProjectsServiceAccountsSignBlob'
     { _psasbXgafv = Nothing
     , _psasbUploadProtocol = Nothing
     , _psasbAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
     , _psasbName = pPsasbName_
     , _psasbCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasbXgafv :: Lens' ProjectsServiceAccountsSignBlob (Maybe Xgafv)
@@ -134,7 +138,9 @@ psasbPayload
 
 -- | The resource name of the service account for which the credentials are
 -- requested, in the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`.
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 psasbName :: Lens' ProjectsServiceAccountsSignBlob Text
 psasbName
   = lens _psasbName (\ s a -> s{_psasbName = a})
@@ -146,7 +152,8 @@ psasbCallback
       (\ s a -> s{_psasbCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsSignBlob where
+           ProjectsServiceAccountsSignBlob
+         where
         type Rs ProjectsServiceAccountsSignBlob =
              SignBlobResponse
         type Scopes ProjectsServiceAccountsSignBlob =

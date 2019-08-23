@@ -71,7 +71,8 @@ type ProjectsGroupsListResource =
 -- | Lists the existing groups.
 --
 -- /See:/ 'projectsGroupsList' smart constructor.
-data ProjectsGroupsList = ProjectsGroupsList'
+data ProjectsGroupsList =
+  ProjectsGroupsList'
     { _pglXgafv              :: !(Maybe Xgafv)
     , _pglUploadProtocol     :: !(Maybe Text)
     , _pglChildrenOfGroup    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsGroupsList = ProjectsGroupsList'
     , _pglPageSize           :: !(Maybe (Textual Int32))
     , _pglAncestorsOfGroup   :: !(Maybe Text)
     , _pglCallback           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGroupsList' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ projectsGroupsList
     :: Text -- ^ 'pglName'
     -> ProjectsGroupsList
 projectsGroupsList pPglName_ =
-    ProjectsGroupsList'
+  ProjectsGroupsList'
     { _pglXgafv = Nothing
     , _pglUploadProtocol = Nothing
     , _pglChildrenOfGroup = Nothing
@@ -127,6 +130,7 @@ projectsGroupsList pPglName_ =
     , _pglAncestorsOfGroup = Nothing
     , _pglCallback = Nothing
     }
+
 
 -- | V1 error format.
 pglXgafv :: Lens' ProjectsGroupsList (Maybe Xgafv)

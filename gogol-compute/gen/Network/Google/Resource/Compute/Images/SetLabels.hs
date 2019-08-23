@@ -61,11 +61,14 @@ type ImagesSetLabelsResource =
 -- Labeling Resources documentation.
 --
 -- /See:/ 'imagesSetLabels' smart constructor.
-data ImagesSetLabels = ImagesSetLabels'
+data ImagesSetLabels =
+  ImagesSetLabels'
     { _islsProject  :: !Text
     , _islsPayload  :: !GlobalSetLabelsRequest
     , _islsResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesSetLabels' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ imagesSetLabels
     -> Text -- ^ 'islsResource'
     -> ImagesSetLabels
 imagesSetLabels pIslsProject_ pIslsPayload_ pIslsResource_ =
-    ImagesSetLabels'
+  ImagesSetLabels'
     { _islsProject = pIslsProject_
     , _islsPayload = pIslsPayload_
     , _islsResource = pIslsResource_
     }
+
 
 -- | Project ID for this request.
 islsProject :: Lens' ImagesSetLabels Text

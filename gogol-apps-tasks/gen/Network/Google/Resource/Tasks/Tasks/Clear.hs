@@ -56,9 +56,12 @@ type TasksClearResource =
 -- when retrieving all tasks for a task list.
 --
 -- /See:/ 'tasksClear' smart constructor.
-newtype TasksClear = TasksClear'
+newtype TasksClear =
+  TasksClear'
     { _tcTaskList :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TasksClear' with the minimum fields required to make a request.
 --
@@ -68,10 +71,8 @@ newtype TasksClear = TasksClear'
 tasksClear
     :: Text -- ^ 'tcTaskList'
     -> TasksClear
-tasksClear pTcTaskList_ =
-    TasksClear'
-    { _tcTaskList = pTcTaskList_
-    }
+tasksClear pTcTaskList_ = TasksClear' {_tcTaskList = pTcTaskList_}
+
 
 -- | Task list identifier.
 tcTaskList :: Lens' TasksClear Text

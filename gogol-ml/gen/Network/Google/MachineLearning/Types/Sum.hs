@@ -190,7 +190,7 @@ instance ToJSON GoogleCloudMlV1__ParameterSpecScaleType where
 data GoogleCloudMlV1__VersionFramework
     = FrameworkUnspecified
       -- ^ @FRAMEWORK_UNSPECIFIED@
-      -- Unspecified framework. Defaults to TensorFlow.
+      -- Unspecified framework. Assigns a value based on the file suffix.
     | Tensorflow
       -- ^ @TENSORFLOW@
       -- Tensorflow framework.
@@ -284,7 +284,8 @@ instance ToJSON GoogleCloudMlV1__VersionState where
 data GoogleCloudMlV1__HyperparameterSpecAlgorithm
     = AlgorithmUnspecified
       -- ^ @ALGORITHM_UNSPECIFIED@
-      -- The default algorithm used by hyperparameter tuning service.
+      -- The default algorithm used by the hyperparameter tuning service. This is
+      -- a Bayesian optimization algorithm.
     | GridSearch
       -- ^ @GRID_SEARCH@
       -- Simple grid search within the feasible space. To use grid search, all
@@ -390,14 +391,16 @@ data GoogleCloudMlV1__PredictionInputDataFormat
       -- Deprecated. Use JSON instead.
     | TfRecord
       -- ^ @TF_RECORD@
-      -- INPUT ONLY. The source file is a TFRecord file.
+      -- The source file is a TFRecord file. Currently available only for input
+      -- data.
     | TfRecordGzip
       -- ^ @TF_RECORD_GZIP@
-      -- INPUT ONLY. The source file is a GZIP-compressed TFRecord file.
+      -- The source file is a GZIP-compressed TFRecord file. Currently available
+      -- only for input data.
     | CSV
       -- ^ @CSV@
-      -- OUTPUT ONLY. Output values will be in comma-separated rows, with keys in
-      -- a separate file.
+      -- Values are comma-separated rows, with keys in a separate file. Currently
+      -- available only for output data.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__PredictionInputDataFormat
@@ -474,14 +477,16 @@ data GoogleCloudMlV1__PredictionInputOutputDataFormat
       -- Deprecated. Use JSON instead.
     | GCMVPIODFTfRecord
       -- ^ @TF_RECORD@
-      -- INPUT ONLY. The source file is a TFRecord file.
+      -- The source file is a TFRecord file. Currently available only for input
+      -- data.
     | GCMVPIODFTfRecordGzip
       -- ^ @TF_RECORD_GZIP@
-      -- INPUT ONLY. The source file is a GZIP-compressed TFRecord file.
+      -- The source file is a GZIP-compressed TFRecord file. Currently available
+      -- only for input data.
     | GCMVPIODFCSV
       -- ^ @CSV@
-      -- OUTPUT ONLY. Output values will be in comma-separated rows, with keys in
-      -- a separate file.
+      -- Values are comma-separated rows, with keys in a separate file. Currently
+      -- available only for output data.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__PredictionInputOutputDataFormat
@@ -668,7 +673,7 @@ instance FromJSON GoogleCloudMlV1__OperationMetadataOperationType where
 instance ToJSON GoogleCloudMlV1__OperationMetadataOperationType where
     toJSON = toJSONText
 
--- | The available types of accelerators.
+-- | The type of accelerator to use.
 data GoogleCloudMlV1__AcceleratorConfigType
     = AcceleratorTypeUnspecified
       -- ^ @ACCELERATOR_TYPE_UNSPECIFIED@
@@ -685,9 +690,9 @@ data GoogleCloudMlV1__AcceleratorConfigType
     | NvidiaTeslaP4
       -- ^ @NVIDIA_TESLA_P4@
       -- Nvidia Tesla P4 GPU.
-    | NvidiaTeslaT4
-      -- ^ @NVIDIA_TESLA_T4@
-      -- Nvidia Tesla T4 GPU.
+    | TpuV2
+      -- ^ @TPU_V2@
+      -- TPU v2.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudMlV1__AcceleratorConfigType
@@ -699,7 +704,7 @@ instance FromHttpApiData GoogleCloudMlV1__AcceleratorConfigType where
         "NVIDIA_TESLA_P100" -> Right NvidiaTeslaP100
         "NVIDIA_TESLA_V100" -> Right NvidiaTeslaV100
         "NVIDIA_TESLA_P4" -> Right NvidiaTeslaP4
-        "NVIDIA_TESLA_T4" -> Right NvidiaTeslaT4
+        "TPU_V2" -> Right TpuV2
         x -> Left ("Unable to parse GoogleCloudMlV1__AcceleratorConfigType from: " <> x)
 
 instance ToHttpApiData GoogleCloudMlV1__AcceleratorConfigType where
@@ -709,7 +714,7 @@ instance ToHttpApiData GoogleCloudMlV1__AcceleratorConfigType where
         NvidiaTeslaP100 -> "NVIDIA_TESLA_P100"
         NvidiaTeslaV100 -> "NVIDIA_TESLA_V100"
         NvidiaTeslaP4 -> "NVIDIA_TESLA_P4"
-        NvidiaTeslaT4 -> "NVIDIA_TESLA_T4"
+        TpuV2 -> "TPU_V2"
 
 instance FromJSON GoogleCloudMlV1__AcceleratorConfigType where
     parseJSON = parseJSONText "GoogleCloudMlV1__AcceleratorConfigType"

@@ -65,13 +65,16 @@ type AutoscalersPatchResource =
 -- merge patch format and processing rules.
 --
 -- /See:/ 'autoscalersPatch' smart constructor.
-data AutoscalersPatch = AutoscalersPatch'
+data AutoscalersPatch =
+  AutoscalersPatch'
     { _apRequestId  :: !(Maybe Text)
     , _apProject    :: !Text
     , _apZone       :: !Text
     , _apPayload    :: !Autoscaler
     , _apAutoscaler :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AutoscalersPatch' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ autoscalersPatch
     -> Autoscaler -- ^ 'apPayload'
     -> AutoscalersPatch
 autoscalersPatch pApProject_ pApZone_ pApPayload_ =
-    AutoscalersPatch'
+  AutoscalersPatch'
     { _apRequestId = Nothing
     , _apProject = pApProject_
     , _apZone = pApZone_
     , _apPayload = pApPayload_
     , _apAutoscaler = Nothing
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

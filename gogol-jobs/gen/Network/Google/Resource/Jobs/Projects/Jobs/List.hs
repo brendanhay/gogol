@@ -69,7 +69,8 @@ type ProjectsJobsListResource =
 -- | Lists jobs by filter.
 --
 -- /See:/ 'projectsJobsList' smart constructor.
-data ProjectsJobsList = ProjectsJobsList'
+data ProjectsJobsList =
+  ProjectsJobsList'
     { _pjlParent         :: !Text
     , _pjlXgafv          :: !(Maybe Xgafv)
     , _pjlJobView        :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsJobsList = ProjectsJobsList'
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlPageSize       :: !(Maybe (Textual Int32))
     , _pjlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsJobsList
     :: Text -- ^ 'pjlParent'
     -> ProjectsJobsList
 projectsJobsList pPjlParent_ =
-    ProjectsJobsList'
+  ProjectsJobsList'
     { _pjlParent = pPjlParent_
     , _pjlXgafv = Nothing
     , _pjlJobView = Nothing
@@ -121,6 +124,7 @@ projectsJobsList pPjlParent_ =
     , _pjlPageSize = Nothing
     , _pjlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project under which the job is
 -- created. The format is \"projects\/{project_id}\", for example,

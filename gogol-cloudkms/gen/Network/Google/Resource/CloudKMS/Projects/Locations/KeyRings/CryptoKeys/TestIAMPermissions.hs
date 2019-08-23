@@ -73,7 +73,8 @@ type ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysTestIAMPermissions' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions = ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'
+data ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions =
+  ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'
     { _plkrcktipXgafv          :: !(Maybe Xgafv)
     , _plkrcktipUploadProtocol :: !(Maybe Text)
     , _plkrcktipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions = ProjectsLocationsKe
     , _plkrcktipPayload        :: !TestIAMPermissionsRequest
     , _plkrcktipResource       :: !Text
     , _plkrcktipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsLocationsKeyRingsCryptoKeysTestIAMPermissions
     -> Text -- ^ 'plkrcktipResource'
     -> ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions
 projectsLocationsKeyRingsCryptoKeysTestIAMPermissions pPlkrcktipPayload_ pPlkrcktipResource_ =
-    ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'
+  ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'
     { _plkrcktipXgafv = Nothing
     , _plkrcktipUploadProtocol = Nothing
     , _plkrcktipAccessToken = Nothing
@@ -114,6 +117,7 @@ projectsLocationsKeyRingsCryptoKeysTestIAMPermissions pPlkrcktipPayload_ pPlkrck
     , _plkrcktipResource = pPlkrcktipResource_
     , _plkrcktipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrcktipXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions (Maybe Xgafv)
@@ -160,14 +164,16 @@ plkrcktipCallback
       (\ s a -> s{_plkrcktipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions
+           ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions
              = TestIAMPermissionsResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysTestIAMPermissions'{..}
           = go _plkrcktipResource _plkrcktipXgafv

@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | The schema for the response.
 --
 -- /See:/ 'restMethodResponse' smart constructor.
-newtype RestMethodResponse = RestMethodResponse'
+newtype RestMethodResponse =
+  RestMethodResponse'
     { _rmrRef :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodResponse' with the minimum fields required to make a request.
 --
@@ -34,10 +37,8 @@ newtype RestMethodResponse = RestMethodResponse'
 -- * 'rmrRef'
 restMethodResponse
     :: RestMethodResponse
-restMethodResponse =
-    RestMethodResponse'
-    { _rmrRef = Nothing
-    }
+restMethodResponse = RestMethodResponse' {_rmrRef = Nothing}
+
 
 -- | Schema ID for the response schema.
 rmrRef :: Lens' RestMethodResponse (Maybe Text)
@@ -55,9 +56,12 @@ instance ToJSON RestMethodResponse where
 -- | Common parameters that apply across all apis.
 --
 -- /See:/ 'restDescriptionParameters' smart constructor.
-newtype RestDescriptionParameters = RestDescriptionParameters'
+newtype RestDescriptionParameters =
+  RestDescriptionParameters'
     { _rdpAddtional :: HashMap Text JSONSchema
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionParameters' with the minimum fields required to make a request.
 --
@@ -68,9 +72,8 @@ restDescriptionParameters
     :: HashMap Text JSONSchema -- ^ 'rdpAddtional'
     -> RestDescriptionParameters
 restDescriptionParameters pRdpAddtional_ =
-    RestDescriptionParameters'
-    { _rdpAddtional = _Coerce # pRdpAddtional_
-    }
+  RestDescriptionParameters' {_rdpAddtional = _Coerce # pRdpAddtional_}
+
 
 -- | Description of a single parameter.
 rdpAddtional :: Lens' RestDescriptionParameters (HashMap Text JSONSchema)
@@ -89,7 +92,8 @@ instance ToJSON RestDescriptionParameters where
 
 --
 -- /See:/ 'restMethod' smart constructor.
-data RestMethod = RestMethod'
+data RestMethod =
+  RestMethod'
     { _rmSupportsMediaDownload   :: !(Maybe Bool)
     , _rmParameterOrder          :: !(Maybe [Text])
     , _rmMediaUpload             :: !(Maybe RestMethodMediaUpload)
@@ -105,7 +109,9 @@ data RestMethod = RestMethod'
     , _rmUseMediaDownloadService :: !(Maybe Bool)
     , _rmDescription             :: !(Maybe Text)
     , _rmRequest                 :: !(Maybe RestMethodRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethod' with the minimum fields required to make a request.
 --
@@ -143,7 +149,7 @@ data RestMethod = RestMethod'
 restMethod
     :: RestMethod
 restMethod =
-    RestMethod'
+  RestMethod'
     { _rmSupportsMediaDownload = Nothing
     , _rmParameterOrder = Nothing
     , _rmMediaUpload = Nothing
@@ -160,6 +166,7 @@ restMethod =
     , _rmDescription = Nothing
     , _rmRequest = Nothing
     }
+
 
 -- | Whether this method supports media downloads.
 rmSupportsMediaDownload :: Lens' RestMethod (Maybe Bool)
@@ -300,10 +307,13 @@ instance ToJSON RestMethod where
 
 --
 -- /See:/ 'restResource' smart constructor.
-data RestResource = RestResource'
+data RestResource =
+  RestResource'
     { _rrResources :: !(Maybe RestResourceResources)
     , _rrMethods   :: !(Maybe RestResourceMethods)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestResource' with the minimum fields required to make a request.
 --
@@ -314,11 +324,8 @@ data RestResource = RestResource'
 -- * 'rrMethods'
 restResource
     :: RestResource
-restResource =
-    RestResource'
-    { _rrResources = Nothing
-    , _rrMethods = Nothing
-    }
+restResource = RestResource' {_rrResources = Nothing, _rrMethods = Nothing}
+
 
 -- | Sub-resources on this resource.
 rrResources :: Lens' RestResource (Maybe RestResourceResources)
@@ -347,9 +354,12 @@ instance ToJSON RestResource where
 -- | Available OAuth 2.0 scopes.
 --
 -- /See:/ 'restDescriptionAuthOAuth2Scopes' smart constructor.
-newtype RestDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes'
+newtype RestDescriptionAuthOAuth2Scopes =
+  RestDescriptionAuthOAuth2Scopes'
     { _rdaoasAddtional :: HashMap Text RestDescriptionAuthOAuth2ScopesAdditional
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionAuthOAuth2Scopes' with the minimum fields required to make a request.
 --
@@ -360,9 +370,9 @@ restDescriptionAuthOAuth2Scopes
     :: HashMap Text RestDescriptionAuthOAuth2ScopesAdditional -- ^ 'rdaoasAddtional'
     -> RestDescriptionAuthOAuth2Scopes
 restDescriptionAuthOAuth2Scopes pRdaoasAddtional_ =
-    RestDescriptionAuthOAuth2Scopes'
-    { _rdaoasAddtional = _Coerce # pRdaoasAddtional_
-    }
+  RestDescriptionAuthOAuth2Scopes'
+    {_rdaoasAddtional = _Coerce # pRdaoasAddtional_}
+
 
 -- | The scope value.
 rdaoasAddtional :: Lens' RestDescriptionAuthOAuth2Scopes (HashMap Text RestDescriptionAuthOAuth2ScopesAdditional)
@@ -385,9 +395,12 @@ instance ToJSON RestDescriptionAuthOAuth2Scopes where
 -- | API-level methods for this API.
 --
 -- /See:/ 'restDescriptionMethods' smart constructor.
-newtype RestDescriptionMethods = RestDescriptionMethods'
+newtype RestDescriptionMethods =
+  RestDescriptionMethods'
     { _rdmAddtional :: HashMap Text RestMethod
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionMethods' with the minimum fields required to make a request.
 --
@@ -398,9 +411,8 @@ restDescriptionMethods
     :: HashMap Text RestMethod -- ^ 'rdmAddtional'
     -> RestDescriptionMethods
 restDescriptionMethods pRdmAddtional_ =
-    RestDescriptionMethods'
-    { _rdmAddtional = _Coerce # pRdmAddtional_
-    }
+  RestDescriptionMethods' {_rdmAddtional = _Coerce # pRdmAddtional_}
+
 
 -- | An individual method description.
 rdmAddtional :: Lens' RestDescriptionMethods (HashMap Text RestMethod)
@@ -419,7 +431,8 @@ instance ToJSON RestDescriptionMethods where
 
 --
 -- /See:/ 'directoryListItemsItem' smart constructor.
-data DirectoryListItemsItem = DirectoryListItemsItem'
+data DirectoryListItemsItem =
+  DirectoryListItemsItem'
     { _dliiDiscoveryLink     :: !(Maybe Text)
     , _dliiPreferred         :: !(Maybe Bool)
     , _dliiKind              :: !Text
@@ -432,7 +445,9 @@ data DirectoryListItemsItem = DirectoryListItemsItem'
     , _dliiTitle             :: !(Maybe Text)
     , _dliiDescription       :: !(Maybe Text)
     , _dliiDiscoveryRestURL  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DirectoryListItemsItem' with the minimum fields required to make a request.
 --
@@ -464,7 +479,7 @@ data DirectoryListItemsItem = DirectoryListItemsItem'
 directoryListItemsItem
     :: DirectoryListItemsItem
 directoryListItemsItem =
-    DirectoryListItemsItem'
+  DirectoryListItemsItem'
     { _dliiDiscoveryLink = Nothing
     , _dliiPreferred = Nothing
     , _dliiKind = "discovery#directoryItem"
@@ -478,6 +493,7 @@ directoryListItemsItem =
     , _dliiDescription = Nothing
     , _dliiDiscoveryRestURL = Nothing
     }
+
 
 -- | A link to the discovery document.
 dliiDiscoveryLink :: Lens' DirectoryListItemsItem (Maybe Text)
@@ -579,10 +595,13 @@ instance ToJSON DirectoryListItemsItem where
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
 -- /See:/ 'directoryListItemsItemIcons' smart constructor.
-data DirectoryListItemsItemIcons = DirectoryListItemsItemIcons'
+data DirectoryListItemsItemIcons =
+  DirectoryListItemsItemIcons'
     { _dliiiX16 :: !(Maybe Text)
     , _dliiiX32 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DirectoryListItemsItemIcons' with the minimum fields required to make a request.
 --
@@ -594,10 +613,8 @@ data DirectoryListItemsItemIcons = DirectoryListItemsItemIcons'
 directoryListItemsItemIcons
     :: DirectoryListItemsItemIcons
 directoryListItemsItemIcons =
-    DirectoryListItemsItemIcons'
-    { _dliiiX16 = Nothing
-    , _dliiiX32 = Nothing
-    }
+  DirectoryListItemsItemIcons' {_dliiiX16 = Nothing, _dliiiX32 = Nothing}
+
 
 -- | The URL of the 16x16 icon.
 dliiiX16 :: Lens' DirectoryListItemsItemIcons (Maybe Text)
@@ -623,9 +640,12 @@ instance ToJSON DirectoryListItemsItemIcons where
 -- | Sub-resources on this resource.
 --
 -- /See:/ 'restResourceResources' smart constructor.
-newtype RestResourceResources = RestResourceResources'
+newtype RestResourceResources =
+  RestResourceResources'
     { _rrrAddtional :: HashMap Text RestResource
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestResourceResources' with the minimum fields required to make a request.
 --
@@ -636,9 +656,8 @@ restResourceResources
     :: HashMap Text RestResource -- ^ 'rrrAddtional'
     -> RestResourceResources
 restResourceResources pRrrAddtional_ =
-    RestResourceResources'
-    { _rrrAddtional = _Coerce # pRrrAddtional_
-    }
+  RestResourceResources' {_rrrAddtional = _Coerce # pRrrAddtional_}
+
 
 -- | Description for any sub-resources on this resource.
 rrrAddtional :: Lens' RestResourceResources (HashMap Text RestResource)
@@ -658,9 +677,12 @@ instance ToJSON RestResourceResources where
 -- | OAuth 2.0 authentication information.
 --
 -- /See:/ 'restDescriptionAuthOAuth2' smart constructor.
-newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2'
+newtype RestDescriptionAuthOAuth2 =
+  RestDescriptionAuthOAuth2'
     { _rdaoaScopes :: Maybe RestDescriptionAuthOAuth2Scopes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionAuthOAuth2' with the minimum fields required to make a request.
 --
@@ -669,10 +691,8 @@ newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2'
 -- * 'rdaoaScopes'
 restDescriptionAuthOAuth2
     :: RestDescriptionAuthOAuth2
-restDescriptionAuthOAuth2 =
-    RestDescriptionAuthOAuth2'
-    { _rdaoaScopes = Nothing
-    }
+restDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2' {_rdaoaScopes = Nothing}
+
 
 -- | Available OAuth 2.0 scopes.
 rdaoaScopes :: Lens' RestDescriptionAuthOAuth2 (Maybe RestDescriptionAuthOAuth2Scopes)
@@ -692,9 +712,12 @@ instance ToJSON RestDescriptionAuthOAuth2 where
 -- | The scope value.
 --
 -- /See:/ 'restDescriptionAuthOAuth2ScopesAdditional' smart constructor.
-newtype RestDescriptionAuthOAuth2ScopesAdditional = RestDescriptionAuthOAuth2ScopesAdditional'
+newtype RestDescriptionAuthOAuth2ScopesAdditional =
+  RestDescriptionAuthOAuth2ScopesAdditional'
     { _rdaoasaDescription :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionAuthOAuth2ScopesAdditional' with the minimum fields required to make a request.
 --
@@ -704,9 +727,8 @@ newtype RestDescriptionAuthOAuth2ScopesAdditional = RestDescriptionAuthOAuth2Sco
 restDescriptionAuthOAuth2ScopesAdditional
     :: RestDescriptionAuthOAuth2ScopesAdditional
 restDescriptionAuthOAuth2ScopesAdditional =
-    RestDescriptionAuthOAuth2ScopesAdditional'
-    { _rdaoasaDescription = Nothing
-    }
+  RestDescriptionAuthOAuth2ScopesAdditional' {_rdaoasaDescription = Nothing}
+
 
 -- | Description of scope.
 rdaoasaDescription :: Lens' RestDescriptionAuthOAuth2ScopesAdditional (Maybe Text)
@@ -715,7 +737,8 @@ rdaoasaDescription
       (\ s a -> s{_rdaoasaDescription = a})
 
 instance FromJSON
-         RestDescriptionAuthOAuth2ScopesAdditional where
+           RestDescriptionAuthOAuth2ScopesAdditional
+         where
         parseJSON
           = withObject
               "RestDescriptionAuthOAuth2ScopesAdditional"
@@ -724,7 +747,8 @@ instance FromJSON
                    (o .:? "description"))
 
 instance ToJSON
-         RestDescriptionAuthOAuth2ScopesAdditional where
+           RestDescriptionAuthOAuth2ScopesAdditional
+         where
         toJSON RestDescriptionAuthOAuth2ScopesAdditional'{..}
           = object
               (catMaybes
@@ -733,10 +757,13 @@ instance ToJSON
 -- | Supports uploading as a single HTTP request.
 --
 -- /See:/ 'restMethodMediaUploadProtocolsSimple' smart constructor.
-data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple'
+data RestMethodMediaUploadProtocolsSimple =
+  RestMethodMediaUploadProtocolsSimple'
     { _rmmupsPath      :: !(Maybe Text)
     , _rmmupsMultiPart :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodMediaUploadProtocolsSimple' with the minimum fields required to make a request.
 --
@@ -748,10 +775,9 @@ data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple
     :: RestMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple =
-    RestMethodMediaUploadProtocolsSimple'
-    { _rmmupsPath = Nothing
-    , _rmmupsMultiPart = True
-    }
+  RestMethodMediaUploadProtocolsSimple'
+    {_rmmupsPath = Nothing, _rmmupsMultiPart = True}
+
 
 -- | The URI path to be used for upload. Should be used in conjunction with
 -- the basePath property at the api-level.
@@ -766,7 +792,8 @@ rmmupsMultiPart
       (\ s a -> s{_rmmupsMultiPart = a})
 
 instance FromJSON
-         RestMethodMediaUploadProtocolsSimple where
+           RestMethodMediaUploadProtocolsSimple
+         where
         parseJSON
           = withObject "RestMethodMediaUploadProtocolsSimple"
               (\ o ->
@@ -784,10 +811,13 @@ instance ToJSON RestMethodMediaUploadProtocolsSimple
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
 -- /See:/ 'restDescriptionIcons' smart constructor.
-data RestDescriptionIcons = RestDescriptionIcons'
+data RestDescriptionIcons =
+  RestDescriptionIcons'
     { _rdiX16 :: !(Maybe Text)
     , _rdiX32 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionIcons' with the minimum fields required to make a request.
 --
@@ -799,10 +829,8 @@ data RestDescriptionIcons = RestDescriptionIcons'
 restDescriptionIcons
     :: RestDescriptionIcons
 restDescriptionIcons =
-    RestDescriptionIcons'
-    { _rdiX16 = Nothing
-    , _rdiX32 = Nothing
-    }
+  RestDescriptionIcons' {_rdiX16 = Nothing, _rdiX32 = Nothing}
+
 
 -- | The URL of the 16x16 icon.
 rdiX16 :: Lens' RestDescriptionIcons (Maybe Text)
@@ -830,10 +858,13 @@ instance ToJSON RestDescriptionIcons where
 -- descriminant values to schema names.
 --
 -- /See:/ 'jsonSchemaVariant' smart constructor.
-data JSONSchemaVariant = JSONSchemaVariant'
+data JSONSchemaVariant =
+  JSONSchemaVariant'
     { _jsvDiscriminant :: !(Maybe Text)
     , _jsvMap          :: !(Maybe [JSONSchemaVariantMapItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JSONSchemaVariant' with the minimum fields required to make a request.
 --
@@ -845,10 +876,8 @@ data JSONSchemaVariant = JSONSchemaVariant'
 jsonSchemaVariant
     :: JSONSchemaVariant
 jsonSchemaVariant =
-    JSONSchemaVariant'
-    { _jsvDiscriminant = Nothing
-    , _jsvMap = Nothing
-    }
+  JSONSchemaVariant' {_jsvDiscriminant = Nothing, _jsvMap = Nothing}
+
 
 -- | The name of the type discriminant property.
 jsvDiscriminant :: Lens' JSONSchemaVariant (Maybe Text)
@@ -879,9 +908,12 @@ instance ToJSON JSONSchemaVariant where
 -- | Methods on this resource.
 --
 -- /See:/ 'restResourceMethods' smart constructor.
-newtype RestResourceMethods = RestResourceMethods'
+newtype RestResourceMethods =
+  RestResourceMethods'
     { _rrmAddtional :: HashMap Text RestMethod
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestResourceMethods' with the minimum fields required to make a request.
 --
@@ -892,9 +924,8 @@ restResourceMethods
     :: HashMap Text RestMethod -- ^ 'rrmAddtional'
     -> RestResourceMethods
 restResourceMethods pRrmAddtional_ =
-    RestResourceMethods'
-    { _rrmAddtional = _Coerce # pRrmAddtional_
-    }
+  RestResourceMethods' {_rrmAddtional = _Coerce # pRrmAddtional_}
+
 
 -- | Description for any methods on this resource.
 rrmAddtional :: Lens' RestResourceMethods (HashMap Text RestMethod)
@@ -913,9 +944,12 @@ instance ToJSON RestResourceMethods where
 -- | Authentication information.
 --
 -- /See:/ 'restDescriptionAuth' smart constructor.
-newtype RestDescriptionAuth = RestDescriptionAuth'
+newtype RestDescriptionAuth =
+  RestDescriptionAuth'
     { _rdaOAuth2 :: Maybe RestDescriptionAuthOAuth2
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionAuth' with the minimum fields required to make a request.
 --
@@ -924,10 +958,8 @@ newtype RestDescriptionAuth = RestDescriptionAuth'
 -- * 'rdaOAuth2'
 restDescriptionAuth
     :: RestDescriptionAuth
-restDescriptionAuth =
-    RestDescriptionAuth'
-    { _rdaOAuth2 = Nothing
-    }
+restDescriptionAuth = RestDescriptionAuth' {_rdaOAuth2 = Nothing}
+
 
 -- | OAuth 2.0 authentication information.
 rdaOAuth2 :: Lens' RestDescriptionAuth (Maybe RestDescriptionAuthOAuth2)
@@ -945,7 +977,8 @@ instance ToJSON RestDescriptionAuth where
 
 --
 -- /See:/ 'restDescription' smart constructor.
-data RestDescription = RestDescription'
+data RestDescription =
+  RestDescription'
     { _rdEtag                      :: !(Maybe Text)
     , _rdSchemas                   :: !(Maybe RestDescriptionSchemas)
     , _rdServicePath               :: !(Maybe Text)
@@ -976,7 +1009,9 @@ data RestDescription = RestDescription'
     , _rdTitle                     :: !(Maybe Text)
     , _rdRevision                  :: !(Maybe Text)
     , _rdDescription               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescription' with the minimum fields required to make a request.
 --
@@ -1044,7 +1079,7 @@ data RestDescription = RestDescription'
 restDescription
     :: RestDescription
 restDescription =
-    RestDescription'
+  RestDescription'
     { _rdEtag = Nothing
     , _rdSchemas = Nothing
     , _rdServicePath = Nothing
@@ -1076,6 +1111,7 @@ restDescription =
     , _rdRevision = Nothing
     , _rdDescription = Nothing
     }
+
 
 -- | The ETag for this response.
 rdEtag :: Lens' RestDescription (Maybe Text)
@@ -1307,7 +1343,8 @@ instance ToJSON RestDescription where
 
 --
 -- /See:/ 'jsonSchema' smart constructor.
-data JSONSchema = JSONSchema'
+data JSONSchema =
+  JSONSchema'
     { _jsAnnotations          :: !(Maybe JSONSchemaAnnotations)
     , _jsVariant              :: !(Maybe JSONSchemaVariant)
     , _jsLocation             :: !(Maybe Text)
@@ -1328,7 +1365,9 @@ data JSONSchema = JSONSchema'
     , _jsEnumDescriptions     :: !(Maybe [Text])
     , _jsDescription          :: !(Maybe Text)
     , _jsProperties           :: !(Maybe JSONSchemaProperties)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JSONSchema' with the minimum fields required to make a request.
 --
@@ -1376,7 +1415,7 @@ data JSONSchema = JSONSchema'
 jsonSchema
     :: JSONSchema
 jsonSchema =
-    JSONSchema'
+  JSONSchema'
     { _jsAnnotations = Nothing
     , _jsVariant = Nothing
     , _jsLocation = Nothing
@@ -1398,6 +1437,7 @@ jsonSchema =
     , _jsDescription = Nothing
     , _jsProperties = Nothing
     }
+
 
 -- | Additional information about this property.
 jsAnnotations :: Lens' JSONSchema (Maybe JSONSchemaAnnotations)
@@ -1567,9 +1607,12 @@ instance ToJSON JSONSchema where
 -- | The schemas for this API.
 --
 -- /See:/ 'restDescriptionSchemas' smart constructor.
-newtype RestDescriptionSchemas = RestDescriptionSchemas'
+newtype RestDescriptionSchemas =
+  RestDescriptionSchemas'
     { _rdsAddtional :: HashMap Text JSONSchema
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionSchemas' with the minimum fields required to make a request.
 --
@@ -1580,9 +1623,8 @@ restDescriptionSchemas
     :: HashMap Text JSONSchema -- ^ 'rdsAddtional'
     -> RestDescriptionSchemas
 restDescriptionSchemas pRdsAddtional_ =
-    RestDescriptionSchemas'
-    { _rdsAddtional = _Coerce # pRdsAddtional_
-    }
+  RestDescriptionSchemas' {_rdsAddtional = _Coerce # pRdsAddtional_}
+
 
 -- | An individual schema description.
 rdsAddtional :: Lens' RestDescriptionSchemas (HashMap Text JSONSchema)
@@ -1601,10 +1643,13 @@ instance ToJSON RestDescriptionSchemas where
 
 --
 -- /See:/ 'jsonSchemaVariantMapItem' smart constructor.
-data JSONSchemaVariantMapItem = JSONSchemaVariantMapItem'
+data JSONSchemaVariantMapItem =
+  JSONSchemaVariantMapItem'
     { _jsvmiRef       :: !(Maybe Text)
     , _jsvmiTypeValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JSONSchemaVariantMapItem' with the minimum fields required to make a request.
 --
@@ -1616,10 +1661,8 @@ data JSONSchemaVariantMapItem = JSONSchemaVariantMapItem'
 jsonSchemaVariantMapItem
     :: JSONSchemaVariantMapItem
 jsonSchemaVariantMapItem =
-    JSONSchemaVariantMapItem'
-    { _jsvmiRef = Nothing
-    , _jsvmiTypeValue = Nothing
-    }
+  JSONSchemaVariantMapItem' {_jsvmiRef = Nothing, _jsvmiTypeValue = Nothing}
+
 
 jsvmiRef :: Lens' JSONSchemaVariantMapItem (Maybe Text)
 jsvmiRef = lens _jsvmiRef (\ s a -> s{_jsvmiRef = a})
@@ -1646,9 +1689,12 @@ instance ToJSON JSONSchemaVariantMapItem where
 -- | The resources in this API.
 --
 -- /See:/ 'restDescriptionResources' smart constructor.
-newtype RestDescriptionResources = RestDescriptionResources'
+newtype RestDescriptionResources =
+  RestDescriptionResources'
     { _rdrAddtional :: HashMap Text RestResource
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestDescriptionResources' with the minimum fields required to make a request.
 --
@@ -1659,9 +1705,8 @@ restDescriptionResources
     :: HashMap Text RestResource -- ^ 'rdrAddtional'
     -> RestDescriptionResources
 restDescriptionResources pRdrAddtional_ =
-    RestDescriptionResources'
-    { _rdrAddtional = _Coerce # pRdrAddtional_
-    }
+  RestDescriptionResources' {_rdrAddtional = _Coerce # pRdrAddtional_}
+
 
 -- | An individual resource description. Contains methods and sub-resources
 -- related to this resource.
@@ -1682,10 +1727,13 @@ instance ToJSON RestDescriptionResources where
 -- | Supported upload protocols.
 --
 -- /See:/ 'restMethodMediaUploadProtocols' smart constructor.
-data RestMethodMediaUploadProtocols = RestMethodMediaUploadProtocols'
+data RestMethodMediaUploadProtocols =
+  RestMethodMediaUploadProtocols'
     { _rmmupSimple    :: !(Maybe RestMethodMediaUploadProtocolsSimple)
     , _rmmupResumable :: !(Maybe RestMethodMediaUploadProtocolsResumable)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodMediaUploadProtocols' with the minimum fields required to make a request.
 --
@@ -1697,10 +1745,9 @@ data RestMethodMediaUploadProtocols = RestMethodMediaUploadProtocols'
 restMethodMediaUploadProtocols
     :: RestMethodMediaUploadProtocols
 restMethodMediaUploadProtocols =
-    RestMethodMediaUploadProtocols'
-    { _rmmupSimple = Nothing
-    , _rmmupResumable = Nothing
-    }
+  RestMethodMediaUploadProtocols'
+    {_rmmupSimple = Nothing, _rmmupResumable = Nothing}
+
 
 -- | Supports uploading as a single HTTP request.
 rmmupSimple :: Lens' RestMethodMediaUploadProtocols (Maybe RestMethodMediaUploadProtocolsSimple)
@@ -1731,9 +1778,12 @@ instance ToJSON RestMethodMediaUploadProtocols where
 -- | Additional information about this property.
 --
 -- /See:/ 'jsonSchemaAnnotations' smart constructor.
-newtype JSONSchemaAnnotations = JSONSchemaAnnotations'
+newtype JSONSchemaAnnotations =
+  JSONSchemaAnnotations'
     { _jsaRequired :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JSONSchemaAnnotations' with the minimum fields required to make a request.
 --
@@ -1742,10 +1792,8 @@ newtype JSONSchemaAnnotations = JSONSchemaAnnotations'
 -- * 'jsaRequired'
 jsonSchemaAnnotations
     :: JSONSchemaAnnotations
-jsonSchemaAnnotations =
-    JSONSchemaAnnotations'
-    { _jsaRequired = Nothing
-    }
+jsonSchemaAnnotations = JSONSchemaAnnotations' {_jsaRequired = Nothing}
+
 
 -- | A list of methods for which this property is required on requests.
 jsaRequired :: Lens' JSONSchemaAnnotations [Text]
@@ -1769,9 +1817,12 @@ instance ToJSON JSONSchemaAnnotations where
 -- | Details for all parameters in this method.
 --
 -- /See:/ 'restMethodParameters' smart constructor.
-newtype RestMethodParameters = RestMethodParameters'
+newtype RestMethodParameters =
+  RestMethodParameters'
     { _rmpAddtional :: HashMap Text JSONSchema
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodParameters' with the minimum fields required to make a request.
 --
@@ -1782,9 +1833,8 @@ restMethodParameters
     :: HashMap Text JSONSchema -- ^ 'rmpAddtional'
     -> RestMethodParameters
 restMethodParameters pRmpAddtional_ =
-    RestMethodParameters'
-    { _rmpAddtional = _Coerce # pRmpAddtional_
-    }
+  RestMethodParameters' {_rmpAddtional = _Coerce # pRmpAddtional_}
+
 
 -- | Details for a single parameter in this method.
 rmpAddtional :: Lens' RestMethodParameters (HashMap Text JSONSchema)
@@ -1804,11 +1854,14 @@ instance ToJSON RestMethodParameters where
 -- | Media upload parameters.
 --
 -- /See:/ 'restMethodMediaUpload' smart constructor.
-data RestMethodMediaUpload = RestMethodMediaUpload'
+data RestMethodMediaUpload =
+  RestMethodMediaUpload'
     { _rmmuProtocols :: !(Maybe RestMethodMediaUploadProtocols)
     , _rmmuAccept    :: !(Maybe [Text])
     , _rmmuMaxSize   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodMediaUpload' with the minimum fields required to make a request.
 --
@@ -1822,11 +1875,9 @@ data RestMethodMediaUpload = RestMethodMediaUpload'
 restMethodMediaUpload
     :: RestMethodMediaUpload
 restMethodMediaUpload =
-    RestMethodMediaUpload'
-    { _rmmuProtocols = Nothing
-    , _rmmuAccept = Nothing
-    , _rmmuMaxSize = Nothing
-    }
+  RestMethodMediaUpload'
+    {_rmmuProtocols = Nothing, _rmmuAccept = Nothing, _rmmuMaxSize = Nothing}
+
 
 -- | Supported upload protocols.
 rmmuProtocols :: Lens' RestMethodMediaUpload (Maybe RestMethodMediaUploadProtocols)
@@ -1866,9 +1917,12 @@ instance ToJSON RestMethodMediaUpload where
 -- this object.
 --
 -- /See:/ 'jsonSchemaProperties' smart constructor.
-newtype JSONSchemaProperties = JSONSchemaProperties'
+newtype JSONSchemaProperties =
+  JSONSchemaProperties'
     { _jspAddtional :: HashMap Text JSONSchema
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JSONSchemaProperties' with the minimum fields required to make a request.
 --
@@ -1879,9 +1933,8 @@ jsonSchemaProperties
     :: HashMap Text JSONSchema -- ^ 'jspAddtional'
     -> JSONSchemaProperties
 jsonSchemaProperties pJspAddtional_ =
-    JSONSchemaProperties'
-    { _jspAddtional = _Coerce # pJspAddtional_
-    }
+  JSONSchemaProperties' {_jspAddtional = _Coerce # pJspAddtional_}
+
 
 -- | A single property of this object. The value is itself a JSON Schema
 -- object describing this property.
@@ -1902,10 +1955,13 @@ instance ToJSON JSONSchemaProperties where
 -- | Supports the Resumable Media Upload protocol.
 --
 -- /See:/ 'restMethodMediaUploadProtocolsResumable' smart constructor.
-data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsResumable'
+data RestMethodMediaUploadProtocolsResumable =
+  RestMethodMediaUploadProtocolsResumable'
     { _rmmuprPath      :: !(Maybe Text)
     , _rmmuprMultiPart :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodMediaUploadProtocolsResumable' with the minimum fields required to make a request.
 --
@@ -1917,10 +1973,9 @@ data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsRes
 restMethodMediaUploadProtocolsResumable
     :: RestMethodMediaUploadProtocolsResumable
 restMethodMediaUploadProtocolsResumable =
-    RestMethodMediaUploadProtocolsResumable'
-    { _rmmuprPath = Nothing
-    , _rmmuprMultiPart = True
-    }
+  RestMethodMediaUploadProtocolsResumable'
+    {_rmmuprPath = Nothing, _rmmuprMultiPart = True}
+
 
 -- | The URI path to be used for upload. Should be used in conjunction with
 -- the basePath property at the api-level.
@@ -1935,7 +1990,8 @@ rmmuprMultiPart
       (\ s a -> s{_rmmuprMultiPart = a})
 
 instance FromJSON
-         RestMethodMediaUploadProtocolsResumable where
+           RestMethodMediaUploadProtocolsResumable
+         where
         parseJSON
           = withObject
               "RestMethodMediaUploadProtocolsResumable"
@@ -1944,7 +2000,8 @@ instance FromJSON
                    (o .:? "path") <*> (o .:? "multipart" .!= True))
 
 instance ToJSON
-         RestMethodMediaUploadProtocolsResumable where
+           RestMethodMediaUploadProtocolsResumable
+         where
         toJSON RestMethodMediaUploadProtocolsResumable'{..}
           = object
               (catMaybes
@@ -1953,11 +2010,14 @@ instance ToJSON
 
 --
 -- /See:/ 'directoryList' smart constructor.
-data DirectoryList = DirectoryList'
+data DirectoryList =
+  DirectoryList'
     { _dlKind             :: !Text
     , _dlItems            :: !(Maybe [DirectoryListItemsItem])
     , _dlDiscoveryVersion :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DirectoryList' with the minimum fields required to make a request.
 --
@@ -1971,11 +2031,12 @@ data DirectoryList = DirectoryList'
 directoryList
     :: DirectoryList
 directoryList =
-    DirectoryList'
+  DirectoryList'
     { _dlKind = "discovery#directoryList"
     , _dlItems = Nothing
     , _dlDiscoveryVersion = "v1"
     }
+
 
 -- | The kind for this response.
 dlKind :: Lens' DirectoryList Text
@@ -2012,10 +2073,13 @@ instance ToJSON DirectoryList where
 -- | The schema for the request.
 --
 -- /See:/ 'restMethodRequest' smart constructor.
-data RestMethodRequest = RestMethodRequest'
+data RestMethodRequest =
+  RestMethodRequest'
     { _rRef           :: !(Maybe Text)
     , _rParameterName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestMethodRequest' with the minimum fields required to make a request.
 --
@@ -2027,10 +2091,8 @@ data RestMethodRequest = RestMethodRequest'
 restMethodRequest
     :: RestMethodRequest
 restMethodRequest =
-    RestMethodRequest'
-    { _rRef = Nothing
-    , _rParameterName = Nothing
-    }
+  RestMethodRequest' {_rRef = Nothing, _rParameterName = Nothing}
+
 
 -- | Schema ID for the request schema.
 rRef :: Lens' RestMethodRequest (Maybe Text)

@@ -65,7 +65,8 @@ type ProjectsGetContentResource =
 -- metadata for each script file.
 --
 -- /See:/ 'projectsGetContent' smart constructor.
-data ProjectsGetContent = ProjectsGetContent'
+data ProjectsGetContent =
+  ProjectsGetContent'
     { _pgcXgafv          :: !(Maybe Xgafv)
     , _pgcUploadProtocol :: !(Maybe Text)
     , _pgcAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsGetContent = ProjectsGetContent'
     , _pgcVersionNumber  :: !(Maybe (Textual Int32))
     , _pgcScriptId       :: !Text
     , _pgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGetContent' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsGetContent
     :: Text -- ^ 'pgcScriptId'
     -> ProjectsGetContent
 projectsGetContent pPgcScriptId_ =
-    ProjectsGetContent'
+  ProjectsGetContent'
     { _pgcXgafv = Nothing
     , _pgcUploadProtocol = Nothing
     , _pgcAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsGetContent pPgcScriptId_ =
     , _pgcScriptId = pPgcScriptId_
     , _pgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgcXgafv :: Lens' ProjectsGetContent (Maybe Xgafv)

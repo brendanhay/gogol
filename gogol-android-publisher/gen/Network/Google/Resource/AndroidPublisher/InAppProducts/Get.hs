@@ -54,10 +54,13 @@ type InAppProductsGetResource =
 -- | Returns information about the in-app product specified.
 --
 -- /See:/ 'inAppProductsGet' smart constructor.
-data InAppProductsGet = InAppProductsGet'
+data InAppProductsGet =
+  InAppProductsGet'
     { _iapgPackageName :: !Text
     , _iapgSKU         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ inAppProductsGet
     -> Text -- ^ 'iapgSKU'
     -> InAppProductsGet
 inAppProductsGet pIapgPackageName_ pIapgSKU_ =
-    InAppProductsGet'
-    { _iapgPackageName = pIapgPackageName_
-    , _iapgSKU = pIapgSKU_
-    }
+  InAppProductsGet' {_iapgPackageName = pIapgPackageName_, _iapgSKU = pIapgSKU_}
+
 
 iapgPackageName :: Lens' InAppProductsGet Text
 iapgPackageName

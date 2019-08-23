@@ -69,7 +69,8 @@ type RolesListResource =
 -- | Lists the Roles defined on a resource.
 --
 -- /See:/ 'rolesList' smart constructor.
-data RolesList = RolesList'
+data RolesList =
+  RolesList'
     { _rlParent         :: !(Maybe Text)
     , _rlXgafv          :: !(Maybe Xgafv)
     , _rlUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,9 @@ data RolesList = RolesList'
     , _rlPageToken      :: !(Maybe Text)
     , _rlPageSize       :: !(Maybe (Textual Int32))
     , _rlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RolesList' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ data RolesList = RolesList'
 rolesList
     :: RolesList
 rolesList =
-    RolesList'
+  RolesList'
     { _rlParent = Nothing
     , _rlXgafv = Nothing
     , _rlUploadProtocol = Nothing
@@ -120,6 +123,7 @@ rolesList =
     , _rlPageSize = Nothing
     , _rlCallback = Nothing
     }
+
 
 -- | The resource name of the parent resource in one of the following
 -- formats: \`\` (empty string) -- this refers to curated roles.
@@ -154,7 +158,10 @@ rlShowDeleted
   = lens _rlShowDeleted
       (\ s a -> s{_rlShowDeleted = a})
 
--- | Optional view for the returned Role objects.
+-- | Optional view for the returned Role objects. When \`FULL\` is specified,
+-- the \`includedPermissions\` field is returned, which includes a list of
+-- all permissions in the role. The default value is \`BASIC\`, which does
+-- not return the \`includedPermissions\` field.
 rlView :: Lens' RolesList (Maybe Text)
 rlView = lens _rlView (\ s a -> s{_rlView = a})
 

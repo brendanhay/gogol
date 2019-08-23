@@ -21,12 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the metadata of the specified Photo batch. Note that if
--- BatchGetPhotos fails, either critical fields are missing or there was an
--- authentication error. Even if BatchGetPhotos succeeds, there may have
--- been failures for single photos in the batch. These failures will be
--- specified in each PhotoResponse.status in
--- BatchGetPhotosResponse.results. See GetPhoto for specific failures that
--- can occur per photo.
+-- BatchGetPhotos fails, either critical fields are missing or there is an
+-- authentication error. Even if BatchGetPhotos succeeds, individual photos
+-- in the batch may have failures. These failures are specified in each
+-- PhotoResponse.status in BatchGetPhotosResponse.results. See GetPhoto for
+-- specific failures that can occur per photo.
 --
 -- /See:/ <https://developers.google.com/streetview/publish/ Street View Publish API Reference> for @streetviewpublish.photos.batchGet@.
 module Network.Google.Resource.StreetViewPublish.Photos.BatchGet
@@ -69,15 +68,15 @@ type PhotosBatchGetResource =
                            Get '[JSON] BatchGetPhotosResponse
 
 -- | Gets the metadata of the specified Photo batch. Note that if
--- BatchGetPhotos fails, either critical fields are missing or there was an
--- authentication error. Even if BatchGetPhotos succeeds, there may have
--- been failures for single photos in the batch. These failures will be
--- specified in each PhotoResponse.status in
--- BatchGetPhotosResponse.results. See GetPhoto for specific failures that
--- can occur per photo.
+-- BatchGetPhotos fails, either critical fields are missing or there is an
+-- authentication error. Even if BatchGetPhotos succeeds, individual photos
+-- in the batch may have failures. These failures are specified in each
+-- PhotoResponse.status in BatchGetPhotosResponse.results. See GetPhoto for
+-- specific failures that can occur per photo.
 --
 -- /See:/ 'photosBatchGet' smart constructor.
-data PhotosBatchGet = PhotosBatchGet'
+data PhotosBatchGet =
+  PhotosBatchGet'
     { _pbgXgafv          :: !(Maybe Xgafv)
     , _pbgLanguageCode   :: !(Maybe Text)
     , _pbgUploadProtocol :: !(Maybe Text)
@@ -86,7 +85,9 @@ data PhotosBatchGet = PhotosBatchGet'
     , _pbgPhotoIds       :: !(Maybe [Text])
     , _pbgView           :: !(Maybe Text)
     , _pbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotosBatchGet' with the minimum fields required to make a request.
 --
@@ -110,7 +111,7 @@ data PhotosBatchGet = PhotosBatchGet'
 photosBatchGet
     :: PhotosBatchGet
 photosBatchGet =
-    PhotosBatchGet'
+  PhotosBatchGet'
     { _pbgXgafv = Nothing
     , _pbgLanguageCode = Nothing
     , _pbgUploadProtocol = Nothing
@@ -121,6 +122,7 @@ photosBatchGet =
     , _pbgCallback = Nothing
     }
 
+
 -- | V1 error format.
 pbgXgafv :: Lens' PhotosBatchGet (Maybe Xgafv)
 pbgXgafv = lens _pbgXgafv (\ s a -> s{_pbgXgafv = a})
@@ -129,7 +131,7 @@ pbgXgafv = lens _pbgXgafv (\ s a -> s{_pbgXgafv = a})
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. If
 -- language_code is unspecified, the user\'s language preference for Google
--- services will be used.
+-- services is used.
 pbgLanguageCode :: Lens' PhotosBatchGet (Maybe Text)
 pbgLanguageCode
   = lens _pbgLanguageCode

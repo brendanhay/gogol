@@ -85,7 +85,8 @@ type ProcessesListScriptProcessesResource =
 -- type and current status.
 --
 -- /See:/ 'processesListScriptProcesses' smart constructor.
-data ProcessesListScriptProcesses = ProcessesListScriptProcesses'
+data ProcessesListScriptProcesses =
+  ProcessesListScriptProcesses'
     { _plspXgafv                               :: !(Maybe Xgafv)
     , _plspScriptProcessFilterFunctionName     :: !(Maybe Text)
     , _plspUploadProtocol                      :: !(Maybe Text)
@@ -101,7 +102,9 @@ data ProcessesListScriptProcesses = ProcessesListScriptProcesses'
     , _plspPageSize                            :: !(Maybe (Textual Int32))
     , _plspScriptProcessFilterTypes            :: !(Maybe [Text])
     , _plspCallback                            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProcessesListScriptProcesses' with the minimum fields required to make a request.
 --
@@ -139,7 +142,7 @@ data ProcessesListScriptProcesses = ProcessesListScriptProcesses'
 processesListScriptProcesses
     :: ProcessesListScriptProcesses
 processesListScriptProcesses =
-    ProcessesListScriptProcesses'
+  ProcessesListScriptProcesses'
     { _plspXgafv = Nothing
     , _plspScriptProcessFilterFunctionName = Nothing
     , _plspUploadProtocol = Nothing
@@ -156,6 +159,7 @@ processesListScriptProcesses =
     , _plspScriptProcessFilterTypes = Nothing
     , _plspCallback = Nothing
     }
+
 
 -- | V1 error format.
 plspXgafv :: Lens' ProcessesListScriptProcesses (Maybe Xgafv)

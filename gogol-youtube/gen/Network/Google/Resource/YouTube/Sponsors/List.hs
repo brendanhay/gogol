@@ -58,12 +58,15 @@ type SponsorsListResource =
 -- | Lists sponsors for a channel.
 --
 -- /See:/ 'sponsorsList' smart constructor.
-data SponsorsList = SponsorsList'
+data SponsorsList =
+  SponsorsList'
     { _sPart       :: !Text
     , _sFilter     :: !SponsorsListFilter
     , _sPageToken  :: !(Maybe Text)
     , _sMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SponsorsList' with the minimum fields required to make a request.
 --
@@ -80,12 +83,13 @@ sponsorsList
     :: Text -- ^ 'sPart'
     -> SponsorsList
 sponsorsList pSPart_ =
-    SponsorsList'
+  SponsorsList'
     { _sPart = pSPart_
     , _sFilter = SLFNewest
     , _sPageToken = Nothing
     , _sMaxResults = 5
     }
+
 
 -- | The part parameter specifies the sponsor resource parts that the API
 -- response will include. Supported values are id and snippet.

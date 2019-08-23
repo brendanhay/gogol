@@ -63,12 +63,15 @@ type TableDataInsertAllResource =
 -- load job. Requires the WRITER dataset role.
 --
 -- /See:/ 'tableDataInsertAll' smart constructor.
-data TableDataInsertAll = TableDataInsertAll'
+data TableDataInsertAll =
+  TableDataInsertAll'
     { _tdiaPayload   :: !TableDataInsertAllRequest
     , _tdiaDataSetId :: !Text
     , _tdiaProjectId :: !Text
     , _tdiaTableId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableDataInsertAll' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ tableDataInsertAll
     -> Text -- ^ 'tdiaTableId'
     -> TableDataInsertAll
 tableDataInsertAll pTdiaPayload_ pTdiaDataSetId_ pTdiaProjectId_ pTdiaTableId_ =
-    TableDataInsertAll'
+  TableDataInsertAll'
     { _tdiaPayload = pTdiaPayload_
     , _tdiaDataSetId = pTdiaDataSetId_
     , _tdiaProjectId = pTdiaProjectId_
     , _tdiaTableId = pTdiaTableId_
     }
+
 
 -- | Multipart request metadata.
 tdiaPayload :: Lens' TableDataInsertAll TableDataInsertAllRequest

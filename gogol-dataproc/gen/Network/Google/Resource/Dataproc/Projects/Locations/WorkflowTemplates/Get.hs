@@ -64,7 +64,8 @@ type ProjectsLocationsWorkflowTemplatesGetResource =
 -- instantiated template by specifying optional version parameter.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesGet' smart constructor.
-data ProjectsLocationsWorkflowTemplatesGet = ProjectsLocationsWorkflowTemplatesGet'
+data ProjectsLocationsWorkflowTemplatesGet =
+  ProjectsLocationsWorkflowTemplatesGet'
     { _plwtgXgafv          :: !(Maybe Xgafv)
     , _plwtgUploadProtocol :: !(Maybe Text)
     , _plwtgAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsLocationsWorkflowTemplatesGet = ProjectsLocationsWorkflowTemplatesG
     , _plwtgName           :: !Text
     , _plwtgVersion        :: !(Maybe (Textual Int32))
     , _plwtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesGet' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsWorkflowTemplatesGet
     :: Text -- ^ 'plwtgName'
     -> ProjectsLocationsWorkflowTemplatesGet
 projectsLocationsWorkflowTemplatesGet pPlwtgName_ =
-    ProjectsLocationsWorkflowTemplatesGet'
+  ProjectsLocationsWorkflowTemplatesGet'
     { _plwtgXgafv = Nothing
     , _plwtgUploadProtocol = Nothing
     , _plwtgAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsWorkflowTemplatesGet pPlwtgName_ =
     , _plwtgVersion = Nothing
     , _plwtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwtgXgafv :: Lens' ProjectsLocationsWorkflowTemplatesGet (Maybe Xgafv)
@@ -150,7 +154,8 @@ plwtgCallback
       (\ s a -> s{_plwtgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesGet where
+           ProjectsLocationsWorkflowTemplatesGet
+         where
         type Rs ProjectsLocationsWorkflowTemplatesGet =
              WorkflowTemplate
         type Scopes ProjectsLocationsWorkflowTemplatesGet =

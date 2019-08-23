@@ -71,7 +71,8 @@ type ProjectsZonesClustersSetMaintenancePolicyResource
 -- | Sets the maintenance policy for a cluster.
 --
 -- /See:/ 'projectsZonesClustersSetMaintenancePolicy' smart constructor.
-data ProjectsZonesClustersSetMaintenancePolicy = ProjectsZonesClustersSetMaintenancePolicy'
+data ProjectsZonesClustersSetMaintenancePolicy =
+  ProjectsZonesClustersSetMaintenancePolicy'
     { _pzcsmpXgafv          :: !(Maybe Xgafv)
     , _pzcsmpUploadProtocol :: !(Maybe Text)
     , _pzcsmpAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsZonesClustersSetMaintenancePolicy = ProjectsZonesClustersSetMainten
     , _pzcsmpClusterId      :: !Text
     , _pzcsmpProjectId      :: !Text
     , _pzcsmpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersSetMaintenancePolicy' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsZonesClustersSetMaintenancePolicy
     -> Text -- ^ 'pzcsmpProjectId'
     -> ProjectsZonesClustersSetMaintenancePolicy
 projectsZonesClustersSetMaintenancePolicy pPzcsmpZone_ pPzcsmpPayload_ pPzcsmpClusterId_ pPzcsmpProjectId_ =
-    ProjectsZonesClustersSetMaintenancePolicy'
+  ProjectsZonesClustersSetMaintenancePolicy'
     { _pzcsmpXgafv = Nothing
     , _pzcsmpUploadProtocol = Nothing
     , _pzcsmpAccessToken = Nothing
@@ -122,6 +125,7 @@ projectsZonesClustersSetMaintenancePolicy pPzcsmpZone_ pPzcsmpPayload_ pPzcsmpCl
     , _pzcsmpProjectId = pPzcsmpProjectId_
     , _pzcsmpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsmpXgafv :: Lens' ProjectsZonesClustersSetMaintenancePolicy (Maybe Xgafv)
@@ -178,7 +182,8 @@ pzcsmpCallback
       (\ s a -> s{_pzcsmpCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersSetMaintenancePolicy where
+           ProjectsZonesClustersSetMaintenancePolicy
+         where
         type Rs ProjectsZonesClustersSetMaintenancePolicy =
              Operation
         type Scopes ProjectsZonesClustersSetMaintenancePolicy

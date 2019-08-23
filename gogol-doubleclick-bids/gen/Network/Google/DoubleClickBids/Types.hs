@@ -174,6 +174,7 @@ module Network.Google.DoubleClickBids.Types
     -- * DownloadResponse
     , DownloadResponse
     , downloadResponse
+    , drInventorySources
     , drInsertionOrders
     , drCampaigns
     , drLineItems
@@ -249,4 +250,4 @@ doubleClickBidsService
 
 -- | View and manage your reports in DoubleClick Bid Manager
 doubleClickBidManagerScope :: Proxy '["https://www.googleapis.com/auth/doubleclickbidmanager"]
-doubleClickBidManagerScope = Proxy;
+doubleClickBidManagerScope = Proxy

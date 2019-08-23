@@ -70,7 +70,8 @@ type SpreadsheetsValuesBatchGetByDataFilterResource =
 -- will be returned.
 --
 -- /See:/ 'spreadsheetsValuesBatchGetByDataFilter' smart constructor.
-data SpreadsheetsValuesBatchGetByDataFilter = SpreadsheetsValuesBatchGetByDataFilter'
+data SpreadsheetsValuesBatchGetByDataFilter =
+  SpreadsheetsValuesBatchGetByDataFilter'
     { _svbgbdfXgafv          :: !(Maybe Xgafv)
     , _svbgbdfUploadProtocol :: !(Maybe Text)
     , _svbgbdfAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data SpreadsheetsValuesBatchGetByDataFilter = SpreadsheetsValuesBatchGetByDataFi
     , _svbgbdfUploadType     :: !(Maybe Text)
     , _svbgbdfPayload        :: !BatchGetValuesByDataFilterRequest
     , _svbgbdfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesBatchGetByDataFilter' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ spreadsheetsValuesBatchGetByDataFilter
     -> BatchGetValuesByDataFilterRequest -- ^ 'svbgbdfPayload'
     -> SpreadsheetsValuesBatchGetByDataFilter
 spreadsheetsValuesBatchGetByDataFilter pSvbgbdfSpreadsheetId_ pSvbgbdfPayload_ =
-    SpreadsheetsValuesBatchGetByDataFilter'
+  SpreadsheetsValuesBatchGetByDataFilter'
     { _svbgbdfXgafv = Nothing
     , _svbgbdfUploadProtocol = Nothing
     , _svbgbdfAccessToken = Nothing
@@ -111,6 +114,7 @@ spreadsheetsValuesBatchGetByDataFilter pSvbgbdfSpreadsheetId_ pSvbgbdfPayload_ =
     , _svbgbdfPayload = pSvbgbdfPayload_
     , _svbgbdfCallback = Nothing
     }
+
 
 -- | V1 error format.
 svbgbdfXgafv :: Lens' SpreadsheetsValuesBatchGetByDataFilter (Maybe Xgafv)
@@ -154,7 +158,8 @@ svbgbdfCallback
       (\ s a -> s{_svbgbdfCallback = a})
 
 instance GoogleRequest
-         SpreadsheetsValuesBatchGetByDataFilter where
+           SpreadsheetsValuesBatchGetByDataFilter
+         where
         type Rs SpreadsheetsValuesBatchGetByDataFilter =
              BatchGetValuesByDataFilterResponse
         type Scopes SpreadsheetsValuesBatchGetByDataFilter =

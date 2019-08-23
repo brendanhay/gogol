@@ -22,6 +22,12 @@
 --
 -- Notifies that item return and refund was handled directly by merchant
 -- outside of Google payments processing (e.g. cash refund done in store).
+-- Note: We recommend calling the returnrefundlineitem method to refund
+-- in-store returns. We will issue the refund directly to the customer.
+-- This helps to prevent possible differences arising between merchant and
+-- Google transaction records. We also recommend having the point of sale
+-- system communicate with Google to ensure that customers do not receive a
+-- double refund by first refunding via Google then via an in-store return.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.instorerefundlineitem@.
 module Network.Google.Resource.Content.Orders.Instorerefundlineitem
@@ -57,13 +63,22 @@ type OrdersInstorerefundlineitemResource =
 
 -- | Notifies that item return and refund was handled directly by merchant
 -- outside of Google payments processing (e.g. cash refund done in store).
+-- Note: We recommend calling the returnrefundlineitem method to refund
+-- in-store returns. We will issue the refund directly to the customer.
+-- This helps to prevent possible differences arising between merchant and
+-- Google transaction records. We also recommend having the point of sale
+-- system communicate with Google to ensure that customers do not receive a
+-- double refund by first refunding via Google then via an in-store return.
 --
 -- /See:/ 'ordersInstorerefundlineitem' smart constructor.
-data OrdersInstorerefundlineitem = OrdersInstorerefundlineitem'
+data OrdersInstorerefundlineitem =
+  OrdersInstorerefundlineitem'
     { _oiMerchantId :: !(Textual Word64)
     , _oiPayload    :: !OrdersInStoreRefundLineItemRequest
     , _oiOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersInstorerefundlineitem' with the minimum fields required to make a request.
 --
@@ -80,11 +95,12 @@ ordersInstorerefundlineitem
     -> Text -- ^ 'oiOrderId'
     -> OrdersInstorerefundlineitem
 ordersInstorerefundlineitem pOiMerchantId_ pOiPayload_ pOiOrderId_ =
-    OrdersInstorerefundlineitem'
+  OrdersInstorerefundlineitem'
     { _oiMerchantId = _Coerce # pOiMerchantId_
     , _oiPayload = pOiPayload_
     , _oiOrderId = pOiOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

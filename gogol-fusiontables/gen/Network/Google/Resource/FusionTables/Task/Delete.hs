@@ -56,10 +56,13 @@ type TaskDeleteResource =
 -- running.
 --
 -- /See:/ 'taskDelete' smart constructor.
-data TaskDelete = TaskDelete'
+data TaskDelete =
+  TaskDelete'
     { _tdTaskId  :: !Text
     , _tdTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TaskDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ taskDelete
     -> Text -- ^ 'tdTableId'
     -> TaskDelete
 taskDelete pTdTaskId_ pTdTableId_ =
-    TaskDelete'
-    { _tdTaskId = pTdTaskId_
-    , _tdTableId = pTdTableId_
-    }
+  TaskDelete' {_tdTaskId = pTdTaskId_, _tdTableId = pTdTableId_}
+
 
 -- | The identifier of the task to delete.
 tdTaskId :: Lens' TaskDelete Text

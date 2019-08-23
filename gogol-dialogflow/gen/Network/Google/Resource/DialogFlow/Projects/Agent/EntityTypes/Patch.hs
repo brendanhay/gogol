@@ -66,7 +66,8 @@ type ProjectsAgentEntityTypesPatchResource =
 -- | Updates the specified entity type.
 --
 -- /See:/ 'projectsAgentEntityTypesPatch' smart constructor.
-data ProjectsAgentEntityTypesPatch = ProjectsAgentEntityTypesPatch'
+data ProjectsAgentEntityTypesPatch =
+  ProjectsAgentEntityTypesPatch'
     { _paetpXgafv          :: !(Maybe Xgafv)
     , _paetpLanguageCode   :: !(Maybe Text)
     , _paetpUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsAgentEntityTypesPatch = ProjectsAgentEntityTypesPatch'
     , _paetpPayload        :: !GoogleCloudDialogflowV2EntityType
     , _paetpName           :: !Text
     , _paetpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentEntityTypesPatch' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsAgentEntityTypesPatch
     -> Text -- ^ 'paetpName'
     -> ProjectsAgentEntityTypesPatch
 projectsAgentEntityTypesPatch pPaetpPayload_ pPaetpName_ =
-    ProjectsAgentEntityTypesPatch'
+  ProjectsAgentEntityTypesPatch'
     { _paetpXgafv = Nothing
     , _paetpLanguageCode = Nothing
     , _paetpUploadProtocol = Nothing
@@ -116,16 +119,17 @@ projectsAgentEntityTypesPatch pPaetpPayload_ pPaetpName_ =
     , _paetpCallback = Nothing
     }
 
+
 -- | V1 error format.
 paetpXgafv :: Lens' ProjectsAgentEntityTypesPatch (Maybe Xgafv)
 paetpXgafv
   = lens _paetpXgafv (\ s a -> s{_paetpXgafv = a})
 
 -- | Optional. The language of entity synonyms defined in \`entity_type\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 paetpLanguageCode :: Lens' ProjectsAgentEntityTypesPatch (Maybe Text)
 paetpLanguageCode
   = lens _paetpLanguageCode
@@ -160,9 +164,9 @@ paetpPayload :: Lens' ProjectsAgentEntityTypesPatch GoogleCloudDialogflowV2Entit
 paetpPayload
   = lens _paetpPayload (\ s a -> s{_paetpPayload = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of the entity type. Format:
--- \`projects\/\/agent\/entityTypes\/\`.
+-- | The unique identifier of the entity type. Required for
+-- EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes
+-- methods. Format: \`projects\/\/agent\/entityTypes\/\`.
 paetpName :: Lens' ProjectsAgentEntityTypesPatch Text
 paetpName
   = lens _paetpName (\ s a -> s{_paetpName = a})

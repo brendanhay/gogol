@@ -25,9 +25,12 @@ import           Network.Google.Prelude
 -- flag as well as any specified in the \`Action\` definition.
 --
 -- /See:/ 'containerStartedEventPortMAppings' smart constructor.
-newtype ContainerStartedEventPortMAppings = ContainerStartedEventPortMAppings'
+newtype ContainerStartedEventPortMAppings =
+  ContainerStartedEventPortMAppings'
     { _csepmaAddtional :: HashMap Text (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerStartedEventPortMAppings' with the minimum fields required to make a request.
 --
@@ -38,9 +41,9 @@ containerStartedEventPortMAppings
     :: HashMap Text Int32 -- ^ 'csepmaAddtional'
     -> ContainerStartedEventPortMAppings
 containerStartedEventPortMAppings pCsepmaAddtional_ =
-    ContainerStartedEventPortMAppings'
-    { _csepmaAddtional = _Coerce # pCsepmaAddtional_
-    }
+  ContainerStartedEventPortMAppings'
+    {_csepmaAddtional = _Coerce # pCsepmaAddtional_}
+
 
 csepmaAddtional :: Lens' ContainerStartedEventPortMAppings (HashMap Text Int32)
 csepmaAddtional
@@ -63,11 +66,14 @@ instance ToJSON ContainerStartedEventPortMAppings
 -- | Carries information about events that occur during pipeline execution.
 --
 -- /See:/ 'event' smart constructor.
-data Event = Event'
+data Event =
+  Event'
     { _eDetails     :: !(Maybe EventDetails)
     , _eTimestamp   :: !(Maybe DateTime')
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
@@ -81,11 +87,8 @@ data Event = Event'
 event
     :: Event
 event =
-    Event'
-    { _eDetails = Nothing
-    , _eTimestamp = Nothing
-    , _eDescription = Nothing
-    }
+  Event' {_eDetails = Nothing, _eTimestamp = Nothing, _eDescription = Nothing}
+
 
 -- | Machine-readable details about the event.
 eDetails :: Lens' Event (Maybe EventDetails)
@@ -123,9 +126,12 @@ instance ToJSON Event where
 -- | A workflow specific event occurred.
 --
 -- /See:/ 'checkInRequestEvent' smart constructor.
-newtype CheckInRequestEvent = CheckInRequestEvent'
+newtype CheckInRequestEvent =
+  CheckInRequestEvent'
     { _cireAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckInRequestEvent' with the minimum fields required to make a request.
 --
@@ -136,9 +142,8 @@ checkInRequestEvent
     :: HashMap Text JSONValue -- ^ 'cireAddtional'
     -> CheckInRequestEvent
 checkInRequestEvent pCireAddtional_ =
-    CheckInRequestEvent'
-    { _cireAddtional = _Coerce # pCireAddtional_
-    }
+  CheckInRequestEvent' {_cireAddtional = _Coerce # pCireAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 cireAddtional :: Lens' CheckInRequestEvent (HashMap Text JSONValue)
@@ -192,11 +197,14 @@ instance ToJSON CheckInRequestEvent where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -209,12 +217,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -256,9 +260,12 @@ instance ToJSON Status where
 -- with the Operation.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema'
+newtype OperationSchema =
+  OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
 --
@@ -269,9 +276,8 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema'
-    { _osAddtional = _Coerce # pOsAddtional_
-    }
+  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
@@ -294,9 +300,12 @@ instance ToJSON OperationSchema where
 -- resource message (for example, \`VirtualMachine\`).
 --
 -- /See:/ 'runPipelineRequestLabels' smart constructor.
-newtype RunPipelineRequestLabels = RunPipelineRequestLabels'
+newtype RunPipelineRequestLabels =
+  RunPipelineRequestLabels'
     { _rprlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RunPipelineRequestLabels' with the minimum fields required to make a request.
 --
@@ -307,9 +316,8 @@ runPipelineRequestLabels
     :: HashMap Text Text -- ^ 'rprlAddtional'
     -> RunPipelineRequestLabels
 runPipelineRequestLabels pRprlAddtional_ =
-    RunPipelineRequestLabels'
-    { _rprlAddtional = _Coerce # pRprlAddtional_
-    }
+  RunPipelineRequestLabels' {_rprlAddtional = _Coerce # pRprlAddtional_}
+
 
 rprlAddtional :: Lens' RunPipelineRequestLabels (HashMap Text Text)
 rprlAddtional
@@ -329,10 +337,13 @@ instance ToJSON RunPipelineRequestLabels where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -344,10 +355,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -382,10 +392,13 @@ instance ToJSON ListOperationsResponse where
 -- that other events can continue to occur after this event.
 --
 -- /See:/ 'failedEvent' smart constructor.
-data FailedEvent = FailedEvent'
+data FailedEvent =
+  FailedEvent'
     { _feCause :: !(Maybe Text)
     , _feCode  :: !(Maybe FailedEventCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FailedEvent' with the minimum fields required to make a request.
 --
@@ -396,11 +409,8 @@ data FailedEvent = FailedEvent'
 -- * 'feCode'
 failedEvent
     :: FailedEvent
-failedEvent =
-    FailedEvent'
-    { _feCause = Nothing
-    , _feCode = Nothing
-    }
+failedEvent = FailedEvent' {_feCause = Nothing, _feCode = Nothing}
+
 
 -- | The human-readable description of the cause of the failure.
 feCause :: Lens' FailedEvent (Maybe Text)
@@ -426,14 +436,16 @@ instance ToJSON FailedEvent where
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
 data CancelOperationRequest =
-    CancelOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -446,13 +458,16 @@ instance ToJSON CancelOperationRequest where
 -- | The status of the worker VM.
 --
 -- /See:/ 'workerStatus' smart constructor.
-data WorkerStatus = WorkerStatus'
+data WorkerStatus =
+  WorkerStatus'
     { _wsTotalRamBytes :: !(Maybe (Textual Word64))
     , _wsAttachedDisks :: !(Maybe WorkerStatusAttachedDisks)
     , _wsUptimeSeconds :: !(Maybe (Textual Int64))
     , _wsBootDisk      :: !(Maybe DiskStatus)
     , _wsFreeRamBytes  :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkerStatus' with the minimum fields required to make a request.
 --
@@ -470,13 +485,14 @@ data WorkerStatus = WorkerStatus'
 workerStatus
     :: WorkerStatus
 workerStatus =
-    WorkerStatus'
+  WorkerStatus'
     { _wsTotalRamBytes = Nothing
     , _wsAttachedDisks = Nothing
     , _wsUptimeSeconds = Nothing
     , _wsBootDisk = Nothing
     , _wsFreeRamBytes = Nothing
     }
+
 
 -- | Total RAM.
 wsTotalRamBytes :: Lens' WorkerStatus (Maybe Word64)
@@ -533,11 +549,14 @@ instance ToJSON WorkerStatus where
 -- | An event generated when a container exits.
 --
 -- /See:/ 'containerStoppedEvent' smart constructor.
-data ContainerStoppedEvent = ContainerStoppedEvent'
+data ContainerStoppedEvent =
+  ContainerStoppedEvent'
     { _cseExitStatus :: !(Maybe (Textual Int32))
     , _cseActionId   :: !(Maybe (Textual Int32))
     , _cseStderr     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerStoppedEvent' with the minimum fields required to make a request.
 --
@@ -551,11 +570,9 @@ data ContainerStoppedEvent = ContainerStoppedEvent'
 containerStoppedEvent
     :: ContainerStoppedEvent
 containerStoppedEvent =
-    ContainerStoppedEvent'
-    { _cseExitStatus = Nothing
-    , _cseActionId = Nothing
-    , _cseStderr = Nothing
-    }
+  ContainerStoppedEvent'
+    {_cseExitStatus = Nothing, _cseActionId = Nothing, _cseStderr = Nothing}
+
 
 -- | The exit status of the container.
 cseExitStatus :: Lens' ContainerStoppedEvent (Maybe Int32)
@@ -600,10 +617,13 @@ instance ToJSON ContainerStoppedEvent where
 -- | The response to the CheckIn method.
 --
 -- /See:/ 'checkInResponse' smart constructor.
-data CheckInResponse = CheckInResponse'
+data CheckInResponse =
+  CheckInResponse'
     { _cirDeadline :: !(Maybe DateTime')
     , _cirMetadata :: !(Maybe CheckInResponseMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckInResponse' with the minimum fields required to make a request.
 --
@@ -615,10 +635,8 @@ data CheckInResponse = CheckInResponse'
 checkInResponse
     :: CheckInResponse
 checkInResponse =
-    CheckInResponse'
-    { _cirDeadline = Nothing
-    , _cirMetadata = Nothing
-    }
+  CheckInResponse' {_cirDeadline = Nothing, _cirMetadata = Nothing}
+
 
 -- | The deadline by which the worker must request an extension. The backend
 -- will allow for network transmission time and other delays, but the
@@ -652,10 +670,13 @@ instance ToJSON CheckInResponse where
 -- pipeline.
 --
 -- /See:/ 'workerAssignedEvent' smart constructor.
-data WorkerAssignedEvent = WorkerAssignedEvent'
+data WorkerAssignedEvent =
+  WorkerAssignedEvent'
     { _waeZone     :: !(Maybe Text)
     , _waeInstance :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkerAssignedEvent' with the minimum fields required to make a request.
 --
@@ -667,10 +688,8 @@ data WorkerAssignedEvent = WorkerAssignedEvent'
 workerAssignedEvent
     :: WorkerAssignedEvent
 workerAssignedEvent =
-    WorkerAssignedEvent'
-    { _waeZone = Nothing
-    , _waeInstance = Nothing
-    }
+  WorkerAssignedEvent' {_waeZone = Nothing, _waeInstance = Nothing}
+
 
 -- | The zone the worker is running in.
 waeZone :: Lens' WorkerAssignedEvent (Maybe Text)
@@ -699,9 +718,12 @@ instance ToJSON WorkerAssignedEvent where
 -- creates the operation.
 --
 -- /See:/ 'operationMetadataLabels' smart constructor.
-newtype OperationMetadataLabels = OperationMetadataLabels'
+newtype OperationMetadataLabels =
+  OperationMetadataLabels'
     { _omlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataLabels' with the minimum fields required to make a request.
 --
@@ -712,9 +734,8 @@ operationMetadataLabels
     :: HashMap Text Text -- ^ 'omlAddtional'
     -> OperationMetadataLabels
 operationMetadataLabels pOmlAddtional_ =
-    OperationMetadataLabels'
-    { _omlAddtional = _Coerce # pOmlAddtional_
-    }
+  OperationMetadataLabels' {_omlAddtional = _Coerce # pOmlAddtional_}
+
 
 omlAddtional :: Lens' OperationMetadataLabels (HashMap Text Text)
 omlAddtional
@@ -734,13 +755,16 @@ instance ToJSON OperationMetadataLabels where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -758,13 +782,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -776,9 +801,7 @@ oDone = lens _oDone (\ s a -> s{_oDone = a})
 oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
--- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
--- If importing Variants, an ImportVariantsResponse is returned. For
--- pipelines and exports, an Empty response is returned.
+-- | An Empty object.
 oResponse :: Lens' Operation (Maybe OperationResponse)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
@@ -822,14 +845,16 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -842,12 +867,15 @@ instance ToJSON Empty where
 -- information about disk type, size, and performance considerations.
 --
 -- /See:/ 'disk' smart constructor.
-data Disk = Disk'
+data Disk =
+  Disk'
     { _dSourceImage :: !(Maybe Text)
     , _dSizeGb      :: !(Maybe (Textual Int32))
     , _dName        :: !(Maybe Text)
     , _dType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
 --
@@ -863,12 +891,13 @@ data Disk = Disk'
 disk
     :: Disk
 disk =
-    Disk'
+  Disk'
     { _dSourceImage = Nothing
     , _dSizeGb = Nothing
     , _dName = Nothing
     , _dType = Nothing
     }
+
 
 -- | An optional image to put on the disk before attaching it to the VM.
 dSourceImage :: Lens' Disk (Maybe Text)
@@ -919,10 +948,13 @@ instance ToJSON Disk where
 -- executed. Other actions will be skipped.
 --
 -- /See:/ 'unexpectedExitStatusEvent' smart constructor.
-data UnexpectedExitStatusEvent = UnexpectedExitStatusEvent'
+data UnexpectedExitStatusEvent =
+  UnexpectedExitStatusEvent'
     { _ueseExitStatus :: !(Maybe (Textual Int32))
     , _ueseActionId   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnexpectedExitStatusEvent' with the minimum fields required to make a request.
 --
@@ -934,10 +966,9 @@ data UnexpectedExitStatusEvent = UnexpectedExitStatusEvent'
 unexpectedExitStatusEvent
     :: UnexpectedExitStatusEvent
 unexpectedExitStatusEvent =
-    UnexpectedExitStatusEvent'
-    { _ueseExitStatus = Nothing
-    , _ueseActionId = Nothing
-    }
+  UnexpectedExitStatusEvent'
+    {_ueseExitStatus = Nothing, _ueseActionId = Nothing}
+
 
 -- | The exit status of the container.
 ueseExitStatus :: Lens' UnexpectedExitStatusEvent (Maybe Int32)
@@ -970,10 +1001,13 @@ instance ToJSON UnexpectedExitStatusEvent where
 -- delays execution of a pipeline that was otherwise ready to run.
 --
 -- /See:/ 'delayedEvent' smart constructor.
-data DelayedEvent = DelayedEvent'
+data DelayedEvent =
+  DelayedEvent'
     { _deMetrics :: !(Maybe [Text])
     , _deCause   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DelayedEvent' with the minimum fields required to make a request.
 --
@@ -984,11 +1018,8 @@ data DelayedEvent = DelayedEvent'
 -- * 'deCause'
 delayedEvent
     :: DelayedEvent
-delayedEvent =
-    DelayedEvent'
-    { _deMetrics = Nothing
-    , _deCause = Nothing
-    }
+delayedEvent = DelayedEvent' {_deMetrics = Nothing, _deCause = Nothing}
+
 
 -- | If the delay was caused by a resource shortage, this field lists the
 -- Compute Engine metrics that are preventing this operation from running
@@ -1028,9 +1059,12 @@ instance ToJSON DelayedEvent where
 -- \`ContainerStartedEvent\` in the operation metadata.
 --
 -- /See:/ 'actionPortMAppings' smart constructor.
-newtype ActionPortMAppings = ActionPortMAppings'
+newtype ActionPortMAppings =
+  ActionPortMAppings'
     { _apmaAddtional :: HashMap Text (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionPortMAppings' with the minimum fields required to make a request.
 --
@@ -1041,9 +1075,8 @@ actionPortMAppings
     :: HashMap Text Int32 -- ^ 'apmaAddtional'
     -> ActionPortMAppings
 actionPortMAppings pApmaAddtional_ =
-    ActionPortMAppings'
-    { _apmaAddtional = _Coerce # pApmaAddtional_
-    }
+  ActionPortMAppings' {_apmaAddtional = _Coerce # pApmaAddtional_}
+
 
 apmaAddtional :: Lens' ActionPortMAppings (HashMap Text Int32)
 apmaAddtional
@@ -1062,9 +1095,12 @@ instance ToJSON ActionPortMAppings where
 -- | The user-defined labels associated with this operation.
 --
 -- /See:/ 'metadataLabels' smart constructor.
-newtype MetadataLabels = MetadataLabels'
+newtype MetadataLabels =
+  MetadataLabels'
     { _mlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetadataLabels' with the minimum fields required to make a request.
 --
@@ -1075,9 +1111,8 @@ metadataLabels
     :: HashMap Text Text -- ^ 'mlAddtional'
     -> MetadataLabels
 metadataLabels pMlAddtional_ =
-    MetadataLabels'
-    { _mlAddtional = _Coerce # pMlAddtional_
-    }
+  MetadataLabels' {_mlAddtional = _Coerce # pMlAddtional_}
+
 
 mlAddtional :: Lens' MetadataLabels (HashMap Text Text)
 mlAddtional
@@ -1095,12 +1130,15 @@ instance ToJSON MetadataLabels where
 -- | The parameters to the CheckIn method.
 --
 -- /See:/ 'checkInRequest' smart constructor.
-data CheckInRequest = CheckInRequest'
+data CheckInRequest =
+  CheckInRequest'
     { _cirEvent           :: !(Maybe CheckInRequestEvent)
     , _cirWorkerStatus    :: !(Maybe WorkerStatus)
     , _cirResult          :: !(Maybe Status)
     , _cirDeadlineExpired :: !(Maybe Empty)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckInRequest' with the minimum fields required to make a request.
 --
@@ -1116,12 +1154,13 @@ data CheckInRequest = CheckInRequest'
 checkInRequest
     :: CheckInRequest
 checkInRequest =
-    CheckInRequest'
+  CheckInRequest'
     { _cirEvent = Nothing
     , _cirWorkerStatus = Nothing
     , _cirResult = Nothing
     , _cirDeadlineExpired = Nothing
     }
+
 
 -- | A workflow specific event occurred.
 cirEvent :: Lens' CheckInRequest (Maybe CheckInRequestEvent)
@@ -1167,9 +1206,12 @@ instance ToJSON CheckInRequest where
 -- timeout specified by the user.
 --
 -- /See:/ 'containerKilledEvent' smart constructor.
-newtype ContainerKilledEvent = ContainerKilledEvent'
+newtype ContainerKilledEvent =
+  ContainerKilledEvent'
     { _ckeActionId :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerKilledEvent' with the minimum fields required to make a request.
 --
@@ -1178,10 +1220,8 @@ newtype ContainerKilledEvent = ContainerKilledEvent'
 -- * 'ckeActionId'
 containerKilledEvent
     :: ContainerKilledEvent
-containerKilledEvent =
-    ContainerKilledEvent'
-    { _ckeActionId = Nothing
-    }
+containerKilledEvent = ContainerKilledEvent' {_ckeActionId = Nothing}
+
 
 -- | The numeric ID of the action that started the container.
 ckeActionId :: Lens' ContainerKilledEvent (Maybe Int32)
@@ -1202,9 +1242,12 @@ instance ToJSON ContainerKilledEvent where
 -- | An event generated when the worker stops pulling an image.
 --
 -- /See:/ 'pullStoppedEvent' smart constructor.
-newtype PullStoppedEvent = PullStoppedEvent'
+newtype PullStoppedEvent =
+  PullStoppedEvent'
     { _pseImageURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PullStoppedEvent' with the minimum fields required to make a request.
 --
@@ -1213,10 +1256,8 @@ newtype PullStoppedEvent = PullStoppedEvent'
 -- * 'pseImageURI'
 pullStoppedEvent
     :: PullStoppedEvent
-pullStoppedEvent =
-    PullStoppedEvent'
-    { _pseImageURI = Nothing
-    }
+pullStoppedEvent = PullStoppedEvent' {_pseImageURI = Nothing}
+
 
 -- | The URI of the image that was pulled.
 pseImageURI :: Lens' PullStoppedEvent (Maybe Text)
@@ -1239,9 +1280,12 @@ instance ToJSON PullStoppedEvent where
 -- They are returned in the operation metadata, but are otherwise ignored.
 --
 -- /See:/ 'actionLabels' smart constructor.
-newtype ActionLabels = ActionLabels'
+newtype ActionLabels =
+  ActionLabels'
     { _alAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionLabels' with the minimum fields required to make a request.
 --
@@ -1252,9 +1296,8 @@ actionLabels
     :: HashMap Text Text -- ^ 'alAddtional'
     -> ActionLabels
 actionLabels pAlAddtional_ =
-    ActionLabels'
-    { _alAddtional = _Coerce # pAlAddtional_
-    }
+  ActionLabels' {_alAddtional = _Coerce # pAlAddtional_}
+
 
 alAddtional :: Lens' ActionLabels (HashMap Text Text)
 alAddtional
@@ -1271,9 +1314,12 @@ instance ToJSON ActionLabels where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1284,9 +1330,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1305,11 +1350,14 @@ instance ToJSON StatusDetailsItem where
 -- | VM networking options.
 --
 -- /See:/ 'network' smart constructor.
-data Network = Network'
+data Network =
+  Network'
     { _nUsePrivateAddress :: !(Maybe Bool)
     , _nName              :: !(Maybe Text)
     , _nSubnetwork        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
@@ -1323,11 +1371,9 @@ data Network = Network'
 network
     :: Network
 network =
-    Network'
-    { _nUsePrivateAddress = Nothing
-    , _nName = Nothing
-    , _nSubnetwork = Nothing
-    }
+  Network'
+    {_nUsePrivateAddress = Nothing, _nName = Nothing, _nSubnetwork = Nothing}
+
 
 -- | If set to true, do not attach a public IP address to the VM. Note that
 -- without a public IP address, additional configuration is required to
@@ -1376,9 +1422,12 @@ instance ToJSON Network where
 -- | Machine-readable details about the event.
 --
 -- /See:/ 'eventDetails' smart constructor.
-newtype EventDetails = EventDetails'
+newtype EventDetails =
+  EventDetails'
     { _edAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventDetails' with the minimum fields required to make a request.
 --
@@ -1389,9 +1438,8 @@ eventDetails
     :: HashMap Text JSONValue -- ^ 'edAddtional'
     -> EventDetails
 eventDetails pEdAddtional_ =
-    EventDetails'
-    { _edAddtional = _Coerce # pEdAddtional_
-    }
+  EventDetails' {_edAddtional = _Coerce # pEdAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 edAddtional :: Lens' EventDetails (HashMap Text JSONValue)
@@ -1410,7 +1458,8 @@ instance ToJSON EventDetails where
 -- | Specifies a single action that runs a Docker container.
 --
 -- /See:/ 'action' smart constructor.
-data Action = Action'
+data Action =
+  Action'
     { _aCommands     :: !(Maybe [Text])
     , _aFlags        :: !(Maybe [Text])
     , _aEnvironment  :: !(Maybe ActionEnvironment)
@@ -1423,7 +1472,9 @@ data Action = Action'
     , _aLabels       :: !(Maybe ActionLabels)
     , _aTimeout      :: !(Maybe GDuration)
     , _aPidNamespace :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Action' with the minimum fields required to make a request.
 --
@@ -1455,7 +1506,7 @@ data Action = Action'
 action
     :: Action
 action =
-    Action'
+  Action'
     { _aCommands = Nothing
     , _aFlags = Nothing
     , _aEnvironment = Nothing
@@ -1469,6 +1520,7 @@ action =
     , _aTimeout = Nothing
     , _aPidNamespace = Nothing
     }
+
 
 -- | If specified, overrides the \`CMD\` specified in the container. If the
 -- container also has an \`ENTRYPOINT\` the values are used as entrypoint
@@ -1578,8 +1630,9 @@ aTimeout
   = lens _aTimeout (\ s a -> s{_aTimeout = a}) .
       mapping _GDuration
 
--- | The PID namespace to run the action inside. If unspecified, a separate
--- isolated namespace is used.
+-- | An optional identifier for a PID namespace to run the action inside.
+-- Multiple actions should use the same string to share a namespace. If
+-- unspecified, a separate isolated namespace is used.
 aPidNamespace :: Lens' Action (Maybe Text)
 aPidNamespace
   = lens _aPidNamespace
@@ -1623,10 +1676,13 @@ instance ToJSON Action where
 -- the worker VM when running the pipeline.
 --
 -- /See:/ 'secret' smart constructor.
-data Secret = Secret'
+data Secret =
+  Secret'
     { _sKeyName    :: !(Maybe Text)
     , _sCipherText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Secret' with the minimum fields required to make a request.
 --
@@ -1637,11 +1693,8 @@ data Secret = Secret'
 -- * 'sCipherText'
 secret
     :: Secret
-secret =
-    Secret'
-    { _sKeyName = Nothing
-    , _sCipherText = Nothing
-    }
+secret = Secret' {_sKeyName = Nothing, _sCipherText = Nothing}
+
 
 -- | The name of the Cloud KMS key that will be used to decrypt the secret
 -- value. The VM service account must have the required permissions and
@@ -1673,9 +1726,12 @@ instance ToJSON Secret where
 -- | Status of attached disks.
 --
 -- /See:/ 'workerStatusAttachedDisks' smart constructor.
-newtype WorkerStatusAttachedDisks = WorkerStatusAttachedDisks'
+newtype WorkerStatusAttachedDisks =
+  WorkerStatusAttachedDisks'
     { _wsadAddtional :: HashMap Text DiskStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkerStatusAttachedDisks' with the minimum fields required to make a request.
 --
@@ -1686,9 +1742,8 @@ workerStatusAttachedDisks
     :: HashMap Text DiskStatus -- ^ 'wsadAddtional'
     -> WorkerStatusAttachedDisks
 workerStatusAttachedDisks pWsadAddtional_ =
-    WorkerStatusAttachedDisks'
-    { _wsadAddtional = _Coerce # pWsadAddtional_
-    }
+  WorkerStatusAttachedDisks' {_wsadAddtional = _Coerce # pWsadAddtional_}
+
 
 wsadAddtional :: Lens' WorkerStatusAttachedDisks (HashMap Text DiskStatus)
 wsadAddtional
@@ -1711,9 +1766,12 @@ instance ToJSON WorkerStatusAttachedDisks where
 -- returned.
 --
 -- /See:/ 'operationMetadataRequest' smart constructor.
-newtype OperationMetadataRequest = OperationMetadataRequest'
+newtype OperationMetadataRequest =
+  OperationMetadataRequest'
     { _omrAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataRequest' with the minimum fields required to make a request.
 --
@@ -1724,9 +1782,8 @@ operationMetadataRequest
     :: HashMap Text JSONValue -- ^ 'omrAddtional'
     -> OperationMetadataRequest
 operationMetadataRequest pOmrAddtional_ =
-    OperationMetadataRequest'
-    { _omrAddtional = _Coerce # pOmrAddtional_
-    }
+  OperationMetadataRequest' {_omrAddtional = _Coerce # pOmrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omrAddtional :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
@@ -1747,12 +1804,15 @@ instance ToJSON OperationMetadataRequest where
 -- must be specified or the pipeline run will fail.
 --
 -- /See:/ 'resources' smart constructor.
-data Resources = Resources'
+data Resources =
+  Resources'
     { _rZones          :: !(Maybe [Text])
     , _rRegions        :: !(Maybe [Text])
     , _rVirtualMachine :: !(Maybe VirtualMachine)
     , _rProjectId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
 --
@@ -1768,12 +1828,13 @@ data Resources = Resources'
 resources
     :: Resources
 resources =
-    Resources'
+  Resources'
     { _rZones = Nothing
     , _rRegions = Nothing
     , _rVirtualMachine = Nothing
     , _rProjectId = Nothing
     }
+
 
 -- | The list of zones allowed for VM allocation. If set, the \`regions\`
 -- field must not be set.
@@ -1823,10 +1884,13 @@ instance ToJSON Resources where
 -- | The status of a disk on a VM.
 --
 -- /See:/ 'diskStatus' smart constructor.
-data DiskStatus = DiskStatus'
+data DiskStatus =
+  DiskStatus'
     { _dsTotalSpaceBytes :: !(Maybe (Textual Word64))
     , _dsFreeSpaceBytes  :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DiskStatus' with the minimum fields required to make a request.
 --
@@ -1838,10 +1902,8 @@ data DiskStatus = DiskStatus'
 diskStatus
     :: DiskStatus
 diskStatus =
-    DiskStatus'
-    { _dsTotalSpaceBytes = Nothing
-    , _dsFreeSpaceBytes = Nothing
-    }
+  DiskStatus' {_dsTotalSpaceBytes = Nothing, _dsFreeSpaceBytes = Nothing}
+
 
 -- | Total disk space.
 dsTotalSpaceBytes :: Lens' DiskStatus (Maybe Word64)
@@ -1879,9 +1941,12 @@ instance ToJSON DiskStatus where
 -- shortly after VM creation.
 --
 -- /See:/ 'virtualMachineLabels' smart constructor.
-newtype VirtualMachineLabels = VirtualMachineLabels'
+newtype VirtualMachineLabels =
+  VirtualMachineLabels'
     { _vmlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VirtualMachineLabels' with the minimum fields required to make a request.
 --
@@ -1892,9 +1957,8 @@ virtualMachineLabels
     :: HashMap Text Text -- ^ 'vmlAddtional'
     -> VirtualMachineLabels
 virtualMachineLabels pVmlAddtional_ =
-    VirtualMachineLabels'
-    { _vmlAddtional = _Coerce # pVmlAddtional_
-    }
+  VirtualMachineLabels' {_vmlAddtional = _Coerce # pVmlAddtional_}
+
 
 vmlAddtional :: Lens' VirtualMachineLabels (HashMap Text Text)
 vmlAddtional
@@ -1913,9 +1977,12 @@ instance ToJSON VirtualMachineLabels where
 -- | Runtime metadata on this Operation.
 --
 -- /See:/ 'operationMetadataRuntimeMetadata' smart constructor.
-newtype OperationMetadataRuntimeMetadata = OperationMetadataRuntimeMetadata'
+newtype OperationMetadataRuntimeMetadata =
+  OperationMetadataRuntimeMetadata'
     { _omrmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadataRuntimeMetadata' with the minimum fields required to make a request.
 --
@@ -1926,9 +1993,8 @@ operationMetadataRuntimeMetadata
     :: HashMap Text JSONValue -- ^ 'omrmAddtional'
     -> OperationMetadataRuntimeMetadata
 operationMetadataRuntimeMetadata pOmrmAddtional_ =
-    OperationMetadataRuntimeMetadata'
-    { _omrmAddtional = _Coerce # pOmrmAddtional_
-    }
+  OperationMetadataRuntimeMetadata' {_omrmAddtional = _Coerce # pOmrmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omrmAddtional :: Lens' OperationMetadataRuntimeMetadata (HashMap Text JSONValue)
@@ -1952,7 +2018,8 @@ instance ToJSON OperationMetadataRuntimeMetadata
 -- | Carries information about a Compute Engine VM resource.
 --
 -- /See:/ 'virtualMachine' smart constructor.
-data VirtualMachine = VirtualMachine'
+data VirtualMachine =
+  VirtualMachine'
     { _vmNetwork             :: !(Maybe Network)
     , _vmCPUPlatform         :: !(Maybe Text)
     , _vmServiceAccount      :: !(Maybe ServiceAccount)
@@ -1964,7 +2031,9 @@ data VirtualMachine = VirtualMachine'
     , _vmBootImage           :: !(Maybe Text)
     , _vmNvidiaDriverVersion :: !(Maybe Text)
     , _vmPreemptible         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VirtualMachine' with the minimum fields required to make a request.
 --
@@ -1994,7 +2063,7 @@ data VirtualMachine = VirtualMachine'
 virtualMachine
     :: VirtualMachine
 virtualMachine =
-    VirtualMachine'
+  VirtualMachine'
     { _vmNetwork = Nothing
     , _vmCPUPlatform = Nothing
     , _vmServiceAccount = Nothing
@@ -2007,6 +2076,7 @@ virtualMachine =
     , _vmNvidiaDriverVersion = Nothing
     , _vmPreemptible = Nothing
     }
+
 
 -- | The VM network configuration.
 vmNetwork :: Lens' VirtualMachine (Maybe Network)
@@ -2141,10 +2211,13 @@ instance ToJSON VirtualMachine where
 -- | Carries information about a Google Cloud service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount'
+data ServiceAccount =
+  ServiceAccount'
     { _saEmail  :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -2155,11 +2228,8 @@ data ServiceAccount = ServiceAccount'
 -- * 'saScopes'
 serviceAccount
     :: ServiceAccount
-serviceAccount =
-    ServiceAccount'
-    { _saEmail = Nothing
-    , _saScopes = Nothing
-    }
+serviceAccount = ServiceAccount' {_saEmail = Nothing, _saScopes = Nothing}
+
 
 -- | Email address of the service account. If not specified, the default
 -- Compute Engine service account for the project will be used.
@@ -2191,9 +2261,12 @@ instance ToJSON ServiceAccount where
 -- | The metadata that describes the operation assigned to the worker.
 --
 -- /See:/ 'checkInResponseMetadata' smart constructor.
-newtype CheckInResponseMetadata = CheckInResponseMetadata'
+newtype CheckInResponseMetadata =
+  CheckInResponseMetadata'
     { _cirmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckInResponseMetadata' with the minimum fields required to make a request.
 --
@@ -2204,9 +2277,8 @@ checkInResponseMetadata
     :: HashMap Text JSONValue -- ^ 'cirmAddtional'
     -> CheckInResponseMetadata
 checkInResponseMetadata pCirmAddtional_ =
-    CheckInResponseMetadata'
-    { _cirmAddtional = _Coerce # pCirmAddtional_
-    }
+  CheckInResponseMetadata' {_cirmAddtional = _Coerce # pCirmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 cirmAddtional :: Lens' CheckInResponseMetadata (HashMap Text JSONValue)
@@ -2227,10 +2299,13 @@ instance ToJSON CheckInResponseMetadata where
 -- | Carries information about an accelerator that can be attached to a VM.
 --
 -- /See:/ 'accelerator' smart constructor.
-data Accelerator = Accelerator'
+data Accelerator =
+  Accelerator'
     { _aCount :: !(Maybe (Textual Int64))
     , _aType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Accelerator' with the minimum fields required to make a request.
 --
@@ -2241,11 +2316,8 @@ data Accelerator = Accelerator'
 -- * 'aType'
 accelerator
     :: Accelerator
-accelerator =
-    Accelerator'
-    { _aCount = Nothing
-    , _aType = Nothing
-    }
+accelerator = Accelerator' {_aCount = Nothing, _aType = Nothing}
+
 
 -- | How many accelerators of this type to attach.
 aCount :: Lens' Accelerator (Maybe Int64)
@@ -2280,9 +2352,12 @@ instance ToJSON Accelerator where
 -- map (though they can overwrite it with a different value).
 --
 -- /See:/ 'pipelineEnvironment' smart constructor.
-newtype PipelineEnvironment = PipelineEnvironment'
+newtype PipelineEnvironment =
+  PipelineEnvironment'
     { _peAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PipelineEnvironment' with the minimum fields required to make a request.
 --
@@ -2293,9 +2368,8 @@ pipelineEnvironment
     :: HashMap Text Text -- ^ 'peAddtional'
     -> PipelineEnvironment
 pipelineEnvironment pPeAddtional_ =
-    PipelineEnvironment'
-    { _peAddtional = _Coerce # pPeAddtional_
-    }
+  PipelineEnvironment' {_peAddtional = _Coerce # pPeAddtional_}
+
 
 peAddtional :: Lens' PipelineEnvironment (HashMap Text Text)
 peAddtional
@@ -2314,10 +2388,13 @@ instance ToJSON PipelineEnvironment where
 -- has been released (deleted).
 --
 -- /See:/ 'workerReleasedEvent' smart constructor.
-data WorkerReleasedEvent = WorkerReleasedEvent'
+data WorkerReleasedEvent =
+  WorkerReleasedEvent'
     { _wreZone     :: !(Maybe Text)
     , _wreInstance :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WorkerReleasedEvent' with the minimum fields required to make a request.
 --
@@ -2329,10 +2406,8 @@ data WorkerReleasedEvent = WorkerReleasedEvent'
 workerReleasedEvent
     :: WorkerReleasedEvent
 workerReleasedEvent =
-    WorkerReleasedEvent'
-    { _wreZone = Nothing
-    , _wreInstance = Nothing
-    }
+  WorkerReleasedEvent' {_wreZone = Nothing, _wreInstance = Nothing}
+
 
 -- | The zone the worker was running in.
 wreZone :: Lens' WorkerReleasedEvent (Maybe Text)
@@ -2360,11 +2435,14 @@ instance ToJSON WorkerReleasedEvent where
 -- | An event generated when a container starts.
 --
 -- /See:/ 'containerStartedEvent' smart constructor.
-data ContainerStartedEvent = ContainerStartedEvent'
+data ContainerStartedEvent =
+  ContainerStartedEvent'
     { _cIPAddress    :: !(Maybe Text)
     , _cActionId     :: !(Maybe (Textual Int32))
     , _cPortMAppings :: !(Maybe ContainerStartedEventPortMAppings)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContainerStartedEvent' with the minimum fields required to make a request.
 --
@@ -2378,11 +2456,9 @@ data ContainerStartedEvent = ContainerStartedEvent'
 containerStartedEvent
     :: ContainerStartedEvent
 containerStartedEvent =
-    ContainerStartedEvent'
-    { _cIPAddress = Nothing
-    , _cActionId = Nothing
-    , _cPortMAppings = Nothing
-    }
+  ContainerStartedEvent'
+    {_cIPAddress = Nothing, _cActionId = Nothing, _cPortMAppings = Nothing}
+
 
 -- | The public IP address that can be used to connect to the container. This
 -- field is only populated when at least one port mapping is present. If
@@ -2427,10 +2503,13 @@ instance ToJSON ContainerStartedEvent where
 -- service account or the request will fail.
 --
 -- /See:/ 'runPipelineRequest' smart constructor.
-data RunPipelineRequest = RunPipelineRequest'
+data RunPipelineRequest =
+  RunPipelineRequest'
     { _rprPipeline :: !(Maybe Pipeline)
     , _rprLabels   :: !(Maybe RunPipelineRequestLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RunPipelineRequest' with the minimum fields required to make a request.
 --
@@ -2442,10 +2521,8 @@ data RunPipelineRequest = RunPipelineRequest'
 runPipelineRequest
     :: RunPipelineRequest
 runPipelineRequest =
-    RunPipelineRequest'
-    { _rprPipeline = Nothing
-    , _rprLabels = Nothing
-    }
+  RunPipelineRequest' {_rprPipeline = Nothing, _rprLabels = Nothing}
+
 
 -- | The description of the pipeline to run.
 rprPipeline :: Lens' RunPipelineRequest (Maybe Pipeline)
@@ -2479,12 +2556,15 @@ instance ToJSON RunPipelineRequest where
 -- containers.
 --
 -- /See:/ 'pipeline' smart constructor.
-data Pipeline = Pipeline'
+data Pipeline =
+  Pipeline'
     { _pActions     :: !(Maybe [Action])
     , _pEnvironment :: !(Maybe PipelineEnvironment)
     , _pResources   :: !(Maybe Resources)
     , _pTimeout     :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Pipeline' with the minimum fields required to make a request.
 --
@@ -2500,12 +2580,13 @@ data Pipeline = Pipeline'
 pipeline
     :: Pipeline
 pipeline =
-    Pipeline'
+  Pipeline'
     { _pActions = Nothing
     , _pEnvironment = Nothing
     , _pResources = Nothing
     , _pTimeout = Nothing
     }
+
 
 -- | The list of actions to execute, in the order they are specified.
 pActions :: Lens' Pipeline [Action]
@@ -2555,97 +2636,21 @@ instance ToJSON Pipeline where
                   ("resources" .=) <$> _pResources,
                   ("timeout" .=) <$> _pTimeout])
 
--- | The variant data import response.
---
--- /See:/ 'importVariantsResponse' smart constructor.
-newtype ImportVariantsResponse = ImportVariantsResponse'
-    { _ivrCallSetIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImportVariantsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ivrCallSetIds'
-importVariantsResponse
-    :: ImportVariantsResponse
-importVariantsResponse =
-    ImportVariantsResponse'
-    { _ivrCallSetIds = Nothing
-    }
-
--- | IDs of the call sets created during the import.
-ivrCallSetIds :: Lens' ImportVariantsResponse [Text]
-ivrCallSetIds
-  = lens _ivrCallSetIds
-      (\ s a -> s{_ivrCallSetIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ImportVariantsResponse where
-        parseJSON
-          = withObject "ImportVariantsResponse"
-              (\ o ->
-                 ImportVariantsResponse' <$>
-                   (o .:? "callSetIds" .!= mempty))
-
-instance ToJSON ImportVariantsResponse where
-        toJSON ImportVariantsResponse'{..}
-          = object
-              (catMaybes [("callSetIds" .=) <$> _ivrCallSetIds])
-
--- | The read group set import response.
---
--- /See:/ 'importReadGroupSetsResponse' smart constructor.
-newtype ImportReadGroupSetsResponse = ImportReadGroupSetsResponse'
-    { _irgsrReadGroupSetIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImportReadGroupSetsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'irgsrReadGroupSetIds'
-importReadGroupSetsResponse
-    :: ImportReadGroupSetsResponse
-importReadGroupSetsResponse =
-    ImportReadGroupSetsResponse'
-    { _irgsrReadGroupSetIds = Nothing
-    }
-
--- | IDs of the read group sets that were created.
-irgsrReadGroupSetIds :: Lens' ImportReadGroupSetsResponse [Text]
-irgsrReadGroupSetIds
-  = lens _irgsrReadGroupSetIds
-      (\ s a -> s{_irgsrReadGroupSetIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ImportReadGroupSetsResponse where
-        parseJSON
-          = withObject "ImportReadGroupSetsResponse"
-              (\ o ->
-                 ImportReadGroupSetsResponse' <$>
-                   (o .:? "readGroupSetIds" .!= mempty))
-
-instance ToJSON ImportReadGroupSetsResponse where
-        toJSON ImportReadGroupSetsResponse'{..}
-          = object
-              (catMaybes
-                 [("readGroupSetIds" .=) <$> _irgsrReadGroupSetIds])
-
 -- | Carries information about the pipeline execution that is returned in the
 -- long running operation\'s metadata field.
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata'
+data Metadata =
+  Metadata'
     { _mStartTime  :: !(Maybe DateTime')
     , _mEvents     :: !(Maybe [Event])
     , _mEndTime    :: !(Maybe DateTime')
     , _mPipeline   :: !(Maybe Pipeline)
     , _mLabels     :: !(Maybe MetadataLabels)
     , _mCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -2665,7 +2670,7 @@ data Metadata = Metadata'
 metadata
     :: Metadata
 metadata =
-    Metadata'
+  Metadata'
     { _mStartTime = Nothing
     , _mEvents = Nothing
     , _mEndTime = Nothing
@@ -2673,6 +2678,7 @@ metadata =
     , _mLabels = Nothing
     , _mCreateTime = Nothing
     }
+
 
 -- | The first time at which resources were allocated to execute the
 -- pipeline.
@@ -2734,11 +2740,14 @@ instance ToJSON Metadata where
 -- | Carries information about a particular disk mount inside a container.
 --
 -- /See:/ 'mount' smart constructor.
-data Mount = Mount'
+data Mount =
+  Mount'
     { _mPath     :: !(Maybe Text)
     , _mDisk     :: !(Maybe Text)
     , _mReadOnly :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Mount' with the minimum fields required to make a request.
 --
@@ -2751,12 +2760,8 @@ data Mount = Mount'
 -- * 'mReadOnly'
 mount
     :: Mount
-mount =
-    Mount'
-    { _mPath = Nothing
-    , _mDisk = Nothing
-    , _mReadOnly = Nothing
-    }
+mount = Mount' {_mPath = Nothing, _mDisk = Nothing, _mReadOnly = Nothing}
+
 
 -- | The path to mount the disk inside the container.
 mPath :: Lens' Mount (Maybe Text)
@@ -2789,9 +2794,12 @@ instance ToJSON Mount where
 -- | An event generated when the worker starts pulling an image.
 --
 -- /See:/ 'pullStartedEvent' smart constructor.
-newtype PullStartedEvent = PullStartedEvent'
+newtype PullStartedEvent =
+  PullStartedEvent'
     { _pImageURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PullStartedEvent' with the minimum fields required to make a request.
 --
@@ -2800,10 +2808,8 @@ newtype PullStartedEvent = PullStartedEvent'
 -- * 'pImageURI'
 pullStartedEvent
     :: PullStartedEvent
-pullStartedEvent =
-    PullStartedEvent'
-    { _pImageURI = Nothing
-    }
+pullStartedEvent = PullStartedEvent' {_pImageURI = Nothing}
+
 
 -- | The URI of the image that was pulled.
 pImageURI :: Lens' PullStartedEvent (Maybe Text)
@@ -2824,14 +2830,16 @@ instance ToJSON PullStartedEvent where
 --
 -- /See:/ 'runPipelineResponse' smart constructor.
 data RunPipelineResponse =
-    RunPipelineResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RunPipelineResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RunPipelineResponse' with the minimum fields required to make a request.
 --
 runPipelineResponse
     :: RunPipelineResponse
 runPipelineResponse = RunPipelineResponse'
+
 
 instance FromJSON RunPipelineResponse where
         parseJSON
@@ -2844,7 +2852,8 @@ instance ToJSON RunPipelineResponse where
 -- | Metadata describing an Operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata'
+data OperationMetadata =
+  OperationMetadata'
     { _omClientId        :: !(Maybe Text)
     , _omStartTime       :: !(Maybe DateTime')
     , _omEvents          :: !(Maybe [OperationEvent])
@@ -2854,7 +2863,9 @@ data OperationMetadata = OperationMetadata'
     , _omCreateTime      :: !(Maybe DateTime')
     , _omRuntimeMetadata :: !(Maybe OperationMetadataRuntimeMetadata)
     , _omRequest         :: !(Maybe OperationMetadataRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2880,7 +2891,7 @@ data OperationMetadata = OperationMetadata'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata'
+  OperationMetadata'
     { _omClientId = Nothing
     , _omStartTime = Nothing
     , _omEvents = Nothing
@@ -2891,6 +2902,7 @@ operationMetadata =
     , _omRuntimeMetadata = Nothing
     , _omRequest = Nothing
     }
+
 
 -- | This field is deprecated. Use \`labels\` instead. Optionally provided by
 -- the caller when submitting the request that creates the operation.
@@ -2992,9 +3004,12 @@ instance ToJSON OperationMetadata where
 -- failed.
 --
 -- /See:/ 'actionEnvironment' smart constructor.
-newtype ActionEnvironment = ActionEnvironment'
+newtype ActionEnvironment =
+  ActionEnvironment'
     { _aeAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionEnvironment' with the minimum fields required to make a request.
 --
@@ -3005,9 +3020,8 @@ actionEnvironment
     :: HashMap Text Text -- ^ 'aeAddtional'
     -> ActionEnvironment
 actionEnvironment pAeAddtional_ =
-    ActionEnvironment'
-    { _aeAddtional = _Coerce # pAeAddtional_
-    }
+  ActionEnvironment' {_aeAddtional = _Coerce # pAeAddtional_}
+
 
 aeAddtional :: Lens' ActionEnvironment (HashMap Text Text)
 aeAddtional
@@ -3026,12 +3040,15 @@ instance ToJSON ActionEnvironment where
 -- pipeline.
 --
 -- /See:/ 'computeEngine' smart constructor.
-data ComputeEngine = ComputeEngine'
+data ComputeEngine =
+  ComputeEngine'
     { _ceZone         :: !(Maybe Text)
     , _ceDiskNames    :: !(Maybe [Text])
     , _ceMachineType  :: !(Maybe Text)
     , _ceInstanceName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ComputeEngine' with the minimum fields required to make a request.
 --
@@ -3047,12 +3064,13 @@ data ComputeEngine = ComputeEngine'
 computeEngine
     :: ComputeEngine
 computeEngine =
-    ComputeEngine'
+  ComputeEngine'
     { _ceZone = Nothing
     , _ceDiskNames = Nothing
     , _ceMachineType = Nothing
     , _ceInstanceName = Nothing
     }
+
 
 -- | The availability zone in which the instance resides.
 ceZone :: Lens' ComputeEngine (Maybe Text)
@@ -3095,14 +3113,15 @@ instance ToJSON ComputeEngine where
                   ("machineType" .=) <$> _ceMachineType,
                   ("instanceName" .=) <$> _ceInstanceName])
 
--- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
--- If importing Variants, an ImportVariantsResponse is returned. For
--- pipelines and exports, an Empty response is returned.
+-- | An Empty object.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -3113,9 +3132,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -3134,11 +3152,14 @@ instance ToJSON OperationResponse where
 -- | An event that occurred during an Operation.
 --
 -- /See:/ 'operationEvent' smart constructor.
-data OperationEvent = OperationEvent'
+data OperationEvent =
+  OperationEvent'
     { _oeStartTime   :: !(Maybe DateTime')
     , _oeEndTime     :: !(Maybe DateTime')
     , _oeDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationEvent' with the minimum fields required to make a request.
 --
@@ -3152,11 +3173,9 @@ data OperationEvent = OperationEvent'
 operationEvent
     :: OperationEvent
 operationEvent =
-    OperationEvent'
-    { _oeStartTime = Nothing
-    , _oeEndTime = Nothing
-    , _oeDescription = Nothing
-    }
+  OperationEvent'
+    {_oeStartTime = Nothing, _oeEndTime = Nothing, _oeDescription = Nothing}
+
 
 -- | Optional time of when event started.
 oeStartTime :: Lens' OperationEvent (Maybe UTCTime)
@@ -3198,9 +3217,12 @@ instance ToJSON OperationEvent where
 -- the Operation associated with a RunPipeline execution.
 --
 -- /See:/ 'runtimeMetadata' smart constructor.
-newtype RuntimeMetadata = RuntimeMetadata'
+newtype RuntimeMetadata =
+  RuntimeMetadata'
     { _rmComputeEngine :: Maybe ComputeEngine
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RuntimeMetadata' with the minimum fields required to make a request.
 --
@@ -3209,10 +3231,8 @@ newtype RuntimeMetadata = RuntimeMetadata'
 -- * 'rmComputeEngine'
 runtimeMetadata
     :: RuntimeMetadata
-runtimeMetadata =
-    RuntimeMetadata'
-    { _rmComputeEngine = Nothing
-    }
+runtimeMetadata = RuntimeMetadata' {_rmComputeEngine = Nothing}
+
 
 -- | Execution information specific to Google Compute Engine.
 rmComputeEngine :: Lens' RuntimeMetadata (Maybe ComputeEngine)

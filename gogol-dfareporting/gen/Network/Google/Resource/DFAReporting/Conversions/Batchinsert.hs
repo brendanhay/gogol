@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConversionsBatchinsert' request conforms to.
 type ConversionsBatchinsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "conversions" :>
@@ -56,10 +56,13 @@ type ConversionsBatchinsertResource =
 -- | Inserts conversions.
 --
 -- /See:/ 'conversionsBatchinsert' smart constructor.
-data ConversionsBatchinsert = ConversionsBatchinsert'
+data ConversionsBatchinsert =
+  ConversionsBatchinsert'
     { _cbProFileId :: !(Textual Int64)
     , _cbPayload   :: !ConversionsBatchInsertRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConversionsBatchinsert' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ conversionsBatchinsert
     -> ConversionsBatchInsertRequest -- ^ 'cbPayload'
     -> ConversionsBatchinsert
 conversionsBatchinsert pCbProFileId_ pCbPayload_ =
-    ConversionsBatchinsert'
-    { _cbProFileId = _Coerce # pCbProFileId_
-    , _cbPayload = pCbPayload_
-    }
+  ConversionsBatchinsert'
+    {_cbProFileId = _Coerce # pCbProFileId_, _cbPayload = pCbPayload_}
+
 
 -- | User profile ID associated with this request.
 cbProFileId :: Lens' ConversionsBatchinsert Int64

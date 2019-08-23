@@ -65,7 +65,8 @@ type ProjectsLocationsWorkflowTemplatesSetIAMPolicyResource
 -- existing policy.
 --
 -- /See:/ 'projectsLocationsWorkflowTemplatesSetIAMPolicy' smart constructor.
-data ProjectsLocationsWorkflowTemplatesSetIAMPolicy = ProjectsLocationsWorkflowTemplatesSetIAMPolicy'
+data ProjectsLocationsWorkflowTemplatesSetIAMPolicy =
+  ProjectsLocationsWorkflowTemplatesSetIAMPolicy'
     { _plwtsipXgafv          :: !(Maybe Xgafv)
     , _plwtsipUploadProtocol :: !(Maybe Text)
     , _plwtsipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsWorkflowTemplatesSetIAMPolicy = ProjectsLocationsWorkflowT
     , _plwtsipPayload        :: !SetIAMPolicyRequest
     , _plwtsipResource       :: !Text
     , _plwtsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsWorkflowTemplatesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsWorkflowTemplatesSetIAMPolicy
     -> Text -- ^ 'plwtsipResource'
     -> ProjectsLocationsWorkflowTemplatesSetIAMPolicy
 projectsLocationsWorkflowTemplatesSetIAMPolicy pPlwtsipPayload_ pPlwtsipResource_ =
-    ProjectsLocationsWorkflowTemplatesSetIAMPolicy'
+  ProjectsLocationsWorkflowTemplatesSetIAMPolicy'
     { _plwtsipXgafv = Nothing
     , _plwtsipUploadProtocol = Nothing
     , _plwtsipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsWorkflowTemplatesSetIAMPolicy pPlwtsipPayload_ pPlwtsipResource
     , _plwtsipResource = pPlwtsipResource_
     , _plwtsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plwtsipXgafv :: Lens' ProjectsLocationsWorkflowTemplatesSetIAMPolicy (Maybe Xgafv)
@@ -150,7 +154,8 @@ plwtsipCallback
       (\ s a -> s{_plwtsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsWorkflowTemplatesSetIAMPolicy where
+           ProjectsLocationsWorkflowTemplatesSetIAMPolicy
+         where
         type Rs
                ProjectsLocationsWorkflowTemplatesSetIAMPolicy
              = Policy

@@ -66,7 +66,8 @@ type SitesReleasesCreateResource =
 -- actively display on the site.
 --
 -- /See:/ 'sitesReleasesCreate' smart constructor.
-data SitesReleasesCreate = SitesReleasesCreate'
+data SitesReleasesCreate =
+  SitesReleasesCreate'
     { _srcParent         :: !Text
     , _srcXgafv          :: !(Maybe Xgafv)
     , _srcUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data SitesReleasesCreate = SitesReleasesCreate'
     , _srcUploadType     :: !(Maybe Text)
     , _srcPayload        :: !Release
     , _srcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesReleasesCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ sitesReleasesCreate
     -> Release -- ^ 'srcPayload'
     -> SitesReleasesCreate
 sitesReleasesCreate pSrcParent_ pSrcPayload_ =
-    SitesReleasesCreate'
+  SitesReleasesCreate'
     { _srcParent = pSrcParent_
     , _srcXgafv = Nothing
     , _srcUploadProtocol = Nothing
@@ -111,6 +114,7 @@ sitesReleasesCreate pSrcParent_ pSrcPayload_ =
     , _srcPayload = pSrcPayload_
     , _srcCallback = Nothing
     }
+
 
 -- | The site that the release belongs to, in the format: 'sites\/site-name'
 srcParent :: Lens' SitesReleasesCreate Text

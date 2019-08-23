@@ -64,7 +64,8 @@ type ExclusionsPatchResource =
 -- | Changes one or more properties of an existing exclusion.
 --
 -- /See:/ 'exclusionsPatch' smart constructor.
-data ExclusionsPatch = ExclusionsPatch'
+data ExclusionsPatch =
+  ExclusionsPatch'
     { _epXgafv          :: !(Maybe Xgafv)
     , _epUploadProtocol :: !(Maybe Text)
     , _epUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ExclusionsPatch = ExclusionsPatch'
     , _epPayload        :: !LogExclusion
     , _epName           :: !Text
     , _epCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExclusionsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ exclusionsPatch
     -> Text -- ^ 'epName'
     -> ExclusionsPatch
 exclusionsPatch pEpPayload_ pEpName_ =
-    ExclusionsPatch'
+  ExclusionsPatch'
     { _epXgafv = Nothing
     , _epUploadProtocol = Nothing
     , _epUpdateMask = Nothing
@@ -109,6 +112,7 @@ exclusionsPatch pEpPayload_ pEpName_ =
     , _epName = pEpName_
     , _epCallback = Nothing
     }
+
 
 -- | V1 error format.
 epXgafv :: Lens' ExclusionsPatch (Maybe Xgafv)

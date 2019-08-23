@@ -64,13 +64,16 @@ type SubscriptionsListResource =
 -- customer\'s transferable subscriptions.
 --
 -- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList'
+data SubscriptionsList =
+  SubscriptionsList'
     { _slCustomerNamePrefix :: !(Maybe Text)
     , _slCustomerId         :: !(Maybe Text)
     , _slCustomerAuthToken  :: !(Maybe Text)
     , _slPageToken          :: !(Maybe Text)
     , _slMaxResults         :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ data SubscriptionsList = SubscriptionsList'
 subscriptionsList
     :: SubscriptionsList
 subscriptionsList =
-    SubscriptionsList'
+  SubscriptionsList'
     { _slCustomerNamePrefix = Nothing
     , _slCustomerId = Nothing
     , _slCustomerAuthToken = Nothing
     , _slPageToken = Nothing
     , _slMaxResults = Nothing
     }
+
 
 -- | When retrieving all of your subscriptions and filtering for specific
 -- customers, you can enter a prefix for a customer name. Using an example

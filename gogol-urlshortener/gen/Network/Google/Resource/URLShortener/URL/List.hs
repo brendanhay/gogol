@@ -54,10 +54,13 @@ type URLListResource =
 -- | Retrieves a list of URLs shortened by a user.
 --
 -- /See:/ 'urlList' smart constructor.
-data URLList = URLList'
+data URLList =
+  URLList'
     { _ulStartToken :: !(Maybe Text)
     , _ulProjection :: !(Maybe URLListProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLList' with the minimum fields required to make a request.
 --
@@ -68,11 +71,8 @@ data URLList = URLList'
 -- * 'ulProjection'
 urlList
     :: URLList
-urlList =
-    URLList'
-    { _ulStartToken = Nothing
-    , _ulProjection = Nothing
-    }
+urlList = URLList' {_ulStartToken = Nothing, _ulProjection = Nothing}
+
 
 -- | Token for requesting successive pages of results.
 ulStartToken :: Lens' URLList (Maybe Text)

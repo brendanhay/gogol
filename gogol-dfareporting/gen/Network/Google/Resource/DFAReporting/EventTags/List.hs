@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'EventTagsList' request conforms to.
 type EventTagsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -76,7 +76,8 @@ type EventTagsListResource =
 -- | Retrieves a list of event tags, possibly filtered.
 --
 -- /See:/ 'eventTagsList' smart constructor.
-data EventTagsList = EventTagsList'
+data EventTagsList =
+  EventTagsList'
     { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
@@ -88,7 +89,9 @@ data EventTagsList = EventTagsList'
     , _etlSortOrder       :: !EventTagsListSortOrder
     , _etlAdId            :: !(Maybe (Textual Int64))
     , _etlSortField       :: !EventTagsListSortField
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventTagsList' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ eventTagsList
     :: Int64 -- ^ 'etlProFileId'
     -> EventTagsList
 eventTagsList pEtlProFileId_ =
-    EventTagsList'
+  EventTagsList'
     { _etlDefinitionsOnly = Nothing
     , _etlEventTagTypes = Nothing
     , _etlEnabled = Nothing
@@ -132,6 +135,7 @@ eventTagsList pEtlProFileId_ =
     , _etlAdId = Nothing
     , _etlSortField = ETLSFID
     }
+
 
 -- | Examine only the specified campaign or advertiser\'s event tags for
 -- matching selector criteria. When set to false, the parent advertiser and

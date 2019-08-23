@@ -54,10 +54,13 @@ type ProjectsEnableXpnHostResource =
 -- | Enable this project as a shared VPC host project.
 --
 -- /See:/ 'projectsEnableXpnHost' smart constructor.
-data ProjectsEnableXpnHost = ProjectsEnableXpnHost'
+data ProjectsEnableXpnHost =
+  ProjectsEnableXpnHost'
     { _pexhRequestId :: !(Maybe Text)
     , _pexhProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsEnableXpnHost' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ projectsEnableXpnHost
     :: Text -- ^ 'pexhProject'
     -> ProjectsEnableXpnHost
 projectsEnableXpnHost pPexhProject_ =
-    ProjectsEnableXpnHost'
-    { _pexhRequestId = Nothing
-    , _pexhProject = pPexhProject_
-    }
+  ProjectsEnableXpnHost'
+    {_pexhRequestId = Nothing, _pexhProject = pPexhProject_}
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

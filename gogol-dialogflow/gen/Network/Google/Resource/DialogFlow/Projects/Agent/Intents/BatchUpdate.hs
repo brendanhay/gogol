@@ -64,7 +64,8 @@ type ProjectsAgentIntentsBatchUpdateResource =
 -- | Updates\/Creates multiple intents in the specified agent. Operation
 --
 -- /See:/ 'projectsAgentIntentsBatchUpdate' smart constructor.
-data ProjectsAgentIntentsBatchUpdate = ProjectsAgentIntentsBatchUpdate'
+data ProjectsAgentIntentsBatchUpdate =
+  ProjectsAgentIntentsBatchUpdate'
     { _paibuParent         :: !Text
     , _paibuXgafv          :: !(Maybe Xgafv)
     , _paibuUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsAgentIntentsBatchUpdate = ProjectsAgentIntentsBatchUpdate'
     , _paibuUploadType     :: !(Maybe Text)
     , _paibuPayload        :: !GoogleCloudDialogflowV2BatchUpdateIntentsRequest
     , _paibuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsBatchUpdate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsAgentIntentsBatchUpdate
     -> GoogleCloudDialogflowV2BatchUpdateIntentsRequest -- ^ 'paibuPayload'
     -> ProjectsAgentIntentsBatchUpdate
 projectsAgentIntentsBatchUpdate pPaibuParent_ pPaibuPayload_ =
-    ProjectsAgentIntentsBatchUpdate'
+  ProjectsAgentIntentsBatchUpdate'
     { _paibuParent = pPaibuParent_
     , _paibuXgafv = Nothing
     , _paibuUploadProtocol = Nothing
@@ -105,6 +108,7 @@ projectsAgentIntentsBatchUpdate pPaibuParent_ pPaibuPayload_ =
     , _paibuPayload = pPaibuPayload_
     , _paibuCallback = Nothing
     }
+
 
 -- | Required. The name of the agent to update or create intents in. Format:
 -- \`projects\/\/agent\`.
@@ -147,7 +151,8 @@ paibuCallback
       (\ s a -> s{_paibuCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentIntentsBatchUpdate where
+           ProjectsAgentIntentsBatchUpdate
+         where
         type Rs ProjectsAgentIntentsBatchUpdate =
              GoogleLongrunningOperation
         type Scopes ProjectsAgentIntentsBatchUpdate =

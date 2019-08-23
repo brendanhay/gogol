@@ -61,9 +61,12 @@ type TimelineInsertResource =
 -- | Inserts a new item into the timeline.
 --
 -- /See:/ 'timelineInsert' smart constructor.
-newtype TimelineInsert = TimelineInsert'
+newtype TimelineInsert =
+  TimelineInsert'
     { _tiPayload :: TimelineItem
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ newtype TimelineInsert = TimelineInsert'
 timelineInsert
     :: TimelineItem -- ^ 'tiPayload'
     -> TimelineInsert
-timelineInsert pTiPayload_ =
-    TimelineInsert'
-    { _tiPayload = pTiPayload_
-    }
+timelineInsert pTiPayload_ = TimelineInsert' {_tiPayload = pTiPayload_}
+
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TimelineInsert TimelineItem

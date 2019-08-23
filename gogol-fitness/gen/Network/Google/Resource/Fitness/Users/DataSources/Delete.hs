@@ -56,10 +56,13 @@ type UsersDataSourcesDeleteResource =
 -- source contains any data points.
 --
 -- /See:/ 'usersDataSourcesDelete' smart constructor.
-data UsersDataSourcesDelete = UsersDataSourcesDelete'
+data UsersDataSourcesDelete =
+  UsersDataSourcesDelete'
     { _udsdDataSourceId :: !Text
     , _udsdUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDataSourcesDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ usersDataSourcesDelete
     -> Text -- ^ 'udsdUserId'
     -> UsersDataSourcesDelete
 usersDataSourcesDelete pUdsdDataSourceId_ pUdsdUserId_ =
-    UsersDataSourcesDelete'
-    { _udsdDataSourceId = pUdsdDataSourceId_
-    , _udsdUserId = pUdsdUserId_
-    }
+  UsersDataSourcesDelete'
+    {_udsdDataSourceId = pUdsdDataSourceId_, _udsdUserId = pUdsdUserId_}
+
 
 -- | The data stream ID of the data source to delete.
 udsdDataSourceId :: Lens' UsersDataSourcesDelete Text

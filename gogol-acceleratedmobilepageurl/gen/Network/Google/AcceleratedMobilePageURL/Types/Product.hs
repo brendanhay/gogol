@@ -23,11 +23,14 @@ import           Network.Google.Prelude
 -- | AMP URL Error resource for a requested URL that couldn\'t be found.
 --
 -- /See:/ 'ampURLError' smart constructor.
-data AmpURLError = AmpURLError'
+data AmpURLError =
+  AmpURLError'
     { _aueOriginalURL  :: !(Maybe Text)
     , _aueErrorCode    :: !(Maybe AmpURLErrorErrorCode)
     , _aueErrorMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AmpURLError' with the minimum fields required to make a request.
 --
@@ -41,11 +44,12 @@ data AmpURLError = AmpURLError'
 ampURLError
     :: AmpURLError
 ampURLError =
-    AmpURLError'
+  AmpURLError'
     { _aueOriginalURL = Nothing
     , _aueErrorCode = Nothing
     , _aueErrorMessage = Nothing
     }
+
 
 -- | The original non-AMP URL.
 aueOriginalURL :: Lens' AmpURLError (Maybe Text)
@@ -83,10 +87,13 @@ instance ToJSON AmpURLError where
 -- | Batch AMP URL response.
 --
 -- /See:/ 'batchGetAmpURLsResponse' smart constructor.
-data BatchGetAmpURLsResponse = BatchGetAmpURLsResponse'
+data BatchGetAmpURLsResponse =
+  BatchGetAmpURLsResponse'
     { _bgaurAmpURLs   :: !(Maybe [AmpURL])
     , _bgaurURLErrors :: !(Maybe [AmpURLError])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchGetAmpURLsResponse' with the minimum fields required to make a request.
 --
@@ -98,10 +105,8 @@ data BatchGetAmpURLsResponse = BatchGetAmpURLsResponse'
 batchGetAmpURLsResponse
     :: BatchGetAmpURLsResponse
 batchGetAmpURLsResponse =
-    BatchGetAmpURLsResponse'
-    { _bgaurAmpURLs = Nothing
-    , _bgaurURLErrors = Nothing
-    }
+  BatchGetAmpURLsResponse' {_bgaurAmpURLs = Nothing, _bgaurURLErrors = Nothing}
+
 
 -- | For each URL in BatchAmpUrlsRequest, the URL response. The response
 -- might not be in the same order as URLs in the batch request. If
@@ -139,10 +144,13 @@ instance ToJSON BatchGetAmpURLsResponse where
 -- | AMP URL request for a batch of URLs.
 --
 -- /See:/ 'batchGetAmpURLsRequest' smart constructor.
-data BatchGetAmpURLsRequest = BatchGetAmpURLsRequest'
+data BatchGetAmpURLsRequest =
+  BatchGetAmpURLsRequest'
     { _bgaurURLs           :: !(Maybe [Text])
     , _bgaurLookupStrategy :: !(Maybe BatchGetAmpURLsRequestLookupStrategy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchGetAmpURLsRequest' with the minimum fields required to make a request.
 --
@@ -154,10 +162,8 @@ data BatchGetAmpURLsRequest = BatchGetAmpURLsRequest'
 batchGetAmpURLsRequest
     :: BatchGetAmpURLsRequest
 batchGetAmpURLsRequest =
-    BatchGetAmpURLsRequest'
-    { _bgaurURLs = Nothing
-    , _bgaurLookupStrategy = Nothing
-    }
+  BatchGetAmpURLsRequest' {_bgaurURLs = Nothing, _bgaurLookupStrategy = Nothing}
+
 
 -- | List of URLs to look up for the paired AMP URLs. The URLs are
 -- case-sensitive. Up to 50 URLs per lookup (see [Usage
@@ -192,11 +198,14 @@ instance ToJSON BatchGetAmpURLsRequest where
 -- | AMP URL response for a requested URL.
 --
 -- /See:/ 'ampURL' smart constructor.
-data AmpURL = AmpURL'
+data AmpURL =
+  AmpURL'
     { _auOriginalURL :: !(Maybe Text)
     , _auAmpURL      :: !(Maybe Text)
     , _auCdnAmpURL   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AmpURL' with the minimum fields required to make a request.
 --
@@ -210,11 +219,9 @@ data AmpURL = AmpURL'
 ampURL
     :: AmpURL
 ampURL =
-    AmpURL'
-    { _auOriginalURL = Nothing
-    , _auAmpURL = Nothing
-    , _auCdnAmpURL = Nothing
-    }
+  AmpURL'
+    {_auOriginalURL = Nothing, _auAmpURL = Nothing, _auCdnAmpURL = Nothing}
+
 
 -- | The original non-AMP URL.
 auOriginalURL :: Lens' AmpURL (Maybe Text)

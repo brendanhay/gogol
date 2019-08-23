@@ -67,7 +67,8 @@ type ProjectsInstancesTablesListResource =
 -- | Lists all tables served from a specified instance.
 --
 -- /See:/ 'projectsInstancesTablesList' smart constructor.
-data ProjectsInstancesTablesList = ProjectsInstancesTablesList'
+data ProjectsInstancesTablesList =
+  ProjectsInstancesTablesList'
     { _pitlParent         :: !Text
     , _pitlXgafv          :: !(Maybe Xgafv)
     , _pitlUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsInstancesTablesList = ProjectsInstancesTablesList'
     , _pitlPageToken      :: !(Maybe Text)
     , _pitlPageSize       :: !(Maybe (Textual Int32))
     , _pitlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesTablesList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsInstancesTablesList
     :: Text -- ^ 'pitlParent'
     -> ProjectsInstancesTablesList
 projectsInstancesTablesList pPitlParent_ =
-    ProjectsInstancesTablesList'
+  ProjectsInstancesTablesList'
     { _pitlParent = pPitlParent_
     , _pitlXgafv = Nothing
     , _pitlUploadProtocol = Nothing
@@ -115,6 +118,7 @@ projectsInstancesTablesList pPitlParent_ =
     , _pitlPageSize = Nothing
     , _pitlCallback = Nothing
     }
+
 
 -- | The unique name of the instance for which tables should be listed.
 -- Values are of the form \`projects\/\/instances\/\`.
@@ -156,7 +160,13 @@ pitlPageToken
   = lens _pitlPageToken
       (\ s a -> s{_pitlPageToken = a})
 
--- | Maximum number of results per page. CURRENTLY UNIMPLEMENTED AND IGNORED.
+-- | Maximum number of results per page. A page_size of zero lets the server
+-- choose the number of items to return. A page_size which is strictly
+-- positive will return at most that many items. A negative page_size will
+-- cause an error. Following the first request, subsequent paginated calls
+-- are not required to pass a page_size. If a page_size is set in
+-- subsequent calls, it must match the page_size given in the first
+-- request.
 pitlPageSize :: Lens' ProjectsInstancesTablesList (Maybe Int32)
 pitlPageSize
   = lens _pitlPageSize (\ s a -> s{_pitlPageSize = a})

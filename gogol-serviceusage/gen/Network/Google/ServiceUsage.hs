@@ -81,6 +81,9 @@ module Network.Google.ServiceUsage
     , mrdType
     , mrdDescription
 
+    -- ** BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
     -- ** GoogleAPIService
     , GoogleAPIService
     , googleAPIService
@@ -195,11 +198,13 @@ module Network.Google.ServiceUsage
     -- ** BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
     , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- ** BatchEnableServicesRequest
     , BatchEnableServicesRequest
@@ -287,6 +292,11 @@ module Network.Google.ServiceUsage
     -- ** MetricDescriptorMetadataLaunchStage
     , MetricDescriptorMetadataLaunchStage (..)
 
+    -- ** BatchCreateAdminOverridesResponse
+    , BatchCreateAdminOverridesResponse
+    , batchCreateAdminOverridesResponse
+    , bcaorOverrides
+
     -- ** Mixin
     , Mixin
     , mixin
@@ -345,6 +355,11 @@ module Network.Google.ServiceUsage
     -- ** TypeSyntax
     , TypeSyntax (..)
 
+    -- ** QuotaOverrideDimensions
+    , QuotaOverrideDimensions
+    , quotaOverrideDimensions
+    , qodAddtional
+
     -- ** EnableFailure
     , EnableFailure
     , enableFailure
@@ -395,6 +410,18 @@ module Network.Google.ServiceUsage
     , EnableServiceResponse
     , enableServiceResponse
     , esrService
+
+    -- ** QuotaOverride
+    , QuotaOverride
+    , quotaOverride
+    , qoOverrideValue
+    , qoName
+    , qoDimensions
+
+    -- ** BatchCreateConsumerOverridesResponse
+    , BatchCreateConsumerOverridesResponse
+    , batchCreateConsumerOverridesResponse
+    , bccorOverrides
 
     -- ** Documentation
     , Documentation

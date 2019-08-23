@@ -53,9 +53,12 @@ type WebfontsListResource =
 -- Developer API
 --
 -- /See:/ 'webfontsList' smart constructor.
-newtype WebfontsList = WebfontsList'
+newtype WebfontsList =
+  WebfontsList'
     { _wlSort :: Maybe WebfontsListSort
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebfontsList' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype WebfontsList = WebfontsList'
 -- * 'wlSort'
 webfontsList
     :: WebfontsList
-webfontsList =
-    WebfontsList'
-    { _wlSort = Nothing
-    }
+webfontsList = WebfontsList' {_wlSort = Nothing}
+
 
 -- | Enables sorting of the list
 wlSort :: Lens' WebfontsList (Maybe WebfontsListSort)

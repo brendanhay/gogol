@@ -43,6 +43,9 @@ module Network.Google.ServiceUsage.Types
     , mrdType
     , mrdDescription
 
+    -- * BackendRulePathTranslation
+    , BackendRulePathTranslation (..)
+
     -- * GoogleAPIService
     , GoogleAPIService
     , googleAPIService
@@ -157,11 +160,13 @@ module Network.Google.ServiceUsage.Types
     -- * BackendRule
     , BackendRule
     , backendRule
+    , brJwtAudience
     , brSelector
     , brMinDeadline
     , brAddress
     , brOperationDeadline
     , brDeadline
+    , brPathTranslation
 
     -- * BatchEnableServicesRequest
     , BatchEnableServicesRequest
@@ -249,6 +254,11 @@ module Network.Google.ServiceUsage.Types
     -- * MetricDescriptorMetadataLaunchStage
     , MetricDescriptorMetadataLaunchStage (..)
 
+    -- * BatchCreateAdminOverridesResponse
+    , BatchCreateAdminOverridesResponse
+    , batchCreateAdminOverridesResponse
+    , bcaorOverrides
+
     -- * Mixin
     , Mixin
     , mixin
@@ -307,6 +317,11 @@ module Network.Google.ServiceUsage.Types
     -- * TypeSyntax
     , TypeSyntax (..)
 
+    -- * QuotaOverrideDimensions
+    , QuotaOverrideDimensions
+    , quotaOverrideDimensions
+    , qodAddtional
+
     -- * EnableFailure
     , EnableFailure
     , enableFailure
@@ -357,6 +372,18 @@ module Network.Google.ServiceUsage.Types
     , EnableServiceResponse
     , enableServiceResponse
     , esrService
+
+    -- * QuotaOverride
+    , QuotaOverride
+    , quotaOverride
+    , qoOverrideValue
+    , qoName
+    , qoDimensions
+
+    -- * BatchCreateConsumerOverridesResponse
+    , BatchCreateConsumerOverridesResponse
+    , batchCreateConsumerOverridesResponse
+    , bccorOverrides
 
     -- * Documentation
     , Documentation
@@ -610,12 +637,12 @@ serviceUsageService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Manage your Google API service configuration
 serviceManagementScope :: Proxy '["https://www.googleapis.com/auth/service.management"]
-serviceManagementScope = Proxy;
+serviceManagementScope = Proxy

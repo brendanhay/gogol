@@ -135,7 +135,6 @@ module Network.Google.Script
     , gastpFunctionName
     , gastpUserAccessLevel
     , gastpProcessType
-    , gastpExecutingUser
     , gastpDuration
 
     -- ** GoogleAppsScriptTypeWebAppConfigExecuteAs

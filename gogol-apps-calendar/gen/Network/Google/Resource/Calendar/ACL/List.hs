@@ -60,13 +60,16 @@ type ACLListResource =
 -- | Returns the rules in the access control list for the calendar.
 --
 -- /See:/ 'aclList' smart constructor.
-data ACLList = ACLList'
+data ACLList =
+  ACLList'
     { _alSyncToken   :: !(Maybe Text)
     , _alCalendarId  :: !Text
     , _alShowDeleted :: !(Maybe Bool)
     , _alPageToken   :: !(Maybe Text)
     , _alMaxResults  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ACLList' with the minimum fields required to make a request.
 --
@@ -85,13 +88,14 @@ aclList
     :: Text -- ^ 'alCalendarId'
     -> ACLList
 aclList pAlCalendarId_ =
-    ACLList'
+  ACLList'
     { _alSyncToken = Nothing
     , _alCalendarId = pAlCalendarId_
     , _alShowDeleted = Nothing
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
     }
+
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
 -- results from the previous list request. It makes the result of this list

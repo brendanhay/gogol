@@ -53,9 +53,12 @@ type AccountsListResource =
 -- id.
 --
 -- /See:/ 'accountsList' smart constructor.
-newtype AccountsList = AccountsList'
+newtype AccountsList =
+  AccountsList'
     { _alFilterAdClientId :: [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ accountsList
     :: [Text] -- ^ 'alFilterAdClientId'
     -> AccountsList
 accountsList pAlFilterAdClientId_ =
-    AccountsList'
-    { _alFilterAdClientId = _Coerce # pAlFilterAdClientId_
-    }
+  AccountsList' {_alFilterAdClientId = _Coerce # pAlFilterAdClientId_}
+
 
 -- | Ad clients to list accounts for.
 alFilterAdClientId :: Lens' AccountsList [Text]

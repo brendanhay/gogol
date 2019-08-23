@@ -72,7 +72,8 @@ type IndexingDatasourcesItemsListResource =
 -- | Lists all or a subset of Item resources.
 --
 -- /See:/ 'indexingDatasourcesItemsList' smart constructor.
-data IndexingDatasourcesItemsList = IndexingDatasourcesItemsList'
+data IndexingDatasourcesItemsList =
+  IndexingDatasourcesItemsList'
     { _idilXgafv                       :: !(Maybe Xgafv)
     , _idilUploadProtocol              :: !(Maybe Text)
     , _idilAccessToken                 :: !(Maybe Text)
@@ -84,7 +85,9 @@ data IndexingDatasourcesItemsList = IndexingDatasourcesItemsList'
     , _idilPageToken                   :: !(Maybe Text)
     , _idilPageSize                    :: !(Maybe (Textual Int32))
     , _idilCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesItemsList' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ indexingDatasourcesItemsList
     :: Text -- ^ 'idilName'
     -> IndexingDatasourcesItemsList
 indexingDatasourcesItemsList pIdilName_ =
-    IndexingDatasourcesItemsList'
+  IndexingDatasourcesItemsList'
     { _idilXgafv = Nothing
     , _idilUploadProtocol = Nothing
     , _idilAccessToken = Nothing
@@ -128,6 +131,7 @@ indexingDatasourcesItemsList pIdilName_ =
     , _idilPageSize = Nothing
     , _idilCallback = Nothing
     }
+
 
 -- | V1 error format.
 idilXgafv :: Lens' IndexingDatasourcesItemsList (Maybe Xgafv)
@@ -171,8 +175,8 @@ idilBrief :: Lens' IndexingDatasourcesItemsList (Maybe Bool)
 idilBrief
   = lens _idilBrief (\ s a -> s{_idilBrief = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 idilDebugOptionsEnableDebugging :: Lens' IndexingDatasourcesItemsList (Maybe Bool)
 idilDebugOptionsEnableDebugging
   = lens _idilDebugOptionsEnableDebugging

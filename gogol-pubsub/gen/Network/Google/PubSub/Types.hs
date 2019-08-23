@@ -26,6 +26,7 @@ module Network.Google.PubSub.Types
     -- * PushConfig
     , PushConfig
     , pushConfig
+    , pcOidcToken
     , pcAttributes
     , pcPushEndpoint
 
@@ -56,6 +57,12 @@ module Network.Google.PubSub.Types
     , eExpression
     , eTitle
     , eDescription
+
+    -- * OidcToken
+    , OidcToken
+    , oidcToken
+    , otAudience
+    , otServiceAccountEmail
 
     -- * ModifyAckDeadlineRequest
     , ModifyAckDeadlineRequest
@@ -262,8 +269,8 @@ pubSubService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage Pub\/Sub topics and subscriptions
 pubSubScope :: Proxy '["https://www.googleapis.com/auth/pubsub"]
-pubSubScope = Proxy;
+pubSubScope = Proxy

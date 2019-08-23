@@ -20,9 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume.
+-- Updates the track configuration for the specified track type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
@@ -58,17 +56,18 @@ type EditsTracksUpdateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Track :> Put '[JSON] Track
 
--- | Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume.
+-- | Updates the track configuration for the specified track type.
 --
 -- /See:/ 'editsTracksUpdate' smart constructor.
-data EditsTracksUpdate = EditsTracksUpdate'
+data EditsTracksUpdate =
+  EditsTracksUpdate'
     { _etuTrack       :: !Text
     , _etuPackageName :: !Text
     , _etuPayload     :: !Track
     , _etuEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsTracksUpdate' with the minimum fields required to make a request.
 --
@@ -88,12 +87,13 @@ editsTracksUpdate
     -> Text -- ^ 'etuEditId'
     -> EditsTracksUpdate
 editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
-    EditsTracksUpdate'
+  EditsTracksUpdate'
     { _etuTrack = pEtuTrack_
     , _etuPackageName = pEtuPackageName_
     , _etuPayload = pEtuPayload_
     , _etuEditId = pEtuEditId_
     }
+
 
 -- | The track to read or modify.
 etuTrack :: Lens' EditsTracksUpdate Text

@@ -61,14 +61,17 @@ type ProjectsGetAgentResource =
 -- | Retrieves the specified agent.
 --
 -- /See:/ 'projectsGetAgent' smart constructor.
-data ProjectsGetAgent = ProjectsGetAgent'
+data ProjectsGetAgent =
+  ProjectsGetAgent'
     { _pgaParent         :: !Text
     , _pgaXgafv          :: !(Maybe Xgafv)
     , _pgaUploadProtocol :: !(Maybe Text)
     , _pgaAccessToken    :: !(Maybe Text)
     , _pgaUploadType     :: !(Maybe Text)
     , _pgaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGetAgent' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsGetAgent
     :: Text -- ^ 'pgaParent'
     -> ProjectsGetAgent
 projectsGetAgent pPgaParent_ =
-    ProjectsGetAgent'
+  ProjectsGetAgent'
     { _pgaParent = pPgaParent_
     , _pgaXgafv = Nothing
     , _pgaUploadProtocol = Nothing
@@ -97,6 +100,7 @@ projectsGetAgent pPgaParent_ =
     , _pgaUploadType = Nothing
     , _pgaCallback = Nothing
     }
+
 
 -- | Required. The project that the agent to fetch is associated with.
 -- Format: \`projects\/\`.

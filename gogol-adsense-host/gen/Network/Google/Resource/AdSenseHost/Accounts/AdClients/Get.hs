@@ -56,10 +56,13 @@ type AccountsAdClientsGetResource =
 -- publisher\'s AdSense account.
 --
 -- /See:/ 'accountsAdClientsGet' smart constructor.
-data AccountsAdClientsGet = AccountsAdClientsGet'
+data AccountsAdClientsGet =
+  AccountsAdClientsGet'
     { _aacgAdClientId :: !Text
     , _aacgAccountId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdClientsGet' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ accountsAdClientsGet
     -> Text -- ^ 'aacgAccountId'
     -> AccountsAdClientsGet
 accountsAdClientsGet pAacgAdClientId_ pAacgAccountId_ =
-    AccountsAdClientsGet'
-    { _aacgAdClientId = pAacgAdClientId_
-    , _aacgAccountId = pAacgAccountId_
-    }
+  AccountsAdClientsGet'
+    {_aacgAdClientId = pAacgAdClientId_, _aacgAccountId = pAacgAccountId_}
+
 
 -- | Ad client to get.
 aacgAdClientId :: Lens' AccountsAdClientsGet Text

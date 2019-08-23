@@ -51,9 +51,12 @@ type QueriesDeleteQueryResource =
 -- | Deletes a stored query as well as the associated stored reports.
 --
 -- /See:/ 'queriesDeleteQuery' smart constructor.
-newtype QueriesDeleteQuery = QueriesDeleteQuery'
+newtype QueriesDeleteQuery =
+  QueriesDeleteQuery'
     { _qdqQueryId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueriesDeleteQuery' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ queriesDeleteQuery
     :: Int64 -- ^ 'qdqQueryId'
     -> QueriesDeleteQuery
 queriesDeleteQuery pQdqQueryId_ =
-    QueriesDeleteQuery'
-    { _qdqQueryId = _Coerce # pQdqQueryId_
-    }
+  QueriesDeleteQuery' {_qdqQueryId = _Coerce # pQdqQueryId_}
+
 
 -- | Query ID to delete.
 qdqQueryId :: Lens' QueriesDeleteQuery Int64

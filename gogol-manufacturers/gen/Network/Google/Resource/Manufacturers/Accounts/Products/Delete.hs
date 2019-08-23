@@ -62,7 +62,8 @@ type AccountsProductsDeleteResource =
 -- | Deletes the product from a Manufacturer Center account.
 --
 -- /See:/ 'accountsProductsDelete' smart constructor.
-data AccountsProductsDelete = AccountsProductsDelete'
+data AccountsProductsDelete =
+  AccountsProductsDelete'
     { _apdParent         :: !Text
     , _apdXgafv          :: !(Maybe Xgafv)
     , _apdUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data AccountsProductsDelete = AccountsProductsDelete'
     , _apdUploadType     :: !(Maybe Text)
     , _apdName           :: !Text
     , _apdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProductsDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ accountsProductsDelete
     -> Text -- ^ 'apdName'
     -> AccountsProductsDelete
 accountsProductsDelete pApdParent_ pApdName_ =
-    AccountsProductsDelete'
+  AccountsProductsDelete'
     { _apdParent = pApdParent_
     , _apdXgafv = Nothing
     , _apdUploadProtocol = Nothing
@@ -103,6 +106,7 @@ accountsProductsDelete pApdParent_ pApdName_ =
     , _apdName = pApdName_
     , _apdCallback = Nothing
     }
+
 
 -- | Parent ID in the format \`accounts\/{account_id}\`. \`account_id\` - The
 -- ID of the Manufacturer Center account.

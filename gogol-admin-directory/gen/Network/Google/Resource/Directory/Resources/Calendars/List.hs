@@ -63,13 +63,16 @@ type ResourcesCalendarsListResource =
 -- | Retrieves a list of calendar resources for an account.
 --
 -- /See:/ 'resourcesCalendarsList' smart constructor.
-data ResourcesCalendarsList = ResourcesCalendarsList'
+data ResourcesCalendarsList =
+  ResourcesCalendarsList'
     { _rclOrderBy    :: !(Maybe Text)
     , _rclCustomer   :: !Text
     , _rclQuery      :: !(Maybe Text)
     , _rclPageToken  :: !(Maybe Text)
     , _rclMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesCalendarsList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ resourcesCalendarsList
     :: Text -- ^ 'rclCustomer'
     -> ResourcesCalendarsList
 resourcesCalendarsList pRclCustomer_ =
-    ResourcesCalendarsList'
+  ResourcesCalendarsList'
     { _rclOrderBy = Nothing
     , _rclCustomer = pRclCustomer_
     , _rclQuery = Nothing
     , _rclPageToken = Nothing
     , _rclMaxResults = Nothing
     }
+
 
 -- | Field(s) to sort results by in either ascending or descending order.
 -- Supported fields include resourceId, resourceName, capacity, buildingId,

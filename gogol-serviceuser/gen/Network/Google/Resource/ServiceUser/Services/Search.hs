@@ -67,7 +67,8 @@ type ServicesSearchResource =
 -- the calling user has \"servicemanagement.services.bind\" permission for.
 --
 -- /See:/ 'servicesSearch' smart constructor.
-data ServicesSearch = ServicesSearch'
+data ServicesSearch =
+  ServicesSearch'
     { _ssXgafv          :: !(Maybe Xgafv)
     , _ssUploadProtocol :: !(Maybe Text)
     , _ssAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ServicesSearch = ServicesSearch'
     , _ssPageToken      :: !(Maybe Text)
     , _ssPageSize       :: !(Maybe (Textual Int32))
     , _ssCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesSearch' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ data ServicesSearch = ServicesSearch'
 servicesSearch
     :: ServicesSearch
 servicesSearch =
-    ServicesSearch'
+  ServicesSearch'
     { _ssXgafv = Nothing
     , _ssUploadProtocol = Nothing
     , _ssAccessToken = Nothing
@@ -106,6 +109,7 @@ servicesSearch =
     , _ssPageSize = Nothing
     , _ssCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssXgafv :: Lens' ServicesSearch (Maybe Xgafv)

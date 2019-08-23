@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.list@ method which the
 -- 'ProjectsLocationsJobsList' request conforms to.
 type ProjectsLocationsJobsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "jobs" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -65,7 +65,8 @@ type ProjectsLocationsJobsListResource =
 -- | Lists jobs.
 --
 -- /See:/ 'projectsLocationsJobsList' smart constructor.
-data ProjectsLocationsJobsList = ProjectsLocationsJobsList'
+data ProjectsLocationsJobsList =
+  ProjectsLocationsJobsList'
     { _pljlParent         :: !Text
     , _pljlXgafv          :: !(Maybe Xgafv)
     , _pljlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsLocationsJobsList = ProjectsLocationsJobsList'
     , _pljlPageToken      :: !(Maybe Text)
     , _pljlPageSize       :: !(Maybe (Textual Int32))
     , _pljlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsJobsList
     :: Text -- ^ 'pljlParent'
     -> ProjectsLocationsJobsList
 projectsLocationsJobsList pPljlParent_ =
-    ProjectsLocationsJobsList'
+  ProjectsLocationsJobsList'
     { _pljlParent = pPljlParent_
     , _pljlXgafv = Nothing
     , _pljlUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsLocationsJobsList pPljlParent_ =
     , _pljlPageSize = Nothing
     , _pljlCallback = Nothing
     }
+
 
 -- | Required. The location name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\`.

@@ -58,12 +58,15 @@ type VideoCategoriesListResource =
 -- | Returns a list of categories that can be associated with YouTube videos.
 --
 -- /See:/ 'videoCategoriesList' smart constructor.
-data VideoCategoriesList = VideoCategoriesList'
+data VideoCategoriesList =
+  VideoCategoriesList'
     { _vclPart       :: !Text
     , _vclRegionCode :: !(Maybe Text)
     , _vclHl         :: !Text
     , _vclId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideoCategoriesList' with the minimum fields required to make a request.
 --
@@ -80,12 +83,13 @@ videoCategoriesList
     :: Text -- ^ 'vclPart'
     -> VideoCategoriesList
 videoCategoriesList pVclPart_ =
-    VideoCategoriesList'
+  VideoCategoriesList'
     { _vclPart = pVclPart_
     , _vclRegionCode = Nothing
     , _vclHl = "en_US"
     , _vclId = Nothing
     }
+
 
 -- | The part parameter specifies the videoCategory resource properties that
 -- the API response will include. Set the parameter value to snippet.

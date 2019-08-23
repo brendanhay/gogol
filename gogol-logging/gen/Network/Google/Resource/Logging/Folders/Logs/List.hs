@@ -67,7 +67,8 @@ type FoldersLogsListResource =
 -- Only logs that have entries are listed.
 --
 -- /See:/ 'foldersLogsList' smart constructor.
-data FoldersLogsList = FoldersLogsList'
+data FoldersLogsList =
+  FoldersLogsList'
     { _fllParent         :: !Text
     , _fllXgafv          :: !(Maybe Xgafv)
     , _fllUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data FoldersLogsList = FoldersLogsList'
     , _fllPageToken      :: !(Maybe Text)
     , _fllPageSize       :: !(Maybe (Textual Int32))
     , _fllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersLogsList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ foldersLogsList
     :: Text -- ^ 'fllParent'
     -> FoldersLogsList
 foldersLogsList pFllParent_ =
-    FoldersLogsList'
+  FoldersLogsList'
     { _fllParent = pFllParent_
     , _fllXgafv = Nothing
     , _fllUploadProtocol = Nothing
@@ -111,6 +114,7 @@ foldersLogsList pFllParent_ =
     , _fllPageSize = Nothing
     , _fllCallback = Nothing
     }
+
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

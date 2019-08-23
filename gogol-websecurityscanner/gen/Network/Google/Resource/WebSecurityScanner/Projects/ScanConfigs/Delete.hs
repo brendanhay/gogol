@@ -47,7 +47,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.delete@ method which the
 -- 'ProjectsScanConfigsDelete' request conforms to.
 type ProjectsScanConfigsDeleteResource =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,14 +59,17 @@ type ProjectsScanConfigsDeleteResource =
 -- | Deletes an existing ScanConfig and its child resources.
 --
 -- /See:/ 'projectsScanConfigsDelete' smart constructor.
-data ProjectsScanConfigsDelete = ProjectsScanConfigsDelete'
+data ProjectsScanConfigsDelete =
+  ProjectsScanConfigsDelete'
     { _pscdXgafv          :: !(Maybe Xgafv)
     , _pscdUploadProtocol :: !(Maybe Text)
     , _pscdAccessToken    :: !(Maybe Text)
     , _pscdUploadType     :: !(Maybe Text)
     , _pscdName           :: !Text
     , _pscdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsScanConfigsDelete
     :: Text -- ^ 'pscdName'
     -> ProjectsScanConfigsDelete
 projectsScanConfigsDelete pPscdName_ =
-    ProjectsScanConfigsDelete'
+  ProjectsScanConfigsDelete'
     { _pscdXgafv = Nothing
     , _pscdUploadProtocol = Nothing
     , _pscdAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsScanConfigsDelete pPscdName_ =
     , _pscdName = pPscdName_
     , _pscdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscdXgafv :: Lens' ProjectsScanConfigsDelete (Maybe Xgafv)

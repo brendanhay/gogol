@@ -68,7 +68,8 @@ type ProjectsLocationsTransferConfigsRunsTransferLogsListResource
 -- | Returns user facing log messages for the data transfer run.
 --
 -- /See:/ 'projectsLocationsTransferConfigsRunsTransferLogsList' smart constructor.
-data ProjectsLocationsTransferConfigsRunsTransferLogsList = ProjectsLocationsTransferConfigsRunsTransferLogsList'
+data ProjectsLocationsTransferConfigsRunsTransferLogsList =
+  ProjectsLocationsTransferConfigsRunsTransferLogsList'
     { _pltcrtllParent         :: !Text
     , _pltcrtllXgafv          :: !(Maybe Xgafv)
     , _pltcrtllUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsLocationsTransferConfigsRunsTransferLogsList = ProjectsLocationsTra
     , _pltcrtllPageToken      :: !(Maybe Text)
     , _pltcrtllPageSize       :: !(Maybe (Textual Int32))
     , _pltcrtllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsRunsTransferLogsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsLocationsTransferConfigsRunsTransferLogsList
     :: Text -- ^ 'pltcrtllParent'
     -> ProjectsLocationsTransferConfigsRunsTransferLogsList
 projectsLocationsTransferConfigsRunsTransferLogsList pPltcrtllParent_ =
-    ProjectsLocationsTransferConfigsRunsTransferLogsList'
+  ProjectsLocationsTransferConfigsRunsTransferLogsList'
     { _pltcrtllParent = pPltcrtllParent_
     , _pltcrtllXgafv = Nothing
     , _pltcrtllUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsLocationsTransferConfigsRunsTransferLogsList pPltcrtllParent_ =
     , _pltcrtllPageSize = Nothing
     , _pltcrtllCallback = Nothing
     }
+
 
 -- | Transfer run name in the form:
 -- \`projects\/{project_id}\/transferConfigs\/{config_Id}\/runs\/{run_id}\`.
@@ -181,7 +185,7 @@ pltcrtllCallback
       (\ s a -> s{_pltcrtllCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsRunsTransferLogsList
+           ProjectsLocationsTransferConfigsRunsTransferLogsList
          where
         type Rs
                ProjectsLocationsTransferConfigsRunsTransferLogsList

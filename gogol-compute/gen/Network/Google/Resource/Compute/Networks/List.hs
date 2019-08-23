@@ -61,13 +61,16 @@ type NetworksListResource =
 -- | Retrieves the list of networks available to the specified project.
 --
 -- /See:/ 'networksList' smart constructor.
-data NetworksList = NetworksList'
+data NetworksList =
+  NetworksList'
     { _nlOrderBy    :: !(Maybe Text)
     , _nlProject    :: !Text
     , _nlFilter     :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
     , _nlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworksList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ networksList
     :: Text -- ^ 'nlProject'
     -> NetworksList
 networksList pNlProject_ =
-    NetworksList'
+  NetworksList'
     { _nlOrderBy = Nothing
     , _nlProject = pNlProject_
     , _nlFilter = Nothing
     , _nlPageToken = Nothing
     , _nlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

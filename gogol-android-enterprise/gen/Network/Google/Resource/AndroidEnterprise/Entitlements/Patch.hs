@@ -64,13 +64,16 @@ type EntitlementsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'entitlementsPatch' smart constructor.
-data EntitlementsPatch = EntitlementsPatch'
+data EntitlementsPatch =
+  EntitlementsPatch'
     { _epEntitlementId :: !Text
     , _epEnterpriseId  :: !Text
     , _epPayload       :: !Entitlement
     , _epInstall       :: !(Maybe Bool)
     , _epUserId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntitlementsPatch' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ entitlementsPatch
     -> Text -- ^ 'epUserId'
     -> EntitlementsPatch
 entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
-    EntitlementsPatch'
+  EntitlementsPatch'
     { _epEntitlementId = pEpEntitlementId_
     , _epEnterpriseId = pEpEnterpriseId_
     , _epPayload = pEpPayload_
     , _epInstall = Nothing
     , _epUserId = pEpUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

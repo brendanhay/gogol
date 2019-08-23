@@ -54,11 +54,14 @@ type AccountsContainersUpdateResource =
 -- | Updates a Container.
 --
 -- /See:/ 'accountsContainersUpdate' smart constructor.
-data AccountsContainersUpdate = AccountsContainersUpdate'
+data AccountsContainersUpdate =
+  AccountsContainersUpdate'
     { _acuPath        :: !Text
     , _acuFingerprint :: !(Maybe Text)
     , _acuPayload     :: !Container
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersUpdate' with the minimum fields required to make a request.
 --
@@ -74,11 +77,12 @@ accountsContainersUpdate
     -> Container -- ^ 'acuPayload'
     -> AccountsContainersUpdate
 accountsContainersUpdate pAcuPath_ pAcuPayload_ =
-    AccountsContainersUpdate'
+  AccountsContainersUpdate'
     { _acuPath = pAcuPath_
     , _acuFingerprint = Nothing
     , _acuPayload = pAcuPayload_
     }
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}

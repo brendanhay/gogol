@@ -55,10 +55,13 @@ type UsersUndeleteResource =
 -- | Undelete a deleted user
 --
 -- /See:/ 'usersUndelete' smart constructor.
-data UsersUndelete = UsersUndelete'
+data UsersUndelete =
+  UsersUndelete'
     { _uuPayload :: !UserUndelete
     , _uuUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersUndelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ usersUndelete
     -> Text -- ^ 'uuUserKey'
     -> UsersUndelete
 usersUndelete pUuPayload_ pUuUserKey_ =
-    UsersUndelete'
-    { _uuPayload = pUuPayload_
-    , _uuUserKey = pUuUserKey_
-    }
+  UsersUndelete' {_uuPayload = pUuPayload_, _uuUserKey = pUuUserKey_}
+
 
 -- | Multipart request metadata.
 uuPayload :: Lens' UsersUndelete UserUndelete

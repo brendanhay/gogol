@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.delete@ method which the
 -- 'ProjectsLocationsQueuesDelete' request conforms to.
 type ProjectsLocationsQueuesDeleteResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -71,14 +71,17 @@ type ProjectsLocationsQueuesDeleteResource =
 -- using this method.
 --
 -- /See:/ 'projectsLocationsQueuesDelete' smart constructor.
-data ProjectsLocationsQueuesDelete = ProjectsLocationsQueuesDelete'
+data ProjectsLocationsQueuesDelete =
+  ProjectsLocationsQueuesDelete'
     { _plqdXgafv          :: !(Maybe Xgafv)
     , _plqdUploadProtocol :: !(Maybe Text)
     , _plqdAccessToken    :: !(Maybe Text)
     , _plqdUploadType     :: !(Maybe Text)
     , _plqdName           :: !Text
     , _plqdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesDelete' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsQueuesDelete
     :: Text -- ^ 'plqdName'
     -> ProjectsLocationsQueuesDelete
 projectsLocationsQueuesDelete pPlqdName_ =
-    ProjectsLocationsQueuesDelete'
+  ProjectsLocationsQueuesDelete'
     { _plqdXgafv = Nothing
     , _plqdUploadProtocol = Nothing
     , _plqdAccessToken = Nothing
@@ -107,6 +110,7 @@ projectsLocationsQueuesDelete pPlqdName_ =
     , _plqdName = pPlqdName_
     , _plqdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqdXgafv :: Lens' ProjectsLocationsQueuesDelete (Maybe Xgafv)

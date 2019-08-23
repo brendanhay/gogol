@@ -39,10 +39,13 @@ import           Network.Google.Prelude
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -53,11 +56,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -92,10 +92,13 @@ instance ToJSON AuditConfig where
 -- | Response message for \`ListServices\`.
 --
 -- /See:/ 'listServicesResponse' smart constructor.
-data ListServicesResponse = ListServicesResponse'
+data ListServicesResponse =
+  ListServicesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrServices      :: !(Maybe [Service])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
@@ -107,10 +110,8 @@ data ListServicesResponse = ListServicesResponse'
 listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
-    ListServicesResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrServices = Nothing
-    }
+  ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListServices\` again with the \`page_token\` field set to this
@@ -147,12 +148,15 @@ instance ToJSON ListServicesResponse where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -168,12 +172,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -223,12 +228,15 @@ instance ToJSON Expr where
 -- account to one or more projects.
 --
 -- /See:/ 'billingAccount' smart constructor.
-data BillingAccount = BillingAccount'
+data BillingAccount =
+  BillingAccount'
     { _baMasterBillingAccount :: !(Maybe Text)
     , _baOpen                 :: !(Maybe Bool)
     , _baName                 :: !(Maybe Text)
     , _baDisplayName          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccount' with the minimum fields required to make a request.
 --
@@ -244,12 +252,13 @@ data BillingAccount = BillingAccount'
 billingAccount
     :: BillingAccount
 billingAccount =
-    BillingAccount'
+  BillingAccount'
     { _baMasterBillingAccount = Nothing
     , _baOpen = Nothing
     , _baName = Nothing
     , _baDisplayName = Nothing
     }
+
 
 -- | If this account is a
 -- [subaccount](https:\/\/cloud.google.com\/billing\/docs\/concepts), then
@@ -302,15 +311,21 @@ instance ToJSON BillingAccount where
 -- | Encapsulates a single service in Google Cloud Platform.
 --
 -- /See:/ 'service' smart constructor.
-data Service = Service'
-    { _sName        :: !(Maybe Text)
-    , _sDisplayName :: !(Maybe Text)
-    , _sServiceId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data Service =
+  Service'
+    { _sBusinessEntityName :: !(Maybe Text)
+    , _sName               :: !(Maybe Text)
+    , _sDisplayName        :: !(Maybe Text)
+    , _sServiceId          :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sBusinessEntityName'
 --
 -- * 'sName'
 --
@@ -320,11 +335,20 @@ data Service = Service'
 service
     :: Service
 service =
-    Service'
-    { _sName = Nothing
+  Service'
+    { _sBusinessEntityName = Nothing
+    , _sName = Nothing
     , _sDisplayName = Nothing
     , _sServiceId = Nothing
     }
+
+
+-- | The business under which the service is offered. Ex.
+-- \"businessEntities\/GCP\", \"businessEntities\/Maps\"
+sBusinessEntityName :: Lens' Service (Maybe Text)
+sBusinessEntityName
+  = lens _sBusinessEntityName
+      (\ s a -> s{_sBusinessEntityName = a})
 
 -- | The resource name for the service. Example: \"services\/DA34-426B-A397\"
 sName :: Lens' Service (Maybe Text)
@@ -345,14 +369,16 @@ instance FromJSON Service where
           = withObject "Service"
               (\ o ->
                  Service' <$>
-                   (o .:? "name") <*> (o .:? "displayName") <*>
-                     (o .:? "serviceId"))
+                   (o .:? "businessEntityName") <*> (o .:? "name") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "serviceId"))
 
 instance ToJSON Service where
         toJSON Service'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _sName,
+                 [("businessEntityName" .=) <$> _sBusinessEntityName,
+                  ("name" .=) <$> _sName,
                   ("displayName" .=) <$> _sDisplayName,
                   ("serviceId" .=) <$> _sServiceId])
 
@@ -361,12 +387,15 @@ instance ToJSON Service where
 -- billing account can be assigned to multiple projects).
 --
 -- /See:/ 'projectBillingInfo' smart constructor.
-data ProjectBillingInfo = ProjectBillingInfo'
+data ProjectBillingInfo =
+  ProjectBillingInfo'
     { _pbiName               :: !(Maybe Text)
     , _pbiBillingAccountName :: !(Maybe Text)
     , _pbiProjectId          :: !(Maybe Text)
     , _pbiBillingEnabled     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectBillingInfo' with the minimum fields required to make a request.
 --
@@ -382,12 +411,13 @@ data ProjectBillingInfo = ProjectBillingInfo'
 projectBillingInfo
     :: ProjectBillingInfo
 projectBillingInfo =
-    ProjectBillingInfo'
+  ProjectBillingInfo'
     { _pbiName = Nothing
     , _pbiBillingAccountName = Nothing
     , _pbiProjectId = Nothing
     , _pbiBillingEnabled = Nothing
     }
+
 
 -- | The resource name for the \`ProjectBillingInfo\`; has the form
 -- \`projects\/{project_id}\/billingInfo\`. For example, the resource name
@@ -441,10 +471,13 @@ instance ToJSON ProjectBillingInfo where
 -- | The price rate indicating starting usage and its corresponding price.
 --
 -- /See:/ 'tierRate' smart constructor.
-data TierRate = TierRate'
+data TierRate =
+  TierRate'
     { _trUnitPrice        :: !(Maybe Money)
     , _trStartUsageAmount :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TierRate' with the minimum fields required to make a request.
 --
@@ -455,11 +488,8 @@ data TierRate = TierRate'
 -- * 'trStartUsageAmount'
 tierRate
     :: TierRate
-tierRate =
-    TierRate'
-    { _trUnitPrice = Nothing
-    , _trStartUsageAmount = Nothing
-    }
+tierRate = TierRate' {_trUnitPrice = Nothing, _trStartUsageAmount = Nothing}
+
 
 -- | The price per unit of usage. Example: unit_price of amount $10 indicates
 -- that each unit will cost $10.
@@ -493,11 +523,14 @@ instance ToJSON TierRate where
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money'
+data Money =
+  Money'
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe (Textual Int32))
     , _mUnits        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
@@ -510,12 +543,8 @@ data Money = Money'
 -- * 'mUnits'
 money
     :: Money
-money =
-    Money'
-    { _mCurrencyCode = Nothing
-    , _mNanos = Nothing
-    , _mUnits = Nothing
-    }
+money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -559,12 +588,15 @@ instance ToJSON Money where
 -- | Represents the category hierarchy of a SKU.
 --
 -- /See:/ 'category' smart constructor.
-data Category = Category'
+data Category =
+  Category'
     { _cResourceFamily     :: !(Maybe Text)
     , _cUsageType          :: !(Maybe Text)
     , _cServiceDisplayName :: !(Maybe Text)
     , _cResourceGroup      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
@@ -580,12 +612,13 @@ data Category = Category'
 category
     :: Category
 category =
-    Category'
+  Category'
     { _cResourceFamily = Nothing
     , _cUsageType = Nothing
     , _cServiceDisplayName = Nothing
     , _cResourceGroup = Nothing
     }
+
 
 -- | The type of product the SKU refers to. Example: \"Compute\",
 -- \"Storage\", \"Network\", \"ApplicationServices\" etc.
@@ -634,10 +667,13 @@ instance ToJSON Category where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -649,10 +685,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -688,10 +722,13 @@ instance ToJSON SetIAMPolicyRequest where
 -- | Request message for \`ListProjectBillingInfoResponse\`.
 --
 -- /See:/ 'listProjectBillingInfoResponse' smart constructor.
-data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse'
+data ListProjectBillingInfoResponse =
+  ListProjectBillingInfoResponse'
     { _lpbirNextPageToken      :: !(Maybe Text)
     , _lpbirProjectBillingInfo :: !(Maybe [ProjectBillingInfo])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListProjectBillingInfoResponse' with the minimum fields required to make a request.
 --
@@ -703,10 +740,9 @@ data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse'
 listProjectBillingInfoResponse
     :: ListProjectBillingInfoResponse
 listProjectBillingInfoResponse =
-    ListProjectBillingInfoResponse'
-    { _lpbirNextPageToken = Nothing
-    , _lpbirProjectBillingInfo = Nothing
-    }
+  ListProjectBillingInfoResponse'
+    {_lpbirNextPageToken = Nothing, _lpbirProjectBillingInfo = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListProjectBillingInfo\` again with the \`page_token\` field set
@@ -746,10 +782,13 @@ instance ToJSON ListProjectBillingInfoResponse where
 -- | Response message for \`ListSkus\`.
 --
 -- /See:/ 'listSKUsResponse' smart constructor.
-data ListSKUsResponse = ListSKUsResponse'
+data ListSKUsResponse =
+  ListSKUsResponse'
     { _lskurNextPageToken :: !(Maybe Text)
     , _lskurSKUs          :: !(Maybe [SKU])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSKUsResponse' with the minimum fields required to make a request.
 --
@@ -761,10 +800,8 @@ data ListSKUsResponse = ListSKUsResponse'
 listSKUsResponse
     :: ListSKUsResponse
 listSKUsResponse =
-    ListSKUsResponse'
-    { _lskurNextPageToken = Nothing
-    , _lskurSKUs = Nothing
-    }
+  ListSKUsResponse' {_lskurNextPageToken = Nothing, _lskurSKUs = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListSkus\` again with the \`page_token\` field set to this value.
@@ -803,7 +840,8 @@ instance ToJSON ListSKUsResponse where
 -- $10 per GB followed by $5 per GB for additional usage.
 --
 -- /See:/ 'pricingExpression' smart constructor.
-data PricingExpression = PricingExpression'
+data PricingExpression =
+  PricingExpression'
     { _peUsageUnitDescription     :: !(Maybe Text)
     , _peBaseUnit                 :: !(Maybe Text)
     , _peBaseUnitConversionFactor :: !(Maybe (Textual Double))
@@ -811,7 +849,9 @@ data PricingExpression = PricingExpression'
     , _peTieredRates              :: !(Maybe [TierRate])
     , _peBaseUnitDescription      :: !(Maybe Text)
     , _peUsageUnit                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PricingExpression' with the minimum fields required to make a request.
 --
@@ -833,7 +873,7 @@ data PricingExpression = PricingExpression'
 pricingExpression
     :: PricingExpression
 pricingExpression =
-    PricingExpression'
+  PricingExpression'
     { _peUsageUnitDescription = Nothing
     , _peBaseUnit = Nothing
     , _peBaseUnitConversionFactor = Nothing
@@ -842,6 +882,7 @@ pricingExpression =
     , _peBaseUnitDescription = Nothing
     , _peUsageUnit = Nothing
     }
+
 
 -- | The unit of usage in human readable form. Example: \"gibi byte\".
 peUsageUnitDescription :: Lens' PricingExpression (Maybe Text)
@@ -931,9 +972,12 @@ instance ToJSON PricingExpression where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -943,9 +987,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -974,11 +1017,14 @@ instance ToJSON TestIAMPermissionsRequest where
 -- SKU.
 --
 -- /See:/ 'aggregationInfo' smart constructor.
-data AggregationInfo = AggregationInfo'
+data AggregationInfo =
+  AggregationInfo'
     { _aiAggregationInterval :: !(Maybe AggregationInfoAggregationInterval)
     , _aiAggregationCount    :: !(Maybe (Textual Int32))
     , _aiAggregationLevel    :: !(Maybe AggregationInfoAggregationLevel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AggregationInfo' with the minimum fields required to make a request.
 --
@@ -992,11 +1038,12 @@ data AggregationInfo = AggregationInfo'
 aggregationInfo
     :: AggregationInfo
 aggregationInfo =
-    AggregationInfo'
+  AggregationInfo'
     { _aiAggregationInterval = Nothing
     , _aiAggregationCount = Nothing
     , _aiAggregationLevel = Nothing
     }
+
 
 aiAggregationInterval :: Lens' AggregationInfo (Maybe AggregationInfoAggregationInterval)
 aiAggregationInterval
@@ -1038,7 +1085,8 @@ instance ToJSON AggregationInfo where
 -- | Encapsulates a single SKU in Google Cloud Platform
 --
 -- /See:/ 'sKU' smart constructor.
-data SKU = SKU'
+data SKU =
+  SKU'
     { _skukCategory            :: !(Maybe Category)
     , _skukSKUId               :: !(Maybe Text)
     , _skukServiceProviderName :: !(Maybe Text)
@@ -1046,7 +1094,9 @@ data SKU = SKU'
     , _skukName                :: !(Maybe Text)
     , _skukPricingInfo         :: !(Maybe [PricingInfo])
     , _skukDescription         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SKU' with the minimum fields required to make a request.
 --
@@ -1068,7 +1118,7 @@ data SKU = SKU'
 sKU
     :: SKU
 sKU =
-    SKU'
+  SKU'
     { _skukCategory = Nothing
     , _skukSKUId = Nothing
     , _skukServiceProviderName = Nothing
@@ -1077,6 +1127,7 @@ sKU =
     , _skukPricingInfo = Nothing
     , _skukDescription = Nothing
     }
+
 
 -- | The category hierarchy of this SKU, purely for organizational purpose.
 skukCategory :: Lens' SKU (Maybe Category)
@@ -1153,9 +1204,12 @@ instance ToJSON SKU where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1165,9 +1219,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1210,12 +1263,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1231,12 +1287,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1294,10 +1351,13 @@ instance ToJSON Policy where
 -- | Response message for \`ListBillingAccounts\`.
 --
 -- /See:/ 'listBillingAccountsResponse' smart constructor.
-data ListBillingAccountsResponse = ListBillingAccountsResponse'
+data ListBillingAccountsResponse =
+  ListBillingAccountsResponse'
     { _lbarNextPageToken   :: !(Maybe Text)
     , _lbarBillingAccounts :: !(Maybe [BillingAccount])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListBillingAccountsResponse' with the minimum fields required to make a request.
 --
@@ -1309,10 +1369,9 @@ data ListBillingAccountsResponse = ListBillingAccountsResponse'
 listBillingAccountsResponse
     :: ListBillingAccountsResponse
 listBillingAccountsResponse =
-    ListBillingAccountsResponse'
-    { _lbarNextPageToken = Nothing
-    , _lbarBillingAccounts = Nothing
-    }
+  ListBillingAccountsResponse'
+    {_lbarNextPageToken = Nothing, _lbarBillingAccounts = Nothing}
+
 
 -- | A token to retrieve the next page of results. To retrieve the next page,
 -- call \`ListBillingAccounts\` again with the \`page_token\` field set to
@@ -1353,10 +1412,13 @@ instance ToJSON ListBillingAccountsResponse where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -1368,10 +1430,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1405,13 +1465,16 @@ instance ToJSON AuditLogConfig where
 -- | Represents the pricing information for a SKU at a single point of time.
 --
 -- /See:/ 'pricingInfo' smart constructor.
-data PricingInfo = PricingInfo'
+data PricingInfo =
+  PricingInfo'
     { _piSummary                :: !(Maybe Text)
     , _piAggregationInfo        :: !(Maybe AggregationInfo)
     , _piPricingExpression      :: !(Maybe PricingExpression)
     , _piCurrencyConversionRate :: !(Maybe (Textual Double))
     , _piEffectiveTime          :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PricingInfo' with the minimum fields required to make a request.
 --
@@ -1429,13 +1492,14 @@ data PricingInfo = PricingInfo'
 pricingInfo
     :: PricingInfo
 pricingInfo =
-    PricingInfo'
+  PricingInfo'
     { _piSummary = Nothing
     , _piAggregationInfo = Nothing
     , _piPricingExpression = Nothing
     , _piCurrencyConversionRate = Nothing
     , _piEffectiveTime = Nothing
     }
+
 
 -- | An optional human readable summary of the pricing information, has a
 -- maximum length of 256 characters.
@@ -1503,11 +1567,14 @@ instance ToJSON PricingInfo where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1521,11 +1588,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -1538,8 +1602,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1552,10 +1616,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

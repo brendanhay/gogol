@@ -67,14 +67,17 @@ type UsersHistoryListResource =
 -- are returned in chronological order (increasing historyId).
 --
 -- /See:/ 'usersHistoryList' smart constructor.
-data UsersHistoryList = UsersHistoryList'
+data UsersHistoryList =
+  UsersHistoryList'
     { _uhlHistoryTypes   :: !(Maybe [UsersHistoryListHistoryTypes])
     , _uhlUserId         :: !Text
     , _uhlStartHistoryId :: !(Maybe (Textual Word64))
     , _uhlPageToken      :: !(Maybe Text)
     , _uhlLabelId        :: !(Maybe Text)
     , _uhlMaxResults     :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersHistoryList' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ data UsersHistoryList = UsersHistoryList'
 usersHistoryList
     :: UsersHistoryList
 usersHistoryList =
-    UsersHistoryList'
+  UsersHistoryList'
     { _uhlHistoryTypes = Nothing
     , _uhlUserId = "me"
     , _uhlStartHistoryId = Nothing
@@ -102,6 +105,7 @@ usersHistoryList =
     , _uhlLabelId = Nothing
     , _uhlMaxResults = 100
     }
+
 
 -- | History types to be returned by the function
 uhlHistoryTypes :: Lens' UsersHistoryList [UsersHistoryListHistoryTypes]

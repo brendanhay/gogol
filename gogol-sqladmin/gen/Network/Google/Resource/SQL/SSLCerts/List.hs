@@ -56,10 +56,13 @@ type SSLCertsListResource =
 -- | Lists all of the current SSL certificates for the instance.
 --
 -- /See:/ 'sslCertsList' smart constructor.
-data SSLCertsList = SSLCertsList'
+data SSLCertsList =
+  SSLCertsList'
     { _sclProject  :: !Text
     , _sclInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertsList' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ sslCertsList
     -> Text -- ^ 'sclInstance'
     -> SSLCertsList
 sslCertsList pSclProject_ pSclInstance_ =
-    SSLCertsList'
-    { _sclProject = pSclProject_
-    , _sclInstance = pSclInstance_
-    }
+  SSLCertsList' {_sclProject = pSclProject_, _sclInstance = pSclInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 sclProject :: Lens' SSLCertsList Text

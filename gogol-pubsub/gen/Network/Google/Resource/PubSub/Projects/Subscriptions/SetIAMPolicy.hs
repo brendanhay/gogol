@@ -64,7 +64,8 @@ type ProjectsSubscriptionsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsSubscriptionsSetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy'
+data ProjectsSubscriptionsSetIAMPolicy =
+  ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv          :: !(Maybe Xgafv)
     , _pssipUploadProtocol :: !(Maybe Text)
     , _pssipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy'
     , _pssipPayload        :: !SetIAMPolicyRequest
     , _pssipResource       :: !Text
     , _pssipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsSubscriptionsSetIAMPolicy
     -> Text -- ^ 'pssipResource'
     -> ProjectsSubscriptionsSetIAMPolicy
 projectsSubscriptionsSetIAMPolicy pPssipPayload_ pPssipResource_ =
-    ProjectsSubscriptionsSetIAMPolicy'
+  ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv = Nothing
     , _pssipUploadProtocol = Nothing
     , _pssipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsSubscriptionsSetIAMPolicy pPssipPayload_ pPssipResource_ =
     , _pssipResource = pPssipResource_
     , _pssipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pssipXgafv :: Lens' ProjectsSubscriptionsSetIAMPolicy (Maybe Xgafv)
@@ -148,7 +152,8 @@ pssipCallback
       (\ s a -> s{_pssipCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsSetIAMPolicy where
+           ProjectsSubscriptionsSetIAMPolicy
+         where
         type Rs ProjectsSubscriptionsSetIAMPolicy = Policy
         type Scopes ProjectsSubscriptionsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",

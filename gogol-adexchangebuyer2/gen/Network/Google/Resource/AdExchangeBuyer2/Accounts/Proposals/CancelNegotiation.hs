@@ -70,7 +70,8 @@ type AccountsProposalsCancelNegotiationResource =
 -- cancels a negotiation unilaterally.
 --
 -- /See:/ 'accountsProposalsCancelNegotiation' smart constructor.
-data AccountsProposalsCancelNegotiation = AccountsProposalsCancelNegotiation'
+data AccountsProposalsCancelNegotiation =
+  AccountsProposalsCancelNegotiation'
     { _apcnXgafv          :: !(Maybe Xgafv)
     , _apcnUploadProtocol :: !(Maybe Text)
     , _apcnAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data AccountsProposalsCancelNegotiation = AccountsProposalsCancelNegotiation'
     , _apcnProposalId     :: !Text
     , _apcnAccountId      :: !Text
     , _apcnCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProposalsCancelNegotiation' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ accountsProposalsCancelNegotiation
     -> Text -- ^ 'apcnAccountId'
     -> AccountsProposalsCancelNegotiation
 accountsProposalsCancelNegotiation pApcnPayload_ pApcnProposalId_ pApcnAccountId_ =
-    AccountsProposalsCancelNegotiation'
+  AccountsProposalsCancelNegotiation'
     { _apcnXgafv = Nothing
     , _apcnUploadProtocol = Nothing
     , _apcnAccessToken = Nothing
@@ -116,6 +119,7 @@ accountsProposalsCancelNegotiation pApcnPayload_ pApcnProposalId_ pApcnAccountId
     , _apcnAccountId = pApcnAccountId_
     , _apcnCallback = Nothing
     }
+
 
 -- | V1 error format.
 apcnXgafv :: Lens' AccountsProposalsCancelNegotiation (Maybe Xgafv)
@@ -163,7 +167,8 @@ apcnCallback
   = lens _apcnCallback (\ s a -> s{_apcnCallback = a})
 
 instance GoogleRequest
-         AccountsProposalsCancelNegotiation where
+           AccountsProposalsCancelNegotiation
+         where
         type Rs AccountsProposalsCancelNegotiation = Proposal
         type Scopes AccountsProposalsCancelNegotiation =
              '["https://www.googleapis.com/auth/adexchange.buyer"]

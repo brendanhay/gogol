@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesGet' request conforms to.
 type RemarketingListSharesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
@@ -55,10 +55,13 @@ type RemarketingListSharesGetResource =
 -- | Gets one remarketing list share by remarketing list ID.
 --
 -- /See:/ 'remarketingListSharesGet' smart constructor.
-data RemarketingListSharesGet = RemarketingListSharesGet'
+data RemarketingListSharesGet =
+  RemarketingListSharesGet'
     { _rlsgProFileId         :: !(Textual Int64)
     , _rlsgRemarketingListId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingListSharesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ remarketingListSharesGet
     -> Int64 -- ^ 'rlsgRemarketingListId'
     -> RemarketingListSharesGet
 remarketingListSharesGet pRlsgProFileId_ pRlsgRemarketingListId_ =
-    RemarketingListSharesGet'
+  RemarketingListSharesGet'
     { _rlsgProFileId = _Coerce # pRlsgProFileId_
     , _rlsgRemarketingListId = _Coerce # pRlsgRemarketingListId_
     }
+
 
 -- | User profile ID associated with this request.
 rlsgProFileId :: Lens' RemarketingListSharesGet Int64

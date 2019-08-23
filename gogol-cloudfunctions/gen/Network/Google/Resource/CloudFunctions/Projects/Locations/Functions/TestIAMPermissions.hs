@@ -20,12 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource. If the
--- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
--- authorization checking. This operation may \"fail open\" without
--- warning.
+-- Tests the specified permissions against the IAM access control policy
+-- for a function. If the function does not exist, this will return an
+-- empty set of permissions, not a NOT_FOUND error.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.testIamPermissions@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.TestIAMPermissions
@@ -65,15 +62,13 @@ type ProjectsLocationsFunctionsTestIAMPermissionsResource
                      ReqBody '[JSON] TestIAMPermissionsRequest :>
                        Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource. If the
--- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
--- authorization checking. This operation may \"fail open\" without
--- warning.
+-- | Tests the specified permissions against the IAM access control policy
+-- for a function. If the function does not exist, this will return an
+-- empty set of permissions, not a NOT_FOUND error.
 --
 -- /See:/ 'projectsLocationsFunctionsTestIAMPermissions' smart constructor.
-data ProjectsLocationsFunctionsTestIAMPermissions = ProjectsLocationsFunctionsTestIAMPermissions'
+data ProjectsLocationsFunctionsTestIAMPermissions =
+  ProjectsLocationsFunctionsTestIAMPermissions'
     { _plftipXgafv          :: !(Maybe Xgafv)
     , _plftipUploadProtocol :: !(Maybe Text)
     , _plftipAccessToken    :: !(Maybe Text)
@@ -81,7 +76,9 @@ data ProjectsLocationsFunctionsTestIAMPermissions = ProjectsLocationsFunctionsTe
     , _plftipPayload        :: !TestIAMPermissionsRequest
     , _plftipResource       :: !Text
     , _plftipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +102,7 @@ projectsLocationsFunctionsTestIAMPermissions
     -> Text -- ^ 'plftipResource'
     -> ProjectsLocationsFunctionsTestIAMPermissions
 projectsLocationsFunctionsTestIAMPermissions pPlftipPayload_ pPlftipResource_ =
-    ProjectsLocationsFunctionsTestIAMPermissions'
+  ProjectsLocationsFunctionsTestIAMPermissions'
     { _plftipXgafv = Nothing
     , _plftipUploadProtocol = Nothing
     , _plftipAccessToken = Nothing
@@ -114,6 +111,7 @@ projectsLocationsFunctionsTestIAMPermissions pPlftipPayload_ pPlftipResource_ =
     , _plftipResource = pPlftipResource_
     , _plftipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plftipXgafv :: Lens' ProjectsLocationsFunctionsTestIAMPermissions (Maybe Xgafv)
@@ -159,7 +157,8 @@ plftipCallback
       (\ s a -> s{_plftipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsTestIAMPermissions where
+           ProjectsLocationsFunctionsTestIAMPermissions
+         where
         type Rs ProjectsLocationsFunctionsTestIAMPermissions
              = TestIAMPermissionsResponse
         type Scopes

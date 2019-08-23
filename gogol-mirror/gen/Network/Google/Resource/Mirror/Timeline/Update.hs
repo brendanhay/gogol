@@ -64,10 +64,13 @@ type TimelineUpdateResource =
 -- | Updates a timeline item in place.
 --
 -- /See:/ 'timelineUpdate' smart constructor.
-data TimelineUpdate = TimelineUpdate'
+data TimelineUpdate =
+  TimelineUpdate'
     { _tuPayload :: !TimelineItem
     , _tuId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineUpdate' with the minimum fields required to make a request.
 --
@@ -81,10 +84,8 @@ timelineUpdate
     -> Text -- ^ 'tuId'
     -> TimelineUpdate
 timelineUpdate pTuPayload_ pTuId_ =
-    TimelineUpdate'
-    { _tuPayload = pTuPayload_
-    , _tuId = pTuId_
-    }
+  TimelineUpdate' {_tuPayload = pTuPayload_, _tuId = pTuId_}
+
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TimelineUpdate TimelineItem

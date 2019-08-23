@@ -62,13 +62,16 @@ type GlobalOperationsAggregatedListResource =
 -- | Retrieves an aggregated list of all operations.
 --
 -- /See:/ 'globalOperationsAggregatedList' smart constructor.
-data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList'
+data GlobalOperationsAggregatedList =
+  GlobalOperationsAggregatedList'
     { _goalOrderBy    :: !(Maybe Text)
     , _goalProject    :: !Text
     , _goalFilter     :: !(Maybe Text)
     , _goalPageToken  :: !(Maybe Text)
     , _goalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalOperationsAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ globalOperationsAggregatedList
     :: Text -- ^ 'goalProject'
     -> GlobalOperationsAggregatedList
 globalOperationsAggregatedList pGoalProject_ =
-    GlobalOperationsAggregatedList'
+  GlobalOperationsAggregatedList'
     { _goalOrderBy = Nothing
     , _goalProject = pGoalProject_
     , _goalFilter = Nothing
     , _goalPageToken = Nothing
     , _goalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -67,7 +67,8 @@ type ProjectsAgentIntentsCreateResource =
 -- | Creates an intent in the specified agent.
 --
 -- /See:/ 'projectsAgentIntentsCreate' smart constructor.
-data ProjectsAgentIntentsCreate = ProjectsAgentIntentsCreate'
+data ProjectsAgentIntentsCreate =
+  ProjectsAgentIntentsCreate'
     { _paicParent         :: !Text
     , _paicXgafv          :: !(Maybe Xgafv)
     , _paicLanguageCode   :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsAgentIntentsCreate = ProjectsAgentIntentsCreate'
     , _paicPayload        :: !GoogleCloudDialogflowV2Intent
     , _paicIntentView     :: !(Maybe Text)
     , _paicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsAgentIntentsCreate
     -> GoogleCloudDialogflowV2Intent -- ^ 'paicPayload'
     -> ProjectsAgentIntentsCreate
 projectsAgentIntentsCreate pPaicParent_ pPaicPayload_ =
-    ProjectsAgentIntentsCreate'
+  ProjectsAgentIntentsCreate'
     { _paicParent = pPaicParent_
     , _paicXgafv = Nothing
     , _paicLanguageCode = Nothing
@@ -116,6 +119,7 @@ projectsAgentIntentsCreate pPaicParent_ pPaicPayload_ =
     , _paicIntentView = Nothing
     , _paicCallback = Nothing
     }
+
 
 -- | Required. The agent to create a intent for. Format:
 -- \`projects\/\/agent\`.
@@ -130,10 +134,10 @@ paicXgafv
 
 -- | Optional. The language of training phrases, parameters and rich messages
 -- defined in \`intent\`. If not specified, the agent\'s default language
--- is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 paicLanguageCode :: Lens' ProjectsAgentIntentsCreate (Maybe Text)
 paicLanguageCode
   = lens _paicLanguageCode

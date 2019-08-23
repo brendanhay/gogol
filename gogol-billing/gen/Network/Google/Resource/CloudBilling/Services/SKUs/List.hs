@@ -71,7 +71,8 @@ type ServicesSKUsListResource =
 -- | Lists all publicly available SKUs for a given cloud service.
 --
 -- /See:/ 'servicesSKUsList' smart constructor.
-data ServicesSKUsList = ServicesSKUsList'
+data ServicesSKUsList =
+  ServicesSKUsList'
     { _sskulParent         :: !Text
     , _sskulXgafv          :: !(Maybe Xgafv)
     , _sskulCurrencyCode   :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ServicesSKUsList = ServicesSKUsList'
     , _sskulPageToken      :: !(Maybe Text)
     , _sskulPageSize       :: !(Maybe (Textual Int32))
     , _sskulCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesSKUsList' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ servicesSKUsList
     :: Text -- ^ 'sskulParent'
     -> ServicesSKUsList
 servicesSKUsList pSskulParent_ =
-    ServicesSKUsList'
+  ServicesSKUsList'
     { _sskulParent = pSskulParent_
     , _sskulXgafv = Nothing
     , _sskulCurrencyCode = Nothing
@@ -127,6 +130,7 @@ servicesSKUsList pSskulParent_ =
     , _sskulPageSize = Nothing
     , _sskulCallback = Nothing
     }
+
 
 -- | The name of the service. Example: \"services\/DA34-426B-A397\"
 sskulParent :: Lens' ServicesSKUsList Text

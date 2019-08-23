@@ -1,5 +1,5 @@
 name:                  gogol-firebasehosting
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Firebase Hosting SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,9 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Firebase Hosting REST API enables programmatic custom deployment for
-    releasing versions of your Firebase hosted content and configuration
-    files.
+    The Firebase Hosting REST API enables programmatic and customizable
+    deployments to your Firebase-hosted sites. Use this REST API to deploy
+    new or updated hosting configurations and content files.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -57,5 +57,5 @@ library
         , Network.Google.FirebaseHosting.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

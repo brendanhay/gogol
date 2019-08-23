@@ -55,11 +55,14 @@ type LiveBroadcastsDeleteResource =
 -- | Deletes a broadcast.
 --
 -- /See:/ 'liveBroadcastsDelete' smart constructor.
-data LiveBroadcastsDelete = LiveBroadcastsDelete'
+data LiveBroadcastsDelete =
+  LiveBroadcastsDelete'
     { _lbdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbdId                            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveBroadcastsDelete' with the minimum fields required to make a request.
 --
@@ -74,11 +77,12 @@ liveBroadcastsDelete
     :: Text -- ^ 'lbdId'
     -> LiveBroadcastsDelete
 liveBroadcastsDelete pLbdId_ =
-    LiveBroadcastsDelete'
+  LiveBroadcastsDelete'
     { _lbdOnBehalfOfContentOwner = Nothing
     , _lbdOnBehalfOfContentOwnerChannel = Nothing
     , _lbdId = pLbdId_
     }
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

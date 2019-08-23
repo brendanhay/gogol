@@ -164,6 +164,8 @@ module Network.Google.AndroidDeviceProvisioning
     , partnerUnclaim
     , puDeviceIdentifier
     , puSectionType
+    , puVacationModeExpireTime
+    , puVacationModeDays
     , puDeviceId
 
     -- ** Dpc
@@ -312,6 +314,8 @@ module Network.Google.AndroidDeviceProvisioning
     , DeviceClaim
     , deviceClaim
     , dcSectionType
+    , dcVacationModeExpireTime
+    , dcVacationModeStartTime
     , dcOwnerCompanyId
     , dcResellerId
 
@@ -345,6 +349,8 @@ module Network.Google.AndroidDeviceProvisioning
     , unclaimDeviceRequest
     , udrDeviceIdentifier
     , udrSectionType
+    , udrVacationModeExpireTime
+    , udrVacationModeDays
     , udrDeviceId
 
     -- ** DevicesLongRunningOperationResponse

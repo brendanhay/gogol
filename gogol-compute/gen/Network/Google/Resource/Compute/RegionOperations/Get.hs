@@ -57,11 +57,14 @@ type RegionOperationsGetResource =
 -- | Retrieves the specified region-specific Operations resource.
 --
 -- /See:/ 'regionOperationsGet' smart constructor.
-data RegionOperationsGet = RegionOperationsGet'
+data RegionOperationsGet =
+  RegionOperationsGet'
     { _rogProject   :: !Text
     , _rogOperation :: !Text
     , _rogRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionOperationsGet' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ regionOperationsGet
     -> Text -- ^ 'rogRegion'
     -> RegionOperationsGet
 regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
-    RegionOperationsGet'
+  RegionOperationsGet'
     { _rogProject = pRogProject_
     , _rogOperation = pRogOperation_
     , _rogRegion = pRogRegion_
     }
+
 
 -- | Project ID for this request.
 rogProject :: Lens' RegionOperationsGet Text

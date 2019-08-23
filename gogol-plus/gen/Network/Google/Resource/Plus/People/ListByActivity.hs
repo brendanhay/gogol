@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the people in the specified collection for a particular
--- activity.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.listByActivity@.
 module Network.Google.Resource.Plus.People.ListByActivity
@@ -57,16 +57,19 @@ type PeopleListByActivityResource =
                    QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
--- | List all of the people in the specified collection for a particular
--- activity.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'peopleListByActivity' smart constructor.
-data PeopleListByActivity = PeopleListByActivity'
+data PeopleListByActivity =
+  PeopleListByActivity'
     { _plbaActivityId :: !Text
     , _plbaCollection :: !PeopleListByActivityCollection
     , _plbaPageToken  :: !(Maybe Text)
     , _plbaMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleListByActivity' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ peopleListByActivity
     -> PeopleListByActivityCollection -- ^ 'plbaCollection'
     -> PeopleListByActivity
 peopleListByActivity pPlbaActivityId_ pPlbaCollection_ =
-    PeopleListByActivity'
+  PeopleListByActivity'
     { _plbaActivityId = pPlbaActivityId_
     , _plbaCollection = pPlbaCollection_
     , _plbaPageToken = Nothing
     , _plbaMaxResults = 20
     }
+
 
 -- | The ID of the activity to get the list of people for.
 plbaActivityId :: Lens' PeopleListByActivity Text

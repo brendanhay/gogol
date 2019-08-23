@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.run@ method which the
 -- 'ProjectsLocationsJobsRun' request conforms to.
 type ProjectsLocationsJobsRunResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "run" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,7 +63,8 @@ type ProjectsLocationsJobsRunResource =
 -- will dispatch the job, even if the job is already running.
 --
 -- /See:/ 'projectsLocationsJobsRun' smart constructor.
-data ProjectsLocationsJobsRun = ProjectsLocationsJobsRun'
+data ProjectsLocationsJobsRun =
+  ProjectsLocationsJobsRun'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsJobsRun = ProjectsLocationsJobsRun'
     , _pPayload        :: !RunJobRequest
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsRun' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsJobsRun
     -> Text -- ^ 'pName'
     -> ProjectsLocationsJobsRun
 projectsLocationsJobsRun pPPayload_ pPName_ =
-    ProjectsLocationsJobsRun'
+  ProjectsLocationsJobsRun'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsJobsRun pPPayload_ pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsLocationsJobsRun (Maybe Xgafv)

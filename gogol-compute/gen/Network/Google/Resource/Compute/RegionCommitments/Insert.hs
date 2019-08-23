@@ -61,12 +61,15 @@ type RegionCommitmentsInsertResource =
 -- the request.
 --
 -- /See:/ 'regionCommitmentsInsert' smart constructor.
-data RegionCommitmentsInsert = RegionCommitmentsInsert'
+data RegionCommitmentsInsert =
+  RegionCommitmentsInsert'
     { _rciRequestId :: !(Maybe Text)
     , _rciProject   :: !Text
     , _rciPayload   :: !Commitment
     , _rciRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionCommitmentsInsert' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ regionCommitmentsInsert
     -> Text -- ^ 'rciRegion'
     -> RegionCommitmentsInsert
 regionCommitmentsInsert pRciProject_ pRciPayload_ pRciRegion_ =
-    RegionCommitmentsInsert'
+  RegionCommitmentsInsert'
     { _rciRequestId = Nothing
     , _rciProject = pRciProject_
     , _rciPayload = pRciPayload_
     , _rciRegion = pRciRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

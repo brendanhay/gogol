@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Request the job status.
+-- Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.messages.list\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.messages.list\` is not recommended, as you can
+-- only request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.messages.list@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
@@ -75,10 +80,16 @@ type ProjectsLocationsJobsMessagesListResource =
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListJobMessagesResponse
 
--- | Request the job status.
+-- | Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.messages.list\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.messages.list\` is not recommended, as you can
+-- only request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsMessagesList' smart constructor.
-data ProjectsLocationsJobsMessagesList = ProjectsLocationsJobsMessagesList'
+data ProjectsLocationsJobsMessagesList =
+  ProjectsLocationsJobsMessagesList'
     { _pljmlXgafv             :: !(Maybe Xgafv)
     , _pljmlJobId             :: !Text
     , _pljmlUploadProtocol    :: !(Maybe Text)
@@ -92,7 +103,9 @@ data ProjectsLocationsJobsMessagesList = ProjectsLocationsJobsMessagesList'
     , _pljmlProjectId         :: !Text
     , _pljmlPageSize          :: !(Maybe (Textual Int32))
     , _pljmlCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsMessagesList' with the minimum fields required to make a request.
 --
@@ -129,7 +142,7 @@ projectsLocationsJobsMessagesList
     -> Text -- ^ 'pljmlProjectId'
     -> ProjectsLocationsJobsMessagesList
 projectsLocationsJobsMessagesList pPljmlJobId_ pPljmlLocation_ pPljmlProjectId_ =
-    ProjectsLocationsJobsMessagesList'
+  ProjectsLocationsJobsMessagesList'
     { _pljmlXgafv = Nothing
     , _pljmlJobId = pPljmlJobId_
     , _pljmlUploadProtocol = Nothing
@@ -144,6 +157,7 @@ projectsLocationsJobsMessagesList pPljmlJobId_ pPljmlLocation_ pPljmlProjectId_ 
     , _pljmlPageSize = Nothing
     , _pljmlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljmlXgafv :: Lens' ProjectsLocationsJobsMessagesList (Maybe Xgafv)
@@ -161,7 +175,9 @@ pljmlUploadProtocol
   = lens _pljmlUploadProtocol
       (\ s a -> s{_pljmlUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pljmlLocation :: Lens' ProjectsLocationsJobsMessagesList Text
 pljmlLocation
   = lens _pljmlLocation
@@ -229,7 +245,8 @@ pljmlCallback
       (\ s a -> s{_pljmlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsMessagesList where
+           ProjectsLocationsJobsMessagesList
+         where
         type Rs ProjectsLocationsJobsMessagesList =
              ListJobMessagesResponse
         type Scopes ProjectsLocationsJobsMessagesList =

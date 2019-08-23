@@ -53,9 +53,12 @@ type ReportsListreportsResource =
 -- | Retrieves stored reports.
 --
 -- /See:/ 'reportsListreports' smart constructor.
-newtype ReportsListreports = ReportsListreports'
+newtype ReportsListreports =
+  ReportsListreports'
     { _rlQueryId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsListreports' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ reportsListreports
     :: Int64 -- ^ 'rlQueryId'
     -> ReportsListreports
 reportsListreports pRlQueryId_ =
-    ReportsListreports'
-    { _rlQueryId = _Coerce # pRlQueryId_
-    }
+  ReportsListreports' {_rlQueryId = _Coerce # pRlQueryId_}
+
 
 -- | Query ID with which the reports are associated.
 rlQueryId :: Lens' ReportsListreports Int64

@@ -65,14 +65,17 @@ type DocumentsAnalyzeSyntaxResource =
 -- properties.
 --
 -- /See:/ 'documentsAnalyzeSyntax' smart constructor.
-data DocumentsAnalyzeSyntax = DocumentsAnalyzeSyntax'
+data DocumentsAnalyzeSyntax =
+  DocumentsAnalyzeSyntax'
     { _dXgafv          :: !(Maybe Xgafv)
     , _dUploadProtocol :: !(Maybe Text)
     , _dAccessToken    :: !(Maybe Text)
     , _dUploadType     :: !(Maybe Text)
     , _dPayload        :: !AnalyzeSyntaxRequest
     , _dCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DocumentsAnalyzeSyntax' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ documentsAnalyzeSyntax
     :: AnalyzeSyntaxRequest -- ^ 'dPayload'
     -> DocumentsAnalyzeSyntax
 documentsAnalyzeSyntax pDPayload_ =
-    DocumentsAnalyzeSyntax'
+  DocumentsAnalyzeSyntax'
     { _dXgafv = Nothing
     , _dUploadProtocol = Nothing
     , _dAccessToken = Nothing
@@ -101,6 +104,7 @@ documentsAnalyzeSyntax pDPayload_ =
     , _dPayload = pDPayload_
     , _dCallback = Nothing
     }
+
 
 -- | V1 error format.
 dXgafv :: Lens' DocumentsAnalyzeSyntax (Maybe Xgafv)

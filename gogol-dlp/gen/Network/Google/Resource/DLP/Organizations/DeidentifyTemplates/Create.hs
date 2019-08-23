@@ -70,7 +70,8 @@ type OrganizationsDeidentifyTemplatesCreateResource =
 -- more.
 --
 -- /See:/ 'organizationsDeidentifyTemplatesCreate' smart constructor.
-data OrganizationsDeidentifyTemplatesCreate = OrganizationsDeidentifyTemplatesCreate'
+data OrganizationsDeidentifyTemplatesCreate =
+  OrganizationsDeidentifyTemplatesCreate'
     { _odtcParent         :: !Text
     , _odtcXgafv          :: !(Maybe Xgafv)
     , _odtcUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data OrganizationsDeidentifyTemplatesCreate = OrganizationsDeidentifyTemplatesCr
     , _odtcUploadType     :: !(Maybe Text)
     , _odtcPayload        :: !GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
     , _odtcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsDeidentifyTemplatesCreate' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ organizationsDeidentifyTemplatesCreate
     -> GooglePrivacyDlpV2CreateDeidentifyTemplateRequest -- ^ 'odtcPayload'
     -> OrganizationsDeidentifyTemplatesCreate
 organizationsDeidentifyTemplatesCreate pOdtcParent_ pOdtcPayload_ =
-    OrganizationsDeidentifyTemplatesCreate'
+  OrganizationsDeidentifyTemplatesCreate'
     { _odtcParent = pOdtcParent_
     , _odtcXgafv = Nothing
     , _odtcUploadProtocol = Nothing
@@ -111,6 +114,7 @@ organizationsDeidentifyTemplatesCreate pOdtcParent_ pOdtcPayload_ =
     , _odtcPayload = pOdtcPayload_
     , _odtcCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.
@@ -152,7 +156,8 @@ odtcCallback
   = lens _odtcCallback (\ s a -> s{_odtcCallback = a})
 
 instance GoogleRequest
-         OrganizationsDeidentifyTemplatesCreate where
+           OrganizationsDeidentifyTemplatesCreate
+         where
         type Rs OrganizationsDeidentifyTemplatesCreate =
              GooglePrivacyDlpV2DeidentifyTemplate
         type Scopes OrganizationsDeidentifyTemplatesCreate =

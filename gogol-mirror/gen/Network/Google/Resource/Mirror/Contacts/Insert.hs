@@ -51,9 +51,12 @@ type ContactsInsertResource =
 -- | Inserts a new contact.
 --
 -- /See:/ 'contactsInsert' smart constructor.
-newtype ContactsInsert = ContactsInsert'
+newtype ContactsInsert =
+  ContactsInsert'
     { _ciPayload :: Contact
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactsInsert' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype ContactsInsert = ContactsInsert'
 contactsInsert
     :: Contact -- ^ 'ciPayload'
     -> ContactsInsert
-contactsInsert pCiPayload_ =
-    ContactsInsert'
-    { _ciPayload = pCiPayload_
-    }
+contactsInsert pCiPayload_ = ContactsInsert' {_ciPayload = pCiPayload_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' ContactsInsert Contact

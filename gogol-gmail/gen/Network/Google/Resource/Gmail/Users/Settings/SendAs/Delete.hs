@@ -59,10 +59,13 @@ type UsersSettingsSendAsDeleteResource =
 -- service account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsSendAsDelete' smart constructor.
-data UsersSettingsSendAsDelete = UsersSettingsSendAsDelete'
+data UsersSettingsSendAsDelete =
+  UsersSettingsSendAsDelete'
     { _ussadUserId      :: !Text
     , _ussadSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsSendAsDelete' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ usersSettingsSendAsDelete
     :: Text -- ^ 'ussadSendAsEmail'
     -> UsersSettingsSendAsDelete
 usersSettingsSendAsDelete pUssadSendAsEmail_ =
-    UsersSettingsSendAsDelete'
-    { _ussadUserId = "me"
-    , _ussadSendAsEmail = pUssadSendAsEmail_
-    }
+  UsersSettingsSendAsDelete'
+    {_ussadUserId = "me", _ussadSendAsEmail = pUssadSendAsEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

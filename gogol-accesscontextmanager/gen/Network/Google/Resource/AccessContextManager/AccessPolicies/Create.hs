@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.create@ method which the
 -- 'AccessPoliciesCreate' request conforms to.
 type AccessPoliciesCreateResource =
-     "v1beta" :>
+     "v1" :>
        "accessPolicies" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -69,14 +69,17 @@ type AccessPoliciesCreateResource =
 -- a BadRequest proto.
 --
 -- /See:/ 'accessPoliciesCreate' smart constructor.
-data AccessPoliciesCreate = AccessPoliciesCreate'
+data AccessPoliciesCreate =
+  AccessPoliciesCreate'
     { _apcXgafv          :: !(Maybe Xgafv)
     , _apcUploadProtocol :: !(Maybe Text)
     , _apcAccessToken    :: !(Maybe Text)
     , _apcUploadType     :: !(Maybe Text)
     , _apcPayload        :: !AccessPolicy
     , _apcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ accessPoliciesCreate
     :: AccessPolicy -- ^ 'apcPayload'
     -> AccessPoliciesCreate
 accessPoliciesCreate pApcPayload_ =
-    AccessPoliciesCreate'
+  AccessPoliciesCreate'
     { _apcXgafv = Nothing
     , _apcUploadProtocol = Nothing
     , _apcAccessToken = Nothing
@@ -105,6 +108,7 @@ accessPoliciesCreate pApcPayload_ =
     , _apcPayload = pApcPayload_
     , _apcCallback = Nothing
     }
+
 
 -- | V1 error format.
 apcXgafv :: Lens' AccessPoliciesCreate (Maybe Xgafv)

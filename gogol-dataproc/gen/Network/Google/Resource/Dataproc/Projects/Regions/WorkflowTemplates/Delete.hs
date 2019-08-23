@@ -61,7 +61,8 @@ type ProjectsRegionsWorkflowTemplatesDeleteResource =
 -- | Deletes a workflow template. It does not cancel in-progress workflows.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesDelete' smart constructor.
-data ProjectsRegionsWorkflowTemplatesDelete = ProjectsRegionsWorkflowTemplatesDelete'
+data ProjectsRegionsWorkflowTemplatesDelete =
+  ProjectsRegionsWorkflowTemplatesDelete'
     { _prwtdXgafv          :: !(Maybe Xgafv)
     , _prwtdUploadProtocol :: !(Maybe Text)
     , _prwtdAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data ProjectsRegionsWorkflowTemplatesDelete = ProjectsRegionsWorkflowTemplatesDe
     , _prwtdName           :: !Text
     , _prwtdVersion        :: !(Maybe (Textual Int32))
     , _prwtdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsRegionsWorkflowTemplatesDelete
     :: Text -- ^ 'prwtdName'
     -> ProjectsRegionsWorkflowTemplatesDelete
 projectsRegionsWorkflowTemplatesDelete pPrwtdName_ =
-    ProjectsRegionsWorkflowTemplatesDelete'
+  ProjectsRegionsWorkflowTemplatesDelete'
     { _prwtdXgafv = Nothing
     , _prwtdUploadProtocol = Nothing
     , _prwtdAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsRegionsWorkflowTemplatesDelete pPrwtdName_ =
     , _prwtdVersion = Nothing
     , _prwtdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwtdXgafv :: Lens' ProjectsRegionsWorkflowTemplatesDelete (Maybe Xgafv)
@@ -147,7 +151,8 @@ prwtdCallback
       (\ s a -> s{_prwtdCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesDelete where
+           ProjectsRegionsWorkflowTemplatesDelete
+         where
         type Rs ProjectsRegionsWorkflowTemplatesDelete =
              Empty
         type Scopes ProjectsRegionsWorkflowTemplatesDelete =

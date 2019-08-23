@@ -55,10 +55,13 @@ type OrgUnitsGetResource =
 -- | Retrieve organizational unit
 --
 -- /See:/ 'orgUnitsGet' smart constructor.
-data OrgUnitsGet = OrgUnitsGet'
+data OrgUnitsGet =
+  OrgUnitsGet'
     { _ougOrgUnitPath :: ![Text]
     , _ougCustomerId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrgUnitsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ orgUnitsGet
     -> Text -- ^ 'ougCustomerId'
     -> OrgUnitsGet
 orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
-    OrgUnitsGet'
+  OrgUnitsGet'
     { _ougOrgUnitPath = _Coerce # pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
     }
+
 
 -- | Full path of the organizational unit or its ID
 ougOrgUnitPath :: Lens' OrgUnitsGet [Text]

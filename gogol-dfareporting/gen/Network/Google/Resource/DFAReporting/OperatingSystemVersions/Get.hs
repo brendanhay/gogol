@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemVersionsGet' request conforms to.
 type OperatingSystemVersionsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>
@@ -55,10 +55,13 @@ type OperatingSystemVersionsGetResource =
 -- | Gets one operating system version by ID.
 --
 -- /See:/ 'operatingSystemVersionsGet' smart constructor.
-data OperatingSystemVersionsGet = OperatingSystemVersionsGet'
+data OperatingSystemVersionsGet =
+  OperatingSystemVersionsGet'
     { _osvgProFileId :: !(Textual Int64)
     , _osvgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperatingSystemVersionsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ operatingSystemVersionsGet
     -> Int64 -- ^ 'osvgId'
     -> OperatingSystemVersionsGet
 operatingSystemVersionsGet pOsvgProFileId_ pOsvgId_ =
-    OperatingSystemVersionsGet'
-    { _osvgProFileId = _Coerce # pOsvgProFileId_
-    , _osvgId = _Coerce # pOsvgId_
-    }
+  OperatingSystemVersionsGet'
+    {_osvgProFileId = _Coerce # pOsvgProFileId_, _osvgId = _Coerce # pOsvgId_}
+
 
 -- | User profile ID associated with this request.
 osvgProFileId :: Lens' OperatingSystemVersionsGet Int64

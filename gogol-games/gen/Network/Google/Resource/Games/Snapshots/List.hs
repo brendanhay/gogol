@@ -61,12 +61,15 @@ type SnapshotsListResource =
 -- corresponding to the player ID.
 --
 -- /See:/ 'snapshotsList' smart constructor.
-data SnapshotsList = SnapshotsList'
+data SnapshotsList =
+  SnapshotsList'
     { _slLanguage   :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slPlayerId   :: !Text
     , _slMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ snapshotsList
     :: Text -- ^ 'slPlayerId'
     -> SnapshotsList
 snapshotsList pSlPlayerId_ =
-    SnapshotsList'
+  SnapshotsList'
     { _slLanguage = Nothing
     , _slPageToken = Nothing
     , _slPlayerId = pSlPlayerId_
     , _slMaxResults = Nothing
     }
+
 
 -- | The preferred language to use for strings returned by this method.
 slLanguage :: Lens' SnapshotsList (Maybe Text)
@@ -118,7 +122,8 @@ instance GoogleRequest SnapshotsList where
         type Rs SnapshotsList = SnapshotListResponse
         type Scopes SnapshotsList =
              '["https://www.googleapis.com/auth/drive.appdata",
-               "https://www.googleapis.com/auth/games"]
+               "https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient SnapshotsList'{..}
           = go _slPlayerId _slLanguage _slPageToken
               _slMaxResults

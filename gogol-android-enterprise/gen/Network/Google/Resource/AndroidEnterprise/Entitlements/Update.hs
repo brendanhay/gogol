@@ -62,13 +62,16 @@ type EntitlementsUpdateResource =
 -- | Adds or updates an entitlement to an app for a user.
 --
 -- /See:/ 'entitlementsUpdate' smart constructor.
-data EntitlementsUpdate = EntitlementsUpdate'
+data EntitlementsUpdate =
+  EntitlementsUpdate'
     { _euEntitlementId :: !Text
     , _euEnterpriseId  :: !Text
     , _euPayload       :: !Entitlement
     , _euInstall       :: !(Maybe Bool)
     , _euUserId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntitlementsUpdate' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ entitlementsUpdate
     -> Text -- ^ 'euUserId'
     -> EntitlementsUpdate
 entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
-    EntitlementsUpdate'
+  EntitlementsUpdate'
     { _euEntitlementId = pEuEntitlementId_
     , _euEnterpriseId = pEuEnterpriseId_
     , _euPayload = pEuPayload_
     , _euInstall = Nothing
     , _euUserId = pEuUserId_
     }
+
 
 -- | The ID of the entitlement (a product ID), e.g.
 -- \"app:com.google.android.gm\".

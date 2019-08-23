@@ -31,7 +31,7 @@
 -- name binding is the parent resource, without the operations collection
 -- id.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.operations.list@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.operations.list@.
 module Network.Google.Resource.Speech.Operations.List
     (
     -- * REST Resource
@@ -85,7 +85,8 @@ type OperationsListResource =
 -- id.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList'
+data OperationsList =
+  OperationsList'
     { _olXgafv          :: !(Maybe Xgafv)
     , _olUploadProtocol :: !(Maybe Text)
     , _olAccessToken    :: !(Maybe Text)
@@ -95,7 +96,9 @@ data OperationsList = OperationsList'
     , _olPageToken      :: !(Maybe Text)
     , _olPageSize       :: !(Maybe (Textual Int32))
     , _olCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ data OperationsList = OperationsList'
 operationsList
     :: OperationsList
 operationsList =
-    OperationsList'
+  OperationsList'
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olAccessToken = Nothing
@@ -132,6 +135,7 @@ operationsList =
     , _olPageSize = Nothing
     , _olCallback = Nothing
     }
+
 
 -- | V1 error format.
 olXgafv :: Lens' OperationsList (Maybe Xgafv)

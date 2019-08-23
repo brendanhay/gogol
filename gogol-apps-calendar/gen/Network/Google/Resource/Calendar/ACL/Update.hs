@@ -58,12 +58,15 @@ type ACLUpdateResource =
 -- | Updates an access control rule.
 --
 -- /See:/ 'aclUpdate' smart constructor.
-data ACLUpdate = ACLUpdate'
+data ACLUpdate =
+  ACLUpdate'
     { _auCalendarId        :: !Text
     , _auRuleId            :: !Text
     , _auPayload           :: !ACLRule
     , _auSendNotifications :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ACLUpdate' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ aclUpdate
     -> ACLRule -- ^ 'auPayload'
     -> ACLUpdate
 aclUpdate pAuCalendarId_ pAuRuleId_ pAuPayload_ =
-    ACLUpdate'
+  ACLUpdate'
     { _auCalendarId = pAuCalendarId_
     , _auRuleId = pAuRuleId_
     , _auPayload = pAuPayload_
     , _auSendNotifications = Nothing
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

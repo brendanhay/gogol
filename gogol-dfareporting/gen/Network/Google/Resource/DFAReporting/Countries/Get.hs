@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CountriesGet' request conforms to.
 type CountriesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>
@@ -54,10 +54,13 @@ type CountriesGetResource =
 -- | Gets one country by ID.
 --
 -- /See:/ 'countriesGet' smart constructor.
-data CountriesGet = CountriesGet'
+data CountriesGet =
+  CountriesGet'
     { _cgProFileId :: !(Textual Int64)
     , _cgDartId    :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CountriesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ countriesGet
     -> Int64 -- ^ 'cgDartId'
     -> CountriesGet
 countriesGet pCgProFileId_ pCgDartId_ =
-    CountriesGet'
-    { _cgProFileId = _Coerce # pCgProFileId_
-    , _cgDartId = _Coerce # pCgDartId_
-    }
+  CountriesGet'
+    {_cgProFileId = _Coerce # pCgProFileId_, _cgDartId = _Coerce # pCgDartId_}
+
 
 -- | User profile ID associated with this request.
 cgProFileId :: Lens' CountriesGet Int64

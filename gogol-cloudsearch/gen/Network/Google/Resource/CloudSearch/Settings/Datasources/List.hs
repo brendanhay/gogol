@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists data sources.
+-- Lists datasources.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.list@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.List
@@ -63,10 +63,11 @@ type SettingsDatasourcesListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListDataSourceResponse
 
--- | Lists data sources.
+-- | Lists datasources.
 --
 -- /See:/ 'settingsDatasourcesList' smart constructor.
-data SettingsDatasourcesList = SettingsDatasourcesList'
+data SettingsDatasourcesList =
+  SettingsDatasourcesList'
     { _sdlXgafv                       :: !(Maybe Xgafv)
     , _sdlUploadProtocol              :: !(Maybe Text)
     , _sdlAccessToken                 :: !(Maybe Text)
@@ -75,7 +76,9 @@ data SettingsDatasourcesList = SettingsDatasourcesList'
     , _sdlPageToken                   :: !(Maybe Text)
     , _sdlPageSize                    :: !(Maybe (Textual Int32))
     , _sdlCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsDatasourcesList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ data SettingsDatasourcesList = SettingsDatasourcesList'
 settingsDatasourcesList
     :: SettingsDatasourcesList
 settingsDatasourcesList =
-    SettingsDatasourcesList'
+  SettingsDatasourcesList'
     { _sdlXgafv = Nothing
     , _sdlUploadProtocol = Nothing
     , _sdlAccessToken = Nothing
@@ -109,6 +112,7 @@ settingsDatasourcesList =
     , _sdlPageSize = Nothing
     , _sdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdlXgafv :: Lens' SettingsDatasourcesList (Maybe Xgafv)
@@ -132,8 +136,8 @@ sdlUploadType
   = lens _sdlUploadType
       (\ s a -> s{_sdlUploadType = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 sdlDebugOptionsEnableDebugging :: Lens' SettingsDatasourcesList (Maybe Bool)
 sdlDebugOptionsEnableDebugging
   = lens _sdlDebugOptionsEnableDebugging
@@ -144,7 +148,7 @@ sdlPageToken :: Lens' SettingsDatasourcesList (Maybe Text)
 sdlPageToken
   = lens _sdlPageToken (\ s a -> s{_sdlPageToken = a})
 
--- | Maximum number of data sources to fetch in a request. The max value is
+-- | Maximum number of datasources to fetch in a request. The max value is
 -- 100.
 -- The default value is 10
 sdlPageSize :: Lens' SettingsDatasourcesList (Maybe Int32)

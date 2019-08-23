@@ -85,7 +85,8 @@ type ProjectsDatabasesOperationsListResource =
 -- id.
 --
 -- /See:/ 'projectsDatabasesOperationsList' smart constructor.
-data ProjectsDatabasesOperationsList = ProjectsDatabasesOperationsList'
+data ProjectsDatabasesOperationsList =
+  ProjectsDatabasesOperationsList'
     { _pdolXgafv          :: !(Maybe Xgafv)
     , _pdolUploadProtocol :: !(Maybe Text)
     , _pdolAccessToken    :: !(Maybe Text)
@@ -95,7 +96,9 @@ data ProjectsDatabasesOperationsList = ProjectsDatabasesOperationsList'
     , _pdolPageToken      :: !(Maybe Text)
     , _pdolPageSize       :: !(Maybe (Textual Int32))
     , _pdolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesOperationsList' with the minimum fields required to make a request.
 --
@@ -122,7 +125,7 @@ projectsDatabasesOperationsList
     :: Text -- ^ 'pdolName'
     -> ProjectsDatabasesOperationsList
 projectsDatabasesOperationsList pPdolName_ =
-    ProjectsDatabasesOperationsList'
+  ProjectsDatabasesOperationsList'
     { _pdolXgafv = Nothing
     , _pdolUploadProtocol = Nothing
     , _pdolAccessToken = Nothing
@@ -133,6 +136,7 @@ projectsDatabasesOperationsList pPdolName_ =
     , _pdolPageSize = Nothing
     , _pdolCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdolXgafv :: Lens' ProjectsDatabasesOperationsList (Maybe Xgafv)
@@ -184,7 +188,8 @@ pdolCallback
   = lens _pdolCallback (\ s a -> s{_pdolCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesOperationsList where
+           ProjectsDatabasesOperationsList
+         where
         type Rs ProjectsDatabasesOperationsList =
              GoogleLongrunningListOperationsResponse
         type Scopes ProjectsDatabasesOperationsList =

@@ -67,7 +67,8 @@ type ProjectsAgentSessionsEntityTypesCreateResource =
 -- already exists, overrides the session entity type.
 --
 -- /See:/ 'projectsAgentSessionsEntityTypesCreate' smart constructor.
-data ProjectsAgentSessionsEntityTypesCreate = ProjectsAgentSessionsEntityTypesCreate'
+data ProjectsAgentSessionsEntityTypesCreate =
+  ProjectsAgentSessionsEntityTypesCreate'
     { _paSetcParent         :: !Text
     , _paSetcXgafv          :: !(Maybe Xgafv)
     , _paSetcUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsAgentSessionsEntityTypesCreate = ProjectsAgentSessionsEntityTypesCr
     , _paSetcUploadType     :: !(Maybe Text)
     , _paSetcPayload        :: !GoogleCloudDialogflowV2SessionEntityType
     , _paSetcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsAgentSessionsEntityTypesCreate
     -> GoogleCloudDialogflowV2SessionEntityType -- ^ 'paSetcPayload'
     -> ProjectsAgentSessionsEntityTypesCreate
 projectsAgentSessionsEntityTypesCreate pPaSetcParent_ pPaSetcPayload_ =
-    ProjectsAgentSessionsEntityTypesCreate'
+  ProjectsAgentSessionsEntityTypesCreate'
     { _paSetcParent = pPaSetcParent_
     , _paSetcXgafv = Nothing
     , _paSetcUploadProtocol = Nothing
@@ -108,6 +111,7 @@ projectsAgentSessionsEntityTypesCreate pPaSetcParent_ pPaSetcPayload_ =
     , _paSetcPayload = pPaSetcPayload_
     , _paSetcCallback = Nothing
     }
+
 
 -- | Required. The session to create a session entity type for. Format:
 -- \`projects\/\/agent\/sessions\/\`.
@@ -151,7 +155,8 @@ paSetcCallback
       (\ s a -> s{_paSetcCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsEntityTypesCreate where
+           ProjectsAgentSessionsEntityTypesCreate
+         where
         type Rs ProjectsAgentSessionsEntityTypesCreate =
              GoogleCloudDialogflowV2SessionEntityType
         type Scopes ProjectsAgentSessionsEntityTypesCreate =

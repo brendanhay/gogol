@@ -81,7 +81,8 @@ type ProjectsProFilesCreateResource =
 -- trailing metadata item named \"google.rpc.retryinfo-bin\".
 --
 -- /See:/ 'projectsProFilesCreate' smart constructor.
-data ProjectsProFilesCreate = ProjectsProFilesCreate'
+data ProjectsProFilesCreate =
+  ProjectsProFilesCreate'
     { _ppfcParent         :: !Text
     , _ppfcXgafv          :: !(Maybe Xgafv)
     , _ppfcUploadProtocol :: !(Maybe Text)
@@ -89,7 +90,9 @@ data ProjectsProFilesCreate = ProjectsProFilesCreate'
     , _ppfcUploadType     :: !(Maybe Text)
     , _ppfcPayload        :: !CreateProFileRequest
     , _ppfcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsProFilesCreate' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ projectsProFilesCreate
     -> CreateProFileRequest -- ^ 'ppfcPayload'
     -> ProjectsProFilesCreate
 projectsProFilesCreate pPpfcParent_ pPpfcPayload_ =
-    ProjectsProFilesCreate'
+  ProjectsProFilesCreate'
     { _ppfcParent = pPpfcParent_
     , _ppfcXgafv = Nothing
     , _ppfcUploadProtocol = Nothing
@@ -122,6 +125,7 @@ projectsProFilesCreate pPpfcParent_ pPpfcPayload_ =
     , _ppfcPayload = pPpfcPayload_
     , _ppfcCallback = Nothing
     }
+
 
 -- | Parent project to create the profile in.
 ppfcParent :: Lens' ProjectsProFilesCreate Text

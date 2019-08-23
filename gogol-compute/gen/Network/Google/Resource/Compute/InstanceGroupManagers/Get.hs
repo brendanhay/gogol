@@ -62,11 +62,14 @@ type InstanceGroupManagersGetResource =
 -- request.
 --
 -- /See:/ 'instanceGroupManagersGet' smart constructor.
-data InstanceGroupManagersGet = InstanceGroupManagersGet'
+data InstanceGroupManagersGet =
+  InstanceGroupManagersGet'
     { _igmgProject              :: !Text
     , _igmgInstanceGroupManager :: !Text
     , _igmgZone                 :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManagersGet' with the minimum fields required to make a request.
 --
@@ -83,11 +86,12 @@ instanceGroupManagersGet
     -> Text -- ^ 'igmgZone'
     -> InstanceGroupManagersGet
 instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
-    InstanceGroupManagersGet'
+  InstanceGroupManagersGet'
     { _igmgProject = pIgmgProject_
     , _igmgInstanceGroupManager = pIgmgInstanceGroupManager_
     , _igmgZone = pIgmgZone_
     }
+
 
 -- | Project ID for this request.
 igmgProject :: Lens' InstanceGroupManagersGet Text

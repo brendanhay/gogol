@@ -58,12 +58,15 @@ type EventsDeleteResource =
 -- | Deletes an event.
 --
 -- /See:/ 'eventsDelete' smart constructor.
-data EventsDelete = EventsDelete'
+data EventsDelete =
+  EventsDelete'
     { _edCalendarId        :: !Text
     , _edSendNotifications :: !(Maybe Bool)
     , _edSendUpdates       :: !(Maybe EventsDeleteSendUpdates)
     , _edEventId           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsDelete' with the minimum fields required to make a request.
 --
@@ -81,12 +84,13 @@ eventsDelete
     -> Text -- ^ 'edEventId'
     -> EventsDelete
 eventsDelete pEdCalendarId_ pEdEventId_ =
-    EventsDelete'
+  EventsDelete'
     { _edCalendarId = pEdCalendarId_
     , _edSendNotifications = Nothing
     , _edSendUpdates = Nothing
     , _edEventId = pEdEventId_
     }
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

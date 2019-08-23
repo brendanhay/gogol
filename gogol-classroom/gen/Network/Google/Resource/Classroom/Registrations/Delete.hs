@@ -62,14 +62,17 @@ type RegistrationsDeleteResource =
 -- notifications for that \`Registration\`.
 --
 -- /See:/ 'registrationsDelete' smart constructor.
-data RegistrationsDelete = RegistrationsDelete'
+data RegistrationsDelete =
+  RegistrationsDelete'
     { _rdRegistrationId :: !Text
     , _rdXgafv          :: !(Maybe Xgafv)
     , _rdUploadProtocol :: !(Maybe Text)
     , _rdAccessToken    :: !(Maybe Text)
     , _rdUploadType     :: !(Maybe Text)
     , _rdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegistrationsDelete' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ registrationsDelete
     :: Text -- ^ 'rdRegistrationId'
     -> RegistrationsDelete
 registrationsDelete pRdRegistrationId_ =
-    RegistrationsDelete'
+  RegistrationsDelete'
     { _rdRegistrationId = pRdRegistrationId_
     , _rdXgafv = Nothing
     , _rdUploadProtocol = Nothing
@@ -98,6 +101,7 @@ registrationsDelete pRdRegistrationId_ =
     , _rdUploadType = Nothing
     , _rdCallback = Nothing
     }
+
 
 -- | The \`registration_id\` of the \`Registration\` to be deleted.
 rdRegistrationId :: Lens' RegistrationsDelete Text

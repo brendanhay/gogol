@@ -55,11 +55,14 @@
 -- support a queue), the action could not be started. The client should
 -- retry. * \`INTERNAL\`: An internal error occurred in the execution
 -- engine or the worker. * \`DEADLINE_EXCEEDED\`: The execution timed out.
--- In the case of a missing input or command, the server SHOULD
--- additionally send a PreconditionFailure error detail where, for each
--- requested blob not present in the CAS, there is a \`Violation\` with a
--- \`type\` of \`MISSING\` and a \`subject\` of
--- \`\"blobs\/{hash}\/{size}\"\` indicating the digest of the missing blob.
+-- * \`CANCELLED\`: The operation was cancelled by the client. This status
+-- is only possible if the server implements the Operations API
+-- CancelOperation method, and it was called for the current execution. In
+-- the case of a missing input or command, the server SHOULD additionally
+-- send a PreconditionFailure error detail where, for each requested blob
+-- not present in the CAS, there is a \`Violation\` with a \`type\` of
+-- \`MISSING\` and a \`subject\` of \`\"blobs\/{hash}\/{size}\"\`
+-- indicating the digest of the missing blob.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actions.execute@.
 module Network.Google.Resource.RemoteBuildExecution.Actions.Execute
@@ -135,14 +138,18 @@ type ActionsExecuteResource =
 -- support a queue), the action could not be started. The client should
 -- retry. * \`INTERNAL\`: An internal error occurred in the execution
 -- engine or the worker. * \`DEADLINE_EXCEEDED\`: The execution timed out.
--- In the case of a missing input or command, the server SHOULD
--- additionally send a PreconditionFailure error detail where, for each
--- requested blob not present in the CAS, there is a \`Violation\` with a
--- \`type\` of \`MISSING\` and a \`subject\` of
--- \`\"blobs\/{hash}\/{size}\"\` indicating the digest of the missing blob.
+-- * \`CANCELLED\`: The operation was cancelled by the client. This status
+-- is only possible if the server implements the Operations API
+-- CancelOperation method, and it was called for the current execution. In
+-- the case of a missing input or command, the server SHOULD additionally
+-- send a PreconditionFailure error detail where, for each requested blob
+-- not present in the CAS, there is a \`Violation\` with a \`type\` of
+-- \`MISSING\` and a \`subject\` of \`\"blobs\/{hash}\/{size}\"\`
+-- indicating the digest of the missing blob.
 --
 -- /See:/ 'actionsExecute' smart constructor.
-data ActionsExecute = ActionsExecute'
+data ActionsExecute =
+  ActionsExecute'
     { _aeXgafv          :: !(Maybe Xgafv)
     , _aeUploadProtocol :: !(Maybe Text)
     , _aeAccessToken    :: !(Maybe Text)
@@ -150,7 +157,9 @@ data ActionsExecute = ActionsExecute'
     , _aePayload        :: !BuildBazelRemoteExecutionV2ExecuteRequest
     , _aeInstanceName   :: !Text
     , _aeCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionsExecute' with the minimum fields required to make a request.
 --
@@ -174,7 +183,7 @@ actionsExecute
     -> Text -- ^ 'aeInstanceName'
     -> ActionsExecute
 actionsExecute pAePayload_ pAeInstanceName_ =
-    ActionsExecute'
+  ActionsExecute'
     { _aeXgafv = Nothing
     , _aeUploadProtocol = Nothing
     , _aeAccessToken = Nothing
@@ -183,6 +192,7 @@ actionsExecute pAePayload_ pAeInstanceName_ =
     , _aeInstanceName = pAeInstanceName_
     , _aeCallback = Nothing
     }
+
 
 -- | V1 error format.
 aeXgafv :: Lens' ActionsExecute (Maybe Xgafv)

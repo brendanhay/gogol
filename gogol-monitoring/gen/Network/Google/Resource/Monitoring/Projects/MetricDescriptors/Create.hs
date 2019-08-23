@@ -65,7 +65,8 @@ type ProjectsMetricDescriptorsCreateResource =
 -- custom metrics.
 --
 -- /See:/ 'projectsMetricDescriptorsCreate' smart constructor.
-data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'
+data ProjectsMetricDescriptorsCreate =
+  ProjectsMetricDescriptorsCreate'
     { _pmdcXgafv          :: !(Maybe Xgafv)
     , _pmdcUploadProtocol :: !(Maybe Text)
     , _pmdcAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'
     , _pmdcPayload        :: !MetricDescriptor
     , _pmdcName           :: !Text
     , _pmdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsMetricDescriptorsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsMetricDescriptorsCreate
     -> Text -- ^ 'pmdcName'
     -> ProjectsMetricDescriptorsCreate
 projectsMetricDescriptorsCreate pPmdcPayload_ pPmdcName_ =
-    ProjectsMetricDescriptorsCreate'
+  ProjectsMetricDescriptorsCreate'
     { _pmdcXgafv = Nothing
     , _pmdcUploadProtocol = Nothing
     , _pmdcAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsMetricDescriptorsCreate pPmdcPayload_ pPmdcName_ =
     , _pmdcName = pPmdcName_
     , _pmdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmdcXgafv :: Lens' ProjectsMetricDescriptorsCreate (Maybe Xgafv)
@@ -146,7 +150,8 @@ pmdcCallback
   = lens _pmdcCallback (\ s a -> s{_pmdcCallback = a})
 
 instance GoogleRequest
-         ProjectsMetricDescriptorsCreate where
+           ProjectsMetricDescriptorsCreate
+         where
         type Rs ProjectsMetricDescriptorsCreate =
              MetricDescriptor
         type Scopes ProjectsMetricDescriptorsCreate =

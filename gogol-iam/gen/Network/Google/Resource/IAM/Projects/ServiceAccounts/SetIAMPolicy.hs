@@ -20,7 +20,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the IAM access control policy for a ServiceAccount.
+-- Sets the Cloud IAM access control policy for a ServiceAccount. Note:
+-- Service accounts are both [resources and
+-- identities](\/iam\/docs\/service-accounts#service_account_permissions).
+-- This method treats the service account as a resource. Use it to grant
+-- members access to the service account, such as when they need to
+-- impersonate it. This method does not grant the service account access to
+-- other resources, such as projects. To grant a service account access to
+-- resources, include the service account in the Cloud IAM policy for the
+-- desired resource, then call the appropriate \`setIamPolicy\` method on
+-- the target resource. For example, to grant a service account access to a
+-- project, call the
+-- [projects.setIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/setIamPolicy)
+-- method.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.setIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
@@ -59,10 +71,23 @@ type ProjectsServiceAccountsSetIAMPolicyResource =
                      ReqBody '[JSON] SetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Sets the IAM access control policy for a ServiceAccount.
+-- | Sets the Cloud IAM access control policy for a ServiceAccount. Note:
+-- Service accounts are both [resources and
+-- identities](\/iam\/docs\/service-accounts#service_account_permissions).
+-- This method treats the service account as a resource. Use it to grant
+-- members access to the service account, such as when they need to
+-- impersonate it. This method does not grant the service account access to
+-- other resources, such as projects. To grant a service account access to
+-- resources, include the service account in the Cloud IAM policy for the
+-- desired resource, then call the appropriate \`setIamPolicy\` method on
+-- the target resource. For example, to grant a service account access to a
+-- project, call the
+-- [projects.setIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/setIamPolicy)
+-- method.
 --
 -- /See:/ 'projectsServiceAccountsSetIAMPolicy' smart constructor.
-data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
+data ProjectsServiceAccountsSetIAMPolicy =
+  ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv          :: !(Maybe Xgafv)
     , _psasipUploadProtocol :: !(Maybe Text)
     , _psasipAccessToken    :: !(Maybe Text)
@@ -70,7 +95,9 @@ data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
     , _psasipPayload        :: !SetIAMPolicyRequest
     , _psasipResource       :: !Text
     , _psasipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -94,7 +121,7 @@ projectsServiceAccountsSetIAMPolicy
     -> Text -- ^ 'psasipResource'
     -> ProjectsServiceAccountsSetIAMPolicy
 projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
-    ProjectsServiceAccountsSetIAMPolicy'
+  ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv = Nothing
     , _psasipUploadProtocol = Nothing
     , _psasipAccessToken = Nothing
@@ -103,6 +130,7 @@ projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
     , _psasipResource = pPsasipResource_
     , _psasipCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasipXgafv :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Xgafv)
@@ -147,7 +175,8 @@ psasipCallback
       (\ s a -> s{_psasipCallback = a})
 
 instance GoogleRequest
-         ProjectsServiceAccountsSetIAMPolicy where
+           ProjectsServiceAccountsSetIAMPolicy
+         where
         type Rs ProjectsServiceAccountsSetIAMPolicy = Policy
         type Scopes ProjectsServiceAccountsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

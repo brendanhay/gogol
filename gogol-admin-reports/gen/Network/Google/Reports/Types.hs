@@ -162,8 +162,8 @@ reportsService
 
 -- | View usage reports for your G Suite domain
 adminReportsUsageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
-adminReportsUsageReadOnlyScope = Proxy;
+adminReportsUsageReadOnlyScope = Proxy
 
 -- | View audit reports for your G Suite domain
 adminReportsAuditReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-adminReportsAuditReadOnlyScope = Proxy;
+adminReportsAuditReadOnlyScope = Proxy

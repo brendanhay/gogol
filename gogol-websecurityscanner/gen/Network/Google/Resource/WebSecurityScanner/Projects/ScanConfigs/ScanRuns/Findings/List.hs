@@ -51,7 +51,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- 'ProjectsScanConfigsScanRunsFindingsList' request conforms to.
 type ProjectsScanConfigsScanRunsFindingsListResource
      =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "parent" Text :>
          "findings" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -68,7 +68,8 @@ type ProjectsScanConfigsScanRunsFindingsListResource
 -- | List Findings under a given ScanRun.
 --
 -- /See:/ 'projectsScanConfigsScanRunsFindingsList' smart constructor.
-data ProjectsScanConfigsScanRunsFindingsList = ProjectsScanConfigsScanRunsFindingsList'
+data ProjectsScanConfigsScanRunsFindingsList =
+  ProjectsScanConfigsScanRunsFindingsList'
     { _pscsrflParent         :: !Text
     , _pscsrflXgafv          :: !(Maybe Xgafv)
     , _pscsrflUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsScanConfigsScanRunsFindingsList = ProjectsScanConfigsScanRunsFindin
     , _pscsrflPageToken      :: !(Maybe Text)
     , _pscsrflPageSize       :: !(Maybe (Textual Int32))
     , _pscsrflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsFindingsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsScanConfigsScanRunsFindingsList
     :: Text -- ^ 'pscsrflParent'
     -> ProjectsScanConfigsScanRunsFindingsList
 projectsScanConfigsScanRunsFindingsList pPscsrflParent_ =
-    ProjectsScanConfigsScanRunsFindingsList'
+  ProjectsScanConfigsScanRunsFindingsList'
     { _pscsrflParent = pPscsrflParent_
     , _pscsrflXgafv = Nothing
     , _pscsrflUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsScanConfigsScanRunsFindingsList pPscsrflParent_ =
     , _pscsrflPageSize = Nothing
     , _pscsrflCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan run resource
 -- name in the format
@@ -179,7 +183,8 @@ pscsrflCallback
       (\ s a -> s{_pscsrflCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsFindingsList where
+           ProjectsScanConfigsScanRunsFindingsList
+         where
         type Rs ProjectsScanConfigsScanRunsFindingsList =
              ListFindingsResponse
         type Scopes ProjectsScanConfigsScanRunsFindingsList =

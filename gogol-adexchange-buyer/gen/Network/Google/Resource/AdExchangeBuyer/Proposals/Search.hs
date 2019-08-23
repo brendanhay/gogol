@@ -53,9 +53,12 @@ type ProposalsSearchResource =
 -- | Search for proposals using pql query
 --
 -- /See:/ 'proposalsSearch' smart constructor.
-newtype ProposalsSearch = ProposalsSearch'
+newtype ProposalsSearch =
+  ProposalsSearch'
     { _pPqlQuery :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProposalsSearch' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype ProposalsSearch = ProposalsSearch'
 -- * 'pPqlQuery'
 proposalsSearch
     :: ProposalsSearch
-proposalsSearch =
-    ProposalsSearch'
-    { _pPqlQuery = Nothing
-    }
+proposalsSearch = ProposalsSearch' {_pPqlQuery = Nothing}
+
 
 -- | Query string to retrieve specific proposals.
 pPqlQuery :: Lens' ProposalsSearch (Maybe Text)

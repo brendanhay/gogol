@@ -77,7 +77,8 @@ type DataGaGetResource =
 -- | Returns Analytics data for a view (profile).
 --
 -- /See:/ 'dataGaGet' smart constructor.
-data DataGaGet = DataGaGet'
+data DataGaGet =
+  DataGaGet'
     { _dggMetrics          :: !Text
     , _dggSamplingLevel    :: !(Maybe DataGaGetSamplingLevel)
     , _dggFilters          :: !(Maybe Text)
@@ -91,7 +92,9 @@ data DataGaGet = DataGaGet'
     , _dggMaxResults       :: !(Maybe (Textual Int32))
     , _dggSegment          :: !(Maybe Text)
     , _dggStartDate        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataGaGet' with the minimum fields required to make a request.
 --
@@ -129,7 +132,7 @@ dataGaGet
     -> Text -- ^ 'dggStartDate'
     -> DataGaGet
 dataGaGet pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
-    DataGaGet'
+  DataGaGet'
     { _dggMetrics = pDggMetrics_
     , _dggSamplingLevel = Nothing
     , _dggFilters = Nothing
@@ -144,6 +147,7 @@ dataGaGet pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     , _dggSegment = Nothing
     , _dggStartDate = pDggStartDate_
     }
+
 
 -- | A comma-separated list of Analytics metrics. E.g.,
 -- \'ga:sessions,ga:pageviews\'. At least one metric must be specified.

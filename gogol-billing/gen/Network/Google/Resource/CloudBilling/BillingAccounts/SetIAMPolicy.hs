@@ -70,7 +70,8 @@ type BillingAccountsSetIAMPolicyResource =
 -- [administrators](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsSetIAMPolicy' smart constructor.
-data BillingAccountsSetIAMPolicy = BillingAccountsSetIAMPolicy'
+data BillingAccountsSetIAMPolicy =
+  BillingAccountsSetIAMPolicy'
     { _basipXgafv          :: !(Maybe Xgafv)
     , _basipUploadProtocol :: !(Maybe Text)
     , _basipAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data BillingAccountsSetIAMPolicy = BillingAccountsSetIAMPolicy'
     , _basipPayload        :: !SetIAMPolicyRequest
     , _basipResource       :: !Text
     , _basipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ billingAccountsSetIAMPolicy
     -> Text -- ^ 'basipResource'
     -> BillingAccountsSetIAMPolicy
 billingAccountsSetIAMPolicy pBasipPayload_ pBasipResource_ =
-    BillingAccountsSetIAMPolicy'
+  BillingAccountsSetIAMPolicy'
     { _basipXgafv = Nothing
     , _basipUploadProtocol = Nothing
     , _basipAccessToken = Nothing
@@ -111,6 +114,7 @@ billingAccountsSetIAMPolicy pBasipPayload_ pBasipResource_ =
     , _basipResource = pBasipResource_
     , _basipCallback = Nothing
     }
+
 
 -- | V1 error format.
 basipXgafv :: Lens' BillingAccountsSetIAMPolicy (Maybe Xgafv)

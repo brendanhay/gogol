@@ -39,10 +39,13 @@ import           Network.Google.Prelude
 -- DATA_WRITE logging.
 --
 -- /See:/ 'googleIAMV1__AuditConfig' smart constructor.
-data GoogleIAMV1__AuditConfig = GoogleIAMV1__AuditConfig'
+data GoogleIAMV1__AuditConfig =
+  GoogleIAMV1__AuditConfig'
     { _givacService         :: !(Maybe Text)
     , _givacAuditLogConfigs :: !(Maybe [GoogleIAMV1__AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__AuditConfig' with the minimum fields required to make a request.
 --
@@ -54,10 +57,9 @@ data GoogleIAMV1__AuditConfig = GoogleIAMV1__AuditConfig'
 googleIAMV1__AuditConfig
     :: GoogleIAMV1__AuditConfig
 googleIAMV1__AuditConfig =
-    GoogleIAMV1__AuditConfig'
-    { _givacService = Nothing
-    , _givacAuditLogConfigs = Nothing
-    }
+  GoogleIAMV1__AuditConfig'
+    {_givacService = Nothing, _givacAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -94,26 +96,32 @@ instance ToJSON GoogleIAMV1__AuditConfig where
 -- have multiple versions. You can get information about all of the
 -- versions of a given model by calling
 -- [projects.models.versions.list](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/list).
+-- Next ID: 30
 --
 -- /See:/ 'googleCloudMlV1__Version' smart constructor.
-data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version'
-    { _gcmvvFramework      :: !(Maybe GoogleCloudMlV1__VersionFramework)
-    , _gcmvvEtag           :: !(Maybe Bytes)
-    , _gcmvvState          :: !(Maybe GoogleCloudMlV1__VersionState)
-    , _gcmvvAutoScaling    :: !(Maybe GoogleCloudMlV1__AutoScaling)
-    , _gcmvvPythonVersion  :: !(Maybe Text)
-    , _gcmvvRuntimeVersion :: !(Maybe Text)
-    , _gcmvvLastUseTime    :: !(Maybe DateTime')
-    , _gcmvvName           :: !(Maybe Text)
-    , _gcmvvDeploymentURI  :: !(Maybe Text)
-    , _gcmvvManualScaling  :: !(Maybe GoogleCloudMlV1__ManualScaling)
-    , _gcmvvMachineType    :: !(Maybe Text)
-    , _gcmvvLabels         :: !(Maybe GoogleCloudMlV1__VersionLabels)
-    , _gcmvvErrorMessage   :: !(Maybe Text)
-    , _gcmvvDescription    :: !(Maybe Text)
-    , _gcmvvCreateTime     :: !(Maybe DateTime')
-    , _gcmvvIsDefault      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudMlV1__Version =
+  GoogleCloudMlV1__Version'
+    { _gcmvvFramework       :: !(Maybe GoogleCloudMlV1__VersionFramework)
+    , _gcmvvEtag            :: !(Maybe Bytes)
+    , _gcmvvState           :: !(Maybe GoogleCloudMlV1__VersionState)
+    , _gcmvvAutoScaling     :: !(Maybe GoogleCloudMlV1__AutoScaling)
+    , _gcmvvPythonVersion   :: !(Maybe Text)
+    , _gcmvvRuntimeVersion  :: !(Maybe Text)
+    , _gcmvvLastUseTime     :: !(Maybe DateTime')
+    , _gcmvvName            :: !(Maybe Text)
+    , _gcmvvPackageURIs     :: !(Maybe [Text])
+    , _gcmvvDeploymentURI   :: !(Maybe Text)
+    , _gcmvvManualScaling   :: !(Maybe GoogleCloudMlV1__ManualScaling)
+    , _gcmvvMachineType     :: !(Maybe Text)
+    , _gcmvvLabels          :: !(Maybe GoogleCloudMlV1__VersionLabels)
+    , _gcmvvPredictionClass :: !(Maybe Text)
+    , _gcmvvErrorMessage    :: !(Maybe Text)
+    , _gcmvvDescription     :: !(Maybe Text)
+    , _gcmvvCreateTime      :: !(Maybe DateTime')
+    , _gcmvvIsDefault       :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__Version' with the minimum fields required to make a request.
 --
@@ -135,6 +143,8 @@ data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version'
 --
 -- * 'gcmvvName'
 --
+-- * 'gcmvvPackageURIs'
+--
 -- * 'gcmvvDeploymentURI'
 --
 -- * 'gcmvvManualScaling'
@@ -142,6 +152,8 @@ data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version'
 -- * 'gcmvvMachineType'
 --
 -- * 'gcmvvLabels'
+--
+-- * 'gcmvvPredictionClass'
 --
 -- * 'gcmvvErrorMessage'
 --
@@ -153,7 +165,7 @@ data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version'
 googleCloudMlV1__Version
     :: GoogleCloudMlV1__Version
 googleCloudMlV1__Version =
-    GoogleCloudMlV1__Version'
+  GoogleCloudMlV1__Version'
     { _gcmvvFramework = Nothing
     , _gcmvvEtag = Nothing
     , _gcmvvState = Nothing
@@ -162,15 +174,18 @@ googleCloudMlV1__Version =
     , _gcmvvRuntimeVersion = Nothing
     , _gcmvvLastUseTime = Nothing
     , _gcmvvName = Nothing
+    , _gcmvvPackageURIs = Nothing
     , _gcmvvDeploymentURI = Nothing
     , _gcmvvManualScaling = Nothing
     , _gcmvvMachineType = Nothing
     , _gcmvvLabels = Nothing
+    , _gcmvvPredictionClass = Nothing
     , _gcmvvErrorMessage = Nothing
     , _gcmvvDescription = Nothing
     , _gcmvvCreateTime = Nothing
     , _gcmvvIsDefault = Nothing
     }
+
 
 -- | Optional. The machine learning framework Cloud ML Engine uses to train
 -- this version of the model. Valid values are \`TENSORFLOW\`,
@@ -242,6 +257,15 @@ gcmvvName :: Lens' GoogleCloudMlV1__Version (Maybe Text)
 gcmvvName
   = lens _gcmvvName (\ s a -> s{_gcmvvName = a})
 
+-- | Optional. The Google Cloud Storage location of the packages for custom
+-- prediction and any additional dependencies.
+gcmvvPackageURIs :: Lens' GoogleCloudMlV1__Version [Text]
+gcmvvPackageURIs
+  = lens _gcmvvPackageURIs
+      (\ s a -> s{_gcmvvPackageURIs = a})
+      . _Default
+      . _Coerce
+
 -- | Required. The Google Cloud Storage location of the trained model used to
 -- create the version. See the [guide to model
 -- deployment](\/ml-engine\/docs\/tensorflow\/deploying-models) for more
@@ -268,10 +292,14 @@ gcmvvManualScaling
       (\ s a -> s{_gcmvvManualScaling = a})
 
 -- | Optional. The type of machine on which to serve the model. Currently
--- only applies to online prediction service. The following are currently
--- supported and will be deprecated in Beta release. mls1-highmem-1 1 core
--- 2 Gb RAM mls1-highcpu-4 4 core 2 Gb RAM The following are available in
--- Beta: mls1-c1-m2 1 core 2 Gb RAM Default mls1-c4-m2 4 core 2 Gb RAM
+-- only applies to online prediction service.
+--
+-- [mls1-c1-m2]
+--     The __default__ machine type, with 1 core and 2 GB RAM. The
+--     deprecated name for this machine type is \"mls1-highmem-1\".
+-- [mls1-c4-m2]
+--     In __Beta__. This machine type has 4 cores and 2 GB RAM. The
+--     deprecated name for this machine type is \"mls1-highcpu-4\".
 gcmvvMachineType :: Lens' GoogleCloudMlV1__Version (Maybe Text)
 gcmvvMachineType
   = lens _gcmvvMachineType
@@ -285,6 +313,30 @@ gcmvvMachineType
 gcmvvLabels :: Lens' GoogleCloudMlV1__Version (Maybe GoogleCloudMlV1__VersionLabels)
 gcmvvLabels
   = lens _gcmvvLabels (\ s a -> s{_gcmvvLabels = a})
+
+-- | class PredictionClass(object): \"\"\"A Model performs predictions on a
+-- given list of instances. The input instances are the raw values sent by
+-- the user. It is the responsibility of a Model to translate these
+-- instances into actual predictions. The input instances and the output
+-- use python data types. The input instances have been decoded prior to
+-- being passed to the predict method. The output, which should use python
+-- data types is encoded after being returned from the predict method.
+-- \"\"\" def predict(self, instances, **kwargs): \"\"\"Returns predictions
+-- for the provided instances. Instances are the decoded values from the
+-- request. Clients need not worry about decoding json nor base64 decoding.
+-- Args: instances: A list of instances, as described in the API. **kwargs:
+-- Additional keyword arguments, will be passed into the client\'s predict
+-- method. Returns: A list of outputs containing the prediction results.
+-- \"\"\" \'classmethod def from_path(cls, model_path): \"\"\"Creates a
+-- model using the given model path. Path is useful, e.g., to load files
+-- from the exported directory containing the model. Args: model_path: The
+-- local directory that contains the exported model file along with any
+-- additional files uploaded when creating the version resource. Returns:
+-- An instance implementing this Model class. \"\"\"
+gcmvvPredictionClass :: Lens' GoogleCloudMlV1__Version (Maybe Text)
+gcmvvPredictionClass
+  = lens _gcmvvPredictionClass
+      (\ s a -> s{_gcmvvPredictionClass = a})
 
 -- | Output only. The details of a failure or a cancellation.
 gcmvvErrorMessage :: Lens' GoogleCloudMlV1__Version (Maybe Text)
@@ -326,10 +378,12 @@ instance FromJSON GoogleCloudMlV1__Version where
                      <*> (o .:? "runtimeVersion")
                      <*> (o .:? "lastUseTime")
                      <*> (o .:? "name")
+                     <*> (o .:? "packageUris" .!= mempty)
                      <*> (o .:? "deploymentUri")
                      <*> (o .:? "manualScaling")
                      <*> (o .:? "machineType")
                      <*> (o .:? "labels")
+                     <*> (o .:? "predictionClass")
                      <*> (o .:? "errorMessage")
                      <*> (o .:? "description")
                      <*> (o .:? "createTime")
@@ -347,10 +401,12 @@ instance ToJSON GoogleCloudMlV1__Version where
                   ("runtimeVersion" .=) <$> _gcmvvRuntimeVersion,
                   ("lastUseTime" .=) <$> _gcmvvLastUseTime,
                   ("name" .=) <$> _gcmvvName,
+                  ("packageUris" .=) <$> _gcmvvPackageURIs,
                   ("deploymentUri" .=) <$> _gcmvvDeploymentURI,
                   ("manualScaling" .=) <$> _gcmvvManualScaling,
                   ("machineType" .=) <$> _gcmvvMachineType,
                   ("labels" .=) <$> _gcmvvLabels,
+                  ("predictionClass" .=) <$> _gcmvvPredictionClass,
                   ("errorMessage" .=) <$> _gcmvvErrorMessage,
                   ("description" .=) <$> _gcmvvDescription,
                   ("createTime" .=) <$> _gcmvvCreateTime,
@@ -359,12 +415,15 @@ instance ToJSON GoogleCloudMlV1__Version where
 -- | Represents results of a prediction job.
 --
 -- /See:/ 'googleCloudMlV1__PredictionOutput' smart constructor.
-data GoogleCloudMlV1__PredictionOutput = GoogleCloudMlV1__PredictionOutput'
+data GoogleCloudMlV1__PredictionOutput =
+  GoogleCloudMlV1__PredictionOutput'
     { _gcmvpoNodeHours       :: !(Maybe (Textual Double))
     , _gcmvpoErrorCount      :: !(Maybe (Textual Int64))
     , _gcmvpoPredictionCount :: !(Maybe (Textual Int64))
     , _gcmvpoOutputPath      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__PredictionOutput' with the minimum fields required to make a request.
 --
@@ -380,12 +439,13 @@ data GoogleCloudMlV1__PredictionOutput = GoogleCloudMlV1__PredictionOutput'
 googleCloudMlV1__PredictionOutput
     :: GoogleCloudMlV1__PredictionOutput
 googleCloudMlV1__PredictionOutput =
-    GoogleCloudMlV1__PredictionOutput'
+  GoogleCloudMlV1__PredictionOutput'
     { _gcmvpoNodeHours = Nothing
     , _gcmvpoErrorCount = Nothing
     , _gcmvpoPredictionCount = Nothing
     , _gcmvpoOutputPath = Nothing
     }
+
 
 -- | Node hours used by the batch prediction job.
 gcmvpoNodeHours :: Lens' GoogleCloudMlV1__PredictionOutput (Maybe Double)
@@ -435,12 +495,99 @@ instance ToJSON GoogleCloudMlV1__PredictionOutput
                   ("predictionCount" .=) <$> _gcmvpoPredictionCount,
                   ("outputPath" .=) <$> _gcmvpoOutputPath])
 
+-- | Represents output related to a built-in algorithm Job.
+--
+-- /See:/ 'googleCloudMlV1__BuiltInAlgorithmOutput' smart constructor.
+data GoogleCloudMlV1__BuiltInAlgorithmOutput =
+  GoogleCloudMlV1__BuiltInAlgorithmOutput'
+    { _gcmvbiaoFramework      :: !(Maybe Text)
+    , _gcmvbiaoPythonVersion  :: !(Maybe Text)
+    , _gcmvbiaoRuntimeVersion :: !(Maybe Text)
+    , _gcmvbiaoModelPath      :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudMlV1__BuiltInAlgorithmOutput' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvbiaoFramework'
+--
+-- * 'gcmvbiaoPythonVersion'
+--
+-- * 'gcmvbiaoRuntimeVersion'
+--
+-- * 'gcmvbiaoModelPath'
+googleCloudMlV1__BuiltInAlgorithmOutput
+    :: GoogleCloudMlV1__BuiltInAlgorithmOutput
+googleCloudMlV1__BuiltInAlgorithmOutput =
+  GoogleCloudMlV1__BuiltInAlgorithmOutput'
+    { _gcmvbiaoFramework = Nothing
+    , _gcmvbiaoPythonVersion = Nothing
+    , _gcmvbiaoRuntimeVersion = Nothing
+    , _gcmvbiaoModelPath = Nothing
+    }
+
+
+-- | Framework on which the built-in algorithm was trained.
+gcmvbiaoFramework :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoFramework
+  = lens _gcmvbiaoFramework
+      (\ s a -> s{_gcmvbiaoFramework = a})
+
+-- | Python version on which the built-in algorithm was trained.
+gcmvbiaoPythonVersion :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoPythonVersion
+  = lens _gcmvbiaoPythonVersion
+      (\ s a -> s{_gcmvbiaoPythonVersion = a})
+
+-- | Cloud ML Engine runtime version on which the built-in algorithm was
+-- trained.
+gcmvbiaoRuntimeVersion :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoRuntimeVersion
+  = lens _gcmvbiaoRuntimeVersion
+      (\ s a -> s{_gcmvbiaoRuntimeVersion = a})
+
+-- | The Cloud Storage path to the \`model\/\` directory where the training
+-- job saves the trained model. Only set for successful jobs that don\'t
+-- use hyperparameter tuning.
+gcmvbiaoModelPath :: Lens' GoogleCloudMlV1__BuiltInAlgorithmOutput (Maybe Text)
+gcmvbiaoModelPath
+  = lens _gcmvbiaoModelPath
+      (\ s a -> s{_gcmvbiaoModelPath = a})
+
+instance FromJSON
+           GoogleCloudMlV1__BuiltInAlgorithmOutput
+         where
+        parseJSON
+          = withObject "GoogleCloudMlV1BuiltInAlgorithmOutput"
+              (\ o ->
+                 GoogleCloudMlV1__BuiltInAlgorithmOutput' <$>
+                   (o .:? "framework") <*> (o .:? "pythonVersion") <*>
+                     (o .:? "runtimeVersion")
+                     <*> (o .:? "modelPath"))
+
+instance ToJSON
+           GoogleCloudMlV1__BuiltInAlgorithmOutput
+         where
+        toJSON GoogleCloudMlV1__BuiltInAlgorithmOutput'{..}
+          = object
+              (catMaybes
+                 [("framework" .=) <$> _gcmvbiaoFramework,
+                  ("pythonVersion" .=) <$> _gcmvbiaoPythonVersion,
+                  ("runtimeVersion" .=) <$> _gcmvbiaoRuntimeVersion,
+                  ("modelPath" .=) <$> _gcmvbiaoModelPath])
+
 -- | The hyperparameters given to this trial.
 --
 -- /See:/ 'googleCloudMlV1__HyperparameterOutputHyperparameters' smart constructor.
-newtype GoogleCloudMlV1__HyperparameterOutputHyperparameters = GoogleCloudMlV1__HyperparameterOutputHyperparameters'
+newtype GoogleCloudMlV1__HyperparameterOutputHyperparameters =
+  GoogleCloudMlV1__HyperparameterOutputHyperparameters'
     { _gcmvhohAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__HyperparameterOutputHyperparameters' with the minimum fields required to make a request.
 --
@@ -451,9 +598,9 @@ googleCloudMlV1__HyperparameterOutputHyperparameters
     :: HashMap Text Text -- ^ 'gcmvhohAddtional'
     -> GoogleCloudMlV1__HyperparameterOutputHyperparameters
 googleCloudMlV1__HyperparameterOutputHyperparameters pGcmvhohAddtional_ =
-    GoogleCloudMlV1__HyperparameterOutputHyperparameters'
-    { _gcmvhohAddtional = _Coerce # pGcmvhohAddtional_
-    }
+  GoogleCloudMlV1__HyperparameterOutputHyperparameters'
+    {_gcmvhohAddtional = _Coerce # pGcmvhohAddtional_}
+
 
 gcmvhohAddtional :: Lens' GoogleCloudMlV1__HyperparameterOutputHyperparameters (HashMap Text Text)
 gcmvhohAddtional
@@ -462,7 +609,7 @@ gcmvhohAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudMlV1__HyperparameterOutputHyperparameters
+           GoogleCloudMlV1__HyperparameterOutputHyperparameters
          where
         parseJSON
           = withObject
@@ -472,16 +619,19 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudMlV1__HyperparameterOutputHyperparameters
+           GoogleCloudMlV1__HyperparameterOutputHyperparameters
          where
         toJSON = toJSON . _gcmvhohAddtional
 
 -- | Request for predictions to be issued against a trained model.
 --
 -- /See:/ 'googleCloudMlV1__PredictRequest' smart constructor.
-newtype GoogleCloudMlV1__PredictRequest = GoogleCloudMlV1__PredictRequest'
+newtype GoogleCloudMlV1__PredictRequest =
+  GoogleCloudMlV1__PredictRequest'
     { _gcmvprHTTPBody :: Maybe GoogleAPI__HTTPBody
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__PredictRequest' with the minimum fields required to make a request.
 --
@@ -491,9 +641,8 @@ newtype GoogleCloudMlV1__PredictRequest = GoogleCloudMlV1__PredictRequest'
 googleCloudMlV1__PredictRequest
     :: GoogleCloudMlV1__PredictRequest
 googleCloudMlV1__PredictRequest =
-    GoogleCloudMlV1__PredictRequest'
-    { _gcmvprHTTPBody = Nothing
-    }
+  GoogleCloudMlV1__PredictRequest' {_gcmvprHTTPBody = Nothing}
+
 
 -- | Required. The prediction request body.
 gcmvprHTTPBody :: Lens' GoogleCloudMlV1__PredictRequest (Maybe GoogleAPI__HTTPBody)
@@ -524,9 +673,12 @@ instance ToJSON GoogleCloudMlV1__PredictRequest where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'googleLongrunning__OperationResponse' smart constructor.
-newtype GoogleLongrunning__OperationResponse = GoogleLongrunning__OperationResponse'
+newtype GoogleLongrunning__OperationResponse =
+  GoogleLongrunning__OperationResponse'
     { _glorAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning__OperationResponse' with the minimum fields required to make a request.
 --
@@ -537,9 +689,9 @@ googleLongrunning__OperationResponse
     :: HashMap Text JSONValue -- ^ 'glorAddtional'
     -> GoogleLongrunning__OperationResponse
 googleLongrunning__OperationResponse pGlorAddtional_ =
-    GoogleLongrunning__OperationResponse'
-    { _glorAddtional = _Coerce # pGlorAddtional_
-    }
+  GoogleLongrunning__OperationResponse'
+    {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunning__OperationResponse (HashMap Text JSONValue)
@@ -549,7 +701,8 @@ glorAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleLongrunning__OperationResponse where
+           GoogleLongrunning__OperationResponse
+         where
         parseJSON
           = withObject "GoogleLongrunningOperationResponse"
               (\ o ->
@@ -567,10 +720,13 @@ instance ToJSON GoogleLongrunning__OperationResponse
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'googleIAMV1__AuditLogConfig' smart constructor.
-data GoogleIAMV1__AuditLogConfig = GoogleIAMV1__AuditLogConfig'
+data GoogleIAMV1__AuditLogConfig =
+  GoogleIAMV1__AuditLogConfig'
     { _givalcLogType         :: !(Maybe GoogleIAMV1__AuditLogConfigLogType)
     , _givalcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -582,10 +738,9 @@ data GoogleIAMV1__AuditLogConfig = GoogleIAMV1__AuditLogConfig'
 googleIAMV1__AuditLogConfig
     :: GoogleIAMV1__AuditLogConfig
 googleIAMV1__AuditLogConfig =
-    GoogleIAMV1__AuditLogConfig'
-    { _givalcLogType = Nothing
-    , _givalcExemptedMembers = Nothing
-    }
+  GoogleIAMV1__AuditLogConfig'
+    {_givalcLogType = Nothing, _givalcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 givalcLogType :: Lens' GoogleIAMV1__AuditLogConfig (Maybe GoogleIAMV1__AuditLogConfigLogType)
@@ -620,10 +775,13 @@ instance ToJSON GoogleIAMV1__AuditLogConfig where
 -- | Response message for the ListModels method.
 --
 -- /See:/ 'googleCloudMlV1__ListModelsResponse' smart constructor.
-data GoogleCloudMlV1__ListModelsResponse = GoogleCloudMlV1__ListModelsResponse'
+data GoogleCloudMlV1__ListModelsResponse =
+  GoogleCloudMlV1__ListModelsResponse'
     { _gcmvlmrNextPageToken :: !(Maybe Text)
     , _gcmvlmrModels        :: !(Maybe [GoogleCloudMlV1__Model])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ListModelsResponse' with the minimum fields required to make a request.
 --
@@ -635,10 +793,9 @@ data GoogleCloudMlV1__ListModelsResponse = GoogleCloudMlV1__ListModelsResponse'
 googleCloudMlV1__ListModelsResponse
     :: GoogleCloudMlV1__ListModelsResponse
 googleCloudMlV1__ListModelsResponse =
-    GoogleCloudMlV1__ListModelsResponse'
-    { _gcmvlmrNextPageToken = Nothing
-    , _gcmvlmrModels = Nothing
-    }
+  GoogleCloudMlV1__ListModelsResponse'
+    {_gcmvlmrNextPageToken = Nothing, _gcmvlmrModels = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -675,10 +832,13 @@ instance ToJSON GoogleCloudMlV1__ListModelsResponse
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'googleLongrunning__ListOperationsResponse' smart constructor.
-data GoogleLongrunning__ListOperationsResponse = GoogleLongrunning__ListOperationsResponse'
+data GoogleLongrunning__ListOperationsResponse =
+  GoogleLongrunning__ListOperationsResponse'
     { _gllorNextPageToken :: !(Maybe Text)
     , _gllorOperations    :: !(Maybe [GoogleLongrunning__Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning__ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -690,10 +850,9 @@ data GoogleLongrunning__ListOperationsResponse = GoogleLongrunning__ListOperatio
 googleLongrunning__ListOperationsResponse
     :: GoogleLongrunning__ListOperationsResponse
 googleLongrunning__ListOperationsResponse =
-    GoogleLongrunning__ListOperationsResponse'
-    { _gllorNextPageToken = Nothing
-    , _gllorOperations = Nothing
-    }
+  GoogleLongrunning__ListOperationsResponse'
+    {_gllorNextPageToken = Nothing, _gllorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 gllorNextPageToken :: Lens' GoogleLongrunning__ListOperationsResponse (Maybe Text)
@@ -710,7 +869,8 @@ gllorOperations
       . _Coerce
 
 instance FromJSON
-         GoogleLongrunning__ListOperationsResponse where
+           GoogleLongrunning__ListOperationsResponse
+         where
         parseJSON
           = withObject
               "GoogleLongrunningListOperationsResponse"
@@ -720,7 +880,8 @@ instance FromJSON
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON
-         GoogleLongrunning__ListOperationsResponse where
+           GoogleLongrunning__ListOperationsResponse
+         where
         toJSON GoogleLongrunning__ListOperationsResponse'{..}
           = object
               (catMaybes
@@ -730,10 +891,13 @@ instance ToJSON
 -- | Represents a hardware accelerator request config.
 --
 -- /See:/ 'googleCloudMlV1__AcceleratorConfig' smart constructor.
-data GoogleCloudMlV1__AcceleratorConfig = GoogleCloudMlV1__AcceleratorConfig'
+data GoogleCloudMlV1__AcceleratorConfig =
+  GoogleCloudMlV1__AcceleratorConfig'
     { _gcmvacCount :: !(Maybe (Textual Int64))
     , _gcmvacType  :: !(Maybe GoogleCloudMlV1__AcceleratorConfigType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__AcceleratorConfig' with the minimum fields required to make a request.
 --
@@ -745,10 +909,9 @@ data GoogleCloudMlV1__AcceleratorConfig = GoogleCloudMlV1__AcceleratorConfig'
 googleCloudMlV1__AcceleratorConfig
     :: GoogleCloudMlV1__AcceleratorConfig
 googleCloudMlV1__AcceleratorConfig =
-    GoogleCloudMlV1__AcceleratorConfig'
-    { _gcmvacCount = Nothing
-    , _gcmvacType = Nothing
-    }
+  GoogleCloudMlV1__AcceleratorConfig'
+    {_gcmvacCount = Nothing, _gcmvacType = Nothing}
+
 
 -- | The number of accelerators to attach to each machine running the job.
 gcmvacCount :: Lens' GoogleCloudMlV1__AcceleratorConfig (Maybe Int64)
@@ -756,7 +919,7 @@ gcmvacCount
   = lens _gcmvacCount (\ s a -> s{_gcmvacCount = a}) .
       mapping _Coerce
 
--- | The available types of accelerators.
+-- | The type of accelerator to use.
 gcmvacType :: Lens' GoogleCloudMlV1__AcceleratorConfig (Maybe GoogleCloudMlV1__AcceleratorConfigType)
 gcmvacType
   = lens _gcmvacType (\ s a -> s{_gcmvacType = a})
@@ -796,12 +959,15 @@ instance ToJSON GoogleCloudMlV1__AcceleratorConfig
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'googleIAMV1__Policy' smart constructor.
-data GoogleIAMV1__Policy = GoogleIAMV1__Policy'
+data GoogleIAMV1__Policy =
+  GoogleIAMV1__Policy'
     { _givpAuditConfigs :: !(Maybe [GoogleIAMV1__AuditConfig])
     , _givpEtag         :: !(Maybe Bytes)
     , _givpVersion      :: !(Maybe (Textual Int32))
     , _givpBindings     :: !(Maybe [GoogleIAMV1__Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__Policy' with the minimum fields required to make a request.
 --
@@ -817,12 +983,13 @@ data GoogleIAMV1__Policy = GoogleIAMV1__Policy'
 googleIAMV1__Policy
     :: GoogleIAMV1__Policy
 googleIAMV1__Policy =
-    GoogleIAMV1__Policy'
+  GoogleIAMV1__Policy'
     { _givpAuditConfigs = Nothing
     , _givpEtag = Nothing
     , _givpVersion = Nothing
     , _givpBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 givpAuditConfigs :: Lens' GoogleIAMV1__Policy [GoogleIAMV1__AuditConfig]
@@ -881,9 +1048,12 @@ instance ToJSON GoogleIAMV1__Policy where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'googleIAMV1__TestIAMPermissionsResponse' smart constructor.
-newtype GoogleIAMV1__TestIAMPermissionsResponse = GoogleIAMV1__TestIAMPermissionsResponse'
+newtype GoogleIAMV1__TestIAMPermissionsResponse =
+  GoogleIAMV1__TestIAMPermissionsResponse'
     { _givtiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -893,9 +1063,8 @@ newtype GoogleIAMV1__TestIAMPermissionsResponse = GoogleIAMV1__TestIAMPermission
 googleIAMV1__TestIAMPermissionsResponse
     :: GoogleIAMV1__TestIAMPermissionsResponse
 googleIAMV1__TestIAMPermissionsResponse =
-    GoogleIAMV1__TestIAMPermissionsResponse'
-    { _givtiprPermissions = Nothing
-    }
+  GoogleIAMV1__TestIAMPermissionsResponse' {_givtiprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -907,7 +1076,8 @@ givtiprPermissions
       . _Coerce
 
 instance FromJSON
-         GoogleIAMV1__TestIAMPermissionsResponse where
+           GoogleIAMV1__TestIAMPermissionsResponse
+         where
         parseJSON
           = withObject "GoogleIAMV1TestIAMPermissionsResponse"
               (\ o ->
@@ -915,7 +1085,8 @@ instance FromJSON
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON
-         GoogleIAMV1__TestIAMPermissionsResponse where
+           GoogleIAMV1__TestIAMPermissionsResponse
+         where
         toJSON GoogleIAMV1__TestIAMPermissionsResponse'{..}
           = object
               (catMaybes
@@ -924,10 +1095,13 @@ instance ToJSON
 -- | Response message for the ListJobs method.
 --
 -- /See:/ 'googleCloudMlV1__ListJobsResponse' smart constructor.
-data GoogleCloudMlV1__ListJobsResponse = GoogleCloudMlV1__ListJobsResponse'
+data GoogleCloudMlV1__ListJobsResponse =
+  GoogleCloudMlV1__ListJobsResponse'
     { _gcmvljrNextPageToken :: !(Maybe Text)
     , _gcmvljrJobs          :: !(Maybe [GoogleCloudMlV1__Job])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ListJobsResponse' with the minimum fields required to make a request.
 --
@@ -939,10 +1113,9 @@ data GoogleCloudMlV1__ListJobsResponse = GoogleCloudMlV1__ListJobsResponse'
 googleCloudMlV1__ListJobsResponse
     :: GoogleCloudMlV1__ListJobsResponse
 googleCloudMlV1__ListJobsResponse =
-    GoogleCloudMlV1__ListJobsResponse'
-    { _gcmvljrNextPageToken = Nothing
-    , _gcmvljrJobs = Nothing
-    }
+  GoogleCloudMlV1__ListJobsResponse'
+    {_gcmvljrNextPageToken = Nothing, _gcmvljrJobs = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -978,10 +1151,13 @@ instance ToJSON GoogleCloudMlV1__ListJobsResponse
 -- | Response message for the ListVersions method.
 --
 -- /See:/ 'googleCloudMlV1__ListVersionsResponse' smart constructor.
-data GoogleCloudMlV1__ListVersionsResponse = GoogleCloudMlV1__ListVersionsResponse'
+data GoogleCloudMlV1__ListVersionsResponse =
+  GoogleCloudMlV1__ListVersionsResponse'
     { _gcmvlvrNextPageToken :: !(Maybe Text)
     , _gcmvlvrVersions      :: !(Maybe [GoogleCloudMlV1__Version])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ListVersionsResponse' with the minimum fields required to make a request.
 --
@@ -993,10 +1169,9 @@ data GoogleCloudMlV1__ListVersionsResponse = GoogleCloudMlV1__ListVersionsRespon
 googleCloudMlV1__ListVersionsResponse
     :: GoogleCloudMlV1__ListVersionsResponse
 googleCloudMlV1__ListVersionsResponse =
-    GoogleCloudMlV1__ListVersionsResponse'
-    { _gcmvlvrNextPageToken = Nothing
-    , _gcmvlvrVersions = Nothing
-    }
+  GoogleCloudMlV1__ListVersionsResponse'
+    {_gcmvlvrNextPageToken = Nothing, _gcmvlvrVersions = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -1014,7 +1189,8 @@ gcmvlvrVersions
       . _Coerce
 
 instance FromJSON
-         GoogleCloudMlV1__ListVersionsResponse where
+           GoogleCloudMlV1__ListVersionsResponse
+         where
         parseJSON
           = withObject "GoogleCloudMlV1ListVersionsResponse"
               (\ o ->
@@ -1035,12 +1211,15 @@ instance ToJSON GoogleCloudMlV1__ListVersionsResponse
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'googleType__Expr' smart constructor.
-data GoogleType__Expr = GoogleType__Expr'
+data GoogleType__Expr =
+  GoogleType__Expr'
     { _gteLocation    :: !(Maybe Text)
     , _gteExpression  :: !(Maybe Text)
     , _gteTitle       :: !(Maybe Text)
     , _gteDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleType__Expr' with the minimum fields required to make a request.
 --
@@ -1056,12 +1235,13 @@ data GoogleType__Expr = GoogleType__Expr'
 googleType__Expr
     :: GoogleType__Expr
 googleType__Expr =
-    GoogleType__Expr'
+  GoogleType__Expr'
     { _gteLocation = Nothing
     , _gteExpression = Nothing
     , _gteTitle = Nothing
     , _gteDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -1114,13 +1294,17 @@ instance ToJSON GoogleType__Expr where
 -- of HyperparameterOutput objects, one for each successful trial.
 --
 -- /See:/ 'googleCloudMlV1__HyperparameterOutput' smart constructor.
-data GoogleCloudMlV1__HyperparameterOutput = GoogleCloudMlV1__HyperparameterOutput'
-    { _gcmvhoIsTrialStoppedEarly :: !(Maybe Bool)
-    , _gcmvhoAllMetrics          :: !(Maybe [GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric])
-    , _gcmvhoHyperparameters     :: !(Maybe GoogleCloudMlV1__HyperparameterOutputHyperparameters)
-    , _gcmvhoTrialId             :: !(Maybe Text)
-    , _gcmvhoFinalMetric         :: !(Maybe GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudMlV1__HyperparameterOutput =
+  GoogleCloudMlV1__HyperparameterOutput'
+    { _gcmvhoIsTrialStoppedEarly    :: !(Maybe Bool)
+    , _gcmvhoAllMetrics             :: !(Maybe [GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric])
+    , _gcmvhoHyperparameters        :: !(Maybe GoogleCloudMlV1__HyperparameterOutputHyperparameters)
+    , _gcmvhoTrialId                :: !(Maybe Text)
+    , _gcmvhoFinalMetric            :: !(Maybe GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric)
+    , _gcmvhoBuiltInAlgorithmOutput :: !(Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__HyperparameterOutput' with the minimum fields required to make a request.
 --
@@ -1135,16 +1319,20 @@ data GoogleCloudMlV1__HyperparameterOutput = GoogleCloudMlV1__HyperparameterOutp
 -- * 'gcmvhoTrialId'
 --
 -- * 'gcmvhoFinalMetric'
+--
+-- * 'gcmvhoBuiltInAlgorithmOutput'
 googleCloudMlV1__HyperparameterOutput
     :: GoogleCloudMlV1__HyperparameterOutput
 googleCloudMlV1__HyperparameterOutput =
-    GoogleCloudMlV1__HyperparameterOutput'
+  GoogleCloudMlV1__HyperparameterOutput'
     { _gcmvhoIsTrialStoppedEarly = Nothing
     , _gcmvhoAllMetrics = Nothing
     , _gcmvhoHyperparameters = Nothing
     , _gcmvhoTrialId = Nothing
     , _gcmvhoFinalMetric = Nothing
+    , _gcmvhoBuiltInAlgorithmOutput = Nothing
     }
+
 
 -- | True if the trial is stopped early.
 gcmvhoIsTrialStoppedEarly :: Lens' GoogleCloudMlV1__HyperparameterOutput (Maybe Bool)
@@ -1179,8 +1367,16 @@ gcmvhoFinalMetric
   = lens _gcmvhoFinalMetric
       (\ s a -> s{_gcmvhoFinalMetric = a})
 
+-- | Details related to built-in algorithms jobs. Only set for trials of
+-- built-in algorithms jobs that have succeeded.
+gcmvhoBuiltInAlgorithmOutput :: Lens' GoogleCloudMlV1__HyperparameterOutput (Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
+gcmvhoBuiltInAlgorithmOutput
+  = lens _gcmvhoBuiltInAlgorithmOutput
+      (\ s a -> s{_gcmvhoBuiltInAlgorithmOutput = a})
+
 instance FromJSON
-         GoogleCloudMlV1__HyperparameterOutput where
+           GoogleCloudMlV1__HyperparameterOutput
+         where
         parseJSON
           = withObject "GoogleCloudMlV1HyperparameterOutput"
               (\ o ->
@@ -1189,7 +1385,8 @@ instance FromJSON
                      (o .:? "allMetrics" .!= mempty)
                      <*> (o .:? "hyperparameters")
                      <*> (o .:? "trialId")
-                     <*> (o .:? "finalMetric"))
+                     <*> (o .:? "finalMetric")
+                     <*> (o .:? "builtInAlgorithmOutput"))
 
 instance ToJSON GoogleCloudMlV1__HyperparameterOutput
          where
@@ -1201,16 +1398,21 @@ instance ToJSON GoogleCloudMlV1__HyperparameterOutput
                   ("allMetrics" .=) <$> _gcmvhoAllMetrics,
                   ("hyperparameters" .=) <$> _gcmvhoHyperparameters,
                   ("trialId" .=) <$> _gcmvhoTrialId,
-                  ("finalMetric" .=) <$> _gcmvhoFinalMetric])
+                  ("finalMetric" .=) <$> _gcmvhoFinalMetric,
+                  ("builtInAlgorithmOutput" .=) <$>
+                    _gcmvhoBuiltInAlgorithmOutput])
 
 -- | Returns service account information associated with a project.
 --
 -- /See:/ 'googleCloudMlV1__GetConfigResponse' smart constructor.
-data GoogleCloudMlV1__GetConfigResponse = GoogleCloudMlV1__GetConfigResponse'
+data GoogleCloudMlV1__GetConfigResponse =
+  GoogleCloudMlV1__GetConfigResponse'
     { _gcmvgcrConfig                :: !(Maybe GoogleCloudMlV1__Config)
     , _gcmvgcrServiceAccount        :: !(Maybe Text)
     , _gcmvgcrServiceAccountProject :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__GetConfigResponse' with the minimum fields required to make a request.
 --
@@ -1224,11 +1426,12 @@ data GoogleCloudMlV1__GetConfigResponse = GoogleCloudMlV1__GetConfigResponse'
 googleCloudMlV1__GetConfigResponse
     :: GoogleCloudMlV1__GetConfigResponse
 googleCloudMlV1__GetConfigResponse =
-    GoogleCloudMlV1__GetConfigResponse'
+  GoogleCloudMlV1__GetConfigResponse'
     { _gcmvgcrConfig = Nothing
     , _gcmvgcrServiceAccount = Nothing
     , _gcmvgcrServiceAccountProject = Nothing
     }
+
 
 gcmvgcrConfig :: Lens' GoogleCloudMlV1__GetConfigResponse (Maybe GoogleCloudMlV1__Config)
 gcmvgcrConfig
@@ -1270,9 +1473,12 @@ instance ToJSON GoogleCloudMlV1__GetConfigResponse
 -- | Options for manually scaling a model.
 --
 -- /See:/ 'googleCloudMlV1__ManualScaling' smart constructor.
-newtype GoogleCloudMlV1__ManualScaling = GoogleCloudMlV1__ManualScaling'
+newtype GoogleCloudMlV1__ManualScaling =
+  GoogleCloudMlV1__ManualScaling'
     { _gcmvmsNodes :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ManualScaling' with the minimum fields required to make a request.
 --
@@ -1282,9 +1488,8 @@ newtype GoogleCloudMlV1__ManualScaling = GoogleCloudMlV1__ManualScaling'
 googleCloudMlV1__ManualScaling
     :: GoogleCloudMlV1__ManualScaling
 googleCloudMlV1__ManualScaling =
-    GoogleCloudMlV1__ManualScaling'
-    { _gcmvmsNodes = Nothing
-    }
+  GoogleCloudMlV1__ManualScaling' {_gcmvmsNodes = Nothing}
+
 
 -- | The number of nodes to allocate for this model. These nodes are always
 -- up, starting from the time the model is deployed, so the cost of
@@ -1310,13 +1515,16 @@ instance ToJSON GoogleCloudMlV1__ManualScaling where
 -- a network API call.
 --
 -- /See:/ 'googleLongrunning__Operation' smart constructor.
-data GoogleLongrunning__Operation = GoogleLongrunning__Operation'
+data GoogleLongrunning__Operation =
+  GoogleLongrunning__Operation'
     { _gloDone     :: !(Maybe Bool)
     , _gloError    :: !(Maybe GoogleRpc__Status)
     , _gloResponse :: !(Maybe GoogleLongrunning__OperationResponse)
     , _gloName     :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunning__OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning__Operation' with the minimum fields required to make a request.
 --
@@ -1334,13 +1542,14 @@ data GoogleLongrunning__Operation = GoogleLongrunning__Operation'
 googleLongrunning__Operation
     :: GoogleLongrunning__Operation
 googleLongrunning__Operation =
-    GoogleLongrunning__Operation'
+  GoogleLongrunning__Operation'
     { _gloDone = Nothing
     , _gloError = Nothing
     , _gloResponse = Nothing
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1403,15 +1612,19 @@ instance ToJSON GoogleLongrunning__Operation where
 -- prediction requests. The model itself is just a container.
 --
 -- /See:/ 'googleCloudMlV1__Model' smart constructor.
-data GoogleCloudMlV1__Model = GoogleCloudMlV1__Model'
-    { _gcmvmEtag                    :: !(Maybe Bytes)
-    , _gcmvmRegions                 :: !(Maybe [Text])
-    , _gcmvmDefaultVersion          :: !(Maybe GoogleCloudMlV1__Version)
-    , _gcmvmName                    :: !(Maybe Text)
-    , _gcmvmLabels                  :: !(Maybe GoogleCloudMlV1__ModelLabels)
-    , _gcmvmDescription             :: !(Maybe Text)
-    , _gcmvmOnlinePredictionLogging :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudMlV1__Model =
+  GoogleCloudMlV1__Model'
+    { _gcmvmEtag                           :: !(Maybe Bytes)
+    , _gcmvmRegions                        :: !(Maybe [Text])
+    , _gcmvmDefaultVersion                 :: !(Maybe GoogleCloudMlV1__Version)
+    , _gcmvmName                           :: !(Maybe Text)
+    , _gcmvmLabels                         :: !(Maybe GoogleCloudMlV1__ModelLabels)
+    , _gcmvmOnlinePredictionConsoleLogging :: !(Maybe Bool)
+    , _gcmvmDescription                    :: !(Maybe Text)
+    , _gcmvmOnlinePredictionLogging        :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__Model' with the minimum fields required to make a request.
 --
@@ -1427,21 +1640,25 @@ data GoogleCloudMlV1__Model = GoogleCloudMlV1__Model'
 --
 -- * 'gcmvmLabels'
 --
+-- * 'gcmvmOnlinePredictionConsoleLogging'
+--
 -- * 'gcmvmDescription'
 --
 -- * 'gcmvmOnlinePredictionLogging'
 googleCloudMlV1__Model
     :: GoogleCloudMlV1__Model
 googleCloudMlV1__Model =
-    GoogleCloudMlV1__Model'
+  GoogleCloudMlV1__Model'
     { _gcmvmEtag = Nothing
     , _gcmvmRegions = Nothing
     , _gcmvmDefaultVersion = Nothing
     , _gcmvmName = Nothing
     , _gcmvmLabels = Nothing
+    , _gcmvmOnlinePredictionConsoleLogging = Nothing
     , _gcmvmDescription = Nothing
     , _gcmvmOnlinePredictionLogging = Nothing
     }
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a model from overwriting each other. It
@@ -1494,14 +1711,30 @@ gcmvmLabels :: Lens' GoogleCloudMlV1__Model (Maybe GoogleCloudMlV1__ModelLabels)
 gcmvmLabels
   = lens _gcmvmLabels (\ s a -> s{_gcmvmLabels = a})
 
+-- | Optional. If true, enables logging of stderr and stdout streams for
+-- online prediction in Stackdriver Logging. These can be more verbose than
+-- the standard access logs (see \`online_prediction_logging\`) and thus
+-- can incur higher cost. However, they are helpful for debugging. Note
+-- that since Stackdriver logs may incur a cost, particularly if the total
+-- QPS in your project is high, be sure to estimate your costs before
+-- enabling this flag. Default is false.
+gcmvmOnlinePredictionConsoleLogging :: Lens' GoogleCloudMlV1__Model (Maybe Bool)
+gcmvmOnlinePredictionConsoleLogging
+  = lens _gcmvmOnlinePredictionConsoleLogging
+      (\ s a ->
+         s{_gcmvmOnlinePredictionConsoleLogging = a})
+
 -- | Optional. The description specified for the model when it was created.
 gcmvmDescription :: Lens' GoogleCloudMlV1__Model (Maybe Text)
 gcmvmDescription
   = lens _gcmvmDescription
       (\ s a -> s{_gcmvmDescription = a})
 
--- | Optional. If true, enables StackDriver Logging for online prediction.
--- Default is false.
+-- | Optional. If true, online prediction access logs are sent to StackDriver
+-- Logging. These logs are like standard server access logs, containing
+-- information like timestamp and latency for each request. Note that
+-- Stackdriver logs may incur a cost, particular if the total QPS in your
+-- project is high. Default is false.
 gcmvmOnlinePredictionLogging :: Lens' GoogleCloudMlV1__Model (Maybe Bool)
 gcmvmOnlinePredictionLogging
   = lens _gcmvmOnlinePredictionLogging
@@ -1516,6 +1749,7 @@ instance FromJSON GoogleCloudMlV1__Model where
                      (o .:? "defaultVersion")
                      <*> (o .:? "name")
                      <*> (o .:? "labels")
+                     <*> (o .:? "onlinePredictionConsoleLogging")
                      <*> (o .:? "description")
                      <*> (o .:? "onlinePredictionLogging"))
 
@@ -1528,6 +1762,8 @@ instance ToJSON GoogleCloudMlV1__Model where
                   ("defaultVersion" .=) <$> _gcmvmDefaultVersion,
                   ("name" .=) <$> _gcmvmName,
                   ("labels" .=) <$> _gcmvmLabels,
+                  ("onlinePredictionConsoleLogging" .=) <$>
+                    _gcmvmOnlinePredictionConsoleLogging,
                   ("description" .=) <$> _gcmvmDescription,
                   ("onlinePredictionLogging" .=) <$>
                     _gcmvmOnlinePredictionLogging])
@@ -1535,7 +1771,8 @@ instance ToJSON GoogleCloudMlV1__Model where
 -- | Represents a training or prediction job.
 --
 -- /See:/ 'googleCloudMlV1__Job' smart constructor.
-data GoogleCloudMlV1__Job = GoogleCloudMlV1__Job'
+data GoogleCloudMlV1__Job =
+  GoogleCloudMlV1__Job'
     { _gcmvjEtag             :: !(Maybe Bytes)
     , _gcmvjState            :: !(Maybe GoogleCloudMlV1__JobState)
     , _gcmvjTrainingOutput   :: !(Maybe GoogleCloudMlV1__TrainingOutput)
@@ -1548,7 +1785,9 @@ data GoogleCloudMlV1__Job = GoogleCloudMlV1__Job'
     , _gcmvjErrorMessage     :: !(Maybe Text)
     , _gcmvjTrainingInput    :: !(Maybe GoogleCloudMlV1__TrainingInput)
     , _gcmvjCreateTime       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__Job' with the minimum fields required to make a request.
 --
@@ -1580,7 +1819,7 @@ data GoogleCloudMlV1__Job = GoogleCloudMlV1__Job'
 googleCloudMlV1__Job
     :: GoogleCloudMlV1__Job
 googleCloudMlV1__Job =
-    GoogleCloudMlV1__Job'
+  GoogleCloudMlV1__Job'
     { _gcmvjEtag = Nothing
     , _gcmvjState = Nothing
     , _gcmvjTrainingOutput = Nothing
@@ -1594,6 +1833,7 @@ googleCloudMlV1__Job =
     , _gcmvjTrainingInput = Nothing
     , _gcmvjCreateTime = Nothing
     }
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a job from overwriting each other. It is
@@ -1714,18 +1954,21 @@ instance ToJSON GoogleCloudMlV1__Job where
 --
 -- /See:/ 'googleCloudMlV1__SetDefaultVersionRequest' smart constructor.
 data GoogleCloudMlV1__SetDefaultVersionRequest =
-    GoogleCloudMlV1__SetDefaultVersionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleCloudMlV1__SetDefaultVersionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__SetDefaultVersionRequest' with the minimum fields required to make a request.
 --
 googleCloudMlV1__SetDefaultVersionRequest
     :: GoogleCloudMlV1__SetDefaultVersionRequest
 googleCloudMlV1__SetDefaultVersionRequest =
-    GoogleCloudMlV1__SetDefaultVersionRequest'
+  GoogleCloudMlV1__SetDefaultVersionRequest'
+
 
 instance FromJSON
-         GoogleCloudMlV1__SetDefaultVersionRequest where
+           GoogleCloudMlV1__SetDefaultVersionRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudMlV1SetDefaultVersionRequest"
@@ -1733,7 +1976,8 @@ instance FromJSON
                  pure GoogleCloudMlV1__SetDefaultVersionRequest')
 
 instance ToJSON
-         GoogleCloudMlV1__SetDefaultVersionRequest where
+           GoogleCloudMlV1__SetDefaultVersionRequest
+         where
         toJSON = const emptyObject
 
 -- | Optional. One or more labels that you can add, to organize your models.
@@ -1743,9 +1987,12 @@ instance ToJSON
 -- </ml-engine/docs/tensorflow/resource-labels using labels>.
 --
 -- /See:/ 'googleCloudMlV1__ModelLabels' smart constructor.
-newtype GoogleCloudMlV1__ModelLabels = GoogleCloudMlV1__ModelLabels'
+newtype GoogleCloudMlV1__ModelLabels =
+  GoogleCloudMlV1__ModelLabels'
     { _gcmvmlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ModelLabels' with the minimum fields required to make a request.
 --
@@ -1756,9 +2003,8 @@ googleCloudMlV1__ModelLabels
     :: HashMap Text Text -- ^ 'gcmvmlAddtional'
     -> GoogleCloudMlV1__ModelLabels
 googleCloudMlV1__ModelLabels pGcmvmlAddtional_ =
-    GoogleCloudMlV1__ModelLabels'
-    { _gcmvmlAddtional = _Coerce # pGcmvmlAddtional_
-    }
+  GoogleCloudMlV1__ModelLabels' {_gcmvmlAddtional = _Coerce # pGcmvmlAddtional_}
+
 
 gcmvmlAddtional :: Lens' GoogleCloudMlV1__ModelLabels (HashMap Text Text)
 gcmvmlAddtional
@@ -1783,9 +2029,12 @@ instance ToJSON GoogleCloudMlV1__ModelLabels where
 -- </ml-engine/docs/tensorflow/resource-labels using labels>.
 --
 -- /See:/ 'googleCloudMlV1__JobLabels' smart constructor.
-newtype GoogleCloudMlV1__JobLabels = GoogleCloudMlV1__JobLabels'
+newtype GoogleCloudMlV1__JobLabels =
+  GoogleCloudMlV1__JobLabels'
     { _gcmvjlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__JobLabels' with the minimum fields required to make a request.
 --
@@ -1796,9 +2045,8 @@ googleCloudMlV1__JobLabels
     :: HashMap Text Text -- ^ 'gcmvjlAddtional'
     -> GoogleCloudMlV1__JobLabels
 googleCloudMlV1__JobLabels pGcmvjlAddtional_ =
-    GoogleCloudMlV1__JobLabels'
-    { _gcmvjlAddtional = _Coerce # pGcmvjlAddtional_
-    }
+  GoogleCloudMlV1__JobLabels' {_gcmvjlAddtional = _Coerce # pGcmvjlAddtional_}
+
 
 gcmvjlAddtional :: Lens' GoogleCloudMlV1__JobLabels (HashMap Text Text)
 gcmvjlAddtional
@@ -1852,11 +2100,14 @@ instance ToJSON GoogleCloudMlV1__JobLabels where
 -- security\/privacy reasons.
 --
 -- /See:/ 'googleRpc__Status' smart constructor.
-data GoogleRpc__Status = GoogleRpc__Status'
+data GoogleRpc__Status =
+  GoogleRpc__Status'
     { _grsDetails :: !(Maybe [GoogleRpc__StatusDetailsItem])
     , _grsCode    :: !(Maybe (Textual Int32))
     , _grsMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpc__Status' with the minimum fields required to make a request.
 --
@@ -1870,11 +2121,9 @@ data GoogleRpc__Status = GoogleRpc__Status'
 googleRpc__Status
     :: GoogleRpc__Status
 googleRpc__Status =
-    GoogleRpc__Status'
-    { _grsDetails = Nothing
-    , _grsCode = Nothing
-    , _grsMessage = Nothing
-    }
+  GoogleRpc__Status'
+    {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -1913,11 +2162,71 @@ instance ToJSON GoogleRpc__Status where
                   ("code" .=) <$> _grsCode,
                   ("message" .=) <$> _grsMessage])
 
+-- | Represents the configuration for a replica in a cluster.
+--
+-- /See:/ 'googleCloudMlV1__ReplicaConfig' smart constructor.
+data GoogleCloudMlV1__ReplicaConfig =
+  GoogleCloudMlV1__ReplicaConfig'
+    { _gcmvrcImageURI          :: !(Maybe Text)
+    , _gcmvrcAcceleratorConfig :: !(Maybe GoogleCloudMlV1__AcceleratorConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudMlV1__ReplicaConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvrcImageURI'
+--
+-- * 'gcmvrcAcceleratorConfig'
+googleCloudMlV1__ReplicaConfig
+    :: GoogleCloudMlV1__ReplicaConfig
+googleCloudMlV1__ReplicaConfig =
+  GoogleCloudMlV1__ReplicaConfig'
+    {_gcmvrcImageURI = Nothing, _gcmvrcAcceleratorConfig = Nothing}
+
+
+-- | The Docker image to run on the replica. This image must be in Container
+-- Registry. Learn more about [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
+gcmvrcImageURI :: Lens' GoogleCloudMlV1__ReplicaConfig (Maybe Text)
+gcmvrcImageURI
+  = lens _gcmvrcImageURI
+      (\ s a -> s{_gcmvrcImageURI = a})
+
+-- | Represents the type and number of accelerators used by the replica.
+-- [Learn about restrictions on accelerator configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+gcmvrcAcceleratorConfig :: Lens' GoogleCloudMlV1__ReplicaConfig (Maybe GoogleCloudMlV1__AcceleratorConfig)
+gcmvrcAcceleratorConfig
+  = lens _gcmvrcAcceleratorConfig
+      (\ s a -> s{_gcmvrcAcceleratorConfig = a})
+
+instance FromJSON GoogleCloudMlV1__ReplicaConfig
+         where
+        parseJSON
+          = withObject "GoogleCloudMlV1ReplicaConfig"
+              (\ o ->
+                 GoogleCloudMlV1__ReplicaConfig' <$>
+                   (o .:? "imageUri") <*> (o .:? "acceleratorConfig"))
+
+instance ToJSON GoogleCloudMlV1__ReplicaConfig where
+        toJSON GoogleCloudMlV1__ReplicaConfig'{..}
+          = object
+              (catMaybes
+                 [("imageUri" .=) <$> _gcmvrcImageURI,
+                  ("acceleratorConfig" .=) <$>
+                    _gcmvrcAcceleratorConfig])
+
 --
 -- /See:/ 'googleCloudMlV1__Config' smart constructor.
-newtype GoogleCloudMlV1__Config = GoogleCloudMlV1__Config'
+newtype GoogleCloudMlV1__Config =
+  GoogleCloudMlV1__Config'
     { _gcmvcTpuServiceAccount :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__Config' with the minimum fields required to make a request.
 --
@@ -1927,9 +2236,8 @@ newtype GoogleCloudMlV1__Config = GoogleCloudMlV1__Config'
 googleCloudMlV1__Config
     :: GoogleCloudMlV1__Config
 googleCloudMlV1__Config =
-    GoogleCloudMlV1__Config'
-    { _gcmvcTpuServiceAccount = Nothing
-    }
+  GoogleCloudMlV1__Config' {_gcmvcTpuServiceAccount = Nothing}
+
 
 -- | The service account Cloud ML uses to run on TPU node.
 gcmvcTpuServiceAccount :: Lens' GoogleCloudMlV1__Config (Maybe Text)
@@ -1954,7 +2262,8 @@ instance ToJSON GoogleCloudMlV1__Config where
 -- | Represents a set of hyperparameters to optimize.
 --
 -- /See:/ 'googleCloudMlV1__HyperparameterSpec' smart constructor.
-data GoogleCloudMlV1__HyperparameterSpec = GoogleCloudMlV1__HyperparameterSpec'
+data GoogleCloudMlV1__HyperparameterSpec =
+  GoogleCloudMlV1__HyperparameterSpec'
     { _gcmvhsResumePreviousJobId      :: !(Maybe Text)
     , _gcmvhsParams                   :: !(Maybe [GoogleCloudMlV1__ParameterSpec])
     , _gcmvhsAlgorithm                :: !(Maybe GoogleCloudMlV1__HyperparameterSpecAlgorithm)
@@ -1962,8 +2271,11 @@ data GoogleCloudMlV1__HyperparameterSpec = GoogleCloudMlV1__HyperparameterSpec'
     , _gcmvhsMaxTrials                :: !(Maybe (Textual Int32))
     , _gcmvhsEnableTrialEarlyStopping :: !(Maybe Bool)
     , _gcmvhsMaxParallelTrials        :: !(Maybe (Textual Int32))
+    , _gcmvhsMaxFailedTrials          :: !(Maybe (Textual Int32))
     , _gcmvhsHyperparameterMetricTag  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__HyperparameterSpec' with the minimum fields required to make a request.
 --
@@ -1983,11 +2295,13 @@ data GoogleCloudMlV1__HyperparameterSpec = GoogleCloudMlV1__HyperparameterSpec'
 --
 -- * 'gcmvhsMaxParallelTrials'
 --
+-- * 'gcmvhsMaxFailedTrials'
+--
 -- * 'gcmvhsHyperparameterMetricTag'
 googleCloudMlV1__HyperparameterSpec
     :: GoogleCloudMlV1__HyperparameterSpec
 googleCloudMlV1__HyperparameterSpec =
-    GoogleCloudMlV1__HyperparameterSpec'
+  GoogleCloudMlV1__HyperparameterSpec'
     { _gcmvhsResumePreviousJobId = Nothing
     , _gcmvhsParams = Nothing
     , _gcmvhsAlgorithm = Nothing
@@ -1995,8 +2309,10 @@ googleCloudMlV1__HyperparameterSpec =
     , _gcmvhsMaxTrials = Nothing
     , _gcmvhsEnableTrialEarlyStopping = Nothing
     , _gcmvhsMaxParallelTrials = Nothing
+    , _gcmvhsMaxFailedTrials = Nothing
     , _gcmvhsHyperparameterMetricTag = Nothing
     }
+
 
 -- | Optional. The prior hyperparameter tuning job id that users hope to
 -- continue with. The job id will be used to find the corresponding vizier
@@ -2055,6 +2371,17 @@ gcmvhsMaxParallelTrials
       (\ s a -> s{_gcmvhsMaxParallelTrials = a})
       . mapping _Coerce
 
+-- | Optional. The number of failed trials that need to be seen before
+-- failing the hyperparameter tuning job. You can specify this field to
+-- override the default failing criteria for Cloud ML Engine hyperparameter
+-- tuning jobs. Defaults to zero, which means the service decides when a
+-- hyperparameter job should fail.
+gcmvhsMaxFailedTrials :: Lens' GoogleCloudMlV1__HyperparameterSpec (Maybe Int32)
+gcmvhsMaxFailedTrials
+  = lens _gcmvhsMaxFailedTrials
+      (\ s a -> s{_gcmvhsMaxFailedTrials = a})
+      . mapping _Coerce
+
 -- | Optional. The Tensorflow summary tag name to use for optimizing trials.
 -- For current versions of Tensorflow, this tag name should exactly match
 -- what is shown in Tensorboard, including all scopes. For versions of
@@ -2078,6 +2405,7 @@ instance FromJSON GoogleCloudMlV1__HyperparameterSpec
                      <*> (o .:? "maxTrials")
                      <*> (o .:? "enableTrialEarlyStopping")
                      <*> (o .:? "maxParallelTrials")
+                     <*> (o .:? "maxFailedTrials")
                      <*> (o .:? "hyperparameterMetricTag"))
 
 instance ToJSON GoogleCloudMlV1__HyperparameterSpec
@@ -2095,15 +2423,19 @@ instance ToJSON GoogleCloudMlV1__HyperparameterSpec
                     _gcmvhsEnableTrialEarlyStopping,
                   ("maxParallelTrials" .=) <$>
                     _gcmvhsMaxParallelTrials,
+                  ("maxFailedTrials" .=) <$> _gcmvhsMaxFailedTrials,
                   ("hyperparameterMetricTag" .=) <$>
                     _gcmvhsHyperparameterMetricTag])
 
 -- | Options for automatically scaling a model.
 --
 -- /See:/ 'googleCloudMlV1__AutoScaling' smart constructor.
-newtype GoogleCloudMlV1__AutoScaling = GoogleCloudMlV1__AutoScaling'
+newtype GoogleCloudMlV1__AutoScaling =
+  GoogleCloudMlV1__AutoScaling'
     { _gcmvasMinNodes :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__AutoScaling' with the minimum fields required to make a request.
 --
@@ -2113,9 +2445,8 @@ newtype GoogleCloudMlV1__AutoScaling = GoogleCloudMlV1__AutoScaling'
 googleCloudMlV1__AutoScaling
     :: GoogleCloudMlV1__AutoScaling
 googleCloudMlV1__AutoScaling =
-    GoogleCloudMlV1__AutoScaling'
-    { _gcmvasMinNodes = Nothing
-    }
+  GoogleCloudMlV1__AutoScaling' {_gcmvasMinNodes = Nothing}
+
 
 -- | Optional. The minimum number of nodes to allocate for this model. These
 -- nodes are always up, starting from the time the model is deployed.
@@ -2143,7 +2474,9 @@ googleCloudMlV1__AutoScaling =
 --
 -- HTTP request:
 --
--- > PATCH https://ml.googleapis.com/v1/{name=projects/*/models/*/versions/*}?update_mask=autoScaling.minNodes -d './update_body.json
+-- > PATCH
+-- > https://ml.googleapis.com/v1/{name=projects/*/models/*/versions/*}?update_mask=autoScaling.minNodes
+-- > -d './update_body.json
 gcmvasMinNodes :: Lens' GoogleCloudMlV1__AutoScaling (Maybe Int32)
 gcmvasMinNodes
   = lens _gcmvasMinNodes
@@ -2167,9 +2500,12 @@ instance ToJSON GoogleCloudMlV1__AutoScaling where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'googleLongrunning__OperationMetadata' smart constructor.
-newtype GoogleLongrunning__OperationMetadata = GoogleLongrunning__OperationMetadata'
+newtype GoogleLongrunning__OperationMetadata =
+  GoogleLongrunning__OperationMetadata'
     { _glomAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning__OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2180,9 +2516,9 @@ googleLongrunning__OperationMetadata
     :: HashMap Text JSONValue -- ^ 'glomAddtional'
     -> GoogleLongrunning__OperationMetadata
 googleLongrunning__OperationMetadata pGlomAddtional_ =
-    GoogleLongrunning__OperationMetadata'
-    { _glomAddtional = _Coerce # pGlomAddtional_
-    }
+  GoogleLongrunning__OperationMetadata'
+    {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunning__OperationMetadata (HashMap Text JSONValue)
@@ -2192,7 +2528,8 @@ glomAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleLongrunning__OperationMetadata where
+           GoogleLongrunning__OperationMetadata
+         where
         parseJSON
           = withObject "GoogleLongrunningOperationMetadata"
               (\ o ->
@@ -2206,7 +2543,8 @@ instance ToJSON GoogleLongrunning__OperationMetadata
 -- | Represents a single hyperparameter to optimize.
 --
 -- /See:/ 'googleCloudMlV1__ParameterSpec' smart constructor.
-data GoogleCloudMlV1__ParameterSpec = GoogleCloudMlV1__ParameterSpec'
+data GoogleCloudMlV1__ParameterSpec =
+  GoogleCloudMlV1__ParameterSpec'
     { _gcmvpsMaxValue          :: !(Maybe (Textual Double))
     , _gcmvpsScaleType         :: !(Maybe GoogleCloudMlV1__ParameterSpecScaleType)
     , _gcmvpsType              :: !(Maybe GoogleCloudMlV1__ParameterSpecType)
@@ -2214,7 +2552,9 @@ data GoogleCloudMlV1__ParameterSpec = GoogleCloudMlV1__ParameterSpec'
     , _gcmvpsParameterName     :: !(Maybe Text)
     , _gcmvpsCategoricalValues :: !(Maybe [Text])
     , _gcmvpsMinValue          :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ParameterSpec' with the minimum fields required to make a request.
 --
@@ -2236,7 +2576,7 @@ data GoogleCloudMlV1__ParameterSpec = GoogleCloudMlV1__ParameterSpec'
 googleCloudMlV1__ParameterSpec
     :: GoogleCloudMlV1__ParameterSpec
 googleCloudMlV1__ParameterSpec =
-    GoogleCloudMlV1__ParameterSpec'
+  GoogleCloudMlV1__ParameterSpec'
     { _gcmvpsMaxValue = Nothing
     , _gcmvpsScaleType = Nothing
     , _gcmvpsType = Nothing
@@ -2245,6 +2585,7 @@ googleCloudMlV1__ParameterSpec =
     , _gcmvpsCategoricalValues = Nothing
     , _gcmvpsMinValue = Nothing
     }
+
 
 -- | Required if type is \`DOUBLE\` or \`INTEGER\`. This field should be
 -- unset if type is \`CATEGORICAL\`. This value should be integers if type
@@ -2333,11 +2674,14 @@ instance ToJSON GoogleCloudMlV1__ParameterSpec where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'googleIAMV1__Binding' smart constructor.
-data GoogleIAMV1__Binding = GoogleIAMV1__Binding'
+data GoogleIAMV1__Binding =
+  GoogleIAMV1__Binding'
     { _givbMembers   :: !(Maybe [Text])
     , _givbRole      :: !(Maybe Text)
     , _givbCondition :: !(Maybe GoogleType__Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__Binding' with the minimum fields required to make a request.
 --
@@ -2351,11 +2695,9 @@ data GoogleIAMV1__Binding = GoogleIAMV1__Binding'
 googleIAMV1__Binding
     :: GoogleIAMV1__Binding
 googleIAMV1__Binding =
-    GoogleIAMV1__Binding'
-    { _givbMembers = Nothing
-    , _givbRole = Nothing
-    , _givbCondition = Nothing
-    }
+  GoogleIAMV1__Binding'
+    {_givbMembers = Nothing, _givbRole = Nothing, _givbCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -2368,8 +2710,8 @@ googleIAMV1__Binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 givbMembers :: Lens' GoogleIAMV1__Binding [Text]
 givbMembers
@@ -2382,10 +2724,9 @@ givbMembers
 givbRole :: Lens' GoogleIAMV1__Binding (Maybe Text)
 givbRole = lens _givbRole (\ s a -> s{_givbRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 givbCondition :: Lens' GoogleIAMV1__Binding (Maybe GoogleType__Expr)
 givbCondition
   = lens _givbCondition
@@ -2410,10 +2751,13 @@ instance ToJSON GoogleIAMV1__Binding where
 -- | An observed value of a metric.
 --
 -- /See:/ 'googleCloudMlV1_HyperparameterOutput_HyperparameterMetric' smart constructor.
-data GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric = GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric'
+data GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric =
+  GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric'
     { _gcmvhohmTrainingStep   :: !(Maybe (Textual Int64))
     , _gcmvhohmObjectiveValue :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric' with the minimum fields required to make a request.
 --
@@ -2425,10 +2769,9 @@ data GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric = GoogleCloudMlV1
 googleCloudMlV1_HyperparameterOutput_HyperparameterMetric
     :: GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
 googleCloudMlV1_HyperparameterOutput_HyperparameterMetric =
-    GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric'
-    { _gcmvhohmTrainingStep = Nothing
-    , _gcmvhohmObjectiveValue = Nothing
-    }
+  GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric'
+    {_gcmvhohmTrainingStep = Nothing, _gcmvhohmObjectiveValue = Nothing}
+
 
 -- | The global training step for this metric.
 gcmvhohmTrainingStep :: Lens' GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric (Maybe Int64)
@@ -2445,7 +2788,7 @@ gcmvhohmObjectiveValue
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
+           GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
          where
         parseJSON
           = withObject
@@ -2456,7 +2799,7 @@ instance FromJSON
                    (o .:? "trainingStep") <*> (o .:? "objectiveValue"))
 
 instance ToJSON
-         GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
+           GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
          where
         toJSON
           GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric'{..}
@@ -2468,10 +2811,13 @@ instance ToJSON
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'googleIAMV1__SetIAMPolicyRequest' smart constructor.
-data GoogleIAMV1__SetIAMPolicyRequest = GoogleIAMV1__SetIAMPolicyRequest'
+data GoogleIAMV1__SetIAMPolicyRequest =
+  GoogleIAMV1__SetIAMPolicyRequest'
     { _givsiprUpdateMask :: !(Maybe GFieldMask)
     , _givsiprPolicy     :: !(Maybe GoogleIAMV1__Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -2483,10 +2829,9 @@ data GoogleIAMV1__SetIAMPolicyRequest = GoogleIAMV1__SetIAMPolicyRequest'
 googleIAMV1__SetIAMPolicyRequest
     :: GoogleIAMV1__SetIAMPolicyRequest
 googleIAMV1__SetIAMPolicyRequest =
-    GoogleIAMV1__SetIAMPolicyRequest'
-    { _givsiprUpdateMask = Nothing
-    , _givsiprPolicy = Nothing
-    }
+  GoogleIAMV1__SetIAMPolicyRequest'
+    {_givsiprUpdateMask = Nothing, _givsiprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -2522,10 +2867,11 @@ instance ToJSON GoogleIAMV1__SetIAMPolicyRequest
                  [("updateMask" .=) <$> _givsiprUpdateMask,
                   ("policy" .=) <$> _givsiprPolicy])
 
--- | Represents input parameters for a prediction job. Next field: 20
+-- | Represents input parameters for a prediction job.
 --
 -- /See:/ 'googleCloudMlV1__PredictionInput' smart constructor.
-data GoogleCloudMlV1__PredictionInput = GoogleCloudMlV1__PredictionInput'
+data GoogleCloudMlV1__PredictionInput =
+  GoogleCloudMlV1__PredictionInput'
     { _gcmvpiVersionName      :: !(Maybe Text)
     , _gcmvpiModelName        :: !(Maybe Text)
     , _gcmvpiDataFormat       :: !(Maybe GoogleCloudMlV1__PredictionInputDataFormat)
@@ -2534,12 +2880,13 @@ data GoogleCloudMlV1__PredictionInput = GoogleCloudMlV1__PredictionInput'
     , _gcmvpiBatchSize        :: !(Maybe (Textual Int64))
     , _gcmvpiMaxWorkerCount   :: !(Maybe (Textual Int64))
     , _gcmvpiOutputDataFormat :: !(Maybe GoogleCloudMlV1__PredictionInputOutputDataFormat)
-    , _gcmvpiAccelerator      :: !(Maybe GoogleCloudMlV1__AcceleratorConfig)
     , _gcmvpiOutputPath       :: !(Maybe Text)
     , _gcmvpiRegion           :: !(Maybe Text)
     , _gcmvpiInputPaths       :: !(Maybe [Text])
     , _gcmvpiSignatureName    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__PredictionInput' with the minimum fields required to make a request.
 --
@@ -2561,8 +2908,6 @@ data GoogleCloudMlV1__PredictionInput = GoogleCloudMlV1__PredictionInput'
 --
 -- * 'gcmvpiOutputDataFormat'
 --
--- * 'gcmvpiAccelerator'
---
 -- * 'gcmvpiOutputPath'
 --
 -- * 'gcmvpiRegion'
@@ -2573,7 +2918,7 @@ data GoogleCloudMlV1__PredictionInput = GoogleCloudMlV1__PredictionInput'
 googleCloudMlV1__PredictionInput
     :: GoogleCloudMlV1__PredictionInput
 googleCloudMlV1__PredictionInput =
-    GoogleCloudMlV1__PredictionInput'
+  GoogleCloudMlV1__PredictionInput'
     { _gcmvpiVersionName = Nothing
     , _gcmvpiModelName = Nothing
     , _gcmvpiDataFormat = Nothing
@@ -2582,12 +2927,12 @@ googleCloudMlV1__PredictionInput =
     , _gcmvpiBatchSize = Nothing
     , _gcmvpiMaxWorkerCount = Nothing
     , _gcmvpiOutputDataFormat = Nothing
-    , _gcmvpiAccelerator = Nothing
     , _gcmvpiOutputPath = Nothing
     , _gcmvpiRegion = Nothing
     , _gcmvpiInputPaths = Nothing
     , _gcmvpiSignatureName = Nothing
     }
+
 
 -- | Use this field if you want to specify a version of the model to use. The
 -- string is formatted the same way as \`model_version\`, with the addition
@@ -2652,13 +2997,6 @@ gcmvpiOutputDataFormat
   = lens _gcmvpiOutputDataFormat
       (\ s a -> s{_gcmvpiOutputDataFormat = a})
 
--- | Optional. The type and number of accelerators to be attached to each
--- machine running the job.
-gcmvpiAccelerator :: Lens' GoogleCloudMlV1__PredictionInput (Maybe GoogleCloudMlV1__AcceleratorConfig)
-gcmvpiAccelerator
-  = lens _gcmvpiAccelerator
-      (\ s a -> s{_gcmvpiAccelerator = a})
-
 -- | Required. The output Google Cloud Storage location.
 gcmvpiOutputPath :: Lens' GoogleCloudMlV1__PredictionInput (Maybe Text)
 gcmvpiOutputPath
@@ -2672,8 +3010,8 @@ gcmvpiRegion :: Lens' GoogleCloudMlV1__PredictionInput (Maybe Text)
 gcmvpiRegion
   = lens _gcmvpiRegion (\ s a -> s{_gcmvpiRegion = a})
 
--- | Required. The Google Cloud Storage location of the input data files. May
--- contain wildcards.
+-- | Required. The Cloud Storage location of the input data files. May
+-- contain </storage/docs/gsutil/addlhelp/WildcardNames wildcards>.
 gcmvpiInputPaths :: Lens' GoogleCloudMlV1__PredictionInput [Text]
 gcmvpiInputPaths
   = lens _gcmvpiInputPaths
@@ -2705,7 +3043,6 @@ instance FromJSON GoogleCloudMlV1__PredictionInput
                      <*> (o .:? "batchSize")
                      <*> (o .:? "maxWorkerCount")
                      <*> (o .:? "outputDataFormat")
-                     <*> (o .:? "accelerator")
                      <*> (o .:? "outputPath")
                      <*> (o .:? "region")
                      <*> (o .:? "inputPaths" .!= mempty)
@@ -2724,7 +3061,6 @@ instance ToJSON GoogleCloudMlV1__PredictionInput
                   ("batchSize" .=) <$> _gcmvpiBatchSize,
                   ("maxWorkerCount" .=) <$> _gcmvpiMaxWorkerCount,
                   ("outputDataFormat" .=) <$> _gcmvpiOutputDataFormat,
-                  ("accelerator" .=) <$> _gcmvpiAccelerator,
                   ("outputPath" .=) <$> _gcmvpiOutputPath,
                   ("region" .=) <$> _gcmvpiRegion,
                   ("inputPaths" .=) <$> _gcmvpiInputPaths,
@@ -2738,28 +3074,36 @@ instance ToJSON GoogleCloudMlV1__PredictionInput
 -- </ml-engine/docs/tensorflow/training-jobs submitting a training job>.
 --
 -- /See:/ 'googleCloudMlV1__TrainingInput' smart constructor.
-data GoogleCloudMlV1__TrainingInput = GoogleCloudMlV1__TrainingInput'
-    { _gcmvtiMasterType           :: !(Maybe Text)
-    , _gcmvtiParameterServerCount :: !(Maybe (Textual Int64))
-    , _gcmvtiArgs                 :: !(Maybe [Text])
-    , _gcmvtiWorkerCount          :: !(Maybe (Textual Int64))
-    , _gcmvtiJobDir               :: !(Maybe Text)
-    , _gcmvtiPythonVersion        :: !(Maybe Text)
-    , _gcmvtiRuntimeVersion       :: !(Maybe Text)
-    , _gcmvtiWorkerType           :: !(Maybe Text)
-    , _gcmvtiPythonModule         :: !(Maybe Text)
-    , _gcmvtiParameterServerType  :: !(Maybe Text)
-    , _gcmvtiHyperparameters      :: !(Maybe GoogleCloudMlV1__HyperparameterSpec)
-    , _gcmvtiPackageURIs          :: !(Maybe [Text])
-    , _gcmvtiScaleTier            :: !(Maybe GoogleCloudMlV1__TrainingInputScaleTier)
-    , _gcmvtiRegion               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudMlV1__TrainingInput =
+  GoogleCloudMlV1__TrainingInput'
+    { _gcmvtiMasterType            :: !(Maybe Text)
+    , _gcmvtiWorkerConfig          :: !(Maybe GoogleCloudMlV1__ReplicaConfig)
+    , _gcmvtiParameterServerCount  :: !(Maybe (Textual Int64))
+    , _gcmvtiArgs                  :: !(Maybe [Text])
+    , _gcmvtiWorkerCount           :: !(Maybe (Textual Int64))
+    , _gcmvtiJobDir                :: !(Maybe Text)
+    , _gcmvtiPythonVersion         :: !(Maybe Text)
+    , _gcmvtiRuntimeVersion        :: !(Maybe Text)
+    , _gcmvtiWorkerType            :: !(Maybe Text)
+    , _gcmvtiMasterConfig          :: !(Maybe GoogleCloudMlV1__ReplicaConfig)
+    , _gcmvtiPythonModule          :: !(Maybe Text)
+    , _gcmvtiParameterServerType   :: !(Maybe Text)
+    , _gcmvtiHyperparameters       :: !(Maybe GoogleCloudMlV1__HyperparameterSpec)
+    , _gcmvtiPackageURIs           :: !(Maybe [Text])
+    , _gcmvtiScaleTier             :: !(Maybe GoogleCloudMlV1__TrainingInputScaleTier)
+    , _gcmvtiRegion                :: !(Maybe Text)
+    , _gcmvtiParameterServerConfig :: !(Maybe GoogleCloudMlV1__ReplicaConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__TrainingInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gcmvtiMasterType'
+--
+-- * 'gcmvtiWorkerConfig'
 --
 -- * 'gcmvtiParameterServerCount'
 --
@@ -2775,6 +3119,8 @@ data GoogleCloudMlV1__TrainingInput = GoogleCloudMlV1__TrainingInput'
 --
 -- * 'gcmvtiWorkerType'
 --
+-- * 'gcmvtiMasterConfig'
+--
 -- * 'gcmvtiPythonModule'
 --
 -- * 'gcmvtiParameterServerType'
@@ -2786,11 +3132,14 @@ data GoogleCloudMlV1__TrainingInput = GoogleCloudMlV1__TrainingInput'
 -- * 'gcmvtiScaleTier'
 --
 -- * 'gcmvtiRegion'
+--
+-- * 'gcmvtiParameterServerConfig'
 googleCloudMlV1__TrainingInput
     :: GoogleCloudMlV1__TrainingInput
 googleCloudMlV1__TrainingInput =
-    GoogleCloudMlV1__TrainingInput'
+  GoogleCloudMlV1__TrainingInput'
     { _gcmvtiMasterType = Nothing
+    , _gcmvtiWorkerConfig = Nothing
     , _gcmvtiParameterServerCount = Nothing
     , _gcmvtiArgs = Nothing
     , _gcmvtiWorkerCount = Nothing
@@ -2798,13 +3147,16 @@ googleCloudMlV1__TrainingInput =
     , _gcmvtiPythonVersion = Nothing
     , _gcmvtiRuntimeVersion = Nothing
     , _gcmvtiWorkerType = Nothing
+    , _gcmvtiMasterConfig = Nothing
     , _gcmvtiPythonModule = Nothing
     , _gcmvtiParameterServerType = Nothing
     , _gcmvtiHyperparameters = Nothing
     , _gcmvtiPackageURIs = Nothing
     , _gcmvtiScaleTier = Nothing
     , _gcmvtiRegion = Nothing
+    , _gcmvtiParameterServerConfig = Nothing
     }
+
 
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s master worker. The following types are supported:
@@ -2844,35 +3196,55 @@ googleCloudMlV1__TrainingInput =
 --     NVIDIA Tesla P100 GPUs.
 -- [standard_v100]
 --     A machine equivalent to /standard/ that also includes a single
---     NVIDIA Tesla V100 GPU. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPU.
 -- [large_model_v100]
 --     A machine equivalent to /large_model/ that also includes a single
---     NVIDIA Tesla V100 GPU. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPU.
 -- [complex_model_m_v100]
 --     A machine equivalent to /complex_model_m/ that also includes four
---     NVIDIA Tesla V100 GPUs. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPUs.
 -- [complex_model_l_v100]
 --     A machine equivalent to /complex_model_l/ that also includes eight
---     NVIDIA Tesla V100 GPUs. The availability of these GPUs is in the
---     /Beta/ launch stage.
+--     NVIDIA Tesla V100 GPUs.
 -- [cloud_tpu]
 --     A TPU VM including one Cloud TPU. See more about
 --     </ml-engine/docs/tensorflow/using-tpus using TPUs to train your model>.
 --
+-- You may also use certain Compute Engine machine types directly in this
+-- field. The following types are supported: - \`n1-standard-4\` -
+-- \`n1-standard-8\` - \`n1-standard-16\` - \`n1-standard-32\` -
+-- \`n1-standard-64\` - \`n1-standard-96\` - \`n1-highmem-2\` -
+-- \`n1-highmem-4\` - \`n1-highmem-8\` - \`n1-highmem-16\` -
+-- \`n1-highmem-32\` - \`n1-highmem-64\` - \`n1-highmem-96\` -
+-- \`n1-highcpu-16\` - \`n1-highcpu-32\` - \`n1-highcpu-64\` -
+-- \`n1-highcpu-96\` See more about [using Compute Engine machine
+-- types](\/ml-engine\/docs\/tensorflow\/machine-types#compute-engine-machine-types).
 -- You must set this value when \`scaleTier\` is set to \`CUSTOM\`.
 gcmvtiMasterType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiMasterType
   = lens _gcmvtiMasterType
       (\ s a -> s{_gcmvtiMasterType = a})
 
+-- | Optional. The configuration for workers. You should only set
+-- \`workerConfig.acceleratorConfig\` if \`workerType\` is set to a Compute
+-- Engine machine type. [Learn about restrictions on accelerator
+-- configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+-- Set \`workerConfig.imageUri\` only if you build a custom image for your
+-- worker. If \`workerConfig.imageUri\` has not been set, Cloud ML Engine
+-- uses the value of \`masterConfig.imageUri\`. Learn more about
+-- [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
+gcmvtiWorkerConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
+gcmvtiWorkerConfig
+  = lens _gcmvtiWorkerConfig
+      (\ s a -> s{_gcmvtiWorkerConfig = a})
+
 -- | Optional. The number of parameter server replicas to use for the
 -- training job. Each replica in the cluster will be of the type specified
 -- in \`parameter_server_type\`. This value can only be used when
 -- \`scale_tier\` is set to \`CUSTOM\`.If you set this value, you must also
--- set \`parameter_server_type\`.
+-- set \`parameter_server_type\`. The default value is zero.
 gcmvtiParameterServerCount :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Int64)
 gcmvtiParameterServerCount
   = lens _gcmvtiParameterServerCount
@@ -2890,6 +3262,7 @@ gcmvtiArgs
 -- Each replica in the cluster will be of the type specified in
 -- \`worker_type\`. This value can only be used when \`scale_tier\` is set
 -- to \`CUSTOM\`. If you set this value, you must also set \`worker_type\`.
+-- The default value is zero.
 gcmvtiWorkerCount :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Int64)
 gcmvtiWorkerCount
   = lens _gcmvtiWorkerCount
@@ -2927,13 +3300,32 @@ gcmvtiRuntimeVersion
 
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s worker nodes. The supported values are the same as those
--- described in the entry for \`masterType\`. This value must be present
--- when \`scaleTier\` is set to \`CUSTOM\` and \`workerCount\` is greater
--- than zero.
+-- described in the entry for \`masterType\`. This value must be consistent
+-- with the category of machine type that \`masterType\` uses. In other
+-- words, both must be Cloud ML Engine machine types or both must be
+-- Compute Engine machine types. If you use \`cloud_tpu\` for this value,
+-- see special instructions for [configuring a custom TPU
+-- machine](\/ml-engine\/docs\/tensorflow\/using-tpus#configuring_a_custom_tpu_machine).
+-- This value must be present when \`scaleTier\` is set to \`CUSTOM\` and
+-- \`workerCount\` is greater than zero.
 gcmvtiWorkerType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiWorkerType
   = lens _gcmvtiWorkerType
       (\ s a -> s{_gcmvtiWorkerType = a})
+
+-- | Optional. The configuration for your master worker. You should only set
+-- \`masterConfig.acceleratorConfig\` if \`masterType\` is set to a Compute
+-- Engine machine type. Learn about [restrictions on accelerator
+-- configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+-- Set \`masterConfig.imageUri\` only if you build a custom image. Only one
+-- of \`masterConfig.imageUri\` and \`runtimeVersion\` should be set. Learn
+-- more about [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
+gcmvtiMasterConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
+gcmvtiMasterConfig
+  = lens _gcmvtiMasterConfig
+      (\ s a -> s{_gcmvtiMasterConfig = a})
 
 -- | Required. The Python module name to run after installing the packages.
 gcmvtiPythonModule :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
@@ -2943,9 +3335,12 @@ gcmvtiPythonModule
 
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s parameter server. The supported values are the same as those
--- described in the entry for \`master_type\`. This value must be present
--- when \`scaleTier\` is set to \`CUSTOM\` and \`parameter_server_count\`
--- is greater than zero.
+-- described in the entry for \`master_type\`. This value must be
+-- consistent with the category of machine type that \`masterType\` uses.
+-- In other words, both must be Cloud ML Engine machine types or both must
+-- be Compute Engine machine types. This value must be present when
+-- \`scaleTier\` is set to \`CUSTOM\` and \`parameter_server_count\` is
+-- greater than zero.
 gcmvtiParameterServerType :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiParameterServerType
   = lens _gcmvtiParameterServerType
@@ -2981,13 +3376,28 @@ gcmvtiRegion :: Lens' GoogleCloudMlV1__TrainingInput (Maybe Text)
 gcmvtiRegion
   = lens _gcmvtiRegion (\ s a -> s{_gcmvtiRegion = a})
 
+-- | Optional. The configuration for parameter servers. You should only set
+-- \`parameterServerConfig.acceleratorConfig\` if
+-- \`parameterServerConfigType\` is set to a Compute Engine machine type.
+-- [Learn about restrictions on accelerator configurations for
+-- training.](\/ml-engine\/docs\/tensorflow\/using-gpus#compute-engine-machine-types-with-gpu)
+-- Set \`parameterServerConfig.imageUri\` only if you build a custom image
+-- for your parameter server. If \`parameterServerConfig.imageUri\` has not
+-- been set, Cloud ML Engine uses the value of \`masterConfig.imageUri\`.
+-- Learn more about [configuring custom
+-- containers](\/ml-engine\/docs\/distributed-training-containers).
+gcmvtiParameterServerConfig :: Lens' GoogleCloudMlV1__TrainingInput (Maybe GoogleCloudMlV1__ReplicaConfig)
+gcmvtiParameterServerConfig
+  = lens _gcmvtiParameterServerConfig
+      (\ s a -> s{_gcmvtiParameterServerConfig = a})
+
 instance FromJSON GoogleCloudMlV1__TrainingInput
          where
         parseJSON
           = withObject "GoogleCloudMlV1TrainingInput"
               (\ o ->
                  GoogleCloudMlV1__TrainingInput' <$>
-                   (o .:? "masterType") <*>
+                   (o .:? "masterType") <*> (o .:? "workerConfig") <*>
                      (o .:? "parameterServerCount")
                      <*> (o .:? "args" .!= mempty)
                      <*> (o .:? "workerCount")
@@ -2995,18 +3405,21 @@ instance FromJSON GoogleCloudMlV1__TrainingInput
                      <*> (o .:? "pythonVersion")
                      <*> (o .:? "runtimeVersion")
                      <*> (o .:? "workerType")
+                     <*> (o .:? "masterConfig")
                      <*> (o .:? "pythonModule")
                      <*> (o .:? "parameterServerType")
                      <*> (o .:? "hyperparameters")
                      <*> (o .:? "packageUris" .!= mempty)
                      <*> (o .:? "scaleTier")
-                     <*> (o .:? "region"))
+                     <*> (o .:? "region")
+                     <*> (o .:? "parameterServerConfig"))
 
 instance ToJSON GoogleCloudMlV1__TrainingInput where
         toJSON GoogleCloudMlV1__TrainingInput'{..}
           = object
               (catMaybes
                  [("masterType" .=) <$> _gcmvtiMasterType,
+                  ("workerConfig" .=) <$> _gcmvtiWorkerConfig,
                   ("parameterServerCount" .=) <$>
                     _gcmvtiParameterServerCount,
                   ("args" .=) <$> _gcmvtiArgs,
@@ -3015,19 +3428,25 @@ instance ToJSON GoogleCloudMlV1__TrainingInput where
                   ("pythonVersion" .=) <$> _gcmvtiPythonVersion,
                   ("runtimeVersion" .=) <$> _gcmvtiRuntimeVersion,
                   ("workerType" .=) <$> _gcmvtiWorkerType,
+                  ("masterConfig" .=) <$> _gcmvtiMasterConfig,
                   ("pythonModule" .=) <$> _gcmvtiPythonModule,
                   ("parameterServerType" .=) <$>
                     _gcmvtiParameterServerType,
                   ("hyperparameters" .=) <$> _gcmvtiHyperparameters,
                   ("packageUris" .=) <$> _gcmvtiPackageURIs,
                   ("scaleTier" .=) <$> _gcmvtiScaleTier,
-                  ("region" .=) <$> _gcmvtiRegion])
+                  ("region" .=) <$> _gcmvtiRegion,
+                  ("parameterServerConfig" .=) <$>
+                    _gcmvtiParameterServerConfig])
 
 --
 -- /See:/ 'googleRpc__StatusDetailsItem' smart constructor.
-newtype GoogleRpc__StatusDetailsItem = GoogleRpc__StatusDetailsItem'
+newtype GoogleRpc__StatusDetailsItem =
+  GoogleRpc__StatusDetailsItem'
     { _grsdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpc__StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -3038,9 +3457,8 @@ googleRpc__StatusDetailsItem
     :: HashMap Text JSONValue -- ^ 'grsdiAddtional'
     -> GoogleRpc__StatusDetailsItem
 googleRpc__StatusDetailsItem pGrsdiAddtional_ =
-    GoogleRpc__StatusDetailsItem'
-    { _grsdiAddtional = _Coerce # pGrsdiAddtional_
-    }
+  GoogleRpc__StatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpc__StatusDetailsItem (HashMap Text JSONValue)
@@ -3067,14 +3485,16 @@ instance ToJSON GoogleRpc__StatusDetailsItem where
 --
 -- /See:/ 'googleProtobuf__Empty' smart constructor.
 data GoogleProtobuf__Empty =
-    GoogleProtobuf__Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleProtobuf__Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleProtobuf__Empty' with the minimum fields required to make a request.
 --
 googleProtobuf__Empty
     :: GoogleProtobuf__Empty
 googleProtobuf__Empty = GoogleProtobuf__Empty'
+
 
 instance FromJSON GoogleProtobuf__Empty where
         parseJSON
@@ -3086,10 +3506,13 @@ instance ToJSON GoogleProtobuf__Empty where
 
 --
 -- /See:/ 'googleCloudMlV1__Location' smart constructor.
-data GoogleCloudMlV1__Location = GoogleCloudMlV1__Location'
+data GoogleCloudMlV1__Location =
+  GoogleCloudMlV1__Location'
     { _gcmvlName         :: !(Maybe Text)
     , _gcmvlCapabilities :: !(Maybe [GoogleCloudMlV1__Capability])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__Location' with the minimum fields required to make a request.
 --
@@ -3101,10 +3524,9 @@ data GoogleCloudMlV1__Location = GoogleCloudMlV1__Location'
 googleCloudMlV1__Location
     :: GoogleCloudMlV1__Location
 googleCloudMlV1__Location =
-    GoogleCloudMlV1__Location'
-    { _gcmvlName = Nothing
-    , _gcmvlCapabilities = Nothing
-    }
+  GoogleCloudMlV1__Location'
+    {_gcmvlName = Nothing, _gcmvlCapabilities = Nothing}
+
 
 gcmvlName :: Lens' GoogleCloudMlV1__Location (Maybe Text)
 gcmvlName
@@ -3136,9 +3558,12 @@ instance ToJSON GoogleCloudMlV1__Location where
 -- operated on.
 --
 -- /See:/ 'googleCloudMlV1__OperationMetadataLabels' smart constructor.
-newtype GoogleCloudMlV1__OperationMetadataLabels = GoogleCloudMlV1__OperationMetadataLabels'
+newtype GoogleCloudMlV1__OperationMetadataLabels =
+  GoogleCloudMlV1__OperationMetadataLabels'
     { _gcmvomlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__OperationMetadataLabels' with the minimum fields required to make a request.
 --
@@ -3149,9 +3574,9 @@ googleCloudMlV1__OperationMetadataLabels
     :: HashMap Text Text -- ^ 'gcmvomlAddtional'
     -> GoogleCloudMlV1__OperationMetadataLabels
 googleCloudMlV1__OperationMetadataLabels pGcmvomlAddtional_ =
-    GoogleCloudMlV1__OperationMetadataLabels'
-    { _gcmvomlAddtional = _Coerce # pGcmvomlAddtional_
-    }
+  GoogleCloudMlV1__OperationMetadataLabels'
+    {_gcmvomlAddtional = _Coerce # pGcmvomlAddtional_}
+
 
 gcmvomlAddtional :: Lens' GoogleCloudMlV1__OperationMetadataLabels (HashMap Text Text)
 gcmvomlAddtional
@@ -3160,7 +3585,8 @@ gcmvomlAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudMlV1__OperationMetadataLabels where
+           GoogleCloudMlV1__OperationMetadataLabels
+         where
         parseJSON
           = withObject "GoogleCloudMlV1OperationMetadataLabels"
               (\ o ->
@@ -3168,15 +3594,19 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudMlV1__OperationMetadataLabels where
+           GoogleCloudMlV1__OperationMetadataLabels
+         where
         toJSON = toJSON . _gcmvomlAddtional
 
 --
 -- /See:/ 'googleCloudMlV1__Capability' smart constructor.
-data GoogleCloudMlV1__Capability = GoogleCloudMlV1__Capability'
+data GoogleCloudMlV1__Capability =
+  GoogleCloudMlV1__Capability'
     { _gcmvcAvailableAccelerators :: !(Maybe [Text])
     , _gcmvcType                  :: !(Maybe GoogleCloudMlV1__CapabilityType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__Capability' with the minimum fields required to make a request.
 --
@@ -3188,10 +3618,9 @@ data GoogleCloudMlV1__Capability = GoogleCloudMlV1__Capability'
 googleCloudMlV1__Capability
     :: GoogleCloudMlV1__Capability
 googleCloudMlV1__Capability =
-    GoogleCloudMlV1__Capability'
-    { _gcmvcAvailableAccelerators = Nothing
-    , _gcmvcType = Nothing
-    }
+  GoogleCloudMlV1__Capability'
+    {_gcmvcAvailableAccelerators = Nothing, _gcmvcType = Nothing}
+
 
 -- | Available accelerators for the capability.
 gcmvcAvailableAccelerators :: Lens' GoogleCloudMlV1__Capability [Text]
@@ -3224,7 +3653,8 @@ instance ToJSON GoogleCloudMlV1__Capability where
 -- | Represents the metadata of the long-running operation.
 --
 -- /See:/ 'googleCloudMlV1__OperationMetadata' smart constructor.
-data GoogleCloudMlV1__OperationMetadata = GoogleCloudMlV1__OperationMetadata'
+data GoogleCloudMlV1__OperationMetadata =
+  GoogleCloudMlV1__OperationMetadata'
     { _gcmvomStartTime               :: !(Maybe DateTime')
     , _gcmvomModelName               :: !(Maybe Text)
     , _gcmvomProjectNumber           :: !(Maybe (Textual Int64))
@@ -3234,7 +3664,9 @@ data GoogleCloudMlV1__OperationMetadata = GoogleCloudMlV1__OperationMetadata'
     , _gcmvomLabels                  :: !(Maybe GoogleCloudMlV1__OperationMetadataLabels)
     , _gcmvomOperationType           :: !(Maybe GoogleCloudMlV1__OperationMetadataOperationType)
     , _gcmvomCreateTime              :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__OperationMetadata' with the minimum fields required to make a request.
 --
@@ -3260,7 +3692,7 @@ data GoogleCloudMlV1__OperationMetadata = GoogleCloudMlV1__OperationMetadata'
 googleCloudMlV1__OperationMetadata
     :: GoogleCloudMlV1__OperationMetadata
 googleCloudMlV1__OperationMetadata =
-    GoogleCloudMlV1__OperationMetadata'
+  GoogleCloudMlV1__OperationMetadata'
     { _gcmvomStartTime = Nothing
     , _gcmvomModelName = Nothing
     , _gcmvomProjectNumber = Nothing
@@ -3271,6 +3703,7 @@ googleCloudMlV1__OperationMetadata =
     , _gcmvomOperationType = Nothing
     , _gcmvomCreateTime = Nothing
     }
+
 
 -- | The time operation processing started.
 gcmvomStartTime :: Lens' GoogleCloudMlV1__OperationMetadata (Maybe UTCTime)
@@ -3363,9 +3796,12 @@ instance ToJSON GoogleCloudMlV1__OperationMetadata
 
 --
 -- /See:/ 'googleAPI__HTTPBodyExtensionsItem' smart constructor.
-newtype GoogleAPI__HTTPBodyExtensionsItem = GoogleAPI__HTTPBodyExtensionsItem'
+newtype GoogleAPI__HTTPBodyExtensionsItem =
+  GoogleAPI__HTTPBodyExtensionsItem'
     { _gahttpbeiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAPI__HTTPBodyExtensionsItem' with the minimum fields required to make a request.
 --
@@ -3376,9 +3812,9 @@ googleAPI__HTTPBodyExtensionsItem
     :: HashMap Text JSONValue -- ^ 'gahttpbeiAddtional'
     -> GoogleAPI__HTTPBodyExtensionsItem
 googleAPI__HTTPBodyExtensionsItem pGahttpbeiAddtional_ =
-    GoogleAPI__HTTPBodyExtensionsItem'
-    { _gahttpbeiAddtional = _Coerce # pGahttpbeiAddtional_
-    }
+  GoogleAPI__HTTPBodyExtensionsItem'
+    {_gahttpbeiAddtional = _Coerce # pGahttpbeiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 gahttpbeiAddtional :: Lens' GoogleAPI__HTTPBodyExtensionsItem (HashMap Text JSONValue)
@@ -3403,14 +3839,16 @@ instance ToJSON GoogleAPI__HTTPBodyExtensionsItem
 --
 -- /See:/ 'googleCloudMlV1__CancelJobRequest' smart constructor.
 data GoogleCloudMlV1__CancelJobRequest =
-    GoogleCloudMlV1__CancelJobRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleCloudMlV1__CancelJobRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__CancelJobRequest' with the minimum fields required to make a request.
 --
 googleCloudMlV1__CancelJobRequest
     :: GoogleCloudMlV1__CancelJobRequest
 googleCloudMlV1__CancelJobRequest = GoogleCloudMlV1__CancelJobRequest'
+
 
 instance FromJSON GoogleCloudMlV1__CancelJobRequest
          where
@@ -3425,12 +3863,17 @@ instance ToJSON GoogleCloudMlV1__CancelJobRequest
 -- | Represents results of a training job. Output only.
 --
 -- /See:/ 'googleCloudMlV1__TrainingOutput' smart constructor.
-data GoogleCloudMlV1__TrainingOutput = GoogleCloudMlV1__TrainingOutput'
+data GoogleCloudMlV1__TrainingOutput =
+  GoogleCloudMlV1__TrainingOutput'
     { _gcmvtoIsHyperparameterTuningJob :: !(Maybe Bool)
+    , _gcmvtoIsBuiltInAlgorithmJob     :: !(Maybe Bool)
     , _gcmvtoCompletedTrialCount       :: !(Maybe (Textual Int64))
     , _gcmvtoConsumedMLUnits           :: !(Maybe (Textual Double))
+    , _gcmvtoBuiltInAlgorithmOutput    :: !(Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
     , _gcmvtoTrials                    :: !(Maybe [GoogleCloudMlV1__HyperparameterOutput])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__TrainingOutput' with the minimum fields required to make a request.
 --
@@ -3438,26 +3881,39 @@ data GoogleCloudMlV1__TrainingOutput = GoogleCloudMlV1__TrainingOutput'
 --
 -- * 'gcmvtoIsHyperparameterTuningJob'
 --
+-- * 'gcmvtoIsBuiltInAlgorithmJob'
+--
 -- * 'gcmvtoCompletedTrialCount'
 --
 -- * 'gcmvtoConsumedMLUnits'
+--
+-- * 'gcmvtoBuiltInAlgorithmOutput'
 --
 -- * 'gcmvtoTrials'
 googleCloudMlV1__TrainingOutput
     :: GoogleCloudMlV1__TrainingOutput
 googleCloudMlV1__TrainingOutput =
-    GoogleCloudMlV1__TrainingOutput'
+  GoogleCloudMlV1__TrainingOutput'
     { _gcmvtoIsHyperparameterTuningJob = Nothing
+    , _gcmvtoIsBuiltInAlgorithmJob = Nothing
     , _gcmvtoCompletedTrialCount = Nothing
     , _gcmvtoConsumedMLUnits = Nothing
+    , _gcmvtoBuiltInAlgorithmOutput = Nothing
     , _gcmvtoTrials = Nothing
     }
+
 
 -- | Whether this job is a hyperparameter tuning job.
 gcmvtoIsHyperparameterTuningJob :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe Bool)
 gcmvtoIsHyperparameterTuningJob
   = lens _gcmvtoIsHyperparameterTuningJob
       (\ s a -> s{_gcmvtoIsHyperparameterTuningJob = a})
+
+-- | Whether this job is a built-in Algorithm job.
+gcmvtoIsBuiltInAlgorithmJob :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe Bool)
+gcmvtoIsBuiltInAlgorithmJob
+  = lens _gcmvtoIsBuiltInAlgorithmJob
+      (\ s a -> s{_gcmvtoIsBuiltInAlgorithmJob = a})
 
 -- | The number of hyperparameter tuning trials that completed successfully.
 -- Only set for hyperparameter tuning jobs.
@@ -3474,6 +3930,13 @@ gcmvtoConsumedMLUnits
       (\ s a -> s{_gcmvtoConsumedMLUnits = a})
       . mapping _Coerce
 
+-- | Details related to built-in algorithms jobs. Only set for built-in
+-- algorithms jobs.
+gcmvtoBuiltInAlgorithmOutput :: Lens' GoogleCloudMlV1__TrainingOutput (Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput)
+gcmvtoBuiltInAlgorithmOutput
+  = lens _gcmvtoBuiltInAlgorithmOutput
+      (\ s a -> s{_gcmvtoBuiltInAlgorithmOutput = a})
+
 -- | Results for individual Hyperparameter trials. Only set for
 -- hyperparameter tuning jobs.
 gcmvtoTrials :: Lens' GoogleCloudMlV1__TrainingOutput [GoogleCloudMlV1__HyperparameterOutput]
@@ -3489,8 +3952,10 @@ instance FromJSON GoogleCloudMlV1__TrainingOutput
               (\ o ->
                  GoogleCloudMlV1__TrainingOutput' <$>
                    (o .:? "isHyperparameterTuningJob") <*>
-                     (o .:? "completedTrialCount")
+                     (o .:? "isBuiltInAlgorithmJob")
+                     <*> (o .:? "completedTrialCount")
                      <*> (o .:? "consumedMLUnits")
+                     <*> (o .:? "builtInAlgorithmOutput")
                      <*> (o .:? "trials" .!= mempty))
 
 instance ToJSON GoogleCloudMlV1__TrainingOutput where
@@ -3499,9 +3964,13 @@ instance ToJSON GoogleCloudMlV1__TrainingOutput where
               (catMaybes
                  [("isHyperparameterTuningJob" .=) <$>
                     _gcmvtoIsHyperparameterTuningJob,
+                  ("isBuiltInAlgorithmJob" .=) <$>
+                    _gcmvtoIsBuiltInAlgorithmJob,
                   ("completedTrialCount" .=) <$>
                     _gcmvtoCompletedTrialCount,
                   ("consumedMLUnits" .=) <$> _gcmvtoConsumedMLUnits,
+                  ("builtInAlgorithmOutput" .=) <$>
+                    _gcmvtoBuiltInAlgorithmOutput,
                   ("trials" .=) <$> _gcmvtoTrials])
 
 -- | Message that represents an arbitrary HTTP body. It should only be used
@@ -3524,11 +3993,14 @@ instance ToJSON GoogleCloudMlV1__TrainingOutput where
 -- continue to work unchanged.
 --
 -- /See:/ 'googleAPI__HTTPBody' smart constructor.
-data GoogleAPI__HTTPBody = GoogleAPI__HTTPBody'
+data GoogleAPI__HTTPBody =
+  GoogleAPI__HTTPBody'
     { _gahttpbExtensions  :: !(Maybe [GoogleAPI__HTTPBodyExtensionsItem])
     , _gahttpbData        :: !(Maybe Bytes)
     , _gahttpbContentType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAPI__HTTPBody' with the minimum fields required to make a request.
 --
@@ -3542,11 +4014,12 @@ data GoogleAPI__HTTPBody = GoogleAPI__HTTPBody'
 googleAPI__HTTPBody
     :: GoogleAPI__HTTPBody
 googleAPI__HTTPBody =
-    GoogleAPI__HTTPBody'
+  GoogleAPI__HTTPBody'
     { _gahttpbExtensions = Nothing
     , _gahttpbData = Nothing
     , _gahttpbContentType = Nothing
     }
+
 
 -- | Application specific response metadata. Must be set in the first
 -- response for streaming APIs.
@@ -3557,13 +4030,14 @@ gahttpbExtensions
       . _Default
       . _Coerce
 
--- | HTTP body binary data.
+-- | The HTTP request\/response body as raw binary.
 gahttpbData :: Lens' GoogleAPI__HTTPBody (Maybe ByteString)
 gahttpbData
   = lens _gahttpbData (\ s a -> s{_gahttpbData = a}) .
       mapping _Bytes
 
--- | The HTTP Content-Type string representing the content type of the body.
+-- | The HTTP Content-Type header value specifying the content type of the
+-- body.
 gahttpbContentType :: Lens' GoogleAPI__HTTPBody (Maybe Text)
 gahttpbContentType
   = lens _gahttpbContentType
@@ -3588,9 +4062,12 @@ instance ToJSON GoogleAPI__HTTPBody where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'googleIAMV1__TestIAMPermissionsRequest' smart constructor.
-newtype GoogleIAMV1__TestIAMPermissionsRequest = GoogleIAMV1__TestIAMPermissionsRequest'
+newtype GoogleIAMV1__TestIAMPermissionsRequest =
+  GoogleIAMV1__TestIAMPermissionsRequest'
     { _giamvtiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -3600,9 +4077,8 @@ newtype GoogleIAMV1__TestIAMPermissionsRequest = GoogleIAMV1__TestIAMPermissions
 googleIAMV1__TestIAMPermissionsRequest
     :: GoogleIAMV1__TestIAMPermissionsRequest
 googleIAMV1__TestIAMPermissionsRequest =
-    GoogleIAMV1__TestIAMPermissionsRequest'
-    { _giamvtiamprPermissions = Nothing
-    }
+  GoogleIAMV1__TestIAMPermissionsRequest' {_giamvtiamprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -3616,7 +4092,8 @@ giamvtiamprPermissions
       . _Coerce
 
 instance FromJSON
-         GoogleIAMV1__TestIAMPermissionsRequest where
+           GoogleIAMV1__TestIAMPermissionsRequest
+         where
         parseJSON
           = withObject "GoogleIAMV1TestIAMPermissionsRequest"
               (\ o ->
@@ -3624,7 +4101,8 @@ instance FromJSON
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON
-         GoogleIAMV1__TestIAMPermissionsRequest where
+           GoogleIAMV1__TestIAMPermissionsRequest
+         where
         toJSON GoogleIAMV1__TestIAMPermissionsRequest'{..}
           = object
               (catMaybes
@@ -3632,10 +4110,13 @@ instance ToJSON
 
 --
 -- /See:/ 'googleCloudMlV1__ListLocationsResponse' smart constructor.
-data GoogleCloudMlV1__ListLocationsResponse = GoogleCloudMlV1__ListLocationsResponse'
+data GoogleCloudMlV1__ListLocationsResponse =
+  GoogleCloudMlV1__ListLocationsResponse'
     { _gcmvllrNextPageToken :: !(Maybe Text)
     , _gcmvllrLocations     :: !(Maybe [GoogleCloudMlV1__Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -3647,10 +4128,9 @@ data GoogleCloudMlV1__ListLocationsResponse = GoogleCloudMlV1__ListLocationsResp
 googleCloudMlV1__ListLocationsResponse
     :: GoogleCloudMlV1__ListLocationsResponse
 googleCloudMlV1__ListLocationsResponse =
-    GoogleCloudMlV1__ListLocationsResponse'
-    { _gcmvllrNextPageToken = Nothing
-    , _gcmvllrLocations = Nothing
-    }
+  GoogleCloudMlV1__ListLocationsResponse'
+    {_gcmvllrNextPageToken = Nothing, _gcmvllrLocations = Nothing}
+
 
 -- | Optional. Pass this token as the \`page_token\` field of the request for
 -- a subsequent call.
@@ -3668,7 +4148,8 @@ gcmvllrLocations
       . _Coerce
 
 instance FromJSON
-         GoogleCloudMlV1__ListLocationsResponse where
+           GoogleCloudMlV1__ListLocationsResponse
+         where
         parseJSON
           = withObject "GoogleCloudMlV1ListLocationsResponse"
               (\ o ->
@@ -3677,7 +4158,8 @@ instance FromJSON
                      (o .:? "locations" .!= mempty))
 
 instance ToJSON
-         GoogleCloudMlV1__ListLocationsResponse where
+           GoogleCloudMlV1__ListLocationsResponse
+         where
         toJSON GoogleCloudMlV1__ListLocationsResponse'{..}
           = object
               (catMaybes
@@ -3691,9 +4173,12 @@ instance ToJSON
 -- </ml-engine/docs/tensorflow/resource-labels using labels>.
 --
 -- /See:/ 'googleCloudMlV1__VersionLabels' smart constructor.
-newtype GoogleCloudMlV1__VersionLabels = GoogleCloudMlV1__VersionLabels'
+newtype GoogleCloudMlV1__VersionLabels =
+  GoogleCloudMlV1__VersionLabels'
     { _gcmvvlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudMlV1__VersionLabels' with the minimum fields required to make a request.
 --
@@ -3704,9 +4189,9 @@ googleCloudMlV1__VersionLabels
     :: HashMap Text Text -- ^ 'gcmvvlAddtional'
     -> GoogleCloudMlV1__VersionLabels
 googleCloudMlV1__VersionLabels pGcmvvlAddtional_ =
-    GoogleCloudMlV1__VersionLabels'
-    { _gcmvvlAddtional = _Coerce # pGcmvvlAddtional_
-    }
+  GoogleCloudMlV1__VersionLabels'
+    {_gcmvvlAddtional = _Coerce # pGcmvvlAddtional_}
+
 
 gcmvvlAddtional :: Lens' GoogleCloudMlV1__VersionLabels (HashMap Text Text)
 gcmvvlAddtional

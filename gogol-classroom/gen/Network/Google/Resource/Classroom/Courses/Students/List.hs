@@ -72,7 +72,8 @@ type CoursesStudentsListResource =
 -- access errors.
 --
 -- /See:/ 'coursesStudentsList' smart constructor.
-data CoursesStudentsList = CoursesStudentsList'
+data CoursesStudentsList =
+  CoursesStudentsList'
     { _cslXgafv          :: !(Maybe Xgafv)
     , _cslUploadProtocol :: !(Maybe Text)
     , _cslCourseId       :: !Text
@@ -81,7 +82,9 @@ data CoursesStudentsList = CoursesStudentsList'
     , _cslPageToken      :: !(Maybe Text)
     , _cslPageSize       :: !(Maybe (Textual Int32))
     , _cslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesStudentsList' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ coursesStudentsList
     :: Text -- ^ 'cslCourseId'
     -> CoursesStudentsList
 coursesStudentsList pCslCourseId_ =
-    CoursesStudentsList'
+  CoursesStudentsList'
     { _cslXgafv = Nothing
     , _cslUploadProtocol = Nothing
     , _cslCourseId = pCslCourseId_
@@ -116,6 +119,7 @@ coursesStudentsList pCslCourseId_ =
     , _cslPageSize = Nothing
     , _cslCallback = Nothing
     }
+
 
 -- | V1 error format.
 cslXgafv :: Lens' CoursesStudentsList (Maybe Xgafv)

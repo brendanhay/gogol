@@ -84,7 +84,8 @@ type ProjectsInstancesOperationsListResource =
 -- id.
 --
 -- /See:/ 'projectsInstancesOperationsList' smart constructor.
-data ProjectsInstancesOperationsList = ProjectsInstancesOperationsList'
+data ProjectsInstancesOperationsList =
+  ProjectsInstancesOperationsList'
     { _piolXgafv          :: !(Maybe Xgafv)
     , _piolUploadProtocol :: !(Maybe Text)
     , _piolAccessToken    :: !(Maybe Text)
@@ -94,7 +95,9 @@ data ProjectsInstancesOperationsList = ProjectsInstancesOperationsList'
     , _piolPageToken      :: !(Maybe Text)
     , _piolPageSize       :: !(Maybe (Textual Int32))
     , _piolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesOperationsList' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ projectsInstancesOperationsList
     :: Text -- ^ 'piolName'
     -> ProjectsInstancesOperationsList
 projectsInstancesOperationsList pPiolName_ =
-    ProjectsInstancesOperationsList'
+  ProjectsInstancesOperationsList'
     { _piolXgafv = Nothing
     , _piolUploadProtocol = Nothing
     , _piolAccessToken = Nothing
@@ -132,6 +135,7 @@ projectsInstancesOperationsList pPiolName_ =
     , _piolPageSize = Nothing
     , _piolCallback = Nothing
     }
+
 
 -- | V1 error format.
 piolXgafv :: Lens' ProjectsInstancesOperationsList (Maybe Xgafv)
@@ -183,7 +187,8 @@ piolCallback
   = lens _piolCallback (\ s a -> s{_piolCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesOperationsList where
+           ProjectsInstancesOperationsList
+         where
         type Rs ProjectsInstancesOperationsList =
              ListOperationsResponse
         type Scopes ProjectsInstancesOperationsList =

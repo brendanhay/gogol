@@ -27,9 +27,9 @@
 -- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Subscription object. Note
--- that for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Subscription object.
+-- Note that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
@@ -75,12 +75,13 @@ type ProjectsSubscriptionsCreateResource =
 -- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Subscription object. Note
--- that for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Subscription object.
+-- Note that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
-data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
+data ProjectsSubscriptionsCreate =
+  ProjectsSubscriptionsCreate'
     { _pscXgafv          :: !(Maybe Xgafv)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscAccessToken    :: !(Maybe Text)
@@ -88,7 +89,9 @@ data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
     , _pscPayload        :: !Subscription
     , _pscName           :: !Text
     , _pscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsCreate' with the minimum fields required to make a request.
 --
@@ -112,7 +115,7 @@ projectsSubscriptionsCreate
     -> Text -- ^ 'pscName'
     -> ProjectsSubscriptionsCreate
 projectsSubscriptionsCreate pPscPayload_ pPscName_ =
-    ProjectsSubscriptionsCreate'
+  ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsSubscriptionsCreate pPscPayload_ pPscName_ =
     , _pscName = pPscName_
     , _pscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Xgafv)

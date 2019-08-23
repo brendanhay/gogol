@@ -60,14 +60,17 @@ type ProjectsTransferConfigsGetResource =
 -- | Returns information about a data transfer config.
 --
 -- /See:/ 'projectsTransferConfigsGet' smart constructor.
-data ProjectsTransferConfigsGet = ProjectsTransferConfigsGet'
+data ProjectsTransferConfigsGet =
+  ProjectsTransferConfigsGet'
     { _ptcgXgafv          :: !(Maybe Xgafv)
     , _ptcgUploadProtocol :: !(Maybe Text)
     , _ptcgAccessToken    :: !(Maybe Text)
     , _ptcgUploadType     :: !(Maybe Text)
     , _ptcgName           :: !Text
     , _ptcgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTransferConfigsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ projectsTransferConfigsGet
     :: Text -- ^ 'ptcgName'
     -> ProjectsTransferConfigsGet
 projectsTransferConfigsGet pPtcgName_ =
-    ProjectsTransferConfigsGet'
+  ProjectsTransferConfigsGet'
     { _ptcgXgafv = Nothing
     , _ptcgUploadProtocol = Nothing
     , _ptcgAccessToken = Nothing
@@ -96,6 +99,7 @@ projectsTransferConfigsGet pPtcgName_ =
     , _ptcgName = pPtcgName_
     , _ptcgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptcgXgafv :: Lens' ProjectsTransferConfigsGet (Maybe Xgafv)

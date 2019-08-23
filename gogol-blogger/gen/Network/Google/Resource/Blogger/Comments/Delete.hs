@@ -57,11 +57,14 @@ type CommentsDeleteResource =
 -- | Delete a comment by ID.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete'
+data CommentsDelete =
+  CommentsDelete'
     { _cdBlogId    :: !Text
     , _cdPostId    :: !Text
     , _cdCommentId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ commentsDelete
     -> Text -- ^ 'cdCommentId'
     -> CommentsDelete
 commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
-    CommentsDelete'
+  CommentsDelete'
     { _cdBlogId = pCdBlogId_
     , _cdPostId = pCdPostId_
     , _cdCommentId = pCdCommentId_
     }
+
 
 -- | The ID of the Blog.
 cdBlogId :: Lens' CommentsDelete Text

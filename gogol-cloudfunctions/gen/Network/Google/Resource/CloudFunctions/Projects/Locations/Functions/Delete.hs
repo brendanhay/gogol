@@ -63,14 +63,17 @@ type ProjectsLocationsFunctionsDeleteResource =
 -- to remove this function.
 --
 -- /See:/ 'projectsLocationsFunctionsDelete' smart constructor.
-data ProjectsLocationsFunctionsDelete = ProjectsLocationsFunctionsDelete'
+data ProjectsLocationsFunctionsDelete =
+  ProjectsLocationsFunctionsDelete'
     { _plfdXgafv          :: !(Maybe Xgafv)
     , _plfdUploadProtocol :: !(Maybe Text)
     , _plfdAccessToken    :: !(Maybe Text)
     , _plfdUploadType     :: !(Maybe Text)
     , _plfdName           :: !Text
     , _plfdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsLocationsFunctionsDelete
     :: Text -- ^ 'plfdName'
     -> ProjectsLocationsFunctionsDelete
 projectsLocationsFunctionsDelete pPlfdName_ =
-    ProjectsLocationsFunctionsDelete'
+  ProjectsLocationsFunctionsDelete'
     { _plfdXgafv = Nothing
     , _plfdUploadProtocol = Nothing
     , _plfdAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsLocationsFunctionsDelete pPlfdName_ =
     , _plfdName = pPlfdName_
     , _plfdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfdXgafv :: Lens' ProjectsLocationsFunctionsDelete (Maybe Xgafv)
@@ -133,7 +137,8 @@ plfdCallback
   = lens _plfdCallback (\ s a -> s{_plfdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsDelete where
+           ProjectsLocationsFunctionsDelete
+         where
         type Rs ProjectsLocationsFunctionsDelete = Operation
         type Scopes ProjectsLocationsFunctionsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

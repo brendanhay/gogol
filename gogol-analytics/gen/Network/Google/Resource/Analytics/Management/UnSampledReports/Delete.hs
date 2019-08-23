@@ -61,12 +61,15 @@ type ManagementUnSampledReportsDeleteResource =
 -- | Deletes an unsampled report.
 --
 -- /See:/ 'managementUnSampledReportsDelete' smart constructor.
-data ManagementUnSampledReportsDelete = ManagementUnSampledReportsDelete'
+data ManagementUnSampledReportsDelete =
+  ManagementUnSampledReportsDelete'
     { _musrdWebPropertyId     :: !Text
     , _musrdProFileId         :: !Text
     , _musrdAccountId         :: !Text
     , _musrdUnSampledReportId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementUnSampledReportsDelete' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ managementUnSampledReportsDelete
     -> Text -- ^ 'musrdUnSampledReportId'
     -> ManagementUnSampledReportsDelete
 managementUnSampledReportsDelete pMusrdWebPropertyId_ pMusrdProFileId_ pMusrdAccountId_ pMusrdUnSampledReportId_ =
-    ManagementUnSampledReportsDelete'
+  ManagementUnSampledReportsDelete'
     { _musrdWebPropertyId = pMusrdWebPropertyId_
     , _musrdProFileId = pMusrdProFileId_
     , _musrdAccountId = pMusrdAccountId_
     , _musrdUnSampledReportId = pMusrdUnSampledReportId_
     }
+
 
 -- | Web property ID to delete the unsampled reports for.
 musrdWebPropertyId :: Lens' ManagementUnSampledReportsDelete Text
@@ -118,7 +122,8 @@ musrdUnSampledReportId
       (\ s a -> s{_musrdUnSampledReportId = a})
 
 instance GoogleRequest
-         ManagementUnSampledReportsDelete where
+           ManagementUnSampledReportsDelete
+         where
         type Rs ManagementUnSampledReportsDelete = ()
         type Scopes ManagementUnSampledReportsDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]

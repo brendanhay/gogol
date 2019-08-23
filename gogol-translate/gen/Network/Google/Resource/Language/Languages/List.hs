@@ -69,7 +69,8 @@ type LanguagesListResource =
 -- | Returns a list of supported languages for translation.
 --
 -- /See:/ 'languagesList' smart constructor.
-data LanguagesList = LanguagesList'
+data LanguagesList =
+  LanguagesList'
     { _llXgafv          :: !(Maybe Xgafv)
     , _llUploadProtocol :: !(Maybe Text)
     , _llPp             :: !Bool
@@ -79,7 +80,9 @@ data LanguagesList = LanguagesList'
     , _llModel          :: !(Maybe Text)
     , _llTarget         :: !(Maybe Text)
     , _llCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LanguagesList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ data LanguagesList = LanguagesList'
 languagesList
     :: LanguagesList
 languagesList =
-    LanguagesList'
+  LanguagesList'
     { _llXgafv = Nothing
     , _llUploadProtocol = Nothing
     , _llPp = True
@@ -116,6 +119,7 @@ languagesList =
     , _llTarget = Nothing
     , _llCallback = Nothing
     }
+
 
 -- | V1 error format.
 llXgafv :: Lens' LanguagesList (Maybe Xgafv)

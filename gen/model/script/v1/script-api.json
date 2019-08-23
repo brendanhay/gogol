@@ -821,7 +821,7 @@
       }
     }
   },
-  "revision": "20181202",
+  "revision": "20190304",
   "rootUrl": "https://script.googleapis.com/",
   "schemas": {
     "Content": {
@@ -980,7 +980,7 @@
           "type": "boolean"
         },
         "function": {
-          "description": "The name of the function to execute in the given script. The name does not\ninclude parentheses or parameters.",
+          "description": "The name of the function to execute in the given script. The name does not\ninclude parentheses or parameters. It can reference a function in an\nincluded library such as `Library.libFunction1`.",
           "type": "string"
         },
         "parameters": {
@@ -991,7 +991,7 @@
           "type": "array"
         },
         "sessionState": {
-          "description": "For Android add-ons only. An ID that represents the user's current session\nin the Android app for Google Docs or Sheets, included as extra data in the\n[Intent](https://developer.android.com/guide/components/intents-filters.html)\nthat launches the add-on. When an Android add-on is run with a session\nstate, it gains the privileges of a\n[bound](https://developers.google.com/apps-script/guides/bound)\nscript\u0026mdash;that is, it can access information like the user's current\ncursor position (in Docs) or selected cell (in Sheets). To retrieve the\nstate, call\n`Intent.getStringExtra(\"com.google.android.apps.docs.addons.SessionState\")`.\nOptional.",
+          "description": "\u003cb\u003eDeprecated\u003c/b\u003e. For use with Android add-ons only. An ID that represents\nthe user's current session in the Android app for Google Docs or Sheets,\nincluded as extra data in the\n[Intent](https://developer.android.com/guide/components/intents-filters.html)\nthat launches the add-on. When an Android add-on is run with a session\nstate, it gains the privileges of a\n[bound](https://developers.google.com/apps-script/guides/bound)\nscript\u0026mdash;that is, it can access information like the user's current\ncursor position (in Docs) or selected cell (in Sheets). To retrieve the\nstate, call\n`Intent.getStringExtra(\"com.google.android.apps.docs.addons.SessionState\")`.\nOptional.",
           "type": "string"
         }
       },
@@ -1166,10 +1166,6 @@
         "duration": {
           "description": "Duration the execution spent executing.",
           "format": "google-duration",
-          "type": "string"
-        },
-        "executingUser": {
-          "description": "User-facing name for the user executing the script.",
           "type": "string"
         },
         "functionName": {

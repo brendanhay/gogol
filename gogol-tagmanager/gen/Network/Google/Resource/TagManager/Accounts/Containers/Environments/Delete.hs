@@ -50,9 +50,12 @@ type AccountsContainersEnvironmentsDeleteResource =
 -- | Deletes a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsDelete' smart constructor.
-newtype AccountsContainersEnvironmentsDelete = AccountsContainersEnvironmentsDelete'
+newtype AccountsContainersEnvironmentsDelete =
+  AccountsContainersEnvironmentsDelete'
     { _acedPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersEnvironmentsDelete' with the minimum fields required to make a request.
 --
@@ -63,9 +66,8 @@ accountsContainersEnvironmentsDelete
     :: Text -- ^ 'acedPath'
     -> AccountsContainersEnvironmentsDelete
 accountsContainersEnvironmentsDelete pAcedPath_ =
-    AccountsContainersEnvironmentsDelete'
-    { _acedPath = pAcedPath_
-    }
+  AccountsContainersEnvironmentsDelete' {_acedPath = pAcedPath_}
+
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}
@@ -73,7 +75,8 @@ acedPath :: Lens' AccountsContainersEnvironmentsDelete Text
 acedPath = lens _acedPath (\ s a -> s{_acedPath = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsDelete where
+           AccountsContainersEnvironmentsDelete
+         where
         type Rs AccountsContainersEnvironmentsDelete = ()
         type Scopes AccountsContainersEnvironmentsDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]

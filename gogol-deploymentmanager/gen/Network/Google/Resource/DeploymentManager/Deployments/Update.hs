@@ -69,14 +69,17 @@ type DeploymentsUpdateResource =
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsUpdate' smart constructor.
-data DeploymentsUpdate = DeploymentsUpdate'
+data DeploymentsUpdate =
+  DeploymentsUpdate'
     { _duCreatePolicy :: !DeploymentsUpdateCreatePolicy
     , _duProject      :: !Text
     , _duPayload      :: !Deployment
     , _duDeletePolicy :: !DeploymentsUpdateDeletePolicy
     , _duPreview      :: !Bool
     , _duDeployment   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsUpdate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ deploymentsUpdate
     -> Text -- ^ 'duDeployment'
     -> DeploymentsUpdate
 deploymentsUpdate pDuProject_ pDuPayload_ pDuDeployment_ =
-    DeploymentsUpdate'
+  DeploymentsUpdate'
     { _duCreatePolicy = CreateOrAcquire
     , _duProject = pDuProject_
     , _duPayload = pDuPayload_
@@ -107,6 +110,7 @@ deploymentsUpdate pDuProject_ pDuPayload_ pDuDeployment_ =
     , _duPreview = False
     , _duDeployment = pDuDeployment_
     }
+
 
 -- | Sets the policy to use for creating new resources.
 duCreatePolicy :: Lens' DeploymentsUpdate DeploymentsUpdateCreatePolicy

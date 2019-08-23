@@ -63,7 +63,8 @@ type SpacesListResource =
 -- | Lists spaces the caller is a member of.
 --
 -- /See:/ 'spacesList' smart constructor.
-data SpacesList = SpacesList'
+data SpacesList =
+  SpacesList'
     { _slXgafv          :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
     , _slAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data SpacesList = SpacesList'
     , _slPageToken      :: !(Maybe Text)
     , _slPageSize       :: !(Maybe (Textual Int32))
     , _slCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpacesList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ data SpacesList = SpacesList'
 spacesList
     :: SpacesList
 spacesList =
-    SpacesList'
+  SpacesList'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
     , _slAccessToken = Nothing
@@ -102,6 +105,7 @@ spacesList =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | V1 error format.
 slXgafv :: Lens' SpacesList (Maybe Xgafv)

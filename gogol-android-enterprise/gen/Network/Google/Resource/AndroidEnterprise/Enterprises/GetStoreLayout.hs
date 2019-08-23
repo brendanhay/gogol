@@ -54,9 +54,12 @@ type EnterprisesGetStoreLayoutResource =
 -- been set, returns \"basic\" as the store layout type and no homepage.
 --
 -- /See:/ 'enterprisesGetStoreLayout' smart constructor.
-newtype EnterprisesGetStoreLayout = EnterprisesGetStoreLayout'
+newtype EnterprisesGetStoreLayout =
+  EnterprisesGetStoreLayout'
     { _egslEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesGetStoreLayout' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ enterprisesGetStoreLayout
     :: Text -- ^ 'egslEnterpriseId'
     -> EnterprisesGetStoreLayout
 enterprisesGetStoreLayout pEgslEnterpriseId_ =
-    EnterprisesGetStoreLayout'
-    { _egslEnterpriseId = pEgslEnterpriseId_
-    }
+  EnterprisesGetStoreLayout' {_egslEnterpriseId = pEgslEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 egslEnterpriseId :: Lens' EnterprisesGetStoreLayout Text

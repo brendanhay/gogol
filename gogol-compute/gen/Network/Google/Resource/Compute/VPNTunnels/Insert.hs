@@ -61,12 +61,15 @@ type VPNTunnelsInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'vpnTunnelsInsert' smart constructor.
-data VPNTunnelsInsert = VPNTunnelsInsert'
+data VPNTunnelsInsert =
+  VPNTunnelsInsert'
     { _vtiRequestId :: !(Maybe Text)
     , _vtiProject   :: !Text
     , _vtiPayload   :: !VPNTunnel
     , _vtiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VPNTunnelsInsert' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ vpnTunnelsInsert
     -> Text -- ^ 'vtiRegion'
     -> VPNTunnelsInsert
 vpnTunnelsInsert pVtiProject_ pVtiPayload_ pVtiRegion_ =
-    VPNTunnelsInsert'
+  VPNTunnelsInsert'
     { _vtiRequestId = Nothing
     , _vtiProject = pVtiProject_
     , _vtiPayload = pVtiPayload_
     , _vtiRegion = pVtiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

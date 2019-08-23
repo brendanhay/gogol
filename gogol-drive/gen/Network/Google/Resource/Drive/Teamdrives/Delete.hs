@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently deletes a Team Drive for which the user is an organizer. The
--- Team Drive cannot contain any untrashed items.
+-- Deprecated use drives.delete instead.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.delete@.
 module Network.Google.Resource.Drive.Teamdrives.Delete
@@ -49,13 +48,15 @@ type TeamdrivesDeleteResource =
            Capture "teamDriveId" Text :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Permanently deletes a Team Drive for which the user is an organizer. The
--- Team Drive cannot contain any untrashed items.
+-- | Deprecated use drives.delete instead.
 --
 -- /See:/ 'teamdrivesDelete' smart constructor.
-newtype TeamdrivesDelete = TeamdrivesDelete'
+newtype TeamdrivesDelete =
+  TeamdrivesDelete'
     { _tdTeamDriveId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamdrivesDelete' with the minimum fields required to make a request.
 --
@@ -66,9 +67,8 @@ teamdrivesDelete
     :: Text -- ^ 'tdTeamDriveId'
     -> TeamdrivesDelete
 teamdrivesDelete pTdTeamDriveId_ =
-    TeamdrivesDelete'
-    { _tdTeamDriveId = pTdTeamDriveId_
-    }
+  TeamdrivesDelete' {_tdTeamDriveId = pTdTeamDriveId_}
+
 
 -- | The ID of the Team Drive
 tdTeamDriveId :: Lens' TeamdrivesDelete Text

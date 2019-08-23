@@ -50,7 +50,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.list@ method which the
 -- 'ProjectsScanConfigsScanRunsList' request conforms to.
 type ProjectsScanConfigsScanRunsListResource =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "parent" Text :>
          "scanRuns" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,7 +67,8 @@ type ProjectsScanConfigsScanRunsListResource =
 -- stop time.
 --
 -- /See:/ 'projectsScanConfigsScanRunsList' smart constructor.
-data ProjectsScanConfigsScanRunsList = ProjectsScanConfigsScanRunsList'
+data ProjectsScanConfigsScanRunsList =
+  ProjectsScanConfigsScanRunsList'
     { _pscsrlParent         :: !Text
     , _pscsrlXgafv          :: !(Maybe Xgafv)
     , _pscsrlUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsScanConfigsScanRunsList = ProjectsScanConfigsScanRunsList'
     , _pscsrlPageToken      :: !(Maybe Text)
     , _pscsrlPageSize       :: !(Maybe (Textual Int32))
     , _pscsrlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsScanConfigsScanRunsList
     :: Text -- ^ 'pscsrlParent'
     -> ProjectsScanConfigsScanRunsList
 projectsScanConfigsScanRunsList pPscsrlParent_ =
-    ProjectsScanConfigsScanRunsList'
+  ProjectsScanConfigsScanRunsList'
     { _pscsrlParent = pPscsrlParent_
     , _pscsrlXgafv = Nothing
     , _pscsrlUploadProtocol = Nothing
@@ -111,6 +114,7 @@ projectsScanConfigsScanRunsList pPscsrlParent_ =
     , _pscsrlPageSize = Nothing
     , _pscsrlCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan resource name
 -- in the format \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'.
@@ -165,7 +169,8 @@ pscsrlCallback
       (\ s a -> s{_pscsrlCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsList where
+           ProjectsScanConfigsScanRunsList
+         where
         type Rs ProjectsScanConfigsScanRunsList =
              ListScanRunsResponse
         type Scopes ProjectsScanConfigsScanRunsList =

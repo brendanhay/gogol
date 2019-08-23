@@ -67,14 +67,17 @@ type ProjectsOperationsGetResource =
 -- \`genomics.operations.get\`
 --
 -- /See:/ 'projectsOperationsGet' smart constructor.
-data ProjectsOperationsGet = ProjectsOperationsGet'
+data ProjectsOperationsGet =
+  ProjectsOperationsGet'
     { _pogXgafv          :: !(Maybe Xgafv)
     , _pogUploadProtocol :: !(Maybe Text)
     , _pogAccessToken    :: !(Maybe Text)
     , _pogUploadType     :: !(Maybe Text)
     , _pogName           :: !Text
     , _pogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOperationsGet' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsOperationsGet
     :: Text -- ^ 'pogName'
     -> ProjectsOperationsGet
 projectsOperationsGet pPogName_ =
-    ProjectsOperationsGet'
+  ProjectsOperationsGet'
     { _pogXgafv = Nothing
     , _pogUploadProtocol = Nothing
     , _pogAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsOperationsGet pPogName_ =
     , _pogName = pPogName_
     , _pogCallback = Nothing
     }
+
 
 -- | V1 error format.
 pogXgafv :: Lens' ProjectsOperationsGet (Maybe Xgafv)

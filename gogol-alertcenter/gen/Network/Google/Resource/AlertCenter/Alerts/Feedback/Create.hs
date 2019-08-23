@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates new feedback for an alert.
+-- Creates new feedback for an alert. Attempting to create a feedback for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.feedback.create@.
 module Network.Google.Resource.AlertCenter.Alerts.Feedback.Create
@@ -63,10 +64,12 @@ type AlertsFeedbackCreateResource =
                            ReqBody '[JSON] AlertFeedback :>
                              Post '[JSON] AlertFeedback
 
--- | Creates new feedback for an alert.
+-- | Creates new feedback for an alert. Attempting to create a feedback for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ 'alertsFeedbackCreate' smart constructor.
-data AlertsFeedbackCreate = AlertsFeedbackCreate'
+data AlertsFeedbackCreate =
+  AlertsFeedbackCreate'
     { _afcXgafv          :: !(Maybe Xgafv)
     , _afcUploadProtocol :: !(Maybe Text)
     , _afcAccessToken    :: !(Maybe Text)
@@ -75,7 +78,9 @@ data AlertsFeedbackCreate = AlertsFeedbackCreate'
     , _afcPayload        :: !AlertFeedback
     , _afcCustomerId     :: !(Maybe Text)
     , _afcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertsFeedbackCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +106,7 @@ alertsFeedbackCreate
     -> AlertFeedback -- ^ 'afcPayload'
     -> AlertsFeedbackCreate
 alertsFeedbackCreate pAfcAlertId_ pAfcPayload_ =
-    AlertsFeedbackCreate'
+  AlertsFeedbackCreate'
     { _afcXgafv = Nothing
     , _afcUploadProtocol = Nothing
     , _afcAccessToken = Nothing
@@ -111,6 +116,7 @@ alertsFeedbackCreate pAfcAlertId_ pAfcPayload_ =
     , _afcCustomerId = Nothing
     , _afcCallback = Nothing
     }
+
 
 -- | V1 error format.
 afcXgafv :: Lens' AlertsFeedbackCreate (Maybe Xgafv)
@@ -128,8 +134,7 @@ afcAccessToken
   = lens _afcAccessToken
       (\ s a -> s{_afcAccessToken = a})
 
--- | Required. The identifier of the alert this feedback belongs to. Returns
--- a \`NOT_FOUND\` error if no such alert.
+-- | Required. The identifier of the alert this feedback belongs to.
 afcAlertId :: Lens' AlertsFeedbackCreate Text
 afcAlertId
   = lens _afcAlertId (\ s a -> s{_afcAlertId = a})

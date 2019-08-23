@@ -72,7 +72,8 @@ type ProjectsJobsAggregatedResource =
 -- | List the jobs of a project across all regions.
 --
 -- /See:/ 'projectsJobsAggregated' smart constructor.
-data ProjectsJobsAggregated = ProjectsJobsAggregated'
+data ProjectsJobsAggregated =
+  ProjectsJobsAggregated'
     { _pjaXgafv          :: !(Maybe Xgafv)
     , _pjaUploadProtocol :: !(Maybe Text)
     , _pjaLocation       :: !(Maybe Text)
@@ -84,7 +85,9 @@ data ProjectsJobsAggregated = ProjectsJobsAggregated'
     , _pjaProjectId      :: !Text
     , _pjaPageSize       :: !(Maybe (Textual Int32))
     , _pjaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsAggregated' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ projectsJobsAggregated
     :: Text -- ^ 'pjaProjectId'
     -> ProjectsJobsAggregated
 projectsJobsAggregated pPjaProjectId_ =
-    ProjectsJobsAggregated'
+  ProjectsJobsAggregated'
     { _pjaXgafv = Nothing
     , _pjaUploadProtocol = Nothing
     , _pjaLocation = Nothing
@@ -129,6 +132,7 @@ projectsJobsAggregated pPjaProjectId_ =
     , _pjaCallback = Nothing
     }
 
+
 -- | V1 error format.
 pjaXgafv :: Lens' ProjectsJobsAggregated (Maybe Xgafv)
 pjaXgafv = lens _pjaXgafv (\ s a -> s{_pjaXgafv = a})
@@ -139,7 +143,9 @@ pjaUploadProtocol
   = lens _pjaUploadProtocol
       (\ s a -> s{_pjaUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pjaLocation :: Lens' ProjectsJobsAggregated (Maybe Text)
 pjaLocation
   = lens _pjaLocation (\ s a -> s{_pjaLocation = a})

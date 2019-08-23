@@ -66,7 +66,8 @@ type BiddersAccountsFilterSetsImpressionMetricsListResource
 -- | Lists all metrics that are measured in terms of number of impressions.
 --
 -- /See:/ 'biddersAccountsFilterSetsImpressionMetricsList' smart constructor.
-data BiddersAccountsFilterSetsImpressionMetricsList = BiddersAccountsFilterSetsImpressionMetricsList'
+data BiddersAccountsFilterSetsImpressionMetricsList =
+  BiddersAccountsFilterSetsImpressionMetricsList'
     { _bafsimlXgafv          :: !(Maybe Xgafv)
     , _bafsimlUploadProtocol :: !(Maybe Text)
     , _bafsimlFilterSetName  :: !Text
@@ -75,7 +76,9 @@ data BiddersAccountsFilterSetsImpressionMetricsList = BiddersAccountsFilterSetsI
     , _bafsimlPageToken      :: !(Maybe Text)
     , _bafsimlPageSize       :: !(Maybe (Textual Int32))
     , _bafsimlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsImpressionMetricsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ biddersAccountsFilterSetsImpressionMetricsList
     :: Text -- ^ 'bafsimlFilterSetName'
     -> BiddersAccountsFilterSetsImpressionMetricsList
 biddersAccountsFilterSetsImpressionMetricsList pBafsimlFilterSetName_ =
-    BiddersAccountsFilterSetsImpressionMetricsList'
+  BiddersAccountsFilterSetsImpressionMetricsList'
     { _bafsimlXgafv = Nothing
     , _bafsimlUploadProtocol = Nothing
     , _bafsimlFilterSetName = pBafsimlFilterSetName_
@@ -110,6 +113,7 @@ biddersAccountsFilterSetsImpressionMetricsList pBafsimlFilterSetName_ =
     , _bafsimlPageSize = Nothing
     , _bafsimlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsimlXgafv :: Lens' BiddersAccountsFilterSetsImpressionMetricsList (Maybe Xgafv)
@@ -170,7 +174,8 @@ bafsimlCallback
       (\ s a -> s{_bafsimlCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsImpressionMetricsList where
+           BiddersAccountsFilterSetsImpressionMetricsList
+         where
         type Rs
                BiddersAccountsFilterSetsImpressionMetricsList
              = ListImpressionMetricsResponse

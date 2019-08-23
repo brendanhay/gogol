@@ -70,7 +70,8 @@ type ProjectsAgentIntentsListResource =
 -- | Returns the list of all intents in the specified agent.
 --
 -- /See:/ 'projectsAgentIntentsList' smart constructor.
-data ProjectsAgentIntentsList = ProjectsAgentIntentsList'
+data ProjectsAgentIntentsList =
+  ProjectsAgentIntentsList'
     { _pailParent         :: !Text
     , _pailXgafv          :: !(Maybe Xgafv)
     , _pailLanguageCode   :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsAgentIntentsList = ProjectsAgentIntentsList'
     , _pailPageToken      :: !(Maybe Text)
     , _pailPageSize       :: !(Maybe (Textual Int32))
     , _pailCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsList' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsAgentIntentsList
     :: Text -- ^ 'pailParent'
     -> ProjectsAgentIntentsList
 projectsAgentIntentsList pPailParent_ =
-    ProjectsAgentIntentsList'
+  ProjectsAgentIntentsList'
     { _pailParent = pPailParent_
     , _pailXgafv = Nothing
     , _pailLanguageCode = Nothing
@@ -122,6 +125,7 @@ projectsAgentIntentsList pPailParent_ =
     , _pailPageSize = Nothing
     , _pailCallback = Nothing
     }
+
 
 -- | Required. The agent to list all intents from. Format:
 -- \`projects\/\/agent\`.
@@ -136,10 +140,10 @@ pailXgafv
 
 -- | Optional. The language to list training phrases, parameters and rich
 -- messages for. If not specified, the agent\'s default language is used.
--- [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent before they can
--- be used.
+-- [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 pailLanguageCode :: Lens' ProjectsAgentIntentsList (Maybe Text)
 pailLanguageCode
   = lens _pailLanguageCode

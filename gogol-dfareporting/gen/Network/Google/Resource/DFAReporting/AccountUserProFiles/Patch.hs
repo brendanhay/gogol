@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesPatch' request conforms to.
 type AccountUserProFilesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -59,11 +59,14 @@ type AccountUserProFilesPatchResource =
 -- semantics.
 --
 -- /See:/ 'accountUserProFilesPatch' smart constructor.
-data AccountUserProFilesPatch = AccountUserProFilesPatch'
+data AccountUserProFilesPatch =
+  AccountUserProFilesPatch'
     { _aupfpProFileId :: !(Textual Int64)
     , _aupfpPayload   :: !AccountUserProFile
     , _aupfpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountUserProFilesPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ accountUserProFilesPatch
     -> Int64 -- ^ 'aupfpId'
     -> AccountUserProFilesPatch
 accountUserProFilesPatch pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
-    AccountUserProFilesPatch'
+  AccountUserProFilesPatch'
     { _aupfpProFileId = _Coerce # pAupfpProFileId_
     , _aupfpPayload = pAupfpPayload_
     , _aupfpId = _Coerce # pAupfpId_
     }
+
 
 -- | User profile ID associated with this request.
 aupfpProFileId :: Lens' AccountUserProFilesPatch Int64

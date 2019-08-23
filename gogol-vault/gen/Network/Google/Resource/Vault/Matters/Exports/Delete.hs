@@ -63,7 +63,8 @@ type MattersExportsDeleteResource =
 -- | Deletes an Export.
 --
 -- /See:/ 'mattersExportsDelete' smart constructor.
-data MattersExportsDelete = MattersExportsDelete'
+data MattersExportsDelete =
+  MattersExportsDelete'
     { _medXgafv          :: !(Maybe Xgafv)
     , _medUploadProtocol :: !(Maybe Text)
     , _medAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersExportsDelete = MattersExportsDelete'
     , _medMatterId       :: !Text
     , _medExportId       :: !Text
     , _medCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersExportsDelete' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersExportsDelete
     -> Text -- ^ 'medExportId'
     -> MattersExportsDelete
 mattersExportsDelete pMedMatterId_ pMedExportId_ =
-    MattersExportsDelete'
+  MattersExportsDelete'
     { _medXgafv = Nothing
     , _medUploadProtocol = Nothing
     , _medAccessToken = Nothing
@@ -104,6 +107,7 @@ mattersExportsDelete pMedMatterId_ pMedExportId_ =
     , _medExportId = pMedExportId_
     , _medCallback = Nothing
     }
+
 
 -- | V1 error format.
 medXgafv :: Lens' MattersExportsDelete (Maybe Xgafv)

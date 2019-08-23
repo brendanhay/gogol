@@ -61,12 +61,15 @@ type InAppProductsListResource =
 -- managed in-app products..
 --
 -- /See:/ 'inAppProductsList' smart constructor.
-data InAppProductsList = InAppProductsList'
+data InAppProductsList =
+  InAppProductsList'
     { _iaplPackageName :: !Text
     , _iaplToken       :: !(Maybe Text)
     , _iaplStartIndex  :: !(Maybe (Textual Word32))
     , _iaplMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductsList' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ inAppProductsList
     :: Text -- ^ 'iaplPackageName'
     -> InAppProductsList
 inAppProductsList pIaplPackageName_ =
-    InAppProductsList'
+  InAppProductsList'
     { _iaplPackageName = pIaplPackageName_
     , _iaplToken = Nothing
     , _iaplStartIndex = Nothing
     , _iaplMaxResults = Nothing
     }
+
 
 -- | Unique identifier for the Android app with in-app products; for example,
 -- \"com.spiffygame\".

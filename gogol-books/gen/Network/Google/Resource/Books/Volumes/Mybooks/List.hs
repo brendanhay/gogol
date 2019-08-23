@@ -68,7 +68,8 @@ type VolumesMybooksListResource =
 -- | Return a list of books in My Library.
 --
 -- /See:/ 'volumesMybooksList' smart constructor.
-data VolumesMybooksList = VolumesMybooksList'
+data VolumesMybooksList =
+  VolumesMybooksList'
     { _vmlProcessingState :: !(Maybe [VolumesMybooksListProcessingState])
     , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
     , _vmlCountry         :: !(Maybe Text)
@@ -76,7 +77,9 @@ data VolumesMybooksList = VolumesMybooksList'
     , _vmlSource          :: !(Maybe Text)
     , _vmlStartIndex      :: !(Maybe (Textual Word32))
     , _vmlMaxResults      :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VolumesMybooksList' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ data VolumesMybooksList = VolumesMybooksList'
 volumesMybooksList
     :: VolumesMybooksList
 volumesMybooksList =
-    VolumesMybooksList'
+  VolumesMybooksList'
     { _vmlProcessingState = Nothing
     , _vmlAcquireMethod = Nothing
     , _vmlCountry = Nothing
@@ -107,6 +110,7 @@ volumesMybooksList =
     , _vmlStartIndex = Nothing
     , _vmlMaxResults = Nothing
     }
+
 
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.

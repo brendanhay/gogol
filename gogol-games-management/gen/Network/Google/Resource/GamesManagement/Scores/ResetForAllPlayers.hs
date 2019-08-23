@@ -57,9 +57,12 @@ type ScoresResetForAllPlayersResource =
 -- console. Only draft leaderboards can be reset.
 --
 -- /See:/ 'scoresResetForAllPlayers' smart constructor.
-newtype ScoresResetForAllPlayers = ScoresResetForAllPlayers'
+newtype ScoresResetForAllPlayers =
+  ScoresResetForAllPlayers'
     { _srfapLeaderboardId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoresResetForAllPlayers' with the minimum fields required to make a request.
 --
@@ -70,9 +73,8 @@ scoresResetForAllPlayers
     :: Text -- ^ 'srfapLeaderboardId'
     -> ScoresResetForAllPlayers
 scoresResetForAllPlayers pSrfapLeaderboardId_ =
-    ScoresResetForAllPlayers'
-    { _srfapLeaderboardId = pSrfapLeaderboardId_
-    }
+  ScoresResetForAllPlayers' {_srfapLeaderboardId = pSrfapLeaderboardId_}
+
 
 -- | The ID of the leaderboard.
 srfapLeaderboardId :: Lens' ScoresResetForAllPlayers Text

@@ -64,7 +64,8 @@ type ProjectsRegionsWorkflowTemplatesUpdateResource =
 -- version that matches the current server version.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesUpdate' smart constructor.
-data ProjectsRegionsWorkflowTemplatesUpdate = ProjectsRegionsWorkflowTemplatesUpdate'
+data ProjectsRegionsWorkflowTemplatesUpdate =
+  ProjectsRegionsWorkflowTemplatesUpdate'
     { _prwtuXgafv          :: !(Maybe Xgafv)
     , _prwtuUploadProtocol :: !(Maybe Text)
     , _prwtuAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsRegionsWorkflowTemplatesUpdate = ProjectsRegionsWorkflowTemplatesUp
     , _prwtuPayload        :: !WorkflowTemplate
     , _prwtuName           :: !Text
     , _prwtuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesUpdate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsRegionsWorkflowTemplatesUpdate
     -> Text -- ^ 'prwtuName'
     -> ProjectsRegionsWorkflowTemplatesUpdate
 projectsRegionsWorkflowTemplatesUpdate pPrwtuPayload_ pPrwtuName_ =
-    ProjectsRegionsWorkflowTemplatesUpdate'
+  ProjectsRegionsWorkflowTemplatesUpdate'
     { _prwtuXgafv = Nothing
     , _prwtuUploadProtocol = Nothing
     , _prwtuAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsRegionsWorkflowTemplatesUpdate pPrwtuPayload_ pPrwtuName_ =
     , _prwtuName = pPrwtuName_
     , _prwtuCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwtuXgafv :: Lens' ProjectsRegionsWorkflowTemplatesUpdate (Maybe Xgafv)
@@ -148,7 +152,8 @@ prwtuCallback
       (\ s a -> s{_prwtuCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesUpdate where
+           ProjectsRegionsWorkflowTemplatesUpdate
+         where
         type Rs ProjectsRegionsWorkflowTemplatesUpdate =
              WorkflowTemplate
         type Scopes ProjectsRegionsWorkflowTemplatesUpdate =

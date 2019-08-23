@@ -64,12 +64,15 @@ type InstallsDeleteResource =
 -- removed.
 --
 -- /See:/ 'installsDelete' smart constructor.
-data InstallsDelete = InstallsDelete'
+data InstallsDelete =
+  InstallsDelete'
     { _idEnterpriseId :: !Text
     , _idUserId       :: !Text
     , _idInstallId    :: !Text
     , _idDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstallsDelete' with the minimum fields required to make a request.
 --
@@ -89,12 +92,13 @@ installsDelete
     -> Text -- ^ 'idDeviceId'
     -> InstallsDelete
 installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
-    InstallsDelete'
+  InstallsDelete'
     { _idEnterpriseId = pIdEnterpriseId_
     , _idUserId = pIdUserId_
     , _idInstallId = pIdInstallId_
     , _idDeviceId = pIdDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 idEnterpriseId :: Lens' InstallsDelete Text

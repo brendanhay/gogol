@@ -71,7 +71,8 @@ type PartnersCustomersCreateResource =
 -- and explains how to sign into the portal.
 --
 -- /See:/ 'partnersCustomersCreate' smart constructor.
-data PartnersCustomersCreate = PartnersCustomersCreate'
+data PartnersCustomersCreate =
+  PartnersCustomersCreate'
     { _pccParent         :: !Text
     , _pccXgafv          :: !(Maybe Xgafv)
     , _pccUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,9 @@ data PartnersCustomersCreate = PartnersCustomersCreate'
     , _pccUploadType     :: !(Maybe Text)
     , _pccPayload        :: !CreateCustomerRequest
     , _pccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartnersCustomersCreate' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ partnersCustomersCreate
     -> CreateCustomerRequest -- ^ 'pccPayload'
     -> PartnersCustomersCreate
 partnersCustomersCreate pPccParent_ pPccPayload_ =
-    PartnersCustomersCreate'
+  PartnersCustomersCreate'
     { _pccParent = pPccParent_
     , _pccXgafv = Nothing
     , _pccUploadProtocol = Nothing
@@ -112,6 +115,7 @@ partnersCustomersCreate pPccParent_ pPccPayload_ =
     , _pccPayload = pPccPayload_
     , _pccCallback = Nothing
     }
+
 
 -- | Required. The parent resource ID in the format
 -- \`partners\/[PARTNER_ID]\` that identifies the reseller.

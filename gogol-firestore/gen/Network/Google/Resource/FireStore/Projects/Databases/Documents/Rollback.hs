@@ -62,7 +62,8 @@ type ProjectsDatabasesDocumentsRollbackResource =
 -- | Rolls back a transaction.
 --
 -- /See:/ 'projectsDatabasesDocumentsRollback' smart constructor.
-data ProjectsDatabasesDocumentsRollback = ProjectsDatabasesDocumentsRollback'
+data ProjectsDatabasesDocumentsRollback =
+  ProjectsDatabasesDocumentsRollback'
     { _pddrXgafv          :: !(Maybe Xgafv)
     , _pddrUploadProtocol :: !(Maybe Text)
     , _pddrDatabase       :: !Text
@@ -70,7 +71,9 @@ data ProjectsDatabasesDocumentsRollback = ProjectsDatabasesDocumentsRollback'
     , _pddrUploadType     :: !(Maybe Text)
     , _pddrPayload        :: !RollbackRequest
     , _pddrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesDocumentsRollback' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsDatabasesDocumentsRollback
     -> RollbackRequest -- ^ 'pddrPayload'
     -> ProjectsDatabasesDocumentsRollback
 projectsDatabasesDocumentsRollback pPddrDatabase_ pPddrPayload_ =
-    ProjectsDatabasesDocumentsRollback'
+  ProjectsDatabasesDocumentsRollback'
     { _pddrXgafv = Nothing
     , _pddrUploadProtocol = Nothing
     , _pddrDatabase = pPddrDatabase_
@@ -103,6 +106,7 @@ projectsDatabasesDocumentsRollback pPddrDatabase_ pPddrPayload_ =
     , _pddrPayload = pPddrPayload_
     , _pddrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pddrXgafv :: Lens' ProjectsDatabasesDocumentsRollback (Maybe Xgafv)
@@ -144,7 +148,8 @@ pddrCallback
   = lens _pddrCallback (\ s a -> s{_pddrCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesDocumentsRollback where
+           ProjectsDatabasesDocumentsRollback
+         where
         type Rs ProjectsDatabasesDocumentsRollback = Empty
         type Scopes ProjectsDatabasesDocumentsRollback =
              '["https://www.googleapis.com/auth/cloud-platform",

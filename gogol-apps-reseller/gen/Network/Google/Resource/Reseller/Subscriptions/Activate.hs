@@ -56,10 +56,13 @@ type SubscriptionsActivateResource =
 -- | Activates a subscription previously suspended by the reseller
 --
 -- /See:/ 'subscriptionsActivate' smart constructor.
-data SubscriptionsActivate = SubscriptionsActivate'
+data SubscriptionsActivate =
+  SubscriptionsActivate'
     { _saCustomerId     :: !Text
     , _saSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionsActivate' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ subscriptionsActivate
     -> Text -- ^ 'saSubscriptionId'
     -> SubscriptionsActivate
 subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
-    SubscriptionsActivate'
-    { _saCustomerId = pSaCustomerId_
-    , _saSubscriptionId = pSaSubscriptionId_
-    }
+  SubscriptionsActivate'
+    {_saCustomerId = pSaCustomerId_, _saSubscriptionId = pSaSubscriptionId_}
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

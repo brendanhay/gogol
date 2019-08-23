@@ -76,14 +76,17 @@ type InvitationsCreateResource =
 -- specified user and course already exists.
 --
 -- /See:/ 'invitationsCreate' smart constructor.
-data InvitationsCreate = InvitationsCreate'
+data InvitationsCreate =
+  InvitationsCreate'
     { _icXgafv          :: !(Maybe Xgafv)
     , _icUploadProtocol :: !(Maybe Text)
     , _icAccessToken    :: !(Maybe Text)
     , _icUploadType     :: !(Maybe Text)
     , _icPayload        :: !Invitation
     , _icCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InvitationsCreate' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ invitationsCreate
     :: Invitation -- ^ 'icPayload'
     -> InvitationsCreate
 invitationsCreate pIcPayload_ =
-    InvitationsCreate'
+  InvitationsCreate'
     { _icXgafv = Nothing
     , _icUploadProtocol = Nothing
     , _icAccessToken = Nothing
@@ -112,6 +115,7 @@ invitationsCreate pIcPayload_ =
     , _icPayload = pIcPayload_
     , _icCallback = Nothing
     }
+
 
 -- | V1 error format.
 icXgafv :: Lens' InvitationsCreate (Maybe Xgafv)

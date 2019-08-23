@@ -1,5 +1,5 @@
 name:                  gogol-shopping-content
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Content API for Shopping SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -72,10 +72,6 @@ library
         , Network.Google.Resource.Content.LiaSettings.Update
         , Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
         , Network.Google.Resource.Content.Orderinvoices.Createrefundinvoice
-        , Network.Google.Resource.Content.Orderpayments.NotifyauthApproved
-        , Network.Google.Resource.Content.Orderpayments.Notifyauthdeclined
-        , Network.Google.Resource.Content.Orderpayments.Notifycharge
-        , Network.Google.Resource.Content.Orderpayments.Notifyrefund
         , Network.Google.Resource.Content.Orderreports.Listdisbursements
         , Network.Google.Resource.Content.Orderreports.Listtransactions
         , Network.Google.Resource.Content.Orderreturns.Get
@@ -114,6 +110,8 @@ library
         , Network.Google.Resource.Content.Productstatuses.Custombatch
         , Network.Google.Resource.Content.Productstatuses.Get
         , Network.Google.Resource.Content.Productstatuses.List
+        , Network.Google.Resource.Content.Regionalinventory.Custombatch
+        , Network.Google.Resource.Content.Regionalinventory.Insert
         , Network.Google.Resource.Content.ShippingSettings.Custombatch
         , Network.Google.Resource.Content.ShippingSettings.Get
         , Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
@@ -128,5 +126,5 @@ library
         , Network.Google.ShoppingContent.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

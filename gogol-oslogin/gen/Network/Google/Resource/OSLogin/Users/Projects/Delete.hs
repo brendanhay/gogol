@@ -22,7 +22,7 @@
 --
 -- Deletes a POSIX account.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.projects.delete@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.projects.delete@.
 module Network.Google.Resource.OSLogin.Users.Projects.Delete
     (
     -- * REST Resource
@@ -59,14 +59,17 @@ type UsersProjectsDeleteResource =
 -- | Deletes a POSIX account.
 --
 -- /See:/ 'usersProjectsDelete' smart constructor.
-data UsersProjectsDelete = UsersProjectsDelete'
+data UsersProjectsDelete =
+  UsersProjectsDelete'
     { _updXgafv          :: !(Maybe Xgafv)
     , _updUploadProtocol :: !(Maybe Text)
     , _updAccessToken    :: !(Maybe Text)
     , _updUploadType     :: !(Maybe Text)
     , _updName           :: !Text
     , _updCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersProjectsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ usersProjectsDelete
     :: Text -- ^ 'updName'
     -> UsersProjectsDelete
 usersProjectsDelete pUpdName_ =
-    UsersProjectsDelete'
+  UsersProjectsDelete'
     { _updXgafv = Nothing
     , _updUploadProtocol = Nothing
     , _updAccessToken = Nothing
@@ -95,6 +98,7 @@ usersProjectsDelete pUpdName_ =
     , _updName = pUpdName_
     , _updCallback = Nothing
     }
+
 
 -- | V1 error format.
 updXgafv :: Lens' UsersProjectsDelete (Maybe Xgafv)

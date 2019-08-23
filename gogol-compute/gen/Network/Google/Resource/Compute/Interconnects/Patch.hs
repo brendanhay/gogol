@@ -64,12 +64,15 @@ type InterconnectsPatchResource =
 -- patch format and processing rules.
 --
 -- /See:/ 'interconnectsPatch' smart constructor.
-data InterconnectsPatch = InterconnectsPatch'
+data InterconnectsPatch =
+  InterconnectsPatch'
     { _ipRequestId    :: !(Maybe Text)
     , _ipProject      :: !Text
     , _ipPayload      :: !Interconnect
     , _ipInterconnect :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectsPatch' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ interconnectsPatch
     -> Text -- ^ 'ipInterconnect'
     -> InterconnectsPatch
 interconnectsPatch pIpProject_ pIpPayload_ pIpInterconnect_ =
-    InterconnectsPatch'
+  InterconnectsPatch'
     { _ipRequestId = Nothing
     , _ipProject = pIpProject_
     , _ipPayload = pIpPayload_
     , _ipInterconnect = pIpInterconnect_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

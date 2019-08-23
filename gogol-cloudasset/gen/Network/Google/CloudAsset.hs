@@ -16,7 +16,7 @@
 -- The cloud asset API manages the history and inventory of cloud
 -- resources.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview Cloud Asset API Reference>
+-- /See:/ <https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/quickstart-cloud-asset-inventory Cloud Asset API Reference>
 module Network.Google.CloudAsset
     (
     -- * Service Configuration
@@ -30,23 +30,14 @@ module Network.Google.CloudAsset
 
     -- * Resources
 
-    -- ** cloudasset.organizations.batchGetAssetsHistory
-    , module Network.Google.Resource.CloudAsset.Organizations.BatchGetAssetsHistory
+    -- ** cloudasset.batchGetAssetsHistory
+    , module Network.Google.Resource.CloudAsset.BatchGetAssetsHistory
 
-    -- ** cloudasset.organizations.exportAssets
-    , module Network.Google.Resource.CloudAsset.Organizations.ExportAssets
+    -- ** cloudasset.exportAssets
+    , module Network.Google.Resource.CloudAsset.ExportAssets
 
-    -- ** cloudasset.organizations.operations.get
-    , module Network.Google.Resource.CloudAsset.Organizations.Operations.Get
-
-    -- ** cloudasset.projects.batchGetAssetsHistory
-    , module Network.Google.Resource.CloudAsset.Projects.BatchGetAssetsHistory
-
-    -- ** cloudasset.projects.exportAssets
-    , module Network.Google.Resource.CloudAsset.Projects.ExportAssets
-
-    -- ** cloudasset.projects.operations.get
-    , module Network.Google.Resource.CloudAsset.Projects.Operations.Get
+    -- ** cloudasset.operations.get
+    , module Network.Google.Resource.CloudAsset.Operations.Get
 
     -- * Types
 
@@ -94,6 +85,7 @@ module Network.Google.CloudAsset
     -- ** GcsDestination
     , GcsDestination
     , gcsDestination
+    , gdURIPrefix
     , gdURI
 
     -- ** StatusDetailsItem
@@ -187,12 +179,9 @@ module Network.Google.CloudAsset
 
 import           Network.Google.CloudAsset.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.CloudAsset.Organizations.BatchGetAssetsHistory
-import           Network.Google.Resource.CloudAsset.Organizations.ExportAssets
-import           Network.Google.Resource.CloudAsset.Organizations.Operations.Get
-import           Network.Google.Resource.CloudAsset.Projects.BatchGetAssetsHistory
-import           Network.Google.Resource.CloudAsset.Projects.ExportAssets
-import           Network.Google.Resource.CloudAsset.Projects.Operations.Get
+import           Network.Google.Resource.CloudAsset.BatchGetAssetsHistory
+import           Network.Google.Resource.CloudAsset.ExportAssets
+import           Network.Google.Resource.CloudAsset.Operations.Get
 
 {- $resources
 TODO
@@ -200,9 +189,6 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud Asset API service.
 type CloudAssetAPI =
-     OrganizationsOperationsGetResource :<|>
-       OrganizationsExportAssetsResource
-       :<|> OrganizationsBatchGetAssetsHistoryResource
-       :<|> ProjectsOperationsGetResource
-       :<|> ProjectsExportAssetsResource
-       :<|> ProjectsBatchGetAssetsHistoryResource
+     ExportAssetsResource :<|>
+       BatchGetAssetsHistoryResource
+       :<|> OperationsGetResource

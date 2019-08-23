@@ -62,13 +62,16 @@ type DataSetsListResource =
 -- granted the READER dataset role.
 --
 -- /See:/ 'dataSetsList' smart constructor.
-data DataSetsList = DataSetsList'
+data DataSetsList =
+  DataSetsList'
     { _dslAll        :: !(Maybe Bool)
     , _dslFilter     :: !(Maybe Text)
     , _dslPageToken  :: !(Maybe Text)
     , _dslProjectId  :: !Text
     , _dslMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSetsList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ dataSetsList
     :: Text -- ^ 'dslProjectId'
     -> DataSetsList
 dataSetsList pDslProjectId_ =
-    DataSetsList'
+  DataSetsList'
     { _dslAll = Nothing
     , _dslFilter = Nothing
     , _dslPageToken = Nothing
     , _dslProjectId = pDslProjectId_
     , _dslMaxResults = Nothing
     }
+
 
 -- | Whether to list all datasets, including hidden ones
 dslAll :: Lens' DataSetsList (Maybe Bool)

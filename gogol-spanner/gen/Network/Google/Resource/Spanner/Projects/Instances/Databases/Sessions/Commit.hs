@@ -75,7 +75,8 @@ type ProjectsInstancesDatabasesSessionsCommitResource
 -- session.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsCommit' smart constructor.
-data ProjectsInstancesDatabasesSessionsCommit = ProjectsInstancesDatabasesSessionsCommit'
+data ProjectsInstancesDatabasesSessionsCommit =
+  ProjectsInstancesDatabasesSessionsCommit'
     { _pidscXgafv          :: !(Maybe Xgafv)
     , _pidscUploadProtocol :: !(Maybe Text)
     , _pidscAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsInstancesDatabasesSessionsCommit = ProjectsInstancesDatabasesSessio
     , _pidscPayload        :: !CommitRequest
     , _pidscSession        :: !Text
     , _pidscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsCommit' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsInstancesDatabasesSessionsCommit
     -> Text -- ^ 'pidscSession'
     -> ProjectsInstancesDatabasesSessionsCommit
 projectsInstancesDatabasesSessionsCommit pPidscPayload_ pPidscSession_ =
-    ProjectsInstancesDatabasesSessionsCommit'
+  ProjectsInstancesDatabasesSessionsCommit'
     { _pidscXgafv = Nothing
     , _pidscUploadProtocol = Nothing
     , _pidscAccessToken = Nothing
@@ -116,6 +119,7 @@ projectsInstancesDatabasesSessionsCommit pPidscPayload_ pPidscSession_ =
     , _pidscSession = pPidscSession_
     , _pidscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidscXgafv :: Lens' ProjectsInstancesDatabasesSessionsCommit (Maybe Xgafv)
@@ -158,7 +162,8 @@ pidscCallback
       (\ s a -> s{_pidscCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsCommit where
+           ProjectsInstancesDatabasesSessionsCommit
+         where
         type Rs ProjectsInstancesDatabasesSessionsCommit =
              CommitResponse
         type Scopes ProjectsInstancesDatabasesSessionsCommit

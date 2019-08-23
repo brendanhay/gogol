@@ -62,13 +62,16 @@ type RegionDisksCreateSnapshotResource =
 -- | Creates a snapshot of this regional disk.
 --
 -- /See:/ 'regionDisksCreateSnapshot' smart constructor.
-data RegionDisksCreateSnapshot = RegionDisksCreateSnapshot'
+data RegionDisksCreateSnapshot =
+  RegionDisksCreateSnapshot'
     { _rdcsRequestId :: !(Maybe Text)
     , _rdcsProject   :: !Text
     , _rdcsDisk      :: !Text
     , _rdcsPayload   :: !Snapshot
     , _rdcsRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksCreateSnapshot' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ regionDisksCreateSnapshot
     -> Text -- ^ 'rdcsRegion'
     -> RegionDisksCreateSnapshot
 regionDisksCreateSnapshot pRdcsProject_ pRdcsDisk_ pRdcsPayload_ pRdcsRegion_ =
-    RegionDisksCreateSnapshot'
+  RegionDisksCreateSnapshot'
     { _rdcsRequestId = Nothing
     , _rdcsProject = pRdcsProject_
     , _rdcsDisk = pRdcsDisk_
     , _rdcsPayload = pRdcsPayload_
     , _rdcsRegion = pRdcsRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

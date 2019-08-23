@@ -57,11 +57,14 @@ type LeaderboardConfigurationsListResource =
 -- | Returns a list of the leaderboard configurations in this application.
 --
 -- /See:/ 'leaderboardConfigurationsList' smart constructor.
-data LeaderboardConfigurationsList = LeaderboardConfigurationsList'
+data LeaderboardConfigurationsList =
+  LeaderboardConfigurationsList'
     { _lclApplicationId :: !Text
     , _lclPageToken     :: !(Maybe Text)
     , _lclMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardConfigurationsList' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ leaderboardConfigurationsList
     :: Text -- ^ 'lclApplicationId'
     -> LeaderboardConfigurationsList
 leaderboardConfigurationsList pLclApplicationId_ =
-    LeaderboardConfigurationsList'
+  LeaderboardConfigurationsList'
     { _lclApplicationId = pLclApplicationId_
     , _lclPageToken = Nothing
     , _lclMaxResults = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 lclApplicationId :: Lens' LeaderboardConfigurationsList Text

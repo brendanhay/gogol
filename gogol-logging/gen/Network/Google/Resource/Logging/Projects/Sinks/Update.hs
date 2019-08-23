@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.update@.
@@ -66,12 +66,13 @@ type ProjectsSinksUpdateResource =
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'projectsSinksUpdate' smart constructor.
-data ProjectsSinksUpdate = ProjectsSinksUpdate'
+data ProjectsSinksUpdate =
+  ProjectsSinksUpdate'
     { _psuXgafv                :: !(Maybe Xgafv)
     , _psuUniqueWriterIdentity :: !(Maybe Bool)
     , _psuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsSinksUpdate = ProjectsSinksUpdate'
     , _psuPayload              :: !LogSink
     , _psuSinkName             :: !Text
     , _psuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsSinksUpdate
     -> Text -- ^ 'psuSinkName'
     -> ProjectsSinksUpdate
 projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
-    ProjectsSinksUpdate'
+  ProjectsSinksUpdate'
     { _psuXgafv = Nothing
     , _psuUniqueWriterIdentity = Nothing
     , _psuUploadProtocol = Nothing
@@ -120,6 +123,7 @@ projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
     , _psuSinkName = pPsuSinkName_
     , _psuCallback = Nothing
     }
+
 
 -- | V1 error format.
 psuXgafv :: Lens' ProjectsSinksUpdate (Maybe Xgafv)

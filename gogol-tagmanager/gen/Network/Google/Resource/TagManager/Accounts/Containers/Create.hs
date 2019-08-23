@@ -53,10 +53,13 @@ type AccountsContainersCreateResource =
 -- | Creates a Container.
 --
 -- /See:/ 'accountsContainersCreate' smart constructor.
-data AccountsContainersCreate = AccountsContainersCreate'
+data AccountsContainersCreate =
+  AccountsContainersCreate'
     { _accParent  :: !Text
     , _accPayload :: !Container
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersCreate' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ accountsContainersCreate
     -> Container -- ^ 'accPayload'
     -> AccountsContainersCreate
 accountsContainersCreate pAccParent_ pAccPayload_ =
-    AccountsContainersCreate'
-    { _accParent = pAccParent_
-    , _accPayload = pAccPayload_
-    }
+  AccountsContainersCreate'
+    {_accParent = pAccParent_, _accPayload = pAccPayload_}
+
 
 -- | GTM Account\'s API relative path. Example: accounts\/{account_id}.
 accParent :: Lens' AccountsContainersCreate Text

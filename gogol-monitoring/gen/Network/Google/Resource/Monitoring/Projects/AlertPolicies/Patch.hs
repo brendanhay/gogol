@@ -70,7 +70,8 @@ type ProjectsAlertPoliciesPatchResource =
 -- the updated alerting policy.
 --
 -- /See:/ 'projectsAlertPoliciesPatch' smart constructor.
-data ProjectsAlertPoliciesPatch = ProjectsAlertPoliciesPatch'
+data ProjectsAlertPoliciesPatch =
+  ProjectsAlertPoliciesPatch'
     { _pAppXgafv          :: !(Maybe Xgafv)
     , _pAppUploadProtocol :: !(Maybe Text)
     , _pAppUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,9 @@ data ProjectsAlertPoliciesPatch = ProjectsAlertPoliciesPatch'
     , _pAppPayload        :: !AlertPolicy
     , _pAppName           :: !Text
     , _pAppCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAlertPoliciesPatch' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsAlertPoliciesPatch
     -> Text -- ^ 'pAppName'
     -> ProjectsAlertPoliciesPatch
 projectsAlertPoliciesPatch pPAppPayload_ pPAppName_ =
-    ProjectsAlertPoliciesPatch'
+  ProjectsAlertPoliciesPatch'
     { _pAppXgafv = Nothing
     , _pAppUploadProtocol = Nothing
     , _pAppUpdateMask = Nothing
@@ -115,6 +118,7 @@ projectsAlertPoliciesPatch pPAppPayload_ pPAppName_ =
     , _pAppName = pPAppName_
     , _pAppCallback = Nothing
     }
+
 
 -- | V1 error format.
 pAppXgafv :: Lens' ProjectsAlertPoliciesPatch (Maybe Xgafv)

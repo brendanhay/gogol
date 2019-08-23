@@ -58,11 +58,14 @@ type UsersAliasesWatchResource =
 -- | Watch for changes in user aliases list
 --
 -- /See:/ 'usersAliasesWatch' smart constructor.
-data UsersAliasesWatch = UsersAliasesWatch'
+data UsersAliasesWatch =
+  UsersAliasesWatch'
     { _uawEvent   :: !(Maybe UsersAliasesWatchEvent)
     , _uawPayload :: !Channel
     , _uawUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersAliasesWatch' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ usersAliasesWatch
     -> Text -- ^ 'uawUserKey'
     -> UsersAliasesWatch
 usersAliasesWatch pUawPayload_ pUawUserKey_ =
-    UsersAliasesWatch'
+  UsersAliasesWatch'
     { _uawEvent = Nothing
     , _uawPayload = pUawPayload_
     , _uawUserKey = pUawUserKey_
     }
+
 
 -- | Event on which subscription is intended (if subscribing)
 uawEvent :: Lens' UsersAliasesWatch (Maybe UsersAliasesWatchEvent)

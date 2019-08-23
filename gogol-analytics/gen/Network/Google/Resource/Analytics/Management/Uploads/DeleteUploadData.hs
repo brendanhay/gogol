@@ -63,12 +63,15 @@ type ManagementUploadsDeleteUploadDataResource =
 -- | Delete data associated with a previous upload.
 --
 -- /See:/ 'managementUploadsDeleteUploadData' smart constructor.
-data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData'
+data ManagementUploadsDeleteUploadData =
+  ManagementUploadsDeleteUploadData'
     { _mududWebPropertyId      :: !Text
     , _mududCustomDataSourceId :: !Text
     , _mududPayload            :: !AnalyticsDataimportDeleteUploadDataRequest
     , _mududAccountId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementUploadsDeleteUploadData' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ managementUploadsDeleteUploadData
     -> Text -- ^ 'mududAccountId'
     -> ManagementUploadsDeleteUploadData
 managementUploadsDeleteUploadData pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
-    ManagementUploadsDeleteUploadData'
+  ManagementUploadsDeleteUploadData'
     { _mududWebPropertyId = pMududWebPropertyId_
     , _mududCustomDataSourceId = pMududCustomDataSourceId_
     , _mududPayload = pMududPayload_
     , _mududAccountId = pMududAccountId_
     }
+
 
 -- | Web property Id for the uploads to be deleted.
 mududWebPropertyId :: Lens' ManagementUploadsDeleteUploadData Text
@@ -119,7 +123,8 @@ mududAccountId
       (\ s a -> s{_mududAccountId = a})
 
 instance GoogleRequest
-         ManagementUploadsDeleteUploadData where
+           ManagementUploadsDeleteUploadData
+         where
         type Rs ManagementUploadsDeleteUploadData = ()
         type Scopes ManagementUploadsDeleteUploadData =
              '["https://www.googleapis.com/auth/analytics",

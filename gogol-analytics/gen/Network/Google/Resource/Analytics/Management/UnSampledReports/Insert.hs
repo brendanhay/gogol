@@ -62,12 +62,15 @@ type ManagementUnSampledReportsInsertResource =
 -- | Create a new unsampled report.
 --
 -- /See:/ 'managementUnSampledReportsInsert' smart constructor.
-data ManagementUnSampledReportsInsert = ManagementUnSampledReportsInsert'
+data ManagementUnSampledReportsInsert =
+  ManagementUnSampledReportsInsert'
     { _musriWebPropertyId :: !Text
     , _musriProFileId     :: !Text
     , _musriPayload       :: !UnSampledReport
     , _musriAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementUnSampledReportsInsert' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ managementUnSampledReportsInsert
     -> Text -- ^ 'musriAccountId'
     -> ManagementUnSampledReportsInsert
 managementUnSampledReportsInsert pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
-    ManagementUnSampledReportsInsert'
+  ManagementUnSampledReportsInsert'
     { _musriWebPropertyId = pMusriWebPropertyId_
     , _musriProFileId = pMusriProFileId_
     , _musriPayload = pMusriPayload_
     , _musriAccountId = pMusriAccountId_
     }
+
 
 -- | Web property ID to create the unsampled report for.
 musriWebPropertyId :: Lens' ManagementUnSampledReportsInsert Text
@@ -118,7 +122,8 @@ musriAccountId
       (\ s a -> s{_musriAccountId = a})
 
 instance GoogleRequest
-         ManagementUnSampledReportsInsert where
+           ManagementUnSampledReportsInsert
+         where
         type Rs ManagementUnSampledReportsInsert =
              UnSampledReport
         type Scopes ManagementUnSampledReportsInsert =

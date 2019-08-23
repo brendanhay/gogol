@@ -60,14 +60,17 @@ type ProjectsLocationsRegistriesDevicesDeleteResource
 -- | Deletes a device.
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesDelete' smart constructor.
-data ProjectsLocationsRegistriesDevicesDelete = ProjectsLocationsRegistriesDevicesDelete'
+data ProjectsLocationsRegistriesDevicesDelete =
+  ProjectsLocationsRegistriesDevicesDelete'
     { _plrddXgafv          :: !(Maybe Xgafv)
     , _plrddUploadProtocol :: !(Maybe Text)
     , _plrddAccessToken    :: !(Maybe Text)
     , _plrddUploadType     :: !(Maybe Text)
     , _plrddName           :: !Text
     , _plrddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesDelete' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ projectsLocationsRegistriesDevicesDelete
     :: Text -- ^ 'plrddName'
     -> ProjectsLocationsRegistriesDevicesDelete
 projectsLocationsRegistriesDevicesDelete pPlrddName_ =
-    ProjectsLocationsRegistriesDevicesDelete'
+  ProjectsLocationsRegistriesDevicesDelete'
     { _plrddXgafv = Nothing
     , _plrddUploadProtocol = Nothing
     , _plrddAccessToken = Nothing
@@ -96,6 +99,7 @@ projectsLocationsRegistriesDevicesDelete pPlrddName_ =
     , _plrddName = pPlrddName_
     , _plrddCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrddXgafv :: Lens' ProjectsLocationsRegistriesDevicesDelete (Maybe Xgafv)
@@ -135,7 +139,8 @@ plrddCallback
       (\ s a -> s{_plrddCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesDelete where
+           ProjectsLocationsRegistriesDevicesDelete
+         where
         type Rs ProjectsLocationsRegistriesDevicesDelete =
              Empty
         type Scopes ProjectsLocationsRegistriesDevicesDelete

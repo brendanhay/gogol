@@ -59,14 +59,17 @@ type ProjectsInstancesAppProFilesGetResource =
 -- | Gets information about an app profile.
 --
 -- /See:/ 'projectsInstancesAppProFilesGet' smart constructor.
-data ProjectsInstancesAppProFilesGet = ProjectsInstancesAppProFilesGet'
+data ProjectsInstancesAppProFilesGet =
+  ProjectsInstancesAppProFilesGet'
     { _piapfgXgafv          :: !(Maybe Xgafv)
     , _piapfgUploadProtocol :: !(Maybe Text)
     , _piapfgAccessToken    :: !(Maybe Text)
     , _piapfgUploadType     :: !(Maybe Text)
     , _piapfgName           :: !Text
     , _piapfgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesAppProFilesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsInstancesAppProFilesGet
     :: Text -- ^ 'piapfgName'
     -> ProjectsInstancesAppProFilesGet
 projectsInstancesAppProFilesGet pPiapfgName_ =
-    ProjectsInstancesAppProFilesGet'
+  ProjectsInstancesAppProFilesGet'
     { _piapfgXgafv = Nothing
     , _piapfgUploadProtocol = Nothing
     , _piapfgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsInstancesAppProFilesGet pPiapfgName_ =
     , _piapfgName = pPiapfgName_
     , _piapfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 piapfgXgafv :: Lens' ProjectsInstancesAppProFilesGet (Maybe Xgafv)
@@ -132,7 +136,8 @@ piapfgCallback
       (\ s a -> s{_piapfgCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesAppProFilesGet where
+           ProjectsInstancesAppProFilesGet
+         where
         type Rs ProjectsInstancesAppProFilesGet = AppProFile
         type Scopes ProjectsInstancesAppProFilesGet =
              '["https://www.googleapis.com/auth/bigtable.admin",

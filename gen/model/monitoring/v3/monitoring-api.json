@@ -369,6 +369,11 @@
                   "pattern": "^projects/[^/]+/groups/[^/]+$",
                   "required": true,
                   "type": "string"
+                },
+                "recursive": {
+                  "description": "If this field is true, then the request means to delete a group with all its descendants. Otherwise, the request means to delete a group only when it has no descendants. The default value is false.",
+                  "location": "query",
+                  "type": "boolean"
                 }
               },
               "path": "v3/{+name}",
@@ -1452,7 +1457,7 @@
       }
     }
   },
-  "revision": "20181211",
+  "revision": "20190331",
   "rootUrl": "https://monitoring.googleapis.com/",
   "schemas": {
     "Aggregation": {
@@ -1946,7 +1951,7 @@
       "id": "Exemplar",
       "properties": {
         "attachments": {
-          "description": "Contextual information about the example value. Examples are:Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.TraceLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.",
+          "description": "Contextual information about the example value. Examples are:Trace: type.googleapis.com/google.monitoring.v3.SpanContextLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.",
           "items": {
             "additionalProperties": {
               "description": "Properties of the object. Contains field @type with type URL.",
@@ -2187,7 +2192,7 @@
           "type": "boolean"
         },
         "path": {
-          "description": "The path to the page to run the check against. Will be combined with the host (specified within the MonitoredResource) and port to construct the full URL. Optional (defaults to \"/\").",
+          "description": "The path to the page to run the check against. Will be combined with the host (specified within the MonitoredResource) and port to construct the full URL. Optional (defaults to \"/\"). If the provided path does not begin with \"/\", it will be prepended automatically.",
           "type": "string"
         },
         "port": {
@@ -2805,7 +2810,7 @@
       "id": "NotificationChannel",
       "properties": {
         "description": {
-          "description": "An optional human-readable description of this notification channel. This description may provide additional details, beyond the display name, for the channel. This may not exceeed 1024 Unicode characters.",
+          "description": "An optional human-readable description of this notification channel. This description may provide additional details, beyond the display name, for the channel. This may not exceed 1024 Unicode characters.",
           "type": "string"
         },
         "displayName": {
@@ -3246,10 +3251,6 @@
           },
           "type": "array"
         },
-        "isInternal": {
-          "description": "If this is true, then checks are made only from the 'internal_checkers'. If it is false, then checks are made only from the 'selected_regions'. It is an error to provide 'selected_regions' when is_internal is true, or to provide 'internal_checkers' when is_internal is false.",
-          "type": "boolean"
-        },
         "monitoredResource": {
           "$ref": "MonitoredResource",
           "description": "The monitored resource (https://cloud.google.com/monitoring/api/resources) associated with the configuration. The following monitored resource types are supported for uptime checks:  uptime_url  gce_instance  gae_app  aws_ec2_instance  aws_elb_load_balancer"
@@ -3259,7 +3260,7 @@
           "type": "string"
         },
         "period": {
-          "description": "How often, in seconds, the uptime check is performed. Currently, the only supported values are 60s (1 minute), 300s (5 minutes), 600s (10 minutes), and 900s (15 minutes). Optional, defaults to 300s.",
+          "description": "How often, in seconds, the uptime check is performed. Currently, the only supported values are 60s (1 minute), 300s (5 minutes), 600s (10 minutes), and 900s (15 minutes). Optional, defaults to 60s.",
           "format": "google-duration",
           "type": "string"
         },

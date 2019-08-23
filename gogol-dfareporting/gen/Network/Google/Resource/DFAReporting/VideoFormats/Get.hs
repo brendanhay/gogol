@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'VideoFormatsGet' request conforms to.
 type VideoFormatsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "videoFormats" :>
@@ -54,10 +54,13 @@ type VideoFormatsGetResource =
 -- | Gets one video format by ID.
 --
 -- /See:/ 'videoFormatsGet' smart constructor.
-data VideoFormatsGet = VideoFormatsGet'
+data VideoFormatsGet =
+  VideoFormatsGet'
     { _vfgProFileId :: !(Textual Int64)
     , _vfgId        :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideoFormatsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ videoFormatsGet
     -> Int32 -- ^ 'vfgId'
     -> VideoFormatsGet
 videoFormatsGet pVfgProFileId_ pVfgId_ =
-    VideoFormatsGet'
-    { _vfgProFileId = _Coerce # pVfgProFileId_
-    , _vfgId = _Coerce # pVfgId_
-    }
+  VideoFormatsGet'
+    {_vfgProFileId = _Coerce # pVfgProFileId_, _vfgId = _Coerce # pVfgId_}
+
 
 -- | User profile ID associated with this request.
 vfgProFileId :: Lens' VideoFormatsGet Int64

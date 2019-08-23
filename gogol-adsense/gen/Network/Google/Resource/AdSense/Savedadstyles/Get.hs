@@ -51,9 +51,12 @@ type SavedadstylesGetResource =
 -- | Get a specific saved ad style from the user\'s account.
 --
 -- /See:/ 'savedadstylesGet' smart constructor.
-newtype SavedadstylesGet = SavedadstylesGet'
+newtype SavedadstylesGet =
+  SavedadstylesGet'
     { _sgSavedAdStyleId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SavedadstylesGet' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ savedadstylesGet
     :: Text -- ^ 'sgSavedAdStyleId'
     -> SavedadstylesGet
 savedadstylesGet pSgSavedAdStyleId_ =
-    SavedadstylesGet'
-    { _sgSavedAdStyleId = pSgSavedAdStyleId_
-    }
+  SavedadstylesGet' {_sgSavedAdStyleId = pSgSavedAdStyleId_}
+
 
 -- | Saved ad style to retrieve.
 sgSavedAdStyleId :: Lens' SavedadstylesGet Text

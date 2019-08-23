@@ -58,9 +58,12 @@ type UsersSettingsDelegatesListResource =
 -- domain-wide authority.
 --
 -- /See:/ 'usersSettingsDelegatesList' smart constructor.
-newtype UsersSettingsDelegatesList = UsersSettingsDelegatesList'
+newtype UsersSettingsDelegatesList =
+  UsersSettingsDelegatesList'
     { _usdlUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsDelegatesList' with the minimum fields required to make a request.
 --
@@ -69,10 +72,8 @@ newtype UsersSettingsDelegatesList = UsersSettingsDelegatesList'
 -- * 'usdlUserId'
 usersSettingsDelegatesList
     :: UsersSettingsDelegatesList
-usersSettingsDelegatesList =
-    UsersSettingsDelegatesList'
-    { _usdlUserId = "me"
-    }
+usersSettingsDelegatesList = UsersSettingsDelegatesList' {_usdlUserId = "me"}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

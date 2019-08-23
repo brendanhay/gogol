@@ -56,10 +56,13 @@ type VideoAbuseReportReasonsListResource =
 -- videos.
 --
 -- /See:/ 'videoAbuseReportReasonsList' smart constructor.
-data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList'
+data VideoAbuseReportReasonsList =
+  VideoAbuseReportReasonsList'
     { _varrlPart :: !Text
     , _varrlHl   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideoAbuseReportReasonsList' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ videoAbuseReportReasonsList
     :: Text -- ^ 'varrlPart'
     -> VideoAbuseReportReasonsList
 videoAbuseReportReasonsList pVarrlPart_ =
-    VideoAbuseReportReasonsList'
-    { _varrlPart = pVarrlPart_
-    , _varrlHl = "en_US"
-    }
+  VideoAbuseReportReasonsList' {_varrlPart = pVarrlPart_, _varrlHl = "en_US"}
+
 
 -- | The part parameter specifies the videoCategory resource parts that the
 -- API response will include. Supported values are id and snippet.

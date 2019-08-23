@@ -65,7 +65,8 @@ type ProjectsInstancesAppProFilesPatchResource =
 -- | Updates an app profile within an instance.
 --
 -- /See:/ 'projectsInstancesAppProFilesPatch' smart constructor.
-data ProjectsInstancesAppProFilesPatch = ProjectsInstancesAppProFilesPatch'
+data ProjectsInstancesAppProFilesPatch =
+  ProjectsInstancesAppProFilesPatch'
     { _piapfpXgafv          :: !(Maybe Xgafv)
     , _piapfpUploadProtocol :: !(Maybe Text)
     , _piapfpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,9 @@ data ProjectsInstancesAppProFilesPatch = ProjectsInstancesAppProFilesPatch'
     , _piapfpIgnoreWarnings :: !(Maybe Bool)
     , _piapfpName           :: !Text
     , _piapfpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesAppProFilesPatch' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsInstancesAppProFilesPatch
     -> Text -- ^ 'piapfpName'
     -> ProjectsInstancesAppProFilesPatch
 projectsInstancesAppProFilesPatch pPiapfpPayload_ pPiapfpName_ =
-    ProjectsInstancesAppProFilesPatch'
+  ProjectsInstancesAppProFilesPatch'
     { _piapfpXgafv = Nothing
     , _piapfpUploadProtocol = Nothing
     , _piapfpUpdateMask = Nothing
@@ -114,6 +117,7 @@ projectsInstancesAppProFilesPatch pPiapfpPayload_ pPiapfpName_ =
     , _piapfpName = pPiapfpName_
     , _piapfpCallback = Nothing
     }
+
 
 -- | V1 error format.
 piapfpXgafv :: Lens' ProjectsInstancesAppProFilesPatch (Maybe Xgafv)
@@ -170,7 +174,8 @@ piapfpCallback
       (\ s a -> s{_piapfpCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesAppProFilesPatch where
+           ProjectsInstancesAppProFilesPatch
+         where
         type Rs ProjectsInstancesAppProFilesPatch = Operation
         type Scopes ProjectsInstancesAppProFilesPatch =
              '["https://www.googleapis.com/auth/bigtable.admin",

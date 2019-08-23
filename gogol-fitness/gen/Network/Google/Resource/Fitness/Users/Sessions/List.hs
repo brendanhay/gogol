@@ -61,13 +61,16 @@ type UsersSessionsListResource =
 -- | Lists sessions previously created.
 --
 -- /See:/ 'usersSessionsList' smart constructor.
-data UsersSessionsList = UsersSessionsList'
+data UsersSessionsList =
+  UsersSessionsList'
     { _uslStartTime      :: !(Maybe Text)
     , _uslUserId         :: !Text
     , _uslEndTime        :: !(Maybe Text)
     , _uslPageToken      :: !(Maybe Text)
     , _uslIncludeDeleted :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSessionsList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ usersSessionsList
     :: Text -- ^ 'uslUserId'
     -> UsersSessionsList
 usersSessionsList pUslUserId_ =
-    UsersSessionsList'
+  UsersSessionsList'
     { _uslStartTime = Nothing
     , _uslUserId = pUslUserId_
     , _uslEndTime = Nothing
     , _uslPageToken = Nothing
     , _uslIncludeDeleted = Nothing
     }
+
 
 -- | An RFC3339 timestamp. Only sessions ending between the start and end
 -- times will be included in the response.
@@ -118,7 +122,7 @@ uslEndTime
 -- timestamp (in millis since epoch). If specified, the API returns
 -- sessions modified since this time. The page token is ignored if either
 -- start or end time is specified. If none of start time, end time, and the
--- page token is specified, sessions modified in the last 7 days are
+-- page token is specified, sessions modified in the last 30 days are
 -- returned.
 uslPageToken :: Lens' UsersSessionsList (Maybe Text)
 uslPageToken

@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets indexed item statistics aggreggated across all data sources.
+-- Gets indexed item statistics aggreggated across all data sources. This
+-- API only returns statistics for previous dates; it doesn\'t return
+-- statistics for the current day.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.stats.getIndex@.
 module Network.Google.Resource.CloudSearch.Stats.GetIndex
@@ -69,10 +71,13 @@ type StatsGetIndexResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] GetCustomerIndexStatsResponse
 
--- | Gets indexed item statistics aggreggated across all data sources.
+-- | Gets indexed item statistics aggreggated across all data sources. This
+-- API only returns statistics for previous dates; it doesn\'t return
+-- statistics for the current day.
 --
 -- /See:/ 'statsGetIndex' smart constructor.
-data StatsGetIndex = StatsGetIndex'
+data StatsGetIndex =
+  StatsGetIndex'
     { _sgiFromDateMonth  :: !(Maybe (Textual Int32))
     , _sgiXgafv          :: !(Maybe Xgafv)
     , _sgiUploadProtocol :: !(Maybe Text)
@@ -84,7 +89,9 @@ data StatsGetIndex = StatsGetIndex'
     , _sgiToDateYear     :: !(Maybe (Textual Int32))
     , _sgiToDateMonth    :: !(Maybe (Textual Int32))
     , _sgiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatsGetIndex' with the minimum fields required to make a request.
 --
@@ -114,7 +121,7 @@ data StatsGetIndex = StatsGetIndex'
 statsGetIndex
     :: StatsGetIndex
 statsGetIndex =
-    StatsGetIndex'
+  StatsGetIndex'
     { _sgiFromDateMonth = Nothing
     , _sgiXgafv = Nothing
     , _sgiUploadProtocol = Nothing
@@ -127,6 +134,7 @@ statsGetIndex =
     , _sgiToDateMonth = Nothing
     , _sgiCallback = Nothing
     }
+
 
 -- | Month of date. Must be from 1 to 12.
 sgiFromDateMonth :: Lens' StatsGetIndex (Maybe Int32)

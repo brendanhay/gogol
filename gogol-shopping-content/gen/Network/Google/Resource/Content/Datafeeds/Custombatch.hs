@@ -20,6 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
+-- Deletes, fetches, gets, inserts and updates multiple datafeeds in a
+-- single request.
+--
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.custombatch@.
 module Network.Google.Resource.Content.Datafeeds.Custombatch
     (
@@ -48,11 +51,16 @@ type DatafeedsCustombatchResource =
                ReqBody '[JSON] DatafeedsCustomBatchRequest :>
                  Post '[JSON] DatafeedsCustomBatchResponse
 
+-- | Deletes, fetches, gets, inserts and updates multiple datafeeds in a
+-- single request.
 --
 -- /See:/ 'datafeedsCustombatch' smart constructor.
-newtype DatafeedsCustombatch = DatafeedsCustombatch'
+newtype DatafeedsCustombatch =
+  DatafeedsCustombatch'
     { _dPayload :: DatafeedsCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedsCustombatch' with the minimum fields required to make a request.
 --
@@ -62,10 +70,8 @@ newtype DatafeedsCustombatch = DatafeedsCustombatch'
 datafeedsCustombatch
     :: DatafeedsCustomBatchRequest -- ^ 'dPayload'
     -> DatafeedsCustombatch
-datafeedsCustombatch pDPayload_ =
-    DatafeedsCustombatch'
-    { _dPayload = pDPayload_
-    }
+datafeedsCustombatch pDPayload_ = DatafeedsCustombatch' {_dPayload = pDPayload_}
+
 
 -- | Multipart request metadata.
 dPayload :: Lens' DatafeedsCustombatch DatafeedsCustomBatchRequest

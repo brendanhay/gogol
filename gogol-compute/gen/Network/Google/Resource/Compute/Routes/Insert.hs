@@ -59,11 +59,14 @@ type RoutesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'routesInsert' smart constructor.
-data RoutesInsert = RoutesInsert'
+data RoutesInsert =
+  RoutesInsert'
     { _rouRequestId :: !(Maybe Text)
     , _rouProject   :: !Text
     , _rouPayload   :: !Route
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoutesInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ routesInsert
     -> Route -- ^ 'rouPayload'
     -> RoutesInsert
 routesInsert pRouProject_ pRouPayload_ =
-    RoutesInsert'
+  RoutesInsert'
     { _rouRequestId = Nothing
     , _rouProject = pRouProject_
     , _rouPayload = pRouPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

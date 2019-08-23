@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns configuration info about the Kubernetes Engine service.
+-- Returns configuration info about the Google Kubernetes Engine service.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.getServerconfig@.
 module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
@@ -64,10 +64,11 @@ type ProjectsZonesGetServerConfigResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ServerConfig
 
--- | Returns configuration info about the Kubernetes Engine service.
+-- | Returns configuration info about the Google Kubernetes Engine service.
 --
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
-data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
+data ProjectsZonesGetServerConfig =
+  ProjectsZonesGetServerConfig'
     { _pzgscXgafv          :: !(Maybe Xgafv)
     , _pzgscUploadProtocol :: !(Maybe Text)
     , _pzgscAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
     , _pzgscName           :: !(Maybe Text)
     , _pzgscProjectId      :: !Text
     , _pzgscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesGetServerConfig' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsZonesGetServerConfig
     -> Text -- ^ 'pzgscProjectId'
     -> ProjectsZonesGetServerConfig
 projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
-    ProjectsZonesGetServerConfig'
+  ProjectsZonesGetServerConfig'
     { _pzgscXgafv = Nothing
     , _pzgscUploadProtocol = Nothing
     , _pzgscAccessToken = Nothing
@@ -112,6 +115,7 @@ projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
     , _pzgscProjectId = pPzgscProjectId_
     , _pzgscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzgscXgafv :: Lens' ProjectsZonesGetServerConfig (Maybe Xgafv)
@@ -143,8 +147,8 @@ pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
 
--- | The name (project and location) of the server config to get Specified in
--- the format \'projects\/*\/locations\/*\'.
+-- | The name (project and location) of the server config to get, specified
+-- in the format \'projects\/*\/locations\/*\'.
 pzgscName :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscName
   = lens _pzgscName (\ s a -> s{_pzgscName = a})

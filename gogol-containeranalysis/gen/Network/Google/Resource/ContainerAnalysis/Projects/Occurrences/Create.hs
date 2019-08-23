@@ -62,7 +62,8 @@ type ProjectsOccurrencesCreateResource =
 -- | Creates a new occurrence.
 --
 -- /See:/ 'projectsOccurrencesCreate' smart constructor.
-data ProjectsOccurrencesCreate = ProjectsOccurrencesCreate'
+data ProjectsOccurrencesCreate =
+  ProjectsOccurrencesCreate'
     { _pocParent         :: !Text
     , _pocXgafv          :: !(Maybe Xgafv)
     , _pocUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsOccurrencesCreate = ProjectsOccurrencesCreate'
     , _pocUploadType     :: !(Maybe Text)
     , _pocPayload        :: !Occurrence
     , _pocCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOccurrencesCreate' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsOccurrencesCreate
     -> Occurrence -- ^ 'pocPayload'
     -> ProjectsOccurrencesCreate
 projectsOccurrencesCreate pPocParent_ pPocPayload_ =
-    ProjectsOccurrencesCreate'
+  ProjectsOccurrencesCreate'
     { _pocParent = pPocParent_
     , _pocXgafv = Nothing
     , _pocUploadProtocol = Nothing
@@ -103,6 +106,7 @@ projectsOccurrencesCreate pPocParent_ pPocPayload_ =
     , _pocPayload = pPocPayload_
     , _pocCallback = Nothing
     }
+
 
 -- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
 -- which the occurrence is to be created.

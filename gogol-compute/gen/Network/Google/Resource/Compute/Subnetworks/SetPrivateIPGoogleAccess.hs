@@ -66,13 +66,16 @@ type SubnetworksSetPrivateIPGoogleAccessResource =
 -- assigning external IP addresses through Private Google Access.
 --
 -- /See:/ 'subnetworksSetPrivateIPGoogleAccess' smart constructor.
-data SubnetworksSetPrivateIPGoogleAccess = SubnetworksSetPrivateIPGoogleAccess'
+data SubnetworksSetPrivateIPGoogleAccess =
+  SubnetworksSetPrivateIPGoogleAccess'
     { _sspigaRequestId  :: !(Maybe Text)
     , _sspigaProject    :: !Text
     , _sspigaPayload    :: !SubnetworksSetPrivateIPGoogleAccessRequest
     , _sspigaSubnetwork :: !Text
     , _sspigaRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubnetworksSetPrivateIPGoogleAccess' with the minimum fields required to make a request.
 --
@@ -94,13 +97,14 @@ subnetworksSetPrivateIPGoogleAccess
     -> Text -- ^ 'sspigaRegion'
     -> SubnetworksSetPrivateIPGoogleAccess
 subnetworksSetPrivateIPGoogleAccess pSspigaProject_ pSspigaPayload_ pSspigaSubnetwork_ pSspigaRegion_ =
-    SubnetworksSetPrivateIPGoogleAccess'
+  SubnetworksSetPrivateIPGoogleAccess'
     { _sspigaRequestId = Nothing
     , _sspigaProject = pSspigaProject_
     , _sspigaPayload = pSspigaPayload_
     , _sspigaSubnetwork = pSspigaSubnetwork_
     , _sspigaRegion = pSspigaRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -141,7 +145,8 @@ sspigaRegion
   = lens _sspigaRegion (\ s a -> s{_sspigaRegion = a})
 
 instance GoogleRequest
-         SubnetworksSetPrivateIPGoogleAccess where
+           SubnetworksSetPrivateIPGoogleAccess
+         where
         type Rs SubnetworksSetPrivateIPGoogleAccess =
              Operation
         type Scopes SubnetworksSetPrivateIPGoogleAccess =

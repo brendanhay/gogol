@@ -57,11 +57,14 @@ type GlobalAddressesDeleteResource =
 -- | Deletes the specified address resource.
 --
 -- /See:/ 'globalAddressesDelete' smart constructor.
-data GlobalAddressesDelete = GlobalAddressesDelete'
+data GlobalAddressesDelete =
+  GlobalAddressesDelete'
     { _gadRequestId :: !(Maybe Text)
     , _gadProject   :: !Text
     , _gadAddress   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalAddressesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ globalAddressesDelete
     -> Text -- ^ 'gadAddress'
     -> GlobalAddressesDelete
 globalAddressesDelete pGadProject_ pGadAddress_ =
-    GlobalAddressesDelete'
+  GlobalAddressesDelete'
     { _gadRequestId = Nothing
     , _gadProject = pGadProject_
     , _gadAddress = pGadAddress_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

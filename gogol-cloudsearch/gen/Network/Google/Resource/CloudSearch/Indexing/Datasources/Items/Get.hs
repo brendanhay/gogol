@@ -64,7 +64,8 @@ type IndexingDatasourcesItemsGetResource =
 -- | Gets Item resource by item name.
 --
 -- /See:/ 'indexingDatasourcesItemsGet' smart constructor.
-data IndexingDatasourcesItemsGet = IndexingDatasourcesItemsGet'
+data IndexingDatasourcesItemsGet =
+  IndexingDatasourcesItemsGet'
     { _idigXgafv                       :: !(Maybe Xgafv)
     , _idigUploadProtocol              :: !(Maybe Text)
     , _idigAccessToken                 :: !(Maybe Text)
@@ -73,7 +74,9 @@ data IndexingDatasourcesItemsGet = IndexingDatasourcesItemsGet'
     , _idigName                        :: !Text
     , _idigDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _idigCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesItemsGet' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ indexingDatasourcesItemsGet
     :: Text -- ^ 'idigName'
     -> IndexingDatasourcesItemsGet
 indexingDatasourcesItemsGet pIdigName_ =
-    IndexingDatasourcesItemsGet'
+  IndexingDatasourcesItemsGet'
     { _idigXgafv = Nothing
     , _idigUploadProtocol = Nothing
     , _idigAccessToken = Nothing
@@ -108,6 +111,7 @@ indexingDatasourcesItemsGet pIdigName_ =
     , _idigDebugOptionsEnableDebugging = Nothing
     , _idigCallback = Nothing
     }
+
 
 -- | V1 error format.
 idigXgafv :: Lens' IndexingDatasourcesItemsGet (Maybe Xgafv)
@@ -144,8 +148,8 @@ idigConnectorName
 idigName :: Lens' IndexingDatasourcesItemsGet Text
 idigName = lens _idigName (\ s a -> s{_idigName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 idigDebugOptionsEnableDebugging :: Lens' IndexingDatasourcesItemsGet (Maybe Bool)
 idigDebugOptionsEnableDebugging
   = lens _idigDebugOptionsEnableDebugging

@@ -60,4 +60,4 @@ indexingService
 
 -- | Submit data to Google for indexing
 indexingScope :: Proxy '["https://www.googleapis.com/auth/indexing"]
-indexingScope = Proxy;
+indexingScope = Proxy

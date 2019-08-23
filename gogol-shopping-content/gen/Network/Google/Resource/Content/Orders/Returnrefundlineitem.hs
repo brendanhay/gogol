@@ -59,11 +59,14 @@ type OrdersReturnrefundlineitemResource =
 -- called on fully shipped orders.
 --
 -- /See:/ 'ordersReturnrefundlineitem' smart constructor.
-data OrdersReturnrefundlineitem = OrdersReturnrefundlineitem'
+data OrdersReturnrefundlineitem =
+  OrdersReturnrefundlineitem'
     { _orMerchantId :: !(Textual Word64)
     , _orPayload    :: !OrdersReturnRefundLineItemRequest
     , _orOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersReturnrefundlineitem' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ ordersReturnrefundlineitem
     -> Text -- ^ 'orOrderId'
     -> OrdersReturnrefundlineitem
 ordersReturnrefundlineitem pOrMerchantId_ pOrPayload_ pOrOrderId_ =
-    OrdersReturnrefundlineitem'
+  OrdersReturnrefundlineitem'
     { _orMerchantId = _Coerce # pOrMerchantId_
     , _orPayload = pOrPayload_
     , _orOrderId = pOrOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

@@ -22,10 +22,18 @@ module Network.Google.Redis.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * FailoverInstanceRequest
+    , FailoverInstanceRequest
+    , failoverInstanceRequest
+    , firDataProtectionMode
+
     -- * InstanceLabels
     , InstanceLabels
     , instanceLabels
     , ilAddtional
+
+    -- * FailoverInstanceRequestDataProtectionMode
+    , FailoverInstanceRequestDataProtectionMode (..)
 
     -- * Status
     , Status
@@ -173,4 +181,4 @@ redisService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

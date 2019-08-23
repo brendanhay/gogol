@@ -22,7 +22,7 @@
 --
 -- Pauses a transfer operation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     (
     -- * REST Resource
@@ -62,7 +62,8 @@ type TransferOperationsPauseResource =
 -- | Pauses a transfer operation.
 --
 -- /See:/ 'transferOperationsPause' smart constructor.
-data TransferOperationsPause = TransferOperationsPause'
+data TransferOperationsPause =
+  TransferOperationsPause'
     { _topXgafv          :: !(Maybe Xgafv)
     , _topUploadProtocol :: !(Maybe Text)
     , _topAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data TransferOperationsPause = TransferOperationsPause'
     , _topPayload        :: !PauseTransferOperationRequest
     , _topName           :: !Text
     , _topCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferOperationsPause' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ transferOperationsPause
     -> Text -- ^ 'topName'
     -> TransferOperationsPause
 transferOperationsPause pTopPayload_ pTopName_ =
-    TransferOperationsPause'
+  TransferOperationsPause'
     { _topXgafv = Nothing
     , _topUploadProtocol = Nothing
     , _topAccessToken = Nothing
@@ -103,6 +106,7 @@ transferOperationsPause pTopPayload_ pTopName_ =
     , _topName = pTopName_
     , _topCallback = Nothing
     }
+
 
 -- | V1 error format.
 topXgafv :: Lens' TransferOperationsPause (Maybe Xgafv)

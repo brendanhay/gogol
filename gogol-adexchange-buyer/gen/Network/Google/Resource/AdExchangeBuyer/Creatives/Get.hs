@@ -55,10 +55,13 @@ type CreativesGetResource =
 -- 30-40 minutes after submission.
 --
 -- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet'
+data CreativesGet =
+  CreativesGet'
     { _cgBuyerCreativeId :: !Text
     , _cgAccountId       :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ creativesGet
     -> Int32 -- ^ 'cgAccountId'
     -> CreativesGet
 creativesGet pCgBuyerCreativeId_ pCgAccountId_ =
-    CreativesGet'
+  CreativesGet'
     { _cgBuyerCreativeId = pCgBuyerCreativeId_
     , _cgAccountId = _Coerce # pCgAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 cgBuyerCreativeId :: Lens' CreativesGet Text

@@ -63,13 +63,16 @@ type RegionDisksResizeResource =
 -- | Resizes the specified regional persistent disk.
 --
 -- /See:/ 'regionDisksResize' smart constructor.
-data RegionDisksResize = RegionDisksResize'
+data RegionDisksResize =
+  RegionDisksResize'
     { _rdrRequestId :: !(Maybe Text)
     , _rdrProject   :: !Text
     , _rdrDisk      :: !Text
     , _rdrPayload   :: !RegionDisksResizeRequest
     , _rdrRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksResize' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ regionDisksResize
     -> Text -- ^ 'rdrRegion'
     -> RegionDisksResize
 regionDisksResize pRdrProject_ pRdrDisk_ pRdrPayload_ pRdrRegion_ =
-    RegionDisksResize'
+  RegionDisksResize'
     { _rdrRequestId = Nothing
     , _rdrProject = pRdrProject_
     , _rdrDisk = pRdrDisk_
     , _rdrPayload = pRdrPayload_
     , _rdrRegion = pRdrRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -55,9 +55,12 @@ type WebResourceGetTokenResource =
 -- | Get a verification token for placing on a website or domain.
 --
 -- /See:/ 'webResourceGetToken' smart constructor.
-newtype WebResourceGetToken = WebResourceGetToken'
+newtype WebResourceGetToken =
+  WebResourceGetToken'
     { _wrgtPayload :: SiteVerificationWebResourceGettokenRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebResourceGetToken' with the minimum fields required to make a request.
 --
@@ -68,9 +71,8 @@ webResourceGetToken
     :: SiteVerificationWebResourceGettokenRequest -- ^ 'wrgtPayload'
     -> WebResourceGetToken
 webResourceGetToken pWrgtPayload_ =
-    WebResourceGetToken'
-    { _wrgtPayload = pWrgtPayload_
-    }
+  WebResourceGetToken' {_wrgtPayload = pWrgtPayload_}
+
 
 -- | Multipart request metadata.
 wrgtPayload :: Lens' WebResourceGetToken SiteVerificationWebResourceGettokenRequest

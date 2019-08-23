@@ -76,13 +76,13 @@ cloudProfilerService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
 monitoringScope :: Proxy '["https://www.googleapis.com/auth/monitoring"]
-monitoringScope = Proxy;
+monitoringScope = Proxy
 
 -- | Publish metric data to your Google Cloud projects
 monitoringWriteScope :: Proxy '["https://www.googleapis.com/auth/monitoring.write"]
-monitoringWriteScope = Proxy;
+monitoringWriteScope = Proxy

@@ -64,14 +64,17 @@ type PurchasesVoidedpurchasesListResource =
 -- | Lists the purchases that were canceled, refunded or charged-back.
 --
 -- /See:/ 'purchasesVoidedpurchasesList' smart constructor.
-data PurchasesVoidedpurchasesList = PurchasesVoidedpurchasesList'
+data PurchasesVoidedpurchasesList =
+  PurchasesVoidedpurchasesList'
     { _pvlPackageName :: !Text
     , _pvlStartTime   :: !(Maybe (Textual Int64))
     , _pvlToken       :: !(Maybe Text)
     , _pvlEndTime     :: !(Maybe (Textual Int64))
     , _pvlStartIndex  :: !(Maybe (Textual Word32))
     , _pvlMaxResults  :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PurchasesVoidedpurchasesList' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ purchasesVoidedpurchasesList
     :: Text -- ^ 'pvlPackageName'
     -> PurchasesVoidedpurchasesList
 purchasesVoidedpurchasesList pPvlPackageName_ =
-    PurchasesVoidedpurchasesList'
+  PurchasesVoidedpurchasesList'
     { _pvlPackageName = pPvlPackageName_
     , _pvlStartTime = Nothing
     , _pvlToken = Nothing
@@ -100,6 +103,7 @@ purchasesVoidedpurchasesList pPvlPackageName_ =
     , _pvlStartIndex = Nothing
     , _pvlMaxResults = Nothing
     }
+
 
 -- | The package name of the application for which voided purchases need to
 -- be returned (for example, \'com.some.thing\').

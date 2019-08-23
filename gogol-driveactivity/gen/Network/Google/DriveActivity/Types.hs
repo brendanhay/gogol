@@ -28,6 +28,13 @@ module Network.Google.DriveActivity.Types
     , suggestion
     , sSubtype
 
+    -- * Drive
+    , Drive
+    , drive
+    , dRoot
+    , dName
+    , dTitle
+
     -- * Impersonation
     , Impersonation
     , impersonation
@@ -52,6 +59,12 @@ module Network.Google.DriveActivity.Types
     , adDelete
     , adMove
 
+    -- * DriveReference
+    , DriveReference
+    , driveReference
+    , drName
+    , drTitle
+
     -- * PermissionRole
     , PermissionRole (..)
 
@@ -61,6 +74,10 @@ module Network.Google.DriveActivity.Types
     , gEmail
     , gTitle
 
+    -- * DriveFile
+    , DriveFile
+    , driveFile
+
     -- * TimeRange
     , TimeRange
     , timeRange
@@ -69,6 +86,9 @@ module Network.Google.DriveActivity.Types
 
     -- * RestrictionChangeNewRestriction
     , RestrictionChangeNewRestriction (..)
+
+    -- * DriveFolderType
+    , DriveFolderType (..)
 
     -- * QueryDriveActivityRequest
     , QueryDriveActivityRequest
@@ -83,8 +103,10 @@ module Network.Google.DriveActivity.Types
     -- * DriveItemReference
     , DriveItemReference
     , driveItemReference
+    , dirDriveFile
     , dirFolder
     , dirName
+    , dirDriveFolder
     , dirTitle
     , dirFile
 
@@ -97,6 +119,7 @@ module Network.Google.DriveActivity.Types
     -- * TargetReference
     , TargetReference
     , targetReference
+    , trDrive
     , trTeamDrive
     , trDriveItem
 
@@ -130,8 +153,8 @@ module Network.Google.DriveActivity.Types
     -- * Domain
     , Domain
     , domain
-    , dLegacyId
-    , dName
+    , domLegacyId
+    , domName
 
     -- * Administrator
     , Administrator
@@ -182,6 +205,7 @@ module Network.Google.DriveActivity.Types
     -- * Owner
     , Owner
     , owner
+    , oDrive
     , oDomain
     , oTeamDrive
     , oUser
@@ -243,6 +267,11 @@ module Network.Google.DriveActivity.Types
     -- * AnonymousUser
     , AnonymousUser
     , anonymousUser
+
+    -- * DriveFolder
+    , DriveFolder
+    , driveFolder
+    , dfType
 
     -- * Anyone
     , Anyone
@@ -332,6 +361,7 @@ module Network.Google.DriveActivity.Types
     -- * Target
     , Target
     , target
+    , tDrive
     , tTeamDrive
     , tFileComment
     , tDriveItem
@@ -358,10 +388,12 @@ module Network.Google.DriveActivity.Types
     -- * DriveItem
     , DriveItem
     , driveItem
+    , diDriveFile
     , diFolder
     , diOwner
     , diMimeType
     , diName
+    , diDriveFolder
     , diTitle
     , diFile
 
@@ -383,8 +415,8 @@ driveActivityService
 
 -- | View the activity record of files in your Google Drive
 driveActivityReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.activity.readonly"]
-driveActivityReadOnlyScope = Proxy;
+driveActivityReadOnlyScope = Proxy
 
 -- | View and add to the activity record of files in your Google Drive
 driveActivityScope :: Proxy '["https://www.googleapis.com/auth/drive.activity"]
-driveActivityScope = Proxy;
+driveActivityScope = Proxy

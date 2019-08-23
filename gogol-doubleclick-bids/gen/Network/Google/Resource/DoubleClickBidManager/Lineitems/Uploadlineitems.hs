@@ -53,9 +53,12 @@ type LineitemsUploadlineitemsResource =
 -- | Uploads line items in CSV format. TrueView line items are not supported.
 --
 -- /See:/ 'lineitemsUploadlineitems' smart constructor.
-newtype LineitemsUploadlineitems = LineitemsUploadlineitems'
+newtype LineitemsUploadlineitems =
+  LineitemsUploadlineitems'
     { _luPayload :: UploadLineItemsRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LineitemsUploadlineitems' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ lineitemsUploadlineitems
     :: UploadLineItemsRequest -- ^ 'luPayload'
     -> LineitemsUploadlineitems
 lineitemsUploadlineitems pLuPayload_ =
-    LineitemsUploadlineitems'
-    { _luPayload = pLuPayload_
-    }
+  LineitemsUploadlineitems' {_luPayload = pLuPayload_}
+
 
 -- | Multipart request metadata.
 luPayload :: Lens' LineitemsUploadlineitems UploadLineItemsRequest

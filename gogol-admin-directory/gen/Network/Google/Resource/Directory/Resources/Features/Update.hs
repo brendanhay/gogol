@@ -58,11 +58,14 @@ type ResourcesFeaturesUpdateResource =
 -- | Updates a feature.
 --
 -- /See:/ 'resourcesFeaturesUpdate' smart constructor.
-data ResourcesFeaturesUpdate = ResourcesFeaturesUpdate'
+data ResourcesFeaturesUpdate =
+  ResourcesFeaturesUpdate'
     { _rfuPayload    :: !Feature
     , _rfuCustomer   :: !Text
     , _rfuFeatureKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesFeaturesUpdate' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ resourcesFeaturesUpdate
     -> Text -- ^ 'rfuFeatureKey'
     -> ResourcesFeaturesUpdate
 resourcesFeaturesUpdate pRfuPayload_ pRfuCustomer_ pRfuFeatureKey_ =
-    ResourcesFeaturesUpdate'
+  ResourcesFeaturesUpdate'
     { _rfuPayload = pRfuPayload_
     , _rfuCustomer = pRfuCustomer_
     , _rfuFeatureKey = pRfuFeatureKey_
     }
+
 
 -- | Multipart request metadata.
 rfuPayload :: Lens' ResourcesFeaturesUpdate Feature

@@ -63,12 +63,15 @@ type FirewallsUpdateResource =
 -- rule: allowed, description, sourceRanges, sourceTags, targetTags.
 --
 -- /See:/ 'firewallsUpdate' smart constructor.
-data FirewallsUpdate = FirewallsUpdate'
+data FirewallsUpdate =
+  FirewallsUpdate'
     { _fuRequestId :: !(Maybe Text)
     , _fuProject   :: !Text
     , _fuPayload   :: !Firewall
     , _fuFirewall  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FirewallsUpdate' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ firewallsUpdate
     -> Text -- ^ 'fuFirewall'
     -> FirewallsUpdate
 firewallsUpdate pFuProject_ pFuPayload_ pFuFirewall_ =
-    FirewallsUpdate'
+  FirewallsUpdate'
     { _fuRequestId = Nothing
     , _fuProject = pFuProject_
     , _fuPayload = pFuPayload_
     , _fuFirewall = pFuFirewall_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

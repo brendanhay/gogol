@@ -63,13 +63,16 @@ type VolumesAssociatedListResource =
 -- | Return a list of associated books.
 --
 -- /See:/ 'volumesAssociatedList' smart constructor.
-data VolumesAssociatedList = VolumesAssociatedList'
+data VolumesAssociatedList =
+  VolumesAssociatedList'
     { _valLocale                   :: !(Maybe Text)
     , _valMaxAllowedMaturityRating :: !(Maybe VolumesAssociatedListMaxAllowedMaturityRating)
     , _valVolumeId                 :: !Text
     , _valSource                   :: !(Maybe Text)
     , _valAssociation              :: !(Maybe VolumesAssociatedListAssociation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VolumesAssociatedList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ volumesAssociatedList
     :: Text -- ^ 'valVolumeId'
     -> VolumesAssociatedList
 volumesAssociatedList pValVolumeId_ =
-    VolumesAssociatedList'
+  VolumesAssociatedList'
     { _valLocale = Nothing
     , _valMaxAllowedMaturityRating = Nothing
     , _valVolumeId = pValVolumeId_
     , _valSource = Nothing
     , _valAssociation = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.

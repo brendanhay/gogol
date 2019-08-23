@@ -75,14 +75,17 @@ type ProjectsHistoriesExecutionsStepsThumbnailsListResource
 -- does not exist, or if any of the images do not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsThumbnailsList' smart constructor.
-data ProjectsHistoriesExecutionsStepsThumbnailsList = ProjectsHistoriesExecutionsStepsThumbnailsList'
+data ProjectsHistoriesExecutionsStepsThumbnailsList =
+  ProjectsHistoriesExecutionsStepsThumbnailsList'
     { _phestlExecutionId :: !Text
     , _phestlStepId      :: !Text
     , _phestlHistoryId   :: !Text
     , _phestlPageToken   :: !(Maybe Text)
     , _phestlProjectId   :: !Text
     , _phestlPageSize    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsThumbnailsList' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsHistoriesExecutionsStepsThumbnailsList
     -> Text -- ^ 'phestlProjectId'
     -> ProjectsHistoriesExecutionsStepsThumbnailsList
 projectsHistoriesExecutionsStepsThumbnailsList pPhestlExecutionId_ pPhestlStepId_ pPhestlHistoryId_ pPhestlProjectId_ =
-    ProjectsHistoriesExecutionsStepsThumbnailsList'
+  ProjectsHistoriesExecutionsStepsThumbnailsList'
     { _phestlExecutionId = pPhestlExecutionId_
     , _phestlStepId = pPhestlStepId_
     , _phestlHistoryId = pPhestlHistoryId_
@@ -114,6 +117,7 @@ projectsHistoriesExecutionsStepsThumbnailsList pPhestlExecutionId_ pPhestlStepId
     , _phestlProjectId = pPhestlProjectId_
     , _phestlPageSize = Nothing
     }
+
 
 -- | An Execution id. Required.
 phestlExecutionId :: Lens' ProjectsHistoriesExecutionsStepsThumbnailsList Text
@@ -154,7 +158,8 @@ phestlPageSize
       . mapping _Coerce
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsThumbnailsList where
+           ProjectsHistoriesExecutionsStepsThumbnailsList
+         where
         type Rs
                ProjectsHistoriesExecutionsStepsThumbnailsList
              = ListStepThumbnailsResponse

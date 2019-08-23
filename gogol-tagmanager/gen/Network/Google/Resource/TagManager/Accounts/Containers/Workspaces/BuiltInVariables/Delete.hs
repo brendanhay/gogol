@@ -54,10 +54,13 @@ type AccountsContainersWorkspacesBuiltInVariablesDeleteResource
 -- | Deletes one or more GTM Built-In Variables.
 --
 -- /See:/ 'accountsContainersWorkspacesBuiltInVariablesDelete' smart constructor.
-data AccountsContainersWorkspacesBuiltInVariablesDelete = AccountsContainersWorkspacesBuiltInVariablesDelete'
+data AccountsContainersWorkspacesBuiltInVariablesDelete =
+  AccountsContainersWorkspacesBuiltInVariablesDelete'
     { _acwbivdPath :: !Text
     , _acwbivdType :: !(Maybe [AccountsContainersWorkspacesBuilt_in_variablesDeleteType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesBuiltInVariablesDelete' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ accountsContainersWorkspacesBuiltInVariablesDelete
     :: Text -- ^ 'acwbivdPath'
     -> AccountsContainersWorkspacesBuiltInVariablesDelete
 accountsContainersWorkspacesBuiltInVariablesDelete pAcwbivdPath_ =
-    AccountsContainersWorkspacesBuiltInVariablesDelete'
-    { _acwbivdPath = pAcwbivdPath_
-    , _acwbivdType = Nothing
-    }
+  AccountsContainersWorkspacesBuiltInVariablesDelete'
+    {_acwbivdPath = pAcwbivdPath_, _acwbivdType = Nothing}
+
 
 -- | GTM BuiltInVariable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/built_in_variables
@@ -89,7 +91,7 @@ acwbivdType
       . _Coerce
 
 instance GoogleRequest
-         AccountsContainersWorkspacesBuiltInVariablesDelete
+           AccountsContainersWorkspacesBuiltInVariablesDelete
          where
         type Rs
                AccountsContainersWorkspacesBuiltInVariablesDelete

@@ -69,7 +69,8 @@ type GetLinkStatsResource =
 -- and app reopens.
 --
 -- /See:/ 'getLinkStats' smart constructor.
-data GetLinkStats = GetLinkStats'
+data GetLinkStats =
+  GetLinkStats'
     { _glsXgafv          :: !(Maybe Xgafv)
     , _glsUploadProtocol :: !(Maybe Text)
     , _glsDynamicLink    :: !Text
@@ -78,7 +79,9 @@ data GetLinkStats = GetLinkStats'
     , _glsSdkVersion     :: !(Maybe Text)
     , _glsDurationDays   :: !(Maybe (Textual Int64))
     , _glsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetLinkStats' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ getLinkStats
     :: Text -- ^ 'glsDynamicLink'
     -> GetLinkStats
 getLinkStats pGlsDynamicLink_ =
-    GetLinkStats'
+  GetLinkStats'
     { _glsXgafv = Nothing
     , _glsUploadProtocol = Nothing
     , _glsDynamicLink = pGlsDynamicLink_
@@ -113,6 +116,7 @@ getLinkStats pGlsDynamicLink_ =
     , _glsDurationDays = Nothing
     , _glsCallback = Nothing
     }
+
 
 -- | V1 error format.
 glsXgafv :: Lens' GetLinkStats (Maybe Xgafv)
@@ -142,8 +146,7 @@ glsUploadType
   = lens _glsUploadType
       (\ s a -> s{_glsUploadType = a})
 
--- | Google SDK version. Version takes the form
--- \"/m//a//j//o//r/.minor.$patch\"
+-- | Google SDK version. Version takes the form \"$major.$minor.$patch\"
 glsSdkVersion :: Lens' GetLinkStats (Maybe Text)
 glsSdkVersion
   = lens _glsSdkVersion

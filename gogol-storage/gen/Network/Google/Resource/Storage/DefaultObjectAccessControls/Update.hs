@@ -59,12 +59,15 @@ type DefaultObjectAccessControlsUpdateResource =
 -- | Updates a default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsUpdate' smart constructor.
-data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate'
+data DefaultObjectAccessControlsUpdate =
+  DefaultObjectAccessControlsUpdate'
     { _doacuBucket      :: !Text
     , _doacuPayload     :: !ObjectAccessControl
     , _doacuUserProject :: !(Maybe Text)
     , _doacuEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DefaultObjectAccessControlsUpdate' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ defaultObjectAccessControlsUpdate
     -> Text -- ^ 'doacuEntity'
     -> DefaultObjectAccessControlsUpdate
 defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
-    DefaultObjectAccessControlsUpdate'
+  DefaultObjectAccessControlsUpdate'
     { _doacuBucket = pDoacuBucket_
     , _doacuPayload = pDoacuPayload_
     , _doacuUserProject = Nothing
     , _doacuEntity = pDoacuEntity_
     }
+
 
 -- | Name of a bucket.
 doacuBucket :: Lens' DefaultObjectAccessControlsUpdate Text
@@ -115,7 +119,8 @@ doacuEntity
   = lens _doacuEntity (\ s a -> s{_doacuEntity = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsUpdate where
+           DefaultObjectAccessControlsUpdate
+         where
         type Rs DefaultObjectAccessControlsUpdate =
              ObjectAccessControl
         type Scopes DefaultObjectAccessControlsUpdate =

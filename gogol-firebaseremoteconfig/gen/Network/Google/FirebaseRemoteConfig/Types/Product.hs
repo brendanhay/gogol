@@ -28,10 +28,13 @@ import           Network.Google.Prelude
 -- boolean instead of the string) it should always be 'true'.
 --
 -- /See:/ 'remoteConfigParameterValue' smart constructor.
-data RemoteConfigParameterValue = RemoteConfigParameterValue'
+data RemoteConfigParameterValue =
+  RemoteConfigParameterValue'
     { _rcpvValue           :: !(Maybe Text)
     , _rcpvUseInAppDefault :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoteConfigParameterValue' with the minimum fields required to make a request.
 --
@@ -43,10 +46,9 @@ data RemoteConfigParameterValue = RemoteConfigParameterValue'
 remoteConfigParameterValue
     :: RemoteConfigParameterValue
 remoteConfigParameterValue =
-    RemoteConfigParameterValue'
-    { _rcpvValue = Nothing
-    , _rcpvUseInAppDefault = Nothing
-    }
+  RemoteConfigParameterValue'
+    {_rcpvValue = Nothing, _rcpvUseInAppDefault = Nothing}
+
 
 -- | the string to set the parameter to
 rcpvValue :: Lens' RemoteConfigParameterValue (Maybe Text)
@@ -78,9 +80,12 @@ instance ToJSON RemoteConfigParameterValue where
 -- determines the value of this parameter.
 --
 -- /See:/ 'remoteConfigParameterConditionalValues' smart constructor.
-newtype RemoteConfigParameterConditionalValues = RemoteConfigParameterConditionalValues'
+newtype RemoteConfigParameterConditionalValues =
+  RemoteConfigParameterConditionalValues'
     { _rcpcvAddtional :: HashMap Text RemoteConfigParameterValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoteConfigParameterConditionalValues' with the minimum fields required to make a request.
 --
@@ -91,9 +96,9 @@ remoteConfigParameterConditionalValues
     :: HashMap Text RemoteConfigParameterValue -- ^ 'rcpcvAddtional'
     -> RemoteConfigParameterConditionalValues
 remoteConfigParameterConditionalValues pRcpcvAddtional_ =
-    RemoteConfigParameterConditionalValues'
-    { _rcpcvAddtional = _Coerce # pRcpcvAddtional_
-    }
+  RemoteConfigParameterConditionalValues'
+    {_rcpcvAddtional = _Coerce # pRcpcvAddtional_}
+
 
 rcpcvAddtional :: Lens' RemoteConfigParameterConditionalValues (HashMap Text RemoteConfigParameterValue)
 rcpcvAddtional
@@ -102,7 +107,8 @@ rcpcvAddtional
       . _Coerce
 
 instance FromJSON
-         RemoteConfigParameterConditionalValues where
+           RemoteConfigParameterConditionalValues
+         where
         parseJSON
           = withObject "RemoteConfigParameterConditionalValues"
               (\ o ->
@@ -110,7 +116,8 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         RemoteConfigParameterConditionalValues where
+           RemoteConfigParameterConditionalValues
+         where
         toJSON = toJSON . _rcpcvAddtional
 
 -- | Map of parameter keys to their optional default values and optional
@@ -119,9 +126,12 @@ instance ToJSON
 -- unique.
 --
 -- /See:/ 'remoteConfigParameters' smart constructor.
-newtype RemoteConfigParameters = RemoteConfigParameters'
+newtype RemoteConfigParameters =
+  RemoteConfigParameters'
     { _rcpAddtional :: HashMap Text RemoteConfigParameter
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoteConfigParameters' with the minimum fields required to make a request.
 --
@@ -132,9 +142,8 @@ remoteConfigParameters
     :: HashMap Text RemoteConfigParameter -- ^ 'rcpAddtional'
     -> RemoteConfigParameters
 remoteConfigParameters pRcpAddtional_ =
-    RemoteConfigParameters'
-    { _rcpAddtional = _Coerce # pRcpAddtional_
-    }
+  RemoteConfigParameters' {_rcpAddtional = _Coerce # pRcpAddtional_}
+
 
 rcpAddtional :: Lens' RemoteConfigParameters (HashMap Text RemoteConfigParameter)
 rcpAddtional
@@ -155,11 +164,14 @@ instance ToJSON RemoteConfigParameters where
 -- (and an exception will be thrown by the validation logic).
 --
 -- /See:/ 'remoteConfigParameter' smart constructor.
-data RemoteConfigParameter = RemoteConfigParameter'
+data RemoteConfigParameter =
+  RemoteConfigParameter'
     { _rcpDefaultValue      :: !(Maybe RemoteConfigParameterValue)
     , _rcpDescription       :: !(Maybe Text)
     , _rcpConditionalValues :: !(Maybe RemoteConfigParameterConditionalValues)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoteConfigParameter' with the minimum fields required to make a request.
 --
@@ -173,11 +185,12 @@ data RemoteConfigParameter = RemoteConfigParameter'
 remoteConfigParameter
     :: RemoteConfigParameter
 remoteConfigParameter =
-    RemoteConfigParameter'
+  RemoteConfigParameter'
     { _rcpDefaultValue = Nothing
     , _rcpDescription = Nothing
     , _rcpConditionalValues = Nothing
     }
+
 
 -- | Optional - value to set the parameter to, when none of the named
 -- conditions evaluate to 'true'.
@@ -224,12 +237,15 @@ instance ToJSON RemoteConfigParameter where
 -- are part of a single RemoteConfig template.
 --
 -- /See:/ 'remoteConfigCondition' smart constructor.
-data RemoteConfigCondition = RemoteConfigCondition'
+data RemoteConfigCondition =
+  RemoteConfigCondition'
     { _rccTagColor    :: !(Maybe RemoteConfigConditionTagColor)
     , _rccName        :: !(Maybe Text)
     , _rccExpression  :: !(Maybe Text)
     , _rccDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoteConfigCondition' with the minimum fields required to make a request.
 --
@@ -245,12 +261,13 @@ data RemoteConfigCondition = RemoteConfigCondition'
 remoteConfigCondition
     :: RemoteConfigCondition
 remoteConfigCondition =
-    RemoteConfigCondition'
+  RemoteConfigCondition'
     { _rccTagColor = Nothing
     , _rccName = Nothing
     , _rccExpression = Nothing
     , _rccDescription = Nothing
     }
+
 
 -- | Optional. The display (tag) color of this condition. This serves as part
 -- of a tag (in the future, we may add tag text as well as tag color, but
@@ -310,10 +327,13 @@ instance ToJSON RemoteConfigCondition where
 -- condition is true).
 --
 -- /See:/ 'remoteConfig' smart constructor.
-data RemoteConfig = RemoteConfig'
+data RemoteConfig =
+  RemoteConfig'
     { _rcParameters :: !(Maybe RemoteConfigParameters)
     , _rcConditions :: !(Maybe [RemoteConfigCondition])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemoteConfig' with the minimum fields required to make a request.
 --
@@ -324,11 +344,8 @@ data RemoteConfig = RemoteConfig'
 -- * 'rcConditions'
 remoteConfig
     :: RemoteConfig
-remoteConfig =
-    RemoteConfig'
-    { _rcParameters = Nothing
-    , _rcConditions = Nothing
-    }
+remoteConfig = RemoteConfig' {_rcParameters = Nothing, _rcConditions = Nothing}
+
 
 -- | Map of parameter keys to their optional default values and optional
 -- submap of (condition name : value). Order doesn\'t affect semantics, and

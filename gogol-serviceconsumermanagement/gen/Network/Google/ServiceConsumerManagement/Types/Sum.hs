@@ -76,6 +76,59 @@ instance FromJSON MetricDescriptorValueType where
 instance ToJSON MetricDescriptorValueType where
     toJSON = toJSONText
 
+data BackendRulePathTranslation
+    = PathTranslationUnspecified
+      -- ^ @PATH_TRANSLATION_UNSPECIFIED@
+    | ConstantAddress
+      -- ^ @CONSTANT_ADDRESS@
+      -- Use the backend address as-is, with no modification to the path. If the
+      -- URL pattern contains variables, the variable names and values will be
+      -- appended to the query string. If a query string parameter and a URL
+      -- pattern variable have the same name, this may result in duplicate keys
+      -- in the query string. # Examples Given the following operation config:
+      -- Method path: \/api\/company\/{cid}\/user\/{uid} Backend address:
+      -- https:\/\/example.cloudfunctions.net\/getUser Requests to the following
+      -- request paths will call the backend at the translated path: Request
+      -- path: \/api\/company\/widgetworks\/user\/johndoe Translated:
+      -- https:\/\/example.cloudfunctions.net\/getUser?cid=widgetworks&uid=johndoe
+      -- Request path: \/api\/company\/widgetworks\/user\/johndoe?timezone=EST
+      -- Translated:
+      -- https:\/\/example.cloudfunctions.net\/getUser?timezone=EST&cid=widgetworks&uid=johndoe
+    | AppendPathToAddress
+      -- ^ @APPEND_PATH_TO_ADDRESS@
+      -- The request path will be appended to the backend address. # Examples
+      -- Given the following operation config: Method path:
+      -- \/api\/company\/{cid}\/user\/{uid} Backend address:
+      -- https:\/\/example.appspot.com Requests to the following request paths
+      -- will call the backend at the translated path: Request path:
+      -- \/api\/company\/widgetworks\/user\/johndoe Translated:
+      -- https:\/\/example.appspot.com\/api\/company\/widgetworks\/user\/johndoe
+      -- Request path: \/api\/company\/widgetworks\/user\/johndoe?timezone=EST
+      -- Translated:
+      -- https:\/\/example.appspot.com\/api\/company\/widgetworks\/user\/johndoe?timezone=EST
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendRulePathTranslation
+
+instance FromHttpApiData BackendRulePathTranslation where
+    parseQueryParam = \case
+        "PATH_TRANSLATION_UNSPECIFIED" -> Right PathTranslationUnspecified
+        "CONSTANT_ADDRESS" -> Right ConstantAddress
+        "APPEND_PATH_TO_ADDRESS" -> Right AppendPathToAddress
+        x -> Left ("Unable to parse BackendRulePathTranslation from: " <> x)
+
+instance ToHttpApiData BackendRulePathTranslation where
+    toQueryParam = \case
+        PathTranslationUnspecified -> "PATH_TRANSLATION_UNSPECIFIED"
+        ConstantAddress -> "CONSTANT_ADDRESS"
+        AppendPathToAddress -> "APPEND_PATH_TO_ADDRESS"
+
+instance FromJSON BackendRulePathTranslation where
+    parseJSON = parseJSONText "BackendRulePathTranslation"
+
+instance ToJSON BackendRulePathTranslation where
+    toJSON = toJSONText
+
 -- | Status of tenant resource.
 data TenantResourceStatus
     = StatusUnspecified

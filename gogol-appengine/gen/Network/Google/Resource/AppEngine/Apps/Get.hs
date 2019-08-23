@@ -60,14 +60,17 @@ type AppsGetResource =
 -- | Gets information about an application.
 --
 -- /See:/ 'appsGet' smart constructor.
-data AppsGet = AppsGet'
+data AppsGet =
+  AppsGet'
     { _agXgafv          :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
     , _agAccessToken    :: !(Maybe Text)
     , _agUploadType     :: !(Maybe Text)
     , _agAppsId         :: !Text
     , _agCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ appsGet
     :: Text -- ^ 'agAppsId'
     -> AppsGet
 appsGet pAgAppsId_ =
-    AppsGet'
+  AppsGet'
     { _agXgafv = Nothing
     , _agUploadProtocol = Nothing
     , _agAccessToken = Nothing
@@ -96,6 +99,7 @@ appsGet pAgAppsId_ =
     , _agAppsId = pAgAppsId_
     , _agCallback = Nothing
     }
+
 
 -- | V1 error format.
 agXgafv :: Lens' AppsGet (Maybe Xgafv)

@@ -57,11 +57,14 @@ type AccountsReportsSavedListResource =
 -- | List all saved reports in this Ad Exchange account.
 --
 -- /See:/ 'accountsReportsSavedList' smart constructor.
-data AccountsReportsSavedList = AccountsReportsSavedList'
+data AccountsReportsSavedList =
+  AccountsReportsSavedList'
     { _arslAccountId  :: !Text
     , _arslPageToken  :: !(Maybe Text)
     , _arslMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsReportsSavedList' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ accountsReportsSavedList
     :: Text -- ^ 'arslAccountId'
     -> AccountsReportsSavedList
 accountsReportsSavedList pArslAccountId_ =
-    AccountsReportsSavedList'
+  AccountsReportsSavedList'
     { _arslAccountId = pArslAccountId_
     , _arslPageToken = Nothing
     , _arslMaxResults = Nothing
     }
+
 
 -- | Account owning the saved reports.
 arslAccountId :: Lens' AccountsReportsSavedList Text

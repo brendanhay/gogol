@@ -59,14 +59,17 @@ type ProjectsRulesetsGetResource =
 -- | Get a \`Ruleset\` by name including the full \`Source\` contents.
 --
 -- /See:/ 'projectsRulesetsGet' smart constructor.
-data ProjectsRulesetsGet = ProjectsRulesetsGet'
+data ProjectsRulesetsGet =
+  ProjectsRulesetsGet'
     { _prgXgafv          :: !(Maybe Xgafv)
     , _prgUploadProtocol :: !(Maybe Text)
     , _prgAccessToken    :: !(Maybe Text)
     , _prgUploadType     :: !(Maybe Text)
     , _prgName           :: !Text
     , _prgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRulesetsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsRulesetsGet
     :: Text -- ^ 'prgName'
     -> ProjectsRulesetsGet
 projectsRulesetsGet pPrgName_ =
-    ProjectsRulesetsGet'
+  ProjectsRulesetsGet'
     { _prgXgafv = Nothing
     , _prgUploadProtocol = Nothing
     , _prgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsRulesetsGet pPrgName_ =
     , _prgName = pPrgName_
     , _prgCallback = Nothing
     }
+
 
 -- | V1 error format.
 prgXgafv :: Lens' ProjectsRulesetsGet (Maybe Xgafv)

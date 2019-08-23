@@ -67,7 +67,8 @@ type ProjectsLocationsListResource =
 -- | Lists information about the supported locations for this service.
 --
 -- /See:/ 'projectsLocationsList' smart constructor.
-data ProjectsLocationsList = ProjectsLocationsList'
+data ProjectsLocationsList =
+  ProjectsLocationsList'
     { _pllXgafv          :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
     , _pllAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsLocationsList = ProjectsLocationsList'
     , _pllPageToken      :: !(Maybe Text)
     , _pllPageSize       :: !(Maybe (Textual Int32))
     , _pllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsLocationsList
     :: Text -- ^ 'pllName'
     -> ProjectsLocationsList
 projectsLocationsList pPllName_ =
-    ProjectsLocationsList'
+  ProjectsLocationsList'
     { _pllXgafv = Nothing
     , _pllUploadProtocol = Nothing
     , _pllAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsLocationsList pPllName_ =
     , _pllPageSize = Nothing
     , _pllCallback = Nothing
     }
+
 
 -- | V1 error format.
 pllXgafv :: Lens' ProjectsLocationsList (Maybe Xgafv)
@@ -166,7 +170,8 @@ pllCallback
 instance GoogleRequest ProjectsLocationsList where
         type Rs ProjectsLocationsList = ListLocationsResponse
         type Scopes ProjectsLocationsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient ProjectsLocationsList'{..}
           = go _pllName _pllXgafv _pllUploadProtocol
               _pllAccessToken

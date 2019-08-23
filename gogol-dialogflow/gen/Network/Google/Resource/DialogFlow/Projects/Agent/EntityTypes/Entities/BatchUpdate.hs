@@ -69,7 +69,8 @@ type ProjectsAgentEntityTypesEntitiesBatchUpdateResource
 -- explicitly specified in the request. Operation
 --
 -- /See:/ 'projectsAgentEntityTypesEntitiesBatchUpdate' smart constructor.
-data ProjectsAgentEntityTypesEntitiesBatchUpdate = ProjectsAgentEntityTypesEntitiesBatchUpdate'
+data ProjectsAgentEntityTypesEntitiesBatchUpdate =
+  ProjectsAgentEntityTypesEntitiesBatchUpdate'
     { _paetebuParent         :: !Text
     , _paetebuXgafv          :: !(Maybe Xgafv)
     , _paetebuUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsAgentEntityTypesEntitiesBatchUpdate = ProjectsAgentEntityTypesEntit
     , _paetebuUploadType     :: !(Maybe Text)
     , _paetebuPayload        :: !GoogleCloudDialogflowV2BatchUpdateEntitiesRequest
     , _paetebuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentEntityTypesEntitiesBatchUpdate' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsAgentEntityTypesEntitiesBatchUpdate
     -> GoogleCloudDialogflowV2BatchUpdateEntitiesRequest -- ^ 'paetebuPayload'
     -> ProjectsAgentEntityTypesEntitiesBatchUpdate
 projectsAgentEntityTypesEntitiesBatchUpdate pPaetebuParent_ pPaetebuPayload_ =
-    ProjectsAgentEntityTypesEntitiesBatchUpdate'
+  ProjectsAgentEntityTypesEntitiesBatchUpdate'
     { _paetebuParent = pPaetebuParent_
     , _paetebuXgafv = Nothing
     , _paetebuUploadProtocol = Nothing
@@ -110,6 +113,7 @@ projectsAgentEntityTypesEntitiesBatchUpdate pPaetebuParent_ pPaetebuPayload_ =
     , _paetebuPayload = pPaetebuPayload_
     , _paetebuCallback = Nothing
     }
+
 
 -- | Required. The name of the entity type to update or create entities in.
 -- Format: \`projects\/\/agent\/entityTypes\/\`.
@@ -154,7 +158,8 @@ paetebuCallback
       (\ s a -> s{_paetebuCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentEntityTypesEntitiesBatchUpdate where
+           ProjectsAgentEntityTypesEntitiesBatchUpdate
+         where
         type Rs ProjectsAgentEntityTypesEntitiesBatchUpdate =
              GoogleLongrunningOperation
         type Scopes

@@ -71,7 +71,8 @@ type ProjectsGroupsMembersListResource =
 -- | Lists the monitored resources that are members of a group.
 --
 -- /See:/ 'projectsGroupsMembersList' smart constructor.
-data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
+data ProjectsGroupsMembersList =
+  ProjectsGroupsMembersList'
     { _pgmlIntervalStartTime :: !(Maybe DateTime')
     , _pgmlXgafv             :: !(Maybe Xgafv)
     , _pgmlUploadProtocol    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
     , _pgmlIntervalEndTime   :: !(Maybe DateTime')
     , _pgmlPageSize          :: !(Maybe (Textual Int32))
     , _pgmlCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGroupsMembersList' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ projectsGroupsMembersList
     :: Text -- ^ 'pgmlName'
     -> ProjectsGroupsMembersList
 projectsGroupsMembersList pPgmlName_ =
-    ProjectsGroupsMembersList'
+  ProjectsGroupsMembersList'
     { _pgmlIntervalStartTime = Nothing
     , _pgmlXgafv = Nothing
     , _pgmlUploadProtocol = Nothing
@@ -127,6 +130,7 @@ projectsGroupsMembersList pPgmlName_ =
     , _pgmlPageSize = Nothing
     , _pgmlCallback = Nothing
     }
+
 
 -- | Optional. The beginning of the time interval. The default value for the
 -- start time is the end time. The start time must not be later than the

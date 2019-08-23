@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -136,10 +135,13 @@ instance ToJSON Status where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -150,11 +152,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -191,12 +190,15 @@ instance ToJSON AuditConfig where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -212,12 +214,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -266,13 +269,16 @@ instance ToJSON Expr where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -290,13 +296,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -357,12 +364,15 @@ instance ToJSON Operation where
 -- IAM policies, and other non-GCP assets.
 --
 -- /See:/ 'asset' smart constructor.
-data Asset = Asset'
+data Asset =
+  Asset'
     { _aName      :: !(Maybe Text)
     , _aResource  :: !(Maybe Resource)
     , _aIAMPolicy :: !(Maybe Policy)
     , _aAssetType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
@@ -378,12 +388,13 @@ data Asset = Asset'
 asset
     :: Asset
 asset =
-    Asset'
+  Asset'
     { _aName = Nothing
     , _aResource = Nothing
     , _aIAMPolicy = Nothing
     , _aAssetType = Nothing
     }
+
 
 -- | The full name of the asset. For example:
 -- \`\/\/compute.googleapis.com\/projects\/my_project_123\/zones\/zone1\/instances\/instance1\`.
@@ -404,7 +415,7 @@ aIAMPolicy :: Lens' Asset (Maybe Policy)
 aIAMPolicy
   = lens _aIAMPolicy (\ s a -> s{_aIAMPolicy = a})
 
--- | Type of the asset. Example: \"google.compute.Disk\".
+-- | Type of the asset. Example: \"compute.googleapis.com\/Disk\".
 aAssetType :: Lens' Asset (Maybe Text)
 aAssetType
   = lens _aAssetType (\ s a -> s{_aAssetType = a})
@@ -430,21 +441,38 @@ instance ToJSON Asset where
 -- | A Cloud Storage location.
 --
 -- /See:/ 'gcsDestination' smart constructor.
-newtype GcsDestination = GcsDestination'
-    { _gdURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GcsDestination =
+  GcsDestination'
+    { _gdURIPrefix :: !(Maybe Text)
+    , _gdURI       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GcsDestination' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gdURIPrefix'
+--
 -- * 'gdURI'
 gcsDestination
     :: GcsDestination
-gcsDestination =
-    GcsDestination'
-    { _gdURI = Nothing
-    }
+gcsDestination = GcsDestination' {_gdURIPrefix = Nothing, _gdURI = Nothing}
+
+
+-- | The uri prefix of all generated Cloud Storage objects. For example:
+-- \"gs:\/\/bucket_name\/object_name_prefix\". Each object uri is in
+-- format: \"gs:\/\/bucket_name\/object_name_prefix\/\/ and only contains
+-- assets for that type. starts from 0. For example:
+-- \"gs:\/\/bucket_name\/object_name_prefix\/compute.googleapis.com\/Disk\/0\"
+-- is the first shard of output objects containing all
+-- compute.googleapis.com\/Disk assets. An INVALID_ARGUMENT error will be
+-- returned if file with the same name
+-- \"gs:\/\/bucket_name\/object_name_prefix\" already exists.
+gdURIPrefix :: Lens' GcsDestination (Maybe Text)
+gdURIPrefix
+  = lens _gdURIPrefix (\ s a -> s{_gdURIPrefix = a})
 
 -- | The uri of the Cloud Storage object. It\'s the same uri that is used by
 -- gsutil. For example: \"gs:\/\/bucket_name\/object_name\". See [Viewing
@@ -457,17 +485,25 @@ gdURI = lens _gdURI (\ s a -> s{_gdURI = a})
 instance FromJSON GcsDestination where
         parseJSON
           = withObject "GcsDestination"
-              (\ o -> GcsDestination' <$> (o .:? "uri"))
+              (\ o ->
+                 GcsDestination' <$>
+                   (o .:? "uriPrefix") <*> (o .:? "uri"))
 
 instance ToJSON GcsDestination where
         toJSON GcsDestination'{..}
-          = object (catMaybes [("uri" .=) <$> _gdURI])
+          = object
+              (catMaybes
+                 [("uriPrefix" .=) <$> _gdURIPrefix,
+                  ("uri" .=) <$> _gdURI])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -478,9 +514,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -499,12 +534,15 @@ instance ToJSON StatusDetailsItem where
 -- | Export asset request.
 --
 -- /See:/ 'exportAssetsRequest' smart constructor.
-data ExportAssetsRequest = ExportAssetsRequest'
+data ExportAssetsRequest =
+  ExportAssetsRequest'
     { _earReadTime     :: !(Maybe DateTime')
     , _earAssetTypes   :: !(Maybe [Text])
     , _earOutputConfig :: !(Maybe OutputConfig)
     , _earContentType  :: !(Maybe ExportAssetsRequestContentType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportAssetsRequest' with the minimum fields required to make a request.
 --
@@ -520,12 +558,13 @@ data ExportAssetsRequest = ExportAssetsRequest'
 exportAssetsRequest
     :: ExportAssetsRequest
 exportAssetsRequest =
-    ExportAssetsRequest'
+  ExportAssetsRequest'
     { _earReadTime = Nothing
     , _earAssetTypes = Nothing
     , _earOutputConfig = Nothing
     , _earContentType = Nothing
     }
+
 
 -- | Timestamp to take an asset snapshot. This can only be set to a timestamp
 -- between 2018-10-02 UTC (inclusive) and the current time. If not
@@ -538,8 +577,8 @@ earReadTime
       mapping _DateTime
 
 -- | A list of asset types of which to take a snapshot for. For example:
--- \"google.compute.Disk\". If specified, only matching assets will be
--- returned. See [Introduction to Cloud Asset
+-- \"compute.googleapis.com\/Disk\". If specified, only matching assets
+-- will be returned. See [Introduction to Cloud Asset
 -- Inventory](https:\/\/cloud.google.com\/resource-manager\/docs\/cloud-asset-inventory\/overview)
 -- for all supported asset types.
 earAssetTypes :: Lens' ExportAssetsRequest [Text]
@@ -585,10 +624,13 @@ instance ToJSON ExportAssetsRequest where
 -- | A time window of (start_time, end_time].
 --
 -- /See:/ 'timeWindow' smart constructor.
-data TimeWindow = TimeWindow'
+data TimeWindow =
+  TimeWindow'
     { _twStartTime :: !(Maybe DateTime')
     , _twEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimeWindow' with the minimum fields required to make a request.
 --
@@ -599,11 +641,8 @@ data TimeWindow = TimeWindow'
 -- * 'twEndTime'
 timeWindow
     :: TimeWindow
-timeWindow =
-    TimeWindow'
-    { _twStartTime = Nothing
-    , _twEndTime = Nothing
-    }
+timeWindow = TimeWindow' {_twStartTime = Nothing, _twEndTime = Nothing}
+
 
 -- | Start time of the time window (exclusive).
 twStartTime :: Lens' TimeWindow (Maybe UTCTime)
@@ -636,11 +675,14 @@ instance ToJSON TimeWindow where
 -- the status of the asset and valid from and to time of it.
 --
 -- /See:/ 'temporalAsset' smart constructor.
-data TemporalAsset = TemporalAsset'
+data TemporalAsset =
+  TemporalAsset'
     { _taWindow  :: !(Maybe TimeWindow)
     , _taAsset   :: !(Maybe Asset)
     , _taDeleted :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TemporalAsset' with the minimum fields required to make a request.
 --
@@ -654,11 +696,8 @@ data TemporalAsset = TemporalAsset'
 temporalAsset
     :: TemporalAsset
 temporalAsset =
-    TemporalAsset'
-    { _taWindow = Nothing
-    , _taAsset = Nothing
-    , _taDeleted = Nothing
-    }
+  TemporalAsset' {_taWindow = Nothing, _taAsset = Nothing, _taDeleted = Nothing}
+
 
 -- | The time window when the asset data and state was observed.
 taWindow :: Lens' TemporalAsset (Maybe TimeWindow)
@@ -692,14 +731,17 @@ instance ToJSON TemporalAsset where
 -- | Representation of a cloud resource.
 --
 -- /See:/ 'resource' smart constructor.
-data Resource = Resource'
+data Resource =
+  Resource'
     { _rParent               :: !(Maybe Text)
     , _rData                 :: !(Maybe ResourceData)
     , _rVersion              :: !(Maybe Text)
     , _rDiscoveryName        :: !(Maybe Text)
     , _rDiscoveryDocumentURI :: !(Maybe Text)
     , _rResourceURL          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
@@ -719,7 +761,7 @@ data Resource = Resource'
 resource
     :: Resource
 resource =
-    Resource'
+  Resource'
     { _rParent = Nothing
     , _rData = Nothing
     , _rVersion = Nothing
@@ -727,6 +769,7 @@ resource =
     , _rDiscoveryDocumentURI = Nothing
     , _rResourceURL = Nothing
     }
+
 
 -- | The full name of the immediate parent of this resource. See [Resource
 -- Names](https:\/\/cloud.google.com\/apis\/design\/resource_names#full_resource_name)
@@ -800,9 +843,12 @@ instance ToJSON Resource where
 -- away and may not be present.
 --
 -- /See:/ 'resourceData' smart constructor.
-newtype ResourceData = ResourceData'
+newtype ResourceData =
+  ResourceData'
     { _rdAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceData' with the minimum fields required to make a request.
 --
@@ -813,9 +859,8 @@ resourceData
     :: HashMap Text JSONValue -- ^ 'rdAddtional'
     -> ResourceData
 resourceData pRdAddtional_ =
-    ResourceData'
-    { _rdAddtional = _Coerce # pRdAddtional_
-    }
+  ResourceData' {_rdAddtional = _Coerce # pRdAddtional_}
+
 
 -- | Properties of the object.
 rdAddtional :: Lens' ResourceData (HashMap Text JSONValue)
@@ -834,9 +879,12 @@ instance ToJSON ResourceData where
 -- | Output configuration for export assets destination.
 --
 -- /See:/ 'outputConfig' smart constructor.
-newtype OutputConfig = OutputConfig'
+newtype OutputConfig =
+  OutputConfig'
     { _ocGcsDestination :: Maybe GcsDestination
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OutputConfig' with the minimum fields required to make a request.
 --
@@ -845,10 +893,8 @@ newtype OutputConfig = OutputConfig'
 -- * 'ocGcsDestination'
 outputConfig
     :: OutputConfig
-outputConfig =
-    OutputConfig'
-    { _ocGcsDestination = Nothing
-    }
+outputConfig = OutputConfig' {_ocGcsDestination = Nothing}
+
 
 -- | Destination on Cloud Storage.
 ocGcsDestination :: Lens' OutputConfig (Maybe GcsDestination)
@@ -886,12 +932,15 @@ instance ToJSON OutputConfig where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -907,12 +956,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -970,9 +1020,12 @@ instance ToJSON Policy where
 -- | Batch get assets history response.
 --
 -- /See:/ 'batchGetAssetsHistoryResponse' smart constructor.
-newtype BatchGetAssetsHistoryResponse = BatchGetAssetsHistoryResponse'
+newtype BatchGetAssetsHistoryResponse =
+  BatchGetAssetsHistoryResponse'
     { _bgahrAssets :: Maybe [TemporalAsset]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchGetAssetsHistoryResponse' with the minimum fields required to make a request.
 --
@@ -982,9 +1035,8 @@ newtype BatchGetAssetsHistoryResponse = BatchGetAssetsHistoryResponse'
 batchGetAssetsHistoryResponse
     :: BatchGetAssetsHistoryResponse
 batchGetAssetsHistoryResponse =
-    BatchGetAssetsHistoryResponse'
-    { _bgahrAssets = Nothing
-    }
+  BatchGetAssetsHistoryResponse' {_bgahrAssets = Nothing}
+
 
 -- | A list of assets with valid time windows.
 bgahrAssets :: Lens' BatchGetAssetsHistoryResponse [TemporalAsset]
@@ -1010,9 +1062,12 @@ instance ToJSON BatchGetAssetsHistoryResponse where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1023,9 +1078,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1048,10 +1102,13 @@ instance ToJSON OperationMetadata where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -1063,10 +1120,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1107,9 +1162,12 @@ instance ToJSON AuditLogConfig where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1120,9 +1178,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1141,11 +1198,14 @@ instance ToJSON OperationResponse where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1159,11 +1219,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -1176,8 +1233,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1190,10 +1247,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

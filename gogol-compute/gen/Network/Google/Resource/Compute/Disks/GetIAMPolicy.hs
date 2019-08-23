@@ -60,11 +60,14 @@ type DisksGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'disksGetIAMPolicy' smart constructor.
-data DisksGetIAMPolicy = DisksGetIAMPolicy'
+data DisksGetIAMPolicy =
+  DisksGetIAMPolicy'
     { _dgipProject  :: !Text
     , _dgipZone     :: !Text
     , _dgipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ disksGetIAMPolicy
     -> Text -- ^ 'dgipResource'
     -> DisksGetIAMPolicy
 disksGetIAMPolicy pDgipProject_ pDgipZone_ pDgipResource_ =
-    DisksGetIAMPolicy'
+  DisksGetIAMPolicy'
     { _dgipProject = pDgipProject_
     , _dgipZone = pDgipZone_
     , _dgipResource = pDgipResource_
     }
+
 
 -- | Project ID for this request.
 dgipProject :: Lens' DisksGetIAMPolicy Text

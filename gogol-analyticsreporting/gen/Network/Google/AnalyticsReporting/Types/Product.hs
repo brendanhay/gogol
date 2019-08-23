@@ -23,12 +23,15 @@ import           Network.Google.Prelude
 -- | MetricFilter specifies the filter on a metric.
 --
 -- /See:/ 'metricFilter' smart constructor.
-data MetricFilter = MetricFilter'
+data MetricFilter =
+  MetricFilter'
     { _mfNot             :: !(Maybe Bool)
     , _mfOperator        :: !(Maybe MetricFilterOperator)
     , _mfMetricName      :: !(Maybe Text)
     , _mfComparisonValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricFilter' with the minimum fields required to make a request.
 --
@@ -44,12 +47,13 @@ data MetricFilter = MetricFilter'
 metricFilter
     :: MetricFilter
 metricFilter =
-    MetricFilter'
+  MetricFilter'
     { _mfNot = Nothing
     , _mfOperator = Nothing
     , _mfMetricName = Nothing
     , _mfComparisonValue = Nothing
     }
+
 
 -- | Logical \`NOT\` operator. If this boolean is set to true, then the
 -- matching metric values will be excluded in the report. The default is
@@ -96,13 +100,104 @@ instance ToJSON MetricFilter where
                   ("metricName" .=) <$> _mfMetricName,
                   ("comparisonValue" .=) <$> _mfComparisonValue])
 
+-- | Represents all the details pertaining to an event.
+--
+-- /See:/ 'eventData' smart constructor.
+data EventData =
+  EventData'
+    { _edEventCategory :: !(Maybe Text)
+    , _edEventCount    :: !(Maybe (Textual Int64))
+    , _edEventValue    :: !(Maybe (Textual Int64))
+    , _edEventLabel    :: !(Maybe Text)
+    , _edEventAction   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EventData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edEventCategory'
+--
+-- * 'edEventCount'
+--
+-- * 'edEventValue'
+--
+-- * 'edEventLabel'
+--
+-- * 'edEventAction'
+eventData
+    :: EventData
+eventData =
+  EventData'
+    { _edEventCategory = Nothing
+    , _edEventCount = Nothing
+    , _edEventValue = Nothing
+    , _edEventLabel = Nothing
+    , _edEventAction = Nothing
+    }
+
+
+-- | The object on the page that was interacted with. Eg: \'Video\'.
+edEventCategory :: Lens' EventData (Maybe Text)
+edEventCategory
+  = lens _edEventCategory
+      (\ s a -> s{_edEventCategory = a})
+
+-- | Number of such events in this activity.
+edEventCount :: Lens' EventData (Maybe Int64)
+edEventCount
+  = lens _edEventCount (\ s a -> s{_edEventCount = a})
+      . mapping _Coerce
+
+-- | Numeric value associated with the event.
+edEventValue :: Lens' EventData (Maybe Int64)
+edEventValue
+  = lens _edEventValue (\ s a -> s{_edEventValue = a})
+      . mapping _Coerce
+
+-- | Label attached with the event.
+edEventLabel :: Lens' EventData (Maybe Text)
+edEventLabel
+  = lens _edEventLabel (\ s a -> s{_edEventLabel = a})
+
+-- | Type of interaction with the object. Eg: \'play\'.
+edEventAction :: Lens' EventData (Maybe Text)
+edEventAction
+  = lens _edEventAction
+      (\ s a -> s{_edEventAction = a})
+
+instance FromJSON EventData where
+        parseJSON
+          = withObject "EventData"
+              (\ o ->
+                 EventData' <$>
+                   (o .:? "eventCategory") <*> (o .:? "eventCount") <*>
+                     (o .:? "eventValue")
+                     <*> (o .:? "eventLabel")
+                     <*> (o .:? "eventAction"))
+
+instance ToJSON EventData where
+        toJSON EventData'{..}
+          = object
+              (catMaybes
+                 [("eventCategory" .=) <$> _edEventCategory,
+                  ("eventCount" .=) <$> _edEventCount,
+                  ("eventValue" .=) <$> _edEventValue,
+                  ("eventLabel" .=) <$> _edEventLabel,
+                  ("eventAction" .=) <$> _edEventAction])
+
 -- | A row in the report.
 --
 -- /See:/ 'reportRow' smart constructor.
-data ReportRow = ReportRow'
+data ReportRow =
+  ReportRow'
     { _rrMetrics    :: !(Maybe [DateRangeValues])
     , _rrDimensions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 --
@@ -113,11 +208,8 @@ data ReportRow = ReportRow'
 -- * 'rrDimensions'
 reportRow
     :: ReportRow
-reportRow =
-    ReportRow'
-    { _rrMetrics = Nothing
-    , _rrDimensions = Nothing
-    }
+reportRow = ReportRow' {_rrMetrics = Nothing, _rrDimensions = Nothing}
+
 
 -- | List of metrics for each requested DateRange.
 rrMetrics :: Lens' ReportRow [DateRangeValues]
@@ -152,11 +244,14 @@ instance ToJSON ReportRow where
 -- metrics requested in the pivots section of the response.
 --
 -- /See:/ 'pivotHeaderEntry' smart constructor.
-data PivotHeaderEntry = PivotHeaderEntry'
+data PivotHeaderEntry =
+  PivotHeaderEntry'
     { _pheDimensionValues :: !(Maybe [Text])
     , _pheDimensionNames  :: !(Maybe [Text])
     , _pheMetric          :: !(Maybe MetricHeaderEntry)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PivotHeaderEntry' with the minimum fields required to make a request.
 --
@@ -170,11 +265,12 @@ data PivotHeaderEntry = PivotHeaderEntry'
 pivotHeaderEntry
     :: PivotHeaderEntry
 pivotHeaderEntry =
-    PivotHeaderEntry'
+  PivotHeaderEntry'
     { _pheDimensionValues = Nothing
     , _pheDimensionNames = Nothing
     , _pheMetric = Nothing
     }
+
 
 -- | The values for the dimensions in the pivot.
 pheDimensionValues :: Lens' PivotHeaderEntry [Text]
@@ -217,9 +313,12 @@ instance ToJSON PivotHeaderEntry where
 -- | The metric values in the pivot region.
 --
 -- /See:/ 'pivotValueRegion' smart constructor.
-newtype PivotValueRegion = PivotValueRegion'
+newtype PivotValueRegion =
+  PivotValueRegion'
     { _pvrValues :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PivotValueRegion' with the minimum fields required to make a request.
 --
@@ -228,10 +327,8 @@ newtype PivotValueRegion = PivotValueRegion'
 -- * 'pvrValues'
 pivotValueRegion
     :: PivotValueRegion
-pivotValueRegion =
-    PivotValueRegion'
-    { _pvrValues = Nothing
-    }
+pivotValueRegion = PivotValueRegion' {_pvrValues = Nothing}
+
 
 -- | The values of the metrics in each of the pivot regions.
 pvrValues :: Lens' PivotValueRegion [Text]
@@ -253,7 +350,8 @@ instance ToJSON PivotValueRegion where
 -- | The main request class which specifies the Reporting API request.
 --
 -- /See:/ 'reportRequest' smart constructor.
-data ReportRequest = ReportRequest'
+data ReportRequest =
+  ReportRequest'
     { _rMetrics                :: !(Maybe [Metric])
     , _rPivots                 :: !(Maybe [Pivot])
     , _rCohortGroup            :: !(Maybe CohortGroup)
@@ -271,7 +369,9 @@ data ReportRequest = ReportRequest'
     , _rPageSize               :: !(Maybe (Textual Int32))
     , _rOrderBys               :: !(Maybe [OrderBy])
     , _rFiltersExpression      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
@@ -313,7 +413,7 @@ data ReportRequest = ReportRequest'
 reportRequest
     :: ReportRequest
 reportRequest =
-    ReportRequest'
+  ReportRequest'
     { _rMetrics = Nothing
     , _rPivots = Nothing
     , _rCohortGroup = Nothing
@@ -332,6 +432,7 @@ reportRequest =
     , _rOrderBys = Nothing
     , _rFiltersExpression = Nothing
     }
+
 
 -- | The metrics requested. Requests must specify at least one metric.
 -- Requests can have a total of 10 metrics.
@@ -544,10 +645,13 @@ instance ToJSON ReportRequest where
 -- | Header for the metrics.
 --
 -- /See:/ 'metricHeaderEntry' smart constructor.
-data MetricHeaderEntry = MetricHeaderEntry'
+data MetricHeaderEntry =
+  MetricHeaderEntry'
     { _mheName :: !(Maybe Text)
     , _mheType :: !(Maybe MetricHeaderEntryType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricHeaderEntry' with the minimum fields required to make a request.
 --
@@ -558,11 +662,8 @@ data MetricHeaderEntry = MetricHeaderEntry'
 -- * 'mheType'
 metricHeaderEntry
     :: MetricHeaderEntry
-metricHeaderEntry =
-    MetricHeaderEntry'
-    { _mheName = Nothing
-    , _mheType = Nothing
-    }
+metricHeaderEntry = MetricHeaderEntry' {_mheName = Nothing, _mheType = Nothing}
+
 
 -- | The name of the header.
 mheName :: Lens' MetricHeaderEntry (Maybe Text)
@@ -585,6 +686,42 @@ instance ToJSON MetricHeaderEntry where
               (catMaybes
                  [("name" .=) <$> _mheName, ("type" .=) <$> _mheType])
 
+-- | Represents a set of goals that were reached in an activity.
+--
+-- /See:/ 'goalSetData' smart constructor.
+newtype GoalSetData =
+  GoalSetData'
+    { _gsdGoals :: Maybe [GoalData]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoalSetData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsdGoals'
+goalSetData
+    :: GoalSetData
+goalSetData = GoalSetData' {_gsdGoals = Nothing}
+
+
+-- | All the goals that were reached in the current activity.
+gsdGoals :: Lens' GoalSetData [GoalData]
+gsdGoals
+  = lens _gsdGoals (\ s a -> s{_gsdGoals = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GoalSetData where
+        parseJSON
+          = withObject "GoalSetData"
+              (\ o -> GoalSetData' <$> (o .:? "goals" .!= mempty))
+
+instance ToJSON GoalSetData where
+        toJSON GoalSetData'{..}
+          = object (catMaybes [("goals" .=) <$> _gsdGoals])
+
 -- | Defines a cohort group. For example: \"cohortGroup\": { \"cohorts\": [{
 -- \"name\": \"cohort 1\", \"type\": \"FIRST_VISIT_DATE\", \"dateRange\": {
 -- \"startDate\": \"2015-08-01\", \"endDate\": \"2015-08-01\" } },{
@@ -592,10 +729,13 @@ instance ToJSON MetricHeaderEntry where
 -- \"startDate\": \"2015-07-01\", \"endDate\": \"2015-07-01\" } }] }
 --
 -- /See:/ 'cohortGroup' smart constructor.
-data CohortGroup = CohortGroup'
+data CohortGroup =
+  CohortGroup'
     { _cgCohorts       :: !(Maybe [Cohort])
     , _cgLifetimeValue :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CohortGroup' with the minimum fields required to make a request.
 --
@@ -606,11 +746,8 @@ data CohortGroup = CohortGroup'
 -- * 'cgLifetimeValue'
 cohortGroup
     :: CohortGroup
-cohortGroup =
-    CohortGroup'
-    { _cgCohorts = Nothing
-    , _cgLifetimeValue = Nothing
-    }
+cohortGroup = CohortGroup' {_cgCohorts = Nothing, _cgLifetimeValue = Nothing}
+
 
 -- | The definition for the cohort.
 cgCohorts :: Lens' CohortGroup [Cohort]
@@ -664,9 +801,12 @@ instance ToJSON CohortGroup where
 -- conditions that can be combined.
 --
 -- /See:/ 'simpleSegment' smart constructor.
-newtype SimpleSegment = SimpleSegment'
+newtype SimpleSegment =
+  SimpleSegment'
     { _ssOrFiltersForSegment :: Maybe [OrFiltersForSegment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SimpleSegment' with the minimum fields required to make a request.
 --
@@ -675,10 +815,8 @@ newtype SimpleSegment = SimpleSegment'
 -- * 'ssOrFiltersForSegment'
 simpleSegment
     :: SimpleSegment
-simpleSegment =
-    SimpleSegment'
-    { _ssOrFiltersForSegment = Nothing
-    }
+simpleSegment = SimpleSegment' {_ssOrFiltersForSegment = Nothing}
+
 
 -- | A list of segment filters groups which are combined with logical \`AND\`
 -- operator.
@@ -707,10 +845,13 @@ instance ToJSON SimpleSegment where
 -- filters are logically combined.
 --
 -- /See:/ 'dimensionFilterClause' smart constructor.
-data DimensionFilterClause = DimensionFilterClause'
+data DimensionFilterClause =
+  DimensionFilterClause'
     { _dfcOperator :: !(Maybe DimensionFilterClauseOperator)
     , _dfcFilters  :: !(Maybe [DimensionFilter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DimensionFilterClause' with the minimum fields required to make a request.
 --
@@ -722,10 +863,8 @@ data DimensionFilterClause = DimensionFilterClause'
 dimensionFilterClause
     :: DimensionFilterClause
 dimensionFilterClause =
-    DimensionFilterClause'
-    { _dfcOperator = Nothing
-    , _dfcFilters = Nothing
-    }
+  DimensionFilterClause' {_dfcOperator = Nothing, _dfcFilters = Nothing}
+
 
 -- | The operator for combining multiple dimension filters. If unspecified,
 -- it is treated as an \`OR\`.
@@ -758,11 +897,14 @@ instance ToJSON DimensionFilterClause where
 -- | Specifies the sorting options.
 --
 -- /See:/ 'orderBy' smart constructor.
-data OrderBy = OrderBy'
+data OrderBy =
+  OrderBy'
     { _obOrderType :: !(Maybe OrderByOrderType)
     , _obSortOrder :: !(Maybe OrderBySortOrder)
     , _obFieldName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderBy' with the minimum fields required to make a request.
 --
@@ -776,11 +918,9 @@ data OrderBy = OrderBy'
 orderBy
     :: OrderBy
 orderBy =
-    OrderBy'
-    { _obOrderType = Nothing
-    , _obSortOrder = Nothing
-    , _obFieldName = Nothing
-    }
+  OrderBy'
+    {_obOrderType = Nothing, _obSortOrder = Nothing, _obFieldName = Nothing}
+
 
 -- | The order type. The default orderType is \`VALUE\`.
 obOrderType :: Lens' OrderBy (Maybe OrderByOrderType)
@@ -821,10 +961,13 @@ instance ToJSON OrderBy where
 -- session originates.
 --
 -- /See:/ 'dimension' smart constructor.
-data Dimension = Dimension'
+data Dimension =
+  Dimension'
     { _dName             :: !(Maybe Text)
     , _dHistogramBuckets :: !(Maybe [Textual Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 --
@@ -835,11 +978,8 @@ data Dimension = Dimension'
 -- * 'dHistogramBuckets'
 dimension
     :: Dimension
-dimension =
-    Dimension'
-    { _dName = Nothing
-    , _dHistogramBuckets = Nothing
-    }
+dimension = Dimension' {_dName = Nothing, _dHistogramBuckets = Nothing}
+
 
 -- | Name of the dimension to fetch, for example \`ga:browser\`.
 dName :: Lens' Dimension (Maybe Text)
@@ -893,10 +1033,13 @@ instance ToJSON Dimension where
 -- combination
 --
 -- /See:/ 'dateRangeValues' smart constructor.
-data DateRangeValues = DateRangeValues'
+data DateRangeValues =
+  DateRangeValues'
     { _drvPivotValueRegions :: !(Maybe [PivotValueRegion])
     , _drvValues            :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DateRangeValues' with the minimum fields required to make a request.
 --
@@ -908,10 +1051,8 @@ data DateRangeValues = DateRangeValues'
 dateRangeValues
     :: DateRangeValues
 dateRangeValues =
-    DateRangeValues'
-    { _drvPivotValueRegions = Nothing
-    , _drvValues = Nothing
-    }
+  DateRangeValues' {_drvPivotValueRegions = Nothing, _drvValues = Nothing}
+
 
 -- | The values of each pivot region.
 drvPivotValueRegions :: Lens' DateRangeValues [PivotValueRegion]
@@ -946,10 +1087,13 @@ instance ToJSON DateRangeValues where
 -- | The headers for each of the pivot sections defined in the request.
 --
 -- /See:/ 'pivotHeader' smart constructor.
-data PivotHeader = PivotHeader'
+data PivotHeader =
+  PivotHeader'
     { _phTotalPivotGroupsCount :: !(Maybe (Textual Int32))
     , _phPivotHeaderEntries    :: !(Maybe [PivotHeaderEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PivotHeader' with the minimum fields required to make a request.
 --
@@ -961,10 +1105,9 @@ data PivotHeader = PivotHeader'
 pivotHeader
     :: PivotHeader
 pivotHeader =
-    PivotHeader'
-    { _phTotalPivotGroupsCount = Nothing
-    , _phPivotHeaderEntries = Nothing
-    }
+  PivotHeader'
+    {_phTotalPivotGroupsCount = Nothing, _phPivotHeaderEntries = Nothing}
+
 
 -- | The total number of groups for this pivot.
 phTotalPivotGroupsCount :: Lens' PivotHeader (Maybe Int32)
@@ -997,13 +1140,133 @@ instance ToJSON PivotHeader where
                     _phTotalPivotGroupsCount,
                   ("pivotHeaderEntries" .=) <$> _phPivotHeaderEntries])
 
+-- | The request to fetch User Report from Reporting API \`userActivity:get\`
+-- call.
+--
+-- /See:/ 'searchUserActivityRequest' smart constructor.
+data SearchUserActivityRequest =
+  SearchUserActivityRequest'
+    { _suarViewId        :: !(Maybe Text)
+    , _suarDateRange     :: !(Maybe DateRange)
+    , _suarUser          :: !(Maybe User)
+    , _suarPageToken     :: !(Maybe Text)
+    , _suarPageSize      :: !(Maybe (Textual Int32))
+    , _suarActivityTypes :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SearchUserActivityRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'suarViewId'
+--
+-- * 'suarDateRange'
+--
+-- * 'suarUser'
+--
+-- * 'suarPageToken'
+--
+-- * 'suarPageSize'
+--
+-- * 'suarActivityTypes'
+searchUserActivityRequest
+    :: SearchUserActivityRequest
+searchUserActivityRequest =
+  SearchUserActivityRequest'
+    { _suarViewId = Nothing
+    , _suarDateRange = Nothing
+    , _suarUser = Nothing
+    , _suarPageToken = Nothing
+    , _suarPageSize = Nothing
+    , _suarActivityTypes = Nothing
+    }
+
+
+-- | Required. The Analytics [view
+-- ID](https:\/\/support.google.com\/analytics\/answer\/1009618) from which
+-- to retrieve data. Every
+-- [SearchUserActivityRequest](#SearchUserActivityRequest) must contain the
+-- \`viewId\`.
+suarViewId :: Lens' SearchUserActivityRequest (Maybe Text)
+suarViewId
+  = lens _suarViewId (\ s a -> s{_suarViewId = a})
+
+-- | Date range for which to retrieve the user activity. If a date range is
+-- not provided, the default date range is (startDate: current date - 7
+-- days, endDate: current date - 1 day).
+suarDateRange :: Lens' SearchUserActivityRequest (Maybe DateRange)
+suarDateRange
+  = lens _suarDateRange
+      (\ s a -> s{_suarDateRange = a})
+
+-- | Required. Unique user Id to query for. Every
+-- [SearchUserActivityRequest](#SearchUserActivityRequest) must contain
+-- this field.
+suarUser :: Lens' SearchUserActivityRequest (Maybe User)
+suarUser = lens _suarUser (\ s a -> s{_suarUser = a})
+
+-- | A continuation token to get the next page of the results. Adding this to
+-- the request will return the rows after the pageToken. The pageToken
+-- should be the value returned in the nextPageToken parameter in the
+-- response to the [SearchUserActivityRequest](#SearchUserActivityRequest)
+-- request.
+suarPageToken :: Lens' SearchUserActivityRequest (Maybe Text)
+suarPageToken
+  = lens _suarPageToken
+      (\ s a -> s{_suarPageToken = a})
+
+-- | Page size is for paging and specifies the maximum number of returned
+-- rows. Page size should be > 0. If the value is 0 or if the field isn\'t
+-- specified, the request returns the default of 1000 rows per page.
+suarPageSize :: Lens' SearchUserActivityRequest (Maybe Int32)
+suarPageSize
+  = lens _suarPageSize (\ s a -> s{_suarPageSize = a})
+      . mapping _Coerce
+
+-- | Set of all activity types being requested. Only acvities matching these
+-- types will be returned in the response. If empty, all activies will be
+-- returned.
+suarActivityTypes :: Lens' SearchUserActivityRequest [Text]
+suarActivityTypes
+  = lens _suarActivityTypes
+      (\ s a -> s{_suarActivityTypes = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON SearchUserActivityRequest where
+        parseJSON
+          = withObject "SearchUserActivityRequest"
+              (\ o ->
+                 SearchUserActivityRequest' <$>
+                   (o .:? "viewId") <*> (o .:? "dateRange") <*>
+                     (o .:? "user")
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "pageSize")
+                     <*> (o .:? "activityTypes" .!= mempty))
+
+instance ToJSON SearchUserActivityRequest where
+        toJSON SearchUserActivityRequest'{..}
+          = object
+              (catMaybes
+                 [("viewId" .=) <$> _suarViewId,
+                  ("dateRange" .=) <$> _suarDateRange,
+                  ("user" .=) <$> _suarUser,
+                  ("pageToken" .=) <$> _suarPageToken,
+                  ("pageSize" .=) <$> _suarPageSize,
+                  ("activityTypes" .=) <$> _suarActivityTypes])
+
 -- | The headers for the metrics.
 --
 -- /See:/ 'metricHeader' smart constructor.
-data MetricHeader = MetricHeader'
+data MetricHeader =
+  MetricHeader'
     { _mhPivotHeaders        :: !(Maybe [PivotHeader])
     , _mhMetricHeaderEntries :: !(Maybe [MetricHeaderEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricHeader' with the minimum fields required to make a request.
 --
@@ -1015,10 +1278,8 @@ data MetricHeader = MetricHeader'
 metricHeader
     :: MetricHeader
 metricHeader =
-    MetricHeader'
-    { _mhPivotHeaders = Nothing
-    , _mhMetricHeaderEntries = Nothing
-    }
+  MetricHeader' {_mhPivotHeaders = Nothing, _mhMetricHeaderEntries = Nothing}
+
 
 -- | Headers for the pivots in the response.
 mhPivotHeaders :: Lens' MetricHeader [PivotHeader]
@@ -1058,11 +1319,14 @@ instance ToJSON MetricHeader where
 -- can be used to select users or sessions based on sequential conditions.
 --
 -- /See:/ 'segmentFilter' smart constructor.
-data SegmentFilter = SegmentFilter'
+data SegmentFilter =
+  SegmentFilter'
     { _sfNot             :: !(Maybe Bool)
     , _sfSimpleSegment   :: !(Maybe SimpleSegment)
     , _sfSequenceSegment :: !(Maybe SequenceSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentFilter' with the minimum fields required to make a request.
 --
@@ -1076,11 +1340,9 @@ data SegmentFilter = SegmentFilter'
 segmentFilter
     :: SegmentFilter
 segmentFilter =
-    SegmentFilter'
-    { _sfNot = Nothing
-    , _sfSimpleSegment = Nothing
-    , _sfSequenceSegment = Nothing
-    }
+  SegmentFilter'
+    {_sfNot = Nothing, _sfSimpleSegment = Nothing, _sfSequenceSegment = Nothing}
+
 
 -- | If true, match the complement of simple or sequence segment. For
 -- example, to match all visits not from \"New York\", we can define the
@@ -1129,10 +1391,13 @@ instance ToJSON SegmentFilter where
 -- \`YYYY-MM-DD\`.
 --
 -- /See:/ 'dateRange' smart constructor.
-data DateRange = DateRange'
+data DateRange =
+  DateRange'
     { _drEndDate   :: !(Maybe Text)
     , _drStartDate :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
@@ -1143,11 +1408,8 @@ data DateRange = DateRange'
 -- * 'drStartDate'
 dateRange
     :: DateRange
-dateRange =
-    DateRange'
-    { _drEndDate = Nothing
-    , _drStartDate = Nothing
-    }
+dateRange = DateRange' {_drEndDate = Nothing, _drStartDate = Nothing}
+
 
 -- | The end date for the query in the format \`YYYY-MM-DD\`.
 drEndDate :: Lens' DateRange (Maybe Text)
@@ -1176,11 +1438,14 @@ instance ToJSON DateRange where
 -- | The data response corresponding to the request.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rNextPageToken :: !(Maybe Text)
     , _rData          :: !(Maybe ReportData)
     , _rColumnHeader  :: !(Maybe ColumnHeader)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -1194,11 +1459,9 @@ data Report = Report'
 report
     :: Report
 report =
-    Report'
-    { _rNextPageToken = Nothing
-    , _rData = Nothing
-    , _rColumnHeader = Nothing
-    }
+  Report'
+    {_rNextPageToken = Nothing, _rData = Nothing, _rColumnHeader = Nothing}
+
 
 -- | Page token to retrieve the next page of results in the list.
 rNextPageToken :: Lens' Report (Maybe Text)
@@ -1232,10 +1495,58 @@ instance ToJSON Report where
                   ("data" .=) <$> _rData,
                   ("columnHeader" .=) <$> _rColumnHeader])
 
+-- | Represents details collected when the visitor views a page.
+--
+-- /See:/ 'pageviewData' smart constructor.
+data PageviewData =
+  PageviewData'
+    { _pdPageTitle :: !(Maybe Text)
+    , _pdPagePath  :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PageviewData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdPageTitle'
+--
+-- * 'pdPagePath'
+pageviewData
+    :: PageviewData
+pageviewData = PageviewData' {_pdPageTitle = Nothing, _pdPagePath = Nothing}
+
+
+-- | The title of the page that the visitor viewed.
+pdPageTitle :: Lens' PageviewData (Maybe Text)
+pdPageTitle
+  = lens _pdPageTitle (\ s a -> s{_pdPageTitle = a})
+
+-- | The URL of the page that the visitor viewed.
+pdPagePath :: Lens' PageviewData (Maybe Text)
+pdPagePath
+  = lens _pdPagePath (\ s a -> s{_pdPagePath = a})
+
+instance FromJSON PageviewData where
+        parseJSON
+          = withObject "PageviewData"
+              (\ o ->
+                 PageviewData' <$>
+                   (o .:? "pageTitle") <*> (o .:? "pagePath"))
+
+instance ToJSON PageviewData where
+        toJSON PageviewData'{..}
+          = object
+              (catMaybes
+                 [("pageTitle" .=) <$> _pdPageTitle,
+                  ("pagePath" .=) <$> _pdPagePath])
+
 -- | The data part of the report.
 --
 -- /See:/ 'reportData' smart constructor.
-data ReportData = ReportData'
+data ReportData =
+  ReportData'
     { _rdMinimums           :: !(Maybe [DateRangeValues])
     , _rdRows               :: !(Maybe [ReportRow])
     , _rdTotals             :: !(Maybe [DateRangeValues])
@@ -1245,7 +1556,9 @@ data ReportData = ReportData'
     , _rdRowCount           :: !(Maybe (Textual Int32))
     , _rdSamplingSpaceSizes :: !(Maybe [Textual Int64])
     , _rdIsDataGolden       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportData' with the minimum fields required to make a request.
 --
@@ -1271,7 +1584,7 @@ data ReportData = ReportData'
 reportData
     :: ReportData
 reportData =
-    ReportData'
+  ReportData'
     { _rdMinimums = Nothing
     , _rdRows = Nothing
     , _rdTotals = Nothing
@@ -1282,6 +1595,7 @@ reportData =
     , _rdSamplingSpaceSizes = Nothing
     , _rdIsDataGolden = Nothing
     }
+
 
 -- | Minimum and maximum values seen over all matching rows. These are both
 -- empty when \`hideValueRanges\` in the request is false, or when rowCount
@@ -1403,11 +1717,14 @@ instance ToJSON ReportData where
 -- or a dimension filter.
 --
 -- /See:/ 'segmentFilterClause' smart constructor.
-data SegmentFilterClause = SegmentFilterClause'
+data SegmentFilterClause =
+  SegmentFilterClause'
     { _sfcMetricFilter    :: !(Maybe SegmentMetricFilter)
     , _sfcNot             :: !(Maybe Bool)
     , _sfcDimensionFilter :: !(Maybe SegmentDimensionFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentFilterClause' with the minimum fields required to make a request.
 --
@@ -1421,11 +1738,12 @@ data SegmentFilterClause = SegmentFilterClause'
 segmentFilterClause
     :: SegmentFilterClause
 segmentFilterClause =
-    SegmentFilterClause'
+  SegmentFilterClause'
     { _sfcMetricFilter = Nothing
     , _sfcNot = Nothing
     , _sfcDimensionFilter = Nothing
     }
+
 
 -- | Metric Filter for the segment definition.
 sfcMetricFilter :: Lens' SegmentFilterClause (Maybe SegmentMetricFilter)
@@ -1462,10 +1780,13 @@ instance ToJSON SegmentFilterClause where
 -- | A segment sequence definition.
 --
 -- /See:/ 'segmentSequenceStep' smart constructor.
-data SegmentSequenceStep = SegmentSequenceStep'
+data SegmentSequenceStep =
+  SegmentSequenceStep'
     { _sssMatchType           :: !(Maybe SegmentSequenceStepMatchType)
     , _sssOrFiltersForSegment :: !(Maybe [OrFiltersForSegment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentSequenceStep' with the minimum fields required to make a request.
 --
@@ -1477,10 +1798,9 @@ data SegmentSequenceStep = SegmentSequenceStep'
 segmentSequenceStep
     :: SegmentSequenceStep
 segmentSequenceStep =
-    SegmentSequenceStep'
-    { _sssMatchType = Nothing
-    , _sssOrFiltersForSegment = Nothing
-    }
+  SegmentSequenceStep'
+    {_sssMatchType = Nothing, _sssOrFiltersForSegment = Nothing}
+
 
 -- | Specifies if the step immediately precedes or can be any time before the
 -- next step.
@@ -1517,9 +1837,12 @@ instance ToJSON SegmentSequenceStep where
 -- logical OR operator.
 --
 -- /See:/ 'orFiltersForSegment' smart constructor.
-newtype OrFiltersForSegment = OrFiltersForSegment'
+newtype OrFiltersForSegment =
+  OrFiltersForSegment'
     { _offsSegmentFilterClauses :: Maybe [SegmentFilterClause]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrFiltersForSegment' with the minimum fields required to make a request.
 --
@@ -1528,10 +1851,8 @@ newtype OrFiltersForSegment = OrFiltersForSegment'
 -- * 'offsSegmentFilterClauses'
 orFiltersForSegment
     :: OrFiltersForSegment
-orFiltersForSegment =
-    OrFiltersForSegment'
-    { _offsSegmentFilterClauses = Nothing
-    }
+orFiltersForSegment = OrFiltersForSegment' {_offsSegmentFilterClauses = Nothing}
+
 
 -- | List of segment filters to be combined with a \`OR\` operator.
 offsSegmentFilterClauses :: Lens' OrFiltersForSegment [SegmentFilterClause]
@@ -1559,9 +1880,12 @@ instance ToJSON OrFiltersForSegment where
 -- which are combined together with a logical \`AND\` operation.
 --
 -- /See:/ 'segmentDefinition' smart constructor.
-newtype SegmentDefinition = SegmentDefinition'
+newtype SegmentDefinition =
+  SegmentDefinition'
     { _sdSegmentFilters :: Maybe [SegmentFilter]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentDefinition' with the minimum fields required to make a request.
 --
@@ -1570,10 +1894,8 @@ newtype SegmentDefinition = SegmentDefinition'
 -- * 'sdSegmentFilters'
 segmentDefinition
     :: SegmentDefinition
-segmentDefinition =
-    SegmentDefinition'
-    { _sdSegmentFilters = Nothing
-    }
+segmentDefinition = SegmentDefinition' {_sdSegmentFilters = Nothing}
+
 
 -- | A segment is defined by a set of segment filters which are combined
 -- together with a logical \`AND\` operation.
@@ -1597,18 +1919,65 @@ instance ToJSON SegmentDefinition where
               (catMaybes
                  [("segmentFilters" .=) <$> _sdSegmentFilters])
 
+-- | Contains information to identify a particular user uniquely.
+--
+-- /See:/ 'user' smart constructor.
+data User =
+  User'
+    { _uUserId :: !(Maybe Text)
+    , _uType   :: !(Maybe UserType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'User' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uUserId'
+--
+-- * 'uType'
+user
+    :: User
+user = User' {_uUserId = Nothing, _uType = Nothing}
+
+
+-- | Unique Id of the user for which the data is being requested.
+uUserId :: Lens' User (Maybe Text)
+uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
+
+-- | Type of the user in the request. The field \`userId\` is associated with
+-- this type.
+uType :: Lens' User (Maybe UserType)
+uType = lens _uType (\ s a -> s{_uType = a})
+
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User' <$> (o .:? "userId") <*> (o .:? "type"))
+
+instance ToJSON User where
+        toJSON User'{..}
+          = object
+              (catMaybes
+                 [("userId" .=) <$> _uUserId, ("type" .=) <$> _uType])
+
 -- | The Pivot describes the pivot section in the request. The Pivot helps
 -- rearrange the information in the table for certain reports by pivoting
 -- your data on a second dimension.
 --
 -- /See:/ 'pivot' smart constructor.
-data Pivot = Pivot'
+data Pivot =
+  Pivot'
     { _pStartGroup             :: !(Maybe (Textual Int32))
     , _pMetrics                :: !(Maybe [Metric])
     , _pMaxGroupCount          :: !(Maybe (Textual Int32))
     , _pDimensions             :: !(Maybe [Dimension])
     , _pDimensionFilterClauses :: !(Maybe [DimensionFilterClause])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Pivot' with the minimum fields required to make a request.
 --
@@ -1626,13 +1995,14 @@ data Pivot = Pivot'
 pivot
     :: Pivot
 pivot =
-    Pivot'
+  Pivot'
     { _pStartGroup = Nothing
     , _pMetrics = Nothing
     , _pMaxGroupCount = Nothing
     , _pDimensions = Nothing
     , _pDimensionFilterClauses = Nothing
     }
+
 
 -- | If k metrics were requested, then the response will contain some
 -- data-dependent multiple of k columns in the report. E.g., if you pivoted
@@ -1711,15 +2081,101 @@ instance ToJSON Pivot where
                   ("dimensionFilterClauses" .=) <$>
                     _pDimensionFilterClauses])
 
+-- | Represents details collected when the visitor performs a transaction on
+-- the page.
+--
+-- /See:/ 'transactionData' smart constructor.
+data TransactionData =
+  TransactionData'
+    { _tdTransactionId       :: !(Maybe Text)
+    , _tdTransactionTax      :: !(Maybe (Textual Double))
+    , _tdTransactionShipping :: !(Maybe (Textual Double))
+    , _tdTransactionRevenue  :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TransactionData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tdTransactionId'
+--
+-- * 'tdTransactionTax'
+--
+-- * 'tdTransactionShipping'
+--
+-- * 'tdTransactionRevenue'
+transactionData
+    :: TransactionData
+transactionData =
+  TransactionData'
+    { _tdTransactionId = Nothing
+    , _tdTransactionTax = Nothing
+    , _tdTransactionShipping = Nothing
+    , _tdTransactionRevenue = Nothing
+    }
+
+
+-- | The transaction ID, supplied by the e-commerce tracking method, for the
+-- purchase in the shopping cart.
+tdTransactionId :: Lens' TransactionData (Maybe Text)
+tdTransactionId
+  = lens _tdTransactionId
+      (\ s a -> s{_tdTransactionId = a})
+
+-- | Total tax for the transaction.
+tdTransactionTax :: Lens' TransactionData (Maybe Double)
+tdTransactionTax
+  = lens _tdTransactionTax
+      (\ s a -> s{_tdTransactionTax = a})
+      . mapping _Coerce
+
+-- | Total cost of shipping.
+tdTransactionShipping :: Lens' TransactionData (Maybe Double)
+tdTransactionShipping
+  = lens _tdTransactionShipping
+      (\ s a -> s{_tdTransactionShipping = a})
+      . mapping _Coerce
+
+-- | The total sale revenue (excluding shipping and tax) of the transaction.
+tdTransactionRevenue :: Lens' TransactionData (Maybe Double)
+tdTransactionRevenue
+  = lens _tdTransactionRevenue
+      (\ s a -> s{_tdTransactionRevenue = a})
+      . mapping _Coerce
+
+instance FromJSON TransactionData where
+        parseJSON
+          = withObject "TransactionData"
+              (\ o ->
+                 TransactionData' <$>
+                   (o .:? "transactionId") <*> (o .:? "transactionTax")
+                     <*> (o .:? "transactionShipping")
+                     <*> (o .:? "transactionRevenue"))
+
+instance ToJSON TransactionData where
+        toJSON TransactionData'{..}
+          = object
+              (catMaybes
+                 [("transactionId" .=) <$> _tdTransactionId,
+                  ("transactionTax" .=) <$> _tdTransactionTax,
+                  ("transactionShipping" .=) <$>
+                    _tdTransactionShipping,
+                  ("transactionRevenue" .=) <$> _tdTransactionRevenue])
+
 -- | Sequence conditions consist of one or more steps, where each step is
 -- defined by one or more dimension\/metric conditions. Multiple steps can
 -- be combined with special sequence operators.
 --
 -- /See:/ 'sequenceSegment' smart constructor.
-data SequenceSegment = SequenceSegment'
+data SequenceSegment =
+  SequenceSegment'
     { _ssFirstStepShouldMatchFirstHit :: !(Maybe Bool)
     , _ssSegmentSequenceSteps         :: !(Maybe [SegmentSequenceStep])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SequenceSegment' with the minimum fields required to make a request.
 --
@@ -1731,10 +2187,11 @@ data SequenceSegment = SequenceSegment'
 sequenceSegment
     :: SequenceSegment
 sequenceSegment =
-    SequenceSegment'
+  SequenceSegment'
     { _ssFirstStepShouldMatchFirstHit = Nothing
     , _ssSegmentSequenceSteps = Nothing
     }
+
 
 -- | If set, first step condition must match the first hit of the visitor (in
 -- the date range).
@@ -1773,11 +2230,14 @@ instance ToJSON SequenceSegment where
 -- indicates the total number of users for the requested time period.
 --
 -- /See:/ 'metric' smart constructor.
-data Metric = Metric'
+data Metric =
+  Metric'
     { _mFormattingType :: !(Maybe MetricFormattingType)
     , _mAlias          :: !(Maybe Text)
     , _mExpression     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
@@ -1791,11 +2251,9 @@ data Metric = Metric'
 metric
     :: Metric
 metric =
-    Metric'
-    { _mFormattingType = Nothing
-    , _mAlias = Nothing
-    , _mExpression = Nothing
-    }
+  Metric'
+    {_mFormattingType = Nothing, _mAlias = Nothing, _mExpression = Nothing}
+
 
 -- | Specifies how the metric expression should be formatted, for example
 -- \`INTEGER\`.
@@ -1843,13 +2301,16 @@ instance ToJSON Metric where
 -- | Metric filter to be used in a segment filter clause.
 --
 -- /See:/ 'segmentMetricFilter' smart constructor.
-data SegmentMetricFilter = SegmentMetricFilter'
+data SegmentMetricFilter =
+  SegmentMetricFilter'
     { _smfOperator           :: !(Maybe SegmentMetricFilterOperator)
     , _smfMetricName         :: !(Maybe Text)
     , _smfMaxComparisonValue :: !(Maybe Text)
     , _smfScope              :: !(Maybe SegmentMetricFilterScope)
     , _smfComparisonValue    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentMetricFilter' with the minimum fields required to make a request.
 --
@@ -1867,13 +2328,14 @@ data SegmentMetricFilter = SegmentMetricFilter'
 segmentMetricFilter
     :: SegmentMetricFilter
 segmentMetricFilter =
-    SegmentMetricFilter'
+  SegmentMetricFilter'
     { _smfOperator = Nothing
     , _smfMetricName = Nothing
     , _smfMaxComparisonValue = Nothing
     , _smfScope = Nothing
     , _smfComparisonValue = Nothing
     }
+
 
 -- | Specifies is the operation to perform to compare the metric. The default
 -- is \`EQUAL\`.
@@ -1931,10 +2393,13 @@ instance ToJSON SegmentMetricFilter where
 -- | The batch request containing multiple report request.
 --
 -- /See:/ 'getReportsRequest' smart constructor.
-data GetReportsRequest = GetReportsRequest'
+data GetReportsRequest =
+  GetReportsRequest'
     { _grrUseResourceQuotas :: !(Maybe Bool)
     , _grrReportRequests    :: !(Maybe [ReportRequest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetReportsRequest' with the minimum fields required to make a request.
 --
@@ -1946,10 +2411,9 @@ data GetReportsRequest = GetReportsRequest'
 getReportsRequest
     :: GetReportsRequest
 getReportsRequest =
-    GetReportsRequest'
-    { _grrUseResourceQuotas = Nothing
-    , _grrReportRequests = Nothing
-    }
+  GetReportsRequest'
+    {_grrUseResourceQuotas = Nothing, _grrReportRequests = Nothing}
+
 
 -- | Enables [resource based
 -- quotas](\/analytics\/devguides\/reporting\/core\/v4\/limits-quotas#analytics_reporting_api_v4),
@@ -1989,16 +2453,475 @@ instance ToJSON GetReportsRequest where
                  [("useResourceQuotas" .=) <$> _grrUseResourceQuotas,
                   ("reportRequests" .=) <$> _grrReportRequests])
 
+-- | This represents a user session performed on a specific device at a
+-- certain time over a period of time.
+--
+-- /See:/ 'userActivitySession' smart constructor.
+data UserActivitySession =
+  UserActivitySession'
+    { _uasPlatform       :: !(Maybe Text)
+    , _uasDeviceCategory :: !(Maybe Text)
+    , _uasActivities     :: !(Maybe [Activity])
+    , _uasSessionDate    :: !(Maybe Text)
+    , _uasDataSource     :: !(Maybe Text)
+    , _uasSessionId      :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UserActivitySession' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uasPlatform'
+--
+-- * 'uasDeviceCategory'
+--
+-- * 'uasActivities'
+--
+-- * 'uasSessionDate'
+--
+-- * 'uasDataSource'
+--
+-- * 'uasSessionId'
+userActivitySession
+    :: UserActivitySession
+userActivitySession =
+  UserActivitySession'
+    { _uasPlatform = Nothing
+    , _uasDeviceCategory = Nothing
+    , _uasActivities = Nothing
+    , _uasSessionDate = Nothing
+    , _uasDataSource = Nothing
+    , _uasSessionId = Nothing
+    }
+
+
+-- | Platform on which the activity happened: \"android\", \"ios\" etc.
+uasPlatform :: Lens' UserActivitySession (Maybe Text)
+uasPlatform
+  = lens _uasPlatform (\ s a -> s{_uasPlatform = a})
+
+-- | The type of device used: \"mobile\", \"tablet\" etc.
+uasDeviceCategory :: Lens' UserActivitySession (Maybe Text)
+uasDeviceCategory
+  = lens _uasDeviceCategory
+      (\ s a -> s{_uasDeviceCategory = a})
+
+-- | Represents a detailed view into each of the activity in this session.
+uasActivities :: Lens' UserActivitySession [Activity]
+uasActivities
+  = lens _uasActivities
+      (\ s a -> s{_uasActivities = a})
+      . _Default
+      . _Coerce
+
+-- | Date of this session in ISO-8601 format.
+uasSessionDate :: Lens' UserActivitySession (Maybe Text)
+uasSessionDate
+  = lens _uasSessionDate
+      (\ s a -> s{_uasSessionDate = a})
+
+-- | The data source of a hit. By default, hits sent from analytics.js are
+-- reported as \"web\" and hits sent from the mobile SDKs are reported as
+-- \"app\". These values can be overridden in the Measurement Protocol.
+uasDataSource :: Lens' UserActivitySession (Maybe Text)
+uasDataSource
+  = lens _uasDataSource
+      (\ s a -> s{_uasDataSource = a})
+
+-- | Unique ID of the session.
+uasSessionId :: Lens' UserActivitySession (Maybe Text)
+uasSessionId
+  = lens _uasSessionId (\ s a -> s{_uasSessionId = a})
+
+instance FromJSON UserActivitySession where
+        parseJSON
+          = withObject "UserActivitySession"
+              (\ o ->
+                 UserActivitySession' <$>
+                   (o .:? "platform") <*> (o .:? "deviceCategory") <*>
+                     (o .:? "activities" .!= mempty)
+                     <*> (o .:? "sessionDate")
+                     <*> (o .:? "dataSource")
+                     <*> (o .:? "sessionId"))
+
+instance ToJSON UserActivitySession where
+        toJSON UserActivitySession'{..}
+          = object
+              (catMaybes
+                 [("platform" .=) <$> _uasPlatform,
+                  ("deviceCategory" .=) <$> _uasDeviceCategory,
+                  ("activities" .=) <$> _uasActivities,
+                  ("sessionDate" .=) <$> _uasSessionDate,
+                  ("dataSource" .=) <$> _uasDataSource,
+                  ("sessionId" .=) <$> _uasSessionId])
+
+-- | Represents all the details pertaining to a goal.
+--
+-- /See:/ 'goalData' smart constructor.
+data GoalData =
+  GoalData'
+    { _gdGoalPreviousStep2      :: !(Maybe Text)
+    , _gdGoalName               :: !(Maybe Text)
+    , _gdGoalPreviousStep3      :: !(Maybe Text)
+    , _gdGoalIndex              :: !(Maybe (Textual Int32))
+    , _gdGoalCompletionLocation :: !(Maybe Text)
+    , _gdGoalPreviousStep1      :: !(Maybe Text)
+    , _gdGoalCompletions        :: !(Maybe (Textual Int64))
+    , _gdGoalValue              :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoalData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdGoalPreviousStep2'
+--
+-- * 'gdGoalName'
+--
+-- * 'gdGoalPreviousStep3'
+--
+-- * 'gdGoalIndex'
+--
+-- * 'gdGoalCompletionLocation'
+--
+-- * 'gdGoalPreviousStep1'
+--
+-- * 'gdGoalCompletions'
+--
+-- * 'gdGoalValue'
+goalData
+    :: GoalData
+goalData =
+  GoalData'
+    { _gdGoalPreviousStep2 = Nothing
+    , _gdGoalName = Nothing
+    , _gdGoalPreviousStep3 = Nothing
+    , _gdGoalIndex = Nothing
+    , _gdGoalCompletionLocation = Nothing
+    , _gdGoalPreviousStep1 = Nothing
+    , _gdGoalCompletions = Nothing
+    , _gdGoalValue = Nothing
+    }
+
+
+-- | URL of the page two steps prior to the goal completion.
+gdGoalPreviousStep2 :: Lens' GoalData (Maybe Text)
+gdGoalPreviousStep2
+  = lens _gdGoalPreviousStep2
+      (\ s a -> s{_gdGoalPreviousStep2 = a})
+
+-- | Name of the goal.
+gdGoalName :: Lens' GoalData (Maybe Text)
+gdGoalName
+  = lens _gdGoalName (\ s a -> s{_gdGoalName = a})
+
+-- | URL of the page three steps prior to the goal completion.
+gdGoalPreviousStep3 :: Lens' GoalData (Maybe Text)
+gdGoalPreviousStep3
+  = lens _gdGoalPreviousStep3
+      (\ s a -> s{_gdGoalPreviousStep3 = a})
+
+-- | This identifies the goal as configured for the profile.
+gdGoalIndex :: Lens' GoalData (Maybe Int32)
+gdGoalIndex
+  = lens _gdGoalIndex (\ s a -> s{_gdGoalIndex = a}) .
+      mapping _Coerce
+
+-- | URL of the page where this goal was completed.
+gdGoalCompletionLocation :: Lens' GoalData (Maybe Text)
+gdGoalCompletionLocation
+  = lens _gdGoalCompletionLocation
+      (\ s a -> s{_gdGoalCompletionLocation = a})
+
+-- | URL of the page one step prior to the goal completion.
+gdGoalPreviousStep1 :: Lens' GoalData (Maybe Text)
+gdGoalPreviousStep1
+  = lens _gdGoalPreviousStep1
+      (\ s a -> s{_gdGoalPreviousStep1 = a})
+
+-- | Total number of goal completions in this activity.
+gdGoalCompletions :: Lens' GoalData (Maybe Int64)
+gdGoalCompletions
+  = lens _gdGoalCompletions
+      (\ s a -> s{_gdGoalCompletions = a})
+      . mapping _Coerce
+
+-- | Value in this goal.
+gdGoalValue :: Lens' GoalData (Maybe Double)
+gdGoalValue
+  = lens _gdGoalValue (\ s a -> s{_gdGoalValue = a}) .
+      mapping _Coerce
+
+instance FromJSON GoalData where
+        parseJSON
+          = withObject "GoalData"
+              (\ o ->
+                 GoalData' <$>
+                   (o .:? "goalPreviousStep2") <*> (o .:? "goalName")
+                     <*> (o .:? "goalPreviousStep3")
+                     <*> (o .:? "goalIndex")
+                     <*> (o .:? "goalCompletionLocation")
+                     <*> (o .:? "goalPreviousStep1")
+                     <*> (o .:? "goalCompletions")
+                     <*> (o .:? "goalValue"))
+
+instance ToJSON GoalData where
+        toJSON GoalData'{..}
+          = object
+              (catMaybes
+                 [("goalPreviousStep2" .=) <$> _gdGoalPreviousStep2,
+                  ("goalName" .=) <$> _gdGoalName,
+                  ("goalPreviousStep3" .=) <$> _gdGoalPreviousStep3,
+                  ("goalIndex" .=) <$> _gdGoalIndex,
+                  ("goalCompletionLocation" .=) <$>
+                    _gdGoalCompletionLocation,
+                  ("goalPreviousStep1" .=) <$> _gdGoalPreviousStep1,
+                  ("goalCompletions" .=) <$> _gdGoalCompletions,
+                  ("goalValue" .=) <$> _gdGoalValue])
+
+-- | An Activity represents data for an activity of a user. Note that an
+-- Activity is different from a hit. A hit might result in multiple
+-- Activity\'s. For example, if a hit includes a transaction and a goal
+-- completion, there will be two Activity protos for this hit, one for
+-- ECOMMERCE and one for GOAL. Conversely, multiple hits can also construct
+-- one Activity. In classic e-commerce, data for one transaction might be
+-- sent through multiple hits. These hits will be merged into one ECOMMERCE
+-- Activity.
+--
+-- /See:/ 'activity' smart constructor.
+data Activity =
+  Activity'
+    { _aEvent           :: !(Maybe EventData)
+    , _aHostname        :: !(Maybe Text)
+    , _aActivityType    :: !(Maybe ActivityActivityType)
+    , _aMedium          :: !(Maybe Text)
+    , _aPageview        :: !(Maybe PageviewData)
+    , _aCampaign        :: !(Maybe Text)
+    , _aGoals           :: !(Maybe GoalSetData)
+    , _aChannelGrouping :: !(Maybe Text)
+    , _aAppview         :: !(Maybe ScreenviewData)
+    , _aSource          :: !(Maybe Text)
+    , _aActivityTime    :: !(Maybe DateTime')
+    , _aEcommerce       :: !(Maybe EcommerceData)
+    , _aCustomDimension :: !(Maybe [CustomDimension])
+    , _aKeyword         :: !(Maybe Text)
+    , _aLandingPagePath :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Activity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aEvent'
+--
+-- * 'aHostname'
+--
+-- * 'aActivityType'
+--
+-- * 'aMedium'
+--
+-- * 'aPageview'
+--
+-- * 'aCampaign'
+--
+-- * 'aGoals'
+--
+-- * 'aChannelGrouping'
+--
+-- * 'aAppview'
+--
+-- * 'aSource'
+--
+-- * 'aActivityTime'
+--
+-- * 'aEcommerce'
+--
+-- * 'aCustomDimension'
+--
+-- * 'aKeyword'
+--
+-- * 'aLandingPagePath'
+activity
+    :: Activity
+activity =
+  Activity'
+    { _aEvent = Nothing
+    , _aHostname = Nothing
+    , _aActivityType = Nothing
+    , _aMedium = Nothing
+    , _aPageview = Nothing
+    , _aCampaign = Nothing
+    , _aGoals = Nothing
+    , _aChannelGrouping = Nothing
+    , _aAppview = Nothing
+    , _aSource = Nothing
+    , _aActivityTime = Nothing
+    , _aEcommerce = Nothing
+    , _aCustomDimension = Nothing
+    , _aKeyword = Nothing
+    , _aLandingPagePath = Nothing
+    }
+
+
+-- | This field contains all the details pertaining to an event and will be
+-- set if \`activity_type\` equals \`EVENT\`.
+aEvent :: Lens' Activity (Maybe EventData)
+aEvent = lens _aEvent (\ s a -> s{_aEvent = a})
+
+-- | The hostname from which the tracking request was made.
+aHostname :: Lens' Activity (Maybe Text)
+aHostname
+  = lens _aHostname (\ s a -> s{_aHostname = a})
+
+-- | Type of this activity.
+aActivityType :: Lens' Activity (Maybe ActivityActivityType)
+aActivityType
+  = lens _aActivityType
+      (\ s a -> s{_aActivityType = a})
+
+-- | The type of referrals. For manual campaign tracking, it is the value of
+-- the utm_medium campaign tracking parameter. For AdWords autotagging, it
+-- is cpc. If users came from a search engine detected by Google Analytics,
+-- it is organic. If the referrer is not a search engine, it is referral.
+-- If users came directly to the property and document.referrer is empty,
+-- its value is (none).
+aMedium :: Lens' Activity (Maybe Text)
+aMedium = lens _aMedium (\ s a -> s{_aMedium = a})
+
+-- | This will be set if \`activity_type\` equals \`PAGEVIEW\`. This field
+-- contains all the details about the visitor and the page that was
+-- visited.
+aPageview :: Lens' Activity (Maybe PageviewData)
+aPageview
+  = lens _aPageview (\ s a -> s{_aPageview = a})
+
+-- | For manual campaign tracking, it is the value of the utm_campaign
+-- campaign tracking parameter. For AdWords autotagging, it is the name(s)
+-- of the online ad campaign(s) you use for the property. If you use
+-- neither, its value is (not set).
+aCampaign :: Lens' Activity (Maybe Text)
+aCampaign
+  = lens _aCampaign (\ s a -> s{_aCampaign = a})
+
+-- | This field contains a list of all the goals that were reached in this
+-- activity when \`activity_type\` equals \`GOAL\`.
+aGoals :: Lens' Activity (Maybe GoalSetData)
+aGoals = lens _aGoals (\ s a -> s{_aGoals = a})
+
+-- | The Channel Group associated with an end user\'s session for this View
+-- (defined by the View\'s Channel Groupings).
+aChannelGrouping :: Lens' Activity (Maybe Text)
+aChannelGrouping
+  = lens _aChannelGrouping
+      (\ s a -> s{_aChannelGrouping = a})
+
+-- | This will be set if \`activity_type\` equals \`SCREEN_VIEW\`.
+aAppview :: Lens' Activity (Maybe ScreenviewData)
+aAppview = lens _aAppview (\ s a -> s{_aAppview = a})
+
+-- | The source of referrals. For manual campaign tracking, it is the value
+-- of the utm_source campaign tracking parameter. For AdWords autotagging,
+-- it is google. If you use neither, it is the domain of the source (e.g.,
+-- document.referrer) referring the users. It may also contain a port
+-- address. If users arrived without a referrer, its value is (direct).
+aSource :: Lens' Activity (Maybe Text)
+aSource = lens _aSource (\ s a -> s{_aSource = a})
+
+-- | Timestamp of the activity.
+aActivityTime :: Lens' Activity (Maybe UTCTime)
+aActivityTime
+  = lens _aActivityTime
+      (\ s a -> s{_aActivityTime = a})
+      . mapping _DateTime
+
+-- | This will be set if \`activity_type\` equals \`ECOMMERCE\`.
+aEcommerce :: Lens' Activity (Maybe EcommerceData)
+aEcommerce
+  = lens _aEcommerce (\ s a -> s{_aEcommerce = a})
+
+-- | A list of all custom dimensions associated with this activity.
+aCustomDimension :: Lens' Activity [CustomDimension]
+aCustomDimension
+  = lens _aCustomDimension
+      (\ s a -> s{_aCustomDimension = a})
+      . _Default
+      . _Coerce
+
+-- | For manual campaign tracking, it is the value of the utm_term campaign
+-- tracking parameter. For AdWords traffic, it contains the best matching
+-- targeting criteria. For the display network, where multiple targeting
+-- criteria could have caused the ad to show up, it returns the best
+-- matching targeting criteria as selected by Ads. This could be
+-- display_keyword, site placement, boomuserlist, user_interest, age, or
+-- gender. Otherwise its value is (not set).
+aKeyword :: Lens' Activity (Maybe Text)
+aKeyword = lens _aKeyword (\ s a -> s{_aKeyword = a})
+
+-- | The first page in users\' sessions, or the landing page.
+aLandingPagePath :: Lens' Activity (Maybe Text)
+aLandingPagePath
+  = lens _aLandingPagePath
+      (\ s a -> s{_aLandingPagePath = a})
+
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity' <$>
+                   (o .:? "event") <*> (o .:? "hostname") <*>
+                     (o .:? "activityType")
+                     <*> (o .:? "medium")
+                     <*> (o .:? "pageview")
+                     <*> (o .:? "campaign")
+                     <*> (o .:? "goals")
+                     <*> (o .:? "channelGrouping")
+                     <*> (o .:? "appview")
+                     <*> (o .:? "source")
+                     <*> (o .:? "activityTime")
+                     <*> (o .:? "ecommerce")
+                     <*> (o .:? "customDimension" .!= mempty)
+                     <*> (o .:? "keyword")
+                     <*> (o .:? "landingPagePath"))
+
+instance ToJSON Activity where
+        toJSON Activity'{..}
+          = object
+              (catMaybes
+                 [("event" .=) <$> _aEvent,
+                  ("hostname" .=) <$> _aHostname,
+                  ("activityType" .=) <$> _aActivityType,
+                  ("medium" .=) <$> _aMedium,
+                  ("pageview" .=) <$> _aPageview,
+                  ("campaign" .=) <$> _aCampaign,
+                  ("goals" .=) <$> _aGoals,
+                  ("channelGrouping" .=) <$> _aChannelGrouping,
+                  ("appview" .=) <$> _aAppview,
+                  ("source" .=) <$> _aSource,
+                  ("activityTime" .=) <$> _aActivityTime,
+                  ("ecommerce" .=) <$> _aEcommerce,
+                  ("customDimension" .=) <$> _aCustomDimension,
+                  ("keyword" .=) <$> _aKeyword,
+                  ("landingPagePath" .=) <$> _aLandingPagePath])
+
 -- | Defines a cohort. A cohort is a group of users who share a common
 -- characteristic. For example, all users with the same acquisition date
 -- belong to the same cohort.
 --
 -- /See:/ 'cohort' smart constructor.
-data Cohort = Cohort'
+data Cohort =
+  Cohort'
     { _cDateRange :: !(Maybe DateRange)
     , _cName      :: !(Maybe Text)
     , _cType      :: !(Maybe CohortType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Cohort' with the minimum fields required to make a request.
 --
@@ -2011,12 +2934,8 @@ data Cohort = Cohort'
 -- * 'cType'
 cohort
     :: Cohort
-cohort =
-    Cohort'
-    { _cDateRange = Nothing
-    , _cName = Nothing
-    , _cType = Nothing
-    }
+cohort = Cohort' {_cDateRange = Nothing, _cName = Nothing, _cType = Nothing}
+
 
 -- | This is used for \`FIRST_VISIT_DATE\` cohort, the cohort selects users
 -- whose first visit date is between start date and end date defined in the
@@ -2058,16 +2977,96 @@ instance ToJSON Cohort where
                  [("dateRange" .=) <$> _cDateRange,
                   ("name" .=) <$> _cName, ("type" .=) <$> _cType])
 
+-- | E-commerce details associated with the user activity.
+--
+-- /See:/ 'ecommerceData' smart constructor.
+data EcommerceData =
+  EcommerceData'
+    { _edEcommerceType :: !(Maybe EcommerceDataEcommerceType)
+    , _edTransaction   :: !(Maybe TransactionData)
+    , _edProducts      :: !(Maybe [ProductData])
+    , _edActionType    :: !(Maybe EcommerceDataActionType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EcommerceData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edEcommerceType'
+--
+-- * 'edTransaction'
+--
+-- * 'edProducts'
+--
+-- * 'edActionType'
+ecommerceData
+    :: EcommerceData
+ecommerceData =
+  EcommerceData'
+    { _edEcommerceType = Nothing
+    , _edTransaction = Nothing
+    , _edProducts = Nothing
+    , _edActionType = Nothing
+    }
+
+
+-- | The type of this e-commerce activity.
+edEcommerceType :: Lens' EcommerceData (Maybe EcommerceDataEcommerceType)
+edEcommerceType
+  = lens _edEcommerceType
+      (\ s a -> s{_edEcommerceType = a})
+
+-- | Transaction details of this e-commerce action.
+edTransaction :: Lens' EcommerceData (Maybe TransactionData)
+edTransaction
+  = lens _edTransaction
+      (\ s a -> s{_edTransaction = a})
+
+-- | Details of the products in this transaction.
+edProducts :: Lens' EcommerceData [ProductData]
+edProducts
+  = lens _edProducts (\ s a -> s{_edProducts = a}) .
+      _Default
+      . _Coerce
+
+-- | Action associated with this e-commerce action.
+edActionType :: Lens' EcommerceData (Maybe EcommerceDataActionType)
+edActionType
+  = lens _edActionType (\ s a -> s{_edActionType = a})
+
+instance FromJSON EcommerceData where
+        parseJSON
+          = withObject "EcommerceData"
+              (\ o ->
+                 EcommerceData' <$>
+                   (o .:? "ecommerceType") <*> (o .:? "transaction") <*>
+                     (o .:? "products" .!= mempty)
+                     <*> (o .:? "actionType"))
+
+instance ToJSON EcommerceData where
+        toJSON EcommerceData'{..}
+          = object
+              (catMaybes
+                 [("ecommerceType" .=) <$> _edEcommerceType,
+                  ("transaction" .=) <$> _edTransaction,
+                  ("products" .=) <$> _edProducts,
+                  ("actionType" .=) <$> _edActionType])
+
 -- | Dimension filter specifies the filtering options on a dimension.
 --
 -- /See:/ 'dimensionFilter' smart constructor.
-data DimensionFilter = DimensionFilter'
+data DimensionFilter =
+  DimensionFilter'
     { _dfNot           :: !(Maybe Bool)
     , _dfOperator      :: !(Maybe DimensionFilterOperator)
     , _dfExpressions   :: !(Maybe [Text])
     , _dfDimensionName :: !(Maybe Text)
     , _dfCaseSensitive :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DimensionFilter' with the minimum fields required to make a request.
 --
@@ -2085,13 +3084,14 @@ data DimensionFilter = DimensionFilter'
 dimensionFilter
     :: DimensionFilter
 dimensionFilter =
-    DimensionFilter'
+  DimensionFilter'
     { _dfNot = Nothing
     , _dfOperator = Nothing
     , _dfExpressions = Nothing
     , _dfDimensionName = Nothing
     , _dfCaseSensitive = Nothing
     }
+
 
 -- | Logical \`NOT\` operator. If this boolean is set to true, then the
 -- matching dimension values will be excluded in the report. The default is
@@ -2151,11 +3151,14 @@ instance ToJSON DimensionFilter where
 -- \`batchGet\` call.
 --
 -- /See:/ 'getReportsResponse' smart constructor.
-data GetReportsResponse = GetReportsResponse'
+data GetReportsResponse =
+  GetReportsResponse'
     { _grrReports                 :: !(Maybe [Report])
     , _grrResourceQuotasRemaining :: !(Maybe ResourceQuotasRemaining)
     , _grrQueryCost               :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetReportsResponse' with the minimum fields required to make a request.
 --
@@ -2169,11 +3172,12 @@ data GetReportsResponse = GetReportsResponse'
 getReportsResponse
     :: GetReportsResponse
 getReportsResponse =
-    GetReportsResponse'
+  GetReportsResponse'
     { _grrReports = Nothing
     , _grrResourceQuotasRemaining = Nothing
     , _grrQueryCost = Nothing
     }
+
 
 -- | Responses corresponding to each of the request.
 grrReports :: Lens' GetReportsResponse [Report]
@@ -2213,15 +3217,66 @@ instance ToJSON GetReportsResponse where
                     _grrResourceQuotasRemaining,
                   ("queryCost" .=) <$> _grrQueryCost])
 
+-- | Custom dimension.
+--
+-- /See:/ 'customDimension' smart constructor.
+data CustomDimension =
+  CustomDimension'
+    { _cdValue :: !(Maybe Text)
+    , _cdIndex :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdValue'
+--
+-- * 'cdIndex'
+customDimension
+    :: CustomDimension
+customDimension = CustomDimension' {_cdValue = Nothing, _cdIndex = Nothing}
+
+
+-- | Value of the custom dimension. Default value (i.e. empty string)
+-- indicates clearing sesion\/visitor scope custom dimension value.
+cdValue :: Lens' CustomDimension (Maybe Text)
+cdValue = lens _cdValue (\ s a -> s{_cdValue = a})
+
+-- | Slot number of custom dimension.
+cdIndex :: Lens' CustomDimension (Maybe Int32)
+cdIndex
+  = lens _cdIndex (\ s a -> s{_cdIndex = a}) .
+      mapping _Coerce
+
+instance FromJSON CustomDimension where
+        parseJSON
+          = withObject "CustomDimension"
+              (\ o ->
+                 CustomDimension' <$>
+                   (o .:? "value") <*> (o .:? "index"))
+
+instance ToJSON CustomDimension where
+        toJSON CustomDimension'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _cdValue,
+                  ("index" .=) <$> _cdIndex])
+
 -- | The segment definition, if the report needs to be segmented. A Segment
 -- is a subset of the Analytics data. For example, of the entire set of
 -- users, one Segment might be users from a particular country or city.
 --
 -- /See:/ 'segment' smart constructor.
-data Segment = Segment'
+data Segment =
+  Segment'
     { _sDynamicSegment :: !(Maybe DynamicSegment)
     , _sSegmentId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 --
@@ -2232,11 +3287,8 @@ data Segment = Segment'
 -- * 'sSegmentId'
 segment
     :: Segment
-segment =
-    Segment'
-    { _sDynamicSegment = Nothing
-    , _sSegmentId = Nothing
-    }
+segment = Segment' {_sDynamicSegment = Nothing, _sSegmentId = Nothing}
+
 
 -- | A dynamic segment definition in the request.
 sDynamicSegment :: Lens' Segment (Maybe DynamicSegment)
@@ -2264,14 +3316,96 @@ instance ToJSON Segment where
                  [("dynamicSegment" .=) <$> _sDynamicSegment,
                   ("segmentId" .=) <$> _sSegmentId])
 
+-- | Details of the products in an e-commerce transaction.
+--
+-- /See:/ 'productData' smart constructor.
+data ProductData =
+  ProductData'
+    { _pdProductName     :: !(Maybe Text)
+    , _pdProductSKU      :: !(Maybe Text)
+    , _pdItemRevenue     :: !(Maybe (Textual Double))
+    , _pdProductQuantity :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ProductData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdProductName'
+--
+-- * 'pdProductSKU'
+--
+-- * 'pdItemRevenue'
+--
+-- * 'pdProductQuantity'
+productData
+    :: ProductData
+productData =
+  ProductData'
+    { _pdProductName = Nothing
+    , _pdProductSKU = Nothing
+    , _pdItemRevenue = Nothing
+    , _pdProductQuantity = Nothing
+    }
+
+
+-- | The product name, supplied by the e-commerce tracking application, for
+-- the purchased items.
+pdProductName :: Lens' ProductData (Maybe Text)
+pdProductName
+  = lens _pdProductName
+      (\ s a -> s{_pdProductName = a})
+
+-- | Unique code that represents the product.
+pdProductSKU :: Lens' ProductData (Maybe Text)
+pdProductSKU
+  = lens _pdProductSKU (\ s a -> s{_pdProductSKU = a})
+
+-- | The total revenue from purchased product items.
+pdItemRevenue :: Lens' ProductData (Maybe Double)
+pdItemRevenue
+  = lens _pdItemRevenue
+      (\ s a -> s{_pdItemRevenue = a})
+      . mapping _Coerce
+
+-- | Total number of this product units in the transaction.
+pdProductQuantity :: Lens' ProductData (Maybe Int64)
+pdProductQuantity
+  = lens _pdProductQuantity
+      (\ s a -> s{_pdProductQuantity = a})
+      . mapping _Coerce
+
+instance FromJSON ProductData where
+        parseJSON
+          = withObject "ProductData"
+              (\ o ->
+                 ProductData' <$>
+                   (o .:? "productName") <*> (o .:? "productSku") <*>
+                     (o .:? "itemRevenue")
+                     <*> (o .:? "productQuantity"))
+
+instance ToJSON ProductData where
+        toJSON ProductData'{..}
+          = object
+              (catMaybes
+                 [("productName" .=) <$> _pdProductName,
+                  ("productSku" .=) <$> _pdProductSKU,
+                  ("itemRevenue" .=) <$> _pdItemRevenue,
+                  ("productQuantity" .=) <$> _pdProductQuantity])
+
 -- | The resource quota tokens remaining for the property after the request
 -- is completed.
 --
 -- /See:/ 'resourceQuotasRemaining' smart constructor.
-data ResourceQuotasRemaining = ResourceQuotasRemaining'
+data ResourceQuotasRemaining =
+  ResourceQuotasRemaining'
     { _rqrHourlyQuotaTokensRemaining :: !(Maybe (Textual Int32))
     , _rqrDailyQuotaTokensRemaining  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceQuotasRemaining' with the minimum fields required to make a request.
 --
@@ -2283,10 +3417,11 @@ data ResourceQuotasRemaining = ResourceQuotasRemaining'
 resourceQuotasRemaining
     :: ResourceQuotasRemaining
 resourceQuotasRemaining =
-    ResourceQuotasRemaining'
+  ResourceQuotasRemaining'
     { _rqrHourlyQuotaTokensRemaining = Nothing
     , _rqrDailyQuotaTokensRemaining = Nothing
     }
+
 
 -- | Hourly resource quota tokens remaining.
 rqrHourlyQuotaTokensRemaining :: Lens' ResourceQuotasRemaining (Maybe Int32)
@@ -2322,14 +3457,17 @@ instance ToJSON ResourceQuotasRemaining where
 -- | Dimension filter specifies the filtering options on a dimension.
 --
 -- /See:/ 'segmentDimensionFilter' smart constructor.
-data SegmentDimensionFilter = SegmentDimensionFilter'
+data SegmentDimensionFilter =
+  SegmentDimensionFilter'
     { _sdfOperator           :: !(Maybe SegmentDimensionFilterOperator)
     , _sdfMinComparisonValue :: !(Maybe Text)
     , _sdfMaxComparisonValue :: !(Maybe Text)
     , _sdfExpressions        :: !(Maybe [Text])
     , _sdfDimensionName      :: !(Maybe Text)
     , _sdfCaseSensitive      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SegmentDimensionFilter' with the minimum fields required to make a request.
 --
@@ -2349,7 +3487,7 @@ data SegmentDimensionFilter = SegmentDimensionFilter'
 segmentDimensionFilter
     :: SegmentDimensionFilter
 segmentDimensionFilter =
-    SegmentDimensionFilter'
+  SegmentDimensionFilter'
     { _sdfOperator = Nothing
     , _sdfMinComparisonValue = Nothing
     , _sdfMaxComparisonValue = Nothing
@@ -2357,6 +3495,7 @@ segmentDimensionFilter =
     , _sdfDimensionName = Nothing
     , _sdfCaseSensitive = Nothing
     }
+
 
 -- | The operator to use to match the dimension with the expressions.
 sdfOperator :: Lens' SegmentDimensionFilter (Maybe SegmentDimensionFilterOperator)
@@ -2422,11 +3561,14 @@ instance ToJSON SegmentDimensionFilter where
 -- A segment can select users, sessions or both.
 --
 -- /See:/ 'dynamicSegment' smart constructor.
-data DynamicSegment = DynamicSegment'
+data DynamicSegment =
+  DynamicSegment'
     { _dsUserSegment    :: !(Maybe SegmentDefinition)
     , _dsName           :: !(Maybe Text)
     , _dsSessionSegment :: !(Maybe SegmentDefinition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicSegment' with the minimum fields required to make a request.
 --
@@ -2440,11 +3582,9 @@ data DynamicSegment = DynamicSegment'
 dynamicSegment
     :: DynamicSegment
 dynamicSegment =
-    DynamicSegment'
-    { _dsUserSegment = Nothing
-    , _dsName = Nothing
-    , _dsSessionSegment = Nothing
-    }
+  DynamicSegment'
+    {_dsUserSegment = Nothing, _dsName = Nothing, _dsSessionSegment = Nothing}
+
 
 -- | User Segment to select users to include in the segment.
 dsUserSegment :: Lens' DynamicSegment (Maybe SegmentDefinition)
@@ -2482,10 +3622,13 @@ instance ToJSON DynamicSegment where
 -- how the filters are logically combined.
 --
 -- /See:/ 'metricFilterClause' smart constructor.
-data MetricFilterClause = MetricFilterClause'
+data MetricFilterClause =
+  MetricFilterClause'
     { _mfcOperator :: !(Maybe MetricFilterClauseOperator)
     , _mfcFilters  :: !(Maybe [MetricFilter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricFilterClause' with the minimum fields required to make a request.
 --
@@ -2497,10 +3640,8 @@ data MetricFilterClause = MetricFilterClause'
 metricFilterClause
     :: MetricFilterClause
 metricFilterClause =
-    MetricFilterClause'
-    { _mfcOperator = Nothing
-    , _mfcFilters = Nothing
-    }
+  MetricFilterClause' {_mfcOperator = Nothing, _mfcFilters = Nothing}
+
 
 -- | The operator for combining multiple metric filters. If unspecified, it
 -- is treated as an \`OR\`.
@@ -2533,10 +3674,13 @@ instance ToJSON MetricFilterClause where
 -- | Column headers.
 --
 -- /See:/ 'columnHeader' smart constructor.
-data ColumnHeader = ColumnHeader'
+data ColumnHeader =
+  ColumnHeader'
     { _chMetricHeader :: !(Maybe MetricHeader)
     , _chDimensions   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnHeader' with the minimum fields required to make a request.
 --
@@ -2548,10 +3692,8 @@ data ColumnHeader = ColumnHeader'
 columnHeader
     :: ColumnHeader
 columnHeader =
-    ColumnHeader'
-    { _chMetricHeader = Nothing
-    , _chDimensions = Nothing
-    }
+  ColumnHeader' {_chMetricHeader = Nothing, _chDimensions = Nothing}
+
 
 -- | Metric headers for the metrics in the response.
 chMetricHeader :: Lens' ColumnHeader (Maybe MetricHeader)
@@ -2580,3 +3722,165 @@ instance ToJSON ColumnHeader where
               (catMaybes
                  [("metricHeader" .=) <$> _chMetricHeader,
                   ("dimensions" .=) <$> _chDimensions])
+
+-- | The response from \`userActivity:get\` call.
+--
+-- /See:/ 'searchUserActivityResponse' smart constructor.
+data SearchUserActivityResponse =
+  SearchUserActivityResponse'
+    { _suarNextPageToken :: !(Maybe Text)
+    , _suarSampleRate    :: !(Maybe (Textual Double))
+    , _suarSessions      :: !(Maybe [UserActivitySession])
+    , _suarTotalRows     :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SearchUserActivityResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'suarNextPageToken'
+--
+-- * 'suarSampleRate'
+--
+-- * 'suarSessions'
+--
+-- * 'suarTotalRows'
+searchUserActivityResponse
+    :: SearchUserActivityResponse
+searchUserActivityResponse =
+  SearchUserActivityResponse'
+    { _suarNextPageToken = Nothing
+    , _suarSampleRate = Nothing
+    , _suarSessions = Nothing
+    , _suarTotalRows = Nothing
+    }
+
+
+-- | This token should be passed to
+-- [SearchUserActivityRequest](#SearchUserActivityRequest) to retrieve the
+-- next page.
+suarNextPageToken :: Lens' SearchUserActivityResponse (Maybe Text)
+suarNextPageToken
+  = lens _suarNextPageToken
+      (\ s a -> s{_suarNextPageToken = a})
+
+-- | This field represents the [sampling
+-- rate](https:\/\/support.google.com\/analytics\/answer\/2637192) for the
+-- given request and is a number between 0.0 to 1.0. See [developer
+-- guide](\/analytics\/devguides\/reporting\/core\/v4\/basics#sampling) for
+-- details.
+suarSampleRate :: Lens' SearchUserActivityResponse (Maybe Double)
+suarSampleRate
+  = lens _suarSampleRate
+      (\ s a -> s{_suarSampleRate = a})
+      . mapping _Coerce
+
+-- | Each record represents a session (device details, duration, etc).
+suarSessions :: Lens' SearchUserActivityResponse [UserActivitySession]
+suarSessions
+  = lens _suarSessions (\ s a -> s{_suarSessions = a})
+      . _Default
+      . _Coerce
+
+-- | Total rows returned by this query (across different pages).
+suarTotalRows :: Lens' SearchUserActivityResponse (Maybe Int32)
+suarTotalRows
+  = lens _suarTotalRows
+      (\ s a -> s{_suarTotalRows = a})
+      . mapping _Coerce
+
+instance FromJSON SearchUserActivityResponse where
+        parseJSON
+          = withObject "SearchUserActivityResponse"
+              (\ o ->
+                 SearchUserActivityResponse' <$>
+                   (o .:? "nextPageToken") <*> (o .:? "sampleRate") <*>
+                     (o .:? "sessions" .!= mempty)
+                     <*> (o .:? "totalRows"))
+
+instance ToJSON SearchUserActivityResponse where
+        toJSON SearchUserActivityResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _suarNextPageToken,
+                  ("sampleRate" .=) <$> _suarSampleRate,
+                  ("sessions" .=) <$> _suarSessions,
+                  ("totalRows" .=) <$> _suarTotalRows])
+
+--
+-- /See:/ 'screenviewData' smart constructor.
+data ScreenviewData =
+  ScreenviewData'
+    { _sdMobileDeviceModel    :: !(Maybe Text)
+    , _sdMobileDeviceBranding :: !(Maybe Text)
+    , _sdAppName              :: !(Maybe Text)
+    , _sdScreenName           :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScreenviewData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdMobileDeviceModel'
+--
+-- * 'sdMobileDeviceBranding'
+--
+-- * 'sdAppName'
+--
+-- * 'sdScreenName'
+screenviewData
+    :: ScreenviewData
+screenviewData =
+  ScreenviewData'
+    { _sdMobileDeviceModel = Nothing
+    , _sdMobileDeviceBranding = Nothing
+    , _sdAppName = Nothing
+    , _sdScreenName = Nothing
+    }
+
+
+-- | Mobile device model. Eg: \"Pixel\", \"iPhone\" etc.
+sdMobileDeviceModel :: Lens' ScreenviewData (Maybe Text)
+sdMobileDeviceModel
+  = lens _sdMobileDeviceModel
+      (\ s a -> s{_sdMobileDeviceModel = a})
+
+-- | Mobile manufacturer or branded name. Eg: \"Google\", \"Apple\" etc.
+sdMobileDeviceBranding :: Lens' ScreenviewData (Maybe Text)
+sdMobileDeviceBranding
+  = lens _sdMobileDeviceBranding
+      (\ s a -> s{_sdMobileDeviceBranding = a})
+
+-- | The application name.
+sdAppName :: Lens' ScreenviewData (Maybe Text)
+sdAppName
+  = lens _sdAppName (\ s a -> s{_sdAppName = a})
+
+-- | The name of the screen.
+sdScreenName :: Lens' ScreenviewData (Maybe Text)
+sdScreenName
+  = lens _sdScreenName (\ s a -> s{_sdScreenName = a})
+
+instance FromJSON ScreenviewData where
+        parseJSON
+          = withObject "ScreenviewData"
+              (\ o ->
+                 ScreenviewData' <$>
+                   (o .:? "mobileDeviceModel") <*>
+                     (o .:? "mobileDeviceBranding")
+                     <*> (o .:? "appName")
+                     <*> (o .:? "screenName"))
+
+instance ToJSON ScreenviewData where
+        toJSON ScreenviewData'{..}
+          = object
+              (catMaybes
+                 [("mobileDeviceModel" .=) <$> _sdMobileDeviceModel,
+                  ("mobileDeviceBranding" .=) <$>
+                    _sdMobileDeviceBranding,
+                  ("appName" .=) <$> _sdAppName,
+                  ("screenName" .=) <$> _sdScreenName])

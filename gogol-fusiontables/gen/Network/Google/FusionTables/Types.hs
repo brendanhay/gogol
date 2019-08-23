@@ -240,8 +240,8 @@ fusionTablesService
 
 -- | View your Fusion Tables
 fusionTablesReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
-fusionTablesReadOnlyScope = Proxy;
+fusionTablesReadOnlyScope = Proxy
 
 -- | Manage your Fusion Tables
 fusionTablesScope :: Proxy '["https://www.googleapis.com/auth/fusiontables"]
-fusionTablesScope = Proxy;
+fusionTablesScope = Proxy

@@ -65,9 +65,6 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.enterprises.get
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
 
-    -- ** androidenterprise.enterprises.getAndroidDevicePolicyConfig
-    , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
-
     -- ** androidenterprise.enterprises.getServiceAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
 
@@ -85,9 +82,6 @@ module Network.Google.AndroidEnterprise
 
     -- ** androidenterprise.enterprises.setAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
-
-    -- ** androidenterprise.enterprises.setAndroidDevicePolicyConfig
-    , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAndroidDevicePolicyConfig
 
     -- ** androidenterprise.enterprises.setStoreLayout
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
@@ -409,6 +403,7 @@ module Network.Google.AndroidEnterprise
     , awtsWebApps
     , awtsPermission
     , awtsStoreBuilder
+    , awtsManagedConfigurations
 
     -- ** ProductVisibility
     , ProductVisibility
@@ -509,6 +504,7 @@ module Network.Google.AndroidEnterprise
     , ProductPolicy
     , productPolicy
     , ppTracks
+    , ppManagedConfiguration
     , ppTrackIds
     , ppAutoInstallPolicy
     , ppProductId
@@ -566,12 +562,6 @@ module Network.Google.AndroidEnterprise
     , groupLicensesListResponse
     , gllrGroupLicense
     , gllrKind
-
-    -- ** AndroidDevicePolicyConfig
-    , AndroidDevicePolicyConfig
-    , androidDevicePolicyConfig
-    , adpcState
-    , adpcKind
 
     -- ** ProductSet
     , ProductSet
@@ -831,6 +821,11 @@ module Network.Google.AndroidEnterprise
     , ppsPermission
     , ppsProductId
 
+    -- ** AdministratorWebTokenSpecManagedConfigurations
+    , AdministratorWebTokenSpecManagedConfigurations
+    , administratorWebTokenSpecManagedConfigurations
+    , awtsmcEnabled
+
     -- ** Permission
     , Permission
     , permission
@@ -900,14 +895,12 @@ import           Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWeb
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GenerateSignupURL
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Get
-import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.List
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.PullNotificationSet
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
-import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAndroidDevicePolicyConfig
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
 import           Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
@@ -1021,14 +1014,12 @@ type AndroidEnterpriseAPI =
        :<|> EnterprisesListResource
        :<|> EnterprisesUnenrollResource
        :<|> EnterprisesGetStoreLayoutResource
-       :<|> EnterprisesSetAndroidDevicePolicyConfigResource
        :<|> EnterprisesSetAccountResource
        :<|> EnterprisesEnrollResource
        :<|> EnterprisesGetResource
        :<|> EnterprisesGenerateSignupURLResource
        :<|> EnterprisesSendTestPushNotificationResource
        :<|> EnterprisesSetStoreLayoutResource
-       :<|> EnterprisesGetAndroidDevicePolicyConfigResource
        :<|> EnterprisesAcknowledgeNotificationSetResource
        :<|> EnterprisesPullNotificationSetResource
        :<|> ManagedConfigurationsforUserListResource

@@ -66,7 +66,8 @@ type BiddersAccountsFilterSetsCreateResource =
 -- ID.
 --
 -- /See:/ 'biddersAccountsFilterSetsCreate' smart constructor.
-data BiddersAccountsFilterSetsCreate = BiddersAccountsFilterSetsCreate'
+data BiddersAccountsFilterSetsCreate =
+  BiddersAccountsFilterSetsCreate'
     { _bafscXgafv          :: !(Maybe Xgafv)
     , _bafscUploadProtocol :: !(Maybe Text)
     , _bafscAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data BiddersAccountsFilterSetsCreate = BiddersAccountsFilterSetsCreate'
     , _bafscPayload        :: !FilterSet
     , _bafscIsTransient    :: !(Maybe Bool)
     , _bafscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ biddersAccountsFilterSetsCreate
     -> FilterSet -- ^ 'bafscPayload'
     -> BiddersAccountsFilterSetsCreate
 biddersAccountsFilterSetsCreate pBafscOwnerName_ pBafscPayload_ =
-    BiddersAccountsFilterSetsCreate'
+  BiddersAccountsFilterSetsCreate'
     { _bafscXgafv = Nothing
     , _bafscUploadProtocol = Nothing
     , _bafscAccessToken = Nothing
@@ -111,6 +114,7 @@ biddersAccountsFilterSetsCreate pBafscOwnerName_ pBafscPayload_ =
     , _bafscIsTransient = Nothing
     , _bafscCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafscXgafv :: Lens' BiddersAccountsFilterSetsCreate (Maybe Xgafv)
@@ -166,7 +170,8 @@ bafscCallback
       (\ s a -> s{_bafscCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsCreate where
+           BiddersAccountsFilterSetsCreate
+         where
         type Rs BiddersAccountsFilterSetsCreate = FilterSet
         type Scopes BiddersAccountsFilterSetsCreate =
              '["https://www.googleapis.com/auth/adexchange.buyer"]

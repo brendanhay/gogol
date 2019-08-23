@@ -57,11 +57,14 @@ type TableUpdateResource =
 -- description, and attribution will be updated.
 --
 -- /See:/ 'tableUpdate' smart constructor.
-data TableUpdate = TableUpdate'
+data TableUpdate =
+  TableUpdate'
     { _tabPayload               :: !Table
     , _tabReplaceViewDefinition :: !(Maybe Bool)
     , _tabTableId               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ tableUpdate
     -> Text -- ^ 'tabTableId'
     -> TableUpdate
 tableUpdate pTabPayload_ pTabTableId_ =
-    TableUpdate'
+  TableUpdate'
     { _tabPayload = pTabPayload_
     , _tabReplaceViewDefinition = Nothing
     , _tabTableId = pTabTableId_
     }
+
 
 -- | Multipart request metadata.
 tabPayload :: Lens' TableUpdate Table

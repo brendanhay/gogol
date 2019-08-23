@@ -63,7 +63,8 @@ type ProjectsUpdateConfigResource =
 -- | Updates the Cloud Source Repositories configuration of the project.
 --
 -- /See:/ 'projectsUpdateConfig' smart constructor.
-data ProjectsUpdateConfig = ProjectsUpdateConfig'
+data ProjectsUpdateConfig =
+  ProjectsUpdateConfig'
     { _pucXgafv          :: !(Maybe Xgafv)
     , _pucUploadProtocol :: !(Maybe Text)
     , _pucAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsUpdateConfig = ProjectsUpdateConfig'
     , _pucPayload        :: !UpdateProjectConfigRequest
     , _pucName           :: !Text
     , _pucCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsUpdateConfig' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsUpdateConfig
     -> Text -- ^ 'pucName'
     -> ProjectsUpdateConfig
 projectsUpdateConfig pPucPayload_ pPucName_ =
-    ProjectsUpdateConfig'
+  ProjectsUpdateConfig'
     { _pucXgafv = Nothing
     , _pucUploadProtocol = Nothing
     , _pucAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsUpdateConfig pPucPayload_ pPucName_ =
     , _pucName = pPucName_
     , _pucCallback = Nothing
     }
+
 
 -- | V1 error format.
 pucXgafv :: Lens' ProjectsUpdateConfig (Maybe Xgafv)

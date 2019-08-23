@@ -53,10 +53,13 @@ type ProjectsListResource =
 -- | Lists all projects to which you have been granted any project role.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList'
+data ProjectsList =
+  ProjectsList'
     { _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
@@ -67,11 +70,8 @@ data ProjectsList = ProjectsList'
 -- * 'plMaxResults'
 projectsList
     :: ProjectsList
-projectsList =
-    ProjectsList'
-    { _plPageToken = Nothing
-    , _plMaxResults = Nothing
-    }
+projectsList = ProjectsList' {_plPageToken = Nothing, _plMaxResults = Nothing}
+
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results

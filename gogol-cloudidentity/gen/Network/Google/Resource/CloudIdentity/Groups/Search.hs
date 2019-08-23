@@ -67,7 +67,8 @@ type GroupsSearchResource =
 -- | Searches for Groups.
 --
 -- /See:/ 'groupsSearch' smart constructor.
-data GroupsSearch = GroupsSearch'
+data GroupsSearch =
+  GroupsSearch'
     { _gsXgafv          :: !(Maybe Xgafv)
     , _gsUploadProtocol :: !(Maybe Text)
     , _gsAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data GroupsSearch = GroupsSearch'
     , _gsPageToken      :: !(Maybe Text)
     , _gsPageSize       :: !(Maybe (Textual Int32))
     , _gsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsSearch' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ data GroupsSearch = GroupsSearch'
 groupsSearch
     :: GroupsSearch
 groupsSearch =
-    GroupsSearch'
+  GroupsSearch'
     { _gsXgafv = Nothing
     , _gsUploadProtocol = Nothing
     , _gsAccessToken = Nothing
@@ -114,6 +117,7 @@ groupsSearch =
     , _gsPageSize = Nothing
     , _gsCallback = Nothing
     }
+
 
 -- | V1 error format.
 gsXgafv :: Lens' GroupsSearch (Maybe Xgafv)
@@ -152,8 +156,8 @@ gsPageToken :: Lens' GroupsSearch (Maybe Text)
 gsPageToken
   = lens _gsPageToken (\ s a -> s{_gsPageToken = a})
 
--- | Maximum number of Groups to return. View | Default | Maximum
--- -----|---------|-------- BASIC | 200 | 1000 FULL | 50 | 500
+-- | The default page size is 200 (max 1000) for the BASIC view, and 50 (max
+-- 500) for the FULL view.
 gsPageSize :: Lens' GroupsSearch (Maybe Int32)
 gsPageSize
   = lens _gsPageSize (\ s a -> s{_gsPageSize = a}) .
@@ -166,7 +170,9 @@ gsCallback
 
 instance GoogleRequest GroupsSearch where
         type Rs GroupsSearch = SearchGroupsResponse
-        type Scopes GroupsSearch = '[]
+        type Scopes GroupsSearch =
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
         requestClient GroupsSearch'{..}
           = go _gsXgafv _gsUploadProtocol _gsAccessToken
               _gsUploadType

@@ -25,10 +25,7 @@
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy. When
--- the snapshot is deleted, all messages retained in the snapshot are
+-- When the snapshot is deleted, all messages retained in the snapshot are
 -- immediately dropped. After a snapshot is deleted, a new one may be
 -- created with the same name, but the new one has no association with the
 -- old snapshot or its subscription, unless the same subscription is
@@ -73,24 +70,24 @@ type ProjectsSnapshotsDeleteResource =
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy. When
--- the snapshot is deleted, all messages retained in the snapshot are
+-- When the snapshot is deleted, all messages retained in the snapshot are
 -- immediately dropped. After a snapshot is deleted, a new one may be
 -- created with the same name, but the new one has no association with the
 -- old snapshot or its subscription, unless the same subscription is
 -- specified.
 --
 -- /See:/ 'projectsSnapshotsDelete' smart constructor.
-data ProjectsSnapshotsDelete = ProjectsSnapshotsDelete'
+data ProjectsSnapshotsDelete =
+  ProjectsSnapshotsDelete'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proSnapshot       :: !Text
     , _proUploadProtocol :: !(Maybe Text)
     , _proAccessToken    :: !(Maybe Text)
     , _proUploadType     :: !(Maybe Text)
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsDelete' with the minimum fields required to make a request.
 --
@@ -111,7 +108,7 @@ projectsSnapshotsDelete
     :: Text -- ^ 'proSnapshot'
     -> ProjectsSnapshotsDelete
 projectsSnapshotsDelete pProSnapshot_ =
-    ProjectsSnapshotsDelete'
+  ProjectsSnapshotsDelete'
     { _proXgafv = Nothing
     , _proSnapshot = pProSnapshot_
     , _proUploadProtocol = Nothing
@@ -119,6 +116,7 @@ projectsSnapshotsDelete pProSnapshot_ =
     , _proUploadType = Nothing
     , _proCallback = Nothing
     }
+
 
 -- | V1 error format.
 proXgafv :: Lens' ProjectsSnapshotsDelete (Maybe Xgafv)

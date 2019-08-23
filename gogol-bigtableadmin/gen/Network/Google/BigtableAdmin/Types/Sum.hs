@@ -53,7 +53,7 @@ instance FromJSON ClusterDefaultStorageType where
 instance ToJSON ClusterDefaultStorageType where
     toJSON = toJSONText
 
--- | (\`OutputOnly\`) The state of replication for the table in this cluster.
+-- | Output only. The state of replication for the table in this cluster.
 data ClusterStateReplicationState
     = StateNotKnown
       -- ^ @STATE_NOT_KNOWN@
@@ -145,6 +145,50 @@ instance FromJSON InstanceType where
 instance ToJSON InstanceType where
     toJSON = toJSONText
 
+data TableProgressState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+    | Pending
+      -- ^ @PENDING@
+      -- The table has not yet begun copying to the new cluster.
+    | Copying
+      -- ^ @COPYING@
+      -- The table is actively being copied to the new cluster.
+    | Completed
+      -- ^ @COMPLETED@
+      -- The table has been fully copied to the new cluster.
+    | Cancelled
+      -- ^ @CANCELLED@
+      -- The table was deleted before it finished copying to the new cluster.
+      -- Note that tables deleted after completion will stay marked as COMPLETED,
+      -- not CANCELLED.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TableProgressState
+
+instance FromHttpApiData TableProgressState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "PENDING" -> Right Pending
+        "COPYING" -> Right Copying
+        "COMPLETED" -> Right Completed
+        "CANCELLED" -> Right Cancelled
+        x -> Left ("Unable to parse TableProgressState from: " <> x)
+
+instance ToHttpApiData TableProgressState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Pending -> "PENDING"
+        Copying -> "COPYING"
+        Completed -> "COMPLETED"
+        Cancelled -> "CANCELLED"
+
+instance FromJSON TableProgressState where
+    parseJSON = parseJSONText "TableProgressState"
+
+instance ToJSON TableProgressState where
+    toJSON = toJSONText
+
 -- | The log type that this config enables.
 data AuditLogConfigLogType
     = LogTypeUnspecified
@@ -216,7 +260,7 @@ instance ToJSON Xgafv where
 -- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
 -- are stored in this table. Timestamps not matching the granularity will
 -- be rejected. If unspecified at creation time, the value will be set to
--- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`
+-- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`.
 data TableGranularity
     = TimestampGranularityUnspecified
       -- ^ @TIMESTAMP_GRANULARITY_UNSPECIFIED@

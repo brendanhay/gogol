@@ -51,9 +51,12 @@ type AccountsContainersWorkspacesTriggersDeleteResource
 -- | Deletes a GTM Trigger.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersDelete' smart constructor.
-newtype AccountsContainersWorkspacesTriggersDelete = AccountsContainersWorkspacesTriggersDelete'
+newtype AccountsContainersWorkspacesTriggersDelete =
+  AccountsContainersWorkspacesTriggersDelete'
     { _acwtdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersDelete' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ accountsContainersWorkspacesTriggersDelete
     :: Text -- ^ 'acwtdPath'
     -> AccountsContainersWorkspacesTriggersDelete
 accountsContainersWorkspacesTriggersDelete pAcwtdPath_ =
-    AccountsContainersWorkspacesTriggersDelete'
-    { _acwtdPath = pAcwtdPath_
-    }
+  AccountsContainersWorkspacesTriggersDelete' {_acwtdPath = pAcwtdPath_}
+
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}
@@ -75,7 +77,8 @@ acwtdPath
   = lens _acwtdPath (\ s a -> s{_acwtdPath = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTriggersDelete where
+           AccountsContainersWorkspacesTriggersDelete
+         where
         type Rs AccountsContainersWorkspacesTriggersDelete =
              ()
         type Scopes

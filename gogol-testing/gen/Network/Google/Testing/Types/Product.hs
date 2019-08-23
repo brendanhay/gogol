@@ -23,10 +23,13 @@ import           Network.Google.Testing.Types.Sum
 -- | Additional details about the progress of the running test.
 --
 -- /See:/ 'testDetails' smart constructor.
-data TestDetails = TestDetails'
+data TestDetails =
+  TestDetails'
     { _tdProgressMessages :: !(Maybe [Text])
     , _tdErrorMessage     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestDetails' with the minimum fields required to make a request.
 --
@@ -38,10 +41,8 @@ data TestDetails = TestDetails'
 testDetails
     :: TestDetails
 testDetails =
-    TestDetails'
-    { _tdProgressMessages = Nothing
-    , _tdErrorMessage = Nothing
-    }
+  TestDetails' {_tdProgressMessages = Nothing, _tdErrorMessage = Nothing}
+
 
 -- | Output only. Human-readable, detailed descriptions of the test\'s
 -- progress. For example: \"Provisioning a device\", \"Starting Test\".
@@ -80,11 +81,14 @@ instance ToJSON TestDetails where
 -- https:\/\/developer.android.com\/guide\/topics\/manifest\/intent-filter-element.html
 --
 -- /See:/ 'intentFilter' smart constructor.
-data IntentFilter = IntentFilter'
+data IntentFilter =
+  IntentFilter'
     { _ifActionNames   :: !(Maybe [Text])
     , _ifMimeType      :: !(Maybe Text)
     , _ifCategoryNames :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IntentFilter' with the minimum fields required to make a request.
 --
@@ -98,11 +102,12 @@ data IntentFilter = IntentFilter'
 intentFilter
     :: IntentFilter
 intentFilter =
-    IntentFilter'
+  IntentFilter'
     { _ifActionNames = Nothing
     , _ifMimeType = Nothing
     , _ifCategoryNames = Nothing
     }
+
 
 -- | The android:name value of the tag.
 ifActionNames :: Lens' IntentFilter [Text]
@@ -145,9 +150,12 @@ instance ToJSON IntentFilter where
 -- | A description of how to set up an iOS device prior to a test.
 --
 -- /See:/ 'iosTestSetup' smart constructor.
-newtype IosTestSetup = IosTestSetup'
+newtype IosTestSetup =
+  IosTestSetup'
     { _itsNetworkProFile :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosTestSetup' with the minimum fields required to make a request.
 --
@@ -156,10 +164,8 @@ newtype IosTestSetup = IosTestSetup'
 -- * 'itsNetworkProFile'
 iosTestSetup
     :: IosTestSetup
-iosTestSetup =
-    IosTestSetup'
-    { _itsNetworkProFile = Nothing
-    }
+iosTestSetup = IosTestSetup' {_itsNetworkProFile = Nothing}
+
 
 -- | The network traffic profile used for running the test. Available network
 -- profiles can be queried by using the NETWORK_CONFIGURATION environment
@@ -184,7 +190,8 @@ instance ToJSON IosTestSetup where
 -- | Specifies a single test to be executed in a single environment.
 --
 -- /See:/ 'testExecution' smart constructor.
-data TestExecution = TestExecution'
+data TestExecution =
+  TestExecution'
     { _teTestDetails       :: !(Maybe TestDetails)
     , _teState             :: !(Maybe TestExecutionState)
     , _teEnvironment       :: !(Maybe Environment)
@@ -194,7 +201,9 @@ data TestExecution = TestExecution'
     , _teProjectId         :: !(Maybe Text)
     , _teToolResultsStep   :: !(Maybe ToolResultsStep)
     , _teTimestamp         :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestExecution' with the minimum fields required to make a request.
 --
@@ -220,7 +229,7 @@ data TestExecution = TestExecution'
 testExecution
     :: TestExecution
 testExecution =
-    TestExecution'
+  TestExecution'
     { _teTestDetails = Nothing
     , _teState = Nothing
     , _teEnvironment = Nothing
@@ -231,6 +240,7 @@ testExecution =
     , _teToolResultsStep = Nothing
     , _teTimestamp = Nothing
     }
+
 
 -- | Output only. Additional details about the running test.
 teTestDetails :: Lens' TestExecution (Maybe TestDetails)
@@ -311,13 +321,16 @@ instance ToJSON TestExecution where
 -- | An iOS version.
 --
 -- /See:/ 'iosVersion' smart constructor.
-data IosVersion = IosVersion'
+data IosVersion =
+  IosVersion'
     { _ivMinorVersion             :: !(Maybe (Textual Int32))
     , _ivMajorVersion             :: !(Maybe (Textual Int32))
     , _ivSupportedXcodeVersionIds :: !(Maybe [Text])
     , _ivId                       :: !(Maybe Text)
     , _ivTags                     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosVersion' with the minimum fields required to make a request.
 --
@@ -335,13 +348,14 @@ data IosVersion = IosVersion'
 iosVersion
     :: IosVersion
 iosVersion =
-    IosVersion'
+  IosVersion'
     { _ivMinorVersion = Nothing
     , _ivMajorVersion = Nothing
     , _ivSupportedXcodeVersionIds = Nothing
     , _ivId = Nothing
     , _ivTags = Nothing
     }
+
 
 -- | An integer representing the minor iOS version. Examples: \"1\", \"2\".
 ivMinorVersion :: Lens' IosVersion (Maybe Int32)
@@ -400,9 +414,12 @@ instance ToJSON IosVersion where
 -- | A list of iOS device configurations in which the test is to be executed.
 --
 -- /See:/ 'iosDeviceList' smart constructor.
-newtype IosDeviceList = IosDeviceList'
+newtype IosDeviceList =
+  IosDeviceList'
     { _idlIosDevices :: Maybe [IosDevice]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosDeviceList' with the minimum fields required to make a request.
 --
@@ -411,10 +428,8 @@ newtype IosDeviceList = IosDeviceList'
 -- * 'idlIosDevices'
 iosDeviceList
     :: IosDeviceList
-iosDeviceList =
-    IosDeviceList'
-    { _idlIosDevices = Nothing
-    }
+iosDeviceList = IosDeviceList' {_idlIosDevices = Nothing}
+
 
 -- | Required. A list of iOS devices.
 idlIosDevices :: Lens' IosDeviceList [IosDevice]
@@ -440,11 +455,14 @@ instance ToJSON IosDeviceList where
 -- click.
 --
 -- /See:/ 'roboDirective' smart constructor.
-data RoboDirective = RoboDirective'
+data RoboDirective =
+  RoboDirective'
     { _rdResourceName :: !(Maybe Text)
     , _rdInputText    :: !(Maybe Text)
     , _rdActionType   :: !(Maybe RoboDirectiveActionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoboDirective' with the minimum fields required to make a request.
 --
@@ -458,11 +476,9 @@ data RoboDirective = RoboDirective'
 roboDirective
     :: RoboDirective
 roboDirective =
-    RoboDirective'
-    { _rdResourceName = Nothing
-    , _rdInputText = Nothing
-    , _rdActionType = Nothing
-    }
+  RoboDirective'
+    {_rdResourceName = Nothing, _rdInputText = Nothing, _rdActionType = Nothing}
+
 
 -- | Required. The android resource name of the target UI element. For
 -- example, in Java: R.string.foo in xml: \'string\/foo Only the \"foo\"
@@ -504,10 +520,13 @@ instance ToJSON RoboDirective where
 -- | Android configuration that can be selected at the time a test is run.
 --
 -- /See:/ 'androidRuntimeConfiguration' smart constructor.
-data AndroidRuntimeConfiguration = AndroidRuntimeConfiguration'
+data AndroidRuntimeConfiguration =
+  AndroidRuntimeConfiguration'
     { _arcOrientations :: !(Maybe [Orientation])
     , _arcLocales      :: !(Maybe [Locale])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidRuntimeConfiguration' with the minimum fields required to make a request.
 --
@@ -519,10 +538,9 @@ data AndroidRuntimeConfiguration = AndroidRuntimeConfiguration'
 androidRuntimeConfiguration
     :: AndroidRuntimeConfiguration
 androidRuntimeConfiguration =
-    AndroidRuntimeConfiguration'
-    { _arcOrientations = Nothing
-    , _arcLocales = Nothing
-    }
+  AndroidRuntimeConfiguration'
+    {_arcOrientations = Nothing, _arcLocales = Nothing}
+
 
 -- | The set of available orientations.
 arcOrientations :: Lens' AndroidRuntimeConfiguration [Orientation]
@@ -557,10 +575,13 @@ instance ToJSON AndroidRuntimeConfiguration where
 -- | An Xcode version that an iOS version is compatible with.
 --
 -- /See:/ 'xcodeVersion' smart constructor.
-data XcodeVersion = XcodeVersion'
+data XcodeVersion =
+  XcodeVersion'
     { _xvVersion :: !(Maybe Text)
     , _xvTags    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'XcodeVersion' with the minimum fields required to make a request.
 --
@@ -571,11 +592,8 @@ data XcodeVersion = XcodeVersion'
 -- * 'xvTags'
 xcodeVersion
     :: XcodeVersion
-xcodeVersion =
-    XcodeVersion'
-    { _xvVersion = Nothing
-    , _xvTags = Nothing
-    }
+xcodeVersion = XcodeVersion' {_xvVersion = Nothing, _xvTags = Nothing}
+
 
 -- | The id for this version. Example: \"9.2\".
 xvVersion :: Lens' XcodeVersion (Maybe Text)
@@ -606,10 +624,13 @@ instance ToJSON XcodeVersion where
 -- of the Android platform.
 --
 -- /See:/ 'distribution' smart constructor.
-data Distribution = Distribution'
+data Distribution =
+  Distribution'
     { _dMeasurementTime :: !(Maybe DateTime')
     , _dMarketShare     :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
@@ -621,10 +642,8 @@ data Distribution = Distribution'
 distribution
     :: Distribution
 distribution =
-    Distribution'
-    { _dMeasurementTime = Nothing
-    , _dMarketShare = Nothing
-    }
+  Distribution' {_dMeasurementTime = Nothing, _dMarketShare = Nothing}
+
 
 -- | Output only. The time this distribution was measured.
 dMeasurementTime :: Lens' Distribution (Maybe UTCTime)
@@ -657,14 +676,17 @@ instance ToJSON Distribution where
 -- | A description of an iOS device tests may be run on.
 --
 -- /See:/ 'iosModel' smart constructor.
-data IosModel = IosModel'
+data IosModel =
+  IosModel'
     { _imFormFactor          :: !(Maybe IosModelFormFactor)
     , _imName                :: !(Maybe Text)
     , _imSupportedVersionIds :: !(Maybe [Text])
     , _imId                  :: !(Maybe Text)
     , _imDeviceCapabilities  :: !(Maybe [Text])
     , _imTags                :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosModel' with the minimum fields required to make a request.
 --
@@ -684,7 +706,7 @@ data IosModel = IosModel'
 iosModel
     :: IosModel
 iosModel =
-    IosModel'
+  IosModel'
     { _imFormFactor = Nothing
     , _imName = Nothing
     , _imSupportedVersionIds = Nothing
@@ -692,6 +714,7 @@ iosModel =
     , _imDeviceCapabilities = Nothing
     , _imTags = Nothing
     }
+
 
 -- | Whether this device is a phone, tablet, wearable, etc.
 imFormFactor :: Lens' IosModel (Maybe IosModelFormFactor)
@@ -758,10 +781,13 @@ instance ToJSON IosModel where
 -- | An Android package file to install.
 --
 -- /See:/ 'aPK' smart constructor.
-data APK = APK'
+data APK =
+  APK'
     { _aPackageName :: !(Maybe Text)
     , _aLocation    :: !(Maybe FileReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APK' with the minimum fields required to make a request.
 --
@@ -772,11 +798,8 @@ data APK = APK'
 -- * 'aLocation'
 aPK
     :: APK
-aPK =
-    APK'
-    { _aPackageName = Nothing
-    , _aLocation = Nothing
-    }
+aPK = APK' {_aPackageName = Nothing, _aLocation = Nothing}
+
 
 -- | The java package for the APK to be installed. Value is determined by
 -- examining the application\'s manifest.
@@ -805,9 +828,12 @@ instance ToJSON APK where
 
 --
 -- /See:/ 'networkConfigurationCatalog' smart constructor.
-newtype NetworkConfigurationCatalog = NetworkConfigurationCatalog'
+newtype NetworkConfigurationCatalog =
+  NetworkConfigurationCatalog'
     { _nccConfigurations :: Maybe [NetworkConfiguration]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworkConfigurationCatalog' with the minimum fields required to make a request.
 --
@@ -817,9 +843,8 @@ newtype NetworkConfigurationCatalog = NetworkConfigurationCatalog'
 networkConfigurationCatalog
     :: NetworkConfigurationCatalog
 networkConfigurationCatalog =
-    NetworkConfigurationCatalog'
-    { _nccConfigurations = Nothing
-    }
+  NetworkConfigurationCatalog' {_nccConfigurations = Nothing}
+
 
 nccConfigurations :: Lens' NetworkConfigurationCatalog [NetworkConfiguration]
 nccConfigurations
@@ -844,12 +869,15 @@ instance ToJSON NetworkConfigurationCatalog where
 -- | A single iOS device.
 --
 -- /See:/ 'iosDevice' smart constructor.
-data IosDevice = IosDevice'
+data IosDevice =
+  IosDevice'
     { _idLocale       :: !(Maybe Text)
     , _idIosModelId   :: !(Maybe Text)
     , _idIosVersionId :: !(Maybe Text)
     , _idOrientation  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosDevice' with the minimum fields required to make a request.
 --
@@ -865,33 +893,34 @@ data IosDevice = IosDevice'
 iosDevice
     :: IosDevice
 iosDevice =
-    IosDevice'
+  IosDevice'
     { _idLocale = Nothing
     , _idIosModelId = Nothing
     , _idIosVersionId = Nothing
     , _idOrientation = Nothing
     }
 
+
 -- | Required. The locale the test device used for testing. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idLocale :: Lens' IosDevice (Maybe Text)
 idLocale = lens _idLocale (\ s a -> s{_idLocale = a})
 
 -- | Required. The id of the iOS device to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idIosModelId :: Lens' IosDevice (Maybe Text)
 idIosModelId
   = lens _idIosModelId (\ s a -> s{_idIosModelId = a})
 
 -- | Required. The id of the iOS major software version to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idIosVersionId :: Lens' IosDevice (Maybe Text)
 idIosVersionId
   = lens _idIosVersionId
       (\ s a -> s{_idIosVersionId = a})
 
 -- | Required. How the device is oriented during the test. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 idOrientation :: Lens' IosDevice (Maybe Text)
 idOrientation
   = lens _idOrientation
@@ -919,9 +948,12 @@ instance ToJSON IosDevice where
 -- APK.
 --
 -- /See:/ 'getAPKDetailsResponse' smart constructor.
-newtype GetAPKDetailsResponse = GetAPKDetailsResponse'
+newtype GetAPKDetailsResponse =
+  GetAPKDetailsResponse'
     { _gapkdrAPKDetail :: Maybe APKDetail
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetAPKDetailsResponse' with the minimum fields required to make a request.
 --
@@ -930,10 +962,8 @@ newtype GetAPKDetailsResponse = GetAPKDetailsResponse'
 -- * 'gapkdrAPKDetail'
 getAPKDetailsResponse
     :: GetAPKDetailsResponse
-getAPKDetailsResponse =
-    GetAPKDetailsResponse'
-    { _gapkdrAPKDetail = Nothing
-    }
+getAPKDetailsResponse = GetAPKDetailsResponse' {_gapkdrAPKDetail = Nothing}
+
 
 -- | Details of the Android APK.
 gapkdrAPKDetail :: Lens' GetAPKDetailsResponse (Maybe APKDetail)
@@ -957,7 +987,8 @@ instance ToJSON GetAPKDetailsResponse where
 -- goes.
 --
 -- /See:/ 'androidRoboTest' smart constructor.
-data AndroidRoboTest = AndroidRoboTest'
+data AndroidRoboTest =
+  AndroidRoboTest'
     { _artRoboDirectives     :: !(Maybe [RoboDirective])
     , _artRoboScript         :: !(Maybe FileReference)
     , _artStartingIntents    :: !(Maybe [RoboStartingIntent])
@@ -967,7 +998,9 @@ data AndroidRoboTest = AndroidRoboTest'
     , _artAppBundle          :: !(Maybe AppBundle)
     , _artAppAPK             :: !(Maybe FileReference)
     , _artMaxDepth           :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidRoboTest' with the minimum fields required to make a request.
 --
@@ -993,7 +1026,7 @@ data AndroidRoboTest = AndroidRoboTest'
 androidRoboTest
     :: AndroidRoboTest
 androidRoboTest =
-    AndroidRoboTest'
+  AndroidRoboTest'
     { _artRoboDirectives = Nothing
     , _artRoboScript = Nothing
     , _artStartingIntents = Nothing
@@ -1004,6 +1037,7 @@ androidRoboTest =
     , _artAppAPK = Nothing
     , _artMaxDepth = Nothing
     }
+
 
 -- | A set of directives Robo should apply during the crawl. This allows
 -- users to customize the crawl. For example, the username and password for
@@ -1102,9 +1136,12 @@ instance ToJSON AndroidRoboTest where
 -- | A reference to a file, used for user inputs.
 --
 -- /See:/ 'fileReference' smart constructor.
-newtype FileReference = FileReference'
+newtype FileReference =
+  FileReference'
     { _frGcsPath :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FileReference' with the minimum fields required to make a request.
 --
@@ -1113,10 +1150,8 @@ newtype FileReference = FileReference'
 -- * 'frGcsPath'
 fileReference
     :: FileReference
-fileReference =
-    FileReference'
-    { _frGcsPath = Nothing
-    }
+fileReference = FileReference' {_frGcsPath = Nothing}
+
 
 -- | A path to a file in Google Cloud Storage. Example:
 -- gs:\/\/build-app-1414623860166\/app-debug-unaligned.apk
@@ -1136,10 +1171,13 @@ instance ToJSON FileReference where
 -- | The environment in which the test is run.
 --
 -- /See:/ 'environment' smart constructor.
-data Environment = Environment'
+data Environment =
+  Environment'
     { _eIosDevice     :: !(Maybe IosDevice)
     , _eAndroidDevice :: !(Maybe AndroidDevice)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Environment' with the minimum fields required to make a request.
 --
@@ -1150,11 +1188,8 @@ data Environment = Environment'
 -- * 'eAndroidDevice'
 environment
     :: Environment
-environment =
-    Environment'
-    { _eIosDevice = Nothing
-    , _eAndroidDevice = Nothing
-    }
+environment = Environment' {_eIosDevice = Nothing, _eAndroidDevice = Nothing}
+
 
 -- | An iOS device which must be used with an iOS test.
 eIosDevice :: Lens' Environment (Maybe IosDevice)
@@ -1184,10 +1219,13 @@ instance ToJSON Environment where
 -- | Represents a tool results history resource.
 --
 -- /See:/ 'toolResultsHistory' smart constructor.
-data ToolResultsHistory = ToolResultsHistory'
+data ToolResultsHistory =
+  ToolResultsHistory'
     { _trhHistoryId :: !(Maybe Text)
     , _trhProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ToolResultsHistory' with the minimum fields required to make a request.
 --
@@ -1199,10 +1237,8 @@ data ToolResultsHistory = ToolResultsHistory'
 toolResultsHistory
     :: ToolResultsHistory
 toolResultsHistory =
-    ToolResultsHistory'
-    { _trhHistoryId = Nothing
-    , _trhProjectId = Nothing
-    }
+  ToolResultsHistory' {_trhHistoryId = Nothing, _trhProjectId = Nothing}
+
 
 -- | Required. A tool results history ID.
 trhHistoryId :: Lens' ToolResultsHistory (Maybe Text)
@@ -1231,12 +1267,15 @@ instance ToJSON ToolResultsHistory where
 -- | A description of a test environment.
 --
 -- /See:/ 'testEnvironmentCatalog' smart constructor.
-data TestEnvironmentCatalog = TestEnvironmentCatalog'
+data TestEnvironmentCatalog =
+  TestEnvironmentCatalog'
     { _tecSoftwareCatalog             :: !(Maybe ProvidedSoftwareCatalog)
     , _tecNetworkConfigurationCatalog :: !(Maybe NetworkConfigurationCatalog)
     , _tecAndroidDeviceCatalog        :: !(Maybe AndroidDeviceCatalog)
     , _tecIosDeviceCatalog            :: !(Maybe IosDeviceCatalog)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestEnvironmentCatalog' with the minimum fields required to make a request.
 --
@@ -1252,12 +1291,13 @@ data TestEnvironmentCatalog = TestEnvironmentCatalog'
 testEnvironmentCatalog
     :: TestEnvironmentCatalog
 testEnvironmentCatalog =
-    TestEnvironmentCatalog'
+  TestEnvironmentCatalog'
     { _tecSoftwareCatalog = Nothing
     , _tecNetworkConfigurationCatalog = Nothing
     , _tecAndroidDeviceCatalog = Nothing
     , _tecIosDeviceCatalog = Nothing
     }
+
 
 -- | The software test environment provided by TestExecutionService.
 tecSoftwareCatalog :: Lens' TestEnvironmentCatalog (Maybe ProvidedSoftwareCatalog)
@@ -1307,12 +1347,15 @@ instance ToJSON TestEnvironmentCatalog where
 -- | A location\/region designation for language.
 --
 -- /See:/ 'locale' smart constructor.
-data Locale = Locale'
+data Locale =
+  Locale'
     { _lName   :: !(Maybe Text)
     , _lId     :: !(Maybe Text)
     , _lRegion :: !(Maybe Text)
     , _lTags   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Locale' with the minimum fields required to make a request.
 --
@@ -1328,12 +1371,9 @@ data Locale = Locale'
 locale
     :: Locale
 locale =
-    Locale'
-    { _lName = Nothing
-    , _lId = Nothing
-    , _lRegion = Nothing
-    , _lTags = Nothing
-    }
+  Locale'
+    {_lName = Nothing, _lId = Nothing, _lRegion = Nothing, _lTags = Nothing}
+
 
 -- | A human-friendly name for this language\/locale. Example: \"English\".
 lName :: Lens' Locale (Maybe Text)
@@ -1372,11 +1412,14 @@ instance ToJSON Locale where
 -- | The currently supported Android devices.
 --
 -- /See:/ 'androidDeviceCatalog' smart constructor.
-data AndroidDeviceCatalog = AndroidDeviceCatalog'
+data AndroidDeviceCatalog =
+  AndroidDeviceCatalog'
     { _adcVersions             :: !(Maybe [AndroidVersion])
     , _adcModels               :: !(Maybe [AndroidModel])
     , _adcRuntimeConfiguration :: !(Maybe AndroidRuntimeConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidDeviceCatalog' with the minimum fields required to make a request.
 --
@@ -1390,11 +1433,12 @@ data AndroidDeviceCatalog = AndroidDeviceCatalog'
 androidDeviceCatalog
     :: AndroidDeviceCatalog
 androidDeviceCatalog =
-    AndroidDeviceCatalog'
+  AndroidDeviceCatalog'
     { _adcVersions = Nothing
     , _adcModels = Nothing
     , _adcRuntimeConfiguration = Nothing
     }
+
 
 -- | The set of supported Android OS versions.
 adcVersions :: Lens' AndroidDeviceCatalog [AndroidVersion]
@@ -1437,18 +1481,20 @@ instance ToJSON AndroidDeviceCatalog where
 -- | A description of how to run the test.
 --
 -- /See:/ 'testSpecification' smart constructor.
-data TestSpecification = TestSpecification'
+data TestSpecification =
+  TestSpecification'
     { _tsIosTestSetup               :: !(Maybe IosTestSetup)
     , _tsTestTimeout                :: !(Maybe GDuration)
     , _tsAndroidRoboTest            :: !(Maybe AndroidRoboTest)
-    , _tsAutoGoogleLogin            :: !(Maybe Bool)
     , _tsDisableVideoRecording      :: !(Maybe Bool)
     , _tsAndroidInstrumentationTest :: !(Maybe AndroidInstrumentationTest)
     , _tsIosXcTest                  :: !(Maybe IosXcTest)
     , _tsDisablePerformanceMetrics  :: !(Maybe Bool)
     , _tsTestSetup                  :: !(Maybe TestSetup)
     , _tsAndroidTestLoop            :: !(Maybe AndroidTestLoop)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestSpecification' with the minimum fields required to make a request.
 --
@@ -1459,8 +1505,6 @@ data TestSpecification = TestSpecification'
 -- * 'tsTestTimeout'
 --
 -- * 'tsAndroidRoboTest'
---
--- * 'tsAutoGoogleLogin'
 --
 -- * 'tsDisableVideoRecording'
 --
@@ -1476,11 +1520,10 @@ data TestSpecification = TestSpecification'
 testSpecification
     :: TestSpecification
 testSpecification =
-    TestSpecification'
+  TestSpecification'
     { _tsIosTestSetup = Nothing
     , _tsTestTimeout = Nothing
     , _tsAndroidRoboTest = Nothing
-    , _tsAutoGoogleLogin = Nothing
     , _tsDisableVideoRecording = Nothing
     , _tsAndroidInstrumentationTest = Nothing
     , _tsIosXcTest = Nothing
@@ -1488,6 +1531,7 @@ testSpecification =
     , _tsTestSetup = Nothing
     , _tsAndroidTestLoop = Nothing
     }
+
 
 -- | Test setup requirements for iOS.
 tsIosTestSetup :: Lens' TestSpecification (Maybe IosTestSetup)
@@ -1508,17 +1552,6 @@ tsAndroidRoboTest :: Lens' TestSpecification (Maybe AndroidRoboTest)
 tsAndroidRoboTest
   = lens _tsAndroidRoboTest
       (\ s a -> s{_tsAndroidRoboTest = a})
-
--- | Enables automatic Google account login. If set, the service will
--- automatically generate a Google test account and add it to the device,
--- before executing the test. Note that test accounts might be reused. Many
--- applications show their full set of functionalities when an account is
--- present on the device. Logging into the device with these generated
--- accounts allows testing more functionalities. Default is false.
-tsAutoGoogleLogin :: Lens' TestSpecification (Maybe Bool)
-tsAutoGoogleLogin
-  = lens _tsAutoGoogleLogin
-      (\ s a -> s{_tsAutoGoogleLogin = a})
 
 -- | Disables video recording; may reduce test latency.
 tsDisableVideoRecording :: Lens' TestSpecification (Maybe Bool)
@@ -1562,7 +1595,6 @@ instance FromJSON TestSpecification where
                  TestSpecification' <$>
                    (o .:? "iosTestSetup") <*> (o .:? "testTimeout") <*>
                      (o .:? "androidRoboTest")
-                     <*> (o .:? "autoGoogleLogin")
                      <*> (o .:? "disableVideoRecording")
                      <*> (o .:? "androidInstrumentationTest")
                      <*> (o .:? "iosXcTest")
@@ -1577,7 +1609,6 @@ instance ToJSON TestSpecification where
                  [("iosTestSetup" .=) <$> _tsIosTestSetup,
                   ("testTimeout" .=) <$> _tsTestTimeout,
                   ("androidRoboTest" .=) <$> _tsAndroidRoboTest,
-                  ("autoGoogleLogin" .=) <$> _tsAutoGoogleLogin,
                   ("disableVideoRecording" .=) <$>
                     _tsDisableVideoRecording,
                   ("androidInstrumentationTest" .=) <$>
@@ -1591,9 +1622,12 @@ instance ToJSON TestSpecification where
 -- | The currently provided software environment on the devices under test.
 --
 -- /See:/ 'providedSoftwareCatalog' smart constructor.
-newtype ProvidedSoftwareCatalog = ProvidedSoftwareCatalog'
+newtype ProvidedSoftwareCatalog =
+  ProvidedSoftwareCatalog'
     { _pscOrchestratorVersion :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProvidedSoftwareCatalog' with the minimum fields required to make a request.
 --
@@ -1603,9 +1637,8 @@ newtype ProvidedSoftwareCatalog = ProvidedSoftwareCatalog'
 providedSoftwareCatalog
     :: ProvidedSoftwareCatalog
 providedSoftwareCatalog =
-    ProvidedSoftwareCatalog'
-    { _pscOrchestratorVersion = Nothing
-    }
+  ProvidedSoftwareCatalog' {_pscOrchestratorVersion = Nothing}
+
 
 -- | A string representing the current version of Android Test Orchestrator
 -- that is provided by TestExecutionService. Example: \"1.0.2 beta\".
@@ -1631,13 +1664,16 @@ instance ToJSON ProvidedSoftwareCatalog where
 -- | Network emulation parameters.
 --
 -- /See:/ 'trafficRule' smart constructor.
-data TrafficRule = TrafficRule'
+data TrafficRule =
+  TrafficRule'
     { _trPacketLossRatio        :: !(Maybe (Textual Double))
     , _trPacketDuplicationRatio :: !(Maybe (Textual Double))
     , _trBandwidth              :: !(Maybe (Textual Double))
     , _trBurst                  :: !(Maybe (Textual Double))
     , _trDelay                  :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrafficRule' with the minimum fields required to make a request.
 --
@@ -1655,13 +1691,14 @@ data TrafficRule = TrafficRule'
 trafficRule
     :: TrafficRule
 trafficRule =
-    TrafficRule'
+  TrafficRule'
     { _trPacketLossRatio = Nothing
     , _trPacketDuplicationRatio = Nothing
     , _trBandwidth = Nothing
     , _trBurst = Nothing
     , _trDelay = Nothing
     }
+
 
 -- | Packet loss ratio (0.0 - 1.0).
 trPacketLossRatio :: Lens' TrafficRule (Maybe Double)
@@ -1720,12 +1757,15 @@ instance ToJSON TrafficRule where
 -- | The currently supported iOS devices.
 --
 -- /See:/ 'iosDeviceCatalog' smart constructor.
-data IosDeviceCatalog = IosDeviceCatalog'
+data IosDeviceCatalog =
+  IosDeviceCatalog'
     { _idcXcodeVersions        :: !(Maybe [XcodeVersion])
     , _idcVersions             :: !(Maybe [IosVersion])
     , _idcModels               :: !(Maybe [IosModel])
     , _idcRuntimeConfiguration :: !(Maybe IosRuntimeConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosDeviceCatalog' with the minimum fields required to make a request.
 --
@@ -1741,12 +1781,13 @@ data IosDeviceCatalog = IosDeviceCatalog'
 iosDeviceCatalog
     :: IosDeviceCatalog
 iosDeviceCatalog =
-    IosDeviceCatalog'
+  IosDeviceCatalog'
     { _idcXcodeVersions = Nothing
     , _idcVersions = Nothing
     , _idcModels = Nothing
     , _idcRuntimeConfiguration = Nothing
     }
+
 
 -- | The set of supported Xcode versions.
 idcXcodeVersions :: Lens' IosDeviceCatalog [XcodeVersion]
@@ -1805,14 +1846,16 @@ instance ToJSON IosDeviceCatalog where
 --
 -- /See:/ 'googleAuto' smart constructor.
 data GoogleAuto =
-    GoogleAuto'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleAuto'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAuto' with the minimum fields required to make a request.
 --
 googleAuto
     :: GoogleAuto
 googleAuto = GoogleAuto'
+
 
 instance FromJSON GoogleAuto where
         parseJSON
@@ -1824,9 +1867,12 @@ instance ToJSON GoogleAuto where
 -- | Identifies an account and how to log into it.
 --
 -- /See:/ 'account' smart constructor.
-newtype Account = Account'
+newtype Account =
+  Account'
     { _aGoogleAuto :: Maybe GoogleAuto
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -1835,10 +1881,8 @@ newtype Account = Account'
 -- * 'aGoogleAuto'
 account
     :: Account
-account =
-    Account'
-    { _aGoogleAuto = Nothing
-    }
+account = Account' {_aGoogleAuto = Nothing}
+
 
 -- | An automatic google login account.
 aGoogleAuto :: Lens' Account (Maybe GoogleAuto)
@@ -1858,11 +1902,14 @@ instance ToJSON Account where
 -- | A starting intent specified by an action, uri, and categories.
 --
 -- /See:/ 'startActivityIntent' smart constructor.
-data StartActivityIntent = StartActivityIntent'
+data StartActivityIntent =
+  StartActivityIntent'
     { _saiURI        :: !(Maybe Text)
     , _saiCategories :: !(Maybe [Text])
     , _saiAction     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StartActivityIntent' with the minimum fields required to make a request.
 --
@@ -1876,11 +1923,9 @@ data StartActivityIntent = StartActivityIntent'
 startActivityIntent
     :: StartActivityIntent
 startActivityIntent =
-    StartActivityIntent'
-    { _saiURI = Nothing
-    , _saiCategories = Nothing
-    , _saiAction = Nothing
-    }
+  StartActivityIntent'
+    {_saiURI = Nothing, _saiCategories = Nothing, _saiAction = Nothing}
+
 
 -- | URI for the action.
 saiURI :: Lens' StartActivityIntent (Maybe Text)
@@ -1918,10 +1963,14 @@ instance ToJSON StartActivityIntent where
 -- | Message for specifying the start activities to crawl.
 --
 -- /See:/ 'roboStartingIntent' smart constructor.
-data RoboStartingIntent = RoboStartingIntent'
+data RoboStartingIntent =
+  RoboStartingIntent'
     { _rsiLauncherActivity :: !(Maybe LauncherActivityIntent)
     , _rsiStartActivity    :: !(Maybe StartActivityIntent)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    , _rsiTimeout          :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoboStartingIntent' with the minimum fields required to make a request.
 --
@@ -1930,13 +1979,17 @@ data RoboStartingIntent = RoboStartingIntent'
 -- * 'rsiLauncherActivity'
 --
 -- * 'rsiStartActivity'
+--
+-- * 'rsiTimeout'
 roboStartingIntent
     :: RoboStartingIntent
 roboStartingIntent =
-    RoboStartingIntent'
+  RoboStartingIntent'
     { _rsiLauncherActivity = Nothing
     , _rsiStartActivity = Nothing
+    , _rsiTimeout = Nothing
     }
+
 
 rsiLauncherActivity :: Lens' RoboStartingIntent (Maybe LauncherActivityIntent)
 rsiLauncherActivity
@@ -1948,20 +2001,28 @@ rsiStartActivity
   = lens _rsiStartActivity
       (\ s a -> s{_rsiStartActivity = a})
 
+-- | Timeout in seconds for each intent.
+rsiTimeout :: Lens' RoboStartingIntent (Maybe Scientific)
+rsiTimeout
+  = lens _rsiTimeout (\ s a -> s{_rsiTimeout = a}) .
+      mapping _GDuration
+
 instance FromJSON RoboStartingIntent where
         parseJSON
           = withObject "RoboStartingIntent"
               (\ o ->
                  RoboStartingIntent' <$>
                    (o .:? "launcherActivity") <*>
-                     (o .:? "startActivity"))
+                     (o .:? "startActivity")
+                     <*> (o .:? "timeout"))
 
 instance ToJSON RoboStartingIntent where
         toJSON RoboStartingIntent'{..}
           = object
               (catMaybes
                  [("launcherActivity" .=) <$> _rsiLauncherActivity,
-                  ("startActivity" .=) <$> _rsiStartActivity])
+                  ("startActivity" .=) <$> _rsiStartActivity,
+                  ("timeout" .=) <$> _rsiTimeout])
 
 -- | Represents a whole or partial calendar date, e.g. a birthday. The time
 -- of day and time zone are either specified elsewhere or are not
@@ -1973,11 +2034,14 @@ instance ToJSON RoboStartingIntent where
 -- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -1990,12 +2054,8 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2036,10 +2096,13 @@ instance ToJSON Date where
 -- | A file or directory to install on the device before the test starts.
 --
 -- /See:/ 'regularFile' smart constructor.
-data RegularFile = RegularFile'
+data RegularFile =
+  RegularFile'
     { _rfDevicePath :: !(Maybe Text)
     , _rfContent    :: !(Maybe FileReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegularFile' with the minimum fields required to make a request.
 --
@@ -2050,11 +2113,8 @@ data RegularFile = RegularFile'
 -- * 'rfContent'
 regularFile
     :: RegularFile
-regularFile =
-    RegularFile'
-    { _rfDevicePath = Nothing
-    , _rfContent = Nothing
-    }
+regularFile = RegularFile' {_rfDevicePath = Nothing, _rfContent = Nothing}
+
 
 -- | Required. Where to put the content on the device. Must be an absolute,
 -- whitelisted path. If the file exists, it will be replaced. The following
@@ -2100,7 +2160,8 @@ instance ToJSON RegularFile where
 -- | A description of an Android device tests may be run on.
 --
 -- /See:/ 'androidModel' smart constructor.
-data AndroidModel = AndroidModel'
+data AndroidModel =
+  AndroidModel'
     { _amSupportedAbis        :: !(Maybe [Text])
     , _amManufacturer         :: !(Maybe Text)
     , _amCodename             :: !(Maybe Text)
@@ -2115,7 +2176,9 @@ data AndroidModel = AndroidModel'
     , _amId                   :: !(Maybe Text)
     , _amForm                 :: !(Maybe AndroidModelForm)
     , _amTags                 :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidModel' with the minimum fields required to make a request.
 --
@@ -2151,7 +2214,7 @@ data AndroidModel = AndroidModel'
 androidModel
     :: AndroidModel
 androidModel =
-    AndroidModel'
+  AndroidModel'
     { _amSupportedAbis = Nothing
     , _amManufacturer = Nothing
     , _amCodename = Nothing
@@ -2167,6 +2230,7 @@ androidModel =
     , _amForm = Nothing
     , _amTags = Nothing
     }
+
 
 -- | The list of supported ABIs for this device. This corresponds to either
 -- android.os.Build.SUPPORTED_ABIS (for API level 21 and above) or
@@ -2300,10 +2364,13 @@ instance ToJSON AndroidModel where
 -- | Information about the client which invoked the test.
 --
 -- /See:/ 'clientInfo' smart constructor.
-data ClientInfo = ClientInfo'
+data ClientInfo =
+  ClientInfo'
     { _ciName              :: !(Maybe Text)
     , _ciClientInfoDetails :: !(Maybe [ClientInfoDetail])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientInfo' with the minimum fields required to make a request.
 --
@@ -2314,11 +2381,8 @@ data ClientInfo = ClientInfo'
 -- * 'ciClientInfoDetails'
 clientInfo
     :: ClientInfo
-clientInfo =
-    ClientInfo'
-    { _ciName = Nothing
-    , _ciClientInfoDetails = Nothing
-    }
+clientInfo = ClientInfo' {_ciName = Nothing, _ciClientInfoDetails = Nothing}
+
 
 -- | Required. Client name, such as gcloud.
 ciName :: Lens' ClientInfo (Maybe Text)
@@ -2351,13 +2415,17 @@ instance ToJSON ClientInfo where
 -- http:\/\/developer.android.com\/guide\/topics\/manifest\/manifest-intro.html
 --
 -- /See:/ 'aPKManifest' smart constructor.
-data APKManifest = APKManifest'
+data APKManifest =
+  APKManifest'
     { _apkmApplicationLabel :: !(Maybe Text)
     , _apkmMinSdkVersion    :: !(Maybe (Textual Int32))
+    , _apkmTargetSdkVersion :: !(Maybe (Textual Int32))
     , _apkmPackageName      :: !(Maybe Text)
     , _apkmIntentFilters    :: !(Maybe [IntentFilter])
     , _apkmMaxSdkVersion    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APKManifest' with the minimum fields required to make a request.
 --
@@ -2367,6 +2435,8 @@ data APKManifest = APKManifest'
 --
 -- * 'apkmMinSdkVersion'
 --
+-- * 'apkmTargetSdkVersion'
+--
 -- * 'apkmPackageName'
 --
 -- * 'apkmIntentFilters'
@@ -2375,13 +2445,15 @@ data APKManifest = APKManifest'
 aPKManifest
     :: APKManifest
 aPKManifest =
-    APKManifest'
+  APKManifest'
     { _apkmApplicationLabel = Nothing
     , _apkmMinSdkVersion = Nothing
+    , _apkmTargetSdkVersion = Nothing
     , _apkmPackageName = Nothing
     , _apkmIntentFilters = Nothing
     , _apkmMaxSdkVersion = Nothing
     }
+
 
 -- | User-readable name for the application.
 apkmApplicationLabel :: Lens' APKManifest (Maybe Text)
@@ -2394,6 +2466,13 @@ apkmMinSdkVersion :: Lens' APKManifest (Maybe Int32)
 apkmMinSdkVersion
   = lens _apkmMinSdkVersion
       (\ s a -> s{_apkmMinSdkVersion = a})
+      . mapping _Coerce
+
+-- | Specifies the API Level on which the application is designed to run.
+apkmTargetSdkVersion :: Lens' APKManifest (Maybe Int32)
+apkmTargetSdkVersion
+  = lens _apkmTargetSdkVersion
+      (\ s a -> s{_apkmTargetSdkVersion = a})
       . mapping _Coerce
 
 -- | Full Java-style package name for this application, e.g.
@@ -2424,6 +2503,7 @@ instance FromJSON APKManifest where
                  APKManifest' <$>
                    (o .:? "applicationLabel") <*>
                      (o .:? "minSdkVersion")
+                     <*> (o .:? "targetSdkVersion")
                      <*> (o .:? "packageName")
                      <*> (o .:? "intentFilters" .!= mempty)
                      <*> (o .:? "maxSdkVersion"))
@@ -2434,6 +2514,7 @@ instance ToJSON APKManifest where
               (catMaybes
                  [("applicationLabel" .=) <$> _apkmApplicationLabel,
                   ("minSdkVersion" .=) <$> _apkmMinSdkVersion,
+                  ("targetSdkVersion" .=) <$> _apkmTargetSdkVersion,
                   ("packageName" .=) <$> _apkmPackageName,
                   ("intentFilters" .=) <$> _apkmIntentFilters,
                   ("maxSdkVersion" .=) <$> _apkmMaxSdkVersion])
@@ -2445,9 +2526,12 @@ instance ToJSON APKManifest where
 -- guidance on building App Bundles.
 --
 -- /See:/ 'appBundle' smart constructor.
-newtype AppBundle = AppBundle'
+newtype AppBundle =
+  AppBundle'
     { _abBundleLocation :: Maybe FileReference
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppBundle' with the minimum fields required to make a request.
 --
@@ -2456,10 +2540,8 @@ newtype AppBundle = AppBundle'
 -- * 'abBundleLocation'
 appBundle
     :: AppBundle
-appBundle =
-    AppBundle'
-    { _abBundleLocation = Nothing
-    }
+appBundle = AppBundle' {_abBundleLocation = Nothing}
+
 
 -- | .aab file representing the app bundle under test.
 abBundleLocation :: Lens' AppBundle (Maybe FileReference)
@@ -2487,7 +2569,8 @@ instance ToJSON AppBundle where
 -- Android tests.
 --
 -- /See:/ 'androidInstrumentationTest' smart constructor.
-data AndroidInstrumentationTest = AndroidInstrumentationTest'
+data AndroidInstrumentationTest =
+  AndroidInstrumentationTest'
     { _aitTestTargets        :: !(Maybe [Text])
     , _aitTestRunnerClass    :: !(Maybe Text)
     , _aitAppPackageId       :: !(Maybe Text)
@@ -2496,7 +2579,9 @@ data AndroidInstrumentationTest = AndroidInstrumentationTest'
     , _aitAppBundle          :: !(Maybe AppBundle)
     , _aitAppAPK             :: !(Maybe FileReference)
     , _aitTestPackageId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidInstrumentationTest' with the minimum fields required to make a request.
 --
@@ -2520,7 +2605,7 @@ data AndroidInstrumentationTest = AndroidInstrumentationTest'
 androidInstrumentationTest
     :: AndroidInstrumentationTest
 androidInstrumentationTest =
-    AndroidInstrumentationTest'
+  AndroidInstrumentationTest'
     { _aitTestTargets = Nothing
     , _aitTestRunnerClass = Nothing
     , _aitAppPackageId = Nothing
@@ -2530,6 +2615,7 @@ androidInstrumentationTest =
     , _aitAppAPK = Nothing
     , _aitTestPackageId = Nothing
     }
+
 
 -- | Each target must be fully qualified with the package name or class name,
 -- in one of these formats: - \"package package_name\" - \"class
@@ -2622,7 +2708,8 @@ instance ToJSON AndroidInstrumentationTest where
 -- values over a pre-defined set of axes.
 --
 -- /See:/ 'testMatrix' smart constructor.
-data TestMatrix = TestMatrix'
+data TestMatrix =
+  TestMatrix'
     { _tmState                :: !(Maybe TestMatrixState)
     , _tmTestMatrixId         :: !(Maybe Text)
     , _tmTestSpecification    :: !(Maybe TestSpecification)
@@ -2634,7 +2721,9 @@ data TestMatrix = TestMatrix'
     , _tmProjectId            :: !(Maybe Text)
     , _tmEnvironmentMatrix    :: !(Maybe EnvironmentMatrix)
     , _tmTimestamp            :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestMatrix' with the minimum fields required to make a request.
 --
@@ -2664,7 +2753,7 @@ data TestMatrix = TestMatrix'
 testMatrix
     :: TestMatrix
 testMatrix =
-    TestMatrix'
+  TestMatrix'
     { _tmState = Nothing
     , _tmTestMatrixId = Nothing
     , _tmTestSpecification = Nothing
@@ -2677,6 +2766,7 @@ testMatrix =
     , _tmEnvironmentMatrix = Nothing
     , _tmTimestamp = Nothing
     }
+
 
 -- | Output only. Indicates the current progress of the test matrix (e.g.,
 -- FINISHED).
@@ -2784,9 +2874,12 @@ instance ToJSON TestMatrix where
 -- | Response containing the current state of the specified test matrix.
 --
 -- /See:/ 'cancelTestMatrixResponse' smart constructor.
-newtype CancelTestMatrixResponse = CancelTestMatrixResponse'
+newtype CancelTestMatrixResponse =
+  CancelTestMatrixResponse'
     { _ctmrTestState :: Maybe CancelTestMatrixResponseTestState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CancelTestMatrixResponse' with the minimum fields required to make a request.
 --
@@ -2795,10 +2888,8 @@ newtype CancelTestMatrixResponse = CancelTestMatrixResponse'
 -- * 'ctmrTestState'
 cancelTestMatrixResponse
     :: CancelTestMatrixResponse
-cancelTestMatrixResponse =
-    CancelTestMatrixResponse'
-    { _ctmrTestState = Nothing
-    }
+cancelTestMatrixResponse = CancelTestMatrixResponse' {_ctmrTestState = Nothing}
+
 
 -- | The current rolled-up state of the test matrix. If this state is already
 -- final, then the cancelation request will have no effect.
@@ -2822,11 +2913,14 @@ instance ToJSON CancelTestMatrixResponse where
 -- TestMatrix.
 --
 -- /See:/ 'toolResultsExecution' smart constructor.
-data ToolResultsExecution = ToolResultsExecution'
+data ToolResultsExecution =
+  ToolResultsExecution'
     { _treExecutionId :: !(Maybe Text)
     , _treHistoryId   :: !(Maybe Text)
     , _treProjectId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ToolResultsExecution' with the minimum fields required to make a request.
 --
@@ -2840,11 +2934,12 @@ data ToolResultsExecution = ToolResultsExecution'
 toolResultsExecution
     :: ToolResultsExecution
 toolResultsExecution =
-    ToolResultsExecution'
+  ToolResultsExecution'
     { _treExecutionId = Nothing
     , _treHistoryId = Nothing
     , _treProjectId = Nothing
     }
+
 
 -- | Output only. A tool results execution ID.
 treExecutionId :: Lens' ToolResultsExecution (Maybe Text)
@@ -2886,12 +2981,15 @@ instance ToJSON ToolResultsExecution where
 -- directory that contains all the binaries needed to run the tests.
 --
 -- /See:/ 'iosXcTest' smart constructor.
-data IosXcTest = IosXcTest'
+data IosXcTest =
+  IosXcTest'
     { _ixtXctestrun    :: !(Maybe FileReference)
     , _ixtXcodeVersion :: !(Maybe Text)
     , _ixtAppBundleId  :: !(Maybe Text)
     , _ixtTestsZip     :: !(Maybe FileReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosXcTest' with the minimum fields required to make a request.
 --
@@ -2907,12 +3005,13 @@ data IosXcTest = IosXcTest'
 iosXcTest
     :: IosXcTest
 iosXcTest =
-    IosXcTest'
+  IosXcTest'
     { _ixtXctestrun = Nothing
     , _ixtXcodeVersion = Nothing
     , _ixtAppBundleId = Nothing
     , _ixtTestsZip = Nothing
     }
+
 
 -- | An .xctestrun file that will override the .xctestrun file in the tests
 -- zip. Because the .xctestrun file contains environment variables along
@@ -2923,8 +3022,8 @@ ixtXctestrun
   = lens _ixtXctestrun (\ s a -> s{_ixtXctestrun = a})
 
 -- | The Xcode version that should be used for the test. Use the
--- EnvironmentDiscoveryService to get supported options. Defaults to the
--- latest Xcode version Firebase Test Lab supports.
+-- TestEnvironmentDiscoveryService to get supported options. Defaults to
+-- the latest Xcode version Firebase Test Lab supports.
 ixtXcodeVersion :: Lens' IosXcTest (Maybe Text)
 ixtXcodeVersion
   = lens _ixtXcodeVersion
@@ -2964,11 +3063,14 @@ instance ToJSON IosXcTest where
 -- | Locations where the results of running the test are stored.
 --
 -- /See:/ 'resultStorage' smart constructor.
-data ResultStorage = ResultStorage'
+data ResultStorage =
+  ResultStorage'
     { _rsToolResultsHistory   :: !(Maybe ToolResultsHistory)
     , _rsToolResultsExecution :: !(Maybe ToolResultsExecution)
     , _rsGoogleCloudStorage   :: !(Maybe GoogleCloudStorage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultStorage' with the minimum fields required to make a request.
 --
@@ -2982,11 +3084,12 @@ data ResultStorage = ResultStorage'
 resultStorage
     :: ResultStorage
 resultStorage =
-    ResultStorage'
+  ResultStorage'
     { _rsToolResultsHistory = Nothing
     , _rsToolResultsExecution = Nothing
     , _rsGoogleCloudStorage = Nothing
     }
+
 
 -- | The tool results history that contains the tool results execution that
 -- results are written to. If not provided, the service will choose an
@@ -3033,12 +3136,15 @@ instance ToJSON ResultStorage where
 -- incompatible models\/versions) are ignored.
 --
 -- /See:/ 'androidMatrix' smart constructor.
-data AndroidMatrix = AndroidMatrix'
+data AndroidMatrix =
+  AndroidMatrix'
     { _amAndroidModelIds   :: !(Maybe [Text])
     , _amAndroidVersionIds :: !(Maybe [Text])
     , _amOrientations      :: !(Maybe [Text])
     , _amLocales           :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidMatrix' with the minimum fields required to make a request.
 --
@@ -3054,15 +3160,16 @@ data AndroidMatrix = AndroidMatrix'
 androidMatrix
     :: AndroidMatrix
 androidMatrix =
-    AndroidMatrix'
+  AndroidMatrix'
     { _amAndroidModelIds = Nothing
     , _amAndroidVersionIds = Nothing
     , _amOrientations = Nothing
     , _amLocales = Nothing
     }
 
+
 -- | Required. The ids of the set of Android device to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 amAndroidModelIds :: Lens' AndroidMatrix [Text]
 amAndroidModelIds
   = lens _amAndroidModelIds
@@ -3071,7 +3178,7 @@ amAndroidModelIds
       . _Coerce
 
 -- | Required. The ids of the set of Android OS version to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 amAndroidVersionIds :: Lens' AndroidMatrix [Text]
 amAndroidVersionIds
   = lens _amAndroidVersionIds
@@ -3080,7 +3187,7 @@ amAndroidVersionIds
       . _Coerce
 
 -- | Required. The set of orientations to test with. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 amOrientations :: Lens' AndroidMatrix [Text]
 amOrientations
   = lens _amOrientations
@@ -3089,7 +3196,7 @@ amOrientations
       . _Coerce
 
 -- | Required. The set of locales the test device will enable for testing.
--- Use the EnvironmentDiscoveryService to get supported options.
+-- Use the TestEnvironmentDiscoveryService to get supported options.
 amLocales :: Lens' AndroidMatrix [Text]
 amLocales
   = lens _amLocales (\ s a -> s{_amLocales = a}) .
@@ -3119,12 +3226,15 @@ instance ToJSON AndroidMatrix where
 -- TestExecution.
 --
 -- /See:/ 'toolResultsStep' smart constructor.
-data ToolResultsStep = ToolResultsStep'
+data ToolResultsStep =
+  ToolResultsStep'
     { _trsExecutionId :: !(Maybe Text)
     , _trsStepId      :: !(Maybe Text)
     , _trsHistoryId   :: !(Maybe Text)
     , _trsProjectId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ToolResultsStep' with the minimum fields required to make a request.
 --
@@ -3140,12 +3250,13 @@ data ToolResultsStep = ToolResultsStep'
 toolResultsStep
     :: ToolResultsStep
 toolResultsStep =
-    ToolResultsStep'
+  ToolResultsStep'
     { _trsExecutionId = Nothing
     , _trsStepId = Nothing
     , _trsHistoryId = Nothing
     , _trsProjectId = Nothing
     }
+
 
 -- | Output only. A tool results execution ID.
 trsExecutionId :: Lens' ToolResultsStep (Maybe Text)
@@ -3190,14 +3301,16 @@ instance ToJSON ToolResultsStep where
 --
 -- /See:/ 'launcherActivityIntent' smart constructor.
 data LauncherActivityIntent =
-    LauncherActivityIntent'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  LauncherActivityIntent'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LauncherActivityIntent' with the minimum fields required to make a request.
 --
 launcherActivityIntent
     :: LauncherActivityIntent
 launcherActivityIntent = LauncherActivityIntent'
+
 
 instance FromJSON LauncherActivityIntent where
         parseJSON
@@ -3211,9 +3324,12 @@ instance ToJSON LauncherActivityIntent where
 -- archive contents.
 --
 -- /See:/ 'aPKDetail' smart constructor.
-newtype APKDetail = APKDetail'
+newtype APKDetail =
+  APKDetail'
     { _apkdAPKManifest :: Maybe APKManifest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APKDetail' with the minimum fields required to make a request.
 --
@@ -3222,10 +3338,8 @@ newtype APKDetail = APKDetail'
 -- * 'apkdAPKManifest'
 aPKDetail
     :: APKDetail
-aPKDetail =
-    APKDetail'
-    { _apkdAPKManifest = Nothing
-    }
+aPKDetail = APKDetail' {_apkdAPKManifest = Nothing}
+
 
 apkdAPKManifest :: Lens' APKDetail (Maybe APKManifest)
 apkdAPKManifest
@@ -3245,12 +3359,15 @@ instance ToJSON APKDetail where
 -- | A single Android device.
 --
 -- /See:/ 'androidDevice' smart constructor.
-data AndroidDevice = AndroidDevice'
+data AndroidDevice =
+  AndroidDevice'
     { _adAndroidVersionId :: !(Maybe Text)
     , _adLocale           :: !(Maybe Text)
     , _adAndroidModelId   :: !(Maybe Text)
     , _adOrientation      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidDevice' with the minimum fields required to make a request.
 --
@@ -3266,34 +3383,35 @@ data AndroidDevice = AndroidDevice'
 androidDevice
     :: AndroidDevice
 androidDevice =
-    AndroidDevice'
+  AndroidDevice'
     { _adAndroidVersionId = Nothing
     , _adLocale = Nothing
     , _adAndroidModelId = Nothing
     , _adOrientation = Nothing
     }
 
+
 -- | Required. The id of the Android OS version to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adAndroidVersionId :: Lens' AndroidDevice (Maybe Text)
 adAndroidVersionId
   = lens _adAndroidVersionId
       (\ s a -> s{_adAndroidVersionId = a})
 
 -- | Required. The locale the test device used for testing. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adLocale :: Lens' AndroidDevice (Maybe Text)
 adLocale = lens _adLocale (\ s a -> s{_adLocale = a})
 
 -- | Required. The id of the Android device to be used. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adAndroidModelId :: Lens' AndroidDevice (Maybe Text)
 adAndroidModelId
   = lens _adAndroidModelId
       (\ s a -> s{_adAndroidModelId = a})
 
 -- | Required. How the device is oriented during the test. Use the
--- EnvironmentDiscoveryService to get supported options.
+-- TestEnvironmentDiscoveryService to get supported options.
 adOrientation :: Lens' AndroidDevice (Maybe Text)
 adOrientation
   = lens _adOrientation
@@ -3320,10 +3438,13 @@ instance ToJSON AndroidDevice where
 -- | A key-value pair passed as an environment variable to the test.
 --
 -- /See:/ 'environmentVariable' smart constructor.
-data EnvironmentVariable = EnvironmentVariable'
+data EnvironmentVariable =
+  EnvironmentVariable'
     { _evValue :: !(Maybe Text)
     , _evKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnvironmentVariable' with the minimum fields required to make a request.
 --
@@ -3335,10 +3456,8 @@ data EnvironmentVariable = EnvironmentVariable'
 environmentVariable
     :: EnvironmentVariable
 environmentVariable =
-    EnvironmentVariable'
-    { _evValue = Nothing
-    , _evKey = Nothing
-    }
+  EnvironmentVariable' {_evValue = Nothing, _evKey = Nothing}
+
 
 -- | Value for the environment variable.
 evValue :: Lens' EnvironmentVariable (Maybe Text)
@@ -3364,11 +3483,14 @@ instance ToJSON EnvironmentVariable where
 -- | Screen orientation of the device.
 --
 -- /See:/ 'orientation' smart constructor.
-data Orientation = Orientation'
+data Orientation =
+  Orientation'
     { _oName :: !(Maybe Text)
     , _oId   :: !(Maybe Text)
     , _oTags :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Orientation' with the minimum fields required to make a request.
 --
@@ -3381,12 +3503,8 @@ data Orientation = Orientation'
 -- * 'oTags'
 orientation
     :: Orientation
-orientation =
-    Orientation'
-    { _oName = Nothing
-    , _oId = Nothing
-    , _oTags = Nothing
-    }
+orientation = Orientation' {_oName = Nothing, _oId = Nothing, _oTags = Nothing}
+
 
 -- | A human-friendly name for this orientation. Example: \"portrait\".
 oName :: Lens' Orientation (Maybe Text)
@@ -3420,11 +3538,14 @@ instance ToJSON Orientation where
 -- | The matrix of environments in which the test is to be executed.
 --
 -- /See:/ 'environmentMatrix' smart constructor.
-data EnvironmentMatrix = EnvironmentMatrix'
+data EnvironmentMatrix =
+  EnvironmentMatrix'
     { _emIosDeviceList     :: !(Maybe IosDeviceList)
     , _emAndroidMatrix     :: !(Maybe AndroidMatrix)
     , _emAndroidDeviceList :: !(Maybe AndroidDeviceList)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnvironmentMatrix' with the minimum fields required to make a request.
 --
@@ -3438,11 +3559,12 @@ data EnvironmentMatrix = EnvironmentMatrix'
 environmentMatrix
     :: EnvironmentMatrix
 environmentMatrix =
-    EnvironmentMatrix'
+  EnvironmentMatrix'
     { _emIosDeviceList = Nothing
     , _emAndroidMatrix = Nothing
     , _emAndroidDeviceList = Nothing
     }
+
 
 -- | A list of iOS devices.
 emIosDeviceList :: Lens' EnvironmentMatrix (Maybe IosDeviceList)
@@ -3482,10 +3604,13 @@ instance ToJSON EnvironmentMatrix where
 -- | A single device file description.
 --
 -- /See:/ 'deviceFile' smart constructor.
-data DeviceFile = DeviceFile'
+data DeviceFile =
+  DeviceFile'
     { _dfRegularFile :: !(Maybe RegularFile)
     , _dfObbFile     :: !(Maybe ObbFile)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceFile' with the minimum fields required to make a request.
 --
@@ -3496,11 +3621,8 @@ data DeviceFile = DeviceFile'
 -- * 'dfObbFile'
 deviceFile
     :: DeviceFile
-deviceFile =
-    DeviceFile'
-    { _dfRegularFile = Nothing
-    , _dfObbFile = Nothing
-    }
+deviceFile = DeviceFile' {_dfRegularFile = Nothing, _dfObbFile = Nothing}
+
 
 -- | A reference to a regular file
 dfRegularFile :: Lens' DeviceFile (Maybe RegularFile)
@@ -3532,10 +3654,13 @@ instance ToJSON DeviceFile where
 -- \'BETA\'}.
 --
 -- /See:/ 'clientInfoDetail' smart constructor.
-data ClientInfoDetail = ClientInfoDetail'
+data ClientInfoDetail =
+  ClientInfoDetail'
     { _cidValue :: !(Maybe Text)
     , _cidKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientInfoDetail' with the minimum fields required to make a request.
 --
@@ -3546,11 +3671,8 @@ data ClientInfoDetail = ClientInfoDetail'
 -- * 'cidKey'
 clientInfoDetail
     :: ClientInfoDetail
-clientInfoDetail =
-    ClientInfoDetail'
-    { _cidValue = Nothing
-    , _cidKey = Nothing
-    }
+clientInfoDetail = ClientInfoDetail' {_cidValue = Nothing, _cidKey = Nothing}
+
 
 -- | Required. The value of detailed client information.
 cidValue :: Lens' ClientInfoDetail (Maybe Text)
@@ -3575,11 +3697,14 @@ instance ToJSON ClientInfoDetail where
 
 --
 -- /See:/ 'networkConfiguration' smart constructor.
-data NetworkConfiguration = NetworkConfiguration'
+data NetworkConfiguration =
+  NetworkConfiguration'
     { _ncDownRule :: !(Maybe TrafficRule)
     , _ncId       :: !(Maybe Text)
     , _ncUpRule   :: !(Maybe TrafficRule)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworkConfiguration' with the minimum fields required to make a request.
 --
@@ -3593,11 +3718,9 @@ data NetworkConfiguration = NetworkConfiguration'
 networkConfiguration
     :: NetworkConfiguration
 networkConfiguration =
-    NetworkConfiguration'
-    { _ncDownRule = Nothing
-    , _ncId = Nothing
-    , _ncUpRule = Nothing
-    }
+  NetworkConfiguration'
+    {_ncDownRule = Nothing, _ncId = Nothing, _ncUpRule = Nothing}
+
 
 -- | The emulation rule applying to the download traffic.
 ncDownRule :: Lens' NetworkConfiguration (Maybe TrafficRule)
@@ -3630,10 +3753,13 @@ instance ToJSON NetworkConfiguration where
 -- | iOS configuration that can be selected at the time a test is run.
 --
 -- /See:/ 'iosRuntimeConfiguration' smart constructor.
-data IosRuntimeConfiguration = IosRuntimeConfiguration'
+data IosRuntimeConfiguration =
+  IosRuntimeConfiguration'
     { _ircOrientations :: !(Maybe [Orientation])
     , _ircLocales      :: !(Maybe [Locale])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosRuntimeConfiguration' with the minimum fields required to make a request.
 --
@@ -3645,10 +3771,8 @@ data IosRuntimeConfiguration = IosRuntimeConfiguration'
 iosRuntimeConfiguration
     :: IosRuntimeConfiguration
 iosRuntimeConfiguration =
-    IosRuntimeConfiguration'
-    { _ircOrientations = Nothing
-    , _ircLocales = Nothing
-    }
+  IosRuntimeConfiguration' {_ircOrientations = Nothing, _ircLocales = Nothing}
+
 
 -- | The set of available orientations.
 ircOrientations :: Lens' IosRuntimeConfiguration [Orientation]
@@ -3683,9 +3807,12 @@ instance ToJSON IosRuntimeConfiguration where
 -- | A storage location within Google cloud storage (GCS).
 --
 -- /See:/ 'googleCloudStorage' smart constructor.
-newtype GoogleCloudStorage = GoogleCloudStorage'
+newtype GoogleCloudStorage =
+  GoogleCloudStorage'
     { _gcsGcsPath :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudStorage' with the minimum fields required to make a request.
 --
@@ -3694,10 +3821,8 @@ newtype GoogleCloudStorage = GoogleCloudStorage'
 -- * 'gcsGcsPath'
 googleCloudStorage
     :: GoogleCloudStorage
-googleCloudStorage =
-    GoogleCloudStorage'
-    { _gcsGcsPath = Nothing
-    }
+googleCloudStorage = GoogleCloudStorage' {_gcsGcsPath = Nothing}
+
 
 -- | Required. The path to a directory in GCS that will eventually contain
 -- the results for this test. The requesting user must have write access on
@@ -3718,7 +3843,8 @@ instance ToJSON GoogleCloudStorage where
 -- | A version of the Android OS.
 --
 -- /See:/ 'androidVersion' smart constructor.
-data AndroidVersion = AndroidVersion'
+data AndroidVersion =
+  AndroidVersion'
     { _avCodeName      :: !(Maybe Text)
     , _avDistribution  :: !(Maybe Distribution)
     , _avAPILevel      :: !(Maybe (Textual Int32))
@@ -3726,7 +3852,9 @@ data AndroidVersion = AndroidVersion'
     , _avId            :: !(Maybe Text)
     , _avReleaseDate   :: !(Maybe Date)
     , _avTags          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidVersion' with the minimum fields required to make a request.
 --
@@ -3748,7 +3876,7 @@ data AndroidVersion = AndroidVersion'
 androidVersion
     :: AndroidVersion
 androidVersion =
-    AndroidVersion'
+  AndroidVersion'
     { _avCodeName = Nothing
     , _avDistribution = Nothing
     , _avAPILevel = Nothing
@@ -3757,6 +3885,7 @@ androidVersion =
     , _avReleaseDate = Nothing
     , _avTags = Nothing
     }
+
 
 -- | The code name for this Android version. Examples: \"JellyBean\",
 -- \"KitKat\".
@@ -3829,10 +3958,13 @@ instance ToJSON AndroidVersion where
 -- starts.
 --
 -- /See:/ 'obbFile' smart constructor.
-data ObbFile = ObbFile'
+data ObbFile =
+  ObbFile'
     { _ofObb         :: !(Maybe FileReference)
     , _ofObbFileName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObbFile' with the minimum fields required to make a request.
 --
@@ -3843,11 +3975,8 @@ data ObbFile = ObbFile'
 -- * 'ofObbFileName'
 obbFile
     :: ObbFile
-obbFile =
-    ObbFile'
-    { _ofObb = Nothing
-    , _ofObbFileName = Nothing
-    }
+obbFile = ObbFile' {_ofObb = Nothing, _ofObbFileName = Nothing}
+
 
 -- | Required. Opaque Binary Blob (OBB) file(s) to install on the device.
 ofObb :: Lens' ObbFile (Maybe FileReference)
@@ -3879,13 +4008,16 @@ instance ToJSON ObbFile where
 -- being.
 --
 -- /See:/ 'androidTestLoop' smart constructor.
-data AndroidTestLoop = AndroidTestLoop'
+data AndroidTestLoop =
+  AndroidTestLoop'
     { _atlScenarios      :: !(Maybe [Textual Int32])
     , _atlScenarioLabels :: !(Maybe [Text])
     , _atlAppPackageId   :: !(Maybe Text)
     , _atlAppBundle      :: !(Maybe AppBundle)
     , _atlAppAPK         :: !(Maybe FileReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidTestLoop' with the minimum fields required to make a request.
 --
@@ -3903,13 +4035,14 @@ data AndroidTestLoop = AndroidTestLoop'
 androidTestLoop
     :: AndroidTestLoop
 androidTestLoop =
-    AndroidTestLoop'
+  AndroidTestLoop'
     { _atlScenarios = Nothing
     , _atlScenarioLabels = Nothing
     , _atlAppPackageId = Nothing
     , _atlAppBundle = Nothing
     , _atlAppAPK = Nothing
     }
+
 
 -- | The list of scenarios that should be run during the test. The default is
 -- all test loops, derived from the application\'s manifest.
@@ -3974,9 +4107,12 @@ instance ToJSON AndroidTestLoop where
 -- executed.
 --
 -- /See:/ 'androidDeviceList' smart constructor.
-newtype AndroidDeviceList = AndroidDeviceList'
+newtype AndroidDeviceList =
+  AndroidDeviceList'
     { _adlAndroidDevices :: Maybe [AndroidDevice]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidDeviceList' with the minimum fields required to make a request.
 --
@@ -3985,10 +4121,8 @@ newtype AndroidDeviceList = AndroidDeviceList'
 -- * 'adlAndroidDevices'
 androidDeviceList
     :: AndroidDeviceList
-androidDeviceList =
-    AndroidDeviceList'
-    { _adlAndroidDevices = Nothing
-    }
+androidDeviceList = AndroidDeviceList' {_adlAndroidDevices = Nothing}
+
 
 -- | Required. A list of Android devices.
 adlAndroidDevices :: Lens' AndroidDeviceList [AndroidDevice]
@@ -4015,14 +4149,17 @@ instance ToJSON AndroidDeviceList where
 -- test.
 --
 -- /See:/ 'testSetup' smart constructor.
-data TestSetup = TestSetup'
+data TestSetup =
+  TestSetup'
     { _tsAccount              :: !(Maybe Account)
     , _tsNetworkProFile       :: !(Maybe Text)
     , _tsEnvironmentVariables :: !(Maybe [EnvironmentVariable])
     , _tsAdditionalAPKs       :: !(Maybe [APK])
     , _tsFilesToPush          :: !(Maybe [DeviceFile])
     , _tsDirectoriesToPull    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestSetup' with the minimum fields required to make a request.
 --
@@ -4042,7 +4179,7 @@ data TestSetup = TestSetup'
 testSetup
     :: TestSetup
 testSetup =
-    TestSetup'
+  TestSetup'
     { _tsAccount = Nothing
     , _tsNetworkProFile = Nothing
     , _tsEnvironmentVariables = Nothing
@@ -4050,6 +4187,7 @@ testSetup =
     , _tsFilesToPush = Nothing
     , _tsDirectoriesToPull = Nothing
     }
+
 
 -- | The device will be logged in on this account for the duration of the
 -- test.

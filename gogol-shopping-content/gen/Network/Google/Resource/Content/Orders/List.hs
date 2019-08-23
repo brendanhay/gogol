@@ -66,7 +66,8 @@ type OrdersListResource =
 -- | Lists the orders in your Merchant Center account.
 --
 -- /See:/ 'ordersList' smart constructor.
-data OrdersList = OrdersList'
+data OrdersList =
+  OrdersList'
     { _ollPlacedDateEnd   :: !(Maybe Text)
     , _ollMerchantId      :: !(Textual Word64)
     , _ollOrderBy         :: !(Maybe OrdersListOrderBy)
@@ -75,7 +76,9 @@ data OrdersList = OrdersList'
     , _ollPageToken       :: !(Maybe Text)
     , _ollPlacedDateStart :: !(Maybe Text)
     , _ollMaxResults      :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ ordersList
     :: Word64 -- ^ 'ollMerchantId'
     -> OrdersList
 ordersList pOllMerchantId_ =
-    OrdersList'
+  OrdersList'
     { _ollPlacedDateEnd = Nothing
     , _ollMerchantId = _Coerce # pOllMerchantId_
     , _ollOrderBy = Nothing
@@ -110,6 +113,7 @@ ordersList pOllMerchantId_ =
     , _ollPlacedDateStart = Nothing
     , _ollMaxResults = Nothing
     }
+
 
 -- | Obtains orders placed before this date (exclusively), in ISO 8601
 -- format.

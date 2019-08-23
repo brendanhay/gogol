@@ -70,7 +70,8 @@ type AppsServicesVersionsInstancesDeleteResource =
 -- | Stops a running instance.
 --
 -- /See:/ 'appsServicesVersionsInstancesDelete' smart constructor.
-data AppsServicesVersionsInstancesDelete = AppsServicesVersionsInstancesDelete'
+data AppsServicesVersionsInstancesDelete =
+  AppsServicesVersionsInstancesDelete'
     { _aXgafv          :: !(Maybe Xgafv)
     , _aInstancesId    :: !Text
     , _aUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,9 @@ data AppsServicesVersionsInstancesDelete = AppsServicesVersionsInstancesDelete'
     , _aAppsId         :: !Text
     , _aServicesId     :: !Text
     , _aCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsServicesVersionsInstancesDelete' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ appsServicesVersionsInstancesDelete
     -> Text -- ^ 'aServicesId'
     -> AppsServicesVersionsInstancesDelete
 appsServicesVersionsInstancesDelete pAInstancesId_ pAVersionsId_ pAAppsId_ pAServicesId_ =
-    AppsServicesVersionsInstancesDelete'
+  AppsServicesVersionsInstancesDelete'
     { _aXgafv = Nothing
     , _aInstancesId = pAInstancesId_
     , _aUploadProtocol = Nothing
@@ -121,6 +124,7 @@ appsServicesVersionsInstancesDelete pAInstancesId_ pAVersionsId_ pAAppsId_ pASer
     , _aServicesId = pAServicesId_
     , _aCallback = Nothing
     }
+
 
 -- | V1 error format.
 aXgafv :: Lens' AppsServicesVersionsInstancesDelete (Maybe Xgafv)
@@ -168,7 +172,8 @@ aCallback
   = lens _aCallback (\ s a -> s{_aCallback = a})
 
 instance GoogleRequest
-         AppsServicesVersionsInstancesDelete where
+           AppsServicesVersionsInstancesDelete
+         where
         type Rs AppsServicesVersionsInstancesDelete =
              Operation
         type Scopes AppsServicesVersionsInstancesDelete =

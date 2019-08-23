@@ -24,9 +24,12 @@ import           Network.Google.ServiceControl.Types.Sum
 -- about the request, response, and other activities.
 --
 -- /See:/ 'auditLogServiceData' smart constructor.
-newtype AuditLogServiceData = AuditLogServiceData'
+newtype AuditLogServiceData =
+  AuditLogServiceData'
     { _alsdAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogServiceData' with the minimum fields required to make a request.
 --
@@ -37,9 +40,8 @@ auditLogServiceData
     :: HashMap Text JSONValue -- ^ 'alsdAddtional'
     -> AuditLogServiceData
 auditLogServiceData pAlsdAddtional_ =
-    AuditLogServiceData'
-    { _alsdAddtional = _Coerce # pAlsdAddtional_
-    }
+  AuditLogServiceData' {_alsdAddtional = _Coerce # pAlsdAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 alsdAddtional :: Lens' AuditLogServiceData (HashMap Text JSONValue)
@@ -60,9 +62,12 @@ instance ToJSON AuditLogServiceData where
 -- information associated with the current audited event.
 --
 -- /See:/ 'auditLogMetadata' smart constructor.
-newtype AuditLogMetadata = AuditLogMetadata'
+newtype AuditLogMetadata =
+  AuditLogMetadata'
     { _almAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogMetadata' with the minimum fields required to make a request.
 --
@@ -73,9 +78,8 @@ auditLogMetadata
     :: HashMap Text JSONValue -- ^ 'almAddtional'
     -> AuditLogMetadata
 auditLogMetadata pAlmAddtional_ =
-    AuditLogMetadata'
-    { _almAddtional = _Coerce # pAlmAddtional_
-    }
+  AuditLogMetadata' {_almAddtional = _Coerce # pAlmAddtional_}
+
 
 -- | Properties of the object.
 almAddtional :: Lens' AuditLogMetadata (HashMap Text JSONValue)
@@ -128,11 +132,14 @@ instance ToJSON AuditLogMetadata where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -145,12 +152,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -191,13 +194,16 @@ instance ToJSON Status where
 -- | Metadata about the request.
 --
 -- /See:/ 'requestMetadata' smart constructor.
-data RequestMetadata = RequestMetadata'
+data RequestMetadata =
+  RequestMetadata'
     { _rmCallerSuppliedUserAgent :: !(Maybe Text)
     , _rmCallerIP                :: !(Maybe Text)
     , _rmDestinationAttributes   :: !(Maybe Peer)
     , _rmCallerNetwork           :: !(Maybe Text)
     , _rmRequestAttributes       :: !(Maybe Request')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
@@ -215,13 +221,14 @@ data RequestMetadata = RequestMetadata'
 requestMetadata
     :: RequestMetadata
 requestMetadata =
-    RequestMetadata'
+  RequestMetadata'
     { _rmCallerSuppliedUserAgent = Nothing
     , _rmCallerIP = Nothing
     , _rmDestinationAttributes = Nothing
     , _rmCallerNetwork = Nothing
     , _rmRequestAttributes = Nothing
     }
+
 
 -- | The user agent of the caller. This information is not authenticated and
 -- should be treated accordingly. For example: +
@@ -301,13 +308,54 @@ instance ToJSON RequestMetadata where
                   ("callerNetwork" .=) <$> _rmCallerNetwork,
                   ("requestAttributes" .=) <$> _rmRequestAttributes])
 
+-- | Third party identity principal.
+--
+-- /See:/ 'thirdPartyPrincipal' smart constructor.
+newtype ThirdPartyPrincipal =
+  ThirdPartyPrincipal'
+    { _tppThirdPartyClaims :: Maybe ThirdPartyPrincipalThirdPartyClaims
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ThirdPartyPrincipal' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tppThirdPartyClaims'
+thirdPartyPrincipal
+    :: ThirdPartyPrincipal
+thirdPartyPrincipal = ThirdPartyPrincipal' {_tppThirdPartyClaims = Nothing}
+
+
+-- | Metadata about third party identity.
+tppThirdPartyClaims :: Lens' ThirdPartyPrincipal (Maybe ThirdPartyPrincipalThirdPartyClaims)
+tppThirdPartyClaims
+  = lens _tppThirdPartyClaims
+      (\ s a -> s{_tppThirdPartyClaims = a})
+
+instance FromJSON ThirdPartyPrincipal where
+        parseJSON
+          = withObject "ThirdPartyPrincipal"
+              (\ o ->
+                 ThirdPartyPrincipal' <$> (o .:? "thirdPartyClaims"))
+
+instance ToJSON ThirdPartyPrincipal where
+        toJSON ThirdPartyPrincipal'{..}
+          = object
+              (catMaybes
+                 [("thirdPartyClaims" .=) <$> _tppThirdPartyClaims])
+
 -- | The labels or tags on the resource, such as AWS resource tags and
 -- Kubernetes resource labels.
 --
 -- /See:/ 'resourceLabels' smart constructor.
-newtype ResourceLabels = ResourceLabels'
+newtype ResourceLabels =
+  ResourceLabels'
     { _rlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceLabels' with the minimum fields required to make a request.
 --
@@ -318,9 +366,8 @@ resourceLabels
     :: HashMap Text Text -- ^ 'rlAddtional'
     -> ResourceLabels
 resourceLabels pRlAddtional_ =
-    ResourceLabels'
-    { _rlAddtional = _Coerce # pRlAddtional_
-    }
+  ResourceLabels' {_rlAddtional = _Coerce # pRlAddtional_}
+
 
 rlAddtional :: Lens' ResourceLabels (HashMap Text Text)
 rlAddtional
@@ -338,10 +385,13 @@ instance ToJSON ResourceLabels where
 -- | Request message for the Report method.
 --
 -- /See:/ 'reportRequest' smart constructor.
-data ReportRequest = ReportRequest'
+data ReportRequest =
+  ReportRequest'
     { _rrServiceConfigId :: !(Maybe Text)
     , _rrOperations      :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
@@ -353,10 +403,8 @@ data ReportRequest = ReportRequest'
 reportRequest
     :: ReportRequest
 reportRequest =
-    ReportRequest'
-    { _rrServiceConfigId = Nothing
-    , _rrOperations = Nothing
-    }
+  ReportRequest' {_rrServiceConfigId = Nothing, _rrOperations = Nothing}
+
 
 -- | Specifies which version of service config should be used to process the
 -- request. If unspecified or no matching version can be found, the latest
@@ -396,12 +444,15 @@ instance ToJSON ReportRequest where
 -- | Request message for the Check method.
 --
 -- /See:/ 'checkRequest' smart constructor.
-data CheckRequest = CheckRequest'
+data CheckRequest =
+  CheckRequest'
     { _crOperation              :: !(Maybe Operation)
     , _crRequestProjectSettings :: !(Maybe Bool)
     , _crServiceConfigId        :: !(Maybe Text)
     , _crSkipActivationCheck    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckRequest' with the minimum fields required to make a request.
 --
@@ -417,12 +468,13 @@ data CheckRequest = CheckRequest'
 checkRequest
     :: CheckRequest
 checkRequest =
-    CheckRequest'
+  CheckRequest'
     { _crOperation = Nothing
     , _crRequestProjectSettings = Nothing
     , _crServiceConfigId = Nothing
     , _crSkipActivationCheck = Nothing
     }
+
 
 -- | The operation to be checked.
 crOperation :: Lens' CheckRequest (Maybe Operation)
@@ -446,7 +498,8 @@ crServiceConfigId
 
 -- | Indicates if service activation check should be skipped for this
 -- request. Default behavior is to perform the check and apply relevant
--- quota.
+-- quota. WARNING: Setting this flag to \"true\" will disable quota
+-- enforcement.
 crSkipActivationCheck :: Lens' CheckRequest (Maybe Bool)
 crSkipActivationCheck
   = lens _crSkipActivationCheck
@@ -478,9 +531,12 @@ instance ToJSON CheckRequest where
 -- relationship.
 --
 -- /See:/ 'metricValueLabels' smart constructor.
-newtype MetricValueLabels = MetricValueLabels'
+newtype MetricValueLabels =
+  MetricValueLabels'
     { _mvlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricValueLabels' with the minimum fields required to make a request.
 --
@@ -491,9 +547,8 @@ metricValueLabels
     :: HashMap Text Text -- ^ 'mvlAddtional'
     -> MetricValueLabels
 metricValueLabels pMvlAddtional_ =
-    MetricValueLabels'
-    { _mvlAddtional = _Coerce # pMvlAddtional_
-    }
+  MetricValueLabels' {_mvlAddtional = _Coerce # pMvlAddtional_}
+
 
 mvlAddtional :: Lens' MetricValueLabels (HashMap Text Text)
 mvlAddtional
@@ -516,7 +571,8 @@ instance ToJSON MetricValueLabels where
 -- sample points
 --
 -- /See:/ 'distribution' smart constructor.
-data Distribution = Distribution'
+data Distribution =
+  Distribution'
     { _dSumOfSquaredDeviation :: !(Maybe (Textual Double))
     , _dMean                  :: !(Maybe (Textual Double))
     , _dExponentialBuckets    :: !(Maybe ExponentialBuckets)
@@ -526,7 +582,9 @@ data Distribution = Distribution'
     , _dMinimum               :: !(Maybe (Textual Double))
     , _dBucketCounts          :: !(Maybe [Textual Int64])
     , _dExplicitBuckets       :: !(Maybe ExplicitBuckets)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Distribution' with the minimum fields required to make a request.
 --
@@ -552,7 +610,7 @@ data Distribution = Distribution'
 distribution
     :: Distribution
 distribution =
-    Distribution'
+  Distribution'
     { _dSumOfSquaredDeviation = Nothing
     , _dMean = Nothing
     , _dExponentialBuckets = Nothing
@@ -563,6 +621,7 @@ distribution =
     , _dBucketCounts = Nothing
     , _dExplicitBuckets = Nothing
     }
+
 
 -- | The sum of squared deviations from the mean: Sum[i=1..count]((x_i -
 -- mean)^2) where each x_i is a sample values. If \`count\` is zero then
@@ -664,11 +723,14 @@ instance ToJSON Distribution where
 -- | Describing buckets with exponentially growing width.
 --
 -- /See:/ 'exponentialBuckets' smart constructor.
-data ExponentialBuckets = ExponentialBuckets'
+data ExponentialBuckets =
+  ExponentialBuckets'
     { _ebGrowthFactor     :: !(Maybe (Textual Double))
     , _ebScale            :: !(Maybe (Textual Double))
     , _ebNumFiniteBuckets :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExponentialBuckets' with the minimum fields required to make a request.
 --
@@ -682,11 +744,12 @@ data ExponentialBuckets = ExponentialBuckets'
 exponentialBuckets
     :: ExponentialBuckets
 exponentialBuckets =
-    ExponentialBuckets'
+  ExponentialBuckets'
     { _ebGrowthFactor = Nothing
     , _ebScale = Nothing
     , _ebNumFiniteBuckets = Nothing
     }
+
 
 -- | The i\'th exponential bucket covers the interval [scale *
 -- growth_factor^(i-1), scale * growth_factor^i) where i ranges from 1 to
@@ -736,14 +799,17 @@ instance ToJSON ExponentialBuckets where
 -- \`service\`, \`principal\`, and \`labels\` as appropriate.
 --
 -- /See:/ 'peer' smart constructor.
-data Peer = Peer'
+data Peer =
+  Peer'
     { _pRegionCode :: !(Maybe Text)
     , _pService    :: !(Maybe Text)
     , _pIP         :: !(Maybe Text)
     , _pPrincipal  :: !(Maybe Text)
     , _pLabels     :: !(Maybe PeerLabels)
     , _pPort       :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Peer' with the minimum fields required to make a request.
 --
@@ -763,7 +829,7 @@ data Peer = Peer'
 peer
     :: Peer
 peer =
-    Peer'
+  Peer'
     { _pRegionCode = Nothing
     , _pService = Nothing
     , _pIP = Nothing
@@ -771,6 +837,7 @@ peer =
     , _pLabels = Nothing
     , _pPort = Nothing
     }
+
 
 -- | The CLDR country\/region code associated with the above IP address. If
 -- the IP address is private, the \`region_code\` should reflect the
@@ -828,12 +895,15 @@ instance ToJSON Peer where
 -- | Authorization information for the operation.
 --
 -- /See:/ 'authorizationInfo' smart constructor.
-data AuthorizationInfo = AuthorizationInfo'
+data AuthorizationInfo =
+  AuthorizationInfo'
     { _aiGranted            :: !(Maybe Bool)
     , _aiResourceAttributes :: !(Maybe Resource)
     , _aiResource           :: !(Maybe Text)
     , _aiPermission         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthorizationInfo' with the minimum fields required to make a request.
 --
@@ -849,12 +919,13 @@ data AuthorizationInfo = AuthorizationInfo'
 authorizationInfo
     :: AuthorizationInfo
 authorizationInfo =
-    AuthorizationInfo'
+  AuthorizationInfo'
     { _aiGranted = Nothing
     , _aiResourceAttributes = Nothing
     , _aiResource = Nothing
     , _aiPermission = Nothing
     }
+
 
 -- | Whether or not authorization for \`resource\` and \`permission\` was
 -- granted.
@@ -904,7 +975,8 @@ instance ToJSON AuthorizationInfo where
 -- | Represents information regarding an operation.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oImportance        :: !(Maybe OperationImportance)
     , _oResourceContainer :: !(Maybe Text)
     , _oStartTime         :: !(Maybe DateTime')
@@ -918,7 +990,9 @@ data Operation = Operation'
     , _oConsumerId        :: !(Maybe Text)
     , _oMetricValueSets   :: !(Maybe [MetricValueSet])
     , _oLogEntries        :: !(Maybe [LogEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -952,7 +1026,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oImportance = Nothing
     , _oResourceContainer = Nothing
     , _oStartTime = Nothing
@@ -967,6 +1041,7 @@ operation =
     , _oMetricValueSets = Nothing
     , _oLogEntries = Nothing
     }
+
 
 -- | DO NOT USE. This is an experimental field.
 oImportance :: Lens' Operation (Maybe OperationImportance)
@@ -1055,8 +1130,10 @@ oOperationId
 -- | Identity of the consumer who is using the service. This field should be
 -- filled in for the operations initiated by a consumer, but not for
 -- service-initiated operations that are not related to a specific
--- consumer. This can be in one of the following formats: project:,
--- project_number:, api_key:.
+-- consumer. - This can be in one of the following formats: -
+-- project:PROJECT_ID, - project\`_\`number:PROJECT_NUMBER, -
+-- projects\/PROJECT_ID or PROJECT_NUMBER, - folders\/FOLDER_NUMBER, -
+-- organizations\/ORGANIZATION_NUMBER, - api\`_\`key:API_KEY.
 oConsumerId :: Lens' Operation (Maybe Text)
 oConsumerId
   = lens _oConsumerId (\ s a -> s{_oConsumerId = a})
@@ -1124,10 +1201,13 @@ instance ToJSON Operation where
 -- label values.
 --
 -- /See:/ 'metricValueSet' smart constructor.
-data MetricValueSet = MetricValueSet'
+data MetricValueSet =
+  MetricValueSet'
     { _mvsMetricName   :: !(Maybe Text)
     , _mvsMetricValues :: !(Maybe [MetricValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricValueSet' with the minimum fields required to make a request.
 --
@@ -1139,10 +1219,8 @@ data MetricValueSet = MetricValueSet'
 metricValueSet
     :: MetricValueSet
 metricValueSet =
-    MetricValueSet'
-    { _mvsMetricName = Nothing
-    , _mvsMetricValues = Nothing
-    }
+  MetricValueSet' {_mvsMetricName = Nothing, _mvsMetricValues = Nothing}
+
 
 -- | The metric name defined in the service configuration.
 mvsMetricName :: Lens' MetricValueSet (Maybe Text)
@@ -1177,9 +1255,12 @@ instance ToJSON MetricValueSet where
 -- information about the log entry.
 --
 -- /See:/ 'logEntryLabels' smart constructor.
-newtype LogEntryLabels = LogEntryLabels'
+newtype LogEntryLabels =
+  LogEntryLabels'
     { _lelAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryLabels' with the minimum fields required to make a request.
 --
@@ -1190,9 +1271,8 @@ logEntryLabels
     :: HashMap Text Text -- ^ 'lelAddtional'
     -> LogEntryLabels
 logEntryLabels pLelAddtional_ =
-    LogEntryLabels'
-    { _lelAddtional = _Coerce # pLelAddtional_
-    }
+  LogEntryLabels' {_lelAddtional = _Coerce # pLelAddtional_}
+
 
 lelAddtional :: Lens' LogEntryLabels (HashMap Text Text)
 lelAddtional
@@ -1212,9 +1292,12 @@ instance ToJSON LogEntryLabels where
 -- AuditLog.
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
-newtype LogEntryProtoPayload = LogEntryProtoPayload'
+newtype LogEntryProtoPayload =
+  LogEntryProtoPayload'
     { _leppAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
 --
@@ -1225,9 +1308,8 @@ logEntryProtoPayload
     :: HashMap Text JSONValue -- ^ 'leppAddtional'
     -> LogEntryProtoPayload
 logEntryProtoPayload pLeppAddtional_ =
-    LogEntryProtoPayload'
-    { _leppAddtional = _Coerce # pLeppAddtional_
-    }
+  LogEntryProtoPayload' {_leppAddtional = _Coerce # pLeppAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 leppAddtional :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
@@ -1248,11 +1330,14 @@ instance ToJSON LogEntryProtoPayload where
 -- | Describing buckets with constant width.
 --
 -- /See:/ 'linearBuckets' smart constructor.
-data LinearBuckets = LinearBuckets'
+data LinearBuckets =
+  LinearBuckets'
     { _lbOffSet           :: !(Maybe (Textual Double))
     , _lbWidth            :: !(Maybe (Textual Double))
     , _lbNumFiniteBuckets :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LinearBuckets' with the minimum fields required to make a request.
 --
@@ -1266,11 +1351,9 @@ data LinearBuckets = LinearBuckets'
 linearBuckets
     :: LinearBuckets
 linearBuckets =
-    LinearBuckets'
-    { _lbOffSet = Nothing
-    , _lbWidth = Nothing
-    , _lbNumFiniteBuckets = Nothing
-    }
+  LinearBuckets'
+    {_lbOffSet = Nothing, _lbWidth = Nothing, _lbNumFiniteBuckets = Nothing}
+
 
 -- | The i\'th linear bucket covers the interval [offset + (i-1) * width,
 -- offset + i * width) where i ranges from 1 to num_finite_buckets,
@@ -1313,18 +1396,75 @@ instance ToJSON LinearBuckets where
                   ("width" .=) <$> _lbWidth,
                   ("numFiniteBuckets" .=) <$> _lbNumFiniteBuckets])
 
+-- | Identity delegation history of an authenticated service account.
+--
+-- /See:/ 'serviceAccountDelegationInfo' smart constructor.
+data ServiceAccountDelegationInfo =
+  ServiceAccountDelegationInfo'
+    { _sadiThirdPartyPrincipal :: !(Maybe ThirdPartyPrincipal)
+    , _sadiFirstPartyPrincipal :: !(Maybe FirstPartyPrincipal)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ServiceAccountDelegationInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sadiThirdPartyPrincipal'
+--
+-- * 'sadiFirstPartyPrincipal'
+serviceAccountDelegationInfo
+    :: ServiceAccountDelegationInfo
+serviceAccountDelegationInfo =
+  ServiceAccountDelegationInfo'
+    {_sadiThirdPartyPrincipal = Nothing, _sadiFirstPartyPrincipal = Nothing}
+
+
+-- | Third party identity as the real authority.
+sadiThirdPartyPrincipal :: Lens' ServiceAccountDelegationInfo (Maybe ThirdPartyPrincipal)
+sadiThirdPartyPrincipal
+  = lens _sadiThirdPartyPrincipal
+      (\ s a -> s{_sadiThirdPartyPrincipal = a})
+
+-- | First party (Google) identity as the real authority.
+sadiFirstPartyPrincipal :: Lens' ServiceAccountDelegationInfo (Maybe FirstPartyPrincipal)
+sadiFirstPartyPrincipal
+  = lens _sadiFirstPartyPrincipal
+      (\ s a -> s{_sadiFirstPartyPrincipal = a})
+
+instance FromJSON ServiceAccountDelegationInfo where
+        parseJSON
+          = withObject "ServiceAccountDelegationInfo"
+              (\ o ->
+                 ServiceAccountDelegationInfo' <$>
+                   (o .:? "thirdPartyPrincipal") <*>
+                     (o .:? "firstPartyPrincipal"))
+
+instance ToJSON ServiceAccountDelegationInfo where
+        toJSON ServiceAccountDelegationInfo'{..}
+          = object
+              (catMaybes
+                 [("thirdPartyPrincipal" .=) <$>
+                    _sadiThirdPartyPrincipal,
+                  ("firstPartyPrincipal" .=) <$>
+                    _sadiFirstPartyPrincipal])
+
 -- | This message defines request authentication attributes. Terminology is
 -- based on the JSON Web Token (JWT) standard, but the terms also correlate
 -- to concepts in other standards.
 --
 -- /See:/ 'auth' smart constructor.
-data Auth = Auth'
+data Auth =
+  Auth'
     { _aPresenter    :: !(Maybe Text)
     , _aClaims       :: !(Maybe AuthClaims)
     , _aAudiences    :: !(Maybe [Text])
     , _aPrincipal    :: !(Maybe Text)
     , _aAccessLevels :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Auth' with the minimum fields required to make a request.
 --
@@ -1342,13 +1482,14 @@ data Auth = Auth'
 auth
     :: Auth
 auth =
-    Auth'
+  Auth'
     { _aPresenter = Nothing
     , _aClaims = Nothing
     , _aAudiences = Nothing
     , _aPrincipal = Nothing
     , _aAccessLevels = Nothing
     }
+
 
 -- | The authorized presenter of the credential. Reflects the optional
 -- Authorized Presenter (\`azp\`) claim within a JWT or the OAuth client
@@ -1432,11 +1573,14 @@ instance ToJSON Auth where
 -- | Contains the quota information for a quota check response.
 --
 -- /See:/ 'quotaInfo' smart constructor.
-data QuotaInfo = QuotaInfo'
+data QuotaInfo =
+  QuotaInfo'
     { _qiLimitExceeded :: !(Maybe [Text])
     , _qiQuotaMetrics  :: !(Maybe [MetricValueSet])
     , _qiQuotaConsumed :: !(Maybe QuotaInfoQuotaConsumed)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaInfo' with the minimum fields required to make a request.
 --
@@ -1450,11 +1594,12 @@ data QuotaInfo = QuotaInfo'
 quotaInfo
     :: QuotaInfo
 quotaInfo =
-    QuotaInfo'
+  QuotaInfo'
     { _qiLimitExceeded = Nothing
     , _qiQuotaMetrics = Nothing
     , _qiQuotaConsumed = Nothing
     }
+
 
 -- | Quota Metrics that have exceeded quota limits. For QuotaGroup-based
 -- quota, this is QuotaGroup.name For QuotaLimit-based quota, this is
@@ -1517,11 +1662,14 @@ instance ToJSON QuotaInfo where
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money'
+data Money =
+  Money'
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe (Textual Int32))
     , _mUnits        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
@@ -1534,12 +1682,8 @@ data Money = Money'
 -- * 'mUnits'
 money
     :: Money
-money =
-    Money'
-    { _mCurrencyCode = Nothing
-    , _mNanos = Nothing
-    , _mUnits = Nothing
-    }
+money = Money' {_mCurrencyCode = Nothing, _mNanos = Nothing, _mUnits = Nothing}
+
 
 -- | The 3-letter currency code defined in ISO 4217.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -1583,11 +1727,14 @@ instance ToJSON Money where
 -- | \`ConsumerInfo\` provides information about the consumer.
 --
 -- /See:/ 'consumerInfo' smart constructor.
-data ConsumerInfo = ConsumerInfo'
+data ConsumerInfo =
+  ConsumerInfo'
     { _ciProjectNumber  :: !(Maybe (Textual Int64))
     , _ciConsumerNumber :: !(Maybe (Textual Int64))
     , _ciType           :: !(Maybe ConsumerInfoType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConsumerInfo' with the minimum fields required to make a request.
 --
@@ -1601,11 +1748,9 @@ data ConsumerInfo = ConsumerInfo'
 consumerInfo
     :: ConsumerInfo
 consumerInfo =
-    ConsumerInfo'
-    { _ciProjectNumber = Nothing
-    , _ciConsumerNumber = Nothing
-    , _ciType = Nothing
-    }
+  ConsumerInfo'
+    {_ciProjectNumber = Nothing, _ciConsumerNumber = Nothing, _ciType = Nothing}
+
 
 -- | The Google cloud project number, e.g. 1234567890. A value of 0 indicates
 -- no project number is found. NOTE: This field is deprecated after Chemist
@@ -1626,6 +1771,8 @@ ciConsumerNumber
       (\ s a -> s{_ciConsumerNumber = a})
       . mapping _Coerce
 
+-- | The type of the consumer which should have been defined in [Google
+-- Resource Manager](https:\/\/cloud.google.com\/resource-manager\/).
 ciType :: Lens' ConsumerInfo (Maybe ConsumerInfoType)
 ciType = lens _ciType (\ s a -> s{_ciType = a})
 
@@ -1645,11 +1792,56 @@ instance ToJSON ConsumerInfo where
                   ("consumerNumber" .=) <$> _ciConsumerNumber,
                   ("type" .=) <$> _ciType])
 
+-- | Metadata about third party identity.
+--
+-- /See:/ 'thirdPartyPrincipalThirdPartyClaims' smart constructor.
+newtype ThirdPartyPrincipalThirdPartyClaims =
+  ThirdPartyPrincipalThirdPartyClaims'
+    { _tpptpcAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ThirdPartyPrincipalThirdPartyClaims' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpptpcAddtional'
+thirdPartyPrincipalThirdPartyClaims
+    :: HashMap Text JSONValue -- ^ 'tpptpcAddtional'
+    -> ThirdPartyPrincipalThirdPartyClaims
+thirdPartyPrincipalThirdPartyClaims pTpptpcAddtional_ =
+  ThirdPartyPrincipalThirdPartyClaims'
+    {_tpptpcAddtional = _Coerce # pTpptpcAddtional_}
+
+
+-- | Properties of the object.
+tpptpcAddtional :: Lens' ThirdPartyPrincipalThirdPartyClaims (HashMap Text JSONValue)
+tpptpcAddtional
+  = lens _tpptpcAddtional
+      (\ s a -> s{_tpptpcAddtional = a})
+      . _Coerce
+
+instance FromJSON ThirdPartyPrincipalThirdPartyClaims
+         where
+        parseJSON
+          = withObject "ThirdPartyPrincipalThirdPartyClaims"
+              (\ o ->
+                 ThirdPartyPrincipalThirdPartyClaims' <$>
+                   (parseJSONObject o))
+
+instance ToJSON ThirdPartyPrincipalThirdPartyClaims
+         where
+        toJSON = toJSON . _tpptpcAddtional
+
 --
 -- /See:/ 'allocateInfo' smart constructor.
-newtype AllocateInfo = AllocateInfo'
+newtype AllocateInfo =
+  AllocateInfo'
     { _aiUnusedArguments :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AllocateInfo' with the minimum fields required to make a request.
 --
@@ -1658,10 +1850,8 @@ newtype AllocateInfo = AllocateInfo'
 -- * 'aiUnusedArguments'
 allocateInfo
     :: AllocateInfo
-allocateInfo =
-    AllocateInfo'
-    { _aiUnusedArguments = Nothing
-    }
+allocateInfo = AllocateInfo' {_aiUnusedArguments = Nothing}
+
 
 -- | A list of label keys that were unused by the server in processing the
 -- request. Thus, for similar requests repeated in a certain future time
@@ -1690,14 +1880,17 @@ instance ToJSON AllocateInfo where
 -- | Represents information regarding a quota operation.
 --
 -- /See:/ 'quotaOperation' smart constructor.
-data QuotaOperation = QuotaOperation'
+data QuotaOperation =
+  QuotaOperation'
     { _qoQuotaMode    :: !(Maybe QuotaOperationQuotaMode)
     , _qoMethodName   :: !(Maybe Text)
     , _qoQuotaMetrics :: !(Maybe [MetricValueSet])
     , _qoLabels       :: !(Maybe QuotaOperationLabels)
     , _qoOperationId  :: !(Maybe Text)
     , _qoConsumerId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaOperation' with the minimum fields required to make a request.
 --
@@ -1717,7 +1910,7 @@ data QuotaOperation = QuotaOperation'
 quotaOperation
     :: QuotaOperation
 quotaOperation =
-    QuotaOperation'
+  QuotaOperation'
     { _qoQuotaMode = Nothing
     , _qoMethodName = Nothing
     , _qoQuotaMetrics = Nothing
@@ -1725,6 +1918,7 @@ quotaOperation =
     , _qoOperationId = Nothing
     , _qoConsumerId = Nothing
     }
+
 
 -- | Quota mode for this operation.
 qoQuotaMode :: Lens' QuotaOperation (Maybe QuotaOperationQuotaMode)
@@ -1804,9 +1998,12 @@ instance ToJSON QuotaOperation where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1817,9 +2014,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1839,11 +2035,15 @@ instance ToJSON StatusDetailsItem where
 -- google.api.servicecontrol.v1.CheckResponse.check_errors.
 --
 -- /See:/ 'checkError' smart constructor.
-data CheckError = CheckError'
+data CheckError =
+  CheckError'
     { _ceSubject :: !(Maybe Text)
+    , _ceStatus  :: !(Maybe Status)
     , _ceCode    :: !(Maybe CheckErrorCode)
     , _ceDetail  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckError' with the minimum fields required to make a request.
 --
@@ -1851,17 +2051,21 @@ data CheckError = CheckError'
 --
 -- * 'ceSubject'
 --
+-- * 'ceStatus'
+--
 -- * 'ceCode'
 --
 -- * 'ceDetail'
 checkError
     :: CheckError
 checkError =
-    CheckError'
+  CheckError'
     { _ceSubject = Nothing
+    , _ceStatus = Nothing
     , _ceCode = Nothing
     , _ceDetail = Nothing
     }
+
 
 -- | Subject to whom this error applies. See the specific code enum for more
 -- details on this field. For example: - “project:” - “folder:” -
@@ -1869,6 +2073,12 @@ checkError =
 ceSubject :: Lens' CheckError (Maybe Text)
 ceSubject
   = lens _ceSubject (\ s a -> s{_ceSubject = a})
+
+-- | Contains public information about the check error. If available,
+-- \`status.code\` will be non zero and client can propagate it out as
+-- public error.
+ceStatus :: Lens' CheckError (Maybe Status)
+ceStatus = lens _ceStatus (\ s a -> s{_ceStatus = a})
 
 -- | The error code.
 ceCode :: Lens' CheckError (Maybe CheckErrorCode)
@@ -1883,23 +2093,79 @@ instance FromJSON CheckError where
           = withObject "CheckError"
               (\ o ->
                  CheckError' <$>
-                   (o .:? "subject") <*> (o .:? "code") <*>
-                     (o .:? "detail"))
+                   (o .:? "subject") <*> (o .:? "status") <*>
+                     (o .:? "code")
+                     <*> (o .:? "detail"))
 
 instance ToJSON CheckError where
         toJSON CheckError'{..}
           = object
               (catMaybes
                  [("subject" .=) <$> _ceSubject,
-                  ("code" .=) <$> _ceCode,
+                  ("status" .=) <$> _ceStatus, ("code" .=) <$> _ceCode,
                   ("detail" .=) <$> _ceDetail])
+
+-- | First party identity principal.
+--
+-- /See:/ 'firstPartyPrincipal' smart constructor.
+data FirstPartyPrincipal =
+  FirstPartyPrincipal'
+    { _fppPrincipalEmail  :: !(Maybe Text)
+    , _fppServiceMetadata :: !(Maybe FirstPartyPrincipalServiceMetadata)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FirstPartyPrincipal' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fppPrincipalEmail'
+--
+-- * 'fppServiceMetadata'
+firstPartyPrincipal
+    :: FirstPartyPrincipal
+firstPartyPrincipal =
+  FirstPartyPrincipal'
+    {_fppPrincipalEmail = Nothing, _fppServiceMetadata = Nothing}
+
+
+-- | The email address of a Google account. .
+fppPrincipalEmail :: Lens' FirstPartyPrincipal (Maybe Text)
+fppPrincipalEmail
+  = lens _fppPrincipalEmail
+      (\ s a -> s{_fppPrincipalEmail = a})
+
+-- | Metadata about the service that uses the service account. .
+fppServiceMetadata :: Lens' FirstPartyPrincipal (Maybe FirstPartyPrincipalServiceMetadata)
+fppServiceMetadata
+  = lens _fppServiceMetadata
+      (\ s a -> s{_fppServiceMetadata = a})
+
+instance FromJSON FirstPartyPrincipal where
+        parseJSON
+          = withObject "FirstPartyPrincipal"
+              (\ o ->
+                 FirstPartyPrincipal' <$>
+                   (o .:? "principalEmail") <*>
+                     (o .:? "serviceMetadata"))
+
+instance ToJSON FirstPartyPrincipal where
+        toJSON FirstPartyPrincipal'{..}
+          = object
+              (catMaybes
+                 [("principalEmail" .=) <$> _fppPrincipalEmail,
+                  ("serviceMetadata" .=) <$> _fppServiceMetadata])
 
 -- | Labels describing the operation.
 --
 -- /See:/ 'quotaOperationLabels' smart constructor.
-newtype QuotaOperationLabels = QuotaOperationLabels'
+newtype QuotaOperationLabels =
+  QuotaOperationLabels'
     { _qolAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaOperationLabels' with the minimum fields required to make a request.
 --
@@ -1910,9 +2176,8 @@ quotaOperationLabels
     :: HashMap Text Text -- ^ 'qolAddtional'
     -> QuotaOperationLabels
 quotaOperationLabels pQolAddtional_ =
-    QuotaOperationLabels'
-    { _qolAddtional = _Coerce # pQolAddtional_
-    }
+  QuotaOperationLabels' {_qolAddtional = _Coerce # pQolAddtional_}
+
 
 qolAddtional :: Lens' QuotaOperationLabels (HashMap Text Text)
 qolAddtional
@@ -1931,10 +2196,13 @@ instance ToJSON QuotaOperationLabels where
 -- | Represents the processing error of one Operation in the request.
 --
 -- /See:/ 'reportError' smart constructor.
-data ReportError = ReportError'
+data ReportError =
+  ReportError'
     { _reStatus      :: !(Maybe Status)
     , _reOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportError' with the minimum fields required to make a request.
 --
@@ -1945,11 +2213,8 @@ data ReportError = ReportError'
 -- * 'reOperationId'
 reportError
     :: ReportError
-reportError =
-    ReportError'
-    { _reStatus = Nothing
-    , _reOperationId = Nothing
-    }
+reportError = ReportError' {_reStatus = Nothing, _reOperationId = Nothing}
+
 
 -- | Details of the error when processing the Operation.
 reStatus :: Lens' ReportError (Maybe Status)
@@ -1987,9 +2252,12 @@ instance ToJSON ReportError where
 -- dependent structure.
 --
 -- /See:/ 'authClaims' smart constructor.
-newtype AuthClaims = AuthClaims'
+newtype AuthClaims =
+  AuthClaims'
     { _acAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthClaims' with the minimum fields required to make a request.
 --
@@ -1999,10 +2267,8 @@ newtype AuthClaims = AuthClaims'
 authClaims
     :: HashMap Text JSONValue -- ^ 'acAddtional'
     -> AuthClaims
-authClaims pAcAddtional_ =
-    AuthClaims'
-    { _acAddtional = _Coerce # pAcAddtional_
-    }
+authClaims pAcAddtional_ = AuthClaims' {_acAddtional = _Coerce # pAcAddtional_}
+
 
 -- | Properties of the object.
 acAddtional :: Lens' AuthClaims (HashMap Text JSONValue)
@@ -2023,7 +2289,8 @@ instance ToJSON AuthClaims where
 -- MUST be defined in a separate message.
 --
 -- /See:/ 'hTTPRequest' smart constructor.
-data HTTPRequest = HTTPRequest'
+data HTTPRequest =
+  HTTPRequest'
     { _httprStatus                         :: !(Maybe (Textual Int32))
     , _httprRequestURL                     :: !(Maybe Text)
     , _httprCacheFillBytes                 :: !(Maybe (Textual Int64))
@@ -2039,7 +2306,9 @@ data HTTPRequest = HTTPRequest'
     , _httprRequestMethod                  :: !(Maybe Text)
     , _httprCacheHit                       :: !(Maybe Bool)
     , _httprReferer                        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
 --
@@ -2077,7 +2346,7 @@ data HTTPRequest = HTTPRequest'
 hTTPRequest
     :: HTTPRequest
 hTTPRequest =
-    HTTPRequest'
+  HTTPRequest'
     { _httprStatus = Nothing
     , _httprRequestURL = Nothing
     , _httprCacheFillBytes = Nothing
@@ -2094,6 +2363,7 @@ hTTPRequest =
     , _httprCacheHit = Nothing
     , _httprReferer = Nothing
     }
+
 
 -- | The response code indicating the status of the response. Examples: 200,
 -- 404.
@@ -2251,9 +2521,12 @@ instance ToJSON HTTPRequest where
 -- equivalent, the proto name will be indicated in the \`\'type\` property.
 --
 -- /See:/ 'authenticationInfoThirdPartyPrincipal' smart constructor.
-newtype AuthenticationInfoThirdPartyPrincipal = AuthenticationInfoThirdPartyPrincipal'
+newtype AuthenticationInfoThirdPartyPrincipal =
+  AuthenticationInfoThirdPartyPrincipal'
     { _aitppAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthenticationInfoThirdPartyPrincipal' with the minimum fields required to make a request.
 --
@@ -2264,9 +2537,9 @@ authenticationInfoThirdPartyPrincipal
     :: HashMap Text JSONValue -- ^ 'aitppAddtional'
     -> AuthenticationInfoThirdPartyPrincipal
 authenticationInfoThirdPartyPrincipal pAitppAddtional_ =
-    AuthenticationInfoThirdPartyPrincipal'
-    { _aitppAddtional = _Coerce # pAitppAddtional_
-    }
+  AuthenticationInfoThirdPartyPrincipal'
+    {_aitppAddtional = _Coerce # pAitppAddtional_}
+
 
 -- | Properties of the object.
 aitppAddtional :: Lens' AuthenticationInfoThirdPartyPrincipal (HashMap Text JSONValue)
@@ -2276,7 +2549,8 @@ aitppAddtional
       . _Coerce
 
 instance FromJSON
-         AuthenticationInfoThirdPartyPrincipal where
+           AuthenticationInfoThirdPartyPrincipal
+         where
         parseJSON
           = withObject "AuthenticationInfoThirdPartyPrincipal"
               (\ o ->
@@ -2290,11 +2564,14 @@ instance ToJSON AuthenticationInfoThirdPartyPrincipal
 -- | Describes a resource associated with this operation.
 --
 -- /See:/ 'resourceInfo' smart constructor.
-data ResourceInfo = ResourceInfo'
+data ResourceInfo =
+  ResourceInfo'
     { _riResourceName      :: !(Maybe Text)
     , _riResourceContainer :: !(Maybe Text)
     , _riResourceLocation  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceInfo' with the minimum fields required to make a request.
 --
@@ -2308,11 +2585,12 @@ data ResourceInfo = ResourceInfo'
 resourceInfo
     :: ResourceInfo
 resourceInfo =
-    ResourceInfo'
+  ResourceInfo'
     { _riResourceName = Nothing
     , _riResourceContainer = Nothing
     , _riResourceLocation = Nothing
     }
+
 
 -- | Name of the resource. This is used for auditing purposes.
 riResourceName :: Lens' ResourceInfo (Maybe Text)
@@ -2357,7 +2635,8 @@ instance ToJSON ResourceInfo where
 -- | Represents a single metric value.
 --
 -- /See:/ 'metricValue' smart constructor.
-data MetricValue = MetricValue'
+data MetricValue =
+  MetricValue'
     { _mvBoolValue         :: !(Maybe Bool)
     , _mvStartTime         :: !(Maybe DateTime')
     , _mvMoneyValue        :: !(Maybe Money)
@@ -2367,7 +2646,9 @@ data MetricValue = MetricValue'
     , _mvEndTime           :: !(Maybe DateTime')
     , _mvInt64Value        :: !(Maybe (Textual Int64))
     , _mvLabels            :: !(Maybe MetricValueLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricValue' with the minimum fields required to make a request.
 --
@@ -2393,7 +2674,7 @@ data MetricValue = MetricValue'
 metricValue
     :: MetricValue
 metricValue =
-    MetricValue'
+  MetricValue'
     { _mvBoolValue = Nothing
     , _mvStartTime = Nothing
     , _mvMoneyValue = Nothing
@@ -2404,6 +2685,7 @@ metricValue =
     , _mvInt64Value = Nothing
     , _mvLabels = Nothing
     }
+
 
 -- | A boolean value.
 mvBoolValue :: Lens' MetricValue (Maybe Bool)
@@ -2493,10 +2775,13 @@ instance ToJSON MetricValue where
 -- | Location information about a resource.
 --
 -- /See:/ 'resourceLocation' smart constructor.
-data ResourceLocation = ResourceLocation'
+data ResourceLocation =
+  ResourceLocation'
     { _rlOriginalLocations :: !(Maybe [Text])
     , _rlCurrentLocations  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceLocation' with the minimum fields required to make a request.
 --
@@ -2508,10 +2793,9 @@ data ResourceLocation = ResourceLocation'
 resourceLocation
     :: ResourceLocation
 resourceLocation =
-    ResourceLocation'
-    { _rlOriginalLocations = Nothing
-    , _rlCurrentLocations = Nothing
-    }
+  ResourceLocation'
+    {_rlOriginalLocations = Nothing, _rlCurrentLocations = Nothing}
+
 
 -- | The locations of a resource prior to the execution of the operation.
 -- Requests that mutate the resource\'s location must populate both the
@@ -2553,9 +2837,12 @@ instance ToJSON ResourceLocation where
 -- | The labels associated with the peer.
 --
 -- /See:/ 'peerLabels' smart constructor.
-newtype PeerLabels = PeerLabels'
+newtype PeerLabels =
+  PeerLabels'
     { _plAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeerLabels' with the minimum fields required to make a request.
 --
@@ -2565,10 +2852,8 @@ newtype PeerLabels = PeerLabels'
 peerLabels
     :: HashMap Text Text -- ^ 'plAddtional'
     -> PeerLabels
-peerLabels pPlAddtional_ =
-    PeerLabels'
-    { _plAddtional = _Coerce # pPlAddtional_
-    }
+peerLabels pPlAddtional_ = PeerLabels' {_plAddtional = _Coerce # pPlAddtional_}
+
 
 plAddtional :: Lens' PeerLabels (HashMap Text Text)
 plAddtional
@@ -2586,9 +2871,12 @@ instance ToJSON PeerLabels where
 -- | Represents the properties needed for quota operations.
 --
 -- /See:/ 'quotaProperties' smart constructor.
-newtype QuotaProperties = QuotaProperties'
+newtype QuotaProperties =
+  QuotaProperties'
     { _qpQuotaMode :: Maybe QuotaPropertiesQuotaMode
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaProperties' with the minimum fields required to make a request.
 --
@@ -2597,10 +2885,8 @@ newtype QuotaProperties = QuotaProperties'
 -- * 'qpQuotaMode'
 quotaProperties
     :: QuotaProperties
-quotaProperties =
-    QuotaProperties'
-    { _qpQuotaMode = Nothing
-    }
+quotaProperties = QuotaProperties' {_qpQuotaMode = Nothing}
+
 
 -- | Quota mode for this operation.
 qpQuotaMode :: Lens' QuotaProperties (Maybe QuotaPropertiesQuotaMode)
@@ -2622,12 +2908,15 @@ instance ToJSON QuotaProperties where
 -- example, a file stored on a network storage service.
 --
 -- /See:/ 'resource' smart constructor.
-data Resource = Resource'
+data Resource =
+  Resource'
     { _rService :: !(Maybe Text)
     , _rName    :: !(Maybe Text)
     , _rLabels  :: !(Maybe ResourceLabels)
     , _rType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Resource' with the minimum fields required to make a request.
 --
@@ -2643,12 +2932,13 @@ data Resource = Resource'
 resource
     :: Resource
 resource =
-    Resource'
+  Resource'
     { _rService = Nothing
     , _rName = Nothing
     , _rLabels = Nothing
     , _rType = Nothing
     }
+
 
 -- | The name of the service that this resource belongs to, such as
 -- \`pubsub.googleapis.com\`. The service may be different from the DNS
@@ -2700,10 +2990,13 @@ instance ToJSON Resource where
 -- | Request message for the AllocateQuota method.
 --
 -- /See:/ 'allocateQuotaRequest' smart constructor.
-data AllocateQuotaRequest = AllocateQuotaRequest'
+data AllocateQuotaRequest =
+  AllocateQuotaRequest'
     { _aqrServiceConfigId   :: !(Maybe Text)
     , _aqrAllocateOperation :: !(Maybe QuotaOperation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AllocateQuotaRequest' with the minimum fields required to make a request.
 --
@@ -2715,10 +3008,9 @@ data AllocateQuotaRequest = AllocateQuotaRequest'
 allocateQuotaRequest
     :: AllocateQuotaRequest
 allocateQuotaRequest =
-    AllocateQuotaRequest'
-    { _aqrServiceConfigId = Nothing
-    , _aqrAllocateOperation = Nothing
-    }
+  AllocateQuotaRequest'
+    {_aqrServiceConfigId = Nothing, _aqrAllocateOperation = Nothing}
+
 
 -- | Specifies which version of service configuration should be used to
 -- process the request. If unspecified or no matching version can be found,
@@ -2756,9 +3048,12 @@ instance ToJSON AllocateQuotaRequest where
 -- equivalent, the proto name will be indicated in the \`\'type\` property.
 --
 -- /See:/ 'auditLogResponse' smart constructor.
-newtype AuditLogResponse = AuditLogResponse'
+newtype AuditLogResponse =
+  AuditLogResponse'
     { _alrAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogResponse' with the minimum fields required to make a request.
 --
@@ -2769,9 +3064,8 @@ auditLogResponse
     :: HashMap Text JSONValue -- ^ 'alrAddtional'
     -> AuditLogResponse
 auditLogResponse pAlrAddtional_ =
-    AuditLogResponse'
-    { _alrAddtional = _Coerce # pAlrAddtional_
-    }
+  AuditLogResponse' {_alrAddtional = _Coerce # pAlrAddtional_}
+
 
 -- | Properties of the object.
 alrAddtional :: Lens' AuditLogResponse (HashMap Text JSONValue)
@@ -2792,9 +3086,12 @@ instance ToJSON AuditLogResponse where
 -- lowercased, because HTTP header keys are case-insensitive.
 --
 -- /See:/ 'requestHeaders' smart constructor.
-newtype RequestHeaders = RequestHeaders'
+newtype RequestHeaders =
+  RequestHeaders'
     { _rhAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RequestHeaders' with the minimum fields required to make a request.
 --
@@ -2805,9 +3102,8 @@ requestHeaders
     :: HashMap Text Text -- ^ 'rhAddtional'
     -> RequestHeaders
 requestHeaders pRhAddtional_ =
-    RequestHeaders'
-    { _rhAddtional = _Coerce # pRhAddtional_
-    }
+  RequestHeaders' {_rhAddtional = _Coerce # pRhAddtional_}
+
 
 rhAddtional :: Lens' RequestHeaders (HashMap Text Text)
 rhAddtional
@@ -2825,13 +3121,16 @@ instance ToJSON RequestHeaders where
 -- | Response message for the Check method.
 --
 -- /See:/ 'checkResponse' smart constructor.
-data CheckResponse = CheckResponse'
+data CheckResponse =
+  CheckResponse'
     { _cCheckErrors     :: !(Maybe [CheckError])
     , _cQuotaInfo       :: !(Maybe QuotaInfo)
     , _cServiceConfigId :: !(Maybe Text)
     , _cCheckInfo       :: !(Maybe CheckInfo)
     , _cOperationId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckResponse' with the minimum fields required to make a request.
 --
@@ -2849,13 +3148,14 @@ data CheckResponse = CheckResponse'
 checkResponse
     :: CheckResponse
 checkResponse =
-    CheckResponse'
+  CheckResponse'
     { _cCheckErrors = Nothing
     , _cQuotaInfo = Nothing
     , _cServiceConfigId = Nothing
     , _cCheckInfo = Nothing
     , _cOperationId = Nothing
     }
+
 
 -- | Indicate the decision of the check. If no check errors are present, the
 -- service should process the operation. Otherwise the service should use
@@ -2919,9 +3219,12 @@ instance ToJSON CheckResponse where
 -- property.
 --
 -- /See:/ 'auditLogResourceOriginalState' smart constructor.
-newtype AuditLogResourceOriginalState = AuditLogResourceOriginalState'
+newtype AuditLogResourceOriginalState =
+  AuditLogResourceOriginalState'
     { _alrosAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogResourceOriginalState' with the minimum fields required to make a request.
 --
@@ -2932,9 +3235,8 @@ auditLogResourceOriginalState
     :: HashMap Text JSONValue -- ^ 'alrosAddtional'
     -> AuditLogResourceOriginalState
 auditLogResourceOriginalState pAlrosAddtional_ =
-    AuditLogResourceOriginalState'
-    { _alrosAddtional = _Coerce # pAlrosAddtional_
-    }
+  AuditLogResourceOriginalState' {_alrosAddtional = _Coerce # pAlrosAddtional_}
+
 
 -- | Properties of the object.
 alrosAddtional :: Lens' AuditLogResourceOriginalState (HashMap Text JSONValue)
@@ -2956,11 +3258,14 @@ instance ToJSON AuditLogResourceOriginalState where
 -- | Response message for the Report method.
 --
 -- /See:/ 'reportResponse' smart constructor.
-data ReportResponse = ReportResponse'
+data ReportResponse =
+  ReportResponse'
     { _rReportErrors    :: !(Maybe [ReportError])
     , _rReportInfos     :: !(Maybe [ReportInfo])
     , _rServiceConfigId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportResponse' with the minimum fields required to make a request.
 --
@@ -2974,11 +3279,12 @@ data ReportResponse = ReportResponse'
 reportResponse
     :: ReportResponse
 reportResponse =
-    ReportResponse'
+  ReportResponse'
     { _rReportErrors = Nothing
     , _rReportInfos = Nothing
     , _rServiceConfigId = Nothing
     }
+
 
 -- | Partial failures, one for each \`Operation\` in the request that failed
 -- processing. There are three possible combinations of the RPC status: 1.
@@ -3037,12 +3343,15 @@ instance ToJSON ReportResponse where
 -- which a log entry is associated.
 --
 -- /See:/ 'logEntryOperation' smart constructor.
-data LogEntryOperation = LogEntryOperation'
+data LogEntryOperation =
+  LogEntryOperation'
     { _leoFirst    :: !(Maybe Bool)
     , _leoProducer :: !(Maybe Text)
     , _leoLast     :: !(Maybe Bool)
     , _leoId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryOperation' with the minimum fields required to make a request.
 --
@@ -3058,12 +3367,13 @@ data LogEntryOperation = LogEntryOperation'
 logEntryOperation
     :: LogEntryOperation
 logEntryOperation =
-    LogEntryOperation'
+  LogEntryOperation'
     { _leoFirst = Nothing
     , _leoProducer = Nothing
     , _leoLast = Nothing
     , _leoId = Nothing
     }
+
 
 -- | Optional. Set this to True if this is the first log entry in the
 -- operation.
@@ -3108,10 +3418,13 @@ instance ToJSON LogEntryOperation where
 -- | Contains additional info about the report operation.
 --
 -- /See:/ 'reportInfo' smart constructor.
-data ReportInfo = ReportInfo'
+data ReportInfo =
+  ReportInfo'
     { _riQuotaInfo   :: !(Maybe QuotaInfo)
     , _riOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportInfo' with the minimum fields required to make a request.
 --
@@ -3122,11 +3435,8 @@ data ReportInfo = ReportInfo'
 -- * 'riOperationId'
 reportInfo
     :: ReportInfo
-reportInfo =
-    ReportInfo'
-    { _riQuotaInfo = Nothing
-    , _riOperationId = Nothing
-    }
+reportInfo = ReportInfo' {_riQuotaInfo = Nothing, _riOperationId = Nothing}
+
 
 -- | Quota usage info when processing the \`Operation\`.
 riQuotaInfo :: Lens' ReportInfo (Maybe QuotaInfo)
@@ -3156,7 +3466,8 @@ instance ToJSON ReportInfo where
 -- | An individual log entry.
 --
 -- /See:/ 'logEntry' smart constructor.
-data LogEntry = LogEntry'
+data LogEntry =
+  LogEntry'
     { _leOperation     :: !(Maybe LogEntryOperation)
     , _leSeverity      :: !(Maybe LogEntrySeverity)
     , _leTextPayload   :: !(Maybe Text)
@@ -3168,7 +3479,9 @@ data LogEntry = LogEntry'
     , _leProtoPayload  :: !(Maybe LogEntryProtoPayload)
     , _leTimestamp     :: !(Maybe DateTime')
     , _leTrace         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
 --
@@ -3198,7 +3511,7 @@ data LogEntry = LogEntry'
 logEntry
     :: LogEntry
 logEntry =
-    LogEntry'
+  LogEntry'
     { _leOperation = Nothing
     , _leSeverity = Nothing
     , _leTextPayload = Nothing
@@ -3211,6 +3524,7 @@ logEntry =
     , _leTimestamp = Nothing
     , _leTrace = Nothing
     }
+
 
 -- | Optional. Information about an operation associated with the log entry,
 -- if applicable.
@@ -3321,9 +3635,12 @@ instance ToJSON LogEntry where
 -- equivalent, the proto name will be indicated in the \`\'type\` property.
 --
 -- /See:/ 'auditLogRequest' smart constructor.
-newtype AuditLogRequest = AuditLogRequest'
+newtype AuditLogRequest =
+  AuditLogRequest'
     { _aAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogRequest' with the minimum fields required to make a request.
 --
@@ -3334,9 +3651,8 @@ auditLogRequest
     :: HashMap Text JSONValue -- ^ 'aAddtional'
     -> AuditLogRequest
 auditLogRequest pAAddtional_ =
-    AuditLogRequest'
-    { _aAddtional = _Coerce # pAAddtional_
-    }
+  AuditLogRequest' {_aAddtional = _Coerce # pAAddtional_}
+
 
 -- | Properties of the object.
 aAddtional :: Lens' AuditLogRequest (HashMap Text JSONValue)
@@ -3367,9 +3683,12 @@ instance ToJSON AuditLogRequest where
 -- Kubernetes Engine.
 --
 -- /See:/ 'operationLabels' smart constructor.
-newtype OperationLabels = OperationLabels'
+newtype OperationLabels =
+  OperationLabels'
     { _olAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationLabels' with the minimum fields required to make a request.
 --
@@ -3380,9 +3699,8 @@ operationLabels
     :: HashMap Text Text -- ^ 'olAddtional'
     -> OperationLabels
 operationLabels pOlAddtional_ =
-    OperationLabels'
-    { _olAddtional = _Coerce # pOlAddtional_
-    }
+  OperationLabels' {_olAddtional = _Coerce # pOlAddtional_}
+
 
 olAddtional :: Lens' OperationLabels (HashMap Text Text)
 olAddtional
@@ -3400,10 +3718,13 @@ instance ToJSON OperationLabels where
 -- | Contains additional information about the check operation.
 --
 -- /See:/ 'checkInfo' smart constructor.
-data CheckInfo = CheckInfo'
+data CheckInfo =
+  CheckInfo'
     { _ciConsumerInfo    :: !(Maybe ConsumerInfo)
     , _ciUnusedArguments :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckInfo' with the minimum fields required to make a request.
 --
@@ -3414,11 +3735,8 @@ data CheckInfo = CheckInfo'
 -- * 'ciUnusedArguments'
 checkInfo
     :: CheckInfo
-checkInfo =
-    CheckInfo'
-    { _ciConsumerInfo = Nothing
-    , _ciUnusedArguments = Nothing
-    }
+checkInfo = CheckInfo' {_ciConsumerInfo = Nothing, _ciUnusedArguments = Nothing}
+
 
 -- | Consumer info of this check.
 ciConsumerInfo :: Lens' CheckInfo (Maybe ConsumerInfo)
@@ -3454,13 +3772,16 @@ instance ToJSON CheckInfo where
 -- | Response message for the AllocateQuota method.
 --
 -- /See:/ 'allocateQuotaResponse' smart constructor.
-data AllocateQuotaResponse = AllocateQuotaResponse'
+data AllocateQuotaResponse =
+  AllocateQuotaResponse'
     { _aAllocateInfo    :: !(Maybe AllocateInfo)
     , _aAllocateErrors  :: !(Maybe [QuotaError])
     , _aQuotaMetrics    :: !(Maybe [MetricValueSet])
     , _aServiceConfigId :: !(Maybe Text)
     , _aOperationId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AllocateQuotaResponse' with the minimum fields required to make a request.
 --
@@ -3478,13 +3799,14 @@ data AllocateQuotaResponse = AllocateQuotaResponse'
 allocateQuotaResponse
     :: AllocateQuotaResponse
 allocateQuotaResponse =
-    AllocateQuotaResponse'
+  AllocateQuotaResponse'
     { _aAllocateInfo = Nothing
     , _aAllocateErrors = Nothing
     , _aQuotaMetrics = Nothing
     , _aServiceConfigId = Nothing
     , _aOperationId = Nothing
     }
+
 
 -- | WARNING: DO NOT use this field until this warning message is removed.
 aAllocateInfo :: Lens' AllocateQuotaResponse (Maybe AllocateInfo)
@@ -3550,9 +3872,12 @@ instance ToJSON AllocateQuotaResponse where
 -- | Describing buckets with arbitrary user-provided width.
 --
 -- /See:/ 'explicitBuckets' smart constructor.
-newtype ExplicitBuckets = ExplicitBuckets'
+newtype ExplicitBuckets =
+  ExplicitBuckets'
     { _ebBounds :: Maybe [Textual Double]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExplicitBuckets' with the minimum fields required to make a request.
 --
@@ -3561,10 +3886,8 @@ newtype ExplicitBuckets = ExplicitBuckets'
 -- * 'ebBounds'
 explicitBuckets
     :: ExplicitBuckets
-explicitBuckets =
-    ExplicitBuckets'
-    { _ebBounds = Nothing
-    }
+explicitBuckets = ExplicitBuckets' {_ebBounds = Nothing}
+
 
 -- | \'bound\' is a list of strictly increasing boundaries between buckets.
 -- Note that a list of length N-1 defines N buckets because of
@@ -3592,14 +3915,59 @@ instance ToJSON ExplicitBuckets where
         toJSON ExplicitBuckets'{..}
           = object (catMaybes [("bounds" .=) <$> _ebBounds])
 
+-- | Metadata about the service that uses the service account. .
+--
+-- /See:/ 'firstPartyPrincipalServiceMetadata' smart constructor.
+newtype FirstPartyPrincipalServiceMetadata =
+  FirstPartyPrincipalServiceMetadata'
+    { _fppsmAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'FirstPartyPrincipalServiceMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fppsmAddtional'
+firstPartyPrincipalServiceMetadata
+    :: HashMap Text JSONValue -- ^ 'fppsmAddtional'
+    -> FirstPartyPrincipalServiceMetadata
+firstPartyPrincipalServiceMetadata pFppsmAddtional_ =
+  FirstPartyPrincipalServiceMetadata'
+    {_fppsmAddtional = _Coerce # pFppsmAddtional_}
+
+
+-- | Properties of the object.
+fppsmAddtional :: Lens' FirstPartyPrincipalServiceMetadata (HashMap Text JSONValue)
+fppsmAddtional
+  = lens _fppsmAddtional
+      (\ s a -> s{_fppsmAddtional = a})
+      . _Coerce
+
+instance FromJSON FirstPartyPrincipalServiceMetadata
+         where
+        parseJSON
+          = withObject "FirstPartyPrincipalServiceMetadata"
+              (\ o ->
+                 FirstPartyPrincipalServiceMetadata' <$>
+                   (parseJSONObject o))
+
+instance ToJSON FirstPartyPrincipalServiceMetadata
+         where
+        toJSON = toJSON . _fppsmAddtional
+
 -- | Represents error information for QuotaOperation.
 --
 -- /See:/ 'quotaError' smart constructor.
-data QuotaError = QuotaError'
+data QuotaError =
+  QuotaError'
     { _qeSubject     :: !(Maybe Text)
     , _qeCode        :: !(Maybe QuotaErrorCode)
     , _qeDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaError' with the minimum fields required to make a request.
 --
@@ -3613,11 +3981,9 @@ data QuotaError = QuotaError'
 quotaError
     :: QuotaError
 quotaError =
-    QuotaError'
-    { _qeSubject = Nothing
-    , _qeCode = Nothing
-    , _qeDescription = Nothing
-    }
+  QuotaError'
+    {_qeSubject = Nothing, _qeCode = Nothing, _qeDescription = Nothing}
+
 
 -- | Subject to whom this error applies. See the specific enum for more
 -- details on this field. For example, \"clientip:\" or \"project:\".
@@ -3654,18 +4020,24 @@ instance ToJSON QuotaError where
 -- | Authentication information for the operation.
 --
 -- /See:/ 'authenticationInfo' smart constructor.
-data AuthenticationInfo = AuthenticationInfo'
-    { _aiThirdPartyPrincipal   :: !(Maybe AuthenticationInfoThirdPartyPrincipal)
-    , _aiPrincipalEmail        :: !(Maybe Text)
-    , _aiAuthoritySelector     :: !(Maybe Text)
-    , _aiServiceAccountKeyName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data AuthenticationInfo =
+  AuthenticationInfo'
+    { _aiThirdPartyPrincipal          :: !(Maybe AuthenticationInfoThirdPartyPrincipal)
+    , _aiServiceAccountDelegationInfo :: !(Maybe [ServiceAccountDelegationInfo])
+    , _aiPrincipalEmail               :: !(Maybe Text)
+    , _aiAuthoritySelector            :: !(Maybe Text)
+    , _aiServiceAccountKeyName        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthenticationInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aiThirdPartyPrincipal'
+--
+-- * 'aiServiceAccountDelegationInfo'
 --
 -- * 'aiPrincipalEmail'
 --
@@ -3675,12 +4047,14 @@ data AuthenticationInfo = AuthenticationInfo'
 authenticationInfo
     :: AuthenticationInfo
 authenticationInfo =
-    AuthenticationInfo'
+  AuthenticationInfo'
     { _aiThirdPartyPrincipal = Nothing
+    , _aiServiceAccountDelegationInfo = Nothing
     , _aiPrincipalEmail = Nothing
     , _aiAuthoritySelector = Nothing
     , _aiServiceAccountKeyName = Nothing
     }
+
 
 -- | The third party identification (if any) of the authenticated user making
 -- the request. When the JSON object represented here has a proto
@@ -3689,6 +4063,18 @@ aiThirdPartyPrincipal :: Lens' AuthenticationInfo (Maybe AuthenticationInfoThird
 aiThirdPartyPrincipal
   = lens _aiThirdPartyPrincipal
       (\ s a -> s{_aiThirdPartyPrincipal = a})
+
+-- | Identity delegation history of an authenticated service account that
+-- makes the request. It contains information on the real authorities that
+-- try to access GCP resources by delegating on a service account. When
+-- multiple authorities present, they are guaranteed to be sorted based on
+-- the original ordering of the identity delegation events.
+aiServiceAccountDelegationInfo :: Lens' AuthenticationInfo [ServiceAccountDelegationInfo]
+aiServiceAccountDelegationInfo
+  = lens _aiServiceAccountDelegationInfo
+      (\ s a -> s{_aiServiceAccountDelegationInfo = a})
+      . _Default
+      . _Coerce
 
 -- | The email address of the authenticated user (or service account on
 -- behalf of third party principal) making the request. For privacy
@@ -3721,7 +4107,8 @@ instance FromJSON AuthenticationInfo where
               (\ o ->
                  AuthenticationInfo' <$>
                    (o .:? "thirdPartyPrincipal") <*>
-                     (o .:? "principalEmail")
+                     (o .:? "serviceAccountDelegationInfo" .!= mempty)
+                     <*> (o .:? "principalEmail")
                      <*> (o .:? "authoritySelector")
                      <*> (o .:? "serviceAccountKeyName"))
 
@@ -3731,6 +4118,8 @@ instance ToJSON AuthenticationInfo where
               (catMaybes
                  [("thirdPartyPrincipal" .=) <$>
                     _aiThirdPartyPrincipal,
+                  ("serviceAccountDelegationInfo" .=) <$>
+                    _aiServiceAccountDelegationInfo,
                   ("principalEmail" .=) <$> _aiPrincipalEmail,
                   ("authoritySelector" .=) <$> _aiAuthoritySelector,
                   ("serviceAccountKeyName" .=) <$>
@@ -3745,9 +4134,12 @@ instance ToJSON AuthenticationInfo where
 -- doesn\'t scale quota usage).
 --
 -- /See:/ 'quotaInfoQuotaConsumed' smart constructor.
-newtype QuotaInfoQuotaConsumed = QuotaInfoQuotaConsumed'
+newtype QuotaInfoQuotaConsumed =
+  QuotaInfoQuotaConsumed'
     { _qiqcAddtional :: HashMap Text (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaInfoQuotaConsumed' with the minimum fields required to make a request.
 --
@@ -3758,9 +4150,8 @@ quotaInfoQuotaConsumed
     :: HashMap Text Int32 -- ^ 'qiqcAddtional'
     -> QuotaInfoQuotaConsumed
 quotaInfoQuotaConsumed pQiqcAddtional_ =
-    QuotaInfoQuotaConsumed'
-    { _qiqcAddtional = _Coerce # pQiqcAddtional_
-    }
+  QuotaInfoQuotaConsumed' {_qiqcAddtional = _Coerce # pQiqcAddtional_}
+
 
 qiqcAddtional :: Lens' QuotaInfoQuotaConsumed (HashMap Text Int32)
 qiqcAddtional
@@ -3780,7 +4171,8 @@ instance ToJSON QuotaInfoQuotaConsumed where
 -- | Common audit log format for Google Cloud Platform API operations.
 --
 -- /See:/ 'auditLog' smart constructor.
-data AuditLog = AuditLog'
+data AuditLog =
+  AuditLog'
     { _alRequestMetadata       :: !(Maybe RequestMetadata)
     , _alStatus                :: !(Maybe Status)
     , _alResourceName          :: !(Maybe Text)
@@ -3795,7 +4187,9 @@ data AuditLog = AuditLog'
     , _alNumResponseItems      :: !(Maybe (Textual Int64))
     , _alAuthenticationInfo    :: !(Maybe AuthenticationInfo)
     , _alRequest               :: !(Maybe AuditLogRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLog' with the minimum fields required to make a request.
 --
@@ -3831,7 +4225,7 @@ data AuditLog = AuditLog'
 auditLog
     :: AuditLog
 auditLog =
-    AuditLog'
+  AuditLog'
     { _alRequestMetadata = Nothing
     , _alStatus = Nothing
     , _alResourceName = Nothing
@@ -3847,6 +4241,7 @@ auditLog =
     , _alAuthenticationInfo = Nothing
     , _alRequest = Nothing
     }
+
 
 -- | Metadata about the operation.
 alRequestMetadata :: Lens' AuditLog (Maybe RequestMetadata)
@@ -3998,9 +4393,12 @@ instance ToJSON AuditLog where
 -- allowed.
 --
 -- /See:/ 'operationUserLabels' smart constructor.
-newtype OperationUserLabels = OperationUserLabels'
+newtype OperationUserLabels =
+  OperationUserLabels'
     { _oulAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationUserLabels' with the minimum fields required to make a request.
 --
@@ -4011,9 +4409,8 @@ operationUserLabels
     :: HashMap Text Text -- ^ 'oulAddtional'
     -> OperationUserLabels
 operationUserLabels pOulAddtional_ =
-    OperationUserLabels'
-    { _oulAddtional = _Coerce # pOulAddtional_
-    }
+  OperationUserLabels' {_oulAddtional = _Coerce # pOulAddtional_}
+
 
 oulAddtional :: Lens' OperationUserLabels (HashMap Text Text)
 oulAddtional
@@ -4032,9 +4429,12 @@ instance ToJSON OperationUserLabels where
 -- JSON object.
 --
 -- /See:/ 'logEntryStructPayload' smart constructor.
-newtype LogEntryStructPayload = LogEntryStructPayload'
+newtype LogEntryStructPayload =
+  LogEntryStructPayload'
     { _lespAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.
 --
@@ -4045,9 +4445,8 @@ logEntryStructPayload
     :: HashMap Text JSONValue -- ^ 'lespAddtional'
     -> LogEntryStructPayload
 logEntryStructPayload pLespAddtional_ =
-    LogEntryStructPayload'
-    { _lespAddtional = _Coerce # pLespAddtional_
-    }
+  LogEntryStructPayload' {_lespAddtional = _Coerce # pLespAddtional_}
+
 
 -- | Properties of the object.
 lespAddtional :: Lens' LogEntryStructPayload (HashMap Text JSONValue)
@@ -4070,7 +4469,8 @@ instance ToJSON LogEntryStructPayload where
 -- actual request to an equivalent HTTP request.
 --
 -- /See:/ 'request'' smart constructor.
-data Request' = Request''
+data Request' =
+  Request''
     { _rPath     :: !(Maybe Text)
     , _rTime     :: !(Maybe DateTime')
     , _rSize     :: !(Maybe (Textual Int64))
@@ -4084,7 +4484,9 @@ data Request' = Request''
     , _rScheme   :: !(Maybe Text)
     , _rId       :: !(Maybe Text)
     , _rHost     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
 --
@@ -4118,7 +4520,7 @@ data Request' = Request''
 request'
     :: Request'
 request' =
-    Request''
+  Request''
     { _rPath = Nothing
     , _rTime = Nothing
     , _rSize = Nothing
@@ -4133,6 +4535,7 @@ request' =
     , _rId = Nothing
     , _rHost = Nothing
     }
+
 
 -- | The HTTP URL path.
 rPath :: Lens' Request' (Maybe Text)

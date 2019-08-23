@@ -55,10 +55,13 @@ type BucketAccessControlsListResource =
 -- | Retrieves ACL entries on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsList' smart constructor.
-data BucketAccessControlsList = BucketAccessControlsList'
+data BucketAccessControlsList =
+  BucketAccessControlsList'
     { _baclBucket      :: !Text
     , _baclUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketAccessControlsList' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ bucketAccessControlsList
     :: Text -- ^ 'baclBucket'
     -> BucketAccessControlsList
 bucketAccessControlsList pBaclBucket_ =
-    BucketAccessControlsList'
-    { _baclBucket = pBaclBucket_
-    , _baclUserProject = Nothing
-    }
+  BucketAccessControlsList'
+    {_baclBucket = pBaclBucket_, _baclUserProject = Nothing}
+
 
 -- | Name of a bucket.
 baclBucket :: Lens' BucketAccessControlsList Text

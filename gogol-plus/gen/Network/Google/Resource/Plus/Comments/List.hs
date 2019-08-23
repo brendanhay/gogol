@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all of the comments for an activity.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.comments.list@.
 module Network.Google.Resource.Plus.Comments.List
@@ -55,15 +56,19 @@ type CommentsListResource =
                    QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
 
--- | List all of the comments for an activity.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList'
+data CommentsList =
+  CommentsList'
     { _clActivityId :: !Text
     , _clSortOrder  :: !CommentsListSortOrder
     , _clPageToken  :: !(Maybe Text)
     , _clMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
@@ -80,12 +85,13 @@ commentsList
     :: Text -- ^ 'clActivityId'
     -> CommentsList
 commentsList pClActivityId_ =
-    CommentsList'
+  CommentsList'
     { _clActivityId = pClActivityId_
     , _clSortOrder = Ascending
     , _clPageToken = Nothing
     , _clMaxResults = 20
     }
+
 
 -- | The ID of the activity to get comments for.
 clActivityId :: Lens' CommentsList Text

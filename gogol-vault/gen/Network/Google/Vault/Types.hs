@@ -26,8 +26,11 @@ module Network.Google.Vault.Types
     -- * HeldAccount
     , HeldAccount
     , heldAccount
+    , haEmail
+    , haLastName
     , haAccountId
     , haHoldTime
+    , haFirstName
 
     -- * HeldHangoutsChatQuery
     , HeldHangoutsChatQuery
@@ -319,6 +322,7 @@ module Network.Google.Vault.Types
     , MailExportOptions
     , mailExportOptions
     , meoExportFormat
+    , meoShowConfidentialModeContent
 
     -- * ListHoldsResponse
     , ListHoldsResponse
@@ -380,8 +384,8 @@ vaultService
 
 -- | View your eDiscovery data
 ediscoveryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ediscovery.readonly"]
-ediscoveryReadOnlyScope = Proxy;
+ediscoveryReadOnlyScope = Proxy
 
 -- | Manage your eDiscovery data
 ediscoveryScope :: Proxy '["https://www.googleapis.com/auth/ediscovery"]
-ediscoveryScope = Proxy;
+ediscoveryScope = Proxy

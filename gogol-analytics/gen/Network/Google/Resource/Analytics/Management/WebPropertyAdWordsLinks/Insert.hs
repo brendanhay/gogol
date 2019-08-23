@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a webProperty-AdWords link.
+-- Creates a webProperty-Google Ads link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.insert@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
@@ -57,14 +57,17 @@ type ManagementWebPropertyAdWordsLinksInsertResource
                        ReqBody '[JSON] EntityAdWordsLink :>
                          Post '[JSON] EntityAdWordsLink
 
--- | Creates a webProperty-AdWords link.
+-- | Creates a webProperty-Google Ads link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksInsert' smart constructor.
-data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert'
+data ManagementWebPropertyAdWordsLinksInsert =
+  ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId :: !Text
     , _mwpawliPayload       :: !EntityAdWordsLink
     , _mwpawliAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ managementWebPropertyAdWordsLinksInsert
     -> Text -- ^ 'mwpawliAccountId'
     -> ManagementWebPropertyAdWordsLinksInsert
 managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
-    ManagementWebPropertyAdWordsLinksInsert'
+  ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId = pMwpawliWebPropertyId_
     , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
     }
+
 
 -- | Web property ID to create the link for.
 mwpawliWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksInsert Text
@@ -106,7 +110,8 @@ mwpawliAccountId
       (\ s a -> s{_mwpawliAccountId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksInsert where
+           ManagementWebPropertyAdWordsLinksInsert
+         where
         type Rs ManagementWebPropertyAdWordsLinksInsert =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksInsert =

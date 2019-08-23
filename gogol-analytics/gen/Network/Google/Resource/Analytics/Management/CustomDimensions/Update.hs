@@ -63,13 +63,16 @@ type ManagementCustomDimensionsUpdateResource =
 -- | Updates an existing custom dimension.
 --
 -- /See:/ 'managementCustomDimensionsUpdate' smart constructor.
-data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate'
+data ManagementCustomDimensionsUpdate =
+  ManagementCustomDimensionsUpdate'
     { _mcduWebPropertyId               :: !Text
     , _mcduIgnoreCustomDataSourceLinks :: !Bool
     , _mcduPayload                     :: !CustomDimension
     , _mcduAccountId                   :: !Text
     , _mcduCustomDimensionId           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementCustomDimensionsUpdate' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ managementCustomDimensionsUpdate
     -> Text -- ^ 'mcduCustomDimensionId'
     -> ManagementCustomDimensionsUpdate
 managementCustomDimensionsUpdate pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ =
-    ManagementCustomDimensionsUpdate'
+  ManagementCustomDimensionsUpdate'
     { _mcduWebPropertyId = pMcduWebPropertyId_
     , _mcduIgnoreCustomDataSourceLinks = False
     , _mcduPayload = pMcduPayload_
     , _mcduAccountId = pMcduAccountId_
     , _mcduCustomDimensionId = pMcduCustomDimensionId_
     }
+
 
 -- | Web property ID for the custom dimension to update.
 mcduWebPropertyId :: Lens' ManagementCustomDimensionsUpdate Text
@@ -130,7 +134,8 @@ mcduCustomDimensionId
       (\ s a -> s{_mcduCustomDimensionId = a})
 
 instance GoogleRequest
-         ManagementCustomDimensionsUpdate where
+           ManagementCustomDimensionsUpdate
+         where
         type Rs ManagementCustomDimensionsUpdate =
              CustomDimension
         type Scopes ManagementCustomDimensionsUpdate =

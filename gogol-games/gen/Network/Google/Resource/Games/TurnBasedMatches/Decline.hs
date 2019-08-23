@@ -55,10 +55,13 @@ type TurnBasedMatchesDeclineResource =
 -- | Decline an invitation to play a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesDecline' smart constructor.
-data TurnBasedMatchesDecline = TurnBasedMatchesDecline'
+data TurnBasedMatchesDecline =
+  TurnBasedMatchesDecline'
     { _tbmdLanguage :: !(Maybe Text)
     , _tbmdMatchId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesDecline' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ turnBasedMatchesDecline
     :: Text -- ^ 'tbmdMatchId'
     -> TurnBasedMatchesDecline
 turnBasedMatchesDecline pTbmdMatchId_ =
-    TurnBasedMatchesDecline'
-    { _tbmdLanguage = Nothing
-    , _tbmdMatchId = pTbmdMatchId_
-    }
+  TurnBasedMatchesDecline'
+    {_tbmdLanguage = Nothing, _tbmdMatchId = pTbmdMatchId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 tbmdLanguage :: Lens' TurnBasedMatchesDecline (Maybe Text)
@@ -89,7 +91,8 @@ tbmdMatchId
 instance GoogleRequest TurnBasedMatchesDecline where
         type Rs TurnBasedMatchesDecline = TurnBasedMatch
         type Scopes TurnBasedMatchesDecline =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesDecline'{..}
           = go _tbmdMatchId _tbmdLanguage (Just AltJSON)
               gamesService

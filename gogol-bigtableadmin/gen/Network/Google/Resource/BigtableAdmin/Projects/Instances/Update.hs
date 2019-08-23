@@ -65,7 +65,8 @@ type ProjectsInstancesUpdateResource =
 -- properties, such as labels, use PartialUpdateInstance.
 --
 -- /See:/ 'projectsInstancesUpdate' smart constructor.
-data ProjectsInstancesUpdate = ProjectsInstancesUpdate'
+data ProjectsInstancesUpdate =
+  ProjectsInstancesUpdate'
     { _piuXgafv          :: !(Maybe Xgafv)
     , _piuUploadProtocol :: !(Maybe Text)
     , _piuAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsInstancesUpdate = ProjectsInstancesUpdate'
     , _piuPayload        :: !Instance
     , _piuName           :: !Text
     , _piuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesUpdate' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsInstancesUpdate
     -> Text -- ^ 'piuName'
     -> ProjectsInstancesUpdate
 projectsInstancesUpdate pPiuPayload_ pPiuName_ =
-    ProjectsInstancesUpdate'
+  ProjectsInstancesUpdate'
     { _piuXgafv = Nothing
     , _piuUploadProtocol = Nothing
     , _piuAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsInstancesUpdate pPiuPayload_ pPiuName_ =
     , _piuName = pPiuName_
     , _piuCallback = Nothing
     }
+
 
 -- | V1 error format.
 piuXgafv :: Lens' ProjectsInstancesUpdate (Maybe Xgafv)

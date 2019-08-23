@@ -56,11 +56,14 @@ type ColumnUpdateResource =
 -- | Updates the name or type of an existing column.
 --
 -- /See:/ 'columnUpdate' smart constructor.
-data ColumnUpdate = ColumnUpdate'
+data ColumnUpdate =
+  ColumnUpdate'
     { _cuPayload  :: !Column
     , _cuTableId  :: !Text
     , _cuColumnId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnUpdate' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ columnUpdate
     -> Text -- ^ 'cuColumnId'
     -> ColumnUpdate
 columnUpdate pCuPayload_ pCuTableId_ pCuColumnId_ =
-    ColumnUpdate'
+  ColumnUpdate'
     { _cuPayload = pCuPayload_
     , _cuTableId = pCuTableId_
     , _cuColumnId = pCuColumnId_
     }
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' ColumnUpdate Column

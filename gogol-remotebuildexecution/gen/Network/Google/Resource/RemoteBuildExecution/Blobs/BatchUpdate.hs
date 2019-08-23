@@ -88,7 +88,8 @@ type BlobsBatchUpdateResource =
 -- not match the provided data.
 --
 -- /See:/ 'blobsBatchUpdate' smart constructor.
-data BlobsBatchUpdate = BlobsBatchUpdate'
+data BlobsBatchUpdate =
+  BlobsBatchUpdate'
     { _bbuXgafv          :: !(Maybe Xgafv)
     , _bbuUploadProtocol :: !(Maybe Text)
     , _bbuAccessToken    :: !(Maybe Text)
@@ -96,7 +97,9 @@ data BlobsBatchUpdate = BlobsBatchUpdate'
     , _bbuPayload        :: !BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
     , _bbuInstanceName   :: !Text
     , _bbuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BlobsBatchUpdate' with the minimum fields required to make a request.
 --
@@ -120,7 +123,7 @@ blobsBatchUpdate
     -> Text -- ^ 'bbuInstanceName'
     -> BlobsBatchUpdate
 blobsBatchUpdate pBbuPayload_ pBbuInstanceName_ =
-    BlobsBatchUpdate'
+  BlobsBatchUpdate'
     { _bbuXgafv = Nothing
     , _bbuUploadProtocol = Nothing
     , _bbuAccessToken = Nothing
@@ -129,6 +132,7 @@ blobsBatchUpdate pBbuPayload_ pBbuInstanceName_ =
     , _bbuInstanceName = pBbuInstanceName_
     , _bbuCallback = Nothing
     }
+
 
 -- | V1 error format.
 bbuXgafv :: Lens' BlobsBatchUpdate (Maybe Xgafv)

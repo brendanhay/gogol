@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -120,10 +119,13 @@ instance ToJSON Status where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -135,10 +137,8 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -168,153 +168,212 @@ instance ToJSON ListLocationsResponse where
                  [("nextPageToken" .=) <$> _llrNextPageToken,
                   ("locations" .=) <$> _llrLocations])
 
+-- | A specification for a time range, this will request transfer runs with
+-- run_time between start_time (inclusive) and end_time (exclusive).
+--
+-- /See:/ 'timeRange' smart constructor.
+data TimeRange =
+  TimeRange'
+    { _trStartTime :: !(Maybe DateTime')
+    , _trEndTime   :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'trStartTime'
+--
+-- * 'trEndTime'
+timeRange
+    :: TimeRange
+timeRange = TimeRange' {_trStartTime = Nothing, _trEndTime = Nothing}
+
+
+-- | Start time of the range of transfer runs. For example,
+-- \`\"2017-05-25T00:00:00+00:00\"\`. The start_time must be strictly less
+-- than the end_time. Creates transfer runs where run_time is in the range
+-- betwen start_time (inclusive) and end_time (exlusive).
+trStartTime :: Lens' TimeRange (Maybe UTCTime)
+trStartTime
+  = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
+      mapping _DateTime
+
+-- | End time of the range of transfer runs. For example,
+-- \`\"2017-05-30T00:00:00+00:00\"\`. The end_time must not be in the
+-- future. Creates transfer runs where run_time is in the range betwen
+-- start_time (inclusive) and end_time (exlusive).
+trEndTime :: Lens' TimeRange (Maybe UTCTime)
+trEndTime
+  = lens _trEndTime (\ s a -> s{_trEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON TimeRange where
+        parseJSON
+          = withObject "TimeRange"
+              (\ o ->
+                 TimeRange' <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON TimeRange where
+        toJSON TimeRange'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _trStartTime,
+                  ("endTime" .=) <$> _trEndTime])
+
 -- | Represents a data transfer run.
 --
 -- /See:/ 'transferRun' smart constructor.
-data TransferRun = TransferRun'
-    { _trRunTime              :: !(Maybe DateTime')
-    , _trErrorStatus          :: !(Maybe Status)
-    , _trState                :: !(Maybe TransferRunState)
-    , _trSchedule             :: !(Maybe Text)
-    , _trStartTime            :: !(Maybe DateTime')
-    , _trScheduleTime         :: !(Maybe DateTime')
-    , _trDataSourceId         :: !(Maybe Text)
-    , _trParams               :: !(Maybe TransferRunParams)
-    , _trUserId               :: !(Maybe (Textual Int64))
-    , _trUpdateTime           :: !(Maybe DateTime')
-    , _trName                 :: !(Maybe Text)
-    , _trEndTime              :: !(Maybe DateTime')
-    , _trDestinationDataSetId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data TransferRun =
+  TransferRun'
+    { _tRunTime              :: !(Maybe DateTime')
+    , _tErrorStatus          :: !(Maybe Status)
+    , _tState                :: !(Maybe TransferRunState)
+    , _tSchedule             :: !(Maybe Text)
+    , _tStartTime            :: !(Maybe DateTime')
+    , _tScheduleTime         :: !(Maybe DateTime')
+    , _tDataSourceId         :: !(Maybe Text)
+    , _tParams               :: !(Maybe TransferRunParams)
+    , _tUserId               :: !(Maybe (Textual Int64))
+    , _tUpdateTime           :: !(Maybe DateTime')
+    , _tName                 :: !(Maybe Text)
+    , _tEndTime              :: !(Maybe DateTime')
+    , _tDestinationDataSetId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'trRunTime'
+-- * 'tRunTime'
 --
--- * 'trErrorStatus'
+-- * 'tErrorStatus'
 --
--- * 'trState'
+-- * 'tState'
 --
--- * 'trSchedule'
+-- * 'tSchedule'
 --
--- * 'trStartTime'
+-- * 'tStartTime'
 --
--- * 'trScheduleTime'
+-- * 'tScheduleTime'
 --
--- * 'trDataSourceId'
+-- * 'tDataSourceId'
 --
--- * 'trParams'
+-- * 'tParams'
 --
--- * 'trUserId'
+-- * 'tUserId'
 --
--- * 'trUpdateTime'
+-- * 'tUpdateTime'
 --
--- * 'trName'
+-- * 'tName'
 --
--- * 'trEndTime'
+-- * 'tEndTime'
 --
--- * 'trDestinationDataSetId'
+-- * 'tDestinationDataSetId'
 transferRun
     :: TransferRun
 transferRun =
-    TransferRun'
-    { _trRunTime = Nothing
-    , _trErrorStatus = Nothing
-    , _trState = Nothing
-    , _trSchedule = Nothing
-    , _trStartTime = Nothing
-    , _trScheduleTime = Nothing
-    , _trDataSourceId = Nothing
-    , _trParams = Nothing
-    , _trUserId = Nothing
-    , _trUpdateTime = Nothing
-    , _trName = Nothing
-    , _trEndTime = Nothing
-    , _trDestinationDataSetId = Nothing
+  TransferRun'
+    { _tRunTime = Nothing
+    , _tErrorStatus = Nothing
+    , _tState = Nothing
+    , _tSchedule = Nothing
+    , _tStartTime = Nothing
+    , _tScheduleTime = Nothing
+    , _tDataSourceId = Nothing
+    , _tParams = Nothing
+    , _tUserId = Nothing
+    , _tUpdateTime = Nothing
+    , _tName = Nothing
+    , _tEndTime = Nothing
+    , _tDestinationDataSetId = Nothing
     }
+
 
 -- | For batch transfer runs, specifies the date and time that data should be
 -- ingested.
-trRunTime :: Lens' TransferRun (Maybe UTCTime)
-trRunTime
-  = lens _trRunTime (\ s a -> s{_trRunTime = a}) .
+tRunTime :: Lens' TransferRun (Maybe UTCTime)
+tRunTime
+  = lens _tRunTime (\ s a -> s{_tRunTime = a}) .
       mapping _DateTime
 
 -- | Status of the transfer run.
-trErrorStatus :: Lens' TransferRun (Maybe Status)
-trErrorStatus
-  = lens _trErrorStatus
-      (\ s a -> s{_trErrorStatus = a})
+tErrorStatus :: Lens' TransferRun (Maybe Status)
+tErrorStatus
+  = lens _tErrorStatus (\ s a -> s{_tErrorStatus = a})
 
 -- | Data transfer run state. Ignored for input requests.
-trState :: Lens' TransferRun (Maybe TransferRunState)
-trState = lens _trState (\ s a -> s{_trState = a})
+tState :: Lens' TransferRun (Maybe TransferRunState)
+tState = lens _tState (\ s a -> s{_tState = a})
 
 -- | Output only. Describes the schedule of this transfer run if it was
 -- created as part of a regular schedule. For batch transfer runs that are
 -- scheduled manually, this is empty. NOTE: the system might choose to
 -- delay the schedule depending on the current load, so \`schedule_time\`
 -- doesn\'t always match this.
-trSchedule :: Lens' TransferRun (Maybe Text)
-trSchedule
-  = lens _trSchedule (\ s a -> s{_trSchedule = a})
+tSchedule :: Lens' TransferRun (Maybe Text)
+tSchedule
+  = lens _tSchedule (\ s a -> s{_tSchedule = a})
 
 -- | Output only. Time when transfer run was started. Parameter ignored by
 -- server for input requests.
-trStartTime :: Lens' TransferRun (Maybe UTCTime)
-trStartTime
-  = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
+tStartTime :: Lens' TransferRun (Maybe UTCTime)
+tStartTime
+  = lens _tStartTime (\ s a -> s{_tStartTime = a}) .
       mapping _DateTime
 
 -- | Minimum time after which a transfer run can be started.
-trScheduleTime :: Lens' TransferRun (Maybe UTCTime)
-trScheduleTime
-  = lens _trScheduleTime
-      (\ s a -> s{_trScheduleTime = a})
+tScheduleTime :: Lens' TransferRun (Maybe UTCTime)
+tScheduleTime
+  = lens _tScheduleTime
+      (\ s a -> s{_tScheduleTime = a})
       . mapping _DateTime
 
 -- | Output only. Data source id.
-trDataSourceId :: Lens' TransferRun (Maybe Text)
-trDataSourceId
-  = lens _trDataSourceId
-      (\ s a -> s{_trDataSourceId = a})
+tDataSourceId :: Lens' TransferRun (Maybe Text)
+tDataSourceId
+  = lens _tDataSourceId
+      (\ s a -> s{_tDataSourceId = a})
 
 -- | Output only. Data transfer specific parameters.
-trParams :: Lens' TransferRun (Maybe TransferRunParams)
-trParams = lens _trParams (\ s a -> s{_trParams = a})
+tParams :: Lens' TransferRun (Maybe TransferRunParams)
+tParams = lens _tParams (\ s a -> s{_tParams = a})
 
 -- | Deprecated. Unique ID of the user on whose behalf transfer is done.
-trUserId :: Lens' TransferRun (Maybe Int64)
-trUserId
-  = lens _trUserId (\ s a -> s{_trUserId = a}) .
+tUserId :: Lens' TransferRun (Maybe Int64)
+tUserId
+  = lens _tUserId (\ s a -> s{_tUserId = a}) .
       mapping _Coerce
 
 -- | Output only. Last time the data transfer run state was updated.
-trUpdateTime :: Lens' TransferRun (Maybe UTCTime)
-trUpdateTime
-  = lens _trUpdateTime (\ s a -> s{_trUpdateTime = a})
-      . mapping _DateTime
+tUpdateTime :: Lens' TransferRun (Maybe UTCTime)
+tUpdateTime
+  = lens _tUpdateTime (\ s a -> s{_tUpdateTime = a}) .
+      mapping _DateTime
 
 -- | The resource name of the transfer run. Transfer run names have the form
 -- \`projects\/{project_id}\/locations\/{location}\/transferConfigs\/{config_id}\/runs\/{run_id}\`.
 -- The name is ignored when creating a transfer run.
-trName :: Lens' TransferRun (Maybe Text)
-trName = lens _trName (\ s a -> s{_trName = a})
+tName :: Lens' TransferRun (Maybe Text)
+tName = lens _tName (\ s a -> s{_tName = a})
 
 -- | Output only. Time when transfer run ended. Parameter ignored by server
 -- for input requests.
-trEndTime :: Lens' TransferRun (Maybe UTCTime)
-trEndTime
-  = lens _trEndTime (\ s a -> s{_trEndTime = a}) .
+tEndTime :: Lens' TransferRun (Maybe UTCTime)
+tEndTime
+  = lens _tEndTime (\ s a -> s{_tEndTime = a}) .
       mapping _DateTime
 
 -- | Output only. The BigQuery target dataset id.
-trDestinationDataSetId :: Lens' TransferRun (Maybe Text)
-trDestinationDataSetId
-  = lens _trDestinationDataSetId
-      (\ s a -> s{_trDestinationDataSetId = a})
+tDestinationDataSetId :: Lens' TransferRun (Maybe Text)
+tDestinationDataSetId
+  = lens _tDestinationDataSetId
+      (\ s a -> s{_tDestinationDataSetId = a})
 
 instance FromJSON TransferRun where
         parseJSON
@@ -338,20 +397,19 @@ instance ToJSON TransferRun where
         toJSON TransferRun'{..}
           = object
               (catMaybes
-                 [("runTime" .=) <$> _trRunTime,
-                  ("errorStatus" .=) <$> _trErrorStatus,
-                  ("state" .=) <$> _trState,
-                  ("schedule" .=) <$> _trSchedule,
-                  ("startTime" .=) <$> _trStartTime,
-                  ("scheduleTime" .=) <$> _trScheduleTime,
-                  ("dataSourceId" .=) <$> _trDataSourceId,
-                  ("params" .=) <$> _trParams,
-                  ("userId" .=) <$> _trUserId,
-                  ("updateTime" .=) <$> _trUpdateTime,
-                  ("name" .=) <$> _trName,
-                  ("endTime" .=) <$> _trEndTime,
+                 [("runTime" .=) <$> _tRunTime,
+                  ("errorStatus" .=) <$> _tErrorStatus,
+                  ("state" .=) <$> _tState,
+                  ("schedule" .=) <$> _tSchedule,
+                  ("startTime" .=) <$> _tStartTime,
+                  ("scheduleTime" .=) <$> _tScheduleTime,
+                  ("dataSourceId" .=) <$> _tDataSourceId,
+                  ("params" .=) <$> _tParams,
+                  ("userId" .=) <$> _tUserId,
+                  ("updateTime" .=) <$> _tUpdateTime,
+                  ("name" .=) <$> _tName, ("endTime" .=) <$> _tEndTime,
                   ("destinationDatasetId" .=) <$>
-                    _trDestinationDataSetId])
+                    _tDestinationDataSetId])
 
 -- | A request to determine whether the user has valid credentials. This
 -- method is used to limit the number of OAuth popups in the user
@@ -362,14 +420,16 @@ instance ToJSON TransferRun where
 --
 -- /See:/ 'checkValidCredsRequest' smart constructor.
 data CheckValidCredsRequest =
-    CheckValidCredsRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CheckValidCredsRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckValidCredsRequest' with the minimum fields required to make a request.
 --
 checkValidCredsRequest
     :: CheckValidCredsRequest
 checkValidCredsRequest = CheckValidCredsRequest'
+
 
 instance FromJSON CheckValidCredsRequest where
         parseJSON
@@ -382,9 +442,12 @@ instance ToJSON CheckValidCredsRequest where
 -- | Data transfer specific parameters.
 --
 -- /See:/ 'transferConfigParams' smart constructor.
-newtype TransferConfigParams = TransferConfigParams'
+newtype TransferConfigParams =
+  TransferConfigParams'
     { _tcpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferConfigParams' with the minimum fields required to make a request.
 --
@@ -395,9 +458,8 @@ transferConfigParams
     :: HashMap Text JSONValue -- ^ 'tcpAddtional'
     -> TransferConfigParams
 transferConfigParams pTcpAddtional_ =
-    TransferConfigParams'
-    { _tcpAddtional = _Coerce # pTcpAddtional_
-    }
+  TransferConfigParams' {_tcpAddtional = _Coerce # pTcpAddtional_}
+
 
 -- | Properties of the object.
 tcpAddtional :: Lens' TransferConfigParams (HashMap Text JSONValue)
@@ -417,10 +479,13 @@ instance ToJSON TransferConfigParams where
 -- | A request to schedule transfer runs for a time range.
 --
 -- /See:/ 'scheduleTransferRunsRequest' smart constructor.
-data ScheduleTransferRunsRequest = ScheduleTransferRunsRequest'
+data ScheduleTransferRunsRequest =
+  ScheduleTransferRunsRequest'
     { _strrStartTime :: !(Maybe DateTime')
     , _strrEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScheduleTransferRunsRequest' with the minimum fields required to make a request.
 --
@@ -432,10 +497,9 @@ data ScheduleTransferRunsRequest = ScheduleTransferRunsRequest'
 scheduleTransferRunsRequest
     :: ScheduleTransferRunsRequest
 scheduleTransferRunsRequest =
-    ScheduleTransferRunsRequest'
-    { _strrStartTime = Nothing
-    , _strrEndTime = Nothing
-    }
+  ScheduleTransferRunsRequest'
+    {_strrStartTime = Nothing, _strrEndTime = Nothing}
+
 
 -- | Start time of the range of transfer runs. For example,
 -- \`\"2017-05-25T00:00:00+00:00\"\`.
@@ -469,13 +533,16 @@ instance ToJSON ScheduleTransferRunsRequest where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -493,13 +560,14 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -556,8 +624,9 @@ instance ToJSON Location where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -565,19 +634,100 @@ empty
     :: Empty
 empty = Empty'
 
+
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
 
+-- | Options customizing the data transfer schedule.
+--
+-- /See:/ 'scheduleOptions' smart constructor.
+data ScheduleOptions =
+  ScheduleOptions'
+    { _soStartTime             :: !(Maybe DateTime')
+    , _soDisableAutoScheduling :: !(Maybe Bool)
+    , _soEndTime               :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScheduleOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'soStartTime'
+--
+-- * 'soDisableAutoScheduling'
+--
+-- * 'soEndTime'
+scheduleOptions
+    :: ScheduleOptions
+scheduleOptions =
+  ScheduleOptions'
+    { _soStartTime = Nothing
+    , _soDisableAutoScheduling = Nothing
+    , _soEndTime = Nothing
+    }
+
+
+-- | Specifies time to start scheduling transfer runs. The first run will be
+-- scheduled at or after the start time according to a recurrence pattern
+-- defined in the schedule string. The start time can be changed at any
+-- moment. The time when a data transfer can be trigerred manually is not
+-- limited by this option.
+soStartTime :: Lens' ScheduleOptions (Maybe UTCTime)
+soStartTime
+  = lens _soStartTime (\ s a -> s{_soStartTime = a}) .
+      mapping _DateTime
+
+-- | If true, automatic scheduling of data transfer runs for this
+-- configuration will be disabled. The runs can be started on ad-hoc basis
+-- using StartManualTransferRuns API. When automatic scheduling is
+-- disabled, the TransferConfig.schedule field will be ignored.
+soDisableAutoScheduling :: Lens' ScheduleOptions (Maybe Bool)
+soDisableAutoScheduling
+  = lens _soDisableAutoScheduling
+      (\ s a -> s{_soDisableAutoScheduling = a})
+
+-- | Defines time to stop scheduling transfer runs. A transfer run cannot be
+-- scheduled at or after the end time. The end time can be changed at any
+-- moment. The time when a data transfer can be trigerred manually is not
+-- limited by this option.
+soEndTime :: Lens' ScheduleOptions (Maybe UTCTime)
+soEndTime
+  = lens _soEndTime (\ s a -> s{_soEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON ScheduleOptions where
+        parseJSON
+          = withObject "ScheduleOptions"
+              (\ o ->
+                 ScheduleOptions' <$>
+                   (o .:? "startTime") <*>
+                     (o .:? "disableAutoScheduling")
+                     <*> (o .:? "endTime"))
+
+instance ToJSON ScheduleOptions where
+        toJSON ScheduleOptions'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _soStartTime,
+                  ("disableAutoScheduling" .=) <$>
+                    _soDisableAutoScheduling,
+                  ("endTime" .=) <$> _soEndTime])
+
 -- | The returned list transfer run messages.
 --
 -- /See:/ 'listTransferLogsResponse' smart constructor.
-data ListTransferLogsResponse = ListTransferLogsResponse'
+data ListTransferLogsResponse =
+  ListTransferLogsResponse'
     { _ltlrNextPageToken    :: !(Maybe Text)
     , _ltlrTransferMessages :: !(Maybe [TransferMessage])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTransferLogsResponse' with the minimum fields required to make a request.
 --
@@ -589,10 +739,9 @@ data ListTransferLogsResponse = ListTransferLogsResponse'
 listTransferLogsResponse
     :: ListTransferLogsResponse
 listTransferLogsResponse =
-    ListTransferLogsResponse'
-    { _ltlrNextPageToken = Nothing
-    , _ltlrTransferMessages = Nothing
-    }
+  ListTransferLogsResponse'
+    {_ltlrNextPageToken = Nothing, _ltlrTransferMessages = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`GetTransferRunLogRequest.page_token\` to
@@ -628,9 +777,12 @@ instance ToJSON ListTransferLogsResponse where
 -- | A response indicating whether the credentials exist and are valid.
 --
 -- /See:/ 'checkValidCredsResponse' smart constructor.
-newtype CheckValidCredsResponse = CheckValidCredsResponse'
+newtype CheckValidCredsResponse =
+  CheckValidCredsResponse'
     { _cvcrHasValidCreds :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckValidCredsResponse' with the minimum fields required to make a request.
 --
@@ -640,9 +792,8 @@ newtype CheckValidCredsResponse = CheckValidCredsResponse'
 checkValidCredsResponse
     :: CheckValidCredsResponse
 checkValidCredsResponse =
-    CheckValidCredsResponse'
-    { _cvcrHasValidCreds = Nothing
-    }
+  CheckValidCredsResponse' {_cvcrHasValidCreds = Nothing}
+
 
 -- | If set to \`true\`, the credentials exist and are valid.
 cvcrHasValidCreds :: Lens' CheckValidCredsResponse (Maybe Bool)
@@ -664,9 +815,12 @@ instance ToJSON CheckValidCredsResponse where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -677,9 +831,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -698,9 +851,12 @@ instance ToJSON StatusDetailsItem where
 -- | Output only. Data transfer specific parameters.
 --
 -- /See:/ 'transferRunParams' smart constructor.
-newtype TransferRunParams = TransferRunParams'
+newtype TransferRunParams =
+  TransferRunParams'
     { _trpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferRunParams' with the minimum fields required to make a request.
 --
@@ -711,9 +867,8 @@ transferRunParams
     :: HashMap Text JSONValue -- ^ 'trpAddtional'
     -> TransferRunParams
 transferRunParams pTrpAddtional_ =
-    TransferRunParams'
-    { _trpAddtional = _Coerce # pTrpAddtional_
-    }
+  TransferRunParams' {_trpAddtional = _Coerce # pTrpAddtional_}
+
 
 -- | Properties of the object.
 trpAddtional :: Lens' TransferRunParams (HashMap Text JSONValue)
@@ -736,7 +891,8 @@ instance ToJSON TransferRunParams where
 -- generate either generic ui, or custom data source specific forms.
 --
 -- /See:/ 'dataSourceParameter' smart constructor.
-data DataSourceParameter = DataSourceParameter'
+data DataSourceParameter =
+  DataSourceParameter'
     { _dspMaxValue              :: !(Maybe (Textual Double))
     , _dspParamId               :: !(Maybe Text)
     , _dspImmutable             :: !(Maybe Bool)
@@ -752,7 +908,9 @@ data DataSourceParameter = DataSourceParameter'
     , _dspMinValue              :: !(Maybe (Textual Double))
     , _dspValidationHelpURL     :: !(Maybe Text)
     , _dspFields                :: !(Maybe [DataSourceParameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSourceParameter' with the minimum fields required to make a request.
 --
@@ -790,7 +948,7 @@ data DataSourceParameter = DataSourceParameter'
 dataSourceParameter
     :: DataSourceParameter
 dataSourceParameter =
-    DataSourceParameter'
+  DataSourceParameter'
     { _dspMaxValue = Nothing
     , _dspParamId = Nothing
     , _dspImmutable = Nothing
@@ -807,6 +965,7 @@ dataSourceParameter =
     , _dspValidationHelpURL = Nothing
     , _dspFields = Nothing
     }
+
 
 -- | For integer and double values specifies maxminum allowed value.
 dspMaxValue :: Lens' DataSourceParameter (Maybe Double)
@@ -939,9 +1098,12 @@ instance ToJSON DataSourceParameter where
 -- | A response to schedule transfer runs for a time range.
 --
 -- /See:/ 'scheduleTransferRunsResponse' smart constructor.
-newtype ScheduleTransferRunsResponse = ScheduleTransferRunsResponse'
+newtype ScheduleTransferRunsResponse =
+  ScheduleTransferRunsResponse'
     { _strrRuns :: Maybe [TransferRun]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScheduleTransferRunsResponse' with the minimum fields required to make a request.
 --
@@ -951,9 +1113,8 @@ newtype ScheduleTransferRunsResponse = ScheduleTransferRunsResponse'
 scheduleTransferRunsResponse
     :: ScheduleTransferRunsResponse
 scheduleTransferRunsResponse =
-    ScheduleTransferRunsResponse'
-    { _strrRuns = Nothing
-    }
+  ScheduleTransferRunsResponse' {_strrRuns = Nothing}
+
 
 -- | The transfer runs that were scheduled.
 strrRuns :: Lens' ScheduleTransferRunsResponse [TransferRun]
@@ -976,10 +1137,13 @@ instance ToJSON ScheduleTransferRunsResponse where
 -- | Returns list of supported data sources and their metadata.
 --
 -- /See:/ 'listDataSourcesResponse' smart constructor.
-data ListDataSourcesResponse = ListDataSourcesResponse'
+data ListDataSourcesResponse =
+  ListDataSourcesResponse'
     { _ldsrNextPageToken :: !(Maybe Text)
     , _ldsrDataSources   :: !(Maybe [DataSource])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 --
@@ -991,10 +1155,9 @@ data ListDataSourcesResponse = ListDataSourcesResponse'
 listDataSourcesResponse
     :: ListDataSourcesResponse
 listDataSourcesResponse =
-    ListDataSourcesResponse'
-    { _ldsrNextPageToken = Nothing
-    , _ldsrDataSources = Nothing
-    }
+  ListDataSourcesResponse'
+    {_ldsrNextPageToken = Nothing, _ldsrDataSources = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`ListDataSourcesRequest.page_token\` to
@@ -1027,11 +1190,68 @@ instance ToJSON ListDataSourcesResponse where
                  [("nextPageToken" .=) <$> _ldsrNextPageToken,
                   ("dataSources" .=) <$> _ldsrDataSources])
 
+-- | A request to start manual transfer runs.
+--
+-- /See:/ 'startManualTransferRunsRequest' smart constructor.
+data StartManualTransferRunsRequest =
+  StartManualTransferRunsRequest'
+    { _smtrrRequestedRunTime   :: !(Maybe DateTime')
+    , _smtrrRequestedTimeRange :: !(Maybe TimeRange)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StartManualTransferRunsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smtrrRequestedRunTime'
+--
+-- * 'smtrrRequestedTimeRange'
+startManualTransferRunsRequest
+    :: StartManualTransferRunsRequest
+startManualTransferRunsRequest =
+  StartManualTransferRunsRequest'
+    {_smtrrRequestedRunTime = Nothing, _smtrrRequestedTimeRange = Nothing}
+
+
+-- | Specific run_time for a transfer run to be started. The
+-- requested_run_time must not be in the future.
+smtrrRequestedRunTime :: Lens' StartManualTransferRunsRequest (Maybe UTCTime)
+smtrrRequestedRunTime
+  = lens _smtrrRequestedRunTime
+      (\ s a -> s{_smtrrRequestedRunTime = a})
+      . mapping _DateTime
+
+-- | Time range for the transfer runs that should be started.
+smtrrRequestedTimeRange :: Lens' StartManualTransferRunsRequest (Maybe TimeRange)
+smtrrRequestedTimeRange
+  = lens _smtrrRequestedTimeRange
+      (\ s a -> s{_smtrrRequestedTimeRange = a})
+
+instance FromJSON StartManualTransferRunsRequest
+         where
+        parseJSON
+          = withObject "StartManualTransferRunsRequest"
+              (\ o ->
+                 StartManualTransferRunsRequest' <$>
+                   (o .:? "requestedRunTime") <*>
+                     (o .:? "requestedTimeRange"))
+
+instance ToJSON StartManualTransferRunsRequest where
+        toJSON StartManualTransferRunsRequest'{..}
+          = object
+              (catMaybes
+                 [("requestedRunTime" .=) <$> _smtrrRequestedRunTime,
+                  ("requestedTimeRange" .=) <$>
+                    _smtrrRequestedTimeRange])
+
 -- | Represents data source metadata. Metadata is sufficient to render UI and
 -- request proper OAuth tokens.
 --
 -- /See:/ 'dataSource' smart constructor.
-data DataSource = DataSource'
+data DataSource =
+  DataSource'
     { _dsClientId                     :: !(Maybe Text)
     , _dsMinimumScheduleInterval      :: !(Maybe GDuration)
     , _dsSupportsCustomSchedule       :: !(Maybe Bool)
@@ -1050,7 +1270,9 @@ data DataSource = DataSource'
     , _dsAuthorizationType            :: !(Maybe DataSourceAuthorizationType)
     , _dsDefaultSchedule              :: !(Maybe Text)
     , _dsDescription                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
@@ -1094,7 +1316,7 @@ data DataSource = DataSource'
 dataSource
     :: DataSource
 dataSource =
-    DataSource'
+  DataSource'
     { _dsClientId = Nothing
     , _dsMinimumScheduleInterval = Nothing
     , _dsSupportsCustomSchedule = Nothing
@@ -1114,6 +1336,7 @@ dataSource =
     , _dsDefaultSchedule = Nothing
     , _dsDescription = Nothing
     }
+
 
 -- | Data source client id which should be used to receive refresh token.
 dsClientId :: Lens' DataSource (Maybe Text)
@@ -1290,10 +1513,13 @@ instance ToJSON DataSource where
 -- | The returned list of pipelines in the project.
 --
 -- /See:/ 'listTransferRunsResponse' smart constructor.
-data ListTransferRunsResponse = ListTransferRunsResponse'
+data ListTransferRunsResponse =
+  ListTransferRunsResponse'
     { _ltrrNextPageToken :: !(Maybe Text)
     , _ltrrTransferRuns  :: !(Maybe [TransferRun])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTransferRunsResponse' with the minimum fields required to make a request.
 --
@@ -1305,10 +1531,9 @@ data ListTransferRunsResponse = ListTransferRunsResponse'
 listTransferRunsResponse
     :: ListTransferRunsResponse
 listTransferRunsResponse =
-    ListTransferRunsResponse'
-    { _ltrrNextPageToken = Nothing
-    , _ltrrTransferRuns = Nothing
-    }
+  ListTransferRunsResponse'
+    {_ltrrNextPageToken = Nothing, _ltrrTransferRuns = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`ListTransferRunsRequest.page_token\` to
@@ -1344,11 +1569,14 @@ instance ToJSON ListTransferRunsResponse where
 -- | Represents a user facing message for a particular data transfer run.
 --
 -- /See:/ 'transferMessage' smart constructor.
-data TransferMessage = TransferMessage'
+data TransferMessage =
+  TransferMessage'
     { _tmSeverity    :: !(Maybe TransferMessageSeverity)
     , _tmMessageTime :: !(Maybe DateTime')
     , _tmMessageText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferMessage' with the minimum fields required to make a request.
 --
@@ -1362,11 +1590,9 @@ data TransferMessage = TransferMessage'
 transferMessage
     :: TransferMessage
 transferMessage =
-    TransferMessage'
-    { _tmSeverity = Nothing
-    , _tmMessageTime = Nothing
-    , _tmMessageText = Nothing
-    }
+  TransferMessage'
+    {_tmSeverity = Nothing, _tmMessageTime = Nothing, _tmMessageText = Nothing}
+
 
 -- | Message severity.
 tmSeverity :: Lens' TransferMessage (Maybe TransferMessageSeverity)
@@ -1406,9 +1632,12 @@ instance ToJSON TransferMessage where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -1419,9 +1648,8 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1436,13 +1664,56 @@ instance FromJSON LocationLabels where
 instance ToJSON LocationLabels where
         toJSON = toJSON . _llAddtional
 
+-- | A response to start manual transfer runs.
+--
+-- /See:/ 'startManualTransferRunsResponse' smart constructor.
+newtype StartManualTransferRunsResponse =
+  StartManualTransferRunsResponse'
+    { _smtrrRuns :: Maybe [TransferRun]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StartManualTransferRunsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smtrrRuns'
+startManualTransferRunsResponse
+    :: StartManualTransferRunsResponse
+startManualTransferRunsResponse =
+  StartManualTransferRunsResponse' {_smtrrRuns = Nothing}
+
+
+-- | The transfer runs that were created.
+smtrrRuns :: Lens' StartManualTransferRunsResponse [TransferRun]
+smtrrRuns
+  = lens _smtrrRuns (\ s a -> s{_smtrrRuns = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StartManualTransferRunsResponse
+         where
+        parseJSON
+          = withObject "StartManualTransferRunsResponse"
+              (\ o ->
+                 StartManualTransferRunsResponse' <$>
+                   (o .:? "runs" .!= mempty))
+
+instance ToJSON StartManualTransferRunsResponse where
+        toJSON StartManualTransferRunsResponse'{..}
+          = object (catMaybes [("runs" .=) <$> _smtrrRuns])
+
 -- | Service-specific metadata. For example the available capacity at the
 -- given location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -1453,9 +1724,8 @@ locationMetadata
     :: HashMap Text JSONValue -- ^ 'lmAddtional'
     -> LocationMetadata
 locationMetadata pLmAddtional_ =
-    LocationMetadata'
-    { _lmAddtional = _Coerce # pLmAddtional_
-    }
+  LocationMetadata' {_lmAddtional = _Coerce # pLmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lmAddtional :: Lens' LocationMetadata (HashMap Text JSONValue)
@@ -1474,10 +1744,13 @@ instance ToJSON LocationMetadata where
 -- | The returned list of pipelines in the project.
 --
 -- /See:/ 'listTransferConfigsResponse' smart constructor.
-data ListTransferConfigsResponse = ListTransferConfigsResponse'
+data ListTransferConfigsResponse =
+  ListTransferConfigsResponse'
     { _ltcrNextPageToken   :: !(Maybe Text)
     , _ltcrTransferConfigs :: !(Maybe [TransferConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTransferConfigsResponse' with the minimum fields required to make a request.
 --
@@ -1489,10 +1762,9 @@ data ListTransferConfigsResponse = ListTransferConfigsResponse'
 listTransferConfigsResponse
     :: ListTransferConfigsResponse
 listTransferConfigsResponse =
-    ListTransferConfigsResponse'
-    { _ltcrNextPageToken = Nothing
-    , _ltcrTransferConfigs = Nothing
-    }
+  ListTransferConfigsResponse'
+    {_ltcrNextPageToken = Nothing, _ltcrTransferConfigs = Nothing}
+
 
 -- | Output only. The next-pagination token. For multiple-page list results,
 -- this token can be used as the \`ListTransferConfigsRequest.page_token\`
@@ -1533,9 +1805,11 @@ instance ToJSON ListTransferConfigsResponse where
 -- appropriate data source service account.
 --
 -- /See:/ 'transferConfig' smart constructor.
-data TransferConfig = TransferConfig'
+data TransferConfig =
+  TransferConfig'
     { _tcState                 :: !(Maybe TransferConfigState)
     , _tcSchedule              :: !(Maybe Text)
+    , _tcScheduleOptions       :: !(Maybe ScheduleOptions)
     , _tcDisabled              :: !(Maybe Bool)
     , _tcDataSourceId          :: !(Maybe Text)
     , _tcParams                :: !(Maybe TransferConfigParams)
@@ -1547,7 +1821,9 @@ data TransferConfig = TransferConfig'
     , _tcNextRunTime           :: !(Maybe DateTime')
     , _tcDestinationDataSetId  :: !(Maybe Text)
     , _tcDataRefreshWindowDays :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferConfig' with the minimum fields required to make a request.
 --
@@ -1556,6 +1832,8 @@ data TransferConfig = TransferConfig'
 -- * 'tcState'
 --
 -- * 'tcSchedule'
+--
+-- * 'tcScheduleOptions'
 --
 -- * 'tcDisabled'
 --
@@ -1581,9 +1859,10 @@ data TransferConfig = TransferConfig'
 transferConfig
     :: TransferConfig
 transferConfig =
-    TransferConfig'
+  TransferConfig'
     { _tcState = Nothing
     , _tcSchedule = Nothing
+    , _tcScheduleOptions = Nothing
     , _tcDisabled = Nothing
     , _tcDataSourceId = Nothing
     , _tcParams = Nothing
@@ -1596,6 +1875,7 @@ transferConfig =
     , _tcDestinationDataSetId = Nothing
     , _tcDataRefreshWindowDays = Nothing
     }
+
 
 -- | Output only. State of the most recently updated transfer run.
 tcState :: Lens' TransferConfig (Maybe TransferConfigState)
@@ -1612,6 +1892,12 @@ tcState = lens _tcState (\ s a -> s{_tcState = a})
 tcSchedule :: Lens' TransferConfig (Maybe Text)
 tcSchedule
   = lens _tcSchedule (\ s a -> s{_tcSchedule = a})
+
+-- | Options customizing the data transfer schedule.
+tcScheduleOptions :: Lens' TransferConfig (Maybe ScheduleOptions)
+tcScheduleOptions
+  = lens _tcScheduleOptions
+      (\ s a -> s{_tcScheduleOptions = a})
 
 -- | Is this config disabled. When set to true, no runs are scheduled for a
 -- given transfer.
@@ -1694,7 +1980,8 @@ instance FromJSON TransferConfig where
               (\ o ->
                  TransferConfig' <$>
                    (o .:? "state") <*> (o .:? "schedule") <*>
-                     (o .:? "disabled")
+                     (o .:? "scheduleOptions")
+                     <*> (o .:? "disabled")
                      <*> (o .:? "dataSourceId")
                      <*> (o .:? "params")
                      <*> (o .:? "userId")
@@ -1712,6 +1999,7 @@ instance ToJSON TransferConfig where
               (catMaybes
                  [("state" .=) <$> _tcState,
                   ("schedule" .=) <$> _tcSchedule,
+                  ("scheduleOptions" .=) <$> _tcScheduleOptions,
                   ("disabled" .=) <$> _tcDisabled,
                   ("dataSourceId" .=) <$> _tcDataSourceId,
                   ("params" .=) <$> _tcParams,

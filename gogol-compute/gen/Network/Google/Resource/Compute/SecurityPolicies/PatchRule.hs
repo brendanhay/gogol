@@ -61,12 +61,15 @@ type SecurityPoliciesPatchRuleResource =
 -- | Patches a rule at the specified priority.
 --
 -- /See:/ 'securityPoliciesPatchRule' smart constructor.
-data SecurityPoliciesPatchRule = SecurityPoliciesPatchRule'
+data SecurityPoliciesPatchRule =
+  SecurityPoliciesPatchRule'
     { _spprPriority       :: !(Maybe (Textual Int32))
     , _spprProject        :: !Text
     , _spprPayload        :: !SecurityPolicyRule
     , _spprSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesPatchRule' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ securityPoliciesPatchRule
     -> Text -- ^ 'spprSecurityPolicy'
     -> SecurityPoliciesPatchRule
 securityPoliciesPatchRule pSpprProject_ pSpprPayload_ pSpprSecurityPolicy_ =
-    SecurityPoliciesPatchRule'
+  SecurityPoliciesPatchRule'
     { _spprPriority = Nothing
     , _spprProject = pSpprProject_
     , _spprPayload = pSpprPayload_
     , _spprSecurityPolicy = pSpprSecurityPolicy_
     }
+
 
 -- | The priority of the rule to patch.
 spprPriority :: Lens' SecurityPoliciesPatchRule (Maybe Int32)

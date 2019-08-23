@@ -65,7 +65,8 @@ type ProjectsLocationsRegistriesGroupsGetIAMPolicyResource
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsLocationsRegistriesGroupsGetIAMPolicy' smart constructor.
-data ProjectsLocationsRegistriesGroupsGetIAMPolicy = ProjectsLocationsRegistriesGroupsGetIAMPolicy'
+data ProjectsLocationsRegistriesGroupsGetIAMPolicy =
+  ProjectsLocationsRegistriesGroupsGetIAMPolicy'
     { _plrggipXgafv          :: !(Maybe Xgafv)
     , _plrggipUploadProtocol :: !(Maybe Text)
     , _plrggipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsRegistriesGroupsGetIAMPolicy = ProjectsLocationsRegistries
     , _plrggipPayload        :: !GetIAMPolicyRequest
     , _plrggipResource       :: !Text
     , _plrggipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesGroupsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsRegistriesGroupsGetIAMPolicy
     -> Text -- ^ 'plrggipResource'
     -> ProjectsLocationsRegistriesGroupsGetIAMPolicy
 projectsLocationsRegistriesGroupsGetIAMPolicy pPlrggipPayload_ pPlrggipResource_ =
-    ProjectsLocationsRegistriesGroupsGetIAMPolicy'
+  ProjectsLocationsRegistriesGroupsGetIAMPolicy'
     { _plrggipXgafv = Nothing
     , _plrggipUploadProtocol = Nothing
     , _plrggipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsRegistriesGroupsGetIAMPolicy pPlrggipPayload_ pPlrggipResource_
     , _plrggipResource = pPlrggipResource_
     , _plrggipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrggipXgafv :: Lens' ProjectsLocationsRegistriesGroupsGetIAMPolicy (Maybe Xgafv)
@@ -150,7 +154,8 @@ plrggipCallback
       (\ s a -> s{_plrggipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesGroupsGetIAMPolicy where
+           ProjectsLocationsRegistriesGroupsGetIAMPolicy
+         where
         type Rs ProjectsLocationsRegistriesGroupsGetIAMPolicy
              = Policy
         type Scopes

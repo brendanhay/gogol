@@ -53,10 +53,13 @@ type ContactsUpdateResource =
 -- | Updates a contact in place.
 --
 -- /See:/ 'contactsUpdate' smart constructor.
-data ContactsUpdate = ContactsUpdate'
+data ContactsUpdate =
+  ContactsUpdate'
     { _cuPayload :: !Contact
     , _cuId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactsUpdate' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ contactsUpdate
     -> Text -- ^ 'cuId'
     -> ContactsUpdate
 contactsUpdate pCuPayload_ pCuId_ =
-    ContactsUpdate'
-    { _cuPayload = pCuPayload_
-    , _cuId = pCuId_
-    }
+  ContactsUpdate' {_cuPayload = pCuPayload_, _cuId = pCuId_}
+
 
 -- | Multipart request metadata.
 cuPayload :: Lens' ContactsUpdate Contact

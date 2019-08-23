@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.delete@ method which the
 -- 'AccessPoliciesDelete' request conforms to.
 type AccessPoliciesDeleteResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,14 +63,17 @@ type AccessPoliciesDeleteResource =
 -- long-lasting storage.
 --
 -- /See:/ 'accessPoliciesDelete' smart constructor.
-data AccessPoliciesDelete = AccessPoliciesDelete'
+data AccessPoliciesDelete =
+  AccessPoliciesDelete'
     { _apdXgafv          :: !(Maybe Xgafv)
     , _apdUploadProtocol :: !(Maybe Text)
     , _apdAccessToken    :: !(Maybe Text)
     , _apdUploadType     :: !(Maybe Text)
     , _apdName           :: !Text
     , _apdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ accessPoliciesDelete
     :: Text -- ^ 'apdName'
     -> AccessPoliciesDelete
 accessPoliciesDelete pApdName_ =
-    AccessPoliciesDelete'
+  AccessPoliciesDelete'
     { _apdXgafv = Nothing
     , _apdUploadProtocol = Nothing
     , _apdAccessToken = Nothing
@@ -99,6 +102,7 @@ accessPoliciesDelete pApdName_ =
     , _apdName = pApdName_
     , _apdCallback = Nothing
     }
+
 
 -- | V1 error format.
 apdXgafv :: Lens' AccessPoliciesDelete (Maybe Xgafv)

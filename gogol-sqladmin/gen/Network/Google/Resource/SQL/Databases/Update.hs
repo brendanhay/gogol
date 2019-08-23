@@ -61,12 +61,15 @@ type DatabasesUpdateResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesUpdate' smart constructor.
-data DatabasesUpdate = DatabasesUpdate'
+data DatabasesUpdate =
+  DatabasesUpdate'
     { _duProject  :: !Text
     , _duDatabase :: !Text
     , _duPayload  :: !Database
     , _duInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatabasesUpdate' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ databasesUpdate
     -> Text -- ^ 'duInstance'
     -> DatabasesUpdate
 databasesUpdate pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
-    DatabasesUpdate'
+  DatabasesUpdate'
     { _duProject = pDuProject_
     , _duDatabase = pDuDatabase_
     , _duPayload = pDuPayload_
     , _duInstance = pDuInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 duProject :: Lens' DatabasesUpdate Text

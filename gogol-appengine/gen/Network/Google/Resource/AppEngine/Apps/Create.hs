@@ -72,14 +72,17 @@ type AppsCreateResource =
 -- (https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/console\/).
 --
 -- /See:/ 'appsCreate' smart constructor.
-data AppsCreate = AppsCreate'
+data AppsCreate =
+  AppsCreate'
     { _acXgafv          :: !(Maybe Xgafv)
     , _acUploadProtocol :: !(Maybe Text)
     , _acAccessToken    :: !(Maybe Text)
     , _acUploadType     :: !(Maybe Text)
     , _acPayload        :: !Application
     , _acCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ appsCreate
     :: Application -- ^ 'acPayload'
     -> AppsCreate
 appsCreate pAcPayload_ =
-    AppsCreate'
+  AppsCreate'
     { _acXgafv = Nothing
     , _acUploadProtocol = Nothing
     , _acAccessToken = Nothing
@@ -108,6 +111,7 @@ appsCreate pAcPayload_ =
     , _acPayload = pAcPayload_
     , _acCallback = Nothing
     }
+
 
 -- | V1 error format.
 acXgafv :: Lens' AppsCreate (Maybe Xgafv)

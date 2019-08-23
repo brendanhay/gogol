@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesGet' request conforms to.
 type ContentCategoriesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -55,10 +55,13 @@ type ContentCategoriesGetResource =
 -- | Gets one content category by ID.
 --
 -- /See:/ 'contentCategoriesGet' smart constructor.
-data ContentCategoriesGet = ContentCategoriesGet'
+data ContentCategoriesGet =
+  ContentCategoriesGet'
     { _ccgProFileId :: !(Textual Int64)
     , _ccgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContentCategoriesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ contentCategoriesGet
     -> Int64 -- ^ 'ccgId'
     -> ContentCategoriesGet
 contentCategoriesGet pCcgProFileId_ pCcgId_ =
-    ContentCategoriesGet'
-    { _ccgProFileId = _Coerce # pCcgProFileId_
-    , _ccgId = _Coerce # pCcgId_
-    }
+  ContentCategoriesGet'
+    {_ccgProFileId = _Coerce # pCcgProFileId_, _ccgId = _Coerce # pCcgId_}
+
 
 -- | User profile ID associated with this request.
 ccgProFileId :: Lens' ContentCategoriesGet Int64

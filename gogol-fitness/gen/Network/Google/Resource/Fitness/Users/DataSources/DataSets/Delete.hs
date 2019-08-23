@@ -73,13 +73,16 @@ type UsersDataSourcesDataSetsDeleteResource =
 -- will be deleted.
 --
 -- /See:/ 'usersDataSourcesDataSetsDelete' smart constructor.
-data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete'
+data UsersDataSourcesDataSetsDelete =
+  UsersDataSourcesDataSetsDelete'
     { _udsdsdDataSourceId       :: !Text
     , _udsdsdUserId             :: !Text
     , _udsdsdDataSetId          :: !Text
     , _udsdsdModifiedTimeMillis :: !(Maybe (Textual Int64))
     , _udsdsdCurrentTimeMillis  :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDataSourcesDataSetsDelete' with the minimum fields required to make a request.
 --
@@ -100,13 +103,14 @@ usersDataSourcesDataSetsDelete
     -> Text -- ^ 'udsdsdDataSetId'
     -> UsersDataSourcesDataSetsDelete
 usersDataSourcesDataSetsDelete pUdsdsdDataSourceId_ pUdsdsdUserId_ pUdsdsdDataSetId_ =
-    UsersDataSourcesDataSetsDelete'
+  UsersDataSourcesDataSetsDelete'
     { _udsdsdDataSourceId = pUdsdsdDataSourceId_
     , _udsdsdUserId = pUdsdsdUserId_
     , _udsdsdDataSetId = pUdsdsdDataSetId_
     , _udsdsdModifiedTimeMillis = Nothing
     , _udsdsdCurrentTimeMillis = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdsdDataSourceId :: Lens' UsersDataSourcesDataSetsDelete Text

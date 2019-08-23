@@ -23,14 +23,17 @@ import           Network.Google.SQLAdmin.Types.Sum
 -- | Read-replica configuration specific to MySQL databases.
 --
 -- /See:/ 'demoteMasterMySQLReplicaConfiguration' smart constructor.
-data DemoteMasterMySQLReplicaConfiguration = DemoteMasterMySQLReplicaConfiguration'
+data DemoteMasterMySQLReplicaConfiguration =
+  DemoteMasterMySQLReplicaConfiguration'
     { _dmmsqlrcKind              :: !Text
     , _dmmsqlrcClientKey         :: !(Maybe Text)
     , _dmmsqlrcUsername          :: !(Maybe Text)
     , _dmmsqlrcClientCertificate :: !(Maybe Text)
     , _dmmsqlrcCaCertificate     :: !(Maybe Text)
     , _dmmsqlrcPassword          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DemoteMasterMySQLReplicaConfiguration' with the minimum fields required to make a request.
 --
@@ -50,7 +53,7 @@ data DemoteMasterMySQLReplicaConfiguration = DemoteMasterMySQLReplicaConfigurati
 demoteMasterMySQLReplicaConfiguration
     :: DemoteMasterMySQLReplicaConfiguration
 demoteMasterMySQLReplicaConfiguration =
-    DemoteMasterMySQLReplicaConfiguration'
+  DemoteMasterMySQLReplicaConfiguration'
     { _dmmsqlrcKind = "sql#demoteMasterMysqlReplicaConfiguration"
     , _dmmsqlrcClientKey = Nothing
     , _dmmsqlrcUsername = Nothing
@@ -58,6 +61,7 @@ demoteMasterMySQLReplicaConfiguration =
     , _dmmsqlrcCaCertificate = Nothing
     , _dmmsqlrcPassword = Nothing
     }
+
 
 -- | This is always sql#demoteMasterMysqlReplicaConfiguration.
 dmmsqlrcKind :: Lens' DemoteMasterMySQLReplicaConfiguration Text
@@ -97,7 +101,8 @@ dmmsqlrcPassword
       (\ s a -> s{_dmmsqlrcPassword = a})
 
 instance FromJSON
-         DemoteMasterMySQLReplicaConfiguration where
+           DemoteMasterMySQLReplicaConfiguration
+         where
         parseJSON
           = withObject "DemoteMasterMySQLReplicaConfiguration"
               (\ o ->
@@ -126,7 +131,8 @@ instance ToJSON DemoteMasterMySQLReplicaConfiguration
 -- | SslCerts Resource
 --
 -- /See:/ 'sslCert' smart constructor.
-data SSLCert = SSLCert'
+data SSLCert =
+  SSLCert'
     { _scCommonName       :: !(Maybe Text)
     , _scKind             :: !Text
     , _scCertSerialNumber :: !(Maybe Text)
@@ -136,7 +142,9 @@ data SSLCert = SSLCert'
     , _scExpirationTime   :: !(Maybe DateTime')
     , _scCreateTime       :: !(Maybe DateTime')
     , _scInstance         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCert' with the minimum fields required to make a request.
 --
@@ -162,7 +170,7 @@ data SSLCert = SSLCert'
 sslCert
     :: SSLCert
 sslCert =
-    SSLCert'
+  SSLCert'
     { _scCommonName = Nothing
     , _scKind = "sql#sslCert"
     , _scCertSerialNumber = Nothing
@@ -173,6 +181,7 @@ sslCert =
     , _scCreateTime = Nothing
     , _scInstance = Nothing
     }
+
 
 -- | User supplied name. Constrained to [a-zA-Z.-_ ]+.
 scCommonName :: Lens' SSLCert (Maybe Text)
@@ -256,10 +265,13 @@ instance ToJSON SSLCert where
 -- | Database list response.
 --
 -- /See:/ 'databasesListResponse' smart constructor.
-data DatabasesListResponse = DatabasesListResponse'
+data DatabasesListResponse =
+  DatabasesListResponse'
     { _dlrKind  :: !Text
     , _dlrItems :: !(Maybe [Database])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatabasesListResponse' with the minimum fields required to make a request.
 --
@@ -271,10 +283,8 @@ data DatabasesListResponse = DatabasesListResponse'
 databasesListResponse
     :: DatabasesListResponse
 databasesListResponse =
-    DatabasesListResponse'
-    { _dlrKind = "sql#databasesList"
-    , _dlrItems = Nothing
-    }
+  DatabasesListResponse' {_dlrKind = "sql#databasesList", _dlrItems = Nothing}
+
 
 -- | This is always sql#databasesList.
 dlrKind :: Lens' DatabasesListResponse Text
@@ -305,9 +315,12 @@ instance ToJSON DatabasesListResponse where
 -- | Database instance export request.
 --
 -- /See:/ 'instancesExportRequest' smart constructor.
-newtype InstancesExportRequest = InstancesExportRequest'
+newtype InstancesExportRequest =
+  InstancesExportRequest'
     { _ierExportContext :: Maybe ExportContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesExportRequest' with the minimum fields required to make a request.
 --
@@ -316,10 +329,8 @@ newtype InstancesExportRequest = InstancesExportRequest'
 -- * 'ierExportContext'
 instancesExportRequest
     :: InstancesExportRequest
-instancesExportRequest =
-    InstancesExportRequest'
-    { _ierExportContext = Nothing
-    }
+instancesExportRequest = InstancesExportRequest' {_ierExportContext = Nothing}
+
 
 -- | Contains details about the export operation.
 ierExportContext :: Lens' InstancesExportRequest (Maybe ExportContext)
@@ -342,11 +353,14 @@ instance ToJSON InstancesExportRequest where
 -- | Instances ListServerCas response.
 --
 -- /See:/ 'instancesListServerCasResponse' smart constructor.
-data InstancesListServerCasResponse = InstancesListServerCasResponse'
+data InstancesListServerCasResponse =
+  InstancesListServerCasResponse'
     { _ilscrKind          :: !Text
     , _ilscrCerts         :: !(Maybe [SSLCert])
     , _ilscrActiveVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesListServerCasResponse' with the minimum fields required to make a request.
 --
@@ -360,11 +374,12 @@ data InstancesListServerCasResponse = InstancesListServerCasResponse'
 instancesListServerCasResponse
     :: InstancesListServerCasResponse
 instancesListServerCasResponse =
-    InstancesListServerCasResponse'
+  InstancesListServerCasResponse'
     { _ilscrKind = "sql#instancesListServerCas"
     , _ilscrCerts = Nothing
     , _ilscrActiveVersion = Nothing
     }
+
 
 -- | This is always sql#instancesListServerCas.
 ilscrKind :: Lens' InstancesListServerCasResponse Text
@@ -404,9 +419,12 @@ instance ToJSON InstancesListServerCasResponse where
 -- | Options for exporting from MySQL.
 --
 -- /See:/ 'exportContextSQLExportOptionsMysqlExportOptions' smart constructor.
-newtype ExportContextSQLExportOptionsMysqlExportOptions = ExportContextSQLExportOptionsMysqlExportOptions'
+newtype ExportContextSQLExportOptionsMysqlExportOptions =
+  ExportContextSQLExportOptionsMysqlExportOptions'
     { _ecsqleomeoMasterData :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportContextSQLExportOptionsMysqlExportOptions' with the minimum fields required to make a request.
 --
@@ -416,9 +434,9 @@ newtype ExportContextSQLExportOptionsMysqlExportOptions = ExportContextSQLExport
 exportContextSQLExportOptionsMysqlExportOptions
     :: ExportContextSQLExportOptionsMysqlExportOptions
 exportContextSQLExportOptionsMysqlExportOptions =
-    ExportContextSQLExportOptionsMysqlExportOptions'
-    { _ecsqleomeoMasterData = Nothing
-    }
+  ExportContextSQLExportOptionsMysqlExportOptions'
+    {_ecsqleomeoMasterData = Nothing}
+
 
 -- | Option to include SQL statement required to set up replication. If set
 -- to 1, the dump file includes a CHANGE MASTER TO statement with the
@@ -432,7 +450,8 @@ ecsqleomeoMasterData
       . mapping _Coerce
 
 instance FromJSON
-         ExportContextSQLExportOptionsMysqlExportOptions where
+           ExportContextSQLExportOptionsMysqlExportOptions
+         where
         parseJSON
           = withObject
               "ExportContextSQLExportOptionsMysqlExportOptions"
@@ -441,7 +460,8 @@ instance FromJSON
                    (o .:? "masterData"))
 
 instance ToJSON
-         ExportContextSQLExportOptionsMysqlExportOptions where
+           ExportContextSQLExportOptionsMysqlExportOptions
+         where
         toJSON
           ExportContextSQLExportOptionsMysqlExportOptions'{..}
           = object
@@ -451,10 +471,13 @@ instance ToJSON
 -- | On-premises instance configuration.
 --
 -- /See:/ 'onPremisesConfiguration' smart constructor.
-data OnPremisesConfiguration = OnPremisesConfiguration'
+data OnPremisesConfiguration =
+  OnPremisesConfiguration'
     { _opcKind     :: !Text
     , _opcHostPort :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OnPremisesConfiguration' with the minimum fields required to make a request.
 --
@@ -466,10 +489,9 @@ data OnPremisesConfiguration = OnPremisesConfiguration'
 onPremisesConfiguration
     :: OnPremisesConfiguration
 onPremisesConfiguration =
-    OnPremisesConfiguration'
-    { _opcKind = "sql#onPremisesConfiguration"
-    , _opcHostPort = Nothing
-    }
+  OnPremisesConfiguration'
+    {_opcKind = "sql#onPremisesConfiguration", _opcHostPort = Nothing}
+
 
 -- | This is always sql#onPremisesConfiguration.
 opcKind :: Lens' OnPremisesConfiguration Text
@@ -498,11 +520,14 @@ instance ToJSON OnPremisesConfiguration where
 -- | Database instance list operations response.
 --
 -- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse'
+data OperationsListResponse =
+  OperationsListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
     , _olrItems         :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
 --
@@ -516,11 +541,12 @@ data OperationsListResponse = OperationsListResponse'
 operationsListResponse
     :: OperationsListResponse
 operationsListResponse =
-    OperationsListResponse'
+  OperationsListResponse'
     { _olrNextPageToken = Nothing
     , _olrKind = "sql#operationsList"
     , _olrItems = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -560,10 +586,13 @@ instance ToJSON OperationsListResponse where
 -- | An Admin API warning message.
 --
 -- /See:/ 'apiWarning' smart constructor.
-data APIWarning = APIWarning'
+data APIWarning =
+  APIWarning'
     { _awCode    :: !(Maybe Text)
     , _awMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APIWarning' with the minimum fields required to make a request.
 --
@@ -574,11 +603,8 @@ data APIWarning = APIWarning'
 -- * 'awMessage'
 apiWarning
     :: APIWarning
-apiWarning =
-    APIWarning'
-    { _awCode = Nothing
-    , _awMessage = Nothing
-    }
+apiWarning = APIWarning' {_awCode = Nothing, _awMessage = Nothing}
+
 
 -- | Code to uniquely identify the warning type.
 awCode :: Lens' APIWarning (Maybe Text)
@@ -602,17 +628,70 @@ instance ToJSON APIWarning where
                  [("code" .=) <$> _awCode,
                   ("message" .=) <$> _awMessage])
 
+-- | Disk encryption configuration.
+--
+-- /See:/ 'diskEncryptionConfiguration' smart constructor.
+data DiskEncryptionConfiguration =
+  DiskEncryptionConfiguration'
+    { _decKind       :: !Text
+    , _decKmsKeyName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiskEncryptionConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'decKind'
+--
+-- * 'decKmsKeyName'
+diskEncryptionConfiguration
+    :: DiskEncryptionConfiguration
+diskEncryptionConfiguration =
+  DiskEncryptionConfiguration'
+    {_decKind = "sql#diskEncryptionConfiguration", _decKmsKeyName = Nothing}
+
+
+-- | This is always sql#diskEncryptionConfiguration.
+decKind :: Lens' DiskEncryptionConfiguration Text
+decKind = lens _decKind (\ s a -> s{_decKind = a})
+
+-- | KMS key resource name
+decKmsKeyName :: Lens' DiskEncryptionConfiguration (Maybe Text)
+decKmsKeyName
+  = lens _decKmsKeyName
+      (\ s a -> s{_decKmsKeyName = a})
+
+instance FromJSON DiskEncryptionConfiguration where
+        parseJSON
+          = withObject "DiskEncryptionConfiguration"
+              (\ o ->
+                 DiskEncryptionConfiguration' <$>
+                   (o .:? "kind" .!= "sql#diskEncryptionConfiguration")
+                     <*> (o .:? "kmsKeyName"))
+
+instance ToJSON DiskEncryptionConfiguration where
+        toJSON DiskEncryptionConfiguration'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _decKind),
+                  ("kmsKeyName" .=) <$> _decKmsKeyName])
+
 -- | Database instance import context.
 --
 -- /See:/ 'importContext' smart constructor.
-data ImportContext = ImportContext'
+data ImportContext =
+  ImportContext'
     { _icDatabase         :: !(Maybe Text)
     , _icKind             :: !Text
     , _icCSVImportOptions :: !(Maybe ImportContextCSVImportOptions)
     , _icURI              :: !(Maybe Text)
     , _icFileType         :: !(Maybe Text)
     , _icImportUser       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImportContext' with the minimum fields required to make a request.
 --
@@ -632,7 +711,7 @@ data ImportContext = ImportContext'
 importContext
     :: ImportContext
 importContext =
-    ImportContext'
+  ImportContext'
     { _icDatabase = Nothing
     , _icKind = "sql#importContext"
     , _icCSVImportOptions = Nothing
@@ -640,6 +719,7 @@ importContext =
     , _icFileType = Nothing
     , _icImportUser = Nothing
     }
+
 
 -- | The target database for the import. If fileType is SQL, this field is
 -- required only if the import file does not specify a database, and is
@@ -653,8 +733,7 @@ icDatabase
 icKind :: Lens' ImportContext Text
 icKind = lens _icKind (\ s a -> s{_icKind = a})
 
--- | Options for importing data as CSV. Importing CSV data using the Cloud
--- SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for importing data as CSV.
 icCSVImportOptions :: Lens' ImportContext (Maybe ImportContextCSVImportOptions)
 icCSVImportOptions
   = lens _icCSVImportOptions
@@ -668,14 +747,13 @@ icURI :: Lens' ImportContext (Maybe Text)
 icURI = lens _icURI (\ s a -> s{_icURI = a})
 
 -- | The file type for the specified uri. SQL: The file contains SQL
--- statements. CSV: The file contains CSV data. Importing CSV data using
--- the Cloud SQL Admin API is not supported for PostgreSQL instances.
+-- statements. CSV: The file contains CSV data.
 icFileType :: Lens' ImportContext (Maybe Text)
 icFileType
   = lens _icFileType (\ s a -> s{_icFileType = a})
 
--- | The PostgreSQL user for this import operation. Defaults to
--- cloudsqlsuperuser. PostgreSQL instances only.
+-- | The PostgreSQL user for this import operation. PostgreSQL instances
+-- only.
 icImportUser :: Lens' ImportContext (Maybe Text)
 icImportUser
   = lens _icImportUser (\ s a -> s{_icImportUser = a})
@@ -708,7 +786,8 @@ instance ToJSON ImportContext where
 -- populated in the resource.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oTargetId      :: !(Maybe Text)
     , _oTargetProject :: !(Maybe Text)
     , _oStatus        :: !(Maybe Text)
@@ -724,7 +803,9 @@ data Operation = Operation'
     , _oEndTime       :: !(Maybe DateTime')
     , _oOperationType :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -762,7 +843,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oTargetId = Nothing
     , _oTargetProject = Nothing
     , _oStatus = Nothing
@@ -779,6 +860,7 @@ operation =
     , _oOperationType = Nothing
     , _oTargetLink = Nothing
     }
+
 
 -- | Name of the database instance related to this operation.
 oTargetId :: Lens' Operation (Maybe Text)
@@ -906,7 +988,8 @@ instance ToJSON Operation where
 -- | Database instance settings.
 --
 -- /See:/ 'settings' smart constructor.
-data Settings = Settings'
+data Settings =
+  Settings'
     { _sStorageAutoResize           :: !(Maybe Bool)
     , _sReplicationType             :: !(Maybe Text)
     , _sActivationPolicy            :: !(Maybe Text)
@@ -927,7 +1010,9 @@ data Settings = Settings'
     , _sBackupConfiguration         :: !(Maybe BackupConfiguration)
     , _sAvailabilityType            :: !(Maybe Text)
     , _sStorageAutoResizeLimit      :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
@@ -975,7 +1060,7 @@ data Settings = Settings'
 settings
     :: Settings
 settings =
-    Settings'
+  Settings'
     { _sStorageAutoResize = Nothing
     , _sReplicationType = Nothing
     , _sActivationPolicy = Nothing
@@ -997,6 +1082,7 @@ settings =
     , _sAvailabilityType = Nothing
     , _sStorageAutoResizeLimit = Nothing
     }
+
 
 -- | Configuration to increase storage size automatically. The default value
 -- is true. Not used for First Generation instances.
@@ -1217,9 +1303,12 @@ instance ToJSON Settings where
 -- | Rotate Server CA request.
 --
 -- /See:/ 'instancesRotateServerCaRequest' smart constructor.
-newtype InstancesRotateServerCaRequest = InstancesRotateServerCaRequest'
+newtype InstancesRotateServerCaRequest =
+  InstancesRotateServerCaRequest'
     { _irscrRotateServerCaContext :: Maybe RotateServerCaContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesRotateServerCaRequest' with the minimum fields required to make a request.
 --
@@ -1229,9 +1318,8 @@ newtype InstancesRotateServerCaRequest = InstancesRotateServerCaRequest'
 instancesRotateServerCaRequest
     :: InstancesRotateServerCaRequest
 instancesRotateServerCaRequest =
-    InstancesRotateServerCaRequest'
-    { _irscrRotateServerCaContext = Nothing
-    }
+  InstancesRotateServerCaRequest' {_irscrRotateServerCaContext = Nothing}
+
 
 -- | Contains details about the rotate server CA operation.
 irscrRotateServerCaContext :: Lens' InstancesRotateServerCaRequest (Maybe RotateServerCaContext)
@@ -1257,11 +1345,14 @@ instance ToJSON InstancesRotateServerCaRequest where
 -- | Database instance IP Mapping.
 --
 -- /See:/ 'ipMApping' smart constructor.
-data IPMApping = IPMApping'
+data IPMApping =
+  IPMApping'
     { _imaIPAddress    :: !(Maybe Text)
     , _imaTimeToRetire :: !(Maybe DateTime')
     , _imaType         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IPMApping' with the minimum fields required to make a request.
 --
@@ -1275,11 +1366,9 @@ data IPMApping = IPMApping'
 ipMApping
     :: IPMApping
 ipMApping =
-    IPMApping'
-    { _imaIPAddress = Nothing
-    , _imaTimeToRetire = Nothing
-    , _imaType = Nothing
-    }
+  IPMApping'
+    {_imaIPAddress = Nothing, _imaTimeToRetire = Nothing, _imaType = Nothing}
+
 
 -- | The IP address assigned.
 imaIPAddress :: Lens' IPMApping (Maybe Text)
@@ -1320,7 +1409,8 @@ instance ToJSON IPMApping where
 -- | Represents a SQL database on the Cloud SQL instance.
 --
 -- /See:/ 'database' smart constructor.
-data Database = Database'
+data Database =
+  Database'
     { _dEtag      :: !(Maybe Text)
     , _dProject   :: !(Maybe Text)
     , _dKind      :: !Text
@@ -1329,7 +1419,9 @@ data Database = Database'
     , _dName      :: !(Maybe Text)
     , _dCharSet   :: !(Maybe Text)
     , _dInstance  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Database' with the minimum fields required to make a request.
 --
@@ -1353,7 +1445,7 @@ data Database = Database'
 database
     :: Database
 database =
-    Database'
+  Database'
     { _dEtag = Nothing
     , _dProject = Nothing
     , _dKind = "sql#database"
@@ -1363,6 +1455,7 @@ database =
     , _dCharSet = Nothing
     , _dInstance = Nothing
     }
+
 
 -- | This field is deprecated and will be removed from a future version of
 -- the API.
@@ -1431,9 +1524,12 @@ instance ToJSON Database where
 -- | SslCerts create ephemeral certificate request.
 --
 -- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
-newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest'
+newtype SSLCertsCreateEphemeralRequest =
+  SSLCertsCreateEphemeralRequest'
     { _sccerPublicKey :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertsCreateEphemeralRequest' with the minimum fields required to make a request.
 --
@@ -1443,9 +1539,8 @@ newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest'
 sslCertsCreateEphemeralRequest
     :: SSLCertsCreateEphemeralRequest
 sslCertsCreateEphemeralRequest =
-    SSLCertsCreateEphemeralRequest'
-    { _sccerPublicKey = Nothing
-    }
+  SSLCertsCreateEphemeralRequest' {_sccerPublicKey = Nothing}
+
 
 -- | PEM encoded public key to include in the signed certificate.
 sccerPublicKey :: Lens' SSLCertsCreateEphemeralRequest (Maybe Text)
@@ -1469,11 +1564,14 @@ instance ToJSON SSLCertsCreateEphemeralRequest where
 -- | Binary log coordinates.
 --
 -- /See:/ 'binLogCoordinates' smart constructor.
-data BinLogCoordinates = BinLogCoordinates'
+data BinLogCoordinates =
+  BinLogCoordinates'
     { _blcBinLogPosition :: !(Maybe (Textual Int64))
     , _blcKind           :: !Text
     , _blcBinLogFileName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BinLogCoordinates' with the minimum fields required to make a request.
 --
@@ -1487,11 +1585,12 @@ data BinLogCoordinates = BinLogCoordinates'
 binLogCoordinates
     :: BinLogCoordinates
 binLogCoordinates =
-    BinLogCoordinates'
+  BinLogCoordinates'
     { _blcBinLogPosition = Nothing
     , _blcKind = "sql#binLogCoordinates"
     , _blcBinLogFileName = Nothing
     }
+
 
 -- | Position (offset) within the binary log file.
 blcBinLogPosition :: Lens' BinLogCoordinates (Maybe Int64)
@@ -1531,10 +1630,13 @@ instance ToJSON BinLogCoordinates where
 -- only to Second Generation instances.
 --
 -- /See:/ 'databaseInstanceFailoverReplica' smart constructor.
-data DatabaseInstanceFailoverReplica = DatabaseInstanceFailoverReplica'
+data DatabaseInstanceFailoverReplica =
+  DatabaseInstanceFailoverReplica'
     { _difrName      :: !(Maybe Text)
     , _difrAvailable :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatabaseInstanceFailoverReplica' with the minimum fields required to make a request.
 --
@@ -1546,10 +1648,9 @@ data DatabaseInstanceFailoverReplica = DatabaseInstanceFailoverReplica'
 databaseInstanceFailoverReplica
     :: DatabaseInstanceFailoverReplica
 databaseInstanceFailoverReplica =
-    DatabaseInstanceFailoverReplica'
-    { _difrName = Nothing
-    , _difrAvailable = Nothing
-    }
+  DatabaseInstanceFailoverReplica'
+    {_difrName = Nothing, _difrAvailable = Nothing}
+
 
 -- | The name of the failover replica. If specified at instance creation, a
 -- failover replica is created for the instance. The name doesn\'t include
@@ -1584,10 +1685,13 @@ instance ToJSON DatabaseInstanceFailoverReplica where
 -- | Tiers list response.
 --
 -- /See:/ 'tiersListResponse' smart constructor.
-data TiersListResponse = TiersListResponse'
+data TiersListResponse =
+  TiersListResponse'
     { _tlrKind  :: !Text
     , _tlrItems :: !(Maybe [Tier])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TiersListResponse' with the minimum fields required to make a request.
 --
@@ -1599,10 +1703,8 @@ data TiersListResponse = TiersListResponse'
 tiersListResponse
     :: TiersListResponse
 tiersListResponse =
-    TiersListResponse'
-    { _tlrKind = "sql#tiersList"
-    , _tlrItems = Nothing
-    }
+  TiersListResponse' {_tlrKind = "sql#tiersList", _tlrItems = Nothing}
+
 
 -- | This is always sql#tiersList.
 tlrKind :: Lens' TiersListResponse Text
@@ -1633,11 +1735,14 @@ instance ToJSON TiersListResponse where
 -- | User list response.
 --
 -- /See:/ 'usersListResponse' smart constructor.
-data UsersListResponse = UsersListResponse'
+data UsersListResponse =
+  UsersListResponse'
     { _ulrNextPageToken :: !(Maybe Text)
     , _ulrKind          :: !Text
     , _ulrItems         :: !(Maybe [User])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
 --
@@ -1651,11 +1756,12 @@ data UsersListResponse = UsersListResponse'
 usersListResponse
     :: UsersListResponse
 usersListResponse =
-    UsersListResponse'
+  UsersListResponse'
     { _ulrNextPageToken = Nothing
     , _ulrKind = "sql#usersList"
     , _ulrItems = Nothing
     }
+
 
 -- | An identifier that uniquely identifies the operation. You can use this
 -- identifier to retrieve the Operations resource that has information
@@ -1696,14 +1802,17 @@ instance ToJSON UsersListResponse where
 -- | Database instance export context.
 --
 -- /See:/ 'exportContext' smart constructor.
-data ExportContext = ExportContext'
+data ExportContext =
+  ExportContext'
     { _ecCSVExportOptions :: !(Maybe ExportContextCSVExportOptions)
     , _ecKind             :: !Text
     , _ecURI              :: !(Maybe Text)
     , _ecFileType         :: !(Maybe Text)
     , _ecSQLExportOptions :: !(Maybe ExportContextSQLExportOptions)
     , _ecDatabases        :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportContext' with the minimum fields required to make a request.
 --
@@ -1723,7 +1832,7 @@ data ExportContext = ExportContext'
 exportContext
     :: ExportContext
 exportContext =
-    ExportContext'
+  ExportContext'
     { _ecCSVExportOptions = Nothing
     , _ecKind = "sql#exportContext"
     , _ecURI = Nothing
@@ -1732,8 +1841,8 @@ exportContext =
     , _ecDatabases = Nothing
     }
 
--- | Options for exporting data as CSV. Exporting in CSV format using the
--- Cloud SQL Admin API is not supported for PostgreSQL instances.
+
+-- | Options for exporting data as CSV.
 ecCSVExportOptions :: Lens' ExportContext (Maybe ExportContextCSVExportOptions)
 ecCSVExportOptions
   = lens _ecCSVExportOptions
@@ -1752,8 +1861,7 @@ ecURI :: Lens' ExportContext (Maybe Text)
 ecURI = lens _ecURI (\ s a -> s{_ecURI = a})
 
 -- | The file type for the specified uri. SQL: The file contains SQL
--- statements. CSV: The file contains CSV data. CSV is not supported for
--- PostgreSQL instances.
+-- statements. CSV: The file contains CSV data.
 ecFileType :: Lens' ExportContext (Maybe Text)
 ecFileType
   = lens _ecFileType (\ s a -> s{_ecFileType = a})
@@ -1769,9 +1877,9 @@ ecSQLExportOptions
 -- system database. If fileType is CSV, you can specify one database,
 -- either by using this property or by using the
 -- csvExportOptions.selectQuery property, which takes precedence over this
--- property. PostgreSQL instances: If fileType is SQL, you must specify one
--- database to be exported. A fileType of CSV is not supported for
--- PostgreSQL instances.
+-- property. PostgreSQL instances: Specify exactly one database to be
+-- exported. If fileType is CSV, this database must match the database used
+-- in the csvExportOptions.selectQuery property.
 ecDatabases :: Lens' ExportContext [Text]
 ecDatabases
   = lens _ecDatabases (\ s a -> s{_ecDatabases = a}) .
@@ -1803,10 +1911,13 @@ instance ToJSON ExportContext where
 -- | Database instance operation errors list wrapper.
 --
 -- /See:/ 'operationErrors' smart constructor.
-data OperationErrors = OperationErrors'
+data OperationErrors =
+  OperationErrors'
     { _oeKind   :: !Text
     , _oeErrors :: !(Maybe [OperationError])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationErrors' with the minimum fields required to make a request.
 --
@@ -1818,10 +1929,8 @@ data OperationErrors = OperationErrors'
 operationErrors
     :: OperationErrors
 operationErrors =
-    OperationErrors'
-    { _oeKind = "sql#operationErrors"
-    , _oeErrors = Nothing
-    }
+  OperationErrors' {_oeKind = "sql#operationErrors", _oeErrors = Nothing}
+
 
 -- | This is always sql#operationErrors.
 oeKind :: Lens' OperationErrors Text
@@ -1852,10 +1961,13 @@ instance ToJSON OperationErrors where
 -- | SslCerts list response.
 --
 -- /See:/ 'sslCertsListResponse' smart constructor.
-data SSLCertsListResponse = SSLCertsListResponse'
+data SSLCertsListResponse =
+  SSLCertsListResponse'
     { _sclrKind  :: !Text
     , _sclrItems :: !(Maybe [SSLCert])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertsListResponse' with the minimum fields required to make a request.
 --
@@ -1867,10 +1979,8 @@ data SSLCertsListResponse = SSLCertsListResponse'
 sslCertsListResponse
     :: SSLCertsListResponse
 sslCertsListResponse =
-    SSLCertsListResponse'
-    { _sclrKind = "sql#sslCertsList"
-    , _sclrItems = Nothing
-    }
+  SSLCertsListResponse' {_sclrKind = "sql#sslCertsList", _sclrItems = Nothing}
+
 
 -- | This is always sql#sslCertsList.
 sclrKind :: Lens' SSLCertsListResponse Text
@@ -1898,12 +2008,65 @@ instance ToJSON SSLCertsListResponse where
                  [Just ("kind" .= _sclrKind),
                   ("items" .=) <$> _sclrItems])
 
+-- | Disk encryption status.
+--
+-- /See:/ 'diskEncryptionStatus' smart constructor.
+data DiskEncryptionStatus =
+  DiskEncryptionStatus'
+    { _desKmsKeyVersionName :: !(Maybe Text)
+    , _desKind              :: !Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiskEncryptionStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'desKmsKeyVersionName'
+--
+-- * 'desKind'
+diskEncryptionStatus
+    :: DiskEncryptionStatus
+diskEncryptionStatus =
+  DiskEncryptionStatus'
+    {_desKmsKeyVersionName = Nothing, _desKind = "sql#diskEncryptionStatus"}
+
+
+-- | KMS key version used to encrypt the Cloud SQL instance disk
+desKmsKeyVersionName :: Lens' DiskEncryptionStatus (Maybe Text)
+desKmsKeyVersionName
+  = lens _desKmsKeyVersionName
+      (\ s a -> s{_desKmsKeyVersionName = a})
+
+-- | This is always sql#diskEncryptionStatus.
+desKind :: Lens' DiskEncryptionStatus Text
+desKind = lens _desKind (\ s a -> s{_desKind = a})
+
+instance FromJSON DiskEncryptionStatus where
+        parseJSON
+          = withObject "DiskEncryptionStatus"
+              (\ o ->
+                 DiskEncryptionStatus' <$>
+                   (o .:? "kmsKeyVersionName") <*>
+                     (o .:? "kind" .!= "sql#diskEncryptionStatus"))
+
+instance ToJSON DiskEncryptionStatus where
+        toJSON DiskEncryptionStatus'{..}
+          = object
+              (catMaybes
+                 [("kmsKeyVersionName" .=) <$> _desKmsKeyVersionName,
+                  Just ("kind" .= _desKind)])
+
 -- | SslCerts insert request.
 --
 -- /See:/ 'sslCertsInsertRequest' smart constructor.
-newtype SSLCertsInsertRequest = SSLCertsInsertRequest'
+newtype SSLCertsInsertRequest =
+  SSLCertsInsertRequest'
     { _scirCommonName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertsInsertRequest' with the minimum fields required to make a request.
 --
@@ -1912,10 +2075,8 @@ newtype SSLCertsInsertRequest = SSLCertsInsertRequest'
 -- * 'scirCommonName'
 sslCertsInsertRequest
     :: SSLCertsInsertRequest
-sslCertsInsertRequest =
-    SSLCertsInsertRequest'
-    { _scirCommonName = Nothing
-    }
+sslCertsInsertRequest = SSLCertsInsertRequest' {_scirCommonName = Nothing}
+
 
 -- | User supplied name. Must be a distinct name from the other certificates
 -- for this instance.
@@ -1938,12 +2099,15 @@ instance ToJSON SSLCertsInsertRequest where
 -- | IP Management configuration.
 --
 -- /See:/ 'ipConfiguration' smart constructor.
-data IPConfiguration = IPConfiguration'
+data IPConfiguration =
+  IPConfiguration'
     { _icAuthorizedNetworks :: !(Maybe [ACLEntry])
     , _icPrivateNetwork     :: !(Maybe Text)
     , _icRequireSSL         :: !(Maybe Bool)
     , _icIPv4Enabled        :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IPConfiguration' with the minimum fields required to make a request.
 --
@@ -1959,12 +2123,13 @@ data IPConfiguration = IPConfiguration'
 ipConfiguration
     :: IPConfiguration
 ipConfiguration =
-    IPConfiguration'
+  IPConfiguration'
     { _icAuthorizedNetworks = Nothing
     , _icPrivateNetwork = Nothing
     , _icRequireSSL = Nothing
     , _icIPv4Enabled = Nothing
     }
+
 
 -- | The list of external networks that are allowed to connect to the
 -- instance using the IP. In CIDR notation, also known as \'slash\'
@@ -2019,12 +2184,15 @@ instance ToJSON IPConfiguration where
 -- preferably be restarted for system maintenance purposes.
 --
 -- /See:/ 'maintenanceWindow' smart constructor.
-data MaintenanceWindow = MaintenanceWindow'
+data MaintenanceWindow =
+  MaintenanceWindow'
     { _mwKind        :: !Text
     , _mwDay         :: !(Maybe (Textual Int32))
     , _mwHour        :: !(Maybe (Textual Int32))
     , _mwUpdateTrack :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
 --
@@ -2040,12 +2208,13 @@ data MaintenanceWindow = MaintenanceWindow'
 maintenanceWindow
     :: MaintenanceWindow
 maintenanceWindow =
-    MaintenanceWindow'
+  MaintenanceWindow'
     { _mwKind = "sql#maintenanceWindow"
     , _mwDay = Nothing
     , _mwHour = Nothing
     , _mwUpdateTrack = Nothing
     }
+
 
 -- | This is always sql#maintenanceWindow.
 mwKind :: Lens' MaintenanceWindow Text
@@ -2088,14 +2257,16 @@ instance ToJSON MaintenanceWindow where
                   ("hour" .=) <$> _mwHour,
                   ("updateTrack" .=) <$> _mwUpdateTrack])
 
--- | Options for importing data as CSV. Importing CSV data using the Cloud
--- SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for importing data as CSV.
 --
 -- /See:/ 'importContextCSVImportOptions' smart constructor.
-data ImportContextCSVImportOptions = ImportContextCSVImportOptions'
+data ImportContextCSVImportOptions =
+  ImportContextCSVImportOptions'
     { _iccioColumns :: !(Maybe [Text])
     , _iccioTable   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImportContextCSVImportOptions' with the minimum fields required to make a request.
 --
@@ -2107,10 +2278,9 @@ data ImportContextCSVImportOptions = ImportContextCSVImportOptions'
 importContextCSVImportOptions
     :: ImportContextCSVImportOptions
 importContextCSVImportOptions =
-    ImportContextCSVImportOptions'
-    { _iccioColumns = Nothing
-    , _iccioTable = Nothing
-    }
+  ImportContextCSVImportOptions'
+    {_iccioColumns = Nothing, _iccioTable = Nothing}
+
 
 -- | The columns to which CSV data is imported. If not specified, all columns
 -- of the database table are loaded with CSV data.
@@ -2142,10 +2312,13 @@ instance ToJSON ImportContextCSVImportOptions where
 -- | Instance rotate server CA context.
 --
 -- /See:/ 'rotateServerCaContext' smart constructor.
-data RotateServerCaContext = RotateServerCaContext'
+data RotateServerCaContext =
+  RotateServerCaContext'
     { _rsccNextVersion :: !(Maybe Text)
     , _rsccKind        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RotateServerCaContext' with the minimum fields required to make a request.
 --
@@ -2157,10 +2330,9 @@ data RotateServerCaContext = RotateServerCaContext'
 rotateServerCaContext
     :: RotateServerCaContext
 rotateServerCaContext =
-    RotateServerCaContext'
-    { _rsccNextVersion = Nothing
-    , _rsccKind = "sql#rotateServerCaContext"
-    }
+  RotateServerCaContext'
+    {_rsccNextVersion = Nothing, _rsccKind = "sql#rotateServerCaContext"}
+
 
 -- | The fingerprint of the next version to be rotated to. If left
 -- unspecified, will be rotated to the most recently added server CA
@@ -2189,13 +2361,15 @@ instance ToJSON RotateServerCaContext where
                  [("nextVersion" .=) <$> _rsccNextVersion,
                   Just ("kind" .= _rsccKind)])
 
--- | Options for exporting data as CSV. Exporting in CSV format using the
--- Cloud SQL Admin API is not supported for PostgreSQL instances.
+-- | Options for exporting data as CSV.
 --
 -- /See:/ 'exportContextCSVExportOptions' smart constructor.
-newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions'
+newtype ExportContextCSVExportOptions =
+  ExportContextCSVExportOptions'
     { _ecceoSelectQuery :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportContextCSVExportOptions' with the minimum fields required to make a request.
 --
@@ -2205,9 +2379,8 @@ newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions'
 exportContextCSVExportOptions
     :: ExportContextCSVExportOptions
 exportContextCSVExportOptions =
-    ExportContextCSVExportOptions'
-    { _ecceoSelectQuery = Nothing
-    }
+  ExportContextCSVExportOptions' {_ecceoSelectQuery = Nothing}
+
 
 -- | The select query used to extract the data.
 ecceoSelectQuery :: Lens' ExportContextCSVExportOptions (Maybe Text)
@@ -2231,7 +2404,8 @@ instance ToJSON ExportContextCSVExportOptions where
 -- | A Cloud SQL user resource.
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uEtag     :: !(Maybe Text)
     , _uProject  :: !(Maybe Text)
     , _uKind     :: !Text
@@ -2239,7 +2413,9 @@ data User = User'
     , _uPassword :: !(Maybe Text)
     , _uHost     :: !(Maybe Text)
     , _uInstance :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -2261,7 +2437,7 @@ data User = User'
 user
     :: User
 user =
-    User'
+  User'
     { _uEtag = Nothing
     , _uProject = Nothing
     , _uKind = "sql#user"
@@ -2270,6 +2446,7 @@ user =
     , _uHost = Nothing
     , _uInstance = Nothing
     }
+
 
 -- | This field is deprecated and will be removed from a future version of
 -- the API.
@@ -2335,33 +2512,39 @@ instance ToJSON User where
 -- | A Cloud SQL instance resource.
 --
 -- /See:/ 'databaseInstance' smart constructor.
-data DatabaseInstance = DatabaseInstance'
-    { _datBackendType                :: !(Maybe Text)
-    , _datMaxDiskSize                :: !(Maybe (Textual Int64))
-    , _datOnPremisesConfiguration    :: !(Maybe OnPremisesConfiguration)
-    , _datGceZone                    :: !(Maybe Text)
-    , _datEtag                       :: !(Maybe Text)
-    , _datState                      :: !(Maybe Text)
-    , _datIPv6Address                :: !(Maybe Text)
-    , _datServerCaCert               :: !(Maybe SSLCert)
-    , _datDatabaseVersion            :: !(Maybe Text)
-    , _datProject                    :: !(Maybe Text)
-    , _datSettings                   :: !(Maybe Settings)
-    , _datKind                       :: !Text
-    , _datConnectionName             :: !(Maybe Text)
-    , _datCurrentDiskSize            :: !(Maybe (Textual Int64))
-    , _datInstanceType               :: !(Maybe Text)
-    , _datReplicaNames               :: !(Maybe [Text])
-    , _datSelfLink                   :: !(Maybe Text)
-    , _datFailoverReplica            :: !(Maybe DatabaseInstanceFailoverReplica)
-    , _datName                       :: !(Maybe Text)
-    , _datMasterInstanceName         :: !(Maybe Text)
-    , _datReplicaConfiguration       :: !(Maybe ReplicaConfiguration)
-    , _datRegion                     :: !(Maybe Text)
-    , _datServiceAccountEmailAddress :: !(Maybe Text)
-    , _datIPAddresses                :: !(Maybe [IPMApping])
-    , _datSuspensionReason           :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data DatabaseInstance =
+  DatabaseInstance'
+    { _datBackendType                 :: !(Maybe Text)
+    , _datMaxDiskSize                 :: !(Maybe (Textual Int64))
+    , _datOnPremisesConfiguration     :: !(Maybe OnPremisesConfiguration)
+    , _datGceZone                     :: !(Maybe Text)
+    , _datEtag                        :: !(Maybe Text)
+    , _datState                       :: !(Maybe Text)
+    , _datIPv6Address                 :: !(Maybe Text)
+    , _datServerCaCert                :: !(Maybe SSLCert)
+    , _datDatabaseVersion             :: !(Maybe Text)
+    , _datDiskEncryptionConfiguration :: !(Maybe DiskEncryptionConfiguration)
+    , _datProject                     :: !(Maybe Text)
+    , _datSettings                    :: !(Maybe Settings)
+    , _datKind                        :: !Text
+    , _datDiskEncryptionStatus        :: !(Maybe DiskEncryptionStatus)
+    , _datConnectionName              :: !(Maybe Text)
+    , _datCurrentDiskSize             :: !(Maybe (Textual Int64))
+    , _datInstanceType                :: !(Maybe Text)
+    , _datRootPassword                :: !(Maybe Text)
+    , _datReplicaNames                :: !(Maybe [Text])
+    , _datSelfLink                    :: !(Maybe Text)
+    , _datFailoverReplica             :: !(Maybe DatabaseInstanceFailoverReplica)
+    , _datName                        :: !(Maybe Text)
+    , _datMasterInstanceName          :: !(Maybe Text)
+    , _datReplicaConfiguration        :: !(Maybe ReplicaConfiguration)
+    , _datRegion                      :: !(Maybe Text)
+    , _datServiceAccountEmailAddress  :: !(Maybe Text)
+    , _datIPAddresses                 :: !(Maybe [IPMApping])
+    , _datSuspensionReason            :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatabaseInstance' with the minimum fields required to make a request.
 --
@@ -2385,17 +2568,23 @@ data DatabaseInstance = DatabaseInstance'
 --
 -- * 'datDatabaseVersion'
 --
+-- * 'datDiskEncryptionConfiguration'
+--
 -- * 'datProject'
 --
 -- * 'datSettings'
 --
 -- * 'datKind'
 --
+-- * 'datDiskEncryptionStatus'
+--
 -- * 'datConnectionName'
 --
 -- * 'datCurrentDiskSize'
 --
 -- * 'datInstanceType'
+--
+-- * 'datRootPassword'
 --
 -- * 'datReplicaNames'
 --
@@ -2419,7 +2608,7 @@ data DatabaseInstance = DatabaseInstance'
 databaseInstance
     :: DatabaseInstance
 databaseInstance =
-    DatabaseInstance'
+  DatabaseInstance'
     { _datBackendType = Nothing
     , _datMaxDiskSize = Nothing
     , _datOnPremisesConfiguration = Nothing
@@ -2429,12 +2618,15 @@ databaseInstance =
     , _datIPv6Address = Nothing
     , _datServerCaCert = Nothing
     , _datDatabaseVersion = Nothing
+    , _datDiskEncryptionConfiguration = Nothing
     , _datProject = Nothing
     , _datSettings = Nothing
     , _datKind = "sql#instance"
+    , _datDiskEncryptionStatus = Nothing
     , _datConnectionName = Nothing
     , _datCurrentDiskSize = Nothing
     , _datInstanceType = Nothing
+    , _datRootPassword = Nothing
     , _datReplicaNames = Nothing
     , _datSelfLink = Nothing
     , _datFailoverReplica = Nothing
@@ -2446,6 +2638,7 @@ databaseInstance =
     , _datIPAddresses = Nothing
     , _datSuspensionReason = Nothing
     }
+
 
 -- | FIRST_GEN: First Generation instance. MySQL only. SECOND_GEN: Second
 -- Generation instance or PostgreSQL instance. EXTERNAL: A database server
@@ -2508,11 +2701,19 @@ datServerCaCert
 -- | The database engine type and version. The databaseVersion field can not
 -- be changed after instance creation. MySQL Second Generation instances:
 -- MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6
--- MySQL First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5
+-- (default) or POSTGRES_11 Beta. MySQL First Generation instances:
+-- MYSQL_5_6 (default) or MYSQL_5_5
 datDatabaseVersion :: Lens' DatabaseInstance (Maybe Text)
 datDatabaseVersion
   = lens _datDatabaseVersion
       (\ s a -> s{_datDatabaseVersion = a})
+
+-- | Disk encryption configuration specific to an instance. Applies only to
+-- Second Generation instances.
+datDiskEncryptionConfiguration :: Lens' DatabaseInstance (Maybe DiskEncryptionConfiguration)
+datDiskEncryptionConfiguration
+  = lens _datDiskEncryptionConfiguration
+      (\ s a -> s{_datDiskEncryptionConfiguration = a})
 
 -- | The project ID of the project containing the Cloud SQL instance. The
 -- Google apps domain is prefixed if applicable.
@@ -2528,6 +2729,13 @@ datSettings
 -- | This is always sql#instance.
 datKind :: Lens' DatabaseInstance Text
 datKind = lens _datKind (\ s a -> s{_datKind = a})
+
+-- | Disk encryption status specific to an instance. Applies only to Second
+-- Generation instances.
+datDiskEncryptionStatus :: Lens' DatabaseInstance (Maybe DiskEncryptionStatus)
+datDiskEncryptionStatus
+  = lens _datDiskEncryptionStatus
+      (\ s a -> s{_datDiskEncryptionStatus = a})
 
 -- | Connection name of the Cloud SQL instance used in connection strings.
 datConnectionName :: Lens' DatabaseInstance (Maybe Text)
@@ -2554,6 +2762,12 @@ datInstanceType :: Lens' DatabaseInstance (Maybe Text)
 datInstanceType
   = lens _datInstanceType
       (\ s a -> s{_datInstanceType = a})
+
+-- | Initial root password. Use only on creation.
+datRootPassword :: Lens' DatabaseInstance (Maybe Text)
+datRootPassword
+  = lens _datRootPassword
+      (\ s a -> s{_datRootPassword = a})
 
 -- | The replicas of the instance.
 datReplicaNames :: Lens' DatabaseInstance [Text]
@@ -2637,12 +2851,15 @@ instance FromJSON DatabaseInstance where
                      <*> (o .:? "ipv6Address")
                      <*> (o .:? "serverCaCert")
                      <*> (o .:? "databaseVersion")
+                     <*> (o .:? "diskEncryptionConfiguration")
                      <*> (o .:? "project")
                      <*> (o .:? "settings")
                      <*> (o .:? "kind" .!= "sql#instance")
+                     <*> (o .:? "diskEncryptionStatus")
                      <*> (o .:? "connectionName")
                      <*> (o .:? "currentDiskSize")
                      <*> (o .:? "instanceType")
+                     <*> (o .:? "rootPassword")
                      <*> (o .:? "replicaNames" .!= mempty)
                      <*> (o .:? "selfLink")
                      <*> (o .:? "failoverReplica")
@@ -2667,12 +2884,17 @@ instance ToJSON DatabaseInstance where
                   ("ipv6Address" .=) <$> _datIPv6Address,
                   ("serverCaCert" .=) <$> _datServerCaCert,
                   ("databaseVersion" .=) <$> _datDatabaseVersion,
+                  ("diskEncryptionConfiguration" .=) <$>
+                    _datDiskEncryptionConfiguration,
                   ("project" .=) <$> _datProject,
                   ("settings" .=) <$> _datSettings,
                   Just ("kind" .= _datKind),
+                  ("diskEncryptionStatus" .=) <$>
+                    _datDiskEncryptionStatus,
                   ("connectionName" .=) <$> _datConnectionName,
                   ("currentDiskSize" .=) <$> _datCurrentDiskSize,
                   ("instanceType" .=) <$> _datInstanceType,
+                  ("rootPassword" .=) <$> _datRootPassword,
                   ("replicaNames" .=) <$> _datReplicaNames,
                   ("selfLink" .=) <$> _datSelfLink,
                   ("failoverReplica" .=) <$> _datFailoverReplica,
@@ -2689,12 +2911,15 @@ instance ToJSON DatabaseInstance where
 -- | Database instance clone context.
 --
 -- /See:/ 'cloneContext' smart constructor.
-data CloneContext = CloneContext'
+data CloneContext =
+  CloneContext'
     { _ccPitrTimestampMs         :: !(Maybe (Textual Int64))
     , _ccDestinationInstanceName :: !(Maybe Text)
     , _ccBinLogCoordinates       :: !(Maybe BinLogCoordinates)
     , _ccKind                    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CloneContext' with the minimum fields required to make a request.
 --
@@ -2710,12 +2935,13 @@ data CloneContext = CloneContext'
 cloneContext
     :: CloneContext
 cloneContext =
-    CloneContext'
+  CloneContext'
     { _ccPitrTimestampMs = Nothing
     , _ccDestinationInstanceName = Nothing
     , _ccBinLogCoordinates = Nothing
     , _ccKind = "sql#cloneContext"
     }
+
 
 -- | Reserved for future use.
 ccPitrTimestampMs :: Lens' CloneContext (Maybe Int64)
@@ -2765,8 +2991,10 @@ instance ToJSON CloneContext where
 -- | A flag resource.
 --
 -- /See:/ 'flag' smart constructor.
-data Flag = Flag'
+data Flag =
+  Flag'
     { _fMaxValue            :: !(Maybe (Textual Int64))
+    , _fInBeta              :: !(Maybe Bool)
     , _fKind                :: !Text
     , _fAppliesTo           :: !(Maybe [Text])
     , _fName                :: !(Maybe Text)
@@ -2774,13 +3002,17 @@ data Flag = Flag'
     , _fType                :: !(Maybe Text)
     , _fMinValue            :: !(Maybe (Textual Int64))
     , _fRequiresRestart     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Flag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fMaxValue'
+--
+-- * 'fInBeta'
 --
 -- * 'fKind'
 --
@@ -2798,8 +3030,9 @@ data Flag = Flag'
 flag
     :: Flag
 flag =
-    Flag'
+  Flag'
     { _fMaxValue = Nothing
+    , _fInBeta = Nothing
     , _fKind = "sql#flag"
     , _fAppliesTo = Nothing
     , _fName = Nothing
@@ -2809,11 +3042,16 @@ flag =
     , _fRequiresRestart = Nothing
     }
 
+
 -- | For INTEGER flags, the maximum allowed value.
 fMaxValue :: Lens' Flag (Maybe Int64)
 fMaxValue
   = lens _fMaxValue (\ s a -> s{_fMaxValue = a}) .
       mapping _Coerce
+
+-- | True if the flag is only released in Beta.
+fInBeta :: Lens' Flag (Maybe Bool)
+fInBeta = lens _fInBeta (\ s a -> s{_fInBeta = a})
 
 -- | This is always sql#flag.
 fKind :: Lens' Flag Text
@@ -2865,7 +3103,8 @@ instance FromJSON Flag where
           = withObject "Flag"
               (\ o ->
                  Flag' <$>
-                   (o .:? "maxValue") <*> (o .:? "kind" .!= "sql#flag")
+                   (o .:? "maxValue") <*> (o .:? "inBeta") <*>
+                     (o .:? "kind" .!= "sql#flag")
                      <*> (o .:? "appliesTo" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "allowedStringValues" .!= mempty)
@@ -2878,7 +3117,7 @@ instance ToJSON Flag where
           = object
               (catMaybes
                  [("maxValue" .=) <$> _fMaxValue,
-                  Just ("kind" .= _fKind),
+                  ("inBeta" .=) <$> _fInBeta, Just ("kind" .= _fKind),
                   ("appliesTo" .=) <$> _fAppliesTo,
                   ("name" .=) <$> _fName,
                   ("allowedStringValues" .=) <$> _fAllowedStringValues,
@@ -2889,9 +3128,12 @@ instance ToJSON Flag where
 -- | Instance failover request.
 --
 -- /See:/ 'instancesFailoverRequest' smart constructor.
-newtype InstancesFailoverRequest = InstancesFailoverRequest'
+newtype InstancesFailoverRequest =
+  InstancesFailoverRequest'
     { _ifrFailoverContext :: Maybe FailoverContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesFailoverRequest' with the minimum fields required to make a request.
 --
@@ -2901,9 +3143,8 @@ newtype InstancesFailoverRequest = InstancesFailoverRequest'
 instancesFailoverRequest
     :: InstancesFailoverRequest
 instancesFailoverRequest =
-    InstancesFailoverRequest'
-    { _ifrFailoverContext = Nothing
-    }
+  InstancesFailoverRequest' {_ifrFailoverContext = Nothing}
+
 
 -- | Failover Context.
 ifrFailoverContext :: Lens' InstancesFailoverRequest (Maybe FailoverContext)
@@ -2927,7 +3168,8 @@ instance ToJSON InstancesFailoverRequest where
 -- | A BackupRun resource.
 --
 -- /See:/ 'backupRun' smart constructor.
-data BackupRun = BackupRun'
+data BackupRun =
+  BackupRun'
     { _brStatus          :: !(Maybe Text)
     , _brStartTime       :: !(Maybe DateTime')
     , _brKind            :: !Text
@@ -2940,7 +3182,9 @@ data BackupRun = BackupRun'
     , _brEnQueuedTime    :: !(Maybe DateTime')
     , _brDescription     :: !(Maybe Text)
     , _brInstance        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackupRun' with the minimum fields required to make a request.
 --
@@ -2972,7 +3216,7 @@ data BackupRun = BackupRun'
 backupRun
     :: BackupRun
 backupRun =
-    BackupRun'
+  BackupRun'
     { _brStatus = Nothing
     , _brStartTime = Nothing
     , _brKind = "sql#backupRun"
@@ -2986,6 +3230,7 @@ backupRun =
     , _brDescription = Nothing
     , _brInstance = Nothing
     }
+
 
 -- | The status of this run.
 brStatus :: Lens' BackupRun (Maybe Text)
@@ -3092,12 +3337,15 @@ instance ToJSON BackupRun where
 -- | An entry for an Access Control list.
 --
 -- /See:/ 'aclEntry' smart constructor.
-data ACLEntry = ACLEntry'
+data ACLEntry =
+  ACLEntry'
     { _aeKind           :: !Text
     , _aeValue          :: !(Maybe Text)
     , _aeName           :: !(Maybe Text)
     , _aeExpirationTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ACLEntry' with the minimum fields required to make a request.
 --
@@ -3113,12 +3361,13 @@ data ACLEntry = ACLEntry'
 aclEntry
     :: ACLEntry
 aclEntry =
-    ACLEntry'
+  ACLEntry'
     { _aeKind = "sql#aclEntry"
     , _aeValue = Nothing
     , _aeName = Nothing
     , _aeExpirationTime = Nothing
     }
+
 
 -- | This is always sql#aclEntry.
 aeKind :: Lens' ACLEntry Text
@@ -3160,10 +3409,13 @@ instance ToJSON ACLEntry where
 -- | Database flags for Cloud SQL instances.
 --
 -- /See:/ 'databaseFlags' smart constructor.
-data DatabaseFlags = DatabaseFlags'
+data DatabaseFlags =
+  DatabaseFlags'
     { _dfValue :: !(Maybe Text)
     , _dfName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatabaseFlags' with the minimum fields required to make a request.
 --
@@ -3174,11 +3426,8 @@ data DatabaseFlags = DatabaseFlags'
 -- * 'dfName'
 databaseFlags
     :: DatabaseFlags
-databaseFlags =
-    DatabaseFlags'
-    { _dfValue = Nothing
-    , _dfName = Nothing
-    }
+databaseFlags = DatabaseFlags' {_dfValue = Nothing, _dfName = Nothing}
+
 
 -- | The value of the flag. Booleans should be set to on for true and off for
 -- false. This field must be omitted if the flag doesn\'t take a value.
@@ -3208,13 +3457,16 @@ instance ToJSON DatabaseFlags where
 -- | A Google Cloud SQL service tier resource.
 --
 -- /See:/ 'tier' smart constructor.
-data Tier = Tier'
+data Tier =
+  Tier'
     { _tKind      :: !Text
     , _tTier      :: !(Maybe Text)
     , _tRegion    :: !(Maybe [Text])
     , _tDiskQuota :: !(Maybe (Textual Int64))
     , _tRAM       :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Tier' with the minimum fields required to make a request.
 --
@@ -3232,13 +3484,14 @@ data Tier = Tier'
 tier
     :: Tier
 tier =
-    Tier'
+  Tier'
     { _tKind = "sql#tier"
     , _tTier = Nothing
     , _tRegion = Nothing
     , _tDiskQuota = Nothing
     , _tRAM = Nothing
     }
+
 
 -- | This is always sql#tier.
 tKind :: Lens' Tier Text
@@ -3289,7 +3542,8 @@ instance ToJSON Tier where
 -- | Read-replica configuration specific to MySQL databases.
 --
 -- /See:/ 'mySQLReplicaConfiguration' smart constructor.
-data MySQLReplicaConfiguration = MySQLReplicaConfiguration'
+data MySQLReplicaConfiguration =
+  MySQLReplicaConfiguration'
     { _msqlrcVerifyServerCertificate :: !(Maybe Bool)
     , _msqlrcKind                    :: !Text
     , _msqlrcClientKey               :: !(Maybe Text)
@@ -3301,7 +3555,9 @@ data MySQLReplicaConfiguration = MySQLReplicaConfiguration'
     , _msqlrcCaCertificate           :: !(Maybe Text)
     , _msqlrcDumpFilePath            :: !(Maybe Text)
     , _msqlrcPassword                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MySQLReplicaConfiguration' with the minimum fields required to make a request.
 --
@@ -3331,7 +3587,7 @@ data MySQLReplicaConfiguration = MySQLReplicaConfiguration'
 mySQLReplicaConfiguration
     :: MySQLReplicaConfiguration
 mySQLReplicaConfiguration =
-    MySQLReplicaConfiguration'
+  MySQLReplicaConfiguration'
     { _msqlrcVerifyServerCertificate = Nothing
     , _msqlrcKind = "sql#mysqlReplicaConfiguration"
     , _msqlrcClientKey = Nothing
@@ -3344,6 +3600,7 @@ mySQLReplicaConfiguration =
     , _msqlrcDumpFilePath = Nothing
     , _msqlrcPassword = Nothing
     }
+
 
 -- | Whether or not to check the master\'s Common Name value in the
 -- certificate that it sends during the SSL handshake.
@@ -3459,10 +3716,13 @@ instance ToJSON MySQLReplicaConfiguration where
 -- | SslCertDetail.
 --
 -- /See:/ 'sslCertDetail' smart constructor.
-data SSLCertDetail = SSLCertDetail'
+data SSLCertDetail =
+  SSLCertDetail'
     { _scdCertInfo       :: !(Maybe SSLCert)
     , _scdCertPrivateKey :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertDetail' with the minimum fields required to make a request.
 --
@@ -3474,10 +3734,8 @@ data SSLCertDetail = SSLCertDetail'
 sslCertDetail
     :: SSLCertDetail
 sslCertDetail =
-    SSLCertDetail'
-    { _scdCertInfo = Nothing
-    , _scdCertPrivateKey = Nothing
-    }
+  SSLCertDetail' {_scdCertInfo = Nothing, _scdCertPrivateKey = Nothing}
+
 
 -- | The public information about the cert.
 scdCertInfo :: Lens' SSLCertDetail (Maybe SSLCert)
@@ -3508,9 +3766,12 @@ instance ToJSON SSLCertDetail where
 -- | Database instance restore backup request.
 --
 -- /See:/ 'instancesRestoreBackupRequest' smart constructor.
-newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest'
+newtype InstancesRestoreBackupRequest =
+  InstancesRestoreBackupRequest'
     { _irbrRestoreBackupContext :: Maybe RestoreBackupContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesRestoreBackupRequest' with the minimum fields required to make a request.
 --
@@ -3520,9 +3781,8 @@ newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest'
 instancesRestoreBackupRequest
     :: InstancesRestoreBackupRequest
 instancesRestoreBackupRequest =
-    InstancesRestoreBackupRequest'
-    { _irbrRestoreBackupContext = Nothing
-    }
+  InstancesRestoreBackupRequest' {_irbrRestoreBackupContext = Nothing}
+
 
 -- | Parameters required to perform the restore backup operation.
 irbrRestoreBackupContext :: Lens' InstancesRestoreBackupRequest (Maybe RestoreBackupContext)
@@ -3547,9 +3807,12 @@ instance ToJSON InstancesRestoreBackupRequest where
 -- | Database demote master request.
 --
 -- /See:/ 'instancesDemoteMasterRequest' smart constructor.
-newtype InstancesDemoteMasterRequest = InstancesDemoteMasterRequest'
+newtype InstancesDemoteMasterRequest =
+  InstancesDemoteMasterRequest'
     { _idmrDemoteMasterContext :: Maybe DemoteMasterContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesDemoteMasterRequest' with the minimum fields required to make a request.
 --
@@ -3559,9 +3822,8 @@ newtype InstancesDemoteMasterRequest = InstancesDemoteMasterRequest'
 instancesDemoteMasterRequest
     :: InstancesDemoteMasterRequest
 instancesDemoteMasterRequest =
-    InstancesDemoteMasterRequest'
-    { _idmrDemoteMasterContext = Nothing
-    }
+  InstancesDemoteMasterRequest' {_idmrDemoteMasterContext = Nothing}
+
 
 -- | Contains details about the demoteMaster operation.
 idmrDemoteMasterContext :: Lens' InstancesDemoteMasterRequest (Maybe DemoteMasterContext)
@@ -3586,11 +3848,14 @@ instance ToJSON InstancesDemoteMasterRequest where
 -- | Backup run list results.
 --
 -- /See:/ 'backupRunsListResponse' smart constructor.
-data BackupRunsListResponse = BackupRunsListResponse'
+data BackupRunsListResponse =
+  BackupRunsListResponse'
     { _brlrNextPageToken :: !(Maybe Text)
     , _brlrKind          :: !Text
     , _brlrItems         :: !(Maybe [BackupRun])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackupRunsListResponse' with the minimum fields required to make a request.
 --
@@ -3604,11 +3869,12 @@ data BackupRunsListResponse = BackupRunsListResponse'
 backupRunsListResponse
     :: BackupRunsListResponse
 backupRunsListResponse =
-    BackupRunsListResponse'
+  BackupRunsListResponse'
     { _brlrNextPageToken = Nothing
     , _brlrKind = "sql#backupRunsList"
     , _brlrItems = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -3649,11 +3915,14 @@ instance ToJSON BackupRunsListResponse where
 -- | Database instance operation error.
 --
 -- /See:/ 'operationError' smart constructor.
-data OperationError = OperationError'
+data OperationError =
+  OperationError'
     { _opeKind    :: !Text
     , _opeCode    :: !(Maybe Text)
     , _opeMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
@@ -3667,11 +3936,9 @@ data OperationError = OperationError'
 operationError
     :: OperationError
 operationError =
-    OperationError'
-    { _opeKind = "sql#operationError"
-    , _opeCode = Nothing
-    , _opeMessage = Nothing
-    }
+  OperationError'
+    {_opeKind = "sql#operationError", _opeCode = Nothing, _opeMessage = Nothing}
+
 
 -- | This is always sql#operationError.
 opeKind :: Lens' OperationError Text
@@ -3705,10 +3972,13 @@ instance ToJSON OperationError where
 -- | Database Instance truncate log context.
 --
 -- /See:/ 'truncateLogContext' smart constructor.
-data TruncateLogContext = TruncateLogContext'
+data TruncateLogContext =
+  TruncateLogContext'
     { _tlcKind    :: !Text
     , _tlcLogType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TruncateLogContext' with the minimum fields required to make a request.
 --
@@ -3720,10 +3990,9 @@ data TruncateLogContext = TruncateLogContext'
 truncateLogContext
     :: TruncateLogContext
 truncateLogContext =
-    TruncateLogContext'
-    { _tlcKind = "sql#truncateLogContext"
-    , _tlcLogType = Nothing
-    }
+  TruncateLogContext'
+    {_tlcKind = "sql#truncateLogContext", _tlcLogType = Nothing}
+
 
 -- | This is always sql#truncateLogContext.
 tlcKind :: Lens' TruncateLogContext Text
@@ -3753,9 +4022,12 @@ instance ToJSON TruncateLogContext where
 -- | Database instance clone request.
 --
 -- /See:/ 'instancesCloneRequest' smart constructor.
-newtype InstancesCloneRequest = InstancesCloneRequest'
+newtype InstancesCloneRequest =
+  InstancesCloneRequest'
     { _icrCloneContext :: Maybe CloneContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesCloneRequest' with the minimum fields required to make a request.
 --
@@ -3764,10 +4036,8 @@ newtype InstancesCloneRequest = InstancesCloneRequest'
 -- * 'icrCloneContext'
 instancesCloneRequest
     :: InstancesCloneRequest
-instancesCloneRequest =
-    InstancesCloneRequest'
-    { _icrCloneContext = Nothing
-    }
+instancesCloneRequest = InstancesCloneRequest' {_icrCloneContext = Nothing}
+
 
 -- | Contains details about the clone operation.
 icrCloneContext :: Lens' InstancesCloneRequest (Maybe CloneContext)
@@ -3790,11 +4060,14 @@ instance ToJSON InstancesCloneRequest where
 -- | Read-replica configuration for connecting to the master.
 --
 -- /See:/ 'replicaConfiguration' smart constructor.
-data ReplicaConfiguration = ReplicaConfiguration'
+data ReplicaConfiguration =
+  ReplicaConfiguration'
     { _rcFailoverTarget            :: !(Maybe Bool)
     , _rcKind                      :: !Text
     , _rcMysqlReplicaConfiguration :: !(Maybe MySQLReplicaConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReplicaConfiguration' with the minimum fields required to make a request.
 --
@@ -3808,11 +4081,12 @@ data ReplicaConfiguration = ReplicaConfiguration'
 replicaConfiguration
     :: ReplicaConfiguration
 replicaConfiguration =
-    ReplicaConfiguration'
+  ReplicaConfiguration'
     { _rcFailoverTarget = Nothing
     , _rcKind = "sql#replicaConfiguration"
     , _rcMysqlReplicaConfiguration = Nothing
     }
+
 
 -- | Specifies if the replica is the failover target. If the field is set to
 -- true the replica will be designated as a failover replica. In case the
@@ -3860,10 +4134,13 @@ instance ToJSON ReplicaConfiguration where
 -- | Database instance failover context.
 --
 -- /See:/ 'failoverContext' smart constructor.
-data FailoverContext = FailoverContext'
+data FailoverContext =
+  FailoverContext'
     { _fcSettingsVersion :: !(Maybe (Textual Int64))
     , _fcKind            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FailoverContext' with the minimum fields required to make a request.
 --
@@ -3875,10 +4152,9 @@ data FailoverContext = FailoverContext'
 failoverContext
     :: FailoverContext
 failoverContext =
-    FailoverContext'
-    { _fcSettingsVersion = Nothing
-    , _fcKind = "sql#failoverContext"
-    }
+  FailoverContext'
+    {_fcSettingsVersion = Nothing, _fcKind = "sql#failoverContext"}
+
 
 -- | The current settings version of this instance. Request will be rejected
 -- if this version doesn\'t match the current settings version.
@@ -3910,12 +4186,15 @@ instance ToJSON FailoverContext where
 -- | SslCert insert response.
 --
 -- /See:/ 'sslCertsInsertResponse' smart constructor.
-data SSLCertsInsertResponse = SSLCertsInsertResponse'
+data SSLCertsInsertResponse =
+  SSLCertsInsertResponse'
     { _scirServerCaCert :: !(Maybe SSLCert)
     , _scirOperation    :: !(Maybe Operation)
     , _scirKind         :: !Text
     , _scirClientCert   :: !(Maybe SSLCertDetail)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLCertsInsertResponse' with the minimum fields required to make a request.
 --
@@ -3931,12 +4210,13 @@ data SSLCertsInsertResponse = SSLCertsInsertResponse'
 sslCertsInsertResponse
     :: SSLCertsInsertResponse
 sslCertsInsertResponse =
-    SSLCertsInsertResponse'
+  SSLCertsInsertResponse'
     { _scirServerCaCert = Nothing
     , _scirOperation = Nothing
     , _scirKind = "sql#sslCertsInsert"
     , _scirClientCert = Nothing
     }
+
 
 -- | The server Certificate Authority\'s certificate. If this is missing you
 -- can force a new one to be generated by calling resetSslConfig method on
@@ -3985,12 +4265,15 @@ instance ToJSON SSLCertsInsertResponse where
 -- | Database instances list response.
 --
 -- /See:/ 'instancesListResponse' smart constructor.
-data InstancesListResponse = InstancesListResponse'
+data InstancesListResponse =
+  InstancesListResponse'
     { _ilrNextPageToken :: !(Maybe Text)
     , _ilrKind          :: !Text
     , _ilrItems         :: !(Maybe [DatabaseInstance])
     , _ilrWarnings      :: !(Maybe [APIWarning])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesListResponse' with the minimum fields required to make a request.
 --
@@ -4006,12 +4289,13 @@ data InstancesListResponse = InstancesListResponse'
 instancesListResponse
     :: InstancesListResponse
 instancesListResponse =
-    InstancesListResponse'
+  InstancesListResponse'
     { _ilrNextPageToken = Nothing
     , _ilrKind = "sql#instancesList"
     , _ilrItems = Nothing
     , _ilrWarnings = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -4060,10 +4344,13 @@ instance ToJSON InstancesListResponse where
 -- | Read-replica configuration for connecting to the on-premises master.
 --
 -- /See:/ 'demoteMasterConfiguration' smart constructor.
-data DemoteMasterConfiguration = DemoteMasterConfiguration'
+data DemoteMasterConfiguration =
+  DemoteMasterConfiguration'
     { _dmcKind                      :: !Text
     , _dmcMysqlReplicaConfiguration :: !(Maybe DemoteMasterMySQLReplicaConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DemoteMasterConfiguration' with the minimum fields required to make a request.
 --
@@ -4075,10 +4362,11 @@ data DemoteMasterConfiguration = DemoteMasterConfiguration'
 demoteMasterConfiguration
     :: DemoteMasterConfiguration
 demoteMasterConfiguration =
-    DemoteMasterConfiguration'
+  DemoteMasterConfiguration'
     { _dmcKind = "sql#demoteMasterConfiguration"
     , _dmcMysqlReplicaConfiguration = Nothing
     }
+
 
 -- | This is always sql#demoteMasterConfiguration.
 dmcKind :: Lens' DemoteMasterConfiguration Text
@@ -4114,13 +4402,16 @@ instance ToJSON DemoteMasterConfiguration where
 -- | Database instance backup configuration.
 --
 -- /See:/ 'backupConfiguration' smart constructor.
-data BackupConfiguration = BackupConfiguration'
+data BackupConfiguration =
+  BackupConfiguration'
     { _bcReplicationLogArchivingEnabled :: !(Maybe Bool)
     , _bcEnabled                        :: !(Maybe Bool)
     , _bcStartTime                      :: !(Maybe Text)
     , _bcKind                           :: !Text
     , _bcBinaryLogEnabled               :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackupConfiguration' with the minimum fields required to make a request.
 --
@@ -4138,13 +4429,14 @@ data BackupConfiguration = BackupConfiguration'
 backupConfiguration
     :: BackupConfiguration
 backupConfiguration =
-    BackupConfiguration'
+  BackupConfiguration'
     { _bcReplicationLogArchivingEnabled = Nothing
     , _bcEnabled = Nothing
     , _bcStartTime = Nothing
     , _bcKind = "sql#backupConfiguration"
     , _bcBinaryLogEnabled = Nothing
     }
+
 
 -- | Reserved for future use.
 bcReplicationLogArchivingEnabled :: Lens' BackupConfiguration (Maybe Bool)
@@ -4199,9 +4491,12 @@ instance ToJSON BackupConfiguration where
 -- | Database instance import request.
 --
 -- /See:/ 'instancesImportRequest' smart constructor.
-newtype InstancesImportRequest = InstancesImportRequest'
+newtype InstancesImportRequest =
+  InstancesImportRequest'
     { _iirImportContext :: Maybe ImportContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesImportRequest' with the minimum fields required to make a request.
 --
@@ -4210,10 +4505,8 @@ newtype InstancesImportRequest = InstancesImportRequest'
 -- * 'iirImportContext'
 instancesImportRequest
     :: InstancesImportRequest
-instancesImportRequest =
-    InstancesImportRequest'
-    { _iirImportContext = Nothing
-    }
+instancesImportRequest = InstancesImportRequest' {_iirImportContext = Nothing}
+
 
 -- | Contains details about the import operation.
 iirImportContext :: Lens' InstancesImportRequest (Maybe ImportContext)
@@ -4240,11 +4533,14 @@ instance ToJSON InstancesImportRequest where
 -- possible within the region. Only one location may be specified.
 --
 -- /See:/ 'locationPreference' smart constructor.
-data LocationPreference = LocationPreference'
+data LocationPreference =
+  LocationPreference'
     { _lpKind                 :: !Text
     , _lpFollowGaeApplication :: !(Maybe Text)
     , _lpZone                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationPreference' with the minimum fields required to make a request.
 --
@@ -4258,11 +4554,12 @@ data LocationPreference = LocationPreference'
 locationPreference
     :: LocationPreference
 locationPreference =
-    LocationPreference'
+  LocationPreference'
     { _lpKind = "sql#locationPreference"
     , _lpFollowGaeApplication = Nothing
     , _lpZone = Nothing
     }
+
 
 -- | This is always sql#locationPreference.
 lpKind :: Lens' LocationPreference Text
@@ -4301,10 +4598,13 @@ instance ToJSON LocationPreference where
 -- | Flags list response.
 --
 -- /See:/ 'flagsListResponse' smart constructor.
-data FlagsListResponse = FlagsListResponse'
+data FlagsListResponse =
+  FlagsListResponse'
     { _flrKind  :: !Text
     , _flrItems :: !(Maybe [Flag])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FlagsListResponse' with the minimum fields required to make a request.
 --
@@ -4316,10 +4616,8 @@ data FlagsListResponse = FlagsListResponse'
 flagsListResponse
     :: FlagsListResponse
 flagsListResponse =
-    FlagsListResponse'
-    { _flrKind = "sql#flagsList"
-    , _flrItems = Nothing
-    }
+  FlagsListResponse' {_flrKind = "sql#flagsList", _flrItems = Nothing}
+
 
 -- | This is always sql#flagsList.
 flrKind :: Lens' FlagsListResponse Text
@@ -4350,9 +4648,12 @@ instance ToJSON FlagsListResponse where
 -- | Instance truncate log request.
 --
 -- /See:/ 'instancesTruncateLogRequest' smart constructor.
-newtype InstancesTruncateLogRequest = InstancesTruncateLogRequest'
+newtype InstancesTruncateLogRequest =
+  InstancesTruncateLogRequest'
     { _itlrTruncateLogContext :: Maybe TruncateLogContext
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesTruncateLogRequest' with the minimum fields required to make a request.
 --
@@ -4362,9 +4663,8 @@ newtype InstancesTruncateLogRequest = InstancesTruncateLogRequest'
 instancesTruncateLogRequest
     :: InstancesTruncateLogRequest
 instancesTruncateLogRequest =
-    InstancesTruncateLogRequest'
-    { _itlrTruncateLogContext = Nothing
-    }
+  InstancesTruncateLogRequest' {_itlrTruncateLogContext = Nothing}
+
 
 -- | Contains details about the truncate log operation.
 itlrTruncateLogContext :: Lens' InstancesTruncateLogRequest (Maybe TruncateLogContext)
@@ -4389,11 +4689,14 @@ instance ToJSON InstancesTruncateLogRequest where
 -- | Options for exporting data as SQL statements.
 --
 -- /See:/ 'exportContextSQLExportOptions' smart constructor.
-data ExportContextSQLExportOptions = ExportContextSQLExportOptions'
+data ExportContextSQLExportOptions =
+  ExportContextSQLExportOptions'
     { _ecsqleoSchemaOnly         :: !(Maybe Bool)
     , _ecsqleoMysqlExportOptions :: !(Maybe ExportContextSQLExportOptionsMysqlExportOptions)
     , _ecsqleoTables             :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExportContextSQLExportOptions' with the minimum fields required to make a request.
 --
@@ -4407,11 +4710,12 @@ data ExportContextSQLExportOptions = ExportContextSQLExportOptions'
 exportContextSQLExportOptions
     :: ExportContextSQLExportOptions
 exportContextSQLExportOptions =
-    ExportContextSQLExportOptions'
+  ExportContextSQLExportOptions'
     { _ecsqleoSchemaOnly = Nothing
     , _ecsqleoMysqlExportOptions = Nothing
     , _ecsqleoTables = Nothing
     }
+
 
 -- | Export only schemas.
 ecsqleoSchemaOnly :: Lens' ExportContextSQLExportOptions (Maybe Bool)
@@ -4455,11 +4759,14 @@ instance ToJSON ExportContextSQLExportOptions where
 -- | Database instance restore from backup context.
 --
 -- /See:/ 'restoreBackupContext' smart constructor.
-data RestoreBackupContext = RestoreBackupContext'
+data RestoreBackupContext =
+  RestoreBackupContext'
     { _rbcInstanceId  :: !(Maybe Text)
     , _rbcBackupRunId :: !(Maybe (Textual Int64))
     , _rbcKind        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestoreBackupContext' with the minimum fields required to make a request.
 --
@@ -4473,11 +4780,12 @@ data RestoreBackupContext = RestoreBackupContext'
 restoreBackupContext
     :: RestoreBackupContext
 restoreBackupContext =
-    RestoreBackupContext'
+  RestoreBackupContext'
     { _rbcInstanceId = Nothing
     , _rbcBackupRunId = Nothing
     , _rbcKind = "sql#restoreBackupContext"
     }
+
 
 -- | The ID of the instance that the backup was taken from.
 rbcInstanceId :: Lens' RestoreBackupContext (Maybe Text)
@@ -4515,12 +4823,15 @@ instance ToJSON RestoreBackupContext where
 -- | Database instance demote master context.
 --
 -- /See:/ 'demoteMasterContext' smart constructor.
-data DemoteMasterContext = DemoteMasterContext'
+data DemoteMasterContext =
+  DemoteMasterContext'
     { _demVerifyGtidConsistency :: !(Maybe Bool)
     , _demKind                  :: !Text
     , _demMasterInstanceName    :: !(Maybe Text)
     , _demReplicaConfiguration  :: !(Maybe DemoteMasterConfiguration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DemoteMasterContext' with the minimum fields required to make a request.
 --
@@ -4536,12 +4847,13 @@ data DemoteMasterContext = DemoteMasterContext'
 demoteMasterContext
     :: DemoteMasterContext
 demoteMasterContext =
-    DemoteMasterContext'
+  DemoteMasterContext'
     { _demVerifyGtidConsistency = Nothing
     , _demKind = "sql#demoteMasterContext"
     , _demMasterInstanceName = Nothing
     , _demReplicaConfiguration = Nothing
     }
+
 
 -- | Verify GTID consistency for demote operation. Default value: True.
 -- Second Generation instances only. Setting this flag to false enables you
@@ -4598,9 +4910,12 @@ instance ToJSON DemoteMasterContext where
 -- single key value pair.
 --
 -- /See:/ 'settingsUserLabels' smart constructor.
-newtype SettingsUserLabels = SettingsUserLabels'
+newtype SettingsUserLabels =
+  SettingsUserLabels'
     { _sulAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsUserLabels' with the minimum fields required to make a request.
 --
@@ -4611,9 +4926,8 @@ settingsUserLabels
     :: HashMap Text Text -- ^ 'sulAddtional'
     -> SettingsUserLabels
 settingsUserLabels pSulAddtional_ =
-    SettingsUserLabels'
-    { _sulAddtional = _Coerce # pSulAddtional_
-    }
+  SettingsUserLabels' {_sulAddtional = _Coerce # pSulAddtional_}
+
 
 -- | An individual label entry, composed of a key and a value.
 sulAddtional :: Lens' SettingsUserLabels (HashMap Text Text)

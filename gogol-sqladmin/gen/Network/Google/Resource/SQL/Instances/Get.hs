@@ -55,10 +55,13 @@ type InstancesGetResource =
 -- | Retrieves a resource containing information about a Cloud SQL instance.
 --
 -- /See:/ 'instancesGet' smart constructor.
-data InstancesGet = InstancesGet'
+data InstancesGet =
+  InstancesGet'
     { _igProject  :: !Text
     , _igInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ instancesGet
     -> Text -- ^ 'igInstance'
     -> InstancesGet
 instancesGet pIgProject_ pIgInstance_ =
-    InstancesGet'
-    { _igProject = pIgProject_
-    , _igInstance = pIgInstance_
-    }
+  InstancesGet' {_igProject = pIgProject_, _igInstance = pIgInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 igProject :: Lens' InstancesGet Text

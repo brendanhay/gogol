@@ -67,7 +67,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestoreResource
 -- destroy_time will be cleared.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore'
     { _plkrckckvrXgafv          :: !(Maybe Xgafv)
     , _plkrckckvrUploadProtocol :: !(Maybe Text)
     , _plkrckckvrAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore = ProjectsLocat
     , _plkrckckvrPayload        :: !RestoreCryptoKeyVersionRequest
     , _plkrckckvrName           :: !Text
     , _plkrckckvrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore
     -> Text -- ^ 'plkrckckvrName'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore pPlkrckckvrPayload_ pPlkrckckvrName_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore'
     { _plkrckckvrXgafv = Nothing
     , _plkrckckvrUploadProtocol = Nothing
     , _plkrckckvrAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore pPlkrckckvrPayload_ 
     , _plkrckckvrName = pPlkrckckvrName_
     , _plkrckckvrCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckckvrXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore (Maybe Xgafv)
@@ -152,14 +156,16 @@ plkrckckvrCallback
       (\ s a -> s{_plkrckckvrCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore
              = CryptoKeyVersion
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore'{..}
           = go _plkrckckvrName _plkrckckvrXgafv

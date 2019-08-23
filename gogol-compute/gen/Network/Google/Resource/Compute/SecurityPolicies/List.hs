@@ -64,13 +64,16 @@ type SecurityPoliciesListResource =
 -- project.
 --
 -- /See:/ 'securityPoliciesList' smart constructor.
-data SecurityPoliciesList = SecurityPoliciesList'
+data SecurityPoliciesList =
+  SecurityPoliciesList'
     { _splOrderBy    :: !(Maybe Text)
     , _splProject    :: !Text
     , _splFilter     :: !(Maybe Text)
     , _splPageToken  :: !(Maybe Text)
     , _splMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ securityPoliciesList
     :: Text -- ^ 'splProject'
     -> SecurityPoliciesList
 securityPoliciesList pSplProject_ =
-    SecurityPoliciesList'
+  SecurityPoliciesList'
     { _splOrderBy = Nothing
     , _splProject = pSplProject_
     , _splFilter = Nothing
     , _splPageToken = Nothing
     , _splMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

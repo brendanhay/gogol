@@ -65,7 +65,8 @@ type ProjectsInstancesDatabasesListResource =
 -- | Lists Cloud Spanner databases.
 --
 -- /See:/ 'projectsInstancesDatabasesList' smart constructor.
-data ProjectsInstancesDatabasesList = ProjectsInstancesDatabasesList'
+data ProjectsInstancesDatabasesList =
+  ProjectsInstancesDatabasesList'
     { _pidlParent         :: !Text
     , _pidlXgafv          :: !(Maybe Xgafv)
     , _pidlUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsInstancesDatabasesList = ProjectsInstancesDatabasesList'
     , _pidlPageToken      :: !(Maybe Text)
     , _pidlPageSize       :: !(Maybe (Textual Int32))
     , _pidlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsInstancesDatabasesList
     :: Text -- ^ 'pidlParent'
     -> ProjectsInstancesDatabasesList
 projectsInstancesDatabasesList pPidlParent_ =
-    ProjectsInstancesDatabasesList'
+  ProjectsInstancesDatabasesList'
     { _pidlParent = pPidlParent_
     , _pidlXgafv = Nothing
     , _pidlUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsInstancesDatabasesList pPidlParent_ =
     , _pidlPageSize = Nothing
     , _pidlCallback = Nothing
     }
+
 
 -- | Required. The instance whose databases should be listed. Values are of
 -- the form \`projects\/\/instances\/\`.

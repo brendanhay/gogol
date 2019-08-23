@@ -55,10 +55,13 @@ type SSLPoliciesGetResource =
 -- | Lists all of the ordered rules present in a single specified policy.
 --
 -- /See:/ 'sslPoliciesGet' smart constructor.
-data SSLPoliciesGet = SSLPoliciesGet'
+data SSLPoliciesGet =
+  SSLPoliciesGet'
     { _spgSSLPolicy :: !Text
     , _spgProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLPoliciesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ sslPoliciesGet
     -> Text -- ^ 'spgProject'
     -> SSLPoliciesGet
 sslPoliciesGet pSpgSSLPolicy_ pSpgProject_ =
-    SSLPoliciesGet'
-    { _spgSSLPolicy = pSpgSSLPolicy_
-    , _spgProject = pSpgProject_
-    }
+  SSLPoliciesGet' {_spgSSLPolicy = pSpgSSLPolicy_, _spgProject = pSpgProject_}
+
 
 -- | Name of the SSL policy to update. The name must be 1-63 characters long,
 -- and comply with RFC1035.

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsUpdate' request conforms to.
 type RemarketingListsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -55,10 +55,13 @@ type RemarketingListsUpdateResource =
 -- | Updates an existing remarketing list.
 --
 -- /See:/ 'remarketingListsUpdate' smart constructor.
-data RemarketingListsUpdate = RemarketingListsUpdate'
+data RemarketingListsUpdate =
+  RemarketingListsUpdate'
     { _rluProFileId :: !(Textual Int64)
     , _rluPayload   :: !RemarketingList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingListsUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ remarketingListsUpdate
     -> RemarketingList -- ^ 'rluPayload'
     -> RemarketingListsUpdate
 remarketingListsUpdate pRluProFileId_ pRluPayload_ =
-    RemarketingListsUpdate'
-    { _rluProFileId = _Coerce # pRluProFileId_
-    , _rluPayload = pRluPayload_
-    }
+  RemarketingListsUpdate'
+    {_rluProFileId = _Coerce # pRluProFileId_, _rluPayload = pRluPayload_}
+
 
 -- | User profile ID associated with this request.
 rluProFileId :: Lens' RemarketingListsUpdate Int64

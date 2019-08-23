@@ -54,10 +54,13 @@ type AchievementConfigurationsUpdateResource =
 -- | Update the metadata of the achievement configuration with the given ID.
 --
 -- /See:/ 'achievementConfigurationsUpdate' smart constructor.
-data AchievementConfigurationsUpdate = AchievementConfigurationsUpdate'
+data AchievementConfigurationsUpdate =
+  AchievementConfigurationsUpdate'
     { _acuAchievementId :: !Text
     , _acuPayload       :: !AchievementConfiguration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementConfigurationsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ achievementConfigurationsUpdate
     -> AchievementConfiguration -- ^ 'acuPayload'
     -> AchievementConfigurationsUpdate
 achievementConfigurationsUpdate pAcuAchievementId_ pAcuPayload_ =
-    AchievementConfigurationsUpdate'
-    { _acuAchievementId = pAcuAchievementId_
-    , _acuPayload = pAcuPayload_
-    }
+  AchievementConfigurationsUpdate'
+    {_acuAchievementId = pAcuAchievementId_, _acuPayload = pAcuPayload_}
+
 
 -- | The ID of the achievement used by this method.
 acuAchievementId :: Lens' AchievementConfigurationsUpdate Text
@@ -88,7 +90,8 @@ acuPayload
   = lens _acuPayload (\ s a -> s{_acuPayload = a})
 
 instance GoogleRequest
-         AchievementConfigurationsUpdate where
+           AchievementConfigurationsUpdate
+         where
         type Rs AchievementConfigurationsUpdate =
              AchievementConfiguration
         type Scopes AchievementConfigurationsUpdate =

@@ -291,7 +291,10 @@ data QuotaOperationQuotaMode
       -- The operation allocates quota for the amount specified in the service
       -- configuration or specified using the quota metrics. If the amount is
       -- higher than the available quota, request does not fail but all available
-      -- quota will be allocated.
+      -- quota will be allocated. For rate quota, BEST_EFFORT will continue to
+      -- deduct from other groups even if one does not have enough quota. For
+      -- allocation, it will find the minimum available amount across all groups
+      -- and deduct that amount from all the affected groups.
     | CheckOnly
       -- ^ @CHECK_ONLY@
       -- For AllocateQuota request, only checks if there is enough quota
@@ -391,15 +394,26 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
+-- | The type of the consumer which should have been defined in [Google
+-- Resource Manager](https:\/\/cloud.google.com\/resource-manager\/).
 data ConsumerInfoType
     = ConsumerTypeUnspecified
       -- ^ @CONSUMER_TYPE_UNSPECIFIED@
+      -- This is never used.
     | Project
       -- ^ @PROJECT@
+      -- The consumer is a Google Cloud Project.
     | Folder
       -- ^ @FOLDER@
+      -- The consumer is a Google Cloud Folder.
     | Organization
       -- ^ @ORGANIZATION@
+      -- The consumer is a Google Cloud Organization.
+    | ServiceSpecific
+      -- ^ @SERVICE_SPECIFIC@
+      -- Service-specific resource container which is defined by the service
+      -- producer to offer their users the ability to manage service control
+      -- functionalities at a finer level of granularity than the PROJECT.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ConsumerInfoType
@@ -410,6 +424,7 @@ instance FromHttpApiData ConsumerInfoType where
         "PROJECT" -> Right Project
         "FOLDER" -> Right Folder
         "ORGANIZATION" -> Right Organization
+        "SERVICE_SPECIFIC" -> Right ServiceSpecific
         x -> Left ("Unable to parse ConsumerInfoType from: " <> x)
 
 instance ToHttpApiData ConsumerInfoType where
@@ -418,6 +433,7 @@ instance ToHttpApiData ConsumerInfoType where
         Project -> "PROJECT"
         Folder -> "FOLDER"
         Organization -> "ORGANIZATION"
+        ServiceSpecific -> "SERVICE_SPECIFIC"
 
 instance FromJSON ConsumerInfoType where
     parseJSON = parseJSONText "ConsumerInfoType"

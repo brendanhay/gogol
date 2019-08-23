@@ -20,17 +20,79 @@ module Network.Google.BinaryAuthorization.Types.Product where
 import           Network.Google.BinaryAuthorization.Types.Sum
 import           Network.Google.Prelude
 
+-- | A public key in the PkixPublicKey format (see
+-- https:\/\/tools.ietf.org\/html\/rfc5280#section-4.1.2.7 for details).
+-- Public keys of this type are typically textually encoded using the PEM
+-- format.
+--
+-- /See:/ 'pkixPublicKey' smart constructor.
+data PkixPublicKey =
+  PkixPublicKey'
+    { _ppkPublicKeyPem       :: !(Maybe Text)
+    , _ppkSignatureAlgorithm :: !(Maybe PkixPublicKeySignatureAlgorithm)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PkixPublicKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppkPublicKeyPem'
+--
+-- * 'ppkSignatureAlgorithm'
+pkixPublicKey
+    :: PkixPublicKey
+pkixPublicKey =
+  PkixPublicKey' {_ppkPublicKeyPem = Nothing, _ppkSignatureAlgorithm = Nothing}
+
+
+-- | A PEM-encoded public key, as described in
+-- https:\/\/tools.ietf.org\/html\/rfc7468#section-13
+ppkPublicKeyPem :: Lens' PkixPublicKey (Maybe Text)
+ppkPublicKeyPem
+  = lens _ppkPublicKeyPem
+      (\ s a -> s{_ppkPublicKeyPem = a})
+
+-- | The signature algorithm used to verify a message against a signature
+-- using this key. These signature algorithm must match the structure and
+-- any object identifiers encoded in \`public_key_pem\` (i.e. this
+-- algorithm must match that of the public key).
+ppkSignatureAlgorithm :: Lens' PkixPublicKey (Maybe PkixPublicKeySignatureAlgorithm)
+ppkSignatureAlgorithm
+  = lens _ppkSignatureAlgorithm
+      (\ s a -> s{_ppkSignatureAlgorithm = a})
+
+instance FromJSON PkixPublicKey where
+        parseJSON
+          = withObject "PkixPublicKey"
+              (\ o ->
+                 PkixPublicKey' <$>
+                   (o .:? "publicKeyPem") <*>
+                     (o .:? "signatureAlgorithm"))
+
+instance ToJSON PkixPublicKey where
+        toJSON PkixPublicKey'{..}
+          = object
+              (catMaybes
+                 [("publicKeyPem" .=) <$> _ppkPublicKeyPem,
+                  ("signatureAlgorithm" .=) <$>
+                    _ppkSignatureAlgorithm])
+
 -- | Represents an expression text. Example: title: \"User account presence\"
 -- description: \"Determines whether the request has a user account\"
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -46,12 +108,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -100,11 +163,14 @@ instance ToJSON Expr where
 -- Note created by the user.
 --
 -- /See:/ 'userOwnedDrydockNote' smart constructor.
-data UserOwnedDrydockNote = UserOwnedDrydockNote'
+data UserOwnedDrydockNote =
+  UserOwnedDrydockNote'
     { _uodnDelegationServiceAccountEmail :: !(Maybe Text)
     , _uodnPublicKeys                    :: !(Maybe [AttestorPublicKey])
     , _uodnNoteReference                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserOwnedDrydockNote' with the minimum fields required to make a request.
 --
@@ -118,11 +184,12 @@ data UserOwnedDrydockNote = UserOwnedDrydockNote'
 userOwnedDrydockNote
     :: UserOwnedDrydockNote
 userOwnedDrydockNote =
-    UserOwnedDrydockNote'
+  UserOwnedDrydockNote'
     { _uodnDelegationServiceAccountEmail = Nothing
     , _uodnPublicKeys = Nothing
     , _uodnNoteReference = Nothing
     }
+
 
 -- | Output only. This field will contain the service account email address
 -- that this Attestor will use as the principal when querying Container
@@ -187,14 +254,16 @@ instance ToJSON UserOwnedDrydockNote where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -205,9 +274,12 @@ instance ToJSON Empty where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
+newtype SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprPolicy :: Maybe IAMPolicy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -216,10 +288,8 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
-setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
-    }
+setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -241,10 +311,13 @@ instance ToJSON SetIAMPolicyRequest where
 -- | Response message for BinauthzManagementService.ListAttestors.
 --
 -- /See:/ 'listAttestorsResponse' smart constructor.
-data ListAttestorsResponse = ListAttestorsResponse'
+data ListAttestorsResponse =
+  ListAttestorsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAttestors     :: !(Maybe [Attestor])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAttestorsResponse' with the minimum fields required to make a request.
 --
@@ -256,10 +329,8 @@ data ListAttestorsResponse = ListAttestorsResponse'
 listAttestorsResponse
     :: ListAttestorsResponse
 listAttestorsResponse =
-    ListAttestorsResponse'
-    { _larNextPageToken = Nothing
-    , _larAttestors = Nothing
-    }
+  ListAttestorsResponse' {_larNextPageToken = Nothing, _larAttestors = Nothing}
+
 
 -- | A token to retrieve the next page of results. Pass this value in the
 -- ListAttestorsRequest.page_token field in the subsequent call to the
@@ -295,9 +366,12 @@ instance ToJSON ListAttestorsResponse where
 -- rules.
 --
 -- /See:/ 'admissionWhiteListPattern' smart constructor.
-newtype AdmissionWhiteListPattern = AdmissionWhiteListPattern'
+newtype AdmissionWhiteListPattern =
+  AdmissionWhiteListPattern'
     { _awlpNamePattern :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdmissionWhiteListPattern' with the minimum fields required to make a request.
 --
@@ -307,9 +381,8 @@ newtype AdmissionWhiteListPattern = AdmissionWhiteListPattern'
 admissionWhiteListPattern
     :: AdmissionWhiteListPattern
 admissionWhiteListPattern =
-    AdmissionWhiteListPattern'
-    { _awlpNamePattern = Nothing
-    }
+  AdmissionWhiteListPattern' {_awlpNamePattern = Nothing}
+
 
 -- | An image name pattern to whitelist, in the form
 -- \`registry\/path\/to\/image\`. This supports a trailing \`*\` as a
@@ -338,11 +411,14 @@ instance ToJSON AdmissionWhiteListPattern where
 -- admission rules and will never block a pod creation.
 --
 -- /See:/ 'admissionRule' smart constructor.
-data AdmissionRule = AdmissionRule'
+data AdmissionRule =
+  AdmissionRule'
     { _arEnforcementMode       :: !(Maybe AdmissionRuleEnforcementMode)
     , _arEvaluationMode        :: !(Maybe AdmissionRuleEvaluationMode)
     , _arRequireAttestationsBy :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdmissionRule' with the minimum fields required to make a request.
 --
@@ -356,11 +432,12 @@ data AdmissionRule = AdmissionRule'
 admissionRule
     :: AdmissionRule
 admissionRule =
-    AdmissionRule'
+  AdmissionRule'
     { _arEnforcementMode = Nothing
     , _arEvaluationMode = Nothing
     , _arRequireAttestationsBy = Nothing
     }
+
 
 -- | Required. The action when a pod creation is denied by the admission
 -- rule.
@@ -410,9 +487,12 @@ instance ToJSON AdmissionRule where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -422,9 +502,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -468,11 +547,14 @@ instance ToJSON TestIAMPermissionsRequest where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'iamPolicy' smart constructor.
-data IAMPolicy = IAMPolicy'
+data IAMPolicy =
+  IAMPolicy'
     { _ipEtag     :: !(Maybe Bytes)
     , _ipVersion  :: !(Maybe (Textual Int32))
     , _ipBindings :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IAMPolicy' with the minimum fields required to make a request.
 --
@@ -486,11 +568,8 @@ data IAMPolicy = IAMPolicy'
 iamPolicy
     :: IAMPolicy
 iamPolicy =
-    IAMPolicy'
-    { _ipEtag = Nothing
-    , _ipVersion = Nothing
-    , _ipBindings = Nothing
-    }
+  IAMPolicy' {_ipEtag = Nothing, _ipVersion = Nothing, _ipBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -536,19 +615,25 @@ instance ToJSON IAMPolicy where
                   ("version" .=) <$> _ipVersion,
                   ("bindings" .=) <$> _ipBindings])
 
--- | An attestator public key that will be used to verify attestations signed
+-- | An attestor public key that will be used to verify attestations signed
 -- by this attestor.
 --
 -- /See:/ 'attestorPublicKey' smart constructor.
-data AttestorPublicKey = AttestorPublicKey'
-    { _apkAsciiArmoredPgpPublicKey :: !(Maybe Text)
+data AttestorPublicKey =
+  AttestorPublicKey'
+    { _apkPkixPublicKey            :: !(Maybe PkixPublicKey)
+    , _apkAsciiArmoredPgpPublicKey :: !(Maybe Text)
     , _apkId                       :: !(Maybe Text)
     , _apkComment                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AttestorPublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apkPkixPublicKey'
 --
 -- * 'apkAsciiArmoredPgpPublicKey'
 --
@@ -558,23 +643,42 @@ data AttestorPublicKey = AttestorPublicKey'
 attestorPublicKey
     :: AttestorPublicKey
 attestorPublicKey =
-    AttestorPublicKey'
-    { _apkAsciiArmoredPgpPublicKey = Nothing
+  AttestorPublicKey'
+    { _apkPkixPublicKey = Nothing
+    , _apkAsciiArmoredPgpPublicKey = Nothing
     , _apkId = Nothing
     , _apkComment = Nothing
     }
 
+
+-- | A raw PKIX SubjectPublicKeyInfo format public key. NOTE: \`id\` may be
+-- explicitly provided by the caller when using this type of public key,
+-- but it MUST be a valid RFC3986 URI. If \`id\` is left blank, a default
+-- one will be computed based on the digest of the DER encoding of the
+-- public key.
+apkPkixPublicKey :: Lens' AttestorPublicKey (Maybe PkixPublicKey)
+apkPkixPublicKey
+  = lens _apkPkixPublicKey
+      (\ s a -> s{_apkPkixPublicKey = a})
+
 -- | ASCII-armored representation of a PGP public key, as the entire output
 -- by the command \`gpg --export --armor foo\'example.com\` (either LF or
--- CRLF line endings).
+-- CRLF line endings). When using this field, \`id\` should be left blank.
+-- The BinAuthz API handlers will calculate the ID and fill it in
+-- automatically. BinAuthz computes this ID as the OpenPGP RFC4880 V4
+-- fingerprint, represented as upper-case hex. If \`id\` is provided by the
+-- caller, it will be overwritten by the API-calculated ID.
 apkAsciiArmoredPgpPublicKey :: Lens' AttestorPublicKey (Maybe Text)
 apkAsciiArmoredPgpPublicKey
   = lens _apkAsciiArmoredPgpPublicKey
       (\ s a -> s{_apkAsciiArmoredPgpPublicKey = a})
 
--- | Output only. This field will be overwritten with key ID information, for
--- example, an identifier extracted from a PGP public key. This field may
--- not be updated.
+-- | The ID of this public key. Signatures verified by BinAuthz must include
+-- the ID of the public key that can be used to verify them, and that ID
+-- must match the contents of this field exactly. Additional restrictions
+-- on this field can be imposed based on which public key type is
+-- encapsulated. See the documentation on \`public_key\` cases below for
+-- details.
 apkId :: Lens' AttestorPublicKey (Maybe Text)
 apkId = lens _apkId (\ s a -> s{_apkId = a})
 
@@ -588,14 +692,17 @@ instance FromJSON AttestorPublicKey where
           = withObject "AttestorPublicKey"
               (\ o ->
                  AttestorPublicKey' <$>
-                   (o .:? "asciiArmoredPgpPublicKey") <*> (o .:? "id")
+                   (o .:? "pkixPublicKey") <*>
+                     (o .:? "asciiArmoredPgpPublicKey")
+                     <*> (o .:? "id")
                      <*> (o .:? "comment"))
 
 instance ToJSON AttestorPublicKey where
         toJSON AttestorPublicKey'{..}
           = object
               (catMaybes
-                 [("asciiArmoredPgpPublicKey" .=) <$>
+                 [("pkixPublicKey" .=) <$> _apkPkixPublicKey,
+                  ("asciiArmoredPgpPublicKey" .=) <$>
                     _apkAsciiArmoredPgpPublicKey,
                   ("id" .=) <$> _apkId,
                   ("comment" .=) <$> _apkComment])
@@ -603,9 +710,12 @@ instance ToJSON AttestorPublicKey where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -615,9 +725,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -644,14 +753,18 @@ instance ToJSON TestIAMPermissionsResponse where
 -- | A policy for container image binary authorization.
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pDefaultAdmissionRule       :: !(Maybe AdmissionRule)
     , _pAdmissionWhiteListPatterns :: !(Maybe [AdmissionWhiteListPattern])
     , _pClusterAdmissionRules      :: !(Maybe PolicyClusterAdmissionRules)
     , _pUpdateTime                 :: !(Maybe DateTime')
     , _pName                       :: !(Maybe Text)
+    , _pGlobalPolicyEvaluationMode :: !(Maybe PolicyGlobalPolicyEvaluationMode)
     , _pDescription                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -667,21 +780,26 @@ data Policy = Policy'
 --
 -- * 'pName'
 --
+-- * 'pGlobalPolicyEvaluationMode'
+--
 -- * 'pDescription'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pDefaultAdmissionRule = Nothing
     , _pAdmissionWhiteListPatterns = Nothing
     , _pClusterAdmissionRules = Nothing
     , _pUpdateTime = Nothing
     , _pName = Nothing
+    , _pGlobalPolicyEvaluationMode = Nothing
     , _pDescription = Nothing
     }
 
--- | Required. Default admission rule for a cluster without a per-cluster
--- admission rule.
+
+-- | Required. Default admission rule for a cluster without a per-cluster,
+-- per- kubernetes-service-account, or per-istio-service-identity admission
+-- rule.
 pDefaultAdmissionRule :: Lens' Policy (Maybe AdmissionRule)
 pDefaultAdmissionRule
   = lens _pDefaultAdmissionRule
@@ -720,6 +838,15 @@ pUpdateTime
 pName :: Lens' Policy (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
+-- | Optional. Controls the evaluation of a Google-maintained global
+-- admission policy for common system-level images. Images not covered by
+-- the global policy will be subject to the project admission policy. This
+-- setting has no effect when specified inside a global admission policy.
+pGlobalPolicyEvaluationMode :: Lens' Policy (Maybe PolicyGlobalPolicyEvaluationMode)
+pGlobalPolicyEvaluationMode
+  = lens _pGlobalPolicyEvaluationMode
+      (\ s a -> s{_pGlobalPolicyEvaluationMode = a})
+
 -- | Optional. A descriptive comment.
 pDescription :: Lens' Policy (Maybe Text)
 pDescription
@@ -735,6 +862,7 @@ instance FromJSON Policy where
                      <*> (o .:? "clusterAdmissionRules")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
+                     <*> (o .:? "globalPolicyEvaluationMode")
                      <*> (o .:? "description"))
 
 instance ToJSON Policy where
@@ -749,6 +877,8 @@ instance ToJSON Policy where
                     _pClusterAdmissionRules,
                   ("updateTime" .=) <$> _pUpdateTime,
                   ("name" .=) <$> _pName,
+                  ("globalPolicyEvaluationMode" .=) <$>
+                    _pGlobalPolicyEvaluationMode,
                   ("description" .=) <$> _pDescription])
 
 -- | Optional. Per-cluster admission rules. Cluster spec format:
@@ -759,9 +889,12 @@ instance ToJSON Policy where
 -- https:\/\/cloud.google.com\/container-engine\/reference\/rest\/v1\/projects.zones.clusters.
 --
 -- /See:/ 'policyClusterAdmissionRules' smart constructor.
-newtype PolicyClusterAdmissionRules = PolicyClusterAdmissionRules'
+newtype PolicyClusterAdmissionRules =
+  PolicyClusterAdmissionRules'
     { _pcarAddtional :: HashMap Text AdmissionRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PolicyClusterAdmissionRules' with the minimum fields required to make a request.
 --
@@ -772,9 +905,8 @@ policyClusterAdmissionRules
     :: HashMap Text AdmissionRule -- ^ 'pcarAddtional'
     -> PolicyClusterAdmissionRules
 policyClusterAdmissionRules pPcarAddtional_ =
-    PolicyClusterAdmissionRules'
-    { _pcarAddtional = _Coerce # pPcarAddtional_
-    }
+  PolicyClusterAdmissionRules' {_pcarAddtional = _Coerce # pPcarAddtional_}
+
 
 pcarAddtional :: Lens' PolicyClusterAdmissionRules (HashMap Text AdmissionRule)
 pcarAddtional
@@ -795,12 +927,15 @@ instance ToJSON PolicyClusterAdmissionRules where
 -- attestor cannot be modified except where indicated.
 --
 -- /See:/ 'attestor' smart constructor.
-data Attestor = Attestor'
+data Attestor =
+  Attestor'
     { _aUserOwnedDrydockNote :: !(Maybe UserOwnedDrydockNote)
     , _aUpdateTime           :: !(Maybe DateTime')
     , _aName                 :: !(Maybe Text)
     , _aDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Attestor' with the minimum fields required to make a request.
 --
@@ -816,12 +951,13 @@ data Attestor = Attestor'
 attestor
     :: Attestor
 attestor =
-    Attestor'
+  Attestor'
     { _aUserOwnedDrydockNote = Nothing
     , _aUpdateTime = Nothing
     , _aName = Nothing
     , _aDescription = Nothing
     }
+
 
 -- | A Drydock ATTESTATION_AUTHORITY Note, created by the user.
 aUserOwnedDrydockNote :: Lens' Attestor (Maybe UserOwnedDrydockNote)
@@ -869,11 +1005,14 @@ instance ToJSON Attestor where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -887,11 +1026,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -904,8 +1040,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -918,10 +1054,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

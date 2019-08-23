@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsPatch' request conforms to.
 type PlacementGroupsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -59,11 +59,14 @@ type PlacementGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'placementGroupsPatch' smart constructor.
-data PlacementGroupsPatch = PlacementGroupsPatch'
+data PlacementGroupsPatch =
+  PlacementGroupsPatch'
     { _pgpProFileId :: !(Textual Int64)
     , _pgpPayload   :: !PlacementGroup
     , _pgpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementGroupsPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ placementGroupsPatch
     -> Int64 -- ^ 'pgpId'
     -> PlacementGroupsPatch
 placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
-    PlacementGroupsPatch'
+  PlacementGroupsPatch'
     { _pgpProFileId = _Coerce # pPgpProFileId_
     , _pgpPayload = pPgpPayload_
     , _pgpId = _Coerce # pPgpId_
     }
+
 
 -- | User profile ID associated with this request.
 pgpProFileId :: Lens' PlacementGroupsPatch Int64

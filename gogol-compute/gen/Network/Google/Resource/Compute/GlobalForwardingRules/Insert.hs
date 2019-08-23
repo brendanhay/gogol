@@ -60,11 +60,14 @@ type GlobalForwardingRulesInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'globalForwardingRulesInsert' smart constructor.
-data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert'
+data GlobalForwardingRulesInsert =
+  GlobalForwardingRulesInsert'
     { _gfriRequestId :: !(Maybe Text)
     , _gfriProject   :: !Text
     , _gfriPayload   :: !ForwardingRule
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalForwardingRulesInsert' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ globalForwardingRulesInsert
     -> ForwardingRule -- ^ 'gfriPayload'
     -> GlobalForwardingRulesInsert
 globalForwardingRulesInsert pGfriProject_ pGfriPayload_ =
-    GlobalForwardingRulesInsert'
+  GlobalForwardingRulesInsert'
     { _gfriRequestId = Nothing
     , _gfriProject = pGfriProject_
     , _gfriPayload = pGfriPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

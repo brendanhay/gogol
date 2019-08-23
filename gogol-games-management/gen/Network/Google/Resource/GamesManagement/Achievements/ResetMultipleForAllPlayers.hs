@@ -57,9 +57,12 @@ type AchievementsResetMultipleForAllPlayersResource =
 -- achievements may be reset.
 --
 -- /See:/ 'achievementsResetMultipleForAllPlayers' smart constructor.
-newtype AchievementsResetMultipleForAllPlayers = AchievementsResetMultipleForAllPlayers'
+newtype AchievementsResetMultipleForAllPlayers =
+  AchievementsResetMultipleForAllPlayers'
     { _armfapPayload :: AchievementResetMultipleForAllRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
@@ -70,9 +73,8 @@ achievementsResetMultipleForAllPlayers
     :: AchievementResetMultipleForAllRequest -- ^ 'armfapPayload'
     -> AchievementsResetMultipleForAllPlayers
 achievementsResetMultipleForAllPlayers pArmfapPayload_ =
-    AchievementsResetMultipleForAllPlayers'
-    { _armfapPayload = pArmfapPayload_
-    }
+  AchievementsResetMultipleForAllPlayers' {_armfapPayload = pArmfapPayload_}
+
 
 -- | Multipart request metadata.
 armfapPayload :: Lens' AchievementsResetMultipleForAllPlayers AchievementResetMultipleForAllRequest
@@ -81,7 +83,8 @@ armfapPayload
       (\ s a -> s{_armfapPayload = a})
 
 instance GoogleRequest
-         AchievementsResetMultipleForAllPlayers where
+           AchievementsResetMultipleForAllPlayers
+         where
         type Rs AchievementsResetMultipleForAllPlayers = ()
         type Scopes AchievementsResetMultipleForAllPlayers =
              '["https://www.googleapis.com/auth/games"]

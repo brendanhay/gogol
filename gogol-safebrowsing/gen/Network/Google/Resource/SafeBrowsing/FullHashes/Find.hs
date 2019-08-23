@@ -61,14 +61,17 @@ type FullHashesFindResource =
 -- | Finds the full hashes that match the requested hash prefixes.
 --
 -- /See:/ 'fullHashesFind' smart constructor.
-data FullHashesFind = FullHashesFind'
+data FullHashesFind =
+  FullHashesFind'
     { _fhfXgafv          :: !(Maybe Xgafv)
     , _fhfUploadProtocol :: !(Maybe Text)
     , _fhfAccessToken    :: !(Maybe Text)
     , _fhfUploadType     :: !(Maybe Text)
     , _fhfPayload        :: !FindFullHashesRequest
     , _fhfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FullHashesFind' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ fullHashesFind
     :: FindFullHashesRequest -- ^ 'fhfPayload'
     -> FullHashesFind
 fullHashesFind pFhfPayload_ =
-    FullHashesFind'
+  FullHashesFind'
     { _fhfXgafv = Nothing
     , _fhfUploadProtocol = Nothing
     , _fhfAccessToken = Nothing
@@ -97,6 +100,7 @@ fullHashesFind pFhfPayload_ =
     , _fhfPayload = pFhfPayload_
     , _fhfCallback = Nothing
     }
+
 
 -- | V1 error format.
 fhfXgafv :: Lens' FullHashesFind (Maybe Xgafv)

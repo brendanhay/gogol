@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Signs a JWT using a service account\'s system-managed private key. If no
--- expiry time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an
--- an expiry time of one hour by default. If you request an expiry time of
+-- **Note**: This method is in the process of being deprecated. Call the
+-- [\`signJwt()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signJwt)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- JWT using a service account\'s system-managed private key. If no expiry
+-- time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an an
+-- expiry time of one hour by default. If you request an expiry time of
 -- more than one hour, the request will fail.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signJwt@.
@@ -62,13 +65,17 @@ type ProjectsServiceAccountsSignJwtResource =
                      ReqBody '[JSON] SignJwtRequest :>
                        Post '[JSON] SignJwtResponse
 
--- | Signs a JWT using a service account\'s system-managed private key. If no
--- expiry time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an
--- an expiry time of one hour by default. If you request an expiry time of
+-- | **Note**: This method is in the process of being deprecated. Call the
+-- [\`signJwt()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signJwt)
+-- method of the Cloud IAM Service Account Credentials API instead. Signs a
+-- JWT using a service account\'s system-managed private key. If no expiry
+-- time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an an
+-- expiry time of one hour by default. If you request an expiry time of
 -- more than one hour, the request will fail.
 --
 -- /See:/ 'projectsServiceAccountsSignJwt' smart constructor.
-data ProjectsServiceAccountsSignJwt = ProjectsServiceAccountsSignJwt'
+data ProjectsServiceAccountsSignJwt =
+  ProjectsServiceAccountsSignJwt'
     { _psasjXgafv          :: !(Maybe Xgafv)
     , _psasjUploadProtocol :: !(Maybe Text)
     , _psasjAccessToken    :: !(Maybe Text)
@@ -76,7 +83,9 @@ data ProjectsServiceAccountsSignJwt = ProjectsServiceAccountsSignJwt'
     , _psasjPayload        :: !SignJwtRequest
     , _psasjName           :: !Text
     , _psasjCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsSignJwt' with the minimum fields required to make a request.
 --
@@ -100,7 +109,7 @@ projectsServiceAccountsSignJwt
     -> Text -- ^ 'psasjName'
     -> ProjectsServiceAccountsSignJwt
 projectsServiceAccountsSignJwt pPsasjPayload_ pPsasjName_ =
-    ProjectsServiceAccountsSignJwt'
+  ProjectsServiceAccountsSignJwt'
     { _psasjXgafv = Nothing
     , _psasjUploadProtocol = Nothing
     , _psasjAccessToken = Nothing
@@ -109,6 +118,7 @@ projectsServiceAccountsSignJwt pPsasjPayload_ pPsasjName_ =
     , _psasjName = pPsasjName_
     , _psasjCallback = Nothing
     }
+
 
 -- | V1 error format.
 psasjXgafv :: Lens' ProjectsServiceAccountsSignJwt (Maybe Xgafv)

@@ -68,7 +68,8 @@ type ProjectsJobsDebugGetConfigResource =
 -- | Get encoded debug configuration for component. Not cacheable.
 --
 -- /See:/ 'projectsJobsDebugGetConfig' smart constructor.
-data ProjectsJobsDebugGetConfig = ProjectsJobsDebugGetConfig'
+data ProjectsJobsDebugGetConfig =
+  ProjectsJobsDebugGetConfig'
     { _pjdgcXgafv          :: !(Maybe Xgafv)
     , _pjdgcJobId          :: !Text
     , _pjdgcUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsJobsDebugGetConfig = ProjectsJobsDebugGetConfig'
     , _pjdgcPayload        :: !GetDebugConfigRequest
     , _pjdgcProjectId      :: !Text
     , _pjdgcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsDebugGetConfig' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsJobsDebugGetConfig
     -> Text -- ^ 'pjdgcProjectId'
     -> ProjectsJobsDebugGetConfig
 projectsJobsDebugGetConfig pPjdgcJobId_ pPjdgcPayload_ pPjdgcProjectId_ =
-    ProjectsJobsDebugGetConfig'
+  ProjectsJobsDebugGetConfig'
     { _pjdgcXgafv = Nothing
     , _pjdgcJobId = pPjdgcJobId_
     , _pjdgcUploadProtocol = Nothing
@@ -114,6 +117,7 @@ projectsJobsDebugGetConfig pPjdgcJobId_ pPjdgcPayload_ pPjdgcProjectId_ =
     , _pjdgcProjectId = pPjdgcProjectId_
     , _pjdgcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjdgcXgafv :: Lens' ProjectsJobsDebugGetConfig (Maybe Xgafv)

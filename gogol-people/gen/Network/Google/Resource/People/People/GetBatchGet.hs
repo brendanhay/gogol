@@ -71,7 +71,8 @@ type PeopleGetBatchGetResource =
 -- The request throws a 400 error if \'personFields\' is not specified.
 --
 -- /See:/ 'peopleGetBatchGet' smart constructor.
-data PeopleGetBatchGet = PeopleGetBatchGet'
+data PeopleGetBatchGet =
+  PeopleGetBatchGet'
     { _pgbgXgafv                   :: !(Maybe Xgafv)
     , _pgbgUploadProtocol          :: !(Maybe Text)
     , _pgbgRequestMaskIncludeField :: !(Maybe GFieldMask)
@@ -80,7 +81,9 @@ data PeopleGetBatchGet = PeopleGetBatchGet'
     , _pgbgPersonFields            :: !(Maybe GFieldMask)
     , _pgbgResourceNames           :: !(Maybe [Text])
     , _pgbgCallback                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleGetBatchGet' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ data PeopleGetBatchGet = PeopleGetBatchGet'
 peopleGetBatchGet
     :: PeopleGetBatchGet
 peopleGetBatchGet =
-    PeopleGetBatchGet'
+  PeopleGetBatchGet'
     { _pgbgXgafv = Nothing
     , _pgbgUploadProtocol = Nothing
     , _pgbgRequestMaskIncludeField = Nothing
@@ -114,6 +117,7 @@ peopleGetBatchGet =
     , _pgbgResourceNames = Nothing
     , _pgbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgbgXgafv :: Lens' PeopleGetBatchGet (Maybe Xgafv)
@@ -183,7 +187,6 @@ instance GoogleRequest PeopleGetBatchGet where
         type Scopes PeopleGetBatchGet =
              '["https://www.googleapis.com/auth/contacts",
                "https://www.googleapis.com/auth/contacts.readonly",
-               "https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/user.addresses.read",
                "https://www.googleapis.com/auth/user.birthday.read",
                "https://www.googleapis.com/auth/user.emails.read",

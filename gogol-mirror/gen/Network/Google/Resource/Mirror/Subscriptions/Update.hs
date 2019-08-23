@@ -54,10 +54,13 @@ type SubscriptionsUpdateResource =
 -- | Updates an existing subscription in place.
 --
 -- /See:/ 'subscriptionsUpdate' smart constructor.
-data SubscriptionsUpdate = SubscriptionsUpdate'
+data SubscriptionsUpdate =
+  SubscriptionsUpdate'
     { _suPayload :: !Subscription
     , _suId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ subscriptionsUpdate
     -> Text -- ^ 'suId'
     -> SubscriptionsUpdate
 subscriptionsUpdate pSuPayload_ pSuId_ =
-    SubscriptionsUpdate'
-    { _suPayload = pSuPayload_
-    , _suId = pSuId_
-    }
+  SubscriptionsUpdate' {_suPayload = pSuPayload_, _suId = pSuId_}
+
 
 -- | Multipart request metadata.
 suPayload :: Lens' SubscriptionsUpdate Subscription

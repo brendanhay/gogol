@@ -51,9 +51,12 @@ type SubscriptionsDeleteResource =
 -- | Deletes a subscription.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
-newtype SubscriptionsDelete = SubscriptionsDelete'
+newtype SubscriptionsDelete =
+  SubscriptionsDelete'
     { _sdId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionsDelete' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype SubscriptionsDelete = SubscriptionsDelete'
 subscriptionsDelete
     :: Text -- ^ 'sdId'
     -> SubscriptionsDelete
-subscriptionsDelete pSdId_ =
-    SubscriptionsDelete'
-    { _sdId = pSdId_
-    }
+subscriptionsDelete pSdId_ = SubscriptionsDelete' {_sdId = pSdId_}
+
 
 -- | The ID of the subscription.
 sdId :: Lens' SubscriptionsDelete Text

@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you manage permission levels and related settings of a group.
+-- Manages permission levels and related settings of a group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.GroupsSettings
@@ -43,21 +43,30 @@ module Network.Google.GroupsSettings
     -- ** Groups
     , Groups
     , groups
+    , gWhoCanHideAbuse
     , gEmail
     , gSendMessageDenyNotification
     , gWhoCanEnterFreeFormTags
     , gWhoCanAssignTopics
     , gWhoCanPostMessage
+    , gWhoCanDeleteTopics
     , gAllowExternalMembers
+    , gWhoCanModifyMembers
+    , gWhoCanAssistContent
     , gShowInGroupDirectory
     , gWhoCanUnmarkFavoriteReplyOnAnyTopic
     , gWhoCanTakeTopics
+    , gWhoCanLockTopics
     , gSpamModerationLevel
     , gKind
+    , gWhoCanDiscoverGroup
     , gWhoCanViewMembership
     , gMembersCanPostAsTheGroup
+    , gWhoCanMakeTopicsSticky
+    , gWhoCanPostAnnouncements
     , gWhoCanViewGroup
     , gWhoCanJoin
+    , gWhoCanModerateMembers
     , gArchiveOnly
     , gMaxMessageBytes
     , gReplyTo
@@ -65,6 +74,8 @@ module Network.Google.GroupsSettings
     , gWhoCanMarkFavoriteReplyOnAnyTopic
     , gIncludeInGlobalAddressList
     , gIsArchived
+    , gWhoCanModerateContent
+    , gCustomRolesEnabledForSettingsToBeMerged
     , gName
     , gWhoCanUnassignTopic
     , gMessageDisplayFont
@@ -76,16 +87,23 @@ module Network.Google.GroupsSettings
     , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
+    , gWhoCanApproveMembers
     , gWhoCanModifyTagsAndCategories
     , gAllowGoogleCommunication
+    , gWhoCanMoveTopicsIn
     , gWhoCanMarkNoResponseNeeded
     , gCustomFooterText
+    , gWhoCanDeleteAnyPost
+    , gWhoCanBanUsers
+    , gWhoCanApproveMessages
     , gWhoCanMarkDuplicate
+    , gEnableCollaborativeInbox
     , gPrimaryLanguage
     , gDescription
     , gDefaultMessageDenyNotificationText
     , gWhoCanMarkFavoriteReplyOnOwnTopic
     , gAllowWebPosting
+    , gWhoCanMoveTopicsOut
     ) where
 
 import           Network.Google.GroupsSettings.Types

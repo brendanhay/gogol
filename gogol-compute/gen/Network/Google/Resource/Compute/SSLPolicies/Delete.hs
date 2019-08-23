@@ -61,11 +61,14 @@ type SSLPoliciesDeleteResource =
 -- resources.
 --
 -- /See:/ 'sslPoliciesDelete' smart constructor.
-data SSLPoliciesDelete = SSLPoliciesDelete'
+data SSLPoliciesDelete =
+  SSLPoliciesDelete'
     { _spdSSLPolicy :: !Text
     , _spdRequestId :: !(Maybe Text)
     , _spdProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLPoliciesDelete' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ sslPoliciesDelete
     -> Text -- ^ 'spdProject'
     -> SSLPoliciesDelete
 sslPoliciesDelete pSpdSSLPolicy_ pSpdProject_ =
-    SSLPoliciesDelete'
+  SSLPoliciesDelete'
     { _spdSSLPolicy = pSpdSSLPolicy_
     , _spdRequestId = Nothing
     , _spdProject = pSpdProject_
     }
+
 
 -- | Name of the SSL policy to delete. The name must be 1-63 characters long,
 -- and comply with RFC1035.

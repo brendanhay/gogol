@@ -25,21 +25,30 @@ module Network.Google.GroupsSettings.Types
     -- * Groups
     , Groups
     , groups
+    , gWhoCanHideAbuse
     , gEmail
     , gSendMessageDenyNotification
     , gWhoCanEnterFreeFormTags
     , gWhoCanAssignTopics
     , gWhoCanPostMessage
+    , gWhoCanDeleteTopics
     , gAllowExternalMembers
+    , gWhoCanModifyMembers
+    , gWhoCanAssistContent
     , gShowInGroupDirectory
     , gWhoCanUnmarkFavoriteReplyOnAnyTopic
     , gWhoCanTakeTopics
+    , gWhoCanLockTopics
     , gSpamModerationLevel
     , gKind
+    , gWhoCanDiscoverGroup
     , gWhoCanViewMembership
     , gMembersCanPostAsTheGroup
+    , gWhoCanMakeTopicsSticky
+    , gWhoCanPostAnnouncements
     , gWhoCanViewGroup
     , gWhoCanJoin
+    , gWhoCanModerateMembers
     , gArchiveOnly
     , gMaxMessageBytes
     , gReplyTo
@@ -47,6 +56,8 @@ module Network.Google.GroupsSettings.Types
     , gWhoCanMarkFavoriteReplyOnAnyTopic
     , gIncludeInGlobalAddressList
     , gIsArchived
+    , gWhoCanModerateContent
+    , gCustomRolesEnabledForSettingsToBeMerged
     , gName
     , gWhoCanUnassignTopic
     , gMessageDisplayFont
@@ -58,16 +69,23 @@ module Network.Google.GroupsSettings.Types
     , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
+    , gWhoCanApproveMembers
     , gWhoCanModifyTagsAndCategories
     , gAllowGoogleCommunication
+    , gWhoCanMoveTopicsIn
     , gWhoCanMarkNoResponseNeeded
     , gCustomFooterText
+    , gWhoCanDeleteAnyPost
+    , gWhoCanBanUsers
+    , gWhoCanApproveMessages
     , gWhoCanMarkDuplicate
+    , gEnableCollaborativeInbox
     , gPrimaryLanguage
     , gDescription
     , gDefaultMessageDenyNotificationText
     , gWhoCanMarkFavoriteReplyOnOwnTopic
     , gAllowWebPosting
+    , gWhoCanMoveTopicsOut
     ) where
 
 import           Network.Google.GroupsSettings.Types.Product
@@ -82,4 +100,4 @@ groupsSettingsService
 
 -- | View and manage the settings of a G Suite group
 appsGroupsSettingsScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
-appsGroupsSettingsScope = Proxy;
+appsGroupsSettingsScope = Proxy

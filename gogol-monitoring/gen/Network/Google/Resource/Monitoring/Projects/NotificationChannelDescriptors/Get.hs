@@ -63,14 +63,17 @@ type ProjectsNotificationChannelDescriptorsGetResource
 -- are expected \/ permitted for a notification channel of the given type.
 --
 -- /See:/ 'projectsNotificationChannelDescriptorsGet' smart constructor.
-data ProjectsNotificationChannelDescriptorsGet = ProjectsNotificationChannelDescriptorsGet'
+data ProjectsNotificationChannelDescriptorsGet =
+  ProjectsNotificationChannelDescriptorsGet'
     { _pncdgXgafv          :: !(Maybe Xgafv)
     , _pncdgUploadProtocol :: !(Maybe Text)
     , _pncdgAccessToken    :: !(Maybe Text)
     , _pncdgUploadType     :: !(Maybe Text)
     , _pncdgName           :: !Text
     , _pncdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotificationChannelDescriptorsGet' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsNotificationChannelDescriptorsGet
     :: Text -- ^ 'pncdgName'
     -> ProjectsNotificationChannelDescriptorsGet
 projectsNotificationChannelDescriptorsGet pPncdgName_ =
-    ProjectsNotificationChannelDescriptorsGet'
+  ProjectsNotificationChannelDescriptorsGet'
     { _pncdgXgafv = Nothing
     , _pncdgUploadProtocol = Nothing
     , _pncdgAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsNotificationChannelDescriptorsGet pPncdgName_ =
     , _pncdgName = pPncdgName_
     , _pncdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncdgXgafv :: Lens' ProjectsNotificationChannelDescriptorsGet (Maybe Xgafv)
@@ -136,7 +140,8 @@ pncdgCallback
       (\ s a -> s{_pncdgCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelDescriptorsGet where
+           ProjectsNotificationChannelDescriptorsGet
+         where
         type Rs ProjectsNotificationChannelDescriptorsGet =
              NotificationChannelDescriptor
         type Scopes ProjectsNotificationChannelDescriptorsGet

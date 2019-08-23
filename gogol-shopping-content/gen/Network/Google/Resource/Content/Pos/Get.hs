@@ -56,11 +56,14 @@ type PosGetResource =
 -- | Retrieves information about the given store.
 --
 -- /See:/ 'posGet' smart constructor.
-data PosGet = PosGet'
+data PosGet =
+  PosGet'
     { _pMerchantId       :: !(Textual Word64)
     , _pStoreCode        :: !Text
     , _pTargetMerchantId :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PosGet' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ posGet
     -> Word64 -- ^ 'pTargetMerchantId'
     -> PosGet
 posGet pPMerchantId_ pPStoreCode_ pPTargetMerchantId_ =
-    PosGet'
+  PosGet'
     { _pMerchantId = _Coerce # pPMerchantId_
     , _pStoreCode = pPStoreCode_
     , _pTargetMerchantId = _Coerce # pPTargetMerchantId_
     }
+
 
 -- | The ID of the POS or inventory data provider.
 pMerchantId :: Lens' PosGet Word64

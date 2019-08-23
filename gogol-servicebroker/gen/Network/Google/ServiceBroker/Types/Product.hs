@@ -39,11 +39,14 @@ import           Network.Google.ServiceBroker.Types.Sum
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'googleIAMV1__Policy' smart constructor.
-data GoogleIAMV1__Policy = GoogleIAMV1__Policy'
+data GoogleIAMV1__Policy =
+  GoogleIAMV1__Policy'
     { _givpEtag     :: !(Maybe Bytes)
     , _givpVersion  :: !(Maybe (Textual Int32))
     , _givpBindings :: !(Maybe [GoogleIAMV1__Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__Policy' with the minimum fields required to make a request.
 --
@@ -57,11 +60,9 @@ data GoogleIAMV1__Policy = GoogleIAMV1__Policy'
 googleIAMV1__Policy
     :: GoogleIAMV1__Policy
 googleIAMV1__Policy =
-    GoogleIAMV1__Policy'
-    { _givpEtag = Nothing
-    , _givpVersion = Nothing
-    , _givpBindings = Nothing
-    }
+  GoogleIAMV1__Policy'
+    {_givpEtag = Nothing, _givpVersion = Nothing, _givpBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -110,9 +111,12 @@ instance ToJSON GoogleIAMV1__Policy where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'googleIAMV1__TestIAMPermissionsResponse' smart constructor.
-newtype GoogleIAMV1__TestIAMPermissionsResponse = GoogleIAMV1__TestIAMPermissionsResponse'
+newtype GoogleIAMV1__TestIAMPermissionsResponse =
+  GoogleIAMV1__TestIAMPermissionsResponse'
     { _givtiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +126,8 @@ newtype GoogleIAMV1__TestIAMPermissionsResponse = GoogleIAMV1__TestIAMPermission
 googleIAMV1__TestIAMPermissionsResponse
     :: GoogleIAMV1__TestIAMPermissionsResponse
 googleIAMV1__TestIAMPermissionsResponse =
-    GoogleIAMV1__TestIAMPermissionsResponse'
-    { _givtiprPermissions = Nothing
-    }
+  GoogleIAMV1__TestIAMPermissionsResponse' {_givtiprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -136,7 +139,8 @@ givtiprPermissions
       . _Coerce
 
 instance FromJSON
-         GoogleIAMV1__TestIAMPermissionsResponse where
+           GoogleIAMV1__TestIAMPermissionsResponse
+         where
         parseJSON
           = withObject "GoogleIAMV1TestIAMPermissionsResponse"
               (\ o ->
@@ -144,7 +148,8 @@ instance FromJSON
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON
-         GoogleIAMV1__TestIAMPermissionsResponse where
+           GoogleIAMV1__TestIAMPermissionsResponse
+         where
         toJSON GoogleIAMV1__TestIAMPermissionsResponse'{..}
           = object
               (catMaybes
@@ -155,12 +160,15 @@ instance ToJSON
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'googleType__Expr' smart constructor.
-data GoogleType__Expr = GoogleType__Expr'
+data GoogleType__Expr =
+  GoogleType__Expr'
     { _gteLocation    :: !(Maybe Text)
     , _gteExpression  :: !(Maybe Text)
     , _gteTitle       :: !(Maybe Text)
     , _gteDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleType__Expr' with the minimum fields required to make a request.
 --
@@ -176,12 +184,13 @@ data GoogleType__Expr = GoogleType__Expr'
 googleType__Expr
     :: GoogleType__Expr
 googleType__Expr =
-    GoogleType__Expr'
+  GoogleType__Expr'
     { _gteLocation = Nothing
     , _gteExpression = Nothing
     , _gteTitle = Nothing
     , _gteDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -231,11 +240,14 @@ instance ToJSON GoogleType__Expr where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'googleIAMV1__Binding' smart constructor.
-data GoogleIAMV1__Binding = GoogleIAMV1__Binding'
+data GoogleIAMV1__Binding =
+  GoogleIAMV1__Binding'
     { _givbMembers   :: !(Maybe [Text])
     , _givbRole      :: !(Maybe Text)
     , _givbCondition :: !(Maybe GoogleType__Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__Binding' with the minimum fields required to make a request.
 --
@@ -249,11 +261,9 @@ data GoogleIAMV1__Binding = GoogleIAMV1__Binding'
 googleIAMV1__Binding
     :: GoogleIAMV1__Binding
 googleIAMV1__Binding =
-    GoogleIAMV1__Binding'
-    { _givbMembers = Nothing
-    , _givbRole = Nothing
-    , _givbCondition = Nothing
-    }
+  GoogleIAMV1__Binding'
+    {_givbMembers = Nothing, _givbRole = Nothing, _givbCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -266,8 +276,8 @@ googleIAMV1__Binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 givbMembers :: Lens' GoogleIAMV1__Binding [Text]
 givbMembers
@@ -280,10 +290,9 @@ givbMembers
 givbRole :: Lens' GoogleIAMV1__Binding (Maybe Text)
 givbRole = lens _givbRole (\ s a -> s{_givbRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 givbCondition :: Lens' GoogleIAMV1__Binding (Maybe GoogleType__Expr)
 givbCondition
   = lens _givbCondition
@@ -308,9 +317,12 @@ instance ToJSON GoogleIAMV1__Binding where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'googleIAMV1__SetIAMPolicyRequest' smart constructor.
-newtype GoogleIAMV1__SetIAMPolicyRequest = GoogleIAMV1__SetIAMPolicyRequest'
+newtype GoogleIAMV1__SetIAMPolicyRequest =
+  GoogleIAMV1__SetIAMPolicyRequest'
     { _givsiprPolicy :: Maybe GoogleIAMV1__Policy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -320,9 +332,8 @@ newtype GoogleIAMV1__SetIAMPolicyRequest = GoogleIAMV1__SetIAMPolicyRequest'
 googleIAMV1__SetIAMPolicyRequest
     :: GoogleIAMV1__SetIAMPolicyRequest
 googleIAMV1__SetIAMPolicyRequest =
-    GoogleIAMV1__SetIAMPolicyRequest'
-    { _givsiprPolicy = Nothing
-    }
+  GoogleIAMV1__SetIAMPolicyRequest' {_givsiprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -350,9 +361,12 @@ instance ToJSON GoogleIAMV1__SetIAMPolicyRequest
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'googleIAMV1__TestIAMPermissionsRequest' smart constructor.
-newtype GoogleIAMV1__TestIAMPermissionsRequest = GoogleIAMV1__TestIAMPermissionsRequest'
+newtype GoogleIAMV1__TestIAMPermissionsRequest =
+  GoogleIAMV1__TestIAMPermissionsRequest'
     { _giamvtiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleIAMV1__TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -362,9 +376,8 @@ newtype GoogleIAMV1__TestIAMPermissionsRequest = GoogleIAMV1__TestIAMPermissions
 googleIAMV1__TestIAMPermissionsRequest
     :: GoogleIAMV1__TestIAMPermissionsRequest
 googleIAMV1__TestIAMPermissionsRequest =
-    GoogleIAMV1__TestIAMPermissionsRequest'
-    { _giamvtiamprPermissions = Nothing
-    }
+  GoogleIAMV1__TestIAMPermissionsRequest' {_giamvtiamprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -378,7 +391,8 @@ giamvtiamprPermissions
       . _Coerce
 
 instance FromJSON
-         GoogleIAMV1__TestIAMPermissionsRequest where
+           GoogleIAMV1__TestIAMPermissionsRequest
+         where
         parseJSON
           = withObject "GoogleIAMV1TestIAMPermissionsRequest"
               (\ o ->
@@ -386,7 +400,8 @@ instance FromJSON
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON
-         GoogleIAMV1__TestIAMPermissionsRequest where
+           GoogleIAMV1__TestIAMPermissionsRequest
+         where
         toJSON GoogleIAMV1__TestIAMPermissionsRequest'{..}
           = object
               (catMaybes

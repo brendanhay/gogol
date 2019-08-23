@@ -8,7 +8,14 @@
                     "default": null
                 }
             }
+        },
+      "Table": {
+        "properties": {
+          "requirePartitionFilter": {
+            "default": null
+          }
         }
+      }
 
     }
 }

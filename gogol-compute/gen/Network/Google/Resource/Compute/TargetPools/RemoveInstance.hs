@@ -63,13 +63,16 @@ type TargetPoolsRemoveInstanceResource =
 -- | Removes instance URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveInstance' smart constructor.
-data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance'
+data TargetPoolsRemoveInstance =
+  TargetPoolsRemoveInstance'
     { _tpriRequestId  :: !(Maybe Text)
     , _tpriProject    :: !Text
     , _tpriTargetPool :: !Text
     , _tpriPayload    :: !TargetPoolsRemoveInstanceRequest
     , _tpriRegion     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolsRemoveInstance' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ targetPoolsRemoveInstance
     -> Text -- ^ 'tpriRegion'
     -> TargetPoolsRemoveInstance
 targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
-    TargetPoolsRemoveInstance'
+  TargetPoolsRemoveInstance'
     { _tpriRequestId = Nothing
     , _tpriProject = pTpriProject_
     , _tpriTargetPool = pTpriTargetPool_
     , _tpriPayload = pTpriPayload_
     , _tpriRegion = pTpriRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

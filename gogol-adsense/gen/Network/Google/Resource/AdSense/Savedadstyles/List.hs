@@ -53,10 +53,13 @@ type SavedadstylesListResource =
 -- | List all saved ad styles in the user\'s account.
 --
 -- /See:/ 'savedadstylesList' smart constructor.
-data SavedadstylesList = SavedadstylesList'
+data SavedadstylesList =
+  SavedadstylesList'
     { _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SavedadstylesList' with the minimum fields required to make a request.
 --
@@ -68,10 +71,8 @@ data SavedadstylesList = SavedadstylesList'
 savedadstylesList
     :: SavedadstylesList
 savedadstylesList =
-    SavedadstylesList'
-    { _slPageToken = Nothing
-    , _slMaxResults = Nothing
-    }
+  SavedadstylesList' {_slPageToken = Nothing, _slMaxResults = Nothing}
+
 
 -- | A continuation token, used to page through saved ad styles. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from

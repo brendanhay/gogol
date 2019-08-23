@@ -1,5 +1,5 @@
 name:                  gogol-drive
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Drive SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -46,6 +46,13 @@ library
         , Network.Google.Resource.Drive.Comments.Get
         , Network.Google.Resource.Drive.Comments.List
         , Network.Google.Resource.Drive.Comments.Update
+        , Network.Google.Resource.Drive.Drives.Create
+        , Network.Google.Resource.Drive.Drives.Delete
+        , Network.Google.Resource.Drive.Drives.Get
+        , Network.Google.Resource.Drive.Drives.Hide
+        , Network.Google.Resource.Drive.Drives.List
+        , Network.Google.Resource.Drive.Drives.Unhide
+        , Network.Google.Resource.Drive.Drives.Update
         , Network.Google.Resource.Drive.Files.Copy
         , Network.Google.Resource.Drive.Files.Create
         , Network.Google.Resource.Drive.Files.Delete
@@ -81,5 +88,5 @@ library
         , Network.Google.Drive.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

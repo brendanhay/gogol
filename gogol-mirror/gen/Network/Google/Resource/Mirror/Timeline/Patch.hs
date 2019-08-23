@@ -54,10 +54,13 @@ type TimelinePatchResource =
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
 -- /See:/ 'timelinePatch' smart constructor.
-data TimelinePatch = TimelinePatch'
+data TimelinePatch =
+  TimelinePatch'
     { _tpPayload :: !TimelineItem
     , _tpId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelinePatch' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ timelinePatch
     -> Text -- ^ 'tpId'
     -> TimelinePatch
 timelinePatch pTpPayload_ pTpId_ =
-    TimelinePatch'
-    { _tpPayload = pTpPayload_
-    , _tpId = pTpId_
-    }
+  TimelinePatch' {_tpPayload = pTpPayload_, _tpId = pTpId_}
+
 
 -- | Multipart request metadata.
 tpPayload :: Lens' TimelinePatch TimelineItem

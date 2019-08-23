@@ -64,13 +64,16 @@ type ManagementExperimentsPatchResource =
 -- | Update an existing experiment. This method supports patch semantics.
 --
 -- /See:/ 'managementExperimentsPatch' smart constructor.
-data ManagementExperimentsPatch = ManagementExperimentsPatch'
+data ManagementExperimentsPatch =
+  ManagementExperimentsPatch'
     { _mepWebPropertyId :: !Text
     , _mepProFileId     :: !Text
     , _mepPayload       :: !Experiment
     , _mepAccountId     :: !Text
     , _mepExperimentId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementExperimentsPatch' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ managementExperimentsPatch
     -> Text -- ^ 'mepExperimentId'
     -> ManagementExperimentsPatch
 managementExperimentsPatch pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
-    ManagementExperimentsPatch'
+  ManagementExperimentsPatch'
     { _mepWebPropertyId = pMepWebPropertyId_
     , _mepProFileId = pMepProFileId_
     , _mepPayload = pMepPayload_
     , _mepAccountId = pMepAccountId_
     , _mepExperimentId = pMepExperimentId_
     }
+
 
 -- | Web property ID of the experiment to update.
 mepWebPropertyId :: Lens' ManagementExperimentsPatch Text

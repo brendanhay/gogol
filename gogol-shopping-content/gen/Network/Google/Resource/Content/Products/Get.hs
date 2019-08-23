@@ -53,10 +53,13 @@ type ProductsGetResource =
 -- | Retrieves a product from your Merchant Center account.
 --
 -- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet'
+data ProductsGet =
+  ProductsGet'
     { _pggMerchantId :: !(Textual Word64)
     , _pggProductId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ productsGet
     -> Text -- ^ 'pggProductId'
     -> ProductsGet
 productsGet pPggMerchantId_ pPggProductId_ =
-    ProductsGet'
-    { _pggMerchantId = _Coerce # pPggMerchantId_
-    , _pggProductId = pPggProductId_
-    }
+  ProductsGet'
+    {_pggMerchantId = _Coerce # pPggMerchantId_, _pggProductId = pPggProductId_}
+
 
 -- | The ID of the account that contains the product. This account cannot be
 -- a multi-client account.
@@ -83,7 +85,7 @@ pggMerchantId
       (\ s a -> s{_pggMerchantId = a})
       . _Coerce
 
--- | The REST id of the product.
+-- | The REST ID of the product.
 pggProductId :: Lens' ProductsGet Text
 pggProductId
   = lens _pggProductId (\ s a -> s{_pggProductId = a})

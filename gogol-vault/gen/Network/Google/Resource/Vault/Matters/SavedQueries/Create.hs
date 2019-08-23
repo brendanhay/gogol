@@ -63,7 +63,8 @@ type MattersSavedQueriesCreateResource =
 -- | Creates a saved query.
 --
 -- /See:/ 'mattersSavedQueriesCreate' smart constructor.
-data MattersSavedQueriesCreate = MattersSavedQueriesCreate'
+data MattersSavedQueriesCreate =
+  MattersSavedQueriesCreate'
     { _msqcXgafv          :: !(Maybe Xgafv)
     , _msqcUploadProtocol :: !(Maybe Text)
     , _msqcAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersSavedQueriesCreate = MattersSavedQueriesCreate'
     , _msqcPayload        :: !SavedQuery
     , _msqcMatterId       :: !Text
     , _msqcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersSavedQueriesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersSavedQueriesCreate
     -> Text -- ^ 'msqcMatterId'
     -> MattersSavedQueriesCreate
 mattersSavedQueriesCreate pMsqcPayload_ pMsqcMatterId_ =
-    MattersSavedQueriesCreate'
+  MattersSavedQueriesCreate'
     { _msqcXgafv = Nothing
     , _msqcUploadProtocol = Nothing
     , _msqcAccessToken = Nothing
@@ -104,6 +107,7 @@ mattersSavedQueriesCreate pMsqcPayload_ pMsqcMatterId_ =
     , _msqcMatterId = pMsqcMatterId_
     , _msqcCallback = Nothing
     }
+
 
 -- | V1 error format.
 msqcXgafv :: Lens' MattersSavedQueriesCreate (Maybe Xgafv)

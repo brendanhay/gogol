@@ -53,9 +53,12 @@ type PosCustombatchResource =
 -- | Batches multiple POS-related calls in a single request.
 --
 -- /See:/ 'posCustombatch' smart constructor.
-newtype PosCustombatch = PosCustombatch'
+newtype PosCustombatch =
+  PosCustombatch'
     { _pPayload :: PosCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PosCustombatch' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype PosCustombatch = PosCustombatch'
 posCustombatch
     :: PosCustomBatchRequest -- ^ 'pPayload'
     -> PosCustombatch
-posCustombatch pPPayload_ =
-    PosCustombatch'
-    { _pPayload = pPPayload_
-    }
+posCustombatch pPPayload_ = PosCustombatch' {_pPayload = pPPayload_}
+
 
 -- | Multipart request metadata.
 pPayload :: Lens' PosCustombatch PosCustomBatchRequest

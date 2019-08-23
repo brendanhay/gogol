@@ -23,7 +23,8 @@ import           Network.Google.Prelude
 -- | Response message for GetSiteSummary.
 --
 -- /See:/ 'siteSummaryResponse' smart constructor.
-data SiteSummaryResponse = SiteSummaryResponse'
+data SiteSummaryResponse =
+  SiteSummaryResponse'
     { _ssrAbusiveStatus   :: !(Maybe SiteSummaryResponseAbusiveStatus)
     , _ssrEnforcementTime :: !(Maybe DateTime')
     , _ssrLastChangeTime  :: !(Maybe DateTime')
@@ -31,7 +32,9 @@ data SiteSummaryResponse = SiteSummaryResponse'
     , _ssrUnderReview     :: !(Maybe Bool)
     , _ssrReportURL       :: !(Maybe Text)
     , _ssrReviewedSite    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SiteSummaryResponse' with the minimum fields required to make a request.
 --
@@ -53,7 +56,7 @@ data SiteSummaryResponse = SiteSummaryResponse'
 siteSummaryResponse
     :: SiteSummaryResponse
 siteSummaryResponse =
-    SiteSummaryResponse'
+  SiteSummaryResponse'
     { _ssrAbusiveStatus = Nothing
     , _ssrEnforcementTime = Nothing
     , _ssrLastChangeTime = Nothing
@@ -62,6 +65,7 @@ siteSummaryResponse =
     , _ssrReportURL = Nothing
     , _ssrReviewedSite = Nothing
     }
+
 
 -- | The status of the site reviewed for the abusive experiences.
 ssrAbusiveStatus :: Lens' SiteSummaryResponse (Maybe SiteSummaryResponseAbusiveStatus)
@@ -133,9 +137,12 @@ instance ToJSON SiteSummaryResponse where
 -- | Response message for ListViolatingSites.
 --
 -- /See:/ 'violatingSitesResponse' smart constructor.
-newtype ViolatingSitesResponse = ViolatingSitesResponse'
+newtype ViolatingSitesResponse =
+  ViolatingSitesResponse'
     { _vsrViolatingSites :: Maybe [SiteSummaryResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ViolatingSitesResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +151,8 @@ newtype ViolatingSitesResponse = ViolatingSitesResponse'
 -- * 'vsrViolatingSites'
 violatingSitesResponse
     :: ViolatingSitesResponse
-violatingSitesResponse =
-    ViolatingSitesResponse'
-    { _vsrViolatingSites = Nothing
-    }
+violatingSitesResponse = ViolatingSitesResponse' {_vsrViolatingSites = Nothing}
+
 
 -- | A list of summaries of violating sites.
 vsrViolatingSites :: Lens' ViolatingSitesResponse [SiteSummaryResponse]

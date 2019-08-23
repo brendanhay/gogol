@@ -71,14 +71,17 @@ type InstancesAttachDiskResource =
 -- persistent disk to your instance.
 --
 -- /See:/ 'instancesAttachDisk' smart constructor.
-data InstancesAttachDisk = InstancesAttachDisk'
+data InstancesAttachDisk =
+  InstancesAttachDisk'
     { _insRequestId   :: !(Maybe Text)
     , _insProject     :: !Text
     , _insZone        :: !Text
     , _insPayload     :: !AttachedDisk
     , _insForceAttach :: !(Maybe Bool)
     , _insInstance    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesAttachDisk' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ instancesAttachDisk
     -> Text -- ^ 'insInstance'
     -> InstancesAttachDisk
 instancesAttachDisk pInsProject_ pInsZone_ pInsPayload_ pInsInstance_ =
-    InstancesAttachDisk'
+  InstancesAttachDisk'
     { _insRequestId = Nothing
     , _insProject = pInsProject_
     , _insZone = pInsZone_
@@ -110,6 +113,7 @@ instancesAttachDisk pInsProject_ pInsZone_ pInsPayload_ pInsInstance_ =
     , _insForceAttach = Nothing
     , _insInstance = pInsInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -140,7 +144,7 @@ insPayload
   = lens _insPayload (\ s a -> s{_insPayload = a})
 
 -- | Whether to force attach the disk even if it\'s currently attached to
--- another instance. This is only available for regional disks.
+-- another instance.
 insForceAttach :: Lens' InstancesAttachDisk (Maybe Bool)
 insForceAttach
   = lens _insForceAttach

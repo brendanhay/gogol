@@ -163,9 +163,11 @@ module Network.Google.FirebaseDynamicLinks
     , getIosReopenAttributionResponse
     , girarIosMinAppVersion
     , girarDeepLink
+    , girarUtmContent
     , girarResolvedLink
     , girarUtmMedium
     , girarInvitationId
+    , girarUtmTerm
     , girarUtmCampaign
     , girarUtmSource
 
@@ -223,12 +225,14 @@ module Network.Google.FirebaseDynamicLinks
     , gipiarAppMinimumVersion
     , gipiarAttributionConfidence
     , gipiarExternalBrowserDestinationLink
+    , gipiarUtmContent
     , gipiarResolvedLink
     , gipiarRequestedLink
     , gipiarUtmMedium
     , gipiarFallbackLink
     , gipiarInvitationId
     , gipiarIsStrongMatchExecutable
+    , gipiarUtmTerm
     , gipiarUtmCampaign
     , gipiarMatchMessage
     , gipiarUtmSource

@@ -61,12 +61,15 @@ type MyLibraryBookshelvesAddVolumeResource =
 -- | Adds a volume to a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesAddVolume' smart constructor.
-data MyLibraryBookshelvesAddVolume = MyLibraryBookshelvesAddVolume'
+data MyLibraryBookshelvesAddVolume =
+  MyLibraryBookshelvesAddVolume'
     { _mlbavReason   :: !(Maybe MyLibraryBookshelvesAddVolumeReason)
     , _mlbavShelf    :: !Text
     , _mlbavVolumeId :: !Text
     , _mlbavSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MyLibraryBookshelvesAddVolume' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ myLibraryBookshelvesAddVolume
     -> Text -- ^ 'mlbavVolumeId'
     -> MyLibraryBookshelvesAddVolume
 myLibraryBookshelvesAddVolume pMlbavShelf_ pMlbavVolumeId_ =
-    MyLibraryBookshelvesAddVolume'
+  MyLibraryBookshelvesAddVolume'
     { _mlbavReason = Nothing
     , _mlbavShelf = pMlbavShelf_
     , _mlbavVolumeId = pMlbavVolumeId_
     , _mlbavSource = Nothing
     }
+
 
 -- | The reason for which the book is added to the library.
 mlbavReason :: Lens' MyLibraryBookshelvesAddVolume (Maybe MyLibraryBookshelvesAddVolumeReason)

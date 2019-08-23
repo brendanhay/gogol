@@ -67,7 +67,8 @@ type DetectionsListResource =
 -- | Detects the language of text within a request.
 --
 -- /See:/ 'detectionsList' smart constructor.
-data DetectionsList = DetectionsList'
+data DetectionsList =
+  DetectionsList'
     { _dlXgafv          :: !(Maybe Xgafv)
     , _dlUploadProtocol :: !(Maybe Text)
     , _dlPp             :: !Bool
@@ -76,7 +77,9 @@ data DetectionsList = DetectionsList'
     , _dlQ              :: ![Text]
     , _dlBearerToken    :: !(Maybe Text)
     , _dlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DetectionsList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ detectionsList
     :: [Text] -- ^ 'dlQ'
     -> DetectionsList
 detectionsList pDlQ_ =
-    DetectionsList'
+  DetectionsList'
     { _dlXgafv = Nothing
     , _dlUploadProtocol = Nothing
     , _dlPp = True
@@ -111,6 +114,7 @@ detectionsList pDlQ_ =
     , _dlBearerToken = Nothing
     , _dlCallback = Nothing
     }
+
 
 -- | V1 error format.
 dlXgafv :: Lens' DetectionsList (Maybe Xgafv)

@@ -86,8 +86,8 @@ dataTransferService
 
 -- | View data transfers between users in your organization
 adminDataTransferReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]
-adminDataTransferReadOnlyScope = Proxy;
+adminDataTransferReadOnlyScope = Proxy
 
 -- | View and manage data transfers between users in your organization
 adminDataTransferScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
-adminDataTransferScope = Proxy;
+adminDataTransferScope = Proxy

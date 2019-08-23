@@ -72,7 +72,8 @@ type ProjectsInstancesDatabasesSessionsRollbackResource
 -- \`Rollback\` never returns \`ABORTED\`.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsRollback' smart constructor.
-data ProjectsInstancesDatabasesSessionsRollback = ProjectsInstancesDatabasesSessionsRollback'
+data ProjectsInstancesDatabasesSessionsRollback =
+  ProjectsInstancesDatabasesSessionsRollback'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
     , _proAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsInstancesDatabasesSessionsRollback = ProjectsInstancesDatabasesSess
     , _proPayload        :: !RollbackRequest
     , _proSession        :: !Text
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsRollback' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsInstancesDatabasesSessionsRollback
     -> Text -- ^ 'proSession'
     -> ProjectsInstancesDatabasesSessionsRollback
 projectsInstancesDatabasesSessionsRollback pProPayload_ pProSession_ =
-    ProjectsInstancesDatabasesSessionsRollback'
+  ProjectsInstancesDatabasesSessionsRollback'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
     , _proAccessToken = Nothing
@@ -113,6 +116,7 @@ projectsInstancesDatabasesSessionsRollback pProPayload_ pProSession_ =
     , _proSession = pProSession_
     , _proCallback = Nothing
     }
+
 
 -- | V1 error format.
 proXgafv :: Lens' ProjectsInstancesDatabasesSessionsRollback (Maybe Xgafv)
@@ -152,7 +156,8 @@ proCallback
   = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsRollback where
+           ProjectsInstancesDatabasesSessionsRollback
+         where
         type Rs ProjectsInstancesDatabasesSessionsRollback =
              Empty
         type Scopes

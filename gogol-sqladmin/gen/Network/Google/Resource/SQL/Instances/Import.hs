@@ -60,11 +60,14 @@ type InstancesImportResource =
 -- Cloud Storage.
 --
 -- /See:/ 'instancesImport' smart constructor.
-data InstancesImport = InstancesImport'
+data InstancesImport =
+  InstancesImport'
     { _iiProject  :: !Text
     , _iiPayload  :: !InstancesImportRequest
     , _iiInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesImport' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ instancesImport
     -> Text -- ^ 'iiInstance'
     -> InstancesImport
 instancesImport pIiProject_ pIiPayload_ pIiInstance_ =
-    InstancesImport'
+  InstancesImport'
     { _iiProject = pIiProject_
     , _iiPayload = pIiPayload_
     , _iiInstance = pIiInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 iiProject :: Lens' InstancesImport Text

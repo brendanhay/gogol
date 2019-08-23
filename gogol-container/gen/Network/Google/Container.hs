@@ -30,6 +30,9 @@ module Network.Google.Container
 
     -- * Resources
 
+    -- ** container.projects.aggregated.usableSubnetworks.list
+    , module Network.Google.Resource.Container.Projects.Aggregated.UsableSubnetworks.List
+
     -- ** container.projects.locations.clusters.completeIpRotation
     , module Network.Google.Resource.Container.Projects.Locations.Clusters.CompleteIPRotation
 
@@ -41,6 +44,9 @@ module Network.Google.Container
 
     -- ** container.projects.locations.clusters.get
     , module Network.Google.Resource.Container.Projects.Locations.Clusters.Get
+
+    -- ** container.projects.locations.clusters.getJwks
+    , module Network.Google.Resource.Container.Projects.Locations.Clusters.GetJWKs
 
     -- ** container.projects.locations.clusters.list
     , module Network.Google.Resource.Container.Projects.Locations.Clusters.List
@@ -107,6 +113,9 @@ module Network.Google.Container
 
     -- ** container.projects.locations.clusters.updateMaster
     , module Network.Google.Resource.Container.Projects.Locations.Clusters.UpdateMaster
+
+    -- ** container.projects.locations.clusters.well-known.getOpenid-configuration
+    , module Network.Google.Resource.Container.Projects.Locations.Clusters.WellKnown.GetOpenidConfiguration
 
     -- ** container.projects.locations.getServerConfig
     , module Network.Google.Resource.Container.Projects.Locations.GetServerConfig
@@ -217,6 +226,12 @@ module Network.Google.Container
     , networkPolicyConfig
     , npcDisabled
 
+    -- ** ListUsableSubnetworksResponse
+    , ListUsableSubnetworksResponse
+    , listUsableSubnetworksResponse
+    , lusrNextPageToken
+    , lusrSubnetworks
+
     -- ** UpdateNodePoolRequest
     , UpdateNodePoolRequest
     , updateNodePoolRequest
@@ -255,6 +270,9 @@ module Network.Google.Container
     , slarClusterId
     , slarProjectId
 
+    -- ** UsableSubnetworkSecondaryRangeStatus
+    , UsableSubnetworkSecondaryRangeStatus (..)
+
     -- ** HorizontalPodAutoscaling
     , HorizontalPodAutoscaling
     , horizontalPodAutoscaling
@@ -291,6 +309,7 @@ module Network.Google.Container
     , cNodePools
     , cEnableKubernetesAlpha
     , cResourceLabels
+    , cTpuIPv4CIdRBlock
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -311,11 +330,13 @@ module Network.Google.Container
     , cName
     , cCurrentMasterVersion
     , cStatusMessage
+    , cDefaultMaxPodsConstraint
     , cSubnetwork
     , cCurrentNodeCount
     , cPrivateClusterConfig
     , cMaintenancePolicy
     , cConditions
+    , cEnableTpu
     , cEndpoint
     , cExpireTime
     , cNetworkPolicy
@@ -426,6 +447,13 @@ module Network.Google.Container
     -- ** OperationOperationType
     , OperationOperationType (..)
 
+    -- ** UsableSubnetworkSecondaryRange
+    , UsableSubnetworkSecondaryRange
+    , usableSubnetworkSecondaryRange
+    , ussrStatus
+    , ussrRangeName
+    , ussrIPCIdRRange
+
     -- ** NodeManagement
     , NodeManagement
     , nodeManagement
@@ -456,6 +484,15 @@ module Network.Google.Container
     , smprMaintenancePolicy
     , smprProjectId
 
+    -- ** UsableSubnetwork
+    , UsableSubnetwork
+    , usableSubnetwork
+    , usNetwork
+    , usStatusMessage
+    , usSecondaryIPRanges
+    , usIPCIdRRange
+    , usSubnetwork
+
     -- ** KubernetesDashboard
     , KubernetesDashboard
     , kubernetesDashboard
@@ -476,6 +513,30 @@ module Network.Google.Container
     , slrProjectId
     , slrLabelFingerprint
 
+    -- ** GetOpenIdConfigResponse
+    , GetOpenIdConfigResponse
+    , getOpenIdConfigResponse
+    , goicrIdTokenSigningAlgValuesSupported
+    , goicrResponseTypesSupported
+    , goicrJWKsURI
+    , goicrGrantTypes
+    , goicrClaimsSupported
+    , goicrIssuer
+    , goicrSubjectTypesSupported
+
+    -- ** JWK
+    , JWK
+    , jwk
+    , jCrv
+    , jAlg
+    , jUse
+    , jKid
+    , jN
+    , jE
+    , jX
+    , jKty
+    , jY
+
     -- ** OperationStatus
     , OperationStatus (..)
 
@@ -484,10 +545,16 @@ module Network.Google.Container
     , maintenanceWindow
     , mwDailyMaintenanceWindow
 
+    -- ** MaxPodsConstraint
+    , MaxPodsConstraint
+    , maxPodsConstraint
+    , mpcMaxPodsPerNode
+
     -- ** IPAllocationPolicy
     , IPAllocationPolicy
     , ipAllocationPolicy
     , iapServicesSecondaryRangeName
+    , iapTpuIPv4CIdRBlock
     , iapNodeIPv4CIdR
     , iapUseIPAliases
     , iapClusterIPv4CIdR
@@ -521,6 +588,7 @@ module Network.Google.Container
     , npConfig
     , npInitialNodeCount
     , npManagement
+    , npMaxPodsConstraint
     , npSelfLink
     , npName
     , npStatusMessage
@@ -719,6 +787,11 @@ module Network.Google.Container
     -- ** ClusterStatus
     , ClusterStatus (..)
 
+    -- ** GetJSONWebKeysResponse
+    , GetJSONWebKeysResponse
+    , getJSONWebKeysResponse
+    , gjwkrKeys
+
     -- ** NodeTaintEffect
     , NodeTaintEffect (..)
 
@@ -742,10 +815,12 @@ module Network.Google.Container
 
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Container.Projects.Aggregated.UsableSubnetworks.List
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.CompleteIPRotation
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.Create
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.Delete
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.Get
+import           Network.Google.Resource.Container.Projects.Locations.Clusters.GetJWKs
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.List
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Create
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Delete
@@ -768,6 +843,7 @@ import           Network.Google.Resource.Container.Projects.Locations.Clusters.S
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.StartIPRotation
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.Update
 import           Network.Google.Resource.Container.Projects.Locations.Clusters.UpdateMaster
+import           Network.Google.Resource.Container.Projects.Locations.Clusters.WellKnown.GetOpenidConfiguration
 import           Network.Google.Resource.Container.Projects.Locations.GetServerConfig
 import           Network.Google.Resource.Container.Projects.Locations.Operations.Cancel
 import           Network.Google.Resource.Container.Projects.Locations.Operations.Get
@@ -809,8 +885,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Kubernetes Engine API service.
 type ContainerAPI =
-     ProjectsZonesOperationsListResource :<|>
-       ProjectsZonesOperationsGetResource
+     ProjectsAggregatedUsableSubnetworksListResource :<|>
+       ProjectsZonesOperationsListResource
+       :<|> ProjectsZonesOperationsGetResource
        :<|> ProjectsZonesOperationsCancelResource
        :<|> ProjectsZonesClustersNodePoolsSetSizeResource
        :<|> ProjectsZonesClustersNodePoolsListResource
@@ -859,6 +936,8 @@ type ContainerAPI =
        :<|> ProjectsLocationsClustersNodePoolsDeleteResource
        :<|> ProjectsLocationsClustersNodePoolsUpdateResource
        :<|>
+       ProjectsLocationsClustersWellKnownGetOpenidConfigurationResource
+       :<|>
        ProjectsLocationsClustersSetNetworkPolicyResource
        :<|> ProjectsLocationsClustersSetLocationsResource
        :<|> ProjectsLocationsClustersListResource
@@ -876,6 +955,7 @@ type ContainerAPI =
        ProjectsLocationsClustersCompleteIPRotationResource
        :<|>
        ProjectsLocationsClustersSetMaintenancePolicyResource
+       :<|> ProjectsLocationsClustersGetJWKsResource
        :<|> ProjectsLocationsClustersDeleteResource
        :<|> ProjectsLocationsClustersUpdateResource
        :<|> ProjectsLocationsClustersSetLoggingResource

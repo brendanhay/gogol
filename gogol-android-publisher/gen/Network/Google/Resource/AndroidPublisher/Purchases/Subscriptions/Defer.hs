@@ -63,12 +63,15 @@ type PurchasesSubscriptionsDeferResource =
 -- expiration time.
 --
 -- /See:/ 'purchasesSubscriptionsDefer' smart constructor.
-data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer'
+data PurchasesSubscriptionsDefer =
+  PurchasesSubscriptionsDefer'
     { _psdPackageName    :: !Text
     , _psdToken          :: !Text
     , _psdPayload        :: !SubscriptionPurchasesDeferRequest
     , _psdSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PurchasesSubscriptionsDefer' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ purchasesSubscriptionsDefer
     -> Text -- ^ 'psdSubscriptionId'
     -> PurchasesSubscriptionsDefer
 purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
-    PurchasesSubscriptionsDefer'
+  PurchasesSubscriptionsDefer'
     { _psdPackageName = pPsdPackageName_
     , _psdToken = pPsdToken_
     , _psdPayload = pPsdPayload_
     , _psdSubscriptionId = pPsdSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

@@ -49,6 +49,11 @@ module Network.Google.ServiceControl.Types
     , rmCallerNetwork
     , rmRequestAttributes
 
+    -- * ThirdPartyPrincipal
+    , ThirdPartyPrincipal
+    , thirdPartyPrincipal
+    , tppThirdPartyClaims
+
     -- * ResourceLabels
     , ResourceLabels
     , resourceLabels
@@ -154,6 +159,12 @@ module Network.Google.ServiceControl.Types
     , lbWidth
     , lbNumFiniteBuckets
 
+    -- * ServiceAccountDelegationInfo
+    , ServiceAccountDelegationInfo
+    , serviceAccountDelegationInfo
+    , sadiThirdPartyPrincipal
+    , sadiFirstPartyPrincipal
+
     -- * Auth
     , Auth
     , auth
@@ -184,6 +195,11 @@ module Network.Google.ServiceControl.Types
     , ciConsumerNumber
     , ciType
 
+    -- * ThirdPartyPrincipalThirdPartyClaims
+    , ThirdPartyPrincipalThirdPartyClaims
+    , thirdPartyPrincipalThirdPartyClaims
+    , tpptpcAddtional
+
     -- * AllocateInfo
     , AllocateInfo
     , allocateInfo
@@ -211,8 +227,15 @@ module Network.Google.ServiceControl.Types
     , CheckError
     , checkError
     , ceSubject
+    , ceStatus
     , ceCode
     , ceDetail
+
+    -- * FirstPartyPrincipal
+    , FirstPartyPrincipal
+    , firstPartyPrincipal
+    , fppPrincipalEmail
+    , fppServiceMetadata
 
     -- * QuotaOperationQuotaMode
     , QuotaOperationQuotaMode (..)
@@ -412,6 +435,11 @@ module Network.Google.ServiceControl.Types
     -- * QuotaErrorCode
     , QuotaErrorCode (..)
 
+    -- * FirstPartyPrincipalServiceMetadata
+    , FirstPartyPrincipalServiceMetadata
+    , firstPartyPrincipalServiceMetadata
+    , fppsmAddtional
+
     -- * QuotaError
     , QuotaError
     , quotaError
@@ -423,6 +451,7 @@ module Network.Google.ServiceControl.Types
     , AuthenticationInfo
     , authenticationInfo
     , aiThirdPartyPrincipal
+    , aiServiceAccountDelegationInfo
     , aiPrincipalEmail
     , aiAuthoritySelector
     , aiServiceAccountKeyName
@@ -490,8 +519,8 @@ serviceControlService
 
 -- | Manage your Google Service Control data
 serviceControlScope :: Proxy '["https://www.googleapis.com/auth/servicecontrol"]
-serviceControlScope = Proxy;
+serviceControlScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

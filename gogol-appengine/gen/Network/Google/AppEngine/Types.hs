@@ -48,11 +48,6 @@ module Network.Google.AppEngine.Types
     , sCode
     , sMessage
 
-    -- * OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
     -- * LocationSchema
     , LocationSchema
     , locationSchema
@@ -149,6 +144,11 @@ module Network.Google.AppEngine.Types
     , acId
     , acExpireTime
     , acVisibleDomainMAppings
+
+    -- * VPCAccessConnector
+    , VPCAccessConnector
+    , vpcAccessConnector
+    , vacName
 
     -- * APIConfigHandler
     , APIConfigHandler
@@ -309,15 +309,6 @@ module Network.Google.AppEngine.Types
     , asMaxPendingLatency
     , asStandardSchedulerSettings
 
-    -- * OperationMetadataV1Beta5
-    , OperationMetadataV1Beta5
-    , operationMetadataV1Beta5
-    , oInsertTime
-    , oUser
-    , oMethod
-    , oEndTime
-    , oTarget
-
     -- * Volume
     , Volume
     , volume
@@ -344,6 +335,7 @@ module Network.Google.AppEngine.Types
     -- * Network
     , Network
     , network
+    , nSessionAffinity
     , nSubnetworkName
     , nForwardedPorts
     , nInstanceTag
@@ -389,6 +381,7 @@ module Network.Google.AppEngine.Types
     -- * FeatureSettings
     , FeatureSettings
     , featureSettings
+    , fsUseContainerOptimizedOS
     , fsSplitHealthChecks
 
     -- * CertificateRawData
@@ -477,6 +470,7 @@ module Network.Google.AppEngine.Types
     , verInstanceClass
     , verRuntimeChannel
     , verRuntimeMainExecutablePath
+    , verVPCAccessConnector
     , verHealthCheck
     , verEndpointsAPIService
     , verEnv
@@ -572,12 +566,7 @@ module Network.Google.AppEngine.Types
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
-    , omInsertTime
-    , omUser
-    , omMethod
-    , omEndTime
-    , omOperationType
-    , omTarget
+    , omAddtional
 
     -- * URLMapAuthFailAction
     , URLMapAuthFailAction (..)
@@ -710,12 +699,12 @@ appEngineService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your applications deployed on Google App Engine
 appEngineAdminScope :: Proxy '["https://www.googleapis.com/auth/appengine.admin"]
-appEngineAdminScope = Proxy;
+appEngineAdminScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

@@ -59,12 +59,15 @@ type TargetVPNGatewaysDeleteResource =
 -- | Deletes the specified target VPN gateway.
 --
 -- /See:/ 'targetVPNGatewaysDelete' smart constructor.
-data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete'
+data TargetVPNGatewaysDelete =
+  TargetVPNGatewaysDelete'
     { _tvgdRequestId        :: !(Maybe Text)
     , _tvgdProject          :: !Text
     , _tvgdTargetVPNGateway :: !Text
     , _tvgdRegion           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetVPNGatewaysDelete' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ targetVPNGatewaysDelete
     -> Text -- ^ 'tvgdRegion'
     -> TargetVPNGatewaysDelete
 targetVPNGatewaysDelete pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
-    TargetVPNGatewaysDelete'
+  TargetVPNGatewaysDelete'
     { _tvgdRequestId = Nothing
     , _tvgdProject = pTvgdProject_
     , _tvgdTargetVPNGateway = pTvgdTargetVPNGateway_
     , _tvgdRegion = pTvgdRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

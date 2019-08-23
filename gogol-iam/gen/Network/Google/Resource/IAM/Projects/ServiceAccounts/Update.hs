@@ -20,8 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a ServiceAccount. Currently, only the following fields are
--- updatable: \`display_name\` . The \`etag\` is mandatory.
+-- Note: This method is in the process of being deprecated. Use
+-- PatchServiceAccount instead. Updates a ServiceAccount. Currently, only
+-- the following fields are updatable: \`display_name\` . The \`etag\` is
+-- mandatory.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.update@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
@@ -34,13 +36,13 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
     , ProjectsServiceAccountsUpdate
 
     -- * Request Lenses
-    , psauXgafv
-    , psauUploadProtocol
-    , psauAccessToken
-    , psauUploadType
-    , psauPayload
-    , psauName
-    , psauCallback
+    , proXgafv
+    , proUploadProtocol
+    , proAccessToken
+    , proUploadType
+    , proPayload
+    , proName
+    , proCallback
     ) where
 
 import           Network.Google.IAM.Types
@@ -60,79 +62,84 @@ type ProjectsServiceAccountsUpdateResource =
                      ReqBody '[JSON] ServiceAccount :>
                        Put '[JSON] ServiceAccount
 
--- | Updates a ServiceAccount. Currently, only the following fields are
--- updatable: \`display_name\` . The \`etag\` is mandatory.
+-- | Note: This method is in the process of being deprecated. Use
+-- PatchServiceAccount instead. Updates a ServiceAccount. Currently, only
+-- the following fields are updatable: \`display_name\` . The \`etag\` is
+-- mandatory.
 --
 -- /See:/ 'projectsServiceAccountsUpdate' smart constructor.
-data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
-    { _psauXgafv          :: !(Maybe Xgafv)
-    , _psauUploadProtocol :: !(Maybe Text)
-    , _psauAccessToken    :: !(Maybe Text)
-    , _psauUploadType     :: !(Maybe Text)
-    , _psauPayload        :: !ServiceAccount
-    , _psauName           :: !Text
-    , _psauCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ProjectsServiceAccountsUpdate =
+  ProjectsServiceAccountsUpdate'
+    { _proXgafv          :: !(Maybe Xgafv)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proAccessToken    :: !(Maybe Text)
+    , _proUploadType     :: !(Maybe Text)
+    , _proPayload        :: !ServiceAccount
+    , _proName           :: !Text
+    , _proCallback       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServiceAccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psauXgafv'
+-- * 'proXgafv'
 --
--- * 'psauUploadProtocol'
+-- * 'proUploadProtocol'
 --
--- * 'psauAccessToken'
+-- * 'proAccessToken'
 --
--- * 'psauUploadType'
+-- * 'proUploadType'
 --
--- * 'psauPayload'
+-- * 'proPayload'
 --
--- * 'psauName'
+-- * 'proName'
 --
--- * 'psauCallback'
+-- * 'proCallback'
 projectsServiceAccountsUpdate
-    :: ServiceAccount -- ^ 'psauPayload'
-    -> Text -- ^ 'psauName'
+    :: ServiceAccount -- ^ 'proPayload'
+    -> Text -- ^ 'proName'
     -> ProjectsServiceAccountsUpdate
-projectsServiceAccountsUpdate pPsauPayload_ pPsauName_ =
-    ProjectsServiceAccountsUpdate'
-    { _psauXgafv = Nothing
-    , _psauUploadProtocol = Nothing
-    , _psauAccessToken = Nothing
-    , _psauUploadType = Nothing
-    , _psauPayload = pPsauPayload_
-    , _psauName = pPsauName_
-    , _psauCallback = Nothing
+projectsServiceAccountsUpdate pProPayload_ pProName_ =
+  ProjectsServiceAccountsUpdate'
+    { _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proPayload = pProPayload_
+    , _proName = pProName_
+    , _proCallback = Nothing
     }
 
+
 -- | V1 error format.
-psauXgafv :: Lens' ProjectsServiceAccountsUpdate (Maybe Xgafv)
-psauXgafv
-  = lens _psauXgafv (\ s a -> s{_psauXgafv = a})
+proXgafv :: Lens' ProjectsServiceAccountsUpdate (Maybe Xgafv)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psauUploadProtocol :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
-psauUploadProtocol
-  = lens _psauUploadProtocol
-      (\ s a -> s{_psauUploadProtocol = a})
+proUploadProtocol :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | OAuth access token.
-psauAccessToken :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
-psauAccessToken
-  = lens _psauAccessToken
-      (\ s a -> s{_psauAccessToken = a})
+proAccessToken :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psauUploadType :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
-psauUploadType
-  = lens _psauUploadType
-      (\ s a -> s{_psauUploadType = a})
+proUploadType :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
 -- | Multipart request metadata.
-psauPayload :: Lens' ProjectsServiceAccountsUpdate ServiceAccount
-psauPayload
-  = lens _psauPayload (\ s a -> s{_psauPayload = a})
+proPayload :: Lens' ProjectsServiceAccountsUpdate ServiceAccount
+proPayload
+  = lens _proPayload (\ s a -> s{_proPayload = a})
 
 -- | The resource name of the service account in the following format:
 -- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Requests using
@@ -141,13 +148,13 @@ psauPayload
 -- or the \`unique_id\` of the service account. In responses the resource
 -- name will always be in the format
 -- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`.
-psauName :: Lens' ProjectsServiceAccountsUpdate Text
-psauName = lens _psauName (\ s a -> s{_psauName = a})
+proName :: Lens' ProjectsServiceAccountsUpdate Text
+proName = lens _proName (\ s a -> s{_proName = a})
 
 -- | JSONP
-psauCallback :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
-psauCallback
-  = lens _psauCallback (\ s a -> s{_psauCallback = a})
+proCallback :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleRequest ProjectsServiceAccountsUpdate
          where
@@ -156,12 +163,12 @@ instance GoogleRequest ProjectsServiceAccountsUpdate
         type Scopes ProjectsServiceAccountsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsUpdate'{..}
-          = go _psauName _psauXgafv _psauUploadProtocol
-              _psauAccessToken
-              _psauUploadType
-              _psauCallback
+          = go _proName _proXgafv _proUploadProtocol
+              _proAccessToken
+              _proUploadType
+              _proCallback
               (Just AltJSON)
-              _psauPayload
+              _proPayload
               iAMService
           where go
                   = buildClient

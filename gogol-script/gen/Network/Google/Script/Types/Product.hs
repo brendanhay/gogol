@@ -23,9 +23,12 @@ import           Network.Google.Script.Types.Sum
 -- | A set of functions. No duplicates are permitted.
 --
 -- /See:/ 'googleAppsScriptTypeFunctionSet' smart constructor.
-newtype GoogleAppsScriptTypeFunctionSet = GoogleAppsScriptTypeFunctionSet'
+newtype GoogleAppsScriptTypeFunctionSet =
+  GoogleAppsScriptTypeFunctionSet'
     { _gastfsValues :: Maybe [GoogleAppsScriptTypeFunction]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeFunctionSet' with the minimum fields required to make a request.
 --
@@ -35,9 +38,8 @@ newtype GoogleAppsScriptTypeFunctionSet = GoogleAppsScriptTypeFunctionSet'
 googleAppsScriptTypeFunctionSet
     :: GoogleAppsScriptTypeFunctionSet
 googleAppsScriptTypeFunctionSet =
-    GoogleAppsScriptTypeFunctionSet'
-    { _gastfsValues = Nothing
-    }
+  GoogleAppsScriptTypeFunctionSet' {_gastfsValues = Nothing}
+
 
 -- | A list of functions composing the set.
 gastfsValues :: Lens' GoogleAppsScriptTypeFunctionSet [GoogleAppsScriptTypeFunction]
@@ -62,9 +64,12 @@ instance ToJSON GoogleAppsScriptTypeFunctionSet where
 -- | API executable entry point configuration.
 --
 -- /See:/ 'googleAppsScriptTypeExecutionAPIConfig' smart constructor.
-newtype GoogleAppsScriptTypeExecutionAPIConfig = GoogleAppsScriptTypeExecutionAPIConfig'
+newtype GoogleAppsScriptTypeExecutionAPIConfig =
+  GoogleAppsScriptTypeExecutionAPIConfig'
     { _gasteacAccess :: Maybe GoogleAppsScriptTypeExecutionAPIConfigAccess
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeExecutionAPIConfig' with the minimum fields required to make a request.
 --
@@ -74,9 +79,8 @@ newtype GoogleAppsScriptTypeExecutionAPIConfig = GoogleAppsScriptTypeExecutionAP
 googleAppsScriptTypeExecutionAPIConfig
     :: GoogleAppsScriptTypeExecutionAPIConfig
 googleAppsScriptTypeExecutionAPIConfig =
-    GoogleAppsScriptTypeExecutionAPIConfig'
-    { _gasteacAccess = Nothing
-    }
+  GoogleAppsScriptTypeExecutionAPIConfig' {_gasteacAccess = Nothing}
+
 
 -- | Who has permission to run the API executable.
 gasteacAccess :: Lens' GoogleAppsScriptTypeExecutionAPIConfig (Maybe GoogleAppsScriptTypeExecutionAPIConfigAccess)
@@ -85,7 +89,8 @@ gasteacAccess
       (\ s a -> s{_gasteacAccess = a})
 
 instance FromJSON
-         GoogleAppsScriptTypeExecutionAPIConfig where
+           GoogleAppsScriptTypeExecutionAPIConfig
+         where
         parseJSON
           = withObject "GoogleAppsScriptTypeExecutionAPIConfig"
               (\ o ->
@@ -93,7 +98,8 @@ instance FromJSON
                    (o .:? "access"))
 
 instance ToJSON
-         GoogleAppsScriptTypeExecutionAPIConfig where
+           GoogleAppsScriptTypeExecutionAPIConfig
+         where
         toJSON GoogleAppsScriptTypeExecutionAPIConfig'{..}
           = object
               (catMaybes [("access" .=) <$> _gasteacAccess])
@@ -103,11 +109,14 @@ instance ToJSON
 -- this \`Status\` object.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -120,12 +129,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | An array that contains a single ExecutionError object that provides
 -- information about the nature of the error.
@@ -171,11 +176,14 @@ instance ToJSON Status where
 -- supplied filter and mask present in the request.
 --
 -- /See:/ 'metrics' smart constructor.
-data Metrics = Metrics'
+data Metrics =
+  Metrics'
     { _mActiveUsers      :: !(Maybe [MetricsValue])
     , _mFailedExecutions :: !(Maybe [MetricsValue])
     , _mTotalExecutions  :: !(Maybe [MetricsValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metrics' with the minimum fields required to make a request.
 --
@@ -189,11 +197,12 @@ data Metrics = Metrics'
 metrics
     :: Metrics
 metrics =
-    Metrics'
+  Metrics'
     { _mActiveUsers = Nothing
     , _mFailedExecutions = Nothing
     , _mTotalExecutions = Nothing
     }
+
 
 -- | Number of active users.
 mActiveUsers :: Lens' Metrics [MetricsValue]
@@ -241,16 +250,18 @@ instance ToJSON Metrics where
 -- represents executions started via the Apps Script API.
 --
 -- /See:/ 'googleAppsScriptTypeProcess' smart constructor.
-data GoogleAppsScriptTypeProcess = GoogleAppsScriptTypeProcess'
+data GoogleAppsScriptTypeProcess =
+  GoogleAppsScriptTypeProcess'
     { _gastpProcessStatus   :: !(Maybe GoogleAppsScriptTypeProcessProcessStatus)
     , _gastpStartTime       :: !(Maybe DateTime')
     , _gastpProjectName     :: !(Maybe Text)
     , _gastpFunctionName    :: !(Maybe Text)
     , _gastpUserAccessLevel :: !(Maybe GoogleAppsScriptTypeProcessUserAccessLevel)
     , _gastpProcessType     :: !(Maybe GoogleAppsScriptTypeProcessProcessType)
-    , _gastpExecutingUser   :: !(Maybe Text)
     , _gastpDuration        :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeProcess' with the minimum fields required to make a request.
 --
@@ -268,22 +279,20 @@ data GoogleAppsScriptTypeProcess = GoogleAppsScriptTypeProcess'
 --
 -- * 'gastpProcessType'
 --
--- * 'gastpExecutingUser'
---
 -- * 'gastpDuration'
 googleAppsScriptTypeProcess
     :: GoogleAppsScriptTypeProcess
 googleAppsScriptTypeProcess =
-    GoogleAppsScriptTypeProcess'
+  GoogleAppsScriptTypeProcess'
     { _gastpProcessStatus = Nothing
     , _gastpStartTime = Nothing
     , _gastpProjectName = Nothing
     , _gastpFunctionName = Nothing
     , _gastpUserAccessLevel = Nothing
     , _gastpProcessType = Nothing
-    , _gastpExecutingUser = Nothing
     , _gastpDuration = Nothing
     }
+
 
 -- | The executions status.
 gastpProcessStatus :: Lens' GoogleAppsScriptTypeProcess (Maybe GoogleAppsScriptTypeProcessProcessStatus)
@@ -322,12 +331,6 @@ gastpProcessType
   = lens _gastpProcessType
       (\ s a -> s{_gastpProcessType = a})
 
--- | User-facing name for the user executing the script.
-gastpExecutingUser :: Lens' GoogleAppsScriptTypeProcess (Maybe Text)
-gastpExecutingUser
-  = lens _gastpExecutingUser
-      (\ s a -> s{_gastpExecutingUser = a})
-
 -- | Duration the execution spent executing.
 gastpDuration :: Lens' GoogleAppsScriptTypeProcess (Maybe Scientific)
 gastpDuration
@@ -345,7 +348,6 @@ instance FromJSON GoogleAppsScriptTypeProcess where
                      <*> (o .:? "functionName")
                      <*> (o .:? "userAccessLevel")
                      <*> (o .:? "processType")
-                     <*> (o .:? "executingUser")
                      <*> (o .:? "duration"))
 
 instance ToJSON GoogleAppsScriptTypeProcess where
@@ -358,13 +360,13 @@ instance ToJSON GoogleAppsScriptTypeProcess where
                   ("functionName" .=) <$> _gastpFunctionName,
                   ("userAccessLevel" .=) <$> _gastpUserAccessLevel,
                   ("processType" .=) <$> _gastpProcessType,
-                  ("executingUser" .=) <$> _gastpExecutingUser,
                   ("duration" .=) <$> _gastpDuration])
 
 -- | The script project resource.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project'
+data Project =
+  Project'
     { _pCreator        :: !(Maybe GoogleAppsScriptTypeUser)
     , _pLastModifyUser :: !(Maybe GoogleAppsScriptTypeUser)
     , _pUpdateTime     :: !(Maybe DateTime')
@@ -372,7 +374,9 @@ data Project = Project'
     , _pTitle          :: !(Maybe Text)
     , _pParentId       :: !(Maybe Text)
     , _pCreateTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
@@ -394,7 +398,7 @@ data Project = Project'
 project
     :: Project
 project =
-    Project'
+  Project'
     { _pCreator = Nothing
     , _pLastModifyUser = Nothing
     , _pUpdateTime = Nothing
@@ -403,6 +407,7 @@ project =
     , _pParentId = Nothing
     , _pCreateTime = Nothing
     }
+
 
 -- | User who originally created the script.
 pCreator :: Lens' Project (Maybe GoogleAppsScriptTypeUser)
@@ -490,11 +495,14 @@ instance ToJSON Project where
 --     into an exception class.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -508,11 +516,8 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
-    { _oDone = Nothing
-    , _oError = Nothing
-    , _oResponse = Nothing
-    }
+  Operation' {_oDone = Nothing, _oError = Nothing, _oResponse = Nothing}
+
 
 -- | This field indicates whether the script execution has completed. A
 -- completed execution has a populated \`response\` field containing the
@@ -552,10 +557,13 @@ instance ToJSON Operation where
 -- | Response with the list of Process resources.
 --
 -- /See:/ 'listUserProcessesResponse' smart constructor.
-data ListUserProcessesResponse = ListUserProcessesResponse'
+data ListUserProcessesResponse =
+  ListUserProcessesResponse'
     { _luprNextPageToken :: !(Maybe Text)
     , _luprProcesses     :: !(Maybe [GoogleAppsScriptTypeProcess])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUserProcessesResponse' with the minimum fields required to make a request.
 --
@@ -567,10 +575,9 @@ data ListUserProcessesResponse = ListUserProcessesResponse'
 listUserProcessesResponse
     :: ListUserProcessesResponse
 listUserProcessesResponse =
-    ListUserProcessesResponse'
-    { _luprNextPageToken = Nothing
-    , _luprProcesses = Nothing
-    }
+  ListUserProcessesResponse'
+    {_luprNextPageToken = Nothing, _luprProcesses = Nothing}
+
 
 -- | Token for the next page of results. If empty, there are no more pages
 -- remaining.
@@ -610,14 +617,16 @@ instance ToJSON ListUserProcessesResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -628,12 +637,15 @@ instance ToJSON Empty where
 -- | A simple user profile resource.
 --
 -- /See:/ 'googleAppsScriptTypeUser' smart constructor.
-data GoogleAppsScriptTypeUser = GoogleAppsScriptTypeUser'
+data GoogleAppsScriptTypeUser =
+  GoogleAppsScriptTypeUser'
     { _gastuEmail    :: !(Maybe Text)
     , _gastuPhotoURL :: !(Maybe Text)
     , _gastuDomain   :: !(Maybe Text)
     , _gastuName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeUser' with the minimum fields required to make a request.
 --
@@ -649,12 +661,13 @@ data GoogleAppsScriptTypeUser = GoogleAppsScriptTypeUser'
 googleAppsScriptTypeUser
     :: GoogleAppsScriptTypeUser
 googleAppsScriptTypeUser =
-    GoogleAppsScriptTypeUser'
+  GoogleAppsScriptTypeUser'
     { _gastuEmail = Nothing
     , _gastuPhotoURL = Nothing
     , _gastuDomain = Nothing
     , _gastuName = Nothing
     }
+
 
 -- | The user\'s identifying email address.
 gastuEmail :: Lens' GoogleAppsScriptTypeUser (Maybe Text)
@@ -698,12 +711,15 @@ instance ToJSON GoogleAppsScriptTypeUser where
 -- | A configuration that defines how a deployment is accessed externally.
 --
 -- /See:/ 'entryPoint' smart constructor.
-data EntryPoint = EntryPoint'
+data EntryPoint =
+  EntryPoint'
     { _epExecutionAPI   :: !(Maybe GoogleAppsScriptTypeExecutionAPIEntryPoint)
     , _epAddOn          :: !(Maybe GoogleAppsScriptTypeAddOnEntryPoint)
     , _epEntryPointType :: !(Maybe EntryPointEntryPointType)
     , _epWebApp         :: !(Maybe GoogleAppsScriptTypeWebAppEntryPoint)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntryPoint' with the minimum fields required to make a request.
 --
@@ -719,12 +735,13 @@ data EntryPoint = EntryPoint'
 entryPoint
     :: EntryPoint
 entryPoint =
-    EntryPoint'
+  EntryPoint'
     { _epExecutionAPI = Nothing
     , _epAddOn = Nothing
     , _epEntryPointType = Nothing
     , _epWebApp = Nothing
     }
+
 
 -- | An entry point specification for Apps Script API execution calls.
 epExecutionAPI :: Lens' EntryPoint (Maybe GoogleAppsScriptTypeExecutionAPIEntryPoint)
@@ -767,10 +784,13 @@ instance ToJSON EntryPoint where
 -- | Response with the list of the versions for the specified script project.
 --
 -- /See:/ 'listVersionsResponse' smart constructor.
-data ListVersionsResponse = ListVersionsResponse'
+data ListVersionsResponse =
+  ListVersionsResponse'
     { _lvrNextPageToken :: !(Maybe Text)
     , _lvrVersions      :: !(Maybe [Version])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListVersionsResponse' with the minimum fields required to make a request.
 --
@@ -782,10 +802,8 @@ data ListVersionsResponse = ListVersionsResponse'
 listVersionsResponse
     :: ListVersionsResponse
 listVersionsResponse =
-    ListVersionsResponse'
-    { _lvrNextPageToken = Nothing
-    , _lvrVersions = Nothing
-    }
+  ListVersionsResponse' {_lvrNextPageToken = Nothing, _lvrVersions = Nothing}
+
 
 -- | The token use to fetch the next page of records. if not exist in the
 -- response, that means no more versions to list.
@@ -821,12 +839,15 @@ instance ToJSON ListVersionsResponse where
 -- results based on the implementation of the script.
 --
 -- /See:/ 'executionRequest' smart constructor.
-data ExecutionRequest = ExecutionRequest'
+data ExecutionRequest =
+  ExecutionRequest'
     { _erFunction     :: !(Maybe Text)
     , _erSessionState :: !(Maybe Text)
     , _erDevMode      :: !(Maybe Bool)
     , _erParameters   :: !(Maybe [JSONValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExecutionRequest' with the minimum fields required to make a request.
 --
@@ -842,22 +863,24 @@ data ExecutionRequest = ExecutionRequest'
 executionRequest
     :: ExecutionRequest
 executionRequest =
-    ExecutionRequest'
+  ExecutionRequest'
     { _erFunction = Nothing
     , _erSessionState = Nothing
     , _erDevMode = Nothing
     , _erParameters = Nothing
     }
 
+
 -- | The name of the function to execute in the given script. The name does
--- not include parentheses or parameters.
+-- not include parentheses or parameters. It can reference a function in an
+-- included library such as \`Library.libFunction1\`.
 erFunction :: Lens' ExecutionRequest (Maybe Text)
 erFunction
   = lens _erFunction (\ s a -> s{_erFunction = a})
 
--- | For Android add-ons only. An ID that represents the user\'s current
--- session in the Android app for Google Docs or Sheets, included as extra
--- data in the
+-- | __Deprecated__. For use with Android add-ons only. An ID that represents
+-- the user\'s current session in the Android app for Google Docs or
+-- Sheets, included as extra data in the
 -- [Intent](https:\/\/developer.android.com\/guide\/components\/intents-filters.html)
 -- that launches the add-on. When an Android add-on is run with a session
 -- state, it gains the privileges of a
@@ -912,10 +935,13 @@ instance ToJSON ExecutionRequest where
 -- | Response with the list of Process resources.
 --
 -- /See:/ 'listScriptProcessesResponse' smart constructor.
-data ListScriptProcessesResponse = ListScriptProcessesResponse'
+data ListScriptProcessesResponse =
+  ListScriptProcessesResponse'
     { _lsprNextPageToken :: !(Maybe Text)
     , _lsprProcesses     :: !(Maybe [GoogleAppsScriptTypeProcess])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListScriptProcessesResponse' with the minimum fields required to make a request.
 --
@@ -927,10 +953,9 @@ data ListScriptProcessesResponse = ListScriptProcessesResponse'
 listScriptProcessesResponse
     :: ListScriptProcessesResponse
 listScriptProcessesResponse =
-    ListScriptProcessesResponse'
-    { _lsprNextPageToken = Nothing
-    , _lsprProcesses = Nothing
-    }
+  ListScriptProcessesResponse'
+    {_lsprNextPageToken = Nothing, _lsprProcesses = Nothing}
+
 
 -- | Token for the next page of results. If empty, there are no more pages
 -- remaining.
@@ -964,9 +989,12 @@ instance ToJSON ListScriptProcessesResponse where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -977,9 +1005,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -998,10 +1025,13 @@ instance ToJSON StatusDetailsItem where
 -- | A stack trace through the script that shows where the execution failed.
 --
 -- /See:/ 'scriptStackTraceElement' smart constructor.
-data ScriptStackTraceElement = ScriptStackTraceElement'
+data ScriptStackTraceElement =
+  ScriptStackTraceElement'
     { _ssteFunction   :: !(Maybe Text)
     , _ssteLineNumber :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScriptStackTraceElement' with the minimum fields required to make a request.
 --
@@ -1013,10 +1043,8 @@ data ScriptStackTraceElement = ScriptStackTraceElement'
 scriptStackTraceElement
     :: ScriptStackTraceElement
 scriptStackTraceElement =
-    ScriptStackTraceElement'
-    { _ssteFunction = Nothing
-    , _ssteLineNumber = Nothing
-    }
+  ScriptStackTraceElement' {_ssteFunction = Nothing, _ssteLineNumber = Nothing}
+
 
 -- | The name of the function that failed.
 ssteFunction :: Lens' ScriptStackTraceElement (Maybe Text)
@@ -1047,10 +1075,13 @@ instance ToJSON ScriptStackTraceElement where
 -- | The Content resource.
 --
 -- /See:/ 'content' smart constructor.
-data Content = Content'
+data Content =
+  Content'
     { _cScriptId :: !(Maybe Text)
     , _cFiles    :: !(Maybe [File])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Content' with the minimum fields required to make a request.
 --
@@ -1061,11 +1092,8 @@ data Content = Content'
 -- * 'cFiles'
 content
     :: Content
-content =
-    Content'
-    { _cScriptId = Nothing
-    , _cFiles = Nothing
-    }
+content = Content' {_cScriptId = Nothing, _cFiles = Nothing}
+
 
 -- | The script project\'s Drive ID.
 cScriptId :: Lens' Content (Maybe Text)
@@ -1097,11 +1125,14 @@ instance ToJSON Content where
 -- | Metrics value that holds number of executions counted.
 --
 -- /See:/ 'metricsValue' smart constructor.
-data MetricsValue = MetricsValue'
+data MetricsValue =
+  MetricsValue'
     { _mvStartTime :: !(Maybe DateTime')
     , _mvValue     :: !(Maybe (Textual Word64))
     , _mvEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricsValue' with the minimum fields required to make a request.
 --
@@ -1115,11 +1146,9 @@ data MetricsValue = MetricsValue'
 metricsValue
     :: MetricsValue
 metricsValue =
-    MetricsValue'
-    { _mvStartTime = Nothing
-    , _mvValue = Nothing
-    , _mvEndTime = Nothing
-    }
+  MetricsValue'
+    {_mvStartTime = Nothing, _mvValue = Nothing, _mvEndTime = Nothing}
+
 
 -- | Required field indicating the start time of the interval.
 mvStartTime :: Lens' MetricsValue (Maybe UTCTime)
@@ -1158,14 +1187,17 @@ instance ToJSON MetricsValue where
 -- | An add-on entry point.
 --
 -- /See:/ 'googleAppsScriptTypeAddOnEntryPoint' smart constructor.
-data GoogleAppsScriptTypeAddOnEntryPoint = GoogleAppsScriptTypeAddOnEntryPoint'
+data GoogleAppsScriptTypeAddOnEntryPoint =
+  GoogleAppsScriptTypeAddOnEntryPoint'
     { _gastaoepPostInstallTipURL :: !(Maybe Text)
     , _gastaoepAddOnType         :: !(Maybe GoogleAppsScriptTypeAddOnEntryPointAddOnType)
     , _gastaoepReportIssueURL    :: !(Maybe Text)
     , _gastaoepHelpURL           :: !(Maybe Text)
     , _gastaoepTitle             :: !(Maybe Text)
     , _gastaoepDescription       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeAddOnEntryPoint' with the minimum fields required to make a request.
 --
@@ -1185,7 +1217,7 @@ data GoogleAppsScriptTypeAddOnEntryPoint = GoogleAppsScriptTypeAddOnEntryPoint'
 googleAppsScriptTypeAddOnEntryPoint
     :: GoogleAppsScriptTypeAddOnEntryPoint
 googleAppsScriptTypeAddOnEntryPoint =
-    GoogleAppsScriptTypeAddOnEntryPoint'
+  GoogleAppsScriptTypeAddOnEntryPoint'
     { _gastaoepPostInstallTipURL = Nothing
     , _gastaoepAddOnType = Nothing
     , _gastaoepReportIssueURL = Nothing
@@ -1193,6 +1225,7 @@ googleAppsScriptTypeAddOnEntryPoint =
     , _gastaoepTitle = Nothing
     , _gastaoepDescription = Nothing
     }
+
 
 -- | The add-on\'s required post install tip URL.
 gastaoepPostInstallTipURL :: Lens' GoogleAppsScriptTypeAddOnEntryPoint (Maybe Text)
@@ -1258,10 +1291,13 @@ instance ToJSON GoogleAppsScriptTypeAddOnEntryPoint
 -- | Web app entry point configuration.
 --
 -- /See:/ 'googleAppsScriptTypeWebAppConfig' smart constructor.
-data GoogleAppsScriptTypeWebAppConfig = GoogleAppsScriptTypeWebAppConfig'
+data GoogleAppsScriptTypeWebAppConfig =
+  GoogleAppsScriptTypeWebAppConfig'
     { _gastwacAccess    :: !(Maybe GoogleAppsScriptTypeWebAppConfigAccess)
     , _gastwacExecuteAs :: !(Maybe GoogleAppsScriptTypeWebAppConfigExecuteAs)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeWebAppConfig' with the minimum fields required to make a request.
 --
@@ -1273,10 +1309,9 @@ data GoogleAppsScriptTypeWebAppConfig = GoogleAppsScriptTypeWebAppConfig'
 googleAppsScriptTypeWebAppConfig
     :: GoogleAppsScriptTypeWebAppConfig
 googleAppsScriptTypeWebAppConfig =
-    GoogleAppsScriptTypeWebAppConfig'
-    { _gastwacAccess = Nothing
-    , _gastwacExecuteAs = Nothing
-    }
+  GoogleAppsScriptTypeWebAppConfig'
+    {_gastwacAccess = Nothing, _gastwacExecuteAs = Nothing}
+
 
 -- | Who has permission to run the web app.
 gastwacAccess :: Lens' GoogleAppsScriptTypeWebAppConfig (Maybe GoogleAppsScriptTypeWebAppConfigAccess)
@@ -1312,12 +1347,15 @@ instance ToJSON GoogleAppsScriptTypeWebAppConfig
 -- specified.
 --
 -- /See:/ 'version' smart constructor.
-data Version = Version'
+data Version =
+  Version'
     { _vVersionNumber :: !(Maybe (Textual Int32))
     , _vScriptId      :: !(Maybe Text)
     , _vDescription   :: !(Maybe Text)
     , _vCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
@@ -1333,12 +1371,13 @@ data Version = Version'
 version
     :: Version
 version =
-    Version'
+  Version'
     { _vVersionNumber = Nothing
     , _vScriptId = Nothing
     , _vDescription = Nothing
     , _vCreateTime = Nothing
     }
+
 
 -- | The incremental ID that is created by Apps Script when a version is
 -- created. This is system assigned number and is immutable once created.
@@ -1390,11 +1429,14 @@ instance ToJSON Version where
 -- contains an array with a single one of these \`ExecutionError\` objects.
 --
 -- /See:/ 'executionError' smart constructor.
-data ExecutionError = ExecutionError'
+data ExecutionError =
+  ExecutionError'
     { _eeScriptStackTraceElements :: !(Maybe [ScriptStackTraceElement])
     , _eeErrorType                :: !(Maybe Text)
     , _eeErrorMessage             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExecutionError' with the minimum fields required to make a request.
 --
@@ -1408,11 +1450,12 @@ data ExecutionError = ExecutionError'
 executionError
     :: ExecutionError
 executionError =
-    ExecutionError'
+  ExecutionError'
     { _eeScriptStackTraceElements = Nothing
     , _eeErrorType = Nothing
     , _eeErrorMessage = Nothing
     }
+
 
 -- | An array of objects that provide a stack trace through the script to
 -- show where the execution failed, with the deepest call first.
@@ -1457,10 +1500,13 @@ instance ToJSON ExecutionError where
 -- | A web application entry point.
 --
 -- /See:/ 'googleAppsScriptTypeWebAppEntryPoint' smart constructor.
-data GoogleAppsScriptTypeWebAppEntryPoint = GoogleAppsScriptTypeWebAppEntryPoint'
+data GoogleAppsScriptTypeWebAppEntryPoint =
+  GoogleAppsScriptTypeWebAppEntryPoint'
     { _gastwaepEntryPointConfig :: !(Maybe GoogleAppsScriptTypeWebAppConfig)
     , _gastwaepURL              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeWebAppEntryPoint' with the minimum fields required to make a request.
 --
@@ -1472,10 +1518,9 @@ data GoogleAppsScriptTypeWebAppEntryPoint = GoogleAppsScriptTypeWebAppEntryPoint
 googleAppsScriptTypeWebAppEntryPoint
     :: GoogleAppsScriptTypeWebAppEntryPoint
 googleAppsScriptTypeWebAppEntryPoint =
-    GoogleAppsScriptTypeWebAppEntryPoint'
-    { _gastwaepEntryPointConfig = Nothing
-    , _gastwaepURL = Nothing
-    }
+  GoogleAppsScriptTypeWebAppEntryPoint'
+    {_gastwaepEntryPointConfig = Nothing, _gastwaepURL = Nothing}
+
 
 -- | The entry point\'s configuration.
 gastwaepEntryPointConfig :: Lens' GoogleAppsScriptTypeWebAppEntryPoint (Maybe GoogleAppsScriptTypeWebAppConfig)
@@ -1489,7 +1534,8 @@ gastwaepURL
   = lens _gastwaepURL (\ s a -> s{_gastwaepURL = a})
 
 instance FromJSON
-         GoogleAppsScriptTypeWebAppEntryPoint where
+           GoogleAppsScriptTypeWebAppEntryPoint
+         where
         parseJSON
           = withObject "GoogleAppsScriptTypeWebAppEntryPoint"
               (\ o ->
@@ -1508,10 +1554,13 @@ instance ToJSON GoogleAppsScriptTypeWebAppEntryPoint
 -- | Request to create a script project.
 --
 -- /See:/ 'createProjectRequest' smart constructor.
-data CreateProjectRequest = CreateProjectRequest'
+data CreateProjectRequest =
+  CreateProjectRequest'
     { _cprTitle    :: !(Maybe Text)
     , _cprParentId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateProjectRequest' with the minimum fields required to make a request.
 --
@@ -1523,10 +1572,8 @@ data CreateProjectRequest = CreateProjectRequest'
 createProjectRequest
     :: CreateProjectRequest
 createProjectRequest =
-    CreateProjectRequest'
-    { _cprTitle = Nothing
-    , _cprParentId = Nothing
-    }
+  CreateProjectRequest' {_cprTitle = Nothing, _cprParentId = Nothing}
+
 
 -- | The title for the project.
 cprTitle :: Lens' CreateProjectRequest (Maybe Text)
@@ -1557,12 +1604,15 @@ instance ToJSON CreateProjectRequest where
 -- | Metadata the defines how a deployment is configured.
 --
 -- /See:/ 'deploymentConfig' smart constructor.
-data DeploymentConfig = DeploymentConfig'
+data DeploymentConfig =
+  DeploymentConfig'
     { _dcVersionNumber    :: !(Maybe (Textual Int32))
     , _dcScriptId         :: !(Maybe Text)
     , _dcManifestFileName :: !(Maybe Text)
     , _dcDescription      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentConfig' with the minimum fields required to make a request.
 --
@@ -1578,12 +1628,13 @@ data DeploymentConfig = DeploymentConfig'
 deploymentConfig
     :: DeploymentConfig
 deploymentConfig =
-    DeploymentConfig'
+  DeploymentConfig'
     { _dcVersionNumber = Nothing
     , _dcScriptId = Nothing
     , _dcManifestFileName = Nothing
     , _dcDescription = Nothing
     }
+
 
 -- | The version number on which this deployment is based.
 dcVersionNumber :: Lens' DeploymentConfig (Maybe Int32)
@@ -1631,10 +1682,13 @@ instance ToJSON DeploymentConfig where
 -- project.
 --
 -- /See:/ 'listDeploymentsResponse' smart constructor.
-data ListDeploymentsResponse = ListDeploymentsResponse'
+data ListDeploymentsResponse =
+  ListDeploymentsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDeployments   :: !(Maybe [Deployment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDeploymentsResponse' with the minimum fields required to make a request.
 --
@@ -1646,10 +1700,9 @@ data ListDeploymentsResponse = ListDeploymentsResponse'
 listDeploymentsResponse
     :: ListDeploymentsResponse
 listDeploymentsResponse =
-    ListDeploymentsResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDeployments = Nothing
-    }
+  ListDeploymentsResponse'
+    {_ldrNextPageToken = Nothing, _ldrDeployments = Nothing}
+
 
 -- | The token that can be used in the next call to get the next page of
 -- results.
@@ -1684,9 +1737,12 @@ instance ToJSON ListDeploymentsResponse where
 -- | Represents a function in a script project.
 --
 -- /See:/ 'googleAppsScriptTypeFunction' smart constructor.
-newtype GoogleAppsScriptTypeFunction = GoogleAppsScriptTypeFunction'
+newtype GoogleAppsScriptTypeFunction =
+  GoogleAppsScriptTypeFunction'
     { _gastfName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeFunction' with the minimum fields required to make a request.
 --
@@ -1696,9 +1752,8 @@ newtype GoogleAppsScriptTypeFunction = GoogleAppsScriptTypeFunction'
 googleAppsScriptTypeFunction
     :: GoogleAppsScriptTypeFunction
 googleAppsScriptTypeFunction =
-    GoogleAppsScriptTypeFunction'
-    { _gastfName = Nothing
-    }
+  GoogleAppsScriptTypeFunction' {_gastfName = Nothing}
+
 
 -- | The function name in the script project.
 gastfName :: Lens' GoogleAppsScriptTypeFunction (Maybe Text)
@@ -1721,7 +1776,8 @@ instance ToJSON GoogleAppsScriptTypeFunction where
 -- multiple files.
 --
 -- /See:/ 'file' smart constructor.
-data File = File'
+data File =
+  File'
     { _fFunctionSet    :: !(Maybe GoogleAppsScriptTypeFunctionSet)
     , _fLastModifyUser :: !(Maybe GoogleAppsScriptTypeUser)
     , _fUpdateTime     :: !(Maybe DateTime')
@@ -1729,7 +1785,9 @@ data File = File'
     , _fSource         :: !(Maybe Text)
     , _fType           :: !(Maybe FileType)
     , _fCreateTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -1751,7 +1809,7 @@ data File = File'
 file
     :: File
 file =
-    File'
+  File'
     { _fFunctionSet = Nothing
     , _fLastModifyUser = Nothing
     , _fUpdateTime = Nothing
@@ -1760,6 +1818,7 @@ file =
     , _fType = Nothing
     , _fCreateTime = Nothing
     }
+
 
 -- | The defined set of functions in the script file, if any.
 fFunctionSet :: Lens' File (Maybe GoogleAppsScriptTypeFunctionSet)
@@ -1826,9 +1885,12 @@ instance ToJSON File where
 -- | An API executable entry point.
 --
 -- /See:/ 'googleAppsScriptTypeExecutionAPIEntryPoint' smart constructor.
-newtype GoogleAppsScriptTypeExecutionAPIEntryPoint = GoogleAppsScriptTypeExecutionAPIEntryPoint'
+newtype GoogleAppsScriptTypeExecutionAPIEntryPoint =
+  GoogleAppsScriptTypeExecutionAPIEntryPoint'
     { _gasteaepEntryPointConfig :: Maybe GoogleAppsScriptTypeExecutionAPIConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleAppsScriptTypeExecutionAPIEntryPoint' with the minimum fields required to make a request.
 --
@@ -1838,9 +1900,9 @@ newtype GoogleAppsScriptTypeExecutionAPIEntryPoint = GoogleAppsScriptTypeExecuti
 googleAppsScriptTypeExecutionAPIEntryPoint
     :: GoogleAppsScriptTypeExecutionAPIEntryPoint
 googleAppsScriptTypeExecutionAPIEntryPoint =
-    GoogleAppsScriptTypeExecutionAPIEntryPoint'
-    { _gasteaepEntryPointConfig = Nothing
-    }
+  GoogleAppsScriptTypeExecutionAPIEntryPoint'
+    {_gasteaepEntryPointConfig = Nothing}
+
 
 -- | The entry point\'s configuration.
 gasteaepEntryPointConfig :: Lens' GoogleAppsScriptTypeExecutionAPIEntryPoint (Maybe GoogleAppsScriptTypeExecutionAPIConfig)
@@ -1849,7 +1911,8 @@ gasteaepEntryPointConfig
       (\ s a -> s{_gasteaepEntryPointConfig = a})
 
 instance FromJSON
-         GoogleAppsScriptTypeExecutionAPIEntryPoint where
+           GoogleAppsScriptTypeExecutionAPIEntryPoint
+         where
         parseJSON
           = withObject
               "GoogleAppsScriptTypeExecutionAPIEntryPoint"
@@ -1858,7 +1921,8 @@ instance FromJSON
                    (o .:? "entryPointConfig"))
 
 instance ToJSON
-         GoogleAppsScriptTypeExecutionAPIEntryPoint where
+           GoogleAppsScriptTypeExecutionAPIEntryPoint
+         where
         toJSON
           GoogleAppsScriptTypeExecutionAPIEntryPoint'{..}
           = object
@@ -1870,9 +1934,12 @@ instance ToJSON
 -- ExecutionResponse object with the function\'s return value.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1883,9 +1950,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1907,9 +1973,12 @@ instance ToJSON OperationResponse where
 -- object.
 --
 -- /See:/ 'executionResponse' smart constructor.
-newtype ExecutionResponse = ExecutionResponse'
+newtype ExecutionResponse =
+  ExecutionResponse'
     { _erResult :: Maybe JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExecutionResponse' with the minimum fields required to make a request.
 --
@@ -1918,10 +1987,8 @@ newtype ExecutionResponse = ExecutionResponse'
 -- * 'erResult'
 executionResponse
     :: ExecutionResponse
-executionResponse =
-    ExecutionResponse'
-    { _erResult = Nothing
-    }
+executionResponse = ExecutionResponse' {_erResult = Nothing}
+
 
 -- | The return value of the script function. The type matches the object
 -- type returned in Apps Script. Functions called using the Apps Script API
@@ -1943,12 +2010,15 @@ instance ToJSON ExecutionResponse where
 -- | Representation of a single script deployment.
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment'
+data Deployment =
+  Deployment'
     { _dDeploymentId     :: !(Maybe Text)
     , _dUpdateTime       :: !(Maybe DateTime')
     , _dEntryPoints      :: !(Maybe [EntryPoint])
     , _dDeploymentConfig :: !(Maybe DeploymentConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
@@ -1964,12 +2034,13 @@ data Deployment = Deployment'
 deployment
     :: Deployment
 deployment =
-    Deployment'
+  Deployment'
     { _dDeploymentId = Nothing
     , _dUpdateTime = Nothing
     , _dEntryPoints = Nothing
     , _dDeploymentConfig = Nothing
     }
+
 
 -- | The deployment ID for this deployment.
 dDeploymentId :: Lens' Deployment (Maybe Text)
@@ -2017,9 +2088,12 @@ instance ToJSON Deployment where
 -- | Request with deployment information to update an existing deployment.
 --
 -- /See:/ 'updateDeploymentRequest' smart constructor.
-newtype UpdateDeploymentRequest = UpdateDeploymentRequest'
+newtype UpdateDeploymentRequest =
+  UpdateDeploymentRequest'
     { _udrDeploymentConfig :: Maybe DeploymentConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateDeploymentRequest' with the minimum fields required to make a request.
 --
@@ -2029,9 +2103,8 @@ newtype UpdateDeploymentRequest = UpdateDeploymentRequest'
 updateDeploymentRequest
     :: UpdateDeploymentRequest
 updateDeploymentRequest =
-    UpdateDeploymentRequest'
-    { _udrDeploymentConfig = Nothing
-    }
+  UpdateDeploymentRequest' {_udrDeploymentConfig = Nothing}
+
 
 -- | The deployment configuration.
 udrDeploymentConfig :: Lens' UpdateDeploymentRequest (Maybe DeploymentConfig)

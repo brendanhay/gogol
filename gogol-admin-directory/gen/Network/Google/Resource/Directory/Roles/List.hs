@@ -57,11 +57,14 @@ type RolesListResource =
 -- | Retrieves a paginated list of all the roles in a domain.
 --
 -- /See:/ 'rolesList' smart constructor.
-data RolesList = RolesList'
+data RolesList =
+  RolesList'
     { _rlCustomer   :: !Text
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RolesList' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ rolesList
     :: Text -- ^ 'rlCustomer'
     -> RolesList
 rolesList pRlCustomer_ =
-    RolesList'
+  RolesList'
     { _rlCustomer = pRlCustomer_
     , _rlPageToken = Nothing
     , _rlMaxResults = Nothing
     }
+
 
 -- | Immutable ID of the G Suite account.
 rlCustomer :: Lens' RolesList Text

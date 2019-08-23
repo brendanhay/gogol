@@ -51,9 +51,12 @@ type TimelineDeleteResource =
 -- | Deletes a timeline item.
 --
 -- /See:/ 'timelineDelete' smart constructor.
-newtype TimelineDelete = TimelineDelete'
+newtype TimelineDelete =
+  TimelineDelete'
     { _tdId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineDelete' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype TimelineDelete = TimelineDelete'
 timelineDelete
     :: Text -- ^ 'tdId'
     -> TimelineDelete
-timelineDelete pTdId_ =
-    TimelineDelete'
-    { _tdId = pTdId_
-    }
+timelineDelete pTdId_ = TimelineDelete' {_tdId = pTdId_}
+
 
 -- | The ID of the timeline item.
 tdId :: Lens' TimelineDelete Text

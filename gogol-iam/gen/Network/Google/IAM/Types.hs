@@ -52,6 +52,10 @@ module Network.Google.IAM.Types
     -- * PermissionStage
     , PermissionStage (..)
 
+    -- * UndeleteServiceAccountRequest
+    , UndeleteServiceAccountRequest
+    , undeleteServiceAccountRequest
+
     -- * AuditableService
     , AuditableService
     , auditableService
@@ -148,6 +152,10 @@ module Network.Google.IAM.Types
     , listServiceAccountKeysResponse
     , lsakrKeys
 
+    -- * EnableServiceAccountRequest
+    , EnableServiceAccountRequest
+    , enableServiceAccountRequest
+
     -- * Role
     , Role
     , role'
@@ -164,10 +172,12 @@ module Network.Google.IAM.Types
     , serviceAccount
     , saEmail
     , saEtag
+    , saDisabled
     , saUniqueId
     , saName
     , saDisplayName
     , saProjectId
+    , saDescription
     , saOAuth2ClientId
 
     -- * QueryTestablePermissionsRequest
@@ -199,6 +209,11 @@ module Network.Google.IAM.Types
 
     -- * LintResultSeverity
     , LintResultSeverity (..)
+
+    -- * UndeleteServiceAccountResponse
+    , UndeleteServiceAccountResponse
+    , undeleteServiceAccountResponse
+    , usarRestoredAccount
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -237,6 +252,12 @@ module Network.Google.IAM.Types
     , signJwtRequest
     , sjrPayload
 
+    -- * PatchServiceAccountRequest
+    , PatchServiceAccountRequest
+    , patchServiceAccountRequest
+    , psarUpdateMask
+    , psarServiceAccount
+
     -- * ServiceAccountKeyKeyAlgorithm
     , ServiceAccountKeyKeyAlgorithm (..)
 
@@ -249,13 +270,13 @@ module Network.Google.IAM.Types
     -- * Permission
     , Permission
     , permission
-    , pStage
-    , pOnlyInPredefinedRoles
-    , pCustomRolesSupportLevel
-    , pName
-    , pTitle
-    , pAPIdisabled
-    , pDescription
+    , perStage
+    , perOnlyInPredefinedRoles
+    , perCustomRolesSupportLevel
+    , perName
+    , perTitle
+    , perAPIdisabled
+    , perDescription
 
     -- * SignBlobResponse
     , SignBlobResponse
@@ -311,6 +332,10 @@ module Network.Google.IAM.Types
     , bMembers
     , bRole
     , bCondition
+
+    -- * DisableServiceAccountRequest
+    , DisableServiceAccountRequest
+    , disableServiceAccountRequest
     ) where
 
 import           Network.Google.IAM.Types.Product
@@ -325,4 +350,4 @@ iAMService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

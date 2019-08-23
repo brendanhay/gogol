@@ -59,14 +59,17 @@ type ProjectsLocationsEnvironmentsDeleteResource =
 -- | Delete an environment.
 --
 -- /See:/ 'projectsLocationsEnvironmentsDelete' smart constructor.
-data ProjectsLocationsEnvironmentsDelete = ProjectsLocationsEnvironmentsDelete'
+data ProjectsLocationsEnvironmentsDelete =
+  ProjectsLocationsEnvironmentsDelete'
     { _pledXgafv          :: !(Maybe Xgafv)
     , _pledUploadProtocol :: !(Maybe Text)
     , _pledAccessToken    :: !(Maybe Text)
     , _pledUploadType     :: !(Maybe Text)
     , _pledName           :: !Text
     , _pledCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsEnvironmentsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsEnvironmentsDelete
     :: Text -- ^ 'pledName'
     -> ProjectsLocationsEnvironmentsDelete
 projectsLocationsEnvironmentsDelete pPledName_ =
-    ProjectsLocationsEnvironmentsDelete'
+  ProjectsLocationsEnvironmentsDelete'
     { _pledXgafv = Nothing
     , _pledUploadProtocol = Nothing
     , _pledAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsEnvironmentsDelete pPledName_ =
     , _pledName = pPledName_
     , _pledCallback = Nothing
     }
+
 
 -- | V1 error format.
 pledXgafv :: Lens' ProjectsLocationsEnvironmentsDelete (Maybe Xgafv)
@@ -130,7 +134,8 @@ pledCallback
   = lens _pledCallback (\ s a -> s{_pledCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsEnvironmentsDelete where
+           ProjectsLocationsEnvironmentsDelete
+         where
         type Rs ProjectsLocationsEnvironmentsDelete =
              Operation
         type Scopes ProjectsLocationsEnvironmentsDelete =

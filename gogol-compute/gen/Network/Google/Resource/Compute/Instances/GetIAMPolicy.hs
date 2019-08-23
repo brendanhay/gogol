@@ -60,11 +60,14 @@ type InstancesGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'instancesGetIAMPolicy' smart constructor.
-data InstancesGetIAMPolicy = InstancesGetIAMPolicy'
+data InstancesGetIAMPolicy =
+  InstancesGetIAMPolicy'
     { _igiampProject  :: !Text
     , _igiampZone     :: !Text
     , _igiampResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ instancesGetIAMPolicy
     -> Text -- ^ 'igiampResource'
     -> InstancesGetIAMPolicy
 instancesGetIAMPolicy pIgiampProject_ pIgiampZone_ pIgiampResource_ =
-    InstancesGetIAMPolicy'
+  InstancesGetIAMPolicy'
     { _igiampProject = pIgiampProject_
     , _igiampZone = pIgiampZone_
     , _igiampResource = pIgiampResource_
     }
+
 
 -- | Project ID for this request.
 igiampProject :: Lens' InstancesGetIAMPolicy Text

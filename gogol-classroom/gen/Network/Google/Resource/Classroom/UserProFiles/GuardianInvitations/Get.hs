@@ -84,7 +84,8 @@ type UserProFilesGuardianInvitationsGetResource =
 -- student.
 --
 -- /See:/ 'userProFilesGuardianInvitationsGet' smart constructor.
-data UserProFilesGuardianInvitationsGet = UserProFilesGuardianInvitationsGet'
+data UserProFilesGuardianInvitationsGet =
+  UserProFilesGuardianInvitationsGet'
     { _upfgigStudentId      :: !Text
     , _upfgigXgafv          :: !(Maybe Xgafv)
     , _upfgigUploadProtocol :: !(Maybe Text)
@@ -92,7 +93,9 @@ data UserProFilesGuardianInvitationsGet = UserProFilesGuardianInvitationsGet'
     , _upfgigUploadType     :: !(Maybe Text)
     , _upfgigInvitationId   :: !Text
     , _upfgigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFilesGuardianInvitationsGet' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ userProFilesGuardianInvitationsGet
     -> Text -- ^ 'upfgigInvitationId'
     -> UserProFilesGuardianInvitationsGet
 userProFilesGuardianInvitationsGet pUpfgigStudentId_ pUpfgigInvitationId_ =
-    UserProFilesGuardianInvitationsGet'
+  UserProFilesGuardianInvitationsGet'
     { _upfgigStudentId = pUpfgigStudentId_
     , _upfgigXgafv = Nothing
     , _upfgigUploadProtocol = Nothing
@@ -125,6 +128,7 @@ userProFilesGuardianInvitationsGet pUpfgigStudentId_ pUpfgigInvitationId_ =
     , _upfgigInvitationId = pUpfgigInvitationId_
     , _upfgigCallback = Nothing
     }
+
 
 -- | The ID of the student whose guardian invitation is being requested.
 upfgigStudentId :: Lens' UserProFilesGuardianInvitationsGet Text
@@ -168,7 +172,8 @@ upfgigCallback
       (\ s a -> s{_upfgigCallback = a})
 
 instance GoogleRequest
-         UserProFilesGuardianInvitationsGet where
+           UserProFilesGuardianInvitationsGet
+         where
         type Rs UserProFilesGuardianInvitationsGet =
              GuardianInvitation
         type Scopes UserProFilesGuardianInvitationsGet =

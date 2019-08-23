@@ -23,10 +23,13 @@ import           Network.Google.ResourceManager.Types.Sum
 -- | The ListFolders response message.
 --
 -- /See:/ 'listFoldersResponse' smart constructor.
-data ListFoldersResponse = ListFoldersResponse'
+data ListFoldersResponse =
+  ListFoldersResponse'
     { _lfrNextPageToken :: !(Maybe Text)
     , _lfrFolders       :: !(Maybe [Folder])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
 --
@@ -38,10 +41,8 @@ data ListFoldersResponse = ListFoldersResponse'
 listFoldersResponse
     :: ListFoldersResponse
 listFoldersResponse =
-    ListFoldersResponse'
-    { _lfrNextPageToken = Nothing
-    , _lfrFolders = Nothing
-    }
+  ListFoldersResponse' {_lfrNextPageToken = Nothing, _lfrFolders = Nothing}
+
 
 -- | A pagination token returned from a previous call to \`ListFolders\` that
 -- indicates from where listing should continue. This field is optional.
@@ -110,11 +111,14 @@ instance ToJSON ListFoldersResponse where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -127,12 +131,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -189,10 +189,13 @@ instance ToJSON Status where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -203,11 +206,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -244,12 +244,15 @@ instance ToJSON AuditConfig where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -265,12 +268,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -319,14 +323,16 @@ instance ToJSON Expr where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -339,11 +345,14 @@ instance ToJSON GetIAMPolicyRequest where
 -- | The request message for searching folders.
 --
 -- /See:/ 'searchFoldersRequest' smart constructor.
-data SearchFoldersRequest = SearchFoldersRequest'
+data SearchFoldersRequest =
+  SearchFoldersRequest'
     { _sfrQuery     :: !(Maybe Text)
     , _sfrPageToken :: !(Maybe Text)
     , _sfrPageSize  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchFoldersRequest' with the minimum fields required to make a request.
 --
@@ -357,11 +366,9 @@ data SearchFoldersRequest = SearchFoldersRequest'
 searchFoldersRequest
     :: SearchFoldersRequest
 searchFoldersRequest =
-    SearchFoldersRequest'
-    { _sfrQuery = Nothing
-    , _sfrPageToken = Nothing
-    , _sfrPageSize = Nothing
-    }
+  SearchFoldersRequest'
+    {_sfrQuery = Nothing, _sfrPageToken = Nothing, _sfrPageSize = Nothing}
+
 
 -- | Search criteria used to select the Folders to return. If no search
 -- criteria is specified then all accessible folders will be returned.
@@ -415,14 +422,16 @@ instance ToJSON SearchFoldersRequest where
 --
 -- /See:/ 'undeleteFolderRequest' smart constructor.
 data UndeleteFolderRequest =
-    UndeleteFolderRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UndeleteFolderRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UndeleteFolderRequest' with the minimum fields required to make a request.
 --
 undeleteFolderRequest
     :: UndeleteFolderRequest
 undeleteFolderRequest = UndeleteFolderRequest'
+
 
 instance FromJSON UndeleteFolderRequest where
         parseJSON
@@ -436,13 +445,16 @@ instance ToJSON UndeleteFolderRequest where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -460,13 +472,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -526,10 +539,13 @@ instance ToJSON Operation where
 -- | The response message for searching folders.
 --
 -- /See:/ 'searchFoldersResponse' smart constructor.
-data SearchFoldersResponse = SearchFoldersResponse'
+data SearchFoldersResponse =
+  SearchFoldersResponse'
     { _sfrNextPageToken :: !(Maybe Text)
     , _sfrFolders       :: !(Maybe [Folder])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchFoldersResponse' with the minimum fields required to make a request.
 --
@@ -541,10 +557,8 @@ data SearchFoldersResponse = SearchFoldersResponse'
 searchFoldersResponse
     :: SearchFoldersResponse
 searchFoldersResponse =
-    SearchFoldersResponse'
-    { _sfrNextPageToken = Nothing
-    , _sfrFolders = Nothing
-    }
+  SearchFoldersResponse' {_sfrNextPageToken = Nothing, _sfrFolders = Nothing}
+
 
 -- | A pagination token returned from a previous call to \`SearchFolders\`
 -- that indicates from where searching should continue. This field is
@@ -582,11 +596,14 @@ instance ToJSON SearchFoldersResponse where
 -- significant phases of Project creation have completed.
 --
 -- /See:/ 'projectCreationStatus' smart constructor.
-data ProjectCreationStatus = ProjectCreationStatus'
+data ProjectCreationStatus =
+  ProjectCreationStatus'
     { _pcsGettable   :: !(Maybe Bool)
     , _pcsReady      :: !(Maybe Bool)
     , _pcsCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectCreationStatus' with the minimum fields required to make a request.
 --
@@ -600,11 +617,9 @@ data ProjectCreationStatus = ProjectCreationStatus'
 projectCreationStatus
     :: ProjectCreationStatus
 projectCreationStatus =
-    ProjectCreationStatus'
-    { _pcsGettable = Nothing
-    , _pcsReady = Nothing
-    , _pcsCreateTime = Nothing
-    }
+  ProjectCreationStatus'
+    {_pcsGettable = Nothing, _pcsReady = Nothing, _pcsCreateTime = Nothing}
+
 
 -- | True if the project can be retrieved using GetProject. No other
 -- operations on the project are guaranteed to work until the project
@@ -642,9 +657,12 @@ instance ToJSON ProjectCreationStatus where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -655,9 +673,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -676,9 +693,12 @@ instance ToJSON StatusDetailsItem where
 -- | A classification of the Folder Operation error.
 --
 -- /See:/ 'folderOperationError' smart constructor.
-newtype FolderOperationError = FolderOperationError'
+newtype FolderOperationError =
+  FolderOperationError'
     { _foeErrorMessageId :: Maybe FolderOperationErrorErrorMessageId
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FolderOperationError' with the minimum fields required to make a request.
 --
@@ -687,10 +707,8 @@ newtype FolderOperationError = FolderOperationError'
 -- * 'foeErrorMessageId'
 folderOperationError
     :: FolderOperationError
-folderOperationError =
-    FolderOperationError'
-    { _foeErrorMessageId = Nothing
-    }
+folderOperationError = FolderOperationError' {_foeErrorMessageId = Nothing}
+
 
 -- | The type of operation error experienced.
 foeErrorMessageId :: Lens' FolderOperationError (Maybe FolderOperationErrorErrorMessageId)
@@ -714,13 +732,16 @@ instance ToJSON FolderOperationError where
 -- Organization\'s resources.
 --
 -- /See:/ 'folder' smart constructor.
-data Folder = Folder'
+data Folder =
+  Folder'
     { _fParent         :: !(Maybe Text)
     , _fName           :: !(Maybe Text)
     , _fDisplayName    :: !(Maybe Text)
     , _fLifecycleState :: !(Maybe FolderLifecycleState)
     , _fCreateTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
@@ -738,13 +759,14 @@ data Folder = Folder'
 folder
     :: Folder
 folder =
-    Folder'
+  Folder'
     { _fParent = Nothing
     , _fName = Nothing
     , _fDisplayName = Nothing
     , _fLifecycleState = Nothing
     , _fCreateTime = Nothing
     }
+
 
 -- | The Folder’s parent\'s resource name. Updates to the folder\'s parent
 -- must be performed via MoveFolder.
@@ -802,10 +824,13 @@ instance ToJSON Folder where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -817,10 +842,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -856,9 +879,12 @@ instance ToJSON SetIAMPolicyRequest where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -868,9 +894,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -898,9 +923,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -910,9 +938,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -955,12 +982,15 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -976,12 +1006,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1042,9 +1073,12 @@ instance ToJSON Policy where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1055,9 +1089,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1076,12 +1109,15 @@ instance ToJSON OperationMetadata where
 -- | Metadata describing a long running folder operation
 --
 -- /See:/ 'folderOperation' smart constructor.
-data FolderOperation = FolderOperation'
+data FolderOperation =
+  FolderOperation'
     { _foDestinationParent :: !(Maybe Text)
     , _foDisplayName       :: !(Maybe Text)
     , _foOperationType     :: !(Maybe FolderOperationOperationType)
     , _foSourceParent      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FolderOperation' with the minimum fields required to make a request.
 --
@@ -1097,12 +1133,13 @@ data FolderOperation = FolderOperation'
 folderOperation
     :: FolderOperation
 folderOperation =
-    FolderOperation'
+  FolderOperation'
     { _foDestinationParent = Nothing
     , _foDisplayName = Nothing
     , _foOperationType = Nothing
     , _foSourceParent = Nothing
     }
+
 
 -- | The resource name of the folder or organization we are either creating
 -- the folder under or moving the folder to.
@@ -1155,10 +1192,13 @@ instance ToJSON FolderOperation where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -1170,10 +1210,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1214,9 +1252,12 @@ instance ToJSON AuditLogConfig where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1227,9 +1268,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1248,9 +1288,12 @@ instance ToJSON OperationResponse where
 -- | The MoveFolder request message.
 --
 -- /See:/ 'moveFolderRequest' smart constructor.
-newtype MoveFolderRequest = MoveFolderRequest'
+newtype MoveFolderRequest =
+  MoveFolderRequest'
     { _mfrDestinationParent :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MoveFolderRequest' with the minimum fields required to make a request.
 --
@@ -1259,10 +1302,8 @@ newtype MoveFolderRequest = MoveFolderRequest'
 -- * 'mfrDestinationParent'
 moveFolderRequest
     :: MoveFolderRequest
-moveFolderRequest =
-    MoveFolderRequest'
-    { _mfrDestinationParent = Nothing
-    }
+moveFolderRequest = MoveFolderRequest' {_mfrDestinationParent = Nothing}
+
 
 -- | The resource name of the Folder or Organization to reparent the folder
 -- under. Must be of the form \`folders\/{folder_id}\` or
@@ -1287,11 +1328,14 @@ instance ToJSON MoveFolderRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1305,11 +1349,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -1322,8 +1363,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1336,10 +1377,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

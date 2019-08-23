@@ -56,10 +56,13 @@ type EditsGetResource =
 -- edit is no long active (e.g. has been deleted, superseded or expired).
 --
 -- /See:/ 'editsGet' smart constructor.
-data EditsGet = EditsGet'
+data EditsGet =
+  EditsGet'
     { _egPackageName :: !Text
     , _egEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsGet' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ editsGet
     -> Text -- ^ 'egEditId'
     -> EditsGet
 editsGet pEgPackageName_ pEgEditId_ =
-    EditsGet'
-    { _egPackageName = pEgPackageName_
-    , _egEditId = pEgEditId_
-    }
+  EditsGet' {_egPackageName = pEgPackageName_, _egEditId = pEgEditId_}
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

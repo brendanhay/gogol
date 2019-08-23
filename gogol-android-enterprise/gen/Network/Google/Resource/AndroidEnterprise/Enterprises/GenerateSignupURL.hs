@@ -52,9 +52,12 @@ type EnterprisesGenerateSignupURLResource =
 -- | Generates a sign-up URL.
 --
 -- /See:/ 'enterprisesGenerateSignupURL' smart constructor.
-newtype EnterprisesGenerateSignupURL = EnterprisesGenerateSignupURL'
+newtype EnterprisesGenerateSignupURL =
+  EnterprisesGenerateSignupURL'
     { _egsuCallbackURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesGenerateSignupURL' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ newtype EnterprisesGenerateSignupURL = EnterprisesGenerateSignupURL'
 enterprisesGenerateSignupURL
     :: EnterprisesGenerateSignupURL
 enterprisesGenerateSignupURL =
-    EnterprisesGenerateSignupURL'
-    { _egsuCallbackURL = Nothing
-    }
+  EnterprisesGenerateSignupURL' {_egsuCallbackURL = Nothing}
+
 
 -- | The callback URL to which the Admin will be redirected after
 -- successfully creating an enterprise. Before redirecting there the system

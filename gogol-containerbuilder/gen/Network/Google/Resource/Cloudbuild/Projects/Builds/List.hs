@@ -70,7 +70,8 @@ type ProjectsBuildsListResource =
 -- be in-progress, or may have finished successfully or unsuccessfully.
 --
 -- /See:/ 'projectsBuildsList' smart constructor.
-data ProjectsBuildsList = ProjectsBuildsList'
+data ProjectsBuildsList =
+  ProjectsBuildsList'
     { _pblXgafv          :: !(Maybe Xgafv)
     , _pblUploadProtocol :: !(Maybe Text)
     , _pblAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsBuildsList = ProjectsBuildsList'
     , _pblProjectId      :: !Text
     , _pblPageSize       :: !(Maybe (Textual Int32))
     , _pblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsBuildsList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsBuildsList
     :: Text -- ^ 'pblProjectId'
     -> ProjectsBuildsList
 projectsBuildsList pPblProjectId_ =
-    ProjectsBuildsList'
+  ProjectsBuildsList'
     { _pblXgafv = Nothing
     , _pblUploadProtocol = Nothing
     , _pblAccessToken = Nothing
@@ -118,6 +121,7 @@ projectsBuildsList pPblProjectId_ =
     , _pblPageSize = Nothing
     , _pblCallback = Nothing
     }
+
 
 -- | V1 error format.
 pblXgafv :: Lens' ProjectsBuildsList (Maybe Xgafv)

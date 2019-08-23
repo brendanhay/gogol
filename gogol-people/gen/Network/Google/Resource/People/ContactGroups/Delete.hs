@@ -63,7 +63,8 @@ type ContactGroupsDeleteResource =
 -- specifying a contact group resource name.
 --
 -- /See:/ 'contactGroupsDelete' smart constructor.
-data ContactGroupsDelete = ContactGroupsDelete'
+data ContactGroupsDelete =
+  ContactGroupsDelete'
     { _cgdXgafv          :: !(Maybe Xgafv)
     , _cgdUploadProtocol :: !(Maybe Text)
     , _cgdDeleteContacts :: !(Maybe Bool)
@@ -71,7 +72,9 @@ data ContactGroupsDelete = ContactGroupsDelete'
     , _cgdAccessToken    :: !(Maybe Text)
     , _cgdUploadType     :: !(Maybe Text)
     , _cgdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupsDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ contactGroupsDelete
     :: Text -- ^ 'cgdResourceName'
     -> ContactGroupsDelete
 contactGroupsDelete pCgdResourceName_ =
-    ContactGroupsDelete'
+  ContactGroupsDelete'
     { _cgdXgafv = Nothing
     , _cgdUploadProtocol = Nothing
     , _cgdDeleteContacts = Nothing
@@ -103,6 +106,7 @@ contactGroupsDelete pCgdResourceName_ =
     , _cgdUploadType = Nothing
     , _cgdCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgdXgafv :: Lens' ContactGroupsDelete (Maybe Xgafv)

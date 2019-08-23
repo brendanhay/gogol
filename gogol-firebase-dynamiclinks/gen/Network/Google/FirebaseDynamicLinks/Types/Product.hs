@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | Information of navigation behavior.
 --
 -- /See:/ 'navigationInfo' smart constructor.
-newtype NavigationInfo = NavigationInfo'
+newtype NavigationInfo =
+  NavigationInfo'
     { _niEnableForcedRedirect :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NavigationInfo' with the minimum fields required to make a request.
 --
@@ -34,10 +37,8 @@ newtype NavigationInfo = NavigationInfo'
 -- * 'niEnableForcedRedirect'
 navigationInfo
     :: NavigationInfo
-navigationInfo =
-    NavigationInfo'
-    { _niEnableForcedRedirect = Nothing
-    }
+navigationInfo = NavigationInfo' {_niEnableForcedRedirect = Nothing}
+
 
 -- | If this option is on, FDL click will be forced to redirect rather than
 -- show an interstitial page.
@@ -62,9 +63,12 @@ instance ToJSON NavigationInfo where
 -- | Desktop related attributes to the Dynamic Link.
 --
 -- /See:/ 'desktopInfo' smart constructor.
-newtype DesktopInfo = DesktopInfo'
+newtype DesktopInfo =
+  DesktopInfo'
     { _diDesktopFallbackLink :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DesktopInfo' with the minimum fields required to make a request.
 --
@@ -73,10 +77,8 @@ newtype DesktopInfo = DesktopInfo'
 -- * 'diDesktopFallbackLink'
 desktopInfo
     :: DesktopInfo
-desktopInfo =
-    DesktopInfo'
-    { _diDesktopFallbackLink = Nothing
-    }
+desktopInfo = DesktopInfo' {_diDesktopFallbackLink = Nothing}
+
 
 -- | Link to open on desktop.
 diDesktopFallbackLink :: Lens' DesktopInfo (Maybe Text)
@@ -100,10 +102,13 @@ instance ToJSON DesktopInfo where
 -- | Short Dynamic Link suffix.
 --
 -- /See:/ 'suffix' smart constructor.
-data Suffix = Suffix'
+data Suffix =
+  Suffix'
     { _sCustomSuffix :: !(Maybe Text)
     , _sOption       :: !(Maybe SuffixOption)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Suffix' with the minimum fields required to make a request.
 --
@@ -114,11 +119,8 @@ data Suffix = Suffix'
 -- * 'sOption'
 suffix
     :: Suffix
-suffix =
-    Suffix'
-    { _sCustomSuffix = Nothing
-    , _sOption = Nothing
-    }
+suffix = Suffix' {_sCustomSuffix = Nothing, _sOption = Nothing}
+
 
 -- | Only applies to Option.CUSTOM.
 sCustomSuffix :: Lens' Suffix (Maybe Text)
@@ -147,11 +149,14 @@ instance ToJSON Suffix where
 -- | Dynamic Links warning messages.
 --
 -- /See:/ 'dynamicLinkWarning' smart constructor.
-data DynamicLinkWarning = DynamicLinkWarning'
+data DynamicLinkWarning =
+  DynamicLinkWarning'
     { _dlwWarningCode         :: !(Maybe DynamicLinkWarningWarningCode)
     , _dlwWarningDocumentLink :: !(Maybe Text)
     , _dlwWarningMessage      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicLinkWarning' with the minimum fields required to make a request.
 --
@@ -165,11 +170,12 @@ data DynamicLinkWarning = DynamicLinkWarning'
 dynamicLinkWarning
     :: DynamicLinkWarning
 dynamicLinkWarning =
-    DynamicLinkWarning'
+  DynamicLinkWarning'
     { _dlwWarningCode = Nothing
     , _dlwWarningDocumentLink = Nothing
     , _dlwWarningMessage = Nothing
     }
+
 
 -- | The warning code.
 dlwWarningCode :: Lens' DynamicLinkWarning (Maybe DynamicLinkWarningWarningCode)
@@ -210,14 +216,17 @@ instance ToJSON DynamicLinkWarning where
 -- | Managed Short Link.
 --
 -- /See:/ 'managedShortLink' smart constructor.
-data ManagedShortLink = ManagedShortLink'
+data ManagedShortLink =
+  ManagedShortLink'
     { _mslCreationTime     :: !(Maybe DateTime')
     , _mslLink             :: !(Maybe Text)
     , _mslVisibility       :: !(Maybe ManagedShortLinkVisibility)
     , _mslLinkName         :: !(Maybe Text)
     , _mslFlaggedAttribute :: !(Maybe [Text])
     , _mslInfo             :: !(Maybe DynamicLinkInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedShortLink' with the minimum fields required to make a request.
 --
@@ -237,7 +246,7 @@ data ManagedShortLink = ManagedShortLink'
 managedShortLink
     :: ManagedShortLink
 managedShortLink =
-    ManagedShortLink'
+  ManagedShortLink'
     { _mslCreationTime = Nothing
     , _mslLink = Nothing
     , _mslVisibility = Nothing
@@ -245,6 +254,7 @@ managedShortLink =
     , _mslFlaggedAttribute = Nothing
     , _mslInfo = Nothing
     }
+
 
 -- | Creation timestamp of the short link.
 mslCreationTime :: Lens' ManagedShortLink (Maybe UTCTime)
@@ -306,12 +316,15 @@ instance ToJSON ManagedShortLink where
 -- | Request to create a short Dynamic Link.
 --
 -- /See:/ 'createShortDynamicLinkRequest' smart constructor.
-data CreateShortDynamicLinkRequest = CreateShortDynamicLinkRequest'
+data CreateShortDynamicLinkRequest =
+  CreateShortDynamicLinkRequest'
     { _csdlrLongDynamicLink :: !(Maybe Text)
     , _csdlrSuffix          :: !(Maybe Suffix)
     , _csdlrDynamicLinkInfo :: !(Maybe DynamicLinkInfo)
     , _csdlrSdkVersion      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateShortDynamicLinkRequest' with the minimum fields required to make a request.
 --
@@ -327,12 +340,13 @@ data CreateShortDynamicLinkRequest = CreateShortDynamicLinkRequest'
 createShortDynamicLinkRequest
     :: CreateShortDynamicLinkRequest
 createShortDynamicLinkRequest =
-    CreateShortDynamicLinkRequest'
+  CreateShortDynamicLinkRequest'
     { _csdlrLongDynamicLink = Nothing
     , _csdlrSuffix = Nothing
     , _csdlrDynamicLinkInfo = Nothing
     , _csdlrSdkVersion = Nothing
     }
+
 
 -- | Full long Dynamic Link URL with desired query parameters specified. For
 -- example,
@@ -356,8 +370,7 @@ csdlrDynamicLinkInfo
   = lens _csdlrDynamicLinkInfo
       (\ s a -> s{_csdlrDynamicLinkInfo = a})
 
--- | Google SDK version. Version takes the form
--- \"/m//a//j//o//r/.minor.$patch\"
+-- | Google SDK version. Version takes the form \"$major.$minor.$patch\"
 csdlrSdkVersion :: Lens' CreateShortDynamicLinkRequest (Maybe Text)
 csdlrSdkVersion
   = lens _csdlrSdkVersion
@@ -385,11 +398,14 @@ instance ToJSON CreateShortDynamicLinkRequest where
 -- link previews on social sites.
 --
 -- /See:/ 'socialMetaTagInfo' smart constructor.
-data SocialMetaTagInfo = SocialMetaTagInfo'
+data SocialMetaTagInfo =
+  SocialMetaTagInfo'
     { _smtiSocialImageLink   :: !(Maybe Text)
     , _smtiSocialDescription :: !(Maybe Text)
     , _smtiSocialTitle       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SocialMetaTagInfo' with the minimum fields required to make a request.
 --
@@ -403,11 +419,12 @@ data SocialMetaTagInfo = SocialMetaTagInfo'
 socialMetaTagInfo
     :: SocialMetaTagInfo
 socialMetaTagInfo =
-    SocialMetaTagInfo'
+  SocialMetaTagInfo'
     { _smtiSocialImageLink = Nothing
     , _smtiSocialDescription = Nothing
     , _smtiSocialTitle = Nothing
     }
+
 
 -- | An image url string. Optional.
 smtiSocialImageLink :: Lens' SocialMetaTagInfo (Maybe Text)
@@ -447,11 +464,14 @@ instance ToJSON SocialMetaTagInfo where
 -- | Response to create a short Dynamic Link.
 --
 -- /See:/ 'createShortDynamicLinkResponse' smart constructor.
-data CreateShortDynamicLinkResponse = CreateShortDynamicLinkResponse'
+data CreateShortDynamicLinkResponse =
+  CreateShortDynamicLinkResponse'
     { _csdlrPreviewLink :: !(Maybe Text)
     , _csdlrWarning     :: !(Maybe [DynamicLinkWarning])
     , _csdlrShortLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateShortDynamicLinkResponse' with the minimum fields required to make a request.
 --
@@ -465,11 +485,12 @@ data CreateShortDynamicLinkResponse = CreateShortDynamicLinkResponse'
 createShortDynamicLinkResponse
     :: CreateShortDynamicLinkResponse
 createShortDynamicLinkResponse =
-    CreateShortDynamicLinkResponse'
+  CreateShortDynamicLinkResponse'
     { _csdlrPreviewLink = Nothing
     , _csdlrWarning = Nothing
     , _csdlrShortLink = Nothing
     }
+
 
 -- | Preview link to show the link flow chart. (debug info.)
 csdlrPreviewLink :: Lens' CreateShortDynamicLinkResponse (Maybe Text)
@@ -511,11 +532,14 @@ instance ToJSON CreateShortDynamicLinkResponse where
 -- | Dynamic Link event stat.
 --
 -- /See:/ 'dynamicLinkEventStat' smart constructor.
-data DynamicLinkEventStat = DynamicLinkEventStat'
+data DynamicLinkEventStat =
+  DynamicLinkEventStat'
     { _dlesEvent    :: !(Maybe DynamicLinkEventStatEvent)
     , _dlesPlatform :: !(Maybe DynamicLinkEventStatPlatform)
     , _dlesCount    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicLinkEventStat' with the minimum fields required to make a request.
 --
@@ -529,11 +553,9 @@ data DynamicLinkEventStat = DynamicLinkEventStat'
 dynamicLinkEventStat
     :: DynamicLinkEventStat
 dynamicLinkEventStat =
-    DynamicLinkEventStat'
-    { _dlesEvent = Nothing
-    , _dlesPlatform = Nothing
-    , _dlesCount = Nothing
-    }
+  DynamicLinkEventStat'
+    {_dlesEvent = Nothing, _dlesPlatform = Nothing, _dlesCount = Nothing}
+
 
 -- | Link event.
 dlesEvent :: Lens' DynamicLinkEventStat (Maybe DynamicLinkEventStatEvent)
@@ -570,7 +592,8 @@ instance ToJSON DynamicLinkEventStat where
 -- | iOS related attributes to the Dynamic Link..
 --
 -- /See:/ 'iosInfo' smart constructor.
-data IosInfo = IosInfo'
+data IosInfo =
+  IosInfo'
     { _iiIosBundleId         :: !(Maybe Text)
     , _iiIosIPadBundleId     :: !(Maybe Text)
     , _iiIosAppStoreId       :: !(Maybe Text)
@@ -578,7 +601,9 @@ data IosInfo = IosInfo'
     , _iiIosIPadFallbackLink :: !(Maybe Text)
     , _iiIosCustomScheme     :: !(Maybe Text)
     , _iiIosFallbackLink     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IosInfo' with the minimum fields required to make a request.
 --
@@ -600,7 +625,7 @@ data IosInfo = IosInfo'
 iosInfo
     :: IosInfo
 iosInfo =
-    IosInfo'
+  IosInfo'
     { _iiIosBundleId = Nothing
     , _iiIosIPadBundleId = Nothing
     , _iiIosAppStoreId = Nothing
@@ -609,6 +634,7 @@ iosInfo =
     , _iiIosCustomScheme = Nothing
     , _iiIosFallbackLink = Nothing
     }
+
 
 -- | iOS bundle ID of the app.
 iiIosBundleId :: Lens' IosInfo (Maybe Text)
@@ -682,7 +708,8 @@ instance ToJSON IosInfo where
 -- | Information about a Dynamic Link.
 --
 -- /See:/ 'dynamicLinkInfo' smart constructor.
-data DynamicLinkInfo = DynamicLinkInfo'
+data DynamicLinkInfo =
+  DynamicLinkInfo'
     { _dliNavigationInfo    :: !(Maybe NavigationInfo)
     , _dliDesktopInfo       :: !(Maybe DesktopInfo)
     , _dliSocialMetaTagInfo :: !(Maybe SocialMetaTagInfo)
@@ -692,7 +719,9 @@ data DynamicLinkInfo = DynamicLinkInfo'
     , _dliDomainURIPrefix   :: !(Maybe Text)
     , _dliAndroidInfo       :: !(Maybe AndroidInfo)
     , _dliAnalyticsInfo     :: !(Maybe AnalyticsInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicLinkInfo' with the minimum fields required to make a request.
 --
@@ -718,7 +747,7 @@ data DynamicLinkInfo = DynamicLinkInfo'
 dynamicLinkInfo
     :: DynamicLinkInfo
 dynamicLinkInfo =
-    DynamicLinkInfo'
+  DynamicLinkInfo'
     { _dliNavigationInfo = Nothing
     , _dliDesktopInfo = Nothing
     , _dliSocialMetaTagInfo = Nothing
@@ -729,6 +758,7 @@ dynamicLinkInfo =
     , _dliAndroidInfo = Nothing
     , _dliAnalyticsInfo = Nothing
     }
+
 
 -- | Information of navigation behavior of a Firebase Dynamic Links.
 dliNavigationInfo :: Lens' DynamicLinkInfo (Maybe NavigationInfo)
@@ -828,9 +858,12 @@ instance ToJSON DynamicLinkInfo where
 -- | Analytics stats of a Dynamic Link for a given timeframe.
 --
 -- /See:/ 'dynamicLinkStats' smart constructor.
-newtype DynamicLinkStats = DynamicLinkStats'
+newtype DynamicLinkStats =
+  DynamicLinkStats'
     { _dlsLinkEventStats :: Maybe [DynamicLinkEventStat]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicLinkStats' with the minimum fields required to make a request.
 --
@@ -839,10 +872,8 @@ newtype DynamicLinkStats = DynamicLinkStats'
 -- * 'dlsLinkEventStats'
 dynamicLinkStats
     :: DynamicLinkStats
-dynamicLinkStats =
-    DynamicLinkStats'
-    { _dlsLinkEventStats = Nothing
-    }
+dynamicLinkStats = DynamicLinkStats' {_dlsLinkEventStats = Nothing}
+
 
 -- | Dynamic Link event stats.
 dlsLinkEventStats :: Lens' DynamicLinkStats [DynamicLinkEventStat]
@@ -868,13 +899,16 @@ instance ToJSON DynamicLinkStats where
 -- | Request to create a managed Short Dynamic Link.
 --
 -- /See:/ 'createManagedShortLinkRequest' smart constructor.
-data CreateManagedShortLinkRequest = CreateManagedShortLinkRequest'
+data CreateManagedShortLinkRequest =
+  CreateManagedShortLinkRequest'
     { _cmslrLongDynamicLink :: !(Maybe Text)
     , _cmslrSuffix          :: !(Maybe Suffix)
     , _cmslrDynamicLinkInfo :: !(Maybe DynamicLinkInfo)
     , _cmslrSdkVersion      :: !(Maybe Text)
     , _cmslrName            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateManagedShortLinkRequest' with the minimum fields required to make a request.
 --
@@ -892,13 +926,14 @@ data CreateManagedShortLinkRequest = CreateManagedShortLinkRequest'
 createManagedShortLinkRequest
     :: CreateManagedShortLinkRequest
 createManagedShortLinkRequest =
-    CreateManagedShortLinkRequest'
+  CreateManagedShortLinkRequest'
     { _cmslrLongDynamicLink = Nothing
     , _cmslrSuffix = Nothing
     , _cmslrDynamicLinkInfo = Nothing
     , _cmslrSdkVersion = Nothing
     , _cmslrName = Nothing
     }
+
 
 -- | Full long Dynamic Link URL with desired query parameters specified. For
 -- example,
@@ -922,8 +957,7 @@ cmslrDynamicLinkInfo
   = lens _cmslrDynamicLinkInfo
       (\ s a -> s{_cmslrDynamicLinkInfo = a})
 
--- | Google SDK version. Version takes the form
--- \"/m//a//j//o//r/.minor.$patch\"
+-- | Google SDK version. Version takes the form \"$major.$minor.$patch\"
 cmslrSdkVersion :: Lens' CreateManagedShortLinkRequest (Maybe Text)
 cmslrSdkVersion
   = lens _cmslrSdkVersion
@@ -961,15 +995,20 @@ instance ToJSON CreateManagedShortLinkRequest where
 -- deeplinking. This endpoint is meant for only iOS requests.
 --
 -- /See:/ 'getIosReopenAttributionResponse' smart constructor.
-data GetIosReopenAttributionResponse = GetIosReopenAttributionResponse'
+data GetIosReopenAttributionResponse =
+  GetIosReopenAttributionResponse'
     { _girarIosMinAppVersion :: !(Maybe Text)
     , _girarDeepLink         :: !(Maybe Text)
+    , _girarUtmContent       :: !(Maybe Text)
     , _girarResolvedLink     :: !(Maybe Text)
     , _girarUtmMedium        :: !(Maybe Text)
     , _girarInvitationId     :: !(Maybe Text)
+    , _girarUtmTerm          :: !(Maybe Text)
     , _girarUtmCampaign      :: !(Maybe Text)
     , _girarUtmSource        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIosReopenAttributionResponse' with the minimum fields required to make a request.
 --
@@ -979,11 +1018,15 @@ data GetIosReopenAttributionResponse = GetIosReopenAttributionResponse'
 --
 -- * 'girarDeepLink'
 --
+-- * 'girarUtmContent'
+--
 -- * 'girarResolvedLink'
 --
 -- * 'girarUtmMedium'
 --
 -- * 'girarInvitationId'
+--
+-- * 'girarUtmTerm'
 --
 -- * 'girarUtmCampaign'
 --
@@ -991,15 +1034,18 @@ data GetIosReopenAttributionResponse = GetIosReopenAttributionResponse'
 getIosReopenAttributionResponse
     :: GetIosReopenAttributionResponse
 getIosReopenAttributionResponse =
-    GetIosReopenAttributionResponse'
+  GetIosReopenAttributionResponse'
     { _girarIosMinAppVersion = Nothing
     , _girarDeepLink = Nothing
+    , _girarUtmContent = Nothing
     , _girarResolvedLink = Nothing
     , _girarUtmMedium = Nothing
     , _girarInvitationId = Nothing
+    , _girarUtmTerm = Nothing
     , _girarUtmCampaign = Nothing
     , _girarUtmSource = Nothing
     }
+
 
 -- | FDL input value of the \"&imv=\" parameter, minimum app version to be
 -- returned to Google Firebase SDK running on iOS-9.
@@ -1014,6 +1060,12 @@ girarDeepLink :: Lens' GetIosReopenAttributionResponse (Maybe Text)
 girarDeepLink
   = lens _girarDeepLink
       (\ s a -> s{_girarDeepLink = a})
+
+-- | Scion content value to be propagated by iSDK to Scion at app-reopen.
+girarUtmContent :: Lens' GetIosReopenAttributionResponse (Maybe Text)
+girarUtmContent
+  = lens _girarUtmContent
+      (\ s a -> s{_girarUtmContent = a})
 
 -- | The entire FDL, expanded from a short link. It is the same as the
 -- requested_link, if it is long.
@@ -1034,6 +1086,11 @@ girarInvitationId
   = lens _girarInvitationId
       (\ s a -> s{_girarInvitationId = a})
 
+-- | Scion term value to be propagated by iSDK to Scion at app-reopen.
+girarUtmTerm :: Lens' GetIosReopenAttributionResponse (Maybe Text)
+girarUtmTerm
+  = lens _girarUtmTerm (\ s a -> s{_girarUtmTerm = a})
+
 -- | Scion campaign value to be propagated by iSDK to Scion at app-reopen.
 girarUtmCampaign :: Lens' GetIosReopenAttributionResponse (Maybe Text)
 girarUtmCampaign
@@ -1053,9 +1110,11 @@ instance FromJSON GetIosReopenAttributionResponse
               (\ o ->
                  GetIosReopenAttributionResponse' <$>
                    (o .:? "iosMinAppVersion") <*> (o .:? "deepLink") <*>
-                     (o .:? "resolvedLink")
+                     (o .:? "utmContent")
+                     <*> (o .:? "resolvedLink")
                      <*> (o .:? "utmMedium")
                      <*> (o .:? "invitationId")
+                     <*> (o .:? "utmTerm")
                      <*> (o .:? "utmCampaign")
                      <*> (o .:? "utmSource"))
 
@@ -1065,9 +1124,11 @@ instance ToJSON GetIosReopenAttributionResponse where
               (catMaybes
                  [("iosMinAppVersion" .=) <$> _girarIosMinAppVersion,
                   ("deepLink" .=) <$> _girarDeepLink,
+                  ("utmContent" .=) <$> _girarUtmContent,
                   ("resolvedLink" .=) <$> _girarResolvedLink,
                   ("utmMedium" .=) <$> _girarUtmMedium,
                   ("invitationId" .=) <$> _girarInvitationId,
+                  ("utmTerm" .=) <$> _girarUtmTerm,
                   ("utmCampaign" .=) <$> _girarUtmCampaign,
                   ("utmSource" .=) <$> _girarUtmSource])
 
@@ -1076,7 +1137,8 @@ instance ToJSON GetIosReopenAttributionResponse where
 -- platforms will not be honored.
 --
 -- /See:/ 'getIosPostInstallAttributionRequest' smart constructor.
-data GetIosPostInstallAttributionRequest = GetIosPostInstallAttributionRequest'
+data GetIosPostInstallAttributionRequest =
+  GetIosPostInstallAttributionRequest'
     { _gipiarIosVersion             :: !(Maybe Text)
     , _gipiarUniqueMatchLinkToCheck :: !(Maybe Text)
     , _gipiarAppInstallationTime    :: !(Maybe (Textual Int64))
@@ -1085,7 +1147,9 @@ data GetIosPostInstallAttributionRequest = GetIosPostInstallAttributionRequest'
     , _gipiarBundleId               :: !(Maybe Text)
     , _gipiarRetrievalMethod        :: !(Maybe GetIosPostInstallAttributionRequestRetrievalMethod)
     , _gipiarVisualStyle            :: !(Maybe GetIosPostInstallAttributionRequestVisualStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIosPostInstallAttributionRequest' with the minimum fields required to make a request.
 --
@@ -1109,7 +1173,7 @@ data GetIosPostInstallAttributionRequest = GetIosPostInstallAttributionRequest'
 getIosPostInstallAttributionRequest
     :: GetIosPostInstallAttributionRequest
 getIosPostInstallAttributionRequest =
-    GetIosPostInstallAttributionRequest'
+  GetIosPostInstallAttributionRequest'
     { _gipiarIosVersion = Nothing
     , _gipiarUniqueMatchLinkToCheck = Nothing
     , _gipiarAppInstallationTime = Nothing
@@ -1119,6 +1183,7 @@ getIosPostInstallAttributionRequest =
     , _gipiarRetrievalMethod = Nothing
     , _gipiarVisualStyle = Nothing
     }
+
 
 -- | iOS version, ie: 9.3.5. Consider adding \"build\".
 gipiarIosVersion :: Lens' GetIosPostInstallAttributionRequest (Maybe Text)
@@ -1148,8 +1213,7 @@ gipiarDevice :: Lens' GetIosPostInstallAttributionRequest (Maybe DeviceInfo)
 gipiarDevice
   = lens _gipiarDevice (\ s a -> s{_gipiarDevice = a})
 
--- | Google SDK version. Version takes the form
--- \"/m//a//j//o//r/.minor.$patch\"
+-- | Google SDK version. Version takes the form \"$major.$minor.$patch\"
 gipiarSdkVersion :: Lens' GetIosPostInstallAttributionRequest (Maybe Text)
 gipiarSdkVersion
   = lens _gipiarSdkVersion
@@ -1210,12 +1274,15 @@ instance ToJSON GetIosPostInstallAttributionRequest
 -- | Android related attributes to the Dynamic Link.
 --
 -- /See:/ 'androidInfo' smart constructor.
-data AndroidInfo = AndroidInfo'
+data AndroidInfo =
+  AndroidInfo'
     { _aiAndroidMinPackageVersionCode :: !(Maybe Text)
     , _aiAndroidFallbackLink          :: !(Maybe Text)
     , _aiAndroidLink                  :: !(Maybe Text)
     , _aiAndroidPackageName           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AndroidInfo' with the minimum fields required to make a request.
 --
@@ -1231,12 +1298,13 @@ data AndroidInfo = AndroidInfo'
 androidInfo
     :: AndroidInfo
 androidInfo =
-    AndroidInfo'
+  AndroidInfo'
     { _aiAndroidMinPackageVersionCode = Nothing
     , _aiAndroidFallbackLink = Nothing
     , _aiAndroidLink = Nothing
     , _aiAndroidPackageName = Nothing
     }
+
 
 -- | Minimum version code for the Android app. If the installed app’s version
 -- code is lower, then the user is taken to the Play Store.
@@ -1287,10 +1355,13 @@ instance ToJSON AndroidInfo where
 -- | Tracking parameters supported by Dynamic Link.
 --
 -- /See:/ 'analyticsInfo' smart constructor.
-data AnalyticsInfo = AnalyticsInfo'
+data AnalyticsInfo =
+  AnalyticsInfo'
     { _aiItunesConnectAnalytics :: !(Maybe ITunesConnectAnalytics)
     , _aiGooglePlayAnalytics    :: !(Maybe GooglePlayAnalytics)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnalyticsInfo' with the minimum fields required to make a request.
 --
@@ -1302,10 +1373,9 @@ data AnalyticsInfo = AnalyticsInfo'
 analyticsInfo
     :: AnalyticsInfo
 analyticsInfo =
-    AnalyticsInfo'
-    { _aiItunesConnectAnalytics = Nothing
-    , _aiGooglePlayAnalytics = Nothing
-    }
+  AnalyticsInfo'
+    {_aiItunesConnectAnalytics = Nothing, _aiGooglePlayAnalytics = Nothing}
+
 
 -- | iTunes Connect App Analytics.
 aiItunesConnectAnalytics :: Lens' AnalyticsInfo (Maybe ITunesConnectAnalytics)
@@ -1339,12 +1409,15 @@ instance ToJSON AnalyticsInfo where
 -- | Parameters for iTunes Connect App Analytics.
 --
 -- /See:/ 'iTunesConnectAnalytics' smart constructor.
-data ITunesConnectAnalytics = ITunesConnectAnalytics'
+data ITunesConnectAnalytics =
+  ITunesConnectAnalytics'
     { _itcaAt :: !(Maybe Text)
     , _itcaMt :: !(Maybe Text)
     , _itcaPt :: !(Maybe Text)
     , _itcaCt :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ITunesConnectAnalytics' with the minimum fields required to make a request.
 --
@@ -1360,12 +1433,9 @@ data ITunesConnectAnalytics = ITunesConnectAnalytics'
 iTunesConnectAnalytics
     :: ITunesConnectAnalytics
 iTunesConnectAnalytics =
-    ITunesConnectAnalytics'
-    { _itcaAt = Nothing
-    , _itcaMt = Nothing
-    , _itcaPt = Nothing
-    , _itcaCt = Nothing
-    }
+  ITunesConnectAnalytics'
+    {_itcaAt = Nothing, _itcaMt = Nothing, _itcaPt = Nothing, _itcaCt = Nothing}
+
 
 -- | Affiliate token used to create affiliate-coded links.
 itcaAt :: Lens' ITunesConnectAnalytics (Maybe Text)
@@ -1404,22 +1474,27 @@ instance ToJSON ITunesConnectAnalytics where
 -- attribution.
 --
 -- /See:/ 'getIosPostInstallAttributionResponse' smart constructor.
-data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse'
+data GetIosPostInstallAttributionResponse =
+  GetIosPostInstallAttributionResponse'
     { _gipiarDeepLink                       :: !(Maybe Text)
     , _gipiarRequestIPVersion               :: !(Maybe GetIosPostInstallAttributionResponseRequestIPVersion)
     , _gipiarAppMinimumVersion              :: !(Maybe Text)
     , _gipiarAttributionConfidence          :: !(Maybe GetIosPostInstallAttributionResponseAttributionConfidence)
     , _gipiarExternalBrowserDestinationLink :: !(Maybe Text)
+    , _gipiarUtmContent                     :: !(Maybe Text)
     , _gipiarResolvedLink                   :: !(Maybe Text)
     , _gipiarRequestedLink                  :: !(Maybe Text)
     , _gipiarUtmMedium                      :: !(Maybe Text)
     , _gipiarFallbackLink                   :: !(Maybe Text)
     , _gipiarInvitationId                   :: !(Maybe Text)
     , _gipiarIsStrongMatchExecutable        :: !(Maybe Bool)
+    , _gipiarUtmTerm                        :: !(Maybe Text)
     , _gipiarUtmCampaign                    :: !(Maybe Text)
     , _gipiarMatchMessage                   :: !(Maybe Text)
     , _gipiarUtmSource                      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIosPostInstallAttributionResponse' with the minimum fields required to make a request.
 --
@@ -1435,6 +1510,8 @@ data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse
 --
 -- * 'gipiarExternalBrowserDestinationLink'
 --
+-- * 'gipiarUtmContent'
+--
 -- * 'gipiarResolvedLink'
 --
 -- * 'gipiarRequestedLink'
@@ -1447,6 +1524,8 @@ data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse
 --
 -- * 'gipiarIsStrongMatchExecutable'
 --
+-- * 'gipiarUtmTerm'
+--
 -- * 'gipiarUtmCampaign'
 --
 -- * 'gipiarMatchMessage'
@@ -1455,22 +1534,25 @@ data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse
 getIosPostInstallAttributionResponse
     :: GetIosPostInstallAttributionResponse
 getIosPostInstallAttributionResponse =
-    GetIosPostInstallAttributionResponse'
+  GetIosPostInstallAttributionResponse'
     { _gipiarDeepLink = Nothing
     , _gipiarRequestIPVersion = Nothing
     , _gipiarAppMinimumVersion = Nothing
     , _gipiarAttributionConfidence = Nothing
     , _gipiarExternalBrowserDestinationLink = Nothing
+    , _gipiarUtmContent = Nothing
     , _gipiarResolvedLink = Nothing
     , _gipiarRequestedLink = Nothing
     , _gipiarUtmMedium = Nothing
     , _gipiarFallbackLink = Nothing
     , _gipiarInvitationId = Nothing
     , _gipiarIsStrongMatchExecutable = Nothing
+    , _gipiarUtmTerm = Nothing
     , _gipiarUtmCampaign = Nothing
     , _gipiarMatchMessage = Nothing
     , _gipiarUtmSource = Nothing
     }
+
 
 -- | The deep-link attributed post-install via one of several techniques
 -- (fingerprint, copy unique).
@@ -1509,6 +1591,12 @@ gipiarExternalBrowserDestinationLink
   = lens _gipiarExternalBrowserDestinationLink
       (\ s a ->
          s{_gipiarExternalBrowserDestinationLink = a})
+
+-- | Scion content value to be propagated by iSDK to Scion at app-reopen.
+gipiarUtmContent :: Lens' GetIosPostInstallAttributionResponse (Maybe Text)
+gipiarUtmContent
+  = lens _gipiarUtmContent
+      (\ s a -> s{_gipiarUtmContent = a})
 
 -- | The entire FDL, expanded from a short link. It is the same as the
 -- requested_link, if it is long. Parameters from this should not be used
@@ -1557,6 +1645,12 @@ gipiarIsStrongMatchExecutable
   = lens _gipiarIsStrongMatchExecutable
       (\ s a -> s{_gipiarIsStrongMatchExecutable = a})
 
+-- | Scion term value to be propagated by iSDK to Scion at app-reopen.
+gipiarUtmTerm :: Lens' GetIosPostInstallAttributionResponse (Maybe Text)
+gipiarUtmTerm
+  = lens _gipiarUtmTerm
+      (\ s a -> s{_gipiarUtmTerm = a})
+
 -- | Scion campaign value to be propagated by iSDK to Scion at post-install.
 gipiarUtmCampaign :: Lens' GetIosPostInstallAttributionResponse (Maybe Text)
 gipiarUtmCampaign
@@ -1577,7 +1671,8 @@ gipiarUtmSource
       (\ s a -> s{_gipiarUtmSource = a})
 
 instance FromJSON
-         GetIosPostInstallAttributionResponse where
+           GetIosPostInstallAttributionResponse
+         where
         parseJSON
           = withObject "GetIosPostInstallAttributionResponse"
               (\ o ->
@@ -1586,12 +1681,14 @@ instance FromJSON
                      (o .:? "appMinimumVersion")
                      <*> (o .:? "attributionConfidence")
                      <*> (o .:? "externalBrowserDestinationLink")
+                     <*> (o .:? "utmContent")
                      <*> (o .:? "resolvedLink")
                      <*> (o .:? "requestedLink")
                      <*> (o .:? "utmMedium")
                      <*> (o .:? "fallbackLink")
                      <*> (o .:? "invitationId")
                      <*> (o .:? "isStrongMatchExecutable")
+                     <*> (o .:? "utmTerm")
                      <*> (o .:? "utmCampaign")
                      <*> (o .:? "matchMessage")
                      <*> (o .:? "utmSource"))
@@ -1609,6 +1706,7 @@ instance ToJSON GetIosPostInstallAttributionResponse
                     _gipiarAttributionConfidence,
                   ("externalBrowserDestinationLink" .=) <$>
                     _gipiarExternalBrowserDestinationLink,
+                  ("utmContent" .=) <$> _gipiarUtmContent,
                   ("resolvedLink" .=) <$> _gipiarResolvedLink,
                   ("requestedLink" .=) <$> _gipiarRequestedLink,
                   ("utmMedium" .=) <$> _gipiarUtmMedium,
@@ -1616,6 +1714,7 @@ instance ToJSON GetIosPostInstallAttributionResponse
                   ("invitationId" .=) <$> _gipiarInvitationId,
                   ("isStrongMatchExecutable" .=) <$>
                     _gipiarIsStrongMatchExecutable,
+                  ("utmTerm" .=) <$> _gipiarUtmTerm,
                   ("utmCampaign" .=) <$> _gipiarUtmCampaign,
                   ("matchMessage" .=) <$> _gipiarMatchMessage,
                   ("utmSource" .=) <$> _gipiarUtmSource])
@@ -1623,11 +1722,14 @@ instance ToJSON GetIosPostInstallAttributionResponse
 -- | Response to create a short Dynamic Link.
 --
 -- /See:/ 'createManagedShortLinkResponse' smart constructor.
-data CreateManagedShortLinkResponse = CreateManagedShortLinkResponse'
+data CreateManagedShortLinkResponse =
+  CreateManagedShortLinkResponse'
     { _cmslrManagedShortLink :: !(Maybe ManagedShortLink)
     , _cmslrPreviewLink      :: !(Maybe Text)
     , _cmslrWarning          :: !(Maybe [DynamicLinkWarning])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateManagedShortLinkResponse' with the minimum fields required to make a request.
 --
@@ -1641,11 +1743,12 @@ data CreateManagedShortLinkResponse = CreateManagedShortLinkResponse'
 createManagedShortLinkResponse
     :: CreateManagedShortLinkResponse
 createManagedShortLinkResponse =
-    CreateManagedShortLinkResponse'
+  CreateManagedShortLinkResponse'
     { _cmslrManagedShortLink = Nothing
     , _cmslrPreviewLink = Nothing
     , _cmslrWarning = Nothing
     }
+
 
 -- | Short Dynamic Link value. e.g. https:\/\/abcd.app.goo.gl\/wxyz
 cmslrManagedShortLink :: Lens' CreateManagedShortLinkResponse (Maybe ManagedShortLink)
@@ -1687,11 +1790,14 @@ instance ToJSON CreateManagedShortLinkResponse where
 -- deeplinking. This endpoint is meant for only iOS requests.
 --
 -- /See:/ 'getIosReopenAttributionRequest' smart constructor.
-data GetIosReopenAttributionRequest = GetIosReopenAttributionRequest'
+data GetIosReopenAttributionRequest =
+  GetIosReopenAttributionRequest'
     { _girarRequestedLink :: !(Maybe Text)
     , _girarSdkVersion    :: !(Maybe Text)
     , _girarBundleId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIosReopenAttributionRequest' with the minimum fields required to make a request.
 --
@@ -1705,11 +1811,12 @@ data GetIosReopenAttributionRequest = GetIosReopenAttributionRequest'
 getIosReopenAttributionRequest
     :: GetIosReopenAttributionRequest
 getIosReopenAttributionRequest =
-    GetIosReopenAttributionRequest'
+  GetIosReopenAttributionRequest'
     { _girarRequestedLink = Nothing
     , _girarSdkVersion = Nothing
     , _girarBundleId = Nothing
     }
+
 
 -- | FDL link to be verified from an app universal link open. The FDL link
 -- can be one of: 1) short FDL. e.g. .page.link\/, or 2) long FDL. e.g.
@@ -1719,8 +1826,7 @@ girarRequestedLink
   = lens _girarRequestedLink
       (\ s a -> s{_girarRequestedLink = a})
 
--- | Google SDK version. Version takes the form
--- \"/m//a//j//o//r/.minor.$patch\"
+-- | Google SDK version. Version takes the form \"$major.$minor.$patch\"
 girarSdkVersion :: Lens' GetIosReopenAttributionRequest (Maybe Text)
 girarSdkVersion
   = lens _girarSdkVersion
@@ -1753,14 +1859,17 @@ instance ToJSON GetIosReopenAttributionRequest where
 -- more](https:\/\/developers.google.com\/analytics\/devguides\/collection\/android\/v4\/campaigns#campaign-params)
 --
 -- /See:/ 'googlePlayAnalytics' smart constructor.
-data GooglePlayAnalytics = GooglePlayAnalytics'
+data GooglePlayAnalytics =
+  GooglePlayAnalytics'
     { _gpaUtmContent  :: !(Maybe Text)
     , _gpaUtmMedium   :: !(Maybe Text)
     , _gpaUtmTerm     :: !(Maybe Text)
     , _gpaUtmCampaign :: !(Maybe Text)
     , _gpaGclid       :: !(Maybe Text)
     , _gpaUtmSource   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GooglePlayAnalytics' with the minimum fields required to make a request.
 --
@@ -1780,7 +1889,7 @@ data GooglePlayAnalytics = GooglePlayAnalytics'
 googlePlayAnalytics
     :: GooglePlayAnalytics
 googlePlayAnalytics =
-    GooglePlayAnalytics'
+  GooglePlayAnalytics'
     { _gpaUtmContent = Nothing
     , _gpaUtmMedium = Nothing
     , _gpaUtmTerm = Nothing
@@ -1788,6 +1897,7 @@ googlePlayAnalytics =
     , _gpaGclid = Nothing
     , _gpaUtmSource = Nothing
     }
+
 
 -- | Campaign content; used for A\/B testing and content-targeted ads to
 -- differentiate ads or links that point to the same URL.
@@ -1852,7 +1962,8 @@ instance ToJSON GooglePlayAnalytics where
 -- | Signals associated with the device making the request.
 --
 -- /See:/ 'deviceInfo' smart constructor.
-data DeviceInfo = DeviceInfo'
+data DeviceInfo =
+  DeviceInfo'
     { _diLanguageCodeFromWebview :: !(Maybe Text)
     , _diScreenResolutionWidth   :: !(Maybe (Textual Int64))
     , _diLanguageCode            :: !(Maybe Text)
@@ -1860,7 +1971,9 @@ data DeviceInfo = DeviceInfo'
     , _diScreenResolutionHeight  :: !(Maybe (Textual Int64))
     , _diLanguageCodeRaw         :: !(Maybe Text)
     , _diTimezone                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeviceInfo' with the minimum fields required to make a request.
 --
@@ -1882,7 +1995,7 @@ data DeviceInfo = DeviceInfo'
 deviceInfo
     :: DeviceInfo
 deviceInfo =
-    DeviceInfo'
+  DeviceInfo'
     { _diLanguageCodeFromWebview = Nothing
     , _diScreenResolutionWidth = Nothing
     , _diLanguageCode = Nothing
@@ -1891,6 +2004,7 @@ deviceInfo =
     , _diLanguageCodeRaw = Nothing
     , _diTimezone = Nothing
     }
+
 
 -- | Device language code setting obtained by executing JavaScript code in
 -- WebView.

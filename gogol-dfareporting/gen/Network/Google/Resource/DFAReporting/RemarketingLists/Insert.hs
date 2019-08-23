@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsInsert' request conforms to.
 type RemarketingListsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -55,10 +55,13 @@ type RemarketingListsInsertResource =
 -- | Inserts a new remarketing list.
 --
 -- /See:/ 'remarketingListsInsert' smart constructor.
-data RemarketingListsInsert = RemarketingListsInsert'
+data RemarketingListsInsert =
+  RemarketingListsInsert'
     { _rliProFileId :: !(Textual Int64)
     , _rliPayload   :: !RemarketingList
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingListsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ remarketingListsInsert
     -> RemarketingList -- ^ 'rliPayload'
     -> RemarketingListsInsert
 remarketingListsInsert pRliProFileId_ pRliPayload_ =
-    RemarketingListsInsert'
-    { _rliProFileId = _Coerce # pRliProFileId_
-    , _rliPayload = pRliPayload_
-    }
+  RemarketingListsInsert'
+    {_rliProFileId = _Coerce # pRliProFileId_, _rliPayload = pRliPayload_}
+
 
 -- | User profile ID associated with this request.
 rliProFileId :: Lens' RemarketingListsInsert Int64

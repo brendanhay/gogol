@@ -64,14 +64,17 @@ type ProjectsDatabasesOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'projectsDatabasesOperationsGet' smart constructor.
-data ProjectsDatabasesOperationsGet = ProjectsDatabasesOperationsGet'
+data ProjectsDatabasesOperationsGet =
+  ProjectsDatabasesOperationsGet'
     { _pdogXgafv          :: !(Maybe Xgafv)
     , _pdogUploadProtocol :: !(Maybe Text)
     , _pdogAccessToken    :: !(Maybe Text)
     , _pdogUploadType     :: !(Maybe Text)
     , _pdogName           :: !Text
     , _pdogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesOperationsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsDatabasesOperationsGet
     :: Text -- ^ 'pdogName'
     -> ProjectsDatabasesOperationsGet
 projectsDatabasesOperationsGet pPdogName_ =
-    ProjectsDatabasesOperationsGet'
+  ProjectsDatabasesOperationsGet'
     { _pdogXgafv = Nothing
     , _pdogUploadProtocol = Nothing
     , _pdogAccessToken = Nothing
@@ -100,6 +103,7 @@ projectsDatabasesOperationsGet pPdogName_ =
     , _pdogName = pPdogName_
     , _pdogCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdogXgafv :: Lens' ProjectsDatabasesOperationsGet (Maybe Xgafv)

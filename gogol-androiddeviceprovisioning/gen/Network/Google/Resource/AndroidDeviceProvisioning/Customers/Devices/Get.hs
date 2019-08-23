@@ -59,14 +59,17 @@ type CustomersDevicesGetResource =
 -- | Gets the details of a device.
 --
 -- /See:/ 'customersDevicesGet' smart constructor.
-data CustomersDevicesGet = CustomersDevicesGet'
+data CustomersDevicesGet =
+  CustomersDevicesGet'
     { _cdgXgafv          :: !(Maybe Xgafv)
     , _cdgUploadProtocol :: !(Maybe Text)
     , _cdgAccessToken    :: !(Maybe Text)
     , _cdgUploadType     :: !(Maybe Text)
     , _cdgName           :: !Text
     , _cdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomersDevicesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ customersDevicesGet
     :: Text -- ^ 'cdgName'
     -> CustomersDevicesGet
 customersDevicesGet pCdgName_ =
-    CustomersDevicesGet'
+  CustomersDevicesGet'
     { _cdgXgafv = Nothing
     , _cdgUploadProtocol = Nothing
     , _cdgAccessToken = Nothing
@@ -95,6 +98,7 @@ customersDevicesGet pCdgName_ =
     , _cdgName = pCdgName_
     , _cdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdgXgafv :: Lens' CustomersDevicesGet (Maybe Xgafv)

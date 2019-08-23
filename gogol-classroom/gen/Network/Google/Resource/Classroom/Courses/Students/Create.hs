@@ -81,7 +81,8 @@ type CoursesStudentsCreateResource =
 -- course.
 --
 -- /See:/ 'coursesStudentsCreate' smart constructor.
-data CoursesStudentsCreate = CoursesStudentsCreate'
+data CoursesStudentsCreate =
+  CoursesStudentsCreate'
     { _cscXgafv          :: !(Maybe Xgafv)
     , _cscUploadProtocol :: !(Maybe Text)
     , _cscCourseId       :: !Text
@@ -90,7 +91,9 @@ data CoursesStudentsCreate = CoursesStudentsCreate'
     , _cscPayload        :: !Student
     , _cscEnrollmentCode :: !(Maybe Text)
     , _cscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesStudentsCreate' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ coursesStudentsCreate
     -> Student -- ^ 'cscPayload'
     -> CoursesStudentsCreate
 coursesStudentsCreate pCscCourseId_ pCscPayload_ =
-    CoursesStudentsCreate'
+  CoursesStudentsCreate'
     { _cscXgafv = Nothing
     , _cscUploadProtocol = Nothing
     , _cscCourseId = pCscCourseId_
@@ -126,6 +129,7 @@ coursesStudentsCreate pCscCourseId_ pCscPayload_ =
     , _cscEnrollmentCode = Nothing
     , _cscCallback = Nothing
     }
+
 
 -- | V1 error format.
 cscXgafv :: Lens' CoursesStudentsCreate (Maybe Xgafv)

@@ -51,9 +51,12 @@ type LocationsGetResource =
 -- | Gets a single location by ID.
 --
 -- /See:/ 'locationsGet' smart constructor.
-newtype LocationsGet = LocationsGet'
+newtype LocationsGet =
+  LocationsGet'
     { _lgId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype LocationsGet = LocationsGet'
 locationsGet
     :: Text -- ^ 'lgId'
     -> LocationsGet
-locationsGet pLgId_ =
-    LocationsGet'
-    { _lgId = pLgId_
-    }
+locationsGet pLgId_ = LocationsGet' {_lgId = pLgId_}
+
 
 -- | The ID of the location or latest for the last known location.
 lgId :: Lens' LocationsGet Text

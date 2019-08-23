@@ -1,5 +1,5 @@
 name:                  gogol-iap
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Cloud Identity-Aware Proxy SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -35,29 +35,14 @@ library
     exposed-modules:
           Network.Google.IAP
         , Network.Google.IAP.Types
-        , Network.Google.Resource.IAP.Projects.IapTunnel.GetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapTunnel.SetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapTunnel.TestIAMPermissions
-        , Network.Google.Resource.IAP.Projects.IapTunnel.Zones.GetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.GetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.SetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapTunnel.Zones.Instances.TestIAMPermissions
-        , Network.Google.Resource.IAP.Projects.IapTunnel.Zones.SetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapTunnel.Zones.TestIAMPermissions
-        , Network.Google.Resource.IAP.Projects.IapWeb.GetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapWeb.Services.GetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapWeb.Services.SetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapWeb.Services.TestIAMPermissions
-        , Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.GetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.SetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapWeb.Services.Versions.TestIAMPermissions
-        , Network.Google.Resource.IAP.Projects.IapWeb.SetIAMPolicy
-        , Network.Google.Resource.IAP.Projects.IapWeb.TestIAMPermissions
+        , Network.Google.Resource.IAP.GetIAMPolicy
+        , Network.Google.Resource.IAP.SetIAMPolicy
+        , Network.Google.Resource.IAP.TestIAMPermissions
 
     other-modules:
           Network.Google.IAP.Types.Product
         , Network.Google.IAP.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

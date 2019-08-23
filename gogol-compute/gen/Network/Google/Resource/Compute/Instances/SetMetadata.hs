@@ -64,13 +64,16 @@ type InstancesSetMetadataResource =
 -- request.
 --
 -- /See:/ 'instancesSetMetadata' smart constructor.
-data InstancesSetMetadata = InstancesSetMetadata'
+data InstancesSetMetadata =
+  InstancesSetMetadata'
     { _ismRequestId :: !(Maybe Text)
     , _ismProject   :: !Text
     , _ismZone      :: !Text
     , _ismPayload   :: !Metadata
     , _ismInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSetMetadata' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ instancesSetMetadata
     -> Text -- ^ 'ismInstance'
     -> InstancesSetMetadata
 instancesSetMetadata pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
-    InstancesSetMetadata'
+  InstancesSetMetadata'
     { _ismRequestId = Nothing
     , _ismProject = pIsmProject_
     , _ismZone = pIsmZone_
     , _ismPayload = pIsmPayload_
     , _ismInstance = pIsmInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

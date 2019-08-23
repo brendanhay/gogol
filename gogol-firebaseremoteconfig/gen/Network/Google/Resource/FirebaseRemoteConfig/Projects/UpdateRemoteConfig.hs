@@ -97,7 +97,8 @@ type ProjectsUpdateRemoteConfigResource =
 -- error (HTTP status 500) for Database problems or other internal errors.
 --
 -- /See:/ 'projectsUpdateRemoteConfig' smart constructor.
-data ProjectsUpdateRemoteConfig = ProjectsUpdateRemoteConfig'
+data ProjectsUpdateRemoteConfig =
+  ProjectsUpdateRemoteConfig'
     { _purcXgafv          :: !(Maybe Xgafv)
     , _purcValidateOnly   :: !(Maybe Bool)
     , _purcUploadProtocol :: !(Maybe Text)
@@ -108,7 +109,9 @@ data ProjectsUpdateRemoteConfig = ProjectsUpdateRemoteConfig'
     , _purcPayload        :: !RemoteConfig
     , _purcBearerToken    :: !(Maybe Text)
     , _purcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsUpdateRemoteConfig' with the minimum fields required to make a request.
 --
@@ -138,7 +141,7 @@ projectsUpdateRemoteConfig
     -> RemoteConfig -- ^ 'purcPayload'
     -> ProjectsUpdateRemoteConfig
 projectsUpdateRemoteConfig pPurcProject_ pPurcPayload_ =
-    ProjectsUpdateRemoteConfig'
+  ProjectsUpdateRemoteConfig'
     { _purcXgafv = Nothing
     , _purcValidateOnly = Nothing
     , _purcUploadProtocol = Nothing
@@ -150,6 +153,7 @@ projectsUpdateRemoteConfig pPurcProject_ pPurcPayload_ =
     , _purcBearerToken = Nothing
     , _purcCallback = Nothing
     }
+
 
 -- | V1 error format.
 purcXgafv :: Lens' ProjectsUpdateRemoteConfig (Maybe Xgafv)

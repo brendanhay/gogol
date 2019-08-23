@@ -62,12 +62,15 @@ type TargetVPNGatewaysInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'targetVPNGatewaysInsert' smart constructor.
-data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert'
+data TargetVPNGatewaysInsert =
+  TargetVPNGatewaysInsert'
     { _tvgiRequestId :: !(Maybe Text)
     , _tvgiProject   :: !Text
     , _tvgiPayload   :: !TargetVPNGateway
     , _tvgiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetVPNGatewaysInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ targetVPNGatewaysInsert
     -> Text -- ^ 'tvgiRegion'
     -> TargetVPNGatewaysInsert
 targetVPNGatewaysInsert pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
-    TargetVPNGatewaysInsert'
+  TargetVPNGatewaysInsert'
     { _tvgiRequestId = Nothing
     , _tvgiProject = pTvgiProject_
     , _tvgiPayload = pTvgiPayload_
     , _tvgiRegion = pTvgiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

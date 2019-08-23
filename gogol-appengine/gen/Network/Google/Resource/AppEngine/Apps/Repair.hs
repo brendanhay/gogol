@@ -24,6 +24,12 @@
 -- application, for example a Cloud Storage bucket or App Engine service
 -- account. Use this method if you receive an error message about a missing
 -- feature, for example, Error retrieving the App Engine service account.
+-- If you have deleted your App Engine service account, this will not be
+-- able to recreate it. Instead, you should attempt to use the IAM undelete
+-- API if possible at
+-- https:\/\/cloud.google.com\/iam\/reference\/rest\/v1\/projects.serviceAccounts\/undelete?apix_params=%7B\"name\"%3A\"projects%2F-%2FserviceAccounts%2Funique_id\"%2C\"resource\"%3A%7B%7D%7D
+-- . If the deletion was recent, the numeric ID can be found in the Cloud
+-- Console Activity Log.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.repair@.
 module Network.Google.Resource.AppEngine.Apps.Repair
@@ -67,9 +73,16 @@ type AppsRepairResource =
 -- application, for example a Cloud Storage bucket or App Engine service
 -- account. Use this method if you receive an error message about a missing
 -- feature, for example, Error retrieving the App Engine service account.
+-- If you have deleted your App Engine service account, this will not be
+-- able to recreate it. Instead, you should attempt to use the IAM undelete
+-- API if possible at
+-- https:\/\/cloud.google.com\/iam\/reference\/rest\/v1\/projects.serviceAccounts\/undelete?apix_params=%7B\"name\"%3A\"projects%2F-%2FserviceAccounts%2Funique_id\"%2C\"resource\"%3A%7B%7D%7D
+-- . If the deletion was recent, the numeric ID can be found in the Cloud
+-- Console Activity Log.
 --
 -- /See:/ 'appsRepair' smart constructor.
-data AppsRepair = AppsRepair'
+data AppsRepair =
+  AppsRepair'
     { _arXgafv          :: !(Maybe Xgafv)
     , _arUploadProtocol :: !(Maybe Text)
     , _arAccessToken    :: !(Maybe Text)
@@ -77,7 +90,9 @@ data AppsRepair = AppsRepair'
     , _arPayload        :: !RepairApplicationRequest
     , _arAppsId         :: !Text
     , _arCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsRepair' with the minimum fields required to make a request.
 --
@@ -101,7 +116,7 @@ appsRepair
     -> Text -- ^ 'arAppsId'
     -> AppsRepair
 appsRepair pArPayload_ pArAppsId_ =
-    AppsRepair'
+  AppsRepair'
     { _arXgafv = Nothing
     , _arUploadProtocol = Nothing
     , _arAccessToken = Nothing
@@ -110,6 +125,7 @@ appsRepair pArPayload_ pArAppsId_ =
     , _arAppsId = pArAppsId_
     , _arCallback = Nothing
     }
+
 
 -- | V1 error format.
 arXgafv :: Lens' AppsRepair (Maybe Xgafv)

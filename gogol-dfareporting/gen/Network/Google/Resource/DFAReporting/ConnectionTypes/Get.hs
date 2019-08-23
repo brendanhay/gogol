@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConnectionTypesGet' request conforms to.
 type ConnectionTypesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>
@@ -55,10 +55,13 @@ type ConnectionTypesGetResource =
 -- | Gets one connection type by ID.
 --
 -- /See:/ 'connectionTypesGet' smart constructor.
-data ConnectionTypesGet = ConnectionTypesGet'
+data ConnectionTypesGet =
+  ConnectionTypesGet'
     { _ctgProFileId :: !(Textual Int64)
     , _ctgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConnectionTypesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ connectionTypesGet
     -> Int64 -- ^ 'ctgId'
     -> ConnectionTypesGet
 connectionTypesGet pCtgProFileId_ pCtgId_ =
-    ConnectionTypesGet'
-    { _ctgProFileId = _Coerce # pCtgProFileId_
-    , _ctgId = _Coerce # pCtgId_
-    }
+  ConnectionTypesGet'
+    {_ctgProFileId = _Coerce # pCtgProFileId_, _ctgId = _Coerce # pCtgId_}
+
 
 -- | User profile ID associated with this request.
 ctgProFileId :: Lens' ConnectionTypesGet Int64

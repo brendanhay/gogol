@@ -67,7 +67,8 @@ type ProjectsReposListResource =
 -- set by ListRepos. To get the size of a repo, use GetRepo.
 --
 -- /See:/ 'projectsReposList' smart constructor.
-data ProjectsReposList = ProjectsReposList'
+data ProjectsReposList =
+  ProjectsReposList'
     { _prlXgafv          :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
     , _prlAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsReposList = ProjectsReposList'
     , _prlPageToken      :: !(Maybe Text)
     , _prlPageSize       :: !(Maybe (Textual Int32))
     , _prlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsReposList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsReposList
     :: Text -- ^ 'prlName'
     -> ProjectsReposList
 projectsReposList pPrlName_ =
-    ProjectsReposList'
+  ProjectsReposList'
     { _prlXgafv = Nothing
     , _prlUploadProtocol = Nothing
     , _prlAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsReposList pPrlName_ =
     , _prlPageSize = Nothing
     , _prlCallback = Nothing
     }
+
 
 -- | V1 error format.
 prlXgafv :: Lens' ProjectsReposList (Maybe Xgafv)

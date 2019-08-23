@@ -104,11 +104,6 @@ module Network.Google.CloudTasks.Types
     -- * QueueState
     , QueueState (..)
 
-    -- * AppEngineHTTPQueue
-    , AppEngineHTTPQueue
-    , appEngineHTTPQueue
-    , aehttpqAppEngineRoutingOverride
-
     -- * CreateTaskRequestResponseView
     , CreateTaskRequestResponseView (..)
 
@@ -121,9 +116,9 @@ module Network.Google.CloudTasks.Types
     , Queue
     , queue
     , qRateLimits
+    , qAppEngineRoutingOverride
     , qState
     , qRetryConfig
-    , qAppEngineHTTPQueue
     , qName
     , qPurgeTime
 
@@ -169,6 +164,7 @@ module Network.Google.CloudTasks.Types
     , Task
     , task
     , tLastAttempt
+    , tDispatchDeadline
     , tScheduleTime
     , tName
     , tFirstAttempt
@@ -236,12 +232,12 @@ import           Network.Google.CloudTasks.Types.Product
 import           Network.Google.CloudTasks.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2beta3' of the Cloud Tasks API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Cloud Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 cloudTasksService :: ServiceConfig
 cloudTasksService
-  = defaultService (ServiceId "cloudtasks:v2beta3")
+  = defaultService (ServiceId "cloudtasks:v2")
       "cloudtasks.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

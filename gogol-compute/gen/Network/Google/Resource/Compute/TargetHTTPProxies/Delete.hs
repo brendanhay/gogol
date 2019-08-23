@@ -57,11 +57,14 @@ type TargetHTTPProxiesDeleteResource =
 -- | Deletes the specified TargetHttpProxy resource.
 --
 -- /See:/ 'targetHTTPProxiesDelete' smart constructor.
-data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete'
+data TargetHTTPProxiesDelete =
+  TargetHTTPProxiesDelete'
     { _thttppdRequestId       :: !(Maybe Text)
     , _thttppdProject         :: !Text
     , _thttppdTargetHTTPProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetHTTPProxiesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ targetHTTPProxiesDelete
     -> Text -- ^ 'thttppdTargetHTTPProxy'
     -> TargetHTTPProxiesDelete
 targetHTTPProxiesDelete pThttppdProject_ pThttppdTargetHTTPProxy_ =
-    TargetHTTPProxiesDelete'
+  TargetHTTPProxiesDelete'
     { _thttppdRequestId = Nothing
     , _thttppdProject = pThttppdProject_
     , _thttppdTargetHTTPProxy = pThttppdTargetHTTPProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -76,12 +76,15 @@ type EditsImagesUploadResource =
 -- language and image type.
 --
 -- /See:/ 'editsImagesUpload' smart constructor.
-data EditsImagesUpload = EditsImagesUpload'
+data EditsImagesUpload =
+  EditsImagesUpload'
     { _eiuPackageName :: !Text
     , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuLanguage    :: !Text
     , _eiuEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsImagesUpload' with the minimum fields required to make a request.
 --
@@ -101,12 +104,13 @@ editsImagesUpload
     -> Text -- ^ 'eiuEditId'
     -> EditsImagesUpload
 editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
-    EditsImagesUpload'
+  EditsImagesUpload'
     { _eiuPackageName = pEiuPackageName_
     , _eiuImageType = pEiuImageType_
     , _eiuLanguage = pEiuLanguage_
     , _eiuEditId = pEiuEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
@@ -146,7 +150,8 @@ instance GoogleRequest EditsImagesUpload where
                       mempty
 
 instance GoogleRequest
-         (MediaUpload EditsImagesUpload) where
+           (MediaUpload EditsImagesUpload)
+         where
         type Rs (MediaUpload EditsImagesUpload) =
              ImagesUploadResponse
         type Scopes (MediaUpload EditsImagesUpload) =

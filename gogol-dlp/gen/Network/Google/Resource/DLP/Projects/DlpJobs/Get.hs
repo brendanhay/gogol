@@ -66,14 +66,17 @@ type ProjectsDlpJobsGetResource =
 -- more.
 --
 -- /See:/ 'projectsDlpJobsGet' smart constructor.
-data ProjectsDlpJobsGet = ProjectsDlpJobsGet'
+data ProjectsDlpJobsGet =
+  ProjectsDlpJobsGet'
     { _pdjgXgafv          :: !(Maybe Xgafv)
     , _pdjgUploadProtocol :: !(Maybe Text)
     , _pdjgAccessToken    :: !(Maybe Text)
     , _pdjgUploadType     :: !(Maybe Text)
     , _pdjgName           :: !Text
     , _pdjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDlpJobsGet' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsDlpJobsGet
     :: Text -- ^ 'pdjgName'
     -> ProjectsDlpJobsGet
 projectsDlpJobsGet pPdjgName_ =
-    ProjectsDlpJobsGet'
+  ProjectsDlpJobsGet'
     { _pdjgXgafv = Nothing
     , _pdjgUploadProtocol = Nothing
     , _pdjgAccessToken = Nothing
@@ -102,6 +105,7 @@ projectsDlpJobsGet pPdjgName_ =
     , _pdjgName = pPdjgName_
     , _pdjgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdjgXgafv :: Lens' ProjectsDlpJobsGet (Maybe Xgafv)

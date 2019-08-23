@@ -70,7 +70,8 @@ type ProjectsDlpJobsCancelResource =
 -- more.
 --
 -- /See:/ 'projectsDlpJobsCancel' smart constructor.
-data ProjectsDlpJobsCancel = ProjectsDlpJobsCancel'
+data ProjectsDlpJobsCancel =
+  ProjectsDlpJobsCancel'
     { _pdjcXgafv          :: !(Maybe Xgafv)
     , _pdjcUploadProtocol :: !(Maybe Text)
     , _pdjcAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsDlpJobsCancel = ProjectsDlpJobsCancel'
     , _pdjcPayload        :: !GooglePrivacyDlpV2CancelDlpJobRequest
     , _pdjcName           :: !Text
     , _pdjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDlpJobsCancel' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsDlpJobsCancel
     -> Text -- ^ 'pdjcName'
     -> ProjectsDlpJobsCancel
 projectsDlpJobsCancel pPdjcPayload_ pPdjcName_ =
-    ProjectsDlpJobsCancel'
+  ProjectsDlpJobsCancel'
     { _pdjcXgafv = Nothing
     , _pdjcUploadProtocol = Nothing
     , _pdjcAccessToken = Nothing
@@ -111,6 +114,7 @@ projectsDlpJobsCancel pPdjcPayload_ pPdjcName_ =
     , _pdjcName = pPdjcName_
     , _pdjcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdjcXgafv :: Lens' ProjectsDlpJobsCancel (Maybe Xgafv)

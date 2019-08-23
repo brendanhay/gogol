@@ -58,11 +58,14 @@ type InstancesSimulateMaintenanceEventResource =
 -- | Simulates a maintenance event on the instance.
 --
 -- /See:/ 'instancesSimulateMaintenanceEvent' smart constructor.
-data InstancesSimulateMaintenanceEvent = InstancesSimulateMaintenanceEvent'
+data InstancesSimulateMaintenanceEvent =
+  InstancesSimulateMaintenanceEvent'
     { _ismeProject  :: !Text
     , _ismeZone     :: !Text
     , _ismeInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSimulateMaintenanceEvent' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ instancesSimulateMaintenanceEvent
     -> Text -- ^ 'ismeInstance'
     -> InstancesSimulateMaintenanceEvent
 instancesSimulateMaintenanceEvent pIsmeProject_ pIsmeZone_ pIsmeInstance_ =
-    InstancesSimulateMaintenanceEvent'
+  InstancesSimulateMaintenanceEvent'
     { _ismeProject = pIsmeProject_
     , _ismeZone = pIsmeZone_
     , _ismeInstance = pIsmeInstance_
     }
+
 
 -- | Project ID for this request.
 ismeProject :: Lens' InstancesSimulateMaintenanceEvent Text
@@ -100,7 +104,8 @@ ismeInstance
   = lens _ismeInstance (\ s a -> s{_ismeInstance = a})
 
 instance GoogleRequest
-         InstancesSimulateMaintenanceEvent where
+           InstancesSimulateMaintenanceEvent
+         where
         type Rs InstancesSimulateMaintenanceEvent = Operation
         type Scopes InstancesSimulateMaintenanceEvent =
              '["https://www.googleapis.com/auth/cloud-platform",

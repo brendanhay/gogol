@@ -63,7 +63,8 @@ type ProjectsLocationsRegistriesDevicesCreateResource
 -- | Creates a device in a device registry.
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesCreate' smart constructor.
-data ProjectsLocationsRegistriesDevicesCreate = ProjectsLocationsRegistriesDevicesCreate'
+data ProjectsLocationsRegistriesDevicesCreate =
+  ProjectsLocationsRegistriesDevicesCreate'
     { _plrdcParent         :: !Text
     , _plrdcXgafv          :: !(Maybe Xgafv)
     , _plrdcUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsRegistriesDevicesCreate = ProjectsLocationsRegistriesDevic
     , _plrdcUploadType     :: !(Maybe Text)
     , _plrdcPayload        :: !Device
     , _plrdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsRegistriesDevicesCreate
     -> Device -- ^ 'plrdcPayload'
     -> ProjectsLocationsRegistriesDevicesCreate
 projectsLocationsRegistriesDevicesCreate pPlrdcParent_ pPlrdcPayload_ =
-    ProjectsLocationsRegistriesDevicesCreate'
+  ProjectsLocationsRegistriesDevicesCreate'
     { _plrdcParent = pPlrdcParent_
     , _plrdcXgafv = Nothing
     , _plrdcUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsLocationsRegistriesDevicesCreate pPlrdcParent_ pPlrdcPayload_ =
     , _plrdcPayload = pPlrdcPayload_
     , _plrdcCallback = Nothing
     }
+
 
 -- | The name of the device registry where this device should be created. For
 -- example,
@@ -147,7 +151,8 @@ plrdcCallback
       (\ s a -> s{_plrdcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesCreate where
+           ProjectsLocationsRegistriesDevicesCreate
+         where
         type Rs ProjectsLocationsRegistriesDevicesCreate =
              Device
         type Scopes ProjectsLocationsRegistriesDevicesCreate

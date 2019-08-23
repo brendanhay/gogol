@@ -58,11 +58,14 @@ type LicenseAssignmentsDeleteResource =
 -- | Revoke License.
 --
 -- /See:/ 'licenseAssignmentsDelete' smart constructor.
-data LicenseAssignmentsDelete = LicenseAssignmentsDelete'
+data LicenseAssignmentsDelete =
+  LicenseAssignmentsDelete'
     { _ladSKUId     :: !Text
     , _ladUserId    :: !Text
     , _ladProductId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicenseAssignmentsDelete' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ licenseAssignmentsDelete
     -> Text -- ^ 'ladProductId'
     -> LicenseAssignmentsDelete
 licenseAssignmentsDelete pLadSKUId_ pLadUserId_ pLadProductId_ =
-    LicenseAssignmentsDelete'
+  LicenseAssignmentsDelete'
     { _ladSKUId = pLadSKUId_
     , _ladUserId = pLadUserId_
     , _ladProductId = pLadProductId_
     }
+
 
 -- | Name for sku
 ladSKUId :: Lens' LicenseAssignmentsDelete Text

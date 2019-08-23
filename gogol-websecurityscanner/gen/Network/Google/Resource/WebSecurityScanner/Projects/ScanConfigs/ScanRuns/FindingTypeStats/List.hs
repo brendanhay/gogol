@@ -48,7 +48,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- 'ProjectsScanConfigsScanRunsFindingTypeStatsList' request conforms to.
 type ProjectsScanConfigsScanRunsFindingTypeStatsListResource
      =
-     "v1alpha" :>
+     "v1beta" :>
        Capture "parent" Text :>
          "findingTypeStats" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -62,14 +62,17 @@ type ProjectsScanConfigsScanRunsFindingTypeStatsListResource
 -- | List all FindingTypeStats under a given ScanRun.
 --
 -- /See:/ 'projectsScanConfigsScanRunsFindingTypeStatsList' smart constructor.
-data ProjectsScanConfigsScanRunsFindingTypeStatsList = ProjectsScanConfigsScanRunsFindingTypeStatsList'
+data ProjectsScanConfigsScanRunsFindingTypeStatsList =
+  ProjectsScanConfigsScanRunsFindingTypeStatsList'
     { _pscsrftslParent         :: !Text
     , _pscsrftslXgafv          :: !(Maybe Xgafv)
     , _pscsrftslUploadProtocol :: !(Maybe Text)
     , _pscsrftslAccessToken    :: !(Maybe Text)
     , _pscsrftslUploadType     :: !(Maybe Text)
     , _pscsrftslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsFindingTypeStatsList' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsScanConfigsScanRunsFindingTypeStatsList
     :: Text -- ^ 'pscsrftslParent'
     -> ProjectsScanConfigsScanRunsFindingTypeStatsList
 projectsScanConfigsScanRunsFindingTypeStatsList pPscsrftslParent_ =
-    ProjectsScanConfigsScanRunsFindingTypeStatsList'
+  ProjectsScanConfigsScanRunsFindingTypeStatsList'
     { _pscsrftslParent = pPscsrftslParent_
     , _pscsrftslXgafv = Nothing
     , _pscsrftslUploadProtocol = Nothing
@@ -98,6 +101,7 @@ projectsScanConfigsScanRunsFindingTypeStatsList pPscsrftslParent_ =
     , _pscsrftslUploadType = Nothing
     , _pscsrftslCallback = Nothing
     }
+
 
 -- | Required. The parent resource name, which should be a scan run resource
 -- name in the format
@@ -138,7 +142,8 @@ pscsrftslCallback
       (\ s a -> s{_pscsrftslCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsFindingTypeStatsList where
+           ProjectsScanConfigsScanRunsFindingTypeStatsList
+         where
         type Rs
                ProjectsScanConfigsScanRunsFindingTypeStatsList
              = ListFindingTypeStatsResponse

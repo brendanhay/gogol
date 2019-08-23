@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a charge invoice for a shipment group, and triggers a charge
--- capture for non-facilitated payment orders.
+-- capture for orderinvoice enabled orders.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderinvoices.createchargeinvoice@.
 module Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
@@ -58,14 +58,17 @@ type OrderinvoicesCreatechargeinvoiceResource =
                      Post '[JSON] OrderinvoicesCreateChargeInvoiceResponse
 
 -- | Creates a charge invoice for a shipment group, and triggers a charge
--- capture for non-facilitated payment orders.
+-- capture for orderinvoice enabled orders.
 --
 -- /See:/ 'orderinvoicesCreatechargeinvoice' smart constructor.
-data OrderinvoicesCreatechargeinvoice = OrderinvoicesCreatechargeinvoice'
+data OrderinvoicesCreatechargeinvoice =
+  OrderinvoicesCreatechargeinvoice'
     { _oMerchantId :: !(Textual Word64)
     , _oPayload    :: !OrderinvoicesCreateChargeInvoiceRequest
     , _oOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderinvoicesCreatechargeinvoice' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ orderinvoicesCreatechargeinvoice
     -> Text -- ^ 'oOrderId'
     -> OrderinvoicesCreatechargeinvoice
 orderinvoicesCreatechargeinvoice pOMerchantId_ pOPayload_ pOOrderId_ =
-    OrderinvoicesCreatechargeinvoice'
+  OrderinvoicesCreatechargeinvoice'
     { _oMerchantId = _Coerce # pOMerchantId_
     , _oPayload = pOPayload_
     , _oOrderId = pOOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -104,7 +108,8 @@ oOrderId :: Lens' OrderinvoicesCreatechargeinvoice Text
 oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
 
 instance GoogleRequest
-         OrderinvoicesCreatechargeinvoice where
+           OrderinvoicesCreatechargeinvoice
+         where
         type Rs OrderinvoicesCreatechargeinvoice =
              OrderinvoicesCreateChargeInvoiceResponse
         type Scopes OrderinvoicesCreatechargeinvoice =

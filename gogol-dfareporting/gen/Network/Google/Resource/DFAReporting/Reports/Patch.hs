@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsPatch' request conforms to.
 type ReportsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -56,11 +56,14 @@ type ReportsPatchResource =
 -- | Updates a report. This method supports patch semantics.
 --
 -- /See:/ 'reportsPatch' smart constructor.
-data ReportsPatch = ReportsPatch'
+data ReportsPatch =
+  ReportsPatch'
     { _rpReportId  :: !(Textual Int64)
     , _rpProFileId :: !(Textual Int64)
     , _rpPayload   :: !Report
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsPatch' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ reportsPatch
     -> Report -- ^ 'rpPayload'
     -> ReportsPatch
 reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
-    ReportsPatch'
+  ReportsPatch'
     { _rpReportId = _Coerce # pRpReportId_
     , _rpProFileId = _Coerce # pRpProFileId_
     , _rpPayload = pRpPayload_
     }
+
 
 -- | The ID of the report.
 rpReportId :: Lens' ReportsPatch Int64

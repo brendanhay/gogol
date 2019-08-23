@@ -68,7 +68,8 @@ type ProjectsLocationsClustersNodePoolsDeleteResource
 -- | Deletes a node pool from a cluster.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsDelete' smart constructor.
-data ProjectsLocationsClustersNodePoolsDelete = ProjectsLocationsClustersNodePoolsDelete'
+data ProjectsLocationsClustersNodePoolsDelete =
+  ProjectsLocationsClustersNodePoolsDelete'
     { _plcnpdXgafv          :: !(Maybe Xgafv)
     , _plcnpdUploadProtocol :: !(Maybe Text)
     , _plcnpdAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsLocationsClustersNodePoolsDelete = ProjectsLocationsClustersNodePoo
     , _plcnpdClusterId      :: !(Maybe Text)
     , _plcnpdProjectId      :: !(Maybe Text)
     , _plcnpdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsDelete' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsLocationsClustersNodePoolsDelete
     :: Text -- ^ 'plcnpdName'
     -> ProjectsLocationsClustersNodePoolsDelete
 projectsLocationsClustersNodePoolsDelete pPlcnpdName_ =
-    ProjectsLocationsClustersNodePoolsDelete'
+  ProjectsLocationsClustersNodePoolsDelete'
     { _plcnpdXgafv = Nothing
     , _plcnpdUploadProtocol = Nothing
     , _plcnpdAccessToken = Nothing
@@ -120,6 +123,7 @@ projectsLocationsClustersNodePoolsDelete pPlcnpdName_ =
     , _plcnpdProjectId = Nothing
     , _plcnpdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpdXgafv :: Lens' ProjectsLocationsClustersNodePoolsDelete (Maybe Xgafv)
@@ -187,7 +191,8 @@ plcnpdCallback
       (\ s a -> s{_plcnpdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsDelete where
+           ProjectsLocationsClustersNodePoolsDelete
+         where
         type Rs ProjectsLocationsClustersNodePoolsDelete =
              Operation
         type Scopes ProjectsLocationsClustersNodePoolsDelete

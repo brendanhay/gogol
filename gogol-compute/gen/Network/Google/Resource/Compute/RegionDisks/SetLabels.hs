@@ -63,13 +63,16 @@ type RegionDisksSetLabelsResource =
 -- | Sets the labels on the target regional disk.
 --
 -- /See:/ 'regionDisksSetLabels' smart constructor.
-data RegionDisksSetLabels = RegionDisksSetLabels'
+data RegionDisksSetLabels =
+  RegionDisksSetLabels'
     { _rdslRequestId :: !(Maybe Text)
     , _rdslProject   :: !Text
     , _rdslPayload   :: !RegionSetLabelsRequest
     , _rdslResource  :: !Text
     , _rdslRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksSetLabels' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ regionDisksSetLabels
     -> Text -- ^ 'rdslRegion'
     -> RegionDisksSetLabels
 regionDisksSetLabels pRdslProject_ pRdslPayload_ pRdslResource_ pRdslRegion_ =
-    RegionDisksSetLabels'
+  RegionDisksSetLabels'
     { _rdslRequestId = Nothing
     , _rdslProject = pRdslProject_
     , _rdslPayload = pRdslPayload_
     , _rdslResource = pRdslResource_
     , _rdslRegion = pRdslRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

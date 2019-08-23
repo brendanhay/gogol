@@ -85,7 +85,8 @@ type OperationsProjectsOperationsListResource =
 -- id.
 --
 -- /See:/ 'operationsProjectsOperationsList' smart constructor.
-data OperationsProjectsOperationsList = OperationsProjectsOperationsList'
+data OperationsProjectsOperationsList =
+  OperationsProjectsOperationsList'
     { _opolXgafv          :: !(Maybe Xgafv)
     , _opolUploadProtocol :: !(Maybe Text)
     , _opolAccessToken    :: !(Maybe Text)
@@ -95,7 +96,9 @@ data OperationsProjectsOperationsList = OperationsProjectsOperationsList'
     , _opolPageToken      :: !(Maybe Text)
     , _opolPageSize       :: !(Maybe (Textual Int32))
     , _opolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsProjectsOperationsList' with the minimum fields required to make a request.
 --
@@ -122,7 +125,7 @@ operationsProjectsOperationsList
     :: Text -- ^ 'opolName'
     -> OperationsProjectsOperationsList
 operationsProjectsOperationsList pOpolName_ =
-    OperationsProjectsOperationsList'
+  OperationsProjectsOperationsList'
     { _opolXgafv = Nothing
     , _opolUploadProtocol = Nothing
     , _opolAccessToken = Nothing
@@ -133,6 +136,7 @@ operationsProjectsOperationsList pOpolName_ =
     , _opolPageSize = Nothing
     , _opolCallback = Nothing
     }
+
 
 -- | V1 error format.
 opolXgafv :: Lens' OperationsProjectsOperationsList (Maybe Xgafv)
@@ -184,7 +188,8 @@ opolCallback
   = lens _opolCallback (\ s a -> s{_opolCallback = a})
 
 instance GoogleRequest
-         OperationsProjectsOperationsList where
+           OperationsProjectsOperationsList
+         where
         type Rs OperationsProjectsOperationsList =
              ListOperationsResponse
         type Scopes OperationsProjectsOperationsList =

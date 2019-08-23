@@ -64,14 +64,17 @@ type InstancesDeleteAccessConfigResource =
 -- | Deletes an access config from an instance\'s network interface.
 --
 -- /See:/ 'instancesDeleteAccessConfig' smart constructor.
-data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig'
+data InstancesDeleteAccessConfig =
+  InstancesDeleteAccessConfig'
     { _idacRequestId        :: !(Maybe Text)
     , _idacProject          :: !Text
     , _idacNetworkInterface :: !Text
     , _idacZone             :: !Text
     , _idacAccessConfig     :: !Text
     , _idacInstance         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesDeleteAccessConfig' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ instancesDeleteAccessConfig
     -> Text -- ^ 'idacInstance'
     -> InstancesDeleteAccessConfig
 instancesDeleteAccessConfig pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
-    InstancesDeleteAccessConfig'
+  InstancesDeleteAccessConfig'
     { _idacRequestId = Nothing
     , _idacProject = pIdacProject_
     , _idacNetworkInterface = pIdacNetworkInterface_
@@ -104,6 +107,7 @@ instancesDeleteAccessConfig pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIda
     , _idacAccessConfig = pIdacAccessConfig_
     , _idacInstance = pIdacInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

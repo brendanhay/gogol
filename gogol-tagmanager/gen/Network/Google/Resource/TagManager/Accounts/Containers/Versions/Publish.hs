@@ -53,10 +53,13 @@ type AccountsContainersVersionsPublishResource =
 -- | Publishes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsPublish' smart constructor.
-data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish'
+data AccountsContainersVersionsPublish =
+  AccountsContainersVersionsPublish'
     { _acvpPath        :: !Text
     , _acvpFingerprint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersVersionsPublish' with the minimum fields required to make a request.
 --
@@ -69,10 +72,9 @@ accountsContainersVersionsPublish
     :: Text -- ^ 'acvpPath'
     -> AccountsContainersVersionsPublish
 accountsContainersVersionsPublish pAcvpPath_ =
-    AccountsContainersVersionsPublish'
-    { _acvpPath = pAcvpPath_
-    , _acvpFingerprint = Nothing
-    }
+  AccountsContainersVersionsPublish'
+    {_acvpPath = pAcvpPath_, _acvpFingerprint = Nothing}
+
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
@@ -87,7 +89,8 @@ acvpFingerprint
       (\ s a -> s{_acvpFingerprint = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsPublish where
+           AccountsContainersVersionsPublish
+         where
         type Rs AccountsContainersVersionsPublish =
              PublishContainerVersionResponse
         type Scopes AccountsContainersVersionsPublish =

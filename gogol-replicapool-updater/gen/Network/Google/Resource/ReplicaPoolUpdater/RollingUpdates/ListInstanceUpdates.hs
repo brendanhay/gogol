@@ -65,14 +65,17 @@ type RollingUpdatesListInstanceUpdatesResource =
 -- | Lists the current status for each instance within a given update.
 --
 -- /See:/ 'rollingUpdatesListInstanceUpdates' smart constructor.
-data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates'
+data RollingUpdatesListInstanceUpdates =
+  RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate :: !Text
     , _ruliuProject       :: !Text
     , _ruliuZone          :: !Text
     , _ruliuFilter        :: !(Maybe Text)
     , _ruliuPageToken     :: !(Maybe Text)
     , _ruliuMaxResults    :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RollingUpdatesListInstanceUpdates' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ rollingUpdatesListInstanceUpdates
     -> Text -- ^ 'ruliuZone'
     -> RollingUpdatesListInstanceUpdates
 rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone_ =
-    RollingUpdatesListInstanceUpdates'
+  RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate = pRuliuRollingUpdate_
     , _ruliuProject = pRuliuProject_
     , _ruliuZone = pRuliuZone_
@@ -103,6 +106,7 @@ rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone
     , _ruliuPageToken = Nothing
     , _ruliuMaxResults = 500
     }
+
 
 -- | The name of the update.
 ruliuRollingUpdate :: Lens' RollingUpdatesListInstanceUpdates Text
@@ -141,7 +145,8 @@ ruliuMaxResults
       . _Coerce
 
 instance GoogleRequest
-         RollingUpdatesListInstanceUpdates where
+           RollingUpdatesListInstanceUpdates
+         where
         type Rs RollingUpdatesListInstanceUpdates =
              InstanceUpdateList
         type Scopes RollingUpdatesListInstanceUpdates =

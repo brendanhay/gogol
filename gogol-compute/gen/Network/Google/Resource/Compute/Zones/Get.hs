@@ -56,10 +56,13 @@ type ZonesGetResource =
 -- making a list() request.
 --
 -- /See:/ 'zonesGet' smart constructor.
-data ZonesGet = ZonesGet'
+data ZonesGet =
+  ZonesGet'
     { _zgProject :: !Text
     , _zgZone    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZonesGet' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ zonesGet
     -> Text -- ^ 'zgZone'
     -> ZonesGet
 zonesGet pZgProject_ pZgZone_ =
-    ZonesGet'
-    { _zgProject = pZgProject_
-    , _zgZone = pZgZone_
-    }
+  ZonesGet' {_zgProject = pZgProject_, _zgZone = pZgZone_}
+
 
 -- | Project ID for this request.
 zgProject :: Lens' ZonesGet Text

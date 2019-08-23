@@ -73,7 +73,8 @@ type ProjectsDatabasesImportDocumentsResource =
 -- Firestore.
 --
 -- /See:/ 'projectsDatabasesImportDocuments' smart constructor.
-data ProjectsDatabasesImportDocuments = ProjectsDatabasesImportDocuments'
+data ProjectsDatabasesImportDocuments =
+  ProjectsDatabasesImportDocuments'
     { _pdidXgafv          :: !(Maybe Xgafv)
     , _pdidUploadProtocol :: !(Maybe Text)
     , _pdidAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsDatabasesImportDocuments = ProjectsDatabasesImportDocuments'
     , _pdidPayload        :: !GoogleFirestoreAdminV1ImportDocumentsRequest
     , _pdidName           :: !Text
     , _pdidCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesImportDocuments' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsDatabasesImportDocuments
     -> Text -- ^ 'pdidName'
     -> ProjectsDatabasesImportDocuments
 projectsDatabasesImportDocuments pPdidPayload_ pPdidName_ =
-    ProjectsDatabasesImportDocuments'
+  ProjectsDatabasesImportDocuments'
     { _pdidXgafv = Nothing
     , _pdidUploadProtocol = Nothing
     , _pdidAccessToken = Nothing
@@ -114,6 +117,7 @@ projectsDatabasesImportDocuments pPdidPayload_ pPdidName_ =
     , _pdidName = pPdidName_
     , _pdidCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdidXgafv :: Lens' ProjectsDatabasesImportDocuments (Maybe Xgafv)
@@ -154,7 +158,8 @@ pdidCallback
   = lens _pdidCallback (\ s a -> s{_pdidCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesImportDocuments where
+           ProjectsDatabasesImportDocuments
+         where
         type Rs ProjectsDatabasesImportDocuments =
              GoogleLongrunningOperation
         type Scopes ProjectsDatabasesImportDocuments =

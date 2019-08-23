@@ -175,6 +175,79 @@ instance FromJSON ItemStatusCode where
 instance ToJSON ItemStatusCode where
     toJSON = toJSONText
 
+data GmailTimeRestrictType
+    = GTRTUnspecified
+      -- ^ @UNSPECIFIED@
+    | GTRTFromThisWeek
+      -- ^ @FROM_THIS_WEEK@
+      -- newer_than:7d
+    | GTRTOlderThanOneYear
+      -- ^ @OLDER_THAN_ONE_YEAR@
+      -- older_than:1y
+    | GTRTFromToday
+      -- ^ @FROM_TODAY@
+      -- newer_than:1d
+    | GTRTFromYesterday
+      -- ^ @FROM_YESTERDAY@
+      -- newer_than:2d older_than:1d
+    | GTRTFromThisMonth
+      -- ^ @FROM_THIS_MONTH@
+      -- newer_than:30d
+    | GTRTFromCertainMonth
+      -- ^ @FROM_CERTAIN_MONTH@
+      -- This will read as something like \"From November\" and will have
+      -- operator before:X after:Y
+    | GTRTOlderThanToday
+      -- ^ @OLDER_THAN_TODAY@
+      -- older_than:1d
+    | GTRTOlderThanYesterday
+      -- ^ @OLDER_THAN_YESTERDAY@
+      -- older_than:2d
+    | GTRTOlderThanAWeek
+      -- ^ @OLDER_THAN_A_WEEK@
+      -- older_than:7d
+    | GTRTOlderThanAMonth
+      -- ^ @OLDER_THAN_A_MONTH@
+      -- older_than:30d
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GmailTimeRestrictType
+
+instance FromHttpApiData GmailTimeRestrictType where
+    parseQueryParam = \case
+        "UNSPECIFIED" -> Right GTRTUnspecified
+        "FROM_THIS_WEEK" -> Right GTRTFromThisWeek
+        "OLDER_THAN_ONE_YEAR" -> Right GTRTOlderThanOneYear
+        "FROM_TODAY" -> Right GTRTFromToday
+        "FROM_YESTERDAY" -> Right GTRTFromYesterday
+        "FROM_THIS_MONTH" -> Right GTRTFromThisMonth
+        "FROM_CERTAIN_MONTH" -> Right GTRTFromCertainMonth
+        "OLDER_THAN_TODAY" -> Right GTRTOlderThanToday
+        "OLDER_THAN_YESTERDAY" -> Right GTRTOlderThanYesterday
+        "OLDER_THAN_A_WEEK" -> Right GTRTOlderThanAWeek
+        "OLDER_THAN_A_MONTH" -> Right GTRTOlderThanAMonth
+        x -> Left ("Unable to parse GmailTimeRestrictType from: " <> x)
+
+instance ToHttpApiData GmailTimeRestrictType where
+    toQueryParam = \case
+        GTRTUnspecified -> "UNSPECIFIED"
+        GTRTFromThisWeek -> "FROM_THIS_WEEK"
+        GTRTOlderThanOneYear -> "OLDER_THAN_ONE_YEAR"
+        GTRTFromToday -> "FROM_TODAY"
+        GTRTFromYesterday -> "FROM_YESTERDAY"
+        GTRTFromThisMonth -> "FROM_THIS_MONTH"
+        GTRTFromCertainMonth -> "FROM_CERTAIN_MONTH"
+        GTRTOlderThanToday -> "OLDER_THAN_TODAY"
+        GTRTOlderThanYesterday -> "OLDER_THAN_YESTERDAY"
+        GTRTOlderThanAWeek -> "OLDER_THAN_A_WEEK"
+        GTRTOlderThanAMonth -> "OLDER_THAN_A_MONTH"
+
+instance FromJSON GmailTimeRestrictType where
+    parseJSON = parseJSONText "GmailTimeRestrictType"
+
+instance ToJSON GmailTimeRestrictType where
+    toJSON = toJSONText
+
 data QueryInterpretationInterpretationType
     = None
       -- ^ @NONE@
@@ -296,6 +369,73 @@ instance FromJSON QueryOperatorType where
     parseJSON = parseJSONText "QueryOperatorType"
 
 instance ToJSON QueryOperatorType where
+    toJSON = toJSONText
+
+data GmailIntelligentRestrictType
+    = GIRTUnspecified
+      -- ^ @UNSPECIFIED@
+    | GIRTSocial
+      -- ^ @SOCIAL@
+      -- category:social
+    | GIRTUpdates
+      -- ^ @UPDATES@
+      -- category:updates
+    | GIRTForums
+      -- ^ @FORUMS@
+      -- category:forums
+    | GIRTPromotions
+      -- ^ @PROMOTIONS@
+      -- category:promotions
+    | GIRTImportant
+      -- ^ @IMPORTANT@
+      -- is:important
+    | GIRTFlightReservation
+      -- ^ @FLIGHT_RESERVATION@
+      -- label:^cob_sm_flightreservation
+    | GIRTLodgingReservation
+      -- ^ @LODGING_RESERVATION@
+      -- label:^cob_sm_lodgingreservation
+    | GIRTCarReservation
+      -- ^ @CAR_RESERVATION@
+      -- label:^cob_sm_rentalcarreservation
+    | GIRTBusReservation
+      -- ^ @BUS_RESERVATION@
+      -- label:^cob_sm_busreservation
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GmailIntelligentRestrictType
+
+instance FromHttpApiData GmailIntelligentRestrictType where
+    parseQueryParam = \case
+        "UNSPECIFIED" -> Right GIRTUnspecified
+        "SOCIAL" -> Right GIRTSocial
+        "UPDATES" -> Right GIRTUpdates
+        "FORUMS" -> Right GIRTForums
+        "PROMOTIONS" -> Right GIRTPromotions
+        "IMPORTANT" -> Right GIRTImportant
+        "FLIGHT_RESERVATION" -> Right GIRTFlightReservation
+        "LODGING_RESERVATION" -> Right GIRTLodgingReservation
+        "CAR_RESERVATION" -> Right GIRTCarReservation
+        "BUS_RESERVATION" -> Right GIRTBusReservation
+        x -> Left ("Unable to parse GmailIntelligentRestrictType from: " <> x)
+
+instance ToHttpApiData GmailIntelligentRestrictType where
+    toQueryParam = \case
+        GIRTUnspecified -> "UNSPECIFIED"
+        GIRTSocial -> "SOCIAL"
+        GIRTUpdates -> "UPDATES"
+        GIRTForums -> "FORUMS"
+        GIRTPromotions -> "PROMOTIONS"
+        GIRTImportant -> "IMPORTANT"
+        GIRTFlightReservation -> "FLIGHT_RESERVATION"
+        GIRTLodgingReservation -> "LODGING_RESERVATION"
+        GIRTCarReservation -> "CAR_RESERVATION"
+        GIRTBusReservation -> "BUS_RESERVATION"
+
+instance FromJSON GmailIntelligentRestrictType where
+    parseJSON = parseJSONText "GmailIntelligentRestrictType"
+
+instance ToJSON GmailIntelligentRestrictType where
     toJSON = toJSONText
 
 -- | Used to specify the ordered ranking for the enumeration that determines
@@ -494,6 +634,68 @@ instance FromJSON SourceScoringConfigSourceImportance where
 instance ToJSON SourceScoringConfigSourceImportance where
     toJSON = toJSONText
 
+data GmailAttachmentRestrictType
+    = GARTUnspecified
+      -- ^ @UNSPECIFIED@
+    | GARTHasAttachment
+      -- ^ @HAS_ATTACHMENT@
+      -- has:attachment
+    | GARTHasPhoto
+      -- ^ @HAS_PHOTO@
+      -- has photos (changes to filename:(jpg OR jpeg OR png) when typed)
+    | GARTHasDrive
+      -- ^ @HAS_DRIVE@
+      -- has:drive
+    | GARTHasDocument
+      -- ^ @HAS_DOCUMENT@
+      -- has:document
+    | GARTHasSpreadsheet
+      -- ^ @HAS_SPREADSHEET@
+      -- has:spreadsheet
+    | GARTHasPresentation
+      -- ^ @HAS_PRESENTATION@
+      -- has:presentation
+    | GARTHasYouTube
+      -- ^ @HAS_YOUTUBE@
+      -- has:youtube
+    | GARTHasPdf
+      -- ^ @HAS_PDF@
+      -- filename:pdf
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GmailAttachmentRestrictType
+
+instance FromHttpApiData GmailAttachmentRestrictType where
+    parseQueryParam = \case
+        "UNSPECIFIED" -> Right GARTUnspecified
+        "HAS_ATTACHMENT" -> Right GARTHasAttachment
+        "HAS_PHOTO" -> Right GARTHasPhoto
+        "HAS_DRIVE" -> Right GARTHasDrive
+        "HAS_DOCUMENT" -> Right GARTHasDocument
+        "HAS_SPREADSHEET" -> Right GARTHasSpreadsheet
+        "HAS_PRESENTATION" -> Right GARTHasPresentation
+        "HAS_YOUTUBE" -> Right GARTHasYouTube
+        "HAS_PDF" -> Right GARTHasPdf
+        x -> Left ("Unable to parse GmailAttachmentRestrictType from: " <> x)
+
+instance ToHttpApiData GmailAttachmentRestrictType where
+    toQueryParam = \case
+        GARTUnspecified -> "UNSPECIFIED"
+        GARTHasAttachment -> "HAS_ATTACHMENT"
+        GARTHasPhoto -> "HAS_PHOTO"
+        GARTHasDrive -> "HAS_DRIVE"
+        GARTHasDocument -> "HAS_DOCUMENT"
+        GARTHasSpreadsheet -> "HAS_SPREADSHEET"
+        GARTHasPresentation -> "HAS_PRESENTATION"
+        GARTHasYouTube -> "HAS_YOUTUBE"
+        GARTHasPdf -> "HAS_PDF"
+
+instance FromJSON GmailAttachmentRestrictType where
+    parseJSON = parseJSONText "GmailAttachmentRestrictType"
+
+instance ToJSON GmailAttachmentRestrictType where
+    toJSON = toJSONText
+
 -- | Indicates the ranking importance given to property when it is matched
 -- during retrieval. Once set, the token importance of a property cannot be
 -- changed.
@@ -612,6 +814,95 @@ instance FromJSON SortOptionsSortOrder where
     parseJSON = parseJSONText "SortOptionsSortOrder"
 
 instance ToJSON SortOptionsSortOrder where
+    toJSON = toJSONText
+
+data GmailActionRestrictType
+    = GUnspecified
+      -- ^ @UNSPECIFIED@
+    | GUnread
+      -- ^ @UNREAD@
+      -- is:unread
+    | GRead'
+      -- ^ @READ@
+      -- is:read
+    | GRepliedTo
+      -- ^ @REPLIED_TO@
+      -- label:^io_re
+    | GMuted
+      -- ^ @MUTED@
+      -- label:mute
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GmailActionRestrictType
+
+instance FromHttpApiData GmailActionRestrictType where
+    parseQueryParam = \case
+        "UNSPECIFIED" -> Right GUnspecified
+        "UNREAD" -> Right GUnread
+        "READ" -> Right GRead'
+        "REPLIED_TO" -> Right GRepliedTo
+        "MUTED" -> Right GMuted
+        x -> Left ("Unable to parse GmailActionRestrictType from: " <> x)
+
+instance ToHttpApiData GmailActionRestrictType where
+    toQueryParam = \case
+        GUnspecified -> "UNSPECIFIED"
+        GUnread -> "UNREAD"
+        GRead' -> "READ"
+        GRepliedTo -> "REPLIED_TO"
+        GMuted -> "MUTED"
+
+instance FromJSON GmailActionRestrictType where
+    parseJSON = parseJSONText "GmailActionRestrictType"
+
+instance ToJSON GmailActionRestrictType where
+    toJSON = toJSONText
+
+data GmailFolderRestrictType
+    = GFRTUnspecified
+      -- ^ @UNSPECIFIED@
+    | GFRTInSent
+      -- ^ @IN_SENT@
+      -- in:sent
+    | GFRTInDraft
+      -- ^ @IN_DRAFT@
+      -- in:draft
+    | GFRTChats
+      -- ^ @CHATS@
+      -- label:chats
+    | GFRTInTrash
+      -- ^ @IN_TRASH@
+      -- in:trash
+    | GFRTUserGeneratedLabel
+      -- ^ @USER_GENERATED_LABEL@
+      -- label:
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GmailFolderRestrictType
+
+instance FromHttpApiData GmailFolderRestrictType where
+    parseQueryParam = \case
+        "UNSPECIFIED" -> Right GFRTUnspecified
+        "IN_SENT" -> Right GFRTInSent
+        "IN_DRAFT" -> Right GFRTInDraft
+        "CHATS" -> Right GFRTChats
+        "IN_TRASH" -> Right GFRTInTrash
+        "USER_GENERATED_LABEL" -> Right GFRTUserGeneratedLabel
+        x -> Left ("Unable to parse GmailFolderRestrictType from: " <> x)
+
+instance ToHttpApiData GmailFolderRestrictType where
+    toQueryParam = \case
+        GFRTUnspecified -> "UNSPECIFIED"
+        GFRTInSent -> "IN_SENT"
+        GFRTInDraft -> "IN_DRAFT"
+        GFRTChats -> "CHATS"
+        GFRTInTrash -> "IN_TRASH"
+        GFRTUserGeneratedLabel -> "USER_GENERATED_LABEL"
+
+instance FromJSON GmailFolderRestrictType where
+    parseJSON = parseJSONText "GmailFolderRestrictType"
+
+instance ToJSON GmailFolderRestrictType where
     toJSON = toJSONText
 
 -- | The resolution status for the external identity.

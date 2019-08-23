@@ -66,7 +66,8 @@ type BiddersFilterSetsCreateResource =
 -- ID.
 --
 -- /See:/ 'biddersFilterSetsCreate' smart constructor.
-data BiddersFilterSetsCreate = BiddersFilterSetsCreate'
+data BiddersFilterSetsCreate =
+  BiddersFilterSetsCreate'
     { _bfscXgafv          :: !(Maybe Xgafv)
     , _bfscUploadProtocol :: !(Maybe Text)
     , _bfscAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data BiddersFilterSetsCreate = BiddersFilterSetsCreate'
     , _bfscPayload        :: !FilterSet
     , _bfscIsTransient    :: !(Maybe Bool)
     , _bfscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersFilterSetsCreate' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ biddersFilterSetsCreate
     -> FilterSet -- ^ 'bfscPayload'
     -> BiddersFilterSetsCreate
 biddersFilterSetsCreate pBfscOwnerName_ pBfscPayload_ =
-    BiddersFilterSetsCreate'
+  BiddersFilterSetsCreate'
     { _bfscXgafv = Nothing
     , _bfscUploadProtocol = Nothing
     , _bfscAccessToken = Nothing
@@ -111,6 +114,7 @@ biddersFilterSetsCreate pBfscOwnerName_ pBfscPayload_ =
     , _bfscIsTransient = Nothing
     , _bfscCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfscXgafv :: Lens' BiddersFilterSetsCreate (Maybe Xgafv)

@@ -66,7 +66,8 @@ type TranslationsTranslateResource =
 -- | Translates input text, returning translated text.
 --
 -- /See:/ 'translationsTranslate' smart constructor.
-data TranslationsTranslate = TranslationsTranslate'
+data TranslationsTranslate =
+  TranslationsTranslate'
     { _ttXgafv          :: !(Maybe Xgafv)
     , _ttUploadProtocol :: !(Maybe Text)
     , _ttPp             :: !Bool
@@ -75,7 +76,9 @@ data TranslationsTranslate = TranslationsTranslate'
     , _ttPayload        :: !TranslateTextRequest
     , _ttBearerToken    :: !(Maybe Text)
     , _ttCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TranslationsTranslate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ translationsTranslate
     :: TranslateTextRequest -- ^ 'ttPayload'
     -> TranslationsTranslate
 translationsTranslate pTtPayload_ =
-    TranslationsTranslate'
+  TranslationsTranslate'
     { _ttXgafv = Nothing
     , _ttUploadProtocol = Nothing
     , _ttPp = True
@@ -110,6 +113,7 @@ translationsTranslate pTtPayload_ =
     , _ttBearerToken = Nothing
     , _ttCallback = Nothing
     }
+
 
 -- | V1 error format.
 ttXgafv :: Lens' TranslationsTranslate (Maybe Xgafv)

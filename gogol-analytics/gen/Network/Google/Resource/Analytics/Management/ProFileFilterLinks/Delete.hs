@@ -61,12 +61,15 @@ type ManagementProFileFilterLinksDeleteResource =
 -- | Delete a profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksDelete' smart constructor.
-data ManagementProFileFilterLinksDelete = ManagementProFileFilterLinksDelete'
+data ManagementProFileFilterLinksDelete =
+  ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId :: !Text
     , _mpffldProFileId     :: !Text
     , _mpffldAccountId     :: !Text
     , _mpffldLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFileFilterLinksDelete' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ managementProFileFilterLinksDelete
     -> Text -- ^ 'mpffldLinkId'
     -> ManagementProFileFilterLinksDelete
 managementProFileFilterLinksDelete pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
-    ManagementProFileFilterLinksDelete'
+  ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId = pMpffldWebPropertyId_
     , _mpffldProFileId = pMpffldProFileId_
     , _mpffldAccountId = pMpffldAccountId_
     , _mpffldLinkId = pMpffldLinkId_
     }
+
 
 -- | Web property Id to which the profile filter link belongs.
 mpffldWebPropertyId :: Lens' ManagementProFileFilterLinksDelete Text
@@ -117,7 +121,8 @@ mpffldLinkId
   = lens _mpffldLinkId (\ s a -> s{_mpffldLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksDelete where
+           ManagementProFileFilterLinksDelete
+         where
         type Rs ManagementProFileFilterLinksDelete = ()
         type Scopes ManagementProFileFilterLinksDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]

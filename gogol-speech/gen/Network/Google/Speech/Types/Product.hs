@@ -26,11 +26,14 @@ import           Network.Google.Speech.Types.Sum
 -- service.
 --
 -- /See:/ 'longRunningRecognizeMetadata' smart constructor.
-data LongRunningRecognizeMetadata = LongRunningRecognizeMetadata'
+data LongRunningRecognizeMetadata =
+  LongRunningRecognizeMetadata'
     { _lrrmStartTime       :: !(Maybe DateTime')
     , _lrrmProgressPercent :: !(Maybe (Textual Int32))
     , _lrrmLastUpdateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LongRunningRecognizeMetadata' with the minimum fields required to make a request.
 --
@@ -44,11 +47,12 @@ data LongRunningRecognizeMetadata = LongRunningRecognizeMetadata'
 longRunningRecognizeMetadata
     :: LongRunningRecognizeMetadata
 longRunningRecognizeMetadata =
-    LongRunningRecognizeMetadata'
+  LongRunningRecognizeMetadata'
     { _lrrmStartTime = Nothing
     , _lrrmProgressPercent = Nothing
     , _lrrmLastUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 lrrmStartTime :: Lens' LongRunningRecognizeMetadata (Maybe UTCTime)
@@ -125,11 +129,14 @@ instance ToJSON LongRunningRecognizeMetadata where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -142,12 +149,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -189,9 +192,12 @@ instance ToJSON Status where
 -- phrases in the results.
 --
 -- /See:/ 'speechContext' smart constructor.
-newtype SpeechContext = SpeechContext'
+newtype SpeechContext =
+  SpeechContext'
     { _scPhrases :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpeechContext' with the minimum fields required to make a request.
 --
@@ -200,10 +206,8 @@ newtype SpeechContext = SpeechContext'
 -- * 'scPhrases'
 speechContext
     :: SpeechContext
-speechContext =
-    SpeechContext'
-    { _scPhrases = Nothing
-    }
+speechContext = SpeechContext' {_scPhrases = Nothing}
+
 
 -- | *Optional* A list of strings containing words and phrases \"hints\" so
 -- that the speech recognition is more likely to recognize them. This can
@@ -230,10 +234,13 @@ instance ToJSON SpeechContext where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -245,10 +252,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -282,7 +288,8 @@ instance ToJSON ListOperationsResponse where
 -- | Description of audio data to be recognized.
 --
 -- /See:/ 'recognitionMetadata' smart constructor.
-data RecognitionMetadata = RecognitionMetadata'
+data RecognitionMetadata =
+  RecognitionMetadata'
     { _rmAudioTopic               :: !(Maybe Text)
     , _rmInteractionType          :: !(Maybe RecognitionMetadataInteractionType)
     , _rmOriginalMediaType        :: !(Maybe RecognitionMetadataOriginalMediaType)
@@ -292,7 +299,9 @@ data RecognitionMetadata = RecognitionMetadata'
     , _rmRecordingDeviceName      :: !(Maybe Text)
     , _rmRecordingDeviceType      :: !(Maybe RecognitionMetadataRecordingDeviceType)
     , _rmMicrophoneDistance       :: !(Maybe RecognitionMetadataMicrophoneDistance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecognitionMetadata' with the minimum fields required to make a request.
 --
@@ -318,7 +327,7 @@ data RecognitionMetadata = RecognitionMetadata'
 recognitionMetadata
     :: RecognitionMetadata
 recognitionMetadata =
-    RecognitionMetadata'
+  RecognitionMetadata'
     { _rmAudioTopic = Nothing
     , _rmInteractionType = Nothing
     , _rmOriginalMediaType = Nothing
@@ -329,6 +338,7 @@ recognitionMetadata =
     , _rmRecordingDeviceType = Nothing
     , _rmMicrophoneDistance = Nothing
     }
+
 
 -- | Description of the content. Eg. \"Recordings of federal supreme court
 -- hearings from 2012\".
@@ -429,10 +439,14 @@ instance ToJSON RecognitionMetadata where
 -- | The top-level message sent by the client for the \`Recognize\` method.
 --
 -- /See:/ 'recognizeRequest' smart constructor.
-data RecognizeRequest = RecognizeRequest'
+data RecognizeRequest =
+  RecognizeRequest'
     { _rrConfig :: !(Maybe RecognitionConfig)
+    , _rrName   :: !(Maybe Text)
     , _rrAudio  :: !(Maybe RecognitionAudio)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecognizeRequest' with the minimum fields required to make a request.
 --
@@ -440,19 +454,23 @@ data RecognizeRequest = RecognizeRequest'
 --
 -- * 'rrConfig'
 --
+-- * 'rrName'
+--
 -- * 'rrAudio'
 recognizeRequest
     :: RecognizeRequest
 recognizeRequest =
-    RecognizeRequest'
-    { _rrConfig = Nothing
-    , _rrAudio = Nothing
-    }
+  RecognizeRequest' {_rrConfig = Nothing, _rrName = Nothing, _rrAudio = Nothing}
+
 
 -- | *Required* Provides information to the recognizer that specifies how to
 -- process the request.
 rrConfig :: Lens' RecognizeRequest (Maybe RecognitionConfig)
 rrConfig = lens _rrConfig (\ s a -> s{_rrConfig = a})
+
+-- | *Optional* The name of the model to use for recognition.
+rrName :: Lens' RecognizeRequest (Maybe Text)
+rrName = lens _rrName (\ s a -> s{_rrName = a})
 
 -- | *Required* The audio data to be recognized.
 rrAudio :: Lens' RecognizeRequest (Maybe RecognitionAudio)
@@ -463,26 +481,30 @@ instance FromJSON RecognizeRequest where
           = withObject "RecognizeRequest"
               (\ o ->
                  RecognizeRequest' <$>
-                   (o .:? "config") <*> (o .:? "audio"))
+                   (o .:? "config") <*> (o .:? "name") <*>
+                     (o .:? "audio"))
 
 instance ToJSON RecognizeRequest where
         toJSON RecognizeRequest'{..}
           = object
               (catMaybes
                  [("config" .=) <$> _rrConfig,
-                  ("audio" .=) <$> _rrAudio])
+                  ("name" .=) <$> _rrName, ("audio" .=) <$> _rrAudio])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -500,13 +522,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -566,11 +589,14 @@ instance ToJSON Operation where
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
 -- /See:/ 'speechRecognitionAlternative' smart constructor.
-data SpeechRecognitionAlternative = SpeechRecognitionAlternative'
+data SpeechRecognitionAlternative =
+  SpeechRecognitionAlternative'
     { _sraConfidence :: !(Maybe (Textual Double))
     , _sraWords      :: !(Maybe [WordInfo])
     , _sraTranscript :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
@@ -584,11 +610,9 @@ data SpeechRecognitionAlternative = SpeechRecognitionAlternative'
 speechRecognitionAlternative
     :: SpeechRecognitionAlternative
 speechRecognitionAlternative =
-    SpeechRecognitionAlternative'
-    { _sraConfidence = Nothing
-    , _sraWords = Nothing
-    , _sraTranscript = Nothing
-    }
+  SpeechRecognitionAlternative'
+    {_sraConfidence = Nothing, _sraWords = Nothing, _sraTranscript = Nothing}
+
 
 -- | Output only. The confidence estimate between 0.0 and 1.0. A higher
 -- number indicates an estimated greater likelihood that the recognized
@@ -637,13 +661,16 @@ instance ToJSON SpeechRecognitionAlternative where
 -- | Word-specific information for recognized words.
 --
 -- /See:/ 'wordInfo' smart constructor.
-data WordInfo = WordInfo'
+data WordInfo =
+  WordInfo'
     { _wiStartTime  :: !(Maybe GDuration)
     , _wiConfidence :: !(Maybe (Textual Double))
     , _wiEndTime    :: !(Maybe GDuration)
     , _wiWord       :: !(Maybe Text)
     , _wiSpeakerTag :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WordInfo' with the minimum fields required to make a request.
 --
@@ -661,13 +688,14 @@ data WordInfo = WordInfo'
 wordInfo
     :: WordInfo
 wordInfo =
-    WordInfo'
+  WordInfo'
     { _wiStartTime = Nothing
     , _wiConfidence = Nothing
     , _wiEndTime = Nothing
     , _wiWord = Nothing
     , _wiSpeakerTag = Nothing
     }
+
 
 -- | Output only. Time offset relative to the beginning of the audio, and
 -- corresponding to the start of the spoken word. This field is only set if
@@ -735,9 +763,12 @@ instance ToJSON WordInfo where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -748,9 +779,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -769,11 +799,14 @@ instance ToJSON StatusDetailsItem where
 -- | A speech recognition result corresponding to a portion of the audio.
 --
 -- /See:/ 'speechRecognitionResult' smart constructor.
-data SpeechRecognitionResult = SpeechRecognitionResult'
+data SpeechRecognitionResult =
+  SpeechRecognitionResult'
     { _srrAlternatives :: !(Maybe [SpeechRecognitionAlternative])
     , _srrLanguageCode :: !(Maybe Text)
     , _srrChannelTag   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpeechRecognitionResult' with the minimum fields required to make a request.
 --
@@ -787,11 +820,12 @@ data SpeechRecognitionResult = SpeechRecognitionResult'
 speechRecognitionResult
     :: SpeechRecognitionResult
 speechRecognitionResult =
-    SpeechRecognitionResult'
+  SpeechRecognitionResult'
     { _srrAlternatives = Nothing
     , _srrLanguageCode = Nothing
     , _srrChannelTag = Nothing
     }
+
 
 -- | Output only. May contain one or more recognition hypotheses (up to the
 -- maximum specified in \`max_alternatives\`). These alternatives are
@@ -846,10 +880,13 @@ instance ToJSON SpeechRecognitionResult where
 -- [content limits](\/speech-to-text\/quotas#content).
 --
 -- /See:/ 'recognitionAudio' smart constructor.
-data RecognitionAudio = RecognitionAudio'
+data RecognitionAudio =
+  RecognitionAudio'
     { _raURI     :: !(Maybe Text)
     , _raContent :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecognitionAudio' with the minimum fields required to make a request.
 --
@@ -860,11 +897,8 @@ data RecognitionAudio = RecognitionAudio'
 -- * 'raContent'
 recognitionAudio
     :: RecognitionAudio
-recognitionAudio =
-    RecognitionAudio'
-    { _raURI = Nothing
-    , _raContent = Nothing
-    }
+recognitionAudio = RecognitionAudio' {_raURI = Nothing, _raContent = Nothing}
+
 
 -- | URI that points to a file that contains audio data bytes as specified in
 -- \`RecognitionConfig\`. The file must not be compressed (for example,
@@ -903,9 +937,12 @@ instance ToJSON RecognitionAudio where
 -- \`SpeechRecognitionResult\` messages.
 --
 -- /See:/ 'recognizeResponse' smart constructor.
-newtype RecognizeResponse = RecognizeResponse'
+newtype RecognizeResponse =
+  RecognizeResponse'
     { _rrResults :: Maybe [SpeechRecognitionResult]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecognizeResponse' with the minimum fields required to make a request.
 --
@@ -914,10 +951,8 @@ newtype RecognizeResponse = RecognizeResponse'
 -- * 'rrResults'
 recognizeResponse
     :: RecognizeResponse
-recognizeResponse =
-    RecognizeResponse'
-    { _rrResults = Nothing
-    }
+recognizeResponse = RecognizeResponse' {_rrResults = Nothing}
+
 
 -- | Output only. Sequential list of transcription results corresponding to
 -- sequential portions of audio.
@@ -945,9 +980,12 @@ instance ToJSON RecognizeResponse where
 -- service.
 --
 -- /See:/ 'longRunningRecognizeResponse' smart constructor.
-newtype LongRunningRecognizeResponse = LongRunningRecognizeResponse'
+newtype LongRunningRecognizeResponse =
+  LongRunningRecognizeResponse'
     { _lrrrResults :: Maybe [SpeechRecognitionResult]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LongRunningRecognizeResponse' with the minimum fields required to make a request.
 --
@@ -957,9 +995,8 @@ newtype LongRunningRecognizeResponse = LongRunningRecognizeResponse'
 longRunningRecognizeResponse
     :: LongRunningRecognizeResponse
 longRunningRecognizeResponse =
-    LongRunningRecognizeResponse'
-    { _lrrrResults = Nothing
-    }
+  LongRunningRecognizeResponse' {_lrrrResults = Nothing}
+
 
 -- | Output only. Sequential list of transcription results corresponding to
 -- sequential portions of audio.
@@ -985,7 +1022,8 @@ instance ToJSON LongRunningRecognizeResponse where
 -- request.
 --
 -- /See:/ 'recognitionConfig' smart constructor.
-data RecognitionConfig = RecognitionConfig'
+data RecognitionConfig =
+  RecognitionConfig'
     { _rcEnableWordTimeOffSets               :: !(Maybe Bool)
     , _rcSpeechContexts                      :: !(Maybe [SpeechContext])
     , _rcLanguageCode                        :: !(Maybe Text)
@@ -1004,7 +1042,9 @@ data RecognitionConfig = RecognitionConfig'
     , _rcEncoding                            :: !(Maybe RecognitionConfigEncoding)
     , _rcAlternativeLanguageCodes            :: !(Maybe [Text])
     , _rcEnableWordConfidence                :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RecognitionConfig' with the minimum fields required to make a request.
 --
@@ -1048,7 +1088,7 @@ data RecognitionConfig = RecognitionConfig'
 recognitionConfig
     :: RecognitionConfig
 recognitionConfig =
-    RecognitionConfig'
+  RecognitionConfig'
     { _rcEnableWordTimeOffSets = Nothing
     , _rcSpeechContexts = Nothing
     , _rcLanguageCode = Nothing
@@ -1068,6 +1108,7 @@ recognitionConfig =
     , _rcAlternativeLanguageCodes = Nothing
     , _rcEnableWordConfidence = Nothing
     }
+
 
 -- | *Optional* If \`true\`, the top result includes a list of words and the
 -- start and end time offsets (timestamps) for those words. If \`false\`,
@@ -1115,9 +1156,9 @@ rcDiarizationConfig
 -- messages. Valid values are: 8000-48000. 16000 is optimal. For best
 -- results, set the sampling rate of the audio source to 16000 Hz. If
 -- that\'s not possible, use the native sample rate of the audio source
--- (instead of re-sampling). This field is optional for \`FLAC\` and
--- \`WAV\` audio files and required for all other audio formats. For
--- details, see AudioEncoding.
+-- (instead of re-sampling). This field is optional for FLAC and WAV audio
+-- files, but is required for all other audio formats. For details, see
+-- AudioEncoding.
 rcSampleRateHertz :: Lens' RecognitionConfig (Maybe Int32)
 rcSampleRateHertz
   = lens _rcSampleRateHertz
@@ -1162,9 +1203,9 @@ rcAudioChannelCount
       (\ s a -> s{_rcAudioChannelCount = a})
       . mapping _Coerce
 
--- | This needs to be set to ‘true’ explicitly and \`audio_channel_count\` >
--- 1 to get each channel recognized separately. The recognition result will
--- contain a \`channel_tag\` field to state which channel that result
+-- | This needs to be set to \`true\` explicitly and \`audio_channel_count\`
+-- > 1 to get each channel recognized separately. The recognition result
+-- will contain a \`channel_tag\` field to state which channel that result
 -- belongs to. If this is not true, we will only recognize the first
 -- channel. The request is billed cumulatively for all channels recognized:
 -- \`audio_channel_count\` multiplied by the length of the audio.
@@ -1178,13 +1219,32 @@ rcEnableSeparateRecognitionPerChannel
 -- best suited to your domain to get best results. If a model is not
 -- explicitly specified, then we auto-select a model based on the
 -- parameters in the RecognitionConfig.
--- >   ---------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- >   __Model__              __Description__
--- >   'command_and_search'   Best for short queries such as voice commands or voice search.
--- >   'phone_call'           Best for audio that originated from a phone call (typically recorded at an 8khz sampling rate).
--- >   'video'                Best for audio that originated from from video or includes multiple speakers. Ideally the audio is recorded at a 16khz or greater sampling rate. This is a premium model that costs more than the standard rate.
--- >   'default'              Best for audio that is not one of the specific audio models. For example, long-form audio. Ideally the audio is high-fidelity, recorded at a 16khz or greater sampling rate.
--- >   ---------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- > +-----------------------------------+-----------------------------------+
+-- > | __Model__                         | __Description__                   |
+-- > +-----------------------------------+-----------------------------------+
+-- > | 'command_and_search'              | Best for short queries such as    |
+-- > |                                   | voice commands or voice search.   |
+-- > +-----------------------------------+-----------------------------------+
+-- > | 'phone_call'                      | Best for audio that originated    |
+-- > |                                   | from a phone call (typically      |
+-- > |                                   | recorded at an 8khz sampling      |
+-- > |                                   | rate).                            |
+-- > +-----------------------------------+-----------------------------------+
+-- > | 'video'                           | Best for audio that originated    |
+-- > |                                   | from from video or includes       |
+-- > |                                   | multiple speakers. Ideally the    |
+-- > |                                   | audio is recorded at a 16khz or   |
+-- > |                                   | greater sampling rate. This is a  |
+-- > |                                   | premium model that costs more     |
+-- > |                                   | than the standard rate.           |
+-- > +-----------------------------------+-----------------------------------+
+-- > | 'default'                         | Best for audio that is not one of |
+-- > |                                   | the specific audio models. For    |
+-- > |                                   | example, long-form audio. Ideally |
+-- > |                                   | the audio is high-fidelity,       |
+-- > |                                   | recorded at a 16khz or greater    |
+-- > |                                   | sampling rate.                    |
+-- > +-----------------------------------+-----------------------------------+
 rcModel :: Lens' RecognitionConfig (Maybe Text)
 rcModel = lens _rcModel (\ s a -> s{_rcModel = a})
 
@@ -1328,10 +1388,13 @@ instance ToJSON RecognitionConfig where
 -- \`LongRunningRecognize\` method.
 --
 -- /See:/ 'longRunningRecognizeRequest' smart constructor.
-data LongRunningRecognizeRequest = LongRunningRecognizeRequest'
+data LongRunningRecognizeRequest =
+  LongRunningRecognizeRequest'
     { _lrrrConfig :: !(Maybe RecognitionConfig)
     , _lrrrAudio  :: !(Maybe RecognitionAudio)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LongRunningRecognizeRequest' with the minimum fields required to make a request.
 --
@@ -1343,10 +1406,8 @@ data LongRunningRecognizeRequest = LongRunningRecognizeRequest'
 longRunningRecognizeRequest
     :: LongRunningRecognizeRequest
 longRunningRecognizeRequest =
-    LongRunningRecognizeRequest'
-    { _lrrrConfig = Nothing
-    , _lrrrAudio = Nothing
-    }
+  LongRunningRecognizeRequest' {_lrrrConfig = Nothing, _lrrrAudio = Nothing}
+
 
 -- | *Required* Provides information to the recognizer that specifies how to
 -- process the request.
@@ -1379,9 +1440,12 @@ instance ToJSON LongRunningRecognizeRequest where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1392,9 +1456,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -1420,9 +1483,12 @@ instance ToJSON OperationMetadata where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1433,9 +1499,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -1453,11 +1518,14 @@ instance ToJSON OperationResponse where
 
 --
 -- /See:/ 'speakerDiarizationConfig' smart constructor.
-data SpeakerDiarizationConfig = SpeakerDiarizationConfig'
+data SpeakerDiarizationConfig =
+  SpeakerDiarizationConfig'
     { _sdcMinSpeakerCount          :: !(Maybe (Textual Int32))
     , _sdcMaxSpeakerCount          :: !(Maybe (Textual Int32))
     , _sdcEnableSpeakerDiarization :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpeakerDiarizationConfig' with the minimum fields required to make a request.
 --
@@ -1471,11 +1539,12 @@ data SpeakerDiarizationConfig = SpeakerDiarizationConfig'
 speakerDiarizationConfig
     :: SpeakerDiarizationConfig
 speakerDiarizationConfig =
-    SpeakerDiarizationConfig'
+  SpeakerDiarizationConfig'
     { _sdcMinSpeakerCount = Nothing
     , _sdcMaxSpeakerCount = Nothing
     , _sdcEnableSpeakerDiarization = Nothing
     }
+
 
 -- | *Optional* Only used if diarization_speaker_count is not set. Minimum
 -- number of speakers in the conversation. This range gives you more

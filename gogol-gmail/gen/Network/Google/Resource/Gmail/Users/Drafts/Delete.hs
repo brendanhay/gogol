@@ -56,10 +56,13 @@ type UsersDraftsDeleteResource =
 -- trash it.
 --
 -- /See:/ 'usersDraftsDelete' smart constructor.
-data UsersDraftsDelete = UsersDraftsDelete'
+data UsersDraftsDelete =
+  UsersDraftsDelete'
     { _uddUserId :: !Text
     , _uddId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDraftsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ usersDraftsDelete
     :: Text -- ^ 'uddId'
     -> UsersDraftsDelete
 usersDraftsDelete pUddId_ =
-    UsersDraftsDelete'
-    { _uddUserId = "me"
-    , _uddId = pUddId_
-    }
+  UsersDraftsDelete' {_uddUserId = "me", _uddId = pUddId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

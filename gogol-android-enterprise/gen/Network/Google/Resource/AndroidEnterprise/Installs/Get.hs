@@ -60,12 +60,15 @@ type InstallsGetResource =
 -- | Retrieves details of an installation of an app on a device.
 --
 -- /See:/ 'installsGet' smart constructor.
-data InstallsGet = InstallsGet'
+data InstallsGet =
+  InstallsGet'
     { _igEnterpriseId :: !Text
     , _igUserId       :: !Text
     , _igInstallId    :: !Text
     , _igDeviceId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstallsGet' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ installsGet
     -> Text -- ^ 'igDeviceId'
     -> InstallsGet
 installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
-    InstallsGet'
+  InstallsGet'
     { _igEnterpriseId = pIgEnterpriseId_
     , _igUserId = pIgUserId_
     , _igInstallId = pIgInstallId_
     , _igDeviceId = pIgDeviceId_
     }
+
 
 -- | The ID of the enterprise.
 igEnterpriseId :: Lens' InstallsGet Text

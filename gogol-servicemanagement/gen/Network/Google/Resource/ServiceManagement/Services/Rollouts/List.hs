@@ -70,7 +70,8 @@ type ServicesRolloutsListResource =
 -- service, from the newest to the oldest.
 --
 -- /See:/ 'servicesRolloutsList' smart constructor.
-data ServicesRolloutsList = ServicesRolloutsList'
+data ServicesRolloutsList =
+  ServicesRolloutsList'
     { _srlXgafv          :: !(Maybe Xgafv)
     , _srlUploadProtocol :: !(Maybe Text)
     , _srlAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ServicesRolloutsList = ServicesRolloutsList'
     , _srlPageToken      :: !(Maybe Text)
     , _srlPageSize       :: !(Maybe (Textual Int32))
     , _srlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesRolloutsList' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ servicesRolloutsList
     :: Text -- ^ 'srlServiceName'
     -> ServicesRolloutsList
 servicesRolloutsList pSrlServiceName_ =
-    ServicesRolloutsList'
+  ServicesRolloutsList'
     { _srlXgafv = Nothing
     , _srlUploadProtocol = Nothing
     , _srlAccessToken = Nothing
@@ -118,6 +121,7 @@ servicesRolloutsList pSrlServiceName_ =
     , _srlPageSize = Nothing
     , _srlCallback = Nothing
     }
+
 
 -- | V1 error format.
 srlXgafv :: Lens' ServicesRolloutsList (Maybe Xgafv)
@@ -164,7 +168,8 @@ srlPageToken :: Lens' ServicesRolloutsList (Maybe Text)
 srlPageToken
   = lens _srlPageToken (\ s a -> s{_srlPageToken = a})
 
--- | The max number of items to include in the response list.
+-- | The max number of items to include in the response list. Page size is 50
+-- if not specified. Maximum value is 100.
 srlPageSize :: Lens' ServicesRolloutsList (Maybe Int32)
 srlPageSize
   = lens _srlPageSize (\ s a -> s{_srlPageSize = a}) .

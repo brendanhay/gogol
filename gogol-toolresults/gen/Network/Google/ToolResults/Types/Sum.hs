@@ -88,6 +88,48 @@ instance FromJSON TestIssueCategory where
 instance ToJSON TestIssueCategory where
     toJSON = toJSONText
 
+data IndividualOutcomeOutcomeSummary
+    = Failure
+      -- ^ @failure@
+    | Flaky
+      -- ^ @flaky@
+    | Inconclusive
+      -- ^ @inconclusive@
+    | Skipped
+      -- ^ @skipped@
+    | Success
+      -- ^ @success@
+    | UnSet
+      -- ^ @unset@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable IndividualOutcomeOutcomeSummary
+
+instance FromHttpApiData IndividualOutcomeOutcomeSummary where
+    parseQueryParam = \case
+        "failure" -> Right Failure
+        "flaky" -> Right Flaky
+        "inconclusive" -> Right Inconclusive
+        "skipped" -> Right Skipped
+        "success" -> Right Success
+        "unset" -> Right UnSet
+        x -> Left ("Unable to parse IndividualOutcomeOutcomeSummary from: " <> x)
+
+instance ToHttpApiData IndividualOutcomeOutcomeSummary where
+    toQueryParam = \case
+        Failure -> "failure"
+        Flaky -> "flaky"
+        Inconclusive -> "inconclusive"
+        Skipped -> "skipped"
+        Success -> "success"
+        UnSet -> "unset"
+
+instance FromJSON IndividualOutcomeOutcomeSummary where
+    parseJSON = parseJSONText "IndividualOutcomeOutcomeSummary"
+
+instance ToJSON IndividualOutcomeOutcomeSummary where
+    toJSON = toJSONText
+
 data BasicPerfSampleSeriesPerfMetricType
     = CPU
       -- ^ @cpu@
@@ -128,15 +170,17 @@ instance ToJSON BasicPerfSampleSeriesPerfMetricType where
 
 -- | The simplest way to interpret a result. Required
 data OutcomeSummary
-    = Failure
+    = OSFailure
       -- ^ @failure@
-    | Inconclusive
+    | OSFlaky
+      -- ^ @flaky@
+    | OSInconclusive
       -- ^ @inconclusive@
-    | Skipped
+    | OSSkipped
       -- ^ @skipped@
-    | Success
+    | OSSuccess
       -- ^ @success@
-    | UnSet
+    | OSUnSet
       -- ^ @unset@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -144,20 +188,22 @@ instance Hashable OutcomeSummary
 
 instance FromHttpApiData OutcomeSummary where
     parseQueryParam = \case
-        "failure" -> Right Failure
-        "inconclusive" -> Right Inconclusive
-        "skipped" -> Right Skipped
-        "success" -> Right Success
-        "unset" -> Right UnSet
+        "failure" -> Right OSFailure
+        "flaky" -> Right OSFlaky
+        "inconclusive" -> Right OSInconclusive
+        "skipped" -> Right OSSkipped
+        "success" -> Right OSSuccess
+        "unset" -> Right OSUnSet
         x -> Left ("Unable to parse OutcomeSummary from: " <> x)
 
 instance ToHttpApiData OutcomeSummary where
     toQueryParam = \case
-        Failure -> "failure"
-        Inconclusive -> "inconclusive"
-        Skipped -> "skipped"
-        Success -> "success"
-        UnSet -> "unset"
+        OSFailure -> "failure"
+        OSFlaky -> "flaky"
+        OSInconclusive -> "inconclusive"
+        OSSkipped -> "skipped"
+        OSSuccess -> "success"
+        OSUnSet -> "unset"
 
 instance FromJSON OutcomeSummary where
     parseJSON = parseJSONText "OutcomeSummary"
@@ -279,6 +325,8 @@ data TestIssueType
       -- ^ @launcherActivityNotFound@
     | NATiveCrash
       -- ^ @nativeCrash@
+    | NonSdkAPIUsageReport
+      -- ^ @nonSdkApiUsageReport@
     | NonSdkAPIUsageViolation
       -- ^ @nonSdkApiUsageViolation@
     | PerformedGoogleLogin
@@ -293,6 +341,8 @@ data TestIssueType
       -- ^ @unusedRoboDirective@
     | UsedRoboDirective
       -- ^ @usedRoboDirective@
+    | UsedRoboIgnoreDirective
+      -- ^ @usedRoboIgnoreDirective@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TestIssueType
@@ -314,6 +364,7 @@ instance FromHttpApiData TestIssueType where
         "iosException" -> Right IosException
         "launcherActivityNotFound" -> Right LauncherActivityNotFound
         "nativeCrash" -> Right NATiveCrash
+        "nonSdkApiUsageReport" -> Right NonSdkAPIUsageReport
         "nonSdkApiUsageViolation" -> Right NonSdkAPIUsageViolation
         "performedGoogleLogin" -> Right PerformedGoogleLogin
         "performedMonkeyActions" -> Right PerformedMonkeyActions
@@ -321,6 +372,7 @@ instance FromHttpApiData TestIssueType where
         "unspecifiedType" -> Right UnspecifiedType
         "unusedRoboDirective" -> Right UnusedRoboDirective
         "usedRoboDirective" -> Right UsedRoboDirective
+        "usedRoboIgnoreDirective" -> Right UsedRoboIgnoreDirective
         x -> Left ("Unable to parse TestIssueType from: " <> x)
 
 instance ToHttpApiData TestIssueType where
@@ -340,6 +392,7 @@ instance ToHttpApiData TestIssueType where
         IosException -> "iosException"
         LauncherActivityNotFound -> "launcherActivityNotFound"
         NATiveCrash -> "nativeCrash"
+        NonSdkAPIUsageReport -> "nonSdkApiUsageReport"
         NonSdkAPIUsageViolation -> "nonSdkApiUsageViolation"
         PerformedGoogleLogin -> "performedGoogleLogin"
         PerformedMonkeyActions -> "performedMonkeyActions"
@@ -347,6 +400,7 @@ instance ToHttpApiData TestIssueType where
         UnspecifiedType -> "unspecifiedType"
         UnusedRoboDirective -> "unusedRoboDirective"
         UsedRoboDirective -> "usedRoboDirective"
+        UsedRoboIgnoreDirective -> "usedRoboIgnoreDirective"
 
 instance FromJSON TestIssueType where
     parseJSON = parseJSONText "TestIssueType"
@@ -505,6 +559,85 @@ instance FromJSON BasicPerfSampleSeriesSampleSeriesLabel where
     parseJSON = parseJSONText "BasicPerfSampleSeriesSampleSeriesLabel"
 
 instance ToJSON BasicPerfSampleSeriesSampleSeriesLabel where
+    toJSON = toJSONText
+
+-- | The status of the test case. Required.
+data TestCaseStatus
+    = TCSError'
+      -- ^ @error@
+    | TCSFailed
+      -- ^ @failed@
+    | TCSPassed
+      -- ^ @passed@
+    | TCSSkipped
+      -- ^ @skipped@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TestCaseStatus
+
+instance FromHttpApiData TestCaseStatus where
+    parseQueryParam = \case
+        "error" -> Right TCSError'
+        "failed" -> Right TCSFailed
+        "passed" -> Right TCSPassed
+        "skipped" -> Right TCSSkipped
+        x -> Left ("Unable to parse TestCaseStatus from: " <> x)
+
+instance ToHttpApiData TestCaseStatus where
+    toQueryParam = \case
+        TCSError' -> "error"
+        TCSFailed -> "failed"
+        TCSPassed -> "passed"
+        TCSSkipped -> "skipped"
+
+instance FromJSON TestCaseStatus where
+    parseJSON = parseJSONText "TestCaseStatus"
+
+instance ToJSON TestCaseStatus where
+    toJSON = toJSONText
+
+-- | Rollup test status of multiple steps that were run with the same
+-- configuration as a group.
+data PrimaryStepRollUp
+    = PSRUFailure
+      -- ^ @failure@
+    | PSRUFlaky
+      -- ^ @flaky@
+    | PSRUInconclusive
+      -- ^ @inconclusive@
+    | PSRUSkipped
+      -- ^ @skipped@
+    | PSRUSuccess
+      -- ^ @success@
+    | PSRUUnSet
+      -- ^ @unset@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PrimaryStepRollUp
+
+instance FromHttpApiData PrimaryStepRollUp where
+    parseQueryParam = \case
+        "failure" -> Right PSRUFailure
+        "flaky" -> Right PSRUFlaky
+        "inconclusive" -> Right PSRUInconclusive
+        "skipped" -> Right PSRUSkipped
+        "success" -> Right PSRUSuccess
+        "unset" -> Right PSRUUnSet
+        x -> Left ("Unable to parse PrimaryStepRollUp from: " <> x)
+
+instance ToHttpApiData PrimaryStepRollUp where
+    toQueryParam = \case
+        PSRUFailure -> "failure"
+        PSRUFlaky -> "flaky"
+        PSRUInconclusive -> "inconclusive"
+        PSRUSkipped -> "skipped"
+        PSRUSuccess -> "success"
+        PSRUUnSet -> "unset"
+
+instance FromJSON PrimaryStepRollUp where
+    parseJSON = parseJSONText "PrimaryStepRollUp"
+
+instance ToJSON PrimaryStepRollUp where
     toJSON = toJSONText
 
 data PerfMetricsSummaryPerfMetricsItem

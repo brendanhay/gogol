@@ -60,13 +60,16 @@ type PeopleListResource =
 -- | List all of the people in the specified collection.
 --
 -- /See:/ 'peopleList' smart constructor.
-data PeopleList = PeopleList'
+data PeopleList =
+  PeopleList'
     { _plOrderBy    :: !(Maybe PeopleListOrderBy)
     , _plCollection :: !PeopleListCollection
     , _plUserId     :: !Text
     , _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ peopleList
     -> Text -- ^ 'plUserId'
     -> PeopleList
 peopleList pPlCollection_ pPlUserId_ =
-    PeopleList'
+  PeopleList'
     { _plOrderBy = Nothing
     , _plCollection = pPlCollection_
     , _plUserId = pPlUserId_
     , _plPageToken = Nothing
     , _plMaxResults = 100
     }
+
 
 -- | The order to return people in.
 plOrderBy :: Lens' PeopleList (Maybe PeopleListOrderBy)

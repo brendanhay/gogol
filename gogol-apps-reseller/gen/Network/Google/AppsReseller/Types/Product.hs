@@ -24,10 +24,13 @@ import           Network.Google.Prelude
 -- 30-day free trial. For more information, see the API concepts.
 --
 -- /See:/ 'subscriptionTrialSettings' smart constructor.
-data SubscriptionTrialSettings = SubscriptionTrialSettings'
+data SubscriptionTrialSettings =
+  SubscriptionTrialSettings'
     { _stsIsInTrial    :: !(Maybe Bool)
     , _stsTrialEndTime :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
 --
@@ -39,10 +42,9 @@ data SubscriptionTrialSettings = SubscriptionTrialSettings'
 subscriptionTrialSettings
     :: SubscriptionTrialSettings
 subscriptionTrialSettings =
-    SubscriptionTrialSettings'
-    { _stsIsInTrial = Nothing
-    , _stsTrialEndTime = Nothing
-    }
+  SubscriptionTrialSettings'
+    {_stsIsInTrial = Nothing, _stsTrialEndTime = Nothing}
+
 
 -- | Determines if a subscription\'s plan is in a 30-day free trial or not: -
 -- true — The plan is in trial. - false — The plan is not in trial.
@@ -75,9 +77,12 @@ instance ToJSON SubscriptionTrialSettings where
 -- | JSON template for resellernotify response.
 --
 -- /See:/ 'resellernotifyResource' smart constructor.
-newtype ResellernotifyResource = ResellernotifyResource'
+newtype ResellernotifyResource =
+  ResellernotifyResource'
     { _rrTopicName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResellernotifyResource' with the minimum fields required to make a request.
 --
@@ -86,10 +91,8 @@ newtype ResellernotifyResource = ResellernotifyResource'
 -- * 'rrTopicName'
 resellernotifyResource
     :: ResellernotifyResource
-resellernotifyResource =
-    ResellernotifyResource'
-    { _rrTopicName = Nothing
-    }
+resellernotifyResource = ResellernotifyResource' {_rrTopicName = Nothing}
+
 
 -- | Topic name of the PubSub
 rrTopicName :: Lens' ResellernotifyResource (Maybe Text)
@@ -110,10 +113,13 @@ instance ToJSON ResellernotifyResource where
 -- | JSON template for resellernotify getwatchdetails response.
 --
 -- /See:/ 'resellernotifyGetwatchdetailsResponse' smart constructor.
-data ResellernotifyGetwatchdetailsResponse = ResellernotifyGetwatchdetailsResponse'
+data ResellernotifyGetwatchdetailsResponse =
+  ResellernotifyGetwatchdetailsResponse'
     { _rgrTopicName                    :: !(Maybe Text)
     , _rgrServiceAccountEmailAddresses :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResellernotifyGetwatchdetailsResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +131,9 @@ data ResellernotifyGetwatchdetailsResponse = ResellernotifyGetwatchdetailsRespon
 resellernotifyGetwatchdetailsResponse
     :: ResellernotifyGetwatchdetailsResponse
 resellernotifyGetwatchdetailsResponse =
-    ResellernotifyGetwatchdetailsResponse'
-    { _rgrTopicName = Nothing
-    , _rgrServiceAccountEmailAddresses = Nothing
-    }
+  ResellernotifyGetwatchdetailsResponse'
+    {_rgrTopicName = Nothing, _rgrServiceAccountEmailAddresses = Nothing}
+
 
 -- | Topic name of the PubSub
 rgrTopicName :: Lens' ResellernotifyGetwatchdetailsResponse (Maybe Text)
@@ -144,7 +149,8 @@ rgrServiceAccountEmailAddresses
       . _Coerce
 
 instance FromJSON
-         ResellernotifyGetwatchdetailsResponse where
+           ResellernotifyGetwatchdetailsResponse
+         where
         parseJSON
           = withObject "ResellernotifyGetwatchdetailsResponse"
               (\ o ->
@@ -164,7 +170,8 @@ instance ToJSON ResellernotifyGetwatchdetailsResponse
 -- | JSON template for address of a customer.
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address'
+data Address =
+  Address'
     { _aOrganizationName :: !(Maybe Text)
     , _aKind             :: !Text
     , _aPostalCode       :: !(Maybe Text)
@@ -175,7 +182,9 @@ data Address = Address'
     , _aCountryCode      :: !(Maybe Text)
     , _aRegion           :: !(Maybe Text)
     , _aAddressLine3     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
@@ -203,7 +212,7 @@ data Address = Address'
 address
     :: Address
 address =
-    Address'
+  Address'
     { _aOrganizationName = Nothing
     , _aKind = "customers#address"
     , _aPostalCode = Nothing
@@ -215,6 +224,7 @@ address =
     , _aRegion = Nothing
     , _aAddressLine3 = Nothing
     }
+
 
 -- | The company or company division name. This is required.
 aOrganizationName :: Lens' Address (Maybe Text)
@@ -306,7 +316,8 @@ instance ToJSON Address where
 -- | JSON template for a customer.
 --
 -- /See:/ 'customer' smart constructor.
-data Customer = Customer'
+data Customer =
+  Customer'
     { _cCustomerDomainVerified :: !(Maybe Bool)
     , _cResourceUiURL          :: !(Maybe Text)
     , _cKind                   :: !Text
@@ -315,7 +326,9 @@ data Customer = Customer'
     , _cCustomerDomain         :: !(Maybe Text)
     , _cPhoneNumber            :: !(Maybe Text)
     , _cPostalAddress          :: !(Maybe Address)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Customer' with the minimum fields required to make a request.
 --
@@ -339,7 +352,7 @@ data Customer = Customer'
 customer
     :: Customer
 customer =
-    Customer'
+  Customer'
     { _cCustomerDomainVerified = Nothing
     , _cResourceUiURL = Nothing
     , _cKind = "reseller#customer"
@@ -349,6 +362,7 @@ customer =
     , _cPhoneNumber = Nothing
     , _cPostalAddress = Nothing
     }
+
 
 -- | Whether the customer\'s primary domain has been verified.
 cCustomerDomainVerified :: Lens' Customer (Maybe Bool)
@@ -393,9 +407,11 @@ cCustomerDomain
   = lens _cCustomerDomain
       (\ s a -> s{_cCustomerDomain = a})
 
--- | Customer contact phone number. This can be continuous numbers, with
--- spaces, etc. But it must be a real phone number and not, for example,
--- \"123\". See phone local format conventions.
+-- | Customer contact phone number. Must start with \"+\" followed by the
+-- country code. The rest of the number can be contiguous numbers or
+-- respect the phone local format conventions, but it must be a real phone
+-- number and not, for example, \"123\". This field is silently ignored if
+-- invalid.
 cPhoneNumber :: Lens' Customer (Maybe Text)
 cPhoneNumber
   = lens _cPhoneNumber (\ s a -> s{_cPhoneNumber = a})
@@ -438,13 +454,16 @@ instance ToJSON Customer where
 -- | JSON template for the ChangePlan rpc request.
 --
 -- /See:/ 'changePlanRequest' smart constructor.
-data ChangePlanRequest = ChangePlanRequest'
+data ChangePlanRequest =
+  ChangePlanRequest'
     { _cprKind            :: !Text
     , _cprDealCode        :: !(Maybe Text)
     , _cprPlanName        :: !(Maybe Text)
     , _cprPurchaseOrderId :: !(Maybe Text)
     , _cprSeats           :: !(Maybe Seats)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChangePlanRequest' with the minimum fields required to make a request.
 --
@@ -462,13 +481,14 @@ data ChangePlanRequest = ChangePlanRequest'
 changePlanRequest
     :: ChangePlanRequest
 changePlanRequest =
-    ChangePlanRequest'
+  ChangePlanRequest'
     { _cprKind = "subscriptions#changePlanRequest"
     , _cprDealCode = Nothing
     , _cprPlanName = Nothing
     , _cprPurchaseOrderId = Nothing
     , _cprSeats = Nothing
     }
+
 
 -- | Identifies the resource as a subscription change plan request. Value:
 -- subscriptions#changePlanRequest
@@ -490,8 +510,9 @@ cprDealCode
 -- | The planName property is required. This is the name of the
 -- subscription\'s payment plan. For more information about the Google
 -- payment plans, see API concepts. Possible values are: -
--- ANNUAL_MONTHLY_PAY - The annual commitment plan with monthly payments -
--- ANNUAL_YEARLY_PAY - The annual commitment plan with yearly payments -
+-- ANNUAL_MONTHLY_PAY - The annual commitment plan with monthly payments
+-- Caution: ANNUAL_MONTHLY_PAY is returned as ANNUAL in all API responses.
+-- - ANNUAL_YEARLY_PAY - The annual commitment plan with yearly payments -
 -- FLEXIBLE - The flexible plan - TRIAL - The 30-day free trial plan
 cprPlanName :: Lens' ChangePlanRequest (Maybe Text)
 cprPlanName
@@ -533,13 +554,17 @@ instance ToJSON ChangePlanRequest where
                   ("seats" .=) <$> _cprSeats])
 
 -- | In this version of the API, annual commitment plan\'s interval is one
--- year.
+-- year. Note: When billingMethod value is OFFLINE, the subscription
+-- property object plan.commitmentInterval is omitted in all API responses.
 --
 -- /See:/ 'subscriptionPlanCommitmentInterval' smart constructor.
-data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval'
+data SubscriptionPlanCommitmentInterval =
+  SubscriptionPlanCommitmentInterval'
     { _spciStartTime :: !(Maybe (Textual Int64))
     , _spciEndTime   :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPlanCommitmentInterval' with the minimum fields required to make a request.
 --
@@ -551,10 +576,9 @@ data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval'
 subscriptionPlanCommitmentInterval
     :: SubscriptionPlanCommitmentInterval
 subscriptionPlanCommitmentInterval =
-    SubscriptionPlanCommitmentInterval'
-    { _spciStartTime = Nothing
-    , _spciEndTime = Nothing
-    }
+  SubscriptionPlanCommitmentInterval'
+    {_spciStartTime = Nothing, _spciEndTime = Nothing}
+
 
 -- | An annual commitment plan\'s interval\'s startTime in milliseconds using
 -- UNIX Epoch format. See an example Epoch converter.
@@ -593,11 +617,14 @@ instance ToJSON SubscriptionPlanCommitmentInterval
 -- API concepts.
 --
 -- /See:/ 'subscriptionPlan' smart constructor.
-data SubscriptionPlan = SubscriptionPlan'
+data SubscriptionPlan =
+  SubscriptionPlan'
     { _spCommitmentInterval :: !(Maybe SubscriptionPlanCommitmentInterval)
     , _spIsCommitmentPlan   :: !(Maybe Bool)
     , _spPlanName           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionPlan' with the minimum fields required to make a request.
 --
@@ -611,14 +638,16 @@ data SubscriptionPlan = SubscriptionPlan'
 subscriptionPlan
     :: SubscriptionPlan
 subscriptionPlan =
-    SubscriptionPlan'
+  SubscriptionPlan'
     { _spCommitmentInterval = Nothing
     , _spIsCommitmentPlan = Nothing
     , _spPlanName = Nothing
     }
 
+
 -- | In this version of the API, annual commitment plan\'s interval is one
--- year.
+-- year. Note: When billingMethod value is OFFLINE, the subscription
+-- property object plan.commitmentInterval is omitted in all API responses.
 spCommitmentInterval :: Lens' SubscriptionPlan (Maybe SubscriptionPlanCommitmentInterval)
 spCommitmentInterval
   = lens _spCommitmentInterval
@@ -635,14 +664,16 @@ spIsCommitmentPlan
 -- | The planName property is required. This is the name of the
 -- subscription\'s plan. For more information about the Google payment
 -- plans, see the API concepts. Possible values are: - ANNUAL_MONTHLY_PAY —
--- The annual commitment plan with monthly payments - ANNUAL_YEARLY_PAY —
--- The annual commitment plan with yearly payments - FLEXIBLE — The
--- flexible plan - TRIAL — The 30-day free trial plan. A subscription in
--- trial will be suspended after the 30th free day if no payment plan is
--- assigned. Calling changePlan will assign a payment plan to a trial but
--- will not activate the plan. A trial will automatically begin its
--- assigned payment plan after its 30th free day or immediately after
--- calling startPaidService.
+-- The annual commitment plan with monthly payments. Caution:
+-- ANNUAL_MONTHLY_PAY is returned as ANNUAL in all API responses. -
+-- ANNUAL_YEARLY_PAY — The annual commitment plan with yearly payments -
+-- FLEXIBLE — The flexible plan - TRIAL — The 30-day free trial plan. A
+-- subscription in trial will be suspended after the 30th free day if no
+-- payment plan is assigned. Calling changePlan will assign a payment plan
+-- to a trial but will not activate the plan. A trial will automatically
+-- begin its assigned payment plan after its 30th free day or immediately
+-- after calling startPaidService. - FREE — The free plan is exclusive to
+-- the Cloud Identity SKU and does not incur any billing.
 spPlanName :: Lens' SubscriptionPlan (Maybe Text)
 spPlanName
   = lens _spPlanName (\ s a -> s{_spPlanName = a})
@@ -667,11 +698,14 @@ instance ToJSON SubscriptionPlan where
 -- | JSON template for a subscription list.
 --
 -- /See:/ 'subscriptions' smart constructor.
-data Subscriptions = Subscriptions'
+data Subscriptions =
+  Subscriptions'
     { _sNextPageToken :: !(Maybe Text)
     , _sKind          :: !Text
     , _sSubscriptions :: !(Maybe [Subscription])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Subscriptions' with the minimum fields required to make a request.
 --
@@ -685,11 +719,12 @@ data Subscriptions = Subscriptions'
 subscriptions
     :: Subscriptions
 subscriptions =
-    Subscriptions'
+  Subscriptions'
     { _sNextPageToken = Nothing
     , _sKind = "reseller#subscriptions"
     , _sSubscriptions = Nothing
     }
+
 
 -- | The continuation token, used to page through large result sets. Provide
 -- this value in a subsequent request to return the next page of results.
@@ -731,12 +766,15 @@ instance ToJSON Subscriptions where
 -- | JSON template for subscription seats.
 --
 -- /See:/ 'seats' smart constructor.
-data Seats = Seats'
+data Seats =
+  Seats'
     { _seaNumberOfSeats         :: !(Maybe (Textual Int32))
     , _seaMaximumNumberOfSeats  :: !(Maybe (Textual Int32))
     , _seaLicensedNumberOfSeats :: !(Maybe (Textual Int32))
     , _seaKind                  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Seats' with the minimum fields required to make a request.
 --
@@ -752,65 +790,51 @@ data Seats = Seats'
 seats
     :: Seats
 seats =
-    Seats'
+  Seats'
     { _seaNumberOfSeats = Nothing
     , _seaMaximumNumberOfSeats = Nothing
     , _seaLicensedNumberOfSeats = Nothing
     , _seaKind = "subscriptions#seats"
     }
 
--- | The numberOfSeats property holds the customer\'s number of user
--- licenses. How a user\'s licenses are managed depends on the
--- subscription\'s plan: - annual commitment plan (with monthly or yearly
--- pay) — For this plan, a reseller is invoiced on the number of user
--- licenses in the numberOfSeats property. This is the maximum number of
--- user licenses that a reseller\'s customer can create. The reseller can
--- add more licenses, but once set, the numberOfSeats can not be reduced
--- until renewal. The reseller is invoiced based on the numberOfSeats value
--- regardless of how many of these user licenses are provisioned users. -
--- flexible plan — For this plan, a reseller is invoiced on the actual
--- number of users which is capped by the maximumNumberOfSeats. The
--- numberOfSeats property is not used in the request or response for
--- flexible plan customers. - 30-day free trial plan — The numberOfSeats
--- property is not used in the request or response for an account in a
--- 30-day trial.
+
+-- | This is a required property and is exclusive to subscriptions with
+-- ANNUAL_MONTHLY_PAY and ANNUAL_YEARLY_PAY plans. This property sets the
+-- maximum number of licenses assignable to users on a subscription. The
+-- reseller can add more licenses, but once set, the numberOfSeats cannot
+-- be reduced until renewal. The reseller is invoiced based on the
+-- numberOfSeats value regardless of how many of these user licenses are
+-- assigned. Note: G Suite subscriptions automatically assign a license to
+-- every user.
 seaNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaNumberOfSeats
   = lens _seaNumberOfSeats
       (\ s a -> s{_seaNumberOfSeats = a})
       . mapping _Coerce
 
--- | The maximumNumberOfSeats property is the maximum number of licenses that
--- the customer can purchase. This property applies to plans other than the
--- annual commitment plan. How a user\'s licenses are managed depends on
--- the subscription\'s payment plan: - annual commitment plan (with monthly
--- or yearly payments) — For this plan, a reseller is invoiced on the
--- number of user licenses in the numberOfSeats property. The
--- maximumNumberOfSeats property is a read-only property in the API\'s
--- response. - flexible plan — For this plan, a reseller is invoiced on the
--- actual number of users which is capped by the maximumNumberOfSeats. This
--- is the maximum number of user licenses a customer has for user license
--- provisioning. This quantity can be increased up to the maximum limit
--- defined in the reseller\'s contract. And the minimum quantity is the
--- current number of users in the customer account. - 30-day free trial
--- plan — A subscription in a 30-day free trial is restricted to maximum 10
--- seats.
+-- | This is a required property and is exclusive to subscriptions with
+-- FLEXIBLE or TRIAL plans. This property sets the maximum number of
+-- licensed users allowed on a subscription. This quantity can be increased
+-- up to the maximum limit defined in the reseller\'s contract. The minimum
+-- quantity is the current number of users in the customer account. Note: G
+-- Suite subscriptions automatically assign a license to every user.
 seaMaximumNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaMaximumNumberOfSeats
   = lens _seaMaximumNumberOfSeats
       (\ s a -> s{_seaMaximumNumberOfSeats = a})
       . mapping _Coerce
 
--- | Read-only field containing the current number of licensed seats for
--- FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as
--- Google-Vault and Drive-storage.
+-- | Read-only field containing the current number of users that are assigned
+-- a license for the product defined in skuId. This field\'s value is
+-- equivalent to the numerical count of users returned by the Enterprise
+-- License Manager API method: listForProductAndSku
 seaLicensedNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaLicensedNumberOfSeats
   = lens _seaLicensedNumberOfSeats
       (\ s a -> s{_seaLicensedNumberOfSeats = a})
       . mapping _Coerce
 
--- | Identifies the resource as a subscription change plan request. Value:
+-- | Identifies the resource as a subscription seat setting. Value:
 -- subscriptions#seats
 seaKind :: Lens' Seats Text
 seaKind = lens _seaKind (\ s a -> s{_seaKind = a})
@@ -839,10 +863,13 @@ instance ToJSON Seats where
 -- | JSON template for a subscription renewal settings.
 --
 -- /See:/ 'renewalSettings' smart constructor.
-data RenewalSettings = RenewalSettings'
+data RenewalSettings =
+  RenewalSettings'
     { _rsKind        :: !Text
     , _rsRenewalType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RenewalSettings' with the minimum fields required to make a request.
 --
@@ -854,10 +881,9 @@ data RenewalSettings = RenewalSettings'
 renewalSettings
     :: RenewalSettings
 renewalSettings =
-    RenewalSettings'
-    { _rsKind = "subscriptions#renewalSettings"
-    , _rsRenewalType = Nothing
-    }
+  RenewalSettings'
+    {_rsKind = "subscriptions#renewalSettings", _rsRenewalType = Nothing}
+
 
 -- | Identifies the resource as a subscription renewal setting. Value:
 -- subscriptions#renewalSettings
@@ -890,7 +916,8 @@ instance ToJSON RenewalSettings where
 -- | JSON template for a subscription.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription'
+data Subscription =
+  Subscription'
     { _subCreationTime      :: !(Maybe (Textual Int64))
     , _subBillingMethod     :: !(Maybe Text)
     , _subStatus            :: !(Maybe Text)
@@ -909,7 +936,9 @@ data Subscription = Subscription'
     , _subSeats             :: !(Maybe Seats)
     , _subRenewalSettings   :: !(Maybe RenewalSettings)
     , _subSubscriptionId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -953,7 +982,7 @@ data Subscription = Subscription'
 subscription
     :: Subscription
 subscription =
-    Subscription'
+  Subscription'
     { _subCreationTime = Nothing
     , _subBillingMethod = Nothing
     , _subStatus = Nothing
@@ -973,6 +1002,7 @@ subscription =
     , _subRenewalSettings = Nothing
     , _subSubscriptionId = Nothing
     }
+
 
 -- | The creationTime property is the date when subscription was created. It
 -- is in milliseconds using the Epoch format. See an example Epoch
@@ -1163,10 +1193,13 @@ instance ToJSON Subscription where
 -- information, see retrieve transferable subscriptions for a customer.
 --
 -- /See:/ 'subscriptionTransferInfo' smart constructor.
-data SubscriptionTransferInfo = SubscriptionTransferInfo'
+data SubscriptionTransferInfo =
+  SubscriptionTransferInfo'
     { _stiTransferabilityExpirationTime :: !(Maybe (Textual Int64))
     , _stiMinimumTransferableSeats      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionTransferInfo' with the minimum fields required to make a request.
 --
@@ -1178,10 +1211,11 @@ data SubscriptionTransferInfo = SubscriptionTransferInfo'
 subscriptionTransferInfo
     :: SubscriptionTransferInfo
 subscriptionTransferInfo =
-    SubscriptionTransferInfo'
+  SubscriptionTransferInfo'
     { _stiTransferabilityExpirationTime = Nothing
     , _stiMinimumTransferableSeats = Nothing
     }
+
 
 -- | The time when transfer token or intent to transfer will expire. The time
 -- is in milliseconds using UNIX Epoch format.

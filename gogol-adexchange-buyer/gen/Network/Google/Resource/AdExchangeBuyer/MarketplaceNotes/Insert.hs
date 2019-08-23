@@ -56,10 +56,13 @@ type MarketplaceNotesInsertResource =
 -- | Add notes to the proposal
 --
 -- /See:/ 'marketplaceNotesInsert' smart constructor.
-data MarketplaceNotesInsert = MarketplaceNotesInsert'
+data MarketplaceNotesInsert =
+  MarketplaceNotesInsert'
     { _mniPayload    :: !AddOrderNotesRequest
     , _mniProposalId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MarketplaceNotesInsert' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ marketplaceNotesInsert
     -> Text -- ^ 'mniProposalId'
     -> MarketplaceNotesInsert
 marketplaceNotesInsert pMniPayload_ pMniProposalId_ =
-    MarketplaceNotesInsert'
-    { _mniPayload = pMniPayload_
-    , _mniProposalId = pMniProposalId_
-    }
+  MarketplaceNotesInsert'
+    {_mniPayload = pMniPayload_, _mniProposalId = pMniProposalId_}
+
 
 -- | Multipart request metadata.
 mniPayload :: Lens' MarketplaceNotesInsert AddOrderNotesRequest

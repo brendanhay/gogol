@@ -759,6 +759,8 @@ instance ToJSON NodeGroupAggregatedListWarningCode where
 data BackendServiceProtocol
     = HTTP
       -- ^ @HTTP@
+    | HTTP2
+      -- ^ @HTTP2@
     | HTTPS
       -- ^ @HTTPS@
     | SSL
@@ -774,6 +776,7 @@ instance Hashable BackendServiceProtocol
 instance FromHttpApiData BackendServiceProtocol where
     parseQueryParam = \case
         "HTTP" -> Right HTTP
+        "HTTP2" -> Right HTTP2
         "HTTPS" -> Right HTTPS
         "SSL" -> Right SSL
         "TCP" -> Right TCP
@@ -783,6 +786,7 @@ instance FromHttpApiData BackendServiceProtocol where
 instance ToHttpApiData BackendServiceProtocol where
     toQueryParam = \case
         HTTP -> "HTTP"
+        HTTP2 -> "HTTP2"
         HTTPS -> "HTTPS"
         SSL -> "SSL"
         TCP -> "TCP"
@@ -792,6 +796,30 @@ instance FromJSON BackendServiceProtocol where
     parseJSON = parseJSONText "BackendServiceProtocol"
 
 instance ToJSON BackendServiceProtocol where
+    toJSON = toJSONText
+
+-- | Type of network endpoints in this network endpoint group. Currently the
+-- only supported value is GCE_VM_IP_PORT.
+data NetworkEndpointGroupNetworkEndpointType
+    = GceVMIPPort
+      -- ^ @GCE_VM_IP_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkEndpointGroupNetworkEndpointType
+
+instance FromHttpApiData NetworkEndpointGroupNetworkEndpointType where
+    parseQueryParam = \case
+        "GCE_VM_IP_PORT" -> Right GceVMIPPort
+        x -> Left ("Unable to parse NetworkEndpointGroupNetworkEndpointType from: " <> x)
+
+instance ToHttpApiData NetworkEndpointGroupNetworkEndpointType where
+    toQueryParam = \case
+        GceVMIPPort -> "GCE_VM_IP_PORT"
+
+instance FromJSON NetworkEndpointGroupNetworkEndpointType where
+    parseJSON = parseJSONText "NetworkEndpointGroupNetworkEndpointType"
+
+instance ToJSON NetworkEndpointGroupNetworkEndpointType where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -1540,8 +1568,7 @@ instance ToJSON InterconnectOutageNotificationSource where
     toJSON = toJSONText
 
 -- | Type of link requested. This field indicates speed of each of the links
--- in the bundle, not the entire bundle. Only 10G per link is allowed for a
--- dedicated interconnect. Options: Ethernet_10G_LR
+-- in the bundle, not the entire bundle.
 data InterconnectLinkType
     = LinkTypeEthernet10GLr
       -- ^ @LINK_TYPE_ETHERNET_10G_LR@
@@ -1731,6 +1758,13 @@ instance FromJSON NodeGroupsListNodesWarningCode where
 instance ToJSON NodeGroupsListNodesWarningCode where
     toJSON = toJSONText
 
+-- | The status of the current value when compared to the warning and alarm
+-- levels for the receiving or transmitting transceiver. Possible states
+-- include: - OK: The value has not crossed a warning threshold. -
+-- LOW_WARNING: The value has crossed below the low warning threshold. -
+-- HIGH_WARNING: The value has crossed above the high warning threshold. -
+-- LOW_ALARM: The value has crossed below the low alarm threshold. -
+-- HIGH_ALARM: The value has crossed above the high alarm threshold.
 data InterconnectDiagnosticsLinkOpticalPowerState
     = HighAlarm
       -- ^ @HIGH_ALARM@
@@ -2049,6 +2083,44 @@ instance FromJSON ProjectXpnProjectStatus where
 instance ToJSON ProjectXpnProjectStatus where
     toJSON = toJSONText
 
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, SSL health check follows
+-- behavior specified in port and portName fields.
+data SSLHealthCheckPortSpecification
+    = UseFixedPort
+      -- ^ @USE_FIXED_PORT@
+    | UseNamedPort
+      -- ^ @USE_NAMED_PORT@
+    | UseServingPort
+      -- ^ @USE_SERVING_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLHealthCheckPortSpecification
+
+instance FromHttpApiData SSLHealthCheckPortSpecification where
+    parseQueryParam = \case
+        "USE_FIXED_PORT" -> Right UseFixedPort
+        "USE_NAMED_PORT" -> Right UseNamedPort
+        "USE_SERVING_PORT" -> Right UseServingPort
+        x -> Left ("Unable to parse SSLHealthCheckPortSpecification from: " <> x)
+
+instance ToHttpApiData SSLHealthCheckPortSpecification where
+    toQueryParam = \case
+        UseFixedPort -> "USE_FIXED_PORT"
+        UseNamedPort -> "USE_NAMED_PORT"
+        UseServingPort -> "USE_SERVING_PORT"
+
+instance FromJSON SSLHealthCheckPortSpecification where
+    parseJSON = parseJSONText "SSLHealthCheckPortSpecification"
+
+instance ToJSON SSLHealthCheckPortSpecification where
+    toJSON = toJSONText
+
 -- | This signifies the networking tier used for configuring this access
 -- configuration and can only take the following values: PREMIUM, STANDARD.
 -- If an AccessConfig is specified without a valid external IP address, an
@@ -2257,6 +2329,118 @@ instance FromJSON SubnetworkAggregatedListWarningCode where
 instance ToJSON SubnetworkAggregatedListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data NetworkEndpointGroupAggregatedListWarningCode
+    = NEGALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | NEGALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | NEGALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | NEGALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | NEGALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | NEGALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | NEGALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | NEGALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | NEGALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | NEGALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | NEGALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | NEGALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | NEGALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | NEGALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | NEGALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | NEGALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | NEGALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | NEGALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | NEGALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | NEGALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | NEGALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkEndpointGroupAggregatedListWarningCode
+
+instance FromHttpApiData NetworkEndpointGroupAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right NEGALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right NEGALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right NEGALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right NEGALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right NEGALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right NEGALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right NEGALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right NEGALWCInjectedKernelsDeprecated
+        "MISSING_TYPE_DEPENDENCY" -> Right NEGALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NEGALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NEGALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NEGALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NEGALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NEGALWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right NEGALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right NEGALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right NEGALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right NEGALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right NEGALWCUndeclaredProperties
+        "UNREACHABLE" -> Right NEGALWCUnreachable
+        x -> Left ("Unable to parse NetworkEndpointGroupAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData NetworkEndpointGroupAggregatedListWarningCode where
+    toQueryParam = \case
+        NEGALWCCleanupFailed -> "CLEANUP_FAILED"
+        NEGALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        NEGALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        NEGALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        NEGALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        NEGALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        NEGALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        NEGALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        NEGALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        NEGALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        NEGALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        NEGALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        NEGALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        NEGALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        NEGALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        NEGALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        NEGALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        NEGALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        NEGALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        NEGALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        NEGALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON NetworkEndpointGroupAggregatedListWarningCode where
+    parseJSON = parseJSONText "NetworkEndpointGroupAggregatedListWarningCode"
+
+instance ToJSON NetworkEndpointGroupAggregatedListWarningCode where
+    toJSON = toJSONText
+
 -- | Type of session affinity to use. The default is NONE. When the load
 -- balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or
 -- GENERATED_COOKIE. When the load balancing scheme is INTERNAL, can be
@@ -2410,6 +2594,42 @@ instance FromJSON ForwardingRulesScopedListWarningCode where
     parseJSON = parseJSONText "ForwardingRulesScopedListWarningCode"
 
 instance ToJSON ForwardingRulesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Health state of the network endpoint determined based on the health
+-- checks configured.
+data HealthStatusForNetworkEndpointHealthState
+    = Draining
+      -- ^ @DRAINING@
+    | Healthy
+      -- ^ @HEALTHY@
+    | Unhealthy
+      -- ^ @UNHEALTHY@
+    | Unknown
+      -- ^ @UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthStatusForNetworkEndpointHealthState
+
+instance FromHttpApiData HealthStatusForNetworkEndpointHealthState where
+    parseQueryParam = \case
+        "DRAINING" -> Right Draining
+        "HEALTHY" -> Right Healthy
+        "UNHEALTHY" -> Right Unhealthy
+        "UNKNOWN" -> Right Unknown
+        x -> Left ("Unable to parse HealthStatusForNetworkEndpointHealthState from: " <> x)
+
+instance ToHttpApiData HealthStatusForNetworkEndpointHealthState where
+    toQueryParam = \case
+        Draining -> "DRAINING"
+        Healthy -> "HEALTHY"
+        Unhealthy -> "UNHEALTHY"
+        Unknown -> "UNKNOWN"
+
+instance FromJSON HealthStatusForNetworkEndpointHealthState where
+    parseJSON = parseJSONText "HealthStatusForNetworkEndpointHealthState"
+
+instance ToJSON HealthStatusForNetworkEndpointHealthState where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -3707,7 +3927,8 @@ instance FromJSON SSLHealthCheckProxyHeader where
 instance ToJSON SSLHealthCheckProxyHeader where
     toJSON = toJSONText
 
--- | [Output Only] The status of the VPN gateway.
+-- | [Output Only] The status of the VPN gateway, which can be one of the
+-- following: CREATING, READY, FAILED, or DELETING.
 data TargetVPNGatewayStatus
     = Creating
       -- ^ @CREATING@
@@ -4150,6 +4371,8 @@ data AddressPurpose
       -- ^ @DNS_RESOLVER@
     | GceEndpoint
       -- ^ @GCE_ENDPOINT@
+    | NATAuto
+      -- ^ @NAT_AUTO@
     | VPCPeering
       -- ^ @VPC_PEERING@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4160,6 +4383,7 @@ instance FromHttpApiData AddressPurpose where
     parseQueryParam = \case
         "DNS_RESOLVER" -> Right DNSResolver
         "GCE_ENDPOINT" -> Right GceEndpoint
+        "NAT_AUTO" -> Right NATAuto
         "VPC_PEERING" -> Right VPCPeering
         x -> Left ("Unable to parse AddressPurpose from: " <> x)
 
@@ -4167,6 +4391,7 @@ instance ToHttpApiData AddressPurpose where
     toQueryParam = \case
         DNSResolver -> "DNS_RESOLVER"
         GceEndpoint -> "GCE_ENDPOINT"
+        NATAuto -> "NAT_AUTO"
         VPCPeering -> "VPC_PEERING"
 
 instance FromJSON AddressPurpose where
@@ -5332,7 +5557,9 @@ instance ToJSON AddressesScopedListWarningCode where
 -- successfully created and the status is set to READY. Possible values are
 -- FAILED, PENDING, or READY.
 data ImageStatus
-    = ISFailed
+    = ISDeleting
+      -- ^ @DELETING@
+    | ISFailed
       -- ^ @FAILED@
     | ISPending
       -- ^ @PENDING@
@@ -5344,6 +5571,7 @@ instance Hashable ImageStatus
 
 instance FromHttpApiData ImageStatus where
     parseQueryParam = \case
+        "DELETING" -> Right ISDeleting
         "FAILED" -> Right ISFailed
         "PENDING" -> Right ISPending
         "READY" -> Right ISReady
@@ -5351,6 +5579,7 @@ instance FromHttpApiData ImageStatus where
 
 instance ToHttpApiData ImageStatus where
     toQueryParam = \case
+        ISDeleting -> "DELETING"
         ISFailed -> "FAILED"
         ISPending -> "PENDING"
         ISReady -> "READY"
@@ -5617,35 +5846,35 @@ instance ToJSON InterconnectAttachmentType where
 
 -- | The type of error returned.
 data AutoscalerStatusDetailsType
-    = AllInstancesUnhealthy
+    = ASDTAllInstancesUnhealthy
       -- ^ @ALL_INSTANCES_UNHEALTHY@
-    | BackendServiceDoesNotExist
+    | ASDTBackendServiceDoesNotExist
       -- ^ @BACKEND_SERVICE_DOES_NOT_EXIST@
-    | CAppedAtMaxNumReplicas
+    | ASDTCAppedAtMaxNumReplicas
       -- ^ @CAPPED_AT_MAX_NUM_REPLICAS@
-    | CustomMetricDataPointsTooSparse
+    | ASDTCustomMetricDataPointsTooSparse
       -- ^ @CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE@
-    | CustomMetricInvalid
+    | ASDTCustomMetricInvalid
       -- ^ @CUSTOM_METRIC_INVALID@
-    | MinEqualsMax
+    | ASDTMinEqualsMax
       -- ^ @MIN_EQUALS_MAX@
-    | MissingCustomMetricDataPoints
+    | ASDTMissingCustomMetricDataPoints
       -- ^ @MISSING_CUSTOM_METRIC_DATA_POINTS@
-    | MissingLoadBalancingDataPoints
+    | ASDTMissingLoadBalancingDataPoints
       -- ^ @MISSING_LOAD_BALANCING_DATA_POINTS@
-    | MoreThanOneBackendService
+    | ASDTMoreThanOneBackendService
       -- ^ @MORE_THAN_ONE_BACKEND_SERVICE@
-    | NotEnoughQuotaAvailable
+    | ASDTNotEnoughQuotaAvailable
       -- ^ @NOT_ENOUGH_QUOTA_AVAILABLE@
-    | RegionResourceStockout
+    | ASDTRegionResourceStockout
       -- ^ @REGION_RESOURCE_STOCKOUT@
-    | ScalingTargetDoesNotExist
+    | ASDTScalingTargetDoesNotExist
       -- ^ @SCALING_TARGET_DOES_NOT_EXIST@
-    | Unknown
+    | ASDTUnknown
       -- ^ @UNKNOWN@
-    | UnsupportedMaxRateLoadBalancingConfiguration
+    | ASDTUnsupportedMaxRateLoadBalancingConfiguration
       -- ^ @UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION@
-    | ZoneResourceStockout
+    | ASDTZoneResourceStockout
       -- ^ @ZONE_RESOURCE_STOCKOUT@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -5653,40 +5882,40 @@ instance Hashable AutoscalerStatusDetailsType
 
 instance FromHttpApiData AutoscalerStatusDetailsType where
     parseQueryParam = \case
-        "ALL_INSTANCES_UNHEALTHY" -> Right AllInstancesUnhealthy
-        "BACKEND_SERVICE_DOES_NOT_EXIST" -> Right BackendServiceDoesNotExist
-        "CAPPED_AT_MAX_NUM_REPLICAS" -> Right CAppedAtMaxNumReplicas
-        "CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE" -> Right CustomMetricDataPointsTooSparse
-        "CUSTOM_METRIC_INVALID" -> Right CustomMetricInvalid
-        "MIN_EQUALS_MAX" -> Right MinEqualsMax
-        "MISSING_CUSTOM_METRIC_DATA_POINTS" -> Right MissingCustomMetricDataPoints
-        "MISSING_LOAD_BALANCING_DATA_POINTS" -> Right MissingLoadBalancingDataPoints
-        "MORE_THAN_ONE_BACKEND_SERVICE" -> Right MoreThanOneBackendService
-        "NOT_ENOUGH_QUOTA_AVAILABLE" -> Right NotEnoughQuotaAvailable
-        "REGION_RESOURCE_STOCKOUT" -> Right RegionResourceStockout
-        "SCALING_TARGET_DOES_NOT_EXIST" -> Right ScalingTargetDoesNotExist
-        "UNKNOWN" -> Right Unknown
-        "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION" -> Right UnsupportedMaxRateLoadBalancingConfiguration
-        "ZONE_RESOURCE_STOCKOUT" -> Right ZoneResourceStockout
+        "ALL_INSTANCES_UNHEALTHY" -> Right ASDTAllInstancesUnhealthy
+        "BACKEND_SERVICE_DOES_NOT_EXIST" -> Right ASDTBackendServiceDoesNotExist
+        "CAPPED_AT_MAX_NUM_REPLICAS" -> Right ASDTCAppedAtMaxNumReplicas
+        "CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE" -> Right ASDTCustomMetricDataPointsTooSparse
+        "CUSTOM_METRIC_INVALID" -> Right ASDTCustomMetricInvalid
+        "MIN_EQUALS_MAX" -> Right ASDTMinEqualsMax
+        "MISSING_CUSTOM_METRIC_DATA_POINTS" -> Right ASDTMissingCustomMetricDataPoints
+        "MISSING_LOAD_BALANCING_DATA_POINTS" -> Right ASDTMissingLoadBalancingDataPoints
+        "MORE_THAN_ONE_BACKEND_SERVICE" -> Right ASDTMoreThanOneBackendService
+        "NOT_ENOUGH_QUOTA_AVAILABLE" -> Right ASDTNotEnoughQuotaAvailable
+        "REGION_RESOURCE_STOCKOUT" -> Right ASDTRegionResourceStockout
+        "SCALING_TARGET_DOES_NOT_EXIST" -> Right ASDTScalingTargetDoesNotExist
+        "UNKNOWN" -> Right ASDTUnknown
+        "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION" -> Right ASDTUnsupportedMaxRateLoadBalancingConfiguration
+        "ZONE_RESOURCE_STOCKOUT" -> Right ASDTZoneResourceStockout
         x -> Left ("Unable to parse AutoscalerStatusDetailsType from: " <> x)
 
 instance ToHttpApiData AutoscalerStatusDetailsType where
     toQueryParam = \case
-        AllInstancesUnhealthy -> "ALL_INSTANCES_UNHEALTHY"
-        BackendServiceDoesNotExist -> "BACKEND_SERVICE_DOES_NOT_EXIST"
-        CAppedAtMaxNumReplicas -> "CAPPED_AT_MAX_NUM_REPLICAS"
-        CustomMetricDataPointsTooSparse -> "CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE"
-        CustomMetricInvalid -> "CUSTOM_METRIC_INVALID"
-        MinEqualsMax -> "MIN_EQUALS_MAX"
-        MissingCustomMetricDataPoints -> "MISSING_CUSTOM_METRIC_DATA_POINTS"
-        MissingLoadBalancingDataPoints -> "MISSING_LOAD_BALANCING_DATA_POINTS"
-        MoreThanOneBackendService -> "MORE_THAN_ONE_BACKEND_SERVICE"
-        NotEnoughQuotaAvailable -> "NOT_ENOUGH_QUOTA_AVAILABLE"
-        RegionResourceStockout -> "REGION_RESOURCE_STOCKOUT"
-        ScalingTargetDoesNotExist -> "SCALING_TARGET_DOES_NOT_EXIST"
-        Unknown -> "UNKNOWN"
-        UnsupportedMaxRateLoadBalancingConfiguration -> "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION"
-        ZoneResourceStockout -> "ZONE_RESOURCE_STOCKOUT"
+        ASDTAllInstancesUnhealthy -> "ALL_INSTANCES_UNHEALTHY"
+        ASDTBackendServiceDoesNotExist -> "BACKEND_SERVICE_DOES_NOT_EXIST"
+        ASDTCAppedAtMaxNumReplicas -> "CAPPED_AT_MAX_NUM_REPLICAS"
+        ASDTCustomMetricDataPointsTooSparse -> "CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE"
+        ASDTCustomMetricInvalid -> "CUSTOM_METRIC_INVALID"
+        ASDTMinEqualsMax -> "MIN_EQUALS_MAX"
+        ASDTMissingCustomMetricDataPoints -> "MISSING_CUSTOM_METRIC_DATA_POINTS"
+        ASDTMissingLoadBalancingDataPoints -> "MISSING_LOAD_BALANCING_DATA_POINTS"
+        ASDTMoreThanOneBackendService -> "MORE_THAN_ONE_BACKEND_SERVICE"
+        ASDTNotEnoughQuotaAvailable -> "NOT_ENOUGH_QUOTA_AVAILABLE"
+        ASDTRegionResourceStockout -> "REGION_RESOURCE_STOCKOUT"
+        ASDTScalingTargetDoesNotExist -> "SCALING_TARGET_DOES_NOT_EXIST"
+        ASDTUnknown -> "UNKNOWN"
+        ASDTUnsupportedMaxRateLoadBalancingConfiguration -> "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION"
+        ASDTZoneResourceStockout -> "ZONE_RESOURCE_STOCKOUT"
 
 instance FromJSON AutoscalerStatusDetailsType where
     parseJSON = parseJSONText "AutoscalerStatusDetailsType"
@@ -5795,9 +6024,9 @@ instance ToJSON TargetHTTPSProxiesSetQuicOverrideRequestQuicOverride where
 
 -- | Health state of the instance.
 data HealthStatusHealthState
-    = Healthy
+    = HSHSHealthy
       -- ^ @HEALTHY@
-    | Unhealthy
+    | HSHSUnhealthy
       -- ^ @UNHEALTHY@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -5805,14 +6034,14 @@ instance Hashable HealthStatusHealthState
 
 instance FromHttpApiData HealthStatusHealthState where
     parseQueryParam = \case
-        "HEALTHY" -> Right Healthy
-        "UNHEALTHY" -> Right Unhealthy
+        "HEALTHY" -> Right HSHSHealthy
+        "UNHEALTHY" -> Right HSHSUnhealthy
         x -> Left ("Unable to parse HealthStatusHealthState from: " <> x)
 
 instance ToHttpApiData HealthStatusHealthState where
     toQueryParam = \case
-        Healthy -> "HEALTHY"
-        Unhealthy -> "UNHEALTHY"
+        HSHSHealthy -> "HEALTHY"
+        HSHSUnhealthy -> "UNHEALTHY"
 
 instance FromJSON HealthStatusHealthState where
     parseJSON = parseJSONText "HealthStatusHealthState"
@@ -5820,18 +6049,21 @@ instance FromJSON HealthStatusHealthState where
 instance ToJSON HealthStatusHealthState where
     toJSON = toJSONText
 
--- | The deprecation state of this resource. This can be DEPRECATED,
--- OBSOLETE, or DELETED. Operations which create a new resource using a
--- DEPRECATED resource will return successfully, but with a warning
+-- | The deprecation state of this resource. This can be ACTIVE, DEPRECATED,
+-- OBSOLETE, or DELETED. Operations which communicate the end of life date
+-- for an image, can use ACTIVE. Operations which create a new resource
+-- using a DEPRECATED resource will return successfully, but with a warning
 -- indicating the deprecated resource and recommending its replacement.
 -- Operations which use OBSOLETE or DELETED resources will be rejected and
 -- result in an error.
 data DeprecationStatusState
-    = Deleted
+    = DSSActive
+      -- ^ @ACTIVE@
+    | DSSDeleted
       -- ^ @DELETED@
-    | Deprecated
+    | DSSDeprecated
       -- ^ @DEPRECATED@
-    | Obsolete
+    | DSSObsolete
       -- ^ @OBSOLETE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -5839,16 +6071,18 @@ instance Hashable DeprecationStatusState
 
 instance FromHttpApiData DeprecationStatusState where
     parseQueryParam = \case
-        "DELETED" -> Right Deleted
-        "DEPRECATED" -> Right Deprecated
-        "OBSOLETE" -> Right Obsolete
+        "ACTIVE" -> Right DSSActive
+        "DELETED" -> Right DSSDeleted
+        "DEPRECATED" -> Right DSSDeprecated
+        "OBSOLETE" -> Right DSSObsolete
         x -> Left ("Unable to parse DeprecationStatusState from: " <> x)
 
 instance ToHttpApiData DeprecationStatusState where
     toQueryParam = \case
-        Deleted -> "DELETED"
-        Deprecated -> "DEPRECATED"
-        Obsolete -> "OBSOLETE"
+        DSSActive -> "ACTIVE"
+        DSSDeleted -> "DELETED"
+        DSSDeprecated -> "DEPRECATED"
+        DSSObsolete -> "OBSOLETE"
 
 instance FromJSON DeprecationStatusState where
     parseJSON = parseJSONText "DeprecationStatusState"
@@ -6956,6 +7190,44 @@ instance FromJSON LicenseCodeState where
 instance ToJSON LicenseCodeState where
     toJSON = toJSONText
 
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, TCP health check follows
+-- behavior specified in port and portName fields.
+data TCPHealthCheckPortSpecification
+    = THCPSUseFixedPort
+      -- ^ @USE_FIXED_PORT@
+    | THCPSUseNamedPort
+      -- ^ @USE_NAMED_PORT@
+    | THCPSUseServingPort
+      -- ^ @USE_SERVING_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TCPHealthCheckPortSpecification
+
+instance FromHttpApiData TCPHealthCheckPortSpecification where
+    parseQueryParam = \case
+        "USE_FIXED_PORT" -> Right THCPSUseFixedPort
+        "USE_NAMED_PORT" -> Right THCPSUseNamedPort
+        "USE_SERVING_PORT" -> Right THCPSUseServingPort
+        x -> Left ("Unable to parse TCPHealthCheckPortSpecification from: " <> x)
+
+instance ToHttpApiData TCPHealthCheckPortSpecification where
+    toQueryParam = \case
+        THCPSUseFixedPort -> "USE_FIXED_PORT"
+        THCPSUseNamedPort -> "USE_NAMED_PORT"
+        THCPSUseServingPort -> "USE_SERVING_PORT"
+
+instance FromJSON TCPHealthCheckPortSpecification where
+    parseJSON = parseJSONText "TCPHealthCheckPortSpecification"
+
+instance ToJSON TCPHealthCheckPortSpecification where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data TargetVPNGatewaysScopedListWarningCode
@@ -7072,6 +7344,8 @@ instance ToJSON TargetVPNGatewaysScopedListWarningCode where
 data DiskStatus
     = DSCreating
       -- ^ @CREATING@
+    | DSDeleting
+      -- ^ @DELETING@
     | DSFailed
       -- ^ @FAILED@
     | DSReady
@@ -7085,6 +7359,7 @@ instance Hashable DiskStatus
 instance FromHttpApiData DiskStatus where
     parseQueryParam = \case
         "CREATING" -> Right DSCreating
+        "DELETING" -> Right DSDeleting
         "FAILED" -> Right DSFailed
         "READY" -> Right DSReady
         "RESTORING" -> Right DSRestoring
@@ -7093,6 +7368,7 @@ instance FromHttpApiData DiskStatus where
 instance ToHttpApiData DiskStatus where
     toQueryParam = \case
         DSCreating -> "CREATING"
+        DSDeleting -> "DELETING"
         DSFailed -> "FAILED"
         DSReady -> "READY"
         DSRestoring -> "RESTORING"
@@ -7257,6 +7533,8 @@ instance ToJSON InterconnectAttachmentEdgeAvailabilityDomain where
 data ManagedInstanceInstanceStatus
     = MIISProvisioning
       -- ^ @PROVISIONING@
+    | MIISRepairing
+      -- ^ @REPAIRING@
     | MIISRunning
       -- ^ @RUNNING@
     | MIISStaging
@@ -7278,6 +7556,7 @@ instance Hashable ManagedInstanceInstanceStatus
 instance FromHttpApiData ManagedInstanceInstanceStatus where
     parseQueryParam = \case
         "PROVISIONING" -> Right MIISProvisioning
+        "REPAIRING" -> Right MIISRepairing
         "RUNNING" -> Right MIISRunning
         "STAGING" -> Right MIISStaging
         "STOPPED" -> Right MIISStopped
@@ -7290,6 +7569,7 @@ instance FromHttpApiData ManagedInstanceInstanceStatus where
 instance ToHttpApiData ManagedInstanceInstanceStatus where
     toQueryParam = \case
         MIISProvisioning -> "PROVISIONING"
+        MIISRepairing -> "REPAIRING"
         MIISRunning -> "RUNNING"
         MIISStaging -> "STAGING"
         MIISStopped -> "STOPPED"
@@ -7565,6 +7845,32 @@ instance FromJSON AttachedDiskMode where
     parseJSON = parseJSONText "AttachedDiskMode"
 
 instance ToJSON AttachedDiskMode where
+    toJSON = toJSONText
+
+data InstanceGroupManagerUpdatePolicyType
+    = Opportunistic
+      -- ^ @OPPORTUNISTIC@
+    | Proactive
+      -- ^ @PROACTIVE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagerUpdatePolicyType
+
+instance FromHttpApiData InstanceGroupManagerUpdatePolicyType where
+    parseQueryParam = \case
+        "OPPORTUNISTIC" -> Right Opportunistic
+        "PROACTIVE" -> Right Proactive
+        x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyType from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagerUpdatePolicyType where
+    toQueryParam = \case
+        Opportunistic -> "OPPORTUNISTIC"
+        Proactive -> "PROACTIVE"
+
+instance FromJSON InstanceGroupManagerUpdatePolicyType where
+    parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyType"
+
+instance ToJSON InstanceGroupManagerUpdatePolicyType where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -8020,6 +8326,44 @@ instance FromJSON TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
 instance ToJSON TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
     toJSON = toJSONText
 
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, HTTP2 health check follows
+-- behavior specified in port and portName fields.
+data HTTP2HealthCheckPortSpecification
+    = HTTPHCPSUseFixedPort
+      -- ^ @USE_FIXED_PORT@
+    | HTTPHCPSUseNamedPort
+      -- ^ @USE_NAMED_PORT@
+    | HTTPHCPSUseServingPort
+      -- ^ @USE_SERVING_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTP2HealthCheckPortSpecification
+
+instance FromHttpApiData HTTP2HealthCheckPortSpecification where
+    parseQueryParam = \case
+        "USE_FIXED_PORT" -> Right HTTPHCPSUseFixedPort
+        "USE_NAMED_PORT" -> Right HTTPHCPSUseNamedPort
+        "USE_SERVING_PORT" -> Right HTTPHCPSUseServingPort
+        x -> Left ("Unable to parse HTTP2HealthCheckPortSpecification from: " <> x)
+
+instance ToHttpApiData HTTP2HealthCheckPortSpecification where
+    toQueryParam = \case
+        HTTPHCPSUseFixedPort -> "USE_FIXED_PORT"
+        HTTPHCPSUseNamedPort -> "USE_NAMED_PORT"
+        HTTPHCPSUseServingPort -> "USE_SERVING_PORT"
+
+instance FromJSON HTTP2HealthCheckPortSpecification where
+    parseJSON = parseJSONText "HTTP2HealthCheckPortSpecification"
+
+instance ToJSON HTTP2HealthCheckPortSpecification where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceListReferrersWarningCode
@@ -8287,7 +8631,18 @@ instance FromJSON RouteListWarningCode where
 instance ToJSON RouteListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The status of the VPN tunnel.
+-- | [Output Only] The status of the VPN tunnel, which can be one of the
+-- following: - PROVISIONING: Resource is being allocated for the VPN
+-- tunnel. - WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related
+-- configs from the user. Network, TargetVpnGateway, VpnTunnel,
+-- ForwardingRule, and Route resources are needed to setup the VPN tunnel.
+-- - FIRST_HANDSHAKE: Successful first handshake with the peer VPN. -
+-- ESTABLISHED: Secure session is successfully established with the peer
+-- VPN. - NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS -
+-- AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). -
+-- NEGOTIATION_FAILURE: Handshake failed. - DEPROVISIONING: Resources are
+-- being deallocated for the VPN tunnel. - FAILED: Tunnel creation has
+-- failed and the tunnel is not ready to be used.
 data VPNTunnelStatus
     = VTSAllocatingResources
       -- ^ @ALLOCATING_RESOURCES@
@@ -8579,6 +8934,118 @@ instance FromJSON RouterBGPAdvertisedGroupsItem where
     parseJSON = parseJSONText "RouterBGPAdvertisedGroupsItem"
 
 instance ToJSON RouterBGPAdvertisedGroupsItem where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data NetworkEndpointGroupListWarningCode
+    = NEGLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | NEGLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | NEGLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | NEGLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | NEGLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | NEGLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | NEGLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | NEGLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | NEGLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | NEGLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | NEGLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | NEGLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | NEGLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | NEGLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | NEGLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | NEGLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | NEGLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | NEGLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | NEGLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | NEGLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | NEGLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkEndpointGroupListWarningCode
+
+instance FromHttpApiData NetworkEndpointGroupListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right NEGLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right NEGLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right NEGLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right NEGLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right NEGLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right NEGLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right NEGLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right NEGLWCInjectedKernelsDeprecated
+        "MISSING_TYPE_DEPENDENCY" -> Right NEGLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NEGLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NEGLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NEGLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NEGLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NEGLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right NEGLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right NEGLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right NEGLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right NEGLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right NEGLWCUndeclaredProperties
+        "UNREACHABLE" -> Right NEGLWCUnreachable
+        x -> Left ("Unable to parse NetworkEndpointGroupListWarningCode from: " <> x)
+
+instance ToHttpApiData NetworkEndpointGroupListWarningCode where
+    toQueryParam = \case
+        NEGLWCCleanupFailed -> "CLEANUP_FAILED"
+        NEGLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        NEGLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        NEGLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        NEGLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        NEGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        NEGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        NEGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        NEGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        NEGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        NEGLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        NEGLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        NEGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        NEGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        NEGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        NEGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        NEGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        NEGLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        NEGLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        NEGLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        NEGLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON NetworkEndpointGroupListWarningCode where
+    parseJSON = parseJSONText "NetworkEndpointGroupListWarningCode"
+
+instance ToJSON NetworkEndpointGroupListWarningCode where
     toJSON = toJSONText
 
 -- | The network-wide routing mode to use. If set to REGIONAL, this
@@ -9351,6 +9818,35 @@ instance FromJSON ForwardingRuleIPProtocol where
 instance ToJSON ForwardingRuleIPProtocol where
     toJSON = toJSONText
 
+-- | Optional query parameter for showing the health status of each network
+-- endpoint. Valid options are SKIP or SHOW. If you don\'t specifiy this
+-- parameter, the health status of network endpoints will not be provided.
+data NetworkEndpointGroupsListEndpointsRequestHealthStatus
+    = Show
+      -- ^ @SHOW@
+    | Skip
+      -- ^ @SKIP@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkEndpointGroupsListEndpointsRequestHealthStatus
+
+instance FromHttpApiData NetworkEndpointGroupsListEndpointsRequestHealthStatus where
+    parseQueryParam = \case
+        "SHOW" -> Right Show
+        "SKIP" -> Right Skip
+        x -> Left ("Unable to parse NetworkEndpointGroupsListEndpointsRequestHealthStatus from: " <> x)
+
+instance ToHttpApiData NetworkEndpointGroupsListEndpointsRequestHealthStatus where
+    toQueryParam = \case
+        Show -> "SHOW"
+        Skip -> "SKIP"
+
+instance FromJSON NetworkEndpointGroupsListEndpointsRequestHealthStatus where
+    parseJSON = parseJSONText "NetworkEndpointGroupsListEndpointsRequestHealthStatus"
+
+instance ToJSON NetworkEndpointGroupsListEndpointsRequestHealthStatus where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data ImageListWarningCode
@@ -10050,13 +10546,15 @@ instance FromJSON AttachedDiskInterface where
 instance ToJSON AttachedDiskInterface where
     toJSON = toJSONText
 
--- | Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS.
--- If not specified, the default is TCP. Exactly one of the
+-- | Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or
+-- HTTP2. If not specified, the default is TCP. Exactly one of the
 -- protocol-specific health check field must be specified, which must match
 -- type field.
 data HealthCheckType
     = HCTHTTP
       -- ^ @HTTP@
+    | HCTHTTP2
+      -- ^ @HTTP2@
     | HCTHTTPS
       -- ^ @HTTPS@
     | HCTInvalid
@@ -10072,6 +10570,7 @@ instance Hashable HealthCheckType
 instance FromHttpApiData HealthCheckType where
     parseQueryParam = \case
         "HTTP" -> Right HCTHTTP
+        "HTTP2" -> Right HCTHTTP2
         "HTTPS" -> Right HCTHTTPS
         "INVALID" -> Right HCTInvalid
         "SSL" -> Right HCTSSL
@@ -10081,6 +10580,7 @@ instance FromHttpApiData HealthCheckType where
 instance ToHttpApiData HealthCheckType where
     toQueryParam = \case
         HCTHTTP -> "HTTP"
+        HCTHTTP2 -> "HTTP2"
         HCTHTTPS -> "HTTPS"
         HCTInvalid -> "INVALID"
         HCTSSL -> "SSL"
@@ -10233,6 +10733,118 @@ instance ToJSON ZoneStatus where
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data NetworkEndpointGroupsScopedListWarningCode
+    = NEGSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | NEGSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | NEGSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | NEGSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | NEGSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | NEGSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | NEGSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | NEGSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | NEGSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | NEGSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | NEGSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | NEGSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | NEGSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | NEGSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | NEGSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | NEGSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | NEGSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | NEGSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | NEGSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | NEGSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | NEGSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkEndpointGroupsScopedListWarningCode
+
+instance FromHttpApiData NetworkEndpointGroupsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right NEGSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right NEGSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right NEGSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right NEGSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right NEGSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right NEGSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right NEGSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right NEGSLWCInjectedKernelsDeprecated
+        "MISSING_TYPE_DEPENDENCY" -> Right NEGSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NEGSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NEGSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NEGSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NEGSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NEGSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right NEGSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right NEGSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right NEGSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right NEGSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right NEGSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right NEGSLWCUnreachable
+        x -> Left ("Unable to parse NetworkEndpointGroupsScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData NetworkEndpointGroupsScopedListWarningCode where
+    toQueryParam = \case
+        NEGSLWCCleanupFailed -> "CLEANUP_FAILED"
+        NEGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        NEGSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        NEGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        NEGSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        NEGSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        NEGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        NEGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        NEGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        NEGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        NEGSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        NEGSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        NEGSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        NEGSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        NEGSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        NEGSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        NEGSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        NEGSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        NEGSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        NEGSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        NEGSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON NetworkEndpointGroupsScopedListWarningCode where
+    parseJSON = parseJSONText "NetworkEndpointGroupsScopedListWarningCode"
+
+instance ToJSON NetworkEndpointGroupsScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data SubnetworksScopedListWarningCode
     = SSLWCCleanupFailed
       -- ^ @CLEANUP_FAILED@
@@ -10343,6 +10955,118 @@ instance FromJSON SubnetworksScopedListWarningCode where
 instance ToJSON SubnetworksScopedListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data NetworkEndpointGroupsListNetworkEndpointsWarningCode
+    = NEGLNEWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | NEGLNEWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | NEGLNEWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | NEGLNEWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | NEGLNEWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | NEGLNEWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | NEGLNEWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | NEGLNEWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGLNEWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | NEGLNEWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | NEGLNEWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | NEGLNEWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | NEGLNEWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | NEGLNEWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | NEGLNEWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | NEGLNEWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGLNEWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | NEGLNEWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | NEGLNEWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | NEGLNEWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | NEGLNEWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | NEGLNEWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | NEGLNEWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkEndpointGroupsListNetworkEndpointsWarningCode
+
+instance FromHttpApiData NetworkEndpointGroupsListNetworkEndpointsWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right NEGLNEWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right NEGLNEWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right NEGLNEWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right NEGLNEWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right NEGLNEWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right NEGLNEWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right NEGLNEWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right NEGLNEWCInjectedKernelsDeprecated
+        "MISSING_TYPE_DEPENDENCY" -> Right NEGLNEWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGLNEWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGLNEWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NEGLNEWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NEGLNEWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NEGLNEWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NEGLNEWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NEGLNEWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right NEGLNEWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGLNEWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right NEGLNEWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right NEGLNEWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right NEGLNEWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right NEGLNEWCUndeclaredProperties
+        "UNREACHABLE" -> Right NEGLNEWCUnreachable
+        x -> Left ("Unable to parse NetworkEndpointGroupsListNetworkEndpointsWarningCode from: " <> x)
+
+instance ToHttpApiData NetworkEndpointGroupsListNetworkEndpointsWarningCode where
+    toQueryParam = \case
+        NEGLNEWCCleanupFailed -> "CLEANUP_FAILED"
+        NEGLNEWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        NEGLNEWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        NEGLNEWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        NEGLNEWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        NEGLNEWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        NEGLNEWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        NEGLNEWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGLNEWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        NEGLNEWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        NEGLNEWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        NEGLNEWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        NEGLNEWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        NEGLNEWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        NEGLNEWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        NEGLNEWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGLNEWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        NEGLNEWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        NEGLNEWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        NEGLNEWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        NEGLNEWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        NEGLNEWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        NEGLNEWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON NetworkEndpointGroupsListNetworkEndpointsWarningCode where
+    parseJSON = parseJSONText "NetworkEndpointGroupsListNetworkEndpointsWarningCode"
+
+instance ToJSON NetworkEndpointGroupsListNetworkEndpointsWarningCode where
+    toJSON = toJSONText
+
 -- | [Output Only] Name of the quota metric.
 data QuotaMetric
     = Autoscalers
@@ -10359,6 +11083,8 @@ data QuotaMetric
       -- ^ @CPUS_ALL_REGIONS@
     | DisksTotalGb
       -- ^ @DISKS_TOTAL_GB@
+    | ExternalVPNGateways
+      -- ^ @EXTERNAL_VPN_GATEWAYS@
     | Firewalls
       -- ^ @FIREWALLS@
     | ForwardingRules
@@ -10391,10 +11117,14 @@ data QuotaMetric
       -- ^ @IN_USE_ADDRESSES@
     | InUseBackupSchedules
       -- ^ @IN_USE_BACKUP_SCHEDULES@
+    | InUseSnapshotSchedules
+      -- ^ @IN_USE_SNAPSHOT_SCHEDULES@
     | LocalSsdTotalGb
       -- ^ @LOCAL_SSD_TOTAL_GB@
     | Networks
       -- ^ @NETWORKS@
+    | NetworkEndpointGroups
+      -- ^ @NETWORK_ENDPOINT_GROUPS@
     | NvidiaK80Gpus
       -- ^ @NVIDIA_K80_GPUS@
     | NvidiaP100Gpus
@@ -10488,6 +11218,7 @@ instance FromHttpApiData QuotaMetric where
         "CPUS" -> Right CPUs
         "CPUS_ALL_REGIONS" -> Right CPUsAllRegions
         "DISKS_TOTAL_GB" -> Right DisksTotalGb
+        "EXTERNAL_VPN_GATEWAYS" -> Right ExternalVPNGateways
         "FIREWALLS" -> Right Firewalls
         "FORWARDING_RULES" -> Right ForwardingRules
         "GLOBAL_INTERNAL_ADDRESSES" -> Right GlobalInternalAddresses
@@ -10504,8 +11235,10 @@ instance FromHttpApiData QuotaMetric where
         "INTERNAL_ADDRESSES" -> Right InternalAddresses
         "IN_USE_ADDRESSES" -> Right InUseAddresses
         "IN_USE_BACKUP_SCHEDULES" -> Right InUseBackupSchedules
+        "IN_USE_SNAPSHOT_SCHEDULES" -> Right InUseSnapshotSchedules
         "LOCAL_SSD_TOTAL_GB" -> Right LocalSsdTotalGb
         "NETWORKS" -> Right Networks
+        "NETWORK_ENDPOINT_GROUPS" -> Right NetworkEndpointGroups
         "NVIDIA_K80_GPUS" -> Right NvidiaK80Gpus
         "NVIDIA_P100_GPUS" -> Right NvidiaP100Gpus
         "NVIDIA_P100_VWS_GPUS" -> Right NvidiaP100VwsGpus
@@ -10557,6 +11290,7 @@ instance ToHttpApiData QuotaMetric where
         CPUs -> "CPUS"
         CPUsAllRegions -> "CPUS_ALL_REGIONS"
         DisksTotalGb -> "DISKS_TOTAL_GB"
+        ExternalVPNGateways -> "EXTERNAL_VPN_GATEWAYS"
         Firewalls -> "FIREWALLS"
         ForwardingRules -> "FORWARDING_RULES"
         GlobalInternalAddresses -> "GLOBAL_INTERNAL_ADDRESSES"
@@ -10573,8 +11307,10 @@ instance ToHttpApiData QuotaMetric where
         InternalAddresses -> "INTERNAL_ADDRESSES"
         InUseAddresses -> "IN_USE_ADDRESSES"
         InUseBackupSchedules -> "IN_USE_BACKUP_SCHEDULES"
+        InUseSnapshotSchedules -> "IN_USE_SNAPSHOT_SCHEDULES"
         LocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
         Networks -> "NETWORKS"
+        NetworkEndpointGroups -> "NETWORK_ENDPOINT_GROUPS"
         NvidiaK80Gpus -> "NVIDIA_K80_GPUS"
         NvidiaP100Gpus -> "NVIDIA_P100_GPUS"
         NvidiaP100VwsGpus -> "NVIDIA_P100_VWS_GPUS"
@@ -10800,6 +11536,8 @@ instance ToJSON AddressIPVersion where
 data InstanceStatus
     = ISProvisioning
       -- ^ @PROVISIONING@
+    | ISRepairing
+      -- ^ @REPAIRING@
     | ISRunning
       -- ^ @RUNNING@
     | ISStaging
@@ -10821,6 +11559,7 @@ instance Hashable InstanceStatus
 instance FromHttpApiData InstanceStatus where
     parseQueryParam = \case
         "PROVISIONING" -> Right ISProvisioning
+        "REPAIRING" -> Right ISRepairing
         "RUNNING" -> Right ISRunning
         "STAGING" -> Right ISStaging
         "STOPPED" -> Right ISStopped
@@ -10833,6 +11572,7 @@ instance FromHttpApiData InstanceStatus where
 instance ToHttpApiData InstanceStatus where
     toQueryParam = \case
         ISProvisioning -> "PROVISIONING"
+        ISRepairing -> "REPAIRING"
         ISRunning -> "RUNNING"
         ISStaging -> "STAGING"
         ISStopped -> "STOPPED"
@@ -11842,6 +12582,44 @@ instance FromJSON AutoscalersScopedListWarningCode where
     parseJSON = parseJSONText "AutoscalersScopedListWarningCode"
 
 instance ToJSON AutoscalersScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, HTTPS health check follows
+-- behavior specified in port and portName fields.
+data HTTPSHealthCheckPortSpecification
+    = HHCPSUseFixedPort
+      -- ^ @USE_FIXED_PORT@
+    | HHCPSUseNamedPort
+      -- ^ @USE_NAMED_PORT@
+    | HHCPSUseServingPort
+      -- ^ @USE_SERVING_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPSHealthCheckPortSpecification
+
+instance FromHttpApiData HTTPSHealthCheckPortSpecification where
+    parseQueryParam = \case
+        "USE_FIXED_PORT" -> Right HHCPSUseFixedPort
+        "USE_NAMED_PORT" -> Right HHCPSUseNamedPort
+        "USE_SERVING_PORT" -> Right HHCPSUseServingPort
+        x -> Left ("Unable to parse HTTPSHealthCheckPortSpecification from: " <> x)
+
+instance ToHttpApiData HTTPSHealthCheckPortSpecification where
+    toQueryParam = \case
+        HHCPSUseFixedPort -> "USE_FIXED_PORT"
+        HHCPSUseNamedPort -> "USE_NAMED_PORT"
+        HHCPSUseServingPort -> "USE_SERVING_PORT"
+
+instance FromJSON HTTPSHealthCheckPortSpecification where
+    parseJSON = parseJSONText "HTTPSHealthCheckPortSpecification"
+
+instance ToJSON HTTPSHealthCheckPortSpecification where
     toJSON = toJSONText
 
 -- | This signifies what the ForwardingRule will be used for and can only
@@ -14127,6 +14905,34 @@ instance FromJSON CommitmentsScopedListWarningCode where
 instance ToJSON CommitmentsScopedListWarningCode where
     toJSON = toJSONText
 
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data HTTP2HealthCheckProxyHeader
+    = HNone
+      -- ^ @NONE@
+    | HProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTP2HealthCheckProxyHeader
+
+instance FromHttpApiData HTTP2HealthCheckProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right HNone
+        "PROXY_V1" -> Right HProxyV1
+        x -> Left ("Unable to parse HTTP2HealthCheckProxyHeader from: " <> x)
+
+instance ToHttpApiData HTTP2HealthCheckProxyHeader where
+    toQueryParam = \case
+        HNone -> "NONE"
+        HProxyV1 -> "PROXY_V1"
+
+instance FromJSON HTTP2HealthCheckProxyHeader where
+    parseJSON = parseJSONText "HTTP2HealthCheckProxyHeader"
+
+instance ToJSON HTTP2HealthCheckProxyHeader where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InterconnectAttachmentsScopedListWarningCode
@@ -14575,6 +15381,36 @@ instance FromJSON RegionInstanceGroupListWarningCode where
 instance ToJSON RegionInstanceGroupListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] The status of this InterconnectLocation. If the status is
+-- AVAILABLE, new Interconnects may be provisioned in this
+-- InterconnectLocation. Otherwise, no new Interconnects may be
+-- provisioned.
+data InterconnectLocationStatus
+    = Available
+      -- ^ @AVAILABLE@
+    | Closed
+      -- ^ @CLOSED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InterconnectLocationStatus
+
+instance FromHttpApiData InterconnectLocationStatus where
+    parseQueryParam = \case
+        "AVAILABLE" -> Right Available
+        "CLOSED" -> Right Closed
+        x -> Left ("Unable to parse InterconnectLocationStatus from: " <> x)
+
+instance ToHttpApiData InterconnectLocationStatus where
+    toQueryParam = \case
+        Available -> "AVAILABLE"
+        Closed -> "CLOSED"
+
+instance FromJSON InterconnectLocationStatus where
+    parseJSON = parseJSONText "InterconnectLocationStatus"
+
+instance ToJSON InterconnectLocationStatus where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceGroupsScopedListWarningCode
@@ -14831,6 +15667,8 @@ instance ToJSON LicensesListResponseWarningCode where
 data InstanceWithNamedPortsStatus
     = IWNPSProvisioning
       -- ^ @PROVISIONING@
+    | IWNPSRepairing
+      -- ^ @REPAIRING@
     | IWNPSRunning
       -- ^ @RUNNING@
     | IWNPSStaging
@@ -14852,6 +15690,7 @@ instance Hashable InstanceWithNamedPortsStatus
 instance FromHttpApiData InstanceWithNamedPortsStatus where
     parseQueryParam = \case
         "PROVISIONING" -> Right IWNPSProvisioning
+        "REPAIRING" -> Right IWNPSRepairing
         "RUNNING" -> Right IWNPSRunning
         "STAGING" -> Right IWNPSStaging
         "STOPPED" -> Right IWNPSStopped
@@ -14864,6 +15703,7 @@ instance FromHttpApiData InstanceWithNamedPortsStatus where
 instance ToHttpApiData InstanceWithNamedPortsStatus where
     toQueryParam = \case
         IWNPSProvisioning -> "PROVISIONING"
+        IWNPSRepairing -> "REPAIRING"
         IWNPSRunning -> "RUNNING"
         IWNPSStaging -> "STAGING"
         IWNPSStopped -> "STOPPED"
@@ -15016,6 +15856,44 @@ instance FromJSON CommitmentListWarningCode where
     parseJSON = parseJSONText "CommitmentListWarningCode"
 
 instance ToJSON CommitmentListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, HTTP health check follows
+-- behavior specified in port and portName fields.
+data HTTPHealthCheckPortSpecification
+    = HUseFixedPort
+      -- ^ @USE_FIXED_PORT@
+    | HUseNamedPort
+      -- ^ @USE_NAMED_PORT@
+    | HUseServingPort
+      -- ^ @USE_SERVING_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPHealthCheckPortSpecification
+
+instance FromHttpApiData HTTPHealthCheckPortSpecification where
+    parseQueryParam = \case
+        "USE_FIXED_PORT" -> Right HUseFixedPort
+        "USE_NAMED_PORT" -> Right HUseNamedPort
+        "USE_SERVING_PORT" -> Right HUseServingPort
+        x -> Left ("Unable to parse HTTPHealthCheckPortSpecification from: " <> x)
+
+instance ToHttpApiData HTTPHealthCheckPortSpecification where
+    toQueryParam = \case
+        HUseFixedPort -> "USE_FIXED_PORT"
+        HUseNamedPort -> "USE_NAMED_PORT"
+        HUseServingPort -> "USE_SERVING_PORT"
+
+instance FromJSON HTTPHealthCheckPortSpecification where
+    parseJSON = parseJSONText "HTTPHealthCheckPortSpecification"
+
+instance ToJSON HTTPHealthCheckPortSpecification where
     toJSON = toJSONText
 
 -- | Trusted attributes supplied by the IAM system.
@@ -15819,6 +16697,38 @@ instance FromJSON ForwardingRuleNetworkTier where
     parseJSON = parseJSONText "ForwardingRuleNetworkTier"
 
 instance ToJSON ForwardingRuleNetworkTier where
+    toJSON = toJSONText
+
+-- | Minimal action to be taken on an instance. You can specify either
+-- RESTART to restart existing instances or REPLACE to delete and create
+-- new instances from the target template. If you specify a RESTART, the
+-- Updater will attempt to perform that action only. However, if the
+-- Updater determines that the minimal action you specify is not enough to
+-- perform the update, it might perform a more disruptive action.
+data InstanceGroupManagerUpdatePolicyMinimalAction
+    = Replace
+      -- ^ @REPLACE@
+    | Restart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagerUpdatePolicyMinimalAction
+
+instance FromHttpApiData InstanceGroupManagerUpdatePolicyMinimalAction where
+    parseQueryParam = \case
+        "REPLACE" -> Right Replace
+        "RESTART" -> Right Restart
+        x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyMinimalAction from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagerUpdatePolicyMinimalAction where
+    toQueryParam = \case
+        Replace -> "REPLACE"
+        Restart -> "RESTART"
+
+instance FromJSON InstanceGroupManagerUpdatePolicyMinimalAction where
+    parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyMinimalAction"
+
+instance ToJSON InstanceGroupManagerUpdatePolicyMinimalAction where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine

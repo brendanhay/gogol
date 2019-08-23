@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the state of an existing Cloud Dataflow job.
+-- Updates the state of an existing Cloud Dataflow job. To update the state
+-- of an existing job, we recommend using
+-- \`projects.locations.jobs.update\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.update\` is not recommended, as you can only
+-- update the state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.update@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Update
@@ -64,10 +69,16 @@ type ProjectsJobsUpdateResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Job :> Put '[JSON] Job
 
--- | Updates the state of an existing Cloud Dataflow job.
+-- | Updates the state of an existing Cloud Dataflow job. To update the state
+-- of an existing job, we recommend using
+-- \`projects.locations.jobs.update\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.update\` is not recommended, as you can only
+-- update the state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsJobsUpdate' smart constructor.
-data ProjectsJobsUpdate = ProjectsJobsUpdate'
+data ProjectsJobsUpdate =
+  ProjectsJobsUpdate'
     { _pjuXgafv          :: !(Maybe Xgafv)
     , _pjuJobId          :: !Text
     , _pjuUploadProtocol :: !(Maybe Text)
@@ -77,7 +88,9 @@ data ProjectsJobsUpdate = ProjectsJobsUpdate'
     , _pjuPayload        :: !Job
     , _pjuProjectId      :: !Text
     , _pjuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsUpdate' with the minimum fields required to make a request.
 --
@@ -106,7 +119,7 @@ projectsJobsUpdate
     -> Text -- ^ 'pjuProjectId'
     -> ProjectsJobsUpdate
 projectsJobsUpdate pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
-    ProjectsJobsUpdate'
+  ProjectsJobsUpdate'
     { _pjuXgafv = Nothing
     , _pjuJobId = pPjuJobId_
     , _pjuUploadProtocol = Nothing
@@ -117,6 +130,7 @@ projectsJobsUpdate pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     , _pjuProjectId = pPjuProjectId_
     , _pjuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjuXgafv :: Lens' ProjectsJobsUpdate (Maybe Xgafv)
@@ -132,7 +146,9 @@ pjuUploadProtocol
   = lens _pjuUploadProtocol
       (\ s a -> s{_pjuUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pjuLocation :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuLocation
   = lens _pjuLocation (\ s a -> s{_pjuLocation = a})

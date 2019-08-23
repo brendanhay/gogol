@@ -59,11 +59,14 @@ type PersonalizedstreamGetResource =
 -- | Returns a stream of personalized book clusters
 --
 -- /See:/ 'personalizedstreamGet' smart constructor.
-data PersonalizedstreamGet = PersonalizedstreamGet'
+data PersonalizedstreamGet =
+  PersonalizedstreamGet'
     { _pgLocale                   :: !(Maybe Text)
     , _pgMaxAllowedMaturityRating :: !(Maybe PersonalizedstreamGetMaxAllowedMaturityRating)
     , _pgSource                   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonalizedstreamGet' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ data PersonalizedstreamGet = PersonalizedstreamGet'
 personalizedstreamGet
     :: PersonalizedstreamGet
 personalizedstreamGet =
-    PersonalizedstreamGet'
+  PersonalizedstreamGet'
     { _pgLocale = Nothing
     , _pgMaxAllowedMaturityRating = Nothing
     , _pgSource = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.

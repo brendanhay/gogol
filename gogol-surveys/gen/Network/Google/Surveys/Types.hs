@@ -169,12 +169,12 @@ surveysService
 
 -- | View and manage your surveys and results
 surveysScope :: Proxy '["https://www.googleapis.com/auth/surveys"]
-surveysScope = Proxy;
+surveysScope = Proxy
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | View your surveys and survey results
 surveysReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/surveys.readonly"]
-surveysReadOnlyScope = Proxy;
+surveysReadOnlyScope = Proxy

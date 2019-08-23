@@ -203,4 +203,4 @@ adSenseHostService
 
 -- | View and manage your AdSense host data and associated accounts
 adSenseHostScope :: Proxy '["https://www.googleapis.com/auth/adsensehost"]
-adSenseHostScope = Proxy;
+adSenseHostScope = Proxy

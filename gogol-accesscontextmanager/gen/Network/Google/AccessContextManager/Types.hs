@@ -35,6 +35,16 @@ module Network.Google.AccessContextManager.Types
     , blConditions
     , blCombiningFunction
 
+    -- * ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- * CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
+
     -- * AccessLevel
     , AccessLevel
     , accessLevel
@@ -51,7 +61,6 @@ module Network.Google.AccessContextManager.Types
     -- * ServicePerimeterConfig
     , ServicePerimeterConfig
     , servicePerimeterConfig
-    , spcUnrestrictedServices
     , spcResources
     , spcRestrictedServices
     , spcAccessLevels
@@ -67,6 +76,10 @@ module Network.Google.AccessContextManager.Types
 
     -- * ServicePerimeterPerimeterType
     , ServicePerimeterPerimeterType (..)
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * OSConstraintOSType
     , OSConstraintOSType (..)
@@ -98,6 +111,7 @@ module Network.Google.AccessContextManager.Types
     , osConstraint
     , ocOSType
     , ocMinimumVersion
+    , ocRequireVerifiedChromeOS
 
     -- * AccessPolicy
     , AccessPolicy
@@ -132,6 +146,8 @@ module Network.Google.AccessContextManager.Types
     , DevicePolicy
     , devicePolicy
     , dpOSConstraints
+    , dpRequireAdminApproval
+    , dpRequireCorpOwned
     , dpRequireScreenlock
     , dpAllowedEncryptionStatuses
     , dpAllowedDeviceManagementLevels
@@ -140,6 +156,7 @@ module Network.Google.AccessContextManager.Types
     , Condition
     , condition
     , cMembers
+    , cRegions
     , cNegate
     , cIPSubnetworks
     , cDevicePolicy
@@ -155,13 +172,13 @@ import           Network.Google.AccessContextManager.Types.Product
 import           Network.Google.AccessContextManager.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta' of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
 accessContextManagerService :: ServiceConfig
 accessContextManagerService
   = defaultService
-      (ServiceId "accesscontextmanager:v1beta")
+      (ServiceId "accesscontextmanager:v1")
       "accesscontextmanager.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

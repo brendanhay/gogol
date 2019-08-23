@@ -63,13 +63,16 @@ type SubnetworksListUsableResource =
 -- | Retrieves an aggregated list of usable subnetworks.
 --
 -- /See:/ 'subnetworksListUsable' smart constructor.
-data SubnetworksListUsable = SubnetworksListUsable'
+data SubnetworksListUsable =
+  SubnetworksListUsable'
     { _sluOrderBy    :: !(Maybe Text)
     , _sluProject    :: !Text
     , _sluFilter     :: !(Maybe Text)
     , _sluPageToken  :: !(Maybe Text)
     , _sluMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubnetworksListUsable' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ subnetworksListUsable
     :: Text -- ^ 'sluProject'
     -> SubnetworksListUsable
 subnetworksListUsable pSluProject_ =
-    SubnetworksListUsable'
+  SubnetworksListUsable'
     { _sluOrderBy = Nothing
     , _sluProject = pSluProject_
     , _sluFilter = Nothing
     , _sluPageToken = Nothing
     , _sluMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

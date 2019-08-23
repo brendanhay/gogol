@@ -73,7 +73,8 @@ type AlertsUndeleteResource =
 -- has no effect.
 --
 -- /See:/ 'alertsUndelete' smart constructor.
-data AlertsUndelete = AlertsUndelete'
+data AlertsUndelete =
+  AlertsUndelete'
     { _auXgafv          :: !(Maybe Xgafv)
     , _auUploadProtocol :: !(Maybe Text)
     , _auAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data AlertsUndelete = AlertsUndelete'
     , _auUploadType     :: !(Maybe Text)
     , _auPayload        :: !UndeleteAlertRequest
     , _auCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertsUndelete' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ alertsUndelete
     -> UndeleteAlertRequest -- ^ 'auPayload'
     -> AlertsUndelete
 alertsUndelete pAuAlertId_ pAuPayload_ =
-    AlertsUndelete'
+  AlertsUndelete'
     { _auXgafv = Nothing
     , _auUploadProtocol = Nothing
     , _auAccessToken = Nothing
@@ -114,6 +117,7 @@ alertsUndelete pAuAlertId_ pAuPayload_ =
     , _auPayload = pAuPayload_
     , _auCallback = Nothing
     }
+
 
 -- | V1 error format.
 auXgafv :: Lens' AlertsUndelete (Maybe Xgafv)

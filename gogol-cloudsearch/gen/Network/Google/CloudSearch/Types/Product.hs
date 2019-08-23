@@ -20,15 +20,51 @@ module Network.Google.CloudSearch.Types.Product where
 import           Network.Google.CloudSearch.Types.Sum
 import           Network.Google.Prelude
 
+-- | Gmail Folder restricts (i.e. in Drafts\/Sent\/Chats\/User Generated
+-- Labels).
+--
+-- /See:/ 'gmailFolderRestrict' smart constructor.
+newtype GmailFolderRestrict =
+  GmailFolderRestrict'
+    { _gfrType :: Maybe GmailFolderRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailFolderRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gfrType'
+gmailFolderRestrict
+    :: GmailFolderRestrict
+gmailFolderRestrict = GmailFolderRestrict' {_gfrType = Nothing}
+
+
+gfrType :: Lens' GmailFolderRestrict (Maybe GmailFolderRestrictType)
+gfrType = lens _gfrType (\ s a -> s{_gfrType = a})
+
+instance FromJSON GmailFolderRestrict where
+        parseJSON
+          = withObject "GmailFolderRestrict"
+              (\ o -> GmailFolderRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailFolderRestrict where
+        toJSON GmailFolderRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _gfrType])
+
 -- | Content of an item to be indexed and surfaced by Cloud Search.
 --
 -- /See:/ 'itemContent' smart constructor.
-data ItemContent = ItemContent'
+data ItemContent =
+  ItemContent'
     { _icHash           :: !(Maybe Text)
     , _icContentFormat  :: !(Maybe ItemContentContentFormat)
     , _icContentDataRef :: !(Maybe UploadItemRef)
     , _icInlineContent  :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemContent' with the minimum fields required to make a request.
 --
@@ -44,12 +80,13 @@ data ItemContent = ItemContent'
 itemContent
     :: ItemContent
 itemContent =
-    ItemContent'
+  ItemContent'
     { _icHash = Nothing
     , _icContentFormat = Nothing
     , _icContentDataRef = Nothing
     , _icInlineContent = Nothing
     }
+
 
 -- | Hashing info calculated and provided by the API client for content. Can
 -- be used with the items.push method to calculate modified state. The
@@ -97,9 +134,12 @@ instance ToJSON ItemContent where
 -- | A person\'s photo.
 --
 -- /See:/ 'photo' smart constructor.
-newtype Photo = Photo'
+newtype Photo =
+  Photo'
     { _pURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
@@ -108,10 +148,8 @@ newtype Photo = Photo'
 -- * 'pURL'
 photo
     :: Photo
-photo =
-    Photo'
-    { _pURL = Nothing
-    }
+photo = Photo' {_pURL = Nothing}
+
 
 -- | The URL of the photo.
 pURL :: Lens' Photo (Maybe Text)
@@ -128,11 +166,14 @@ instance ToJSON Photo where
 
 --
 -- /See:/ 'searchItemsByViewURLRequest' smart constructor.
-data SearchItemsByViewURLRequest = SearchItemsByViewURLRequest'
+data SearchItemsByViewURLRequest =
+  SearchItemsByViewURLRequest'
     { _sibvurDebugOptions :: !(Maybe DebugOptions)
     , _sibvurPageToken    :: !(Maybe Text)
     , _sibvurViewURL      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchItemsByViewURLRequest' with the minimum fields required to make a request.
 --
@@ -146,11 +187,12 @@ data SearchItemsByViewURLRequest = SearchItemsByViewURLRequest'
 searchItemsByViewURLRequest
     :: SearchItemsByViewURLRequest
 searchItemsByViewURLRequest =
-    SearchItemsByViewURLRequest'
+  SearchItemsByViewURLRequest'
     { _sibvurDebugOptions = Nothing
     , _sibvurPageToken = Nothing
     , _sibvurViewURL = Nothing
     }
+
 
 -- | Common debug options.
 sibvurDebugOptions :: Lens' SearchItemsByViewURLRequest (Maybe DebugOptions)
@@ -190,7 +232,8 @@ instance ToJSON SearchItemsByViewURLRequest where
 -- | SearchApplication
 --
 -- /See:/ 'searchApplication' smart constructor.
-data SearchApplication = SearchApplication'
+data SearchApplication =
+  SearchApplication'
     { _saDataSourceRestrictions :: !(Maybe [DataSourceRestriction])
     , _saOperationIds           :: !(Maybe [Text])
     , _saDefaultFacetOptions    :: !(Maybe [FacetOptions])
@@ -199,7 +242,9 @@ data SearchApplication = SearchApplication'
     , _saSourceConfig           :: !(Maybe [SourceConfig])
     , _saDisplayName            :: !(Maybe Text)
     , _saDefaultSortOptions     :: !(Maybe SortOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchApplication' with the minimum fields required to make a request.
 --
@@ -223,7 +268,7 @@ data SearchApplication = SearchApplication'
 searchApplication
     :: SearchApplication
 searchApplication =
-    SearchApplication'
+  SearchApplication'
     { _saDataSourceRestrictions = Nothing
     , _saOperationIds = Nothing
     , _saDefaultFacetOptions = Nothing
@@ -233,6 +278,7 @@ searchApplication =
     , _saDisplayName = Nothing
     , _saDefaultSortOptions = Nothing
     }
+
 
 -- | Retrictions applied to the configurations. The maximum number of
 -- elements is 10.
@@ -327,9 +373,12 @@ instance ToJSON SearchApplication where
 -- fields relevant to the type of item being searched.
 --
 -- /See:/ 'booleanOperatorOptions' smart constructor.
-newtype BooleanOperatorOptions = BooleanOperatorOptions'
+newtype BooleanOperatorOptions =
+  BooleanOperatorOptions'
     { _booOperatorName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BooleanOperatorOptions' with the minimum fields required to make a request.
 --
@@ -338,10 +387,8 @@ newtype BooleanOperatorOptions = BooleanOperatorOptions'
 -- * 'booOperatorName'
 booleanOperatorOptions
     :: BooleanOperatorOptions
-booleanOperatorOptions =
-    BooleanOperatorOptions'
-    { _booOperatorName = Nothing
-    }
+booleanOperatorOptions = BooleanOperatorOptions' {_booOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the boolean property. For example, if operatorName is *closed* and the
@@ -406,11 +453,14 @@ instance ToJSON BooleanOperatorOptions where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -423,12 +473,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -477,11 +523,14 @@ instance ToJSON Status where
 -- those items indexed with the value *p0*.
 --
 -- /See:/ 'enumPropertyOptions' smart constructor.
-data EnumPropertyOptions = EnumPropertyOptions'
+data EnumPropertyOptions =
+  EnumPropertyOptions'
     { _epoPossibleValues  :: !(Maybe [EnumValuePair])
     , _epoOrderedRanking  :: !(Maybe EnumPropertyOptionsOrderedRanking)
     , _epoOperatorOptions :: !(Maybe EnumOperatorOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnumPropertyOptions' with the minimum fields required to make a request.
 --
@@ -495,11 +544,12 @@ data EnumPropertyOptions = EnumPropertyOptions'
 enumPropertyOptions
     :: EnumPropertyOptions
 enumPropertyOptions =
-    EnumPropertyOptions'
+  EnumPropertyOptions'
     { _epoPossibleValues = Nothing
     , _epoOrderedRanking = Nothing
     , _epoOperatorOptions = Nothing
     }
+
 
 -- | The list of possible values for the enumeration property. All
 -- EnumValuePairs must provide a string value. If you specify an integer
@@ -550,13 +600,48 @@ instance ToJSON EnumPropertyOptions where
                   ("orderedRanking" .=) <$> _epoOrderedRanking,
                   ("operatorOptions" .=) <$> _epoOperatorOptions])
 
+-- | Gmail Action restricts (i.e. read\/replied\/snoozed).
+--
+-- /See:/ 'gmailActionRestrict' smart constructor.
+newtype GmailActionRestrict =
+  GmailActionRestrict'
+    { _garType :: Maybe GmailActionRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailActionRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'garType'
+gmailActionRestrict
+    :: GmailActionRestrict
+gmailActionRestrict = GmailActionRestrict' {_garType = Nothing}
+
+
+garType :: Lens' GmailActionRestrict (Maybe GmailActionRestrictType)
+garType = lens _garType (\ s a -> s{_garType = a})
+
+instance FromJSON GmailActionRestrict where
+        parseJSON
+          = withObject "GmailActionRestrict"
+              (\ o -> GmailActionRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailActionRestrict where
+        toJSON GmailActionRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _garType])
+
 --
 -- /See:/ 'unreserveItemsRequest' smart constructor.
-data UnreserveItemsRequest = UnreserveItemsRequest'
+data UnreserveItemsRequest =
+  UnreserveItemsRequest'
     { _uirQueue         :: !(Maybe Text)
     , _uirDebugOptions  :: !(Maybe DebugOptions)
     , _uirConnectorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnreserveItemsRequest' with the minimum fields required to make a request.
 --
@@ -570,11 +655,12 @@ data UnreserveItemsRequest = UnreserveItemsRequest'
 unreserveItemsRequest
     :: UnreserveItemsRequest
 unreserveItemsRequest =
-    UnreserveItemsRequest'
+  UnreserveItemsRequest'
     { _uirQueue = Nothing
     , _uirDebugOptions = Nothing
     , _uirConnectorName = Nothing
     }
+
 
 -- | Name of a queue to unreserve items from.
 uirQueue :: Lens' UnreserveItemsRequest (Maybe Text)
@@ -614,11 +700,14 @@ instance ToJSON UnreserveItemsRequest where
 -- the type of item being searched.
 --
 -- /See:/ 'dateOperatorOptions' smart constructor.
-data DateOperatorOptions = DateOperatorOptions'
+data DateOperatorOptions =
+  DateOperatorOptions'
     { _dooOperatorName            :: !(Maybe Text)
     , _dooLessThanOperatorName    :: !(Maybe Text)
     , _dooGreaterThanOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DateOperatorOptions' with the minimum fields required to make a request.
 --
@@ -632,11 +721,12 @@ data DateOperatorOptions = DateOperatorOptions'
 dateOperatorOptions
     :: DateOperatorOptions
 dateOperatorOptions =
-    DateOperatorOptions'
+  DateOperatorOptions'
     { _dooOperatorName = Nothing
     , _dooLessThanOperatorName = Nothing
     , _dooGreaterThanOperatorName = Nothing
     }
+
 
 -- | Indicates the actual string required in the query in order to isolate
 -- the date property. For example, suppose an issue tracking schema object
@@ -698,9 +788,12 @@ instance ToJSON DateOperatorOptions where
 
 --
 -- /See:/ 'getDataSourceIndexStatsResponse' smart constructor.
-newtype GetDataSourceIndexStatsResponse = GetDataSourceIndexStatsResponse'
+newtype GetDataSourceIndexStatsResponse =
+  GetDataSourceIndexStatsResponse'
     { _gdsisrStats :: Maybe [DataSourceIndexStats]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetDataSourceIndexStatsResponse' with the minimum fields required to make a request.
 --
@@ -710,9 +803,8 @@ newtype GetDataSourceIndexStatsResponse = GetDataSourceIndexStatsResponse'
 getDataSourceIndexStatsResponse
     :: GetDataSourceIndexStatsResponse
 getDataSourceIndexStatsResponse =
-    GetDataSourceIndexStatsResponse'
-    { _gdsisrStats = Nothing
-    }
+  GetDataSourceIndexStatsResponse' {_gdsisrStats = Nothing}
+
 
 -- | Summary of indexed item counts, one for each day in the requested range.
 gdsisrStats :: Lens' GetDataSourceIndexStatsResponse [DataSourceIndexStats]
@@ -736,10 +828,13 @@ instance ToJSON GetDataSourceIndexStatsResponse where
 -- | The display options for an object.
 --
 -- /See:/ 'objectDisplayOptions' smart constructor.
-data ObjectDisplayOptions = ObjectDisplayOptions'
+data ObjectDisplayOptions =
+  ObjectDisplayOptions'
     { _odoMetalines          :: !(Maybe [Metaline])
     , _odoObjectDisplayLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectDisplayOptions' with the minimum fields required to make a request.
 --
@@ -751,10 +846,9 @@ data ObjectDisplayOptions = ObjectDisplayOptions'
 objectDisplayOptions
     :: ObjectDisplayOptions
 objectDisplayOptions =
-    ObjectDisplayOptions'
-    { _odoMetalines = Nothing
-    , _odoObjectDisplayLabel = Nothing
-    }
+  ObjectDisplayOptions'
+    {_odoMetalines = Nothing, _odoObjectDisplayLabel = Nothing}
+
 
 -- | Defines the properties that will be displayed in the metalines of the
 -- search results. The property values will be displayed in the order given
@@ -762,7 +856,7 @@ objectDisplayOptions =
 -- diplayed before the next properties. For this reason, it is a good
 -- practice to specify singular properties before repeated properties in
 -- this list. All of the properties must set is_returnable to true. The
--- maximum number of elements is 3.
+-- maximum number of metalines is 3.
 odoMetalines :: Lens' ObjectDisplayOptions [Metaline]
 odoMetalines
   = lens _odoMetalines (\ s a -> s{_odoMetalines = a})
@@ -797,9 +891,12 @@ instance ToJSON ObjectDisplayOptions where
 -- | Information relevant only to a query entry.
 --
 -- /See:/ 'queryItem' smart constructor.
-newtype QueryItem = QueryItem'
+newtype QueryItem =
+  QueryItem'
     { _qiIsSynthetic :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryItem' with the minimum fields required to make a request.
 --
@@ -808,10 +905,8 @@ newtype QueryItem = QueryItem'
 -- * 'qiIsSynthetic'
 queryItem
     :: QueryItem
-queryItem =
-    QueryItem'
-    { _qiIsSynthetic = Nothing
-    }
+queryItem = QueryItem' {_qiIsSynthetic = Nothing}
+
 
 -- | True if the text was generated by means other than a previous user
 -- search.
@@ -832,10 +927,13 @@ instance ToJSON QueryItem where
 
 --
 -- /See:/ 'listUnmAppedIdentitiesResponse' smart constructor.
-data ListUnmAppedIdentitiesResponse = ListUnmAppedIdentitiesResponse'
+data ListUnmAppedIdentitiesResponse =
+  ListUnmAppedIdentitiesResponse'
     { _luairNextPageToken      :: !(Maybe Text)
     , _luairUnmAppedIdentities :: !(Maybe [UnmAppedIdentity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUnmAppedIdentitiesResponse' with the minimum fields required to make a request.
 --
@@ -847,10 +945,9 @@ data ListUnmAppedIdentitiesResponse = ListUnmAppedIdentitiesResponse'
 listUnmAppedIdentitiesResponse
     :: ListUnmAppedIdentitiesResponse
 listUnmAppedIdentitiesResponse =
-    ListUnmAppedIdentitiesResponse'
-    { _luairNextPageToken = Nothing
-    , _luairUnmAppedIdentities = Nothing
-    }
+  ListUnmAppedIdentitiesResponse'
+    {_luairNextPageToken = Nothing, _luairUnmAppedIdentities = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -885,11 +982,14 @@ instance ToJSON ListUnmAppedIdentitiesResponse where
 
 --
 -- /See:/ 'deleteQueueItemsRequest' smart constructor.
-data DeleteQueueItemsRequest = DeleteQueueItemsRequest'
+data DeleteQueueItemsRequest =
+  DeleteQueueItemsRequest'
     { _dqirQueue         :: !(Maybe Text)
     , _dqirDebugOptions  :: !(Maybe DebugOptions)
     , _dqirConnectorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeleteQueueItemsRequest' with the minimum fields required to make a request.
 --
@@ -903,11 +1003,12 @@ data DeleteQueueItemsRequest = DeleteQueueItemsRequest'
 deleteQueueItemsRequest
     :: DeleteQueueItemsRequest
 deleteQueueItemsRequest =
-    DeleteQueueItemsRequest'
+  DeleteQueueItemsRequest'
     { _dqirQueue = Nothing
     , _dqirDebugOptions = Nothing
     , _dqirConnectorName = Nothing
     }
+
 
 -- | Name of a queue to delete items from.
 dqirQueue :: Lens' DeleteQueueItemsRequest (Maybe Text)
@@ -946,14 +1047,17 @@ instance ToJSON DeleteQueueItemsRequest where
 -- | Results containing indexed information for a document.
 --
 -- /See:/ 'searchResult' smart constructor.
-data SearchResult = SearchResult'
+data SearchResult =
+  SearchResult'
     { _srDebugInfo        :: !(Maybe ResultDebugInfo)
     , _srSnippet          :: !(Maybe Snippet)
     , _srURL              :: !(Maybe Text)
     , _srClusteredResults :: !(Maybe [SearchResult])
     , _srMetadata         :: !(Maybe Metadata)
     , _srTitle            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchResult' with the minimum fields required to make a request.
 --
@@ -973,7 +1077,7 @@ data SearchResult = SearchResult'
 searchResult
     :: SearchResult
 searchResult =
-    SearchResult'
+  SearchResult'
     { _srDebugInfo = Nothing
     , _srSnippet = Nothing
     , _srURL = Nothing
@@ -981,6 +1085,7 @@ searchResult =
     , _srMetadata = Nothing
     , _srTitle = Nothing
     }
+
 
 -- | Debugging information about this search result.
 srDebugInfo :: Lens' SearchResult (Maybe ResultDebugInfo)
@@ -992,7 +1097,8 @@ srSnippet :: Lens' SearchResult (Maybe Snippet)
 srSnippet
   = lens _srSnippet (\ s a -> s{_srSnippet = a})
 
--- | The URL of the result.
+-- | The URL of the search result. The URL contains a Google redirect to the
+-- actual item. This URL is signed and shouldn\'t be changed.
 srURL :: Lens' SearchResult (Maybe Text)
 srURL = lens _srURL (\ s a -> s{_srURL = a})
 
@@ -1038,9 +1144,12 @@ instance ToJSON SearchResult where
 
 --
 -- /See:/ 'spellResult' smart constructor.
-newtype SpellResult = SpellResult'
+newtype SpellResult =
+  SpellResult'
     { _srSuggestedQuery :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpellResult' with the minimum fields required to make a request.
 --
@@ -1049,10 +1158,8 @@ newtype SpellResult = SpellResult'
 -- * 'srSuggestedQuery'
 spellResult
     :: SpellResult
-spellResult =
-    SpellResult'
-    { _srSuggestedQuery = Nothing
-    }
+spellResult = SpellResult' {_srSuggestedQuery = Nothing}
+
 
 -- | The suggested spelling of the query.
 srSuggestedQuery :: Lens' SpellResult (Maybe Text)
@@ -1071,12 +1178,15 @@ instance ToJSON SpellResult where
               (catMaybes
                  [("suggestedQuery" .=) <$> _srSuggestedQuery])
 
--- | A people suggestion.
+-- | This field contains information about the person being suggested.
 --
 -- /See:/ 'peopleSuggestion' smart constructor.
-newtype PeopleSuggestion = PeopleSuggestion'
+newtype PeopleSuggestion =
+  PeopleSuggestion'
     { _psPerson :: Maybe Person
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleSuggestion' with the minimum fields required to make a request.
 --
@@ -1085,10 +1195,8 @@ newtype PeopleSuggestion = PeopleSuggestion'
 -- * 'psPerson'
 peopleSuggestion
     :: PeopleSuggestion
-peopleSuggestion =
-    PeopleSuggestion'
-    { _psPerson = Nothing
-    }
+peopleSuggestion = PeopleSuggestion' {_psPerson = Nothing}
+
 
 -- | Suggested person. All fields of the person object might not be
 -- populated.
@@ -1107,12 +1215,15 @@ instance ToJSON PeopleSuggestion where
 -- | List of sources that the user can search using the query API.
 --
 -- /See:/ 'querySource' smart constructor.
-data QuerySource = QuerySource'
+data QuerySource =
+  QuerySource'
     { _qsShortName   :: !(Maybe Text)
     , _qsDisplayName :: !(Maybe Text)
     , _qsSource      :: !(Maybe Source)
     , _qsOperators   :: !(Maybe [QueryOperator])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuerySource' with the minimum fields required to make a request.
 --
@@ -1128,12 +1239,13 @@ data QuerySource = QuerySource'
 querySource
     :: QuerySource
 querySource =
-    QuerySource'
+  QuerySource'
     { _qsShortName = Nothing
     , _qsDisplayName = Nothing
     , _qsSource = Nothing
     , _qsOperators = Nothing
     }
+
 
 -- | A short name or alias for the source. This value can be used with the
 -- \'source\' operator.
@@ -1179,9 +1291,12 @@ instance ToJSON QuerySource where
 -- | Response of the suggest API.
 --
 -- /See:/ 'suggestResponse' smart constructor.
-newtype SuggestResponse = SuggestResponse'
+newtype SuggestResponse =
+  SuggestResponse'
     { _srSuggestResults :: Maybe [SuggestResult]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SuggestResponse' with the minimum fields required to make a request.
 --
@@ -1190,12 +1305,10 @@ newtype SuggestResponse = SuggestResponse'
 -- * 'srSuggestResults'
 suggestResponse
     :: SuggestResponse
-suggestResponse =
-    SuggestResponse'
-    { _srSuggestResults = Nothing
-    }
+suggestResponse = SuggestResponse' {_srSuggestResults = Nothing}
 
--- | List of suggestion results.
+
+-- | List of suggestions.
 srSuggestResults :: Lens' SuggestResponse [SuggestResult]
 srSuggestResults
   = lens _srSuggestResults
@@ -1219,11 +1332,14 @@ instance ToJSON SuggestResponse where
 -- | Errors when the connector is communicating to the source repository.
 --
 -- /See:/ 'repositoryError' smart constructor.
-data RepositoryError = RepositoryError'
+data RepositoryError =
+  RepositoryError'
     { _reHTTPStatusCode :: !(Maybe (Textual Int32))
     , _reType           :: !(Maybe RepositoryErrorType)
     , _reErrorMessage   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepositoryError' with the minimum fields required to make a request.
 --
@@ -1237,11 +1353,9 @@ data RepositoryError = RepositoryError'
 repositoryError
     :: RepositoryError
 repositoryError =
-    RepositoryError'
-    { _reHTTPStatusCode = Nothing
-    , _reType = Nothing
-    , _reErrorMessage = Nothing
-    }
+  RepositoryError'
+    {_reHTTPStatusCode = Nothing, _reType = Nothing, _reErrorMessage = Nothing}
+
 
 -- | Error codes. Matches the definition of HTTP status codes.
 reHTTPStatusCode :: Lens' RepositoryError (Maybe Int32)
@@ -1280,10 +1394,13 @@ instance ToJSON RepositoryError where
 -- | Options for html properties.
 --
 -- /See:/ 'htmlPropertyOptions' smart constructor.
-data HTMLPropertyOptions = HTMLPropertyOptions'
+data HTMLPropertyOptions =
+  HTMLPropertyOptions'
     { _hpoRetrievalImportance :: !(Maybe RetrievalImportance)
     , _hpoOperatorOptions     :: !(Maybe HTMLOperatorOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTMLPropertyOptions' with the minimum fields required to make a request.
 --
@@ -1295,10 +1412,9 @@ data HTMLPropertyOptions = HTMLPropertyOptions'
 htmlPropertyOptions
     :: HTMLPropertyOptions
 htmlPropertyOptions =
-    HTMLPropertyOptions'
-    { _hpoRetrievalImportance = Nothing
-    , _hpoOperatorOptions = Nothing
-    }
+  HTMLPropertyOptions'
+    {_hpoRetrievalImportance = Nothing, _hpoOperatorOptions = Nothing}
+
 
 -- | Indicates the search quality importance of the tokens within the field
 -- when used for retrieval. Can only be set to DEFAULT or NONE.
@@ -1332,7 +1448,8 @@ instance ToJSON HTMLPropertyOptions where
 -- | The definition of a property within an object.
 --
 -- /See:/ 'propertyDefinition' smart constructor.
-data PropertyDefinition = PropertyDefinition'
+data PropertyDefinition =
+  PropertyDefinition'
     { _pdEnumPropertyOptions      :: !(Maybe EnumPropertyOptions)
     , _pdHTMLPropertyOptions      :: !(Maybe HTMLPropertyOptions)
     , _pdObjectPropertyOptions    :: !(Maybe ObjectPropertyOptions)
@@ -1348,7 +1465,9 @@ data PropertyDefinition = PropertyDefinition'
     , _pdIsFacetable              :: !(Maybe Bool)
     , _pdBooleanPropertyOptions   :: !(Maybe BooleanPropertyOptions)
     , _pdDatePropertyOptions      :: !(Maybe DatePropertyOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PropertyDefinition' with the minimum fields required to make a request.
 --
@@ -1386,7 +1505,7 @@ data PropertyDefinition = PropertyDefinition'
 propertyDefinition
     :: PropertyDefinition
 propertyDefinition =
-    PropertyDefinition'
+  PropertyDefinition'
     { _pdEnumPropertyOptions = Nothing
     , _pdHTMLPropertyOptions = Nothing
     , _pdObjectPropertyOptions = Nothing
@@ -1403,6 +1522,7 @@ propertyDefinition =
     , _pdBooleanPropertyOptions = Nothing
     , _pdDatePropertyOptions = Nothing
     }
+
 
 pdEnumPropertyOptions :: Lens' PropertyDefinition (Maybe EnumPropertyOptions)
 pdEnumPropertyOptions
@@ -1560,10 +1680,13 @@ instance ToJSON PropertyDefinition where
 
 --
 -- /See:/ 'sortOptions' smart constructor.
-data SortOptions = SortOptions'
+data SortOptions =
+  SortOptions'
     { _soSortOrder    :: !(Maybe SortOptionsSortOrder)
     , _soOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SortOptions' with the minimum fields required to make a request.
 --
@@ -1574,11 +1697,8 @@ data SortOptions = SortOptions'
 -- * 'soOperatorName'
 sortOptions
     :: SortOptions
-sortOptions =
-    SortOptions'
-    { _soSortOrder = Nothing
-    , _soOperatorName = Nothing
-    }
+sortOptions = SortOptions' {_soSortOrder = Nothing, _soOperatorName = Nothing}
+
 
 -- | Ascending is the default sort order
 soSortOrder :: Lens' SortOptions (Maybe SortOptionsSortOrder)
@@ -1609,9 +1729,12 @@ instance ToJSON SortOptions where
 -- | Options for object properties.
 --
 -- /See:/ 'objectPropertyOptions' smart constructor.
-newtype ObjectPropertyOptions = ObjectPropertyOptions'
+newtype ObjectPropertyOptions =
+  ObjectPropertyOptions'
     { _opoSubobjectProperties :: Maybe [PropertyDefinition]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectPropertyOptions' with the minimum fields required to make a request.
 --
@@ -1621,9 +1744,8 @@ newtype ObjectPropertyOptions = ObjectPropertyOptions'
 objectPropertyOptions
     :: ObjectPropertyOptions
 objectPropertyOptions =
-    ObjectPropertyOptions'
-    { _opoSubobjectProperties = Nothing
-    }
+  ObjectPropertyOptions' {_opoSubobjectProperties = Nothing}
+
 
 -- | The properties of the sub-object. These properties represent a nested
 -- object. For example, if this property represents a postal address, the
@@ -1653,7 +1775,8 @@ instance ToJSON ObjectPropertyOptions where
 -- | The search API response.
 --
 -- /See:/ 'searchResponse' smart constructor.
-data SearchResponse = SearchResponse'
+data SearchResponse =
+  SearchResponse'
     { _sSpellResults        :: !(Maybe [SpellResult])
     , _sFacetResults        :: !(Maybe [FacetResult])
     , _sDebugInfo           :: !(Maybe ResponseDebugInfo)
@@ -1665,7 +1788,9 @@ data SearchResponse = SearchResponse'
     , _sQueryInterpretation :: !(Maybe QueryInterpretation)
     , _sStructuredResults   :: !(Maybe [StructuredResult])
     , _sErrorInfo           :: !(Maybe ErrorInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchResponse' with the minimum fields required to make a request.
 --
@@ -1695,7 +1820,7 @@ data SearchResponse = SearchResponse'
 searchResponse
     :: SearchResponse
 searchResponse =
-    SearchResponse'
+  SearchResponse'
     { _sSpellResults = Nothing
     , _sFacetResults = Nothing
     , _sDebugInfo = Nothing
@@ -1708,6 +1833,7 @@ searchResponse =
     , _sStructuredResults = Nothing
     , _sErrorInfo = Nothing
     }
+
 
 -- | Suggested spelling for the query.
 sSpellResults :: Lens' SearchResponse [SpellResult]
@@ -1820,12 +1946,15 @@ instance ToJSON SearchResponse where
 -- | One suggestion result.
 --
 -- /See:/ 'suggestResult' smart constructor.
-data SuggestResult = SuggestResult'
+data SuggestResult =
+  SuggestResult'
     { _sPeopleSuggestion :: !(Maybe PeopleSuggestion)
     , _sQuerySuggestion  :: !(Maybe QuerySuggestion)
     , _sSuggestedQuery   :: !(Maybe Text)
     , _sSource           :: !(Maybe Source)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SuggestResult' with the minimum fields required to make a request.
 --
@@ -1841,18 +1970,23 @@ data SuggestResult = SuggestResult'
 suggestResult
     :: SuggestResult
 suggestResult =
-    SuggestResult'
+  SuggestResult'
     { _sPeopleSuggestion = Nothing
     , _sQuerySuggestion = Nothing
     , _sSuggestedQuery = Nothing
     , _sSource = Nothing
     }
 
+
+-- | This is present when the suggestion indicates a person. It contains more
+-- information about the person - like their email ID, name etc.
 sPeopleSuggestion :: Lens' SuggestResult (Maybe PeopleSuggestion)
 sPeopleSuggestion
   = lens _sPeopleSuggestion
       (\ s a -> s{_sPeopleSuggestion = a})
 
+-- | This field will be present if the suggested query is a word\/phrase
+-- completion.
 sQuerySuggestion :: Lens' SuggestResult (Maybe QuerySuggestion)
 sQuerySuggestion
   = lens _sQuerySuggestion
@@ -1891,9 +2025,12 @@ instance ToJSON SuggestResult where
 -- | List of text values.
 --
 -- /See:/ 'textValues' smart constructor.
-newtype TextValues = TextValues'
+newtype TextValues =
+  TextValues'
     { _tvValues :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TextValues' with the minimum fields required to make a request.
 --
@@ -1902,13 +2039,10 @@ newtype TextValues = TextValues'
 -- * 'tvValues'
 textValues
     :: TextValues
-textValues =
-    TextValues'
-    { _tvValues = Nothing
-    }
+textValues = TextValues' {_tvValues = Nothing}
 
--- | The maximum allowable length for text values is 2048 characters. The
--- maximum number of string elements is 100.
+
+-- | The maximum allowable length for text values is 2048 characters.
 tvValues :: Lens' TextValues [Text]
 tvValues
   = lens _tvValues (\ s a -> s{_tvValues = a}) .
@@ -1927,9 +2061,12 @@ instance ToJSON TextValues where
 -- | Drive location search restricts (e.g. \"is:starred\").
 --
 -- /See:/ 'driveLocationRestrict' smart constructor.
-newtype DriveLocationRestrict = DriveLocationRestrict'
+newtype DriveLocationRestrict =
+  DriveLocationRestrict'
     { _dlrType :: Maybe DriveLocationRestrictType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveLocationRestrict' with the minimum fields required to make a request.
 --
@@ -1938,10 +2075,8 @@ newtype DriveLocationRestrict = DriveLocationRestrict'
 -- * 'dlrType'
 driveLocationRestrict
     :: DriveLocationRestrict
-driveLocationRestrict =
-    DriveLocationRestrict'
-    { _dlrType = Nothing
-    }
+driveLocationRestrict = DriveLocationRestrict' {_dlrType = Nothing}
+
 
 dlrType :: Lens' DriveLocationRestrict (Maybe DriveLocationRestrictType)
 dlrType = lens _dlrType (\ s a -> s{_dlrType = a})
@@ -1958,10 +2093,13 @@ instance ToJSON DriveLocationRestrict where
 -- | List sources response.
 --
 -- /See:/ 'listQuerySourcesResponse' smart constructor.
-data ListQuerySourcesResponse = ListQuerySourcesResponse'
+data ListQuerySourcesResponse =
+  ListQuerySourcesResponse'
     { _lqsrNextPageToken :: !(Maybe Text)
     , _lqsrSources       :: !(Maybe [QuerySource])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListQuerySourcesResponse' with the minimum fields required to make a request.
 --
@@ -1973,10 +2111,9 @@ data ListQuerySourcesResponse = ListQuerySourcesResponse'
 listQuerySourcesResponse
     :: ListQuerySourcesResponse
 listQuerySourcesResponse =
-    ListQuerySourcesResponse'
-    { _lqsrNextPageToken = Nothing
-    , _lqsrSources = Nothing
-    }
+  ListQuerySourcesResponse'
+    {_lqsrNextPageToken = Nothing, _lqsrSources = Nothing}
+
 
 lqsrNextPageToken :: Lens' ListQuerySourcesResponse (Maybe Text)
 lqsrNextPageToken
@@ -2009,9 +2146,12 @@ instance ToJSON ListQuerySourcesResponse where
 -- fields relevant to the type of item being searched.
 --
 -- /See:/ 'doubleOperatorOptions' smart constructor.
-newtype DoubleOperatorOptions = DoubleOperatorOptions'
+newtype DoubleOperatorOptions =
+  DoubleOperatorOptions'
     { _dOperatorName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DoubleOperatorOptions' with the minimum fields required to make a request.
 --
@@ -2020,10 +2160,8 @@ newtype DoubleOperatorOptions = DoubleOperatorOptions'
 -- * 'dOperatorName'
 doubleOperatorOptions
     :: DoubleOperatorOptions
-doubleOperatorOptions =
-    DoubleOperatorOptions'
-    { _dOperatorName = Nothing
-    }
+doubleOperatorOptions = DoubleOperatorOptions' {_dOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to use the
 -- double property in sorting or as a facet. The operator name can only
@@ -2048,13 +2186,16 @@ instance ToJSON DoubleOperatorOptions where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -2072,13 +2213,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -2138,13 +2280,16 @@ instance ToJSON Operation where
 -- | Object to represent a person.
 --
 -- /See:/ 'person' smart constructor.
-data Person = Person'
+data Person =
+  Person'
     { _pEmailAddresses :: !(Maybe [EmailAddress])
     , _pPersonNames    :: !(Maybe [Name])
     , _pPhotos         :: !(Maybe [Photo])
     , _pName           :: !(Maybe Text)
     , _pObfuscatedId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
 --
@@ -2162,13 +2307,14 @@ data Person = Person'
 person
     :: Person
 person =
-    Person'
+  Person'
     { _pEmailAddresses = Nothing
     , _pPersonNames = Nothing
     , _pPhotos = Nothing
     , _pName = Nothing
     , _pObfuscatedId = Nothing
     }
+
 
 -- | The person\'s email addresses
 pEmailAddresses :: Lens' Person [EmailAddress]
@@ -2226,10 +2372,13 @@ instance ToJSON Person where
 
 --
 -- /See:/ 'compositeFilter' smart constructor.
-data CompositeFilter = CompositeFilter'
+data CompositeFilter =
+  CompositeFilter'
     { _cfSubFilters    :: !(Maybe [Filter])
     , _cfLogicOperator :: !(Maybe CompositeFilterLogicOperator)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
@@ -2241,10 +2390,8 @@ data CompositeFilter = CompositeFilter'
 compositeFilter
     :: CompositeFilter
 compositeFilter =
-    CompositeFilter'
-    { _cfSubFilters = Nothing
-    , _cfLogicOperator = Nothing
-    }
+  CompositeFilter' {_cfSubFilters = Nothing, _cfLogicOperator = Nothing}
+
 
 -- | Sub filters.
 cfSubFilters :: Lens' CompositeFilter [Filter]
@@ -2277,9 +2424,12 @@ instance ToJSON CompositeFilter where
 -- | The collection of fields that make up a displayed line
 --
 -- /See:/ 'resultDisplayLine' smart constructor.
-newtype ResultDisplayLine = ResultDisplayLine'
+newtype ResultDisplayLine =
+  ResultDisplayLine'
     { _rdlFields :: Maybe [ResultDisplayField]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultDisplayLine' with the minimum fields required to make a request.
 --
@@ -2288,10 +2438,8 @@ newtype ResultDisplayLine = ResultDisplayLine'
 -- * 'rdlFields'
 resultDisplayLine
     :: ResultDisplayLine
-resultDisplayLine =
-    ResultDisplayLine'
-    { _rdlFields = Nothing
-    }
+resultDisplayLine = ResultDisplayLine' {_rdlFields = Nothing}
+
 
 rdlFields :: Lens' ResultDisplayLine [ResultDisplayField]
 rdlFields
@@ -2312,9 +2460,12 @@ instance ToJSON ResultDisplayLine where
 -- | List of double values.
 --
 -- /See:/ 'doubleValues' smart constructor.
-newtype DoubleValues = DoubleValues'
+newtype DoubleValues =
+  DoubleValues'
     { _dvValues :: Maybe [Textual Double]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DoubleValues' with the minimum fields required to make a request.
 --
@@ -2323,12 +2474,9 @@ newtype DoubleValues = DoubleValues'
 -- * 'dvValues'
 doubleValues
     :: DoubleValues
-doubleValues =
-    DoubleValues'
-    { _dvValues = Nothing
-    }
+doubleValues = DoubleValues' {_dvValues = Nothing}
 
--- | The maximum number of elements is 100.
+
 dvValues :: Lens' DoubleValues [Double]
 dvValues
   = lens _dvValues (\ s a -> s{_dvValues = a}) .
@@ -2349,10 +2497,13 @@ instance ToJSON DoubleValues where
 -- resulting page.
 --
 -- /See:/ 'snippet' smart constructor.
-data Snippet = Snippet'
+data Snippet =
+  Snippet'
     { _sMatchRanges :: !(Maybe [MatchRange])
     , _sSnippet     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Snippet' with the minimum fields required to make a request.
 --
@@ -2363,11 +2514,8 @@ data Snippet = Snippet'
 -- * 'sSnippet'
 snippet
     :: Snippet
-snippet =
-    Snippet'
-    { _sMatchRanges = Nothing
-    , _sSnippet = Nothing
-    }
+snippet = Snippet' {_sMatchRanges = Nothing, _sSnippet = Nothing}
+
 
 -- | The matched ranges in the snippet.
 sMatchRanges :: Lens' Snippet [MatchRange]
@@ -2401,10 +2549,13 @@ instance ToJSON Snippet where
 -- relevant to the type of item being searched.
 --
 -- /See:/ 'textOperatorOptions' smart constructor.
-data TextOperatorOptions = TextOperatorOptions'
+data TextOperatorOptions =
+  TextOperatorOptions'
     { _tooOperatorName           :: !(Maybe Text)
     , _tooExactMatchWithOperator :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TextOperatorOptions' with the minimum fields required to make a request.
 --
@@ -2416,10 +2567,9 @@ data TextOperatorOptions = TextOperatorOptions'
 textOperatorOptions
     :: TextOperatorOptions
 textOperatorOptions =
-    TextOperatorOptions'
-    { _tooOperatorName = Nothing
-    , _tooExactMatchWithOperator = Nothing
-    }
+  TextOperatorOptions'
+    {_tooOperatorName = Nothing, _tooExactMatchWithOperator = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the text property. For example, if operatorName is *subject* and the
@@ -2467,9 +2617,12 @@ instance ToJSON TextOperatorOptions where
 -- | Options to interpret user query.
 --
 -- /See:/ 'queryInterpretationOptions' smart constructor.
-newtype QueryInterpretationOptions = QueryInterpretationOptions'
+newtype QueryInterpretationOptions =
+  QueryInterpretationOptions'
     { _qioDisableNlInterpretation :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryInterpretationOptions' with the minimum fields required to make a request.
 --
@@ -2479,9 +2632,8 @@ newtype QueryInterpretationOptions = QueryInterpretationOptions'
 queryInterpretationOptions
     :: QueryInterpretationOptions
 queryInterpretationOptions =
-    QueryInterpretationOptions'
-    { _qioDisableNlInterpretation = Nothing
-    }
+  QueryInterpretationOptions' {_qioDisableNlInterpretation = Nothing}
+
 
 -- | Flag to disable natural language (NL) interpretation of queries. Default
 -- is false, Set to true to disable natural language interpretation. NL
@@ -2507,9 +2659,12 @@ instance ToJSON QueryInterpretationOptions where
 
 --
 -- /See:/ 'resetSearchApplicationRequest' smart constructor.
-newtype ResetSearchApplicationRequest = ResetSearchApplicationRequest'
+newtype ResetSearchApplicationRequest =
+  ResetSearchApplicationRequest'
     { _rsarDebugOptions :: Maybe DebugOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResetSearchApplicationRequest' with the minimum fields required to make a request.
 --
@@ -2519,9 +2674,8 @@ newtype ResetSearchApplicationRequest = ResetSearchApplicationRequest'
 resetSearchApplicationRequest
     :: ResetSearchApplicationRequest
 resetSearchApplicationRequest =
-    ResetSearchApplicationRequest'
-    { _rsarDebugOptions = Nothing
-    }
+  ResetSearchApplicationRequest' {_rsarDebugOptions = Nothing}
+
 
 -- | Common debug options.
 rsarDebugOptions :: Lens' ResetSearchApplicationRequest (Maybe DebugOptions)
@@ -2545,7 +2699,8 @@ instance ToJSON ResetSearchApplicationRequest where
 -- | Available metadata fields for the item.
 --
 -- /See:/ 'itemMetadata' smart constructor.
-data ItemMetadata = ItemMetadata'
+data ItemMetadata =
+  ItemMetadata'
     { _imSourceRepositoryURL   :: !(Maybe Text)
     , _imHash                  :: !(Maybe Text)
     , _imObjectType            :: !(Maybe Text)
@@ -2558,7 +2713,9 @@ data ItemMetadata = ItemMetadata'
     , _imContentLanguage       :: !(Maybe Text)
     , _imSearchQualityMetadata :: !(Maybe SearchQualityMetadata)
     , _imCreateTime            :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemMetadata' with the minimum fields required to make a request.
 --
@@ -2590,7 +2747,7 @@ data ItemMetadata = ItemMetadata'
 itemMetadata
     :: ItemMetadata
 itemMetadata =
-    ItemMetadata'
+  ItemMetadata'
     { _imSourceRepositoryURL = Nothing
     , _imHash = Nothing
     , _imObjectType = Nothing
@@ -2604,6 +2761,7 @@ itemMetadata =
     , _imSearchQualityMetadata = Nothing
     , _imCreateTime = Nothing
     }
+
 
 -- | Link to the source repository serving the data. Search results apply
 -- this link to the title. The maximum length is 2048 characters.
@@ -2733,10 +2891,13 @@ instance ToJSON ItemMetadata where
 -- | Filter options to be applied on query.
 --
 -- /See:/ 'filterOptions' smart constructor.
-data FilterOptions = FilterOptions'
+data FilterOptions =
+  FilterOptions'
     { _foObjectType :: !(Maybe Text)
     , _foFilter     :: !(Maybe Filter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilterOptions' with the minimum fields required to make a request.
 --
@@ -2747,11 +2908,8 @@ data FilterOptions = FilterOptions'
 -- * 'foFilter'
 filterOptions
     :: FilterOptions
-filterOptions =
-    FilterOptions'
-    { _foObjectType = Nothing
-    , _foFilter = Nothing
-    }
+filterOptions = FilterOptions' {_foObjectType = Nothing, _foFilter = Nothing}
+
 
 -- | If object_type is set, only objects of that type are returned. This
 -- should correspond to the name of the object that was registered within
@@ -2782,9 +2940,12 @@ instance ToJSON FilterOptions where
 -- | Structured results that are returned as part of search request.
 --
 -- /See:/ 'structuredResult' smart constructor.
-newtype StructuredResult = StructuredResult'
+newtype StructuredResult =
+  StructuredResult'
     { _srPerson :: Maybe Person
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StructuredResult' with the minimum fields required to make a request.
 --
@@ -2793,11 +2954,10 @@ newtype StructuredResult = StructuredResult'
 -- * 'srPerson'
 structuredResult
     :: StructuredResult
-structuredResult =
-    StructuredResult'
-    { _srPerson = Nothing
-    }
+structuredResult = StructuredResult' {_srPerson = Nothing}
 
+
+-- | Representation of a person
 srPerson :: Lens' StructuredResult (Maybe Person)
 srPerson = lens _srPerson (\ s a -> s{_srPerson = a})
 
@@ -2812,11 +2972,14 @@ instance ToJSON StructuredResult where
 
 --
 -- /See:/ 'processingError' smart constructor.
-data ProcessingError = ProcessingError'
+data ProcessingError =
+  ProcessingError'
     { _peFieldViolations :: !(Maybe [FieldViolation])
     , _peCode            :: !(Maybe ProcessingErrorCode)
     , _peErrorMessage    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProcessingError' with the minimum fields required to make a request.
 --
@@ -2830,11 +2993,9 @@ data ProcessingError = ProcessingError'
 processingError
     :: ProcessingError
 processingError =
-    ProcessingError'
-    { _peFieldViolations = Nothing
-    , _peCode = Nothing
-    , _peErrorMessage = Nothing
-    }
+  ProcessingError'
+    {_peFieldViolations = Nothing, _peCode = Nothing, _peErrorMessage = Nothing}
+
 
 -- | In case the item fields are invalid, this field contains the details
 -- about the validation errors.
@@ -2874,10 +3035,13 @@ instance ToJSON ProcessingError where
 
 --
 -- /See:/ 'listItemNamesForUnmAppedIdentityResponse' smart constructor.
-data ListItemNamesForUnmAppedIdentityResponse = ListItemNamesForUnmAppedIdentityResponse'
+data ListItemNamesForUnmAppedIdentityResponse =
+  ListItemNamesForUnmAppedIdentityResponse'
     { _linfuairNextPageToken :: !(Maybe Text)
     , _linfuairItemNames     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListItemNamesForUnmAppedIdentityResponse' with the minimum fields required to make a request.
 --
@@ -2889,10 +3053,9 @@ data ListItemNamesForUnmAppedIdentityResponse = ListItemNamesForUnmAppedIdentity
 listItemNamesForUnmAppedIdentityResponse
     :: ListItemNamesForUnmAppedIdentityResponse
 listItemNamesForUnmAppedIdentityResponse =
-    ListItemNamesForUnmAppedIdentityResponse'
-    { _linfuairNextPageToken = Nothing
-    , _linfuairItemNames = Nothing
-    }
+  ListItemNamesForUnmAppedIdentityResponse'
+    {_linfuairNextPageToken = Nothing, _linfuairItemNames = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -2909,7 +3072,8 @@ linfuairItemNames
       . _Coerce
 
 instance FromJSON
-         ListItemNamesForUnmAppedIdentityResponse where
+           ListItemNamesForUnmAppedIdentityResponse
+         where
         parseJSON
           = withObject
               "ListItemNamesForUnmAppedIdentityResponse"
@@ -2919,7 +3083,8 @@ instance FromJSON
                      (o .:? "itemNames" .!= mempty))
 
 instance ToJSON
-         ListItemNamesForUnmAppedIdentityResponse where
+           ListItemNamesForUnmAppedIdentityResponse
+         where
         toJSON ListItemNamesForUnmAppedIdentityResponse'{..}
           = object
               (catMaybes
@@ -2930,13 +3095,16 @@ instance ToJSON
 -- https:\/\/developers.google.com\/cloud-search\/docs\/guides\/index-your-data#acls
 --
 -- /See:/ 'itemACL' smart constructor.
-data ItemACL = ItemACL'
+data ItemACL =
+  ItemACL'
     { _iaOwners             :: !(Maybe [Principal])
     , _iaReaders            :: !(Maybe [Principal])
     , _iaACLInheritanceType :: !(Maybe ItemACLACLInheritanceType)
     , _iaInheritACLFrom     :: !(Maybe Text)
     , _iaDeniedReaders      :: !(Maybe [Principal])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemACL' with the minimum fields required to make a request.
 --
@@ -2954,13 +3122,14 @@ data ItemACL = ItemACL'
 itemACL
     :: ItemACL
 itemACL =
-    ItemACL'
+  ItemACL'
     { _iaOwners = Nothing
     , _iaReaders = Nothing
     , _iaACLInheritanceType = Nothing
     , _iaInheritACLFrom = Nothing
     , _iaDeniedReaders = Nothing
     }
+
 
 -- | Optional. List of owners for the item. This field has no bearing on
 -- document access permissions. It does, however, offer a slight ranking
@@ -3041,14 +3210,17 @@ instance ToJSON ItemACL where
 -- | Definition of a single value with generic type.
 --
 -- /See:/ 'value' smart constructor.
-data Value = Value'
+data Value =
+  Value'
     { _vIntegerValue   :: !(Maybe (Textual Int64))
     , _vTimestampValue :: !(Maybe DateTime')
     , _vDoubleValue    :: !(Maybe (Textual Double))
     , _vStringValue    :: !(Maybe Text)
     , _vDateValue      :: !(Maybe Date)
     , _vBooleanValue   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -3068,7 +3240,7 @@ data Value = Value'
 value
     :: Value
 value =
-    Value'
+  Value'
     { _vIntegerValue = Nothing
     , _vTimestampValue = Nothing
     , _vDoubleValue = Nothing
@@ -3076,6 +3248,7 @@ value =
     , _vDateValue = Nothing
     , _vBooleanValue = Nothing
     }
+
 
 vIntegerValue :: Lens' Value (Maybe Int64)
 vIntegerValue
@@ -3131,10 +3304,13 @@ instance ToJSON Value where
 
 --
 -- /See:/ 'fieldViolation' smart constructor.
-data FieldViolation = FieldViolation'
+data FieldViolation =
+  FieldViolation'
     { _fvField       :: !(Maybe Text)
     , _fvDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FieldViolation' with the minimum fields required to make a request.
 --
@@ -3145,11 +3321,8 @@ data FieldViolation = FieldViolation'
 -- * 'fvDescription'
 fieldViolation
     :: FieldViolation
-fieldViolation =
-    FieldViolation'
-    { _fvField = Nothing
-    , _fvDescription = Nothing
-    }
+fieldViolation = FieldViolation' {_fvField = Nothing, _fvDescription = Nothing}
+
 
 -- | Path of field with violation.
 fvField :: Lens' FieldViolation (Maybe Text)
@@ -3179,9 +3352,12 @@ instance ToJSON FieldViolation where
 -- search result to provide context.
 --
 -- /See:/ 'metaline' smart constructor.
-newtype Metaline = Metaline'
+newtype Metaline =
+  Metaline'
     { _mProperties :: Maybe [DisplayedProperty]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metaline' with the minimum fields required to make a request.
 --
@@ -3190,12 +3366,11 @@ newtype Metaline = Metaline'
 -- * 'mProperties'
 metaline
     :: Metaline
-metaline =
-    Metaline'
-    { _mProperties = Nothing
-    }
+metaline = Metaline' {_mProperties = Nothing}
 
--- | The list of displayed properties for the metaline.
+
+-- | The list of displayed properties for the metaline. The maxiumum number
+-- of properties is 5.
 mProperties :: Lens' Metaline [DisplayedProperty]
 mProperties
   = lens _mProperties (\ s a -> s{_mProperties = a}) .
@@ -3219,11 +3394,14 @@ instance ToJSON Metaline where
 -- used only for returning the response object.
 --
 -- /See:/ 'facetBucket' smart constructor.
-data FacetBucket = FacetBucket'
+data FacetBucket =
+  FacetBucket'
     { _fbValue      :: !(Maybe Value)
     , _fbCount      :: !(Maybe (Textual Int32))
     , _fbPercentage :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FacetBucket' with the minimum fields required to make a request.
 --
@@ -3237,23 +3415,23 @@ data FacetBucket = FacetBucket'
 facetBucket
     :: FacetBucket
 facetBucket =
-    FacetBucket'
-    { _fbValue = Nothing
-    , _fbCount = Nothing
-    , _fbPercentage = Nothing
-    }
+  FacetBucket' {_fbValue = Nothing, _fbCount = Nothing, _fbPercentage = Nothing}
+
 
 fbValue :: Lens' FacetBucket (Maybe Value)
 fbValue = lens _fbValue (\ s a -> s{_fbValue = a})
 
--- | Number of results that match the bucket value.
+-- | Number of results that match the bucket value. Counts are only returned
+-- for searches when count accuracy is ensured. Can be empty.
 fbCount :: Lens' FacetBucket (Maybe Int32)
 fbCount
   = lens _fbCount (\ s a -> s{_fbCount = a}) .
       mapping _Coerce
 
 -- | Percent of results that match the bucket value. This value is between
--- (0-100]. This may not be accurate and is a best effort estimate.
+-- (0-100]. Percentages are returned for all searches, but are an estimate.
+-- Because percentages are always returned, you should render percentages
+-- instead of counts.
 fbPercentage :: Lens' FacetBucket (Maybe Int32)
 fbPercentage
   = lens _fbPercentage (\ s a -> s{_fbPercentage = a})
@@ -3277,9 +3455,12 @@ instance ToJSON FacetBucket where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -3290,9 +3471,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -3313,11 +3493,14 @@ instance ToJSON StatusDetailsItem where
 -- fields relevant to the type of item being searched.
 --
 -- /See:/ 'timestampOperatorOptions' smart constructor.
-data TimestampOperatorOptions = TimestampOperatorOptions'
+data TimestampOperatorOptions =
+  TimestampOperatorOptions'
     { _tOperatorName            :: !(Maybe Text)
     , _tLessThanOperatorName    :: !(Maybe Text)
     , _tGreaterThanOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimestampOperatorOptions' with the minimum fields required to make a request.
 --
@@ -3331,11 +3514,12 @@ data TimestampOperatorOptions = TimestampOperatorOptions'
 timestampOperatorOptions
     :: TimestampOperatorOptions
 timestampOperatorOptions =
-    TimestampOperatorOptions'
+  TimestampOperatorOptions'
     { _tOperatorName = Nothing
     , _tLessThanOperatorName = Nothing
     , _tGreaterThanOperatorName = Nothing
     }
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the timestamp property. For example, if operatorName is *closedon* and
@@ -3399,11 +3583,14 @@ instance ToJSON TimestampOperatorOptions where
 -- fields relevant to the type of item being searched.
 --
 -- /See:/ 'integerOperatorOptions' smart constructor.
-data IntegerOperatorOptions = IntegerOperatorOptions'
+data IntegerOperatorOptions =
+  IntegerOperatorOptions'
     { _iooOperatorName            :: !(Maybe Text)
     , _iooLessThanOperatorName    :: !(Maybe Text)
     , _iooGreaterThanOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IntegerOperatorOptions' with the minimum fields required to make a request.
 --
@@ -3417,11 +3604,12 @@ data IntegerOperatorOptions = IntegerOperatorOptions'
 integerOperatorOptions
     :: IntegerOperatorOptions
 integerOperatorOptions =
-    IntegerOperatorOptions'
+  IntegerOperatorOptions'
     { _iooOperatorName = Nothing
     , _iooLessThanOperatorName = Nothing
     , _iooGreaterThanOperatorName = Nothing
     }
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the integer property. For example, if operatorName is *priority* and the
@@ -3480,18 +3668,21 @@ instance ToJSON IntegerOperatorOptions where
                   ("greaterThanOperatorName" .=) <$>
                     _iooGreaterThanOperatorName])
 
--- | A completed query suggestion.
+-- | This field does not contain anything as of now and is just used as an
+-- indicator that the suggest result was a phrase completion.
 --
 -- /See:/ 'querySuggestion' smart constructor.
 data QuerySuggestion =
-    QuerySuggestion'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  QuerySuggestion'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuerySuggestion' with the minimum fields required to make a request.
 --
 querySuggestion
     :: QuerySuggestion
 querySuggestion = QuerySuggestion'
+
 
 instance FromJSON QuerySuggestion where
         parseJSON
@@ -3503,10 +3694,13 @@ instance ToJSON QuerySuggestion where
 
 --
 -- /See:/ 'listSearchApplicationsResponse' smart constructor.
-data ListSearchApplicationsResponse = ListSearchApplicationsResponse'
+data ListSearchApplicationsResponse =
+  ListSearchApplicationsResponse'
     { _lsarNextPageToken      :: !(Maybe Text)
     , _lsarSearchApplications :: !(Maybe [SearchApplication])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSearchApplicationsResponse' with the minimum fields required to make a request.
 --
@@ -3518,10 +3712,9 @@ data ListSearchApplicationsResponse = ListSearchApplicationsResponse'
 listSearchApplicationsResponse
     :: ListSearchApplicationsResponse
 listSearchApplicationsResponse =
-    ListSearchApplicationsResponse'
-    { _lsarNextPageToken = Nothing
-    , _lsarSearchApplications = Nothing
-    }
+  ListSearchApplicationsResponse'
+    {_lsarNextPageToken = Nothing, _lsarSearchApplications = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -3557,9 +3750,12 @@ instance ToJSON ListSearchApplicationsResponse where
 -- | Debugging information about the result.
 --
 -- /See:/ 'resultDebugInfo' smart constructor.
-newtype ResultDebugInfo = ResultDebugInfo'
+newtype ResultDebugInfo =
+  ResultDebugInfo'
     { _rdiFormattedDebugInfo :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultDebugInfo' with the minimum fields required to make a request.
 --
@@ -3568,10 +3764,8 @@ newtype ResultDebugInfo = ResultDebugInfo'
 -- * 'rdiFormattedDebugInfo'
 resultDebugInfo
     :: ResultDebugInfo
-resultDebugInfo =
-    ResultDebugInfo'
-    { _rdiFormattedDebugInfo = Nothing
-    }
+resultDebugInfo = ResultDebugInfo' {_rdiFormattedDebugInfo = Nothing}
+
 
 -- | General debug info formatted for display.
 rdiFormattedDebugInfo :: Lens' ResultDebugInfo (Maybe Text)
@@ -3594,10 +3788,13 @@ instance ToJSON ResultDebugInfo where
 
 --
 -- /See:/ 'itemCountByStatus' smart constructor.
-data ItemCountByStatus = ItemCountByStatus'
+data ItemCountByStatus =
+  ItemCountByStatus'
     { _icbsCount      :: !(Maybe (Textual Int64))
     , _icbsStatusCode :: !(Maybe ItemCountByStatusStatusCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemCountByStatus' with the minimum fields required to make a request.
 --
@@ -3609,10 +3806,8 @@ data ItemCountByStatus = ItemCountByStatus'
 itemCountByStatus
     :: ItemCountByStatus
 itemCountByStatus =
-    ItemCountByStatus'
-    { _icbsCount = Nothing
-    , _icbsStatusCode = Nothing
-    }
+  ItemCountByStatus' {_icbsCount = Nothing, _icbsStatusCode = Nothing}
+
 
 -- | Number of items matching the status code.
 icbsCount :: Lens' ItemCountByStatus (Maybe Int64)
@@ -3643,9 +3838,12 @@ instance ToJSON ItemCountByStatus where
 -- | Options for timestamp properties.
 --
 -- /See:/ 'timestampPropertyOptions' smart constructor.
-newtype TimestampPropertyOptions = TimestampPropertyOptions'
+newtype TimestampPropertyOptions =
+  TimestampPropertyOptions'
     { _tpoOperatorOptions :: Maybe TimestampOperatorOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimestampPropertyOptions' with the minimum fields required to make a request.
 --
@@ -3655,9 +3853,8 @@ newtype TimestampPropertyOptions = TimestampPropertyOptions'
 timestampPropertyOptions
     :: TimestampPropertyOptions
 timestampPropertyOptions =
-    TimestampPropertyOptions'
-    { _tpoOperatorOptions = Nothing
-    }
+  TimestampPropertyOptions' {_tpoOperatorOptions = Nothing}
+
 
 -- | If set, describes how the timestamp should be used as a search operator.
 tpoOperatorOptions :: Lens' TimestampPropertyOptions (Maybe TimestampOperatorOptions)
@@ -3681,9 +3878,12 @@ instance ToJSON TimestampPropertyOptions where
 -- | Result count information
 --
 -- /See:/ 'resultCounts' smart constructor.
-newtype ResultCounts = ResultCounts'
+newtype ResultCounts =
+  ResultCounts'
     { _rcSourceResultCounts :: Maybe [SourceResultCount]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultCounts' with the minimum fields required to make a request.
 --
@@ -3692,10 +3892,8 @@ newtype ResultCounts = ResultCounts'
 -- * 'rcSourceResultCounts'
 resultCounts
     :: ResultCounts
-resultCounts =
-    ResultCounts'
-    { _rcSourceResultCounts = Nothing
-    }
+resultCounts = ResultCounts' {_rcSourceResultCounts = Nothing}
+
 
 -- | Result count information for each source with results.
 rcSourceResultCounts :: Lens' ResultCounts [SourceResultCount]
@@ -3728,10 +3926,13 @@ instance ToJSON ResultCounts where
 -- query are considered higher quality and ranked accordingly.
 --
 -- /See:/ 'freshnessOptions' smart constructor.
-data FreshnessOptions = FreshnessOptions'
+data FreshnessOptions =
+  FreshnessOptions'
     { _foFreshnessDuration :: !(Maybe GDuration)
     , _foFreshnessProperty :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FreshnessOptions' with the minimum fields required to make a request.
 --
@@ -3743,13 +3944,12 @@ data FreshnessOptions = FreshnessOptions'
 freshnessOptions
     :: FreshnessOptions
 freshnessOptions =
-    FreshnessOptions'
-    { _foFreshnessDuration = Nothing
-    , _foFreshnessProperty = Nothing
-    }
+  FreshnessOptions'
+    {_foFreshnessDuration = Nothing, _foFreshnessProperty = Nothing}
 
--- | The duration (in seconds) after which an object should be considered
--- stale.
+
+-- | The duration after which an object should be considered stale. The
+-- default value is 180 days (in seconds).
 foFreshnessDuration :: Lens' FreshnessOptions (Maybe Scientific)
 foFreshnessDuration
   = lens _foFreshnessDuration
@@ -3760,7 +3960,8 @@ foFreshnessDuration
 -- If set, this property must be a top-level property within the property
 -- definitions and it must be a timestamp type or date type. Otherwise, the
 -- Indexing API uses updateTime as the freshness indicator. The maximum
--- length is 256 characters.
+-- length is 256 characters. When a property is used to calculate
+-- fresheness, the value defaults to 2 years from the current time.
 foFreshnessProperty :: Lens' FreshnessOptions (Maybe Text)
 foFreshnessProperty
   = lens _foFreshnessProperty
@@ -3784,9 +3985,12 @@ instance ToJSON FreshnessOptions where
 -- | Shared request debug options for all cloudsearch RPC methods.
 --
 -- /See:/ 'debugOptions' smart constructor.
-newtype DebugOptions = DebugOptions'
+newtype DebugOptions =
+  DebugOptions'
     { _doEnableDebugging :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DebugOptions' with the minimum fields required to make a request.
 --
@@ -3795,13 +3999,11 @@ newtype DebugOptions = DebugOptions'
 -- * 'doEnableDebugging'
 debugOptions
     :: DebugOptions
-debugOptions =
-    DebugOptions'
-    { _doEnableDebugging = Nothing
-    }
+debugOptions = DebugOptions' {_doEnableDebugging = Nothing}
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 doEnableDebugging :: Lens' DebugOptions (Maybe Bool)
 doEnableDebugging
   = lens _doEnableDebugging
@@ -3821,12 +4023,15 @@ instance ToJSON DebugOptions where
 -- | Options for integer properties.
 --
 -- /See:/ 'integerPropertyOptions' smart constructor.
-data IntegerPropertyOptions = IntegerPropertyOptions'
+data IntegerPropertyOptions =
+  IntegerPropertyOptions'
     { _ipoMaximumValue    :: !(Maybe (Textual Int64))
     , _ipoOrderedRanking  :: !(Maybe IntegerPropertyOptionsOrderedRanking)
     , _ipoMinimumValue    :: !(Maybe (Textual Int64))
     , _ipoOperatorOptions :: !(Maybe IntegerOperatorOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IntegerPropertyOptions' with the minimum fields required to make a request.
 --
@@ -3842,12 +4047,13 @@ data IntegerPropertyOptions = IntegerPropertyOptions'
 integerPropertyOptions
     :: IntegerPropertyOptions
 integerPropertyOptions =
-    IntegerPropertyOptions'
+  IntegerPropertyOptions'
     { _ipoMaximumValue = Nothing
     , _ipoOrderedRanking = Nothing
     , _ipoMinimumValue = Nothing
     , _ipoOperatorOptions = Nothing
     }
+
 
 -- | The maximum value of the property. The minimum and maximum values for
 -- the property are used to rank results according to the ordered ranking.
@@ -3903,10 +4109,13 @@ instance ToJSON IntegerPropertyOptions where
 -- | Restriction on Datasource.
 --
 -- /See:/ 'dataSourceRestriction' smart constructor.
-data DataSourceRestriction = DataSourceRestriction'
+data DataSourceRestriction =
+  DataSourceRestriction'
     { _dsrFilterOptions :: !(Maybe [FilterOptions])
     , _dsrSource        :: !(Maybe Source)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSourceRestriction' with the minimum fields required to make a request.
 --
@@ -3918,15 +4127,16 @@ data DataSourceRestriction = DataSourceRestriction'
 dataSourceRestriction
     :: DataSourceRestriction
 dataSourceRestriction =
-    DataSourceRestriction'
-    { _dsrFilterOptions = Nothing
-    , _dsrSource = Nothing
-    }
+  DataSourceRestriction' {_dsrFilterOptions = Nothing, _dsrSource = Nothing}
+
 
 -- | Filter options restricting the results. If multiple filters are present,
 -- they are grouped by object type before joining. Filters with the same
 -- object type are joined conjunctively, then the resulting expressions are
--- joined disjunctively. The maximum number of elements is 20.
+-- joined disjunctively. The maximum number of elements is 20. NOTE:
+-- Suggest API supports only few filters at the moment: \"objecttype\",
+-- \"type\" and \"mimetype\". For now, schema specific filters cannot be
+-- used to filter suggestions.
 dsrFilterOptions :: Lens' DataSourceRestriction [FilterOptions]
 dsrFilterOptions
   = lens _dsrFilterOptions
@@ -3957,10 +4167,13 @@ instance ToJSON DataSourceRestriction where
 -- | The schema definition for a data source.
 --
 -- /See:/ 'schema' smart constructor.
-data Schema = Schema'
+data Schema =
+  Schema'
     { _sObjectDefinitions :: !(Maybe [ObjectDefinition])
     , _sOperationIds      :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Schema' with the minimum fields required to make a request.
 --
@@ -3971,11 +4184,8 @@ data Schema = Schema'
 -- * 'sOperationIds'
 schema
     :: Schema
-schema =
-    Schema'
-    { _sObjectDefinitions = Nothing
-    , _sOperationIds = Nothing
-    }
+schema = Schema' {_sObjectDefinitions = Nothing, _sOperationIds = Nothing}
+
 
 -- | The list of top-level objects for the data source. The maximum number of
 -- elements is 10.
@@ -3987,7 +4197,7 @@ sObjectDefinitions
       . _Coerce
 
 -- | IDs of the Long Running Operations (LROs) currently running for this
--- schema. After modifying the schema, wait for opeations to complete
+-- schema. After modifying the schema, wait for operations to complete
 -- before indexing additional content.
 sOperationIds :: Lens' Schema [Text]
 sOperationIds
@@ -4015,9 +4225,12 @@ instance ToJSON Schema where
 -- before:2017-09-12\").
 --
 -- /See:/ 'driveTimeSpanRestrict' smart constructor.
-newtype DriveTimeSpanRestrict = DriveTimeSpanRestrict'
+newtype DriveTimeSpanRestrict =
+  DriveTimeSpanRestrict'
     { _dtsrType :: Maybe DriveTimeSpanRestrictType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveTimeSpanRestrict' with the minimum fields required to make a request.
 --
@@ -4026,10 +4239,8 @@ newtype DriveTimeSpanRestrict = DriveTimeSpanRestrict'
 -- * 'dtsrType'
 driveTimeSpanRestrict
     :: DriveTimeSpanRestrict
-driveTimeSpanRestrict =
-    DriveTimeSpanRestrict'
-    { _dtsrType = Nothing
-    }
+driveTimeSpanRestrict = DriveTimeSpanRestrict' {_dtsrType = Nothing}
+
 
 dtsrType :: Lens' DriveTimeSpanRestrict (Maybe DriveTimeSpanRestrictType)
 dtsrType = lens _dtsrType (\ s a -> s{_dtsrType = a})
@@ -4046,11 +4257,14 @@ instance ToJSON DriveTimeSpanRestrict where
 -- | Display Fields for Search Results
 --
 -- /See:/ 'resultDisplayField' smart constructor.
-data ResultDisplayField = ResultDisplayField'
+data ResultDisplayField =
+  ResultDisplayField'
     { _rdfProperty     :: !(Maybe NamedProperty)
     , _rdfOperatorName :: !(Maybe Text)
     , _rdfLabel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultDisplayField' with the minimum fields required to make a request.
 --
@@ -4064,11 +4278,9 @@ data ResultDisplayField = ResultDisplayField'
 resultDisplayField
     :: ResultDisplayField
 resultDisplayField =
-    ResultDisplayField'
-    { _rdfProperty = Nothing
-    , _rdfOperatorName = Nothing
-    , _rdfLabel = Nothing
-    }
+  ResultDisplayField'
+    {_rdfProperty = Nothing, _rdfOperatorName = Nothing, _rdfLabel = Nothing}
+
 
 -- | The name value pair for the property.
 rdfProperty :: Lens' ResultDisplayField (Maybe NamedProperty)
@@ -4103,11 +4315,14 @@ instance ToJSON ResultDisplayField where
 
 --
 -- /See:/ 'updateSchemaRequest' smart constructor.
-data UpdateSchemaRequest = UpdateSchemaRequest'
+data UpdateSchemaRequest =
+  UpdateSchemaRequest'
     { _usrValidateOnly :: !(Maybe Bool)
     , _usrSchema       :: !(Maybe Schema)
     , _usrDebugOptions :: !(Maybe DebugOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateSchemaRequest' with the minimum fields required to make a request.
 --
@@ -4121,11 +4336,12 @@ data UpdateSchemaRequest = UpdateSchemaRequest'
 updateSchemaRequest
     :: UpdateSchemaRequest
 updateSchemaRequest =
-    UpdateSchemaRequest'
+  UpdateSchemaRequest'
     { _usrValidateOnly = Nothing
     , _usrSchema = Nothing
     , _usrDebugOptions = Nothing
     }
+
 
 -- | If true, the request will be validated without side effects.
 usrValidateOnly :: Lens' UpdateSchemaRequest (Maybe Bool)
@@ -4167,11 +4383,14 @@ instance ToJSON UpdateSchemaRequest where
 -- The date must be a valid calendar date between the year 1 and 9999.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -4184,12 +4403,8 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month.
 dDay :: Lens' Date (Maybe Int32)
@@ -4230,9 +4445,12 @@ instance ToJSON Date where
 -- the values will be shown.
 --
 -- /See:/ 'displayedProperty' smart constructor.
-newtype DisplayedProperty = DisplayedProperty'
+newtype DisplayedProperty =
+  DisplayedProperty'
     { _dpPropertyName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisplayedProperty' with the minimum fields required to make a request.
 --
@@ -4241,10 +4459,8 @@ newtype DisplayedProperty = DisplayedProperty'
 -- * 'dpPropertyName'
 displayedProperty
     :: DisplayedProperty
-displayedProperty =
-    DisplayedProperty'
-    { _dpPropertyName = Nothing
-    }
+displayedProperty = DisplayedProperty' {_dpPropertyName = Nothing}
+
 
 -- | The name of the top-level property as defined in a property definition
 -- for the object. If the name is not a defined property in the schema, an
@@ -4268,12 +4484,15 @@ instance ToJSON DisplayedProperty where
 -- | Source specific facet response
 --
 -- /See:/ 'facetResult' smart constructor.
-data FacetResult = FacetResult'
+data FacetResult =
+  FacetResult'
     { _frSourceName   :: !(Maybe Text)
     , _frBuckets      :: !(Maybe [FacetBucket])
     , _frObjectType   :: !(Maybe Text)
     , _frOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FacetResult' with the minimum fields required to make a request.
 --
@@ -4289,19 +4508,20 @@ data FacetResult = FacetResult'
 facetResult
     :: FacetResult
 facetResult =
-    FacetResult'
+  FacetResult'
     { _frSourceName = Nothing
     , _frBuckets = Nothing
     , _frObjectType = Nothing
     , _frOperatorName = Nothing
     }
 
+
 -- | Source name for which facet results are returned. Will not be empty.
 frSourceName :: Lens' FacetResult (Maybe Text)
 frSourceName
   = lens _frSourceName (\ s a -> s{_frSourceName = a})
 
--- | FacetBuckets for values in response containing atleast a single result.
+-- | FacetBuckets for values in response containing at least a single result.
 frBuckets :: Lens' FacetResult [FacetBucket]
 frBuckets
   = lens _frBuckets (\ s a -> s{_frBuckets = a}) .
@@ -4341,9 +4561,12 @@ instance ToJSON FacetResult where
 -- | Drive mime-type search restricts (e.g. \"type:pdf\").
 --
 -- /See:/ 'driveMimeTypeRestrict' smart constructor.
-newtype DriveMimeTypeRestrict = DriveMimeTypeRestrict'
+newtype DriveMimeTypeRestrict =
+  DriveMimeTypeRestrict'
     { _dmtrType :: Maybe DriveMimeTypeRestrictType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveMimeTypeRestrict' with the minimum fields required to make a request.
 --
@@ -4352,10 +4575,8 @@ newtype DriveMimeTypeRestrict = DriveMimeTypeRestrict'
 -- * 'dmtrType'
 driveMimeTypeRestrict
     :: DriveMimeTypeRestrict
-driveMimeTypeRestrict =
-    DriveMimeTypeRestrict'
-    { _dmtrType = Nothing
-    }
+driveMimeTypeRestrict = DriveMimeTypeRestrict' {_dmtrType = Nothing}
+
 
 dmtrType :: Lens' DriveMimeTypeRestrict (Maybe DriveMimeTypeRestrictType)
 dmtrType = lens _dmtrType (\ s a -> s{_dmtrType = a})
@@ -4372,9 +4593,12 @@ instance ToJSON DriveMimeTypeRestrict where
 -- | A structured data object consisting of named properties.
 --
 -- /See:/ 'structuredDataObject' smart constructor.
-newtype StructuredDataObject = StructuredDataObject'
+newtype StructuredDataObject =
+  StructuredDataObject'
     { _sdoProperties :: Maybe [NamedProperty]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StructuredDataObject' with the minimum fields required to make a request.
 --
@@ -4383,10 +4607,8 @@ newtype StructuredDataObject = StructuredDataObject'
 -- * 'sdoProperties'
 structuredDataObject
     :: StructuredDataObject
-structuredDataObject =
-    StructuredDataObject'
-    { _sdoProperties = Nothing
-    }
+structuredDataObject = StructuredDataObject' {_sdoProperties = Nothing}
+
 
 -- | The properties for the object. The maximum number of elements is 1000.
 sdoProperties :: Lens' StructuredDataObject [NamedProperty]
@@ -4411,9 +4633,12 @@ instance ToJSON StructuredDataObject where
 -- | Media resource.
 --
 -- /See:/ 'media' smart constructor.
-newtype Media = Media'
+newtype Media =
+  Media'
     { _mResourceName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Media' with the minimum fields required to make a request.
 --
@@ -4422,10 +4647,8 @@ newtype Media = Media'
 -- * 'mResourceName'
 media
     :: Media
-media =
-    Media'
-    { _mResourceName = Nothing
-    }
+media = Media' {_mResourceName = Nothing}
+
 
 -- | Name of the media resource.
 mResourceName :: Lens' Media (Maybe Text)
@@ -4446,10 +4669,13 @@ instance ToJSON Media where
 -- | Available structured data fields for the item.
 --
 -- /See:/ 'itemStructuredData' smart constructor.
-data ItemStructuredData = ItemStructuredData'
+data ItemStructuredData =
+  ItemStructuredData'
     { _isdHash   :: !(Maybe Text)
     , _isdObject :: !(Maybe StructuredDataObject)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemStructuredData' with the minimum fields required to make a request.
 --
@@ -4461,10 +4687,8 @@ data ItemStructuredData = ItemStructuredData'
 itemStructuredData
     :: ItemStructuredData
 itemStructuredData =
-    ItemStructuredData'
-    { _isdHash = Nothing
-    , _isdObject = Nothing
-    }
+  ItemStructuredData' {_isdHash = Nothing, _isdObject = Nothing}
+
 
 -- | Hashing value provided by the API caller. This can be used with the
 -- items.push method to calculate modified state. The maximum length is
@@ -4495,9 +4719,12 @@ instance ToJSON ItemStructuredData where
 -- | Drive follow-up search restricts (e.g. \"followup:suggestions\").
 --
 -- /See:/ 'driveFollowUpRestrict' smart constructor.
-newtype DriveFollowUpRestrict = DriveFollowUpRestrict'
+newtype DriveFollowUpRestrict =
+  DriveFollowUpRestrict'
     { _dfurType :: Maybe DriveFollowUpRestrictType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveFollowUpRestrict' with the minimum fields required to make a request.
 --
@@ -4506,10 +4733,8 @@ newtype DriveFollowUpRestrict = DriveFollowUpRestrict'
 -- * 'dfurType'
 driveFollowUpRestrict
     :: DriveFollowUpRestrict
-driveFollowUpRestrict =
-    DriveFollowUpRestrict'
-    { _dfurType = Nothing
-    }
+driveFollowUpRestrict = DriveFollowUpRestrict' {_dfurType = Nothing}
+
 
 dfurType :: Lens' DriveFollowUpRestrict (Maybe DriveFollowUpRestrictType)
 dfurType = lens _dfurType (\ s a -> s{_dfurType = a})
@@ -4526,9 +4751,12 @@ instance ToJSON DriveFollowUpRestrict where
 -- | List of date values.
 --
 -- /See:/ 'dateValues' smart constructor.
-newtype DateValues = DateValues'
+newtype DateValues =
+  DateValues'
     { _dValues :: Maybe [Date]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DateValues' with the minimum fields required to make a request.
 --
@@ -4537,12 +4765,9 @@ newtype DateValues = DateValues'
 -- * 'dValues'
 dateValues
     :: DateValues
-dateValues =
-    DateValues'
-    { _dValues = Nothing
-    }
+dateValues = DateValues' {_dValues = Nothing}
 
--- | The maximum number of elements is 100.
+
 dValues :: Lens' DateValues [Date]
 dValues
   = lens _dValues (\ s a -> s{_dValues = a}) . _Default
@@ -4562,7 +4787,8 @@ instance ToJSON DateValues where
 -- the object definition of \`objectType\`.
 --
 -- /See:/ 'namedProperty' smart constructor.
-data NamedProperty = NamedProperty'
+data NamedProperty =
+  NamedProperty'
     { _npDoubleValues    :: !(Maybe DoubleValues)
     , _npTextValues      :: !(Maybe TextValues)
     , _npDateValues      :: !(Maybe DateValues)
@@ -4573,7 +4799,9 @@ data NamedProperty = NamedProperty'
     , _npEnumValues      :: !(Maybe EnumValues)
     , _npTimestampValues :: !(Maybe TimestampValues)
     , _npIntegerValues   :: !(Maybe IntegerValues)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NamedProperty' with the minimum fields required to make a request.
 --
@@ -4601,7 +4829,7 @@ data NamedProperty = NamedProperty'
 namedProperty
     :: NamedProperty
 namedProperty =
-    NamedProperty'
+  NamedProperty'
     { _npDoubleValues = Nothing
     , _npTextValues = Nothing
     , _npDateValues = Nothing
@@ -4613,6 +4841,7 @@ namedProperty =
     , _npTimestampValues = Nothing
     , _npIntegerValues = Nothing
     }
+
 
 npDoubleValues :: Lens' NamedProperty (Maybe DoubleValues)
 npDoubleValues
@@ -4694,10 +4923,13 @@ instance ToJSON NamedProperty where
 -- | Matched range of a snippet [start, end).
 --
 -- /See:/ 'matchRange' smart constructor.
-data MatchRange = MatchRange'
+data MatchRange =
+  MatchRange'
     { _mrStart :: !(Maybe (Textual Int32))
     , _mrEnd   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MatchRange' with the minimum fields required to make a request.
 --
@@ -4708,11 +4940,8 @@ data MatchRange = MatchRange'
 -- * 'mrEnd'
 matchRange
     :: MatchRange
-matchRange =
-    MatchRange'
-    { _mrStart = Nothing
-    , _mrEnd = Nothing
-    }
+matchRange = MatchRange' {_mrStart = Nothing, _mrEnd = Nothing}
+
 
 -- | Starting position of the match in the snippet.
 mrStart :: Lens' MatchRange (Maybe Int32)
@@ -4741,9 +4970,12 @@ instance ToJSON MatchRange where
 -- | Debugging information about the response.
 --
 -- /See:/ 'responseDebugInfo' smart constructor.
-newtype ResponseDebugInfo = ResponseDebugInfo'
+newtype ResponseDebugInfo =
+  ResponseDebugInfo'
     { _rFormattedDebugInfo :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResponseDebugInfo' with the minimum fields required to make a request.
 --
@@ -4752,10 +4984,8 @@ newtype ResponseDebugInfo = ResponseDebugInfo'
 -- * 'rFormattedDebugInfo'
 responseDebugInfo
     :: ResponseDebugInfo
-responseDebugInfo =
-    ResponseDebugInfo'
-    { _rFormattedDebugInfo = Nothing
-    }
+responseDebugInfo = ResponseDebugInfo' {_rFormattedDebugInfo = Nothing}
+
 
 -- | General debug info formatted for display.
 rFormattedDebugInfo :: Lens' ResponseDebugInfo (Maybe Text)
@@ -4777,10 +5007,13 @@ instance ToJSON ResponseDebugInfo where
 
 --
 -- /See:/ 'listDataSourceResponse' smart constructor.
-data ListDataSourceResponse = ListDataSourceResponse'
+data ListDataSourceResponse =
+  ListDataSourceResponse'
     { _ldsrNextPageToken :: !(Maybe Text)
     , _ldsrSources       :: !(Maybe [DataSource])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -4792,10 +5025,8 @@ data ListDataSourceResponse = ListDataSourceResponse'
 listDataSourceResponse
     :: ListDataSourceResponse
 listDataSourceResponse =
-    ListDataSourceResponse'
-    { _ldsrNextPageToken = Nothing
-    , _ldsrSources = Nothing
-    }
+  ListDataSourceResponse' {_ldsrNextPageToken = Nothing, _ldsrSources = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -4828,7 +5059,8 @@ instance ToJSON ListDataSourceResponse where
 -- | The search API request.
 --
 -- /See:/ 'searchRequest' smart constructor.
-data SearchRequest = SearchRequest'
+data SearchRequest =
+  SearchRequest'
     { _srSortOptions                :: !(Maybe SortOptions)
     , _srDataSourceRestrictions     :: !(Maybe [DataSourceRestriction])
     , _srQueryInterpretationOptions :: !(Maybe QueryInterpretationOptions)
@@ -4837,7 +5069,9 @@ data SearchRequest = SearchRequest'
     , _srFacetOptions               :: !(Maybe [FacetOptions])
     , _srPageSize                   :: !(Maybe (Textual Int32))
     , _srRequestOptions             :: !(Maybe RequestOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchRequest' with the minimum fields required to make a request.
 --
@@ -4861,7 +5095,7 @@ data SearchRequest = SearchRequest'
 searchRequest
     :: SearchRequest
 searchRequest =
-    SearchRequest'
+  SearchRequest'
     { _srSortOptions = Nothing
     , _srDataSourceRestrictions = Nothing
     , _srQueryInterpretationOptions = Nothing
@@ -4871,6 +5105,7 @@ searchRequest =
     , _srPageSize = Nothing
     , _srRequestOptions = Nothing
     }
+
 
 -- | The options for sorting the search results
 srSortOptions :: Lens' SearchRequest (Maybe SortOptions)
@@ -4956,9 +5191,12 @@ instance ToJSON SearchRequest where
 -- | A person\'s name.
 --
 -- /See:/ 'name' smart constructor.
-newtype Name = Name'
+newtype Name =
+  Name'
     { _nDisplayName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
@@ -4967,10 +5205,8 @@ newtype Name = Name'
 -- * 'nDisplayName'
 name
     :: Name
-name =
-    Name'
-    { _nDisplayName = Nothing
-    }
+name = Name' {_nDisplayName = Nothing}
+
 
 -- | The read-only display name formatted according to the locale specified
 -- by the viewer\'s account or the 'Accept-Language' HTTP header.
@@ -4991,12 +5227,15 @@ instance ToJSON Name where
 -- | Per source result count information.
 --
 -- /See:/ 'sourceResultCount' smart constructor.
-data SourceResultCount = SourceResultCount'
+data SourceResultCount =
+  SourceResultCount'
     { _srcHasMoreResults      :: !(Maybe Bool)
     , _srcResultCountExact    :: !(Maybe (Textual Int64))
     , _srcResultCountEstimate :: !(Maybe (Textual Int64))
     , _srcSource              :: !(Maybe Source)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceResultCount' with the minimum fields required to make a request.
 --
@@ -5012,12 +5251,13 @@ data SourceResultCount = SourceResultCount'
 sourceResultCount
     :: SourceResultCount
 sourceResultCount =
-    SourceResultCount'
+  SourceResultCount'
     { _srcHasMoreResults = Nothing
     , _srcResultCountExact = Nothing
     , _srcResultCountEstimate = Nothing
     , _srcSource = Nothing
     }
+
 
 -- | Whether there are more search results for this source.
 srcHasMoreResults :: Lens' SourceResultCount (Maybe Bool)
@@ -5068,11 +5308,14 @@ instance ToJSON SourceResultCount where
 -- request.
 --
 -- /See:/ 'sourceConfig' smart constructor.
-data SourceConfig = SourceConfig'
+data SourceConfig =
+  SourceConfig'
     { _scCrowdingConfig :: !(Maybe SourceCrowdingConfig)
     , _scScoringConfig  :: !(Maybe SourceScoringConfig)
     , _scSource         :: !(Maybe Source)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceConfig' with the minimum fields required to make a request.
 --
@@ -5086,11 +5329,12 @@ data SourceConfig = SourceConfig'
 sourceConfig
     :: SourceConfig
 sourceConfig =
-    SourceConfig'
+  SourceConfig'
     { _scCrowdingConfig = Nothing
     , _scScoringConfig = Nothing
     , _scSource = Nothing
     }
+
 
 -- | The crowding configuration for the source.
 scCrowdingConfig :: Lens' SourceConfig (Maybe SourceCrowdingConfig)
@@ -5126,10 +5370,13 @@ instance ToJSON SourceConfig where
 
 --
 -- /See:/ 'listItemsResponse' smart constructor.
-data ListItemsResponse = ListItemsResponse'
+data ListItemsResponse =
+  ListItemsResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirItems         :: !(Maybe [Item])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListItemsResponse' with the minimum fields required to make a request.
 --
@@ -5141,10 +5388,8 @@ data ListItemsResponse = ListItemsResponse'
 listItemsResponse
     :: ListItemsResponse
 listItemsResponse =
-    ListItemsResponse'
-    { _lirNextPageToken = Nothing
-    , _lirItems = Nothing
-    }
+  ListItemsResponse' {_lirNextPageToken = Nothing, _lirItems = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -5178,10 +5423,13 @@ instance ToJSON ListItemsResponse where
 -- request.
 --
 -- /See:/ 'scoringConfig' smart constructor.
-data ScoringConfig = ScoringConfig'
+data ScoringConfig =
+  ScoringConfig'
     { _scDisablePersonalization :: !(Maybe Bool)
     , _scDisableFreshness       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoringConfig' with the minimum fields required to make a request.
 --
@@ -5193,10 +5441,9 @@ data ScoringConfig = ScoringConfig'
 scoringConfig
     :: ScoringConfig
 scoringConfig =
-    ScoringConfig'
-    { _scDisablePersonalization = Nothing
-    , _scDisableFreshness = Nothing
-    }
+  ScoringConfig'
+    {_scDisablePersonalization = Nothing, _scDisableFreshness = Nothing}
+
 
 -- | Whether to personalize the results. By default, personal signals will be
 -- used to boost results.
@@ -5206,7 +5453,8 @@ scDisablePersonalization
       (\ s a -> s{_scDisablePersonalization = a})
 
 -- | Whether to use freshness as a ranking signal. By default, freshness is
--- used as a ranking signal.
+-- used as a ranking signal. Note that this setting is not available in the
+-- Admin UI.
 scDisableFreshness :: Lens' ScoringConfig (Maybe Bool)
 scDisableFreshness
   = lens _scDisableFreshness
@@ -5231,10 +5479,13 @@ instance ToJSON ScoringConfig where
 -- | Start upload file request.
 --
 -- /See:/ 'startUploadItemRequest' smart constructor.
-data StartUploadItemRequest = StartUploadItemRequest'
+data StartUploadItemRequest =
+  StartUploadItemRequest'
     { _suirDebugOptions  :: !(Maybe DebugOptions)
     , _suirConnectorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StartUploadItemRequest' with the minimum fields required to make a request.
 --
@@ -5246,10 +5497,9 @@ data StartUploadItemRequest = StartUploadItemRequest'
 startUploadItemRequest
     :: StartUploadItemRequest
 startUploadItemRequest =
-    StartUploadItemRequest'
-    { _suirDebugOptions = Nothing
-    , _suirConnectorName = Nothing
-    }
+  StartUploadItemRequest'
+    {_suirDebugOptions = Nothing, _suirConnectorName = Nothing}
+
 
 -- | Common debug options.
 suirDebugOptions :: Lens' StartUploadItemRequest (Maybe DebugOptions)
@@ -5283,9 +5533,12 @@ instance ToJSON StartUploadItemRequest where
 -- content via contentDataRef.
 --
 -- /See:/ 'uploadItemRef' smart constructor.
-newtype UploadItemRef = UploadItemRef'
+newtype UploadItemRef =
+  UploadItemRef'
     { _uirName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UploadItemRef' with the minimum fields required to make a request.
 --
@@ -5294,10 +5547,8 @@ newtype UploadItemRef = UploadItemRef'
 -- * 'uirName'
 uploadItemRef
     :: UploadItemRef
-uploadItemRef =
-    UploadItemRef'
-    { _uirName = Nothing
-    }
+uploadItemRef = UploadItemRef' {_uirName = Nothing}
+
 
 -- | Name of the content reference. The maximum length is 2048 characters.
 uirName :: Lens' UploadItemRef (Maybe Text)
@@ -5312,13 +5563,48 @@ instance ToJSON UploadItemRef where
         toJSON UploadItemRef'{..}
           = object (catMaybes [("name" .=) <$> _uirName])
 
+-- | Gmail Time restricts (i.e. received today, this week).
+--
+-- /See:/ 'gmailTimeRestrict' smart constructor.
+newtype GmailTimeRestrict =
+  GmailTimeRestrict'
+    { _gtrType :: Maybe GmailTimeRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailTimeRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gtrType'
+gmailTimeRestrict
+    :: GmailTimeRestrict
+gmailTimeRestrict = GmailTimeRestrict' {_gtrType = Nothing}
+
+
+gtrType :: Lens' GmailTimeRestrict (Maybe GmailTimeRestrictType)
+gtrType = lens _gtrType (\ s a -> s{_gtrType = a})
+
+instance FromJSON GmailTimeRestrict where
+        parseJSON
+          = withObject "GmailTimeRestrict"
+              (\ o -> GmailTimeRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailTimeRestrict where
+        toJSON GmailTimeRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _gtrType])
+
 --
 -- /See:/ 'pushItemRequest' smart constructor.
-data PushItemRequest = PushItemRequest'
+data PushItemRequest =
+  PushItemRequest'
     { _pirDebugOptions  :: !(Maybe DebugOptions)
     , _pirConnectorName :: !(Maybe Text)
     , _pirItem          :: !(Maybe PushItem)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushItemRequest' with the minimum fields required to make a request.
 --
@@ -5332,11 +5618,12 @@ data PushItemRequest = PushItemRequest'
 pushItemRequest
     :: PushItemRequest
 pushItemRequest =
-    PushItemRequest'
+  PushItemRequest'
     { _pirDebugOptions = Nothing
     , _pirConnectorName = Nothing
     , _pirItem = Nothing
     }
+
 
 -- | Common debug options.
 pirDebugOptions :: Lens' PushItemRequest (Maybe DebugOptions)
@@ -5374,9 +5661,12 @@ instance ToJSON PushItemRequest where
 -- | Options for double properties.
 --
 -- /See:/ 'doublePropertyOptions' smart constructor.
-newtype DoublePropertyOptions = DoublePropertyOptions'
+newtype DoublePropertyOptions =
+  DoublePropertyOptions'
     { _dpoOperatorOptions :: Maybe DoubleOperatorOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DoublePropertyOptions' with the minimum fields required to make a request.
 --
@@ -5385,10 +5675,8 @@ newtype DoublePropertyOptions = DoublePropertyOptions'
 -- * 'dpoOperatorOptions'
 doublePropertyOptions
     :: DoublePropertyOptions
-doublePropertyOptions =
-    DoublePropertyOptions'
-    { _dpoOperatorOptions = Nothing
-    }
+doublePropertyOptions = DoublePropertyOptions' {_dpoOperatorOptions = Nothing}
+
 
 -- | If set, describes how the double should be used as a search operator.
 dpoOperatorOptions :: Lens' DoublePropertyOptions (Maybe DoubleOperatorOptions)
@@ -5412,7 +5700,8 @@ instance ToJSON DoublePropertyOptions where
 -- request.
 --
 -- /See:/ 'queryOperator' smart constructor.
-data QueryOperator = QueryOperator'
+data QueryOperator =
+  QueryOperator'
     { _qoIsSuggestable           :: !(Maybe Bool)
     , _qoIsReturnable            :: !(Maybe Bool)
     , _qoIsRepeatable            :: !(Maybe Bool)
@@ -5424,7 +5713,9 @@ data QueryOperator = QueryOperator'
     , _qoType                    :: !(Maybe QueryOperatorType)
     , _qoEnumValues              :: !(Maybe [Text])
     , _qoGreaterThanOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryOperator' with the minimum fields required to make a request.
 --
@@ -5454,7 +5745,7 @@ data QueryOperator = QueryOperator'
 queryOperator
     :: QueryOperator
 queryOperator =
-    QueryOperator'
+  QueryOperator'
     { _qoIsSuggestable = Nothing
     , _qoIsReturnable = Nothing
     , _qoIsRepeatable = Nothing
@@ -5467,6 +5758,7 @@ queryOperator =
     , _qoEnumValues = Nothing
     , _qoGreaterThanOperatorName = Nothing
     }
+
 
 -- | Can get suggestions for this field.
 qoIsSuggestable :: Lens' QueryOperator (Maybe Bool)
@@ -5573,9 +5865,12 @@ instance ToJSON QueryOperator where
 
 --
 -- /See:/ 'pollItemsResponse' smart constructor.
-newtype PollItemsResponse = PollItemsResponse'
+newtype PollItemsResponse =
+  PollItemsResponse'
     { _pirItems :: Maybe [Item]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PollItemsResponse' with the minimum fields required to make a request.
 --
@@ -5584,10 +5879,8 @@ newtype PollItemsResponse = PollItemsResponse'
 -- * 'pirItems'
 pollItemsResponse
     :: PollItemsResponse
-pollItemsResponse =
-    PollItemsResponse'
-    { _pirItems = Nothing
-    }
+pollItemsResponse = PollItemsResponse' {_pirItems = Nothing}
+
 
 -- | Set of items from the queue available for connector to process.
 -- These items have the following subset of fields populated:
@@ -5618,9 +5911,12 @@ instance ToJSON PollItemsResponse where
 -- results for a source.
 --
 -- /See:/ 'sourceScoringConfig' smart constructor.
-newtype SourceScoringConfig = SourceScoringConfig'
+newtype SourceScoringConfig =
+  SourceScoringConfig'
     { _sscSourceImportance :: Maybe SourceScoringConfigSourceImportance
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceScoringConfig' with the minimum fields required to make a request.
 --
@@ -5629,10 +5925,8 @@ newtype SourceScoringConfig = SourceScoringConfig'
 -- * 'sscSourceImportance'
 sourceScoringConfig
     :: SourceScoringConfig
-sourceScoringConfig =
-    SourceScoringConfig'
-    { _sscSourceImportance = Nothing
-    }
+sourceScoringConfig = SourceScoringConfig' {_sscSourceImportance = Nothing}
+
 
 -- | Importance of the source.
 sscSourceImportance :: Lens' SourceScoringConfig (Maybe SourceScoringConfigSourceImportance)
@@ -5655,9 +5949,12 @@ instance ToJSON SourceScoringConfig where
 -- | A person\'s email address.
 --
 -- /See:/ 'emailAddress' smart constructor.
-newtype EmailAddress = EmailAddress'
+newtype EmailAddress =
+  EmailAddress'
     { _eaEmailAddress :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EmailAddress' with the minimum fields required to make a request.
 --
@@ -5666,10 +5963,8 @@ newtype EmailAddress = EmailAddress'
 -- * 'eaEmailAddress'
 emailAddress
     :: EmailAddress
-emailAddress =
-    EmailAddress'
-    { _eaEmailAddress = Nothing
-    }
+emailAddress = EmailAddress' {_eaEmailAddress = Nothing}
+
 
 -- | The email address.
 eaEmailAddress :: Lens' EmailAddress (Maybe Text)
@@ -5689,9 +5984,12 @@ instance ToJSON EmailAddress where
 
 --
 -- /See:/ 'retrievalImportance' smart constructor.
-newtype RetrievalImportance = RetrievalImportance'
+newtype RetrievalImportance =
+  RetrievalImportance'
     { _riImportance :: Maybe RetrievalImportanceImportance
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RetrievalImportance' with the minimum fields required to make a request.
 --
@@ -5700,10 +5998,8 @@ newtype RetrievalImportance = RetrievalImportance'
 -- * 'riImportance'
 retrievalImportance
     :: RetrievalImportance
-retrievalImportance =
-    RetrievalImportance'
-    { _riImportance = Nothing
-    }
+retrievalImportance = RetrievalImportance' {_riImportance = Nothing}
+
 
 -- | Indicates the ranking importance given to property when it is matched
 -- during retrieval. Once set, the token importance of a property cannot be
@@ -5726,10 +6022,13 @@ instance ToJSON RetrievalImportance where
 -- | Aggregation of items by status code as of the specified date.
 --
 -- /See:/ 'dataSourceIndexStats' smart constructor.
-data DataSourceIndexStats = DataSourceIndexStats'
+data DataSourceIndexStats =
+  DataSourceIndexStats'
     { _dsisItemCountByStatus :: !(Maybe [ItemCountByStatus])
     , _dsisDate              :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSourceIndexStats' with the minimum fields required to make a request.
 --
@@ -5741,10 +6040,8 @@ data DataSourceIndexStats = DataSourceIndexStats'
 dataSourceIndexStats
     :: DataSourceIndexStats
 dataSourceIndexStats =
-    DataSourceIndexStats'
-    { _dsisItemCountByStatus = Nothing
-    , _dsisDate = Nothing
-    }
+  DataSourceIndexStats' {_dsisItemCountByStatus = Nothing, _dsisDate = Nothing}
+
 
 -- | Number of items aggregrated by status code.
 dsisItemCountByStatus :: Lens' DataSourceIndexStats [ItemCountByStatus]
@@ -5783,12 +6080,15 @@ instance ToJSON DataSourceIndexStats where
 -- condition to reduce repetitive results by source.
 --
 -- /See:/ 'sourceCrowdingConfig' smart constructor.
-data SourceCrowdingConfig = SourceCrowdingConfig'
+data SourceCrowdingConfig =
+  SourceCrowdingConfig'
     { _sccField          :: !(Maybe Text)
     , _sccNumSuggestions :: !(Maybe (Textual Int32))
     , _sccNumResults     :: !(Maybe (Textual Int32))
     , _sccSource         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceCrowdingConfig' with the minimum fields required to make a request.
 --
@@ -5804,12 +6104,13 @@ data SourceCrowdingConfig = SourceCrowdingConfig'
 sourceCrowdingConfig
     :: SourceCrowdingConfig
 sourceCrowdingConfig =
-    SourceCrowdingConfig'
+  SourceCrowdingConfig'
     { _sccField = Nothing
     , _sccNumSuggestions = Nothing
     , _sccNumResults = Nothing
     , _sccSource = Nothing
     }
+
 
 -- | Use a field to control results crowding. For example, if you want to
 -- control overly similar results from Gmail topics, use \`thread_id\`. For
@@ -5862,11 +6163,14 @@ instance ToJSON SourceCrowdingConfig where
 -- | Represents an interaction between a user and an item.
 --
 -- /See:/ 'interaction' smart constructor.
-data Interaction = Interaction'
+data Interaction =
+  Interaction'
     { _iInteractionTime :: !(Maybe DateTime')
     , _iPrincipal       :: !(Maybe Principal)
     , _iType            :: !(Maybe InteractionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Interaction' with the minimum fields required to make a request.
 --
@@ -5880,11 +6184,9 @@ data Interaction = Interaction'
 interaction
     :: Interaction
 interaction =
-    Interaction'
-    { _iInteractionTime = Nothing
-    , _iPrincipal = Nothing
-    , _iType = Nothing
-    }
+  Interaction'
+    {_iInteractionTime = Nothing, _iPrincipal = Nothing, _iType = Nothing}
+
 
 -- | The time when the user acted on the item. If multiple actions of the
 -- same type exist for a single user, only the most recent action is
@@ -5922,11 +6224,14 @@ instance ToJSON Interaction where
 -- | Reference to a user, group, or domain.
 --
 -- /See:/ 'principal' smart constructor.
-data Principal = Principal'
+data Principal =
+  Principal'
     { _pUserResourceName  :: !(Maybe Text)
     , _pGroupResourceName :: !(Maybe Text)
     , _pGsuitePrincipal   :: !(Maybe GSuitePrincipal)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Principal' with the minimum fields required to make a request.
 --
@@ -5940,11 +6245,12 @@ data Principal = Principal'
 principal
     :: Principal
 principal =
-    Principal'
+  Principal'
     { _pUserResourceName = Nothing
     , _pGroupResourceName = Nothing
     , _pGsuitePrincipal = Nothing
     }
+
 
 -- | This principal is a user identified using an external identity. The name
 -- field must specify the user resource name with this format:
@@ -5987,12 +6293,16 @@ instance ToJSON Principal where
 
 --
 -- /See:/ 'indexItemRequest' smart constructor.
-data IndexItemRequest = IndexItemRequest'
-    { _iirMode          :: !(Maybe IndexItemRequestMode)
-    , _iirDebugOptions  :: !(Maybe DebugOptions)
-    , _iirConnectorName :: !(Maybe Text)
-    , _iirItem          :: !(Maybe Item)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data IndexItemRequest =
+  IndexItemRequest'
+    { _iirMode             :: !(Maybe IndexItemRequestMode)
+    , _iirDebugOptions     :: !(Maybe DebugOptions)
+    , _iirConnectorName    :: !(Maybe Text)
+    , _iirItem             :: !(Maybe Item)
+    , _iirIndexItemOptions :: !(Maybe IndexItemOptions)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexItemRequest' with the minimum fields required to make a request.
 --
@@ -6005,15 +6315,19 @@ data IndexItemRequest = IndexItemRequest'
 -- * 'iirConnectorName'
 --
 -- * 'iirItem'
+--
+-- * 'iirIndexItemOptions'
 indexItemRequest
     :: IndexItemRequest
 indexItemRequest =
-    IndexItemRequest'
+  IndexItemRequest'
     { _iirMode = Nothing
     , _iirDebugOptions = Nothing
     , _iirConnectorName = Nothing
     , _iirItem = Nothing
+    , _iirIndexItemOptions = Nothing
     }
+
 
 -- | Required. The RequestMode for this request.
 iirMode :: Lens' IndexItemRequest (Maybe IndexItemRequestMode)
@@ -6036,6 +6350,11 @@ iirConnectorName
 iirItem :: Lens' IndexItemRequest (Maybe Item)
 iirItem = lens _iirItem (\ s a -> s{_iirItem = a})
 
+iirIndexItemOptions :: Lens' IndexItemRequest (Maybe IndexItemOptions)
+iirIndexItemOptions
+  = lens _iirIndexItemOptions
+      (\ s a -> s{_iirIndexItemOptions = a})
+
 instance FromJSON IndexItemRequest where
         parseJSON
           = withObject "IndexItemRequest"
@@ -6043,7 +6362,8 @@ instance FromJSON IndexItemRequest where
                  IndexItemRequest' <$>
                    (o .:? "mode") <*> (o .:? "debugOptions") <*>
                      (o .:? "connectorName")
-                     <*> (o .:? "item"))
+                     <*> (o .:? "item")
+                     <*> (o .:? "indexItemOptions"))
 
 instance ToJSON IndexItemRequest where
         toJSON IndexItemRequest'{..}
@@ -6052,15 +6372,19 @@ instance ToJSON IndexItemRequest where
                  [("mode" .=) <$> _iirMode,
                   ("debugOptions" .=) <$> _iirDebugOptions,
                   ("connectorName" .=) <$> _iirConnectorName,
-                  ("item" .=) <$> _iirItem])
+                  ("item" .=) <$> _iirItem,
+                  ("indexItemOptions" .=) <$> _iirIndexItemOptions])
 
 -- | Options for text properties.
 --
 -- /See:/ 'textPropertyOptions' smart constructor.
-data TextPropertyOptions = TextPropertyOptions'
+data TextPropertyOptions =
+  TextPropertyOptions'
     { _tRetrievalImportance :: !(Maybe RetrievalImportance)
     , _tOperatorOptions     :: !(Maybe TextOperatorOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TextPropertyOptions' with the minimum fields required to make a request.
 --
@@ -6072,10 +6396,9 @@ data TextPropertyOptions = TextPropertyOptions'
 textPropertyOptions
     :: TextPropertyOptions
 textPropertyOptions =
-    TextPropertyOptions'
-    { _tRetrievalImportance = Nothing
-    , _tOperatorOptions = Nothing
-    }
+  TextPropertyOptions'
+    {_tRetrievalImportance = Nothing, _tOperatorOptions = Nothing}
+
 
 -- | Indicates the search quality importance of the tokens within the field
 -- when used for retrieval.
@@ -6121,10 +6444,13 @@ instance ToJSON TextPropertyOptions where
 -- item ranking.
 --
 -- /See:/ 'enumValuePair' smart constructor.
-data EnumValuePair = EnumValuePair'
+data EnumValuePair =
+  EnumValuePair'
     { _evpIntegerValue :: !(Maybe (Textual Int32))
     , _evpStringValue  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnumValuePair' with the minimum fields required to make a request.
 --
@@ -6136,10 +6462,8 @@ data EnumValuePair = EnumValuePair'
 enumValuePair
     :: EnumValuePair
 enumValuePair =
-    EnumValuePair'
-    { _evpIntegerValue = Nothing
-    , _evpStringValue = Nothing
-    }
+  EnumValuePair' {_evpIntegerValue = Nothing, _evpStringValue = Nothing}
+
 
 -- | The integer value of the EnumValuePair which must be non-negative.
 -- Optional.
@@ -6173,7 +6497,8 @@ instance ToJSON EnumValuePair where
 -- | Metadata of a matched search result.
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata'
+data Metadata =
+  Metadata'
     { _mObjectType     :: !(Maybe Text)
     , _mOwner          :: !(Maybe Person)
     , _mMimeType       :: !(Maybe Text)
@@ -6182,7 +6507,9 @@ data Metadata = Metadata'
     , _mSource         :: !(Maybe Source)
     , _mCreateTime     :: !(Maybe DateTime')
     , _mFields         :: !(Maybe [NamedProperty])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -6206,7 +6533,7 @@ data Metadata = Metadata'
 metadata
     :: Metadata
 metadata =
-    Metadata'
+  Metadata'
     { _mObjectType = Nothing
     , _mOwner = Nothing
     , _mMimeType = Nothing
@@ -6216,6 +6543,7 @@ metadata =
     , _mCreateTime = Nothing
     , _mFields = Nothing
     }
+
 
 -- | Object type of the search result.
 mObjectType :: Lens' Metadata (Maybe Text)
@@ -6231,7 +6559,10 @@ mMimeType :: Lens' Metadata (Maybe Text)
 mMimeType
   = lens _mMimeType (\ s a -> s{_mMimeType = a})
 
--- | The last modified date for the object in the search result.
+-- | The last modified date for the object in the search result. If not set
+-- in the item, the value returned here is empty. When \`updateTime\` is
+-- used for calculating freshness and is not set, this value defaults to 2
+-- years from the current time.
 mUpdateTime :: Lens' Metadata (Maybe UTCTime)
 mUpdateTime
   = lens _mUpdateTime (\ s a -> s{_mUpdateTime = a}) .
@@ -6287,10 +6618,13 @@ instance ToJSON Metadata where
 
 --
 -- /See:/ 'updateDataSourceRequest' smart constructor.
-data UpdateDataSourceRequest = UpdateDataSourceRequest'
+data UpdateDataSourceRequest =
+  UpdateDataSourceRequest'
     { _udsrDebugOptions :: !(Maybe DebugOptions)
     , _udsrSource       :: !(Maybe DataSource)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateDataSourceRequest' with the minimum fields required to make a request.
 --
@@ -6302,10 +6636,8 @@ data UpdateDataSourceRequest = UpdateDataSourceRequest'
 updateDataSourceRequest
     :: UpdateDataSourceRequest
 updateDataSourceRequest =
-    UpdateDataSourceRequest'
-    { _udsrDebugOptions = Nothing
-    , _udsrSource = Nothing
-    }
+  UpdateDataSourceRequest' {_udsrDebugOptions = Nothing, _udsrSource = Nothing}
+
 
 -- | Common debug options.
 udsrDebugOptions :: Lens' UpdateDataSourceRequest (Maybe DebugOptions)
@@ -6331,12 +6663,13 @@ instance ToJSON UpdateDataSourceRequest where
                  [("debugOptions" .=) <$> _udsrDebugOptions,
                   ("source" .=) <$> _udsrSource])
 
--- | Data source is a logical namespace for items to be indexed. All items
--- must belong to a data source. This is the prerequisite before items can
+-- | Datasource is a logical namespace for items to be indexed. All items
+-- must belong to a datasource. This is the prerequisite before items can
 -- be indexed into Cloud Search.
 --
 -- /See:/ 'dataSource' smart constructor.
-data DataSource = DataSource'
+data DataSource =
+  DataSource'
     { _dsShortName               :: !(Maybe Text)
     , _dsItemsVisibility         :: !(Maybe [GSuitePrincipal])
     , _dsOperationIds            :: !(Maybe [Text])
@@ -6345,7 +6678,9 @@ data DataSource = DataSource'
     , _dsDisableModifications    :: !(Maybe Bool)
     , _dsName                    :: !(Maybe Text)
     , _dsDisplayName             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
@@ -6369,7 +6704,7 @@ data DataSource = DataSource'
 dataSource
     :: DataSource
 dataSource =
-    DataSource'
+  DataSource'
     { _dsShortName = Nothing
     , _dsItemsVisibility = Nothing
     , _dsOperationIds = Nothing
@@ -6380,24 +6715,25 @@ dataSource =
     , _dsDisplayName = Nothing
     }
 
+
 -- | A short name or alias for the source. This value will be used to match
 -- the \'source\' operator. For example, if the short name is *\<value>*
 -- then queries like *source:\<value>* will only return results for this
--- source. The value must be unique across all data sources. The value must
+-- source. The value must be unique across all datasources. The value must
 -- only contain alphanumeric characters (a-zA-Z0-9). The value cannot start
 -- with \'google\' and cannot be one of the following: mail, gmail, docs,
--- drive, groups, sites, calendar, hangouts, gplus, keep. Its maximum
--- length is 32 characters.
+-- drive, groups, sites, calendar, hangouts, gplus, keep, people, teams.
+-- Its maximum length is 32 characters.
 dsShortName :: Lens' DataSource (Maybe Text)
 dsShortName
   = lens _dsShortName (\ s a -> s{_dsShortName = a})
 
--- | This restricts visibility to items at a data source level to the
--- disjunction of users\/groups mentioned with the field. Note that, this
--- does not ensure access to a specific item, as users need to have ACL
--- permissions on the contained items. This ensures a high level access on
--- the entire data source, and that the individual items are not shared
--- outside this visibility.
+-- | This field restricts visibility to items at the datasource level. Items
+-- within the datasource are restricted to the union of users and groups
+-- included in this field. Note that, this does not ensure access to a
+-- specific item, as users need to have ACL permissions on the contained
+-- items. This ensures a high level access on the entire datasource, and
+-- that the individual items are not shared outside this visibility.
 dsItemsVisibility :: Lens' DataSource [GSuitePrincipal]
 dsItemsVisibility
   = lens _dsItemsVisibility
@@ -6428,7 +6764,7 @@ dsIndexingServiceAccounts
       . _Default
       . _Coerce
 
--- | If true, Indexing API rejects any modification calls to this data source
+-- | If true, Indexing API rejects any modification calls to this datasource
 -- such as create, update, and delete. Disabling this does not imply
 -- halting process of previously accepted data.
 dsDisableModifications :: Lens' DataSource (Maybe Bool)
@@ -6436,12 +6772,12 @@ dsDisableModifications
   = lens _dsDisableModifications
       (\ s a -> s{_dsDisableModifications = a})
 
--- | Name of the data source resource. Format: datasources\/{source_id}.
--- The name is ignored when creating a data source.
+-- | Name of the datasource resource. Format: datasources\/{source_id}.
+-- The name is ignored when creating a datasource.
 dsName :: Lens' DataSource (Maybe Text)
 dsName = lens _dsName (\ s a -> s{_dsName = a})
 
--- | Required. Display name of the data source The maximum length is 300
+-- | Required. Display name of the datasource The maximum length is 300
 -- characters.
 dsDisplayName :: Lens' DataSource (Maybe Text)
 dsDisplayName
@@ -6480,9 +6816,12 @@ instance ToJSON DataSource where
 -- | List of html values.
 --
 -- /See:/ 'htmlValues' smart constructor.
-newtype HTMLValues = HTMLValues'
+newtype HTMLValues =
+  HTMLValues'
     { _hvValues :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTMLValues' with the minimum fields required to make a request.
 --
@@ -6491,13 +6830,10 @@ newtype HTMLValues = HTMLValues'
 -- * 'hvValues'
 htmlValues
     :: HTMLValues
-htmlValues =
-    HTMLValues'
-    { _hvValues = Nothing
-    }
+htmlValues = HTMLValues' {_hvValues = Nothing}
 
--- | The maximum allowable length for html values is 2048 characters. The
--- maximum number of string elements is 100.
+
+-- | The maximum allowable length for html values is 2048 characters.
 hvValues :: Lens' HTMLValues [Text]
 hvValues
   = lens _hvValues (\ s a -> s{_hvValues = a}) .
@@ -6513,14 +6849,49 @@ instance ToJSON HTMLValues where
         toJSON HTMLValues'{..}
           = object (catMaybes [("values" .=) <$> _hvValues])
 
+-- | Gmail Intelligent restricts (i.e. smartlabels, important).
+--
+-- /See:/ 'gmailIntelligentRestrict' smart constructor.
+newtype GmailIntelligentRestrict =
+  GmailIntelligentRestrict'
+    { _girType :: Maybe GmailIntelligentRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailIntelligentRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'girType'
+gmailIntelligentRestrict
+    :: GmailIntelligentRestrict
+gmailIntelligentRestrict = GmailIntelligentRestrict' {_girType = Nothing}
+
+
+girType :: Lens' GmailIntelligentRestrict (Maybe GmailIntelligentRestrictType)
+girType = lens _girType (\ s a -> s{_girType = a})
+
+instance FromJSON GmailIntelligentRestrict where
+        parseJSON
+          = withObject "GmailIntelligentRestrict"
+              (\ o -> GmailIntelligentRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailIntelligentRestrict where
+        toJSON GmailIntelligentRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _girType])
+
 -- | Used to provide a search operator for html properties. This is optional.
 -- Search operators let users restrict the query to specific fields
 -- relevant to the type of item being searched.
 --
 -- /See:/ 'htmlOperatorOptions' smart constructor.
-newtype HTMLOperatorOptions = HTMLOperatorOptions'
+newtype HTMLOperatorOptions =
+  HTMLOperatorOptions'
     { _hooOperatorName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTMLOperatorOptions' with the minimum fields required to make a request.
 --
@@ -6529,10 +6900,8 @@ newtype HTMLOperatorOptions = HTMLOperatorOptions'
 -- * 'hooOperatorName'
 htmlOperatorOptions
     :: HTMLOperatorOptions
-htmlOperatorOptions =
-    HTMLOperatorOptions'
-    { _hooOperatorName = Nothing
-    }
+htmlOperatorOptions = HTMLOperatorOptions' {_hooOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the html property. For example, if operatorName is *subject* and the
@@ -6564,7 +6933,8 @@ instance ToJSON HTMLOperatorOptions where
 -- a file, folder, or a database record.
 --
 -- /See:/ 'item' smart constructor.
-data Item = Item'
+data Item =
+  Item'
     { _iStatus         :: !(Maybe ItemStatus)
     , _iItemType       :: !(Maybe ItemItemType)
     , _iPayload        :: !(Maybe Bytes)
@@ -6575,7 +6945,9 @@ data Item = Item'
     , _iVersion        :: !(Maybe Bytes)
     , _iMetadata       :: !(Maybe ItemMetadata)
     , _iACL            :: !(Maybe ItemACL)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Item' with the minimum fields required to make a request.
 --
@@ -6603,7 +6975,7 @@ data Item = Item'
 item
     :: Item
 item =
-    Item'
+  Item'
     { _iStatus = Nothing
     , _iItemType = Nothing
     , _iPayload = Nothing
@@ -6615,6 +6987,7 @@ item =
     , _iMetadata = Nothing
     , _iACL = Nothing
     }
+
 
 -- | Status of the item. Output only field.
 iStatus :: Lens' Item (Maybe ItemStatus)
@@ -6704,10 +7077,13 @@ instance ToJSON Item where
 -- | Defines sources for the suggest\/search APIs.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source'
+data Source =
+  Source'
     { _sName             :: !(Maybe Text)
     , _sPredefinedSource :: !(Maybe SourcePredefinedSource)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -6718,11 +7094,8 @@ data Source = Source'
 -- * 'sPredefinedSource'
 source
     :: Source
-source =
-    Source'
-    { _sName = Nothing
-    , _sPredefinedSource = Nothing
-    }
+source = Source' {_sName = Nothing, _sPredefinedSource = Nothing}
+
 
 -- | Source name for content indexed by the Indexing API.
 sName :: Lens' Source (Maybe Text)
@@ -6751,9 +7124,12 @@ instance ToJSON Source where
 -- | The display options for a property.
 --
 -- /See:/ 'propertyDisplayOptions' smart constructor.
-newtype PropertyDisplayOptions = PropertyDisplayOptions'
+newtype PropertyDisplayOptions =
+  PropertyDisplayOptions'
     { _pdoDisplayLabel :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PropertyDisplayOptions' with the minimum fields required to make a request.
 --
@@ -6762,10 +7138,8 @@ newtype PropertyDisplayOptions = PropertyDisplayOptions'
 -- * 'pdoDisplayLabel'
 propertyDisplayOptions
     :: PropertyDisplayOptions
-propertyDisplayOptions =
-    PropertyDisplayOptions'
-    { _pdoDisplayLabel = Nothing
-    }
+propertyDisplayOptions = PropertyDisplayOptions' {_pdoDisplayLabel = Nothing}
+
 
 -- | The user friendly label for the property that will be used if the
 -- property is specified to be displayed in ObjectDisplayOptions. If given,
@@ -6796,9 +7170,12 @@ instance ToJSON PropertyDisplayOptions where
 -- | List of object values.
 --
 -- /See:/ 'objectValues' smart constructor.
-newtype ObjectValues = ObjectValues'
+newtype ObjectValues =
+  ObjectValues'
     { _ovValues :: Maybe [StructuredDataObject]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectValues' with the minimum fields required to make a request.
 --
@@ -6807,12 +7184,9 @@ newtype ObjectValues = ObjectValues'
 -- * 'ovValues'
 objectValues
     :: ObjectValues
-objectValues =
-    ObjectValues'
-    { _ovValues = Nothing
-    }
+objectValues = ObjectValues' {_ovValues = Nothing}
 
--- | The maximum number of elements is 100.
+
 ovValues :: Lens' ObjectValues [StructuredDataObject]
 ovValues
   = lens _ovValues (\ s a -> s{_ovValues = a}) .
@@ -6832,10 +7206,13 @@ instance ToJSON ObjectValues where
 -- | The options for an object.
 --
 -- /See:/ 'objectOptions' smart constructor.
-data ObjectOptions = ObjectOptions'
+data ObjectOptions =
+  ObjectOptions'
     { _ooFreshnessOptions :: !(Maybe FreshnessOptions)
     , _ooDisplayOptions   :: !(Maybe ObjectDisplayOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectOptions' with the minimum fields required to make a request.
 --
@@ -6847,10 +7224,8 @@ data ObjectOptions = ObjectOptions'
 objectOptions
     :: ObjectOptions
 objectOptions =
-    ObjectOptions'
-    { _ooFreshnessOptions = Nothing
-    , _ooDisplayOptions = Nothing
-    }
+  ObjectOptions' {_ooFreshnessOptions = Nothing, _ooDisplayOptions = Nothing}
+
 
 -- | The freshness options for an object.
 ooFreshnessOptions :: Lens' ObjectOptions (Maybe FreshnessOptions)
@@ -6885,11 +7260,15 @@ instance ToJSON ObjectOptions where
 -- combination.
 --
 -- /See:/ 'facetOptions' smart constructor.
-data FacetOptions = FacetOptions'
-    { _fSourceName   :: !(Maybe Text)
-    , _fObjectType   :: !(Maybe Text)
-    , _fOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data FacetOptions =
+  FacetOptions'
+    { _fSourceName      :: !(Maybe Text)
+    , _fObjectType      :: !(Maybe Text)
+    , _fNumFacetBuckets :: !(Maybe (Textual Int32))
+    , _fOperatorName    :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FacetOptions' with the minimum fields required to make a request.
 --
@@ -6899,15 +7278,19 @@ data FacetOptions = FacetOptions'
 --
 -- * 'fObjectType'
 --
+-- * 'fNumFacetBuckets'
+--
 -- * 'fOperatorName'
 facetOptions
     :: FacetOptions
 facetOptions =
-    FacetOptions'
+  FacetOptions'
     { _fSourceName = Nothing
     , _fObjectType = Nothing
+    , _fNumFacetBuckets = Nothing
     , _fOperatorName = Nothing
     }
+
 
 -- | Source name to facet on. Format: datasources\/{source_id} If empty, all
 -- data sources will be used.
@@ -6922,6 +7305,14 @@ fObjectType :: Lens' FacetOptions (Maybe Text)
 fObjectType
   = lens _fObjectType (\ s a -> s{_fObjectType = a})
 
+-- | Maximum number of facet buckets that should be returned for this facet.
+-- Defaults to 10. Maximum value is 100.
+fNumFacetBuckets :: Lens' FacetOptions (Maybe Int32)
+fNumFacetBuckets
+  = lens _fNumFacetBuckets
+      (\ s a -> s{_fNumFacetBuckets = a})
+      . mapping _Coerce
+
 -- | Name of the operator chosen for faceting. \'see
 -- cloudsearch.SchemaPropertyOptions
 fOperatorName :: Lens' FacetOptions (Maybe Text)
@@ -6935,7 +7326,8 @@ instance FromJSON FacetOptions where
               (\ o ->
                  FacetOptions' <$>
                    (o .:? "sourceName") <*> (o .:? "objectType") <*>
-                     (o .:? "operatorName"))
+                     (o .:? "numFacetBuckets")
+                     <*> (o .:? "operatorName"))
 
 instance ToJSON FacetOptions where
         toJSON FacetOptions'{..}
@@ -6943,16 +7335,20 @@ instance ToJSON FacetOptions where
               (catMaybes
                  [("sourceName" .=) <$> _fSourceName,
                   ("objectType" .=) <$> _fObjectType,
+                  ("numFacetBuckets" .=) <$> _fNumFacetBuckets,
                   ("operatorName" .=) <$> _fOperatorName])
 
 -- | Request of suggest API.
 --
 -- /See:/ 'suggestRequest' smart constructor.
-data SuggestRequest = SuggestRequest'
+data SuggestRequest =
+  SuggestRequest'
     { _sDataSourceRestrictions :: !(Maybe [DataSourceRestriction])
     , _sQuery                  :: !(Maybe Text)
     , _sRequestOptions         :: !(Maybe RequestOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SuggestRequest' with the minimum fields required to make a request.
 --
@@ -6966,14 +7362,16 @@ data SuggestRequest = SuggestRequest'
 suggestRequest
     :: SuggestRequest
 suggestRequest =
-    SuggestRequest'
+  SuggestRequest'
     { _sDataSourceRestrictions = Nothing
     , _sQuery = Nothing
     , _sRequestOptions = Nothing
     }
 
+
 -- | The sources to use for suggestions. If not specified, all data sources
--- from the current search application are used.
+-- from the current search application are used. Suggestions are based on
+-- Gmail titles. Suggestions from third party sources are not available.
 sDataSourceRestrictions :: Lens' SuggestRequest [DataSourceRestriction]
 sDataSourceRestrictions
   = lens _sDataSourceRestrictions
@@ -6981,7 +7379,9 @@ sDataSourceRestrictions
       . _Default
       . _Coerce
 
--- | Partial query for the completion suggestion.
+-- | Partial query for which autocomplete suggestions will be shown. For
+-- example, if the query is \"sea\", then the server might return
+-- \"season\", \"search\", \"seagull\" and so on.
 sQuery :: Lens' SuggestRequest (Maybe Text)
 sQuery = lens _sQuery (\ s a -> s{_sQuery = a})
 
@@ -7019,10 +7419,13 @@ instance ToJSON SuggestRequest where
 -- a top-level AND.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter'
+data Filter =
+  Filter'
     { _fCompositeFilter :: !(Maybe CompositeFilter)
     , _fValueFilter     :: !(Maybe ValueFilter)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -7033,11 +7436,8 @@ data Filter = Filter'
 -- * 'fValueFilter'
 filter'
     :: Filter
-filter' =
-    Filter'
-    { _fCompositeFilter = Nothing
-    , _fValueFilter = Nothing
-    }
+filter' = Filter' {_fCompositeFilter = Nothing, _fValueFilter = Nothing}
+
 
 fCompositeFilter :: Lens' Filter (Maybe CompositeFilter)
 fCompositeFilter
@@ -7065,11 +7465,14 @@ instance ToJSON Filter where
 -- | The definition for an object within a data source.
 --
 -- /See:/ 'objectDefinition' smart constructor.
-data ObjectDefinition = ObjectDefinition'
+data ObjectDefinition =
+  ObjectDefinition'
     { _odName                :: !(Maybe Text)
     , _odOptions             :: !(Maybe ObjectOptions)
     , _odPropertyDefinitions :: !(Maybe [PropertyDefinition])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectDefinition' with the minimum fields required to make a request.
 --
@@ -7083,11 +7486,9 @@ data ObjectDefinition = ObjectDefinition'
 objectDefinition
     :: ObjectDefinition
 objectDefinition =
-    ObjectDefinition'
-    { _odName = Nothing
-    , _odOptions = Nothing
-    , _odPropertyDefinitions = Nothing
-    }
+  ObjectDefinition'
+    {_odName = Nothing, _odOptions = Nothing, _odPropertyDefinitions = Nothing}
+
 
 -- | Name for the object, which then defines its type. Item indexing requests
 -- should set the objectType field equal to this value. For example, if
@@ -7132,13 +7533,16 @@ instance ToJSON ObjectDefinition where
 
 --
 -- /See:/ 'pollItemsRequest' smart constructor.
-data PollItemsRequest = PollItemsRequest'
+data PollItemsRequest =
+  PollItemsRequest'
     { _pQueue         :: !(Maybe Text)
     , _pDebugOptions  :: !(Maybe DebugOptions)
     , _pConnectorName :: !(Maybe Text)
     , _pStatusCodes   :: !(Maybe [Text])
     , _pLimit         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PollItemsRequest' with the minimum fields required to make a request.
 --
@@ -7156,13 +7560,14 @@ data PollItemsRequest = PollItemsRequest'
 pollItemsRequest
     :: PollItemsRequest
 pollItemsRequest =
-    PollItemsRequest'
+  PollItemsRequest'
     { _pQueue = Nothing
     , _pDebugOptions = Nothing
     , _pConnectorName = Nothing
     , _pStatusCodes = Nothing
     , _pLimit = Nothing
     }
+
 
 -- | Queue name to fetch items from. If unspecified, PollItems will fetch
 -- from \'default\' queue. The maximum length is 100 characters.
@@ -7218,10 +7623,13 @@ instance ToJSON PollItemsRequest where
 
 --
 -- /See:/ 'queryInterpretation' smart constructor.
-data QueryInterpretation = QueryInterpretation'
+data QueryInterpretation =
+  QueryInterpretation'
     { _qiInterpretedQuery   :: !(Maybe Text)
     , _qiInterpretationType :: !(Maybe QueryInterpretationInterpretationType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryInterpretation' with the minimum fields required to make a request.
 --
@@ -7233,10 +7641,9 @@ data QueryInterpretation = QueryInterpretation'
 queryInterpretation
     :: QueryInterpretation
 queryInterpretation =
-    QueryInterpretation'
-    { _qiInterpretedQuery = Nothing
-    , _qiInterpretationType = Nothing
-    }
+  QueryInterpretation'
+    {_qiInterpretedQuery = Nothing, _qiInterpretationType = Nothing}
+
 
 -- | The interpretation of the query used in search. For example, query
 -- \"email from john\" will be interpreted as \"from:john source:mail\"
@@ -7267,10 +7674,13 @@ instance ToJSON QueryInterpretation where
 
 --
 -- /See:/ 'unmAppedIdentity' smart constructor.
-data UnmAppedIdentity = UnmAppedIdentity'
+data UnmAppedIdentity =
+  UnmAppedIdentity'
     { _uaiResolutionStatusCode :: !(Maybe UnmAppedIdentityResolutionStatusCode)
     , _uaiExternalIdentity     :: !(Maybe Principal)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnmAppedIdentity' with the minimum fields required to make a request.
 --
@@ -7282,10 +7692,9 @@ data UnmAppedIdentity = UnmAppedIdentity'
 unmAppedIdentity
     :: UnmAppedIdentity
 unmAppedIdentity =
-    UnmAppedIdentity'
-    { _uaiResolutionStatusCode = Nothing
-    , _uaiExternalIdentity = Nothing
-    }
+  UnmAppedIdentity'
+    {_uaiResolutionStatusCode = Nothing, _uaiExternalIdentity = Nothing}
+
 
 -- | The resolution status for the external identity.
 uaiResolutionStatusCode :: Lens' UnmAppedIdentity (Maybe UnmAppedIdentityResolutionStatusCode)
@@ -7321,9 +7730,12 @@ instance ToJSON UnmAppedIdentity where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -7334,9 +7746,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -7355,10 +7766,13 @@ instance ToJSON OperationMetadata where
 -- | Aggregation of items by status code as of the specified date.
 --
 -- /See:/ 'customerIndexStats' smart constructor.
-data CustomerIndexStats = CustomerIndexStats'
+data CustomerIndexStats =
+  CustomerIndexStats'
     { _cisItemCountByStatus :: !(Maybe [ItemCountByStatus])
     , _cisDate              :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomerIndexStats' with the minimum fields required to make a request.
 --
@@ -7370,10 +7784,8 @@ data CustomerIndexStats = CustomerIndexStats'
 customerIndexStats
     :: CustomerIndexStats
 customerIndexStats =
-    CustomerIndexStats'
-    { _cisItemCountByStatus = Nothing
-    , _cisDate = Nothing
-    }
+  CustomerIndexStats' {_cisItemCountByStatus = Nothing, _cisDate = Nothing}
+
 
 -- | Number of items aggregrated by status code.
 cisItemCountByStatus :: Lens' CustomerIndexStats [ItemCountByStatus]
@@ -7405,7 +7817,8 @@ instance ToJSON CustomerIndexStats where
 -- | Represents an item to be pushed to the indexing queue.
 --
 -- /See:/ 'pushItem' smart constructor.
-data PushItem = PushItem'
+data PushItem =
+  PushItem'
     { _piRepositoryError    :: !(Maybe RepositoryError)
     , _piContentHash        :: !(Maybe Text)
     , _piStructuredDataHash :: !(Maybe Text)
@@ -7413,7 +7826,9 @@ data PushItem = PushItem'
     , _piQueue              :: !(Maybe Text)
     , _piMetadataHash       :: !(Maybe Text)
     , _piType               :: !(Maybe PushItemType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushItem' with the minimum fields required to make a request.
 --
@@ -7435,7 +7850,7 @@ data PushItem = PushItem'
 pushItem
     :: PushItem
 pushItem =
-    PushItem'
+  PushItem'
     { _piRepositoryError = Nothing
     , _piContentHash = Nothing
     , _piStructuredDataHash = Nothing
@@ -7444,6 +7859,7 @@ pushItem =
     , _piMetadataHash = Nothing
     , _piType = Nothing
     }
+
 
 -- | Populate this field to store Connector or repository error details. This
 -- information is displayed in the Admin Console. This field may only be
@@ -7524,10 +7940,13 @@ instance ToJSON PushItem where
 -- | Error message per source response.
 --
 -- /See:/ 'errorMessage' smart constructor.
-data ErrorMessage = ErrorMessage'
+data ErrorMessage =
+  ErrorMessage'
     { _emSource       :: !(Maybe Source)
     , _emErrorMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ErrorMessage' with the minimum fields required to make a request.
 --
@@ -7538,11 +7957,8 @@ data ErrorMessage = ErrorMessage'
 -- * 'emErrorMessage'
 errorMessage
     :: ErrorMessage
-errorMessage =
-    ErrorMessage'
-    { _emSource = Nothing
-    , _emErrorMessage = Nothing
-    }
+errorMessage = ErrorMessage' {_emSource = Nothing, _emErrorMessage = Nothing}
+
 
 emSource :: Lens' ErrorMessage (Maybe Source)
 emSource = lens _emSource (\ s a -> s{_emSource = a})
@@ -7569,9 +7985,12 @@ instance ToJSON ErrorMessage where
 -- | Options for boolean properties.
 --
 -- /See:/ 'booleanPropertyOptions' smart constructor.
-newtype BooleanPropertyOptions = BooleanPropertyOptions'
+newtype BooleanPropertyOptions =
+  BooleanPropertyOptions'
     { _bpoOperatorOptions :: Maybe BooleanOperatorOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BooleanPropertyOptions' with the minimum fields required to make a request.
 --
@@ -7580,10 +7999,8 @@ newtype BooleanPropertyOptions = BooleanPropertyOptions'
 -- * 'bpoOperatorOptions'
 booleanPropertyOptions
     :: BooleanPropertyOptions
-booleanPropertyOptions =
-    BooleanPropertyOptions'
-    { _bpoOperatorOptions = Nothing
-    }
+booleanPropertyOptions = BooleanPropertyOptions' {_bpoOperatorOptions = Nothing}
+
 
 -- | If set, describes how the boolean should be used as a search operator.
 bpoOperatorOptions :: Lens' BooleanPropertyOptions (Maybe BooleanOperatorOptions)
@@ -7606,10 +8023,13 @@ instance ToJSON BooleanPropertyOptions where
 
 --
 -- /See:/ 'valueFilter' smart constructor.
-data ValueFilter = ValueFilter'
+data ValueFilter =
+  ValueFilter'
     { _vfValue        :: !(Maybe Value)
     , _vfOperatorName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ValueFilter' with the minimum fields required to make a request.
 --
@@ -7620,11 +8040,8 @@ data ValueFilter = ValueFilter'
 -- * 'vfOperatorName'
 valueFilter
     :: ValueFilter
-valueFilter =
-    ValueFilter'
-    { _vfValue = Nothing
-    , _vfOperatorName = Nothing
-    }
+valueFilter = ValueFilter' {_vfValue = Nothing, _vfOperatorName = Nothing}
+
 
 -- | The value to be compared with.
 vfValue :: Lens' ValueFilter (Maybe Value)
@@ -7669,9 +8086,12 @@ instance ToJSON ValueFilter where
 -- property\'s value, with the query *priority:p0*.
 --
 -- /See:/ 'enumOperatorOptions' smart constructor.
-newtype EnumOperatorOptions = EnumOperatorOptions'
+newtype EnumOperatorOptions =
+  EnumOperatorOptions'
     { _eooOperatorName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnumOperatorOptions' with the minimum fields required to make a request.
 --
@@ -7680,10 +8100,8 @@ newtype EnumOperatorOptions = EnumOperatorOptions'
 -- * 'eooOperatorName'
 enumOperatorOptions
     :: EnumOperatorOptions
-enumOperatorOptions =
-    EnumOperatorOptions'
-    { _eooOperatorName = Nothing
-    }
+enumOperatorOptions = EnumOperatorOptions' {_eooOperatorName = Nothing}
+
 
 -- | Indicates the operator name required in the query in order to isolate
 -- the enum property. For example, if operatorName is *priority* and the
@@ -7711,12 +8129,48 @@ instance ToJSON EnumOperatorOptions where
               (catMaybes
                  [("operatorName" .=) <$> _eooOperatorName])
 
+-- | Gmail Attachment restricts (i.e. has:attachment, has:drive,
+-- filename:pdf).
+--
+-- /See:/ 'gmailAttachmentRestrict' smart constructor.
+newtype GmailAttachmentRestrict =
+  GmailAttachmentRestrict'
+    { _gType :: Maybe GmailAttachmentRestrictType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GmailAttachmentRestrict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gType'
+gmailAttachmentRestrict
+    :: GmailAttachmentRestrict
+gmailAttachmentRestrict = GmailAttachmentRestrict' {_gType = Nothing}
+
+
+gType :: Lens' GmailAttachmentRestrict (Maybe GmailAttachmentRestrictType)
+gType = lens _gType (\ s a -> s{_gType = a})
+
+instance FromJSON GmailAttachmentRestrict where
+        parseJSON
+          = withObject "GmailAttachmentRestrict"
+              (\ o -> GmailAttachmentRestrict' <$> (o .:? "type"))
+
+instance ToJSON GmailAttachmentRestrict where
+        toJSON GmailAttachmentRestrict'{..}
+          = object (catMaybes [("type" .=) <$> _gType])
+
 -- | Options for date properties.
 --
 -- /See:/ 'datePropertyOptions' smart constructor.
-newtype DatePropertyOptions = DatePropertyOptions'
+newtype DatePropertyOptions =
+  DatePropertyOptions'
     { _dOperatorOptions :: Maybe DateOperatorOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatePropertyOptions' with the minimum fields required to make a request.
 --
@@ -7725,10 +8179,8 @@ newtype DatePropertyOptions = DatePropertyOptions'
 -- * 'dOperatorOptions'
 datePropertyOptions
     :: DatePropertyOptions
-datePropertyOptions =
-    DatePropertyOptions'
-    { _dOperatorOptions = Nothing
-    }
+datePropertyOptions = DatePropertyOptions' {_dOperatorOptions = Nothing}
+
 
 -- | If set, describes how the date should be used as a search operator.
 dOperatorOptions :: Lens' DatePropertyOptions (Maybe DateOperatorOptions)
@@ -7751,9 +8203,12 @@ instance ToJSON DatePropertyOptions where
 -- | List of enum values.
 --
 -- /See:/ 'enumValues' smart constructor.
-newtype EnumValues = EnumValues'
+newtype EnumValues =
+  EnumValues'
     { _evValues :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnumValues' with the minimum fields required to make a request.
 --
@@ -7762,13 +8217,10 @@ newtype EnumValues = EnumValues'
 -- * 'evValues'
 enumValues
     :: EnumValues
-enumValues =
-    EnumValues'
-    { _evValues = Nothing
-    }
+enumValues = EnumValues' {_evValues = Nothing}
 
--- | The maximum allowable length for string values is 32 characters. The
--- maximum number of elements is 100.
+
+-- | The maximum allowable length for string values is 32 characters.
 evValues :: Lens' EnumValues [Text]
 evValues
   = lens _evValues (\ s a -> s{_evValues = a}) .
@@ -7786,11 +8238,14 @@ instance ToJSON EnumValues where
 
 --
 -- /See:/ 'gSuitePrincipal' smart constructor.
-data GSuitePrincipal = GSuitePrincipal'
+data GSuitePrincipal =
+  GSuitePrincipal'
     { _gspGsuiteGroupEmail :: !(Maybe Text)
     , _gspGsuiteUserEmail  :: !(Maybe Text)
     , _gspGsuiteDomain     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GSuitePrincipal' with the minimum fields required to make a request.
 --
@@ -7804,11 +8259,12 @@ data GSuitePrincipal = GSuitePrincipal'
 gSuitePrincipal
     :: GSuitePrincipal
 gSuitePrincipal =
-    GSuitePrincipal'
+  GSuitePrincipal'
     { _gspGsuiteGroupEmail = Nothing
     , _gspGsuiteUserEmail = Nothing
     , _gspGsuiteDomain = Nothing
     }
+
 
 -- | This principal references a G Suite group account
 gspGsuiteGroupEmail :: Lens' GSuitePrincipal (Maybe Text)
@@ -7846,12 +8302,56 @@ instance ToJSON GSuitePrincipal where
                   ("gsuiteUserEmail" .=) <$> _gspGsuiteUserEmail,
                   ("gsuiteDomain" .=) <$> _gspGsuiteDomain])
 
+--
+-- /See:/ 'indexItemOptions' smart constructor.
+newtype IndexItemOptions =
+  IndexItemOptions'
+    { _iioAllowUnknownGsuitePrincipals :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IndexItemOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iioAllowUnknownGsuitePrincipals'
+indexItemOptions
+    :: IndexItemOptions
+indexItemOptions =
+  IndexItemOptions' {_iioAllowUnknownGsuitePrincipals = Nothing}
+
+
+-- | Specifies if the index request should allow gsuite principals that do
+-- not exist or are deleted in the index request.
+iioAllowUnknownGsuitePrincipals :: Lens' IndexItemOptions (Maybe Bool)
+iioAllowUnknownGsuitePrincipals
+  = lens _iioAllowUnknownGsuitePrincipals
+      (\ s a -> s{_iioAllowUnknownGsuitePrincipals = a})
+
+instance FromJSON IndexItemOptions where
+        parseJSON
+          = withObject "IndexItemOptions"
+              (\ o ->
+                 IndexItemOptions' <$>
+                   (o .:? "allowUnknownGsuitePrincipals"))
+
+instance ToJSON IndexItemOptions where
+        toJSON IndexItemOptions'{..}
+          = object
+              (catMaybes
+                 [("allowUnknownGsuitePrincipals" .=) <$>
+                    _iioAllowUnknownGsuitePrincipals])
+
 -- | Additional search quality metadata of the item.
 --
 -- /See:/ 'searchQualityMetadata' smart constructor.
-newtype SearchQualityMetadata = SearchQualityMetadata'
+newtype SearchQualityMetadata =
+  SearchQualityMetadata'
     { _sqmQuality :: Maybe (Textual Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchQualityMetadata' with the minimum fields required to make a request.
 --
@@ -7860,14 +8360,12 @@ newtype SearchQualityMetadata = SearchQualityMetadata'
 -- * 'sqmQuality'
 searchQualityMetadata
     :: SearchQualityMetadata
-searchQualityMetadata =
-    SearchQualityMetadata'
-    { _sqmQuality = Nothing
-    }
+searchQualityMetadata = SearchQualityMetadata' {_sqmQuality = Nothing}
+
 
 -- | An indication of the quality of the item, used to influence search
 -- quality. Value should be between 0.0 (lowest quality) and 1.0 (highest
--- quality).
+-- quality). The default value is 0.0.
 sqmQuality :: Lens' SearchQualityMetadata (Maybe Double)
 sqmQuality
   = lens _sqmQuality (\ s a -> s{_sqmQuality = a}) .
@@ -7885,9 +8383,12 @@ instance ToJSON SearchQualityMetadata where
 -- | List of timestamp values.
 --
 -- /See:/ 'timestampValues' smart constructor.
-newtype TimestampValues = TimestampValues'
+newtype TimestampValues =
+  TimestampValues'
     { _tValues :: Maybe [DateTime']
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimestampValues' with the minimum fields required to make a request.
 --
@@ -7896,12 +8397,9 @@ newtype TimestampValues = TimestampValues'
 -- * 'tValues'
 timestampValues
     :: TimestampValues
-timestampValues =
-    TimestampValues'
-    { _tValues = Nothing
-    }
+timestampValues = TimestampValues' {_tValues = Nothing}
 
--- | The maximum number of elements is 100.
+
 tValues :: Lens' TimestampValues [UTCTime]
 tValues
   = lens _tValues (\ s a -> s{_tValues = a}) . _Default
@@ -7920,9 +8418,12 @@ instance ToJSON TimestampValues where
 -- | Error information about the response.
 --
 -- /See:/ 'errorInfo' smart constructor.
-newtype ErrorInfo = ErrorInfo'
+newtype ErrorInfo =
+  ErrorInfo'
     { _eiErrorMessages :: Maybe [ErrorMessage]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ErrorInfo' with the minimum fields required to make a request.
 --
@@ -7931,10 +8432,8 @@ newtype ErrorInfo = ErrorInfo'
 -- * 'eiErrorMessages'
 errorInfo
     :: ErrorInfo
-errorInfo =
-    ErrorInfo'
-    { _eiErrorMessages = Nothing
-    }
+errorInfo = ErrorInfo' {_eiErrorMessages = Nothing}
+
 
 eiErrorMessages :: Lens' ErrorInfo [ErrorMessage]
 eiErrorMessages
@@ -7957,10 +8456,13 @@ instance ToJSON ErrorInfo where
 
 --
 -- /See:/ 'resultDisplayMetadata' smart constructor.
-data ResultDisplayMetadata = ResultDisplayMetadata'
+data ResultDisplayMetadata =
+  ResultDisplayMetadata'
     { _rdmMetalines       :: !(Maybe [ResultDisplayLine])
     , _rdmObjectTypeLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultDisplayMetadata' with the minimum fields required to make a request.
 --
@@ -7972,10 +8474,9 @@ data ResultDisplayMetadata = ResultDisplayMetadata'
 resultDisplayMetadata
     :: ResultDisplayMetadata
 resultDisplayMetadata =
-    ResultDisplayMetadata'
-    { _rdmMetalines = Nothing
-    , _rdmObjectTypeLabel = Nothing
-    }
+  ResultDisplayMetadata'
+    {_rdmMetalines = Nothing, _rdmObjectTypeLabel = Nothing}
+
 
 -- | The metalines content to be displayed with the result.
 rdmMetalines :: Lens' ResultDisplayMetadata [ResultDisplayLine]
@@ -8015,9 +8516,12 @@ instance ToJSON ResultDisplayMetadata where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -8028,9 +8532,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -8049,9 +8552,12 @@ instance ToJSON OperationResponse where
 -- | List of integer values.
 --
 -- /See:/ 'integerValues' smart constructor.
-newtype IntegerValues = IntegerValues'
+newtype IntegerValues =
+  IntegerValues'
     { _ivValues :: Maybe [Textual Int64]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IntegerValues' with the minimum fields required to make a request.
 --
@@ -8060,12 +8566,9 @@ newtype IntegerValues = IntegerValues'
 -- * 'ivValues'
 integerValues
     :: IntegerValues
-integerValues =
-    IntegerValues'
-    { _ivValues = Nothing
-    }
+integerValues = IntegerValues' {_ivValues = Nothing}
 
--- | The maximum number of elements is 100.
+
 ivValues :: Lens' IntegerValues [Int64]
 ivValues
   = lens _ivValues (\ s a -> s{_ivValues = a}) .
@@ -8084,10 +8587,13 @@ instance ToJSON IntegerValues where
 
 --
 -- /See:/ 'searchItemsByViewURLResponse' smart constructor.
-data SearchItemsByViewURLResponse = SearchItemsByViewURLResponse'
+data SearchItemsByViewURLResponse =
+  SearchItemsByViewURLResponse'
     { _sibvurNextPageToken :: !(Maybe Text)
     , _sibvurItems         :: !(Maybe [Item])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchItemsByViewURLResponse' with the minimum fields required to make a request.
 --
@@ -8099,10 +8605,9 @@ data SearchItemsByViewURLResponse = SearchItemsByViewURLResponse'
 searchItemsByViewURLResponse
     :: SearchItemsByViewURLResponse
 searchItemsByViewURLResponse =
-    SearchItemsByViewURLResponse'
-    { _sibvurNextPageToken = Nothing
-    , _sibvurItems = Nothing
-    }
+  SearchItemsByViewURLResponse'
+    {_sibvurNextPageToken = Nothing, _sibvurItems = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -8134,9 +8639,12 @@ instance ToJSON SearchItemsByViewURLResponse where
 
 --
 -- /See:/ 'getCustomerIndexStatsResponse' smart constructor.
-newtype GetCustomerIndexStatsResponse = GetCustomerIndexStatsResponse'
+newtype GetCustomerIndexStatsResponse =
+  GetCustomerIndexStatsResponse'
     { _gcisrStats :: Maybe [CustomerIndexStats]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetCustomerIndexStatsResponse' with the minimum fields required to make a request.
 --
@@ -8146,9 +8654,8 @@ newtype GetCustomerIndexStatsResponse = GetCustomerIndexStatsResponse'
 getCustomerIndexStatsResponse
     :: GetCustomerIndexStatsResponse
 getCustomerIndexStatsResponse =
-    GetCustomerIndexStatsResponse'
-    { _gcisrStats = Nothing
-    }
+  GetCustomerIndexStatsResponse' {_gcisrStats = Nothing}
+
 
 -- | Summary of indexed item counts, one for each day in the requested range.
 gcisrStats :: Lens' GetCustomerIndexStatsResponse [CustomerIndexStats]
@@ -8168,20 +8675,32 @@ instance ToJSON GetCustomerIndexStatsResponse where
         toJSON GetCustomerIndexStatsResponse'{..}
           = object (catMaybes [("stats" .=) <$> _gcisrStats])
 
--- | Information relevant only to a restrict entry. NextId: 7
+-- | Information relevant only to a restrict entry. NextId: 12
 --
 -- /See:/ 'restrictItem' smart constructor.
-data RestrictItem = RestrictItem'
-    { _riDriveLocationRestrict :: !(Maybe DriveLocationRestrict)
-    , _riDriveTimeSpanRestrict :: !(Maybe DriveTimeSpanRestrict)
-    , _riDriveMimeTypeRestrict :: !(Maybe DriveMimeTypeRestrict)
-    , _riDriveFollowUpRestrict :: !(Maybe DriveFollowUpRestrict)
-    , _riSearchOperator        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data RestrictItem =
+  RestrictItem'
+    { _riGmailFolderRestrict      :: !(Maybe GmailFolderRestrict)
+    , _riGmailActionRestrict      :: !(Maybe GmailActionRestrict)
+    , _riDriveLocationRestrict    :: !(Maybe DriveLocationRestrict)
+    , _riDriveTimeSpanRestrict    :: !(Maybe DriveTimeSpanRestrict)
+    , _riDriveMimeTypeRestrict    :: !(Maybe DriveMimeTypeRestrict)
+    , _riDriveFollowUpRestrict    :: !(Maybe DriveFollowUpRestrict)
+    , _riGmailTimeRestrict        :: !(Maybe GmailTimeRestrict)
+    , _riGmailIntelligentRestrict :: !(Maybe GmailIntelligentRestrict)
+    , _riGmailAttachmentRestrict  :: !(Maybe GmailAttachmentRestrict)
+    , _riSearchOperator           :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestrictItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riGmailFolderRestrict'
+--
+-- * 'riGmailActionRestrict'
 --
 -- * 'riDriveLocationRestrict'
 --
@@ -8191,17 +8710,40 @@ data RestrictItem = RestrictItem'
 --
 -- * 'riDriveFollowUpRestrict'
 --
+-- * 'riGmailTimeRestrict'
+--
+-- * 'riGmailIntelligentRestrict'
+--
+-- * 'riGmailAttachmentRestrict'
+--
 -- * 'riSearchOperator'
 restrictItem
     :: RestrictItem
 restrictItem =
-    RestrictItem'
-    { _riDriveLocationRestrict = Nothing
+  RestrictItem'
+    { _riGmailFolderRestrict = Nothing
+    , _riGmailActionRestrict = Nothing
+    , _riDriveLocationRestrict = Nothing
     , _riDriveTimeSpanRestrict = Nothing
     , _riDriveMimeTypeRestrict = Nothing
     , _riDriveFollowUpRestrict = Nothing
+    , _riGmailTimeRestrict = Nothing
+    , _riGmailIntelligentRestrict = Nothing
+    , _riGmailAttachmentRestrict = Nothing
     , _riSearchOperator = Nothing
     }
+
+
+-- | Gmail Types.
+riGmailFolderRestrict :: Lens' RestrictItem (Maybe GmailFolderRestrict)
+riGmailFolderRestrict
+  = lens _riGmailFolderRestrict
+      (\ s a -> s{_riGmailFolderRestrict = a})
+
+riGmailActionRestrict :: Lens' RestrictItem (Maybe GmailActionRestrict)
+riGmailActionRestrict
+  = lens _riGmailActionRestrict
+      (\ s a -> s{_riGmailActionRestrict = a})
 
 riDriveLocationRestrict :: Lens' RestrictItem (Maybe DriveLocationRestrict)
 riDriveLocationRestrict
@@ -8213,15 +8755,32 @@ riDriveTimeSpanRestrict
   = lens _riDriveTimeSpanRestrict
       (\ s a -> s{_riDriveTimeSpanRestrict = a})
 
+-- | LINT.IfChange Drive Types.
 riDriveMimeTypeRestrict :: Lens' RestrictItem (Maybe DriveMimeTypeRestrict)
 riDriveMimeTypeRestrict
   = lens _riDriveMimeTypeRestrict
       (\ s a -> s{_riDriveMimeTypeRestrict = a})
 
+-- | LINT.ThenChange(\/\/depot\/google3\/java\/com\/google\/apps\/search\/quality\/itemsuggest\/utils\/SubtypeRerankingUtils.java)
 riDriveFollowUpRestrict :: Lens' RestrictItem (Maybe DriveFollowUpRestrict)
 riDriveFollowUpRestrict
   = lens _riDriveFollowUpRestrict
       (\ s a -> s{_riDriveFollowUpRestrict = a})
+
+riGmailTimeRestrict :: Lens' RestrictItem (Maybe GmailTimeRestrict)
+riGmailTimeRestrict
+  = lens _riGmailTimeRestrict
+      (\ s a -> s{_riGmailTimeRestrict = a})
+
+riGmailIntelligentRestrict :: Lens' RestrictItem (Maybe GmailIntelligentRestrict)
+riGmailIntelligentRestrict
+  = lens _riGmailIntelligentRestrict
+      (\ s a -> s{_riGmailIntelligentRestrict = a})
+
+riGmailAttachmentRestrict :: Lens' RestrictItem (Maybe GmailAttachmentRestrict)
+riGmailAttachmentRestrict
+  = lens _riGmailAttachmentRestrict
+      (\ s a -> s{_riGmailAttachmentRestrict = a})
 
 -- | The search restrict (e.g. \"after:2017-09-11 before:2017-09-12\").
 riSearchOperator :: Lens' RestrictItem (Maybe Text)
@@ -8234,17 +8793,26 @@ instance FromJSON RestrictItem where
           = withObject "RestrictItem"
               (\ o ->
                  RestrictItem' <$>
-                   (o .:? "driveLocationRestrict") <*>
-                     (o .:? "driveTimeSpanRestrict")
+                   (o .:? "gmailFolderRestrict") <*>
+                     (o .:? "gmailActionRestrict")
+                     <*> (o .:? "driveLocationRestrict")
+                     <*> (o .:? "driveTimeSpanRestrict")
                      <*> (o .:? "driveMimeTypeRestrict")
                      <*> (o .:? "driveFollowUpRestrict")
+                     <*> (o .:? "gmailTimeRestrict")
+                     <*> (o .:? "gmailIntelligentRestrict")
+                     <*> (o .:? "gmailAttachmentRestrict")
                      <*> (o .:? "searchOperator"))
 
 instance ToJSON RestrictItem where
         toJSON RestrictItem'{..}
           = object
               (catMaybes
-                 [("driveLocationRestrict" .=) <$>
+                 [("gmailFolderRestrict" .=) <$>
+                    _riGmailFolderRestrict,
+                  ("gmailActionRestrict" .=) <$>
+                    _riGmailActionRestrict,
+                  ("driveLocationRestrict" .=) <$>
                     _riDriveLocationRestrict,
                   ("driveTimeSpanRestrict" .=) <$>
                     _riDriveTimeSpanRestrict,
@@ -8252,13 +8820,21 @@ instance ToJSON RestrictItem where
                     _riDriveMimeTypeRestrict,
                   ("driveFollowUpRestrict" .=) <$>
                     _riDriveFollowUpRestrict,
+                  ("gmailTimeRestrict" .=) <$> _riGmailTimeRestrict,
+                  ("gmailIntelligentRestrict" .=) <$>
+                    _riGmailIntelligentRestrict,
+                  ("gmailAttachmentRestrict" .=) <$>
+                    _riGmailAttachmentRestrict,
                   ("searchOperator" .=) <$> _riSearchOperator])
 
 --
 -- /See:/ 'checkAccessResponse' smart constructor.
-newtype CheckAccessResponse = CheckAccessResponse'
+newtype CheckAccessResponse =
+  CheckAccessResponse'
     { _carHasAccess :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CheckAccessResponse' with the minimum fields required to make a request.
 --
@@ -8267,10 +8843,8 @@ newtype CheckAccessResponse = CheckAccessResponse'
 -- * 'carHasAccess'
 checkAccessResponse
     :: CheckAccessResponse
-checkAccessResponse =
-    CheckAccessResponse'
-    { _carHasAccess = Nothing
-    }
+checkAccessResponse = CheckAccessResponse' {_carHasAccess = Nothing}
+
 
 -- | Returns true if principal has access. Returns false otherwise.
 carHasAccess :: Lens' CheckAccessResponse (Maybe Bool)
@@ -8290,12 +8864,15 @@ instance ToJSON CheckAccessResponse where
 -- | Shared request options for all RPC methods.
 --
 -- /See:/ 'requestOptions' smart constructor.
-data RequestOptions = RequestOptions'
+data RequestOptions =
+  RequestOptions'
     { _roLanguageCode        :: !(Maybe Text)
     , _roDebugOptions        :: !(Maybe DebugOptions)
     , _roTimeZone            :: !(Maybe Text)
     , _roSearchApplicationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RequestOptions' with the minimum fields required to make a request.
 --
@@ -8311,17 +8888,20 @@ data RequestOptions = RequestOptions'
 requestOptions
     :: RequestOptions
 requestOptions =
-    RequestOptions'
+  RequestOptions'
     { _roLanguageCode = Nothing
     , _roDebugOptions = Nothing
     , _roTimeZone = Nothing
     , _roSearchApplicationId = Nothing
     }
 
+
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. For
--- translations.
+-- translations. When specified, the documents in search results are biased
+-- towards the specified language. Suggest API does not use this parameter.
+-- It autocompletes only based on characters in the query.
 roLanguageCode :: Lens' RequestOptions (Maybe Text)
 roLanguageCode
   = lens _roLanguageCode
@@ -8370,11 +8950,14 @@ instance ToJSON RequestOptions where
 -- | This contains item\'s status and any errors.
 --
 -- /See:/ 'itemStatus' smart constructor.
-data ItemStatus = ItemStatus'
+data ItemStatus =
+  ItemStatus'
     { _isProcessingErrors :: !(Maybe [ProcessingError])
     , _isCode             :: !(Maybe ItemStatusCode)
     , _isRepositoryErrors :: !(Maybe [RepositoryError])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ItemStatus' with the minimum fields required to make a request.
 --
@@ -8388,11 +8971,12 @@ data ItemStatus = ItemStatus'
 itemStatus
     :: ItemStatus
 itemStatus =
-    ItemStatus'
+  ItemStatus'
     { _isProcessingErrors = Nothing
     , _isCode = Nothing
     , _isRepositoryErrors = Nothing
     }
+
 
 -- | Error details in case the item is in ERROR state.
 isProcessingErrors :: Lens' ItemStatus [ProcessingError]

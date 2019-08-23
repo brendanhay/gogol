@@ -68,7 +68,8 @@ type BiddersAccountsFilterSetsLosingBidsListResource
 -- bids that lost for each reason.
 --
 -- /See:/ 'biddersAccountsFilterSetsLosingBidsList' smart constructor.
-data BiddersAccountsFilterSetsLosingBidsList = BiddersAccountsFilterSetsLosingBidsList'
+data BiddersAccountsFilterSetsLosingBidsList =
+  BiddersAccountsFilterSetsLosingBidsList'
     { _bafslblXgafv          :: !(Maybe Xgafv)
     , _bafslblUploadProtocol :: !(Maybe Text)
     , _bafslblFilterSetName  :: !Text
@@ -77,7 +78,9 @@ data BiddersAccountsFilterSetsLosingBidsList = BiddersAccountsFilterSetsLosingBi
     , _bafslblPageToken      :: !(Maybe Text)
     , _bafslblPageSize       :: !(Maybe (Textual Int32))
     , _bafslblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsLosingBidsList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ biddersAccountsFilterSetsLosingBidsList
     :: Text -- ^ 'bafslblFilterSetName'
     -> BiddersAccountsFilterSetsLosingBidsList
 biddersAccountsFilterSetsLosingBidsList pBafslblFilterSetName_ =
-    BiddersAccountsFilterSetsLosingBidsList'
+  BiddersAccountsFilterSetsLosingBidsList'
     { _bafslblXgafv = Nothing
     , _bafslblUploadProtocol = Nothing
     , _bafslblFilterSetName = pBafslblFilterSetName_
@@ -112,6 +115,7 @@ biddersAccountsFilterSetsLosingBidsList pBafslblFilterSetName_ =
     , _bafslblPageSize = Nothing
     , _bafslblCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafslblXgafv :: Lens' BiddersAccountsFilterSetsLosingBidsList (Maybe Xgafv)
@@ -171,7 +175,8 @@ bafslblCallback
       (\ s a -> s{_bafslblCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsLosingBidsList where
+           BiddersAccountsFilterSetsLosingBidsList
+         where
         type Rs BiddersAccountsFilterSetsLosingBidsList =
              ListLosingBidsResponse
         type Scopes BiddersAccountsFilterSetsLosingBidsList =

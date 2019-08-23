@@ -58,11 +58,14 @@ type ManagementAccountUserLinksListResource =
 -- | Lists account-user links for a given account.
 --
 -- /See:/ 'managementAccountUserLinksList' smart constructor.
-data ManagementAccountUserLinksList = ManagementAccountUserLinksList'
+data ManagementAccountUserLinksList =
+  ManagementAccountUserLinksList'
     { _maullAccountId  :: !Text
     , _maullStartIndex :: !(Maybe (Textual Int32))
     , _maullMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementAccountUserLinksList' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ managementAccountUserLinksList
     :: Text -- ^ 'maullAccountId'
     -> ManagementAccountUserLinksList
 managementAccountUserLinksList pMaullAccountId_ =
-    ManagementAccountUserLinksList'
+  ManagementAccountUserLinksList'
     { _maullAccountId = pMaullAccountId_
     , _maullStartIndex = Nothing
     , _maullMaxResults = Nothing
     }
+
 
 -- | Account ID to retrieve the user links for.
 maullAccountId :: Lens' ManagementAccountUserLinksList Text

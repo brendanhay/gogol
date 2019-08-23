@@ -1,5 +1,5 @@
 name:                  gogol-bigtableadmin
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Cloud Bigtable Admin SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-
+    Administer your Cloud Bigtable tables and instances.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -62,8 +62,11 @@ library
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.DropRowRange
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GetIAMPolicy
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.SetIAMPolicy
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.TestIAMPermissions
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
         , Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
 
@@ -72,5 +75,5 @@ library
         , Network.Google.BigtableAdmin.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

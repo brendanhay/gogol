@@ -56,11 +56,14 @@ type DatafeedsListResource =
 -- | Lists the configurations for datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedsList' smart constructor.
-data DatafeedsList = DatafeedsList'
+data DatafeedsList =
+  DatafeedsList'
     { _datMerchantId :: !(Textual Word64)
     , _datPageToken  :: !(Maybe Text)
     , _datMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedsList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ datafeedsList
     :: Word64 -- ^ 'datMerchantId'
     -> DatafeedsList
 datafeedsList pDatMerchantId_ =
-    DatafeedsList'
+  DatafeedsList'
     { _datMerchantId = _Coerce # pDatMerchantId_
     , _datPageToken = Nothing
     , _datMaxResults = Nothing
     }
+
 
 -- | The ID of the account that manages the datafeeds. This account cannot be
 -- a multi-client account.

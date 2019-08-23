@@ -66,7 +66,8 @@ type AccountsPublisherProFilesListResource =
 -- | List all publisher profiles visible to the buyer
 --
 -- /See:/ 'accountsPublisherProFilesList' smart constructor.
-data AccountsPublisherProFilesList = AccountsPublisherProFilesList'
+data AccountsPublisherProFilesList =
+  AccountsPublisherProFilesList'
     { _appflXgafv          :: !(Maybe Xgafv)
     , _appflUploadProtocol :: !(Maybe Text)
     , _appflAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data AccountsPublisherProFilesList = AccountsPublisherProFilesList'
     , _appflPageToken      :: !(Maybe Text)
     , _appflPageSize       :: !(Maybe (Textual Int32))
     , _appflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsPublisherProFilesList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ accountsPublisherProFilesList
     :: Text -- ^ 'appflAccountId'
     -> AccountsPublisherProFilesList
 accountsPublisherProFilesList pAppflAccountId_ =
-    AccountsPublisherProFilesList'
+  AccountsPublisherProFilesList'
     { _appflXgafv = Nothing
     , _appflUploadProtocol = Nothing
     , _appflAccessToken = Nothing
@@ -110,6 +113,7 @@ accountsPublisherProFilesList pAppflAccountId_ =
     , _appflPageSize = Nothing
     , _appflCallback = Nothing
     }
+
 
 -- | V1 error format.
 appflXgafv :: Lens' AccountsPublisherProFilesList (Maybe Xgafv)

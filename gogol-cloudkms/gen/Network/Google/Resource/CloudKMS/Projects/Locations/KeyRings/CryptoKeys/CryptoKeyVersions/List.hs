@@ -68,7 +68,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListResource
 -- | Lists CryptoKeyVersions.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList'
     { _plkrckckvlParent         :: !Text
     , _plkrckckvlXgafv          :: !(Maybe Xgafv)
     , _plkrckckvlUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList = ProjectsLocation
     , _plkrckckvlPageToken      :: !(Maybe Text)
     , _plkrckckvlPageSize       :: !(Maybe (Textual Int32))
     , _plkrckckvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList
     :: Text -- ^ 'plkrckckvlParent'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList pPlkrckckvlParent_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList'
     { _plkrckckvlParent = pPlkrckckvlParent_
     , _plkrckckvlXgafv = Nothing
     , _plkrckckvlUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList pPlkrckckvlParent_ =
     , _plkrckckvlPageSize = Nothing
     , _plkrckckvlCallback = Nothing
     }
+
 
 -- | Required. The resource name of the CryptoKey to list, in the format
 -- \`projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*\`.
@@ -179,14 +183,16 @@ plkrckckvlCallback
       (\ s a -> s{_plkrckckvlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList
              = ListCryptoKeyVersionsResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList'{..}
           = go _plkrckckvlParent _plkrckckvlXgafv

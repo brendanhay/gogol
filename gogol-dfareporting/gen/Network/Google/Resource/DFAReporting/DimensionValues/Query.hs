@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'DimensionValuesQuery' request conforms to.
 type DimensionValuesQueryResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dimensionvalues" :>
@@ -60,12 +60,15 @@ type DimensionValuesQueryResource =
 -- | Retrieves list of report dimension values for a list of filters.
 --
 -- /See:/ 'dimensionValuesQuery' smart constructor.
-data DimensionValuesQuery = DimensionValuesQuery'
+data DimensionValuesQuery =
+  DimensionValuesQuery'
     { _dvqProFileId  :: !(Textual Int64)
     , _dvqPayload    :: !DimensionValueRequest
     , _dvqPageToken  :: !(Maybe Text)
     , _dvqMaxResults :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DimensionValuesQuery' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ dimensionValuesQuery
     -> DimensionValueRequest -- ^ 'dvqPayload'
     -> DimensionValuesQuery
 dimensionValuesQuery pDvqProFileId_ pDvqPayload_ =
-    DimensionValuesQuery'
+  DimensionValuesQuery'
     { _dvqProFileId = _Coerce # pDvqProFileId_
     , _dvqPayload = pDvqPayload_
     , _dvqPageToken = Nothing
     , _dvqMaxResults = 100
     }
+
 
 -- | The DFA user profile ID.
 dvqProFileId :: Lens' DimensionValuesQuery Int64

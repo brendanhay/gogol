@@ -54,10 +54,13 @@ type UsersLabelsCreateResource =
 -- | Creates a new label.
 --
 -- /See:/ 'usersLabelsCreate' smart constructor.
-data UsersLabelsCreate = UsersLabelsCreate'
+data UsersLabelsCreate =
+  UsersLabelsCreate'
     { _ulcPayload :: !Label
     , _ulcUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersLabelsCreate' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ usersLabelsCreate
     :: Label -- ^ 'ulcPayload'
     -> UsersLabelsCreate
 usersLabelsCreate pUlcPayload_ =
-    UsersLabelsCreate'
-    { _ulcPayload = pUlcPayload_
-    , _ulcUserId = "me"
-    }
+  UsersLabelsCreate' {_ulcPayload = pUlcPayload_, _ulcUserId = "me"}
+
 
 -- | Multipart request metadata.
 ulcPayload :: Lens' UsersLabelsCreate Label

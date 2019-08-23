@@ -24,11 +24,11 @@
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
 -- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the cluster creates
+-- is added for the cluster. After cluster creation, the Kubelet creates
 -- routes for each node to allow the containers on that node to communicate
 -- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range is being used
--- by the cluster.
+-- the project\'s global metadata indicating which CIDR range the cluster
+-- is using.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.create@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.Create
@@ -72,14 +72,15 @@ type ProjectsLocationsClustersCreateResource =
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
 -- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the cluster creates
+-- is added for the cluster. After cluster creation, the Kubelet creates
 -- routes for each node to allow the containers on that node to communicate
 -- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range is being used
--- by the cluster.
+-- the project\'s global metadata indicating which CIDR range the cluster
+-- is using.
 --
 -- /See:/ 'projectsLocationsClustersCreate' smart constructor.
-data ProjectsLocationsClustersCreate = ProjectsLocationsClustersCreate'
+data ProjectsLocationsClustersCreate =
+  ProjectsLocationsClustersCreate'
     { _plccParent         :: !Text
     , _plccXgafv          :: !(Maybe Xgafv)
     , _plccUploadProtocol :: !(Maybe Text)
@@ -87,7 +88,9 @@ data ProjectsLocationsClustersCreate = ProjectsLocationsClustersCreate'
     , _plccUploadType     :: !(Maybe Text)
     , _plccPayload        :: !CreateClusterRequest
     , _plccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersCreate' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsLocationsClustersCreate
     -> CreateClusterRequest -- ^ 'plccPayload'
     -> ProjectsLocationsClustersCreate
 projectsLocationsClustersCreate pPlccParent_ pPlccPayload_ =
-    ProjectsLocationsClustersCreate'
+  ProjectsLocationsClustersCreate'
     { _plccParent = pPlccParent_
     , _plccXgafv = Nothing
     , _plccUploadProtocol = Nothing
@@ -120,6 +123,7 @@ projectsLocationsClustersCreate pPlccParent_ pPlccPayload_ =
     , _plccPayload = pPlccPayload_
     , _plccCallback = Nothing
     }
+
 
 -- | The parent (project and location) where the cluster will be created.
 -- Specified in the format \'projects\/*\/locations\/*\'.
@@ -161,7 +165,8 @@ plccCallback
   = lens _plccCallback (\ s a -> s{_plccCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersCreate where
+           ProjectsLocationsClustersCreate
+         where
         type Rs ProjectsLocationsClustersCreate = Operation
         type Scopes ProjectsLocationsClustersCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

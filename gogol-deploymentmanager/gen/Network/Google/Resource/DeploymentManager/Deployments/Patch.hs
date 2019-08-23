@@ -69,14 +69,17 @@ type DeploymentsPatchResource =
 -- deployment manifest. This method supports patch semantics.
 --
 -- /See:/ 'deploymentsPatch' smart constructor.
-data DeploymentsPatch = DeploymentsPatch'
+data DeploymentsPatch =
+  DeploymentsPatch'
     { _dpCreatePolicy :: !DeploymentsPatchCreatePolicy
     , _dpProject      :: !Text
     , _dpPayload      :: !Deployment
     , _dpDeletePolicy :: !DeploymentsPatchDeletePolicy
     , _dpPreview      :: !Bool
     , _dpDeployment   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ deploymentsPatch
     -> Text -- ^ 'dpDeployment'
     -> DeploymentsPatch
 deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
-    DeploymentsPatch'
+  DeploymentsPatch'
     { _dpCreatePolicy = DPCPCreateOrAcquire
     , _dpProject = pDpProject_
     , _dpPayload = pDpPayload_
@@ -107,6 +110,7 @@ deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
     , _dpPreview = False
     , _dpDeployment = pDpDeployment_
     }
+
 
 -- | Sets the policy to use for creating new resources.
 dpCreatePolicy :: Lens' DeploymentsPatch DeploymentsPatchCreatePolicy

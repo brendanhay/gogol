@@ -1,5 +1,5 @@
 name:                  gogol-storage
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Cloud Storage JSON SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -83,6 +83,11 @@ library
         , Network.Google.Resource.Storage.Objects.TestIAMPermissions
         , Network.Google.Resource.Storage.Objects.Update
         , Network.Google.Resource.Storage.Objects.WatchAll
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Create
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Delete
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Get
+        , Network.Google.Resource.Storage.Projects.HmacKeys.List
+        , Network.Google.Resource.Storage.Projects.HmacKeys.Update
         , Network.Google.Resource.Storage.Projects.ServiceAccount.Get
         , Network.Google.Storage
         , Network.Google.Storage.Types
@@ -92,5 +97,5 @@ library
         , Network.Google.Storage.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

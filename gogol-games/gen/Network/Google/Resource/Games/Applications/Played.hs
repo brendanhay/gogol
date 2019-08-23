@@ -54,9 +54,12 @@ type ApplicationsPlayedResource =
 -- application.
 --
 -- /See:/ 'applicationsPlayed' smart constructor.
-newtype ApplicationsPlayed = ApplicationsPlayed'
+newtype ApplicationsPlayed =
+  ApplicationsPlayed'
     { _apBuiltinGameId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationsPlayed' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype ApplicationsPlayed = ApplicationsPlayed'
 -- * 'apBuiltinGameId'
 applicationsPlayed
     :: ApplicationsPlayed
-applicationsPlayed =
-    ApplicationsPlayed'
-    { _apBuiltinGameId = Nothing
-    }
+applicationsPlayed = ApplicationsPlayed' {_apBuiltinGameId = Nothing}
+
 
 -- | Override used only by built-in games in Play Games application.
 apBuiltinGameId :: Lens' ApplicationsPlayed (Maybe Text)
@@ -79,7 +80,8 @@ apBuiltinGameId
 instance GoogleRequest ApplicationsPlayed where
         type Rs ApplicationsPlayed = ()
         type Scopes ApplicationsPlayed =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ApplicationsPlayed'{..}
           = go _apBuiltinGameId (Just AltJSON) gamesService
           where go

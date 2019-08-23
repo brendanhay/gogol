@@ -65,7 +65,8 @@ type FoldersSinksListResource =
 -- | Lists sinks.
 --
 -- /See:/ 'foldersSinksList' smart constructor.
-data FoldersSinksList = FoldersSinksList'
+data FoldersSinksList =
+  FoldersSinksList'
     { _fslParent         :: !Text
     , _fslXgafv          :: !(Maybe Xgafv)
     , _fslUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data FoldersSinksList = FoldersSinksList'
     , _fslPageToken      :: !(Maybe Text)
     , _fslPageSize       :: !(Maybe (Textual Int32))
     , _fslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersSinksList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ foldersSinksList
     :: Text -- ^ 'fslParent'
     -> FoldersSinksList
 foldersSinksList pFslParent_ =
-    FoldersSinksList'
+  FoldersSinksList'
     { _fslParent = pFslParent_
     , _fslXgafv = Nothing
     , _fslUploadProtocol = Nothing
@@ -109,6 +112,7 @@ foldersSinksList pFslParent_ =
     , _fslPageSize = Nothing
     , _fslCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose sinks are to be listed:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

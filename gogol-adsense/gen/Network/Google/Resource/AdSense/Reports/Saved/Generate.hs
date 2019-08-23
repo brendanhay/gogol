@@ -60,12 +60,15 @@ type ReportsSavedGenerateResource =
 -- query parameters.
 --
 -- /See:/ 'reportsSavedGenerate' smart constructor.
-data ReportsSavedGenerate = ReportsSavedGenerate'
+data ReportsSavedGenerate =
+  ReportsSavedGenerate'
     { _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
     , _rsgStartIndex    :: !(Maybe (Textual Int32))
     , _rsgMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsSavedGenerate' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ reportsSavedGenerate
     :: Text -- ^ 'rsgSavedReportId'
     -> ReportsSavedGenerate
 reportsSavedGenerate pRsgSavedReportId_ =
-    ReportsSavedGenerate'
+  ReportsSavedGenerate'
     { _rsgLocale = Nothing
     , _rsgSavedReportId = pRsgSavedReportId_
     , _rsgStartIndex = Nothing
     , _rsgMaxResults = Nothing
     }
+
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.

@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.patch@.
@@ -66,12 +66,13 @@ type BillingAccountsSinksPatchResource =
                          ReqBody '[JSON] LogSink :> Patch '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'billingAccountsSinksPatch' smart constructor.
-data BillingAccountsSinksPatch = BillingAccountsSinksPatch'
+data BillingAccountsSinksPatch =
+  BillingAccountsSinksPatch'
     { _baspXgafv                :: !(Maybe Xgafv)
     , _baspUniqueWriterIdentity :: !(Maybe Bool)
     , _baspUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data BillingAccountsSinksPatch = BillingAccountsSinksPatch'
     , _baspPayload              :: !LogSink
     , _baspSinkName             :: !Text
     , _baspCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ billingAccountsSinksPatch
     -> Text -- ^ 'baspSinkName'
     -> BillingAccountsSinksPatch
 billingAccountsSinksPatch pBaspPayload_ pBaspSinkName_ =
-    BillingAccountsSinksPatch'
+  BillingAccountsSinksPatch'
     { _baspXgafv = Nothing
     , _baspUniqueWriterIdentity = Nothing
     , _baspUploadProtocol = Nothing
@@ -120,6 +123,7 @@ billingAccountsSinksPatch pBaspPayload_ pBaspSinkName_ =
     , _baspSinkName = pBaspSinkName_
     , _baspCallback = Nothing
     }
+
 
 -- | V1 error format.
 baspXgafv :: Lens' BillingAccountsSinksPatch (Maybe Xgafv)

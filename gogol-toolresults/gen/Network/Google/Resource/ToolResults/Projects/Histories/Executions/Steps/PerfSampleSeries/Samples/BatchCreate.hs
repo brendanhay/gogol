@@ -83,14 +83,17 @@ type ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreateResource
 -- does not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate' smart constructor.
-data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate = ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate'
+data ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate =
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate'
     { _phespsssbcExecutionId    :: !Text
     , _phespsssbcStepId         :: !Text
     , _phespsssbcPayload        :: !BatchCreatePerfSamplesRequest
     , _phespsssbcHistoryId      :: !Text
     , _phespsssbcProjectId      :: !Text
     , _phespsssbcSampleSeriesId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate
     -> Text -- ^ 'phespsssbcSampleSeriesId'
     -> ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate
 projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate pPhespsssbcExecutionId_ pPhespsssbcStepId_ pPhespsssbcPayload_ pPhespsssbcHistoryId_ pPhespsssbcProjectId_ pPhespsssbcSampleSeriesId_ =
-    ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate'
+  ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate'
     { _phespsssbcExecutionId = pPhespsssbcExecutionId_
     , _phespsssbcStepId = pPhespsssbcStepId_
     , _phespsssbcPayload = pPhespsssbcPayload_
@@ -124,6 +127,7 @@ projectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate pPhespsssbcEx
     , _phespsssbcProjectId = pPhespsssbcProjectId_
     , _phespsssbcSampleSeriesId = pPhespsssbcSampleSeriesId_
     }
+
 
 -- | A tool results execution ID.
 phespsssbcExecutionId :: Lens' ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate Text
@@ -162,7 +166,7 @@ phespsssbcSampleSeriesId
       (\ s a -> s{_phespsssbcSampleSeriesId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate
+           ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate
          where
         type Rs
                ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreate

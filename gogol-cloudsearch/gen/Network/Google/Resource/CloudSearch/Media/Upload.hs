@@ -90,7 +90,8 @@ type MediaUploadResource =
 -- API](https:\/\/developers.google.com\/cloud-search\/docs\/guides\/content-connector#rest).
 --
 -- /See:/ 'mediaUpload' smart constructor.
-data MediaUpload' = MediaUpload''
+data MediaUpload' =
+  MediaUpload''
     { _muXgafv          :: !(Maybe Xgafv)
     , _muUploadProtocol :: !(Maybe Text)
     , _muResourceName   :: !Text
@@ -98,7 +99,9 @@ data MediaUpload' = MediaUpload''
     , _muUploadType     :: !(Maybe Text)
     , _muPayload        :: !Media
     , _muCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MediaUpload' with the minimum fields required to make a request.
 --
@@ -122,7 +125,7 @@ mediaUpload
     -> Media -- ^ 'muPayload'
     -> MediaUpload'
 mediaUpload pMuResourceName_ pMuPayload_ =
-    MediaUpload''
+  MediaUpload''
     { _muXgafv = Nothing
     , _muUploadProtocol = Nothing
     , _muResourceName = pMuResourceName_
@@ -131,6 +134,7 @@ mediaUpload pMuResourceName_ pMuPayload_ =
     , _muPayload = pMuPayload_
     , _muCallback = Nothing
     }
+
 
 -- | V1 error format.
 muXgafv :: Lens' MediaUpload' (Maybe Xgafv)

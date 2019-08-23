@@ -59,11 +59,14 @@ type VPNTunnelsGetResource =
 -- tunnels by making a list() request.
 --
 -- /See:/ 'vpnTunnelsGet' smart constructor.
-data VPNTunnelsGet = VPNTunnelsGet'
+data VPNTunnelsGet =
+  VPNTunnelsGet'
     { _vtgProject   :: !Text
     , _vtgVPNTunnel :: !Text
     , _vtgRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VPNTunnelsGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ vpnTunnelsGet
     -> Text -- ^ 'vtgRegion'
     -> VPNTunnelsGet
 vpnTunnelsGet pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
-    VPNTunnelsGet'
+  VPNTunnelsGet'
     { _vtgProject = pVtgProject_
     , _vtgVPNTunnel = pVtgVPNTunnel_
     , _vtgRegion = pVtgRegion_
     }
+
 
 -- | Project ID for this request.
 vtgProject :: Lens' VPNTunnelsGet Text

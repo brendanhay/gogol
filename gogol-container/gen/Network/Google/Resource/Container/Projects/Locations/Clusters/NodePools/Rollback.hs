@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Roll back the previously Aborted or Failed NodePool upgrade. This will
--- be an no-op if the last upgrade successfully completed.
+-- Rolls back a previously Aborted or Failed NodePool upgrade. This makes
+-- no changes if the last upgrade successfully completed.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.rollback@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Rollback
@@ -61,11 +61,12 @@ type ProjectsLocationsClustersNodePoolsRollbackResource
                      ReqBody '[JSON] RollbackNodePoolUpgradeRequest :>
                        Post '[JSON] Operation
 
--- | Roll back the previously Aborted or Failed NodePool upgrade. This will
--- be an no-op if the last upgrade successfully completed.
+-- | Rolls back a previously Aborted or Failed NodePool upgrade. This makes
+-- no changes if the last upgrade successfully completed.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsRollback' smart constructor.
-data ProjectsLocationsClustersNodePoolsRollback = ProjectsLocationsClustersNodePoolsRollback'
+data ProjectsLocationsClustersNodePoolsRollback =
+  ProjectsLocationsClustersNodePoolsRollback'
     { _plcnprXgafv          :: !(Maybe Xgafv)
     , _plcnprUploadProtocol :: !(Maybe Text)
     , _plcnprAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsClustersNodePoolsRollback = ProjectsLocationsClustersNodeP
     , _plcnprPayload        :: !RollbackNodePoolUpgradeRequest
     , _plcnprName           :: !Text
     , _plcnprCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsRollback' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsClustersNodePoolsRollback
     -> Text -- ^ 'plcnprName'
     -> ProjectsLocationsClustersNodePoolsRollback
 projectsLocationsClustersNodePoolsRollback pPlcnprPayload_ pPlcnprName_ =
-    ProjectsLocationsClustersNodePoolsRollback'
+  ProjectsLocationsClustersNodePoolsRollback'
     { _plcnprXgafv = Nothing
     , _plcnprUploadProtocol = Nothing
     , _plcnprAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsClustersNodePoolsRollback pPlcnprPayload_ pPlcnprName_ =
     , _plcnprName = pPlcnprName_
     , _plcnprCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnprXgafv :: Lens' ProjectsLocationsClustersNodePoolsRollback (Maybe Xgafv)
@@ -150,7 +154,8 @@ plcnprCallback
       (\ s a -> s{_plcnprCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsRollback where
+           ProjectsLocationsClustersNodePoolsRollback
+         where
         type Rs ProjectsLocationsClustersNodePoolsRollback =
              Operation
         type Scopes

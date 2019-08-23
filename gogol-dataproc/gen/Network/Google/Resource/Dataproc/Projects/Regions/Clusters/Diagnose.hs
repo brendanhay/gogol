@@ -71,7 +71,8 @@ type ProjectsRegionsClustersDiagnoseResource =
 -- Operation.response field contains DiagnoseClusterOutputLocation.
 --
 -- /See:/ 'projectsRegionsClustersDiagnose' smart constructor.
-data ProjectsRegionsClustersDiagnose = ProjectsRegionsClustersDiagnose'
+data ProjectsRegionsClustersDiagnose =
+  ProjectsRegionsClustersDiagnose'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsRegionsClustersDiagnose = ProjectsRegionsClustersDiagnose'
     , _pRegion         :: !Text
     , _pProjectId      :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsClustersDiagnose' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsRegionsClustersDiagnose
     -> Text -- ^ 'pProjectId'
     -> ProjectsRegionsClustersDiagnose
 projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_ =
-    ProjectsRegionsClustersDiagnose'
+  ProjectsRegionsClustersDiagnose'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing
@@ -122,6 +125,7 @@ projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_
     , _pProjectId = pPProjectId_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsRegionsClustersDiagnose (Maybe Xgafv)
@@ -168,7 +172,8 @@ pCallback
   = lens _pCallback (\ s a -> s{_pCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsClustersDiagnose where
+           ProjectsRegionsClustersDiagnose
+         where
         type Rs ProjectsRegionsClustersDiagnose = Operation
         type Scopes ProjectsRegionsClustersDiagnose =
              '["https://www.googleapis.com/auth/cloud-platform"]

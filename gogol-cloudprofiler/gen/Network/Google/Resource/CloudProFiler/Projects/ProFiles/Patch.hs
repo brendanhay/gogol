@@ -69,7 +69,8 @@ type ProjectsProFilesPatchResource =
 -- content must be provided at the time of the profile creation.
 --
 -- /See:/ 'projectsProFilesPatch' smart constructor.
-data ProjectsProFilesPatch = ProjectsProFilesPatch'
+data ProjectsProFilesPatch =
+  ProjectsProFilesPatch'
     { _ppfpXgafv          :: !(Maybe Xgafv)
     , _ppfpUploadProtocol :: !(Maybe Text)
     , _ppfpUpdateMask     :: !(Maybe GFieldMask)
@@ -78,7 +79,9 @@ data ProjectsProFilesPatch = ProjectsProFilesPatch'
     , _ppfpPayload        :: !ProFile
     , _ppfpName           :: !Text
     , _ppfpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsProFilesPatch' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsProFilesPatch
     -> Text -- ^ 'ppfpName'
     -> ProjectsProFilesPatch
 projectsProFilesPatch pPpfpPayload_ pPpfpName_ =
-    ProjectsProFilesPatch'
+  ProjectsProFilesPatch'
     { _ppfpXgafv = Nothing
     , _ppfpUploadProtocol = Nothing
     , _ppfpUpdateMask = Nothing
@@ -114,6 +117,7 @@ projectsProFilesPatch pPpfpPayload_ pPpfpName_ =
     , _ppfpName = pPpfpName_
     , _ppfpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppfpXgafv :: Lens' ProjectsProFilesPatch (Maybe Xgafv)

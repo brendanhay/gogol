@@ -60,11 +60,14 @@ type JobsGetResource =
 -- who ran the job, or have the Is Owner project role.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet'
+data JobsGet =
+  JobsGet'
     { _jgJobId     :: !Text
     , _jgLocation  :: !(Maybe Text)
     , _jgProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,9 @@ jobsGet
     -> Text -- ^ 'jgProjectId'
     -> JobsGet
 jobsGet pJgJobId_ pJgProjectId_ =
-    JobsGet'
-    { _jgJobId = pJgJobId_
-    , _jgLocation = Nothing
-    , _jgProjectId = pJgProjectId_
-    }
+  JobsGet'
+    {_jgJobId = pJgJobId_, _jgLocation = Nothing, _jgProjectId = pJgProjectId_}
+
 
 -- | [Required] Job ID of the requested job
 jgJobId :: Lens' JobsGet Text

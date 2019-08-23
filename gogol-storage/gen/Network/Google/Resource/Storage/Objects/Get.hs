@@ -86,7 +86,8 @@ type ObjectsGetResource =
 -- | Retrieves an object or its metadata.
 --
 -- /See:/ 'objectsGet' smart constructor.
-data ObjectsGet = ObjectsGet'
+data ObjectsGet =
+  ObjectsGet'
     { _ogIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _ogIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ogIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -96,7 +97,9 @@ data ObjectsGet = ObjectsGet'
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe ObjectsGetProjection)
     , _ogGeneration               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsGet' with the minimum fields required to make a request.
 --
@@ -124,7 +127,7 @@ objectsGet
     -> Text -- ^ 'ogObject'
     -> ObjectsGet
 objectsGet pOgBucket_ pOgObject_ =
-    ObjectsGet'
+  ObjectsGet'
     { _ogIfMetagenerationMatch = Nothing
     , _ogIfGenerationNotMatch = Nothing
     , _ogIfGenerationMatch = Nothing
@@ -135,6 +138,7 @@ objectsGet pOgBucket_ pOgObject_ =
     , _ogProjection = Nothing
     , _ogGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

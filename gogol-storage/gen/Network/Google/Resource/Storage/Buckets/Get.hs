@@ -60,13 +60,16 @@ type BucketsGetResource =
 -- | Returns metadata for the specified bucket.
 --
 -- /See:/ 'bucketsGet' smart constructor.
-data BucketsGet = BucketsGet'
+data BucketsGet =
+  BucketsGet'
     { _bgIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bgBucket                   :: !Text
     , _bgUserProject              :: !(Maybe Text)
     , _bgIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _bgProjection               :: !(Maybe BucketsGetProjection)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketsGet' with the minimum fields required to make a request.
 --
@@ -85,13 +88,14 @@ bucketsGet
     :: Text -- ^ 'bgBucket'
     -> BucketsGet
 bucketsGet pBgBucket_ =
-    BucketsGet'
+  BucketsGet'
     { _bgIfMetagenerationMatch = Nothing
     , _bgBucket = pBgBucket_
     , _bgUserProject = Nothing
     , _bgIfMetagenerationNotMatch = Nothing
     , _bgProjection = Nothing
     }
+
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.

@@ -21,6 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Modify the members of a contact group owned by the authenticated user.
+-- The only system contact groups that can have members added are
+-- \`contactGroups\/myContacts\` and \`contactGroups\/starred\`. Other
+-- system contact groups are deprecated and can only have contacts removed.
 --
 -- /See:/ <https://developers.google.com/people/ People API Reference> for @people.contactGroups.members.modify@.
 module Network.Google.Resource.People.ContactGroups.Members.Modify
@@ -61,9 +64,13 @@ type ContactGroupsMembersModifyResource =
                          Post '[JSON] ModifyContactGroupMembersResponse
 
 -- | Modify the members of a contact group owned by the authenticated user.
+-- The only system contact groups that can have members added are
+-- \`contactGroups\/myContacts\` and \`contactGroups\/starred\`. Other
+-- system contact groups are deprecated and can only have contacts removed.
 --
 -- /See:/ 'contactGroupsMembersModify' smart constructor.
-data ContactGroupsMembersModify = ContactGroupsMembersModify'
+data ContactGroupsMembersModify =
+  ContactGroupsMembersModify'
     { _cgmmXgafv          :: !(Maybe Xgafv)
     , _cgmmUploadProtocol :: !(Maybe Text)
     , _cgmmResourceName   :: !Text
@@ -71,7 +78,9 @@ data ContactGroupsMembersModify = ContactGroupsMembersModify'
     , _cgmmUploadType     :: !(Maybe Text)
     , _cgmmPayload        :: !ModifyContactGroupMembersRequest
     , _cgmmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupsMembersModify' with the minimum fields required to make a request.
 --
@@ -95,7 +104,7 @@ contactGroupsMembersModify
     -> ModifyContactGroupMembersRequest -- ^ 'cgmmPayload'
     -> ContactGroupsMembersModify
 contactGroupsMembersModify pCgmmResourceName_ pCgmmPayload_ =
-    ContactGroupsMembersModify'
+  ContactGroupsMembersModify'
     { _cgmmXgafv = Nothing
     , _cgmmUploadProtocol = Nothing
     , _cgmmResourceName = pCgmmResourceName_
@@ -104,6 +113,7 @@ contactGroupsMembersModify pCgmmResourceName_ pCgmmPayload_ =
     , _cgmmPayload = pCgmmPayload_
     , _cgmmCallback = Nothing
     }
+
 
 -- | V1 error format.
 cgmmXgafv :: Lens' ContactGroupsMembersModify (Maybe Xgafv)

@@ -71,9 +71,6 @@ module Network.Google.Fitness
     -- ** fitness.users.dataSources.list
     , module Network.Google.Resource.Fitness.Users.DataSources.List
 
-    -- ** fitness.users.dataSources.patch
-    , module Network.Google.Resource.Fitness.Users.DataSources.Patch
-
     -- ** fitness.users.dataSources.update
     , module Network.Google.Resource.Fitness.Users.DataSources.Update
 
@@ -297,7 +294,6 @@ import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patc
 import           Network.Google.Resource.Fitness.Users.DataSources.Delete
 import           Network.Google.Resource.Fitness.Users.DataSources.Get
 import           Network.Google.Resource.Fitness.Users.DataSources.List
-import           Network.Google.Resource.Fitness.Users.DataSources.Patch
 import           Network.Google.Resource.Fitness.Users.DataSources.Update
 import           Network.Google.Resource.Fitness.Users.Sessions.Delete
 import           Network.Google.Resource.Fitness.Users.Sessions.List
@@ -315,7 +311,6 @@ type FitnessAPI =
        :<|> UsersDataSourcesDataSetsDeleteResource
        :<|> UsersDataSourcesDataPointChangesListResource
        :<|> UsersDataSourcesListResource
-       :<|> UsersDataSourcesPatchResource
        :<|> UsersDataSourcesGetResource
        :<|> UsersDataSourcesCreateResource
        :<|> UsersDataSourcesDeleteResource

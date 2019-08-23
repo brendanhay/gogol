@@ -41,6 +41,7 @@ module Network.Google.Resource.DLP.Projects.JobTriggers.List
     , pjtlOrderBy
     , pjtlAccessToken
     , pjtlUploadType
+    , pjtlFilter
     , pjtlPageToken
     , pjtlPageSize
     , pjtlCallback
@@ -60,29 +61,34 @@ type ProjectsJobTriggersListResource =
                QueryParam "orderBy" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListJobTriggersResponse
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListJobTriggersResponse
 
 -- | Lists job triggers. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn
 -- more.
 --
 -- /See:/ 'projectsJobTriggersList' smart constructor.
-data ProjectsJobTriggersList = ProjectsJobTriggersList'
+data ProjectsJobTriggersList =
+  ProjectsJobTriggersList'
     { _pjtlParent         :: !Text
     , _pjtlXgafv          :: !(Maybe Xgafv)
     , _pjtlUploadProtocol :: !(Maybe Text)
     , _pjtlOrderBy        :: !(Maybe Text)
     , _pjtlAccessToken    :: !(Maybe Text)
     , _pjtlUploadType     :: !(Maybe Text)
+    , _pjtlFilter         :: !(Maybe Text)
     , _pjtlPageToken      :: !(Maybe Text)
     , _pjtlPageSize       :: !(Maybe (Textual Int32))
     , _pjtlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobTriggersList' with the minimum fields required to make a request.
 --
@@ -100,6 +106,8 @@ data ProjectsJobTriggersList = ProjectsJobTriggersList'
 --
 -- * 'pjtlUploadType'
 --
+-- * 'pjtlFilter'
+--
 -- * 'pjtlPageToken'
 --
 -- * 'pjtlPageSize'
@@ -109,17 +117,19 @@ projectsJobTriggersList
     :: Text -- ^ 'pjtlParent'
     -> ProjectsJobTriggersList
 projectsJobTriggersList pPjtlParent_ =
-    ProjectsJobTriggersList'
+  ProjectsJobTriggersList'
     { _pjtlParent = pPjtlParent_
     , _pjtlXgafv = Nothing
     , _pjtlUploadProtocol = Nothing
     , _pjtlOrderBy = Nothing
     , _pjtlAccessToken = Nothing
     , _pjtlUploadType = Nothing
+    , _pjtlFilter = Nothing
     , _pjtlPageToken = Nothing
     , _pjtlPageSize = Nothing
     , _pjtlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example \`projects\/my-project-id\`.
 pjtlParent :: Lens' ProjectsJobTriggersList Text
@@ -143,7 +153,8 @@ pjtlUploadProtocol
 -- insignificant. Example: \`name asc,update_time, create_time desc\`
 -- Supported fields are: - \`create_time\`: corresponds to time the
 -- JobTrigger was created. - \`update_time\`: corresponds to time the
--- JobTrigger was last updated. - \`name\`: corresponds to JobTrigger\'s
+-- JobTrigger was last updated. - \`last_run_time\`: corresponds to the
+-- last time the JobTrigger ran. - \`name\`: corresponds to JobTrigger\'s
 -- name. - \`display_name\`: corresponds to JobTrigger\'s display name. -
 -- \`status\`: corresponds to JobTrigger\'s status.
 pjtlOrderBy :: Lens' ProjectsJobTriggersList (Maybe Text)
@@ -161,6 +172,26 @@ pjtlUploadType :: Lens' ProjectsJobTriggersList (Maybe Text)
 pjtlUploadType
   = lens _pjtlUploadType
       (\ s a -> s{_pjtlUploadType = a})
+
+-- | Optional. Allows filtering. Supported syntax: * Filter expressions are
+-- made up of one or more restrictions. * Restrictions can be combined by
+-- \`AND\` or \`OR\` logical operators. A sequence of restrictions
+-- implicitly uses \`AND\`. * A restriction has the form of \` \`. *
+-- Supported fields\/values for inspect jobs: - \`status\` -
+-- HEALTHY|PAUSED|CANCELLED - \`inspected_storage\` -
+-- DATASTORE|CLOUD_STORAGE|BIGQUERY - \'last_run_time\` - RFC 3339
+-- formatted timestamp, surrounded by quotation marks. Nanoseconds are
+-- ignored. - \'error_count\' - Number of errors that have occurred while
+-- running. * The operator must be \`=\` or \`!=\` for status and
+-- inspected_storage. Examples: * inspected_storage = cloud_storage AND
+-- status = HEALTHY * inspected_storage = cloud_storage OR
+-- inspected_storage = bigquery * inspected_storage = cloud_storage AND
+-- (state = PAUSED OR state = HEALTHY) * last_run_time >
+-- \\\"2017-12-12T00:00:00+00:00\\\" The length of this field should be no
+-- more than 500 characters.
+pjtlFilter :: Lens' ProjectsJobTriggersList (Maybe Text)
+pjtlFilter
+  = lens _pjtlFilter (\ s a -> s{_pjtlFilter = a})
 
 -- | Optional page token to continue retrieval. Comes from previous call to
 -- ListJobTriggers. \`order_by\` field must not change for subsequent
@@ -191,6 +222,7 @@ instance GoogleRequest ProjectsJobTriggersList where
               _pjtlOrderBy
               _pjtlAccessToken
               _pjtlUploadType
+              _pjtlFilter
               _pjtlPageToken
               _pjtlPageSize
               _pjtlCallback

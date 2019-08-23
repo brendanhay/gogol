@@ -63,7 +63,8 @@ type ProjectsTriggersGetResource =
 -- | Returns information about a \`BuildTrigger\`. This API is experimental.
 --
 -- /See:/ 'projectsTriggersGet' smart constructor.
-data ProjectsTriggersGet = ProjectsTriggersGet'
+data ProjectsTriggersGet =
+  ProjectsTriggersGet'
     { _ptgXgafv          :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgTriggerId      :: !Text
@@ -71,7 +72,9 @@ data ProjectsTriggersGet = ProjectsTriggersGet'
     , _ptgUploadType     :: !(Maybe Text)
     , _ptgProjectId      :: !Text
     , _ptgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTriggersGet' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsTriggersGet
     -> Text -- ^ 'ptgProjectId'
     -> ProjectsTriggersGet
 projectsTriggersGet pPtgTriggerId_ pPtgProjectId_ =
-    ProjectsTriggersGet'
+  ProjectsTriggersGet'
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
     , _ptgTriggerId = pPtgTriggerId_
@@ -104,6 +107,7 @@ projectsTriggersGet pPtgTriggerId_ pPtgProjectId_ =
     , _ptgProjectId = pPtgProjectId_
     , _ptgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptgXgafv :: Lens' ProjectsTriggersGet (Maybe Xgafv)

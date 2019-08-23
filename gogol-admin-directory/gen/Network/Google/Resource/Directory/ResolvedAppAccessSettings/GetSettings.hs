@@ -51,8 +51,9 @@ type ResolvedAppAccessSettingsGetSettingsResource =
 --
 -- /See:/ 'resolvedAppAccessSettingsGetSettings' smart constructor.
 data ResolvedAppAccessSettingsGetSettings =
-    ResolvedAppAccessSettingsGetSettings'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ResolvedAppAccessSettingsGetSettings'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResolvedAppAccessSettingsGetSettings' with the minimum fields required to make a request.
 --
@@ -60,8 +61,10 @@ resolvedAppAccessSettingsGetSettings
     :: ResolvedAppAccessSettingsGetSettings
 resolvedAppAccessSettingsGetSettings = ResolvedAppAccessSettingsGetSettings'
 
+
 instance GoogleRequest
-         ResolvedAppAccessSettingsGetSettings where
+           ResolvedAppAccessSettingsGetSettings
+         where
         type Rs ResolvedAppAccessSettingsGetSettings =
              AppAccessCollections
         type Scopes ResolvedAppAccessSettingsGetSettings =

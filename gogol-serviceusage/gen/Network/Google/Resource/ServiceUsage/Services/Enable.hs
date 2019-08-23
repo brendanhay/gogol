@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enable a service so that it can be used with a project. Operation
+-- Enable a service so that it can be used with a project.
 --
 -- /See:/ <https://cloud.google.com/service-usage/ Service Usage API Reference> for @serviceusage.services.enable@.
 module Network.Google.Resource.ServiceUsage.Services.Enable
@@ -59,10 +59,11 @@ type ServicesEnableResource =
                      ReqBody '[JSON] EnableServiceRequest :>
                        Post '[JSON] Operation
 
--- | Enable a service so that it can be used with a project. Operation
+-- | Enable a service so that it can be used with a project.
 --
 -- /See:/ 'servicesEnable' smart constructor.
-data ServicesEnable = ServicesEnable'
+data ServicesEnable =
+  ServicesEnable'
     { _seXgafv          :: !(Maybe Xgafv)
     , _seUploadProtocol :: !(Maybe Text)
     , _seAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ServicesEnable = ServicesEnable'
     , _sePayload        :: !EnableServiceRequest
     , _seName           :: !Text
     , _seCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesEnable' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ servicesEnable
     -> Text -- ^ 'seName'
     -> ServicesEnable
 servicesEnable pSePayload_ pSeName_ =
-    ServicesEnable'
+  ServicesEnable'
     { _seXgafv = Nothing
     , _seUploadProtocol = Nothing
     , _seAccessToken = Nothing
@@ -103,6 +106,7 @@ servicesEnable pSePayload_ pSeName_ =
     , _seName = pSeName_
     , _seCallback = Nothing
     }
+
 
 -- | V1 error format.
 seXgafv :: Lens' ServicesEnable (Maybe Xgafv)

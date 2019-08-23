@@ -59,14 +59,17 @@ type SpacesMembersGetResource =
 -- | Returns a membership.
 --
 -- /See:/ 'spacesMembersGet' smart constructor.
-data SpacesMembersGet = SpacesMembersGet'
+data SpacesMembersGet =
+  SpacesMembersGet'
     { _spaXgafv          :: !(Maybe Xgafv)
     , _spaUploadProtocol :: !(Maybe Text)
     , _spaAccessToken    :: !(Maybe Text)
     , _spaUploadType     :: !(Maybe Text)
     , _spaName           :: !Text
     , _spaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpacesMembersGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ spacesMembersGet
     :: Text -- ^ 'spaName'
     -> SpacesMembersGet
 spacesMembersGet pSpaName_ =
-    SpacesMembersGet'
+  SpacesMembersGet'
     { _spaXgafv = Nothing
     , _spaUploadProtocol = Nothing
     , _spaAccessToken = Nothing
@@ -95,6 +98,7 @@ spacesMembersGet pSpaName_ =
     , _spaName = pSpaName_
     , _spaCallback = Nothing
     }
+
 
 -- | V1 error format.
 spaXgafv :: Lens' SpacesMembersGet (Maybe Xgafv)

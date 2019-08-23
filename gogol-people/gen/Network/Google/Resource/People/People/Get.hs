@@ -67,7 +67,8 @@ type PeopleGetResource =
 -- The request throws a 400 error if \'personFields\' is not specified.
 --
 -- /See:/ 'peopleGet' smart constructor.
-data PeopleGet = PeopleGet'
+data PeopleGet =
+  PeopleGet'
     { _pgXgafv                   :: !(Maybe Xgafv)
     , _pgUploadProtocol          :: !(Maybe Text)
     , _pgResourceName            :: !Text
@@ -76,7 +77,9 @@ data PeopleGet = PeopleGet'
     , _pgUploadType              :: !(Maybe Text)
     , _pgPersonFields            :: !(Maybe GFieldMask)
     , _pgCallback                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleGet' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ peopleGet
     :: Text -- ^ 'pgResourceName'
     -> PeopleGet
 peopleGet pPgResourceName_ =
-    PeopleGet'
+  PeopleGet'
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
     , _pgResourceName = pPgResourceName_
@@ -111,6 +114,7 @@ peopleGet pPgResourceName_ =
     , _pgPersonFields = Nothing
     , _pgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pgXgafv :: Lens' PeopleGet (Maybe Xgafv)
@@ -175,7 +179,6 @@ instance GoogleRequest PeopleGet where
         type Scopes PeopleGet =
              '["https://www.googleapis.com/auth/contacts",
                "https://www.googleapis.com/auth/contacts.readonly",
-               "https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/user.addresses.read",
                "https://www.googleapis.com/auth/user.birthday.read",
                "https://www.googleapis.com/auth/user.emails.read",

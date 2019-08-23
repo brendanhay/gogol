@@ -20,10 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add a new media item to an album. The current upload size limitations
--- are 36MB for a photo and 1GB for a video. Uploads do not count against
--- quota if photos are less than 2048 pixels on their longest side or
--- videos are less than 15 minutes in length.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.media.insert@.
 module Network.Google.Resource.PlusDomains.Media.Insert
@@ -67,17 +65,18 @@ type MediaInsertResource =
                        QueryParam "uploadType" Multipart :>
                          MultipartRelated '[JSON] Media :> Post '[JSON] Media
 
--- | Add a new media item to an album. The current upload size limitations
--- are 36MB for a photo and 1GB for a video. Uploads do not count against
--- quota if photos are less than 2048 pixels on their longest side or
--- videos are less than 15 minutes in length.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'mediaInsert' smart constructor.
-data MediaInsert = MediaInsert'
+data MediaInsert =
+  MediaInsert'
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MediaInsert' with the minimum fields required to make a request.
 --
@@ -94,11 +93,12 @@ mediaInsert
     -> Text -- ^ 'miUserId'
     -> MediaInsert
 mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ =
-    MediaInsert'
+  MediaInsert'
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
     }
+
 
 miCollection :: Lens' MediaInsert MediaInsertCollection
 miCollection

@@ -64,13 +64,16 @@ type ManagementExperimentsUpdateResource =
 -- | Update an existing experiment.
 --
 -- /See:/ 'managementExperimentsUpdate' smart constructor.
-data ManagementExperimentsUpdate = ManagementExperimentsUpdate'
+data ManagementExperimentsUpdate =
+  ManagementExperimentsUpdate'
     { _meuWebPropertyId :: !Text
     , _meuProFileId     :: !Text
     , _meuPayload       :: !Experiment
     , _meuAccountId     :: !Text
     , _meuExperimentId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementExperimentsUpdate' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ managementExperimentsUpdate
     -> Text -- ^ 'meuExperimentId'
     -> ManagementExperimentsUpdate
 managementExperimentsUpdate pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
-    ManagementExperimentsUpdate'
+  ManagementExperimentsUpdate'
     { _meuWebPropertyId = pMeuWebPropertyId_
     , _meuProFileId = pMeuProFileId_
     , _meuPayload = pMeuPayload_
     , _meuAccountId = pMeuAccountId_
     , _meuExperimentId = pMeuExperimentId_
     }
+
 
 -- | Web property ID of the experiment to update.
 meuWebPropertyId :: Lens' ManagementExperimentsUpdate Text

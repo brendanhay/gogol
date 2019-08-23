@@ -52,9 +52,12 @@ type WebResourceGetResource =
 -- | Get the most current data for a website or domain.
 --
 -- /See:/ 'webResourceGet' smart constructor.
-newtype WebResourceGet = WebResourceGet'
+newtype WebResourceGet =
+  WebResourceGet'
     { _wrgId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebResourceGet' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype WebResourceGet = WebResourceGet'
 webResourceGet
     :: Text -- ^ 'wrgId'
     -> WebResourceGet
-webResourceGet pWrgId_ =
-    WebResourceGet'
-    { _wrgId = pWrgId_
-    }
+webResourceGet pWrgId_ = WebResourceGet' {_wrgId = pWrgId_}
+
 
 -- | The id of a verified site or domain.
 wrgId :: Lens' WebResourceGet Text

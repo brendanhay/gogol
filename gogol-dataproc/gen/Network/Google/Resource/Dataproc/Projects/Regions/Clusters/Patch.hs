@@ -77,7 +77,8 @@ type ProjectsRegionsClustersPatchResource =
 -- | Updates a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersPatch' smart constructor.
-data ProjectsRegionsClustersPatch = ProjectsRegionsClustersPatch'
+data ProjectsRegionsClustersPatch =
+  ProjectsRegionsClustersPatch'
     { _prcpXgafv                       :: !(Maybe Xgafv)
     , _prcpRequestId                   :: !(Maybe Text)
     , _prcpUploadProtocol              :: !(Maybe Text)
@@ -90,7 +91,9 @@ data ProjectsRegionsClustersPatch = ProjectsRegionsClustersPatch'
     , _prcpRegion                      :: !Text
     , _prcpProjectId                   :: !Text
     , _prcpCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsClustersPatch' with the minimum fields required to make a request.
 --
@@ -126,7 +129,7 @@ projectsRegionsClustersPatch
     -> Text -- ^ 'prcpProjectId'
     -> ProjectsRegionsClustersPatch
 projectsRegionsClustersPatch pPrcpPayload_ pPrcpClusterName_ pPrcpRegion_ pPrcpProjectId_ =
-    ProjectsRegionsClustersPatch'
+  ProjectsRegionsClustersPatch'
     { _prcpXgafv = Nothing
     , _prcpRequestId = Nothing
     , _prcpUploadProtocol = Nothing
@@ -140,6 +143,7 @@ projectsRegionsClustersPatch pPrcpPayload_ pPrcpClusterName_ pPrcpRegion_ pPrcpP
     , _prcpProjectId = pPrcpProjectId_
     , _prcpCallback = Nothing
     }
+
 
 -- | V1 error format.
 prcpXgafv :: Lens' ProjectsRegionsClustersPatch (Maybe Xgafv)
@@ -176,12 +180,17 @@ prcpUploadProtocol
 -- body would be set as follows: { \"config\":{ \"secondaryWorkerConfig\":{
 -- \"numInstances\":\"5\" } } } __Note:__ Currently, only the following
 -- fields can be updated:
--- >   ---------------------------------------------------- -------------------------------
--- >   __Mask__                                             __Purpose__
--- >   __/labels/__                                         Update labels
--- >   __/config.worker_config.num_instances/__             Resize primary worker group
--- >   __/config.secondary_worker_config.num_instances/__   Resize secondary worker group
--- >   ---------------------------------------------------- -------------------------------
+-- > +-----------------------------------+-----------------------------------+
+-- > | __Mask__                          | __Purpose__                       |
+-- > +-----------------------------------+-----------------------------------+
+-- > | __/labels/__                      | Update labels                     |
+-- > +-----------------------------------+-----------------------------------+
+-- > | __/config.worker_config.num_insta | Resize primary worker group       |
+-- > | nces/__                           |                                   |
+-- > +-----------------------------------+-----------------------------------+
+-- > | __/config.secondary_worker_config | Resize secondary worker group     |
+-- > | .num_instances/__                 |                                   |
+-- > +-----------------------------------+-----------------------------------+
 prcpUpdateMask :: Lens' ProjectsRegionsClustersPatch (Maybe GFieldMask)
 prcpUpdateMask
   = lens _prcpUpdateMask

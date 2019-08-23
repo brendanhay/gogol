@@ -74,7 +74,8 @@ type QuerySourcesListResource =
 -- | Returns list of sources that user can use for Search and Suggest APIs.
 --
 -- /See:/ 'querySourcesList' smart constructor.
-data QuerySourcesList = QuerySourcesList'
+data QuerySourcesList =
+  QuerySourcesList'
     { _qslXgafv                                     :: !(Maybe Xgafv)
     , _qslRequestOptionsTimeZone                    :: !(Maybe Text)
     , _qslRequestOptionsDebugOptionsEnableDebugging :: !(Maybe Bool)
@@ -85,7 +86,9 @@ data QuerySourcesList = QuerySourcesList'
     , _qslRequestOptionsLanguageCode                :: !(Maybe Text)
     , _qslPageToken                                 :: !(Maybe Text)
     , _qslCallback                                  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuerySourcesList' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ data QuerySourcesList = QuerySourcesList'
 querySourcesList
     :: QuerySourcesList
 querySourcesList =
-    QuerySourcesList'
+  QuerySourcesList'
     { _qslXgafv = Nothing
     , _qslRequestOptionsTimeZone = Nothing
     , _qslRequestOptionsDebugOptionsEnableDebugging = Nothing
@@ -125,6 +128,7 @@ querySourcesList =
     , _qslPageToken = Nothing
     , _qslCallback = Nothing
     }
+
 
 -- | V1 error format.
 qslXgafv :: Lens' QuerySourcesList (Maybe Xgafv)
@@ -140,8 +144,8 @@ qslRequestOptionsTimeZone
   = lens _qslRequestOptionsTimeZone
       (\ s a -> s{_qslRequestOptionsTimeZone = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 qslRequestOptionsDebugOptionsEnableDebugging :: Lens' QuerySourcesList (Maybe Bool)
 qslRequestOptionsDebugOptionsEnableDebugging
   = lens _qslRequestOptionsDebugOptionsEnableDebugging
@@ -176,7 +180,9 @@ qslRequestOptionsSearchApplicationId
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. For
--- translations.
+-- translations. When specified, the documents in search results are biased
+-- towards the specified language. Suggest API does not use this parameter.
+-- It autocompletes only based on characters in the query.
 qslRequestOptionsLanguageCode :: Lens' QuerySourcesList (Maybe Text)
 qslRequestOptionsLanguageCode
   = lens _qslRequestOptionsLanguageCode

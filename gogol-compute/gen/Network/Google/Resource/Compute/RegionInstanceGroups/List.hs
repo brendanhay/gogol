@@ -66,14 +66,17 @@ type RegionInstanceGroupsListResource =
 -- specified region.
 --
 -- /See:/ 'regionInstanceGroupsList' smart constructor.
-data RegionInstanceGroupsList = RegionInstanceGroupsList'
+data RegionInstanceGroupsList =
+  RegionInstanceGroupsList'
     { _riglOrderBy    :: !(Maybe Text)
     , _riglProject    :: !Text
     , _riglFilter     :: !(Maybe Text)
     , _riglRegion     :: !Text
     , _riglPageToken  :: !(Maybe Text)
     , _riglMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionInstanceGroupsList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ regionInstanceGroupsList
     -> Text -- ^ 'riglRegion'
     -> RegionInstanceGroupsList
 regionInstanceGroupsList pRiglProject_ pRiglRegion_ =
-    RegionInstanceGroupsList'
+  RegionInstanceGroupsList'
     { _riglOrderBy = Nothing
     , _riglProject = pRiglProject_
     , _riglFilter = Nothing
@@ -103,6 +106,7 @@ regionInstanceGroupsList pRiglProject_ pRiglRegion_ =
     , _riglPageToken = Nothing
     , _riglMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

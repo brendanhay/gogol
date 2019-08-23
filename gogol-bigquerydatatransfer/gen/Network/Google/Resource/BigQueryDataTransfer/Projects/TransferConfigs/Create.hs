@@ -40,6 +40,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Cre
     , ptccUploadType
     , ptccAuthorizationCode
     , ptccPayload
+    , ptccVersionInfo
     , ptccCallback
     ) where
 
@@ -57,15 +58,17 @@ type ProjectsTransferConfigsCreateResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "authorizationCode" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TransferConfig :>
-                           Post '[JSON] TransferConfig
+                     QueryParam "versionInfo" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TransferConfig :>
+                             Post '[JSON] TransferConfig
 
 -- | Creates a new data transfer configuration.
 --
 -- /See:/ 'projectsTransferConfigsCreate' smart constructor.
-data ProjectsTransferConfigsCreate = ProjectsTransferConfigsCreate'
+data ProjectsTransferConfigsCreate =
+  ProjectsTransferConfigsCreate'
     { _ptccParent            :: !Text
     , _ptccXgafv             :: !(Maybe Xgafv)
     , _ptccUploadProtocol    :: !(Maybe Text)
@@ -73,8 +76,11 @@ data ProjectsTransferConfigsCreate = ProjectsTransferConfigsCreate'
     , _ptccUploadType        :: !(Maybe Text)
     , _ptccAuthorizationCode :: !(Maybe Text)
     , _ptccPayload           :: !TransferConfig
+    , _ptccVersionInfo       :: !(Maybe Text)
     , _ptccCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTransferConfigsCreate' with the minimum fields required to make a request.
 --
@@ -94,13 +100,15 @@ data ProjectsTransferConfigsCreate = ProjectsTransferConfigsCreate'
 --
 -- * 'ptccPayload'
 --
+-- * 'ptccVersionInfo'
+--
 -- * 'ptccCallback'
 projectsTransferConfigsCreate
     :: Text -- ^ 'ptccParent'
     -> TransferConfig -- ^ 'ptccPayload'
     -> ProjectsTransferConfigsCreate
 projectsTransferConfigsCreate pPtccParent_ pPtccPayload_ =
-    ProjectsTransferConfigsCreate'
+  ProjectsTransferConfigsCreate'
     { _ptccParent = pPtccParent_
     , _ptccXgafv = Nothing
     , _ptccUploadProtocol = Nothing
@@ -108,8 +116,10 @@ projectsTransferConfigsCreate pPtccParent_ pPtccPayload_ =
     , _ptccUploadType = Nothing
     , _ptccAuthorizationCode = Nothing
     , _ptccPayload = pPtccPayload_
+    , _ptccVersionInfo = Nothing
     , _ptccCallback = Nothing
     }
+
 
 -- | The BigQuery project id where the transfer configuration should be
 -- created. Must be in the format
@@ -167,6 +177,17 @@ ptccPayload :: Lens' ProjectsTransferConfigsCreate TransferConfig
 ptccPayload
   = lens _ptccPayload (\ s a -> s{_ptccPayload = a})
 
+-- | Optional version info. If users want to find a very recent access token,
+-- that is, immediately after approving access, users have to set the
+-- version_info claim in the token request. To obtain the version_info,
+-- users must use the “none+gsession” response type. which be return a
+-- version_info back in the authorization response which be be put in a JWT
+-- claim in the token request.
+ptccVersionInfo :: Lens' ProjectsTransferConfigsCreate (Maybe Text)
+ptccVersionInfo
+  = lens _ptccVersionInfo
+      (\ s a -> s{_ptccVersionInfo = a})
+
 -- | JSONP
 ptccCallback :: Lens' ProjectsTransferConfigsCreate (Maybe Text)
 ptccCallback
@@ -183,6 +204,7 @@ instance GoogleRequest ProjectsTransferConfigsCreate
               _ptccAccessToken
               _ptccUploadType
               _ptccAuthorizationCode
+              _ptccVersionInfo
               _ptccCallback
               (Just AltJSON)
               _ptccPayload

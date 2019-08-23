@@ -61,12 +61,15 @@ type NodeTemplatesTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'nodeTemplatesTestIAMPermissions' smart constructor.
-data NodeTemplatesTestIAMPermissions = NodeTemplatesTestIAMPermissions'
+data NodeTemplatesTestIAMPermissions =
+  NodeTemplatesTestIAMPermissions'
     { _nttipProject  :: !Text
     , _nttipPayload  :: !TestPermissionsRequest
     , _nttipResource :: !Text
     , _nttipRegion   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ nodeTemplatesTestIAMPermissions
     -> Text -- ^ 'nttipRegion'
     -> NodeTemplatesTestIAMPermissions
 nodeTemplatesTestIAMPermissions pNttipProject_ pNttipPayload_ pNttipResource_ pNttipRegion_ =
-    NodeTemplatesTestIAMPermissions'
+  NodeTemplatesTestIAMPermissions'
     { _nttipProject = pNttipProject_
     , _nttipPayload = pNttipPayload_
     , _nttipResource = pNttipResource_
     , _nttipRegion = pNttipRegion_
     }
+
 
 -- | Project ID for this request.
 nttipProject :: Lens' NodeTemplatesTestIAMPermissions Text
@@ -115,7 +119,8 @@ nttipRegion
   = lens _nttipRegion (\ s a -> s{_nttipRegion = a})
 
 instance GoogleRequest
-         NodeTemplatesTestIAMPermissions where
+           NodeTemplatesTestIAMPermissions
+         where
         type Rs NodeTemplatesTestIAMPermissions =
              TestPermissionsResponse
         type Scopes NodeTemplatesTestIAMPermissions =

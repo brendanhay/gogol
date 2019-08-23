@@ -82,6 +82,12 @@ module Network.Google.IAM
     -- ** iam.projects.serviceAccounts.delete
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
 
+    -- ** iam.projects.serviceAccounts.disable
+    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
+
+    -- ** iam.projects.serviceAccounts.enable
+    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
+
     -- ** iam.projects.serviceAccounts.get
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
 
@@ -103,6 +109,9 @@ module Network.Google.IAM
     -- ** iam.projects.serviceAccounts.list
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
 
+    -- ** iam.projects.serviceAccounts.patch
+    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
+
     -- ** iam.projects.serviceAccounts.setIamPolicy
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
 
@@ -114,6 +123,9 @@ module Network.Google.IAM
 
     -- ** iam.projects.serviceAccounts.testIamPermissions
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
+
+    -- ** iam.projects.serviceAccounts.undelete
+    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
 
     -- ** iam.projects.serviceAccounts.update
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
@@ -158,6 +170,10 @@ module Network.Google.IAM
 
     -- ** PermissionStage
     , PermissionStage (..)
+
+    -- ** UndeleteServiceAccountRequest
+    , UndeleteServiceAccountRequest
+    , undeleteServiceAccountRequest
 
     -- ** AuditableService
     , AuditableService
@@ -255,6 +271,10 @@ module Network.Google.IAM
     , listServiceAccountKeysResponse
     , lsakrKeys
 
+    -- ** EnableServiceAccountRequest
+    , EnableServiceAccountRequest
+    , enableServiceAccountRequest
+
     -- ** Role
     , Role
     , role'
@@ -271,10 +291,12 @@ module Network.Google.IAM
     , serviceAccount
     , saEmail
     , saEtag
+    , saDisabled
     , saUniqueId
     , saName
     , saDisplayName
     , saProjectId
+    , saDescription
     , saOAuth2ClientId
 
     -- ** QueryTestablePermissionsRequest
@@ -306,6 +328,11 @@ module Network.Google.IAM
 
     -- ** LintResultSeverity
     , LintResultSeverity (..)
+
+    -- ** UndeleteServiceAccountResponse
+    , UndeleteServiceAccountResponse
+    , undeleteServiceAccountResponse
+    , usarRestoredAccount
 
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -344,6 +371,12 @@ module Network.Google.IAM
     , signJwtRequest
     , sjrPayload
 
+    -- ** PatchServiceAccountRequest
+    , PatchServiceAccountRequest
+    , patchServiceAccountRequest
+    , psarUpdateMask
+    , psarServiceAccount
+
     -- ** ServiceAccountKeyKeyAlgorithm
     , ServiceAccountKeyKeyAlgorithm (..)
 
@@ -356,13 +389,13 @@ module Network.Google.IAM
     -- ** Permission
     , Permission
     , permission
-    , pStage
-    , pOnlyInPredefinedRoles
-    , pCustomRolesSupportLevel
-    , pName
-    , pTitle
-    , pAPIdisabled
-    , pDescription
+    , perStage
+    , perOnlyInPredefinedRoles
+    , perCustomRolesSupportLevel
+    , perName
+    , perTitle
+    , perAPIdisabled
+    , perDescription
 
     -- ** SignBlobResponse
     , SignBlobResponse
@@ -418,6 +451,10 @@ module Network.Google.IAM
     , bMembers
     , bRole
     , bCondition
+
+    -- ** DisableServiceAccountRequest
+    , DisableServiceAccountRequest
+    , disableServiceAccountRequest
     ) where
 
 import           Network.Google.IAM.Types
@@ -439,6 +476,8 @@ import           Network.Google.Resource.IAM.Projects.Roles.Patch
 import           Network.Google.Resource.IAM.Projects.Roles.Undelete
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
+import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
+import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
@@ -446,10 +485,12 @@ import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delet
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.List
+import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
+import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
 import           Network.Google.Resource.IAM.Roles.Get
 import           Network.Google.Resource.IAM.Roles.List
@@ -484,9 +525,13 @@ type IAMAPI =
        :<|> ProjectsServiceAccountsKeysDeleteResource
        :<|> ProjectsServiceAccountsListResource
        :<|> ProjectsServiceAccountsSignJwtResource
+       :<|> ProjectsServiceAccountsUndeleteResource
        :<|> ProjectsServiceAccountsGetIAMPolicyResource
+       :<|> ProjectsServiceAccountsPatchResource
        :<|> ProjectsServiceAccountsGetResource
+       :<|> ProjectsServiceAccountsEnableResource
        :<|> ProjectsServiceAccountsCreateResource
+       :<|> ProjectsServiceAccountsDisableResource
        :<|> ProjectsServiceAccountsSetIAMPolicyResource
        :<|> ProjectsServiceAccountsSignBlobResource
        :<|>

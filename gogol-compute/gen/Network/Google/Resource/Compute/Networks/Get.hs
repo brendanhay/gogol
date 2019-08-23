@@ -57,10 +57,13 @@ type NetworksGetResource =
 -- making a list() request.
 --
 -- /See:/ 'networksGet' smart constructor.
-data NetworksGet = NetworksGet'
+data NetworksGet =
+  NetworksGet'
     { _ngProject :: !Text
     , _ngNetwork :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworksGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,8 @@ networksGet
     -> Text -- ^ 'ngNetwork'
     -> NetworksGet
 networksGet pNgProject_ pNgNetwork_ =
-    NetworksGet'
-    { _ngProject = pNgProject_
-    , _ngNetwork = pNgNetwork_
-    }
+  NetworksGet' {_ngProject = pNgProject_, _ngNetwork = pNgNetwork_}
+
 
 -- | Project ID for this request.
 ngProject :: Lens' NetworksGet Text

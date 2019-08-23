@@ -63,12 +63,15 @@ type TablesGetResource =
 -- describes the structure of this table.
 --
 -- /See:/ 'tablesGet' smart constructor.
-data TablesGet = TablesGet'
+data TablesGet =
+  TablesGet'
     { _tgDataSetId      :: !Text
     , _tgProjectId      :: !Text
     , _tgSelectedFields :: !(Maybe Text)
     , _tgTableId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TablesGet' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ tablesGet
     -> Text -- ^ 'tgTableId'
     -> TablesGet
 tablesGet pTgDataSetId_ pTgProjectId_ pTgTableId_ =
-    TablesGet'
+  TablesGet'
     { _tgDataSetId = pTgDataSetId_
     , _tgProjectId = pTgProjectId_
     , _tgSelectedFields = Nothing
     , _tgTableId = pTgTableId_
     }
+
 
 -- | Dataset ID of the requested table
 tgDataSetId :: Lens' TablesGet Text

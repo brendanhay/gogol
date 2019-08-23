@@ -65,7 +65,8 @@ type ProjectsSinksListResource =
 -- | Lists sinks.
 --
 -- /See:/ 'projectsSinksList' smart constructor.
-data ProjectsSinksList = ProjectsSinksList'
+data ProjectsSinksList =
+  ProjectsSinksList'
     { _pslParent         :: !Text
     , _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsSinksList = ProjectsSinksList'
     , _pslPageToken      :: !(Maybe Text)
     , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSinksList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsSinksList
     :: Text -- ^ 'pslParent'
     -> ProjectsSinksList
 projectsSinksList pPslParent_ =
-    ProjectsSinksList'
+  ProjectsSinksList'
     { _pslParent = pPslParent_
     , _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsSinksList pPslParent_ =
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
+
 
 -- | Required. The parent resource whose sinks are to be listed:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

@@ -60,11 +60,14 @@ type TargetInstancesGetResource =
 -- target instances by making a list() request.
 --
 -- /See:/ 'targetInstancesGet' smart constructor.
-data TargetInstancesGet = TargetInstancesGet'
+data TargetInstancesGet =
+  TargetInstancesGet'
     { _tigProject        :: !Text
     , _tigTargetInstance :: !Text
     , _tigZone           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetInstancesGet' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ targetInstancesGet
     -> Text -- ^ 'tigZone'
     -> TargetInstancesGet
 targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
-    TargetInstancesGet'
+  TargetInstancesGet'
     { _tigProject = pTigProject_
     , _tigTargetInstance = pTigTargetInstance_
     , _tigZone = pTigZone_
     }
+
 
 -- | Project ID for this request.
 tigProject :: Lens' TargetInstancesGet Text

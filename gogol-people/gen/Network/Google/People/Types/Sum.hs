@@ -32,7 +32,8 @@ data SourceType
       -- profile at https:\/\/profiles.google.com\/id where id is the source id.
     | DomainProFile
       -- ^ @DOMAIN_PROFILE@
-      -- [Google Apps domain profile](https:\/\/admin.google.com).
+      -- [G Suite domain
+      -- profile](https:\/\/support.google.com\/a\/answer\/1628008).
     | Contact
       -- ^ @CONTACT@
       -- [Google contact](https:\/\/contacts.google.com). You can view the

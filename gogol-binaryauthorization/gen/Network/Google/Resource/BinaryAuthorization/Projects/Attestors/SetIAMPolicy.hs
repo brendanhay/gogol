@@ -64,7 +64,8 @@ type ProjectsAttestorsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsAttestorsSetIAMPolicy' smart constructor.
-data ProjectsAttestorsSetIAMPolicy = ProjectsAttestorsSetIAMPolicy'
+data ProjectsAttestorsSetIAMPolicy =
+  ProjectsAttestorsSetIAMPolicy'
     { _pasipXgafv          :: !(Maybe Xgafv)
     , _pasipUploadProtocol :: !(Maybe Text)
     , _pasipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsAttestorsSetIAMPolicy = ProjectsAttestorsSetIAMPolicy'
     , _pasipPayload        :: !SetIAMPolicyRequest
     , _pasipResource       :: !Text
     , _pasipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAttestorsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsAttestorsSetIAMPolicy
     -> Text -- ^ 'pasipResource'
     -> ProjectsAttestorsSetIAMPolicy
 projectsAttestorsSetIAMPolicy pPasipPayload_ pPasipResource_ =
-    ProjectsAttestorsSetIAMPolicy'
+  ProjectsAttestorsSetIAMPolicy'
     { _pasipXgafv = Nothing
     , _pasipUploadProtocol = Nothing
     , _pasipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsAttestorsSetIAMPolicy pPasipPayload_ pPasipResource_ =
     , _pasipResource = pPasipResource_
     , _pasipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pasipXgafv :: Lens' ProjectsAttestorsSetIAMPolicy (Maybe Xgafv)

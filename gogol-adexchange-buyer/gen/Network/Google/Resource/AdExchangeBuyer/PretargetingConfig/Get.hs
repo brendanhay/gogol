@@ -54,10 +54,13 @@ type PretargetingConfigGetResource =
 -- | Gets a specific pretargeting configuration
 --
 -- /See:/ 'pretargetingConfigGet' smart constructor.
-data PretargetingConfigGet = PretargetingConfigGet'
+data PretargetingConfigGet =
+  PretargetingConfigGet'
     { _pcgAccountId :: !(Textual Int64)
     , _pcgConfigId  :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PretargetingConfigGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,11 @@ pretargetingConfigGet
     -> Int64 -- ^ 'pcgConfigId'
     -> PretargetingConfigGet
 pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
-    PretargetingConfigGet'
+  PretargetingConfigGet'
     { _pcgAccountId = _Coerce # pPcgAccountId_
     , _pcgConfigId = _Coerce # pPcgConfigId_
     }
+
 
 -- | The account id to get the pretargeting config for.
 pcgAccountId :: Lens' PretargetingConfigGet Int64

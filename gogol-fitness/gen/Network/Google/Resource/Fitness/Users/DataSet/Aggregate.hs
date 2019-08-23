@@ -61,10 +61,13 @@ type UsersDataSetAggregateResource =
 -- request.
 --
 -- /See:/ 'usersDataSetAggregate' smart constructor.
-data UsersDataSetAggregate = UsersDataSetAggregate'
+data UsersDataSetAggregate =
+  UsersDataSetAggregate'
     { _udsaPayload :: !AggregateRequest
     , _udsaUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDataSetAggregate' with the minimum fields required to make a request.
 --
@@ -78,10 +81,9 @@ usersDataSetAggregate
     -> Text -- ^ 'udsaUserId'
     -> UsersDataSetAggregate
 usersDataSetAggregate pUdsaPayload_ pUdsaUserId_ =
-    UsersDataSetAggregate'
-    { _udsaPayload = pUdsaPayload_
-    , _udsaUserId = pUdsaUserId_
-    }
+  UsersDataSetAggregate'
+    {_udsaPayload = pUdsaPayload_, _udsaUserId = pUdsaUserId_}
+
 
 -- | Multipart request metadata.
 udsaPayload :: Lens' UsersDataSetAggregate AggregateRequest

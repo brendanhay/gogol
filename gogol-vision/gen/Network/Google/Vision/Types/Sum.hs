@@ -914,6 +914,9 @@ data BlockBlockType
     | BBTBarcode
       -- ^ @BARCODE@
       -- Barcode block.
+    | BBTKeyValuePair
+      -- ^ @KEY_VALUE_PAIR@
+      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlockBlockType
@@ -926,6 +929,7 @@ instance FromHttpApiData BlockBlockType where
         "PICTURE" -> Right BBTPicture
         "RULER" -> Right BBTRuler
         "BARCODE" -> Right BBTBarcode
+        "KEY_VALUE_PAIR" -> Right BBTKeyValuePair
         x -> Left ("Unable to parse BlockBlockType from: " <> x)
 
 instance ToHttpApiData BlockBlockType where
@@ -936,6 +940,7 @@ instance ToHttpApiData BlockBlockType where
         BBTPicture -> "PICTURE"
         BBTRuler -> "RULER"
         BBTBarcode -> "BARCODE"
+        BBTKeyValuePair -> "KEY_VALUE_PAIR"
 
 instance FromJSON BlockBlockType where
     parseJSON = parseJSONText "BlockBlockType"
@@ -1215,6 +1220,9 @@ data GoogleCloudVisionV1p3beta1BlockBlockType
     | GCVVBBTBarcode
       -- ^ @BARCODE@
       -- Barcode block.
+    | GCVVBBTKeyValuePair
+      -- ^ @KEY_VALUE_PAIR@
+      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1BlockBlockType
@@ -1227,6 +1235,7 @@ instance FromHttpApiData GoogleCloudVisionV1p3beta1BlockBlockType where
         "PICTURE" -> Right GCVVBBTPicture
         "RULER" -> Right GCVVBBTRuler
         "BARCODE" -> Right GCVVBBTBarcode
+        "KEY_VALUE_PAIR" -> Right GCVVBBTKeyValuePair
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1BlockBlockType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1BlockBlockType where
@@ -1237,6 +1246,7 @@ instance ToHttpApiData GoogleCloudVisionV1p3beta1BlockBlockType where
         GCVVBBTPicture -> "PICTURE"
         GCVVBBTRuler -> "RULER"
         GCVVBBTBarcode -> "BARCODE"
+        GCVVBBTKeyValuePair -> "KEY_VALUE_PAIR"
 
 instance FromJSON GoogleCloudVisionV1p3beta1BlockBlockType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1BlockBlockType"
@@ -2560,6 +2570,9 @@ data GoogleCloudVisionV1p2beta1BlockBlockType
     | GCVVBBTCBarcode
       -- ^ @BARCODE@
       -- Barcode block.
+    | GCVVBBTCKeyValuePair
+      -- ^ @KEY_VALUE_PAIR@
+      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1BlockBlockType
@@ -2572,6 +2585,7 @@ instance FromHttpApiData GoogleCloudVisionV1p2beta1BlockBlockType where
         "PICTURE" -> Right GCVVBBTCPicture
         "RULER" -> Right GCVVBBTCRuler
         "BARCODE" -> Right GCVVBBTCBarcode
+        "KEY_VALUE_PAIR" -> Right GCVVBBTCKeyValuePair
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1BlockBlockType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1BlockBlockType where
@@ -2582,6 +2596,7 @@ instance ToHttpApiData GoogleCloudVisionV1p2beta1BlockBlockType where
         GCVVBBTCPicture -> "PICTURE"
         GCVVBBTCRuler -> "RULER"
         GCVVBBTCBarcode -> "BARCODE"
+        GCVVBBTCKeyValuePair -> "KEY_VALUE_PAIR"
 
 instance FromJSON GoogleCloudVisionV1p2beta1BlockBlockType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1BlockBlockType"
@@ -3822,6 +3837,9 @@ data GoogleCloudVisionV1p1beta1BlockBlockType
     | GCVVBBT1Barcode
       -- ^ @BARCODE@
       -- Barcode block.
+    | GCVVBBT1KeyValuePair
+      -- ^ @KEY_VALUE_PAIR@
+      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1BlockBlockType
@@ -3834,6 +3852,7 @@ instance FromHttpApiData GoogleCloudVisionV1p1beta1BlockBlockType where
         "PICTURE" -> Right GCVVBBT1Picture
         "RULER" -> Right GCVVBBT1Ruler
         "BARCODE" -> Right GCVVBBT1Barcode
+        "KEY_VALUE_PAIR" -> Right GCVVBBT1KeyValuePair
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1BlockBlockType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1BlockBlockType where
@@ -3844,6 +3863,7 @@ instance ToHttpApiData GoogleCloudVisionV1p1beta1BlockBlockType where
         GCVVBBT1Picture -> "PICTURE"
         GCVVBBT1Ruler -> "RULER"
         GCVVBBT1Barcode -> "BARCODE"
+        GCVVBBT1KeyValuePair -> "KEY_VALUE_PAIR"
 
 instance FromJSON GoogleCloudVisionV1p1beta1BlockBlockType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1BlockBlockType"

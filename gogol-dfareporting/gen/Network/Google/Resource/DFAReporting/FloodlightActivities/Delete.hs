@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesDelete' request conforms to.
 type FloodlightActivitiesDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -54,10 +54,13 @@ type FloodlightActivitiesDeleteResource =
 -- | Deletes an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesDelete' smart constructor.
-data FloodlightActivitiesDelete = FloodlightActivitiesDelete'
+data FloodlightActivitiesDelete =
+  FloodlightActivitiesDelete'
     { _fadProFileId :: !(Textual Int64)
     , _fadId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightActivitiesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ floodlightActivitiesDelete
     -> Int64 -- ^ 'fadId'
     -> FloodlightActivitiesDelete
 floodlightActivitiesDelete pFadProFileId_ pFadId_ =
-    FloodlightActivitiesDelete'
-    { _fadProFileId = _Coerce # pFadProFileId_
-    , _fadId = _Coerce # pFadId_
-    }
+  FloodlightActivitiesDelete'
+    {_fadProFileId = _Coerce # pFadProFileId_, _fadId = _Coerce # pFadId_}
+
 
 -- | User profile ID associated with this request.
 fadProFileId :: Lens' FloodlightActivitiesDelete Int64

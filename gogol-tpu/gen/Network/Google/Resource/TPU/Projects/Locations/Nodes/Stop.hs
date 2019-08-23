@@ -62,7 +62,8 @@ type ProjectsLocationsNodesStopResource =
 -- | Stops a node.
 --
 -- /See:/ 'projectsLocationsNodesStop' smart constructor.
-data ProjectsLocationsNodesStop = ProjectsLocationsNodesStop'
+data ProjectsLocationsNodesStop =
+  ProjectsLocationsNodesStop'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsLocationsNodesStop = ProjectsLocationsNodesStop'
     , _pPayload        :: !StopNodeRequest
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsNodesStop' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsLocationsNodesStop
     -> Text -- ^ 'pName'
     -> ProjectsLocationsNodesStop
 projectsLocationsNodesStop pPPayload_ pPName_ =
-    ProjectsLocationsNodesStop'
+  ProjectsLocationsNodesStop'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsLocationsNodesStop pPPayload_ pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsLocationsNodesStop (Maybe Xgafv)

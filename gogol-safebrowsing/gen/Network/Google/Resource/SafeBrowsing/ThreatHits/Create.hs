@@ -62,14 +62,17 @@ type ThreatHitsCreateResource =
 -- TRUSTED_REPORTER visibility can use this method.
 --
 -- /See:/ 'threatHitsCreate' smart constructor.
-data ThreatHitsCreate = ThreatHitsCreate'
+data ThreatHitsCreate =
+  ThreatHitsCreate'
     { _thcXgafv          :: !(Maybe Xgafv)
     , _thcUploadProtocol :: !(Maybe Text)
     , _thcAccessToken    :: !(Maybe Text)
     , _thcUploadType     :: !(Maybe Text)
     , _thcPayload        :: !ThreatHit
     , _thcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatHitsCreate' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ threatHitsCreate
     :: ThreatHit -- ^ 'thcPayload'
     -> ThreatHitsCreate
 threatHitsCreate pThcPayload_ =
-    ThreatHitsCreate'
+  ThreatHitsCreate'
     { _thcXgafv = Nothing
     , _thcUploadProtocol = Nothing
     , _thcAccessToken = Nothing
@@ -98,6 +101,7 @@ threatHitsCreate pThcPayload_ =
     , _thcPayload = pThcPayload_
     , _thcCallback = Nothing
     }
+
 
 -- | V1 error format.
 thcXgafv :: Lens' ThreatHitsCreate (Maybe Xgafv)

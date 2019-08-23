@@ -67,7 +67,8 @@ type AccountsProductsListResource =
 -- | Lists all the products in a Manufacturer Center account.
 --
 -- /See:/ 'accountsProductsList' smart constructor.
-data AccountsProductsList = AccountsProductsList'
+data AccountsProductsList =
+  AccountsProductsList'
     { _aplParent         :: !Text
     , _aplInclude        :: !(Maybe [Text])
     , _aplXgafv          :: !(Maybe Xgafv)
@@ -77,7 +78,9 @@ data AccountsProductsList = AccountsProductsList'
     , _aplPageToken      :: !(Maybe Text)
     , _aplPageSize       :: !(Maybe (Textual Int32))
     , _aplCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProductsList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ accountsProductsList
     :: Text -- ^ 'aplParent'
     -> AccountsProductsList
 accountsProductsList pAplParent_ =
-    AccountsProductsList'
+  AccountsProductsList'
     { _aplParent = pAplParent_
     , _aplInclude = Nothing
     , _aplXgafv = Nothing
@@ -115,6 +118,7 @@ accountsProductsList pAplParent_ =
     , _aplPageSize = Nothing
     , _aplCallback = Nothing
     }
+
 
 -- | Parent ID in the format \`accounts\/{account_id}\`. \`account_id\` - The
 -- ID of the Manufacturer Center account.

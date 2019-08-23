@@ -88,7 +88,8 @@ type ProcessesListResource =
 -- process type and current status.
 --
 -- /See:/ 'processesList' smart constructor.
-data ProcessesList = ProcessesList'
+data ProcessesList =
+  ProcessesList'
     { _plUserProcessFilterUserAccessLevels :: !(Maybe [Text])
     , _plXgafv                             :: !(Maybe Xgafv)
     , _plUploadProtocol                    :: !(Maybe Text)
@@ -105,7 +106,9 @@ data ProcessesList = ProcessesList'
     , _plUserProcessFilterEndTime          :: !(Maybe DateTime')
     , _plUserProcessFilterStartTime        :: !(Maybe DateTime')
     , _plCallback                          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProcessesList' with the minimum fields required to make a request.
 --
@@ -145,7 +148,7 @@ data ProcessesList = ProcessesList'
 processesList
     :: ProcessesList
 processesList =
-    ProcessesList'
+  ProcessesList'
     { _plUserProcessFilterUserAccessLevels = Nothing
     , _plXgafv = Nothing
     , _plUploadProtocol = Nothing
@@ -163,6 +166,7 @@ processesList =
     , _plUserProcessFilterStartTime = Nothing
     , _plCallback = Nothing
     }
+
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified user access levels.

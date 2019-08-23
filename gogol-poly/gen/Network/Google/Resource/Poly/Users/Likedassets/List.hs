@@ -73,7 +73,8 @@ type UsersLikedassetsListResource =
 -- assets with an access level of UNLISTED.
 --
 -- /See:/ 'usersLikedassetsList' smart constructor.
-data UsersLikedassetsList = UsersLikedassetsList'
+data UsersLikedassetsList =
+  UsersLikedassetsList'
     { _ullXgafv          :: !(Maybe Xgafv)
     , _ullUploadProtocol :: !(Maybe Text)
     , _ullOrderBy        :: !(Maybe Text)
@@ -84,7 +85,9 @@ data UsersLikedassetsList = UsersLikedassetsList'
     , _ullPageToken      :: !(Maybe Text)
     , _ullPageSize       :: !(Maybe (Textual Int32))
     , _ullCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersLikedassetsList' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ usersLikedassetsList
     :: Text -- ^ 'ullName'
     -> UsersLikedassetsList
 usersLikedassetsList pUllName_ =
-    UsersLikedassetsList'
+  UsersLikedassetsList'
     { _ullXgafv = Nothing
     , _ullUploadProtocol = Nothing
     , _ullOrderBy = Nothing
@@ -125,6 +128,7 @@ usersLikedassetsList pUllName_ =
     , _ullPageSize = Nothing
     , _ullCallback = Nothing
     }
+
 
 -- | V1 error format.
 ullXgafv :: Lens' UsersLikedassetsList (Maybe Xgafv)

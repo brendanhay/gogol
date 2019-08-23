@@ -65,7 +65,8 @@ type ProjectsServicesListResource =
 -- | List enabled services for the specified consumer.
 --
 -- /See:/ 'projectsServicesList' smart constructor.
-data ProjectsServicesList = ProjectsServicesList'
+data ProjectsServicesList =
+  ProjectsServicesList'
     { _pslParent         :: !Text
     , _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsServicesList = ProjectsServicesList'
     , _pslPageToken      :: !(Maybe Text)
     , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsServicesList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsServicesList
     :: Text -- ^ 'pslParent'
     -> ProjectsServicesList
 projectsServicesList pPslParent_ =
-    ProjectsServicesList'
+  ProjectsServicesList'
     { _pslParent = pPslParent_
     , _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsServicesList pPslParent_ =
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
+
 
 -- | List enabled services for the specified parent. An example valid parent
 -- would be: - projects\/my-project

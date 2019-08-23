@@ -24,11 +24,11 @@
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
 -- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the cluster creates
+-- is added for the cluster. After cluster creation, the Kubelet creates
 -- routes for each node to allow the containers on that node to communicate
 -- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range is being used
--- by the cluster.
+-- the project\'s global metadata indicating which CIDR range the cluster
+-- is using.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
@@ -76,14 +76,15 @@ type ProjectsZonesClustersCreateResource =
 -- Compute Engine instances. By default, the cluster is created in the
 -- project\'s [default
 -- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
--- is added for the cluster. After cluster creation, the cluster creates
+-- is added for the cluster. After cluster creation, the Kubelet creates
 -- routes for each node to allow the containers on that node to communicate
 -- with all other instances in the cluster. Finally, an entry is added to
--- the project\'s global metadata indicating which CIDR range is being used
--- by the cluster.
+-- the project\'s global metadata indicating which CIDR range the cluster
+-- is using.
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
-data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
+data ProjectsZonesClustersCreate =
+  ProjectsZonesClustersCreate'
     { _pzccXgafv          :: !(Maybe Xgafv)
     , _pzccUploadProtocol :: !(Maybe Text)
     , _pzccAccessToken    :: !(Maybe Text)
@@ -92,7 +93,9 @@ data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
     , _pzccPayload        :: !CreateClusterRequest
     , _pzccProjectId      :: !Text
     , _pzccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersCreate' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ projectsZonesClustersCreate
     -> Text -- ^ 'pzccProjectId'
     -> ProjectsZonesClustersCreate
 projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
-    ProjectsZonesClustersCreate'
+  ProjectsZonesClustersCreate'
     { _pzccXgafv = Nothing
     , _pzccUploadProtocol = Nothing
     , _pzccAccessToken = Nothing
@@ -129,6 +132,7 @@ projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
     , _pzccProjectId = pPzccProjectId_
     , _pzccCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzccXgafv :: Lens' ProjectsZonesClustersCreate (Maybe Xgafv)

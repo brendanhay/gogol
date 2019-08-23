@@ -52,9 +52,12 @@ type FreeBusyQueryResource =
 -- | Returns free\/busy information for a set of calendars.
 --
 -- /See:/ 'freeBusyQuery' smart constructor.
-newtype FreeBusyQuery = FreeBusyQuery'
+newtype FreeBusyQuery =
+  FreeBusyQuery'
     { _fbqPayload :: FreeBusyRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FreeBusyQuery' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype FreeBusyQuery = FreeBusyQuery'
 freeBusyQuery
     :: FreeBusyRequest -- ^ 'fbqPayload'
     -> FreeBusyQuery
-freeBusyQuery pFbqPayload_ =
-    FreeBusyQuery'
-    { _fbqPayload = pFbqPayload_
-    }
+freeBusyQuery pFbqPayload_ = FreeBusyQuery' {_fbqPayload = pFbqPayload_}
+
 
 -- | Multipart request metadata.
 fbqPayload :: Lens' FreeBusyQuery FreeBusyRequest

@@ -167,11 +167,6 @@ module Network.Google.CloudTasks
     -- ** QueueState
     , QueueState (..)
 
-    -- ** AppEngineHTTPQueue
-    , AppEngineHTTPQueue
-    , appEngineHTTPQueue
-    , aehttpqAppEngineRoutingOverride
-
     -- ** CreateTaskRequestResponseView
     , CreateTaskRequestResponseView (..)
 
@@ -184,9 +179,9 @@ module Network.Google.CloudTasks
     , Queue
     , queue
     , qRateLimits
+    , qAppEngineRoutingOverride
     , qState
     , qRetryConfig
-    , qAppEngineHTTPQueue
     , qName
     , qPurgeTime
 
@@ -232,6 +227,7 @@ module Network.Google.CloudTasks
     , Task
     , task
     , tLastAttempt
+    , tDispatchDeadline
     , tScheduleTime
     , tName
     , tFirstAttempt

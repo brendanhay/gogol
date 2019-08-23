@@ -63,14 +63,17 @@ type IAMPoliciesQueryAuditableServicesResource =
 -- configuration for the given resource.
 --
 -- /See:/ 'iamPoliciesQueryAuditableServices' smart constructor.
-data IAMPoliciesQueryAuditableServices = IAMPoliciesQueryAuditableServices'
+data IAMPoliciesQueryAuditableServices =
+  IAMPoliciesQueryAuditableServices'
     { _ipqasXgafv          :: !(Maybe Xgafv)
     , _ipqasUploadProtocol :: !(Maybe Text)
     , _ipqasAccessToken    :: !(Maybe Text)
     , _ipqasUploadType     :: !(Maybe Text)
     , _ipqasPayload        :: !QueryAuditableServicesRequest
     , _ipqasCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IAMPoliciesQueryAuditableServices' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ iamPoliciesQueryAuditableServices
     :: QueryAuditableServicesRequest -- ^ 'ipqasPayload'
     -> IAMPoliciesQueryAuditableServices
 iamPoliciesQueryAuditableServices pIpqasPayload_ =
-    IAMPoliciesQueryAuditableServices'
+  IAMPoliciesQueryAuditableServices'
     { _ipqasXgafv = Nothing
     , _ipqasUploadProtocol = Nothing
     , _ipqasAccessToken = Nothing
@@ -99,6 +102,7 @@ iamPoliciesQueryAuditableServices pIpqasPayload_ =
     , _ipqasPayload = pIpqasPayload_
     , _ipqasCallback = Nothing
     }
+
 
 -- | V1 error format.
 ipqasXgafv :: Lens' IAMPoliciesQueryAuditableServices (Maybe Xgafv)
@@ -135,7 +139,8 @@ ipqasCallback
       (\ s a -> s{_ipqasCallback = a})
 
 instance GoogleRequest
-         IAMPoliciesQueryAuditableServices where
+           IAMPoliciesQueryAuditableServices
+         where
         type Rs IAMPoliciesQueryAuditableServices =
              QueryAuditableServicesResponse
         type Scopes IAMPoliciesQueryAuditableServices =

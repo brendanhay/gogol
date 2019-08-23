@@ -22,7 +22,7 @@
 --
 -- Deletes an SSH public key.
 --
--- /See:/ <https://cloud.google.com/compute/docs/oslogin/rest/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.delete@.
+-- /See:/ <https://cloud.google.com/compute/docs/oslogin/ Cloud OS Login API Reference> for @oslogin.users.sshPublicKeys.delete@.
 module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Delete
     (
     -- * REST Resource
@@ -59,14 +59,17 @@ type UsersSSHPublicKeysDeleteResource =
 -- | Deletes an SSH public key.
 --
 -- /See:/ 'usersSSHPublicKeysDelete' smart constructor.
-data UsersSSHPublicKeysDelete = UsersSSHPublicKeysDelete'
+data UsersSSHPublicKeysDelete =
+  UsersSSHPublicKeysDelete'
     { _uspkdXgafv          :: !(Maybe Xgafv)
     , _uspkdUploadProtocol :: !(Maybe Text)
     , _uspkdAccessToken    :: !(Maybe Text)
     , _uspkdUploadType     :: !(Maybe Text)
     , _uspkdName           :: !Text
     , _uspkdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSSHPublicKeysDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ usersSSHPublicKeysDelete
     :: Text -- ^ 'uspkdName'
     -> UsersSSHPublicKeysDelete
 usersSSHPublicKeysDelete pUspkdName_ =
-    UsersSSHPublicKeysDelete'
+  UsersSSHPublicKeysDelete'
     { _uspkdXgafv = Nothing
     , _uspkdUploadProtocol = Nothing
     , _uspkdAccessToken = Nothing
@@ -95,6 +98,7 @@ usersSSHPublicKeysDelete pUspkdName_ =
     , _uspkdName = pUspkdName_
     , _uspkdCallback = Nothing
     }
+
 
 -- | V1 error format.
 uspkdXgafv :: Lens' UsersSSHPublicKeysDelete (Maybe Xgafv)

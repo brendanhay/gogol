@@ -51,9 +51,12 @@ type WebResourceDeleteResource =
 -- | Relinquish ownership of a website or domain.
 --
 -- /See:/ 'webResourceDelete' smart constructor.
-newtype WebResourceDelete = WebResourceDelete'
+newtype WebResourceDelete =
+  WebResourceDelete'
     { _wrdId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WebResourceDelete' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype WebResourceDelete = WebResourceDelete'
 webResourceDelete
     :: Text -- ^ 'wrdId'
     -> WebResourceDelete
-webResourceDelete pWrdId_ =
-    WebResourceDelete'
-    { _wrdId = pWrdId_
-    }
+webResourceDelete pWrdId_ = WebResourceDelete' {_wrdId = pWrdId_}
+
 
 -- | The id of a verified site or domain.
 wrdId :: Lens' WebResourceDelete Text

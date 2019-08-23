@@ -388,9 +388,11 @@ module Network.Google.Logging
     , LogExclusion
     , logExclusion
     , leDisabled
+    , leUpdateTime
     , leName
     , leFilter
     , leDescription
+    , leCreateTime
 
     -- ** WriteLogEntriesResponse
     , WriteLogEntriesResponse
@@ -406,8 +408,10 @@ module Network.Google.Logging
     , lsIncludeChildren
     , lsOutputVersionFormat
     , lsWriterIdentity
+    , lsUpdateTime
     , lsName
     , lsFilter
+    , lsCreateTime
 
     -- ** MonitoredResourceMetadataUserLabels
     , MonitoredResourceMetadataUserLabels
@@ -536,6 +540,7 @@ module Network.Google.Logging
     , LogMetric
     , logMetric
     , lmMetricDescriptor
+    , lmUpdateTime
     , lmName
     , lmVersion
     , lmLabelExtractors
@@ -543,6 +548,7 @@ module Network.Google.Logging
     , lmValueExtractor
     , lmBucketOptions
     , lmDescription
+    , lmCreateTime
 
     -- ** LogEntry
     , LogEntry

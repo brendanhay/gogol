@@ -66,7 +66,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateResource
 -- next sequential id. If unset, state will be set to ENABLED.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate'
     { _plkrckckvcParent         :: !Text
     , _plkrckckvcXgafv          :: !(Maybe Xgafv)
     , _plkrckckvcUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate = ProjectsLocati
     , _plkrckckvcUploadType     :: !(Maybe Text)
     , _plkrckckvcPayload        :: !CryptoKeyVersion
     , _plkrckckvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
     -> CryptoKeyVersion -- ^ 'plkrckckvcPayload'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate pPlkrckckvcParent_ pPlkrckckvcPayload_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate'
     { _plkrckckvcParent = pPlkrckckvcParent_
     , _plkrckckvcXgafv = Nothing
     , _plkrckckvcUploadProtocol = Nothing
@@ -107,6 +110,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate pPlkrckckvcParent_ pP
     , _plkrckckvcPayload = pPlkrckckvcPayload_
     , _plkrckckvcCallback = Nothing
     }
+
 
 -- | Required. The name of the CryptoKey associated with the
 -- CryptoKeyVersions.
@@ -152,14 +156,16 @@ plkrckckvcCallback
       (\ s a -> s{_plkrckckvcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
              = CryptoKeyVersion
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate'{..}
           = go _plkrckckvcParent _plkrckckvcXgafv

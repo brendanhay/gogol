@@ -59,11 +59,14 @@ type LicenseAssignmentsGetResource =
 -- | Get license assignment of a particular product and sku for a user
 --
 -- /See:/ 'licenseAssignmentsGet' smart constructor.
-data LicenseAssignmentsGet = LicenseAssignmentsGet'
+data LicenseAssignmentsGet =
+  LicenseAssignmentsGet'
     { _lagSKUId     :: !Text
     , _lagUserId    :: !Text
     , _lagProductId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicenseAssignmentsGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ licenseAssignmentsGet
     -> Text -- ^ 'lagProductId'
     -> LicenseAssignmentsGet
 licenseAssignmentsGet pLagSKUId_ pLagUserId_ pLagProductId_ =
-    LicenseAssignmentsGet'
+  LicenseAssignmentsGet'
     { _lagSKUId = pLagSKUId_
     , _lagUserId = pLagUserId_
     , _lagProductId = pLagProductId_
     }
+
 
 -- | Name for sku
 lagSKUId :: Lens' LicenseAssignmentsGet Text

@@ -23,7 +23,7 @@
 -- Creates transfer runs for a time range [start_time, end_time]. For each
 -- date - or whatever granularity the data source supports - in the range,
 -- one transfer run is created. Note that runs are created per UTC time in
--- the time range.
+-- the time range. DEPRECATED: use StartManualTransferRuns instead.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.scheduleRuns@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
@@ -65,10 +65,11 @@ type ProjectsTransferConfigsScheduleRunsResource =
 -- | Creates transfer runs for a time range [start_time, end_time]. For each
 -- date - or whatever granularity the data source supports - in the range,
 -- one transfer run is created. Note that runs are created per UTC time in
--- the time range.
+-- the time range. DEPRECATED: use StartManualTransferRuns instead.
 --
 -- /See:/ 'projectsTransferConfigsScheduleRuns' smart constructor.
-data ProjectsTransferConfigsScheduleRuns = ProjectsTransferConfigsScheduleRuns'
+data ProjectsTransferConfigsScheduleRuns =
+  ProjectsTransferConfigsScheduleRuns'
     { _ptcsrParent         :: !Text
     , _ptcsrXgafv          :: !(Maybe Xgafv)
     , _ptcsrUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsTransferConfigsScheduleRuns = ProjectsTransferConfigsScheduleRuns'
     , _ptcsrUploadType     :: !(Maybe Text)
     , _ptcsrPayload        :: !ScheduleTransferRunsRequest
     , _ptcsrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTransferConfigsScheduleRuns' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsTransferConfigsScheduleRuns
     -> ScheduleTransferRunsRequest -- ^ 'ptcsrPayload'
     -> ProjectsTransferConfigsScheduleRuns
 projectsTransferConfigsScheduleRuns pPtcsrParent_ pPtcsrPayload_ =
-    ProjectsTransferConfigsScheduleRuns'
+  ProjectsTransferConfigsScheduleRuns'
     { _ptcsrParent = pPtcsrParent_
     , _ptcsrXgafv = Nothing
     , _ptcsrUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsTransferConfigsScheduleRuns pPtcsrParent_ pPtcsrPayload_ =
     , _ptcsrPayload = pPtcsrPayload_
     , _ptcsrCallback = Nothing
     }
+
 
 -- | Transfer configuration name in the form:
 -- \`projects\/{project_id}\/transferConfigs\/{config_id}\`.
@@ -151,7 +155,8 @@ ptcsrCallback
       (\ s a -> s{_ptcsrCallback = a})
 
 instance GoogleRequest
-         ProjectsTransferConfigsScheduleRuns where
+           ProjectsTransferConfigsScheduleRuns
+         where
         type Rs ProjectsTransferConfigsScheduleRuns =
              ScheduleTransferRunsResponse
         type Scopes ProjectsTransferConfigsScheduleRuns =

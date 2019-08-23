@@ -48,7 +48,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.stop@ method which the
 -- 'ProjectsScanConfigsScanRunsStop' request conforms to.
 type ProjectsScanConfigsScanRunsStopResource =
-     "v1alpha" :>
+     "v1beta" :>
        CaptureMode "name" "stop" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,7 +62,8 @@ type ProjectsScanConfigsScanRunsStopResource =
 -- | Stops a ScanRun. The stopped ScanRun is returned.
 --
 -- /See:/ 'projectsScanConfigsScanRunsStop' smart constructor.
-data ProjectsScanConfigsScanRunsStop = ProjectsScanConfigsScanRunsStop'
+data ProjectsScanConfigsScanRunsStop =
+  ProjectsScanConfigsScanRunsStop'
     { _pscsrsXgafv          :: !(Maybe Xgafv)
     , _pscsrsUploadProtocol :: !(Maybe Text)
     , _pscsrsAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsScanConfigsScanRunsStop = ProjectsScanConfigsScanRunsStop'
     , _pscsrsPayload        :: !StopScanRunRequest
     , _pscsrsName           :: !Text
     , _pscsrsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsScanRunsStop' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsScanConfigsScanRunsStop
     -> Text -- ^ 'pscsrsName'
     -> ProjectsScanConfigsScanRunsStop
 projectsScanConfigsScanRunsStop pPscsrsPayload_ pPscsrsName_ =
-    ProjectsScanConfigsScanRunsStop'
+  ProjectsScanConfigsScanRunsStop'
     { _pscsrsXgafv = Nothing
     , _pscsrsUploadProtocol = Nothing
     , _pscsrsAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsScanConfigsScanRunsStop pPscsrsPayload_ pPscsrsName_ =
     , _pscsrsName = pPscsrsName_
     , _pscsrsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscsrsXgafv :: Lens' ProjectsScanConfigsScanRunsStop (Maybe Xgafv)
@@ -147,7 +151,8 @@ pscsrsCallback
       (\ s a -> s{_pscsrsCallback = a})
 
 instance GoogleRequest
-         ProjectsScanConfigsScanRunsStop where
+           ProjectsScanConfigsScanRunsStop
+         where
         type Rs ProjectsScanConfigsScanRunsStop = ScanRun
         type Scopes ProjectsScanConfigsScanRunsStop =
              '["https://www.googleapis.com/auth/cloud-platform"]

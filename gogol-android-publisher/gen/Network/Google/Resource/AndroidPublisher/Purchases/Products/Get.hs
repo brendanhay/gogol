@@ -59,11 +59,14 @@ type PurchasesProductsGetResource =
 -- | Checks the purchase and consumption status of an inapp item.
 --
 -- /See:/ 'purchasesProductsGet' smart constructor.
-data PurchasesProductsGet = PurchasesProductsGet'
+data PurchasesProductsGet =
+  PurchasesProductsGet'
     { _ppgPackageName :: !Text
     , _ppgToken       :: !Text
     , _ppgProductId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PurchasesProductsGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ purchasesProductsGet
     -> Text -- ^ 'ppgProductId'
     -> PurchasesProductsGet
 purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
-    PurchasesProductsGet'
+  PurchasesProductsGet'
     { _ppgPackageName = pPpgPackageName_
     , _ppgToken = pPpgToken_
     , _ppgProductId = pPpgProductId_
     }
+
 
 -- | The package name of the application the inapp product was sold in (for
 -- example, \'com.some.thing\').

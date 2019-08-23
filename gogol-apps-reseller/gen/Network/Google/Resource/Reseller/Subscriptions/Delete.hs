@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancel, suspend or transfer a subscription to direct.
+-- Cancel or transfer a subscription to direct.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.delete@.
 module Network.Google.Resource.Reseller.Subscriptions.Delete
@@ -55,14 +55,17 @@ type SubscriptionsDeleteResource =
                      SubscriptionsDeleteDeletionType
                      :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Cancel, suspend or transfer a subscription to direct.
+-- | Cancel or transfer a subscription to direct.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
-data SubscriptionsDelete = SubscriptionsDelete'
+data SubscriptionsDelete =
+  SubscriptionsDelete'
     { _sdCustomerId     :: !Text
     , _sdDeletionType   :: !SubscriptionsDeleteDeletionType
     , _sdSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionsDelete' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ subscriptionsDelete
     -> Text -- ^ 'sdSubscriptionId'
     -> SubscriptionsDelete
 subscriptionsDelete pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
-    SubscriptionsDelete'
+  SubscriptionsDelete'
     { _sdCustomerId = pSdCustomerId_
     , _sdDeletionType = pSdDeletionType_
     , _sdSubscriptionId = pSdSubscriptionId_
     }
+
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a

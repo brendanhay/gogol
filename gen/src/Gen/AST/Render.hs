@@ -1,15 +1,11 @@
-{-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE DeriveGeneric              #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE KindSignatures             #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RankNTypes                 #-}
-{-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE TemplateHaskell            #-}
-{-# LANGUAGE ViewPatterns               #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE FlexibleContexts  #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RankNTypes        #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE ViewPatterns      #-}
 
 -- Module      : Gen.AST.Render
 -- Copyright   : (c) 2015-2016 Brendan Hay
@@ -25,18 +21,21 @@ module Gen.AST.Render
 import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
+import qualified Data.ByteString.Char8        as C8
+import qualified Data.ByteString.Lazy.Builder as LBB
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import           Data.String
 import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
+import qualified Data.Text.Lazy.Encoding      as LText
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
 import           Gen.Syntax
 import           Gen.Types
-import           HIndent
+import qualified HIndent
+import qualified HIndent.Types                as HIndent
 import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty as PP
 import           Prelude                      hiding (sum)
@@ -131,7 +130,10 @@ renderMethod s root suf m@Method {..} = do
     typ <- reserveType typ'
 
     x@Solved {..} <- getSolved typ
-    Just d        <- renderSchema x
+    d'            <- renderSchema x
+    d <- case d' of
+      Nothing  -> error "failed to render the schema"
+      Just d'' -> pure d''
 
     i   <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
     dl  <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
@@ -170,15 +172,15 @@ data PP
 
 pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
 pp i x
-    | i == Indent = result (reformat johanTibell Nothing p)
-    | otherwise   = pure p
+    | i == Indent = result (HIndent.reformat HIndent.defaultConfig Nothing Nothing p)
+    | otherwise   = pure (LText.pack (C8.unpack p))
   where
-    result = hoistEither . bimap e Build.toLazyText
+    result = hoistEither . bimap (e . LText.pack) (LText.decodeUtf8 . LBB.toLazyByteString)
 
-    e = flip mappend ("\nSyntax:\n" <> p <> "\nAST:\n" <> LText.pack (show x)) . LText.pack
+    e = flip mappend ("\nSyntax:\n" <> LText.pack (C8.unpack p) <> "\nAST:\n" <> LText.pack (show x))
 
-    p = LText.dropWhile isSpace
-      . LText.pack
+    p = C8.dropWhile isSpace
+      . C8.pack
       $ prettyPrintStyleMode s m x
 
     s = style
@@ -197,15 +199,12 @@ pp i x
 -- FIXME: dirty hack to render smart ctor parameter comments.
 comments :: Prefix -> Map Local Solved -> Rendered -> Rendered
 comments p (Map.toList -> rs) =
-      LText.replace     " :: " "\n    :: "
-    . LText.intercalate "\n    -> "
-    . zipWith rel ps
-    . map LText.strip
-    . LText.splitOn     "->"
+  LText.replace " :: " "\n    :: " .
+  LText.intercalate "\n    -> " .
+  zipWith rel ps . map LText.strip . LText.splitOn "->"
   where
     ks = filter (parameter . _schema . snd) rs
     ps = map (Just . fst) ks ++ repeat Nothing
-
-    rel Nothing  t = t
+    rel Nothing t = t
     rel (Just l) t =
-        t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"
+      t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"

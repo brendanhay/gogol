@@ -66,13 +66,16 @@ type InstancesStartWithEncryptionKeyResource =
 -- For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStartWithEncryptionKey' smart constructor.
-data InstancesStartWithEncryptionKey = InstancesStartWithEncryptionKey'
+data InstancesStartWithEncryptionKey =
+  InstancesStartWithEncryptionKey'
     { _iswekRequestId :: !(Maybe Text)
     , _iswekProject   :: !Text
     , _iswekZone      :: !Text
     , _iswekPayload   :: !InstancesStartWithEncryptionKeyRequest
     , _iswekInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesStartWithEncryptionKey' with the minimum fields required to make a request.
 --
@@ -94,13 +97,14 @@ instancesStartWithEncryptionKey
     -> Text -- ^ 'iswekInstance'
     -> InstancesStartWithEncryptionKey
 instancesStartWithEncryptionKey pIswekProject_ pIswekZone_ pIswekPayload_ pIswekInstance_ =
-    InstancesStartWithEncryptionKey'
+  InstancesStartWithEncryptionKey'
     { _iswekRequestId = Nothing
     , _iswekProject = pIswekProject_
     , _iswekZone = pIswekZone_
     , _iswekPayload = pIswekPayload_
     , _iswekInstance = pIswekInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -139,7 +143,8 @@ iswekInstance
       (\ s a -> s{_iswekInstance = a})
 
 instance GoogleRequest
-         InstancesStartWithEncryptionKey where
+           InstancesStartWithEncryptionKey
+         where
         type Rs InstancesStartWithEncryptionKey = Operation
         type Scopes InstancesStartWithEncryptionKey =
              '["https://www.googleapis.com/auth/cloud-platform",

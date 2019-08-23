@@ -22,7 +22,6 @@ module Network.Google.People.Types
     -- * OAuth Scopes
     , userBirthdayReadScope
     , userInfoProFileScope
-    , plusLoginScope
     , userPhoneNumbersReadScope
     , userInfoEmailScope
     , contactsReadOnlyScope
@@ -177,6 +176,7 @@ module Network.Google.People.Types
     -- * ContactGroupMembership
     , ContactGroupMembership
     , contactGroupMembership
+    , cgmContactGroupResourceName
     , cgmContactGroupId
 
     -- * ContactGroupGroupType
@@ -482,36 +482,33 @@ peopleService
 
 -- | View your complete date of birth
 userBirthdayReadScope :: Proxy '["https://www.googleapis.com/auth/user.birthday.read"]
-userBirthdayReadScope = Proxy;
+userBirthdayReadScope = Proxy
 
--- | View your basic profile info
+-- | See your personal info, including any personal info you\'ve made
+-- publicly available
 userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userInfoProFileScope = Proxy;
-
--- | Know the list of people in your circles, your age range, and language
-plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Proxy;
+userInfoProFileScope = Proxy
 
 -- | View your phone numbers
 userPhoneNumbersReadScope :: Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
-userPhoneNumbersReadScope = Proxy;
+userPhoneNumbersReadScope = Proxy
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | See and download your contacts
 contactsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/contacts.readonly"]
-contactsReadOnlyScope = Proxy;
+contactsReadOnlyScope = Proxy
 
 -- | View your street addresses
 userAddressesReadScope :: Proxy '["https://www.googleapis.com/auth/user.addresses.read"]
-userAddressesReadScope = Proxy;
+userAddressesReadScope = Proxy
 
 -- | See, edit, download, and permanently delete your contacts
 contactsScope :: Proxy '["https://www.googleapis.com/auth/contacts"]
-contactsScope = Proxy;
+contactsScope = Proxy
 
 -- | View your email addresses
 userEmailsReadScope :: Proxy '["https://www.googleapis.com/auth/user.emails.read"]
-userEmailsReadScope = Proxy;
+userEmailsReadScope = Proxy

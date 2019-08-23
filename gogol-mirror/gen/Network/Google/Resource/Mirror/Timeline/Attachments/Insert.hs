@@ -62,9 +62,12 @@ type TimelineAttachmentsInsertResource =
 -- | Adds a new attachment to a timeline item.
 --
 -- /See:/ 'timelineAttachmentsInsert' smart constructor.
-newtype TimelineAttachmentsInsert = TimelineAttachmentsInsert'
+newtype TimelineAttachmentsInsert =
+  TimelineAttachmentsInsert'
     { _taiItemId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineAttachmentsInsert' with the minimum fields required to make a request.
 --
@@ -75,9 +78,8 @@ timelineAttachmentsInsert
     :: Text -- ^ 'taiItemId'
     -> TimelineAttachmentsInsert
 timelineAttachmentsInsert pTaiItemId_ =
-    TimelineAttachmentsInsert'
-    { _taiItemId = pTaiItemId_
-    }
+  TimelineAttachmentsInsert' {_taiItemId = pTaiItemId_}
+
 
 -- | The ID of the timeline item the attachment belongs to.
 taiItemId :: Lens' TimelineAttachmentsInsert Text
@@ -97,7 +99,8 @@ instance GoogleRequest TimelineAttachmentsInsert
                       mempty
 
 instance GoogleRequest
-         (MediaUpload TimelineAttachmentsInsert) where
+           (MediaUpload TimelineAttachmentsInsert)
+         where
         type Rs (MediaUpload TimelineAttachmentsInsert) =
              Attachment
         type Scopes (MediaUpload TimelineAttachmentsInsert) =

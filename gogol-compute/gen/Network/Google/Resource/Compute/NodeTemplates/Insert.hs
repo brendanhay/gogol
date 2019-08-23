@@ -62,12 +62,15 @@ type NodeTemplatesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'nodeTemplatesInsert' smart constructor.
-data NodeTemplatesInsert = NodeTemplatesInsert'
+data NodeTemplatesInsert =
+  NodeTemplatesInsert'
     { _ntiRequestId :: !(Maybe Text)
     , _ntiProject   :: !Text
     , _ntiPayload   :: !NodeTemplate
     , _ntiRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeTemplatesInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ nodeTemplatesInsert
     -> Text -- ^ 'ntiRegion'
     -> NodeTemplatesInsert
 nodeTemplatesInsert pNtiProject_ pNtiPayload_ pNtiRegion_ =
-    NodeTemplatesInsert'
+  NodeTemplatesInsert'
     { _ntiRequestId = Nothing
     , _ntiProject = pNtiProject_
     , _ntiPayload = pNtiPayload_
     , _ntiRegion = pNtiRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

@@ -69,13 +69,16 @@ type UsersDataSourcesDataSetsGetResource =
 -- or equal to the dataset start time.
 --
 -- /See:/ 'usersDataSourcesDataSetsGet' smart constructor.
-data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet'
+data UsersDataSourcesDataSetsGet =
+  UsersDataSourcesDataSetsGet'
     { _udsdsgDataSourceId :: !Text
     , _udsdsgUserId       :: !Text
     , _udsdsgDataSetId    :: !Text
     , _udsdsgLimit        :: !(Maybe (Textual Int32))
     , _udsdsgPageToken    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersDataSourcesDataSetsGet' with the minimum fields required to make a request.
 --
@@ -96,13 +99,14 @@ usersDataSourcesDataSetsGet
     -> Text -- ^ 'udsdsgDataSetId'
     -> UsersDataSourcesDataSetsGet
 usersDataSourcesDataSetsGet pUdsdsgDataSourceId_ pUdsdsgUserId_ pUdsdsgDataSetId_ =
-    UsersDataSourcesDataSetsGet'
+  UsersDataSourcesDataSetsGet'
     { _udsdsgDataSourceId = pUdsdsgDataSourceId_
     , _udsdsgUserId = pUdsdsgUserId_
     , _udsdsgDataSetId = pUdsdsgDataSetId_
     , _udsdsgLimit = Nothing
     , _udsdsgPageToken = Nothing
     }
+
 
 -- | The data stream ID of the data source that created the dataset.
 udsdsgDataSourceId :: Lens' UsersDataSourcesDataSetsGet Text

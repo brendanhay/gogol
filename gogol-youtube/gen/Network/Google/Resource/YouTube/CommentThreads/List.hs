@@ -76,7 +76,8 @@ type CommentThreadsListResource =
 -- | Returns a list of comment threads that match the API request parameters.
 --
 -- /See:/ 'commentThreadsList' smart constructor.
-data CommentThreadsList = CommentThreadsList'
+data CommentThreadsList =
+  CommentThreadsList'
     { _ctlPart                         :: !Text
     , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
     , _ctlSearchTerms                  :: !(Maybe Text)
@@ -88,7 +89,9 @@ data CommentThreadsList = CommentThreadsList'
     , _ctlOrder                        :: !CommentThreadsListOrder
     , _ctlTextFormat                   :: !CommentThreadsListTextFormat
     , _ctlMaxResults                   :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentThreadsList' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ commentThreadsList
     :: Text -- ^ 'ctlPart'
     -> CommentThreadsList
 commentThreadsList pCtlPart_ =
-    CommentThreadsList'
+  CommentThreadsList'
     { _ctlPart = pCtlPart_
     , _ctlModerationStatus = Published
     , _ctlSearchTerms = Nothing
@@ -132,6 +135,7 @@ commentThreadsList pCtlPart_ =
     , _ctlTextFormat = CTLTFHTML
     , _ctlMaxResults = 20
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- commentThread resource properties that the API response will include.

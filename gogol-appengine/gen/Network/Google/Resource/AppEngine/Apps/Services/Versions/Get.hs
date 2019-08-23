@@ -70,7 +70,8 @@ type AppsServicesVersionsGetResource =
 -- be returned. Specify the FULL_VIEW parameter to get the full resource.
 --
 -- /See:/ 'appsServicesVersionsGet' smart constructor.
-data AppsServicesVersionsGet = AppsServicesVersionsGet'
+data AppsServicesVersionsGet =
+  AppsServicesVersionsGet'
     { _asvgXgafv          :: !(Maybe Xgafv)
     , _asvgUploadProtocol :: !(Maybe Text)
     , _asvgAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data AppsServicesVersionsGet = AppsServicesVersionsGet'
     , _asvgView           :: !(Maybe Text)
     , _asvgServicesId     :: !Text
     , _asvgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsServicesVersionsGet' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ appsServicesVersionsGet
     -> Text -- ^ 'asvgServicesId'
     -> AppsServicesVersionsGet
 appsServicesVersionsGet pAsvgVersionsId_ pAsvgAppsId_ pAsvgServicesId_ =
-    AppsServicesVersionsGet'
+  AppsServicesVersionsGet'
     { _asvgXgafv = Nothing
     , _asvgUploadProtocol = Nothing
     , _asvgAccessToken = Nothing
@@ -120,6 +123,7 @@ appsServicesVersionsGet pAsvgVersionsId_ pAsvgAppsId_ pAsvgServicesId_ =
     , _asvgServicesId = pAsvgServicesId_
     , _asvgCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvgXgafv :: Lens' AppsServicesVersionsGet (Maybe Xgafv)

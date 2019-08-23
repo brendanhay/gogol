@@ -62,14 +62,17 @@ type OrganizationsInspectTemplatesGetResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'organizationsInspectTemplatesGet' smart constructor.
-data OrganizationsInspectTemplatesGet = OrganizationsInspectTemplatesGet'
+data OrganizationsInspectTemplatesGet =
+  OrganizationsInspectTemplatesGet'
     { _oitgXgafv          :: !(Maybe Xgafv)
     , _oitgUploadProtocol :: !(Maybe Text)
     , _oitgAccessToken    :: !(Maybe Text)
     , _oitgUploadType     :: !(Maybe Text)
     , _oitgName           :: !Text
     , _oitgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsInspectTemplatesGet' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ organizationsInspectTemplatesGet
     :: Text -- ^ 'oitgName'
     -> OrganizationsInspectTemplatesGet
 organizationsInspectTemplatesGet pOitgName_ =
-    OrganizationsInspectTemplatesGet'
+  OrganizationsInspectTemplatesGet'
     { _oitgXgafv = Nothing
     , _oitgUploadProtocol = Nothing
     , _oitgAccessToken = Nothing
@@ -98,6 +101,7 @@ organizationsInspectTemplatesGet pOitgName_ =
     , _oitgName = pOitgName_
     , _oitgCallback = Nothing
     }
+
 
 -- | V1 error format.
 oitgXgafv :: Lens' OrganizationsInspectTemplatesGet (Maybe Xgafv)
@@ -134,7 +138,8 @@ oitgCallback
   = lens _oitgCallback (\ s a -> s{_oitgCallback = a})
 
 instance GoogleRequest
-         OrganizationsInspectTemplatesGet where
+           OrganizationsInspectTemplatesGet
+         where
         type Rs OrganizationsInspectTemplatesGet =
              GooglePrivacyDlpV2InspectTemplate
         type Scopes OrganizationsInspectTemplatesGet =

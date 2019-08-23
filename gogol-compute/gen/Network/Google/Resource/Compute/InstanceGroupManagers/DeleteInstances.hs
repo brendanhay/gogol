@@ -84,13 +84,16 @@ type InstanceGroupManagersDeleteInstancesResource =
 -- maximum of 1000 instances with this method per request.
 --
 -- /See:/ 'instanceGroupManagersDeleteInstances' smart constructor.
-data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances'
+data InstanceGroupManagersDeleteInstances =
+  InstanceGroupManagersDeleteInstances'
     { _igmdiRequestId            :: !(Maybe Text)
     , _igmdiProject              :: !Text
     , _igmdiInstanceGroupManager :: !Text
     , _igmdiZone                 :: !Text
     , _igmdiPayload              :: !InstanceGroupManagersDeleteInstancesRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupManagersDeleteInstances' with the minimum fields required to make a request.
 --
@@ -112,13 +115,14 @@ instanceGroupManagersDeleteInstances
     -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'igmdiPayload'
     -> InstanceGroupManagersDeleteInstances
 instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiPayload_ =
-    InstanceGroupManagersDeleteInstances'
+  InstanceGroupManagersDeleteInstances'
     { _igmdiRequestId = Nothing
     , _igmdiProject = pIgmdiProject_
     , _igmdiInstanceGroupManager = pIgmdiInstanceGroupManager_
     , _igmdiZone = pIgmdiZone_
     , _igmdiPayload = pIgmdiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -157,7 +161,8 @@ igmdiPayload
   = lens _igmdiPayload (\ s a -> s{_igmdiPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersDeleteInstances where
+           InstanceGroupManagersDeleteInstances
+         where
         type Rs InstanceGroupManagersDeleteInstances =
              Operation
         type Scopes InstanceGroupManagersDeleteInstances =

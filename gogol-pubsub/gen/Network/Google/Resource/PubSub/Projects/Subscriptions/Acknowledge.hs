@@ -72,7 +72,8 @@ type ProjectsSubscriptionsAcknowledgeResource =
 -- error.
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
-data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
+data ProjectsSubscriptionsAcknowledge =
+  ProjectsSubscriptionsAcknowledge'
     { _psaXgafv          :: !(Maybe Xgafv)
     , _psaUploadProtocol :: !(Maybe Text)
     , _psaAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
     , _psaPayload        :: !AcknowledgeRequest
     , _psaSubscription   :: !Text
     , _psaCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsAcknowledge' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsSubscriptionsAcknowledge
     -> Text -- ^ 'psaSubscription'
     -> ProjectsSubscriptionsAcknowledge
 projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
-    ProjectsSubscriptionsAcknowledge'
+  ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaUploadProtocol = Nothing
     , _psaAccessToken = Nothing
@@ -113,6 +116,7 @@ projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
     , _psaSubscription = pPsaSubscription_
     , _psaCallback = Nothing
     }
+
 
 -- | V1 error format.
 psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Xgafv)
@@ -154,7 +158,8 @@ psaCallback
   = lens _psaCallback (\ s a -> s{_psaCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsAcknowledge where
+           ProjectsSubscriptionsAcknowledge
+         where
         type Rs ProjectsSubscriptionsAcknowledge = Empty
         type Scopes ProjectsSubscriptionsAcknowledge =
              '["https://www.googleapis.com/auth/cloud-platform",

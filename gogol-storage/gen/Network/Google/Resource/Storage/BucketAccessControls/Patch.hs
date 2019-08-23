@@ -59,12 +59,15 @@ type BucketAccessControlsPatchResource =
 -- | Patches an ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsPatch' smart constructor.
-data BucketAccessControlsPatch = BucketAccessControlsPatch'
+data BucketAccessControlsPatch =
+  BucketAccessControlsPatch'
     { _bacpBucket      :: !Text
     , _bacpPayload     :: !BucketAccessControl
     , _bacpUserProject :: !(Maybe Text)
     , _bacpEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketAccessControlsPatch' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ bucketAccessControlsPatch
     -> Text -- ^ 'bacpEntity'
     -> BucketAccessControlsPatch
 bucketAccessControlsPatch pBacpBucket_ pBacpPayload_ pBacpEntity_ =
-    BucketAccessControlsPatch'
+  BucketAccessControlsPatch'
     { _bacpBucket = pBacpBucket_
     , _bacpPayload = pBacpPayload_
     , _bacpUserProject = Nothing
     , _bacpEntity = pBacpEntity_
     }
+
 
 -- | Name of a bucket.
 bacpBucket :: Lens' BucketAccessControlsPatch Text

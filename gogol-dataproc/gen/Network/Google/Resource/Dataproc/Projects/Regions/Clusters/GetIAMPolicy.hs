@@ -64,7 +64,8 @@ type ProjectsRegionsClustersGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsRegionsClustersGetIAMPolicy' smart constructor.
-data ProjectsRegionsClustersGetIAMPolicy = ProjectsRegionsClustersGetIAMPolicy'
+data ProjectsRegionsClustersGetIAMPolicy =
+  ProjectsRegionsClustersGetIAMPolicy'
     { _prcgipXgafv          :: !(Maybe Xgafv)
     , _prcgipUploadProtocol :: !(Maybe Text)
     , _prcgipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsRegionsClustersGetIAMPolicy = ProjectsRegionsClustersGetIAMPolicy'
     , _prcgipPayload        :: !GetIAMPolicyRequest
     , _prcgipResource       :: !Text
     , _prcgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsClustersGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsRegionsClustersGetIAMPolicy
     -> Text -- ^ 'prcgipResource'
     -> ProjectsRegionsClustersGetIAMPolicy
 projectsRegionsClustersGetIAMPolicy pPrcgipPayload_ pPrcgipResource_ =
-    ProjectsRegionsClustersGetIAMPolicy'
+  ProjectsRegionsClustersGetIAMPolicy'
     { _prcgipXgafv = Nothing
     , _prcgipUploadProtocol = Nothing
     , _prcgipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsRegionsClustersGetIAMPolicy pPrcgipPayload_ pPrcgipResource_ =
     , _prcgipResource = pPrcgipResource_
     , _prcgipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prcgipXgafv :: Lens' ProjectsRegionsClustersGetIAMPolicy (Maybe Xgafv)
@@ -149,7 +153,8 @@ prcgipCallback
       (\ s a -> s{_prcgipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsClustersGetIAMPolicy where
+           ProjectsRegionsClustersGetIAMPolicy
+         where
         type Rs ProjectsRegionsClustersGetIAMPolicy = Policy
         type Scopes ProjectsRegionsClustersGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]

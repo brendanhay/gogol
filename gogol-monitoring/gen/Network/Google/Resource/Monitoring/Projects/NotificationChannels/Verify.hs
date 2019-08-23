@@ -66,7 +66,8 @@ type ProjectsNotificationChannelsVerifyResource =
 -- SendNotificationChannelVerificationCode.
 --
 -- /See:/ 'projectsNotificationChannelsVerify' smart constructor.
-data ProjectsNotificationChannelsVerify = ProjectsNotificationChannelsVerify'
+data ProjectsNotificationChannelsVerify =
+  ProjectsNotificationChannelsVerify'
     { _pncvXgafv          :: !(Maybe Xgafv)
     , _pncvUploadProtocol :: !(Maybe Text)
     , _pncvAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsNotificationChannelsVerify = ProjectsNotificationChannelsVerify'
     , _pncvPayload        :: !VerifyNotificationChannelRequest
     , _pncvName           :: !Text
     , _pncvCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotificationChannelsVerify' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsNotificationChannelsVerify
     -> Text -- ^ 'pncvName'
     -> ProjectsNotificationChannelsVerify
 projectsNotificationChannelsVerify pPncvPayload_ pPncvName_ =
-    ProjectsNotificationChannelsVerify'
+  ProjectsNotificationChannelsVerify'
     { _pncvXgafv = Nothing
     , _pncvUploadProtocol = Nothing
     , _pncvAccessToken = Nothing
@@ -107,6 +110,7 @@ projectsNotificationChannelsVerify pPncvPayload_ pPncvName_ =
     , _pncvName = pPncvName_
     , _pncvCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncvXgafv :: Lens' ProjectsNotificationChannelsVerify (Maybe Xgafv)
@@ -146,7 +150,8 @@ pncvCallback
   = lens _pncvCallback (\ s a -> s{_pncvCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsVerify where
+           ProjectsNotificationChannelsVerify
+         where
         type Rs ProjectsNotificationChannelsVerify =
              NotificationChannel
         type Scopes ProjectsNotificationChannelsVerify =

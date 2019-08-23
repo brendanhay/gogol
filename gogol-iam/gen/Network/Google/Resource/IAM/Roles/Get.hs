@@ -59,14 +59,17 @@ type RolesGetResource =
 -- | Gets a Role definition.
 --
 -- /See:/ 'rolesGet' smart constructor.
-data RolesGet = RolesGet'
+data RolesGet =
+  RolesGet'
     { _rgXgafv          :: !(Maybe Xgafv)
     , _rgUploadProtocol :: !(Maybe Text)
     , _rgAccessToken    :: !(Maybe Text)
     , _rgUploadType     :: !(Maybe Text)
     , _rgName           :: !Text
     , _rgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RolesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ rolesGet
     :: Text -- ^ 'rgName'
     -> RolesGet
 rolesGet pRgName_ =
-    RolesGet'
+  RolesGet'
     { _rgXgafv = Nothing
     , _rgUploadProtocol = Nothing
     , _rgAccessToken = Nothing
@@ -95,6 +98,7 @@ rolesGet pRgName_ =
     , _rgName = pRgName_
     , _rgCallback = Nothing
     }
+
 
 -- | V1 error format.
 rgXgafv :: Lens' RolesGet (Maybe Xgafv)

@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Request the job status.
+-- Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.getMetrics\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.getMetrics\` is not recommended, as you can only
+-- request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.getMetrics@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
@@ -67,10 +71,15 @@ type ProjectsLocationsJobsGetMetricsResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] JobMetrics
 
--- | Request the job status.
+-- | Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.getMetrics\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.getMetrics\` is not recommended, as you can only
+-- request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsGetMetrics' smart constructor.
-data ProjectsLocationsJobsGetMetrics = ProjectsLocationsJobsGetMetrics'
+data ProjectsLocationsJobsGetMetrics =
+  ProjectsLocationsJobsGetMetrics'
     { _pljgmXgafv          :: !(Maybe Xgafv)
     , _pljgmJobId          :: !Text
     , _pljgmUploadProtocol :: !(Maybe Text)
@@ -80,7 +89,9 @@ data ProjectsLocationsJobsGetMetrics = ProjectsLocationsJobsGetMetrics'
     , _pljgmUploadType     :: !(Maybe Text)
     , _pljgmProjectId      :: !Text
     , _pljgmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsGetMetrics' with the minimum fields required to make a request.
 --
@@ -109,7 +120,7 @@ projectsLocationsJobsGetMetrics
     -> Text -- ^ 'pljgmProjectId'
     -> ProjectsLocationsJobsGetMetrics
 projectsLocationsJobsGetMetrics pPljgmJobId_ pPljgmLocation_ pPljgmProjectId_ =
-    ProjectsLocationsJobsGetMetrics'
+  ProjectsLocationsJobsGetMetrics'
     { _pljgmXgafv = Nothing
     , _pljgmJobId = pPljgmJobId_
     , _pljgmUploadProtocol = Nothing
@@ -120,6 +131,7 @@ projectsLocationsJobsGetMetrics pPljgmJobId_ pPljgmLocation_ pPljgmProjectId_ =
     , _pljgmProjectId = pPljgmProjectId_
     , _pljgmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljgmXgafv :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Xgafv)
@@ -137,7 +149,9 @@ pljgmUploadProtocol
   = lens _pljgmUploadProtocol
       (\ s a -> s{_pljgmUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pljgmLocation :: Lens' ProjectsLocationsJobsGetMetrics Text
 pljgmLocation
   = lens _pljgmLocation
@@ -176,7 +190,8 @@ pljgmCallback
       (\ s a -> s{_pljgmCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsGetMetrics where
+           ProjectsLocationsJobsGetMetrics
+         where
         type Rs ProjectsLocationsJobsGetMetrics = JobMetrics
         type Scopes ProjectsLocationsJobsGetMetrics =
              '["https://www.googleapis.com/auth/cloud-platform",

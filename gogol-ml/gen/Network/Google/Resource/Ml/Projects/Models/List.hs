@@ -73,7 +73,8 @@ type ProjectsModelsListResource =
 -- body: {}.
 --
 -- /See:/ 'projectsModelsList' smart constructor.
-data ProjectsModelsList = ProjectsModelsList'
+data ProjectsModelsList =
+  ProjectsModelsList'
     { _pmlParent         :: !Text
     , _pmlXgafv          :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsModelsList = ProjectsModelsList'
     , _pmlPageToken      :: !(Maybe Text)
     , _pmlPageSize       :: !(Maybe (Textual Int32))
     , _pmlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsModelsList' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsModelsList
     :: Text -- ^ 'pmlParent'
     -> ProjectsModelsList
 projectsModelsList pPmlParent_ =
-    ProjectsModelsList'
+  ProjectsModelsList'
     { _pmlParent = pPmlParent_
     , _pmlXgafv = Nothing
     , _pmlUploadProtocol = Nothing
@@ -121,6 +124,7 @@ projectsModelsList pPmlParent_ =
     , _pmlPageSize = Nothing
     , _pmlCallback = Nothing
     }
+
 
 -- | Required. The name of the project whose models are to be listed.
 pmlParent :: Lens' ProjectsModelsList Text

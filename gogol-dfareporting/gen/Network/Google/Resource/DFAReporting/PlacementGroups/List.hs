@@ -63,7 +63,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsList' request conforms to.
 type PlacementGroupsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -107,7 +107,8 @@ type PlacementGroupsListResource =
 -- supports paging.
 --
 -- /See:/ 'placementGroupsList' smart constructor.
-data PlacementGroupsList = PlacementGroupsList'
+data PlacementGroupsList =
+  PlacementGroupsList'
     { _pglPlacementStrategyIds :: !(Maybe [Textual Int64])
     , _pglContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
@@ -128,7 +129,9 @@ data PlacementGroupsList = PlacementGroupsList'
     , _pglArchived             :: !(Maybe Bool)
     , _pglMaxResults           :: !(Textual Int32)
     , _pglMinEndDate           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementGroupsList' with the minimum fields required to make a request.
 --
@@ -177,7 +180,7 @@ placementGroupsList
     :: Int64 -- ^ 'pglProFileId'
     -> PlacementGroupsList
 placementGroupsList pPglProFileId_ =
-    PlacementGroupsList'
+  PlacementGroupsList'
     { _pglPlacementStrategyIds = Nothing
     , _pglContentCategoryIds = Nothing
     , _pglMaxEndDate = Nothing
@@ -199,6 +202,7 @@ placementGroupsList pPglProFileId_ =
     , _pglMaxResults = 800
     , _pglMinEndDate = Nothing
     }
+
 
 -- | Select only placement groups that are associated with these placement
 -- strategies.

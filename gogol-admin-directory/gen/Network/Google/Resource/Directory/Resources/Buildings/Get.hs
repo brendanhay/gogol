@@ -56,10 +56,13 @@ type ResourcesBuildingsGetResource =
 -- | Retrieves a building.
 --
 -- /See:/ 'resourcesBuildingsGet' smart constructor.
-data ResourcesBuildingsGet = ResourcesBuildingsGet'
+data ResourcesBuildingsGet =
+  ResourcesBuildingsGet'
     { _rbgBuildingId :: !Text
     , _rbgCustomer   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesBuildingsGet' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ resourcesBuildingsGet
     -> Text -- ^ 'rbgCustomer'
     -> ResourcesBuildingsGet
 resourcesBuildingsGet pRbgBuildingId_ pRbgCustomer_ =
-    ResourcesBuildingsGet'
-    { _rbgBuildingId = pRbgBuildingId_
-    , _rbgCustomer = pRbgCustomer_
-    }
+  ResourcesBuildingsGet'
+    {_rbgBuildingId = pRbgBuildingId_, _rbgCustomer = pRbgCustomer_}
+
 
 -- | The unique ID of the building to retrieve.
 rbgBuildingId :: Lens' ResourcesBuildingsGet Text

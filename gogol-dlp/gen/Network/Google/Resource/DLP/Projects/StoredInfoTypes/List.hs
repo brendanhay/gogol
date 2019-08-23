@@ -72,7 +72,8 @@ type ProjectsStoredInfoTypesListResource =
 -- learn more.
 --
 -- /See:/ 'projectsStoredInfoTypesList' smart constructor.
-data ProjectsStoredInfoTypesList = ProjectsStoredInfoTypesList'
+data ProjectsStoredInfoTypesList =
+  ProjectsStoredInfoTypesList'
     { _psitlParent         :: !Text
     , _psitlXgafv          :: !(Maybe Xgafv)
     , _psitlUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsStoredInfoTypesList = ProjectsStoredInfoTypesList'
     , _psitlPageToken      :: !(Maybe Text)
     , _psitlPageSize       :: !(Maybe (Textual Int32))
     , _psitlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsStoredInfoTypesList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsStoredInfoTypesList
     :: Text -- ^ 'psitlParent'
     -> ProjectsStoredInfoTypesList
 projectsStoredInfoTypesList pPsitlParent_ =
-    ProjectsStoredInfoTypesList'
+  ProjectsStoredInfoTypesList'
     { _psitlParent = pPsitlParent_
     , _psitlXgafv = Nothing
     , _psitlUploadProtocol = Nothing
@@ -120,6 +123,7 @@ projectsStoredInfoTypesList pPsitlParent_ =
     , _psitlPageSize = Nothing
     , _psitlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

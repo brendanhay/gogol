@@ -199,6 +199,7 @@ module Network.Google.TPU
     -- ** SchedulingConfig
     , SchedulingConfig
     , schedulingConfig
+    , scReserved
     , scPreemptible
 
     -- ** NodeLabels

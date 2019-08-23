@@ -56,11 +56,14 @@ type ReviewsGetResource =
 -- | Returns a single review.
 --
 -- /See:/ 'reviewsGet' smart constructor.
-data ReviewsGet = ReviewsGet'
+data ReviewsGet =
+  ReviewsGet'
     { _rgReviewId            :: !Text
     , _rgPackageName         :: !Text
     , _rgTranslationLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReviewsGet' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ reviewsGet
     -> Text -- ^ 'rgPackageName'
     -> ReviewsGet
 reviewsGet pRgReviewId_ pRgPackageName_ =
-    ReviewsGet'
+  ReviewsGet'
     { _rgReviewId = pRgReviewId_
     , _rgPackageName = pRgPackageName_
     , _rgTranslationLanguage = Nothing
     }
+
 
 rgReviewId :: Lens' ReviewsGet Text
 rgReviewId

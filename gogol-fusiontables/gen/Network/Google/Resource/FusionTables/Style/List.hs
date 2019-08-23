@@ -57,11 +57,14 @@ type StyleListResource =
 -- | Retrieves a list of styles.
 --
 -- /See:/ 'styleList' smart constructor.
-data StyleList = StyleList'
+data StyleList =
+  StyleList'
     { _slPageToken  :: !(Maybe Text)
     , _slTableId    :: !Text
     , _slMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StyleList' with the minimum fields required to make a request.
 --
@@ -76,11 +79,9 @@ styleList
     :: Text -- ^ 'slTableId'
     -> StyleList
 styleList pSlTableId_ =
-    StyleList'
-    { _slPageToken = Nothing
-    , _slTableId = pSlTableId_
-    , _slMaxResults = Nothing
-    }
+  StyleList'
+    {_slPageToken = Nothing, _slTableId = pSlTableId_, _slMaxResults = Nothing}
+
 
 -- | Continuation token specifying which result page to return. Optional.
 slPageToken :: Lens' StyleList (Maybe Text)

@@ -72,7 +72,8 @@ type ProjectsOperationsListResource =
 -- \`genomics.operations.list\`
 --
 -- /See:/ 'projectsOperationsList' smart constructor.
-data ProjectsOperationsList = ProjectsOperationsList'
+data ProjectsOperationsList =
+  ProjectsOperationsList'
     { _polXgafv          :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
     , _polAccessToken    :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsOperationsList = ProjectsOperationsList'
     , _polPageToken      :: !(Maybe Text)
     , _polPageSize       :: !(Maybe (Textual Int32))
     , _polCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOperationsList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsOperationsList
     :: Text -- ^ 'polName'
     -> ProjectsOperationsList
 projectsOperationsList pPolName_ =
-    ProjectsOperationsList'
+  ProjectsOperationsList'
     { _polXgafv = Nothing
     , _polUploadProtocol = Nothing
     , _polAccessToken = Nothing
@@ -120,6 +123,7 @@ projectsOperationsList pPolName_ =
     , _polPageSize = Nothing
     , _polCallback = Nothing
     }
+
 
 -- | V1 error format.
 polXgafv :: Lens' ProjectsOperationsList (Maybe Xgafv)
@@ -176,8 +180,7 @@ polPageToken :: Lens' ProjectsOperationsList (Maybe Text)
 polPageToken
   = lens _polPageToken (\ s a -> s{_polPageToken = a})
 
--- | The maximum number of results to return. If unspecified, defaults to
--- 256. The maximum value is 2048.
+-- | The maximum number of results to return. The maximum value is 256.
 polPageSize :: Lens' ProjectsOperationsList (Maybe Int32)
 polPageSize
   = lens _polPageSize (\ s a -> s{_polPageSize = a}) .

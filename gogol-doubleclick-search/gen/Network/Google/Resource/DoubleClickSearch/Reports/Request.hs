@@ -51,9 +51,12 @@ type ReportsRequestResource =
 -- | Inserts a report request into the reporting system.
 --
 -- /See:/ 'reportsRequest' smart constructor.
-newtype ReportsRequest = ReportsRequest'
+newtype ReportsRequest =
+  ReportsRequest'
     { _rrPayload :: ReportRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsRequest' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype ReportsRequest = ReportsRequest'
 reportsRequest
     :: ReportRequest -- ^ 'rrPayload'
     -> ReportsRequest
-reportsRequest pRrPayload_ =
-    ReportsRequest'
-    { _rrPayload = pRrPayload_
-    }
+reportsRequest pRrPayload_ = ReportsRequest' {_rrPayload = pRrPayload_}
+
 
 -- | Multipart request metadata.
 rrPayload :: Lens' ReportsRequest ReportRequest

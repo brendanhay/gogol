@@ -108,8 +108,8 @@ instance FromJSON PhotoTransferStatus where
 instance ToJSON PhotoTransferStatus where
     toJSON = toJSONText
 
--- | Output only. Status in Google Maps, whether this photo was published, or
--- rejected for a possibly specified reason.
+-- | Output only. Status in Google Maps, whether this photo was published or
+-- rejected.
 data PhotoMapsPublishStatus
     = UnspecifiedMapsPublishStatus
       -- ^ @UNSPECIFIED_MAPS_PUBLISH_STATUS@

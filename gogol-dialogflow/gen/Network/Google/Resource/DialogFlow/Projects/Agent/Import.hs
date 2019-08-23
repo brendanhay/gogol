@@ -70,7 +70,8 @@ type ProjectsAgentImportResource =
 -- ImportAgentRequest. Operation
 --
 -- /See:/ 'projectsAgentImport' smart constructor.
-data ProjectsAgentImport = ProjectsAgentImport'
+data ProjectsAgentImport =
+  ProjectsAgentImport'
     { _paiParent         :: !Text
     , _paiXgafv          :: !(Maybe Xgafv)
     , _paiUploadProtocol :: !(Maybe Text)
@@ -78,7 +79,9 @@ data ProjectsAgentImport = ProjectsAgentImport'
     , _paiUploadType     :: !(Maybe Text)
     , _paiPayload        :: !GoogleCloudDialogflowV2ImportAgentRequest
     , _paiCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentImport' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ projectsAgentImport
     -> GoogleCloudDialogflowV2ImportAgentRequest -- ^ 'paiPayload'
     -> ProjectsAgentImport
 projectsAgentImport pPaiParent_ pPaiPayload_ =
-    ProjectsAgentImport'
+  ProjectsAgentImport'
     { _paiParent = pPaiParent_
     , _paiXgafv = Nothing
     , _paiUploadProtocol = Nothing
@@ -111,6 +114,7 @@ projectsAgentImport pPaiParent_ pPaiPayload_ =
     , _paiPayload = pPaiPayload_
     , _paiCallback = Nothing
     }
+
 
 -- | Required. The project that the agent to import is associated with.
 -- Format: \`projects\/\`.

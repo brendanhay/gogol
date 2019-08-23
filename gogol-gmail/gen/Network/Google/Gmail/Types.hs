@@ -245,6 +245,11 @@ module Network.Google.Gmail.Types
     , listSendAsResponse
     , lsarSendAs
 
+    -- * LanguageSettings
+    , LanguageSettings
+    , languageSettings
+    , lsDisplayLanguage
+
     -- * WatchResponse
     , WatchResponse
     , watchResponse
@@ -411,41 +416,41 @@ gmailService
 
 -- | Manage your basic mail settings
 gmailSettingsBasicScope :: Proxy '["https://www.googleapis.com/auth/gmail.settings.basic"]
-gmailSettingsBasicScope = Proxy;
+gmailSettingsBasicScope = Proxy
 
 -- | Read, compose, send, and permanently delete all your email from Gmail
 mailGoogleComScope :: Proxy '["https://mail.google.com/"]
-mailGoogleComScope = Proxy;
+mailGoogleComScope = Proxy
 
 -- | View and modify but not delete your email
 gmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
-gmailModifyScope = Proxy;
+gmailModifyScope = Proxy
 
 -- | View your email message metadata such as labels and headers, but not the
 -- email body
 gmailMetadataScope :: Proxy '["https://www.googleapis.com/auth/gmail.metadata"]
-gmailMetadataScope = Proxy;
+gmailMetadataScope = Proxy
 
 -- | Manage mailbox labels
 gmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
-gmailLabelsScope = Proxy;
+gmailLabelsScope = Proxy
 
 -- | Manage your sensitive mail settings, including who can manage your mail
 gmailSettingsSharingScope :: Proxy '["https://www.googleapis.com/auth/gmail.settings.sharing"]
-gmailSettingsSharingScope = Proxy;
+gmailSettingsSharingScope = Proxy
 
 -- | Send email on your behalf
 gmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
-gmailSendScope = Proxy;
+gmailSendScope = Proxy
 
 -- | Insert mail into your mailbox
 gmailInsertScope :: Proxy '["https://www.googleapis.com/auth/gmail.insert"]
-gmailInsertScope = Proxy;
+gmailInsertScope = Proxy
 
 -- | Manage drafts and send emails
 gmailComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.compose"]
-gmailComposeScope = Proxy;
+gmailComposeScope = Proxy
 
 -- | View your email messages and settings
 gmailReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
-gmailReadOnlyScope = Proxy;
+gmailReadOnlyScope = Proxy

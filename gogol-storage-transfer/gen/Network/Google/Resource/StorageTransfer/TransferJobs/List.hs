@@ -22,7 +22,7 @@
 --
 -- Lists transfer jobs.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.list@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.list@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.List
     (
     -- * REST Resource
@@ -65,7 +65,8 @@ type TransferJobsListResource =
 -- | Lists transfer jobs.
 --
 -- /See:/ 'transferJobsList' smart constructor.
-data TransferJobsList = TransferJobsList'
+data TransferJobsList =
+  TransferJobsList'
     { _tjlXgafv          :: !(Maybe Xgafv)
     , _tjlUploadProtocol :: !(Maybe Text)
     , _tjlAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data TransferJobsList = TransferJobsList'
     , _tjlPageToken      :: !(Maybe Text)
     , _tjlPageSize       :: !(Maybe (Textual Int32))
     , _tjlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferJobsList' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ data TransferJobsList = TransferJobsList'
 transferJobsList
     :: TransferJobsList
 transferJobsList =
-    TransferJobsList'
+  TransferJobsList'
     { _tjlXgafv = Nothing
     , _tjlUploadProtocol = Nothing
     , _tjlAccessToken = Nothing
@@ -108,6 +111,7 @@ transferJobsList =
     , _tjlPageSize = Nothing
     , _tjlCallback = Nothing
     }
+
 
 -- | V1 error format.
 tjlXgafv :: Lens' TransferJobsList (Maybe Xgafv)

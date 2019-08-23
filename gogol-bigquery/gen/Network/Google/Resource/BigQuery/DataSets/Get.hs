@@ -54,10 +54,13 @@ type DataSetsGetResource =
 -- | Returns the dataset specified by datasetID.
 --
 -- /See:/ 'dataSetsGet' smart constructor.
-data DataSetsGet = DataSetsGet'
+data DataSetsGet =
+  DataSetsGet'
     { _dsgDataSetId :: !Text
     , _dsgProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataSetsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ dataSetsGet
     -> Text -- ^ 'dsgProjectId'
     -> DataSetsGet
 dataSetsGet pDsgDataSetId_ pDsgProjectId_ =
-    DataSetsGet'
-    { _dsgDataSetId = pDsgDataSetId_
-    , _dsgProjectId = pDsgProjectId_
-    }
+  DataSetsGet' {_dsgDataSetId = pDsgDataSetId_, _dsgProjectId = pDsgProjectId_}
+
 
 -- | Dataset ID of the requested dataset
 dsgDataSetId :: Lens' DataSetsGet Text

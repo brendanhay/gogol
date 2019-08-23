@@ -139,6 +139,7 @@ module Network.Google.BigQuery.Types
     , jsCreationTime
     , jsStartTime
     , jsCompletionRatio
+    , jsNumChildJobs
     , jsTotalSlotMs
     , jsLoad
     , jsTotalBytesProcessed
@@ -147,6 +148,7 @@ module Network.Google.BigQuery.Types
     , jsQuery
     , jsExtract
     , jsReservationUsage
+    , jsParentJobId
 
     -- * JobConfigurationLabels
     , JobConfigurationLabels
@@ -201,6 +203,7 @@ module Network.Google.BigQuery.Types
     , externalDataConfiguration
     , edcBigtableOptions
     , edcIgnoreUnknownValues
+    , edcHivePartitioningMode
     , edcCompression
     , edcSourceFormat
     , edcSchema
@@ -224,6 +227,13 @@ module Network.Google.BigQuery.Types
     , mdmoLabels
     , mdmoLossType
 
+    -- * RoutineReference
+    , RoutineReference
+    , routineReference
+    , rrDataSetId
+    , rrProjectId
+    , rrRoutineId
+
     -- * RangePartitioning
     , RangePartitioning
     , rangePartitioning
@@ -234,6 +244,7 @@ module Network.Google.BigQuery.Types
     , TableFieldSchema
     , tableFieldSchema
     , tfsMode
+    , tfsCategories
     , tfsName
     , tfsType
     , tfsDescription
@@ -282,6 +293,19 @@ module Network.Google.BigQuery.Types
     -- * JobsListProjection
     , JobsListProjection (..)
 
+    -- * BqmlTrainingRunTrainingOptions
+    , BqmlTrainingRunTrainingOptions
+    , bqmlTrainingRunTrainingOptions
+    , btrtoLineSearchInitLearnRate
+    , btrtoMinRelProgress
+    , btrtoL1Reg
+    , btrtoLearnRate
+    , btrtoLearnRateStrategy
+    , btrtoMaxIteration
+    , btrtoEarlyStop
+    , btrtoL2Reg
+    , btrtoWarmStart
+
     -- * QueryParameter
     , QueryParameter
     , queryParameter
@@ -289,18 +313,10 @@ module Network.Google.BigQuery.Types
     , qpParameterType
     , qpName
 
-    -- * IterationResult
-    , IterationResult
-    , iterationResult
-    , irDurationMs
-    , irLearnRate
-    , irEvalLoss
-    , irTrainingLoss
-    , irIndex
-
     -- * JobStatistics4
     , JobStatistics4
     , jobStatistics4
+    , jsInputBytes
     , jsDestinationURIFileCounts
 
     -- * ProjectReference
@@ -341,19 +357,6 @@ module Network.Google.BigQuery.Types
     , eqsEndMs
     , eqsWaitMsMax
 
-    -- * TrainingRunTrainingOptions
-    , TrainingRunTrainingOptions
-    , trainingRunTrainingOptions
-    , trtoLineSearchInitLearnRate
-    , trtoMinRelProgress
-    , trtoL1Reg
-    , trtoLearnRate
-    , trtoLearnRateStrategy
-    , trtoMaxIteration
-    , trtoEarlyStop
-    , trtoL2Reg
-    , trtoWarmStart
-
     -- * BigQueryModelTraining
     , BigQueryModelTraining
     , bigQueryModelTraining
@@ -373,6 +376,7 @@ module Network.Google.BigQuery.Types
     , jclSchemaInline
     , jclIgnoreUnknownValues
     , jclSchemaUpdateOptions
+    , jclHivePartitioningMode
     , jclCreateDisPosition
     , jclSchemaInlineFormat
     , jclAllowQuotedNewlines
@@ -428,6 +432,15 @@ module Network.Google.BigQuery.Types
     , plpiProjectReference
     , plpiId
     , plpiNumericId
+
+    -- * BqmlIterationResult
+    , BqmlIterationResult
+    , bqmlIterationResult
+    , birDurationMs
+    , birLearnRate
+    , birEvalLoss
+    , birTrainingLoss
+    , birIndex
 
     -- * BigtableColumn
     , BigtableColumn
@@ -634,6 +647,7 @@ module Network.Google.BigQuery.Types
     , jModelTrainingExpectedTotalIteration
     , jModelTraining
     , jTotalSlotMs
+    , jDdlTargetRoutine
     , jDdlTargetTable
     , jEstimatedBytesProcessed
     , jModelTrainingCurrentIteration
@@ -653,6 +667,11 @@ module Network.Google.BigQuery.Types
     , jDdlOperationPerformed
     , jTotalPartitionsProcessed
 
+    -- * TableFieldSchemaCategories
+    , TableFieldSchemaCategories
+    , tableFieldSchemaCategories
+    , tfscNames
+
     -- * JobStatus
     , JobStatus
     , jobStatus
@@ -669,6 +688,7 @@ module Network.Google.BigQuery.Types
     , DestinationTableProperties
     , destinationTableProperties
     , dtpFriendlyName
+    , dtpLabels
     , dtpDescription
 
     -- * DataSetAccessItem
@@ -681,6 +701,14 @@ module Network.Google.BigQuery.Types
     , dsaiIAMMember
     , dsaiView
     , dsaiUserByEmail
+
+    -- * BqmlTrainingRun
+    , BqmlTrainingRun
+    , bqmlTrainingRun
+    , btrState
+    , btrStartTime
+    , btrIterationResults
+    , btrTrainingOptions
 
     -- * TableDataInsertAllResponse
     , TableDataInsertAllResponse
@@ -745,6 +773,11 @@ module Network.Google.BigQuery.Types
     , coEncoding
     , coFieldDelimiter
 
+    -- * DestinationTablePropertiesLabels
+    , DestinationTablePropertiesLabels
+    , destinationTablePropertiesLabels
+    , dtplAddtional
+
     -- * JobStatistics3
     , JobStatistics3
     , jobStatistics3
@@ -774,14 +807,6 @@ module Network.Google.BigQuery.Types
     , dataSetListDataSetsItemLabels
     , dsldsilAddtional
 
-    -- * TrainingRun
-    , TrainingRun
-    , trainingRun
-    , trState
-    , trStartTime
-    , trIterationResults
-    , trTrainingOptions
-
     -- * TableListTablesItemView
     , TableListTablesItemView
     , tableListTablesItemView
@@ -805,28 +830,28 @@ bigQueryService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View your data in Google Cloud Storage
 storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageReadOnlyScope = Proxy;
+storageReadOnlyScope = Proxy
 
 -- | Insert data into Google BigQuery
 bigQueryInsertDataScope :: Proxy '["https://www.googleapis.com/auth/bigquery.insertdata"]
-bigQueryInsertDataScope = Proxy;
+bigQueryInsertDataScope = Proxy
 
 -- | Manage your data in Google Cloud Storage
 storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageReadWriteScope = Proxy;
+storageReadWriteScope = Proxy
 
 -- | View and manage your data in Google BigQuery
 bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigQueryScope = Proxy;
+bigQueryScope = Proxy
 
 -- | Manage your data and permissions in Google Cloud Storage
 storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFullControlScope = Proxy;
+storageFullControlScope = Proxy

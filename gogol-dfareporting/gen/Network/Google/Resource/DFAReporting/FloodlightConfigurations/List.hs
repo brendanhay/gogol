@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsList' request conforms to.
 type FloodlightConfigurationsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -55,10 +55,13 @@ type FloodlightConfigurationsListResource =
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 --
 -- /See:/ 'floodlightConfigurationsList' smart constructor.
-data FloodlightConfigurationsList = FloodlightConfigurationsList'
+data FloodlightConfigurationsList =
+  FloodlightConfigurationsList'
     { _fclIds       :: !(Maybe [Textual Int64])
     , _fclProFileId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightConfigurationsList' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ floodlightConfigurationsList
     :: Int64 -- ^ 'fclProFileId'
     -> FloodlightConfigurationsList
 floodlightConfigurationsList pFclProFileId_ =
-    FloodlightConfigurationsList'
-    { _fclIds = Nothing
-    , _fclProFileId = _Coerce # pFclProFileId_
-    }
+  FloodlightConfigurationsList'
+    {_fclIds = Nothing, _fclProFileId = _Coerce # pFclProFileId_}
+
 
 -- | Set of IDs of floodlight configurations to retrieve. Required field;
 -- otherwise an empty list will be returned.

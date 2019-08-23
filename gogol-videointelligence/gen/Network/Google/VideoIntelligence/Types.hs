@@ -39,16 +39,6 @@ module Network.Google.VideoIntelligence.Types
     , gcvvsraWords
     , gcvvsraTranscript
 
-    -- * GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-    , GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-    , googleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-    , gcvvavrInputURI
-    , gcvvavrVideoContext
-    , gcvvavrInputContent
-    , gcvvavrFeatures
-    , gcvvavrLocationId
-    , gcvvavrOutputURI
-
     -- * GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
     , GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
     , googleCloudVideointelligenceV1beta2_AnnotateVideoResponse
@@ -68,6 +58,9 @@ module Network.Google.VideoIntelligence.Types
     , googleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
     , gcvvecfTimeOffSet
     , gcvvecfPornographyLikelihood
+
+    -- * GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode
+    , GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode (..)
 
     -- * GoogleCloudVideointelligenceV1beta2_Entity
     , GoogleCloudVideointelligenceV1beta2_Entity
@@ -95,6 +88,11 @@ module Network.Google.VideoIntelligence.Types
     , gcvvvapInputURI
     , gcvvvapProgressPercent
     , gcvvvapUpdateTime
+
+    -- * GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+    , GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+    , googleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+    , gcvvecdcModel
 
     -- * GoogleCloudVideointelligenceV1beta2_LabelFrame
     , GoogleCloudVideointelligenceV1beta2_LabelFrame
@@ -149,10 +147,10 @@ module Network.Google.VideoIntelligence.Types
     , gcvvlfcTimeOffSet
     , gcvvlfcConfidence
 
-    -- * GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
-    , GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
-    , googleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
-    , gcvvscdcModel
+    -- * GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig
+    , GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig
+    , googleCloudVideointelligenceV1p2beta1_TextDetectionConfig
+    , gcvvtdcLanguageHints
 
     -- * GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
     , GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
@@ -196,17 +194,9 @@ module Network.Google.VideoIntelligence.Types
     , googleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
     , gcvvotaFrames
     , gcvvotaConfidence
+    , gcvvotaTrackId
     , gcvvotaSegment
     , gcvvotaEntity
-
-    -- * GoogleCloudVideointelligenceV1p1beta1_VideoContext
-    , GoogleCloudVideointelligenceV1p1beta1_VideoContext
-    , googleCloudVideointelligenceV1p1beta1_VideoContext
-    , gcvvvcSpeechTranscriptionConfig
-    , gcvvvcExplicitContentDetectionConfig
-    , gcvvvcLabelDetectionConfig
-    , gcvvvcSegments
-    , gcvvvcShotChangeDetectionConfig
 
     -- * GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
     , GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
@@ -356,11 +346,6 @@ module Network.Google.VideoIntelligence.Types
     , gooStartTimeOffSet
     , gooEndTimeOffSet
 
-    -- * GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-    , GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-    , googleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-    , gcvvecdcModel
-
     -- * GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
     , GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
     , googleCloudVideointelligenceV1p1beta1_LabelAnnotation
@@ -375,8 +360,15 @@ module Network.Google.VideoIntelligence.Types
     , gcvvlf1TimeOffSet
     , gcvvlf1Confidence
 
-    -- * GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode
-    , GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode (..)
+    -- * GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+    , GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+    , googleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+    , gcvvavrInputURI
+    , gcvvavrVideoContext
+    , gcvvavrInputContent
+    , gcvvavrFeatures
+    , gcvvavrLocationId
+    , gcvvavrOutputURI
 
     -- * GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFramePornographyLikelihood
     , GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFramePornographyLikelihood (..)
@@ -408,6 +400,11 @@ module Network.Google.VideoIntelligence.Types
     , gcvvstcAlternatives
     , gcvvstcLanguageCode
 
+    -- * GoogleCloudVideointelligenceV1p2beta1_SpeechContext
+    , GoogleCloudVideointelligenceV1p2beta1_SpeechContext
+    , googleCloudVideointelligenceV1p2beta1_SpeechContext
+    , gcvvscPhrases
+
     -- * GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
     , GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
     , googleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
@@ -427,19 +424,6 @@ module Network.Google.VideoIntelligence.Types
     , GoogleCloudVideointelligenceV1_AnnotateVideoProgress
     , googleCloudVideointelligenceV1_AnnotateVideoProgress
     , gooAnnotationProgress
-
-    -- * GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-    , GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-    , googleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-    , gcvvstccSpeechContexts
-    , gcvvstccLanguageCode
-    , gcvvstccAudioTracks
-    , gcvvstccEnableAutomaticPunctuation
-    , gcvvstccMaxAlternatives
-    , gcvvstccEnableSpeakerDiarization
-    , gcvvstccFilterProfanity
-    , gcvvstccDiarizationSpeakerCount
-    , gcvvstccEnableWordConfidence
 
     -- * GoogleCloudVideointelligenceV1beta2_ExplicitContentFramePornographyLikelihood
     , GoogleCloudVideointelligenceV1beta2_ExplicitContentFramePornographyLikelihood (..)
@@ -471,13 +455,6 @@ module Network.Google.VideoIntelligence.Types
     , goooSegments
     , goooEntity
 
-    -- * GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-    , GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-    , googleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-    , gcvvldcLabelDetectionMode
-    , gcvvldcStationaryCamera
-    , gcvvldcModel
-
     -- * GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
     , GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
     , googleCloudVideointelligenceV1p1beta1_SpeechTranscription
@@ -501,6 +478,16 @@ module Network.Google.VideoIntelligence.Types
     , googleCloudVideointelligenceV1p2beta1_LabelSegment
     , gcvvls1Confidence
     , gcvvls1Segment
+
+    -- * GoogleCloudVideointelligenceV1p2beta1_VideoContext
+    , GoogleCloudVideointelligenceV1p2beta1_VideoContext
+    , googleCloudVideointelligenceV1p2beta1_VideoContext
+    , gcvvvcSpeechTranscriptionConfig
+    , gcvvvcExplicitContentDetectionConfig
+    , gcvvvcLabelDetectionConfig
+    , gcvvvcSegments
+    , gcvvvcTextDetectionConfig
+    , gcvvvcShotChangeDetectionConfig
 
     -- * GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
     , GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
@@ -530,6 +517,13 @@ module Network.Google.VideoIntelligence.Types
     , grsCode
     , grsMessage
 
+    -- * GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+    , GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+    , googleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+    , gcvvldcLabelDetectionMode
+    , gcvvldcStationaryCamera
+    , gcvvldcModel
+
     -- * GoogleCloudVideointelligenceV1_VideoSegment
     , GoogleCloudVideointelligenceV1_VideoSegment
     , googleCloudVideointelligenceV1_VideoSegment
@@ -540,6 +534,11 @@ module Network.Google.VideoIntelligence.Types
     , GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
     , googleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
     , gcvvecacFrames
+
+    -- * GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+    , GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+    , googleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+    , gcvvscdcModel
 
     -- * GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
     , GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
@@ -552,10 +551,18 @@ module Network.Google.VideoIntelligence.Types
     , gcvvecfcTimeOffSet
     , gcvvecfcPornographyLikelihood
 
-    -- * GoogleCloudVideointelligenceV1p1beta1_SpeechContext
-    , GoogleCloudVideointelligenceV1p1beta1_SpeechContext
-    , googleCloudVideointelligenceV1p1beta1_SpeechContext
-    , gcvvscPhrases
+    -- * GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
+    , GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
+    , googleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
+    , gcvvstccSpeechContexts
+    , gcvvstccLanguageCode
+    , gcvvstccAudioTracks
+    , gcvvstccEnableAutomaticPunctuation
+    , gcvvstccMaxAlternatives
+    , gcvvstccEnableSpeakerDiarization
+    , gcvvstccFilterProfanity
+    , gcvvstccDiarizationSpeakerCount
+    , gcvvstccEnableWordConfidence
 
     -- * GoogleCloudVideointelligenceV1_LabelSegment
     , GoogleCloudVideointelligenceV1_LabelSegment
@@ -568,13 +575,13 @@ import           Network.Google.Prelude
 import           Network.Google.VideoIntelligence.Types.Product
 import           Network.Google.VideoIntelligence.Types.Sum
 
--- | Default request referring to version 'v1p1beta1' of the Cloud Video Intelligence API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1p2beta1' of the Cloud Video Intelligence API. This contains the host and root path used as a starting point for constructing service requests.
 videoIntelligenceService :: ServiceConfig
 videoIntelligenceService
   = defaultService
-      (ServiceId "videointelligence:v1p1beta1")
+      (ServiceId "videointelligence:v1p2beta1")
       "videointelligence.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

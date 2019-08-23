@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.get@ method which the
 -- 'ProjectsLocationsQueuesTasksGet' request conforms to.
 type ProjectsLocationsQueuesTasksGetResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,7 +61,8 @@ type ProjectsLocationsQueuesTasksGetResource =
 -- | Gets a task.
 --
 -- /See:/ 'projectsLocationsQueuesTasksGet' smart constructor.
-data ProjectsLocationsQueuesTasksGet = ProjectsLocationsQueuesTasksGet'
+data ProjectsLocationsQueuesTasksGet =
+  ProjectsLocationsQueuesTasksGet'
     { _plqtgXgafv          :: !(Maybe Xgafv)
     , _plqtgUploadProtocol :: !(Maybe Text)
     , _plqtgAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data ProjectsLocationsQueuesTasksGet = ProjectsLocationsQueuesTasksGet'
     , _plqtgResponseView   :: !(Maybe Text)
     , _plqtgName           :: !Text
     , _plqtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsLocationsQueuesTasksGet
     :: Text -- ^ 'plqtgName'
     -> ProjectsLocationsQueuesTasksGet
 projectsLocationsQueuesTasksGet pPlqtgName_ =
-    ProjectsLocationsQueuesTasksGet'
+  ProjectsLocationsQueuesTasksGet'
     { _plqtgXgafv = Nothing
     , _plqtgUploadProtocol = Nothing
     , _plqtgAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsLocationsQueuesTasksGet pPlqtgName_ =
     , _plqtgName = pPlqtgName_
     , _plqtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqtgXgafv :: Lens' ProjectsLocationsQueuesTasksGet (Maybe Xgafv)
@@ -150,7 +154,8 @@ plqtgCallback
       (\ s a -> s{_plqtgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksGet where
+           ProjectsLocationsQueuesTasksGet
+         where
         type Rs ProjectsLocationsQueuesTasksGet = Task
         type Scopes ProjectsLocationsQueuesTasksGet =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -22,9 +22,12 @@ import           Network.Google.VideoIntelligence.Types.Sum
 
 --
 -- /See:/ 'googleRpc_StatusDetailsItem' smart constructor.
-newtype GoogleRpc_StatusDetailsItem = GoogleRpc_StatusDetailsItem'
+newtype GoogleRpc_StatusDetailsItem =
+  GoogleRpc_StatusDetailsItem'
     { _grsdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpc_StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -35,9 +38,8 @@ googleRpc_StatusDetailsItem
     :: HashMap Text JSONValue -- ^ 'grsdiAddtional'
     -> GoogleRpc_StatusDetailsItem
 googleRpc_StatusDetailsItem pGrsdiAddtional_ =
-    GoogleRpc_StatusDetailsItem'
-    { _grsdiAddtional = _Coerce # pGrsdiAddtional_
-    }
+  GoogleRpc_StatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpc_StatusDetailsItem (HashMap Text JSONValue)
@@ -60,9 +62,12 @@ instance ToJSON GoogleRpc_StatusDetailsItem where
 -- present for that frame.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_ExplicitContentAnnotation' smart constructor.
-newtype GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation = GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
+newtype GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation =
+  GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
     { _gcvvecaFrames :: Maybe [GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
@@ -72,9 +77,9 @@ newtype GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation = GoogleCl
 googleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
     :: GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
 googleCloudVideointelligenceV1beta2_ExplicitContentAnnotation =
-    GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
-    { _gcvvecaFrames = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
+    {_gcvvecaFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gcvvecaFrames :: Lens' GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame]
@@ -85,7 +90,7 @@ gcvvecaFrames
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
          where
         parseJSON
           = withObject
@@ -95,7 +100,7 @@ instance FromJSON
                    <$> (o .:? "frames" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'{..}
@@ -105,11 +110,14 @@ instance ToJSON
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
 -- /See:/ 'googleCloudVideointelligenceV1_SpeechRecognitionAlternative' smart constructor.
-data GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative = GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative'
+data GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative =
+  GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative'
     { _gcvvsraConfidence :: !(Maybe (Textual Double))
     , _gcvvsraWords      :: !(Maybe [GoogleCloudVideointelligenceV1_WordInfo])
     , _gcvvsraTranscript :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
@@ -123,11 +131,12 @@ data GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative = GoogleCloudVi
 googleCloudVideointelligenceV1_SpeechRecognitionAlternative
     :: GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
 googleCloudVideointelligenceV1_SpeechRecognitionAlternative =
-    GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative'
+  GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative'
     { _gcvvsraConfidence = Nothing
     , _gcvvsraWords = Nothing
     , _gcvvsraTranscript = Nothing
     }
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -156,7 +165,7 @@ gcvvsraTranscript
       (\ s a -> s{_gcvvsraTranscript = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
          where
         parseJSON
           = withObject
@@ -168,7 +177,7 @@ instance FromJSON
                      <*> (o .:? "transcript"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
          where
         toJSON
           GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative'{..}
@@ -178,140 +187,17 @@ instance ToJSON
                   ("words" .=) <$> _gcvvsraWords,
                   ("transcript" .=) <$> _gcvvsraTranscript])
 
--- | Video annotation request.
---
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest = GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest'
-    { _gcvvavrInputURI     :: !(Maybe Text)
-    , _gcvvavrVideoContext :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_VideoContext)
-    , _gcvvavrInputContent :: !(Maybe Bytes)
-    , _gcvvavrFeatures     :: !(Maybe [Text])
-    , _gcvvavrLocationId   :: !(Maybe Text)
-    , _gcvvavrOutputURI    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gcvvavrInputURI'
---
--- * 'gcvvavrVideoContext'
---
--- * 'gcvvavrInputContent'
---
--- * 'gcvvavrFeatures'
---
--- * 'gcvvavrLocationId'
---
--- * 'gcvvavrOutputURI'
-googleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-    :: GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-googleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest =
-    GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest'
-    { _gcvvavrInputURI = Nothing
-    , _gcvvavrVideoContext = Nothing
-    , _gcvvavrInputContent = Nothing
-    , _gcvvavrFeatures = Nothing
-    , _gcvvavrLocationId = Nothing
-    , _gcvvavrOutputURI = Nothing
-    }
-
--- | Input video location. Currently, only [Google Cloud
--- Storage](https:\/\/cloud.google.com\/storage\/) URIs are supported,
--- which must be specified in the following format:
--- \`gs:\/\/bucket-id\/object-id\` (other URI formats return
--- google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request
--- URIs](\/storage\/docs\/reference-uris). A video URI may include
--- wildcards in \`object-id\`, and thus identify multiple videos. Supported
--- wildcards: \'*\' to match 0 or more characters; \'?\' to match 1
--- character. If unset, the input video should be embedded in the request
--- as \`input_content\`. If set, \`input_content\` should be unset.
-gcvvavrInputURI :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest (Maybe Text)
-gcvvavrInputURI
-  = lens _gcvvavrInputURI
-      (\ s a -> s{_gcvvavrInputURI = a})
-
--- | Additional video context and\/or feature-specific parameters.
-gcvvavrVideoContext :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest (Maybe GoogleCloudVideointelligenceV1p1beta1_VideoContext)
-gcvvavrVideoContext
-  = lens _gcvvavrVideoContext
-      (\ s a -> s{_gcvvavrVideoContext = a})
-
--- | The video data bytes. If unset, the input video(s) should be specified
--- via \`input_uri\`. If set, \`input_uri\` should be unset.
-gcvvavrInputContent :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest (Maybe ByteString)
-gcvvavrInputContent
-  = lens _gcvvavrInputContent
-      (\ s a -> s{_gcvvavrInputContent = a})
-      . mapping _Bytes
-
--- | Requested video annotation features.
-gcvvavrFeatures :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest [Text]
-gcvvavrFeatures
-  = lens _gcvvavrFeatures
-      (\ s a -> s{_gcvvavrFeatures = a})
-      . _Default
-      . _Coerce
-
--- | Optional cloud region where annotation should take place. Supported
--- cloud regions: \`us-east1\`, \`us-west1\`, \`europe-west1\`,
--- \`asia-east1\`. If no region is specified, a region will be determined
--- based on video file location.
-gcvvavrLocationId :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest (Maybe Text)
-gcvvavrLocationId
-  = lens _gcvvavrLocationId
-      (\ s a -> s{_gcvvavrLocationId = a})
-
--- | Optional location where the output (in JSON format) should be stored.
--- Currently, only [Google Cloud
--- Storage](https:\/\/cloud.google.com\/storage\/) URIs are supported,
--- which must be specified in the following format:
--- \`gs:\/\/bucket-id\/object-id\` (other URI formats return
--- google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request
--- URIs](\/storage\/docs\/reference-uris).
-gcvvavrOutputURI :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest (Maybe Text)
-gcvvavrOutputURI
-  = lens _gcvvavrOutputURI
-      (\ s a -> s{_gcvvavrOutputURI = a})
-
-instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-         where
-        parseJSON
-          = withObject
-              "GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequest"
-              (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest'
-                   <$>
-                   (o .:? "inputUri") <*> (o .:? "videoContext") <*>
-                     (o .:? "inputContent")
-                     <*> (o .:? "features" .!= mempty)
-                     <*> (o .:? "locationId")
-                     <*> (o .:? "outputUri"))
-
-instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest
-         where
-        toJSON
-          GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest'{..}
-          = object
-              (catMaybes
-                 [("inputUri" .=) <$> _gcvvavrInputURI,
-                  ("videoContext" .=) <$> _gcvvavrVideoContext,
-                  ("inputContent" .=) <$> _gcvvavrInputContent,
-                  ("features" .=) <$> _gcvvavrFeatures,
-                  ("locationId" .=) <$> _gcvvavrLocationId,
-                  ("outputUri" .=) <$> _gcvvavrOutputURI])
-
 -- | Video annotation response. Included in the \`response\` field of the
 -- \`Operation\` returned by the \`GetOperation\` call of the
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_AnnotateVideoResponse' smart constructor.
-newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse = GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse'
+newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse =
+  GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse'
     { _gcvvavrAnnotationResults :: Maybe [GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
@@ -321,9 +207,9 @@ newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse = GoogleCloudV
 googleCloudVideointelligenceV1beta2_AnnotateVideoResponse
     :: GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
 googleCloudVideointelligenceV1beta2_AnnotateVideoResponse =
-    GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse'
-    { _gcvvavrAnnotationResults = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse'
+    {_gcvvavrAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavrAnnotationResults :: Lens' GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse [GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults]
@@ -334,7 +220,7 @@ gcvvavrAnnotationResults
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
          where
         parseJSON
           = withObject
@@ -344,7 +230,7 @@ instance FromJSON
                    <$> (o .:? "annotationResults" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse'{..}
@@ -358,13 +244,16 @@ instance ToJSON
 -- as \`enable_word_time_offsets\`.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_WordInfo' smart constructor.
-data GoogleCloudVideointelligenceV1_WordInfo = GoogleCloudVideointelligenceV1_WordInfo'
+data GoogleCloudVideointelligenceV1_WordInfo =
+  GoogleCloudVideointelligenceV1_WordInfo'
     { _gcvvwiStartTime  :: !(Maybe GDuration)
     , _gcvvwiConfidence :: !(Maybe (Textual Double))
     , _gcvvwiEndTime    :: !(Maybe GDuration)
     , _gcvvwiWord       :: !(Maybe Text)
     , _gcvvwiSpeakerTag :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_WordInfo' with the minimum fields required to make a request.
 --
@@ -382,13 +271,14 @@ data GoogleCloudVideointelligenceV1_WordInfo = GoogleCloudVideointelligenceV1_Wo
 googleCloudVideointelligenceV1_WordInfo
     :: GoogleCloudVideointelligenceV1_WordInfo
 googleCloudVideointelligenceV1_WordInfo =
-    GoogleCloudVideointelligenceV1_WordInfo'
+  GoogleCloudVideointelligenceV1_WordInfo'
     { _gcvvwiStartTime = Nothing
     , _gcvvwiConfidence = Nothing
     , _gcvvwiEndTime = Nothing
     , _gcvvwiWord = Nothing
     , _gcvvwiSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -439,7 +329,8 @@ gcvvwiSpeakerTag
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_WordInfo where
+           GoogleCloudVideointelligenceV1_WordInfo
+         where
         parseJSON
           = withObject "GoogleCloudVideointelligenceV1WordInfo"
               (\ o ->
@@ -450,7 +341,8 @@ instance FromJSON
                      <*> (o .:? "speakerTag"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_WordInfo where
+           GoogleCloudVideointelligenceV1_WordInfo
+         where
         toJSON GoogleCloudVideointelligenceV1_WordInfo'{..}
           = object
               (catMaybes
@@ -463,10 +355,13 @@ instance ToJSON
 -- | Video frame level annotation results for explicit content.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_ExplicitContentFrame' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame = GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'
+data GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame =
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'
     { _gcvvecfTimeOffSet            :: !(Maybe GDuration)
     , _gcvvecfPornographyLikelihood :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFramePornographyLikelihood)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame' with the minimum fields required to make a request.
 --
@@ -478,10 +373,9 @@ data GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame = GoogleCloudVid
 googleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
     :: GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
 googleCloudVideointelligenceV1p1beta1_ExplicitContentFrame =
-    GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'
-    { _gcvvecfTimeOffSet = Nothing
-    , _gcvvecfPornographyLikelihood = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'
+    {_gcvvecfTimeOffSet = Nothing, _gcvvecfPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -498,7 +392,7 @@ gcvvecfPornographyLikelihood
       (\ s a -> s{_gcvvecfPornographyLikelihood = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
          where
         parseJSON
           = withObject
@@ -510,7 +404,7 @@ instance FromJSON
                      (o .:? "pornographyLikelihood"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'{..}
@@ -523,11 +417,14 @@ instance ToJSON
 -- | Detected entity from video analysis.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_Entity' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_Entity = GoogleCloudVideointelligenceV1beta2_Entity'
+data GoogleCloudVideointelligenceV1beta2_Entity =
+  GoogleCloudVideointelligenceV1beta2_Entity'
     { _gcvveLanguageCode :: !(Maybe Text)
     , _gcvveEntityId     :: !(Maybe Text)
     , _gcvveDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_Entity' with the minimum fields required to make a request.
 --
@@ -541,11 +438,12 @@ data GoogleCloudVideointelligenceV1beta2_Entity = GoogleCloudVideointelligenceV1
 googleCloudVideointelligenceV1beta2_Entity
     :: GoogleCloudVideointelligenceV1beta2_Entity
 googleCloudVideointelligenceV1beta2_Entity =
-    GoogleCloudVideointelligenceV1beta2_Entity'
+  GoogleCloudVideointelligenceV1beta2_Entity'
     { _gcvveLanguageCode = Nothing
     , _gcvveEntityId = Nothing
     , _gcvveDescription = Nothing
     }
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gcvveLanguageCode :: Lens' GoogleCloudVideointelligenceV1beta2_Entity (Maybe Text)
@@ -567,7 +465,8 @@ gcvveDescription
       (\ s a -> s{_gcvveDescription = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_Entity where
+           GoogleCloudVideointelligenceV1beta2_Entity
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1beta2Entity"
@@ -577,7 +476,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_Entity where
+           GoogleCloudVideointelligenceV1beta2_Entity
+         where
         toJSON
           GoogleCloudVideointelligenceV1beta2_Entity'{..}
           = object
@@ -591,10 +491,13 @@ instance ToJSON
 -- for each detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_TextAnnotation' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_TextAnnotation = GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'
+data GoogleCloudVideointelligenceV1p2beta1_TextAnnotation =
+  GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'
     { _gcvvtaText     :: !(Maybe Text)
     , _gcvvtaSegments :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_TextSegment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextAnnotation' with the minimum fields required to make a request.
 --
@@ -606,10 +509,9 @@ data GoogleCloudVideointelligenceV1p2beta1_TextAnnotation = GoogleCloudVideointe
 googleCloudVideointelligenceV1p2beta1_TextAnnotation
     :: GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
 googleCloudVideointelligenceV1p2beta1_TextAnnotation =
-    GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'
-    { _gcvvtaText = Nothing
-    , _gcvvtaSegments = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'
+    {_gcvvtaText = Nothing, _gcvvtaSegments = Nothing}
+
 
 -- | The detected text.
 gcvvtaText :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextAnnotation (Maybe Text)
@@ -625,7 +527,7 @@ gcvvtaSegments
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
          where
         parseJSON
           = withObject
@@ -635,7 +537,7 @@ instance FromJSON
                    <$> (o .:? "text") <*> (o .:? "segments" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'{..}
@@ -647,10 +549,13 @@ instance ToJSON
 -- | Video segment.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_VideoSegment' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_VideoSegment = GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+data GoogleCloudVideointelligenceV1p2beta1_VideoSegment =
+  GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
     { _gcvvvsStartTimeOffSet :: !(Maybe GDuration)
     , _gcvvvsEndTimeOffSet   :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoSegment' with the minimum fields required to make a request.
 --
@@ -662,10 +567,9 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoSegment = GoogleCloudVideointell
 googleCloudVideointelligenceV1p2beta1_VideoSegment
     :: GoogleCloudVideointelligenceV1p2beta1_VideoSegment
 googleCloudVideointelligenceV1p2beta1_VideoSegment =
-    GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
-    { _gcvvvsStartTimeOffSet = Nothing
-    , _gcvvvsEndTimeOffSet = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+    {_gcvvvsStartTimeOffSet = Nothing, _gcvvvsEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -684,7 +588,7 @@ gcvvvsEndTimeOffSet
       . mapping _GDuration
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_VideoSegment
+           GoogleCloudVideointelligenceV1p2beta1_VideoSegment
          where
         parseJSON
           = withObject
@@ -696,7 +600,7 @@ instance FromJSON
                      (o .:? "endTimeOffset"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_VideoSegment
+           GoogleCloudVideointelligenceV1p2beta1_VideoSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_VideoSegment'{..}
@@ -708,12 +612,15 @@ instance ToJSON
 -- | Annotation progress for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_VideoAnnotationProgress' smart constructor.
-data GoogleCloudVideointelligenceV1_VideoAnnotationProgress = GoogleCloudVideointelligenceV1_VideoAnnotationProgress'
+data GoogleCloudVideointelligenceV1_VideoAnnotationProgress =
+  GoogleCloudVideointelligenceV1_VideoAnnotationProgress'
     { _gcvvvapStartTime       :: !(Maybe DateTime')
     , _gcvvvapInputURI        :: !(Maybe Text)
     , _gcvvvapProgressPercent :: !(Maybe (Textual Int32))
     , _gcvvvapUpdateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
@@ -729,12 +636,13 @@ data GoogleCloudVideointelligenceV1_VideoAnnotationProgress = GoogleCloudVideoin
 googleCloudVideointelligenceV1_VideoAnnotationProgress
     :: GoogleCloudVideointelligenceV1_VideoAnnotationProgress
 googleCloudVideointelligenceV1_VideoAnnotationProgress =
-    GoogleCloudVideointelligenceV1_VideoAnnotationProgress'
+  GoogleCloudVideointelligenceV1_VideoAnnotationProgress'
     { _gcvvvapStartTime = Nothing
     , _gcvvvapInputURI = Nothing
     , _gcvvvapProgressPercent = Nothing
     , _gcvvvapUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gcvvvapStartTime :: Lens' GoogleCloudVideointelligenceV1_VideoAnnotationProgress (Maybe UTCTime)
@@ -766,7 +674,7 @@ gcvvvapUpdateTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1_VideoAnnotationProgress
          where
         parseJSON
           = withObject
@@ -779,7 +687,7 @@ instance FromJSON
                      <*> (o .:? "updateTime"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1_VideoAnnotationProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1_VideoAnnotationProgress'{..}
@@ -790,13 +698,63 @@ instance ToJSON
                   ("progressPercent" .=) <$> _gcvvvapProgressPercent,
                   ("updateTime" .=) <$> _gcvvvapUpdateTime])
 
+-- | Config for EXPLICIT_CONTENT_DETECTION.
+--
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig' smart constructor.
+newtype GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig'
+    { _gcvvecdcModel :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcvvecdcModel'
+googleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+    :: GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+googleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig'
+    {_gcvvecdcModel = Nothing}
+
+
+-- | Model to use for explicit content detection. Supported values:
+-- \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
+gcvvecdcModel :: Lens' GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig (Maybe Text)
+gcvvecdcModel
+  = lens _gcvvecdcModel
+      (\ s a -> s{_gcvvecdcModel = a})
+
+instance FromJSON
+           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudVideointelligenceV1p2beta1ExplicitContentDetectionConfig"
+              (\ o ->
+                 GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig'
+                   <$> (o .:? "model"))
+
+instance ToJSON
+           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig
+         where
+        toJSON
+          GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig'{..}
+          = object
+              (catMaybes [("model" .=) <$> _gcvvecdcModel])
+
 -- | Video frame level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_LabelFrame' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_LabelFrame = GoogleCloudVideointelligenceV1beta2_LabelFrame'
+data GoogleCloudVideointelligenceV1beta2_LabelFrame =
+  GoogleCloudVideointelligenceV1beta2_LabelFrame'
     { _gcvvlfTimeOffSet :: !(Maybe GDuration)
     , _gcvvlfConfidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_LabelFrame' with the minimum fields required to make a request.
 --
@@ -808,10 +766,9 @@ data GoogleCloudVideointelligenceV1beta2_LabelFrame = GoogleCloudVideointelligen
 googleCloudVideointelligenceV1beta2_LabelFrame
     :: GoogleCloudVideointelligenceV1beta2_LabelFrame
 googleCloudVideointelligenceV1beta2_LabelFrame =
-    GoogleCloudVideointelligenceV1beta2_LabelFrame'
-    { _gcvvlfTimeOffSet = Nothing
-    , _gcvvlfConfidence = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_LabelFrame'
+    {_gcvvlfTimeOffSet = Nothing, _gcvvlfConfidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -829,7 +786,8 @@ gcvvlfConfidence
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_LabelFrame where
+           GoogleCloudVideointelligenceV1beta2_LabelFrame
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1beta2LabelFrame"
@@ -838,7 +796,8 @@ instance FromJSON
                    (o .:? "timeOffset") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_LabelFrame where
+           GoogleCloudVideointelligenceV1beta2_LabelFrame
+         where
         toJSON
           GoogleCloudVideointelligenceV1beta2_LabelFrame'{..}
           = object
@@ -849,10 +808,13 @@ instance ToJSON
 -- | A speech recognition result corresponding to a portion of the audio.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_SpeechTranscription' smart constructor.
-data GoogleCloudVideointelligenceV1_SpeechTranscription = GoogleCloudVideointelligenceV1_SpeechTranscription'
+data GoogleCloudVideointelligenceV1_SpeechTranscription =
+  GoogleCloudVideointelligenceV1_SpeechTranscription'
     { _gcvvstAlternatives :: !(Maybe [GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative])
     , _gcvvstLanguageCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_SpeechTranscription' with the minimum fields required to make a request.
 --
@@ -864,10 +826,9 @@ data GoogleCloudVideointelligenceV1_SpeechTranscription = GoogleCloudVideointell
 googleCloudVideointelligenceV1_SpeechTranscription
     :: GoogleCloudVideointelligenceV1_SpeechTranscription
 googleCloudVideointelligenceV1_SpeechTranscription =
-    GoogleCloudVideointelligenceV1_SpeechTranscription'
-    { _gcvvstAlternatives = Nothing
-    , _gcvvstLanguageCode = Nothing
-    }
+  GoogleCloudVideointelligenceV1_SpeechTranscription'
+    {_gcvvstAlternatives = Nothing, _gcvvstLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -890,7 +851,7 @@ gcvvstLanguageCode
       (\ s a -> s{_gcvvstLanguageCode = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_SpeechTranscription
+           GoogleCloudVideointelligenceV1_SpeechTranscription
          where
         parseJSON
           = withObject
@@ -902,7 +863,7 @@ instance FromJSON
                      (o .:? "languageCode"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_SpeechTranscription
+           GoogleCloudVideointelligenceV1_SpeechTranscription
          where
         toJSON
           GoogleCloudVideointelligenceV1_SpeechTranscription'{..}
@@ -916,9 +877,12 @@ instance ToJSON
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_AnnotateVideoProgress' smart constructor.
-newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress = GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress'
+newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress =
+  GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress'
     { _gcvvavpAnnotationProgress :: Maybe [GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
@@ -928,9 +892,9 @@ newtype GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress = GoogleCloudV
 googleCloudVideointelligenceV1beta2_AnnotateVideoProgress
     :: GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
 googleCloudVideointelligenceV1beta2_AnnotateVideoProgress =
-    GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress'
-    { _gcvvavpAnnotationProgress = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress'
+    {_gcvvavpAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavpAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress [GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress]
@@ -941,7 +905,7 @@ gcvvavpAnnotationProgress
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
          where
         parseJSON
           = withObject
@@ -951,7 +915,7 @@ instance FromJSON
                    <$> (o .:? "annotationProgress" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress'{..}
@@ -964,10 +928,13 @@ instance ToJSON
 -- field stores per frame location, time offset, and confidence.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame = GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
+data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame =
+  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
     { _gcvvotfTimeOffSet            :: !(Maybe GDuration)
     , _gcvvotfNormalizedBoundingBox :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame' with the minimum fields required to make a request.
 --
@@ -979,10 +946,9 @@ data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame = GoogleCloudVide
 googleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
     :: GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
 googleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame =
-    GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
-    { _gcvvotfTimeOffSet = Nothing
-    , _gcvvotfNormalizedBoundingBox = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
+    {_gcvvotfTimeOffSet = Nothing, _gcvvotfNormalizedBoundingBox = Nothing}
+
 
 -- | The timestamp of the frame in microseconds.
 gcvvotfTimeOffSet :: Lens' GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame (Maybe Scientific)
@@ -998,7 +964,7 @@ gcvvotfNormalizedBoundingBox
       (\ s a -> s{_gcvvotfNormalizedBoundingBox = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
+           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
          where
         parseJSON
           = withObject
@@ -1010,7 +976,7 @@ instance FromJSON
                      (o .:? "normalizedBoundingBox"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
+           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'{..}
@@ -1023,12 +989,15 @@ instance ToJSON
 -- | Label annotation.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_LabelAnnotation' smart constructor.
-data GoogleCloudVideointelligenceV1_LabelAnnotation = GoogleCloudVideointelligenceV1_LabelAnnotation'
+data GoogleCloudVideointelligenceV1_LabelAnnotation =
+  GoogleCloudVideointelligenceV1_LabelAnnotation'
     { _gcvvlaCategoryEntities :: !(Maybe [GoogleCloudVideointelligenceV1_Entity])
     , _gcvvlaFrames           :: !(Maybe [GoogleCloudVideointelligenceV1_LabelFrame])
     , _gcvvlaSegments         :: !(Maybe [GoogleCloudVideointelligenceV1_LabelSegment])
     , _gcvvlaEntity           :: !(Maybe GoogleCloudVideointelligenceV1_Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_LabelAnnotation' with the minimum fields required to make a request.
 --
@@ -1044,12 +1013,13 @@ data GoogleCloudVideointelligenceV1_LabelAnnotation = GoogleCloudVideointelligen
 googleCloudVideointelligenceV1_LabelAnnotation
     :: GoogleCloudVideointelligenceV1_LabelAnnotation
 googleCloudVideointelligenceV1_LabelAnnotation =
-    GoogleCloudVideointelligenceV1_LabelAnnotation'
+  GoogleCloudVideointelligenceV1_LabelAnnotation'
     { _gcvvlaCategoryEntities = Nothing
     , _gcvvlaFrames = Nothing
     , _gcvvlaSegments = Nothing
     , _gcvvlaEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -1083,7 +1053,8 @@ gcvvlaEntity
   = lens _gcvvlaEntity (\ s a -> s{_gcvvlaEntity = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_LabelAnnotation where
+           GoogleCloudVideointelligenceV1_LabelAnnotation
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1LabelAnnotation"
@@ -1095,7 +1066,8 @@ instance FromJSON
                      <*> (o .:? "entity"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_LabelAnnotation where
+           GoogleCloudVideointelligenceV1_LabelAnnotation
+         where
         toJSON
           GoogleCloudVideointelligenceV1_LabelAnnotation'{..}
           = object
@@ -1108,11 +1080,14 @@ instance ToJSON
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative = GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'
+data GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative =
+  GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'
     { _gConfidence :: !(Maybe (Textual Double))
     , _gWords      :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_WordInfo])
     , _gTranscript :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
@@ -1126,11 +1101,9 @@ data GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative = Google
 googleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
     :: GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
 googleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative =
-    GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'
-    { _gConfidence = Nothing
-    , _gWords = Nothing
-    , _gTranscript = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'
+    {_gConfidence = Nothing, _gWords = Nothing, _gTranscript = Nothing}
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -1156,7 +1129,7 @@ gTranscript
   = lens _gTranscript (\ s a -> s{_gTranscript = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
          where
         parseJSON
           = withObject
@@ -1168,7 +1141,7 @@ instance FromJSON
                      <*> (o .:? "transcript"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'{..}
@@ -1183,13 +1156,16 @@ instance ToJSON
 -- as \`enable_word_time_offsets\`.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_WordInfo' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_WordInfo = GoogleCloudVideointelligenceV1p2beta1_WordInfo'
+data GoogleCloudVideointelligenceV1p2beta1_WordInfo =
+  GoogleCloudVideointelligenceV1p2beta1_WordInfo'
     { _gooStartTime  :: !(Maybe GDuration)
     , _gooConfidence :: !(Maybe (Textual Double))
     , _gooEndTime    :: !(Maybe GDuration)
     , _gooWord       :: !(Maybe Text)
     , _gooSpeakerTag :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_WordInfo' with the minimum fields required to make a request.
 --
@@ -1207,13 +1183,14 @@ data GoogleCloudVideointelligenceV1p2beta1_WordInfo = GoogleCloudVideointelligen
 googleCloudVideointelligenceV1p2beta1_WordInfo
     :: GoogleCloudVideointelligenceV1p2beta1_WordInfo
 googleCloudVideointelligenceV1p2beta1_WordInfo =
-    GoogleCloudVideointelligenceV1p2beta1_WordInfo'
+  GoogleCloudVideointelligenceV1p2beta1_WordInfo'
     { _gooStartTime = Nothing
     , _gooConfidence = Nothing
     , _gooEndTime = Nothing
     , _gooWord = Nothing
     , _gooSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -1261,7 +1238,8 @@ gooSpeakerTag
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_WordInfo where
+           GoogleCloudVideointelligenceV1p2beta1_WordInfo
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1p2beta1WordInfo"
@@ -1273,7 +1251,8 @@ instance FromJSON
                      <*> (o .:? "speakerTag"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_WordInfo where
+           GoogleCloudVideointelligenceV1p2beta1_WordInfo
+         where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_WordInfo'{..}
           = object
@@ -1287,10 +1266,13 @@ instance ToJSON
 -- | Video frame level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_LabelFrame' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_LabelFrame = GoogleCloudVideointelligenceV1p1beta1_LabelFrame'
+data GoogleCloudVideointelligenceV1p1beta1_LabelFrame =
+  GoogleCloudVideointelligenceV1p1beta1_LabelFrame'
     { _gcvvlfcTimeOffSet :: !(Maybe GDuration)
     , _gcvvlfcConfidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelFrame' with the minimum fields required to make a request.
 --
@@ -1302,10 +1284,9 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelFrame = GoogleCloudVideointellig
 googleCloudVideointelligenceV1p1beta1_LabelFrame
     :: GoogleCloudVideointelligenceV1p1beta1_LabelFrame
 googleCloudVideointelligenceV1p1beta1_LabelFrame =
-    GoogleCloudVideointelligenceV1p1beta1_LabelFrame'
-    { _gcvvlfcTimeOffSet = Nothing
-    , _gcvvlfcConfidence = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_LabelFrame'
+    {_gcvvlfcTimeOffSet = Nothing, _gcvvlfcConfidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -1323,7 +1304,7 @@ gcvvlfcConfidence
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelFrame
+           GoogleCloudVideointelligenceV1p1beta1_LabelFrame
          where
         parseJSON
           = withObject
@@ -1333,7 +1314,7 @@ instance FromJSON
                    (o .:? "timeOffset") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelFrame
+           GoogleCloudVideointelligenceV1p1beta1_LabelFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_LabelFrame'{..}
@@ -1342,58 +1323,69 @@ instance ToJSON
                  [("timeOffset" .=) <$> _gcvvlfcTimeOffSet,
                   ("confidence" .=) <$> _gcvvlfcConfidence])
 
--- | Config for SHOT_CHANGE_DETECTION.
+-- | Config for TEXT_DETECTION.
 --
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig' smart constructor.
-newtype GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig = GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig'
-    { _gcvvscdcModel :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_TextDetectionConfig' smart constructor.
+newtype GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig'
+    { _gcvvtdcLanguageHints :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig' with the minimum fields required to make a request.
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcvvscdcModel'
-googleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
-    :: GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
-googleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig =
-    GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig'
-    { _gcvvscdcModel = Nothing
-    }
+-- * 'gcvvtdcLanguageHints'
+googleCloudVideointelligenceV1p2beta1_TextDetectionConfig
+    :: GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig
+googleCloudVideointelligenceV1p2beta1_TextDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig'
+    {_gcvvtdcLanguageHints = Nothing}
 
--- | Model to use for shot change detection. Supported values:
--- \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
-gcvvscdcModel :: Lens' GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig (Maybe Text)
-gcvvscdcModel
-  = lens _gcvvscdcModel
-      (\ s a -> s{_gcvvscdcModel = a})
+
+-- | Language hint can be specified if the language to be detected is known a
+-- priori. It can increase the accuracy of the detection. Language hint
+-- must be language code in BCP-47 format. Automatic language detection is
+-- performed if no hint is provided.
+gcvvtdcLanguageHints :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig [Text]
+gcvvtdcLanguageHints
+  = lens _gcvvtdcLanguageHints
+      (\ s a -> s{_gcvvtdcLanguageHints = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
+           GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig
          where
         parseJSON
           = withObject
-              "GoogleCloudVideointelligenceV1p1beta1ShotChangeDetectionConfig"
+              "GoogleCloudVideointelligenceV1p2beta1TextDetectionConfig"
               (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig'
-                   <$> (o .:? "model"))
+                 GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig'
+                   <$> (o .:? "languageHints" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig
+           GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig
          where
         toJSON
-          GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig'{..}
+          GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig'{..}
           = object
-              (catMaybes [("model" .=) <$> _gcvvscdcModel])
+              (catMaybes
+                 [("languageHints" .=) <$> _gcvvtdcLanguageHints])
 
 -- | Explicit content annotation (based on per-frame visual signals only). If
 -- no explicit content has been detected in a frame, no annotations are
 -- present for that frame.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation' smart constructor.
-newtype GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation = GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'
+newtype GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation =
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'
     { _gFrames :: Maybe [GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
@@ -1403,9 +1395,9 @@ newtype GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation = Google
 googleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
     :: GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
 googleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation =
-    GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'
-    { _gFrames = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'
+    {_gFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gFrames :: Lens' GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame]
@@ -1414,7 +1406,7 @@ gFrames
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
          where
         parseJSON
           = withObject
@@ -1424,7 +1416,7 @@ instance FromJSON
                    <$> (o .:? "frames" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'{..}
@@ -1433,11 +1425,14 @@ instance ToJSON
 -- | Detected entity from video analysis.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_Entity' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_Entity = GoogleCloudVideointelligenceV1p1beta1_Entity'
+data GoogleCloudVideointelligenceV1p1beta1_Entity =
+  GoogleCloudVideointelligenceV1p1beta1_Entity'
     { _gLanguageCode :: !(Maybe Text)
     , _gEntityId     :: !(Maybe Text)
     , _gDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_Entity' with the minimum fields required to make a request.
 --
@@ -1451,11 +1446,9 @@ data GoogleCloudVideointelligenceV1p1beta1_Entity = GoogleCloudVideointelligence
 googleCloudVideointelligenceV1p1beta1_Entity
     :: GoogleCloudVideointelligenceV1p1beta1_Entity
 googleCloudVideointelligenceV1p1beta1_Entity =
-    GoogleCloudVideointelligenceV1p1beta1_Entity'
-    { _gLanguageCode = Nothing
-    , _gEntityId = Nothing
-    , _gDescription = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_Entity'
+    {_gLanguageCode = Nothing, _gEntityId = Nothing, _gDescription = Nothing}
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gLanguageCode :: Lens' GoogleCloudVideointelligenceV1p1beta1_Entity (Maybe Text)
@@ -1475,7 +1468,8 @@ gDescription
   = lens _gDescription (\ s a -> s{_gDescription = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_Entity where
+           GoogleCloudVideointelligenceV1p1beta1_Entity
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1p1beta1Entity"
@@ -1485,7 +1479,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_Entity where
+           GoogleCloudVideointelligenceV1p1beta1_Entity
+         where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_Entity'{..}
           = object
@@ -1499,9 +1494,12 @@ instance ToJSON
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse' smart constructor.
-newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse = GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse'
+newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse =
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse'
     { _gAnnotationResults :: Maybe [GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
@@ -1511,9 +1509,9 @@ newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse = GoogleClou
 googleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
     :: GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
 googleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse =
-    GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse'
-    { _gAnnotationResults = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse'
+    {_gAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gAnnotationResults :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse [GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults]
@@ -1524,7 +1522,7 @@ gAnnotationResults
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
          where
         parseJSON
           = withObject
@@ -1534,7 +1532,7 @@ instance FromJSON
                    <$> (o .:? "annotationResults" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse'{..}
@@ -1547,9 +1545,12 @@ instance ToJSON
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress' smart constructor.
-newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress = GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress'
+newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress =
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress'
     { _gAnnotationProgress :: Maybe [GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
@@ -1559,9 +1560,9 @@ newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress = GoogleClou
 googleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
     :: GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
 googleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress =
-    GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress'
-    { _gAnnotationProgress = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress'
+    {_gAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress [GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress]
@@ -1572,7 +1573,7 @@ gAnnotationProgress
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
          where
         parseJSON
           = withObject
@@ -1582,7 +1583,7 @@ instance FromJSON
                    <$> (o .:? "annotationProgress" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress'{..}
@@ -1593,7 +1594,8 @@ instance ToJSON
 -- | Annotation results for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_VideoAnnotationResults' smart constructor.
-data GoogleCloudVideointelligenceV1_VideoAnnotationResults = GoogleCloudVideointelligenceV1_VideoAnnotationResults'
+data GoogleCloudVideointelligenceV1_VideoAnnotationResults =
+  GoogleCloudVideointelligenceV1_VideoAnnotationResults'
     { _gcvvvarShotAnnotations         :: !(Maybe [GoogleCloudVideointelligenceV1_VideoSegment])
     , _gcvvvarShotLabelAnnotations    :: !(Maybe [GoogleCloudVideointelligenceV1_LabelAnnotation])
     , _gcvvvarInputURI                :: !(Maybe Text)
@@ -1602,7 +1604,9 @@ data GoogleCloudVideointelligenceV1_VideoAnnotationResults = GoogleCloudVideoint
     , _gcvvvarSpeechTranscriptions    :: !(Maybe [GoogleCloudVideointelligenceV1_SpeechTranscription])
     , _gcvvvarSegmentLabelAnnotations :: !(Maybe [GoogleCloudVideointelligenceV1_LabelAnnotation])
     , _gcvvvarExplicitAnnotation      :: !(Maybe GoogleCloudVideointelligenceV1_ExplicitContentAnnotation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_VideoAnnotationResults' with the minimum fields required to make a request.
 --
@@ -1626,7 +1630,7 @@ data GoogleCloudVideointelligenceV1_VideoAnnotationResults = GoogleCloudVideoint
 googleCloudVideointelligenceV1_VideoAnnotationResults
     :: GoogleCloudVideointelligenceV1_VideoAnnotationResults
 googleCloudVideointelligenceV1_VideoAnnotationResults =
-    GoogleCloudVideointelligenceV1_VideoAnnotationResults'
+  GoogleCloudVideointelligenceV1_VideoAnnotationResults'
     { _gcvvvarShotAnnotations = Nothing
     , _gcvvvarShotLabelAnnotations = Nothing
     , _gcvvvarInputURI = Nothing
@@ -1636,6 +1640,7 @@ googleCloudVideointelligenceV1_VideoAnnotationResults =
     , _gcvvvarSegmentLabelAnnotations = Nothing
     , _gcvvvarExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gcvvvarShotAnnotations :: Lens' GoogleCloudVideointelligenceV1_VideoAnnotationResults [GoogleCloudVideointelligenceV1_VideoSegment]
@@ -1700,7 +1705,7 @@ gcvvvarExplicitAnnotation
       (\ s a -> s{_gcvvvarExplicitAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1_VideoAnnotationResults
          where
         parseJSON
           = withObject
@@ -1718,7 +1723,7 @@ instance FromJSON
                      <*> (o .:? "explicitAnnotation"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1_VideoAnnotationResults
          where
         toJSON
           GoogleCloudVideointelligenceV1_VideoAnnotationResults'{..}
@@ -1741,12 +1746,16 @@ instance ToJSON
 -- | Annotations corresponding to one tracked object.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation = GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'
+data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation =
+  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'
     { _gcvvotaFrames     :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame])
     , _gcvvotaConfidence :: !(Maybe (Textual Double))
+    , _gcvvotaTrackId    :: !(Maybe (Textual Int64))
     , _gcvvotaSegment    :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_VideoSegment)
     , _gcvvotaEntity     :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation' with the minimum fields required to make a request.
 --
@@ -1756,20 +1765,27 @@ data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation = GoogleClou
 --
 -- * 'gcvvotaConfidence'
 --
+-- * 'gcvvotaTrackId'
+--
 -- * 'gcvvotaSegment'
 --
 -- * 'gcvvotaEntity'
 googleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
     :: GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
 googleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation =
-    GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'
+  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'
     { _gcvvotaFrames = Nothing
     , _gcvvotaConfidence = Nothing
+    , _gcvvotaTrackId = Nothing
     , _gcvvotaSegment = Nothing
     , _gcvvotaEntity = Nothing
     }
 
+
 -- | Information corresponding to all frames where this object track appears.
+-- Non-streaming batch mode: it may be one or multiple ObjectTrackingFrame
+-- messages in frames. Streaming mode: it can only be one
+-- ObjectTrackingFrame message in frames.
 gcvvotaFrames :: Lens' GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation [GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame]
 gcvvotaFrames
   = lens _gcvvotaFrames
@@ -1784,7 +1800,19 @@ gcvvotaConfidence
       (\ s a -> s{_gcvvotaConfidence = a})
       . mapping _Coerce
 
--- | Each object track corresponds to one video segment where it appears.
+-- | Streaming mode ONLY. In streaming mode, we do not know the end time of a
+-- tracked object before it is completed. Hence, there is no VideoSegment
+-- info returned. Instead, we provide a unique identifiable integer
+-- track_id so that the customers can correlate the results of the ongoing
+-- ObjectTrackAnnotation of the same track_id over time.
+gcvvotaTrackId :: Lens' GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation (Maybe Int64)
+gcvvotaTrackId
+  = lens _gcvvotaTrackId
+      (\ s a -> s{_gcvvotaTrackId = a})
+      . mapping _Coerce
+
+-- | Non-streaming batch mode ONLY. Each object track corresponds to one
+-- video segment where it appears.
 gcvvotaSegment :: Lens' GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation (Maybe GoogleCloudVideointelligenceV1p2beta1_VideoSegment)
 gcvvotaSegment
   = lens _gcvvotaSegment
@@ -1797,7 +1825,7 @@ gcvvotaEntity
       (\ s a -> s{_gcvvotaEntity = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
          where
         parseJSON
           = withObject
@@ -1806,11 +1834,12 @@ instance FromJSON
                  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'
                    <$>
                    (o .:? "frames" .!= mempty) <*> (o .:? "confidence")
+                     <*> (o .:? "trackId")
                      <*> (o .:? "segment")
                      <*> (o .:? "entity"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'{..}
@@ -1818,119 +1847,21 @@ instance ToJSON
               (catMaybes
                  [("frames" .=) <$> _gcvvotaFrames,
                   ("confidence" .=) <$> _gcvvotaConfidence,
+                  ("trackId" .=) <$> _gcvvotaTrackId,
                   ("segment" .=) <$> _gcvvotaSegment,
                   ("entity" .=) <$> _gcvvotaEntity])
-
--- | Video context and\/or feature-specific parameters.
---
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_VideoContext' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_VideoContext = GoogleCloudVideointelligenceV1p1beta1_VideoContext'
-    { _gcvvvcSpeechTranscriptionConfig      :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig)
-    , _gcvvvcExplicitContentDetectionConfig :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig)
-    , _gcvvvcLabelDetectionConfig           :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig)
-    , _gcvvvcSegments                       :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_VideoSegment])
-    , _gcvvvcShotChangeDetectionConfig      :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoContext' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gcvvvcSpeechTranscriptionConfig'
---
--- * 'gcvvvcExplicitContentDetectionConfig'
---
--- * 'gcvvvcLabelDetectionConfig'
---
--- * 'gcvvvcSegments'
---
--- * 'gcvvvcShotChangeDetectionConfig'
-googleCloudVideointelligenceV1p1beta1_VideoContext
-    :: GoogleCloudVideointelligenceV1p1beta1_VideoContext
-googleCloudVideointelligenceV1p1beta1_VideoContext =
-    GoogleCloudVideointelligenceV1p1beta1_VideoContext'
-    { _gcvvvcSpeechTranscriptionConfig = Nothing
-    , _gcvvvcExplicitContentDetectionConfig = Nothing
-    , _gcvvvcLabelDetectionConfig = Nothing
-    , _gcvvvcSegments = Nothing
-    , _gcvvvcShotChangeDetectionConfig = Nothing
-    }
-
--- | Config for SPEECH_TRANSCRIPTION.
-gcvvvcSpeechTranscriptionConfig :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig)
-gcvvvcSpeechTranscriptionConfig
-  = lens _gcvvvcSpeechTranscriptionConfig
-      (\ s a -> s{_gcvvvcSpeechTranscriptionConfig = a})
-
--- | Config for EXPLICIT_CONTENT_DETECTION.
-gcvvvcExplicitContentDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig)
-gcvvvcExplicitContentDetectionConfig
-  = lens _gcvvvcExplicitContentDetectionConfig
-      (\ s a ->
-         s{_gcvvvcExplicitContentDetectionConfig = a})
-
--- | Config for LABEL_DETECTION.
-gcvvvcLabelDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig)
-gcvvvcLabelDetectionConfig
-  = lens _gcvvvcLabelDetectionConfig
-      (\ s a -> s{_gcvvvcLabelDetectionConfig = a})
-
--- | Video segments to annotate. The segments may overlap and are not
--- required to be contiguous or span the whole video. If unspecified, each
--- video is treated as a single segment.
-gcvvvcSegments :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoContext [GoogleCloudVideointelligenceV1p1beta1_VideoSegment]
-gcvvvcSegments
-  = lens _gcvvvcSegments
-      (\ s a -> s{_gcvvvcSegments = a})
-      . _Default
-      . _Coerce
-
--- | Config for SHOT_CHANGE_DETECTION.
-gcvvvcShotChangeDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig)
-gcvvvcShotChangeDetectionConfig
-  = lens _gcvvvcShotChangeDetectionConfig
-      (\ s a -> s{_gcvvvcShotChangeDetectionConfig = a})
-
-instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoContext
-         where
-        parseJSON
-          = withObject
-              "GoogleCloudVideointelligenceV1p1beta1VideoContext"
-              (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_VideoContext'
-                   <$>
-                   (o .:? "speechTranscriptionConfig") <*>
-                     (o .:? "explicitContentDetectionConfig")
-                     <*> (o .:? "labelDetectionConfig")
-                     <*> (o .:? "segments" .!= mempty)
-                     <*> (o .:? "shotChangeDetectionConfig"))
-
-instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoContext
-         where
-        toJSON
-          GoogleCloudVideointelligenceV1p1beta1_VideoContext'{..}
-          = object
-              (catMaybes
-                 [("speechTranscriptionConfig" .=) <$>
-                    _gcvvvcSpeechTranscriptionConfig,
-                  ("explicitContentDetectionConfig" .=) <$>
-                    _gcvvvcExplicitContentDetectionConfig,
-                  ("labelDetectionConfig" .=) <$>
-                    _gcvvvcLabelDetectionConfig,
-                  ("segments" .=) <$> _gcvvvcSegments,
-                  ("shotChangeDetectionConfig" .=) <$>
-                    _gcvvvcShotChangeDetectionConfig])
 
 -- | Video annotation progress. Included in the \`metadata\` field of the
 -- \`Operation\` returned by the \`GetOperation\` call of the
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress' smart constructor.
-newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress = GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress'
+newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress =
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress'
     { _gcvvavpsAnnotationProgress :: Maybe [GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
@@ -1940,9 +1871,9 @@ newtype GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress = GoogleClou
 googleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
     :: GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
 googleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress =
-    GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress'
-    { _gcvvavpsAnnotationProgress = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress'
+    {_gcvvavpsAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavpsAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress [GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress]
@@ -1953,7 +1884,7 @@ gcvvavpsAnnotationProgress
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
          where
         parseJSON
           = withObject
@@ -1963,7 +1894,7 @@ instance FromJSON
                    <$> (o .:? "annotationProgress" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress'{..}
@@ -1978,9 +1909,12 @@ instance ToJSON
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'googleLongrunning_OperationMetadata' smart constructor.
-newtype GoogleLongrunning_OperationMetadata = GoogleLongrunning_OperationMetadata'
+newtype GoogleLongrunning_OperationMetadata =
+  GoogleLongrunning_OperationMetadata'
     { _glomAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning_OperationMetadata' with the minimum fields required to make a request.
 --
@@ -1991,9 +1925,9 @@ googleLongrunning_OperationMetadata
     :: HashMap Text JSONValue -- ^ 'glomAddtional'
     -> GoogleLongrunning_OperationMetadata
 googleLongrunning_OperationMetadata pGlomAddtional_ =
-    GoogleLongrunning_OperationMetadata'
-    { _glomAddtional = _Coerce # pGlomAddtional_
-    }
+  GoogleLongrunning_OperationMetadata'
+    {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunning_OperationMetadata (HashMap Text JSONValue)
@@ -2017,10 +1951,13 @@ instance ToJSON GoogleLongrunning_OperationMetadata
 -- | Video segment level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_LabelSegment' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_LabelSegment = GoogleCloudVideointelligenceV1p1beta1_LabelSegment'
+data GoogleCloudVideointelligenceV1p1beta1_LabelSegment =
+  GoogleCloudVideointelligenceV1p1beta1_LabelSegment'
     { _gcvvlsConfidence :: !(Maybe (Textual Double))
     , _gcvvlsSegment    :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_VideoSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelSegment' with the minimum fields required to make a request.
 --
@@ -2032,10 +1969,9 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelSegment = GoogleCloudVideointell
 googleCloudVideointelligenceV1p1beta1_LabelSegment
     :: GoogleCloudVideointelligenceV1p1beta1_LabelSegment
 googleCloudVideointelligenceV1p1beta1_LabelSegment =
-    GoogleCloudVideointelligenceV1p1beta1_LabelSegment'
-    { _gcvvlsConfidence = Nothing
-    , _gcvvlsSegment = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_LabelSegment'
+    {_gcvvlsConfidence = Nothing, _gcvvlsSegment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 gcvvlsConfidence :: Lens' GoogleCloudVideointelligenceV1p1beta1_LabelSegment (Maybe Double)
@@ -2051,7 +1987,7 @@ gcvvlsSegment
       (\ s a -> s{_gcvvlsSegment = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelSegment
+           GoogleCloudVideointelligenceV1p1beta1_LabelSegment
          where
         parseJSON
           = withObject
@@ -2061,7 +1997,7 @@ instance FromJSON
                    <$> (o .:? "confidence") <*> (o .:? "segment"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelSegment
+           GoogleCloudVideointelligenceV1p1beta1_LabelSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_LabelSegment'{..}
@@ -2073,10 +2009,13 @@ instance ToJSON
 -- | Video frame level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_LabelFrame' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_LabelFrame = GoogleCloudVideointelligenceV1p2beta1_LabelFrame'
+data GoogleCloudVideointelligenceV1p2beta1_LabelFrame =
+  GoogleCloudVideointelligenceV1p2beta1_LabelFrame'
     { _ggTimeOffSet :: !(Maybe GDuration)
     , _ggConfidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelFrame' with the minimum fields required to make a request.
 --
@@ -2088,10 +2027,9 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelFrame = GoogleCloudVideointellig
 googleCloudVideointelligenceV1p2beta1_LabelFrame
     :: GoogleCloudVideointelligenceV1p2beta1_LabelFrame
 googleCloudVideointelligenceV1p2beta1_LabelFrame =
-    GoogleCloudVideointelligenceV1p2beta1_LabelFrame'
-    { _ggTimeOffSet = Nothing
-    , _ggConfidence = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_LabelFrame'
+    {_ggTimeOffSet = Nothing, _ggConfidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -2107,7 +2045,7 @@ ggConfidence
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_LabelFrame
+           GoogleCloudVideointelligenceV1p2beta1_LabelFrame
          where
         parseJSON
           = withObject
@@ -2117,7 +2055,7 @@ instance FromJSON
                    (o .:? "timeOffset") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_LabelFrame
+           GoogleCloudVideointelligenceV1p2beta1_LabelFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_LabelFrame'{..}
@@ -2129,12 +2067,15 @@ instance ToJSON
 -- | Annotation progress for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress = GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress'
+data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress =
+  GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress'
     { _gStartTime       :: !(Maybe DateTime')
     , _gInputURI        :: !(Maybe Text)
     , _gProgressPercent :: !(Maybe (Textual Int32))
     , _gUpdateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
@@ -2150,12 +2091,13 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress = GoogleCloud
 googleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
     :: GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
 googleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress =
-    GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress'
+  GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress'
     { _gStartTime = Nothing
     , _gInputURI = Nothing
     , _gProgressPercent = Nothing
     , _gUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gStartTime :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress (Maybe UTCTime)
@@ -2184,7 +2126,7 @@ gUpdateTime
       mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
          where
         parseJSON
           = withObject
@@ -2197,7 +2139,7 @@ instance FromJSON
                      <*> (o .:? "updateTime"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress'{..}
@@ -2211,11 +2153,14 @@ instance ToJSON
 -- | Detected entity from video analysis.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_Entity' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_Entity = GoogleCloudVideointelligenceV1p2beta1_Entity'
+data GoogleCloudVideointelligenceV1p2beta1_Entity =
+  GoogleCloudVideointelligenceV1p2beta1_Entity'
     { _gooLanguageCode :: !(Maybe Text)
     , _gooEntityId     :: !(Maybe Text)
     , _gooDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_Entity' with the minimum fields required to make a request.
 --
@@ -2229,11 +2174,12 @@ data GoogleCloudVideointelligenceV1p2beta1_Entity = GoogleCloudVideointelligence
 googleCloudVideointelligenceV1p2beta1_Entity
     :: GoogleCloudVideointelligenceV1p2beta1_Entity
 googleCloudVideointelligenceV1p2beta1_Entity =
-    GoogleCloudVideointelligenceV1p2beta1_Entity'
+  GoogleCloudVideointelligenceV1p2beta1_Entity'
     { _gooLanguageCode = Nothing
     , _gooEntityId = Nothing
     , _gooDescription = Nothing
     }
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gooLanguageCode :: Lens' GoogleCloudVideointelligenceV1p2beta1_Entity (Maybe Text)
@@ -2254,7 +2200,8 @@ gooDescription
       (\ s a -> s{_gooDescription = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_Entity where
+           GoogleCloudVideointelligenceV1p2beta1_Entity
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1p2beta1Entity"
@@ -2264,7 +2211,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_Entity where
+           GoogleCloudVideointelligenceV1p2beta1_Entity
+         where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_Entity'{..}
           = object
@@ -2278,13 +2226,16 @@ instance ToJSON
 -- as \`enable_word_time_offsets\`.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_WordInfo' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_WordInfo = GoogleCloudVideointelligenceV1p1beta1_WordInfo'
+data GoogleCloudVideointelligenceV1p1beta1_WordInfo =
+  GoogleCloudVideointelligenceV1p1beta1_WordInfo'
     { _gcvvwicStartTime  :: !(Maybe GDuration)
     , _gcvvwicConfidence :: !(Maybe (Textual Double))
     , _gcvvwicEndTime    :: !(Maybe GDuration)
     , _gcvvwicWord       :: !(Maybe Text)
     , _gcvvwicSpeakerTag :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_WordInfo' with the minimum fields required to make a request.
 --
@@ -2302,13 +2253,14 @@ data GoogleCloudVideointelligenceV1p1beta1_WordInfo = GoogleCloudVideointelligen
 googleCloudVideointelligenceV1p1beta1_WordInfo
     :: GoogleCloudVideointelligenceV1p1beta1_WordInfo
 googleCloudVideointelligenceV1p1beta1_WordInfo =
-    GoogleCloudVideointelligenceV1p1beta1_WordInfo'
+  GoogleCloudVideointelligenceV1p1beta1_WordInfo'
     { _gcvvwicStartTime = Nothing
     , _gcvvwicConfidence = Nothing
     , _gcvvwicEndTime = Nothing
     , _gcvvwicWord = Nothing
     , _gcvvwicSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -2359,7 +2311,8 @@ gcvvwicSpeakerTag
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_WordInfo where
+           GoogleCloudVideointelligenceV1p1beta1_WordInfo
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1p1beta1WordInfo"
@@ -2371,7 +2324,8 @@ instance FromJSON
                      <*> (o .:? "speakerTag"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_WordInfo where
+           GoogleCloudVideointelligenceV1p1beta1_WordInfo
+         where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_WordInfo'{..}
           = object
@@ -2386,13 +2340,16 @@ instance ToJSON
 -- a network API call.
 --
 -- /See:/ 'googleLongrunning_Operation' smart constructor.
-data GoogleLongrunning_Operation = GoogleLongrunning_Operation'
+data GoogleLongrunning_Operation =
+  GoogleLongrunning_Operation'
     { _gloDone     :: !(Maybe Bool)
     , _gloError    :: !(Maybe GoogleRpc_Status)
     , _gloResponse :: !(Maybe GoogleLongrunning_OperationResponse)
     , _gloName     :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunning_OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning_Operation' with the minimum fields required to make a request.
 --
@@ -2410,13 +2367,14 @@ data GoogleLongrunning_Operation = GoogleLongrunning_Operation'
 googleLongrunning_Operation
     :: GoogleLongrunning_Operation
 googleLongrunning_Operation =
-    GoogleLongrunning_Operation'
+  GoogleLongrunning_Operation'
     { _gloDone = Nothing
     , _gloError = Nothing
     , _gloResponse = Nothing
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -2477,11 +2435,14 @@ instance ToJSON GoogleLongrunning_Operation where
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative = GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative'
+data GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative =
+  GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative'
     { _gcvvsracConfidence :: !(Maybe (Textual Double))
     , _gcvvsracWords      :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_WordInfo])
     , _gcvvsracTranscript :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
@@ -2495,11 +2456,12 @@ data GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative = Google
 googleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
     :: GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
 googleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative =
-    GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative'
+  GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative'
     { _gcvvsracConfidence = Nothing
     , _gcvvsracWords = Nothing
     , _gcvvsracTranscript = Nothing
     }
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -2529,7 +2491,7 @@ gcvvsracTranscript
       (\ s a -> s{_gcvvsracTranscript = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
          where
         parseJSON
           = withObject
@@ -2541,7 +2503,7 @@ instance FromJSON
                      <*> (o .:? "transcript"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative'{..}
@@ -2554,10 +2516,13 @@ instance ToJSON
 -- | Video frame level annotation results for explicit content.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_ExplicitContentFrame' smart constructor.
-data GoogleCloudVideointelligenceV1_ExplicitContentFrame = GoogleCloudVideointelligenceV1_ExplicitContentFrame'
+data GoogleCloudVideointelligenceV1_ExplicitContentFrame =
+  GoogleCloudVideointelligenceV1_ExplicitContentFrame'
     { _gTimeOffSet            :: !(Maybe GDuration)
     , _gPornographyLikelihood :: !(Maybe GoogleCloudVideointelligenceV1_ExplicitContentFramePornographyLikelihood)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_ExplicitContentFrame' with the minimum fields required to make a request.
 --
@@ -2569,10 +2534,9 @@ data GoogleCloudVideointelligenceV1_ExplicitContentFrame = GoogleCloudVideointel
 googleCloudVideointelligenceV1_ExplicitContentFrame
     :: GoogleCloudVideointelligenceV1_ExplicitContentFrame
 googleCloudVideointelligenceV1_ExplicitContentFrame =
-    GoogleCloudVideointelligenceV1_ExplicitContentFrame'
-    { _gTimeOffSet = Nothing
-    , _gPornographyLikelihood = Nothing
-    }
+  GoogleCloudVideointelligenceV1_ExplicitContentFrame'
+    {_gTimeOffSet = Nothing, _gPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -2588,7 +2552,7 @@ gPornographyLikelihood
       (\ s a -> s{_gPornographyLikelihood = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1_ExplicitContentFrame
          where
         parseJSON
           = withObject
@@ -2600,7 +2564,7 @@ instance FromJSON
                      (o .:? "pornographyLikelihood"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1_ExplicitContentFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1_ExplicitContentFrame'{..}
@@ -2613,10 +2577,13 @@ instance ToJSON
 -- | Video segment.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_VideoSegment' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_VideoSegment = GoogleCloudVideointelligenceV1beta2_VideoSegment'
+data GoogleCloudVideointelligenceV1beta2_VideoSegment =
+  GoogleCloudVideointelligenceV1beta2_VideoSegment'
     { _gStartTimeOffSet :: !(Maybe GDuration)
     , _gEndTimeOffSet   :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_VideoSegment' with the minimum fields required to make a request.
 --
@@ -2628,10 +2595,9 @@ data GoogleCloudVideointelligenceV1beta2_VideoSegment = GoogleCloudVideointellig
 googleCloudVideointelligenceV1beta2_VideoSegment
     :: GoogleCloudVideointelligenceV1beta2_VideoSegment
 googleCloudVideointelligenceV1beta2_VideoSegment =
-    GoogleCloudVideointelligenceV1beta2_VideoSegment'
-    { _gStartTimeOffSet = Nothing
-    , _gEndTimeOffSet = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_VideoSegment'
+    {_gStartTimeOffSet = Nothing, _gEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -2650,7 +2616,7 @@ gEndTimeOffSet
       . mapping _GDuration
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_VideoSegment
+           GoogleCloudVideointelligenceV1beta2_VideoSegment
          where
         parseJSON
           = withObject
@@ -2661,7 +2627,7 @@ instance FromJSON
                      (o .:? "endTimeOffset"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_VideoSegment
+           GoogleCloudVideointelligenceV1beta2_VideoSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_VideoSegment'{..}
@@ -2673,7 +2639,8 @@ instance ToJSON
 -- | Annotation results for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_VideoAnnotationResults' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults = GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'
+data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults =
+  GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'
     { _gcvvvarsShotAnnotations         :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_VideoSegment])
     , _gcvvvarsShotLabelAnnotations    :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation])
     , _gcvvvarsInputURI                :: !(Maybe Text)
@@ -2684,7 +2651,9 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults = GoogleCloudV
     , _gcvvvarsTextAnnotations         :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_TextAnnotation])
     , _gcvvvarsSegmentLabelAnnotations :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation])
     , _gcvvvarsExplicitAnnotation      :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults' with the minimum fields required to make a request.
 --
@@ -2712,7 +2681,7 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults = GoogleCloudV
 googleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
     :: GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
 googleCloudVideointelligenceV1p2beta1_VideoAnnotationResults =
-    GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'
+  GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'
     { _gcvvvarsShotAnnotations = Nothing
     , _gcvvvarsShotLabelAnnotations = Nothing
     , _gcvvvarsInputURI = Nothing
@@ -2724,6 +2693,7 @@ googleCloudVideointelligenceV1p2beta1_VideoAnnotationResults =
     , _gcvvvarsSegmentLabelAnnotations = Nothing
     , _gcvvvarsExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gcvvvarsShotAnnotations :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults [GoogleCloudVideointelligenceV1p2beta1_VideoSegment]
@@ -2806,7 +2776,7 @@ gcvvvarsExplicitAnnotation
       (\ s a -> s{_gcvvvarsExplicitAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
          where
         parseJSON
           = withObject
@@ -2826,7 +2796,7 @@ instance FromJSON
                      <*> (o .:? "explicitAnnotation"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'{..}
@@ -2852,10 +2822,13 @@ instance ToJSON
 -- | Video segment level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_LabelSegment' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_LabelSegment = GoogleCloudVideointelligenceV1beta2_LabelSegment'
+data GoogleCloudVideointelligenceV1beta2_LabelSegment =
+  GoogleCloudVideointelligenceV1beta2_LabelSegment'
     { _gcvvlscConfidence :: !(Maybe (Textual Double))
     , _gcvvlscSegment    :: !(Maybe GoogleCloudVideointelligenceV1beta2_VideoSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_LabelSegment' with the minimum fields required to make a request.
 --
@@ -2867,10 +2840,9 @@ data GoogleCloudVideointelligenceV1beta2_LabelSegment = GoogleCloudVideointellig
 googleCloudVideointelligenceV1beta2_LabelSegment
     :: GoogleCloudVideointelligenceV1beta2_LabelSegment
 googleCloudVideointelligenceV1beta2_LabelSegment =
-    GoogleCloudVideointelligenceV1beta2_LabelSegment'
-    { _gcvvlscConfidence = Nothing
-    , _gcvvlscSegment = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_LabelSegment'
+    {_gcvvlscConfidence = Nothing, _gcvvlscSegment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 gcvvlscConfidence :: Lens' GoogleCloudVideointelligenceV1beta2_LabelSegment (Maybe Double)
@@ -2886,7 +2858,7 @@ gcvvlscSegment
       (\ s a -> s{_gcvvlscSegment = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_LabelSegment
+           GoogleCloudVideointelligenceV1beta2_LabelSegment
          where
         parseJSON
           = withObject
@@ -2896,7 +2868,7 @@ instance FromJSON
                    (o .:? "confidence") <*> (o .:? "segment"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_LabelSegment
+           GoogleCloudVideointelligenceV1beta2_LabelSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_LabelSegment'{..}
@@ -2915,9 +2887,12 @@ instance ToJSON
 -- calculations for location of the box.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly' smart constructor.
-newtype GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly = GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'
+newtype GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly =
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'
     { _gcvvnbpVertices :: Maybe [GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly' with the minimum fields required to make a request.
 --
@@ -2927,9 +2902,9 @@ newtype GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly = GoogleClo
 googleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
     :: GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
 googleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly =
-    GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'
-    { _gcvvnbpVertices = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'
+    {_gcvvnbpVertices = Nothing}
+
 
 -- | Normalized vertices of the bounding polygon.
 gcvvnbpVertices :: Lens' GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly [GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex]
@@ -2940,7 +2915,7 @@ gcvvnbpVertices
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
+           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
          where
         parseJSON
           = withObject
@@ -2950,7 +2925,7 @@ instance FromJSON
                    <$> (o .:? "vertices" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
+           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'{..}
@@ -2962,13 +2937,16 @@ instance ToJSON
 -- as \`enable_word_time_offsets\`.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_WordInfo' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_WordInfo = GoogleCloudVideointelligenceV1beta2_WordInfo'
+data GoogleCloudVideointelligenceV1beta2_WordInfo =
+  GoogleCloudVideointelligenceV1beta2_WordInfo'
     { _goooStartTime  :: !(Maybe GDuration)
     , _goooConfidence :: !(Maybe (Textual Double))
     , _goooEndTime    :: !(Maybe GDuration)
     , _goooWord       :: !(Maybe Text)
     , _goooSpeakerTag :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_WordInfo' with the minimum fields required to make a request.
 --
@@ -2986,13 +2964,14 @@ data GoogleCloudVideointelligenceV1beta2_WordInfo = GoogleCloudVideointelligence
 googleCloudVideointelligenceV1beta2_WordInfo
     :: GoogleCloudVideointelligenceV1beta2_WordInfo
 googleCloudVideointelligenceV1beta2_WordInfo =
-    GoogleCloudVideointelligenceV1beta2_WordInfo'
+  GoogleCloudVideointelligenceV1beta2_WordInfo'
     { _goooStartTime = Nothing
     , _goooConfidence = Nothing
     , _goooEndTime = Nothing
     , _goooWord = Nothing
     , _goooSpeakerTag = Nothing
     }
+
 
 -- | Time offset relative to the beginning of the audio, and corresponding to
 -- the start of the spoken word. This field is only set if
@@ -3041,7 +3020,8 @@ goooSpeakerTag
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_WordInfo where
+           GoogleCloudVideointelligenceV1beta2_WordInfo
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1beta2WordInfo"
@@ -3053,7 +3033,8 @@ instance FromJSON
                      <*> (o .:? "speakerTag"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_WordInfo where
+           GoogleCloudVideointelligenceV1beta2_WordInfo
+         where
         toJSON
           GoogleCloudVideointelligenceV1beta2_WordInfo'{..}
           = object
@@ -3069,9 +3050,12 @@ instance ToJSON
 -- present for that frame.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_ExplicitContentAnnotation' smart constructor.
-newtype GoogleCloudVideointelligenceV1_ExplicitContentAnnotation = GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
+newtype GoogleCloudVideointelligenceV1_ExplicitContentAnnotation =
+  GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
     { _gooFrames :: Maybe [GoogleCloudVideointelligenceV1_ExplicitContentFrame]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
@@ -3081,9 +3065,9 @@ newtype GoogleCloudVideointelligenceV1_ExplicitContentAnnotation = GoogleCloudVi
 googleCloudVideointelligenceV1_ExplicitContentAnnotation
     :: GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
 googleCloudVideointelligenceV1_ExplicitContentAnnotation =
-    GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
-    { _gooFrames = Nothing
-    }
+  GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
+    {_gooFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gooFrames :: Lens' GoogleCloudVideointelligenceV1_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1_ExplicitContentFrame]
@@ -3093,7 +3077,7 @@ gooFrames
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
          where
         parseJSON
           = withObject
@@ -3103,7 +3087,7 @@ instance FromJSON
                    <$> (o .:? "frames" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'{..}
@@ -3114,9 +3098,12 @@ instance ToJSON
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_AnnotateVideoResponse' smart constructor.
-newtype GoogleCloudVideointelligenceV1_AnnotateVideoResponse = GoogleCloudVideointelligenceV1_AnnotateVideoResponse'
+newtype GoogleCloudVideointelligenceV1_AnnotateVideoResponse =
+  GoogleCloudVideointelligenceV1_AnnotateVideoResponse'
     { _gooAnnotationResults :: Maybe [GoogleCloudVideointelligenceV1_VideoAnnotationResults]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
@@ -3126,9 +3113,9 @@ newtype GoogleCloudVideointelligenceV1_AnnotateVideoResponse = GoogleCloudVideoi
 googleCloudVideointelligenceV1_AnnotateVideoResponse
     :: GoogleCloudVideointelligenceV1_AnnotateVideoResponse
 googleCloudVideointelligenceV1_AnnotateVideoResponse =
-    GoogleCloudVideointelligenceV1_AnnotateVideoResponse'
-    { _gooAnnotationResults = Nothing
-    }
+  GoogleCloudVideointelligenceV1_AnnotateVideoResponse'
+    {_gooAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gooAnnotationResults :: Lens' GoogleCloudVideointelligenceV1_AnnotateVideoResponse [GoogleCloudVideointelligenceV1_VideoAnnotationResults]
@@ -3139,7 +3126,7 @@ gooAnnotationResults
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1_AnnotateVideoResponse
          where
         parseJSON
           = withObject
@@ -3149,7 +3136,7 @@ instance FromJSON
                    <$> (o .:? "annotationResults" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1_AnnotateVideoResponse
          where
         toJSON
           GoogleCloudVideointelligenceV1_AnnotateVideoResponse'{..}
@@ -3161,10 +3148,13 @@ instance ToJSON
 -- coordinates are relative to the original image and range from 0 to 1.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_NormalizedVertex' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex = GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
+data GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex =
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
     { _gcvvnvX :: !(Maybe (Textual Double))
     , _gcvvnvY :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex' with the minimum fields required to make a request.
 --
@@ -3176,10 +3166,9 @@ data GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex = GoogleCloudVideoin
 googleCloudVideointelligenceV1p2beta1_NormalizedVertex
     :: GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
 googleCloudVideointelligenceV1p2beta1_NormalizedVertex =
-    GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
-    { _gcvvnvX = Nothing
-    , _gcvvnvY = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
+    {_gcvvnvX = Nothing, _gcvvnvY = Nothing}
+
 
 -- | X coordinate.
 gcvvnvX :: Lens' GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex (Maybe Double)
@@ -3194,7 +3183,7 @@ gcvvnvY
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
+           GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
          where
         parseJSON
           = withObject
@@ -3204,7 +3193,7 @@ instance FromJSON
                    <$> (o .:? "x") <*> (o .:? "y"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
+           GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'{..}
@@ -3215,12 +3204,15 @@ instance ToJSON
 -- | Label annotation.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_LabelAnnotation' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation = GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+data GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation =
+  GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
     { _gcvvlacCategoryEntities :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_Entity])
     , _gcvvlacFrames           :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_LabelFrame])
     , _gcvvlacSegments         :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_LabelSegment])
     , _gcvvlacEntity           :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation' with the minimum fields required to make a request.
 --
@@ -3236,12 +3228,13 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation = GoogleCloudVideoint
 googleCloudVideointelligenceV1p2beta1_LabelAnnotation
     :: GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
 googleCloudVideointelligenceV1p2beta1_LabelAnnotation =
-    GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+  GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
     { _gcvvlacCategoryEntities = Nothing
     , _gcvvlacFrames = Nothing
     , _gcvvlacSegments = Nothing
     , _gcvvlacEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -3277,7 +3270,7 @@ gcvvlacEntity
       (\ s a -> s{_gcvvlacEntity = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
          where
         parseJSON
           = withObject
@@ -3291,7 +3284,7 @@ instance FromJSON
                      <*> (o .:? "entity"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
+           GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'{..}
@@ -3306,11 +3299,14 @@ instance ToJSON
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative = GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative'
+data GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative =
+  GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative'
     { _gcvvsra1Confidence :: !(Maybe (Textual Double))
     , _gcvvsra1Words      :: !(Maybe [GoogleCloudVideointelligenceV1beta2_WordInfo])
     , _gcvvsra1Transcript :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative' with the minimum fields required to make a request.
 --
@@ -3324,11 +3320,12 @@ data GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative = GoogleCl
 googleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
     :: GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
 googleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative =
-    GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative'
+  GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative'
     { _gcvvsra1Confidence = Nothing
     , _gcvvsra1Words = Nothing
     , _gcvvsra1Transcript = Nothing
     }
+
 
 -- | The confidence estimate between 0.0 and 1.0. A higher number indicates
 -- an estimated greater likelihood that the recognized words are correct.
@@ -3358,7 +3355,7 @@ gcvvsra1Transcript
       (\ s a -> s{_gcvvsra1Transcript = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
          where
         parseJSON
           = withObject
@@ -3370,7 +3367,7 @@ instance FromJSON
                      <*> (o .:? "transcript"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
+           GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative'{..}
@@ -3383,10 +3380,13 @@ instance ToJSON
 -- | Video segment.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_VideoSegment' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_VideoSegment = GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+data GoogleCloudVideointelligenceV1p1beta1_VideoSegment =
+  GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
     { _gooStartTimeOffSet :: !(Maybe GDuration)
     , _gooEndTimeOffSet   :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoSegment' with the minimum fields required to make a request.
 --
@@ -3398,10 +3398,9 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoSegment = GoogleCloudVideointell
 googleCloudVideointelligenceV1p1beta1_VideoSegment
     :: GoogleCloudVideointelligenceV1p1beta1_VideoSegment
 googleCloudVideointelligenceV1p1beta1_VideoSegment =
-    GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
-    { _gooStartTimeOffSet = Nothing
-    , _gooEndTimeOffSet = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+    {_gooStartTimeOffSet = Nothing, _gooEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -3420,7 +3419,7 @@ gooEndTimeOffSet
       . mapping _GDuration
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoSegment
+           GoogleCloudVideointelligenceV1p1beta1_VideoSegment
          where
         parseJSON
           = withObject
@@ -3432,7 +3431,7 @@ instance FromJSON
                      (o .:? "endTimeOffset"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoSegment
+           GoogleCloudVideointelligenceV1p1beta1_VideoSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_VideoSegment'{..}
@@ -3441,59 +3440,18 @@ instance ToJSON
                  [("startTimeOffset" .=) <$> _gooStartTimeOffSet,
                   ("endTimeOffset" .=) <$> _gooEndTimeOffSet])
 
--- | Config for EXPLICIT_CONTENT_DETECTION.
---
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig' smart constructor.
-newtype GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig = GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig'
-    { _gcvvecdcModel :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gcvvecdcModel'
-googleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-    :: GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-googleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig =
-    GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig'
-    { _gcvvecdcModel = Nothing
-    }
-
--- | Model to use for explicit content detection. Supported values:
--- \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
-gcvvecdcModel :: Lens' GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig (Maybe Text)
-gcvvecdcModel
-  = lens _gcvvecdcModel
-      (\ s a -> s{_gcvvecdcModel = a})
-
-instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-         where
-        parseJSON
-          = withObject
-              "GoogleCloudVideointelligenceV1p1beta1ExplicitContentDetectionConfig"
-              (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig'
-                   <$> (o .:? "model"))
-
-instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig
-         where
-        toJSON
-          GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig'{..}
-          = object
-              (catMaybes [("model" .=) <$> _gcvvecdcModel])
-
 -- | Label annotation.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_LabelAnnotation' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation = GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+data GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation =
+  GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
     { _ggCategoryEntities :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_Entity])
     , _ggFrames           :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_LabelFrame])
     , _ggSegments         :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_LabelSegment])
     , _ggEntity           :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation' with the minimum fields required to make a request.
 --
@@ -3509,12 +3467,13 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation = GoogleCloudVideoint
 googleCloudVideointelligenceV1p1beta1_LabelAnnotation
     :: GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
 googleCloudVideointelligenceV1p1beta1_LabelAnnotation =
-    GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+  GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
     { _ggCategoryEntities = Nothing
     , _ggFrames = Nothing
     , _ggSegments = Nothing
     , _ggEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -3546,7 +3505,7 @@ ggEntity :: Lens' GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation (Maybe G
 ggEntity = lens _ggEntity (\ s a -> s{_ggEntity = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
+           GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
          where
         parseJSON
           = withObject
@@ -3560,7 +3519,7 @@ instance FromJSON
                      <*> (o .:? "entity"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
+           GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'{..}
@@ -3574,10 +3533,13 @@ instance ToJSON
 -- | Video frame level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_LabelFrame' smart constructor.
-data GoogleCloudVideointelligenceV1_LabelFrame = GoogleCloudVideointelligenceV1_LabelFrame'
+data GoogleCloudVideointelligenceV1_LabelFrame =
+  GoogleCloudVideointelligenceV1_LabelFrame'
     { _gcvvlf1TimeOffSet :: !(Maybe GDuration)
     , _gcvvlf1Confidence :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_LabelFrame' with the minimum fields required to make a request.
 --
@@ -3589,10 +3551,9 @@ data GoogleCloudVideointelligenceV1_LabelFrame = GoogleCloudVideointelligenceV1_
 googleCloudVideointelligenceV1_LabelFrame
     :: GoogleCloudVideointelligenceV1_LabelFrame
 googleCloudVideointelligenceV1_LabelFrame =
-    GoogleCloudVideointelligenceV1_LabelFrame'
-    { _gcvvlf1TimeOffSet = Nothing
-    , _gcvvlf1Confidence = Nothing
-    }
+  GoogleCloudVideointelligenceV1_LabelFrame'
+    {_gcvvlf1TimeOffSet = Nothing, _gcvvlf1Confidence = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -3610,7 +3571,8 @@ gcvvlf1Confidence
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_LabelFrame where
+           GoogleCloudVideointelligenceV1_LabelFrame
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1LabelFrame"
@@ -3619,20 +3581,154 @@ instance FromJSON
                    (o .:? "timeOffset") <*> (o .:? "confidence"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_LabelFrame where
+           GoogleCloudVideointelligenceV1_LabelFrame
+         where
         toJSON GoogleCloudVideointelligenceV1_LabelFrame'{..}
           = object
               (catMaybes
                  [("timeOffset" .=) <$> _gcvvlf1TimeOffSet,
                   ("confidence" .=) <$> _gcvvlf1Confidence])
 
+-- | Video annotation request.
+--
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest' smart constructor.
+data GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest =
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest'
+    { _gcvvavrInputURI     :: !(Maybe Text)
+    , _gcvvavrVideoContext :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_VideoContext)
+    , _gcvvavrInputContent :: !(Maybe Bytes)
+    , _gcvvavrFeatures     :: !(Maybe [Text])
+    , _gcvvavrLocationId   :: !(Maybe Text)
+    , _gcvvavrOutputURI    :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcvvavrInputURI'
+--
+-- * 'gcvvavrVideoContext'
+--
+-- * 'gcvvavrInputContent'
+--
+-- * 'gcvvavrFeatures'
+--
+-- * 'gcvvavrLocationId'
+--
+-- * 'gcvvavrOutputURI'
+googleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+    :: GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+googleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest =
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest'
+    { _gcvvavrInputURI = Nothing
+    , _gcvvavrVideoContext = Nothing
+    , _gcvvavrInputContent = Nothing
+    , _gcvvavrFeatures = Nothing
+    , _gcvvavrLocationId = Nothing
+    , _gcvvavrOutputURI = Nothing
+    }
+
+
+-- | Input video location. Currently, only [Google Cloud
+-- Storage](https:\/\/cloud.google.com\/storage\/) URIs are supported,
+-- which must be specified in the following format:
+-- \`gs:\/\/bucket-id\/object-id\` (other URI formats return
+-- google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request
+-- URIs](\/storage\/docs\/reference-uris). A video URI may include
+-- wildcards in \`object-id\`, and thus identify multiple videos. Supported
+-- wildcards: \'*\' to match 0 or more characters; \'?\' to match 1
+-- character. If unset, the input video should be embedded in the request
+-- as \`input_content\`. If set, \`input_content\` should be unset.
+gcvvavrInputURI :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest (Maybe Text)
+gcvvavrInputURI
+  = lens _gcvvavrInputURI
+      (\ s a -> s{_gcvvavrInputURI = a})
+
+-- | Additional video context and\/or feature-specific parameters.
+gcvvavrVideoContext :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest (Maybe GoogleCloudVideointelligenceV1p2beta1_VideoContext)
+gcvvavrVideoContext
+  = lens _gcvvavrVideoContext
+      (\ s a -> s{_gcvvavrVideoContext = a})
+
+-- | The video data bytes. If unset, the input video(s) should be specified
+-- via \`input_uri\`. If set, \`input_uri\` should be unset.
+gcvvavrInputContent :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest (Maybe ByteString)
+gcvvavrInputContent
+  = lens _gcvvavrInputContent
+      (\ s a -> s{_gcvvavrInputContent = a})
+      . mapping _Bytes
+
+-- | Requested video annotation features.
+gcvvavrFeatures :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest [Text]
+gcvvavrFeatures
+  = lens _gcvvavrFeatures
+      (\ s a -> s{_gcvvavrFeatures = a})
+      . _Default
+      . _Coerce
+
+-- | Optional cloud region where annotation should take place. Supported
+-- cloud regions: \`us-east1\`, \`us-west1\`, \`europe-west1\`,
+-- \`asia-east1\`. If no region is specified, a region will be determined
+-- based on video file location.
+gcvvavrLocationId :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest (Maybe Text)
+gcvvavrLocationId
+  = lens _gcvvavrLocationId
+      (\ s a -> s{_gcvvavrLocationId = a})
+
+-- | Optional location where the output (in JSON format) should be stored.
+-- Currently, only [Google Cloud
+-- Storage](https:\/\/cloud.google.com\/storage\/) URIs are supported,
+-- which must be specified in the following format:
+-- \`gs:\/\/bucket-id\/object-id\` (other URI formats return
+-- google.rpc.Code.INVALID_ARGUMENT). For more information, see [Request
+-- URIs](\/storage\/docs\/reference-uris).
+gcvvavrOutputURI :: Lens' GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest (Maybe Text)
+gcvvavrOutputURI
+  = lens _gcvvavrOutputURI
+      (\ s a -> s{_gcvvavrOutputURI = a})
+
+instance FromJSON
+           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudVideointelligenceV1p2beta1AnnotateVideoRequest"
+              (\ o ->
+                 GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest'
+                   <$>
+                   (o .:? "inputUri") <*> (o .:? "videoContext") <*>
+                     (o .:? "inputContent")
+                     <*> (o .:? "features" .!= mempty)
+                     <*> (o .:? "locationId")
+                     <*> (o .:? "outputUri"))
+
+instance ToJSON
+           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest
+         where
+        toJSON
+          GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoRequest'{..}
+          = object
+              (catMaybes
+                 [("inputUri" .=) <$> _gcvvavrInputURI,
+                  ("videoContext" .=) <$> _gcvvavrVideoContext,
+                  ("inputContent" .=) <$> _gcvvavrInputContent,
+                  ("features" .=) <$> _gcvvavrFeatures,
+                  ("locationId" .=) <$> _gcvvavrLocationId,
+                  ("outputUri" .=) <$> _gcvvavrOutputURI])
+
 -- | Video frame level annotation results for explicit content.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_ExplicitContentFrame' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame = GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'
+data GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame =
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'
     { _gooTimeOffSet            :: !(Maybe GDuration)
     , _gooPornographyLikelihood :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFramePornographyLikelihood)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame' with the minimum fields required to make a request.
 --
@@ -3644,10 +3740,9 @@ data GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame = GoogleCloudVid
 googleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
     :: GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
 googleCloudVideointelligenceV1p2beta1_ExplicitContentFrame =
-    GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'
-    { _gooTimeOffSet = Nothing
-    , _gooPornographyLikelihood = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'
+    {_gooTimeOffSet = Nothing, _gooPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -3664,7 +3759,7 @@ gooPornographyLikelihood
       (\ s a -> s{_gooPornographyLikelihood = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
          where
         parseJSON
           = withObject
@@ -3676,7 +3771,7 @@ instance FromJSON
                      (o .:? "pornographyLikelihood"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'{..}
@@ -3689,11 +3784,14 @@ instance ToJSON
 -- | Detected entity from video analysis.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_Entity' smart constructor.
-data GoogleCloudVideointelligenceV1_Entity = GoogleCloudVideointelligenceV1_Entity'
+data GoogleCloudVideointelligenceV1_Entity =
+  GoogleCloudVideointelligenceV1_Entity'
     { _gcvvecLanguageCode :: !(Maybe Text)
     , _gcvvecEntityId     :: !(Maybe Text)
     , _gcvvecDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_Entity' with the minimum fields required to make a request.
 --
@@ -3707,11 +3805,12 @@ data GoogleCloudVideointelligenceV1_Entity = GoogleCloudVideointelligenceV1_Enti
 googleCloudVideointelligenceV1_Entity
     :: GoogleCloudVideointelligenceV1_Entity
 googleCloudVideointelligenceV1_Entity =
-    GoogleCloudVideointelligenceV1_Entity'
+  GoogleCloudVideointelligenceV1_Entity'
     { _gcvvecLanguageCode = Nothing
     , _gcvvecEntityId = Nothing
     , _gcvvecDescription = Nothing
     }
+
 
 -- | Language code for \`description\` in BCP-47 format.
 gcvvecLanguageCode :: Lens' GoogleCloudVideointelligenceV1_Entity (Maybe Text)
@@ -3733,7 +3832,8 @@ gcvvecDescription
       (\ s a -> s{_gcvvecDescription = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_Entity where
+           GoogleCloudVideointelligenceV1_Entity
+         where
         parseJSON
           = withObject "GoogleCloudVideointelligenceV1Entity"
               (\ o ->
@@ -3753,12 +3853,15 @@ instance ToJSON GoogleCloudVideointelligenceV1_Entity
 -- | Annotation progress for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_VideoAnnotationProgress' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress = GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress'
+data GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress =
+  GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress'
     { _gcvvvapsStartTime       :: !(Maybe DateTime')
     , _gcvvvapsInputURI        :: !(Maybe Text)
     , _gcvvvapsProgressPercent :: !(Maybe (Textual Int32))
     , _gcvvvapsUpdateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
@@ -3774,12 +3877,13 @@ data GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress = GoogleCloudVi
 googleCloudVideointelligenceV1beta2_VideoAnnotationProgress
     :: GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
 googleCloudVideointelligenceV1beta2_VideoAnnotationProgress =
-    GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress'
+  GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress'
     { _gcvvvapsStartTime = Nothing
     , _gcvvvapsInputURI = Nothing
     , _gcvvvapsProgressPercent = Nothing
     , _gcvvvapsUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gcvvvapsStartTime :: Lens' GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress (Maybe UTCTime)
@@ -3811,7 +3915,7 @@ gcvvvapsUpdateTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
          where
         parseJSON
           = withObject
@@ -3824,7 +3928,7 @@ instance FromJSON
                      <*> (o .:? "updateTime"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress'{..}
@@ -3838,10 +3942,13 @@ instance ToJSON
 -- | A speech recognition result corresponding to a portion of the audio.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_SpeechTranscription' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_SpeechTranscription = GoogleCloudVideointelligenceV1beta2_SpeechTranscription'
+data GoogleCloudVideointelligenceV1beta2_SpeechTranscription =
+  GoogleCloudVideointelligenceV1beta2_SpeechTranscription'
     { _gcvvstcAlternatives :: !(Maybe [GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative])
     , _gcvvstcLanguageCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_SpeechTranscription' with the minimum fields required to make a request.
 --
@@ -3853,10 +3960,9 @@ data GoogleCloudVideointelligenceV1beta2_SpeechTranscription = GoogleCloudVideoi
 googleCloudVideointelligenceV1beta2_SpeechTranscription
     :: GoogleCloudVideointelligenceV1beta2_SpeechTranscription
 googleCloudVideointelligenceV1beta2_SpeechTranscription =
-    GoogleCloudVideointelligenceV1beta2_SpeechTranscription'
-    { _gcvvstcAlternatives = Nothing
-    , _gcvvstcLanguageCode = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_SpeechTranscription'
+    {_gcvvstcAlternatives = Nothing, _gcvvstcLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -3879,7 +3985,7 @@ gcvvstcLanguageCode
       (\ s a -> s{_gcvvstcLanguageCode = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_SpeechTranscription
+           GoogleCloudVideointelligenceV1beta2_SpeechTranscription
          where
         parseJSON
           = withObject
@@ -3891,7 +3997,7 @@ instance FromJSON
                      (o .:? "languageCode"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_SpeechTranscription
+           GoogleCloudVideointelligenceV1beta2_SpeechTranscription
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_SpeechTranscription'{..}
@@ -3900,10 +4006,66 @@ instance ToJSON
                  [("alternatives" .=) <$> _gcvvstcAlternatives,
                   ("languageCode" .=) <$> _gcvvstcLanguageCode])
 
+-- | Provides \"hints\" to the speech recognizer to favor specific words and
+-- phrases in the results.
+--
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_SpeechContext' smart constructor.
+newtype GoogleCloudVideointelligenceV1p2beta1_SpeechContext =
+  GoogleCloudVideointelligenceV1p2beta1_SpeechContext'
+    { _gcvvscPhrases :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcvvscPhrases'
+googleCloudVideointelligenceV1p2beta1_SpeechContext
+    :: GoogleCloudVideointelligenceV1p2beta1_SpeechContext
+googleCloudVideointelligenceV1p2beta1_SpeechContext =
+  GoogleCloudVideointelligenceV1p2beta1_SpeechContext'
+    {_gcvvscPhrases = Nothing}
+
+
+-- | *Optional* A list of strings containing words and phrases \"hints\" so
+-- that the speech recognition is more likely to recognize them. This can
+-- be used to improve the accuracy for specific words and phrases, for
+-- example, if specific commands are typically spoken by the user. This can
+-- also be used to add additional words to the vocabulary of the
+-- recognizer. See [usage
+-- limits](https:\/\/cloud.google.com\/speech\/limits#content).
+gcvvscPhrases :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechContext [Text]
+gcvvscPhrases
+  = lens _gcvvscPhrases
+      (\ s a -> s{_gcvvscPhrases = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudVideointelligenceV1p2beta1_SpeechContext
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudVideointelligenceV1p2beta1SpeechContext"
+              (\ o ->
+                 GoogleCloudVideointelligenceV1p2beta1_SpeechContext'
+                   <$> (o .:? "phrases" .!= mempty))
+
+instance ToJSON
+           GoogleCloudVideointelligenceV1p2beta1_SpeechContext
+         where
+        toJSON
+          GoogleCloudVideointelligenceV1p2beta1_SpeechContext'{..}
+          = object
+              (catMaybes [("phrases" .=) <$> _gcvvscPhrases])
+
 -- | Annotation results for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_VideoAnnotationResults' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults = GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'
+data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults =
+  GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'
     { _gooShotAnnotations         :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_VideoSegment])
     , _gooShotLabelAnnotations    :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation])
     , _gooInputURI                :: !(Maybe Text)
@@ -3912,7 +4074,9 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults = GoogleCloudV
     , _gooSpeechTranscriptions    :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription])
     , _gooSegmentLabelAnnotations :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation])
     , _gooExplicitAnnotation      :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults' with the minimum fields required to make a request.
 --
@@ -3936,7 +4100,7 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults = GoogleCloudV
 googleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
     :: GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
 googleCloudVideointelligenceV1p1beta1_VideoAnnotationResults =
-    GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'
+  GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'
     { _gooShotAnnotations = Nothing
     , _gooShotLabelAnnotations = Nothing
     , _gooInputURI = Nothing
@@ -3946,6 +4110,7 @@ googleCloudVideointelligenceV1p1beta1_VideoAnnotationResults =
     , _gooSegmentLabelAnnotations = Nothing
     , _gooExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gooShotAnnotations :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults [GoogleCloudVideointelligenceV1p1beta1_VideoSegment]
@@ -4008,7 +4173,7 @@ gooExplicitAnnotation
       (\ s a -> s{_gooExplicitAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
          where
         parseJSON
           = withObject
@@ -4026,7 +4191,7 @@ instance FromJSON
                      <*> (o .:? "explicitAnnotation"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'{..}
@@ -4051,9 +4216,12 @@ instance ToJSON
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_AnnotateVideoProgress' smart constructor.
-newtype GoogleCloudVideointelligenceV1_AnnotateVideoProgress = GoogleCloudVideointelligenceV1_AnnotateVideoProgress'
+newtype GoogleCloudVideointelligenceV1_AnnotateVideoProgress =
+  GoogleCloudVideointelligenceV1_AnnotateVideoProgress'
     { _gooAnnotationProgress :: Maybe [GoogleCloudVideointelligenceV1_VideoAnnotationProgress]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_AnnotateVideoProgress' with the minimum fields required to make a request.
 --
@@ -4063,9 +4231,9 @@ newtype GoogleCloudVideointelligenceV1_AnnotateVideoProgress = GoogleCloudVideoi
 googleCloudVideointelligenceV1_AnnotateVideoProgress
     :: GoogleCloudVideointelligenceV1_AnnotateVideoProgress
 googleCloudVideointelligenceV1_AnnotateVideoProgress =
-    GoogleCloudVideointelligenceV1_AnnotateVideoProgress'
-    { _gooAnnotationProgress = Nothing
-    }
+  GoogleCloudVideointelligenceV1_AnnotateVideoProgress'
+    {_gooAnnotationProgress = Nothing}
+
 
 -- | Progress metadata for all videos specified in \`AnnotateVideoRequest\`.
 gooAnnotationProgress :: Lens' GoogleCloudVideointelligenceV1_AnnotateVideoProgress [GoogleCloudVideointelligenceV1_VideoAnnotationProgress]
@@ -4076,7 +4244,7 @@ gooAnnotationProgress
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1_AnnotateVideoProgress
          where
         parseJSON
           = withObject
@@ -4086,7 +4254,7 @@ instance FromJSON
                    <$> (o .:? "annotationProgress" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_AnnotateVideoProgress
+           GoogleCloudVideointelligenceV1_AnnotateVideoProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1_AnnotateVideoProgress'{..}
@@ -4094,186 +4262,6 @@ instance ToJSON
               (catMaybes
                  [("annotationProgress" .=) <$>
                     _gooAnnotationProgress])
-
--- | Config for SPEECH_TRANSCRIPTION.
---
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig = GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig'
-    { _gcvvstccSpeechContexts             :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_SpeechContext])
-    , _gcvvstccLanguageCode               :: !(Maybe Text)
-    , _gcvvstccAudioTracks                :: !(Maybe [Textual Int32])
-    , _gcvvstccEnableAutomaticPunctuation :: !(Maybe Bool)
-    , _gcvvstccMaxAlternatives            :: !(Maybe (Textual Int32))
-    , _gcvvstccEnableSpeakerDiarization   :: !(Maybe Bool)
-    , _gcvvstccFilterProfanity            :: !(Maybe Bool)
-    , _gcvvstccDiarizationSpeakerCount    :: !(Maybe (Textual Int32))
-    , _gcvvstccEnableWordConfidence       :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gcvvstccSpeechContexts'
---
--- * 'gcvvstccLanguageCode'
---
--- * 'gcvvstccAudioTracks'
---
--- * 'gcvvstccEnableAutomaticPunctuation'
---
--- * 'gcvvstccMaxAlternatives'
---
--- * 'gcvvstccEnableSpeakerDiarization'
---
--- * 'gcvvstccFilterProfanity'
---
--- * 'gcvvstccDiarizationSpeakerCount'
---
--- * 'gcvvstccEnableWordConfidence'
-googleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-    :: GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-googleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig =
-    GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig'
-    { _gcvvstccSpeechContexts = Nothing
-    , _gcvvstccLanguageCode = Nothing
-    , _gcvvstccAudioTracks = Nothing
-    , _gcvvstccEnableAutomaticPunctuation = Nothing
-    , _gcvvstccMaxAlternatives = Nothing
-    , _gcvvstccEnableSpeakerDiarization = Nothing
-    , _gcvvstccFilterProfanity = Nothing
-    , _gcvvstccDiarizationSpeakerCount = Nothing
-    , _gcvvstccEnableWordConfidence = Nothing
-    }
-
--- | *Optional* A means to provide context to assist the speech recognition.
-gcvvstccSpeechContexts :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig [GoogleCloudVideointelligenceV1p1beta1_SpeechContext]
-gcvvstccSpeechContexts
-  = lens _gcvvstccSpeechContexts
-      (\ s a -> s{_gcvvstccSpeechContexts = a})
-      . _Default
-      . _Coerce
-
--- | *Required* The language of the supplied audio as a
--- [BCP-47](https:\/\/www.rfc-editor.org\/rfc\/bcp\/bcp47.txt) language
--- tag. Example: \"en-US\". See [Language
--- Support](https:\/\/cloud.google.com\/speech\/docs\/languages) for a list
--- of the currently supported language codes.
-gcvvstccLanguageCode :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Text)
-gcvvstccLanguageCode
-  = lens _gcvvstccLanguageCode
-      (\ s a -> s{_gcvvstccLanguageCode = a})
-
--- | *Optional* For file formats, such as MXF or MKV, supporting multiple
--- audio tracks, specify up to two tracks. Default: track 0.
-gcvvstccAudioTracks :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig [Int32]
-gcvvstccAudioTracks
-  = lens _gcvvstccAudioTracks
-      (\ s a -> s{_gcvvstccAudioTracks = a})
-      . _Default
-      . _Coerce
-
--- | *Optional* If \'true\', adds punctuation to recognition result
--- hypotheses. This feature is only available in select languages. Setting
--- this for requests in other languages has no effect at all. The default
--- \'false\' value does not add punctuation to result hypotheses. NOTE:
--- \"This is currently offered as an experimental service, complimentary to
--- all users. In the future this may be exclusively available as a premium
--- feature.\"
-gcvvstccEnableAutomaticPunctuation :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Bool)
-gcvvstccEnableAutomaticPunctuation
-  = lens _gcvvstccEnableAutomaticPunctuation
-      (\ s a -> s{_gcvvstccEnableAutomaticPunctuation = a})
-
--- | *Optional* Maximum number of recognition hypotheses to be returned.
--- Specifically, the maximum number of \`SpeechRecognitionAlternative\`
--- messages within each \`SpeechTranscription\`. The server may return
--- fewer than \`max_alternatives\`. Valid values are \`0\`-\`30\`. A value
--- of \`0\` or \`1\` will return a maximum of one. If omitted, will return
--- a maximum of one.
-gcvvstccMaxAlternatives :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Int32)
-gcvvstccMaxAlternatives
-  = lens _gcvvstccMaxAlternatives
-      (\ s a -> s{_gcvvstccMaxAlternatives = a})
-      . mapping _Coerce
-
--- | *Optional* If \'true\', enables speaker detection for each recognized
--- word in the top alternative of the recognition result using a
--- speaker_tag provided in the WordInfo. Note: When this is true, we send
--- all the words from the beginning of the audio for the top alternative in
--- every consecutive responses. This is done in order to improve our
--- speaker tags as our models learn to identify the speakers in the
--- conversation over time.
-gcvvstccEnableSpeakerDiarization :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Bool)
-gcvvstccEnableSpeakerDiarization
-  = lens _gcvvstccEnableSpeakerDiarization
-      (\ s a -> s{_gcvvstccEnableSpeakerDiarization = a})
-
--- | *Optional* If set to \`true\`, the server will attempt to filter out
--- profanities, replacing all but the initial character in each filtered
--- word with asterisks, e.g. \"f***\". If set to \`false\` or omitted,
--- profanities won\'t be filtered out.
-gcvvstccFilterProfanity :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Bool)
-gcvvstccFilterProfanity
-  = lens _gcvvstccFilterProfanity
-      (\ s a -> s{_gcvvstccFilterProfanity = a})
-
--- | *Optional* If set, specifies the estimated number of speakers in the
--- conversation. If not set, defaults to \'2\'. Ignored unless
--- enable_speaker_diarization is set to true.
-gcvvstccDiarizationSpeakerCount :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Int32)
-gcvvstccDiarizationSpeakerCount
-  = lens _gcvvstccDiarizationSpeakerCount
-      (\ s a -> s{_gcvvstccDiarizationSpeakerCount = a})
-      . mapping _Coerce
-
--- | *Optional* If \`true\`, the top result includes a list of words and the
--- confidence for those words. If \`false\`, no word-level confidence
--- information is returned. The default is \`false\`.
-gcvvstccEnableWordConfidence :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig (Maybe Bool)
-gcvvstccEnableWordConfidence
-  = lens _gcvvstccEnableWordConfidence
-      (\ s a -> s{_gcvvstccEnableWordConfidence = a})
-
-instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-         where
-        parseJSON
-          = withObject
-              "GoogleCloudVideointelligenceV1p1beta1SpeechTranscriptionConfig"
-              (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig'
-                   <$>
-                   (o .:? "speechContexts" .!= mempty) <*>
-                     (o .:? "languageCode")
-                     <*> (o .:? "audioTracks" .!= mempty)
-                     <*> (o .:? "enableAutomaticPunctuation")
-                     <*> (o .:? "maxAlternatives")
-                     <*> (o .:? "enableSpeakerDiarization")
-                     <*> (o .:? "filterProfanity")
-                     <*> (o .:? "diarizationSpeakerCount")
-                     <*> (o .:? "enableWordConfidence"))
-
-instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig
-         where
-        toJSON
-          GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig'{..}
-          = object
-              (catMaybes
-                 [("speechContexts" .=) <$> _gcvvstccSpeechContexts,
-                  ("languageCode" .=) <$> _gcvvstccLanguageCode,
-                  ("audioTracks" .=) <$> _gcvvstccAudioTracks,
-                  ("enableAutomaticPunctuation" .=) <$>
-                    _gcvvstccEnableAutomaticPunctuation,
-                  ("maxAlternatives" .=) <$> _gcvvstccMaxAlternatives,
-                  ("enableSpeakerDiarization" .=) <$>
-                    _gcvvstccEnableSpeakerDiarization,
-                  ("filterProfanity" .=) <$> _gcvvstccFilterProfanity,
-                  ("diarizationSpeakerCount" .=) <$>
-                    _gcvvstccDiarizationSpeakerCount,
-                  ("enableWordConfidence" .=) <$>
-                    _gcvvstccEnableWordConfidence])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -4285,9 +4273,12 @@ instance ToJSON
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'googleLongrunning_OperationResponse' smart constructor.
-newtype GoogleLongrunning_OperationResponse = GoogleLongrunning_OperationResponse'
+newtype GoogleLongrunning_OperationResponse =
+  GoogleLongrunning_OperationResponse'
     { _glorAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunning_OperationResponse' with the minimum fields required to make a request.
 --
@@ -4298,9 +4289,9 @@ googleLongrunning_OperationResponse
     :: HashMap Text JSONValue -- ^ 'glorAddtional'
     -> GoogleLongrunning_OperationResponse
 googleLongrunning_OperationResponse pGlorAddtional_ =
-    GoogleLongrunning_OperationResponse'
-    { _glorAddtional = _Coerce # pGlorAddtional_
-    }
+  GoogleLongrunning_OperationResponse'
+    {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunning_OperationResponse (HashMap Text JSONValue)
@@ -4324,12 +4315,15 @@ instance ToJSON GoogleLongrunning_OperationResponse
 -- | Annotation progress for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress = GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress'
+data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress =
+  GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress'
     { _gcvvvapcStartTime       :: !(Maybe DateTime')
     , _gcvvvapcInputURI        :: !(Maybe Text)
     , _gcvvvapcProgressPercent :: !(Maybe (Textual Int32))
     , _gcvvvapcUpdateTime      :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress' with the minimum fields required to make a request.
 --
@@ -4345,12 +4339,13 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress = GoogleCloud
 googleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
     :: GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
 googleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress =
-    GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress'
+  GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress'
     { _gcvvvapcStartTime = Nothing
     , _gcvvvapcInputURI = Nothing
     , _gcvvvapcProgressPercent = Nothing
     , _gcvvvapcUpdateTime = Nothing
     }
+
 
 -- | Time when the request was received.
 gcvvvapcStartTime :: Lens' GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress (Maybe UTCTime)
@@ -4382,7 +4377,7 @@ gcvvvapcUpdateTime
       . mapping _DateTime
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
          where
         parseJSON
           = withObject
@@ -4395,7 +4390,7 @@ instance FromJSON
                      <*> (o .:? "updateTime"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
+           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress'{..}
@@ -4411,10 +4406,13 @@ instance ToJSON
 -- frames containing detected OCR text snippets.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_TextFrame' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_TextFrame = GoogleCloudVideointelligenceV1p2beta1_TextFrame'
+data GoogleCloudVideointelligenceV1p2beta1_TextFrame =
+  GoogleCloudVideointelligenceV1p2beta1_TextFrame'
     { _gcvvtfRotatedBoundingBox :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly)
     , _gcvvtfTimeOffSet         :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextFrame' with the minimum fields required to make a request.
 --
@@ -4426,10 +4424,9 @@ data GoogleCloudVideointelligenceV1p2beta1_TextFrame = GoogleCloudVideointellige
 googleCloudVideointelligenceV1p2beta1_TextFrame
     :: GoogleCloudVideointelligenceV1p2beta1_TextFrame
 googleCloudVideointelligenceV1p2beta1_TextFrame =
-    GoogleCloudVideointelligenceV1p2beta1_TextFrame'
-    { _gcvvtfRotatedBoundingBox = Nothing
-    , _gcvvtfTimeOffSet = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_TextFrame'
+    {_gcvvtfRotatedBoundingBox = Nothing, _gcvvtfTimeOffSet = Nothing}
+
 
 -- | Bounding polygon of the detected text for this frame.
 gcvvtfRotatedBoundingBox :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextFrame (Maybe GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly)
@@ -4445,7 +4442,8 @@ gcvvtfTimeOffSet
       . mapping _GDuration
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_TextFrame where
+           GoogleCloudVideointelligenceV1p2beta1_TextFrame
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1p2beta1TextFrame"
@@ -4455,7 +4453,8 @@ instance FromJSON
                      (o .:? "timeOffset"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_TextFrame where
+           GoogleCloudVideointelligenceV1p2beta1_TextFrame
+         where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_TextFrame'{..}
           = object
@@ -4467,12 +4466,15 @@ instance ToJSON
 -- | Label annotation.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_LabelAnnotation' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_LabelAnnotation = GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+data GoogleCloudVideointelligenceV1beta2_LabelAnnotation =
+  GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
     { _goooCategoryEntities :: !(Maybe [GoogleCloudVideointelligenceV1beta2_Entity])
     , _goooFrames           :: !(Maybe [GoogleCloudVideointelligenceV1beta2_LabelFrame])
     , _goooSegments         :: !(Maybe [GoogleCloudVideointelligenceV1beta2_LabelSegment])
     , _goooEntity           :: !(Maybe GoogleCloudVideointelligenceV1beta2_Entity)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_LabelAnnotation' with the minimum fields required to make a request.
 --
@@ -4488,12 +4490,13 @@ data GoogleCloudVideointelligenceV1beta2_LabelAnnotation = GoogleCloudVideointel
 googleCloudVideointelligenceV1beta2_LabelAnnotation
     :: GoogleCloudVideointelligenceV1beta2_LabelAnnotation
 googleCloudVideointelligenceV1beta2_LabelAnnotation =
-    GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+  GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
     { _goooCategoryEntities = Nothing
     , _goooFrames = Nothing
     , _goooSegments = Nothing
     , _goooEntity = Nothing
     }
+
 
 -- | Common categories for the detected entity. E.g. when the label is
 -- \`Terrier\` the category is likely \`dog\`. And in some cases there
@@ -4526,7 +4529,7 @@ goooEntity
   = lens _goooEntity (\ s a -> s{_goooEntity = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_LabelAnnotation
+           GoogleCloudVideointelligenceV1beta2_LabelAnnotation
          where
         parseJSON
           = withObject
@@ -4540,7 +4543,7 @@ instance FromJSON
                      <*> (o .:? "entity"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_LabelAnnotation
+           GoogleCloudVideointelligenceV1beta2_LabelAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_LabelAnnotation'{..}
@@ -4551,87 +4554,16 @@ instance ToJSON
                   ("segments" .=) <$> _goooSegments,
                   ("entity" .=) <$> _goooEntity])
 
--- | Config for LABEL_DETECTION.
---
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_LabelDetectionConfig' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig = GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig'
-    { _gcvvldcLabelDetectionMode :: !(Maybe GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode)
-    , _gcvvldcStationaryCamera   :: !(Maybe Bool)
-    , _gcvvldcModel              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gcvvldcLabelDetectionMode'
---
--- * 'gcvvldcStationaryCamera'
---
--- * 'gcvvldcModel'
-googleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-    :: GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-googleCloudVideointelligenceV1p1beta1_LabelDetectionConfig =
-    GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig'
-    { _gcvvldcLabelDetectionMode = Nothing
-    , _gcvvldcStationaryCamera = Nothing
-    , _gcvvldcModel = Nothing
-    }
-
--- | What labels should be detected with LABEL_DETECTION, in addition to
--- video-level labels or segment-level labels. If unspecified, defaults to
--- \`SHOT_MODE\`.
-gcvvldcLabelDetectionMode :: Lens' GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig (Maybe GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfigLabelDetectionMode)
-gcvvldcLabelDetectionMode
-  = lens _gcvvldcLabelDetectionMode
-      (\ s a -> s{_gcvvldcLabelDetectionMode = a})
-
--- | Whether the video has been shot from a stationary (i.e. non-moving)
--- camera. When set to true, might improve detection accuracy for moving
--- objects. Should be used with \`SHOT_AND_FRAME_MODE\` enabled.
-gcvvldcStationaryCamera :: Lens' GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig (Maybe Bool)
-gcvvldcStationaryCamera
-  = lens _gcvvldcStationaryCamera
-      (\ s a -> s{_gcvvldcStationaryCamera = a})
-
--- | Model to use for label detection. Supported values: \"builtin\/stable\"
--- (the default if unset) and \"builtin\/latest\".
-gcvvldcModel :: Lens' GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig (Maybe Text)
-gcvvldcModel
-  = lens _gcvvldcModel (\ s a -> s{_gcvvldcModel = a})
-
-instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-         where
-        parseJSON
-          = withObject
-              "GoogleCloudVideointelligenceV1p1beta1LabelDetectionConfig"
-              (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig'
-                   <$>
-                   (o .:? "labelDetectionMode") <*>
-                     (o .:? "stationaryCamera")
-                     <*> (o .:? "model"))
-
-instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig
-         where
-        toJSON
-          GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig'{..}
-          = object
-              (catMaybes
-                 [("labelDetectionMode" .=) <$>
-                    _gcvvldcLabelDetectionMode,
-                  ("stationaryCamera" .=) <$> _gcvvldcStationaryCamera,
-                  ("model" .=) <$> _gcvvldcModel])
-
 -- | A speech recognition result corresponding to a portion of the audio.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_SpeechTranscription' smart constructor.
-data GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription = GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'
+data GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription =
+  GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'
     { _ggAlternatives :: !(Maybe [GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative])
     , _ggLanguageCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription' with the minimum fields required to make a request.
 --
@@ -4643,10 +4575,9 @@ data GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription = GoogleCloudVide
 googleCloudVideointelligenceV1p1beta1_SpeechTranscription
     :: GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
 googleCloudVideointelligenceV1p1beta1_SpeechTranscription =
-    GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'
-    { _ggAlternatives = Nothing
-    , _ggLanguageCode = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'
+    {_ggAlternatives = Nothing, _ggLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -4669,7 +4600,7 @@ ggLanguageCode
       (\ s a -> s{_ggLanguageCode = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
+           GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
          where
         parseJSON
           = withObject
@@ -4681,7 +4612,7 @@ instance FromJSON
                      (o .:? "languageCode"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
+           GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'{..}
@@ -4693,7 +4624,8 @@ instance ToJSON
 -- | Annotation results for a single video.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_VideoAnnotationResults' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults = GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'
+data GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults =
+  GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'
     { _gcvvvarcShotAnnotations         :: !(Maybe [GoogleCloudVideointelligenceV1beta2_VideoSegment])
     , _gcvvvarcShotLabelAnnotations    :: !(Maybe [GoogleCloudVideointelligenceV1beta2_LabelAnnotation])
     , _gcvvvarcInputURI                :: !(Maybe Text)
@@ -4702,7 +4634,9 @@ data GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults = GoogleCloudVid
     , _gcvvvarcSpeechTranscriptions    :: !(Maybe [GoogleCloudVideointelligenceV1beta2_SpeechTranscription])
     , _gcvvvarcSegmentLabelAnnotations :: !(Maybe [GoogleCloudVideointelligenceV1beta2_LabelAnnotation])
     , _gcvvvarcExplicitAnnotation      :: !(Maybe GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults' with the minimum fields required to make a request.
 --
@@ -4726,7 +4660,7 @@ data GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults = GoogleCloudVid
 googleCloudVideointelligenceV1beta2_VideoAnnotationResults
     :: GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
 googleCloudVideointelligenceV1beta2_VideoAnnotationResults =
-    GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'
+  GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'
     { _gcvvvarcShotAnnotations = Nothing
     , _gcvvvarcShotLabelAnnotations = Nothing
     , _gcvvvarcInputURI = Nothing
@@ -4736,6 +4670,7 @@ googleCloudVideointelligenceV1beta2_VideoAnnotationResults =
     , _gcvvvarcSegmentLabelAnnotations = Nothing
     , _gcvvvarcExplicitAnnotation = Nothing
     }
+
 
 -- | Shot annotations. Each shot is represented as a video segment.
 gcvvvarcShotAnnotations :: Lens' GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults [GoogleCloudVideointelligenceV1beta2_VideoSegment]
@@ -4801,7 +4736,7 @@ gcvvvarcExplicitAnnotation
       (\ s a -> s{_gcvvvarcExplicitAnnotation = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
          where
         parseJSON
           = withObject
@@ -4819,7 +4754,7 @@ instance FromJSON
                      <*> (o .:? "explicitAnnotation"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
+           GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'{..}
@@ -4842,10 +4777,13 @@ instance ToJSON
 -- | Video segment level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_LabelSegment' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_LabelSegment = GoogleCloudVideointelligenceV1p2beta1_LabelSegment'
+data GoogleCloudVideointelligenceV1p2beta1_LabelSegment =
+  GoogleCloudVideointelligenceV1p2beta1_LabelSegment'
     { _gcvvls1Confidence :: !(Maybe (Textual Double))
     , _gcvvls1Segment    :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_VideoSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelSegment' with the minimum fields required to make a request.
 --
@@ -4857,10 +4795,9 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelSegment = GoogleCloudVideointell
 googleCloudVideointelligenceV1p2beta1_LabelSegment
     :: GoogleCloudVideointelligenceV1p2beta1_LabelSegment
 googleCloudVideointelligenceV1p2beta1_LabelSegment =
-    GoogleCloudVideointelligenceV1p2beta1_LabelSegment'
-    { _gcvvls1Confidence = Nothing
-    , _gcvvls1Segment = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_LabelSegment'
+    {_gcvvls1Confidence = Nothing, _gcvvls1Segment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 gcvvls1Confidence :: Lens' GoogleCloudVideointelligenceV1p2beta1_LabelSegment (Maybe Double)
@@ -4876,7 +4813,7 @@ gcvvls1Segment
       (\ s a -> s{_gcvvls1Segment = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_LabelSegment
+           GoogleCloudVideointelligenceV1p2beta1_LabelSegment
          where
         parseJSON
           = withObject
@@ -4886,7 +4823,7 @@ instance FromJSON
                    <$> (o .:? "confidence") <*> (o .:? "segment"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_LabelSegment
+           GoogleCloudVideointelligenceV1p2beta1_LabelSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_LabelSegment'{..}
@@ -4895,16 +4832,138 @@ instance ToJSON
                  [("confidence" .=) <$> _gcvvls1Confidence,
                   ("segment" .=) <$> _gcvvls1Segment])
 
+-- | Video context and\/or feature-specific parameters.
+--
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_VideoContext' smart constructor.
+data GoogleCloudVideointelligenceV1p2beta1_VideoContext =
+  GoogleCloudVideointelligenceV1p2beta1_VideoContext'
+    { _gcvvvcSpeechTranscriptionConfig      :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig)
+    , _gcvvvcExplicitContentDetectionConfig :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig)
+    , _gcvvvcLabelDetectionConfig           :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig)
+    , _gcvvvcSegments                       :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_VideoSegment])
+    , _gcvvvcTextDetectionConfig            :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig)
+    , _gcvvvcShotChangeDetectionConfig      :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_VideoContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcvvvcSpeechTranscriptionConfig'
+--
+-- * 'gcvvvcExplicitContentDetectionConfig'
+--
+-- * 'gcvvvcLabelDetectionConfig'
+--
+-- * 'gcvvvcSegments'
+--
+-- * 'gcvvvcTextDetectionConfig'
+--
+-- * 'gcvvvcShotChangeDetectionConfig'
+googleCloudVideointelligenceV1p2beta1_VideoContext
+    :: GoogleCloudVideointelligenceV1p2beta1_VideoContext
+googleCloudVideointelligenceV1p2beta1_VideoContext =
+  GoogleCloudVideointelligenceV1p2beta1_VideoContext'
+    { _gcvvvcSpeechTranscriptionConfig = Nothing
+    , _gcvvvcExplicitContentDetectionConfig = Nothing
+    , _gcvvvcLabelDetectionConfig = Nothing
+    , _gcvvvcSegments = Nothing
+    , _gcvvvcTextDetectionConfig = Nothing
+    , _gcvvvcShotChangeDetectionConfig = Nothing
+    }
+
+
+-- | Config for SPEECH_TRANSCRIPTION.
+gcvvvcSpeechTranscriptionConfig :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig)
+gcvvvcSpeechTranscriptionConfig
+  = lens _gcvvvcSpeechTranscriptionConfig
+      (\ s a -> s{_gcvvvcSpeechTranscriptionConfig = a})
+
+-- | Config for EXPLICIT_CONTENT_DETECTION.
+gcvvvcExplicitContentDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p2beta1_ExplicitContentDetectionConfig)
+gcvvvcExplicitContentDetectionConfig
+  = lens _gcvvvcExplicitContentDetectionConfig
+      (\ s a ->
+         s{_gcvvvcExplicitContentDetectionConfig = a})
+
+-- | Config for LABEL_DETECTION.
+gcvvvcLabelDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig)
+gcvvvcLabelDetectionConfig
+  = lens _gcvvvcLabelDetectionConfig
+      (\ s a -> s{_gcvvvcLabelDetectionConfig = a})
+
+-- | Video segments to annotate. The segments may overlap and are not
+-- required to be contiguous or span the whole video. If unspecified, each
+-- video is treated as a single segment.
+gcvvvcSegments :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext [GoogleCloudVideointelligenceV1p2beta1_VideoSegment]
+gcvvvcSegments
+  = lens _gcvvvcSegments
+      (\ s a -> s{_gcvvvcSegments = a})
+      . _Default
+      . _Coerce
+
+-- | Config for TEXT_DETECTION.
+gcvvvcTextDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p2beta1_TextDetectionConfig)
+gcvvvcTextDetectionConfig
+  = lens _gcvvvcTextDetectionConfig
+      (\ s a -> s{_gcvvvcTextDetectionConfig = a})
+
+-- | Config for SHOT_CHANGE_DETECTION.
+gcvvvcShotChangeDetectionConfig :: Lens' GoogleCloudVideointelligenceV1p2beta1_VideoContext (Maybe GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig)
+gcvvvcShotChangeDetectionConfig
+  = lens _gcvvvcShotChangeDetectionConfig
+      (\ s a -> s{_gcvvvcShotChangeDetectionConfig = a})
+
+instance FromJSON
+           GoogleCloudVideointelligenceV1p2beta1_VideoContext
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudVideointelligenceV1p2beta1VideoContext"
+              (\ o ->
+                 GoogleCloudVideointelligenceV1p2beta1_VideoContext'
+                   <$>
+                   (o .:? "speechTranscriptionConfig") <*>
+                     (o .:? "explicitContentDetectionConfig")
+                     <*> (o .:? "labelDetectionConfig")
+                     <*> (o .:? "segments" .!= mempty)
+                     <*> (o .:? "textDetectionConfig")
+                     <*> (o .:? "shotChangeDetectionConfig"))
+
+instance ToJSON
+           GoogleCloudVideointelligenceV1p2beta1_VideoContext
+         where
+        toJSON
+          GoogleCloudVideointelligenceV1p2beta1_VideoContext'{..}
+          = object
+              (catMaybes
+                 [("speechTranscriptionConfig" .=) <$>
+                    _gcvvvcSpeechTranscriptionConfig,
+                  ("explicitContentDetectionConfig" .=) <$>
+                    _gcvvvcExplicitContentDetectionConfig,
+                  ("labelDetectionConfig" .=) <$>
+                    _gcvvvcLabelDetectionConfig,
+                  ("segments" .=) <$> _gcvvvcSegments,
+                  ("textDetectionConfig" .=) <$>
+                    _gcvvvcTextDetectionConfig,
+                  ("shotChangeDetectionConfig" .=) <$>
+                    _gcvvvcShotChangeDetectionConfig])
+
 -- | Normalized bounding box. The normalized vertex coordinates are relative
 -- to the original image. Range: [0, 1].
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox = GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'
+data GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox =
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'
     { _gcvvnbbBottom :: !(Maybe (Textual Double))
     , _gcvvnbbLeft   :: !(Maybe (Textual Double))
     , _gcvvnbbRight  :: !(Maybe (Textual Double))
     , _gcvvnbbTop    :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox' with the minimum fields required to make a request.
 --
@@ -4920,12 +4979,13 @@ data GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox = GoogleCloudVi
 googleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
     :: GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
 googleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox =
-    GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'
     { _gcvvnbbBottom = Nothing
     , _gcvvnbbLeft = Nothing
     , _gcvvnbbRight = Nothing
     , _gcvvnbbTop = Nothing
     }
+
 
 -- | Bottom Y coordinate.
 gcvvnbbBottom :: Lens' GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox (Maybe Double)
@@ -4953,7 +5013,7 @@ gcvvnbbTop
       mapping _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
+           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
          where
         parseJSON
           = withObject
@@ -4966,7 +5026,7 @@ instance FromJSON
                      <*> (o .:? "top"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
+           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'{..}
@@ -4980,11 +5040,14 @@ instance ToJSON
 -- | Video segment level annotation results for text detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_TextSegment' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_TextSegment = GoogleCloudVideointelligenceV1p2beta1_TextSegment'
+data GoogleCloudVideointelligenceV1p2beta1_TextSegment =
+  GoogleCloudVideointelligenceV1p2beta1_TextSegment'
     { _gcvvtsFrames     :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_TextFrame])
     , _gcvvtsConfidence :: !(Maybe (Textual Double))
     , _gcvvtsSegment    :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_VideoSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_TextSegment' with the minimum fields required to make a request.
 --
@@ -4998,11 +5061,12 @@ data GoogleCloudVideointelligenceV1p2beta1_TextSegment = GoogleCloudVideointelli
 googleCloudVideointelligenceV1p2beta1_TextSegment
     :: GoogleCloudVideointelligenceV1p2beta1_TextSegment
 googleCloudVideointelligenceV1p2beta1_TextSegment =
-    GoogleCloudVideointelligenceV1p2beta1_TextSegment'
+  GoogleCloudVideointelligenceV1p2beta1_TextSegment'
     { _gcvvtsFrames = Nothing
     , _gcvvtsConfidence = Nothing
     , _gcvvtsSegment = Nothing
     }
+
 
 -- | Information related to the frames where OCR detected text appears.
 gcvvtsFrames :: Lens' GoogleCloudVideointelligenceV1p2beta1_TextSegment [GoogleCloudVideointelligenceV1p2beta1_TextFrame]
@@ -5026,7 +5090,7 @@ gcvvtsSegment
       (\ s a -> s{_gcvvtsSegment = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_TextSegment
+           GoogleCloudVideointelligenceV1p2beta1_TextSegment
          where
         parseJSON
           = withObject
@@ -5038,7 +5102,7 @@ instance FromJSON
                      <*> (o .:? "segment"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_TextSegment
+           GoogleCloudVideointelligenceV1p2beta1_TextSegment
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_TextSegment'{..}
@@ -5051,10 +5115,13 @@ instance ToJSON
 -- | A speech recognition result corresponding to a portion of the audio.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p2beta1_SpeechTranscription' smart constructor.
-data GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription = GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'
+data GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription =
+  GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'
     { _goooAlternatives :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative])
     , _goooLanguageCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription' with the minimum fields required to make a request.
 --
@@ -5066,10 +5133,9 @@ data GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription = GoogleCloudVide
 googleCloudVideointelligenceV1p2beta1_SpeechTranscription
     :: GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
 googleCloudVideointelligenceV1p2beta1_SpeechTranscription =
-    GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'
-    { _goooAlternatives = Nothing
-    , _goooLanguageCode = Nothing
-    }
+  GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'
+    {_goooAlternatives = Nothing, _goooLanguageCode = Nothing}
+
 
 -- | May contain one or more recognition hypotheses (up to the maximum
 -- specified in \`max_alternatives\`). These alternatives are ordered in
@@ -5092,7 +5158,7 @@ goooLanguageCode
       (\ s a -> s{_goooLanguageCode = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
+           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
          where
         parseJSON
           = withObject
@@ -5104,7 +5170,7 @@ instance FromJSON
                      (o .:? "languageCode"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
+           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
          where
         toJSON
           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'{..}
@@ -5150,11 +5216,14 @@ instance ToJSON
 -- security\/privacy reasons.
 --
 -- /See:/ 'googleRpc_Status' smart constructor.
-data GoogleRpc_Status = GoogleRpc_Status'
+data GoogleRpc_Status =
+  GoogleRpc_Status'
     { _grsDetails :: !(Maybe [GoogleRpc_StatusDetailsItem])
     , _grsCode    :: !(Maybe (Textual Int32))
     , _grsMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpc_Status' with the minimum fields required to make a request.
 --
@@ -5168,11 +5237,9 @@ data GoogleRpc_Status = GoogleRpc_Status'
 googleRpc_Status
     :: GoogleRpc_Status
 googleRpc_Status =
-    GoogleRpc_Status'
-    { _grsDetails = Nothing
-    , _grsCode = Nothing
-    , _grsMessage = Nothing
-    }
+  GoogleRpc_Status'
+    {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -5211,13 +5278,94 @@ instance ToJSON GoogleRpc_Status where
                   ("code" .=) <$> _grsCode,
                   ("message" .=) <$> _grsMessage])
 
+-- | Config for LABEL_DETECTION.
+--
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_LabelDetectionConfig' smart constructor.
+data GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig'
+    { _gcvvldcLabelDetectionMode :: !(Maybe GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode)
+    , _gcvvldcStationaryCamera   :: !(Maybe Bool)
+    , _gcvvldcModel              :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcvvldcLabelDetectionMode'
+--
+-- * 'gcvvldcStationaryCamera'
+--
+-- * 'gcvvldcModel'
+googleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+    :: GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+googleCloudVideointelligenceV1p2beta1_LabelDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig'
+    { _gcvvldcLabelDetectionMode = Nothing
+    , _gcvvldcStationaryCamera = Nothing
+    , _gcvvldcModel = Nothing
+    }
+
+
+-- | What labels should be detected with LABEL_DETECTION, in addition to
+-- video-level labels or segment-level labels. If unspecified, defaults to
+-- \`SHOT_MODE\`.
+gcvvldcLabelDetectionMode :: Lens' GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig (Maybe GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfigLabelDetectionMode)
+gcvvldcLabelDetectionMode
+  = lens _gcvvldcLabelDetectionMode
+      (\ s a -> s{_gcvvldcLabelDetectionMode = a})
+
+-- | Whether the video has been shot from a stationary (i.e. non-moving)
+-- camera. When set to true, might improve detection accuracy for moving
+-- objects. Should be used with \`SHOT_AND_FRAME_MODE\` enabled.
+gcvvldcStationaryCamera :: Lens' GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig (Maybe Bool)
+gcvvldcStationaryCamera
+  = lens _gcvvldcStationaryCamera
+      (\ s a -> s{_gcvvldcStationaryCamera = a})
+
+-- | Model to use for label detection. Supported values: \"builtin\/stable\"
+-- (the default if unset) and \"builtin\/latest\".
+gcvvldcModel :: Lens' GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig (Maybe Text)
+gcvvldcModel
+  = lens _gcvvldcModel (\ s a -> s{_gcvvldcModel = a})
+
+instance FromJSON
+           GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudVideointelligenceV1p2beta1LabelDetectionConfig"
+              (\ o ->
+                 GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig'
+                   <$>
+                   (o .:? "labelDetectionMode") <*>
+                     (o .:? "stationaryCamera")
+                     <*> (o .:? "model"))
+
+instance ToJSON
+           GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig
+         where
+        toJSON
+          GoogleCloudVideointelligenceV1p2beta1_LabelDetectionConfig'{..}
+          = object
+              (catMaybes
+                 [("labelDetectionMode" .=) <$>
+                    _gcvvldcLabelDetectionMode,
+                  ("stationaryCamera" .=) <$> _gcvvldcStationaryCamera,
+                  ("model" .=) <$> _gcvvldcModel])
+
 -- | Video segment.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_VideoSegment' smart constructor.
-data GoogleCloudVideointelligenceV1_VideoSegment = GoogleCloudVideointelligenceV1_VideoSegment'
+data GoogleCloudVideointelligenceV1_VideoSegment =
+  GoogleCloudVideointelligenceV1_VideoSegment'
     { _gcvvvscStartTimeOffSet :: !(Maybe GDuration)
     , _gcvvvscEndTimeOffSet   :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_VideoSegment' with the minimum fields required to make a request.
 --
@@ -5229,10 +5377,9 @@ data GoogleCloudVideointelligenceV1_VideoSegment = GoogleCloudVideointelligenceV
 googleCloudVideointelligenceV1_VideoSegment
     :: GoogleCloudVideointelligenceV1_VideoSegment
 googleCloudVideointelligenceV1_VideoSegment =
-    GoogleCloudVideointelligenceV1_VideoSegment'
-    { _gcvvvscStartTimeOffSet = Nothing
-    , _gcvvvscEndTimeOffSet = Nothing
-    }
+  GoogleCloudVideointelligenceV1_VideoSegment'
+    {_gcvvvscStartTimeOffSet = Nothing, _gcvvvscEndTimeOffSet = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the start of the segment (inclusive).
@@ -5251,7 +5398,8 @@ gcvvvscEndTimeOffSet
       . mapping _GDuration
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_VideoSegment where
+           GoogleCloudVideointelligenceV1_VideoSegment
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1VideoSegment"
@@ -5261,7 +5409,8 @@ instance FromJSON
                      (o .:? "endTimeOffset"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_VideoSegment where
+           GoogleCloudVideointelligenceV1_VideoSegment
+         where
         toJSON
           GoogleCloudVideointelligenceV1_VideoSegment'{..}
           = object
@@ -5274,9 +5423,12 @@ instance ToJSON
 -- present for that frame.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation' smart constructor.
-newtype GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation = GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
+newtype GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation =
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
     { _gcvvecacFrames :: Maybe [GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation' with the minimum fields required to make a request.
 --
@@ -5286,9 +5438,9 @@ newtype GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation = Google
 googleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
     :: GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
 googleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation =
-    GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
-    { _gcvvecacFrames = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
+    {_gcvvecacFrames = Nothing}
+
 
 -- | All video frames where explicit content was detected.
 gcvvecacFrames :: Lens' GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation [GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame]
@@ -5299,7 +5451,7 @@ gcvvecacFrames
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
          where
         parseJSON
           = withObject
@@ -5309,21 +5461,71 @@ instance FromJSON
                    <$> (o .:? "frames" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
+           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'{..}
           = object
               (catMaybes [("frames" .=) <$> _gcvvecacFrames])
 
+-- | Config for SHOT_CHANGE_DETECTION.
+--
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig' smart constructor.
+newtype GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig'
+    { _gcvvscdcModel :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcvvscdcModel'
+googleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+    :: GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+googleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig'
+    {_gcvvscdcModel = Nothing}
+
+
+-- | Model to use for shot change detection. Supported values:
+-- \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
+gcvvscdcModel :: Lens' GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig (Maybe Text)
+gcvvscdcModel
+  = lens _gcvvscdcModel
+      (\ s a -> s{_gcvvscdcModel = a})
+
+instance FromJSON
+           GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudVideointelligenceV1p2beta1ShotChangeDetectionConfig"
+              (\ o ->
+                 GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig'
+                   <$> (o .:? "model"))
+
+instance ToJSON
+           GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig
+         where
+        toJSON
+          GoogleCloudVideointelligenceV1p2beta1_ShotChangeDetectionConfig'{..}
+          = object
+              (catMaybes [("model" .=) <$> _gcvvscdcModel])
+
 -- | Video annotation response. Included in the \`response\` field of the
 -- \`Operation\` returned by the \`GetOperation\` call of the
 -- \`google::longrunning::Operations\` service.
 --
 -- /See:/ 'googleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse' smart constructor.
-newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse = GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse'
+newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse =
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse'
     { _gcvvavrcAnnotationResults :: Maybe [GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse' with the minimum fields required to make a request.
 --
@@ -5333,9 +5535,9 @@ newtype GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse = GoogleClou
 googleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
     :: GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
 googleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse =
-    GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse'
-    { _gcvvavrcAnnotationResults = Nothing
-    }
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse'
+    {_gcvvavrcAnnotationResults = Nothing}
+
 
 -- | Annotation results for all videos specified in \`AnnotateVideoRequest\`.
 gcvvavrcAnnotationResults :: Lens' GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse [GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults]
@@ -5346,7 +5548,7 @@ gcvvavrcAnnotationResults
       . _Coerce
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
          where
         parseJSON
           = withObject
@@ -5356,7 +5558,7 @@ instance FromJSON
                    <$> (o .:? "annotationResults" .!= mempty))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
+           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
          where
         toJSON
           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse'{..}
@@ -5368,10 +5570,13 @@ instance ToJSON
 -- | Video frame level annotation results for explicit content.
 --
 -- /See:/ 'googleCloudVideointelligenceV1beta2_ExplicitContentFrame' smart constructor.
-data GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame = GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'
+data GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame =
+  GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'
     { _gcvvecfcTimeOffSet            :: !(Maybe GDuration)
     , _gcvvecfcPornographyLikelihood :: !(Maybe GoogleCloudVideointelligenceV1beta2_ExplicitContentFramePornographyLikelihood)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame' with the minimum fields required to make a request.
 --
@@ -5383,10 +5588,9 @@ data GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame = GoogleCloudVideo
 googleCloudVideointelligenceV1beta2_ExplicitContentFrame
     :: GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
 googleCloudVideointelligenceV1beta2_ExplicitContentFrame =
-    GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'
-    { _gcvvecfcTimeOffSet = Nothing
-    , _gcvvecfcPornographyLikelihood = Nothing
-    }
+  GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'
+    {_gcvvecfcTimeOffSet = Nothing, _gcvvecfcPornographyLikelihood = Nothing}
+
 
 -- | Time-offset, relative to the beginning of the video, corresponding to
 -- the video frame for this location.
@@ -5403,7 +5607,7 @@ gcvvecfcPornographyLikelihood
       (\ s a -> s{_gcvvecfcPornographyLikelihood = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
          where
         parseJSON
           = withObject
@@ -5415,7 +5619,7 @@ instance FromJSON
                      (o .:? "pornographyLikelihood"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
+           GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
          where
         toJSON
           GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'{..}
@@ -5425,65 +5629,200 @@ instance ToJSON
                   ("pornographyLikelihood" .=) <$>
                     _gcvvecfcPornographyLikelihood])
 
--- | Provides \"hints\" to the speech recognizer to favor specific words and
--- phrases in the results.
+-- | Config for SPEECH_TRANSCRIPTION.
 --
--- /See:/ 'googleCloudVideointelligenceV1p1beta1_SpeechContext' smart constructor.
-newtype GoogleCloudVideointelligenceV1p1beta1_SpeechContext = GoogleCloudVideointelligenceV1p1beta1_SpeechContext'
-    { _gcvvscPhrases :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'googleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig' smart constructor.
+data GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig'
+    { _gcvvstccSpeechContexts             :: !(Maybe [GoogleCloudVideointelligenceV1p2beta1_SpeechContext])
+    , _gcvvstccLanguageCode               :: !(Maybe Text)
+    , _gcvvstccAudioTracks                :: !(Maybe [Textual Int32])
+    , _gcvvstccEnableAutomaticPunctuation :: !(Maybe Bool)
+    , _gcvvstccMaxAlternatives            :: !(Maybe (Textual Int32))
+    , _gcvvstccEnableSpeakerDiarization   :: !(Maybe Bool)
+    , _gcvvstccFilterProfanity            :: !(Maybe Bool)
+    , _gcvvstccDiarizationSpeakerCount    :: !(Maybe (Textual Int32))
+    , _gcvvstccEnableWordConfidence       :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
 
--- | Creates a value of 'GoogleCloudVideointelligenceV1p1beta1_SpeechContext' with the minimum fields required to make a request.
+
+-- | Creates a value of 'GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcvvscPhrases'
-googleCloudVideointelligenceV1p1beta1_SpeechContext
-    :: GoogleCloudVideointelligenceV1p1beta1_SpeechContext
-googleCloudVideointelligenceV1p1beta1_SpeechContext =
-    GoogleCloudVideointelligenceV1p1beta1_SpeechContext'
-    { _gcvvscPhrases = Nothing
+-- * 'gcvvstccSpeechContexts'
+--
+-- * 'gcvvstccLanguageCode'
+--
+-- * 'gcvvstccAudioTracks'
+--
+-- * 'gcvvstccEnableAutomaticPunctuation'
+--
+-- * 'gcvvstccMaxAlternatives'
+--
+-- * 'gcvvstccEnableSpeakerDiarization'
+--
+-- * 'gcvvstccFilterProfanity'
+--
+-- * 'gcvvstccDiarizationSpeakerCount'
+--
+-- * 'gcvvstccEnableWordConfidence'
+googleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
+    :: GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
+googleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig =
+  GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig'
+    { _gcvvstccSpeechContexts = Nothing
+    , _gcvvstccLanguageCode = Nothing
+    , _gcvvstccAudioTracks = Nothing
+    , _gcvvstccEnableAutomaticPunctuation = Nothing
+    , _gcvvstccMaxAlternatives = Nothing
+    , _gcvvstccEnableSpeakerDiarization = Nothing
+    , _gcvvstccFilterProfanity = Nothing
+    , _gcvvstccDiarizationSpeakerCount = Nothing
+    , _gcvvstccEnableWordConfidence = Nothing
     }
 
--- | *Optional* A list of strings containing words and phrases \"hints\" so
--- that the speech recognition is more likely to recognize them. This can
--- be used to improve the accuracy for specific words and phrases, for
--- example, if specific commands are typically spoken by the user. This can
--- also be used to add additional words to the vocabulary of the
--- recognizer. See [usage
--- limits](https:\/\/cloud.google.com\/speech\/limits#content).
-gcvvscPhrases :: Lens' GoogleCloudVideointelligenceV1p1beta1_SpeechContext [Text]
-gcvvscPhrases
-  = lens _gcvvscPhrases
-      (\ s a -> s{_gcvvscPhrases = a})
+
+-- | *Optional* A means to provide context to assist the speech recognition.
+gcvvstccSpeechContexts :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig [GoogleCloudVideointelligenceV1p2beta1_SpeechContext]
+gcvvstccSpeechContexts
+  = lens _gcvvstccSpeechContexts
+      (\ s a -> s{_gcvvstccSpeechContexts = a})
       . _Default
       . _Coerce
 
+-- | *Required* The language of the supplied audio as a
+-- [BCP-47](https:\/\/www.rfc-editor.org\/rfc\/bcp\/bcp47.txt) language
+-- tag. Example: \"en-US\". See [Language
+-- Support](https:\/\/cloud.google.com\/speech\/docs\/languages) for a list
+-- of the currently supported language codes.
+gcvvstccLanguageCode :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Text)
+gcvvstccLanguageCode
+  = lens _gcvvstccLanguageCode
+      (\ s a -> s{_gcvvstccLanguageCode = a})
+
+-- | *Optional* For file formats, such as MXF or MKV, supporting multiple
+-- audio tracks, specify up to two tracks. Default: track 0.
+gcvvstccAudioTracks :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig [Int32]
+gcvvstccAudioTracks
+  = lens _gcvvstccAudioTracks
+      (\ s a -> s{_gcvvstccAudioTracks = a})
+      . _Default
+      . _Coerce
+
+-- | *Optional* If \'true\', adds punctuation to recognition result
+-- hypotheses. This feature is only available in select languages. Setting
+-- this for requests in other languages has no effect at all. The default
+-- \'false\' value does not add punctuation to result hypotheses. NOTE:
+-- \"This is currently offered as an experimental service, complimentary to
+-- all users. In the future this may be exclusively available as a premium
+-- feature.\"
+gcvvstccEnableAutomaticPunctuation :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Bool)
+gcvvstccEnableAutomaticPunctuation
+  = lens _gcvvstccEnableAutomaticPunctuation
+      (\ s a -> s{_gcvvstccEnableAutomaticPunctuation = a})
+
+-- | *Optional* Maximum number of recognition hypotheses to be returned.
+-- Specifically, the maximum number of \`SpeechRecognitionAlternative\`
+-- messages within each \`SpeechTranscription\`. The server may return
+-- fewer than \`max_alternatives\`. Valid values are \`0\`-\`30\`. A value
+-- of \`0\` or \`1\` will return a maximum of one. If omitted, will return
+-- a maximum of one.
+gcvvstccMaxAlternatives :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Int32)
+gcvvstccMaxAlternatives
+  = lens _gcvvstccMaxAlternatives
+      (\ s a -> s{_gcvvstccMaxAlternatives = a})
+      . mapping _Coerce
+
+-- | *Optional* If \'true\', enables speaker detection for each recognized
+-- word in the top alternative of the recognition result using a
+-- speaker_tag provided in the WordInfo. Note: When this is true, we send
+-- all the words from the beginning of the audio for the top alternative in
+-- every consecutive responses. This is done in order to improve our
+-- speaker tags as our models learn to identify the speakers in the
+-- conversation over time.
+gcvvstccEnableSpeakerDiarization :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Bool)
+gcvvstccEnableSpeakerDiarization
+  = lens _gcvvstccEnableSpeakerDiarization
+      (\ s a -> s{_gcvvstccEnableSpeakerDiarization = a})
+
+-- | *Optional* If set to \`true\`, the server will attempt to filter out
+-- profanities, replacing all but the initial character in each filtered
+-- word with asterisks, e.g. \"f***\". If set to \`false\` or omitted,
+-- profanities won\'t be filtered out.
+gcvvstccFilterProfanity :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Bool)
+gcvvstccFilterProfanity
+  = lens _gcvvstccFilterProfanity
+      (\ s a -> s{_gcvvstccFilterProfanity = a})
+
+-- | *Optional* If set, specifies the estimated number of speakers in the
+-- conversation. If not set, defaults to \'2\'. Ignored unless
+-- enable_speaker_diarization is set to true.
+gcvvstccDiarizationSpeakerCount :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Int32)
+gcvvstccDiarizationSpeakerCount
+  = lens _gcvvstccDiarizationSpeakerCount
+      (\ s a -> s{_gcvvstccDiarizationSpeakerCount = a})
+      . mapping _Coerce
+
+-- | *Optional* If \`true\`, the top result includes a list of words and the
+-- confidence for those words. If \`false\`, no word-level confidence
+-- information is returned. The default is \`false\`.
+gcvvstccEnableWordConfidence :: Lens' GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig (Maybe Bool)
+gcvvstccEnableWordConfidence
+  = lens _gcvvstccEnableWordConfidence
+      (\ s a -> s{_gcvvstccEnableWordConfidence = a})
+
 instance FromJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechContext
+           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
          where
         parseJSON
           = withObject
-              "GoogleCloudVideointelligenceV1p1beta1SpeechContext"
+              "GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig"
               (\ o ->
-                 GoogleCloudVideointelligenceV1p1beta1_SpeechContext'
-                   <$> (o .:? "phrases" .!= mempty))
+                 GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig'
+                   <$>
+                   (o .:? "speechContexts" .!= mempty) <*>
+                     (o .:? "languageCode")
+                     <*> (o .:? "audioTracks" .!= mempty)
+                     <*> (o .:? "enableAutomaticPunctuation")
+                     <*> (o .:? "maxAlternatives")
+                     <*> (o .:? "enableSpeakerDiarization")
+                     <*> (o .:? "filterProfanity")
+                     <*> (o .:? "diarizationSpeakerCount")
+                     <*> (o .:? "enableWordConfidence"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1p1beta1_SpeechContext
+           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig
          where
         toJSON
-          GoogleCloudVideointelligenceV1p1beta1_SpeechContext'{..}
+          GoogleCloudVideointelligenceV1p2beta1_SpeechTranscriptionConfig'{..}
           = object
-              (catMaybes [("phrases" .=) <$> _gcvvscPhrases])
+              (catMaybes
+                 [("speechContexts" .=) <$> _gcvvstccSpeechContexts,
+                  ("languageCode" .=) <$> _gcvvstccLanguageCode,
+                  ("audioTracks" .=) <$> _gcvvstccAudioTracks,
+                  ("enableAutomaticPunctuation" .=) <$>
+                    _gcvvstccEnableAutomaticPunctuation,
+                  ("maxAlternatives" .=) <$> _gcvvstccMaxAlternatives,
+                  ("enableSpeakerDiarization" .=) <$>
+                    _gcvvstccEnableSpeakerDiarization,
+                  ("filterProfanity" .=) <$> _gcvvstccFilterProfanity,
+                  ("diarizationSpeakerCount" .=) <$>
+                    _gcvvstccDiarizationSpeakerCount,
+                  ("enableWordConfidence" .=) <$>
+                    _gcvvstccEnableWordConfidence])
 
 -- | Video segment level annotation results for label detection.
 --
 -- /See:/ 'googleCloudVideointelligenceV1_LabelSegment' smart constructor.
-data GoogleCloudVideointelligenceV1_LabelSegment = GoogleCloudVideointelligenceV1_LabelSegment'
+data GoogleCloudVideointelligenceV1_LabelSegment =
+  GoogleCloudVideointelligenceV1_LabelSegment'
     { _g2Confidence :: !(Maybe (Textual Double))
     , _g2Segment    :: !(Maybe GoogleCloudVideointelligenceV1_VideoSegment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudVideointelligenceV1_LabelSegment' with the minimum fields required to make a request.
 --
@@ -5495,10 +5834,9 @@ data GoogleCloudVideointelligenceV1_LabelSegment = GoogleCloudVideointelligenceV
 googleCloudVideointelligenceV1_LabelSegment
     :: GoogleCloudVideointelligenceV1_LabelSegment
 googleCloudVideointelligenceV1_LabelSegment =
-    GoogleCloudVideointelligenceV1_LabelSegment'
-    { _g2Confidence = Nothing
-    , _g2Segment = Nothing
-    }
+  GoogleCloudVideointelligenceV1_LabelSegment'
+    {_g2Confidence = Nothing, _g2Segment = Nothing}
+
 
 -- | Confidence that the label is accurate. Range: [0, 1].
 g2Confidence :: Lens' GoogleCloudVideointelligenceV1_LabelSegment (Maybe Double)
@@ -5512,7 +5850,8 @@ g2Segment
   = lens _g2Segment (\ s a -> s{_g2Segment = a})
 
 instance FromJSON
-         GoogleCloudVideointelligenceV1_LabelSegment where
+           GoogleCloudVideointelligenceV1_LabelSegment
+         where
         parseJSON
           = withObject
               "GoogleCloudVideointelligenceV1LabelSegment"
@@ -5521,7 +5860,8 @@ instance FromJSON
                    (o .:? "confidence") <*> (o .:? "segment"))
 
 instance ToJSON
-         GoogleCloudVideointelligenceV1_LabelSegment where
+           GoogleCloudVideointelligenceV1_LabelSegment
+         where
         toJSON
           GoogleCloudVideointelligenceV1_LabelSegment'{..}
           = object

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConversionsBatchupdate' request conforms to.
 type ConversionsBatchupdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "conversions" :>
@@ -56,10 +56,13 @@ type ConversionsBatchupdateResource =
 -- | Updates existing conversions.
 --
 -- /See:/ 'conversionsBatchupdate' smart constructor.
-data ConversionsBatchupdate = ConversionsBatchupdate'
+data ConversionsBatchupdate =
+  ConversionsBatchupdate'
     { _conProFileId :: !(Textual Int64)
     , _conPayload   :: !ConversionsBatchUpdateRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConversionsBatchupdate' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ conversionsBatchupdate
     -> ConversionsBatchUpdateRequest -- ^ 'conPayload'
     -> ConversionsBatchupdate
 conversionsBatchupdate pConProFileId_ pConPayload_ =
-    ConversionsBatchupdate'
-    { _conProFileId = _Coerce # pConProFileId_
-    , _conPayload = pConPayload_
-    }
+  ConversionsBatchupdate'
+    {_conProFileId = _Coerce # pConProFileId_, _conPayload = pConPayload_}
+
 
 -- | User profile ID associated with this request.
 conProFileId :: Lens' ConversionsBatchupdate Int64

@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | A suggestion.
 --
 -- /See:/ 'suggestion' smart constructor.
-newtype Suggestion = Suggestion'
+newtype Suggestion =
+  Suggestion'
     { _sSubtype :: Maybe SuggestionSubtype
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Suggestion' with the minimum fields required to make a request.
 --
@@ -34,10 +37,8 @@ newtype Suggestion = Suggestion'
 -- * 'sSubtype'
 suggestion
     :: Suggestion
-suggestion =
-    Suggestion'
-    { _sSubtype = Nothing
-    }
+suggestion = Suggestion' {_sSubtype = Nothing}
+
 
 -- | The sub-type of this event.
 sSubtype :: Lens' Suggestion (Maybe SuggestionSubtype)
@@ -52,13 +53,71 @@ instance ToJSON Suggestion where
         toJSON Suggestion'{..}
           = object (catMaybes [("subtype" .=) <$> _sSubtype])
 
+-- | Information about a shared drive.
+--
+-- /See:/ 'drive' smart constructor.
+data Drive =
+  Drive'
+    { _dRoot  :: !(Maybe DriveItem)
+    , _dName  :: !(Maybe Text)
+    , _dTitle :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Drive' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dRoot'
+--
+-- * 'dName'
+--
+-- * 'dTitle'
+drive
+    :: Drive
+drive = Drive' {_dRoot = Nothing, _dName = Nothing, _dTitle = Nothing}
+
+
+-- | The root of this shared drive.
+dRoot :: Lens' Drive (Maybe DriveItem)
+dRoot = lens _dRoot (\ s a -> s{_dRoot = a})
+
+-- | The resource name of the shared drive. The format is
+-- \"COLLECTION_ID\/DRIVE_ID\". Clients should not assume a specific
+-- collection ID for this resource name.
+dName :: Lens' Drive (Maybe Text)
+dName = lens _dName (\ s a -> s{_dName = a})
+
+-- | The title of the shared drive.
+dTitle :: Lens' Drive (Maybe Text)
+dTitle = lens _dTitle (\ s a -> s{_dTitle = a})
+
+instance FromJSON Drive where
+        parseJSON
+          = withObject "Drive"
+              (\ o ->
+                 Drive' <$>
+                   (o .:? "root") <*> (o .:? "name") <*>
+                     (o .:? "title"))
+
+instance ToJSON Drive where
+        toJSON Drive'{..}
+          = object
+              (catMaybes
+                 [("root" .=) <$> _dRoot, ("name" .=) <$> _dName,
+                  ("title" .=) <$> _dTitle])
+
 -- | Information about an impersonation, where an admin acts on behalf of an
 -- end user. Information about the acting admin is not currently available.
 --
 -- /See:/ 'impersonation' smart constructor.
-newtype Impersonation = Impersonation'
+newtype Impersonation =
+  Impersonation'
     { _iImpersonatedUser :: Maybe User
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Impersonation' with the minimum fields required to make a request.
 --
@@ -67,10 +126,8 @@ newtype Impersonation = Impersonation'
 -- * 'iImpersonatedUser'
 impersonation
     :: Impersonation
-impersonation =
-    Impersonation'
-    { _iImpersonatedUser = Nothing
-    }
+impersonation = Impersonation' {_iImpersonatedUser = Nothing}
+
 
 -- | The impersonated user.
 iImpersonatedUser :: Lens' Impersonation (Maybe User)
@@ -94,14 +151,16 @@ instance ToJSON Impersonation where
 --
 -- /See:/ 'edit' smart constructor.
 data Edit =
-    Edit'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Edit'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Edit' with the minimum fields required to make a request.
 --
 edit
     :: Edit
 edit = Edit'
+
 
 instance FromJSON Edit where
         parseJSON = withObject "Edit" (\ o -> pure Edit')
@@ -112,7 +171,8 @@ instance ToJSON Edit where
 -- | Data describing the type and additional information of an action.
 --
 -- /See:/ 'actionDetail' smart constructor.
-data ActionDetail = ActionDetail'
+data ActionDetail =
+  ActionDetail'
     { _adEdit             :: !(Maybe Edit)
     , _adPermissionChange :: !(Maybe PermissionChange)
     , _adRestore          :: !(Maybe Restore)
@@ -124,7 +184,9 @@ data ActionDetail = ActionDetail'
     , _adDlpChange        :: !(Maybe DataLeakPreventionChange)
     , _adDelete           :: !(Maybe Delete')
     , _adMove             :: !(Maybe Move)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActionDetail' with the minimum fields required to make a request.
 --
@@ -154,7 +216,7 @@ data ActionDetail = ActionDetail'
 actionDetail
     :: ActionDetail
 actionDetail =
-    ActionDetail'
+  ActionDetail'
     { _adEdit = Nothing
     , _adPermissionChange = Nothing
     , _adRestore = Nothing
@@ -167,6 +229,7 @@ actionDetail =
     , _adDelete = Nothing
     , _adMove = Nothing
     }
+
 
 -- | An object was edited.
 adEdit :: Lens' ActionDetail (Maybe Edit)
@@ -252,13 +315,62 @@ instance ToJSON ActionDetail where
                   ("delete" .=) <$> _adDelete,
                   ("move" .=) <$> _adMove])
 
+-- | A lightweight reference to a shared drive.
+--
+-- /See:/ 'driveReference' smart constructor.
+data DriveReference =
+  DriveReference'
+    { _drName  :: !(Maybe Text)
+    , _drTitle :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DriveReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drName'
+--
+-- * 'drTitle'
+driveReference
+    :: DriveReference
+driveReference = DriveReference' {_drName = Nothing, _drTitle = Nothing}
+
+
+-- | The resource name of the shared drive. The format is
+-- \"COLLECTION_ID\/DRIVE_ID\". Clients should not assume a specific
+-- collection ID for this resource name.
+drName :: Lens' DriveReference (Maybe Text)
+drName = lens _drName (\ s a -> s{_drName = a})
+
+-- | The title of the shared drive.
+drTitle :: Lens' DriveReference (Maybe Text)
+drTitle = lens _drTitle (\ s a -> s{_drTitle = a})
+
+instance FromJSON DriveReference where
+        parseJSON
+          = withObject "DriveReference"
+              (\ o ->
+                 DriveReference' <$>
+                   (o .:? "name") <*> (o .:? "title"))
+
+instance ToJSON DriveReference where
+        toJSON DriveReference'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _drName, ("title" .=) <$> _drTitle])
+
 -- | Information about a group.
 --
 -- /See:/ 'group'' smart constructor.
-data Group = Group'
+data Group =
+  Group'
     { _gEmail :: !(Maybe Text)
     , _gTitle :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -269,11 +381,8 @@ data Group = Group'
 -- * 'gTitle'
 group'
     :: Group
-group' =
-    Group'
-    { _gEmail = Nothing
-    , _gTitle = Nothing
-    }
+group' = Group' {_gEmail = Nothing, _gTitle = Nothing}
+
 
 -- | The email address of the group.
 gEmail :: Lens' Group (Maybe Text)
@@ -295,13 +404,38 @@ instance ToJSON Group where
               (catMaybes
                  [("email" .=) <$> _gEmail, ("title" .=) <$> _gTitle])
 
+-- | A Drive item which is a file.
+--
+-- /See:/ 'driveFile' smart constructor.
+data DriveFile =
+  DriveFile'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DriveFile' with the minimum fields required to make a request.
+--
+driveFile
+    :: DriveFile
+driveFile = DriveFile'
+
+
+instance FromJSON DriveFile where
+        parseJSON
+          = withObject "DriveFile" (\ o -> pure DriveFile')
+
+instance ToJSON DriveFile where
+        toJSON = const emptyObject
+
 -- | Information about time ranges.
 --
 -- /See:/ 'timeRange' smart constructor.
-data TimeRange = TimeRange'
+data TimeRange =
+  TimeRange'
     { _trStartTime :: !(Maybe DateTime')
     , _trEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
 --
@@ -312,11 +446,8 @@ data TimeRange = TimeRange'
 -- * 'trEndTime'
 timeRange
     :: TimeRange
-timeRange =
-    TimeRange'
-    { _trStartTime = Nothing
-    , _trEndTime = Nothing
-    }
+timeRange = TimeRange' {_trStartTime = Nothing, _trEndTime = Nothing}
+
 
 -- | The start of the time range.
 trStartTime :: Lens' TimeRange (Maybe UTCTime)
@@ -347,14 +478,17 @@ instance ToJSON TimeRange where
 -- | The request message for querying Drive activity.
 --
 -- /See:/ 'queryDriveActivityRequest' smart constructor.
-data QueryDriveActivityRequest = QueryDriveActivityRequest'
+data QueryDriveActivityRequest =
+  QueryDriveActivityRequest'
     { _qdarAncestorName          :: !(Maybe Text)
     , _qdarItemName              :: !(Maybe Text)
     , _qdarConsolidationStrategy :: !(Maybe ConsolidationStrategy)
     , _qdarFilter                :: !(Maybe Text)
     , _qdarPageToken             :: !(Maybe Text)
     , _qdarPageSize              :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryDriveActivityRequest' with the minimum fields required to make a request.
 --
@@ -374,7 +508,7 @@ data QueryDriveActivityRequest = QueryDriveActivityRequest'
 queryDriveActivityRequest
     :: QueryDriveActivityRequest
 queryDriveActivityRequest =
-    QueryDriveActivityRequest'
+  QueryDriveActivityRequest'
     { _qdarAncestorName = Nothing
     , _qdarItemName = Nothing
     , _qdarConsolidationStrategy = Nothing
@@ -382,6 +516,7 @@ queryDriveActivityRequest =
     , _qdarPageToken = Nothing
     , _qdarPageSize = Nothing
     }
+
 
 -- | Return activities for this Drive folder and all children and
 -- descendants. The format is \"items\/ITEM_ID\".
@@ -458,20 +593,29 @@ instance ToJSON QueryDriveActivityRequest where
 -- | A lightweight reference to a Drive item, such as a file or folder.
 --
 -- /See:/ 'driveItemReference' smart constructor.
-data DriveItemReference = DriveItemReference'
-    { _dirFolder :: !(Maybe Folder)
-    , _dirName   :: !(Maybe Text)
-    , _dirTitle  :: !(Maybe Text)
-    , _dirFile   :: !(Maybe File)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data DriveItemReference =
+  DriveItemReference'
+    { _dirDriveFile   :: !(Maybe DriveFile)
+    , _dirFolder      :: !(Maybe Folder)
+    , _dirName        :: !(Maybe Text)
+    , _dirDriveFolder :: !(Maybe DriveFolder)
+    , _dirTitle       :: !(Maybe Text)
+    , _dirFile        :: !(Maybe File)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveItemReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dirDriveFile'
+--
 -- * 'dirFolder'
 --
 -- * 'dirName'
+--
+-- * 'dirDriveFolder'
 --
 -- * 'dirTitle'
 --
@@ -479,14 +623,22 @@ data DriveItemReference = DriveItemReference'
 driveItemReference
     :: DriveItemReference
 driveItemReference =
-    DriveItemReference'
-    { _dirFolder = Nothing
+  DriveItemReference'
+    { _dirDriveFile = Nothing
+    , _dirFolder = Nothing
     , _dirName = Nothing
+    , _dirDriveFolder = Nothing
     , _dirTitle = Nothing
     , _dirFile = Nothing
     }
 
--- | The Drive item is a folder.
+
+-- | The Drive item is a file.
+dirDriveFile :: Lens' DriveItemReference (Maybe DriveFile)
+dirDriveFile
+  = lens _dirDriveFile (\ s a -> s{_dirDriveFile = a})
+
+-- | This field is deprecated; please use the \`driveFolder\` field instead.
 dirFolder :: Lens' DriveItemReference (Maybe Folder)
 dirFolder
   = lens _dirFolder (\ s a -> s{_dirFolder = a})
@@ -495,11 +647,17 @@ dirFolder
 dirName :: Lens' DriveItemReference (Maybe Text)
 dirName = lens _dirName (\ s a -> s{_dirName = a})
 
+-- | The Drive item is a folder.
+dirDriveFolder :: Lens' DriveItemReference (Maybe DriveFolder)
+dirDriveFolder
+  = lens _dirDriveFolder
+      (\ s a -> s{_dirDriveFolder = a})
+
 -- | The title of the Drive item.
 dirTitle :: Lens' DriveItemReference (Maybe Text)
 dirTitle = lens _dirTitle (\ s a -> s{_dirTitle = a})
 
--- | The Drive item is a file.
+-- | This field is deprecated; please use the \`driveFile\` field instead.
 dirFile :: Lens' DriveItemReference (Maybe File)
 dirFile = lens _dirFile (\ s a -> s{_dirFile = a})
 
@@ -508,25 +666,33 @@ instance FromJSON DriveItemReference where
           = withObject "DriveItemReference"
               (\ o ->
                  DriveItemReference' <$>
-                   (o .:? "folder") <*> (o .:? "name") <*>
-                     (o .:? "title")
+                   (o .:? "driveFile") <*> (o .:? "folder") <*>
+                     (o .:? "name")
+                     <*> (o .:? "driveFolder")
+                     <*> (o .:? "title")
                      <*> (o .:? "file"))
 
 instance ToJSON DriveItemReference where
         toJSON DriveItemReference'{..}
           = object
               (catMaybes
-                 [("folder" .=) <$> _dirFolder,
-                  ("name" .=) <$> _dirName, ("title" .=) <$> _dirTitle,
+                 [("driveFile" .=) <$> _dirDriveFile,
+                  ("folder" .=) <$> _dirFolder,
+                  ("name" .=) <$> _dirName,
+                  ("driveFolder" .=) <$> _dirDriveFolder,
+                  ("title" .=) <$> _dirTitle,
                   ("file" .=) <$> _dirFile])
 
 -- | A known user.
 --
 -- /See:/ 'knownUser' smart constructor.
-data KnownUser = KnownUser'
+data KnownUser =
+  KnownUser'
     { _kuPersonName    :: !(Maybe Text)
     , _kuIsCurrentUser :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KnownUser' with the minimum fields required to make a request.
 --
@@ -537,11 +703,8 @@ data KnownUser = KnownUser'
 -- * 'kuIsCurrentUser'
 knownUser
     :: KnownUser
-knownUser =
-    KnownUser'
-    { _kuPersonName = Nothing
-    , _kuIsCurrentUser = Nothing
-    }
+knownUser = KnownUser' {_kuPersonName = Nothing, _kuIsCurrentUser = Nothing}
+
 
 -- | The identifier for this user that can be used with the People API to get
 -- more information. The format is \"people\/ACCOUNT_ID\". See
@@ -573,14 +736,20 @@ instance ToJSON KnownUser where
 -- | A lightweight reference to the target of activity.
 --
 -- /See:/ 'targetReference' smart constructor.
-data TargetReference = TargetReference'
-    { _trTeamDrive :: !(Maybe TeamDriveReference)
+data TargetReference =
+  TargetReference'
+    { _trDrive     :: !(Maybe DriveReference)
+    , _trTeamDrive :: !(Maybe TeamDriveReference)
     , _trDriveItem :: !(Maybe DriveItemReference)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'trDrive'
 --
 -- * 'trTeamDrive'
 --
@@ -588,12 +757,15 @@ data TargetReference = TargetReference'
 targetReference
     :: TargetReference
 targetReference =
-    TargetReference'
-    { _trTeamDrive = Nothing
-    , _trDriveItem = Nothing
-    }
+  TargetReference'
+    {_trDrive = Nothing, _trTeamDrive = Nothing, _trDriveItem = Nothing}
 
--- | The target is a Team Drive.
+
+-- | The target is a shared drive.
+trDrive :: Lens' TargetReference (Maybe DriveReference)
+trDrive = lens _trDrive (\ s a -> s{_trDrive = a})
+
+-- | This field is deprecated; please use the \`drive\` field instead.
 trTeamDrive :: Lens' TargetReference (Maybe TeamDriveReference)
 trTeamDrive
   = lens _trTeamDrive (\ s a -> s{_trTeamDrive = a})
@@ -608,21 +780,26 @@ instance FromJSON TargetReference where
           = withObject "TargetReference"
               (\ o ->
                  TargetReference' <$>
-                   (o .:? "teamDrive") <*> (o .:? "driveItem"))
+                   (o .:? "drive") <*> (o .:? "teamDrive") <*>
+                     (o .:? "driveItem"))
 
 instance ToJSON TargetReference where
         toJSON TargetReference'{..}
           = object
               (catMaybes
-                 [("teamDrive" .=) <$> _trTeamDrive,
+                 [("drive" .=) <$> _trDrive,
+                  ("teamDrive" .=) <$> _trTeamDrive,
                   ("driveItem" .=) <$> _trDriveItem])
 
 -- | An object was created by copying an existing object.
 --
 -- /See:/ 'copy' smart constructor.
-newtype Copy = Copy'
+newtype Copy =
+  Copy'
     { _cOriginalObject :: Maybe TargetReference
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Copy' with the minimum fields required to make a request.
 --
@@ -631,10 +808,8 @@ newtype Copy = Copy'
 -- * 'cOriginalObject'
 copy
     :: Copy
-copy =
-    Copy'
-    { _cOriginalObject = Nothing
-    }
+copy = Copy' {_cOriginalObject = Nothing}
+
 
 -- | The the original object.
 cOriginalObject :: Lens' Copy (Maybe TargetReference)
@@ -656,10 +831,13 @@ instance ToJSON Copy where
 -- | A change of the permission setting on an item.
 --
 -- /See:/ 'permissionChange' smart constructor.
-data PermissionChange = PermissionChange'
+data PermissionChange =
+  PermissionChange'
     { _pcAddedPermissions   :: !(Maybe [Permission])
     , _pcRemovedPermissions :: !(Maybe [Permission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionChange' with the minimum fields required to make a request.
 --
@@ -671,10 +849,9 @@ data PermissionChange = PermissionChange'
 permissionChange
     :: PermissionChange
 permissionChange =
-    PermissionChange'
-    { _pcAddedPermissions = Nothing
-    , _pcRemovedPermissions = Nothing
-    }
+  PermissionChange'
+    {_pcAddedPermissions = Nothing, _pcRemovedPermissions = Nothing}
+
 
 -- | The set of permissions added by this change.
 pcAddedPermissions :: Lens' PermissionChange [Permission]
@@ -710,10 +887,13 @@ instance ToJSON PermissionChange where
 -- | Response message for querying Drive activity.
 --
 -- /See:/ 'queryDriveActivityResponse' smart constructor.
-data QueryDriveActivityResponse = QueryDriveActivityResponse'
+data QueryDriveActivityResponse =
+  QueryDriveActivityResponse'
     { _qdarNextPageToken :: !(Maybe Text)
     , _qdarActivities    :: !(Maybe [DriveActivity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryDriveActivityResponse' with the minimum fields required to make a request.
 --
@@ -725,10 +905,9 @@ data QueryDriveActivityResponse = QueryDriveActivityResponse'
 queryDriveActivityResponse
     :: QueryDriveActivityResponse
 queryDriveActivityResponse =
-    QueryDriveActivityResponse'
-    { _qdarNextPageToken = Nothing
-    , _qdarActivities = Nothing
-    }
+  QueryDriveActivityResponse'
+    {_qdarNextPageToken = Nothing, _qdarActivities = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -763,9 +942,12 @@ instance ToJSON QueryDriveActivityResponse where
 -- | A regular posted comment.
 --
 -- /See:/ 'post' smart constructor.
-newtype Post' = Post''
+newtype Post' =
+  Post''
     { _pSubtype :: Maybe PostSubtype
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Post' with the minimum fields required to make a request.
 --
@@ -774,10 +956,8 @@ newtype Post' = Post''
 -- * 'pSubtype'
 post
     :: Post'
-post =
-    Post''
-    { _pSubtype = Nothing
-    }
+post = Post'' {_pSubtype = Nothing}
+
 
 -- | The sub-type of this event.
 pSubtype :: Lens' Post' (Maybe PostSubtype)
@@ -795,9 +975,12 @@ instance ToJSON Post' where
 -- | A deleted object was restored.
 --
 -- /See:/ 'restore' smart constructor.
-newtype Restore = Restore'
+newtype Restore =
+  Restore'
     { _rType :: Maybe RestoreType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Restore' with the minimum fields required to make a request.
 --
@@ -806,10 +989,8 @@ newtype Restore = Restore'
 -- * 'rType'
 restore
     :: Restore
-restore =
-    Restore'
-    { _rType = Nothing
-    }
+restore = Restore' {_rType = Nothing}
+
 
 -- | The type of restore action taken.
 rType :: Lens' Restore (Maybe RestoreType)
@@ -827,34 +1008,34 @@ instance ToJSON Restore where
 -- | Information about a domain.
 --
 -- /See:/ 'domain' smart constructor.
-data Domain = Domain'
-    { _dLegacyId :: !(Maybe Text)
-    , _dName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data Domain =
+  Domain'
+    { _domLegacyId :: !(Maybe Text)
+    , _domName     :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Domain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dLegacyId'
+-- * 'domLegacyId'
 --
--- * 'dName'
+-- * 'domName'
 domain
     :: Domain
-domain =
-    Domain'
-    { _dLegacyId = Nothing
-    , _dName = Nothing
-    }
+domain = Domain' {_domLegacyId = Nothing, _domName = Nothing}
+
 
 -- | An opaque string used to identify this domain.
-dLegacyId :: Lens' Domain (Maybe Text)
-dLegacyId
-  = lens _dLegacyId (\ s a -> s{_dLegacyId = a})
+domLegacyId :: Lens' Domain (Maybe Text)
+domLegacyId
+  = lens _domLegacyId (\ s a -> s{_domLegacyId = a})
 
 -- | The name of the domain, e.g. \"google.com\".
-dName :: Lens' Domain (Maybe Text)
-dName = lens _dName (\ s a -> s{_dName = a})
+domName :: Lens' Domain (Maybe Text)
+domName = lens _domName (\ s a -> s{_domName = a})
 
 instance FromJSON Domain where
         parseJSON
@@ -866,21 +1047,23 @@ instance ToJSON Domain where
         toJSON Domain'{..}
           = object
               (catMaybes
-                 [("legacyId" .=) <$> _dLegacyId,
-                  ("name" .=) <$> _dName])
+                 [("legacyId" .=) <$> _domLegacyId,
+                  ("name" .=) <$> _domName])
 
 -- | Empty message representing an administrator.
 --
 -- /See:/ 'administrator' smart constructor.
 data Administrator =
-    Administrator'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Administrator'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Administrator' with the minimum fields required to make a request.
 --
 administrator
     :: Administrator
 administrator = Administrator'
+
 
 instance FromJSON Administrator where
         parseJSON
@@ -893,9 +1076,12 @@ instance ToJSON Administrator where
 -- | A change in the object\'s data leak prevention status.
 --
 -- /See:/ 'dataLeakPreventionChange' smart constructor.
-newtype DataLeakPreventionChange = DataLeakPreventionChange'
+newtype DataLeakPreventionChange =
+  DataLeakPreventionChange'
     { _dlpcType :: Maybe DataLeakPreventionChangeType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataLeakPreventionChange' with the minimum fields required to make a request.
 --
@@ -904,10 +1090,8 @@ newtype DataLeakPreventionChange = DataLeakPreventionChange'
 -- * 'dlpcType'
 dataLeakPreventionChange
     :: DataLeakPreventionChange
-dataLeakPreventionChange =
-    DataLeakPreventionChange'
-    { _dlpcType = Nothing
-    }
+dataLeakPreventionChange = DataLeakPreventionChange' {_dlpcType = Nothing}
+
 
 -- | The type of Data Leak Prevention (DLP) change.
 dlpcType :: Lens' DataLeakPreventionChange (Maybe DataLeakPreventionChangeType)
@@ -925,13 +1109,16 @@ instance ToJSON DataLeakPreventionChange where
 -- | The actor of a Drive activity.
 --
 -- /See:/ 'actor' smart constructor.
-data Actor = Actor'
+data Actor =
+  Actor'
     { _aImpersonation :: !(Maybe Impersonation)
     , _aSystem        :: !(Maybe SystemEvent)
     , _aAdministrator :: !(Maybe Administrator)
     , _aUser          :: !(Maybe User)
     , _aAnonymous     :: !(Maybe AnonymousUser)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Actor' with the minimum fields required to make a request.
 --
@@ -949,13 +1136,14 @@ data Actor = Actor'
 actor
     :: Actor
 actor =
-    Actor'
+  Actor'
     { _aImpersonation = Nothing
     , _aSystem = Nothing
     , _aAdministrator = Nothing
     , _aUser = Nothing
     , _aAnonymous = Nothing
     }
+
 
 -- | An account acting on behalf of another.
 aImpersonation :: Lens' Actor (Maybe Impersonation)
@@ -1002,12 +1190,15 @@ instance ToJSON Actor where
                   ("user" .=) <$> _aUser,
                   ("anonymous" .=) <$> _aAnonymous])
 
--- | A Drive item which is a folder.
+-- | This item is deprecated; please see \`DriveFolder\` instead.
 --
 -- /See:/ 'folder' smart constructor.
-newtype Folder = Folder'
+newtype Folder =
+  Folder'
     { _fType :: Maybe FolderType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
@@ -1016,12 +1207,10 @@ newtype Folder = Folder'
 -- * 'fType'
 folder
     :: Folder
-folder =
-    Folder'
-    { _fType = Nothing
-    }
+folder = Folder' {_fType = Nothing}
 
--- | The type of Drive folder.
+
+-- | This field is deprecated; please see \`DriveFolder.type\` instead.
 fType :: Lens' Folder (Maybe FolderType)
 fType = lens _fType (\ s a -> s{_fType = a})
 
@@ -1037,13 +1226,16 @@ instance ToJSON Folder where
 -- | Information about the action.
 --
 -- /See:/ 'action' smart constructor.
-data Action = Action'
+data Action =
+  Action'
     { _aTimeRange :: !(Maybe TimeRange)
     , _aActor     :: !(Maybe Actor)
     , _aTimestamp :: !(Maybe DateTime')
     , _aTarget    :: !(Maybe Target)
     , _aDetail    :: !(Maybe ActionDetail)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Action' with the minimum fields required to make a request.
 --
@@ -1061,13 +1253,14 @@ data Action = Action'
 action
     :: Action
 action =
-    Action'
+  Action'
     { _aTimeRange = Nothing
     , _aActor = Nothing
     , _aTimestamp = Nothing
     , _aTarget = Nothing
     , _aDetail = Nothing
     }
+
 
 -- | The action occurred over this time range.
 aTimeRange :: Lens' Action (Maybe TimeRange)
@@ -1115,14 +1308,17 @@ instance ToJSON Action where
                   ("target" .=) <$> _aTarget,
                   ("detail" .=) <$> _aDetail])
 
--- | Information about a Team Drive.
+-- | This item is deprecated; please see \`Drive\` instead.
 --
 -- /See:/ 'teamDrive' smart constructor.
-data TeamDrive = TeamDrive'
+data TeamDrive =
+  TeamDrive'
     { _tdRoot  :: !(Maybe DriveItem)
     , _tdName  :: !(Maybe Text)
     , _tdTitle :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamDrive' with the minimum fields required to make a request.
 --
@@ -1136,22 +1332,18 @@ data TeamDrive = TeamDrive'
 teamDrive
     :: TeamDrive
 teamDrive =
-    TeamDrive'
-    { _tdRoot = Nothing
-    , _tdName = Nothing
-    , _tdTitle = Nothing
-    }
+  TeamDrive' {_tdRoot = Nothing, _tdName = Nothing, _tdTitle = Nothing}
 
--- | The root of this Team Drive.
+
+-- | This field is deprecated; please see \`Drive.root\` instead.
 tdRoot :: Lens' TeamDrive (Maybe DriveItem)
 tdRoot = lens _tdRoot (\ s a -> s{_tdRoot = a})
 
--- | The resource name of the Team Drive. The format is
--- \"teamDrives\/TEAM_DRIVE_ID\".
+-- | This field is deprecated; please see \`Drive.name\` instead.
 tdName :: Lens' TeamDrive (Maybe Text)
 tdName = lens _tdName (\ s a -> s{_tdName = a})
 
--- | The title of the Team Drive.
+-- | This field is deprecated; please see \`Drive.title\` instead.
 tdTitle :: Lens' TeamDrive (Maybe Text)
 tdTitle = lens _tdTitle (\ s a -> s{_tdTitle = a})
 
@@ -1174,14 +1366,16 @@ instance ToJSON TeamDrive where
 --
 -- /See:/ 'unknownUser' smart constructor.
 data UnknownUser =
-    UnknownUser'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  UnknownUser'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UnknownUser' with the minimum fields required to make a request.
 --
 unknownUser
     :: UnknownUser
 unknownUser = UnknownUser'
+
 
 instance FromJSON UnknownUser where
         parseJSON
@@ -1193,15 +1387,21 @@ instance ToJSON UnknownUser where
 -- | Information about the owner of a Drive item.
 --
 -- /See:/ 'owner' smart constructor.
-data Owner = Owner'
-    { _oDomain    :: !(Maybe Domain)
+data Owner =
+  Owner'
+    { _oDrive     :: !(Maybe DriveReference)
+    , _oDomain    :: !(Maybe Domain)
     , _oTeamDrive :: !(Maybe TeamDriveReference)
     , _oUser      :: !(Maybe User)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Owner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oDrive'
 --
 -- * 'oDomain'
 --
@@ -1211,17 +1411,23 @@ data Owner = Owner'
 owner
     :: Owner
 owner =
-    Owner'
-    { _oDomain = Nothing
+  Owner'
+    { _oDrive = Nothing
+    , _oDomain = Nothing
     , _oTeamDrive = Nothing
     , _oUser = Nothing
     }
+
+
+-- | The drive that owns the item.
+oDrive :: Lens' Owner (Maybe DriveReference)
+oDrive = lens _oDrive (\ s a -> s{_oDrive = a})
 
 -- | The domain of the Drive item owner.
 oDomain :: Lens' Owner (Maybe Domain)
 oDomain = lens _oDomain (\ s a -> s{_oDomain = a})
 
--- | The Team Drive that owns the Drive item.
+-- | This field is deprecated; please use the \`drive\` field instead.
 oTeamDrive :: Lens' Owner (Maybe TeamDriveReference)
 oTeamDrive
   = lens _oTeamDrive (\ s a -> s{_oTeamDrive = a})
@@ -1235,23 +1441,28 @@ instance FromJSON Owner where
           = withObject "Owner"
               (\ o ->
                  Owner' <$>
-                   (o .:? "domain") <*> (o .:? "teamDrive") <*>
-                     (o .:? "user"))
+                   (o .:? "drive") <*> (o .:? "domain") <*>
+                     (o .:? "teamDrive")
+                     <*> (o .:? "user"))
 
 instance ToJSON Owner where
         toJSON Owner'{..}
           = object
               (catMaybes
-                 [("domain" .=) <$> _oDomain,
+                 [("drive" .=) <$> _oDrive,
+                  ("domain" .=) <$> _oDomain,
                   ("teamDrive" .=) <$> _oTeamDrive,
                   ("user" .=) <$> _oUser])
 
 -- | Activity in applications other than Drive.
 --
 -- /See:/ 'applicationReference' smart constructor.
-newtype ApplicationReference = ApplicationReference'
+newtype ApplicationReference =
+  ApplicationReference'
     { _arType :: Maybe ApplicationReferenceType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationReference' with the minimum fields required to make a request.
 --
@@ -1260,10 +1471,8 @@ newtype ApplicationReference = ApplicationReference'
 -- * 'arType'
 applicationReference
     :: ApplicationReference
-applicationReference =
-    ApplicationReference'
-    { _arType = Nothing
-    }
+applicationReference = ApplicationReference' {_arType = Nothing}
+
 
 -- | The reference type corresponding to this event.
 arType :: Lens' ApplicationReference (Maybe ApplicationReferenceType)
@@ -1285,10 +1494,13 @@ instance ToJSON ApplicationReference where
 -- strategy defines the rules for which activities are related.
 --
 -- /See:/ 'consolidationStrategy' smart constructor.
-data ConsolidationStrategy = ConsolidationStrategy'
+data ConsolidationStrategy =
+  ConsolidationStrategy'
     { _csNone   :: !(Maybe NoConsolidation)
     , _csLegacy :: !(Maybe Legacy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ConsolidationStrategy' with the minimum fields required to make a request.
 --
@@ -1300,10 +1512,8 @@ data ConsolidationStrategy = ConsolidationStrategy'
 consolidationStrategy
     :: ConsolidationStrategy
 consolidationStrategy =
-    ConsolidationStrategy'
-    { _csNone = Nothing
-    , _csLegacy = Nothing
-    }
+  ConsolidationStrategy' {_csNone = Nothing, _csLegacy = Nothing}
+
 
 -- | The individual activities are not consolidated.
 csNone :: Lens' ConsolidationStrategy (Maybe NoConsolidation)
@@ -1330,11 +1540,14 @@ instance ToJSON ConsolidationStrategy where
 -- | Information about an end user.
 --
 -- /See:/ 'user' smart constructor.
-data User = User'
+data User =
+  User'
     { _uKnownUser   :: !(Maybe KnownUser)
     , _uUnknownUser :: !(Maybe UnknownUser)
     , _uDeletedUser :: !(Maybe DeletedUser)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1348,11 +1561,9 @@ data User = User'
 user
     :: User
 user =
-    User'
-    { _uKnownUser = Nothing
-    , _uUnknownUser = Nothing
-    , _uDeletedUser = Nothing
-    }
+  User'
+    {_uKnownUser = Nothing, _uUnknownUser = Nothing, _uDeletedUser = Nothing}
+
 
 -- | A known user.
 uKnownUser :: Lens' User (Maybe KnownUser)
@@ -1389,14 +1600,16 @@ instance ToJSON User where
 --
 -- /See:/ 'deletedUser' smart constructor.
 data DeletedUser =
-    DeletedUser'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  DeletedUser'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeletedUser' with the minimum fields required to make a request.
 --
 deletedUser
     :: DeletedUser
 deletedUser = DeletedUser'
+
 
 instance FromJSON DeletedUser where
         parseJSON
@@ -1408,11 +1621,14 @@ instance ToJSON DeletedUser where
 -- | An object was created.
 --
 -- /See:/ 'create' smart constructor.
-data Create = Create'
+data Create =
+  Create'
     { _cCopy   :: !(Maybe Copy)
     , _cNew    :: !(Maybe New)
     , _cUpload :: !(Maybe Upload)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Create' with the minimum fields required to make a request.
 --
@@ -1425,12 +1641,8 @@ data Create = Create'
 -- * 'cUpload'
 create
     :: Create
-create =
-    Create'
-    { _cCopy = Nothing
-    , _cNew = Nothing
-    , _cUpload = Nothing
-    }
+create = Create' {_cCopy = Nothing, _cNew = Nothing, _cUpload = Nothing}
+
 
 -- | If present, indicates the object was created by copying an existing
 -- Drive object.
@@ -1466,8 +1678,9 @@ instance ToJSON Create where
 --
 -- /See:/ 'new' smart constructor.
 data New =
-    New'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  New'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'New' with the minimum fields required to make a request.
 --
@@ -1475,19 +1688,23 @@ new
     :: New
 new = New'
 
+
 instance FromJSON New where
         parseJSON = withObject "New" (\ o -> pure New')
 
 instance ToJSON New where
         toJSON = const emptyObject
 
--- | A lightweight reference to a Team Drive.
+-- | This item is deprecated; please see \`DriveReference\` instead.
 --
 -- /See:/ 'teamDriveReference' smart constructor.
-data TeamDriveReference = TeamDriveReference'
+data TeamDriveReference =
+  TeamDriveReference'
     { _tdrName  :: !(Maybe Text)
     , _tdrTitle :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamDriveReference' with the minimum fields required to make a request.
 --
@@ -1499,17 +1716,14 @@ data TeamDriveReference = TeamDriveReference'
 teamDriveReference
     :: TeamDriveReference
 teamDriveReference =
-    TeamDriveReference'
-    { _tdrName = Nothing
-    , _tdrTitle = Nothing
-    }
+  TeamDriveReference' {_tdrName = Nothing, _tdrTitle = Nothing}
 
--- | The resource name of the Team Drive. The format is
--- \"teamDrives\/TEAM_DRIVE_ID\".
+
+-- | This field is deprecated; please see \`DriveReference.name\` instead.
 tdrName :: Lens' TeamDriveReference (Maybe Text)
 tdrName = lens _tdrName (\ s a -> s{_tdrName = a})
 
--- | The title of the Team Drive.
+-- | This field is deprecated; please see \`DriveReference.title\` instead.
 tdrTitle :: Lens' TeamDriveReference (Maybe Text)
 tdrTitle = lens _tdrTitle (\ s a -> s{_tdrTitle = a})
 
@@ -1532,14 +1746,16 @@ instance ToJSON TeamDriveReference where
 --
 -- /See:/ 'anonymousUser' smart constructor.
 data AnonymousUser =
-    AnonymousUser'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  AnonymousUser'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AnonymousUser' with the minimum fields required to make a request.
 --
 anonymousUser
     :: AnonymousUser
 anonymousUser = AnonymousUser'
+
 
 instance FromJSON AnonymousUser where
         parseJSON
@@ -1549,18 +1765,53 @@ instance FromJSON AnonymousUser where
 instance ToJSON AnonymousUser where
         toJSON = const emptyObject
 
+-- | A Drive item which is a folder.
+--
+-- /See:/ 'driveFolder' smart constructor.
+newtype DriveFolder =
+  DriveFolder'
+    { _dfType :: Maybe DriveFolderType
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DriveFolder' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfType'
+driveFolder
+    :: DriveFolder
+driveFolder = DriveFolder' {_dfType = Nothing}
+
+
+-- | The type of Drive folder.
+dfType :: Lens' DriveFolder (Maybe DriveFolderType)
+dfType = lens _dfType (\ s a -> s{_dfType = a})
+
+instance FromJSON DriveFolder where
+        parseJSON
+          = withObject "DriveFolder"
+              (\ o -> DriveFolder' <$> (o .:? "type"))
+
+instance ToJSON DriveFolder where
+        toJSON DriveFolder'{..}
+          = object (catMaybes [("type" .=) <$> _dfType])
+
 -- | Represents any user (including a logged out user).
 --
 -- /See:/ 'anyone' smart constructor.
 data Anyone =
-    Anyone'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Anyone'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Anyone' with the minimum fields required to make a request.
 --
 anyone
     :: Anyone
 anyone = Anyone'
+
 
 instance FromJSON Anyone where
         parseJSON = withObject "Anyone" (\ o -> pure Anyone')
@@ -1571,10 +1822,13 @@ instance ToJSON Anyone where
 -- | Information about restriction policy changes to a feature.
 --
 -- /See:/ 'restrictionChange' smart constructor.
-data RestrictionChange = RestrictionChange'
+data RestrictionChange =
+  RestrictionChange'
     { _rcFeature        :: !(Maybe RestrictionChangeFeature)
     , _rcNewRestriction :: !(Maybe RestrictionChangeNewRestriction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestrictionChange' with the minimum fields required to make a request.
 --
@@ -1586,10 +1840,8 @@ data RestrictionChange = RestrictionChange'
 restrictionChange
     :: RestrictionChange
 restrictionChange =
-    RestrictionChange'
-    { _rcFeature = Nothing
-    , _rcNewRestriction = Nothing
-    }
+  RestrictionChange' {_rcFeature = Nothing, _rcNewRestriction = Nothing}
+
 
 -- | The feature which had a change in restriction policy.
 rcFeature :: Lens' RestrictionChange (Maybe RestrictionChangeFeature)
@@ -1625,14 +1877,16 @@ instance ToJSON RestrictionChange where
 --
 -- /See:/ 'legacy' smart constructor.
 data Legacy =
-    Legacy'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Legacy'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Legacy' with the minimum fields required to make a request.
 --
 legacy
     :: Legacy
 legacy = Legacy'
+
 
 instance FromJSON Legacy where
         parseJSON = withObject "Legacy" (\ o -> pure Legacy')
@@ -1643,12 +1897,15 @@ instance ToJSON Legacy where
 -- | A comment on a file.
 --
 -- /See:/ 'fileComment' smart constructor.
-data FileComment = FileComment'
+data FileComment =
+  FileComment'
     { _fcParent             :: !(Maybe DriveItem)
     , _fcLegacyDiscussionId :: !(Maybe Text)
     , _fcLegacyCommentId    :: !(Maybe Text)
     , _fcLinkToDiscussion   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FileComment' with the minimum fields required to make a request.
 --
@@ -1664,12 +1921,13 @@ data FileComment = FileComment'
 fileComment
     :: FileComment
 fileComment =
-    FileComment'
+  FileComment'
     { _fcParent = Nothing
     , _fcLegacyDiscussionId = Nothing
     , _fcLegacyCommentId = Nothing
     , _fcLinkToDiscussion = Nothing
     }
+
 
 -- | The Drive item containing this comment.
 fcParent :: Lens' FileComment (Maybe DriveItem)
@@ -1720,10 +1978,13 @@ instance ToJSON FileComment where
 -- | An object was renamed.
 --
 -- /See:/ 'rename' smart constructor.
-data Rename = Rename'
+data Rename =
+  Rename'
     { _rNewTitle :: !(Maybe Text)
     , _rOldTitle :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Rename' with the minimum fields required to make a request.
 --
@@ -1734,11 +1995,8 @@ data Rename = Rename'
 -- * 'rOldTitle'
 rename
     :: Rename
-rename =
-    Rename'
-    { _rNewTitle = Nothing
-    , _rOldTitle = Nothing
-    }
+rename = Rename' {_rNewTitle = Nothing, _rOldTitle = Nothing}
+
 
 -- | The new title of the drive object.
 rNewTitle :: Lens' Rename (Maybe Text)
@@ -1768,14 +2026,16 @@ instance ToJSON Rename where
 --
 -- /See:/ 'upload' smart constructor.
 data Upload =
-    Upload'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Upload'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Upload' with the minimum fields required to make a request.
 --
 upload
     :: Upload
 upload = Upload'
+
 
 instance FromJSON Upload where
         parseJSON = withObject "Upload" (\ o -> pure Upload')
@@ -1787,14 +2047,16 @@ instance ToJSON Upload where
 --
 -- /See:/ 'noConsolidation' smart constructor.
 data NoConsolidation =
-    NoConsolidation'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  NoConsolidation'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NoConsolidation' with the minimum fields required to make a request.
 --
 noConsolidation
     :: NoConsolidation
 noConsolidation = NoConsolidation'
+
 
 instance FromJSON NoConsolidation where
         parseJSON
@@ -1807,9 +2069,12 @@ instance ToJSON NoConsolidation where
 -- | A comment with an assignment.
 --
 -- /See:/ 'assignment' smart constructor.
-newtype Assignment = Assignment'
+newtype Assignment =
+  Assignment'
     { _aSubtype :: Maybe AssignmentSubtype
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Assignment' with the minimum fields required to make a request.
 --
@@ -1818,10 +2083,8 @@ newtype Assignment = Assignment'
 -- * 'aSubtype'
 assignment
     :: Assignment
-assignment =
-    Assignment'
-    { _aSubtype = Nothing
-    }
+assignment = Assignment' {_aSubtype = Nothing}
+
 
 -- | The sub-type of this event.
 aSubtype :: Lens' Assignment (Maybe AssignmentSubtype)
@@ -1839,9 +2102,12 @@ instance ToJSON Assignment where
 -- | Information about settings changes.
 --
 -- /See:/ 'settingsChange' smart constructor.
-newtype SettingsChange = SettingsChange'
+newtype SettingsChange =
+  SettingsChange'
     { _scRestrictionChanges :: Maybe [RestrictionChange]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsChange' with the minimum fields required to make a request.
 --
@@ -1850,10 +2116,8 @@ newtype SettingsChange = SettingsChange'
 -- * 'scRestrictionChanges'
 settingsChange
     :: SettingsChange
-settingsChange =
-    SettingsChange'
-    { _scRestrictionChanges = Nothing
-    }
+settingsChange = SettingsChange' {_scRestrictionChanges = Nothing}
+
 
 -- | The set of changes made to restrictions.
 scRestrictionChanges :: Lens' SettingsChange [RestrictionChange]
@@ -1880,12 +2144,15 @@ instance ToJSON SettingsChange where
 -- | A change about comments on an object.
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment'
+data Comment =
+  Comment'
     { _cSuggestion     :: !(Maybe Suggestion)
     , _cPost           :: !(Maybe Post')
     , _cMentionedUsers :: !(Maybe [User])
     , _cAssignment     :: !(Maybe Assignment)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -1901,12 +2168,13 @@ data Comment = Comment'
 comment
     :: Comment
 comment =
-    Comment'
+  Comment'
     { _cSuggestion = Nothing
     , _cPost = Nothing
     , _cMentionedUsers = Nothing
     , _cAssignment = Nothing
     }
+
 
 -- | A change on a suggestion.
 cSuggestion :: Lens' Comment (Maybe Suggestion)
@@ -1951,14 +2219,17 @@ instance ToJSON Comment where
 -- | The permission setting of an object.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission'
+data Permission =
+  Permission'
     { _pGroup          :: !(Maybe Group)
     , _pDomain         :: !(Maybe Domain)
     , _pUser           :: !(Maybe User)
     , _pRole           :: !(Maybe PermissionRole)
     , _pAnyone         :: !(Maybe Anyone)
     , _pAllowDiscovery :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -1978,7 +2249,7 @@ data Permission = Permission'
 permission
     :: Permission
 permission =
-    Permission'
+  Permission'
     { _pGroup = Nothing
     , _pDomain = Nothing
     , _pUser = Nothing
@@ -1986,6 +2257,7 @@ permission =
     , _pAnyone = Nothing
     , _pAllowDiscovery = Nothing
     }
+
 
 -- | The group to whom this permission applies.
 pGroup :: Lens' Permission (Maybe Group)
@@ -2036,18 +2308,20 @@ instance ToJSON Permission where
                   ("role" .=) <$> _pRole, ("anyone" .=) <$> _pAnyone,
                   ("allowDiscovery" .=) <$> _pAllowDiscovery])
 
--- | A Drive item which is a file.
+-- | This item is deprecated; please see \`DriveFile\` instead.
 --
 -- /See:/ 'file' smart constructor.
 data File =
-    File'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  File'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
 file
     :: File
 file = File'
+
 
 instance FromJSON File where
         parseJSON = withObject "File" (\ o -> pure File')
@@ -2058,9 +2332,12 @@ instance ToJSON File where
 -- | An object was deleted.
 --
 -- /See:/ 'delete'' smart constructor.
-newtype Delete' = Delete''
+newtype Delete' =
+  Delete''
     { _dType :: Maybe DeleteType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Delete' with the minimum fields required to make a request.
 --
@@ -2069,10 +2346,8 @@ newtype Delete' = Delete''
 -- * 'dType'
 delete'
     :: Delete'
-delete' =
-    Delete''
-    { _dType = Nothing
-    }
+delete' = Delete'' {_dType = Nothing}
+
 
 -- | The type of delete action taken.
 dType :: Lens' Delete' (Maybe DeleteType)
@@ -2090,15 +2365,21 @@ instance ToJSON Delete' where
 -- | Information about the target of activity.
 --
 -- /See:/ 'target' smart constructor.
-data Target = Target'
-    { _tTeamDrive   :: !(Maybe TeamDrive)
+data Target =
+  Target'
+    { _tDrive       :: !(Maybe Drive)
+    , _tTeamDrive   :: !(Maybe TeamDrive)
     , _tFileComment :: !(Maybe FileComment)
     , _tDriveItem   :: !(Maybe DriveItem)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Target' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tDrive'
 --
 -- * 'tTeamDrive'
 --
@@ -2108,13 +2389,19 @@ data Target = Target'
 target
     :: Target
 target =
-    Target'
-    { _tTeamDrive = Nothing
+  Target'
+    { _tDrive = Nothing
+    , _tTeamDrive = Nothing
     , _tFileComment = Nothing
     , _tDriveItem = Nothing
     }
 
--- | The target is a Team Drive.
+
+-- | The target is a shared drive.
+tDrive :: Lens' Target (Maybe Drive)
+tDrive = lens _tDrive (\ s a -> s{_tDrive = a})
+
+-- | This field is deprecated; please use the \`drive\` field instead.
 tTeamDrive :: Lens' Target (Maybe TeamDrive)
 tTeamDrive
   = lens _tTeamDrive (\ s a -> s{_tTeamDrive = a})
@@ -2134,24 +2421,29 @@ instance FromJSON Target where
           = withObject "Target"
               (\ o ->
                  Target' <$>
-                   (o .:? "teamDrive") <*> (o .:? "fileComment") <*>
-                     (o .:? "driveItem"))
+                   (o .:? "drive") <*> (o .:? "teamDrive") <*>
+                     (o .:? "fileComment")
+                     <*> (o .:? "driveItem"))
 
 instance ToJSON Target where
         toJSON Target'{..}
           = object
               (catMaybes
-                 [("teamDrive" .=) <$> _tTeamDrive,
+                 [("drive" .=) <$> _tDrive,
+                  ("teamDrive" .=) <$> _tTeamDrive,
                   ("fileComment" .=) <$> _tFileComment,
                   ("driveItem" .=) <$> _tDriveItem])
 
 -- | An object was moved.
 --
 -- /See:/ 'move' smart constructor.
-data Move = Move'
+data Move =
+  Move'
     { _mAddedParents   :: !(Maybe [TargetReference])
     , _mRemovedParents :: !(Maybe [TargetReference])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
 --
@@ -2162,11 +2454,8 @@ data Move = Move'
 -- * 'mRemovedParents'
 move
     :: Move
-move =
-    Move'
-    { _mAddedParents = Nothing
-    , _mRemovedParents = Nothing
-    }
+move = Move' {_mAddedParents = Nothing, _mRemovedParents = Nothing}
+
 
 -- | The added parent object(s).
 mAddedParents :: Lens' Move [TargetReference]
@@ -2208,14 +2497,17 @@ instance ToJSON Move where
 -- QueryDriveActivityRequest.
 --
 -- /See:/ 'driveActivity' smart constructor.
-data DriveActivity = DriveActivity'
+data DriveActivity =
+  DriveActivity'
     { _daTimeRange           :: !(Maybe TimeRange)
     , _daActions             :: !(Maybe [Action])
     , _daActors              :: !(Maybe [Actor])
     , _daTargets             :: !(Maybe [Target])
     , _daPrimaryActionDetail :: !(Maybe ActionDetail)
     , _daTimestamp           :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveActivity' with the minimum fields required to make a request.
 --
@@ -2235,7 +2527,7 @@ data DriveActivity = DriveActivity'
 driveActivity
     :: DriveActivity
 driveActivity =
-    DriveActivity'
+  DriveActivity'
     { _daTimeRange = Nothing
     , _daActions = Nothing
     , _daActors = Nothing
@@ -2243,6 +2535,7 @@ driveActivity =
     , _daPrimaryActionDetail = Nothing
     , _daTimestamp = Nothing
     }
+
 
 -- | The activity occurred over this time range.
 daTimeRange :: Lens' DriveActivity (Maybe TimeRange)
@@ -2263,8 +2556,8 @@ daActors
       _Default
       . _Coerce
 
--- | All Drive objects this activity is about (e.g. file, folder, Team
--- Drive). This represents the state of the target immediately after the
+-- | All Google Drive objects this activity is about (e.g. file, folder,
+-- drive). This represents the state of the target immediately after the
 -- actions occurred.
 daTargets :: Lens' DriveActivity [Target]
 daTargets
@@ -2312,18 +2605,25 @@ instance ToJSON DriveActivity where
 -- | A Drive item, such as a file or folder.
 --
 -- /See:/ 'driveItem' smart constructor.
-data DriveItem = DriveItem'
-    { _diFolder   :: !(Maybe Folder)
-    , _diOwner    :: !(Maybe Owner)
-    , _diMimeType :: !(Maybe Text)
-    , _diName     :: !(Maybe Text)
-    , _diTitle    :: !(Maybe Text)
-    , _diFile     :: !(Maybe File)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data DriveItem =
+  DriveItem'
+    { _diDriveFile   :: !(Maybe DriveFile)
+    , _diFolder      :: !(Maybe Folder)
+    , _diOwner       :: !(Maybe Owner)
+    , _diMimeType    :: !(Maybe Text)
+    , _diName        :: !(Maybe Text)
+    , _diDriveFolder :: !(Maybe DriveFolder)
+    , _diTitle       :: !(Maybe Text)
+    , _diFile        :: !(Maybe File)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DriveItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diDriveFile'
 --
 -- * 'diFolder'
 --
@@ -2333,22 +2633,32 @@ data DriveItem = DriveItem'
 --
 -- * 'diName'
 --
+-- * 'diDriveFolder'
+--
 -- * 'diTitle'
 --
 -- * 'diFile'
 driveItem
     :: DriveItem
 driveItem =
-    DriveItem'
-    { _diFolder = Nothing
+  DriveItem'
+    { _diDriveFile = Nothing
+    , _diFolder = Nothing
     , _diOwner = Nothing
     , _diMimeType = Nothing
     , _diName = Nothing
+    , _diDriveFolder = Nothing
     , _diTitle = Nothing
     , _diFile = Nothing
     }
 
--- | The Drive item is a folder.
+
+-- | The Drive item is a file.
+diDriveFile :: Lens' DriveItem (Maybe DriveFile)
+diDriveFile
+  = lens _diDriveFile (\ s a -> s{_diDriveFile = a})
+
+-- | This field is deprecated; please use the \`driveFolder\` field instead.
 diFolder :: Lens' DriveItem (Maybe Folder)
 diFolder = lens _diFolder (\ s a -> s{_diFolder = a})
 
@@ -2366,11 +2676,17 @@ diMimeType
 diName :: Lens' DriveItem (Maybe Text)
 diName = lens _diName (\ s a -> s{_diName = a})
 
+-- | The Drive item is a folder.
+diDriveFolder :: Lens' DriveItem (Maybe DriveFolder)
+diDriveFolder
+  = lens _diDriveFolder
+      (\ s a -> s{_diDriveFolder = a})
+
 -- | The title of the Drive item.
 diTitle :: Lens' DriveItem (Maybe Text)
 diTitle = lens _diTitle (\ s a -> s{_diTitle = a})
 
--- | The Drive item is a file.
+-- | This field is deprecated; please use the \`driveFile\` field instead.
 diFile :: Lens' DriveItem (Maybe File)
 diFile = lens _diFile (\ s a -> s{_diFile = a})
 
@@ -2379,9 +2695,11 @@ instance FromJSON DriveItem where
           = withObject "DriveItem"
               (\ o ->
                  DriveItem' <$>
-                   (o .:? "folder") <*> (o .:? "owner") <*>
-                     (o .:? "mimeType")
+                   (o .:? "driveFile") <*> (o .:? "folder") <*>
+                     (o .:? "owner")
+                     <*> (o .:? "mimeType")
                      <*> (o .:? "name")
+                     <*> (o .:? "driveFolder")
                      <*> (o .:? "title")
                      <*> (o .:? "file"))
 
@@ -2389,18 +2707,23 @@ instance ToJSON DriveItem where
         toJSON DriveItem'{..}
           = object
               (catMaybes
-                 [("folder" .=) <$> _diFolder,
+                 [("driveFile" .=) <$> _diDriveFile,
+                  ("folder" .=) <$> _diFolder,
                   ("owner" .=) <$> _diOwner,
                   ("mimeType" .=) <$> _diMimeType,
-                  ("name" .=) <$> _diName, ("title" .=) <$> _diTitle,
-                  ("file" .=) <$> _diFile])
+                  ("name" .=) <$> _diName,
+                  ("driveFolder" .=) <$> _diDriveFolder,
+                  ("title" .=) <$> _diTitle, ("file" .=) <$> _diFile])
 
 -- | Event triggered by system operations instead of end users.
 --
 -- /See:/ 'systemEvent' smart constructor.
-newtype SystemEvent = SystemEvent'
+newtype SystemEvent =
+  SystemEvent'
     { _seType :: Maybe SystemEventType
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SystemEvent' with the minimum fields required to make a request.
 --
@@ -2409,10 +2732,8 @@ newtype SystemEvent = SystemEvent'
 -- * 'seType'
 systemEvent
     :: SystemEvent
-systemEvent =
-    SystemEvent'
-    { _seType = Nothing
-    }
+systemEvent = SystemEvent' {_seType = Nothing}
+
 
 -- | The type of the system event that may triggered activity.
 seType :: Lens' SystemEvent (Maybe SystemEventType)

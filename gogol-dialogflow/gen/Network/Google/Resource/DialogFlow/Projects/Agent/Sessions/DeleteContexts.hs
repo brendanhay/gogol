@@ -61,14 +61,17 @@ type ProjectsAgentSessionsDeleteContextsResource =
 -- | Deletes all active contexts in the specified session.
 --
 -- /See:/ 'projectsAgentSessionsDeleteContexts' smart constructor.
-data ProjectsAgentSessionsDeleteContexts = ProjectsAgentSessionsDeleteContexts'
+data ProjectsAgentSessionsDeleteContexts =
+  ProjectsAgentSessionsDeleteContexts'
     { _pasdcParent         :: !Text
     , _pasdcXgafv          :: !(Maybe Xgafv)
     , _pasdcUploadProtocol :: !(Maybe Text)
     , _pasdcAccessToken    :: !(Maybe Text)
     , _pasdcUploadType     :: !(Maybe Text)
     , _pasdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentSessionsDeleteContexts' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsAgentSessionsDeleteContexts
     :: Text -- ^ 'pasdcParent'
     -> ProjectsAgentSessionsDeleteContexts
 projectsAgentSessionsDeleteContexts pPasdcParent_ =
-    ProjectsAgentSessionsDeleteContexts'
+  ProjectsAgentSessionsDeleteContexts'
     { _pasdcParent = pPasdcParent_
     , _pasdcXgafv = Nothing
     , _pasdcUploadProtocol = Nothing
@@ -97,6 +100,7 @@ projectsAgentSessionsDeleteContexts pPasdcParent_ =
     , _pasdcUploadType = Nothing
     , _pasdcCallback = Nothing
     }
+
 
 -- | Required. The name of the session to delete all contexts from. Format:
 -- \`projects\/\/agent\/sessions\/\`.
@@ -134,7 +138,8 @@ pasdcCallback
       (\ s a -> s{_pasdcCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsDeleteContexts where
+           ProjectsAgentSessionsDeleteContexts
+         where
         type Rs ProjectsAgentSessionsDeleteContexts =
              GoogleProtobufEmpty
         type Scopes ProjectsAgentSessionsDeleteContexts =

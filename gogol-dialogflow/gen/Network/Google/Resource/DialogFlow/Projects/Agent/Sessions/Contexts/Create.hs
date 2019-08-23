@@ -65,7 +65,8 @@ type ProjectsAgentSessionsContextsCreateResource =
 -- the context.
 --
 -- /See:/ 'projectsAgentSessionsContextsCreate' smart constructor.
-data ProjectsAgentSessionsContextsCreate = ProjectsAgentSessionsContextsCreate'
+data ProjectsAgentSessionsContextsCreate =
+  ProjectsAgentSessionsContextsCreate'
     { _pasccParent         :: !Text
     , _pasccXgafv          :: !(Maybe Xgafv)
     , _pasccUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsAgentSessionsContextsCreate = ProjectsAgentSessionsContextsCreate'
     , _pasccUploadType     :: !(Maybe Text)
     , _pasccPayload        :: !GoogleCloudDialogflowV2Context
     , _pasccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentSessionsContextsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsAgentSessionsContextsCreate
     -> GoogleCloudDialogflowV2Context -- ^ 'pasccPayload'
     -> ProjectsAgentSessionsContextsCreate
 projectsAgentSessionsContextsCreate pPasccParent_ pPasccPayload_ =
-    ProjectsAgentSessionsContextsCreate'
+  ProjectsAgentSessionsContextsCreate'
     { _pasccParent = pPasccParent_
     , _pasccXgafv = Nothing
     , _pasccUploadProtocol = Nothing
@@ -106,6 +109,7 @@ projectsAgentSessionsContextsCreate pPasccParent_ pPasccPayload_ =
     , _pasccPayload = pPasccPayload_
     , _pasccCallback = Nothing
     }
+
 
 -- | Required. The session to create a context for. Format:
 -- \`projects\/\/agent\/sessions\/\`.
@@ -148,7 +152,8 @@ pasccCallback
       (\ s a -> s{_pasccCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsContextsCreate where
+           ProjectsAgentSessionsContextsCreate
+         where
         type Rs ProjectsAgentSessionsContextsCreate =
              GoogleCloudDialogflowV2Context
         type Scopes ProjectsAgentSessionsContextsCreate =

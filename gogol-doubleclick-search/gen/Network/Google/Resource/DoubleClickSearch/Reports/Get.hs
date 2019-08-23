@@ -51,9 +51,12 @@ type ReportsGetResource =
 -- | Polls for the status of a report request.
 --
 -- /See:/ 'reportsGet' smart constructor.
-newtype ReportsGet = ReportsGet'
+newtype ReportsGet =
+  ReportsGet'
     { _rgReportId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype ReportsGet = ReportsGet'
 reportsGet
     :: Text -- ^ 'rgReportId'
     -> ReportsGet
-reportsGet pRgReportId_ =
-    ReportsGet'
-    { _rgReportId = pRgReportId_
-    }
+reportsGet pRgReportId_ = ReportsGet' {_rgReportId = pRgReportId_}
+
 
 -- | ID of the report request being polled.
 rgReportId :: Lens' ReportsGet Text

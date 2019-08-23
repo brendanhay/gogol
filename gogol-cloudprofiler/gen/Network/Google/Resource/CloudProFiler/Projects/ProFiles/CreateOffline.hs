@@ -66,7 +66,8 @@ type ProjectsProFilesCreateOfflineResource =
 -- the server records it.
 --
 -- /See:/ 'projectsProFilesCreateOffline' smart constructor.
-data ProjectsProFilesCreateOffline = ProjectsProFilesCreateOffline'
+data ProjectsProFilesCreateOffline =
+  ProjectsProFilesCreateOffline'
     { _ppfcoParent         :: !Text
     , _ppfcoXgafv          :: !(Maybe Xgafv)
     , _ppfcoUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsProFilesCreateOffline = ProjectsProFilesCreateOffline'
     , _ppfcoUploadType     :: !(Maybe Text)
     , _ppfcoPayload        :: !ProFile
     , _ppfcoCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsProFilesCreateOffline' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsProFilesCreateOffline
     -> ProFile -- ^ 'ppfcoPayload'
     -> ProjectsProFilesCreateOffline
 projectsProFilesCreateOffline pPpfcoParent_ pPpfcoPayload_ =
-    ProjectsProFilesCreateOffline'
+  ProjectsProFilesCreateOffline'
     { _ppfcoParent = pPpfcoParent_
     , _ppfcoXgafv = Nothing
     , _ppfcoUploadProtocol = Nothing
@@ -107,6 +110,7 @@ projectsProFilesCreateOffline pPpfcoParent_ pPpfcoPayload_ =
     , _ppfcoPayload = pPpfcoPayload_
     , _ppfcoCallback = Nothing
     }
+
 
 -- | Parent project to create the profile in.
 ppfcoParent :: Lens' ProjectsProFilesCreateOffline Text

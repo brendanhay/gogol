@@ -58,10 +58,13 @@ type HTTPSHealthChecksGetResource =
 -- available HTTPS health checks by making a list() request.
 --
 -- /See:/ 'httpsHealthChecksGet' smart constructor.
-data HTTPSHealthChecksGet = HTTPSHealthChecksGet'
+data HTTPSHealthChecksGet =
+  HTTPSHealthChecksGet'
     { _hhcgProject          :: !Text
     , _hhcgHTTPSHealthCheck :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPSHealthChecksGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,11 @@ httpsHealthChecksGet
     -> Text -- ^ 'hhcgHTTPSHealthCheck'
     -> HTTPSHealthChecksGet
 httpsHealthChecksGet pHhcgProject_ pHhcgHTTPSHealthCheck_ =
-    HTTPSHealthChecksGet'
+  HTTPSHealthChecksGet'
     { _hhcgProject = pHhcgProject_
     , _hhcgHTTPSHealthCheck = pHhcgHTTPSHealthCheck_
     }
+
 
 -- | Project ID for this request.
 hhcgProject :: Lens' HTTPSHealthChecksGet Text

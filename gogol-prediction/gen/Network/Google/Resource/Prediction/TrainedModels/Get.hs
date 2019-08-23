@@ -54,10 +54,13 @@ type TrainedModelsGetResource =
 -- | Check training status of your model.
 --
 -- /See:/ 'trainedModelsGet' smart constructor.
-data TrainedModelsGet = TrainedModelsGet'
+data TrainedModelsGet =
+  TrainedModelsGet'
     { _tmgProject :: !Text
     , _tmgId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TrainedModelsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ trainedModelsGet
     -> Text -- ^ 'tmgId'
     -> TrainedModelsGet
 trainedModelsGet pTmgProject_ pTmgId_ =
-    TrainedModelsGet'
-    { _tmgProject = pTmgProject_
-    , _tmgId = pTmgId_
-    }
+  TrainedModelsGet' {_tmgProject = pTmgProject_, _tmgId = pTmgId_}
+
 
 -- | The project associated with the model.
 tmgProject :: Lens' TrainedModelsGet Text

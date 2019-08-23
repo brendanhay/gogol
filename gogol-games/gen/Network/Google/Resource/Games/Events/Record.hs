@@ -56,10 +56,13 @@ type EventsRecordResource =
 -- for the currently authenticated user of this application.
 --
 -- /See:/ 'eventsRecord' smart constructor.
-data EventsRecord = EventsRecord'
+data EventsRecord =
+  EventsRecord'
     { _erPayload  :: !EventRecordRequest
     , _erLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsRecord' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ eventsRecord
     :: EventRecordRequest -- ^ 'erPayload'
     -> EventsRecord
 eventsRecord pErPayload_ =
-    EventsRecord'
-    { _erPayload = pErPayload_
-    , _erLanguage = Nothing
-    }
+  EventsRecord' {_erPayload = pErPayload_, _erLanguage = Nothing}
+
 
 -- | Multipart request metadata.
 erPayload :: Lens' EventsRecord EventRecordRequest
@@ -90,7 +91,8 @@ erLanguage
 instance GoogleRequest EventsRecord where
         type Rs EventsRecord = EventUpdateResponse
         type Scopes EventsRecord =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient EventsRecord'{..}
           = go _erLanguage (Just AltJSON) _erPayload
               gamesService

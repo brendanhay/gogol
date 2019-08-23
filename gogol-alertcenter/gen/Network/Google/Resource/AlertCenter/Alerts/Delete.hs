@@ -70,7 +70,8 @@ type AlertsDeleteResource =
 -- results in a \`NOT_FOUND\` error.
 --
 -- /See:/ 'alertsDelete' smart constructor.
-data AlertsDelete = AlertsDelete'
+data AlertsDelete =
+  AlertsDelete'
     { _adXgafv          :: !(Maybe Xgafv)
     , _adUploadProtocol :: !(Maybe Text)
     , _adAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data AlertsDelete = AlertsDelete'
     , _adUploadType     :: !(Maybe Text)
     , _adCustomerId     :: !(Maybe Text)
     , _adCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertsDelete' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ alertsDelete
     :: Text -- ^ 'adAlertId'
     -> AlertsDelete
 alertsDelete pAdAlertId_ =
-    AlertsDelete'
+  AlertsDelete'
     { _adXgafv = Nothing
     , _adUploadProtocol = Nothing
     , _adAccessToken = Nothing
@@ -110,6 +113,7 @@ alertsDelete pAdAlertId_ =
     , _adCustomerId = Nothing
     , _adCallback = Nothing
     }
+
 
 -- | V1 error format.
 adXgafv :: Lens' AlertsDelete (Maybe Xgafv)

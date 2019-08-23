@@ -74,7 +74,8 @@ type DebugIdentitysourcesItemsListForunmAppedidentityResource
 -- | Lists names of items associated with an unmapped identity.
 --
 -- /See:/ 'debugIdentitysourcesItemsListForunmAppedidentity' smart constructor.
-data DebugIdentitysourcesItemsListForunmAppedidentity = DebugIdentitysourcesItemsListForunmAppedidentity'
+data DebugIdentitysourcesItemsListForunmAppedidentity =
+  DebugIdentitysourcesItemsListForunmAppedidentity'
     { _diilfaUserResourceName            :: !(Maybe Text)
     , _diilfaParent                      :: !Text
     , _diilfaXgafv                       :: !(Maybe Xgafv)
@@ -86,7 +87,9 @@ data DebugIdentitysourcesItemsListForunmAppedidentity = DebugIdentitysourcesItem
     , _diilfaPageToken                   :: !(Maybe Text)
     , _diilfaPageSize                    :: !(Maybe (Textual Int32))
     , _diilfaCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DebugIdentitysourcesItemsListForunmAppedidentity' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ debugIdentitysourcesItemsListForunmAppedidentity
     :: Text -- ^ 'diilfaParent'
     -> DebugIdentitysourcesItemsListForunmAppedidentity
 debugIdentitysourcesItemsListForunmAppedidentity pDiilfaParent_ =
-    DebugIdentitysourcesItemsListForunmAppedidentity'
+  DebugIdentitysourcesItemsListForunmAppedidentity'
     { _diilfaUserResourceName = Nothing
     , _diilfaParent = pDiilfaParent_
     , _diilfaXgafv = Nothing
@@ -130,6 +133,7 @@ debugIdentitysourcesItemsListForunmAppedidentity pDiilfaParent_ =
     , _diilfaPageSize = Nothing
     , _diilfaCallback = Nothing
     }
+
 
 diilfaUserResourceName :: Lens' DebugIdentitysourcesItemsListForunmAppedidentity (Maybe Text)
 diilfaUserResourceName
@@ -170,8 +174,8 @@ diilfaUploadType
   = lens _diilfaUploadType
       (\ s a -> s{_diilfaUploadType = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 diilfaDebugOptionsEnableDebugging :: Lens' DebugIdentitysourcesItemsListForunmAppedidentity (Maybe Bool)
 diilfaDebugOptionsEnableDebugging
   = lens _diilfaDebugOptionsEnableDebugging
@@ -197,7 +201,7 @@ diilfaCallback
       (\ s a -> s{_diilfaCallback = a})
 
 instance GoogleRequest
-         DebugIdentitysourcesItemsListForunmAppedidentity
+           DebugIdentitysourcesItemsListForunmAppedidentity
          where
         type Rs
                DebugIdentitysourcesItemsListForunmAppedidentity

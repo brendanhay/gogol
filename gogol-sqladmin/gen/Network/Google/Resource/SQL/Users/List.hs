@@ -56,10 +56,13 @@ type UsersListResource =
 -- | Lists users in the specified Cloud SQL instance.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList'
+data UsersList =
+  UsersList'
     { _ulProject  :: !Text
     , _ulInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ usersList
     -> Text -- ^ 'ulInstance'
     -> UsersList
 usersList pUlProject_ pUlInstance_ =
-    UsersList'
-    { _ulProject = pUlProject_
-    , _ulInstance = pUlInstance_
-    }
+  UsersList' {_ulProject = pUlProject_, _ulInstance = pUlInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 ulProject :: Lens' UsersList Text

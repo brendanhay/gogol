@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get a comment.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.comments.get@.
 module Network.Google.Resource.PlusDomains.Comments.Get
@@ -48,12 +49,16 @@ type CommentsGetResource =
            Capture "commentId" Text :>
              QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
--- | Get a comment.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'commentsGet' smart constructor.
-newtype CommentsGet = CommentsGet'
+newtype CommentsGet =
+  CommentsGet'
     { _cgCommentId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +68,8 @@ newtype CommentsGet = CommentsGet'
 commentsGet
     :: Text -- ^ 'cgCommentId'
     -> CommentsGet
-commentsGet pCgCommentId_ =
-    CommentsGet'
-    { _cgCommentId = pCgCommentId_
-    }
+commentsGet pCgCommentId_ = CommentsGet' {_cgCommentId = pCgCommentId_}
+
 
 -- | The ID of the comment to get.
 cgCommentId :: Lens' CommentsGet Text

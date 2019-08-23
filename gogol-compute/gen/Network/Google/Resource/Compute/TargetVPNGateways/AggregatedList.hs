@@ -62,13 +62,16 @@ type TargetVPNGatewaysAggregatedListResource =
 -- | Retrieves an aggregated list of target VPN gateways.
 --
 -- /See:/ 'targetVPNGatewaysAggregatedList' smart constructor.
-data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList'
+data TargetVPNGatewaysAggregatedList =
+  TargetVPNGatewaysAggregatedList'
     { _tvgalOrderBy    :: !(Maybe Text)
     , _tvgalProject    :: !Text
     , _tvgalFilter     :: !(Maybe Text)
     , _tvgalPageToken  :: !(Maybe Text)
     , _tvgalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetVPNGatewaysAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ targetVPNGatewaysAggregatedList
     :: Text -- ^ 'tvgalProject'
     -> TargetVPNGatewaysAggregatedList
 targetVPNGatewaysAggregatedList pTvgalProject_ =
-    TargetVPNGatewaysAggregatedList'
+  TargetVPNGatewaysAggregatedList'
     { _tvgalOrderBy = Nothing
     , _tvgalProject = pTvgalProject_
     , _tvgalFilter = Nothing
     , _tvgalPageToken = Nothing
     , _tvgalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
@@ -151,7 +155,8 @@ tvgalMaxResults
       . _Coerce
 
 instance GoogleRequest
-         TargetVPNGatewaysAggregatedList where
+           TargetVPNGatewaysAggregatedList
+         where
         type Rs TargetVPNGatewaysAggregatedList =
              TargetVPNGatewayAggregatedList
         type Scopes TargetVPNGatewaysAggregatedList =

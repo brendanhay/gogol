@@ -118,6 +118,45 @@ instance FromJSON RestrictionChangeNewRestriction where
 instance ToJSON RestrictionChangeNewRestriction where
     toJSON = toJSONText
 
+-- | The type of Drive folder.
+data DriveFolderType
+    = TypeUnspecified
+      -- ^ @TYPE_UNSPECIFIED@
+      -- The folder type is unknown.
+    | MyDriveRoot
+      -- ^ @MY_DRIVE_ROOT@
+      -- The folder is the root of a user\'s MyDrive.
+    | SharedDriveRoot
+      -- ^ @SHARED_DRIVE_ROOT@
+      -- The folder is the root of a shared drive.
+    | StandardFolder
+      -- ^ @STANDARD_FOLDER@
+      -- The folder is a standard, non-root, folder.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DriveFolderType
+
+instance FromHttpApiData DriveFolderType where
+    parseQueryParam = \case
+        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
+        "MY_DRIVE_ROOT" -> Right MyDriveRoot
+        "SHARED_DRIVE_ROOT" -> Right SharedDriveRoot
+        "STANDARD_FOLDER" -> Right StandardFolder
+        x -> Left ("Unable to parse DriveFolderType from: " <> x)
+
+instance ToHttpApiData DriveFolderType where
+    toQueryParam = \case
+        TypeUnspecified -> "TYPE_UNSPECIFIED"
+        MyDriveRoot -> "MY_DRIVE_ROOT"
+        SharedDriveRoot -> "SHARED_DRIVE_ROOT"
+        StandardFolder -> "STANDARD_FOLDER"
+
+instance FromJSON DriveFolderType where
+    parseJSON = parseJSONText "DriveFolderType"
+
+instance ToJSON DriveFolderType where
+    toJSON = toJSONText
+
 -- | The feature which had a change in restriction policy.
 data RestrictionChangeFeature
     = FeatureUnspecified
@@ -166,13 +205,13 @@ instance ToJSON RestrictionChangeFeature where
 
 -- | The type of the system event that may triggered activity.
 data SystemEventType
-    = TypeUnspecified
+    = SETTypeUnspecified
       -- ^ @TYPE_UNSPECIFIED@
       -- The event type is unspecified.
-    | UserDeletion
+    | SETUserDeletion
       -- ^ @USER_DELETION@
       -- The event is a consequence of a user account being deleted.
-    | TrashAutoPurge
+    | SETTrashAutoPurge
       -- ^ @TRASH_AUTO_PURGE@
       -- The event is due to the system automatically purging trash.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -181,16 +220,16 @@ instance Hashable SystemEventType
 
 instance FromHttpApiData SystemEventType where
     parseQueryParam = \case
-        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
-        "USER_DELETION" -> Right UserDeletion
-        "TRASH_AUTO_PURGE" -> Right TrashAutoPurge
+        "TYPE_UNSPECIFIED" -> Right SETTypeUnspecified
+        "USER_DELETION" -> Right SETUserDeletion
+        "TRASH_AUTO_PURGE" -> Right SETTrashAutoPurge
         x -> Left ("Unable to parse SystemEventType from: " <> x)
 
 instance ToHttpApiData SystemEventType where
     toQueryParam = \case
-        TypeUnspecified -> "TYPE_UNSPECIFIED"
-        UserDeletion -> "USER_DELETION"
-        TrashAutoPurge -> "TRASH_AUTO_PURGE"
+        SETTypeUnspecified -> "TYPE_UNSPECIFIED"
+        SETUserDeletion -> "USER_DELETION"
+        SETTrashAutoPurge -> "TRASH_AUTO_PURGE"
 
 instance FromJSON SystemEventType where
     parseJSON = parseJSONText "SystemEventType"
@@ -501,21 +540,20 @@ instance FromJSON DataLeakPreventionChangeType where
 instance ToJSON DataLeakPreventionChangeType where
     toJSON = toJSONText
 
--- | The type of Drive folder.
+-- | This field is deprecated; please see \`DriveFolder.type\` instead.
 data FolderType
     = FTTypeUnspecified
       -- ^ @TYPE_UNSPECIFIED@
-      -- The folder type is unknown.
+      -- This item is deprecated; please see \`DriveFolder.Type\` instead.
     | FTMyDriveRoot
       -- ^ @MY_DRIVE_ROOT@
-      -- The folder is the root of a user\'s MyDrive.
+      -- This item is deprecated; please see \`DriveFolder.Type\` instead.
     | FTTeamDriveRoot
       -- ^ @TEAM_DRIVE_ROOT@
-      -- The folder is the root of a Team Drive. Note that this folder is a Drive
-      -- item, and is a distinct entity from the Team Drive itself.
+      -- This item is deprecated; please see \`DriveFolder.Type\` instead.
     | FTStandardFolder
       -- ^ @STANDARD_FOLDER@
-      -- The folder is a standard, non-root, folder.
+      -- This item is deprecated; please see \`DriveFolder.Type\` instead.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FolderType

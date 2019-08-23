@@ -65,13 +65,16 @@ type ManagementCustomDimensionsPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementCustomDimensionsPatch' smart constructor.
-data ManagementCustomDimensionsPatch = ManagementCustomDimensionsPatch'
+data ManagementCustomDimensionsPatch =
+  ManagementCustomDimensionsPatch'
     { _mcdpWebPropertyId               :: !Text
     , _mcdpIgnoreCustomDataSourceLinks :: !Bool
     , _mcdpPayload                     :: !CustomDimension
     , _mcdpAccountId                   :: !Text
     , _mcdpCustomDimensionId           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementCustomDimensionsPatch' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ managementCustomDimensionsPatch
     -> Text -- ^ 'mcdpCustomDimensionId'
     -> ManagementCustomDimensionsPatch
 managementCustomDimensionsPatch pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
-    ManagementCustomDimensionsPatch'
+  ManagementCustomDimensionsPatch'
     { _mcdpWebPropertyId = pMcdpWebPropertyId_
     , _mcdpIgnoreCustomDataSourceLinks = False
     , _mcdpPayload = pMcdpPayload_
     , _mcdpAccountId = pMcdpAccountId_
     , _mcdpCustomDimensionId = pMcdpCustomDimensionId_
     }
+
 
 -- | Web property ID for the custom dimension to update.
 mcdpWebPropertyId :: Lens' ManagementCustomDimensionsPatch Text
@@ -132,7 +136,8 @@ mcdpCustomDimensionId
       (\ s a -> s{_mcdpCustomDimensionId = a})
 
 instance GoogleRequest
-         ManagementCustomDimensionsPatch where
+           ManagementCustomDimensionsPatch
+         where
         type Rs ManagementCustomDimensionsPatch =
              CustomDimension
         type Scopes ManagementCustomDimensionsPatch =

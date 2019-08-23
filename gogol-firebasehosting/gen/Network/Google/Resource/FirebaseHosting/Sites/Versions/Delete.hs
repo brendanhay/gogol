@@ -59,14 +59,17 @@ type SitesVersionsDeleteResource =
 -- | Deletes the specified version.
 --
 -- /See:/ 'sitesVersionsDelete' smart constructor.
-data SitesVersionsDelete = SitesVersionsDelete'
+data SitesVersionsDelete =
+  SitesVersionsDelete'
     { _svdXgafv          :: !(Maybe Xgafv)
     , _svdUploadProtocol :: !(Maybe Text)
     , _svdAccessToken    :: !(Maybe Text)
     , _svdUploadType     :: !(Maybe Text)
     , _svdName           :: !Text
     , _svdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesVersionsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ sitesVersionsDelete
     :: Text -- ^ 'svdName'
     -> SitesVersionsDelete
 sitesVersionsDelete pSvdName_ =
-    SitesVersionsDelete'
+  SitesVersionsDelete'
     { _svdXgafv = Nothing
     , _svdUploadProtocol = Nothing
     , _svdAccessToken = Nothing
@@ -95,6 +98,7 @@ sitesVersionsDelete pSvdName_ =
     , _svdName = pSvdName_
     , _svdCallback = Nothing
     }
+
 
 -- | V1 error format.
 svdXgafv :: Lens' SitesVersionsDelete (Maybe Xgafv)

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables\/Disables Network Policy for a cluster.
+-- Enables or disables Network Policy for a cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.setNetworkPolicy@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.SetNetworkPolicy
@@ -60,10 +60,11 @@ type ProjectsLocationsClustersSetNetworkPolicyResource
                      ReqBody '[JSON] SetNetworkPolicyRequest :>
                        Post '[JSON] Operation
 
--- | Enables\/Disables Network Policy for a cluster.
+-- | Enables or disables Network Policy for a cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetNetworkPolicy' smart constructor.
-data ProjectsLocationsClustersSetNetworkPolicy = ProjectsLocationsClustersSetNetworkPolicy'
+data ProjectsLocationsClustersSetNetworkPolicy =
+  ProjectsLocationsClustersSetNetworkPolicy'
     { _plcsnpXgafv          :: !(Maybe Xgafv)
     , _plcsnpUploadProtocol :: !(Maybe Text)
     , _plcsnpAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsClustersSetNetworkPolicy = ProjectsLocationsClustersSetNet
     , _plcsnpPayload        :: !SetNetworkPolicyRequest
     , _plcsnpName           :: !Text
     , _plcsnpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersSetNetworkPolicy' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsClustersSetNetworkPolicy
     -> Text -- ^ 'plcsnpName'
     -> ProjectsLocationsClustersSetNetworkPolicy
 projectsLocationsClustersSetNetworkPolicy pPlcsnpPayload_ pPlcsnpName_ =
-    ProjectsLocationsClustersSetNetworkPolicy'
+  ProjectsLocationsClustersSetNetworkPolicy'
     { _plcsnpXgafv = Nothing
     , _plcsnpUploadProtocol = Nothing
     , _plcsnpAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsClustersSetNetworkPolicy pPlcsnpPayload_ pPlcsnpName_ =
     , _plcsnpName = pPlcsnpName_
     , _plcsnpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsnpXgafv :: Lens' ProjectsLocationsClustersSetNetworkPolicy (Maybe Xgafv)
@@ -148,7 +152,8 @@ plcsnpCallback
       (\ s a -> s{_plcsnpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetNetworkPolicy where
+           ProjectsLocationsClustersSetNetworkPolicy
+         where
         type Rs ProjectsLocationsClustersSetNetworkPolicy =
              Operation
         type Scopes ProjectsLocationsClustersSetNetworkPolicy

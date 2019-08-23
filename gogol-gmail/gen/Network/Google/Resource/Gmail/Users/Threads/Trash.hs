@@ -55,10 +55,13 @@ type UsersThreadsTrashResource =
 -- | Moves the specified thread to the trash.
 --
 -- /See:/ 'usersThreadsTrash' smart constructor.
-data UsersThreadsTrash = UsersThreadsTrash'
+data UsersThreadsTrash =
+  UsersThreadsTrash'
     { _uttUserId :: !Text
     , _uttId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersThreadsTrash' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ usersThreadsTrash
     :: Text -- ^ 'uttId'
     -> UsersThreadsTrash
 usersThreadsTrash pUttId_ =
-    UsersThreadsTrash'
-    { _uttUserId = "me"
-    , _uttId = pUttId_
-    }
+  UsersThreadsTrash' {_uttUserId = "me", _uttId = pUttId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

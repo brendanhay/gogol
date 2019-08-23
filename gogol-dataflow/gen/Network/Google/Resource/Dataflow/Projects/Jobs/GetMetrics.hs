@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Request the job status.
+-- Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.getMetrics\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.getMetrics\` is not recommended, as you can only
+-- request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.getMetrics@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
@@ -66,10 +70,15 @@ type ProjectsJobsGetMetricsResource =
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] JobMetrics
 
--- | Request the job status.
+-- | Request the job status. To request the status of a job, we recommend
+-- using \`projects.locations.jobs.getMetrics\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.getMetrics\` is not recommended, as you can only
+-- request the status of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsJobsGetMetrics' smart constructor.
-data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
+data ProjectsJobsGetMetrics =
+  ProjectsJobsGetMetrics'
     { _pjgmXgafv          :: !(Maybe Xgafv)
     , _pjgmJobId          :: !Text
     , _pjgmUploadProtocol :: !(Maybe Text)
@@ -79,7 +88,9 @@ data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
     , _pjgmUploadType     :: !(Maybe Text)
     , _pjgmProjectId      :: !Text
     , _pjgmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsGetMetrics' with the minimum fields required to make a request.
 --
@@ -107,7 +118,7 @@ projectsJobsGetMetrics
     -> Text -- ^ 'pjgmProjectId'
     -> ProjectsJobsGetMetrics
 projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
-    ProjectsJobsGetMetrics'
+  ProjectsJobsGetMetrics'
     { _pjgmXgafv = Nothing
     , _pjgmJobId = pPjgmJobId_
     , _pjgmUploadProtocol = Nothing
@@ -118,6 +129,7 @@ projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
     , _pjgmProjectId = pPjgmProjectId_
     , _pjgmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjgmXgafv :: Lens' ProjectsJobsGetMetrics (Maybe Xgafv)
@@ -135,7 +147,9 @@ pjgmUploadProtocol
   = lens _pjgmUploadProtocol
       (\ s a -> s{_pjgmUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pjgmLocation :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmLocation
   = lens _pjgmLocation (\ s a -> s{_pjgmLocation = a})

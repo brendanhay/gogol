@@ -57,11 +57,14 @@ type ApplicationsListResource =
 -- | Lists the applications available for data transfer for a customer.
 --
 -- /See:/ 'applicationsList' smart constructor.
-data ApplicationsList = ApplicationsList'
+data ApplicationsList =
+  ApplicationsList'
     { _alCustomerId :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationsList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,9 @@ data ApplicationsList = ApplicationsList'
 applicationsList
     :: ApplicationsList
 applicationsList =
-    ApplicationsList'
-    { _alCustomerId = Nothing
-    , _alPageToken = Nothing
-    , _alMaxResults = Nothing
-    }
+  ApplicationsList'
+    {_alCustomerId = Nothing, _alPageToken = Nothing, _alMaxResults = Nothing}
+
 
 -- | Immutable ID of the Google Apps account.
 alCustomerId :: Lens' ApplicationsList (Maybe Text)

@@ -71,7 +71,8 @@ type ProjectsNotificationChannelDescriptorsListResource
 -- added.
 --
 -- /See:/ 'projectsNotificationChannelDescriptorsList' smart constructor.
-data ProjectsNotificationChannelDescriptorsList = ProjectsNotificationChannelDescriptorsList'
+data ProjectsNotificationChannelDescriptorsList =
+  ProjectsNotificationChannelDescriptorsList'
     { _pncdlXgafv          :: !(Maybe Xgafv)
     , _pncdlUploadProtocol :: !(Maybe Text)
     , _pncdlAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsNotificationChannelDescriptorsList = ProjectsNotificationChannelDes
     , _pncdlPageToken      :: !(Maybe Text)
     , _pncdlPageSize       :: !(Maybe (Textual Int32))
     , _pncdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotificationChannelDescriptorsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsNotificationChannelDescriptorsList
     :: Text -- ^ 'pncdlName'
     -> ProjectsNotificationChannelDescriptorsList
 projectsNotificationChannelDescriptorsList pPncdlName_ =
-    ProjectsNotificationChannelDescriptorsList'
+  ProjectsNotificationChannelDescriptorsList'
     { _pncdlXgafv = Nothing
     , _pncdlUploadProtocol = Nothing
     , _pncdlAccessToken = Nothing
@@ -115,6 +118,7 @@ projectsNotificationChannelDescriptorsList pPncdlName_ =
     , _pncdlPageSize = Nothing
     , _pncdlCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncdlXgafv :: Lens' ProjectsNotificationChannelDescriptorsList (Maybe Xgafv)
@@ -171,7 +175,8 @@ pncdlCallback
       (\ s a -> s{_pncdlCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelDescriptorsList where
+           ProjectsNotificationChannelDescriptorsList
+         where
         type Rs ProjectsNotificationChannelDescriptorsList =
              ListNotificationChannelDescriptorsResponse
         type Scopes

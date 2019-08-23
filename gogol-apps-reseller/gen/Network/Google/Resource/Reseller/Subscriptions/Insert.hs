@@ -58,11 +58,14 @@ type SubscriptionsInsertResource =
 -- | Create or transfer a subscription.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert'
+data SubscriptionsInsert =
+  SubscriptionsInsert'
     { _siPayload           :: !Subscription
     , _siCustomerId        :: !Text
     , _siCustomerAuthToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ subscriptionsInsert
     -> Text -- ^ 'siCustomerId'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPayload_ pSiCustomerId_ =
-    SubscriptionsInsert'
+  SubscriptionsInsert'
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     , _siCustomerAuthToken = Nothing
     }
+
 
 -- | Multipart request metadata.
 siPayload :: Lens' SubscriptionsInsert Subscription

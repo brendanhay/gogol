@@ -54,10 +54,13 @@ type LeaderboardConfigurationsUpdateResource =
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsUpdate' smart constructor.
-data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate'
+data LeaderboardConfigurationsUpdate =
+  LeaderboardConfigurationsUpdate'
     { _lcuPayload       :: !LeaderboardConfiguration
     , _lcuLeaderboardId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardConfigurationsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ leaderboardConfigurationsUpdate
     -> Text -- ^ 'lcuLeaderboardId'
     -> LeaderboardConfigurationsUpdate
 leaderboardConfigurationsUpdate pLcuPayload_ pLcuLeaderboardId_ =
-    LeaderboardConfigurationsUpdate'
-    { _lcuPayload = pLcuPayload_
-    , _lcuLeaderboardId = pLcuLeaderboardId_
-    }
+  LeaderboardConfigurationsUpdate'
+    {_lcuPayload = pLcuPayload_, _lcuLeaderboardId = pLcuLeaderboardId_}
+
 
 -- | Multipart request metadata.
 lcuPayload :: Lens' LeaderboardConfigurationsUpdate LeaderboardConfiguration
@@ -88,7 +90,8 @@ lcuLeaderboardId
       (\ s a -> s{_lcuLeaderboardId = a})
 
 instance GoogleRequest
-         LeaderboardConfigurationsUpdate where
+           LeaderboardConfigurationsUpdate
+         where
         type Rs LeaderboardConfigurationsUpdate =
              LeaderboardConfiguration
         type Scopes LeaderboardConfigurationsUpdate =

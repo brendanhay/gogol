@@ -56,11 +56,14 @@ type UsersLabelsPatchResource =
 -- | Updates the specified label. This method supports patch semantics.
 --
 -- /See:/ 'usersLabelsPatch' smart constructor.
-data UsersLabelsPatch = UsersLabelsPatch'
+data UsersLabelsPatch =
+  UsersLabelsPatch'
     { _ulpPayload :: !Label
     , _ulpUserId  :: !Text
     , _ulpId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersLabelsPatch' with the minimum fields required to make a request.
 --
@@ -76,11 +79,9 @@ usersLabelsPatch
     -> Text -- ^ 'ulpId'
     -> UsersLabelsPatch
 usersLabelsPatch pUlpPayload_ pUlpId_ =
-    UsersLabelsPatch'
-    { _ulpPayload = pUlpPayload_
-    , _ulpUserId = "me"
-    , _ulpId = pUlpId_
-    }
+  UsersLabelsPatch'
+    {_ulpPayload = pUlpPayload_, _ulpUserId = "me", _ulpId = pUlpId_}
+
 
 -- | Multipart request metadata.
 ulpPayload :: Lens' UsersLabelsPatch Label

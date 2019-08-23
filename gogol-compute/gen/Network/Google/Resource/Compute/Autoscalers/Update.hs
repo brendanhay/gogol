@@ -63,13 +63,16 @@ type AutoscalersUpdateResource =
 -- in the request.
 --
 -- /See:/ 'autoscalersUpdate' smart constructor.
-data AutoscalersUpdate = AutoscalersUpdate'
+data AutoscalersUpdate =
+  AutoscalersUpdate'
     { _auRequestId  :: !(Maybe Text)
     , _auProject    :: !Text
     , _auZone       :: !Text
     , _auPayload    :: !Autoscaler
     , _auAutoscaler :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AutoscalersUpdate' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ autoscalersUpdate
     -> Autoscaler -- ^ 'auPayload'
     -> AutoscalersUpdate
 autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ =
-    AutoscalersUpdate'
+  AutoscalersUpdate'
     { _auRequestId = Nothing
     , _auProject = pAuProject_
     , _auZone = pAuZone_
     , _auPayload = pAuPayload_
     , _auAutoscaler = Nothing
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

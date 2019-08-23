@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.update@.
@@ -66,12 +66,13 @@ type BillingAccountsSinksUpdateResource =
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'billingAccountsSinksUpdate' smart constructor.
-data BillingAccountsSinksUpdate = BillingAccountsSinksUpdate'
+data BillingAccountsSinksUpdate =
+  BillingAccountsSinksUpdate'
     { _basuXgafv                :: !(Maybe Xgafv)
     , _basuUniqueWriterIdentity :: !(Maybe Bool)
     , _basuUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data BillingAccountsSinksUpdate = BillingAccountsSinksUpdate'
     , _basuPayload              :: !LogSink
     , _basuSinkName             :: !Text
     , _basuCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsSinksUpdate' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ billingAccountsSinksUpdate
     -> Text -- ^ 'basuSinkName'
     -> BillingAccountsSinksUpdate
 billingAccountsSinksUpdate pBasuPayload_ pBasuSinkName_ =
-    BillingAccountsSinksUpdate'
+  BillingAccountsSinksUpdate'
     { _basuXgafv = Nothing
     , _basuUniqueWriterIdentity = Nothing
     , _basuUploadProtocol = Nothing
@@ -120,6 +123,7 @@ billingAccountsSinksUpdate pBasuPayload_ pBasuSinkName_ =
     , _basuSinkName = pBasuSinkName_
     , _basuCallback = Nothing
     }
+
 
 -- | V1 error format.
 basuXgafv :: Lens' BillingAccountsSinksUpdate (Maybe Xgafv)

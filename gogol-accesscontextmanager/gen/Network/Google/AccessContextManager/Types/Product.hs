@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -74,12 +77,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,10 +120,13 @@ instance ToJSON Status where
 -- features.
 --
 -- /See:/ 'basicLevel' smart constructor.
-data BasicLevel = BasicLevel'
+data BasicLevel =
+  BasicLevel'
     { _blConditions        :: !(Maybe [Condition])
     , _blCombiningFunction :: !(Maybe BasicLevelCombiningFunction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BasicLevel' with the minimum fields required to make a request.
 --
@@ -136,10 +138,8 @@ data BasicLevel = BasicLevel'
 basicLevel
     :: BasicLevel
 basicLevel =
-    BasicLevel'
-    { _blConditions = Nothing
-    , _blCombiningFunction = Nothing
-    }
+  BasicLevel' {_blConditions = Nothing, _blCombiningFunction = Nothing}
+
 
 -- | Required. A list of requirements for the \`AccessLevel\` to be granted.
 blConditions :: Lens' BasicLevel [Condition]
@@ -174,19 +174,99 @@ instance ToJSON BasicLevel where
                  [("conditions" .=) <$> _blConditions,
                   ("combiningFunction" .=) <$> _blCombiningFunction])
 
+-- | The response message for Operations.ListOperations.
+--
+-- /See:/ 'listOperationsResponse' smart constructor.
+data ListOperationsResponse =
+  ListOperationsResponse'
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOperations    :: !(Maybe [Operation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lorNextPageToken'
+--
+-- * 'lorOperations'
+listOperationsResponse
+    :: ListOperationsResponse
+listOperationsResponse =
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
+
+-- | The standard List next-page token.
+lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
+
+-- | A list of operations that matches the specified filter in the request.
+lorOperations :: Lens' ListOperationsResponse [Operation]
+lorOperations
+  = lens _lorOperations
+      (\ s a -> s{_lorOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
+
+-- | The request message for Operations.CancelOperation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
+
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest')
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
+
 -- | An \`AccessLevel\` is a label that can be applied to requests to GCP
 -- services, along with a list of requirements necessary for the label to
 -- be applied.
 --
 -- /See:/ 'accessLevel' smart constructor.
-data AccessLevel = AccessLevel'
+data AccessLevel =
+  AccessLevel'
     { _alBasic       :: !(Maybe BasicLevel)
     , _alUpdateTime  :: !(Maybe DateTime')
     , _alName        :: !(Maybe Text)
     , _alTitle       :: !(Maybe Text)
     , _alDescription :: !(Maybe Text)
     , _alCreateTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessLevel' with the minimum fields required to make a request.
 --
@@ -206,7 +286,7 @@ data AccessLevel = AccessLevel'
 accessLevel
     :: AccessLevel
 accessLevel =
-    AccessLevel'
+  AccessLevel'
     { _alBasic = Nothing
     , _alUpdateTime = Nothing
     , _alName = Nothing
@@ -214,6 +294,7 @@ accessLevel =
     , _alDescription = Nothing
     , _alCreateTime = Nothing
     }
+
 
 -- | A \`BasicLevel\` composed of \`Conditions\`.
 alBasic :: Lens' AccessLevel (Maybe BasicLevel)
@@ -274,18 +355,18 @@ instance ToJSON AccessLevel where
 -- describe specific Service Perimeter configuration.
 --
 -- /See:/ 'servicePerimeterConfig' smart constructor.
-data ServicePerimeterConfig = ServicePerimeterConfig'
-    { _spcUnrestrictedServices :: !(Maybe [Text])
-    , _spcResources            :: !(Maybe [Text])
-    , _spcRestrictedServices   :: !(Maybe [Text])
-    , _spcAccessLevels         :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ServicePerimeterConfig =
+  ServicePerimeterConfig'
+    { _spcResources          :: !(Maybe [Text])
+    , _spcRestrictedServices :: !(Maybe [Text])
+    , _spcAccessLevels       :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicePerimeterConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'spcUnrestrictedServices'
 --
 -- * 'spcResources'
 --
@@ -295,31 +376,12 @@ data ServicePerimeterConfig = ServicePerimeterConfig'
 servicePerimeterConfig
     :: ServicePerimeterConfig
 servicePerimeterConfig =
-    ServicePerimeterConfig'
-    { _spcUnrestrictedServices = Nothing
-    , _spcResources = Nothing
+  ServicePerimeterConfig'
+    { _spcResources = Nothing
     , _spcRestrictedServices = Nothing
     , _spcAccessLevels = Nothing
     }
 
--- | GCP services that are not subject to the Service Perimeter restrictions.
--- May contain a list of services or a single wildcard \"*\". For example,
--- if \`logging.googleapis.com\` is unrestricted, users can access logs
--- inside the perimeter as if the perimeter doesn\'t exist, and it also
--- means VMs inside the perimeter can access logs outside the perimeter.
--- The wildcard means that unless explicitly specified by
--- \"restricted_services\" list, any service is treated as unrestricted.
--- One of the fields \"restricted_services\", \"unrestricted_services\"
--- must contain a wildcard \"*\", otherwise the Service Perimeter
--- specification is invalid. It also means that both field being empty is
--- invalid as well. \"unrestricted_services\" can be empty if and only if
--- \"restricted_services\" list contains a \"*\" wildcard.
-spcUnrestrictedServices :: Lens' ServicePerimeterConfig [Text]
-spcUnrestrictedServices
-  = lens _spcUnrestrictedServices
-      (\ s a -> s{_spcUnrestrictedServices = a})
-      . _Default
-      . _Coerce
 
 -- | A list of GCP resources that are inside of the service perimeter.
 -- Currently only projects are allowed. Format:
@@ -330,17 +392,10 @@ spcResources
       . _Default
       . _Coerce
 
--- | GCP services that are subject to the Service Perimeter restrictions. May
--- contain a list of services or a single wildcard \"*\". For example, if
--- \`storage.googleapis.com\` is specified, access to the storage buckets
--- inside the perimeter must meet the perimeter\'s access restrictions.
--- Wildcard means that unless explicitly specified by
--- \"unrestricted_services\" list, any service is treated as restricted.
--- One of the fields \"restricted_services\", \"unrestricted_services\"
--- must contain a wildcard \"*\", otherwise the Service Perimeter
--- specification is invalid. It also means that both field being empty is
--- invalid as well. \"restricted_services\" can be empty if and only if
--- \"unrestricted_services\" list contains a \"*\" wildcard.
+-- | GCP services that are subject to the Service Perimeter restrictions. For
+-- example, if \`storage.googleapis.com\` is specified, access to the
+-- storage buckets inside the perimeter must meet the perimeter\'s access
+-- restrictions.
 spcRestrictedServices :: Lens' ServicePerimeterConfig [Text]
 spcRestrictedServices
   = lens _spcRestrictedServices
@@ -369,18 +424,15 @@ instance FromJSON ServicePerimeterConfig where
           = withObject "ServicePerimeterConfig"
               (\ o ->
                  ServicePerimeterConfig' <$>
-                   (o .:? "unrestrictedServices" .!= mempty) <*>
-                     (o .:? "resources" .!= mempty)
-                     <*> (o .:? "restrictedServices" .!= mempty)
+                   (o .:? "resources" .!= mempty) <*>
+                     (o .:? "restrictedServices" .!= mempty)
                      <*> (o .:? "accessLevels" .!= mempty))
 
 instance ToJSON ServicePerimeterConfig where
         toJSON ServicePerimeterConfig'{..}
           = object
               (catMaybes
-                 [("unrestrictedServices" .=) <$>
-                    _spcUnrestrictedServices,
-                  ("resources" .=) <$> _spcResources,
+                 [("resources" .=) <$> _spcResources,
                   ("restrictedServices" .=) <$> _spcRestrictedServices,
                   ("accessLevels" .=) <$> _spcAccessLevels])
 
@@ -388,13 +440,16 @@ instance ToJSON ServicePerimeterConfig where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -412,13 +467,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -475,6 +531,31 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
 -- | \`ServicePerimeter\` describes a set of GCP resources which can freely
 -- import and export data amongst themselves, but not export outside of the
 -- \`ServicePerimeter\`. If a request with a source within this
@@ -487,7 +568,8 @@ instance ToJSON Operation where
 -- multiple Service Perimeter Bridges.
 --
 -- /See:/ 'servicePerimeter' smart constructor.
-data ServicePerimeter = ServicePerimeter'
+data ServicePerimeter =
+  ServicePerimeter'
     { _spStatus        :: !(Maybe ServicePerimeterConfig)
     , _spPerimeterType :: !(Maybe ServicePerimeterPerimeterType)
     , _spUpdateTime    :: !(Maybe DateTime')
@@ -495,7 +577,9 @@ data ServicePerimeter = ServicePerimeter'
     , _spTitle         :: !(Maybe Text)
     , _spDescription   :: !(Maybe Text)
     , _spCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicePerimeter' with the minimum fields required to make a request.
 --
@@ -517,7 +601,7 @@ data ServicePerimeter = ServicePerimeter'
 servicePerimeter
     :: ServicePerimeter
 servicePerimeter =
-    ServicePerimeter'
+  ServicePerimeter'
     { _spStatus = Nothing
     , _spPerimeterType = Nothing
     , _spUpdateTime = Nothing
@@ -527,18 +611,18 @@ servicePerimeter =
     , _spCreateTime = Nothing
     }
 
+
 -- | Current ServicePerimeter configuration. Specifies sets of resources,
--- restricted\/unrestricted services and access levels that determine
--- perimeter content and boundaries.
+-- restricted services and access levels that determine perimeter content
+-- and boundaries.
 spStatus :: Lens' ServicePerimeter (Maybe ServicePerimeterConfig)
 spStatus = lens _spStatus (\ s a -> s{_spStatus = a})
 
 -- | Perimeter type indicator. A single project is allowed to be a member of
 -- single regular perimeter, but multiple service perimeter bridges. A
 -- project cannot be a included in a perimeter bridge without being
--- included in regular perimeter. For perimeter bridges,
--- restricted\/unrestricted service lists as well as access lists must be
--- empty.
+-- included in regular perimeter. For perimeter bridges, the restricted
+-- service list as well as access level lists must be empty.
 spPerimeterType :: Lens' ServicePerimeter (Maybe ServicePerimeterPerimeterType)
 spPerimeterType
   = lens _spPerimeterType
@@ -600,10 +684,13 @@ instance ToJSON ServicePerimeter where
 -- | A response to \`ListAccessPoliciesRequest\`.
 --
 -- /See:/ 'listAccessPoliciesResponse' smart constructor.
-data ListAccessPoliciesResponse = ListAccessPoliciesResponse'
+data ListAccessPoliciesResponse =
+  ListAccessPoliciesResponse'
     { _laprNextPageToken  :: !(Maybe Text)
     , _laprAccessPolicies :: !(Maybe [AccessPolicy])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAccessPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -615,10 +702,9 @@ data ListAccessPoliciesResponse = ListAccessPoliciesResponse'
 listAccessPoliciesResponse
     :: ListAccessPoliciesResponse
 listAccessPoliciesResponse =
-    ListAccessPoliciesResponse'
-    { _laprNextPageToken = Nothing
-    , _laprAccessPolicies = Nothing
-    }
+  ListAccessPoliciesResponse'
+    {_laprNextPageToken = Nothing, _laprAccessPolicies = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -652,9 +738,12 @@ instance ToJSON ListAccessPoliciesResponse where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -665,9 +754,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -686,10 +774,14 @@ instance ToJSON StatusDetailsItem where
 -- | A restriction on the OS type and version of devices making requests.
 --
 -- /See:/ 'osConstraint' smart constructor.
-data OSConstraint = OSConstraint'
-    { _ocOSType         :: !(Maybe OSConstraintOSType)
-    , _ocMinimumVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data OSConstraint =
+  OSConstraint'
+    { _ocOSType                  :: !(Maybe OSConstraintOSType)
+    , _ocMinimumVersion          :: !(Maybe Text)
+    , _ocRequireVerifiedChromeOS :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OSConstraint' with the minimum fields required to make a request.
 --
@@ -698,13 +790,17 @@ data OSConstraint = OSConstraint'
 -- * 'ocOSType'
 --
 -- * 'ocMinimumVersion'
+--
+-- * 'ocRequireVerifiedChromeOS'
 osConstraint
     :: OSConstraint
 osConstraint =
-    OSConstraint'
+  OSConstraint'
     { _ocOSType = Nothing
     , _ocMinimumVersion = Nothing
+    , _ocRequireVerifiedChromeOS = Nothing
     }
+
 
 -- | Required. The allowed OS type.
 ocOSType :: Lens' OSConstraint (Maybe OSConstraintOSType)
@@ -718,19 +814,31 @@ ocMinimumVersion
   = lens _ocMinimumVersion
       (\ s a -> s{_ocMinimumVersion = a})
 
+-- | Only allows requests from devices with a verified Chrome OS.
+-- Verifications includes requirements that the device is
+-- enterprise-managed, conformant to Dasher domain policies, and the caller
+-- has permission to call the API targeted by the request.
+ocRequireVerifiedChromeOS :: Lens' OSConstraint (Maybe Bool)
+ocRequireVerifiedChromeOS
+  = lens _ocRequireVerifiedChromeOS
+      (\ s a -> s{_ocRequireVerifiedChromeOS = a})
+
 instance FromJSON OSConstraint where
         parseJSON
           = withObject "OSConstraint"
               (\ o ->
                  OSConstraint' <$>
-                   (o .:? "osType") <*> (o .:? "minimumVersion"))
+                   (o .:? "osType") <*> (o .:? "minimumVersion") <*>
+                     (o .:? "requireVerifiedChromeOs"))
 
 instance ToJSON OSConstraint where
         toJSON OSConstraint'{..}
           = object
               (catMaybes
                  [("osType" .=) <$> _ocOSType,
-                  ("minimumVersion" .=) <$> _ocMinimumVersion])
+                  ("minimumVersion" .=) <$> _ocMinimumVersion,
+                  ("requireVerifiedChromeOs" .=) <$>
+                    _ocRequireVerifiedChromeOS])
 
 -- | \`AccessPolicy\` is a container for \`AccessLevels\` (which define the
 -- necessary attributes to use GCP services) and \`ServicePerimeters\`
@@ -740,13 +848,16 @@ instance ToJSON OSConstraint where
 -- organization.
 --
 -- /See:/ 'accessPolicy' smart constructor.
-data AccessPolicy = AccessPolicy'
+data AccessPolicy =
+  AccessPolicy'
     { _apParent     :: !(Maybe Text)
     , _apUpdateTime :: !(Maybe DateTime')
     , _apName       :: !(Maybe Text)
     , _apTitle      :: !(Maybe Text)
     , _apCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
 --
@@ -764,13 +875,14 @@ data AccessPolicy = AccessPolicy'
 accessPolicy
     :: AccessPolicy
 accessPolicy =
-    AccessPolicy'
+  AccessPolicy'
     { _apParent = Nothing
     , _apUpdateTime = Nothing
     , _apName = Nothing
     , _apTitle = Nothing
     , _apCreateTime = Nothing
     }
+
 
 -- | Required. The parent of this \`AccessPolicy\` in the Cloud Resource
 -- Hierarchy. Currently immutable once created. Format:
@@ -821,10 +933,13 @@ instance ToJSON AccessPolicy where
 -- | A response to \`ListServicePerimetersRequest\`.
 --
 -- /See:/ 'listServicePerimetersResponse' smart constructor.
-data ListServicePerimetersResponse = ListServicePerimetersResponse'
+data ListServicePerimetersResponse =
+  ListServicePerimetersResponse'
     { _lsprNextPageToken     :: !(Maybe Text)
     , _lsprServicePerimeters :: !(Maybe [ServicePerimeter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListServicePerimetersResponse' with the minimum fields required to make a request.
 --
@@ -836,10 +951,9 @@ data ListServicePerimetersResponse = ListServicePerimetersResponse'
 listServicePerimetersResponse
     :: ListServicePerimetersResponse
 listServicePerimetersResponse =
-    ListServicePerimetersResponse'
-    { _lsprNextPageToken = Nothing
-    , _lsprServicePerimeters = Nothing
-    }
+  ListServicePerimetersResponse'
+    {_lsprNextPageToken = Nothing, _lsprServicePerimeters = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -874,10 +988,13 @@ instance ToJSON ListServicePerimetersResponse where
 -- | A response to \`ListAccessLevelsRequest\`.
 --
 -- /See:/ 'listAccessLevelsResponse' smart constructor.
-data ListAccessLevelsResponse = ListAccessLevelsResponse'
+data ListAccessLevelsResponse =
+  ListAccessLevelsResponse'
     { _lalrNextPageToken :: !(Maybe Text)
     , _lalrAccessLevels  :: !(Maybe [AccessLevel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListAccessLevelsResponse' with the minimum fields required to make a request.
 --
@@ -889,10 +1006,9 @@ data ListAccessLevelsResponse = ListAccessLevelsResponse'
 listAccessLevelsResponse
     :: ListAccessLevelsResponse
 listAccessLevelsResponse =
-    ListAccessLevelsResponse'
-    { _lalrNextPageToken = Nothing
-    , _lalrAccessLevels = Nothing
-    }
+  ListAccessLevelsResponse'
+    {_lalrNextPageToken = Nothing, _lalrAccessLevels = Nothing}
+
 
 -- | The pagination token to retrieve the next page of results. If the value
 -- is empty, no further results remain.
@@ -930,9 +1046,12 @@ instance ToJSON ListAccessLevelsResponse where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -943,9 +1062,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -972,18 +1090,27 @@ instance ToJSON OperationMetadata where
 -- encrypted Linux desktops and encrypted Windows desktops.
 --
 -- /See:/ 'devicePolicy' smart constructor.
-data DevicePolicy = DevicePolicy'
+data DevicePolicy =
+  DevicePolicy'
     { _dpOSConstraints                 :: !(Maybe [OSConstraint])
+    , _dpRequireAdminApproval          :: !(Maybe Bool)
+    , _dpRequireCorpOwned              :: !(Maybe Bool)
     , _dpRequireScreenlock             :: !(Maybe Bool)
     , _dpAllowedEncryptionStatuses     :: !(Maybe [Text])
     , _dpAllowedDeviceManagementLevels :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DevicePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dpOSConstraints'
+--
+-- * 'dpRequireAdminApproval'
+--
+-- * 'dpRequireCorpOwned'
 --
 -- * 'dpRequireScreenlock'
 --
@@ -993,12 +1120,15 @@ data DevicePolicy = DevicePolicy'
 devicePolicy
     :: DevicePolicy
 devicePolicy =
-    DevicePolicy'
+  DevicePolicy'
     { _dpOSConstraints = Nothing
+    , _dpRequireAdminApproval = Nothing
+    , _dpRequireCorpOwned = Nothing
     , _dpRequireScreenlock = Nothing
     , _dpAllowedEncryptionStatuses = Nothing
     , _dpAllowedDeviceManagementLevels = Nothing
     }
+
 
 -- | Allowed OS versions, an empty list allows all types and all versions.
 dpOSConstraints :: Lens' DevicePolicy [OSConstraint]
@@ -1007,6 +1137,18 @@ dpOSConstraints
       (\ s a -> s{_dpOSConstraints = a})
       . _Default
       . _Coerce
+
+-- | Whether the device needs to be approved by the customer admin.
+dpRequireAdminApproval :: Lens' DevicePolicy (Maybe Bool)
+dpRequireAdminApproval
+  = lens _dpRequireAdminApproval
+      (\ s a -> s{_dpRequireAdminApproval = a})
+
+-- | Whether the device needs to be corp owned.
+dpRequireCorpOwned :: Lens' DevicePolicy (Maybe Bool)
+dpRequireCorpOwned
+  = lens _dpRequireCorpOwned
+      (\ s a -> s{_dpRequireCorpOwned = a})
 
 -- | Whether or not screenlock is required for the DevicePolicy to be true.
 -- Defaults to \`false\`.
@@ -1038,7 +1180,9 @@ instance FromJSON DevicePolicy where
               (\ o ->
                  DevicePolicy' <$>
                    (o .:? "osConstraints" .!= mempty) <*>
-                     (o .:? "requireScreenlock")
+                     (o .:? "requireAdminApproval")
+                     <*> (o .:? "requireCorpOwned")
+                     <*> (o .:? "requireScreenlock")
                      <*> (o .:? "allowedEncryptionStatuses" .!= mempty)
                      <*>
                      (o .:? "allowedDeviceManagementLevels" .!= mempty))
@@ -1048,6 +1192,9 @@ instance ToJSON DevicePolicy where
           = object
               (catMaybes
                  [("osConstraints" .=) <$> _dpOSConstraints,
+                  ("requireAdminApproval" .=) <$>
+                    _dpRequireAdminApproval,
+                  ("requireCorpOwned" .=) <$> _dpRequireCorpOwned,
                   ("requireScreenlock" .=) <$> _dpRequireScreenlock,
                   ("allowedEncryptionStatuses" .=) <$>
                     _dpAllowedEncryptionStatuses,
@@ -1062,19 +1209,25 @@ instance ToJSON DevicePolicy where
 -- DateTimeRestriction.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition'
+data Condition =
+  Condition'
     { _cMembers              :: !(Maybe [Text])
+    , _cRegions              :: !(Maybe [Text])
     , _cNegate               :: !(Maybe Bool)
     , _cIPSubnetworks        :: !(Maybe [Text])
     , _cDevicePolicy         :: !(Maybe DevicePolicy)
     , _cRequiredAccessLevels :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cMembers'
+--
+-- * 'cRegions'
 --
 -- * 'cNegate'
 --
@@ -1086,21 +1239,31 @@ data Condition = Condition'
 condition
     :: Condition
 condition =
-    Condition'
+  Condition'
     { _cMembers = Nothing
+    , _cRegions = Nothing
     , _cNegate = Nothing
     , _cIPSubnetworks = Nothing
     , _cDevicePolicy = Nothing
     , _cRequiredAccessLevels = Nothing
     }
 
--- | The signed-in user originating the request must be a part of one of the
--- provided members. Syntax: \`user:{emailid}\` \`group:{emailid}\`
+
+-- | The request must be made by one of the provided user or service
+-- accounts. Groups are not supported. Syntax: \`user:{emailid}\`
 -- \`serviceAccount:{emailid}\` If not specified, a request may come from
--- any user (logged in\/not logged in, not present in any groups, etc.).
+-- any user.
 cMembers :: Lens' Condition [Text]
 cMembers
   = lens _cMembers (\ s a -> s{_cMembers = a}) .
+      _Default
+      . _Coerce
+
+-- | The request must originate from one of the provided countries\/regions.
+-- Must be valid ISO 3166-1 alpha-2 codes.
+cRegions :: Lens' Condition [Text]
+cRegions
+  = lens _cRegions (\ s a -> s{_cRegions = a}) .
       _Default
       . _Coerce
 
@@ -1149,8 +1312,10 @@ instance FromJSON Condition where
           = withObject "Condition"
               (\ o ->
                  Condition' <$>
-                   (o .:? "members" .!= mempty) <*> (o .:? "negate") <*>
-                     (o .:? "ipSubnetworks" .!= mempty)
+                   (o .:? "members" .!= mempty) <*>
+                     (o .:? "regions" .!= mempty)
+                     <*> (o .:? "negate")
+                     <*> (o .:? "ipSubnetworks" .!= mempty)
                      <*> (o .:? "devicePolicy")
                      <*> (o .:? "requiredAccessLevels" .!= mempty))
 
@@ -1159,6 +1324,7 @@ instance ToJSON Condition where
           = object
               (catMaybes
                  [("members" .=) <$> _cMembers,
+                  ("regions" .=) <$> _cRegions,
                   ("negate" .=) <$> _cNegate,
                   ("ipSubnetworks" .=) <$> _cIPSubnetworks,
                   ("devicePolicy" .=) <$> _cDevicePolicy,
@@ -1175,9 +1341,12 @@ instance ToJSON Condition where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -1188,9 +1357,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)

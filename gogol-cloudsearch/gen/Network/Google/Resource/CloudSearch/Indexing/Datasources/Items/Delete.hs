@@ -69,7 +69,8 @@ type IndexingDatasourcesItemsDeleteResource =
 -- | Deletes Item resource for the specified resource name.
 --
 -- /See:/ 'indexingDatasourcesItemsDelete' smart constructor.
-data IndexingDatasourcesItemsDelete = IndexingDatasourcesItemsDelete'
+data IndexingDatasourcesItemsDelete =
+  IndexingDatasourcesItemsDelete'
     { _ididXgafv                       :: !(Maybe Xgafv)
     , _ididUploadProtocol              :: !(Maybe Text)
     , _ididAccessToken                 :: !(Maybe Text)
@@ -80,7 +81,9 @@ data IndexingDatasourcesItemsDelete = IndexingDatasourcesItemsDelete'
     , _ididVersion                     :: !(Maybe Bytes)
     , _ididDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _ididCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesItemsDelete' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ indexingDatasourcesItemsDelete
     :: Text -- ^ 'ididName'
     -> IndexingDatasourcesItemsDelete
 indexingDatasourcesItemsDelete pIdidName_ =
-    IndexingDatasourcesItemsDelete'
+  IndexingDatasourcesItemsDelete'
     { _ididXgafv = Nothing
     , _ididUploadProtocol = Nothing
     , _ididAccessToken = Nothing
@@ -121,6 +124,7 @@ indexingDatasourcesItemsDelete pIdidName_ =
     , _ididDebugOptionsEnableDebugging = Nothing
     , _ididCallback = Nothing
     }
+
 
 -- | V1 error format.
 ididXgafv :: Lens' IndexingDatasourcesItemsDelete (Maybe Xgafv)
@@ -173,8 +177,8 @@ ididVersion
   = lens _ididVersion (\ s a -> s{_ididVersion = a}) .
       mapping _Bytes
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ididDebugOptionsEnableDebugging :: Lens' IndexingDatasourcesItemsDelete (Maybe Bool)
 ididDebugOptionsEnableDebugging
   = lens _ididDebugOptionsEnableDebugging

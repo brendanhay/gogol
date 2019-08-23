@@ -68,6 +68,11 @@ module Network.Google.ServiceControl
     , rmCallerNetwork
     , rmRequestAttributes
 
+    -- ** ThirdPartyPrincipal
+    , ThirdPartyPrincipal
+    , thirdPartyPrincipal
+    , tppThirdPartyClaims
+
     -- ** ResourceLabels
     , ResourceLabels
     , resourceLabels
@@ -173,6 +178,12 @@ module Network.Google.ServiceControl
     , lbWidth
     , lbNumFiniteBuckets
 
+    -- ** ServiceAccountDelegationInfo
+    , ServiceAccountDelegationInfo
+    , serviceAccountDelegationInfo
+    , sadiThirdPartyPrincipal
+    , sadiFirstPartyPrincipal
+
     -- ** Auth
     , Auth
     , auth
@@ -203,6 +214,11 @@ module Network.Google.ServiceControl
     , ciConsumerNumber
     , ciType
 
+    -- ** ThirdPartyPrincipalThirdPartyClaims
+    , ThirdPartyPrincipalThirdPartyClaims
+    , thirdPartyPrincipalThirdPartyClaims
+    , tpptpcAddtional
+
     -- ** AllocateInfo
     , AllocateInfo
     , allocateInfo
@@ -230,8 +246,15 @@ module Network.Google.ServiceControl
     , CheckError
     , checkError
     , ceSubject
+    , ceStatus
     , ceCode
     , ceDetail
+
+    -- ** FirstPartyPrincipal
+    , FirstPartyPrincipal
+    , firstPartyPrincipal
+    , fppPrincipalEmail
+    , fppServiceMetadata
 
     -- ** QuotaOperationQuotaMode
     , QuotaOperationQuotaMode (..)
@@ -431,6 +454,11 @@ module Network.Google.ServiceControl
     -- ** QuotaErrorCode
     , QuotaErrorCode (..)
 
+    -- ** FirstPartyPrincipalServiceMetadata
+    , FirstPartyPrincipalServiceMetadata
+    , firstPartyPrincipalServiceMetadata
+    , fppsmAddtional
+
     -- ** QuotaError
     , QuotaError
     , quotaError
@@ -442,6 +470,7 @@ module Network.Google.ServiceControl
     , AuthenticationInfo
     , authenticationInfo
     , aiThirdPartyPrincipal
+    , aiServiceAccountDelegationInfo
     , aiPrincipalEmail
     , aiAuthoritySelector
     , aiServiceAccountKeyName

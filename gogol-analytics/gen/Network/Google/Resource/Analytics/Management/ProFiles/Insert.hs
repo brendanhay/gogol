@@ -58,11 +58,14 @@ type ManagementProFilesInsertResource =
 -- | Create a new view (profile).
 --
 -- /See:/ 'managementProFilesInsert' smart constructor.
-data ManagementProFilesInsert = ManagementProFilesInsert'
+data ManagementProFilesInsert =
+  ManagementProFilesInsert'
     { _mpfiWebPropertyId :: !Text
     , _mpfiPayload       :: !ProFile
     , _mpfiAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFilesInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementProFilesInsert
     -> Text -- ^ 'mpfiAccountId'
     -> ManagementProFilesInsert
 managementProFilesInsert pMpfiWebPropertyId_ pMpfiPayload_ pMpfiAccountId_ =
-    ManagementProFilesInsert'
+  ManagementProFilesInsert'
     { _mpfiWebPropertyId = pMpfiWebPropertyId_
     , _mpfiPayload = pMpfiPayload_
     , _mpfiAccountId = pMpfiAccountId_
     }
+
 
 -- | Web property ID to create the view (profile) for.
 mpfiWebPropertyId :: Lens' ManagementProFilesInsert Text

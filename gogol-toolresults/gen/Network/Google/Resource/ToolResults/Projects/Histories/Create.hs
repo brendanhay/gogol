@@ -64,11 +64,14 @@ type ProjectsHistoriesCreateResource =
 -- exist
 --
 -- /See:/ 'projectsHistoriesCreate' smart constructor.
-data ProjectsHistoriesCreate = ProjectsHistoriesCreate'
+data ProjectsHistoriesCreate =
+  ProjectsHistoriesCreate'
     { _phcRequestId :: !(Maybe Text)
     , _phcPayload   :: !History
     , _phcProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesCreate' with the minimum fields required to make a request.
 --
@@ -84,11 +87,12 @@ projectsHistoriesCreate
     -> Text -- ^ 'phcProjectId'
     -> ProjectsHistoriesCreate
 projectsHistoriesCreate pPhcPayload_ pPhcProjectId_ =
-    ProjectsHistoriesCreate'
+  ProjectsHistoriesCreate'
     { _phcRequestId = Nothing
     , _phcPayload = pPhcPayload_
     , _phcProjectId = pPhcProjectId_
     }
+
 
 -- | A unique request ID for server to detect duplicated requests. For
 -- example, a UUID. Optional, but strongly recommended.

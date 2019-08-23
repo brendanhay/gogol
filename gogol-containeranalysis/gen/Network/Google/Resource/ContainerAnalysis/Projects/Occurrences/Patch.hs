@@ -64,7 +64,8 @@ type ProjectsOccurrencesPatchResource =
 -- | Updates the specified occurrence.
 --
 -- /See:/ 'projectsOccurrencesPatch' smart constructor.
-data ProjectsOccurrencesPatch = ProjectsOccurrencesPatch'
+data ProjectsOccurrencesPatch =
+  ProjectsOccurrencesPatch'
     { _popXgafv          :: !(Maybe Xgafv)
     , _popUploadProtocol :: !(Maybe Text)
     , _popUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ProjectsOccurrencesPatch = ProjectsOccurrencesPatch'
     , _popPayload        :: !Occurrence
     , _popName           :: !Text
     , _popCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOccurrencesPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsOccurrencesPatch
     -> Text -- ^ 'popName'
     -> ProjectsOccurrencesPatch
 projectsOccurrencesPatch pPopPayload_ pPopName_ =
-    ProjectsOccurrencesPatch'
+  ProjectsOccurrencesPatch'
     { _popXgafv = Nothing
     , _popUploadProtocol = Nothing
     , _popUpdateMask = Nothing
@@ -109,6 +112,7 @@ projectsOccurrencesPatch pPopPayload_ pPopName_ =
     , _popName = pPopName_
     , _popCallback = Nothing
     }
+
 
 -- | V1 error format.
 popXgafv :: Lens' ProjectsOccurrencesPatch (Maybe Xgafv)

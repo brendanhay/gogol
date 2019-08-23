@@ -58,11 +58,14 @@ type InstancesCloneResource =
 -- | Creates a Cloud SQL instance as a clone of the source instance.
 --
 -- /See:/ 'instancesClone' smart constructor.
-data InstancesClone = InstancesClone'
+data InstancesClone =
+  InstancesClone'
     { _icProject  :: !Text
     , _icPayload  :: !InstancesCloneRequest
     , _icInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesClone' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ instancesClone
     -> Text -- ^ 'icInstance'
     -> InstancesClone
 instancesClone pIcProject_ pIcPayload_ pIcInstance_ =
-    InstancesClone'
+  InstancesClone'
     { _icProject = pIcProject_
     , _icPayload = pIcPayload_
     , _icInstance = pIcInstance_
     }
+
 
 -- | Project ID of the source as well as the clone Cloud SQL instance.
 icProject :: Lens' InstancesClone Text

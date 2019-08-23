@@ -59,12 +59,15 @@ type ManagedZonesPatchResource =
 -- | Apply a partial update to an existing ManagedZone.
 --
 -- /See:/ 'managedZonesPatch' smart constructor.
-data ManagedZonesPatch = ManagedZonesPatch'
+data ManagedZonesPatch =
+  ManagedZonesPatch'
     { _mzpProject           :: !Text
     , _mzpPayload           :: !ManagedZone
     , _mzpManagedZone       :: !Text
     , _mzpClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedZonesPatch' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ managedZonesPatch
     -> Text -- ^ 'mzpManagedZone'
     -> ManagedZonesPatch
 managedZonesPatch pMzpProject_ pMzpPayload_ pMzpManagedZone_ =
-    ManagedZonesPatch'
+  ManagedZonesPatch'
     { _mzpProject = pMzpProject_
     , _mzpPayload = pMzpPayload_
     , _mzpManagedZone = pMzpManagedZone_
     , _mzpClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 mzpProject :: Lens' ManagedZonesPatch Text

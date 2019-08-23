@@ -61,12 +61,15 @@ type StorelayoutclustersPatchResource =
 -- | Updates a cluster. This method supports patch semantics.
 --
 -- /See:/ 'storelayoutclustersPatch' smart constructor.
-data StorelayoutclustersPatch = StorelayoutclustersPatch'
+data StorelayoutclustersPatch =
+  StorelayoutclustersPatch'
     { _sppEnterpriseId :: !Text
     , _sppPageId       :: !Text
     , _sppPayload      :: !StoreCluster
     , _sppClusterId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StorelayoutclustersPatch' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ storelayoutclustersPatch
     -> Text -- ^ 'sppClusterId'
     -> StorelayoutclustersPatch
 storelayoutclustersPatch pSppEnterpriseId_ pSppPageId_ pSppPayload_ pSppClusterId_ =
-    StorelayoutclustersPatch'
+  StorelayoutclustersPatch'
     { _sppEnterpriseId = pSppEnterpriseId_
     , _sppPageId = pSppPageId_
     , _sppPayload = pSppPayload_
     , _sppClusterId = pSppClusterId_
     }
+
 
 -- | The ID of the enterprise.
 sppEnterpriseId :: Lens' StorelayoutclustersPatch Text

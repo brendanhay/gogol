@@ -58,10 +58,13 @@ type InstanceTemplatesGetResource =
 -- instance templates by making a list() request.
 --
 -- /See:/ 'instanceTemplatesGet' smart constructor.
-data InstanceTemplatesGet = InstanceTemplatesGet'
+data InstanceTemplatesGet =
+  InstanceTemplatesGet'
     { _itgProject          :: !Text
     , _itgInstanceTemplate :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceTemplatesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ instanceTemplatesGet
     -> Text -- ^ 'itgInstanceTemplate'
     -> InstanceTemplatesGet
 instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
-    InstanceTemplatesGet'
-    { _itgProject = pItgProject_
-    , _itgInstanceTemplate = pItgInstanceTemplate_
-    }
+  InstanceTemplatesGet'
+    {_itgProject = pItgProject_, _itgInstanceTemplate = pItgInstanceTemplate_}
+
 
 -- | Project ID for this request.
 itgProject :: Lens' InstanceTemplatesGet Text

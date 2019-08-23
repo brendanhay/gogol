@@ -56,11 +56,14 @@ type NotificationsGetResource =
 -- | View a notification configuration.
 --
 -- /See:/ 'notificationsGet' smart constructor.
-data NotificationsGet = NotificationsGet'
+data NotificationsGet =
+  NotificationsGet'
     { _ngNotification :: !Text
     , _ngBucket       :: !Text
     , _ngUserProject  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationsGet' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ notificationsGet
     -> Text -- ^ 'ngBucket'
     -> NotificationsGet
 notificationsGet pNgNotification_ pNgBucket_ =
-    NotificationsGet'
+  NotificationsGet'
     { _ngNotification = pNgNotification_
     , _ngBucket = pNgBucket_
     , _ngUserProject = Nothing
     }
+
 
 -- | Notification ID
 ngNotification :: Lens' NotificationsGet Text

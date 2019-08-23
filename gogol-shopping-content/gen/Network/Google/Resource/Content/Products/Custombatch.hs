@@ -53,9 +53,12 @@ type ProductsCustombatchResource =
 -- | Retrieves, inserts, and deletes multiple products in a single request.
 --
 -- /See:/ 'productsCustombatch' smart constructor.
-newtype ProductsCustombatch = ProductsCustombatch'
+newtype ProductsCustombatch =
+  ProductsCustombatch'
     { _pcPayload :: ProductsCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsCustombatch' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ productsCustombatch
     :: ProductsCustomBatchRequest -- ^ 'pcPayload'
     -> ProductsCustombatch
 productsCustombatch pPcPayload_ =
-    ProductsCustombatch'
-    { _pcPayload = pPcPayload_
-    }
+  ProductsCustombatch' {_pcPayload = pPcPayload_}
+
 
 -- | Multipart request metadata.
 pcPayload :: Lens' ProductsCustombatch ProductsCustomBatchRequest

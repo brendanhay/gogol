@@ -58,11 +58,14 @@ type PretargetingConfigPatchResource =
 -- semantics.
 --
 -- /See:/ 'pretargetingConfigPatch' smart constructor.
-data PretargetingConfigPatch = PretargetingConfigPatch'
+data PretargetingConfigPatch =
+  PretargetingConfigPatch'
     { _pcpPayload   :: !PretargetingConfig
     , _pcpAccountId :: !(Textual Int64)
     , _pcpConfigId  :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PretargetingConfigPatch' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ pretargetingConfigPatch
     -> Int64 -- ^ 'pcpConfigId'
     -> PretargetingConfigPatch
 pretargetingConfigPatch pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
-    PretargetingConfigPatch'
+  PretargetingConfigPatch'
     { _pcpPayload = pPcpPayload_
     , _pcpAccountId = _Coerce # pPcpAccountId_
     , _pcpConfigId = _Coerce # pPcpConfigId_
     }
+
 
 -- | Multipart request metadata.
 pcpPayload :: Lens' PretargetingConfigPatch PretargetingConfig

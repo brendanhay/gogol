@@ -59,11 +59,14 @@ type GlobalAddressesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'globalAddressesInsert' smart constructor.
-data GlobalAddressesInsert = GlobalAddressesInsert'
+data GlobalAddressesInsert =
+  GlobalAddressesInsert'
     { _gaiRequestId :: !(Maybe Text)
     , _gaiProject   :: !Text
     , _gaiPayload   :: !Address
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalAddressesInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ globalAddressesInsert
     -> Address -- ^ 'gaiPayload'
     -> GlobalAddressesInsert
 globalAddressesInsert pGaiProject_ pGaiPayload_ =
-    GlobalAddressesInsert'
+  GlobalAddressesInsert'
     { _gaiRequestId = Nothing
     , _gaiProject = pGaiProject_
     , _gaiPayload = pGaiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

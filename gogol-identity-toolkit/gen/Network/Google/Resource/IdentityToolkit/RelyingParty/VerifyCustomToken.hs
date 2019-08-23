@@ -54,9 +54,12 @@ type RelyingPartyVerifyCustomTokenResource =
 -- | Verifies the developer asserted ID token.
 --
 -- /See:/ 'relyingPartyVerifyCustomToken' smart constructor.
-newtype RelyingPartyVerifyCustomToken = RelyingPartyVerifyCustomToken'
+newtype RelyingPartyVerifyCustomToken =
+  RelyingPartyVerifyCustomToken'
     { _rpvctPayload :: IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelyingPartyVerifyCustomToken' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ relyingPartyVerifyCustomToken
     :: IdentitytoolkitRelyingPartyVerifyCustomTokenRequest -- ^ 'rpvctPayload'
     -> RelyingPartyVerifyCustomToken
 relyingPartyVerifyCustomToken pRpvctPayload_ =
-    RelyingPartyVerifyCustomToken'
-    { _rpvctPayload = pRpvctPayload_
-    }
+  RelyingPartyVerifyCustomToken' {_rpvctPayload = pRpvctPayload_}
+
 
 -- | Multipart request metadata.
 rpvctPayload :: Lens' RelyingPartyVerifyCustomToken IdentitytoolkitRelyingPartyVerifyCustomTokenRequest

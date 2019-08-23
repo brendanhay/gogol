@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- Sets the IAM access control policy on the specified function. Replaces
+-- any existing policy.
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.setIamPolicy@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.SetIAMPolicy
@@ -60,11 +60,12 @@ type ProjectsLocationsFunctionsSetIAMPolicyResource =
                      ReqBody '[JSON] SetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- | Sets the IAM access control policy on the specified function. Replaces
+-- any existing policy.
 --
 -- /See:/ 'projectsLocationsFunctionsSetIAMPolicy' smart constructor.
-data ProjectsLocationsFunctionsSetIAMPolicy = ProjectsLocationsFunctionsSetIAMPolicy'
+data ProjectsLocationsFunctionsSetIAMPolicy =
+  ProjectsLocationsFunctionsSetIAMPolicy'
     { _plfsipXgafv          :: !(Maybe Xgafv)
     , _plfsipUploadProtocol :: !(Maybe Text)
     , _plfsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsLocationsFunctionsSetIAMPolicy = ProjectsLocationsFunctionsSetIAMPo
     , _plfsipPayload        :: !SetIAMPolicyRequest
     , _plfsipResource       :: !Text
     , _plfsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsLocationsFunctionsSetIAMPolicy
     -> Text -- ^ 'plfsipResource'
     -> ProjectsLocationsFunctionsSetIAMPolicy
 projectsLocationsFunctionsSetIAMPolicy pPlfsipPayload_ pPlfsipResource_ =
-    ProjectsLocationsFunctionsSetIAMPolicy'
+  ProjectsLocationsFunctionsSetIAMPolicy'
     { _plfsipXgafv = Nothing
     , _plfsipUploadProtocol = Nothing
     , _plfsipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsLocationsFunctionsSetIAMPolicy pPlfsipPayload_ pPlfsipResource_ =
     , _plfsipResource = pPlfsipResource_
     , _plfsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfsipXgafv :: Lens' ProjectsLocationsFunctionsSetIAMPolicy (Maybe Xgafv)
@@ -149,7 +153,8 @@ plfsipCallback
       (\ s a -> s{_plfsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsSetIAMPolicy where
+           ProjectsLocationsFunctionsSetIAMPolicy
+         where
         type Rs ProjectsLocationsFunctionsSetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsFunctionsSetIAMPolicy =

@@ -63,10 +63,13 @@ type InstancesAddServerCaResource =
 -- version waiting to be rotated in.
 --
 -- /See:/ 'instancesAddServerCa' smart constructor.
-data InstancesAddServerCa = InstancesAddServerCa'
+data InstancesAddServerCa =
+  InstancesAddServerCa'
     { _iascProject  :: !Text
     , _iascInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesAddServerCa' with the minimum fields required to make a request.
 --
@@ -80,10 +83,9 @@ instancesAddServerCa
     -> Text -- ^ 'iascInstance'
     -> InstancesAddServerCa
 instancesAddServerCa pIascProject_ pIascInstance_ =
-    InstancesAddServerCa'
-    { _iascProject = pIascProject_
-    , _iascInstance = pIascInstance_
-    }
+  InstancesAddServerCa'
+    {_iascProject = pIascProject_, _iascInstance = pIascInstance_}
+
 
 -- | Project ID of the project that contains the instance.
 iascProject :: Lens' InstancesAddServerCa Text

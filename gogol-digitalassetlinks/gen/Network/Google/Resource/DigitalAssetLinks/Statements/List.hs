@@ -95,7 +95,8 @@ type StatementsListResource =
 -- to navigate to the corresponding web site or Google+ profile.
 --
 -- /See:/ 'statementsList' smart constructor.
-data StatementsList = StatementsList'
+data StatementsList =
+  StatementsList'
     { _slXgafv                                        :: !(Maybe Xgafv)
     , _slSourceAndroidAppCertificateSha256Fingerprint :: !(Maybe Text)
     , _slSourceAndroidAppPackageName                  :: !(Maybe Text)
@@ -105,7 +106,9 @@ data StatementsList = StatementsList'
     , _slRelation                                     :: !(Maybe Text)
     , _slSourceWebSite                                :: !(Maybe Text)
     , _slCallback                                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatementsList' with the minimum fields required to make a request.
 --
@@ -131,7 +134,7 @@ data StatementsList = StatementsList'
 statementsList
     :: StatementsList
 statementsList =
-    StatementsList'
+  StatementsList'
     { _slXgafv = Nothing
     , _slSourceAndroidAppCertificateSha256Fingerprint = Nothing
     , _slSourceAndroidAppPackageName = Nothing
@@ -142,6 +145,7 @@ statementsList =
     , _slSourceWebSite = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | V1 error format.
 slXgafv :: Lens' StatementsList (Maybe Xgafv)

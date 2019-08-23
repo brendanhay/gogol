@@ -1,5 +1,5 @@
 name:                  gogol-composer
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Cloud Composer SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -40,6 +40,7 @@ library
         , Network.Google.Resource.Composer.Projects.Locations.Environments.Get
         , Network.Google.Resource.Composer.Projects.Locations.Environments.List
         , Network.Google.Resource.Composer.Projects.Locations.Environments.Patch
+        , Network.Google.Resource.Composer.Projects.Locations.ImageVersions.List
         , Network.Google.Resource.Composer.Projects.Locations.Operations.Delete
         , Network.Google.Resource.Composer.Projects.Locations.Operations.Get
         , Network.Google.Resource.Composer.Projects.Locations.Operations.List
@@ -49,5 +50,5 @@ library
         , Network.Google.Composer.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

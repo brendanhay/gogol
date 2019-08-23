@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.get@ method which the
 -- 'ProjectsLocationsJobsGet' request conforms to.
 type ProjectsLocationsJobsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,14 +59,17 @@ type ProjectsLocationsJobsGetResource =
 -- | Gets a job.
 --
 -- /See:/ 'projectsLocationsJobsGet' smart constructor.
-data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
+data ProjectsLocationsJobsGet =
+  ProjectsLocationsJobsGet'
     { _pljgXgafv          :: !(Maybe Xgafv)
     , _pljgUploadProtocol :: !(Maybe Text)
     , _pljgAccessToken    :: !(Maybe Text)
     , _pljgUploadType     :: !(Maybe Text)
     , _pljgName           :: !Text
     , _pljgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsLocationsJobsGet
     :: Text -- ^ 'pljgName'
     -> ProjectsLocationsJobsGet
 projectsLocationsJobsGet pPljgName_ =
-    ProjectsLocationsJobsGet'
+  ProjectsLocationsJobsGet'
     { _pljgXgafv = Nothing
     , _pljgUploadProtocol = Nothing
     , _pljgAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsLocationsJobsGet pPljgName_ =
     , _pljgName = pPljgName_
     , _pljgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljgXgafv :: Lens' ProjectsLocationsJobsGet (Maybe Xgafv)

@@ -63,14 +63,17 @@ type ProjectsOccurrencesDeleteResource =
 -- resource.
 --
 -- /See:/ 'projectsOccurrencesDelete' smart constructor.
-data ProjectsOccurrencesDelete = ProjectsOccurrencesDelete'
+data ProjectsOccurrencesDelete =
+  ProjectsOccurrencesDelete'
     { _podXgafv          :: !(Maybe Xgafv)
     , _podUploadProtocol :: !(Maybe Text)
     , _podAccessToken    :: !(Maybe Text)
     , _podUploadType     :: !(Maybe Text)
     , _podName           :: !Text
     , _podCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOccurrencesDelete' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ projectsOccurrencesDelete
     :: Text -- ^ 'podName'
     -> ProjectsOccurrencesDelete
 projectsOccurrencesDelete pPodName_ =
-    ProjectsOccurrencesDelete'
+  ProjectsOccurrencesDelete'
     { _podXgafv = Nothing
     , _podUploadProtocol = Nothing
     , _podAccessToken = Nothing
@@ -99,6 +102,7 @@ projectsOccurrencesDelete pPodName_ =
     , _podName = pPodName_
     , _podCallback = Nothing
     }
+
 
 -- | V1 error format.
 podXgafv :: Lens' ProjectsOccurrencesDelete (Maybe Xgafv)

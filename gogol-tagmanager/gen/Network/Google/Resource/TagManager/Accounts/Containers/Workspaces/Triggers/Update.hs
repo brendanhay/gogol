@@ -55,11 +55,14 @@ type AccountsContainersWorkspacesTriggersUpdateResource
 -- | Updates a GTM Trigger.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersUpdate' smart constructor.
-data AccountsContainersWorkspacesTriggersUpdate = AccountsContainersWorkspacesTriggersUpdate'
+data AccountsContainersWorkspacesTriggersUpdate =
+  AccountsContainersWorkspacesTriggersUpdate'
     { _acwtuPath        :: !Text
     , _acwtuFingerprint :: !(Maybe Text)
     , _acwtuPayload     :: !Trigger
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesTriggersUpdate' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ accountsContainersWorkspacesTriggersUpdate
     -> Trigger -- ^ 'acwtuPayload'
     -> AccountsContainersWorkspacesTriggersUpdate
 accountsContainersWorkspacesTriggersUpdate pAcwtuPath_ pAcwtuPayload_ =
-    AccountsContainersWorkspacesTriggersUpdate'
+  AccountsContainersWorkspacesTriggersUpdate'
     { _acwtuPath = pAcwtuPath_
     , _acwtuFingerprint = Nothing
     , _acwtuPayload = pAcwtuPayload_
     }
+
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}
@@ -100,7 +104,8 @@ acwtuPayload
   = lens _acwtuPayload (\ s a -> s{_acwtuPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesTriggersUpdate where
+           AccountsContainersWorkspacesTriggersUpdate
+         where
         type Rs AccountsContainersWorkspacesTriggersUpdate =
              Trigger
         type Scopes

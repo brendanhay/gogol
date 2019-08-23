@@ -56,11 +56,14 @@ type AccountsContainersVersionHeadersListResource =
 -- | Lists all Container Versions of a GTM Container.
 --
 -- /See:/ 'accountsContainersVersionHeadersList' smart constructor.
-data AccountsContainersVersionHeadersList = AccountsContainersVersionHeadersList'
+data AccountsContainersVersionHeadersList =
+  AccountsContainersVersionHeadersList'
     { _aParent         :: !Text
     , _aPageToken      :: !(Maybe Text)
     , _aIncludeDeleted :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersVersionHeadersList' with the minimum fields required to make a request.
 --
@@ -75,11 +78,9 @@ accountsContainersVersionHeadersList
     :: Text -- ^ 'aParent'
     -> AccountsContainersVersionHeadersList
 accountsContainersVersionHeadersList pAParent_ =
-    AccountsContainersVersionHeadersList'
-    { _aParent = pAParent_
-    , _aPageToken = Nothing
-    , _aIncludeDeleted = Nothing
-    }
+  AccountsContainersVersionHeadersList'
+    {_aParent = pAParent_, _aPageToken = Nothing, _aIncludeDeleted = Nothing}
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}
@@ -98,7 +99,8 @@ aIncludeDeleted
       (\ s a -> s{_aIncludeDeleted = a})
 
 instance GoogleRequest
-         AccountsContainersVersionHeadersList where
+           AccountsContainersVersionHeadersList
+         where
         type Rs AccountsContainersVersionHeadersList =
              ListContainerVersionsResponse
         type Scopes AccountsContainersVersionHeadersList =

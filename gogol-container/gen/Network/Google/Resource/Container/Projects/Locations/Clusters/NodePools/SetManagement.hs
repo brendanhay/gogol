@@ -63,7 +63,8 @@ type ProjectsLocationsClustersNodePoolsSetManagementResource
 -- | Sets the NodeManagement options for a node pool.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsSetManagement' smart constructor.
-data ProjectsLocationsClustersNodePoolsSetManagement = ProjectsLocationsClustersNodePoolsSetManagement'
+data ProjectsLocationsClustersNodePoolsSetManagement =
+  ProjectsLocationsClustersNodePoolsSetManagement'
     { _plcnpsmXgafv          :: !(Maybe Xgafv)
     , _plcnpsmUploadProtocol :: !(Maybe Text)
     , _plcnpsmAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsClustersNodePoolsSetManagement = ProjectsLocationsClusters
     , _plcnpsmPayload        :: !SetNodePoolManagementRequest
     , _plcnpsmName           :: !Text
     , _plcnpsmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsSetManagement' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsClustersNodePoolsSetManagement
     -> Text -- ^ 'plcnpsmName'
     -> ProjectsLocationsClustersNodePoolsSetManagement
 projectsLocationsClustersNodePoolsSetManagement pPlcnpsmPayload_ pPlcnpsmName_ =
-    ProjectsLocationsClustersNodePoolsSetManagement'
+  ProjectsLocationsClustersNodePoolsSetManagement'
     { _plcnpsmXgafv = Nothing
     , _plcnpsmUploadProtocol = Nothing
     , _plcnpsmAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsClustersNodePoolsSetManagement pPlcnpsmPayload_ pPlcnpsmName_ =
     , _plcnpsmName = pPlcnpsmName_
     , _plcnpsmCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcnpsmXgafv :: Lens' ProjectsLocationsClustersNodePoolsSetManagement (Maybe Xgafv)
@@ -148,7 +152,8 @@ plcnpsmCallback
       (\ s a -> s{_plcnpsmCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsSetManagement where
+           ProjectsLocationsClustersNodePoolsSetManagement
+         where
         type Rs
                ProjectsLocationsClustersNodePoolsSetManagement
              = Operation

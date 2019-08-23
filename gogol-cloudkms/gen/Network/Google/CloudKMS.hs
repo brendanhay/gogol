@@ -24,6 +24,7 @@ module Network.Google.CloudKMS
 
     -- * OAuth Scopes
     , cloudPlatformScope
+    , cloudKMSScope
 
     -- * API Declaration
     , CloudKMSAPI

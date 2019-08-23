@@ -61,4 +61,4 @@ abusiveExperienceReportService
 
 -- | Test scope for access to the Zoo service
 xapiZooScope :: Proxy '["https://www.googleapis.com/auth/xapi.zoo"]
-xapiZooScope = Proxy;
+xapiZooScope = Proxy

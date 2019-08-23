@@ -66,7 +66,8 @@ type SettingsSearchApplicationsListResource =
 -- | Lists all search applications.
 --
 -- /See:/ 'settingsSearchApplicationsList' smart constructor.
-data SettingsSearchApplicationsList = SettingsSearchApplicationsList'
+data SettingsSearchApplicationsList =
+  SettingsSearchApplicationsList'
     { _ssalXgafv                       :: !(Maybe Xgafv)
     , _ssalUploadProtocol              :: !(Maybe Text)
     , _ssalAccessToken                 :: !(Maybe Text)
@@ -75,7 +76,9 @@ data SettingsSearchApplicationsList = SettingsSearchApplicationsList'
     , _ssalPageToken                   :: !(Maybe Text)
     , _ssalPageSize                    :: !(Maybe (Textual Int32))
     , _ssalCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsSearchApplicationsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ data SettingsSearchApplicationsList = SettingsSearchApplicationsList'
 settingsSearchApplicationsList
     :: SettingsSearchApplicationsList
 settingsSearchApplicationsList =
-    SettingsSearchApplicationsList'
+  SettingsSearchApplicationsList'
     { _ssalXgafv = Nothing
     , _ssalUploadProtocol = Nothing
     , _ssalAccessToken = Nothing
@@ -109,6 +112,7 @@ settingsSearchApplicationsList =
     , _ssalPageSize = Nothing
     , _ssalCallback = Nothing
     }
+
 
 -- | V1 error format.
 ssalXgafv :: Lens' SettingsSearchApplicationsList (Maybe Xgafv)
@@ -133,8 +137,8 @@ ssalUploadType
   = lens _ssalUploadType
       (\ s a -> s{_ssalUploadType = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 ssalDebugOptionsEnableDebugging :: Lens' SettingsSearchApplicationsList (Maybe Bool)
 ssalDebugOptionsEnableDebugging
   = lens _ssalDebugOptionsEnableDebugging

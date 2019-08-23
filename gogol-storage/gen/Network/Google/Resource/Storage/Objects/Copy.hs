@@ -113,7 +113,8 @@ type ObjectsCopyResource =
 -- metadata.
 --
 -- /See:/ 'objectsCopy' smart constructor.
-data ObjectsCopy = ObjectsCopy'
+data ObjectsCopy =
+  ObjectsCopy'
     { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
     , _ocIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
     , _ocIfMetagenerationMatch          :: !(Maybe (Textual Int64))
@@ -131,7 +132,9 @@ data ObjectsCopy = ObjectsCopy'
     , _ocProjection                     :: !(Maybe ObjectsCopyProjection)
     , _ocSourceGeneration               :: !(Maybe (Textual Int64))
     , _ocDestinationObject              :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsCopy' with the minimum fields required to make a request.
 --
@@ -178,7 +181,7 @@ objectsCopy
     -> Text -- ^ 'ocDestinationObject'
     -> ObjectsCopy
 objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
-    ObjectsCopy'
+  ObjectsCopy'
     { _ocDestinationPredefinedACL = Nothing
     , _ocIfSourceGenerationMatch = Nothing
     , _ocIfMetagenerationMatch = Nothing
@@ -197,6 +200,7 @@ objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ 
     , _ocSourceGeneration = Nothing
     , _ocDestinationObject = pOcDestinationObject_
     }
+
 
 -- | Apply a predefined set of access controls to the destination object.
 ocDestinationPredefinedACL :: Lens' ObjectsCopy (Maybe ObjectsCopyDestinationPredefinedACL)

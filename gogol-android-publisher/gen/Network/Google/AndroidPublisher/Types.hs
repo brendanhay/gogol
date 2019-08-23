@@ -245,10 +245,17 @@ module Network.Google.AndroidPublisher.Types
     , trStatus
     , trReleaseNotes
     , trUserFraction
+    , trCountryTargeting
     , trName
 
     -- * EditsImagesListImageType
     , EditsImagesListImageType (..)
+
+    -- * CountryTargeting
+    , CountryTargeting
+    , countryTargeting
+    , ctIncludeRestOfWorld
+    , ctCountries
 
     -- * Bundle
     , Bundle
@@ -470,4 +477,4 @@ androidPublisherService
 
 -- | View and manage your Google Play Developer account
 androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-androidPublisherScope = Proxy;
+androidPublisherScope = Proxy

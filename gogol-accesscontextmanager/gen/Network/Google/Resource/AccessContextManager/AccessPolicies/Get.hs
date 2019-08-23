@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.get@ method which the
 -- 'AccessPoliciesGet' request conforms to.
 type AccessPoliciesGetResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,14 +59,17 @@ type AccessPoliciesGetResource =
 -- | Get an AccessPolicy by name.
 --
 -- /See:/ 'accessPoliciesGet' smart constructor.
-data AccessPoliciesGet = AccessPoliciesGet'
+data AccessPoliciesGet =
+  AccessPoliciesGet'
     { _apgXgafv          :: !(Maybe Xgafv)
     , _apgUploadProtocol :: !(Maybe Text)
     , _apgAccessToken    :: !(Maybe Text)
     , _apgUploadType     :: !(Maybe Text)
     , _apgName           :: !Text
     , _apgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ accessPoliciesGet
     :: Text -- ^ 'apgName'
     -> AccessPoliciesGet
 accessPoliciesGet pApgName_ =
-    AccessPoliciesGet'
+  AccessPoliciesGet'
     { _apgXgafv = Nothing
     , _apgUploadProtocol = Nothing
     , _apgAccessToken = Nothing
@@ -95,6 +98,7 @@ accessPoliciesGet pApgName_ =
     , _apgName = pApgName_
     , _apgCallback = Nothing
     }
+
 
 -- | V1 error format.
 apgXgafv :: Lens' AccessPoliciesGet (Maybe Xgafv)

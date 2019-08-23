@@ -63,7 +63,8 @@ type ProjectsLocationsRegistriesBindDeviceToGatewayResource
 -- | Associates the device with the gateway.
 --
 -- /See:/ 'projectsLocationsRegistriesBindDeviceToGateway' smart constructor.
-data ProjectsLocationsRegistriesBindDeviceToGateway = ProjectsLocationsRegistriesBindDeviceToGateway'
+data ProjectsLocationsRegistriesBindDeviceToGateway =
+  ProjectsLocationsRegistriesBindDeviceToGateway'
     { _plrbdtgParent         :: !Text
     , _plrbdtgXgafv          :: !(Maybe Xgafv)
     , _plrbdtgUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsRegistriesBindDeviceToGateway = ProjectsLocationsRegistrie
     , _plrbdtgUploadType     :: !(Maybe Text)
     , _plrbdtgPayload        :: !BindDeviceToGatewayRequest
     , _plrbdtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesBindDeviceToGateway' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsRegistriesBindDeviceToGateway
     -> BindDeviceToGatewayRequest -- ^ 'plrbdtgPayload'
     -> ProjectsLocationsRegistriesBindDeviceToGateway
 projectsLocationsRegistriesBindDeviceToGateway pPlrbdtgParent_ pPlrbdtgPayload_ =
-    ProjectsLocationsRegistriesBindDeviceToGateway'
+  ProjectsLocationsRegistriesBindDeviceToGateway'
     { _plrbdtgParent = pPlrbdtgParent_
     , _plrbdtgXgafv = Nothing
     , _plrbdtgUploadProtocol = Nothing
@@ -104,6 +107,7 @@ projectsLocationsRegistriesBindDeviceToGateway pPlrbdtgParent_ pPlrbdtgPayload_ 
     , _plrbdtgPayload = pPlrbdtgPayload_
     , _plrbdtgCallback = Nothing
     }
+
 
 -- | The name of the registry. For example,
 -- \`projects\/example-project\/locations\/us-central1\/registries\/my-registry\`.
@@ -148,7 +152,8 @@ plrbdtgCallback
       (\ s a -> s{_plrbdtgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesBindDeviceToGateway where
+           ProjectsLocationsRegistriesBindDeviceToGateway
+         where
         type Rs
                ProjectsLocationsRegistriesBindDeviceToGateway
              = BindDeviceToGatewayResponse

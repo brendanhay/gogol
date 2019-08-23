@@ -63,7 +63,8 @@ type VolumesGetResource =
 -- | Gets volume information for a single volume.
 --
 -- /See:/ 'volumesGet' smart constructor.
-data VolumesGet = VolumesGet'
+data VolumesGet =
+  VolumesGet'
     { _vgCountry                   :: !(Maybe Text)
     , _vgIncludeNonComicsSeries    :: !(Maybe Bool)
     , _vgPartner                   :: !(Maybe Text)
@@ -71,7 +72,9 @@ data VolumesGet = VolumesGet'
     , _vgSource                    :: !(Maybe Text)
     , _vgProjection                :: !(Maybe VolumesGetProjection)
     , _vgUserLibraryConsistentRead :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VolumesGet' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ volumesGet
     :: Text -- ^ 'vgVolumeId'
     -> VolumesGet
 volumesGet pVgVolumeId_ =
-    VolumesGet'
+  VolumesGet'
     { _vgCountry = Nothing
     , _vgIncludeNonComicsSeries = Nothing
     , _vgPartner = Nothing
@@ -103,6 +106,7 @@ volumesGet pVgVolumeId_ =
     , _vgProjection = Nothing
     , _vgUserLibraryConsistentRead = Nothing
     }
+
 
 -- | ISO-3166-1 code to override the IP-based location.
 vgCountry :: Lens' VolumesGet (Maybe Text)

@@ -28,12 +28,6 @@ module Network.Google.TagManager.Types
     , tagManagerPublishScope
     , tagManagerEditContainerversionsScope
 
-    -- * CreateWorkspaceProposalRequest
-    , CreateWorkspaceProposalRequest
-    , createWorkspaceProposalRequest
-    , cwprInitialComment
-    , cwprReviewers
-
     -- * ListVariablesResponse
     , ListVariablesResponse
     , listVariablesResponse
@@ -45,6 +39,17 @@ module Network.Google.TagManager.Types
     , listFoldersResponse
     , lfrNextPageToken
     , lfrFolder
+
+    -- * ListZonesResponse
+    , ListZonesResponse
+    , listZonesResponse
+    , lzrNextPageToken
+    , lzrZone
+
+    -- * RevertZoneResponse
+    , RevertZoneResponse
+    , revertZoneResponse
+    , rzrZone
 
     -- * ListEnvironmentsResponse
     , ListEnvironmentsResponse
@@ -92,6 +97,7 @@ module Network.Google.TagManager.Types
     , cvhNumZones
     , cvhNumRules
     , cvhNumVariables
+    , cvhNumCustomTemplates
 
     -- * TeardownTag
     , TeardownTag
@@ -139,9 +145,6 @@ module Network.Google.TagManager.Types
     , ztrEnable
     , ztrWhiteListedTypeId
 
-    -- * WorkspaceProposalHistoryStatusChangeOldStatus
-    , WorkspaceProposalHistoryStatusChangeOldStatus (..)
-
     -- * CreateContainerVersionResponse
     , CreateContainerVersionResponse
     , createContainerVersionResponse
@@ -167,9 +170,6 @@ module Network.Google.TagManager.Types
     , wTagManagerURL
     , wWorkspaceId
     , wDescription
-
-    -- * UpdateWorkspaceProposalRequestStatus
-    , UpdateWorkspaceProposalRequestStatus (..)
 
     -- * AccountsContainersWorkspacesBuilt_in_variablesDeleteType
     , AccountsContainersWorkspacesBuilt_in_variablesDeleteType (..)
@@ -216,27 +216,10 @@ module Network.Google.TagManager.Types
     -- * AccountsContainersWorkspacesBuilt_in_variablesCreateType
     , AccountsContainersWorkspacesBuilt_in_variablesCreateType (..)
 
-    -- * WorkspaceProposalHistoryComment
-    , WorkspaceProposalHistoryComment
-    , workspaceProposalHistoryComment
-    , wphcContent
-
     -- * CreateBuiltInVariableResponse
     , CreateBuiltInVariableResponse
     , createBuiltInVariableResponse
     , cbivrBuiltInVariable
-
-    -- * WorkspaceProposalUserType
-    , WorkspaceProposalUserType (..)
-
-    -- * WorkspaceProposalHistory
-    , WorkspaceProposalHistory
-    , workspaceProposalHistory
-    , wphCreatedBy
-    , wphStatusChange
-    , wphType
-    , wphComment
-    , wphCreatedTimestamp
 
     -- * ZoneChildContainer
     , ZoneChildContainer
@@ -294,6 +277,7 @@ module Network.Google.TagManager.Types
     , vDisablingTriggerId
     , vName
     , vTagManagerURL
+    , vFormatValue
     , vWorkspaceId
     , vType
     , vScheduleStartMs
@@ -347,14 +331,6 @@ module Network.Google.TagManager.Types
     -- * EntityChangeStatus
     , EntityChangeStatus (..)
 
-    -- * UpdateWorkspaceProposalRequest
-    , UpdateWorkspaceProposalRequest
-    , updateWorkspaceProposalRequest
-    , uwprStatus
-    , uwprNewComment
-    , uwprFingerprint
-    , uwprReviewers
-
     -- * GetWorkspaceStatusResponse
     , GetWorkspaceStatusResponse
     , getWorkspaceStatusResponse
@@ -407,6 +383,9 @@ module Network.Google.TagManager.Types
     , upEmailAddress
     , upContainerAccess
 
+    -- * VariableFormatValueCaseConversionType
+    , VariableFormatValueCaseConversionType (..)
+
     -- * ContainerVersion
     , ContainerVersion
     , containerVersion
@@ -425,6 +404,7 @@ module Network.Google.TagManager.Types
     , cvTagManagerURL
     , cvDeleted
     , cvTrigger
+    , cvCustomTemplate
     , cvDescription
 
     -- * EnvironmentType
@@ -435,9 +415,6 @@ module Network.Google.TagManager.Types
     , setupTag
     , stTagName
     , stStopOnSetupFailure
-
-    -- * WorkspaceProposalStatus
-    , WorkspaceProposalStatus (..)
 
     -- * ListContainersResponse
     , ListContainersResponse
@@ -493,11 +470,18 @@ module Network.Google.TagManager.Types
     , lebivrNextPageToken
     , lebivrBuiltInVariable
 
-    -- * WorkspaceProposalUser
-    , WorkspaceProposalUser
-    , workspaceProposalUser
-    , wpuGaiaId
-    , wpuType
+    -- * CustomTemplate
+    , CustomTemplate
+    , customTemplate
+    , ctContainerId
+    , ctPath
+    , ctTemplateId
+    , ctFingerprint
+    , ctAccountId
+    , ctName
+    , ctTagManagerURL
+    , ctTemplateData
+    , ctWorkspaceId
 
     -- * FolderEntities
     , FolderEntities
@@ -524,9 +508,6 @@ module Network.Google.TagManager.Types
     , cType
     , cParameter
 
-    -- * WorkspaceProposalHistoryType
-    , WorkspaceProposalHistoryType (..)
-
     -- * Entity
     , Entity
     , entity
@@ -548,6 +529,15 @@ module Network.Google.TagManager.Types
     , tNanos
     , tSeconds
 
+    -- * VariableFormatValue
+    , VariableFormatValue
+    , variableFormatValue
+    , vfvConvertNullToValue
+    , vfvConvertTrueToValue
+    , vfvCaseConversionType
+    , vfvConvertFalseToValue
+    , vfvConvertUndefinedToValue
+
     -- * RevertBuiltInVariableResponse
     , RevertBuiltInVariableResponse
     , revertBuiltInVariableResponse
@@ -555,25 +545,6 @@ module Network.Google.TagManager.Types
 
     -- * AccountsContainersWorkspacesBuilt_in_variablesRevertType
     , AccountsContainersWorkspacesBuilt_in_variablesRevertType (..)
-
-    -- * WorkspaceProposalHistoryStatusChangeNewStatus
-    , WorkspaceProposalHistoryStatusChangeNewStatus (..)
-
-    -- * WorkspaceProposalHistoryStatusChange
-    , WorkspaceProposalHistoryStatusChange
-    , workspaceProposalHistoryStatusChange
-    , wphscOldStatus
-    , wphscNewStatus
-
-    -- * WorkspaceProposal
-    , WorkspaceProposal
-    , workspaceProposal
-    , wpStatus
-    , wpHistory
-    , wpPath
-    , wpFingerprint
-    , wpAuthors
-    , wpReviewers
 
     -- * Parameter
     , Parameter
@@ -597,29 +568,29 @@ tagManagerService
 
 -- | View your Google Tag Manager container and its subcomponents
 tagManagerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
-tagManagerReadOnlyScope = Proxy;
+tagManagerReadOnlyScope = Proxy
 
 -- | Manage your Google Tag Manager container and its subcomponents,
 -- excluding versioning and publishing
 tagManagerEditContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-tagManagerEditContainersScope = Proxy;
+tagManagerEditContainersScope = Proxy
 
 -- | View and manage your Google Tag Manager accounts
 tagManagerManageAccountsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
-tagManagerManageAccountsScope = Proxy;
+tagManagerManageAccountsScope = Proxy
 
 -- | Delete your Google Tag Manager containers
 tagManagerDeleteContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
-tagManagerDeleteContainersScope = Proxy;
+tagManagerDeleteContainersScope = Proxy
 
 -- | Manage user permissions of your Google Tag Manager account and container
 tagManagerManageUsersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-tagManagerManageUsersScope = Proxy;
+tagManagerManageUsersScope = Proxy
 
 -- | Publish your Google Tag Manager container versions
 tagManagerPublishScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
-tagManagerPublishScope = Proxy;
+tagManagerPublishScope = Proxy
 
 -- | Manage your Google Tag Manager container versions
 tagManagerEditContainerversionsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-tagManagerEditContainerversionsScope = Proxy;
+tagManagerEditContainerversionsScope = Proxy

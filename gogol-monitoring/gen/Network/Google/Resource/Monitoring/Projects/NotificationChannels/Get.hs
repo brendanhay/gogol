@@ -68,14 +68,17 @@ type ProjectsNotificationChannelsGetResource =
 -- information that was supplied in the call to the create method.
 --
 -- /See:/ 'projectsNotificationChannelsGet' smart constructor.
-data ProjectsNotificationChannelsGet = ProjectsNotificationChannelsGet'
+data ProjectsNotificationChannelsGet =
+  ProjectsNotificationChannelsGet'
     { _pncgXgafv          :: !(Maybe Xgafv)
     , _pncgUploadProtocol :: !(Maybe Text)
     , _pncgAccessToken    :: !(Maybe Text)
     , _pncgUploadType     :: !(Maybe Text)
     , _pncgName           :: !Text
     , _pncgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotificationChannelsGet' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsNotificationChannelsGet
     :: Text -- ^ 'pncgName'
     -> ProjectsNotificationChannelsGet
 projectsNotificationChannelsGet pPncgName_ =
-    ProjectsNotificationChannelsGet'
+  ProjectsNotificationChannelsGet'
     { _pncgXgafv = Nothing
     , _pncgUploadProtocol = Nothing
     , _pncgAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsNotificationChannelsGet pPncgName_ =
     , _pncgName = pPncgName_
     , _pncgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncgXgafv :: Lens' ProjectsNotificationChannelsGet (Maybe Xgafv)
@@ -139,7 +143,8 @@ pncgCallback
   = lens _pncgCallback (\ s a -> s{_pncgCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsGet where
+           ProjectsNotificationChannelsGet
+         where
         type Rs ProjectsNotificationChannelsGet =
              NotificationChannel
         type Scopes ProjectsNotificationChannelsGet =

@@ -54,9 +54,12 @@ type AchievementConfigurationsGetResource =
 -- ID.
 --
 -- /See:/ 'achievementConfigurationsGet' smart constructor.
-newtype AchievementConfigurationsGet = AchievementConfigurationsGet'
+newtype AchievementConfigurationsGet =
+  AchievementConfigurationsGet'
     { _acgAchievementId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementConfigurationsGet' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ achievementConfigurationsGet
     :: Text -- ^ 'acgAchievementId'
     -> AchievementConfigurationsGet
 achievementConfigurationsGet pAcgAchievementId_ =
-    AchievementConfigurationsGet'
-    { _acgAchievementId = pAcgAchievementId_
-    }
+  AchievementConfigurationsGet' {_acgAchievementId = pAcgAchievementId_}
+
 
 -- | The ID of the achievement used by this method.
 acgAchievementId :: Lens' AchievementConfigurationsGet Text

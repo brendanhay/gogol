@@ -1,5 +1,5 @@
 name:                  gogol-serviceconsumermanagement
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Service Consumer Management SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -43,8 +43,10 @@ library
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.Create
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.Delete
+        , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.List
         , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.RemoveProject
+        , Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.UndeleteProject
         , Network.Google.ServiceConsumerManagement
         , Network.Google.ServiceConsumerManagement.Types
 
@@ -53,5 +55,5 @@ library
         , Network.Google.ServiceConsumerManagement.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

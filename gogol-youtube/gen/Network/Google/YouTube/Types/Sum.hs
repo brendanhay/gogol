@@ -203,6 +203,8 @@ data ContentRatingMpaaRating
       -- ^ @mpaaR@
     | MpaaUnrated
       -- ^ @mpaaUnrated@
+    | MpaaX
+      -- ^ @mpaaX@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMpaaRating
@@ -215,6 +217,7 @@ instance FromHttpApiData ContentRatingMpaaRating where
         "mpaaPg13" -> Right MPAAPG13
         "mpaaR" -> Right MpaaR
         "mpaaUnrated" -> Right MpaaUnrated
+        "mpaaX" -> Right MpaaX
         x -> Left ("Unable to parse ContentRatingMpaaRating from: " <> x)
 
 instance ToHttpApiData ContentRatingMpaaRating where
@@ -225,6 +228,7 @@ instance ToHttpApiData ContentRatingMpaaRating where
         MPAAPG13 -> "mpaaPg13"
         MpaaR -> "mpaaR"
         MpaaUnrated -> "mpaaUnrated"
+        MpaaX -> "mpaaX"
 
 instance FromJSON ContentRatingMpaaRating where
     parseJSON = parseJSONText "ContentRatingMpaaRating"
@@ -412,12 +416,8 @@ instance ToJSON VideoStatusPrivacyStatus where
 -- | The broadcast\'s status. The status can be updated using the API\'s
 -- liveBroadcasts.transition method.
 data LiveBroadcastStatusLifeCycleStatus
-    = LBSLCSAbandoned
-      -- ^ @abandoned@
-    | LBSLCSComplete
+    = LBSLCSComplete
       -- ^ @complete@
-    | LBSLCSCompleteStarting
-      -- ^ @completeStarting@
     | LBSLCSCreated
       -- ^ @created@
     | LBSLCSLive
@@ -426,8 +426,6 @@ data LiveBroadcastStatusLifeCycleStatus
       -- ^ @liveStarting@
     | LBSLCSReady
       -- ^ @ready@
-    | LBSLCSReclaimed
-      -- ^ @reclaimed@
     | LBSLCSRevoked
       -- ^ @revoked@
     | LBSLCSTestStarting
@@ -440,14 +438,11 @@ instance Hashable LiveBroadcastStatusLifeCycleStatus
 
 instance FromHttpApiData LiveBroadcastStatusLifeCycleStatus where
     parseQueryParam = \case
-        "abandoned" -> Right LBSLCSAbandoned
         "complete" -> Right LBSLCSComplete
-        "completeStarting" -> Right LBSLCSCompleteStarting
         "created" -> Right LBSLCSCreated
         "live" -> Right LBSLCSLive
         "liveStarting" -> Right LBSLCSLiveStarting
         "ready" -> Right LBSLCSReady
-        "reclaimed" -> Right LBSLCSReclaimed
         "revoked" -> Right LBSLCSRevoked
         "testStarting" -> Right LBSLCSTestStarting
         "testing" -> Right LBSLCSTesting
@@ -455,14 +450,11 @@ instance FromHttpApiData LiveBroadcastStatusLifeCycleStatus where
 
 instance ToHttpApiData LiveBroadcastStatusLifeCycleStatus where
     toQueryParam = \case
-        LBSLCSAbandoned -> "abandoned"
         LBSLCSComplete -> "complete"
-        LBSLCSCompleteStarting -> "completeStarting"
         LBSLCSCreated -> "created"
         LBSLCSLive -> "live"
         LBSLCSLiveStarting -> "liveStarting"
         LBSLCSReady -> "ready"
-        LBSLCSReclaimed -> "reclaimed"
         LBSLCSRevoked -> "revoked"
         LBSLCSTestStarting -> "testStarting"
         LBSLCSTesting -> "testing"
@@ -3821,6 +3813,8 @@ data ContentRatingCNCRating
       -- ^ @cnc18@
     | CNCE
       -- ^ @cncE@
+    | CNCInterdiction
+      -- ^ @cncInterdiction@
     | CNCT
       -- ^ @cncT@
     | CNCUnrated
@@ -3836,6 +3830,7 @@ instance FromHttpApiData ContentRatingCNCRating where
         "cnc16" -> Right CNC16
         "cnc18" -> Right CNC18
         "cncE" -> Right CNCE
+        "cncInterdiction" -> Right CNCInterdiction
         "cncT" -> Right CNCT
         "cncUnrated" -> Right CNCUnrated
         x -> Left ("Unable to parse ContentRatingCNCRating from: " <> x)
@@ -3847,6 +3842,7 @@ instance ToHttpApiData ContentRatingCNCRating where
         CNC16 -> "cnc16"
         CNC18 -> "cnc18"
         CNCE -> "cncE"
+        CNCInterdiction -> "cncInterdiction"
         CNCT -> "cncT"
         CNCUnrated -> "cncUnrated"
 
@@ -6003,8 +5999,12 @@ instance ToJSON ContentRatingDjctqRatingReasonsItem where
 data CdnSettingsIngestionType
     = Dash
       -- ^ @dash@
+    | Hls
+      -- ^ @hls@
     | Rtmp
       -- ^ @rtmp@
+    | Webrtc
+      -- ^ @webrtc@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CdnSettingsIngestionType
@@ -6012,13 +6012,17 @@ instance Hashable CdnSettingsIngestionType
 instance FromHttpApiData CdnSettingsIngestionType where
     parseQueryParam = \case
         "dash" -> Right Dash
+        "hls" -> Right Hls
         "rtmp" -> Right Rtmp
+        "webrtc" -> Right Webrtc
         x -> Left ("Unable to parse CdnSettingsIngestionType from: " <> x)
 
 instance ToHttpApiData CdnSettingsIngestionType where
     toQueryParam = \case
         Dash -> "dash"
+        Hls -> "hls"
         Rtmp -> "rtmp"
+        Webrtc -> "webrtc"
 
 instance FromJSON CdnSettingsIngestionType where
     parseJSON = parseJSONText "CdnSettingsIngestionType"
@@ -6195,6 +6199,8 @@ data LiveChatMessageSnippetType
       -- ^ @sponsorOnlyModeStartedEvent@
     | LCMSTSuperChatEvent
       -- ^ @superChatEvent@
+    | LCMSTSuperStickerEvent
+      -- ^ @superStickerEvent@
     | LCMSTTextMessageEvent
       -- ^ @textMessageEvent@
     | LCMSTTombstone
@@ -6219,6 +6225,7 @@ instance FromHttpApiData LiveChatMessageSnippetType where
         "sponsorOnlyModeEndedEvent" -> Right LCMSTSponsorOnlyModeEndedEvent
         "sponsorOnlyModeStartedEvent" -> Right LCMSTSponsorOnlyModeStartedEvent
         "superChatEvent" -> Right LCMSTSuperChatEvent
+        "superStickerEvent" -> Right LCMSTSuperStickerEvent
         "textMessageEvent" -> Right LCMSTTextMessageEvent
         "tombstone" -> Right LCMSTTombstone
         "userBannedEvent" -> Right LCMSTUserBannedEvent
@@ -6238,6 +6245,7 @@ instance ToHttpApiData LiveChatMessageSnippetType where
         LCMSTSponsorOnlyModeEndedEvent -> "sponsorOnlyModeEndedEvent"
         LCMSTSponsorOnlyModeStartedEvent -> "sponsorOnlyModeStartedEvent"
         LCMSTSuperChatEvent -> "superChatEvent"
+        LCMSTSuperStickerEvent -> "superStickerEvent"
         LCMSTTextMessageEvent -> "textMessageEvent"
         LCMSTTombstone -> "tombstone"
         LCMSTUserBannedEvent -> "userBannedEvent"
@@ -6475,16 +6483,48 @@ instance ToJSON ContentRatingAcbRating where
 data ContentRatingDjctqRating
     = DJCTQ10
       -- ^ @djctq10@
+    | DJCTQ1012
+      -- ^ @djctq1012@
+    | DJCTQ1014
+      -- ^ @djctq1014@
+    | DJCTQ1016
+      -- ^ @djctq1016@
+    | DJCTQ1018
+      -- ^ @djctq1018@
     | DJCTQ12
       -- ^ @djctq12@
+    | DJCTQ1214
+      -- ^ @djctq1214@
+    | DJCTQ1216
+      -- ^ @djctq1216@
+    | DJCTQ1218
+      -- ^ @djctq1218@
     | DJCTQ14
       -- ^ @djctq14@
+    | DJCTQ1416
+      -- ^ @djctq1416@
+    | DJCTQ1418
+      -- ^ @djctq1418@
     | DJCTQ16
       -- ^ @djctq16@
+    | DJCTQ1618
+      -- ^ @djctq1618@
     | DJCTQ18
       -- ^ @djctq18@
+    | DjctqEr
+      -- ^ @djctqEr@
     | DjctqL
       -- ^ @djctqL@
+    | DJCTQL10
+      -- ^ @djctqL10@
+    | DJCTQL12
+      -- ^ @djctqL12@
+    | DJCTQL14
+      -- ^ @djctqL14@
+    | DJCTQL16
+      -- ^ @djctqL16@
+    | DJCTQL18
+      -- ^ @djctqL18@
     | DjctqUnrated
       -- ^ @djctqUnrated@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -6494,22 +6534,54 @@ instance Hashable ContentRatingDjctqRating
 instance FromHttpApiData ContentRatingDjctqRating where
     parseQueryParam = \case
         "djctq10" -> Right DJCTQ10
+        "djctq1012" -> Right DJCTQ1012
+        "djctq1014" -> Right DJCTQ1014
+        "djctq1016" -> Right DJCTQ1016
+        "djctq1018" -> Right DJCTQ1018
         "djctq12" -> Right DJCTQ12
+        "djctq1214" -> Right DJCTQ1214
+        "djctq1216" -> Right DJCTQ1216
+        "djctq1218" -> Right DJCTQ1218
         "djctq14" -> Right DJCTQ14
+        "djctq1416" -> Right DJCTQ1416
+        "djctq1418" -> Right DJCTQ1418
         "djctq16" -> Right DJCTQ16
+        "djctq1618" -> Right DJCTQ1618
         "djctq18" -> Right DJCTQ18
+        "djctqEr" -> Right DjctqEr
         "djctqL" -> Right DjctqL
+        "djctqL10" -> Right DJCTQL10
+        "djctqL12" -> Right DJCTQL12
+        "djctqL14" -> Right DJCTQL14
+        "djctqL16" -> Right DJCTQL16
+        "djctqL18" -> Right DJCTQL18
         "djctqUnrated" -> Right DjctqUnrated
         x -> Left ("Unable to parse ContentRatingDjctqRating from: " <> x)
 
 instance ToHttpApiData ContentRatingDjctqRating where
     toQueryParam = \case
         DJCTQ10 -> "djctq10"
+        DJCTQ1012 -> "djctq1012"
+        DJCTQ1014 -> "djctq1014"
+        DJCTQ1016 -> "djctq1016"
+        DJCTQ1018 -> "djctq1018"
         DJCTQ12 -> "djctq12"
+        DJCTQ1214 -> "djctq1214"
+        DJCTQ1216 -> "djctq1216"
+        DJCTQ1218 -> "djctq1218"
         DJCTQ14 -> "djctq14"
+        DJCTQ1416 -> "djctq1416"
+        DJCTQ1418 -> "djctq1418"
         DJCTQ16 -> "djctq16"
+        DJCTQ1618 -> "djctq1618"
         DJCTQ18 -> "djctq18"
+        DjctqEr -> "djctqEr"
         DjctqL -> "djctqL"
+        DJCTQL10 -> "djctqL10"
+        DJCTQL12 -> "djctqL12"
+        DJCTQL14 -> "djctqL14"
+        DJCTQL16 -> "djctqL16"
+        DJCTQL18 -> "djctqL18"
         DjctqUnrated -> "djctqUnrated"
 
 instance FromJSON ContentRatingDjctqRating where

@@ -64,14 +64,17 @@ type RegionAutoscalersListResource =
 -- | Retrieves a list of autoscalers contained within the specified region.
 --
 -- /See:/ 'regionAutoscalersList' smart constructor.
-data RegionAutoscalersList = RegionAutoscalersList'
+data RegionAutoscalersList =
+  RegionAutoscalersList'
     { _ralOrderBy    :: !(Maybe Text)
     , _ralProject    :: !Text
     , _ralFilter     :: !(Maybe Text)
     , _ralRegion     :: !Text
     , _ralPageToken  :: !(Maybe Text)
     , _ralMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionAutoscalersList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ regionAutoscalersList
     -> Text -- ^ 'ralRegion'
     -> RegionAutoscalersList
 regionAutoscalersList pRalProject_ pRalRegion_ =
-    RegionAutoscalersList'
+  RegionAutoscalersList'
     { _ralOrderBy = Nothing
     , _ralProject = pRalProject_
     , _ralFilter = Nothing
@@ -101,6 +104,7 @@ regionAutoscalersList pRalProject_ pRalRegion_ =
     , _ralPageToken = Nothing
     , _ralMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

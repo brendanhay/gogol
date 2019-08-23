@@ -58,10 +58,13 @@ type UsersMessagesBatchDeleteResource =
 -- messages were not already deleted or even existed at all.
 --
 -- /See:/ 'usersMessagesBatchDelete' smart constructor.
-data UsersMessagesBatchDelete = UsersMessagesBatchDelete'
+data UsersMessagesBatchDelete =
+  UsersMessagesBatchDelete'
     { _umbdPayload :: !BatchDeleteMessagesRequest
     , _umbdUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersMessagesBatchDelete' with the minimum fields required to make a request.
 --
@@ -74,10 +77,8 @@ usersMessagesBatchDelete
     :: BatchDeleteMessagesRequest -- ^ 'umbdPayload'
     -> UsersMessagesBatchDelete
 usersMessagesBatchDelete pUmbdPayload_ =
-    UsersMessagesBatchDelete'
-    { _umbdPayload = pUmbdPayload_
-    , _umbdUserId = "me"
-    }
+  UsersMessagesBatchDelete' {_umbdPayload = pUmbdPayload_, _umbdUserId = "me"}
+
 
 -- | Multipart request metadata.
 umbdPayload :: Lens' UsersMessagesBatchDelete BatchDeleteMessagesRequest

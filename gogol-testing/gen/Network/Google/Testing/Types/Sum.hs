@@ -126,6 +126,10 @@ data TestMatrixInvalidMatrixDetails
     | NoPackageName
       -- ^ @NO_PACKAGE_NAME@
       -- The APK manifest does not declare a package name.
+    | InvalidPackageName
+      -- ^ @INVALID_PACKAGE_NAME@
+      -- The APK application ID (aka package name) is invalid. See also
+      -- https:\/\/developer.android.com\/studio\/build\/application-id
     | TestSameAsApp
       -- ^ @TEST_SAME_AS_APP@
       -- The test package and app package are the same.
@@ -158,6 +162,14 @@ data TestMatrixInvalidMatrixDetails
     | InvalidRoboDirectives
       -- ^ @INVALID_ROBO_DIRECTIVES@
       -- There is a conflict in the provided robo_directives.
+    | InvalidResourceName
+      -- ^ @INVALID_RESOURCE_NAME@
+      -- There is at least one invalid resource name in the provided robo
+      -- directives
+    | InvalidDirectiveAction
+      -- ^ @INVALID_DIRECTIVE_ACTION@
+      -- Invalid definition of action in the robo directives (e.g. a click or
+      -- ignore action includes an input text field)
     | TestLoopIntentFilterNotFound
       -- ^ @TEST_LOOP_INTENT_FILTER_NOT_FOUND@
       -- There there is no test loop intent filter, or the one that is given is
@@ -228,6 +240,7 @@ instance FromHttpApiData TestMatrixInvalidMatrixDetails where
         "MALFORMED_TEST_APK" -> Right MalformedTestAPK
         "NO_MANIFEST" -> Right NoManifest
         "NO_PACKAGE_NAME" -> Right NoPackageName
+        "INVALID_PACKAGE_NAME" -> Right InvalidPackageName
         "TEST_SAME_AS_APP" -> Right TestSameAsApp
         "NO_INSTRUMENTATION" -> Right NoInstrumentation
         "NO_SIGNATURE" -> Right NoSignature
@@ -236,6 +249,8 @@ instance FromHttpApiData TestMatrixInvalidMatrixDetails where
         "NO_LAUNCHER_ACTIVITY" -> Right NoLauncherActivity
         "FORBIDDEN_PERMISSIONS" -> Right ForBiddenPermissions
         "INVALID_ROBO_DIRECTIVES" -> Right InvalidRoboDirectives
+        "INVALID_RESOURCE_NAME" -> Right InvalidResourceName
+        "INVALID_DIRECTIVE_ACTION" -> Right InvalidDirectiveAction
         "TEST_LOOP_INTENT_FILTER_NOT_FOUND" -> Right TestLoopIntentFilterNotFound
         "SCENARIO_LABEL_NOT_DECLARED" -> Right ScenarioLabelNotDeclared
         "SCENARIO_LABEL_MALFORMED" -> Right ScenarioLabelMalformed
@@ -262,6 +277,7 @@ instance ToHttpApiData TestMatrixInvalidMatrixDetails where
         MalformedTestAPK -> "MALFORMED_TEST_APK"
         NoManifest -> "NO_MANIFEST"
         NoPackageName -> "NO_PACKAGE_NAME"
+        InvalidPackageName -> "INVALID_PACKAGE_NAME"
         TestSameAsApp -> "TEST_SAME_AS_APP"
         NoInstrumentation -> "NO_INSTRUMENTATION"
         NoSignature -> "NO_SIGNATURE"
@@ -270,6 +286,8 @@ instance ToHttpApiData TestMatrixInvalidMatrixDetails where
         NoLauncherActivity -> "NO_LAUNCHER_ACTIVITY"
         ForBiddenPermissions -> "FORBIDDEN_PERMISSIONS"
         InvalidRoboDirectives -> "INVALID_ROBO_DIRECTIVES"
+        InvalidResourceName -> "INVALID_RESOURCE_NAME"
+        InvalidDirectiveAction -> "INVALID_DIRECTIVE_ACTION"
         TestLoopIntentFilterNotFound -> "TEST_LOOP_INTENT_FILTER_NOT_FOUND"
         ScenarioLabelNotDeclared -> "SCENARIO_LABEL_NOT_DECLARED"
         ScenarioLabelMalformed -> "SCENARIO_LABEL_MALFORMED"
@@ -525,6 +543,9 @@ data RoboDirectiveActionType
       -- ^ @ENTER_TEXT@
       -- Direct Robo to enter text on the specified element. No-op if specified
       -- element is not enabled or does not allow text entry.
+    | Ignore
+      -- ^ @IGNORE@
+      -- Direct Robo to ignore interactions with a specific element.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RoboDirectiveActionType
@@ -534,6 +555,7 @@ instance FromHttpApiData RoboDirectiveActionType where
         "ACTION_TYPE_UNSPECIFIED" -> Right ActionTypeUnspecified
         "SINGLE_CLICK" -> Right SingleClick
         "ENTER_TEXT" -> Right EnterText
+        "IGNORE" -> Right Ignore
         x -> Left ("Unable to parse RoboDirectiveActionType from: " <> x)
 
 instance ToHttpApiData RoboDirectiveActionType where
@@ -541,6 +563,7 @@ instance ToHttpApiData RoboDirectiveActionType where
         ActionTypeUnspecified -> "ACTION_TYPE_UNSPECIFIED"
         SingleClick -> "SINGLE_CLICK"
         EnterText -> "ENTER_TEXT"
+        Ignore -> "IGNORE"
 
 instance FromJSON RoboDirectiveActionType where
     parseJSON = parseJSONText "RoboDirectiveActionType"

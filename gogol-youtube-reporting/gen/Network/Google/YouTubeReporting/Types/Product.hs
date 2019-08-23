@@ -23,10 +23,13 @@ import           Network.Google.YouTubeReporting.Types.Sum
 -- | Response message for ReportingService.ListReports.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
-data ListReportsResponse = ListReportsResponse'
+data ListReportsResponse =
+  ListReportsResponse'
     { _lrrNextPageToken :: !(Maybe Text)
     , _lrrReports       :: !(Maybe [Report])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListReportsResponse' with the minimum fields required to make a request.
 --
@@ -38,10 +41,8 @@ data ListReportsResponse = ListReportsResponse'
 listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
-    ListReportsResponse'
-    { _lrrNextPageToken = Nothing
-    , _lrrReports = Nothing
-    }
+  ListReportsResponse' {_lrrNextPageToken = Nothing, _lrrReports = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListReportsRequest.page_token field in the subsequent call to
@@ -76,13 +77,16 @@ instance ToJSON ListReportsResponse where
 -- | gdata
 --
 -- /See:/ 'gDataDiffChecksumsResponse' smart constructor.
-data GDataDiffChecksumsResponse = GDataDiffChecksumsResponse'
+data GDataDiffChecksumsResponse =
+  GDataDiffChecksumsResponse'
     { _gddcrChecksumsLocation :: !(Maybe GDataCompositeMedia)
     , _gddcrObjectSizeBytes   :: !(Maybe (Textual Int64))
     , _gddcrChunkSizeBytes    :: !(Maybe (Textual Int64))
     , _gddcrObjectVersion     :: !(Maybe Text)
     , _gddcrObjectLocation    :: !(Maybe GDataCompositeMedia)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataDiffChecksumsResponse' with the minimum fields required to make a request.
 --
@@ -100,13 +104,14 @@ data GDataDiffChecksumsResponse = GDataDiffChecksumsResponse'
 gDataDiffChecksumsResponse
     :: GDataDiffChecksumsResponse
 gDataDiffChecksumsResponse =
-    GDataDiffChecksumsResponse'
+  GDataDiffChecksumsResponse'
     { _gddcrChecksumsLocation = Nothing
     , _gddcrObjectSizeBytes = Nothing
     , _gddcrChunkSizeBytes = Nothing
     , _gddcrObjectVersion = Nothing
     , _gddcrObjectLocation = Nothing
     }
+
 
 -- | gdata
 gddcrChecksumsLocation :: Lens' GDataDiffChecksumsResponse (Maybe GDataCompositeMedia)
@@ -165,11 +170,14 @@ instance ToJSON GDataDiffChecksumsResponse where
 -- | gdata
 --
 -- /See:/ 'gDataObjectId' smart constructor.
-data GDataObjectId = GDataObjectId'
+data GDataObjectId =
+  GDataObjectId'
     { _gdoiObjectName :: !(Maybe Text)
     , _gdoiBucketName :: !(Maybe Text)
     , _gdoiGeneration :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataObjectId' with the minimum fields required to make a request.
 --
@@ -183,11 +191,12 @@ data GDataObjectId = GDataObjectId'
 gDataObjectId
     :: GDataObjectId
 gDataObjectId =
-    GDataObjectId'
+  GDataObjectId'
     { _gdoiObjectName = Nothing
     , _gdoiBucketName = Nothing
     , _gdoiGeneration = Nothing
     }
+
 
 -- | gdata
 gdoiObjectName :: Lens' GDataObjectId (Maybe Text)
@@ -232,14 +241,16 @@ instance ToJSON GDataObjectId where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -250,13 +261,16 @@ instance ToJSON Empty where
 -- | gdata
 --
 -- /See:/ 'gDataContentTypeInfo' smart constructor.
-data GDataContentTypeInfo = GDataContentTypeInfo'
+data GDataContentTypeInfo =
+  GDataContentTypeInfo'
     { _gdctiFromBytes    :: !(Maybe Text)
     , _gdctiFromFileName :: !(Maybe Text)
     , _gdctiFromHeader   :: !(Maybe Text)
     , _gdctiBestGuess    :: !(Maybe Text)
     , _gdctiFromURLPath  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataContentTypeInfo' with the minimum fields required to make a request.
 --
@@ -274,13 +288,14 @@ data GDataContentTypeInfo = GDataContentTypeInfo'
 gDataContentTypeInfo
     :: GDataContentTypeInfo
 gDataContentTypeInfo =
-    GDataContentTypeInfo'
+  GDataContentTypeInfo'
     { _gdctiFromBytes = Nothing
     , _gdctiFromFileName = Nothing
     , _gdctiFromHeader = Nothing
     , _gdctiBestGuess = Nothing
     , _gdctiFromURLPath = Nothing
     }
+
 
 -- | gdata
 gdctiFromBytes :: Lens' GDataContentTypeInfo (Maybe Text)
@@ -335,7 +350,8 @@ instance ToJSON GDataContentTypeInfo where
 -- | gdata
 --
 -- /See:/ 'gDataMedia' smart constructor.
-data GDataMedia = GDataMedia'
+data GDataMedia =
+  GDataMedia'
     { _gdmLength                :: !(Maybe (Textual Int64))
     , _gdmDiffVersionResponse   :: !(Maybe GDataDiffVersionResponse)
     , _gdmDiffUploadRequest     :: !(Maybe GDataDiffUploadRequest)
@@ -366,7 +382,9 @@ data GDataMedia = GDataMedia'
     , _gdmSha256Hash            :: !(Maybe Bytes)
     , _gdmContentType           :: !(Maybe Text)
     , _gdmCompositeMedia        :: !(Maybe [GDataCompositeMedia])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataMedia' with the minimum fields required to make a request.
 --
@@ -434,7 +452,7 @@ data GDataMedia = GDataMedia'
 gDataMedia
     :: GDataMedia
 gDataMedia =
-    GDataMedia'
+  GDataMedia'
     { _gdmLength = Nothing
     , _gdmDiffVersionResponse = Nothing
     , _gdmDiffUploadRequest = Nothing
@@ -466,6 +484,7 @@ gDataMedia =
     , _gdmContentType = Nothing
     , _gdmCompositeMedia = Nothing
     }
+
 
 -- | gdata
 gdmLength :: Lens' GDataMedia (Maybe Int64)
@@ -722,7 +741,8 @@ instance ToJSON GDataMedia where
 -- be downloaded.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rJobId         :: !(Maybe Text)
     , _rStartTime     :: !(Maybe DateTime')
     , _rDownloadURL   :: !(Maybe Text)
@@ -730,7 +750,9 @@ data Report = Report'
     , _rId            :: !(Maybe Text)
     , _rCreateTime    :: !(Maybe DateTime')
     , _rJobExpireTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -752,7 +774,7 @@ data Report = Report'
 report
     :: Report
 report =
-    Report'
+  Report'
     { _rJobId = Nothing
     , _rStartTime = Nothing
     , _rDownloadURL = Nothing
@@ -761,6 +783,7 @@ report =
     , _rCreateTime = Nothing
     , _rJobExpireTime = Nothing
     }
+
 
 -- | The ID of the job that created this report.
 rJobId :: Lens' Report (Maybe Text)
@@ -828,7 +851,8 @@ instance ToJSON Report where
 -- | gdata
 --
 -- /See:/ 'gDataCompositeMedia' smart constructor.
-data GDataCompositeMedia = GDataCompositeMedia'
+data GDataCompositeMedia =
+  GDataCompositeMedia'
     { _gdcmLength               :: !(Maybe (Textual Int64))
     , _gdcmCrc32cHash           :: !(Maybe (Textual Word32))
     , _gdcmBlobRef              :: !(Maybe Bytes)
@@ -840,7 +864,9 @@ data GDataCompositeMedia = GDataCompositeMedia'
     , _gdcmReferenceType        :: !(Maybe GDataCompositeMediaReferenceType)
     , _gdcmMD5Hash              :: !(Maybe Bytes)
     , _gdcmCosmoBinaryReference :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataCompositeMedia' with the minimum fields required to make a request.
 --
@@ -870,7 +896,7 @@ data GDataCompositeMedia = GDataCompositeMedia'
 gDataCompositeMedia
     :: GDataCompositeMedia
 gDataCompositeMedia =
-    GDataCompositeMedia'
+  GDataCompositeMedia'
     { _gdcmLength = Nothing
     , _gdcmCrc32cHash = Nothing
     , _gdcmBlobRef = Nothing
@@ -883,6 +909,7 @@ gDataCompositeMedia =
     , _gdcmMD5Hash = Nothing
     , _gdcmCosmoBinaryReference = Nothing
     }
+
 
 -- | gdata
 gdcmLength :: Lens' GDataCompositeMedia (Maybe Int64)
@@ -985,10 +1012,13 @@ instance ToJSON GDataCompositeMedia where
 -- | gdata
 --
 -- /See:/ 'gDataDownloadParameters' smart constructor.
-data GDataDownloadParameters = GDataDownloadParameters'
+data GDataDownloadParameters =
+  GDataDownloadParameters'
     { _gddpIgnoreRange          :: !(Maybe Bool)
     , _gddpAllowGzipCompression :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataDownloadParameters' with the minimum fields required to make a request.
 --
@@ -1000,10 +1030,9 @@ data GDataDownloadParameters = GDataDownloadParameters'
 gDataDownloadParameters
     :: GDataDownloadParameters
 gDataDownloadParameters =
-    GDataDownloadParameters'
-    { _gddpIgnoreRange = Nothing
-    , _gddpAllowGzipCompression = Nothing
-    }
+  GDataDownloadParameters'
+    {_gddpIgnoreRange = Nothing, _gddpAllowGzipCompression = Nothing}
+
 
 -- | gdata
 gddpIgnoreRange :: Lens' GDataDownloadParameters (Maybe Bool)
@@ -1036,10 +1065,13 @@ instance ToJSON GDataDownloadParameters where
 -- | Response message for ReportingService.ListReportTypes.
 --
 -- /See:/ 'listReportTypesResponse' smart constructor.
-data ListReportTypesResponse = ListReportTypesResponse'
+data ListReportTypesResponse =
+  ListReportTypesResponse'
     { _lrtrNextPageToken :: !(Maybe Text)
     , _lrtrReportTypes   :: !(Maybe [ReportType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListReportTypesResponse' with the minimum fields required to make a request.
 --
@@ -1051,10 +1083,9 @@ data ListReportTypesResponse = ListReportTypesResponse'
 listReportTypesResponse
     :: ListReportTypesResponse
 listReportTypesResponse =
-    ListReportTypesResponse'
-    { _lrtrNextPageToken = Nothing
-    , _lrtrReportTypes = Nothing
-    }
+  ListReportTypesResponse'
+    {_lrtrNextPageToken = Nothing, _lrtrReportTypes = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListReportTypesRequest.page_token field in the subsequent call to
@@ -1090,13 +1121,16 @@ instance ToJSON ListReportTypesResponse where
 -- | gdata
 --
 -- /See:/ 'gDataBlobstore2Info' smart constructor.
-data GDataBlobstore2Info = GDataBlobstore2Info'
+data GDataBlobstore2Info =
+  GDataBlobstore2Info'
     { _gdbiBlobGeneration          :: !(Maybe (Textual Int64))
     , _gdbiBlobId                  :: !(Maybe Text)
     , _gdbiReadToken               :: !(Maybe Text)
     , _gdbiDownloadReadHandle      :: !(Maybe Bytes)
     , _gdbiUploadMetadataContainer :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataBlobstore2Info' with the minimum fields required to make a request.
 --
@@ -1114,13 +1148,14 @@ data GDataBlobstore2Info = GDataBlobstore2Info'
 gDataBlobstore2Info
     :: GDataBlobstore2Info
 gDataBlobstore2Info =
-    GDataBlobstore2Info'
+  GDataBlobstore2Info'
     { _gdbiBlobGeneration = Nothing
     , _gdbiBlobId = Nothing
     , _gdbiReadToken = Nothing
     , _gdbiDownloadReadHandle = Nothing
     , _gdbiUploadMetadataContainer = Nothing
     }
+
 
 -- | gdata
 gdbiBlobGeneration :: Lens' GDataBlobstore2Info (Maybe Int64)
@@ -1179,14 +1214,17 @@ instance ToJSON GDataBlobstore2Info where
 -- | A job creating reports of a specific type.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job'
+data Job =
+  Job'
     { _jName          :: !(Maybe Text)
     , _jId            :: !(Maybe Text)
     , _jSystemManaged :: !(Maybe Bool)
     , _jReportTypeId  :: !(Maybe Text)
     , _jExpireTime    :: !(Maybe DateTime')
     , _jCreateTime    :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -1206,7 +1244,7 @@ data Job = Job'
 job
     :: Job
 job =
-    Job'
+  Job'
     { _jName = Nothing
     , _jId = Nothing
     , _jSystemManaged = Nothing
@@ -1214,6 +1252,7 @@ job =
     , _jExpireTime = Nothing
     , _jCreateTime = Nothing
     }
+
 
 -- | The name of the job (max. 100 characters).
 jName :: Lens' Job (Maybe Text)
@@ -1274,10 +1313,13 @@ instance ToJSON Job where
 -- | gdata
 --
 -- /See:/ 'gDataDiffUploadResponse' smart constructor.
-data GDataDiffUploadResponse = GDataDiffUploadResponse'
+data GDataDiffUploadResponse =
+  GDataDiffUploadResponse'
     { _gddurOriginalObject :: !(Maybe GDataCompositeMedia)
     , _gddurObjectVersion  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataDiffUploadResponse' with the minimum fields required to make a request.
 --
@@ -1289,10 +1331,9 @@ data GDataDiffUploadResponse = GDataDiffUploadResponse'
 gDataDiffUploadResponse
     :: GDataDiffUploadResponse
 gDataDiffUploadResponse =
-    GDataDiffUploadResponse'
-    { _gddurOriginalObject = Nothing
-    , _gddurObjectVersion = Nothing
-    }
+  GDataDiffUploadResponse'
+    {_gddurOriginalObject = Nothing, _gddurObjectVersion = Nothing}
+
 
 -- | gdata
 gddurOriginalObject :: Lens' GDataDiffUploadResponse (Maybe GDataCompositeMedia)
@@ -1323,9 +1364,12 @@ instance ToJSON GDataDiffUploadResponse where
 -- | gdata
 --
 -- /See:/ 'gDataDiffDownloadResponse' smart constructor.
-newtype GDataDiffDownloadResponse = GDataDiffDownloadResponse'
+newtype GDataDiffDownloadResponse =
+  GDataDiffDownloadResponse'
     { _gdddrObjectLocation :: Maybe GDataCompositeMedia
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataDiffDownloadResponse' with the minimum fields required to make a request.
 --
@@ -1335,9 +1379,8 @@ newtype GDataDiffDownloadResponse = GDataDiffDownloadResponse'
 gDataDiffDownloadResponse
     :: GDataDiffDownloadResponse
 gDataDiffDownloadResponse =
-    GDataDiffDownloadResponse'
-    { _gdddrObjectLocation = Nothing
-    }
+  GDataDiffDownloadResponse' {_gdddrObjectLocation = Nothing}
+
 
 -- | gdata
 gdddrObjectLocation :: Lens' GDataDiffDownloadResponse (Maybe GDataCompositeMedia)
@@ -1361,10 +1404,13 @@ instance ToJSON GDataDiffDownloadResponse where
 -- | Response message for ReportingService.ListJobs.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse'
+data ListJobsResponse =
+  ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
@@ -1376,10 +1422,8 @@ data ListJobsResponse = ListJobsResponse'
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse'
-    { _ljrNextPageToken = Nothing
-    , _ljrJobs = Nothing
-    }
+  ListJobsResponse' {_ljrNextPageToken = Nothing, _ljrJobs = Nothing}
+
 
 -- | A token to retrieve next page of results. Pass this value in the
 -- ListJobsRequest.page_token field in the subsequent call to \`ListJobs\`
@@ -1413,11 +1457,14 @@ instance ToJSON ListJobsResponse where
 -- | gdata
 --
 -- /See:/ 'gDataDiffUploadRequest' smart constructor.
-data GDataDiffUploadRequest = GDataDiffUploadRequest'
+data GDataDiffUploadRequest =
+  GDataDiffUploadRequest'
     { _gChecksumsInfo :: !(Maybe GDataCompositeMedia)
     , _gObjectVersion :: !(Maybe Text)
     , _gObjectInfo    :: !(Maybe GDataCompositeMedia)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataDiffUploadRequest' with the minimum fields required to make a request.
 --
@@ -1431,11 +1478,12 @@ data GDataDiffUploadRequest = GDataDiffUploadRequest'
 gDataDiffUploadRequest
     :: GDataDiffUploadRequest
 gDataDiffUploadRequest =
-    GDataDiffUploadRequest'
+  GDataDiffUploadRequest'
     { _gChecksumsInfo = Nothing
     , _gObjectVersion = Nothing
     , _gObjectInfo = Nothing
     }
+
 
 -- | gdata
 gChecksumsInfo :: Lens' GDataDiffUploadRequest (Maybe GDataCompositeMedia)
@@ -1473,10 +1521,13 @@ instance ToJSON GDataDiffUploadRequest where
 -- | gdata
 --
 -- /See:/ 'gDataDiffVersionResponse' smart constructor.
-data GDataDiffVersionResponse = GDataDiffVersionResponse'
+data GDataDiffVersionResponse =
+  GDataDiffVersionResponse'
     { _gddvrObjectSizeBytes :: !(Maybe (Textual Int64))
     , _gddvrObjectVersion   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GDataDiffVersionResponse' with the minimum fields required to make a request.
 --
@@ -1488,10 +1539,9 @@ data GDataDiffVersionResponse = GDataDiffVersionResponse'
 gDataDiffVersionResponse
     :: GDataDiffVersionResponse
 gDataDiffVersionResponse =
-    GDataDiffVersionResponse'
-    { _gddvrObjectSizeBytes = Nothing
-    , _gddvrObjectVersion = Nothing
-    }
+  GDataDiffVersionResponse'
+    {_gddvrObjectSizeBytes = Nothing, _gddvrObjectVersion = Nothing}
+
 
 -- | gdata
 gddvrObjectSizeBytes :: Lens' GDataDiffVersionResponse (Maybe Int64)
@@ -1524,12 +1574,15 @@ instance ToJSON GDataDiffVersionResponse where
 -- | A report type.
 --
 -- /See:/ 'reportType' smart constructor.
-data ReportType = ReportType'
+data ReportType =
+  ReportType'
     { _rtName          :: !(Maybe Text)
     , _rtId            :: !(Maybe Text)
     , _rtDeprecateTime :: !(Maybe DateTime')
     , _rtSystemManaged :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportType' with the minimum fields required to make a request.
 --
@@ -1545,12 +1598,13 @@ data ReportType = ReportType'
 reportType
     :: ReportType
 reportType =
-    ReportType'
+  ReportType'
     { _rtName = Nothing
     , _rtId = Nothing
     , _rtDeprecateTime = Nothing
     , _rtSystemManaged = Nothing
     }
+
 
 -- | The name of the report type (max. 100 characters).
 rtName :: Lens' ReportType (Maybe Text)

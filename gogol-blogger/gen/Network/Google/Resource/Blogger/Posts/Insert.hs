@@ -60,13 +60,16 @@ type PostsInsertResource =
 -- | Add a post.
 --
 -- /See:/ 'postsInsert' smart constructor.
-data PostsInsert = PostsInsert'
+data PostsInsert =
+  PostsInsert'
     { _posFetchBody   :: !Bool
     , _posIsDraft     :: !(Maybe Bool)
     , _posFetchImages :: !(Maybe Bool)
     , _posBlogId      :: !Text
     , _posPayload     :: !Post'
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostsInsert' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ postsInsert
     -> Post' -- ^ 'posPayload'
     -> PostsInsert
 postsInsert pPosBlogId_ pPosPayload_ =
-    PostsInsert'
+  PostsInsert'
     { _posFetchBody = True
     , _posIsDraft = Nothing
     , _posFetchImages = Nothing
     , _posBlogId = pPosBlogId_
     , _posPayload = pPosPayload_
     }
+
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).

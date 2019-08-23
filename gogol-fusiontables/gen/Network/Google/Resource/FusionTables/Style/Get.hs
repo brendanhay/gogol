@@ -54,10 +54,13 @@ type StyleGetResource =
 -- | Gets a specific style.
 --
 -- /See:/ 'styleGet' smart constructor.
-data StyleGet = StyleGet'
+data StyleGet =
+  StyleGet'
     { _sgStyleId :: !(Textual Int32)
     , _sgTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StyleGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ styleGet
     -> Text -- ^ 'sgTableId'
     -> StyleGet
 styleGet pSgStyleId_ pSgTableId_ =
-    StyleGet'
-    { _sgStyleId = _Coerce # pSgStyleId_
-    , _sgTableId = pSgTableId_
-    }
+  StyleGet' {_sgStyleId = _Coerce # pSgStyleId_, _sgTableId = pSgTableId_}
+
 
 -- | Identifier (integer) for a specific style in a table
 sgStyleId :: Lens' StyleGet Int32

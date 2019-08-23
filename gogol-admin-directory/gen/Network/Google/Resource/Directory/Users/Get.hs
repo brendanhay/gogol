@@ -58,12 +58,15 @@ type UsersGetResource =
 -- | retrieve user
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet'
+data UsersGet =
+  UsersGet'
     { _ugViewType        :: !UsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
     , _ugProjection      :: !UsersGetProjection
     , _ugUserKey         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
@@ -80,12 +83,13 @@ usersGet
     :: Text -- ^ 'ugUserKey'
     -> UsersGet
 usersGet pUgUserKey_ =
-    UsersGet'
+  UsersGet'
     { _ugViewType = UGVTAdminView
     , _ugCustomFieldMask = Nothing
     , _ugProjection = UGPBasic
     , _ugUserKey = pUgUserKey_
     }
+
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
 ugViewType :: Lens' UsersGet UsersGetViewType

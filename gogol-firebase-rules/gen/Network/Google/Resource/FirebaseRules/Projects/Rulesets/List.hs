@@ -71,7 +71,8 @@ type ProjectsRulesetsListResource =
 -- retrieved with GetRuleset.
 --
 -- /See:/ 'projectsRulesetsList' smart constructor.
-data ProjectsRulesetsList = ProjectsRulesetsList'
+data ProjectsRulesetsList =
+  ProjectsRulesetsList'
     { _prlXgafv          :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
     , _prlAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsRulesetsList = ProjectsRulesetsList'
     , _prlPageToken      :: !(Maybe Text)
     , _prlPageSize       :: !(Maybe (Textual Int32))
     , _prlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRulesetsList' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsRulesetsList
     :: Text -- ^ 'prlName'
     -> ProjectsRulesetsList
 projectsRulesetsList pPrlName_ =
-    ProjectsRulesetsList'
+  ProjectsRulesetsList'
     { _prlXgafv = Nothing
     , _prlUploadProtocol = Nothing
     , _prlAccessToken = Nothing
@@ -119,6 +122,7 @@ projectsRulesetsList pPrlName_ =
     , _prlPageSize = Nothing
     , _prlCallback = Nothing
     }
+
 
 -- | V1 error format.
 prlXgafv :: Lens' ProjectsRulesetsList (Maybe Xgafv)
@@ -149,8 +153,8 @@ prlName = lens _prlName (\ s a -> s{_prlName = a})
 -- | \`Ruleset\` filter. The list method supports filters with restrictions
 -- on \`Ruleset.name\`. Filters on \`Ruleset.create_time\` should use the
 -- \`date\` function which parses strings that conform to the RFC 3339
--- date\/time specifications. Example: \`create_time > date(\"2017-01-01\")
--- AND name=UUID-*\`
+-- date\/time specifications. Example: \`create_time >
+-- date(\"2017-01-01T00:00:00Z\") AND name=UUID-*\`
 prlFilter :: Lens' ProjectsRulesetsList (Maybe Text)
 prlFilter
   = lens _prlFilter (\ s a -> s{_prlFilter = a})

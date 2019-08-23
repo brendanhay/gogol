@@ -25,9 +25,6 @@
 -- operations, which allow you to manage message acknowledgments in bulk.
 -- That is, you can set the acknowledgment state of messages in an existing
 -- subscription to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 -- If the snapshot already exists, returns \`ALREADY_EXISTS\`. If the
 -- requested subscription doesn\'t exist, returns \`NOT_FOUND\`. If the
 -- backlog in the subscription is too old -- and the resulting snapshot
@@ -36,9 +33,9 @@
 -- not provided in the request, the server will assign a random name for
 -- this snapshot on the same project as the subscription, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Snapshot object. Note that
--- for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Snapshot object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.create@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.Create
@@ -82,9 +79,6 @@ type ProjectsSnapshotsCreateResource =
 -- operations, which allow you to manage message acknowledgments in bulk.
 -- That is, you can set the acknowledgment state of messages in an existing
 -- subscription to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 -- If the snapshot already exists, returns \`ALREADY_EXISTS\`. If the
 -- requested subscription doesn\'t exist, returns \`NOT_FOUND\`. If the
 -- backlog in the subscription is too old -- and the resulting snapshot
@@ -93,12 +87,13 @@ type ProjectsSnapshotsCreateResource =
 -- not provided in the request, the server will assign a random name for
 -- this snapshot on the same project as the subscription, conforming to the
 -- [resource name
--- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
--- generated name is populated in the returned Snapshot object. Note that
--- for REST API requests, you must specify a name in the request.
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- The generated name is populated in the returned Snapshot object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSnapshotsCreate' smart constructor.
-data ProjectsSnapshotsCreate = ProjectsSnapshotsCreate'
+data ProjectsSnapshotsCreate =
+  ProjectsSnapshotsCreate'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
     , _pAccessToken    :: !(Maybe Text)
@@ -106,7 +101,9 @@ data ProjectsSnapshotsCreate = ProjectsSnapshotsCreate'
     , _pPayload        :: !CreateSnapshotRequest
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsCreate' with the minimum fields required to make a request.
 --
@@ -130,7 +127,7 @@ projectsSnapshotsCreate
     -> Text -- ^ 'pName'
     -> ProjectsSnapshotsCreate
 projectsSnapshotsCreate pPPayload_ pPName_ =
-    ProjectsSnapshotsCreate'
+  ProjectsSnapshotsCreate'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing
@@ -139,6 +136,7 @@ projectsSnapshotsCreate pPPayload_ pPName_ =
     , _pName = pPName_
     , _pCallback = Nothing
     }
+
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsSnapshotsCreate (Maybe Xgafv)

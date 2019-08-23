@@ -68,7 +68,8 @@ type AccountsCreativesWatchResource =
 -- topic when the creative changes status.
 --
 -- /See:/ 'accountsCreativesWatch' smart constructor.
-data AccountsCreativesWatch = AccountsCreativesWatch'
+data AccountsCreativesWatch =
+  AccountsCreativesWatch'
     { _acwXgafv          :: !(Maybe Xgafv)
     , _acwUploadProtocol :: !(Maybe Text)
     , _acwAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data AccountsCreativesWatch = AccountsCreativesWatch'
     , _acwPayload        :: !WatchCreativeRequest
     , _acwAccountId      :: !Text
     , _acwCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsCreativesWatch' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ accountsCreativesWatch
     -> Text -- ^ 'acwAccountId'
     -> AccountsCreativesWatch
 accountsCreativesWatch pAcwCreativeId_ pAcwPayload_ pAcwAccountId_ =
-    AccountsCreativesWatch'
+  AccountsCreativesWatch'
     { _acwXgafv = Nothing
     , _acwUploadProtocol = Nothing
     , _acwAccessToken = Nothing
@@ -114,6 +117,7 @@ accountsCreativesWatch pAcwCreativeId_ pAcwPayload_ pAcwAccountId_ =
     , _acwAccountId = pAcwAccountId_
     , _acwCallback = Nothing
     }
+
 
 -- | V1 error format.
 acwXgafv :: Lens' AccountsCreativesWatch (Maybe Xgafv)

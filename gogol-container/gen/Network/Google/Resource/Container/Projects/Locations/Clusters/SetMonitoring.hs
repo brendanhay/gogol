@@ -62,7 +62,8 @@ type ProjectsLocationsClustersSetMonitoringResource =
 -- | Sets the monitoring service for a specific cluster.
 --
 -- /See:/ 'projectsLocationsClustersSetMonitoring' smart constructor.
-data ProjectsLocationsClustersSetMonitoring = ProjectsLocationsClustersSetMonitoring'
+data ProjectsLocationsClustersSetMonitoring =
+  ProjectsLocationsClustersSetMonitoring'
     { _plcsmXgafv          :: !(Maybe Xgafv)
     , _plcsmUploadProtocol :: !(Maybe Text)
     , _plcsmAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsLocationsClustersSetMonitoring = ProjectsLocationsClustersSetMonito
     , _plcsmPayload        :: !SetMonitoringServiceRequest
     , _plcsmName           :: !Text
     , _plcsmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersSetMonitoring' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsLocationsClustersSetMonitoring
     -> Text -- ^ 'plcsmName'
     -> ProjectsLocationsClustersSetMonitoring
 projectsLocationsClustersSetMonitoring pPlcsmPayload_ pPlcsmName_ =
-    ProjectsLocationsClustersSetMonitoring'
+  ProjectsLocationsClustersSetMonitoring'
     { _plcsmXgafv = Nothing
     , _plcsmUploadProtocol = Nothing
     , _plcsmAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsLocationsClustersSetMonitoring pPlcsmPayload_ pPlcsmName_ =
     , _plcsmName = pPlcsmName_
     , _plcsmCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsmXgafv :: Lens' ProjectsLocationsClustersSetMonitoring (Maybe Xgafv)
@@ -145,7 +149,8 @@ plcsmCallback
       (\ s a -> s{_plcsmCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersSetMonitoring where
+           ProjectsLocationsClustersSetMonitoring
+         where
         type Rs ProjectsLocationsClustersSetMonitoring =
              Operation
         type Scopes ProjectsLocationsClustersSetMonitoring =

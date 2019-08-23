@@ -66,7 +66,8 @@ type AppsAuthorizedCertificatesGetResource =
 -- | Gets the specified SSL certificate.
 --
 -- /See:/ 'appsAuthorizedCertificatesGet' smart constructor.
-data AppsAuthorizedCertificatesGet = AppsAuthorizedCertificatesGet'
+data AppsAuthorizedCertificatesGet =
+  AppsAuthorizedCertificatesGet'
     { _aacgAuthorizedCertificatesId :: !Text
     , _aacgXgafv                    :: !(Maybe Xgafv)
     , _aacgUploadProtocol           :: !(Maybe Text)
@@ -75,7 +76,9 @@ data AppsAuthorizedCertificatesGet = AppsAuthorizedCertificatesGet'
     , _aacgAppsId                   :: !Text
     , _aacgView                     :: !(Maybe Text)
     , _aacgCallback                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsAuthorizedCertificatesGet' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ appsAuthorizedCertificatesGet
     -> Text -- ^ 'aacgAppsId'
     -> AppsAuthorizedCertificatesGet
 appsAuthorizedCertificatesGet pAacgAuthorizedCertificatesId_ pAacgAppsId_ =
-    AppsAuthorizedCertificatesGet'
+  AppsAuthorizedCertificatesGet'
     { _aacgAuthorizedCertificatesId = pAacgAuthorizedCertificatesId_
     , _aacgXgafv = Nothing
     , _aacgUploadProtocol = Nothing
@@ -111,6 +114,7 @@ appsAuthorizedCertificatesGet pAacgAuthorizedCertificatesId_ pAacgAppsId_ =
     , _aacgView = Nothing
     , _aacgCallback = Nothing
     }
+
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
 aacgAuthorizedCertificatesId :: Lens' AppsAuthorizedCertificatesGet Text

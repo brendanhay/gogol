@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Team Drive\'s metadata
+-- Deprecated use drives.update instead
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.update@.
 module Network.Google.Resource.Drive.Teamdrives.Update
@@ -52,14 +52,17 @@ type TeamdrivesUpdateResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] TeamDrive :> Patch '[JSON] TeamDrive
 
--- | Updates a Team Drive\'s metadata
+-- | Deprecated use drives.update instead
 --
 -- /See:/ 'teamdrivesUpdate' smart constructor.
-data TeamdrivesUpdate = TeamdrivesUpdate'
+data TeamdrivesUpdate =
+  TeamdrivesUpdate'
     { _tuPayload              :: !TeamDrive
     , _tuTeamDriveId          :: !Text
     , _tuUseDomainAdminAccess :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamdrivesUpdate' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ teamdrivesUpdate
     -> Text -- ^ 'tuTeamDriveId'
     -> TeamdrivesUpdate
 teamdrivesUpdate pTuPayload_ pTuTeamDriveId_ =
-    TeamdrivesUpdate'
+  TeamdrivesUpdate'
     { _tuPayload = pTuPayload_
     , _tuTeamDriveId = pTuTeamDriveId_
     , _tuUseDomainAdminAccess = False
     }
+
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TeamdrivesUpdate TeamDrive

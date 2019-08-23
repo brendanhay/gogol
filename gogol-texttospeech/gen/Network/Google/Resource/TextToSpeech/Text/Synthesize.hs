@@ -63,14 +63,17 @@ type TextSynthesizeResource =
 -- has been processed.
 --
 -- /See:/ 'textSynthesize' smart constructor.
-data TextSynthesize = TextSynthesize'
+data TextSynthesize =
+  TextSynthesize'
     { _tsXgafv          :: !(Maybe Xgafv)
     , _tsUploadProtocol :: !(Maybe Text)
     , _tsAccessToken    :: !(Maybe Text)
     , _tsUploadType     :: !(Maybe Text)
     , _tsPayload        :: !SynthesizeSpeechRequest
     , _tsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TextSynthesize' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ textSynthesize
     :: SynthesizeSpeechRequest -- ^ 'tsPayload'
     -> TextSynthesize
 textSynthesize pTsPayload_ =
-    TextSynthesize'
+  TextSynthesize'
     { _tsXgafv = Nothing
     , _tsUploadProtocol = Nothing
     , _tsAccessToken = Nothing
@@ -99,6 +102,7 @@ textSynthesize pTsPayload_ =
     , _tsPayload = pTsPayload_
     , _tsCallback = Nothing
     }
+
 
 -- | V1 error format.
 tsXgafv :: Lens' TextSynthesize (Maybe Xgafv)

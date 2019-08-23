@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -54,10 +54,13 @@ type ProjectsGetResource =
 -- | Gets one project by ID.
 --
 -- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet'
+data ProjectsGet =
+  ProjectsGet'
     { _proProFileId :: !(Textual Int64)
     , _proId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ projectsGet
     -> Int64 -- ^ 'proId'
     -> ProjectsGet
 projectsGet pProProFileId_ pProId_ =
-    ProjectsGet'
-    { _proProFileId = _Coerce # pProProFileId_
-    , _proId = _Coerce # pProId_
-    }
+  ProjectsGet'
+    {_proProFileId = _Coerce # pProProFileId_, _proId = _Coerce # pProId_}
+
 
 -- | User profile ID associated with this request.
 proProFileId :: Lens' ProjectsGet Int64

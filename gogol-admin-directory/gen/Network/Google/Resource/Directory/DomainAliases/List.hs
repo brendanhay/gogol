@@ -55,10 +55,13 @@ type DomainAliasesListResource =
 -- | Lists the domain aliases of the customer.
 --
 -- /See:/ 'domainAliasesList' smart constructor.
-data DomainAliasesList = DomainAliasesList'
+data DomainAliasesList =
+  DomainAliasesList'
     { _dalCustomer         :: !Text
     , _dalParentDomainName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainAliasesList' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ domainAliasesList
     :: Text -- ^ 'dalCustomer'
     -> DomainAliasesList
 domainAliasesList pDalCustomer_ =
-    DomainAliasesList'
-    { _dalCustomer = pDalCustomer_
-    , _dalParentDomainName = Nothing
-    }
+  DomainAliasesList'
+    {_dalCustomer = pDalCustomer_, _dalParentDomainName = Nothing}
+
 
 -- | Immutable ID of the G Suite account.
 dalCustomer :: Lens' DomainAliasesList Text

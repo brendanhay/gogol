@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.instances.create@ method which the
 -- 'ProjectsLocationsInstancesCreate' request conforms to.
 type ProjectsLocationsInstancesCreateResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "instances" :>
            QueryParam "instanceId" Text :>
@@ -64,7 +64,8 @@ type ProjectsLocationsInstancesCreateResource =
 -- | Creates an instance.
 --
 -- /See:/ 'projectsLocationsInstancesCreate' smart constructor.
-data ProjectsLocationsInstancesCreate = ProjectsLocationsInstancesCreate'
+data ProjectsLocationsInstancesCreate =
+  ProjectsLocationsInstancesCreate'
     { _plicParent         :: !Text
     , _plicInstanceId     :: !(Maybe Text)
     , _plicXgafv          :: !(Maybe Xgafv)
@@ -73,7 +74,9 @@ data ProjectsLocationsInstancesCreate = ProjectsLocationsInstancesCreate'
     , _plicUploadType     :: !(Maybe Text)
     , _plicPayload        :: !Instance
     , _plicCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsInstancesCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsInstancesCreate
     -> Instance -- ^ 'plicPayload'
     -> ProjectsLocationsInstancesCreate
 projectsLocationsInstancesCreate pPlicParent_ pPlicPayload_ =
-    ProjectsLocationsInstancesCreate'
+  ProjectsLocationsInstancesCreate'
     { _plicParent = pPlicParent_
     , _plicInstanceId = Nothing
     , _plicXgafv = Nothing
@@ -109,6 +112,7 @@ projectsLocationsInstancesCreate pPlicParent_ pPlicPayload_ =
     , _plicPayload = pPlicPayload_
     , _plicCallback = Nothing
     }
+
 
 -- | The instance\'s project and location, in the format
 -- projects\/{project_id}\/locations\/{location}. In Cloud Filestore,
@@ -158,7 +162,8 @@ plicCallback
   = lens _plicCallback (\ s a -> s{_plicCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsInstancesCreate where
+           ProjectsLocationsInstancesCreate
+         where
         type Rs ProjectsLocationsInstancesCreate = Operation
         type Scopes ProjectsLocationsInstancesCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

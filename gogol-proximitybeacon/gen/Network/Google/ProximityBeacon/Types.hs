@@ -198,4 +198,4 @@ proximityBeaconService
 
 -- | View and modify your beacons
 userlocationBeaconRegistryScope :: Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
-userlocationBeaconRegistryScope = Proxy;
+userlocationBeaconRegistryScope = Proxy

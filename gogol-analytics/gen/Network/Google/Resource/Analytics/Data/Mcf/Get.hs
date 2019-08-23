@@ -70,7 +70,8 @@ type DataMcfGetResource =
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
 -- /See:/ 'dataMcfGet' smart constructor.
-data DataMcfGet = DataMcfGet'
+data DataMcfGet =
+  DataMcfGet'
     { _dmgMetrics       :: !Text
     , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
     , _dmgFilters       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data DataMcfGet = DataMcfGet'
     , _dmgStartIndex    :: !(Maybe (Textual Int32))
     , _dmgMaxResults    :: !(Maybe (Textual Int32))
     , _dmgStartDate     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DataMcfGet' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ dataMcfGet
     -> Text -- ^ 'dmgStartDate'
     -> DataMcfGet
 dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
-    DataMcfGet'
+  DataMcfGet'
     { _dmgMetrics = pDmgMetrics_
     , _dmgSamplingLevel = Nothing
     , _dmgFilters = Nothing
@@ -125,6 +128,7 @@ dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
     , _dmgMaxResults = Nothing
     , _dmgStartDate = pDmgStartDate_
     }
+
 
 -- | A comma-separated list of Multi-Channel Funnels metrics. E.g.,
 -- \'mcf:totalConversions,mcf:totalConversionValue\'. At least one metric

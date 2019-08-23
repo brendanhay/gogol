@@ -60,14 +60,17 @@ type GroupsCreateResource =
 -- | Creates a Group.
 --
 -- /See:/ 'groupsCreate' smart constructor.
-data GroupsCreate = GroupsCreate'
+data GroupsCreate =
+  GroupsCreate'
     { _gcXgafv          :: !(Maybe Xgafv)
     , _gcUploadProtocol :: !(Maybe Text)
     , _gcAccessToken    :: !(Maybe Text)
     , _gcUploadType     :: !(Maybe Text)
     , _gcPayload        :: !Group
     , _gcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsCreate' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ groupsCreate
     :: Group -- ^ 'gcPayload'
     -> GroupsCreate
 groupsCreate pGcPayload_ =
-    GroupsCreate'
+  GroupsCreate'
     { _gcXgafv = Nothing
     , _gcUploadProtocol = Nothing
     , _gcAccessToken = Nothing
@@ -96,6 +99,7 @@ groupsCreate pGcPayload_ =
     , _gcPayload = pGcPayload_
     , _gcCallback = Nothing
     }
+
 
 -- | V1 error format.
 gcXgafv :: Lens' GroupsCreate (Maybe Xgafv)
@@ -130,7 +134,8 @@ gcCallback
 
 instance GoogleRequest GroupsCreate where
         type Rs GroupsCreate = Operation
-        type Scopes GroupsCreate = '[]
+        type Scopes GroupsCreate =
+             '["https://www.googleapis.com/auth/cloud-identity.groups"]
         requestClient GroupsCreate'{..}
           = go _gcXgafv _gcUploadProtocol _gcAccessToken
               _gcUploadType

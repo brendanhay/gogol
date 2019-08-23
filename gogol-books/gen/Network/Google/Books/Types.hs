@@ -300,6 +300,7 @@ module Network.Google.Books.Types
     , nKind
     , nBody
     , nCrmExperimentIds
+    , nTimeToExpireMs
     , nPcampaignId
     , nReason
     , nIsDocumentMature
@@ -992,4 +993,4 @@ booksService
 
 -- | Manage your books
 booksScope :: Proxy '["https://www.googleapis.com/auth/books"]
-booksScope = Proxy;
+booksScope = Proxy

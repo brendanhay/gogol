@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a Team Drive\'s metadata by ID.
+-- Deprecated use drives.get instead.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.teamdrives.get@.
 module Network.Google.Resource.Drive.Teamdrives.Get
@@ -50,13 +50,16 @@ type TeamdrivesGetResource =
              QueryParam "useDomainAdminAccess" Bool :>
                QueryParam "alt" AltJSON :> Get '[JSON] TeamDrive
 
--- | Gets a Team Drive\'s metadata by ID.
+-- | Deprecated use drives.get instead.
 --
 -- /See:/ 'teamdrivesGet' smart constructor.
-data TeamdrivesGet = TeamdrivesGet'
+data TeamdrivesGet =
+  TeamdrivesGet'
     { _tgTeamDriveId          :: !Text
     , _tgUseDomainAdminAccess :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TeamdrivesGet' with the minimum fields required to make a request.
 --
@@ -69,10 +72,9 @@ teamdrivesGet
     :: Text -- ^ 'tgTeamDriveId'
     -> TeamdrivesGet
 teamdrivesGet pTgTeamDriveId_ =
-    TeamdrivesGet'
-    { _tgTeamDriveId = pTgTeamDriveId_
-    , _tgUseDomainAdminAccess = False
-    }
+  TeamdrivesGet'
+    {_tgTeamDriveId = pTgTeamDriveId_, _tgUseDomainAdminAccess = False}
+
 
 -- | The ID of the Team Drive
 tgTeamDriveId :: Lens' TeamdrivesGet Text

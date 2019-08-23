@@ -1,5 +1,5 @@
 name:                  gogol-analyticsreporting
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Analytics Reporting SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -36,11 +36,12 @@ library
           Network.Google.AnalyticsReporting
         , Network.Google.AnalyticsReporting.Types
         , Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
+        , Network.Google.Resource.AnalyticsReporting.UserActivity.Search
 
     other-modules:
           Network.Google.AnalyticsReporting.Types.Product
         , Network.Google.AnalyticsReporting.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

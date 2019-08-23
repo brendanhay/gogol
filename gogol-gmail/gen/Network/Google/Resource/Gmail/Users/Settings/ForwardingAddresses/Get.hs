@@ -56,10 +56,13 @@ type UsersSettingsForwardingAddressesGetResource =
 -- | Gets the specified forwarding address.
 --
 -- /See:/ 'usersSettingsForwardingAddressesGet' smart constructor.
-data UsersSettingsForwardingAddressesGet = UsersSettingsForwardingAddressesGet'
+data UsersSettingsForwardingAddressesGet =
+  UsersSettingsForwardingAddressesGet'
     { _usfagForwardingEmail :: !Text
     , _usfagUserId          :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsForwardingAddressesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ usersSettingsForwardingAddressesGet
     :: Text -- ^ 'usfagForwardingEmail'
     -> UsersSettingsForwardingAddressesGet
 usersSettingsForwardingAddressesGet pUsfagForwardingEmail_ =
-    UsersSettingsForwardingAddressesGet'
-    { _usfagForwardingEmail = pUsfagForwardingEmail_
-    , _usfagUserId = "me"
-    }
+  UsersSettingsForwardingAddressesGet'
+    {_usfagForwardingEmail = pUsfagForwardingEmail_, _usfagUserId = "me"}
+
 
 -- | The forwarding address to be retrieved.
 usfagForwardingEmail :: Lens' UsersSettingsForwardingAddressesGet Text
@@ -90,7 +92,8 @@ usfagUserId
   = lens _usfagUserId (\ s a -> s{_usfagUserId = a})
 
 instance GoogleRequest
-         UsersSettingsForwardingAddressesGet where
+           UsersSettingsForwardingAddressesGet
+         where
         type Rs UsersSettingsForwardingAddressesGet =
              ForwardingAddress
         type Scopes UsersSettingsForwardingAddressesGet =

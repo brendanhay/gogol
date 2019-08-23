@@ -64,7 +64,8 @@ type ProjectsLocationsClustersNodePoolsCreateResource
 -- | Creates a node pool for a cluster.
 --
 -- /See:/ 'projectsLocationsClustersNodePoolsCreate' smart constructor.
-data ProjectsLocationsClustersNodePoolsCreate = ProjectsLocationsClustersNodePoolsCreate'
+data ProjectsLocationsClustersNodePoolsCreate =
+  ProjectsLocationsClustersNodePoolsCreate'
     { _plcnpcParent         :: !Text
     , _plcnpcXgafv          :: !(Maybe Xgafv)
     , _plcnpcUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsLocationsClustersNodePoolsCreate = ProjectsLocationsClustersNodePoo
     , _plcnpcUploadType     :: !(Maybe Text)
     , _plcnpcPayload        :: !CreateNodePoolRequest
     , _plcnpcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersNodePoolsCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsLocationsClustersNodePoolsCreate
     -> CreateNodePoolRequest -- ^ 'plcnpcPayload'
     -> ProjectsLocationsClustersNodePoolsCreate
 projectsLocationsClustersNodePoolsCreate pPlcnpcParent_ pPlcnpcPayload_ =
-    ProjectsLocationsClustersNodePoolsCreate'
+  ProjectsLocationsClustersNodePoolsCreate'
     { _plcnpcParent = pPlcnpcParent_
     , _plcnpcXgafv = Nothing
     , _plcnpcUploadProtocol = Nothing
@@ -105,6 +108,7 @@ projectsLocationsClustersNodePoolsCreate pPlcnpcParent_ pPlcnpcPayload_ =
     , _plcnpcPayload = pPlcnpcPayload_
     , _plcnpcCallback = Nothing
     }
+
 
 -- | The parent (project, location, cluster id) where the node pool will be
 -- created. Specified in the format
@@ -149,7 +153,8 @@ plcnpcCallback
       (\ s a -> s{_plcnpcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersNodePoolsCreate where
+           ProjectsLocationsClustersNodePoolsCreate
+         where
         type Rs ProjectsLocationsClustersNodePoolsCreate =
              Operation
         type Scopes ProjectsLocationsClustersNodePoolsCreate

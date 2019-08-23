@@ -59,14 +59,17 @@ type ProjectsNotesGetResource =
 -- | Gets the specified note.
 --
 -- /See:/ 'projectsNotesGet' smart constructor.
-data ProjectsNotesGet = ProjectsNotesGet'
+data ProjectsNotesGet =
+  ProjectsNotesGet'
     { _pngXgafv          :: !(Maybe Xgafv)
     , _pngUploadProtocol :: !(Maybe Text)
     , _pngAccessToken    :: !(Maybe Text)
     , _pngUploadType     :: !(Maybe Text)
     , _pngName           :: !Text
     , _pngCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsNotesGet
     :: Text -- ^ 'pngName'
     -> ProjectsNotesGet
 projectsNotesGet pPngName_ =
-    ProjectsNotesGet'
+  ProjectsNotesGet'
     { _pngXgafv = Nothing
     , _pngUploadProtocol = Nothing
     , _pngAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsNotesGet pPngName_ =
     , _pngName = pPngName_
     , _pngCallback = Nothing
     }
+
 
 -- | V1 error format.
 pngXgafv :: Lens' ProjectsNotesGet (Maybe Xgafv)

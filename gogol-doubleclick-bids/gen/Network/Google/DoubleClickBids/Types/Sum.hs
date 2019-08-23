@@ -227,7 +227,8 @@ instance FromJSON DownloadLineItemsRequestFilterType where
 instance ToJSON DownloadLineItemsRequestFilterType where
     toJSON = toJSONText
 
--- | Filter type used to filter entities to fetch.
+-- | Filter type used to filter entities to fetch. PARTNER_ID and
+-- INVENTORY_SOURCE_ID may only be used when downloading inventory sources.
 data DownloadRequestFilterType
     = DRFTAdvertiserId
       -- ^ @ADVERTISER_ID@
@@ -235,8 +236,12 @@ data DownloadRequestFilterType
       -- ^ @CAMPAIGN_ID@
     | DRFTInsertionOrderId
       -- ^ @INSERTION_ORDER_ID@
+    | DRFTInventorySourceId
+      -- ^ @INVENTORY_SOURCE_ID@
     | DRFTLineItemId
       -- ^ @LINE_ITEM_ID@
+    | DRFTPartnerId
+      -- ^ @PARTNER_ID@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DownloadRequestFilterType
@@ -246,7 +251,9 @@ instance FromHttpApiData DownloadRequestFilterType where
         "ADVERTISER_ID" -> Right DRFTAdvertiserId
         "CAMPAIGN_ID" -> Right DRFTCampaignId
         "INSERTION_ORDER_ID" -> Right DRFTInsertionOrderId
+        "INVENTORY_SOURCE_ID" -> Right DRFTInventorySourceId
         "LINE_ITEM_ID" -> Right DRFTLineItemId
+        "PARTNER_ID" -> Right DRFTPartnerId
         x -> Left ("Unable to parse DownloadRequestFilterType from: " <> x)
 
 instance ToHttpApiData DownloadRequestFilterType where
@@ -254,7 +261,9 @@ instance ToHttpApiData DownloadRequestFilterType where
         DRFTAdvertiserId -> "ADVERTISER_ID"
         DRFTCampaignId -> "CAMPAIGN_ID"
         DRFTInsertionOrderId -> "INSERTION_ORDER_ID"
+        DRFTInventorySourceId -> "INVENTORY_SOURCE_ID"
         DRFTLineItemId -> "LINE_ITEM_ID"
+        DRFTPartnerId -> "PARTNER_ID"
 
 instance FromJSON DownloadRequestFilterType where
     parseJSON = parseJSONText "DownloadRequestFilterType"
@@ -271,6 +280,8 @@ data DownloadRequestFileTypesItem
       -- ^ @CAMPAIGN@
     | InsertionOrder
       -- ^ @INSERTION_ORDER@
+    | InventorySource
+      -- ^ @INVENTORY_SOURCE@
     | LineItem
       -- ^ @LINE_ITEM@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -283,6 +294,7 @@ instance FromHttpApiData DownloadRequestFileTypesItem where
         "AD_GROUP" -> Right AdGroup
         "CAMPAIGN" -> Right Campaign
         "INSERTION_ORDER" -> Right InsertionOrder
+        "INVENTORY_SOURCE" -> Right InventorySource
         "LINE_ITEM" -> Right LineItem
         x -> Left ("Unable to parse DownloadRequestFileTypesItem from: " <> x)
 
@@ -292,6 +304,7 @@ instance ToHttpApiData DownloadRequestFileTypesItem where
         AdGroup -> "AD_GROUP"
         Campaign -> "CAMPAIGN"
         InsertionOrder -> "INSERTION_ORDER"
+        InventorySource -> "INVENTORY_SOURCE"
         LineItem -> "LINE_ITEM"
 
 instance FromJSON DownloadRequestFileTypesItem where
@@ -1789,6 +1802,8 @@ data FilterPairType
       -- ^ @FILTER_CONVERSION_DELAY@
     | FilterCountry
       -- ^ @FILTER_COUNTRY@
+    | FilterCreativeAttribute
+      -- ^ @FILTER_CREATIVE_ATTRIBUTE@
     | FilterCreativeHeight
       -- ^ @FILTER_CREATIVE_HEIGHT@
     | FilterCreativeId
@@ -1827,8 +1842,14 @@ data FilterPairType
       -- ^ @FILTER_GENDER@
     | FilterInsertionOrder
       -- ^ @FILTER_INSERTION_ORDER@
+    | FilterInventoryCommitmentType
+      -- ^ @FILTER_INVENTORY_COMMITMENT_TYPE@
+    | FilterInventoryDeliveryMethod
+      -- ^ @FILTER_INVENTORY_DELIVERY_METHOD@
     | FilterInventoryFormat
       -- ^ @FILTER_INVENTORY_FORMAT@
+    | FilterInventoryRateType
+      -- ^ @FILTER_INVENTORY_RATE_TYPE@
     | FilterInventorySource
       -- ^ @FILTER_INVENTORY_SOURCE@
     | FilterInventorySourceType
@@ -2025,6 +2046,7 @@ instance FromHttpApiData FilterPairType where
         "FILTER_COMPANION_CREATIVE_ID" -> Right FilterCompanionCreativeId
         "FILTER_CONVERSION_DELAY" -> Right FilterConversionDelay
         "FILTER_COUNTRY" -> Right FilterCountry
+        "FILTER_CREATIVE_ATTRIBUTE" -> Right FilterCreativeAttribute
         "FILTER_CREATIVE_HEIGHT" -> Right FilterCreativeHeight
         "FILTER_CREATIVE_ID" -> Right FilterCreativeId
         "FILTER_CREATIVE_SIZE" -> Right FilterCreativeSize
@@ -2044,7 +2066,10 @@ instance FromHttpApiData FilterPairType where
         "FILTER_FLOODLIGHT_PIXEL_ID" -> Right FilterFloodlightPixelId
         "FILTER_GENDER" -> Right FilterGender
         "FILTER_INSERTION_ORDER" -> Right FilterInsertionOrder
+        "FILTER_INVENTORY_COMMITMENT_TYPE" -> Right FilterInventoryCommitmentType
+        "FILTER_INVENTORY_DELIVERY_METHOD" -> Right FilterInventoryDeliveryMethod
         "FILTER_INVENTORY_FORMAT" -> Right FilterInventoryFormat
+        "FILTER_INVENTORY_RATE_TYPE" -> Right FilterInventoryRateType
         "FILTER_INVENTORY_SOURCE" -> Right FilterInventorySource
         "FILTER_INVENTORY_SOURCE_TYPE" -> Right FilterInventorySourceType
         "FILTER_KEYWORD" -> Right FilterKeyword
@@ -2153,6 +2178,7 @@ instance ToHttpApiData FilterPairType where
         FilterCompanionCreativeId -> "FILTER_COMPANION_CREATIVE_ID"
         FilterConversionDelay -> "FILTER_CONVERSION_DELAY"
         FilterCountry -> "FILTER_COUNTRY"
+        FilterCreativeAttribute -> "FILTER_CREATIVE_ATTRIBUTE"
         FilterCreativeHeight -> "FILTER_CREATIVE_HEIGHT"
         FilterCreativeId -> "FILTER_CREATIVE_ID"
         FilterCreativeSize -> "FILTER_CREATIVE_SIZE"
@@ -2172,7 +2198,10 @@ instance ToHttpApiData FilterPairType where
         FilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
         FilterGender -> "FILTER_GENDER"
         FilterInsertionOrder -> "FILTER_INSERTION_ORDER"
+        FilterInventoryCommitmentType -> "FILTER_INVENTORY_COMMITMENT_TYPE"
+        FilterInventoryDeliveryMethod -> "FILTER_INVENTORY_DELIVERY_METHOD"
         FilterInventoryFormat -> "FILTER_INVENTORY_FORMAT"
+        FilterInventoryRateType -> "FILTER_INVENTORY_RATE_TYPE"
         FilterInventorySource -> "FILTER_INVENTORY_SOURCE"
         FilterInventorySourceType -> "FILTER_INVENTORY_SOURCE_TYPE"
         FilterKeyword -> "FILTER_KEYWORD"
@@ -2429,6 +2458,8 @@ data ParametersGroupBysItem
       -- ^ @FILTER_CONVERSION_DELAY@
     | PGBIFilterCountry
       -- ^ @FILTER_COUNTRY@
+    | PGBIFilterCreativeAttribute
+      -- ^ @FILTER_CREATIVE_ATTRIBUTE@
     | PGBIFilterCreativeHeight
       -- ^ @FILTER_CREATIVE_HEIGHT@
     | PGBIFilterCreativeId
@@ -2467,8 +2498,14 @@ data ParametersGroupBysItem
       -- ^ @FILTER_GENDER@
     | PGBIFilterInsertionOrder
       -- ^ @FILTER_INSERTION_ORDER@
+    | PGBIFilterInventoryCommitmentType
+      -- ^ @FILTER_INVENTORY_COMMITMENT_TYPE@
+    | PGBIFilterInventoryDeliveryMethod
+      -- ^ @FILTER_INVENTORY_DELIVERY_METHOD@
     | PGBIFilterInventoryFormat
       -- ^ @FILTER_INVENTORY_FORMAT@
+    | PGBIFilterInventoryRateType
+      -- ^ @FILTER_INVENTORY_RATE_TYPE@
     | PGBIFilterInventorySource
       -- ^ @FILTER_INVENTORY_SOURCE@
     | PGBIFilterInventorySourceType
@@ -2665,6 +2702,7 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_COMPANION_CREATIVE_ID" -> Right PGBIFilterCompanionCreativeId
         "FILTER_CONVERSION_DELAY" -> Right PGBIFilterConversionDelay
         "FILTER_COUNTRY" -> Right PGBIFilterCountry
+        "FILTER_CREATIVE_ATTRIBUTE" -> Right PGBIFilterCreativeAttribute
         "FILTER_CREATIVE_HEIGHT" -> Right PGBIFilterCreativeHeight
         "FILTER_CREATIVE_ID" -> Right PGBIFilterCreativeId
         "FILTER_CREATIVE_SIZE" -> Right PGBIFilterCreativeSize
@@ -2684,7 +2722,10 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_FLOODLIGHT_PIXEL_ID" -> Right PGBIFilterFloodlightPixelId
         "FILTER_GENDER" -> Right PGBIFilterGender
         "FILTER_INSERTION_ORDER" -> Right PGBIFilterInsertionOrder
+        "FILTER_INVENTORY_COMMITMENT_TYPE" -> Right PGBIFilterInventoryCommitmentType
+        "FILTER_INVENTORY_DELIVERY_METHOD" -> Right PGBIFilterInventoryDeliveryMethod
         "FILTER_INVENTORY_FORMAT" -> Right PGBIFilterInventoryFormat
+        "FILTER_INVENTORY_RATE_TYPE" -> Right PGBIFilterInventoryRateType
         "FILTER_INVENTORY_SOURCE" -> Right PGBIFilterInventorySource
         "FILTER_INVENTORY_SOURCE_TYPE" -> Right PGBIFilterInventorySourceType
         "FILTER_KEYWORD" -> Right PGBIFilterKeyword
@@ -2793,6 +2834,7 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterCompanionCreativeId -> "FILTER_COMPANION_CREATIVE_ID"
         PGBIFilterConversionDelay -> "FILTER_CONVERSION_DELAY"
         PGBIFilterCountry -> "FILTER_COUNTRY"
+        PGBIFilterCreativeAttribute -> "FILTER_CREATIVE_ATTRIBUTE"
         PGBIFilterCreativeHeight -> "FILTER_CREATIVE_HEIGHT"
         PGBIFilterCreativeId -> "FILTER_CREATIVE_ID"
         PGBIFilterCreativeSize -> "FILTER_CREATIVE_SIZE"
@@ -2812,7 +2854,10 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
         PGBIFilterGender -> "FILTER_GENDER"
         PGBIFilterInsertionOrder -> "FILTER_INSERTION_ORDER"
+        PGBIFilterInventoryCommitmentType -> "FILTER_INVENTORY_COMMITMENT_TYPE"
+        PGBIFilterInventoryDeliveryMethod -> "FILTER_INVENTORY_DELIVERY_METHOD"
         PGBIFilterInventoryFormat -> "FILTER_INVENTORY_FORMAT"
+        PGBIFilterInventoryRateType -> "FILTER_INVENTORY_RATE_TYPE"
         PGBIFilterInventorySource -> "FILTER_INVENTORY_SOURCE"
         PGBIFilterInventorySourceType -> "FILTER_INVENTORY_SOURCE_TYPE"
         PGBIFilterKeyword -> "FILTER_KEYWORD"

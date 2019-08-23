@@ -62,13 +62,16 @@ type TargetInstancesAggregatedListResource =
 -- | Retrieves an aggregated list of target instances.
 --
 -- /See:/ 'targetInstancesAggregatedList' smart constructor.
-data TargetInstancesAggregatedList = TargetInstancesAggregatedList'
+data TargetInstancesAggregatedList =
+  TargetInstancesAggregatedList'
     { _tialOrderBy    :: !(Maybe Text)
     , _tialProject    :: !Text
     , _tialFilter     :: !(Maybe Text)
     , _tialPageToken  :: !(Maybe Text)
     , _tialMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetInstancesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ targetInstancesAggregatedList
     :: Text -- ^ 'tialProject'
     -> TargetInstancesAggregatedList
 targetInstancesAggregatedList pTialProject_ =
-    TargetInstancesAggregatedList'
+  TargetInstancesAggregatedList'
     { _tialOrderBy = Nothing
     , _tialProject = pTialProject_
     , _tialFilter = Nothing
     , _tialPageToken = Nothing
     , _tialMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

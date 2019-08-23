@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsInsert' request conforms to.
 type CreativeGroupsInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -55,10 +55,13 @@ type CreativeGroupsInsertResource =
 -- | Inserts a new creative group.
 --
 -- /See:/ 'creativeGroupsInsert' smart constructor.
-data CreativeGroupsInsert = CreativeGroupsInsert'
+data CreativeGroupsInsert =
+  CreativeGroupsInsert'
     { _cgiProFileId :: !(Textual Int64)
     , _cgiPayload   :: !CreativeGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeGroupsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ creativeGroupsInsert
     -> CreativeGroup -- ^ 'cgiPayload'
     -> CreativeGroupsInsert
 creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
-    CreativeGroupsInsert'
-    { _cgiProFileId = _Coerce # pCgiProFileId_
-    , _cgiPayload = pCgiPayload_
-    }
+  CreativeGroupsInsert'
+    {_cgiProFileId = _Coerce # pCgiProFileId_, _cgiPayload = pCgiPayload_}
+
 
 -- | User profile ID associated with this request.
 cgiProFileId :: Lens' CreativeGroupsInsert Int64

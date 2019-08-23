@@ -63,7 +63,8 @@ type MattersAddPermissionsResource =
 -- | Adds an account as a matter collaborator.
 --
 -- /See:/ 'mattersAddPermissions' smart constructor.
-data MattersAddPermissions = MattersAddPermissions'
+data MattersAddPermissions =
+  MattersAddPermissions'
     { _mapXgafv          :: !(Maybe Xgafv)
     , _mapUploadProtocol :: !(Maybe Text)
     , _mapAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersAddPermissions = MattersAddPermissions'
     , _mapPayload        :: !AddMatterPermissionsRequest
     , _mapMatterId       :: !Text
     , _mapCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersAddPermissions' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersAddPermissions
     -> Text -- ^ 'mapMatterId'
     -> MattersAddPermissions
 mattersAddPermissions pMapPayload_ pMapMatterId_ =
-    MattersAddPermissions'
+  MattersAddPermissions'
     { _mapXgafv = Nothing
     , _mapUploadProtocol = Nothing
     , _mapAccessToken = Nothing
@@ -104,6 +107,7 @@ mattersAddPermissions pMapPayload_ pMapMatterId_ =
     , _mapMatterId = pMapMatterId_
     , _mapCallback = Nothing
     }
+
 
 -- | V1 error format.
 mapXgafv :: Lens' MattersAddPermissions (Maybe Xgafv)

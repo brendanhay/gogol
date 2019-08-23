@@ -59,12 +59,15 @@ type NodeTemplatesDeleteResource =
 -- | Deletes the specified NodeTemplate resource.
 --
 -- /See:/ 'nodeTemplatesDelete' smart constructor.
-data NodeTemplatesDelete = NodeTemplatesDelete'
+data NodeTemplatesDelete =
+  NodeTemplatesDelete'
     { _ntdRequestId    :: !(Maybe Text)
     , _ntdProject      :: !Text
     , _ntdNodeTemplate :: !Text
     , _ntdRegion       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ nodeTemplatesDelete
     -> Text -- ^ 'ntdRegion'
     -> NodeTemplatesDelete
 nodeTemplatesDelete pNtdProject_ pNtdNodeTemplate_ pNtdRegion_ =
-    NodeTemplatesDelete'
+  NodeTemplatesDelete'
     { _ntdRequestId = Nothing
     , _ntdProject = pNtdProject_
     , _ntdNodeTemplate = pNtdNodeTemplate_
     , _ntdRegion = pNtdRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

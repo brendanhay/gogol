@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysDelete' request conforms to.
 type DynamicTargetingKeysDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>
@@ -59,12 +59,15 @@ type DynamicTargetingKeysDeleteResource =
 -- | Deletes an existing dynamic targeting key.
 --
 -- /See:/ 'dynamicTargetingKeysDelete' smart constructor.
-data DynamicTargetingKeysDelete = DynamicTargetingKeysDelete'
+data DynamicTargetingKeysDelete =
+  DynamicTargetingKeysDelete'
     { _dtkdObjectType :: !DynamicTargetingKeysDeleteObjectType
     , _dtkdObjectId   :: !(Textual Int64)
     , _dtkdProFileId  :: !(Textual Int64)
     , _dtkdName       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DynamicTargetingKeysDelete' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ dynamicTargetingKeysDelete
     -> Text -- ^ 'dtkdName'
     -> DynamicTargetingKeysDelete
 dynamicTargetingKeysDelete pDtkdObjectType_ pDtkdObjectId_ pDtkdProFileId_ pDtkdName_ =
-    DynamicTargetingKeysDelete'
+  DynamicTargetingKeysDelete'
     { _dtkdObjectType = pDtkdObjectType_
     , _dtkdObjectId = _Coerce # pDtkdObjectId_
     , _dtkdProFileId = _Coerce # pDtkdProFileId_
     , _dtkdName = pDtkdName_
     }
+
 
 -- | Type of the object of this dynamic targeting key. This is a required
 -- field.

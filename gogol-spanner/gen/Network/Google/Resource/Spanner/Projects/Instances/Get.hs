@@ -59,14 +59,17 @@ type ProjectsInstancesGetResource =
 -- | Gets information about a particular instance.
 --
 -- /See:/ 'projectsInstancesGet' smart constructor.
-data ProjectsInstancesGet = ProjectsInstancesGet'
+data ProjectsInstancesGet =
+  ProjectsInstancesGet'
     { _pigXgafv          :: !(Maybe Xgafv)
     , _pigUploadProtocol :: !(Maybe Text)
     , _pigAccessToken    :: !(Maybe Text)
     , _pigUploadType     :: !(Maybe Text)
     , _pigName           :: !Text
     , _pigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsInstancesGet
     :: Text -- ^ 'pigName'
     -> ProjectsInstancesGet
 projectsInstancesGet pPigName_ =
-    ProjectsInstancesGet'
+  ProjectsInstancesGet'
     { _pigXgafv = Nothing
     , _pigUploadProtocol = Nothing
     , _pigAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsInstancesGet pPigName_ =
     , _pigName = pPigName_
     , _pigCallback = Nothing
     }
+
 
 -- | V1 error format.
 pigXgafv :: Lens' ProjectsInstancesGet (Maybe Xgafv)

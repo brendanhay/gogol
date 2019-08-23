@@ -64,7 +64,8 @@ type ProjectsJobsCreateResource =
 -- seconds, but it may take up to 5 minutes.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
-data ProjectsJobsCreate = ProjectsJobsCreate'
+data ProjectsJobsCreate =
+  ProjectsJobsCreate'
     { _pjcParent         :: !Text
     , _pjcXgafv          :: !(Maybe Xgafv)
     , _pjcUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsJobsCreate = ProjectsJobsCreate'
     , _pjcUploadType     :: !(Maybe Text)
     , _pjcPayload        :: !CreateJobRequest
     , _pjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsJobsCreate
     -> CreateJobRequest -- ^ 'pjcPayload'
     -> ProjectsJobsCreate
 projectsJobsCreate pPjcParent_ pPjcPayload_ =
-    ProjectsJobsCreate'
+  ProjectsJobsCreate'
     { _pjcParent = pPjcParent_
     , _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
@@ -105,6 +108,7 @@ projectsJobsCreate pPjcParent_ pPjcPayload_ =
     , _pjcPayload = pPjcPayload_
     , _pjcCallback = Nothing
     }
+
 
 -- | Required. The resource name of the project under which the job is
 -- created. The format is \"projects\/{project_id}\", for example,

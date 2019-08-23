@@ -51,9 +51,12 @@ type UsersGetResource =
 -- | Gets one user by ID.
 --
 -- /See:/ 'usersGet' smart constructor.
-newtype UsersGet = UsersGet'
+newtype UsersGet =
+  UsersGet'
     { _ugUserId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype UsersGet = UsersGet'
 usersGet
     :: Text -- ^ 'ugUserId'
     -> UsersGet
-usersGet pUgUserId_ =
-    UsersGet'
-    { _ugUserId = pUgUserId_
-    }
+usersGet pUgUserId_ = UsersGet' {_ugUserId = pUgUserId_}
+
 
 -- | The ID of the user to get.
 ugUserId :: Lens' UsersGet Text

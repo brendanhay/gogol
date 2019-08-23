@@ -64,7 +64,8 @@ type ServicesConsumersSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'servicesConsumersSetIAMPolicy' smart constructor.
-data ServicesConsumersSetIAMPolicy = ServicesConsumersSetIAMPolicy'
+data ServicesConsumersSetIAMPolicy =
+  ServicesConsumersSetIAMPolicy'
     { _scsipXgafv          :: !(Maybe Xgafv)
     , _scsipUploadProtocol :: !(Maybe Text)
     , _scsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ServicesConsumersSetIAMPolicy = ServicesConsumersSetIAMPolicy'
     , _scsipPayload        :: !SetIAMPolicyRequest
     , _scsipResource       :: !Text
     , _scsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesConsumersSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ servicesConsumersSetIAMPolicy
     -> Text -- ^ 'scsipResource'
     -> ServicesConsumersSetIAMPolicy
 servicesConsumersSetIAMPolicy pScsipPayload_ pScsipResource_ =
-    ServicesConsumersSetIAMPolicy'
+  ServicesConsumersSetIAMPolicy'
     { _scsipXgafv = Nothing
     , _scsipUploadProtocol = Nothing
     , _scsipAccessToken = Nothing
@@ -105,6 +108,7 @@ servicesConsumersSetIAMPolicy pScsipPayload_ pScsipResource_ =
     , _scsipResource = pScsipResource_
     , _scsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 scsipXgafv :: Lens' ServicesConsumersSetIAMPolicy (Maybe Xgafv)

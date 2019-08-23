@@ -66,7 +66,8 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
 -- | Deletes the breakpoint from the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
-data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
+data DebuggerDebuggeesBreakpointsDelete =
+  DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv          :: !(Maybe Xgafv)
     , _ddbdUploadProtocol :: !(Maybe Text)
     , _ddbdAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
     , _ddbdDebuggeeId     :: !Text
     , _ddbdClientVersion  :: !(Maybe Text)
     , _ddbdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsDelete' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ debuggerDebuggeesBreakpointsDelete
     -> Text -- ^ 'ddbdDebuggeeId'
     -> DebuggerDebuggeesBreakpointsDelete
 debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsDelete'
+  DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv = Nothing
     , _ddbdUploadProtocol = Nothing
     , _ddbdAccessToken = Nothing
@@ -111,6 +114,7 @@ debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     , _ddbdClientVersion = Nothing
     , _ddbdCallback = Nothing
     }
+
 
 -- | V1 error format.
 ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Xgafv)
@@ -160,7 +164,8 @@ ddbdCallback
   = lens _ddbdCallback (\ s a -> s{_ddbdCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsDelete where
+           DebuggerDebuggeesBreakpointsDelete
+         where
         type Rs DebuggerDebuggeesBreakpointsDelete = Empty
         type Scopes DebuggerDebuggeesBreakpointsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

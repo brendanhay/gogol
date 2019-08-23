@@ -64,7 +64,8 @@ type TimelineListResource =
 -- | Retrieves a list of timeline items for the authenticated user.
 --
 -- /See:/ 'timelineList' smart constructor.
-data TimelineList = TimelineList'
+data TimelineList =
+  TimelineList'
     { _tlPinnedOnly     :: !(Maybe Bool)
     , _tlOrderBy        :: !(Maybe TimelineListOrderBy)
     , _tlBundleId       :: !(Maybe Text)
@@ -72,7 +73,9 @@ data TimelineList = TimelineList'
     , _tlPageToken      :: !(Maybe Text)
     , _tlMaxResults     :: !(Maybe (Textual Word32))
     , _tlIncludeDeleted :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TimelineList' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ data TimelineList = TimelineList'
 timelineList
     :: TimelineList
 timelineList =
-    TimelineList'
+  TimelineList'
     { _tlPinnedOnly = Nothing
     , _tlOrderBy = Nothing
     , _tlBundleId = Nothing
@@ -103,6 +106,7 @@ timelineList =
     , _tlMaxResults = Nothing
     , _tlIncludeDeleted = Nothing
     }
+
 
 -- | If true, only pinned items will be returned.
 tlPinnedOnly :: Lens' TimelineList (Maybe Bool)

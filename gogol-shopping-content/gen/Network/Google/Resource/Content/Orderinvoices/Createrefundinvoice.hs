@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a refund invoice for one or more shipment groups, and triggers a
--- refund for non-facilitated payment orders. This can only be used for
--- line items that have previously been charged using createChargeInvoice.
--- All amounts (except for the summary) are incremental with respect to the
+-- refund for orderinvoice enabled orders. This can only be used for line
+-- items that have previously been charged using createChargeInvoice. All
+-- amounts (except for the summary) are incremental with respect to the
 -- previous invoice.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderinvoices.createrefundinvoice@.
@@ -61,17 +61,20 @@ type OrderinvoicesCreaterefundinvoiceResource =
                      Post '[JSON] OrderinvoicesCreateRefundInvoiceResponse
 
 -- | Creates a refund invoice for one or more shipment groups, and triggers a
--- refund for non-facilitated payment orders. This can only be used for
--- line items that have previously been charged using createChargeInvoice.
--- All amounts (except for the summary) are incremental with respect to the
+-- refund for orderinvoice enabled orders. This can only be used for line
+-- items that have previously been charged using createChargeInvoice. All
+-- amounts (except for the summary) are incremental with respect to the
 -- previous invoice.
 --
 -- /See:/ 'orderinvoicesCreaterefundinvoice' smart constructor.
-data OrderinvoicesCreaterefundinvoice = OrderinvoicesCreaterefundinvoice'
+data OrderinvoicesCreaterefundinvoice =
+  OrderinvoicesCreaterefundinvoice'
     { _ocMerchantId :: !(Textual Word64)
     , _ocPayload    :: !OrderinvoicesCreateRefundInvoiceRequest
     , _ocOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderinvoicesCreaterefundinvoice' with the minimum fields required to make a request.
 --
@@ -88,11 +91,12 @@ orderinvoicesCreaterefundinvoice
     -> Text -- ^ 'ocOrderId'
     -> OrderinvoicesCreaterefundinvoice
 orderinvoicesCreaterefundinvoice pOcMerchantId_ pOcPayload_ pOcOrderId_ =
-    OrderinvoicesCreaterefundinvoice'
+  OrderinvoicesCreaterefundinvoice'
     { _ocMerchantId = _Coerce # pOcMerchantId_
     , _ocPayload = pOcPayload_
     , _ocOrderId = pOcOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -112,7 +116,8 @@ ocOrderId
   = lens _ocOrderId (\ s a -> s{_ocOrderId = a})
 
 instance GoogleRequest
-         OrderinvoicesCreaterefundinvoice where
+           OrderinvoicesCreaterefundinvoice
+         where
         type Rs OrderinvoicesCreaterefundinvoice =
              OrderinvoicesCreateRefundInvoiceResponse
         type Scopes OrderinvoicesCreaterefundinvoice =

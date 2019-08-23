@@ -52,9 +52,12 @@ type AccountsListResource =
 -- | Lists all GTM Accounts that a user has access to.
 --
 -- /See:/ 'accountsList' smart constructor.
-newtype AccountsList = AccountsList'
+newtype AccountsList =
+  AccountsList'
     { _alPageToken :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype AccountsList = AccountsList'
 -- * 'alPageToken'
 accountsList
     :: AccountsList
-accountsList =
-    AccountsList'
-    { _alPageToken = Nothing
-    }
+accountsList = AccountsList' {_alPageToken = Nothing}
+
 
 -- | Continuation token for fetching the next page of results.
 alPageToken :: Lens' AccountsList (Maybe Text)

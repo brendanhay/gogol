@@ -21,6 +21,10 @@ module Network.Google.CloudIdentity
     -- * Service Configuration
       cloudIdentityService
 
+    -- * OAuth Scopes
+    , cloudIdentityGroupsReadOnlyScope
+    , cloudIdentityGroupsScope
+
     -- * API Declaration
     , CloudIdentityAPI
 

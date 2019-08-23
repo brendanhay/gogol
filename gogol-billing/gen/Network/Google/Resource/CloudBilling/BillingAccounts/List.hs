@@ -69,7 +69,8 @@ type BillingAccountsListResource =
 -- [view](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsList' smart constructor.
-data BillingAccountsList = BillingAccountsList'
+data BillingAccountsList =
+  BillingAccountsList'
     { _balXgafv          :: !(Maybe Xgafv)
     , _balUploadProtocol :: !(Maybe Text)
     , _balAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data BillingAccountsList = BillingAccountsList'
     , _balPageToken      :: !(Maybe Text)
     , _balPageSize       :: !(Maybe (Textual Int32))
     , _balCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ data BillingAccountsList = BillingAccountsList'
 billingAccountsList
     :: BillingAccountsList
 billingAccountsList =
-    BillingAccountsList'
+  BillingAccountsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balAccessToken = Nothing
@@ -112,6 +115,7 @@ billingAccountsList =
     , _balPageSize = Nothing
     , _balCallback = Nothing
     }
+
 
 -- | V1 error format.
 balXgafv :: Lens' BillingAccountsList (Maybe Xgafv)

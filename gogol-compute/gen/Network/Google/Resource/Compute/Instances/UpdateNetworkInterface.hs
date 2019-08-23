@@ -67,14 +67,17 @@ type InstancesUpdateNetworkInterfaceResource =
 -- semantics.
 --
 -- /See:/ 'instancesUpdateNetworkInterface' smart constructor.
-data InstancesUpdateNetworkInterface = InstancesUpdateNetworkInterface'
+data InstancesUpdateNetworkInterface =
+  InstancesUpdateNetworkInterface'
     { _iuniRequestId        :: !(Maybe Text)
     , _iuniProject          :: !Text
     , _iuniNetworkInterface :: !Text
     , _iuniZone             :: !Text
     , _iuniPayload          :: !NetworkInterface
     , _iuniInstance         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesUpdateNetworkInterface' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ instancesUpdateNetworkInterface
     -> Text -- ^ 'iuniInstance'
     -> InstancesUpdateNetworkInterface
 instancesUpdateNetworkInterface pIuniProject_ pIuniNetworkInterface_ pIuniZone_ pIuniPayload_ pIuniInstance_ =
-    InstancesUpdateNetworkInterface'
+  InstancesUpdateNetworkInterface'
     { _iuniRequestId = Nothing
     , _iuniProject = pIuniProject_
     , _iuniNetworkInterface = pIuniNetworkInterface_
@@ -107,6 +110,7 @@ instancesUpdateNetworkInterface pIuniProject_ pIuniNetworkInterface_ pIuniZone_ 
     , _iuniPayload = pIuniPayload_
     , _iuniInstance = pIuniInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -149,7 +153,8 @@ iuniInstance
   = lens _iuniInstance (\ s a -> s{_iuniInstance = a})
 
 instance GoogleRequest
-         InstancesUpdateNetworkInterface where
+           InstancesUpdateNetworkInterface
+         where
         type Rs InstancesUpdateNetworkInterface = Operation
         type Scopes InstancesUpdateNetworkInterface =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesUpdate' request conforms to.
 type TargetingTemplatesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
@@ -55,10 +55,13 @@ type TargetingTemplatesUpdateResource =
 -- | Updates an existing targeting template.
 --
 -- /See:/ 'targetingTemplatesUpdate' smart constructor.
-data TargetingTemplatesUpdate = TargetingTemplatesUpdate'
+data TargetingTemplatesUpdate =
+  TargetingTemplatesUpdate'
     { _ttuProFileId :: !(Textual Int64)
     , _ttuPayload   :: !TargetingTemplate
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetingTemplatesUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ targetingTemplatesUpdate
     -> TargetingTemplate -- ^ 'ttuPayload'
     -> TargetingTemplatesUpdate
 targetingTemplatesUpdate pTtuProFileId_ pTtuPayload_ =
-    TargetingTemplatesUpdate'
-    { _ttuProFileId = _Coerce # pTtuProFileId_
-    , _ttuPayload = pTtuPayload_
-    }
+  TargetingTemplatesUpdate'
+    {_ttuProFileId = _Coerce # pTtuProFileId_, _ttuPayload = pTtuPayload_}
+
 
 -- | User profile ID associated with this request.
 ttuProFileId :: Lens' TargetingTemplatesUpdate Int64

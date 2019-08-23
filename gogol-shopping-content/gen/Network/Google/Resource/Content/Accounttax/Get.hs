@@ -53,10 +53,13 @@ type AccounttaxGetResource =
 -- | Retrieves the tax settings of the account.
 --
 -- /See:/ 'accounttaxGet' smart constructor.
-data AccounttaxGet = AccounttaxGet'
+data AccounttaxGet =
+  AccounttaxGet'
     { _aggMerchantId :: !(Textual Word64)
     , _aggAccountId  :: !(Textual Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccounttaxGet' with the minimum fields required to make a request.
 --
@@ -70,10 +73,11 @@ accounttaxGet
     -> Word64 -- ^ 'aggAccountId'
     -> AccounttaxGet
 accounttaxGet pAggMerchantId_ pAggAccountId_ =
-    AccounttaxGet'
+  AccounttaxGet'
     { _aggMerchantId = _Coerce # pAggMerchantId_
     , _aggAccountId = _Coerce # pAggAccountId_
     }
+
 
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and

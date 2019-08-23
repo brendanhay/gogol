@@ -163,9 +163,11 @@ module Network.Google.Logging.Types
     , LogExclusion
     , logExclusion
     , leDisabled
+    , leUpdateTime
     , leName
     , leFilter
     , leDescription
+    , leCreateTime
 
     -- * WriteLogEntriesResponse
     , WriteLogEntriesResponse
@@ -181,8 +183,10 @@ module Network.Google.Logging.Types
     , lsIncludeChildren
     , lsOutputVersionFormat
     , lsWriterIdentity
+    , lsUpdateTime
     , lsName
     , lsFilter
+    , lsCreateTime
 
     -- * MonitoredResourceMetadataUserLabels
     , MonitoredResourceMetadataUserLabels
@@ -311,6 +315,7 @@ module Network.Google.Logging.Types
     , LogMetric
     , logMetric
     , lmMetricDescriptor
+    , lmUpdateTime
     , lmName
     , lmVersion
     , lmLabelExtractors
@@ -318,6 +323,7 @@ module Network.Google.Logging.Types
     , lmValueExtractor
     , lmBucketOptions
     , lmDescription
+    , lmCreateTime
 
     -- * LogEntry
     , LogEntry
@@ -387,20 +393,20 @@ loggingService
 
 -- | Administrate log data for your projects
 loggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
-loggingAdminScope = Proxy;
+loggingAdminScope = Proxy
 
 -- | View log data for your projects
 loggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
-loggingReadScope = Proxy;
+loggingReadScope = Proxy
 
 -- | Submit log data for your projects
 loggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
-loggingWriteScope = Proxy;
+loggingWriteScope = Proxy
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

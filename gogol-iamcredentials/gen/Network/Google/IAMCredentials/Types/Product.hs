@@ -22,11 +22,14 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'generateIdTokenRequest' smart constructor.
-data GenerateIdTokenRequest = GenerateIdTokenRequest'
+data GenerateIdTokenRequest =
+  GenerateIdTokenRequest'
     { _gitrAudience     :: !(Maybe Text)
     , _gitrDelegates    :: !(Maybe [Text])
     , _gitrIncludeEmail :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateIdTokenRequest' with the minimum fields required to make a request.
 --
@@ -40,11 +43,12 @@ data GenerateIdTokenRequest = GenerateIdTokenRequest'
 generateIdTokenRequest
     :: GenerateIdTokenRequest
 generateIdTokenRequest =
-    GenerateIdTokenRequest'
+  GenerateIdTokenRequest'
     { _gitrAudience = Nothing
     , _gitrDelegates = Nothing
     , _gitrIncludeEmail = Nothing
     }
+
 
 -- | The audience for the token, such as the API or account that this token
 -- grants access to.
@@ -59,7 +63,9 @@ gitrAudience
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 gitrDelegates :: Lens' GenerateIdTokenRequest [Text]
 gitrDelegates
   = lens _gitrDelegates
@@ -92,10 +98,13 @@ instance ToJSON GenerateIdTokenRequest where
 
 --
 -- /See:/ 'generateAccessTokenResponse' smart constructor.
-data GenerateAccessTokenResponse = GenerateAccessTokenResponse'
+data GenerateAccessTokenResponse =
+  GenerateAccessTokenResponse'
     { _gatrAccessToken :: !(Maybe Text)
     , _gatrExpireTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateAccessTokenResponse' with the minimum fields required to make a request.
 --
@@ -107,10 +116,9 @@ data GenerateAccessTokenResponse = GenerateAccessTokenResponse'
 generateAccessTokenResponse
     :: GenerateAccessTokenResponse
 generateAccessTokenResponse =
-    GenerateAccessTokenResponse'
-    { _gatrAccessToken = Nothing
-    , _gatrExpireTime = Nothing
-    }
+  GenerateAccessTokenResponse'
+    {_gatrAccessToken = Nothing, _gatrExpireTime = Nothing}
+
 
 -- | The OAuth 2.0 access token.
 gatrAccessToken :: Lens' GenerateAccessTokenResponse (Maybe Text)
@@ -141,10 +149,13 @@ instance ToJSON GenerateAccessTokenResponse where
 
 --
 -- /See:/ 'signJwtResponse' smart constructor.
-data SignJwtResponse = SignJwtResponse'
+data SignJwtResponse =
+  SignJwtResponse'
     { _sjrKeyId     :: !(Maybe Text)
     , _sjrSignedJwt :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignJwtResponse' with the minimum fields required to make a request.
 --
@@ -156,10 +167,8 @@ data SignJwtResponse = SignJwtResponse'
 signJwtResponse
     :: SignJwtResponse
 signJwtResponse =
-    SignJwtResponse'
-    { _sjrKeyId = Nothing
-    , _sjrSignedJwt = Nothing
-    }
+  SignJwtResponse' {_sjrKeyId = Nothing, _sjrSignedJwt = Nothing}
+
 
 -- | The ID of the key used to sign the JWT.
 sjrKeyId :: Lens' SignJwtResponse (Maybe Text)
@@ -186,10 +195,13 @@ instance ToJSON SignJwtResponse where
 
 --
 -- /See:/ 'signBlobRequest' smart constructor.
-data SignBlobRequest = SignBlobRequest'
+data SignBlobRequest =
+  SignBlobRequest'
     { _sbrDelegates :: !(Maybe [Text])
     , _sbrPayload   :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignBlobRequest' with the minimum fields required to make a request.
 --
@@ -201,10 +213,8 @@ data SignBlobRequest = SignBlobRequest'
 signBlobRequest
     :: SignBlobRequest
 signBlobRequest =
-    SignBlobRequest'
-    { _sbrDelegates = Nothing
-    , _sbrPayload = Nothing
-    }
+  SignBlobRequest' {_sbrDelegates = Nothing, _sbrPayload = Nothing}
+
 
 -- | The sequence of service accounts in a delegation chain. Each service
 -- account must be granted the \`roles\/iam.serviceAccountTokenCreator\`
@@ -213,7 +223,9 @@ signBlobRequest =
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 sbrDelegates :: Lens' SignBlobRequest [Text]
 sbrDelegates
   = lens _sbrDelegates (\ s a -> s{_sbrDelegates = a})
@@ -242,10 +254,13 @@ instance ToJSON SignBlobRequest where
 
 --
 -- /See:/ 'generateIdentityBindingAccessTokenRequest' smart constructor.
-data GenerateIdentityBindingAccessTokenRequest = GenerateIdentityBindingAccessTokenRequest'
+data GenerateIdentityBindingAccessTokenRequest =
+  GenerateIdentityBindingAccessTokenRequest'
     { _gibatrJwt   :: !(Maybe Text)
     , _gibatrScope :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateIdentityBindingAccessTokenRequest' with the minimum fields required to make a request.
 --
@@ -257,10 +272,9 @@ data GenerateIdentityBindingAccessTokenRequest = GenerateIdentityBindingAccessTo
 generateIdentityBindingAccessTokenRequest
     :: GenerateIdentityBindingAccessTokenRequest
 generateIdentityBindingAccessTokenRequest =
-    GenerateIdentityBindingAccessTokenRequest'
-    { _gibatrJwt = Nothing
-    , _gibatrScope = Nothing
-    }
+  GenerateIdentityBindingAccessTokenRequest'
+    {_gibatrJwt = Nothing, _gibatrScope = Nothing}
+
 
 -- | Required. Input token. Must be in JWT format according to RFC7523
 -- (https:\/\/tools.ietf.org\/html\/rfc7523) and must have \'kid\' field in
@@ -305,7 +319,8 @@ gibatrScope
       . _Coerce
 
 instance FromJSON
-         GenerateIdentityBindingAccessTokenRequest where
+           GenerateIdentityBindingAccessTokenRequest
+         where
         parseJSON
           = withObject
               "GenerateIdentityBindingAccessTokenRequest"
@@ -314,7 +329,8 @@ instance FromJSON
                    (o .:? "jwt") <*> (o .:? "scope" .!= mempty))
 
 instance ToJSON
-         GenerateIdentityBindingAccessTokenRequest where
+           GenerateIdentityBindingAccessTokenRequest
+         where
         toJSON GenerateIdentityBindingAccessTokenRequest'{..}
           = object
               (catMaybes
@@ -323,11 +339,14 @@ instance ToJSON
 
 --
 -- /See:/ 'generateAccessTokenRequest' smart constructor.
-data GenerateAccessTokenRequest = GenerateAccessTokenRequest'
+data GenerateAccessTokenRequest =
+  GenerateAccessTokenRequest'
     { _gatrDelegates :: !(Maybe [Text])
     , _gatrLifetime  :: !(Maybe GDuration)
     , _gatrScope     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateAccessTokenRequest' with the minimum fields required to make a request.
 --
@@ -341,11 +360,9 @@ data GenerateAccessTokenRequest = GenerateAccessTokenRequest'
 generateAccessTokenRequest
     :: GenerateAccessTokenRequest
 generateAccessTokenRequest =
-    GenerateAccessTokenRequest'
-    { _gatrDelegates = Nothing
-    , _gatrLifetime = Nothing
-    , _gatrScope = Nothing
-    }
+  GenerateAccessTokenRequest'
+    {_gatrDelegates = Nothing, _gatrLifetime = Nothing, _gatrScope = Nothing}
+
 
 -- | The sequence of service accounts in a delegation chain. Each service
 -- account must be granted the \`roles\/iam.serviceAccountTokenCreator\`
@@ -354,7 +371,9 @@ generateAccessTokenRequest =
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 gatrDelegates :: Lens' GenerateAccessTokenRequest [Text]
 gatrDelegates
   = lens _gatrDelegates
@@ -399,10 +418,13 @@ instance ToJSON GenerateAccessTokenRequest where
 
 --
 -- /See:/ 'generateIdentityBindingAccessTokenResponse' smart constructor.
-data GenerateIdentityBindingAccessTokenResponse = GenerateIdentityBindingAccessTokenResponse'
+data GenerateIdentityBindingAccessTokenResponse =
+  GenerateIdentityBindingAccessTokenResponse'
     { _gibatrAccessToken :: !(Maybe Text)
     , _gibatrExpireTime  :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateIdentityBindingAccessTokenResponse' with the minimum fields required to make a request.
 --
@@ -414,10 +436,9 @@ data GenerateIdentityBindingAccessTokenResponse = GenerateIdentityBindingAccessT
 generateIdentityBindingAccessTokenResponse
     :: GenerateIdentityBindingAccessTokenResponse
 generateIdentityBindingAccessTokenResponse =
-    GenerateIdentityBindingAccessTokenResponse'
-    { _gibatrAccessToken = Nothing
-    , _gibatrExpireTime = Nothing
-    }
+  GenerateIdentityBindingAccessTokenResponse'
+    {_gibatrAccessToken = Nothing, _gibatrExpireTime = Nothing}
+
 
 -- | The OAuth 2.0 access token.
 gibatrAccessToken :: Lens' GenerateIdentityBindingAccessTokenResponse (Maybe Text)
@@ -433,7 +454,8 @@ gibatrExpireTime
       . mapping _DateTime
 
 instance FromJSON
-         GenerateIdentityBindingAccessTokenResponse where
+           GenerateIdentityBindingAccessTokenResponse
+         where
         parseJSON
           = withObject
               "GenerateIdentityBindingAccessTokenResponse"
@@ -442,7 +464,8 @@ instance FromJSON
                    (o .:? "accessToken") <*> (o .:? "expireTime"))
 
 instance ToJSON
-         GenerateIdentityBindingAccessTokenResponse where
+           GenerateIdentityBindingAccessTokenResponse
+         where
         toJSON
           GenerateIdentityBindingAccessTokenResponse'{..}
           = object
@@ -452,10 +475,13 @@ instance ToJSON
 
 --
 -- /See:/ 'signJwtRequest' smart constructor.
-data SignJwtRequest = SignJwtRequest'
+data SignJwtRequest =
+  SignJwtRequest'
     { _sjrDelegates :: !(Maybe [Text])
     , _sjrPayload   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignJwtRequest' with the minimum fields required to make a request.
 --
@@ -467,10 +493,8 @@ data SignJwtRequest = SignJwtRequest'
 signJwtRequest
     :: SignJwtRequest
 signJwtRequest =
-    SignJwtRequest'
-    { _sjrDelegates = Nothing
-    , _sjrPayload = Nothing
-    }
+  SignJwtRequest' {_sjrDelegates = Nothing, _sjrPayload = Nothing}
+
 
 -- | The sequence of service accounts in a delegation chain. Each service
 -- account must be granted the \`roles\/iam.serviceAccountTokenCreator\`
@@ -479,7 +503,9 @@ signJwtRequest =
 -- \`roles\/iam.serviceAccountTokenCreator\` role on the service account
 -- that is specified in the \`name\` field of the request. The delegates
 -- must have the following format:
--- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`
+-- \`projects\/-\/serviceAccounts\/{ACCOUNT_EMAIL_OR_UNIQUEID}\`. The \`-\`
+-- wildcard character is required; replacing it with a project ID is
+-- invalid.
 sjrDelegates :: Lens' SignJwtRequest [Text]
 sjrDelegates
   = lens _sjrDelegates (\ s a -> s{_sjrDelegates = a})
@@ -507,10 +533,13 @@ instance ToJSON SignJwtRequest where
 
 --
 -- /See:/ 'signBlobResponse' smart constructor.
-data SignBlobResponse = SignBlobResponse'
+data SignBlobResponse =
+  SignBlobResponse'
     { _sbrKeyId      :: !(Maybe Text)
     , _sbrSignedBlob :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SignBlobResponse' with the minimum fields required to make a request.
 --
@@ -522,10 +551,8 @@ data SignBlobResponse = SignBlobResponse'
 signBlobResponse
     :: SignBlobResponse
 signBlobResponse =
-    SignBlobResponse'
-    { _sbrKeyId = Nothing
-    , _sbrSignedBlob = Nothing
-    }
+  SignBlobResponse' {_sbrKeyId = Nothing, _sbrSignedBlob = Nothing}
+
 
 -- | The ID of the key used to sign the blob.
 sbrKeyId :: Lens' SignBlobResponse (Maybe Text)
@@ -554,9 +581,12 @@ instance ToJSON SignBlobResponse where
 
 --
 -- /See:/ 'generateIdTokenResponse' smart constructor.
-newtype GenerateIdTokenResponse = GenerateIdTokenResponse'
+newtype GenerateIdTokenResponse =
+  GenerateIdTokenResponse'
     { _gitrToken :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GenerateIdTokenResponse' with the minimum fields required to make a request.
 --
@@ -565,10 +595,8 @@ newtype GenerateIdTokenResponse = GenerateIdTokenResponse'
 -- * 'gitrToken'
 generateIdTokenResponse
     :: GenerateIdTokenResponse
-generateIdTokenResponse =
-    GenerateIdTokenResponse'
-    { _gitrToken = Nothing
-    }
+generateIdTokenResponse = GenerateIdTokenResponse' {_gitrToken = Nothing}
+
 
 -- | The OpenId Connect ID token.
 gitrToken :: Lens' GenerateIdTokenResponse (Maybe Text)

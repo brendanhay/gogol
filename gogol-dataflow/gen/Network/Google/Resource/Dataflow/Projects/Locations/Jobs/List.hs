@@ -20,7 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the jobs of a project in a given region.
+-- List the jobs of a project. To list the jobs of a project in a region,
+-- we recommend using \`projects.locations.jobs.get\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- To list the all jobs across all regions, use
+-- \`projects.jobs.aggregated\`. Using \`projects.jobs.list\` is not
+-- recommended, as you can only get the list of jobs that are running in
+-- \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.list@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
@@ -70,10 +77,18 @@ type ProjectsLocationsJobsListResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListJobsResponse
 
--- | List the jobs of a project in a given region.
+-- | List the jobs of a project. To list the jobs of a project in a region,
+-- we recommend using \`projects.locations.jobs.get\` with a [regional
+-- endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- To list the all jobs across all regions, use
+-- \`projects.jobs.aggregated\`. Using \`projects.jobs.list\` is not
+-- recommended, as you can only get the list of jobs that are running in
+-- \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsList' smart constructor.
-data ProjectsLocationsJobsList = ProjectsLocationsJobsList'
+data ProjectsLocationsJobsList =
+  ProjectsLocationsJobsList'
     { _pljlXgafv          :: !(Maybe Xgafv)
     , _pljlUploadProtocol :: !(Maybe Text)
     , _pljlLocation       :: !Text
@@ -85,7 +100,9 @@ data ProjectsLocationsJobsList = ProjectsLocationsJobsList'
     , _pljlProjectId      :: !Text
     , _pljlPageSize       :: !(Maybe (Textual Int32))
     , _pljlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsList' with the minimum fields required to make a request.
 --
@@ -117,7 +134,7 @@ projectsLocationsJobsList
     -> Text -- ^ 'pljlProjectId'
     -> ProjectsLocationsJobsList
 projectsLocationsJobsList pPljlLocation_ pPljlProjectId_ =
-    ProjectsLocationsJobsList'
+  ProjectsLocationsJobsList'
     { _pljlXgafv = Nothing
     , _pljlUploadProtocol = Nothing
     , _pljlLocation = pPljlLocation_
@@ -131,6 +148,7 @@ projectsLocationsJobsList pPljlLocation_ pPljlProjectId_ =
     , _pljlCallback = Nothing
     }
 
+
 -- | V1 error format.
 pljlXgafv :: Lens' ProjectsLocationsJobsList (Maybe Xgafv)
 pljlXgafv
@@ -142,7 +160,9 @@ pljlUploadProtocol
   = lens _pljlUploadProtocol
       (\ s a -> s{_pljlUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pljlLocation :: Lens' ProjectsLocationsJobsList Text
 pljlLocation
   = lens _pljlLocation (\ s a -> s{_pljlLocation = a})

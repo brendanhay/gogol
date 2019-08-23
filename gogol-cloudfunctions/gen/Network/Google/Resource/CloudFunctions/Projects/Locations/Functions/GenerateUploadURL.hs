@@ -28,9 +28,14 @@
 -- reference to the function source code. When uploading source code to the
 -- generated signed URL, please follow these restrictions: * Source file
 -- type should be a zip file. * Source file size should not exceed 100MB
--- limit. When making a HTTP PUT request, these two headers need to be
+-- limit. * No credentials should be attached - the signed URLs provide
+-- access to the target bucket using internal service identity; if
+-- credentials were attached, the identity from the credentials would be
+-- used, but that identity does not have permissions to upload files to the
+-- URL. When making a HTTP PUT request, these two headers need to be
 -- specified: * \`content-type: application\/zip\` *
--- \`x-goog-content-length-range: 0,104857600\`
+-- \`x-goog-content-length-range: 0,104857600\` And this header SHOULD NOT
+-- be specified: * \`Authorization: Bearer YOUR_TOKEN\`
 --
 -- /See:/ <https://cloud.google.com/functions Cloud Functions API Reference> for @cloudfunctions.projects.locations.functions.generateUploadUrl@.
 module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateUploadURL
@@ -79,12 +84,18 @@ type ProjectsLocationsFunctionsGenerateUploadURLResource
 -- reference to the function source code. When uploading source code to the
 -- generated signed URL, please follow these restrictions: * Source file
 -- type should be a zip file. * Source file size should not exceed 100MB
--- limit. When making a HTTP PUT request, these two headers need to be
+-- limit. * No credentials should be attached - the signed URLs provide
+-- access to the target bucket using internal service identity; if
+-- credentials were attached, the identity from the credentials would be
+-- used, but that identity does not have permissions to upload files to the
+-- URL. When making a HTTP PUT request, these two headers need to be
 -- specified: * \`content-type: application\/zip\` *
--- \`x-goog-content-length-range: 0,104857600\`
+-- \`x-goog-content-length-range: 0,104857600\` And this header SHOULD NOT
+-- be specified: * \`Authorization: Bearer YOUR_TOKEN\`
 --
 -- /See:/ 'projectsLocationsFunctionsGenerateUploadURL' smart constructor.
-data ProjectsLocationsFunctionsGenerateUploadURL = ProjectsLocationsFunctionsGenerateUploadURL'
+data ProjectsLocationsFunctionsGenerateUploadURL =
+  ProjectsLocationsFunctionsGenerateUploadURL'
     { _plfguuParent         :: !Text
     , _plfguuXgafv          :: !(Maybe Xgafv)
     , _plfguuUploadProtocol :: !(Maybe Text)
@@ -92,7 +103,9 @@ data ProjectsLocationsFunctionsGenerateUploadURL = ProjectsLocationsFunctionsGen
     , _plfguuUploadType     :: !(Maybe Text)
     , _plfguuPayload        :: !GenerateUploadURLRequest
     , _plfguuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsGenerateUploadURL' with the minimum fields required to make a request.
 --
@@ -116,7 +129,7 @@ projectsLocationsFunctionsGenerateUploadURL
     -> GenerateUploadURLRequest -- ^ 'plfguuPayload'
     -> ProjectsLocationsFunctionsGenerateUploadURL
 projectsLocationsFunctionsGenerateUploadURL pPlfguuParent_ pPlfguuPayload_ =
-    ProjectsLocationsFunctionsGenerateUploadURL'
+  ProjectsLocationsFunctionsGenerateUploadURL'
     { _plfguuParent = pPlfguuParent_
     , _plfguuXgafv = Nothing
     , _plfguuUploadProtocol = Nothing
@@ -125,6 +138,7 @@ projectsLocationsFunctionsGenerateUploadURL pPlfguuParent_ pPlfguuPayload_ =
     , _plfguuPayload = pPlfguuPayload_
     , _plfguuCallback = Nothing
     }
+
 
 -- | The project and location in which the Google Cloud Storage signed URL
 -- should be generated, specified in the format
@@ -169,7 +183,8 @@ plfguuCallback
       (\ s a -> s{_plfguuCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsGenerateUploadURL where
+           ProjectsLocationsFunctionsGenerateUploadURL
+         where
         type Rs ProjectsLocationsFunctionsGenerateUploadURL =
              GenerateUploadURLResponse
         type Scopes

@@ -63,7 +63,8 @@ type ServicesTenancyUnitsCreateResource =
 -- | Creates a tenancy unit with no tenant resources.
 --
 -- /See:/ 'servicesTenancyUnitsCreate' smart constructor.
-data ServicesTenancyUnitsCreate = ServicesTenancyUnitsCreate'
+data ServicesTenancyUnitsCreate =
+  ServicesTenancyUnitsCreate'
     { _stucParent         :: !Text
     , _stucXgafv          :: !(Maybe Xgafv)
     , _stucUploadProtocol :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ServicesTenancyUnitsCreate = ServicesTenancyUnitsCreate'
     , _stucUploadType     :: !(Maybe Text)
     , _stucPayload        :: !CreateTenancyUnitRequest
     , _stucCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ servicesTenancyUnitsCreate
     -> CreateTenancyUnitRequest -- ^ 'stucPayload'
     -> ServicesTenancyUnitsCreate
 servicesTenancyUnitsCreate pStucParent_ pStucPayload_ =
-    ServicesTenancyUnitsCreate'
+  ServicesTenancyUnitsCreate'
     { _stucParent = pStucParent_
     , _stucXgafv = Nothing
     , _stucUploadProtocol = Nothing
@@ -105,11 +108,12 @@ servicesTenancyUnitsCreate pStucParent_ pStucPayload_ =
     , _stucCallback = Nothing
     }
 
+
 -- | services\/{service}\/{collection id}\/{resource id} {collection id} is
 -- the cloud resource collection type representing the service consumer,
 -- for example \'projects\', or \'organizations\'. {resource id} is the
 -- consumer numeric id, such as project number: \'123456\'. {service} the
--- name of a service, for example \'service.googleapis.com\'. Enabled
+-- name of a managed service, such as \'service.googleapis.com\'. Enables
 -- service binding using the new tenancy unit.
 stucParent :: Lens' ServicesTenancyUnitsCreate Text
 stucParent

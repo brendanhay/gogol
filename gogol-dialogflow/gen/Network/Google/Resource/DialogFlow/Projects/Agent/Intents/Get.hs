@@ -64,7 +64,8 @@ type ProjectsAgentIntentsGetResource =
 -- | Retrieves the specified intent.
 --
 -- /See:/ 'projectsAgentIntentsGet' smart constructor.
-data ProjectsAgentIntentsGet = ProjectsAgentIntentsGet'
+data ProjectsAgentIntentsGet =
+  ProjectsAgentIntentsGet'
     { _paigXgafv          :: !(Maybe Xgafv)
     , _paigLanguageCode   :: !(Maybe Text)
     , _paigUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsAgentIntentsGet = ProjectsAgentIntentsGet'
     , _paigIntentView     :: !(Maybe Text)
     , _paigName           :: !Text
     , _paigCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsGet' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsAgentIntentsGet
     :: Text -- ^ 'paigName'
     -> ProjectsAgentIntentsGet
 projectsAgentIntentsGet pPaigName_ =
-    ProjectsAgentIntentsGet'
+  ProjectsAgentIntentsGet'
     { _paigXgafv = Nothing
     , _paigLanguageCode = Nothing
     , _paigUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsAgentIntentsGet pPaigName_ =
     , _paigCallback = Nothing
     }
 
+
 -- | V1 error format.
 paigXgafv :: Lens' ProjectsAgentIntentsGet (Maybe Xgafv)
 paigXgafv
@@ -116,10 +120,10 @@ paigXgafv
 
 -- | Optional. The language to retrieve training phrases, parameters and rich
 -- messages for. If not specified, the agent\'s default language is used.
--- [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 paigLanguageCode :: Lens' ProjectsAgentIntentsGet (Maybe Text)
 paigLanguageCode
   = lens _paigLanguageCode

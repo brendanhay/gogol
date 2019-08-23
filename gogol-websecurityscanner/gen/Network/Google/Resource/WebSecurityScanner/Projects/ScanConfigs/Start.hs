@@ -48,7 +48,7 @@ import           Network.Google.WebSecurityScanner.Types
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.start@ method which the
 -- 'ProjectsScanConfigsStart' request conforms to.
 type ProjectsScanConfigsStartResource =
-     "v1alpha" :>
+     "v1beta" :>
        CaptureMode "name" "start" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,7 +62,8 @@ type ProjectsScanConfigsStartResource =
 -- | Start a ScanRun according to the given ScanConfig.
 --
 -- /See:/ 'projectsScanConfigsStart' smart constructor.
-data ProjectsScanConfigsStart = ProjectsScanConfigsStart'
+data ProjectsScanConfigsStart =
+  ProjectsScanConfigsStart'
     { _pscsXgafv          :: !(Maybe Xgafv)
     , _pscsUploadProtocol :: !(Maybe Text)
     , _pscsAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data ProjectsScanConfigsStart = ProjectsScanConfigsStart'
     , _pscsPayload        :: !StartScanRunRequest
     , _pscsName           :: !Text
     , _pscsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsScanConfigsStart' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ projectsScanConfigsStart
     -> Text -- ^ 'pscsName'
     -> ProjectsScanConfigsStart
 projectsScanConfigsStart pPscsPayload_ pPscsName_ =
-    ProjectsScanConfigsStart'
+  ProjectsScanConfigsStart'
     { _pscsXgafv = Nothing
     , _pscsUploadProtocol = Nothing
     , _pscsAccessToken = Nothing
@@ -103,6 +106,7 @@ projectsScanConfigsStart pPscsPayload_ pPscsName_ =
     , _pscsName = pPscsName_
     , _pscsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pscsXgafv :: Lens' ProjectsScanConfigsStart (Maybe Xgafv)

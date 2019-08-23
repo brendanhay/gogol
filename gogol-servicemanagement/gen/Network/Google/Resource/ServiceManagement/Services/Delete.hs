@@ -66,14 +66,17 @@ type ServicesDeleteResource =
 -- service will be permanently deleted. Operation
 --
 -- /See:/ 'servicesDelete' smart constructor.
-data ServicesDelete = ServicesDelete'
+data ServicesDelete =
+  ServicesDelete'
     { _sdXgafv          :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
     , _sdAccessToken    :: !(Maybe Text)
     , _sdUploadType     :: !(Maybe Text)
     , _sdServiceName    :: !Text
     , _sdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesDelete' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ servicesDelete
     :: Text -- ^ 'sdServiceName'
     -> ServicesDelete
 servicesDelete pSdServiceName_ =
-    ServicesDelete'
+  ServicesDelete'
     { _sdXgafv = Nothing
     , _sdUploadProtocol = Nothing
     , _sdAccessToken = Nothing
@@ -102,6 +105,7 @@ servicesDelete pSdServiceName_ =
     , _sdServiceName = pSdServiceName_
     , _sdCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdXgafv :: Lens' ServicesDelete (Maybe Xgafv)

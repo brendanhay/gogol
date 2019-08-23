@@ -63,7 +63,8 @@ type IndexingDatasourcesGetSchemaResource =
 -- | Gets the schema of a data source.
 --
 -- /See:/ 'indexingDatasourcesGetSchema' smart constructor.
-data IndexingDatasourcesGetSchema = IndexingDatasourcesGetSchema'
+data IndexingDatasourcesGetSchema =
+  IndexingDatasourcesGetSchema'
     { _idgsXgafv                       :: !(Maybe Xgafv)
     , _idgsUploadProtocol              :: !(Maybe Text)
     , _idgsAccessToken                 :: !(Maybe Text)
@@ -71,7 +72,9 @@ data IndexingDatasourcesGetSchema = IndexingDatasourcesGetSchema'
     , _idgsName                        :: !Text
     , _idgsDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _idgsCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesGetSchema' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ indexingDatasourcesGetSchema
     :: Text -- ^ 'idgsName'
     -> IndexingDatasourcesGetSchema
 indexingDatasourcesGetSchema pIdgsName_ =
-    IndexingDatasourcesGetSchema'
+  IndexingDatasourcesGetSchema'
     { _idgsXgafv = Nothing
     , _idgsUploadProtocol = Nothing
     , _idgsAccessToken = Nothing
@@ -103,6 +106,7 @@ indexingDatasourcesGetSchema pIdgsName_ =
     , _idgsDebugOptionsEnableDebugging = Nothing
     , _idgsCallback = Nothing
     }
+
 
 -- | V1 error format.
 idgsXgafv :: Lens' IndexingDatasourcesGetSchema (Maybe Xgafv)
@@ -131,8 +135,8 @@ idgsUploadType
 idgsName :: Lens' IndexingDatasourcesGetSchema Text
 idgsName = lens _idgsName (\ s a -> s{_idgsName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 idgsDebugOptionsEnableDebugging :: Lens' IndexingDatasourcesGetSchema (Maybe Bool)
 idgsDebugOptionsEnableDebugging
   = lens _idgsDebugOptionsEnableDebugging

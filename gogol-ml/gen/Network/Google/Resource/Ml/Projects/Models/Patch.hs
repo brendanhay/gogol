@@ -66,7 +66,8 @@ type ProjectsModelsPatchResource =
 -- to update are \`description\` and \`default_version.name\`.
 --
 -- /See:/ 'projectsModelsPatch' smart constructor.
-data ProjectsModelsPatch = ProjectsModelsPatch'
+data ProjectsModelsPatch =
+  ProjectsModelsPatch'
     { _pmpXgafv          :: !(Maybe Xgafv)
     , _pmpUploadProtocol :: !(Maybe Text)
     , _pmpUpdateMask     :: !(Maybe GFieldMask)
@@ -75,7 +76,9 @@ data ProjectsModelsPatch = ProjectsModelsPatch'
     , _pmpPayload        :: !GoogleCloudMlV1__Model
     , _pmpName           :: !Text
     , _pmpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsModelsPatch' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsModelsPatch
     -> Text -- ^ 'pmpName'
     -> ProjectsModelsPatch
 projectsModelsPatch pPmpPayload_ pPmpName_ =
-    ProjectsModelsPatch'
+  ProjectsModelsPatch'
     { _pmpXgafv = Nothing
     , _pmpUploadProtocol = Nothing
     , _pmpUpdateMask = Nothing
@@ -111,6 +114,7 @@ projectsModelsPatch pPmpPayload_ pPmpName_ =
     , _pmpName = pPmpName_
     , _pmpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmpXgafv :: Lens' ProjectsModelsPatch (Maybe Xgafv)

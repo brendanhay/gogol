@@ -87,7 +87,8 @@ type ProjectsLocationsRegistriesDevicesSendCommandToDeviceResource
 -- QoS 0, no acknowledgment will be expected from the device.
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesSendCommandToDevice' smart constructor.
-data ProjectsLocationsRegistriesDevicesSendCommandToDevice = ProjectsLocationsRegistriesDevicesSendCommandToDevice'
+data ProjectsLocationsRegistriesDevicesSendCommandToDevice =
+  ProjectsLocationsRegistriesDevicesSendCommandToDevice'
     { _plrdsctdXgafv          :: !(Maybe Xgafv)
     , _plrdsctdUploadProtocol :: !(Maybe Text)
     , _plrdsctdAccessToken    :: !(Maybe Text)
@@ -95,7 +96,9 @@ data ProjectsLocationsRegistriesDevicesSendCommandToDevice = ProjectsLocationsRe
     , _plrdsctdPayload        :: !SendCommandToDeviceRequest
     , _plrdsctdName           :: !Text
     , _plrdsctdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesSendCommandToDevice' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ projectsLocationsRegistriesDevicesSendCommandToDevice
     -> Text -- ^ 'plrdsctdName'
     -> ProjectsLocationsRegistriesDevicesSendCommandToDevice
 projectsLocationsRegistriesDevicesSendCommandToDevice pPlrdsctdPayload_ pPlrdsctdName_ =
-    ProjectsLocationsRegistriesDevicesSendCommandToDevice'
+  ProjectsLocationsRegistriesDevicesSendCommandToDevice'
     { _plrdsctdXgafv = Nothing
     , _plrdsctdUploadProtocol = Nothing
     , _plrdsctdAccessToken = Nothing
@@ -128,6 +131,7 @@ projectsLocationsRegistriesDevicesSendCommandToDevice pPlrdsctdPayload_ pPlrdsct
     , _plrdsctdName = pPlrdsctdName_
     , _plrdsctdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrdsctdXgafv :: Lens' ProjectsLocationsRegistriesDevicesSendCommandToDevice (Maybe Xgafv)
@@ -174,7 +178,7 @@ plrdsctdCallback
       (\ s a -> s{_plrdsctdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesSendCommandToDevice
+           ProjectsLocationsRegistriesDevicesSendCommandToDevice
          where
         type Rs
                ProjectsLocationsRegistriesDevicesSendCommandToDevice

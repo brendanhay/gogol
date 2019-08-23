@@ -66,7 +66,7 @@ import           Network.Google.Prelude
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -121,7 +121,8 @@ type PlacementsListResource =
 -- paging.
 --
 -- /See:/ 'placementsList' smart constructor.
-data PlacementsList = PlacementsList'
+data PlacementsList =
+  PlacementsList'
     { _pPlacementStrategyIds :: !(Maybe [Textual Int64])
     , _pContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pMaxEndDate           :: !(Maybe Text)
@@ -145,7 +146,9 @@ data PlacementsList = PlacementsList'
     , _pArchived             :: !(Maybe Bool)
     , _pMaxResults           :: !(Textual Int32)
     , _pMinEndDate           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementsList' with the minimum fields required to make a request.
 --
@@ -200,7 +203,7 @@ placementsList
     :: Int64 -- ^ 'pProFileId'
     -> PlacementsList
 placementsList pPProFileId_ =
-    PlacementsList'
+  PlacementsList'
     { _pPlacementStrategyIds = Nothing
     , _pContentCategoryIds = Nothing
     , _pMaxEndDate = Nothing
@@ -225,6 +228,7 @@ placementsList pPProFileId_ =
     , _pMaxResults = 1000
     , _pMinEndDate = Nothing
     }
+
 
 -- | Select only placements that are associated with these placement
 -- strategies.

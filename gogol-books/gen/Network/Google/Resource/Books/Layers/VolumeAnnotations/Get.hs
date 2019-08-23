@@ -62,13 +62,16 @@ type LayersVolumeAnnotationsGetResource =
 -- | Gets the volume annotation.
 --
 -- /See:/ 'layersVolumeAnnotationsGet' smart constructor.
-data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet'
+data LayersVolumeAnnotationsGet =
+  LayersVolumeAnnotationsGet'
     { _lvagLocale       :: !(Maybe Text)
     , _lvagAnnotationId :: !Text
     , _lvagVolumeId     :: !Text
     , _lvagSource       :: !(Maybe Text)
     , _lvagLayerId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LayersVolumeAnnotationsGet' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ layersVolumeAnnotationsGet
     -> Text -- ^ 'lvagLayerId'
     -> LayersVolumeAnnotationsGet
 layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
-    LayersVolumeAnnotationsGet'
+  LayersVolumeAnnotationsGet'
     { _lvagLocale = Nothing
     , _lvagAnnotationId = pLvagAnnotationId_
     , _lvagVolumeId = pLvagVolumeId_
     , _lvagSource = Nothing
     , _lvagLayerId = pLvagLayerId_
     }
+
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.

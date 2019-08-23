@@ -62,13 +62,16 @@ type OnboardingListCategoryVolumesResource =
 -- | List available volumes under categories for onboarding experience.
 --
 -- /See:/ 'onboardingListCategoryVolumes' smart constructor.
-data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes'
+data OnboardingListCategoryVolumes =
+  OnboardingListCategoryVolumes'
     { _olcvLocale                   :: !(Maybe Text)
     , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
     , _olcvCategoryId               :: !(Maybe [Text])
     , _olcvPageToken                :: !(Maybe Text)
     , _olcvPageSize                 :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OnboardingListCategoryVolumes' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes'
 onboardingListCategoryVolumes
     :: OnboardingListCategoryVolumes
 onboardingListCategoryVolumes =
-    OnboardingListCategoryVolumes'
+  OnboardingListCategoryVolumes'
     { _olcvLocale = Nothing
     , _olcvMaxAllowedMaturityRating = Nothing
     , _olcvCategoryId = Nothing
     , _olcvPageToken = Nothing
     , _olcvPageSize = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.

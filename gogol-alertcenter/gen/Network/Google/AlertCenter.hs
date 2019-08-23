@@ -127,6 +127,22 @@ module Network.Google.AlertCenter
     , notification
     , nCloudPubsubTopic
 
+    -- ** ActivityRule
+    , ActivityRule
+    , activityRule
+    , arSupersededAlerts
+    , arActionNames
+    , arSupersedingAlert
+    , arTriggerSource
+    , arWindowSize
+    , arUpdateTime
+    , arName
+    , arThreshold
+    , arQuery
+    , arDisplayName
+    , arDescription
+    , arCreateTime
+
     -- ** AccountWarning
     , AccountWarning
     , accountWarning
@@ -183,6 +199,7 @@ module Network.Google.AlertCenter
     , aAlertId
     , aSecurityInvestigationToolLink
     , aCustomerId
+    , aUpdateTime
     , aEndTime
     , aSource
     , aDeleted

@@ -67,12 +67,15 @@ type ProjectsHistoriesExecutionsCreateResource =
 -- not exist
 --
 -- /See:/ 'projectsHistoriesExecutionsCreate' smart constructor.
-data ProjectsHistoriesExecutionsCreate = ProjectsHistoriesExecutionsCreate'
+data ProjectsHistoriesExecutionsCreate =
+  ProjectsHistoriesExecutionsCreate'
     { _phecRequestId :: !(Maybe Text)
     , _phecPayload   :: !Execution
     , _phecHistoryId :: !Text
     , _phecProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsHistoriesExecutionsCreate' with the minimum fields required to make a request.
 --
@@ -91,12 +94,13 @@ projectsHistoriesExecutionsCreate
     -> Text -- ^ 'phecProjectId'
     -> ProjectsHistoriesExecutionsCreate
 projectsHistoriesExecutionsCreate pPhecPayload_ pPhecHistoryId_ pPhecProjectId_ =
-    ProjectsHistoriesExecutionsCreate'
+  ProjectsHistoriesExecutionsCreate'
     { _phecRequestId = Nothing
     , _phecPayload = pPhecPayload_
     , _phecHistoryId = pPhecHistoryId_
     , _phecProjectId = pPhecProjectId_
     }
+
 
 -- | A unique request ID for server to detect duplicated requests. For
 -- example, a UUID. Optional, but strongly recommended.
@@ -123,7 +127,8 @@ phecProjectId
       (\ s a -> s{_phecProjectId = a})
 
 instance GoogleRequest
-         ProjectsHistoriesExecutionsCreate where
+           ProjectsHistoriesExecutionsCreate
+         where
         type Rs ProjectsHistoriesExecutionsCreate = Execution
         type Scopes ProjectsHistoriesExecutionsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

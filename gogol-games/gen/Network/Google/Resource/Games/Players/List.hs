@@ -60,12 +60,15 @@ type PlayersListResource =
 -- | Get the collection of players for the currently authenticated user.
 --
 -- /See:/ 'playersList' smart constructor.
-data PlayersList = PlayersList'
+data PlayersList =
+  PlayersList'
     { _plCollection :: !PlayersListCollection
     , _plLanguage   :: !(Maybe Text)
     , _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayersList' with the minimum fields required to make a request.
 --
@@ -82,12 +85,13 @@ playersList
     :: PlayersListCollection -- ^ 'plCollection'
     -> PlayersList
 playersList pPlCollection_ =
-    PlayersList'
+  PlayersList'
     { _plCollection = pPlCollection_
     , _plLanguage = Nothing
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
+
 
 -- | Collection of players being retrieved
 plCollection :: Lens' PlayersList PlayersListCollection
@@ -115,7 +119,8 @@ plMaxResults
 instance GoogleRequest PlayersList where
         type Rs PlayersList = PlayerListResponse
         type Scopes PlayersList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient PlayersList'{..}
           = go _plCollection _plLanguage _plPageToken
               _plMaxResults

@@ -70,7 +70,8 @@ type BillingAccountsSinksCreateResource =
 -- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'billingAccountsSinksCreate' smart constructor.
-data BillingAccountsSinksCreate = BillingAccountsSinksCreate'
+data BillingAccountsSinksCreate =
+  BillingAccountsSinksCreate'
     { _bascParent               :: !Text
     , _bascXgafv                :: !(Maybe Xgafv)
     , _bascUniqueWriterIdentity :: !(Maybe Bool)
@@ -79,7 +80,9 @@ data BillingAccountsSinksCreate = BillingAccountsSinksCreate'
     , _bascUploadType           :: !(Maybe Text)
     , _bascPayload              :: !LogSink
     , _bascCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsSinksCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ billingAccountsSinksCreate
     -> LogSink -- ^ 'bascPayload'
     -> BillingAccountsSinksCreate
 billingAccountsSinksCreate pBascParent_ pBascPayload_ =
-    BillingAccountsSinksCreate'
+  BillingAccountsSinksCreate'
     { _bascParent = pBascParent_
     , _bascXgafv = Nothing
     , _bascUniqueWriterIdentity = Nothing
@@ -115,6 +118,7 @@ billingAccountsSinksCreate pBascParent_ pBascPayload_ =
     , _bascPayload = pBascPayload_
     , _bascCallback = Nothing
     }
+
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

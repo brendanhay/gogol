@@ -65,7 +65,8 @@ type EncodedUpdatesGetResource =
 -- |
 --
 -- /See:/ 'encodedUpdatesGet' smart constructor.
-data EncodedUpdatesGet = EncodedUpdatesGet'
+data EncodedUpdatesGet =
+  EncodedUpdatesGet'
     { _eugClientId       :: !(Maybe Text)
     , _eugXgafv          :: !(Maybe Xgafv)
     , _eugUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data EncodedUpdatesGet = EncodedUpdatesGet'
     , _eugUploadType     :: !(Maybe Text)
     , _eugClientVersion  :: !(Maybe Text)
     , _eugCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EncodedUpdatesGet' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ encodedUpdatesGet
     :: ByteString -- ^ 'eugEncodedRequest'
     -> EncodedUpdatesGet
 encodedUpdatesGet pEugEncodedRequest_ =
-    EncodedUpdatesGet'
+  EncodedUpdatesGet'
     { _eugClientId = Nothing
     , _eugXgafv = Nothing
     , _eugUploadProtocol = Nothing
@@ -109,6 +112,7 @@ encodedUpdatesGet pEugEncodedRequest_ =
     , _eugClientVersion = Nothing
     , _eugCallback = Nothing
     }
+
 
 -- | A client ID that uniquely identifies the client implementation of the
 -- Safe Browsing API.

@@ -36,14 +36,14 @@ module Network.Google.Resource.Classroom.Courses.Teachers.List
     , CoursesTeachersList
 
     -- * Request Lenses
-    , ctlXgafv
-    , ctlUploadProtocol
-    , ctlCourseId
-    , ctlAccessToken
-    , ctlUploadType
-    , ctlPageToken
-    , ctlPageSize
-    , ctlCallback
+    , ctltXgafv
+    , ctltUploadProtocol
+    , ctltCourseId
+    , ctltAccessToken
+    , ctltUploadType
+    , ctltPageToken
+    , ctltPageSize
+    , ctltCallback
     ) where
 
 import           Network.Google.Classroom.Types
@@ -72,97 +72,103 @@ type CoursesTeachersListResource =
 -- access errors.
 --
 -- /See:/ 'coursesTeachersList' smart constructor.
-data CoursesTeachersList = CoursesTeachersList'
-    { _ctlXgafv          :: !(Maybe Xgafv)
-    , _ctlUploadProtocol :: !(Maybe Text)
-    , _ctlCourseId       :: !Text
-    , _ctlAccessToken    :: !(Maybe Text)
-    , _ctlUploadType     :: !(Maybe Text)
-    , _ctlPageToken      :: !(Maybe Text)
-    , _ctlPageSize       :: !(Maybe (Textual Int32))
-    , _ctlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data CoursesTeachersList =
+  CoursesTeachersList'
+    { _ctltXgafv          :: !(Maybe Xgafv)
+    , _ctltUploadProtocol :: !(Maybe Text)
+    , _ctltCourseId       :: !Text
+    , _ctltAccessToken    :: !(Maybe Text)
+    , _ctltUploadType     :: !(Maybe Text)
+    , _ctltPageToken      :: !(Maybe Text)
+    , _ctltPageSize       :: !(Maybe (Textual Int32))
+    , _ctltCallback       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesTeachersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctlXgafv'
+-- * 'ctltXgafv'
 --
--- * 'ctlUploadProtocol'
+-- * 'ctltUploadProtocol'
 --
--- * 'ctlCourseId'
+-- * 'ctltCourseId'
 --
--- * 'ctlAccessToken'
+-- * 'ctltAccessToken'
 --
--- * 'ctlUploadType'
+-- * 'ctltUploadType'
 --
--- * 'ctlPageToken'
+-- * 'ctltPageToken'
 --
--- * 'ctlPageSize'
+-- * 'ctltPageSize'
 --
--- * 'ctlCallback'
+-- * 'ctltCallback'
 coursesTeachersList
-    :: Text -- ^ 'ctlCourseId'
+    :: Text -- ^ 'ctltCourseId'
     -> CoursesTeachersList
-coursesTeachersList pCtlCourseId_ =
-    CoursesTeachersList'
-    { _ctlXgafv = Nothing
-    , _ctlUploadProtocol = Nothing
-    , _ctlCourseId = pCtlCourseId_
-    , _ctlAccessToken = Nothing
-    , _ctlUploadType = Nothing
-    , _ctlPageToken = Nothing
-    , _ctlPageSize = Nothing
-    , _ctlCallback = Nothing
+coursesTeachersList pCtltCourseId_ =
+  CoursesTeachersList'
+    { _ctltXgafv = Nothing
+    , _ctltUploadProtocol = Nothing
+    , _ctltCourseId = pCtltCourseId_
+    , _ctltAccessToken = Nothing
+    , _ctltUploadType = Nothing
+    , _ctltPageToken = Nothing
+    , _ctltPageSize = Nothing
+    , _ctltCallback = Nothing
     }
 
+
 -- | V1 error format.
-ctlXgafv :: Lens' CoursesTeachersList (Maybe Xgafv)
-ctlXgafv = lens _ctlXgafv (\ s a -> s{_ctlXgafv = a})
+ctltXgafv :: Lens' CoursesTeachersList (Maybe Xgafv)
+ctltXgafv
+  = lens _ctltXgafv (\ s a -> s{_ctltXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ctlUploadProtocol :: Lens' CoursesTeachersList (Maybe Text)
-ctlUploadProtocol
-  = lens _ctlUploadProtocol
-      (\ s a -> s{_ctlUploadProtocol = a})
+ctltUploadProtocol :: Lens' CoursesTeachersList (Maybe Text)
+ctltUploadProtocol
+  = lens _ctltUploadProtocol
+      (\ s a -> s{_ctltUploadProtocol = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-ctlCourseId :: Lens' CoursesTeachersList Text
-ctlCourseId
-  = lens _ctlCourseId (\ s a -> s{_ctlCourseId = a})
+ctltCourseId :: Lens' CoursesTeachersList Text
+ctltCourseId
+  = lens _ctltCourseId (\ s a -> s{_ctltCourseId = a})
 
 -- | OAuth access token.
-ctlAccessToken :: Lens' CoursesTeachersList (Maybe Text)
-ctlAccessToken
-  = lens _ctlAccessToken
-      (\ s a -> s{_ctlAccessToken = a})
+ctltAccessToken :: Lens' CoursesTeachersList (Maybe Text)
+ctltAccessToken
+  = lens _ctltAccessToken
+      (\ s a -> s{_ctltAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ctlUploadType :: Lens' CoursesTeachersList (Maybe Text)
-ctlUploadType
-  = lens _ctlUploadType
-      (\ s a -> s{_ctlUploadType = a})
+ctltUploadType :: Lens' CoursesTeachersList (Maybe Text)
+ctltUploadType
+  = lens _ctltUploadType
+      (\ s a -> s{_ctltUploadType = a})
 
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
-ctlPageToken :: Lens' CoursesTeachersList (Maybe Text)
-ctlPageToken
-  = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
+ctltPageToken :: Lens' CoursesTeachersList (Maybe Text)
+ctltPageToken
+  = lens _ctltPageToken
+      (\ s a -> s{_ctltPageToken = a})
 
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
-ctlPageSize :: Lens' CoursesTeachersList (Maybe Int32)
-ctlPageSize
-  = lens _ctlPageSize (\ s a -> s{_ctlPageSize = a}) .
-      mapping _Coerce
+ctltPageSize :: Lens' CoursesTeachersList (Maybe Int32)
+ctltPageSize
+  = lens _ctltPageSize (\ s a -> s{_ctltPageSize = a})
+      . mapping _Coerce
 
 -- | JSONP
-ctlCallback :: Lens' CoursesTeachersList (Maybe Text)
-ctlCallback
-  = lens _ctlCallback (\ s a -> s{_ctlCallback = a})
+ctltCallback :: Lens' CoursesTeachersList (Maybe Text)
+ctltCallback
+  = lens _ctltCallback (\ s a -> s{_ctltCallback = a})
 
 instance GoogleRequest CoursesTeachersList where
         type Rs CoursesTeachersList = ListTeachersResponse
@@ -172,12 +178,12 @@ instance GoogleRequest CoursesTeachersList where
                "https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesTeachersList'{..}
-          = go _ctlCourseId _ctlXgafv _ctlUploadProtocol
-              _ctlAccessToken
-              _ctlUploadType
-              _ctlPageToken
-              _ctlPageSize
-              _ctlCallback
+          = go _ctltCourseId _ctltXgafv _ctltUploadProtocol
+              _ctltAccessToken
+              _ctltUploadType
+              _ctltPageToken
+              _ctltPageSize
+              _ctltCallback
               (Just AltJSON)
               classroomService
           where go

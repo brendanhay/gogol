@@ -57,11 +57,14 @@ import           Network.Google.Prelude
 -- security\/privacy reasons.
 --
 -- /See:/ 'googleRpcStatus' smart constructor.
-data GoogleRpcStatus = GoogleRpcStatus'
+data GoogleRpcStatus =
+  GoogleRpcStatus'
     { _grsDetails :: !(Maybe [GoogleRpcStatusDetailsItem])
     , _grsCode    :: !(Maybe (Textual Int32))
     , _grsMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpcStatus' with the minimum fields required to make a request.
 --
@@ -75,11 +78,9 @@ data GoogleRpcStatus = GoogleRpcStatus'
 googleRpcStatus
     :: GoogleRpcStatus
 googleRpcStatus =
-    GoogleRpcStatus'
-    { _grsDetails = Nothing
-    , _grsCode = Nothing
-    , _grsMessage = Nothing
-    }
+  GoogleRpcStatus'
+    {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -121,10 +122,13 @@ instance ToJSON GoogleRpcStatus where
 -- | Represents a single followup intent in the chain.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentFollowupIntentInfo' smart constructor.
-data GoogleCloudDialogflowV2IntentFollowupIntentInfo = GoogleCloudDialogflowV2IntentFollowupIntentInfo'
+data GoogleCloudDialogflowV2IntentFollowupIntentInfo =
+  GoogleCloudDialogflowV2IntentFollowupIntentInfo'
     { _gcdvifiiFollowupIntentName       :: !(Maybe Text)
     , _gcdvifiiParentFollowupIntentName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentFollowupIntentInfo' with the minimum fields required to make a request.
 --
@@ -136,10 +140,11 @@ data GoogleCloudDialogflowV2IntentFollowupIntentInfo = GoogleCloudDialogflowV2In
 googleCloudDialogflowV2IntentFollowupIntentInfo
     :: GoogleCloudDialogflowV2IntentFollowupIntentInfo
 googleCloudDialogflowV2IntentFollowupIntentInfo =
-    GoogleCloudDialogflowV2IntentFollowupIntentInfo'
+  GoogleCloudDialogflowV2IntentFollowupIntentInfo'
     { _gcdvifiiFollowupIntentName = Nothing
     , _gcdvifiiParentFollowupIntentName = Nothing
     }
+
 
 -- | The unique identifier of the followup intent. Format:
 -- \`projects\/\/agent\/intents\/\`.
@@ -156,7 +161,8 @@ gcdvifiiParentFollowupIntentName
       (\ s a -> s{_gcdvifiiParentFollowupIntentName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentFollowupIntentInfo where
+           GoogleCloudDialogflowV2IntentFollowupIntentInfo
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentFollowupIntentInfo"
@@ -166,7 +172,8 @@ instance FromJSON
                      (o .:? "parentFollowupIntentName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentFollowupIntentInfo where
+           GoogleCloudDialogflowV2IntentFollowupIntentInfo
+         where
         toJSON
           GoogleCloudDialogflowV2IntentFollowupIntentInfo'{..}
           = object
@@ -182,9 +189,12 @@ instance ToJSON
 -- \`SimpleResponse\`.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageSimpleResponses' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses = GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses'
+newtype GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses =
+  GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses'
     { _gcdvimsrSimpleResponses :: Maybe [GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses' with the minimum fields required to make a request.
 --
@@ -194,9 +204,9 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses = GoogleCloudDi
 googleCloudDialogflowV2beta1IntentMessageSimpleResponses
     :: GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses
 googleCloudDialogflowV2beta1IntentMessageSimpleResponses =
-    GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses'
-    { _gcdvimsrSimpleResponses = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses'
+    {_gcdvimsrSimpleResponses = Nothing}
+
 
 -- | Required. The list of simple responses.
 gcdvimsrSimpleResponses :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses [GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse]
@@ -207,7 +217,7 @@ gcdvimsrSimpleResponses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses
+           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses
          where
         parseJSON
           = withObject
@@ -217,7 +227,7 @@ instance FromJSON
                    <$> (o .:? "simpleResponses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses
+           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses'{..}
@@ -226,15 +236,132 @@ instance ToJSON
                  [("simpleResponses" .=) <$>
                     _gcdvimsrSimpleResponses])
 
+-- | Configuration of how speech should be synthesized.
+--
+-- /See:/ 'googleCloudDialogflowV2SynthesizeSpeechConfig' smart constructor.
+data GoogleCloudDialogflowV2SynthesizeSpeechConfig =
+  GoogleCloudDialogflowV2SynthesizeSpeechConfig'
+    { _gcdvsscVolumeGainDB     :: !(Maybe (Textual Double))
+    , _gcdvsscEffectsProFileId :: !(Maybe [Text])
+    , _gcdvsscVoice            :: !(Maybe GoogleCloudDialogflowV2VoiceSelectionParams)
+    , _gcdvsscSpeakingRate     :: !(Maybe (Textual Double))
+    , _gcdvsscPitch            :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SynthesizeSpeechConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvsscVolumeGainDB'
+--
+-- * 'gcdvsscEffectsProFileId'
+--
+-- * 'gcdvsscVoice'
+--
+-- * 'gcdvsscSpeakingRate'
+--
+-- * 'gcdvsscPitch'
+googleCloudDialogflowV2SynthesizeSpeechConfig
+    :: GoogleCloudDialogflowV2SynthesizeSpeechConfig
+googleCloudDialogflowV2SynthesizeSpeechConfig =
+  GoogleCloudDialogflowV2SynthesizeSpeechConfig'
+    { _gcdvsscVolumeGainDB = Nothing
+    , _gcdvsscEffectsProFileId = Nothing
+    , _gcdvsscVoice = Nothing
+    , _gcdvsscSpeakingRate = Nothing
+    , _gcdvsscPitch = Nothing
+    }
+
+
+-- | Optional. Volume gain (in dB) of the normal native volume supported by
+-- the specific voice, in the range [-96.0, 16.0]. If unset, or set to a
+-- value of 0.0 (dB), will play at normal native signal amplitude. A value
+-- of -6.0 (dB) will play at approximately half the amplitude of the normal
+-- native signal amplitude. A value of +6.0 (dB) will play at approximately
+-- twice the amplitude of the normal native signal amplitude. We strongly
+-- recommend not to exceed +10 (dB) as there\'s usually no effective
+-- increase in loudness for any value greater than that.
+gcdvsscVolumeGainDB :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe Double)
+gcdvsscVolumeGainDB
+  = lens _gcdvsscVolumeGainDB
+      (\ s a -> s{_gcdvsscVolumeGainDB = a})
+      . mapping _Coerce
+
+-- | Optional. An identifier which selects \'audio effects\' profiles that
+-- are applied on (post synthesized) text to speech. Effects are applied on
+-- top of each other in the order they are given.
+gcdvsscEffectsProFileId :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig [Text]
+gcdvsscEffectsProFileId
+  = lens _gcdvsscEffectsProFileId
+      (\ s a -> s{_gcdvsscEffectsProFileId = a})
+      . _Default
+      . _Coerce
+
+-- | Optional. The desired voice of the synthesized audio.
+gcdvsscVoice :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe GoogleCloudDialogflowV2VoiceSelectionParams)
+gcdvsscVoice
+  = lens _gcdvsscVoice (\ s a -> s{_gcdvsscVoice = a})
+
+-- | Optional. Speaking rate\/speed, in the range [0.25, 4.0]. 1.0 is the
+-- normal native speed supported by the specific voice. 2.0 is twice as
+-- fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0
+-- speed. Any other values \< 0.25 or > 4.0 will return an error.
+gcdvsscSpeakingRate :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe Double)
+gcdvsscSpeakingRate
+  = lens _gcdvsscSpeakingRate
+      (\ s a -> s{_gcdvsscSpeakingRate = a})
+      . mapping _Coerce
+
+-- | Optional. Speaking pitch, in the range [-20.0, 20.0]. 20 means increase
+-- 20 semitones from the original pitch. -20 means decrease 20 semitones
+-- from the original pitch.
+gcdvsscPitch :: Lens' GoogleCloudDialogflowV2SynthesizeSpeechConfig (Maybe Double)
+gcdvsscPitch
+  = lens _gcdvsscPitch (\ s a -> s{_gcdvsscPitch = a})
+      . mapping _Coerce
+
+instance FromJSON
+           GoogleCloudDialogflowV2SynthesizeSpeechConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2SynthesizeSpeechConfig"
+              (\ o ->
+                 GoogleCloudDialogflowV2SynthesizeSpeechConfig' <$>
+                   (o .:? "volumeGainDb") <*>
+                     (o .:? "effectsProfileId" .!= mempty)
+                     <*> (o .:? "voice")
+                     <*> (o .:? "speakingRate")
+                     <*> (o .:? "pitch"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2SynthesizeSpeechConfig
+         where
+        toJSON
+          GoogleCloudDialogflowV2SynthesizeSpeechConfig'{..}
+          = object
+              (catMaybes
+                 [("volumeGainDb" .=) <$> _gcdvsscVolumeGainDB,
+                  ("effectsProfileId" .=) <$> _gcdvsscEffectsProFileId,
+                  ("voice" .=) <$> _gcdvsscVoice,
+                  ("speakingRate" .=) <$> _gcdvsscSpeakingRate,
+                  ("pitch" .=) <$> _gcdvsscPitch])
+
 -- | Instructs the speech recognizer how to process the audio content.
 --
 -- /See:/ 'googleCloudDialogflowV2InputAudioConfig' smart constructor.
-data GoogleCloudDialogflowV2InputAudioConfig = GoogleCloudDialogflowV2InputAudioConfig'
+data GoogleCloudDialogflowV2InputAudioConfig =
+  GoogleCloudDialogflowV2InputAudioConfig'
     { _gcdviacLanguageCode    :: !(Maybe Text)
     , _gcdviacPhraseHints     :: !(Maybe [Text])
     , _gcdviacSampleRateHertz :: !(Maybe (Textual Int32))
+    , _gcdviacModelVariant    :: !(Maybe GoogleCloudDialogflowV2InputAudioConfigModelVariant)
     , _gcdviacAudioEncoding   :: !(Maybe GoogleCloudDialogflowV2InputAudioConfigAudioEncoding)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2InputAudioConfig' with the minimum fields required to make a request.
 --
@@ -246,22 +373,27 @@ data GoogleCloudDialogflowV2InputAudioConfig = GoogleCloudDialogflowV2InputAudio
 --
 -- * 'gcdviacSampleRateHertz'
 --
+-- * 'gcdviacModelVariant'
+--
 -- * 'gcdviacAudioEncoding'
 googleCloudDialogflowV2InputAudioConfig
     :: GoogleCloudDialogflowV2InputAudioConfig
 googleCloudDialogflowV2InputAudioConfig =
-    GoogleCloudDialogflowV2InputAudioConfig'
+  GoogleCloudDialogflowV2InputAudioConfig'
     { _gcdviacLanguageCode = Nothing
     , _gcdviacPhraseHints = Nothing
     , _gcdviacSampleRateHertz = Nothing
+    , _gcdviacModelVariant = Nothing
     , _gcdviacAudioEncoding = Nothing
     }
 
+
 -- | Required. The language of the supplied audio. Dialogflow does not do
 -- translations. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gcdviacLanguageCode :: Lens' GoogleCloudDialogflowV2InputAudioConfig (Maybe Text)
 gcdviacLanguageCode
   = lens _gcdviacLanguageCode
@@ -288,6 +420,12 @@ gcdviacSampleRateHertz
       (\ s a -> s{_gcdviacSampleRateHertz = a})
       . mapping _Coerce
 
+-- | Optional. Which variant of the Speech model to use.
+gcdviacModelVariant :: Lens' GoogleCloudDialogflowV2InputAudioConfig (Maybe GoogleCloudDialogflowV2InputAudioConfigModelVariant)
+gcdviacModelVariant
+  = lens _gcdviacModelVariant
+      (\ s a -> s{_gcdviacModelVariant = a})
+
 -- | Required. Audio encoding of the audio content to process.
 gcdviacAudioEncoding :: Lens' GoogleCloudDialogflowV2InputAudioConfig (Maybe GoogleCloudDialogflowV2InputAudioConfigAudioEncoding)
 gcdviacAudioEncoding
@@ -295,7 +433,8 @@ gcdviacAudioEncoding
       (\ s a -> s{_gcdviacAudioEncoding = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2InputAudioConfig where
+           GoogleCloudDialogflowV2InputAudioConfig
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2InputAudioConfig"
@@ -304,24 +443,30 @@ instance FromJSON
                    (o .:? "languageCode") <*>
                      (o .:? "phraseHints" .!= mempty)
                      <*> (o .:? "sampleRateHertz")
+                     <*> (o .:? "modelVariant")
                      <*> (o .:? "audioEncoding"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2InputAudioConfig where
+           GoogleCloudDialogflowV2InputAudioConfig
+         where
         toJSON GoogleCloudDialogflowV2InputAudioConfig'{..}
           = object
               (catMaybes
                  [("languageCode" .=) <$> _gcdviacLanguageCode,
                   ("phraseHints" .=) <$> _gcdviacPhraseHints,
                   ("sampleRateHertz" .=) <$> _gcdviacSampleRateHertz,
+                  ("modelVariant" .=) <$> _gcdviacModelVariant,
                   ("audioEncoding" .=) <$> _gcdviacAudioEncoding])
 
 -- | The response message for Intents.BatchUpdateIntents.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1BatchUpdateIntentsResponse' smart constructor.
-newtype GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse = GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse'
+newtype GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse =
+  GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse'
     { _gcdvbuirIntents :: Maybe [GoogleCloudDialogflowV2beta1Intent]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse' with the minimum fields required to make a request.
 --
@@ -331,9 +476,9 @@ newtype GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse = GoogleCloudDial
 googleCloudDialogflowV2beta1BatchUpdateIntentsResponse
     :: GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
 googleCloudDialogflowV2beta1BatchUpdateIntentsResponse =
-    GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse'
-    { _gcdvbuirIntents = Nothing
-    }
+  GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse'
+    {_gcdvbuirIntents = Nothing}
+
 
 -- | The collection of updated or created intents.
 gcdvbuirIntents :: Lens' GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse [GoogleCloudDialogflowV2beta1Intent]
@@ -344,7 +489,7 @@ gcdvbuirIntents
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
+           GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
          where
         parseJSON
           = withObject
@@ -354,7 +499,7 @@ instance FromJSON
                    <$> (o .:? "intents" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
+           GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
          where
         toJSON
           GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse'{..}
@@ -366,9 +511,12 @@ instance ToJSON
 -- may be required for your platform.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessagePayload' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessagePayload = GoogleCloudDialogflowV2beta1IntentMessagePayload'
+newtype GoogleCloudDialogflowV2beta1IntentMessagePayload =
+  GoogleCloudDialogflowV2beta1IntentMessagePayload'
     { _gcdvimpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessagePayload' with the minimum fields required to make a request.
 --
@@ -379,9 +527,9 @@ googleCloudDialogflowV2beta1IntentMessagePayload
     :: HashMap Text JSONValue -- ^ 'gcdvimpAddtional'
     -> GoogleCloudDialogflowV2beta1IntentMessagePayload
 googleCloudDialogflowV2beta1IntentMessagePayload pGcdvimpAddtional_ =
-    GoogleCloudDialogflowV2beta1IntentMessagePayload'
-    { _gcdvimpAddtional = _Coerce # pGcdvimpAddtional_
-    }
+  GoogleCloudDialogflowV2beta1IntentMessagePayload'
+    {_gcdvimpAddtional = _Coerce # pGcdvimpAddtional_}
+
 
 -- | Properties of the object.
 gcdvimpAddtional :: Lens' GoogleCloudDialogflowV2beta1IntentMessagePayload (HashMap Text JSONValue)
@@ -391,7 +539,7 @@ gcdvimpAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessagePayload
+           GoogleCloudDialogflowV2beta1IntentMessagePayload
          where
         parseJSON
           = withObject
@@ -401,19 +549,22 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessagePayload
+           GoogleCloudDialogflowV2beta1IntentMessagePayload
          where
         toJSON = toJSON . _gcdvimpAddtional
 
 -- | The request message for a webhook call.
 --
 -- /See:/ 'googleCloudDialogflowV2WebhookRequest' smart constructor.
-data GoogleCloudDialogflowV2WebhookRequest = GoogleCloudDialogflowV2WebhookRequest'
+data GoogleCloudDialogflowV2WebhookRequest =
+  GoogleCloudDialogflowV2WebhookRequest'
     { _gcdvwrOriginalDetectIntentRequest :: !(Maybe GoogleCloudDialogflowV2OriginalDetectIntentRequest)
     , _gcdvwrResponseId                  :: !(Maybe Text)
     , _gcdvwrQueryResult                 :: !(Maybe GoogleCloudDialogflowV2QueryResult)
     , _gcdvwrSession                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2WebhookRequest' with the minimum fields required to make a request.
 --
@@ -429,12 +580,13 @@ data GoogleCloudDialogflowV2WebhookRequest = GoogleCloudDialogflowV2WebhookReque
 googleCloudDialogflowV2WebhookRequest
     :: GoogleCloudDialogflowV2WebhookRequest
 googleCloudDialogflowV2WebhookRequest =
-    GoogleCloudDialogflowV2WebhookRequest'
+  GoogleCloudDialogflowV2WebhookRequest'
     { _gcdvwrOriginalDetectIntentRequest = Nothing
     , _gcdvwrResponseId = Nothing
     , _gcdvwrQueryResult = Nothing
     , _gcdvwrSession = Nothing
     }
+
 
 -- | Optional. The contents of the original request that was passed to
 -- \`[Streaming]DetectIntent\` call.
@@ -467,7 +619,8 @@ gcdvwrSession
       (\ s a -> s{_gcdvwrSession = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2WebhookRequest where
+           GoogleCloudDialogflowV2WebhookRequest
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2WebhookRequest"
               (\ o ->
@@ -491,12 +644,15 @@ instance ToJSON GoogleCloudDialogflowV2WebhookRequest
 -- | An item in the carousel.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageCarouselSelectItem' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageCarouselSelectItem = GoogleCloudDialogflowV2IntentMessageCarouselSelectItem'
+data GoogleCloudDialogflowV2IntentMessageCarouselSelectItem =
+  GoogleCloudDialogflowV2IntentMessageCarouselSelectItem'
     { _gcdvimcsiImage       :: !(Maybe GoogleCloudDialogflowV2IntentMessageImage)
     , _gcdvimcsiTitle       :: !(Maybe Text)
     , _gcdvimcsiDescription :: !(Maybe Text)
     , _gcdvimcsiInfo        :: !(Maybe GoogleCloudDialogflowV2IntentMessageSelectItemInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCarouselSelectItem' with the minimum fields required to make a request.
 --
@@ -512,12 +668,13 @@ data GoogleCloudDialogflowV2IntentMessageCarouselSelectItem = GoogleCloudDialogf
 googleCloudDialogflowV2IntentMessageCarouselSelectItem
     :: GoogleCloudDialogflowV2IntentMessageCarouselSelectItem
 googleCloudDialogflowV2IntentMessageCarouselSelectItem =
-    GoogleCloudDialogflowV2IntentMessageCarouselSelectItem'
+  GoogleCloudDialogflowV2IntentMessageCarouselSelectItem'
     { _gcdvimcsiImage = Nothing
     , _gcdvimcsiTitle = Nothing
     , _gcdvimcsiDescription = Nothing
     , _gcdvimcsiInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gcdvimcsiImage :: Lens' GoogleCloudDialogflowV2IntentMessageCarouselSelectItem (Maybe GoogleCloudDialogflowV2IntentMessageImage)
@@ -544,7 +701,7 @@ gcdvimcsiInfo
       (\ s a -> s{_gcdvimcsiInfo = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageCarouselSelectItem
+           GoogleCloudDialogflowV2IntentMessageCarouselSelectItem
          where
         parseJSON
           = withObject
@@ -557,7 +714,7 @@ instance FromJSON
                      <*> (o .:? "info"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageCarouselSelectItem
+           GoogleCloudDialogflowV2IntentMessageCarouselSelectItem
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageCarouselSelectItem'{..}
@@ -571,14 +728,18 @@ instance ToJSON
 -- | Events allow for matching intents by event name instead of the natural
 -- language input. For instance, input \`\` can trigger a personalized
 -- welcome response. The parameter \`name\` may be used by the agent in the
--- response: \`“Hello #welcome_event.name! What can I do for you today?”\`.
+-- response: \`\"Hello #welcome_event.name! What can I do for you
+-- today?\"\`.
 --
 -- /See:/ 'googleCloudDialogflowV2EventInput' smart constructor.
-data GoogleCloudDialogflowV2EventInput = GoogleCloudDialogflowV2EventInput'
+data GoogleCloudDialogflowV2EventInput =
+  GoogleCloudDialogflowV2EventInput'
     { _gcdveiLanguageCode :: !(Maybe Text)
     , _gcdveiName         :: !(Maybe Text)
     , _gcdveiParameters   :: !(Maybe GoogleCloudDialogflowV2EventInputParameters)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2EventInput' with the minimum fields required to make a request.
 --
@@ -592,16 +753,18 @@ data GoogleCloudDialogflowV2EventInput = GoogleCloudDialogflowV2EventInput'
 googleCloudDialogflowV2EventInput
     :: GoogleCloudDialogflowV2EventInput
 googleCloudDialogflowV2EventInput =
-    GoogleCloudDialogflowV2EventInput'
+  GoogleCloudDialogflowV2EventInput'
     { _gcdveiLanguageCode = Nothing
     , _gcdveiName = Nothing
     , _gcdveiParameters = Nothing
     }
 
+
 -- | Required. The language of this query. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gcdveiLanguageCode :: Lens' GoogleCloudDialogflowV2EventInput (Maybe Text)
 gcdveiLanguageCode
   = lens _gcdveiLanguageCode
@@ -639,11 +802,14 @@ instance ToJSON GoogleCloudDialogflowV2EventInput
 -- | The simple response message containing speech or text.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageSimpleResponse' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageSimpleResponse = GoogleCloudDialogflowV2IntentMessageSimpleResponse'
+data GoogleCloudDialogflowV2IntentMessageSimpleResponse =
+  GoogleCloudDialogflowV2IntentMessageSimpleResponse'
     { _gcdvimsrDisplayText  :: !(Maybe Text)
     , _gcdvimsrSsml         :: !(Maybe Text)
     , _gcdvimsrTextToSpeech :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSimpleResponse' with the minimum fields required to make a request.
 --
@@ -657,11 +823,12 @@ data GoogleCloudDialogflowV2IntentMessageSimpleResponse = GoogleCloudDialogflowV
 googleCloudDialogflowV2IntentMessageSimpleResponse
     :: GoogleCloudDialogflowV2IntentMessageSimpleResponse
 googleCloudDialogflowV2IntentMessageSimpleResponse =
-    GoogleCloudDialogflowV2IntentMessageSimpleResponse'
+  GoogleCloudDialogflowV2IntentMessageSimpleResponse'
     { _gcdvimsrDisplayText = Nothing
     , _gcdvimsrSsml = Nothing
     , _gcdvimsrTextToSpeech = Nothing
     }
+
 
 -- | Optional. The text to display.
 gcdvimsrDisplayText :: Lens' GoogleCloudDialogflowV2IntentMessageSimpleResponse (Maybe Text)
@@ -684,7 +851,7 @@ gcdvimsrTextToSpeech
       (\ s a -> s{_gcdvimsrTextToSpeech = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageSimpleResponse
+           GoogleCloudDialogflowV2IntentMessageSimpleResponse
          where
         parseJSON
           = withObject
@@ -696,7 +863,7 @@ instance FromJSON
                      (o .:? "textToSpeech"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageSimpleResponse
+           GoogleCloudDialogflowV2IntentMessageSimpleResponse
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageSimpleResponse'{..}
@@ -712,9 +879,12 @@ instance ToJSON
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'googleLongrunningOperationMetadata' smart constructor.
-newtype GoogleLongrunningOperationMetadata = GoogleLongrunningOperationMetadata'
+newtype GoogleLongrunningOperationMetadata =
+  GoogleLongrunningOperationMetadata'
     { _glomAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
@@ -725,9 +895,9 @@ googleLongrunningOperationMetadata
     :: HashMap Text JSONValue -- ^ 'glomAddtional'
     -> GoogleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
-    GoogleLongrunningOperationMetadata'
-    { _glomAddtional = _Coerce # pGlomAddtional_
-    }
+  GoogleLongrunningOperationMetadata'
+    {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -748,15 +918,18 @@ instance ToJSON GoogleLongrunningOperationMetadata
          where
         toJSON = toJSON . _glomAddtional
 
--- | Represents an example or template that the agent is trained on.
+-- | Represents an example that the agent is trained on.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentTrainingPhrase' smart constructor.
-data GoogleCloudDialogflowV2IntentTrainingPhrase = GoogleCloudDialogflowV2IntentTrainingPhrase'
+data GoogleCloudDialogflowV2IntentTrainingPhrase =
+  GoogleCloudDialogflowV2IntentTrainingPhrase'
     { _gcdvitpParts           :: !(Maybe [GoogleCloudDialogflowV2IntentTrainingPhrasePart])
     , _gcdvitpName            :: !(Maybe Text)
     , _gcdvitpTimesAddedCount :: !(Maybe (Textual Int32))
     , _gcdvitpType            :: !(Maybe GoogleCloudDialogflowV2IntentTrainingPhraseType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentTrainingPhrase' with the minimum fields required to make a request.
 --
@@ -772,16 +945,27 @@ data GoogleCloudDialogflowV2IntentTrainingPhrase = GoogleCloudDialogflowV2Intent
 googleCloudDialogflowV2IntentTrainingPhrase
     :: GoogleCloudDialogflowV2IntentTrainingPhrase
 googleCloudDialogflowV2IntentTrainingPhrase =
-    GoogleCloudDialogflowV2IntentTrainingPhrase'
+  GoogleCloudDialogflowV2IntentTrainingPhrase'
     { _gcdvitpParts = Nothing
     , _gcdvitpName = Nothing
     , _gcdvitpTimesAddedCount = Nothing
     , _gcdvitpType = Nothing
     }
 
--- | Required. The collection of training phrase parts (can be annotated).
--- Fields: \`entity_type\`, \`alias\` and \`user_defined\` should be
--- populated only for the annotated parts of the training phrase.
+
+-- | Required. The ordered list of training phrase parts. The parts are
+-- concatenated in order to form the training phrase. Note: The API does
+-- not automatically annotate training phrases like the Dialogflow Console
+-- does. Note: Do not forget to include whitespace at part boundaries, so
+-- the training phrase is well formatted when the parts are concatenated.
+-- If the training phrase does not need to be annotated with parameters,
+-- you just need a single part with only the Part.text field set. If you
+-- want to annotate the training phrase, you must create multiple parts,
+-- where the fields of each part are populated in one of two ways: -
+-- \`Part.text\` is set to a part of the phrase that has no parameters. -
+-- \`Part.text\` is set to a part of the phrase that you want to annotate,
+-- and the \`entity_type\`, \`alias\`, and \`user_defined\` fields are all
+-- set.
 gcdvitpParts :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrase [GoogleCloudDialogflowV2IntentTrainingPhrasePart]
 gcdvitpParts
   = lens _gcdvitpParts (\ s a -> s{_gcdvitpParts = a})
@@ -793,9 +977,9 @@ gcdvitpName :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrase (Maybe Text)
 gcdvitpName
   = lens _gcdvitpName (\ s a -> s{_gcdvitpName = a})
 
--- | Optional. Indicates how many times this example or template was added to
--- the intent. Each time a developer adds an existing sample by editing an
--- intent or training, this counter is increased.
+-- | Optional. Indicates how many times this example was added to the intent.
+-- Each time a developer adds an existing sample by editing an intent or
+-- training, this counter is increased.
 gcdvitpTimesAddedCount :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrase (Maybe Int32)
 gcdvitpTimesAddedCount
   = lens _gcdvitpTimesAddedCount
@@ -808,7 +992,8 @@ gcdvitpType
   = lens _gcdvitpType (\ s a -> s{_gcdvitpType = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentTrainingPhrase where
+           GoogleCloudDialogflowV2IntentTrainingPhrase
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentTrainingPhrase"
@@ -819,7 +1004,8 @@ instance FromJSON
                      <*> (o .:? "type"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentTrainingPhrase where
+           GoogleCloudDialogflowV2IntentTrainingPhrase
+         where
         toJSON
           GoogleCloudDialogflowV2IntentTrainingPhrase'{..}
           = object
@@ -832,12 +1018,15 @@ instance ToJSON
 -- | An item in the carousel.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageCarouselSelectItem' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem = GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem'
+data GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem =
+  GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem'
     { _gImage       :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
     , _gTitle       :: !(Maybe Text)
     , _gDescription :: !(Maybe Text)
     , _gInfo        :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem' with the minimum fields required to make a request.
 --
@@ -853,12 +1042,13 @@ data GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem = GoogleCloudDi
 googleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
     :: GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
 googleCloudDialogflowV2beta1IntentMessageCarouselSelectItem =
-    GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem'
+  GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem'
     { _gImage = Nothing
     , _gTitle = Nothing
     , _gDescription = Nothing
     , _gInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gImage :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem (Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
@@ -878,7 +1068,7 @@ gInfo :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem (Mayb
 gInfo = lens _gInfo (\ s a -> s{_gInfo = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
+           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
          where
         parseJSON
           = withObject
@@ -891,7 +1081,7 @@ instance FromJSON
                      <*> (o .:? "info"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
+           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem'{..}
@@ -904,13 +1094,16 @@ instance ToJSON
 -- | The basic card message. Useful for displaying information.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageBasicCard' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageBasicCard = GoogleCloudDialogflowV2IntentMessageBasicCard'
+data GoogleCloudDialogflowV2IntentMessageBasicCard =
+  GoogleCloudDialogflowV2IntentMessageBasicCard'
     { _gcdvimbcImage         :: !(Maybe GoogleCloudDialogflowV2IntentMessageImage)
     , _gcdvimbcButtons       :: !(Maybe [GoogleCloudDialogflowV2IntentMessageBasicCardButton])
     , _gcdvimbcSubtitle      :: !(Maybe Text)
     , _gcdvimbcTitle         :: !(Maybe Text)
     , _gcdvimbcFormattedText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageBasicCard' with the minimum fields required to make a request.
 --
@@ -928,13 +1121,14 @@ data GoogleCloudDialogflowV2IntentMessageBasicCard = GoogleCloudDialogflowV2Inte
 googleCloudDialogflowV2IntentMessageBasicCard
     :: GoogleCloudDialogflowV2IntentMessageBasicCard
 googleCloudDialogflowV2IntentMessageBasicCard =
-    GoogleCloudDialogflowV2IntentMessageBasicCard'
+  GoogleCloudDialogflowV2IntentMessageBasicCard'
     { _gcdvimbcImage = Nothing
     , _gcdvimbcButtons = Nothing
     , _gcdvimbcSubtitle = Nothing
     , _gcdvimbcTitle = Nothing
     , _gcdvimbcFormattedText = Nothing
     }
+
 
 -- | Optional. The image for the card.
 gcdvimbcImage :: Lens' GoogleCloudDialogflowV2IntentMessageBasicCard (Maybe GoogleCloudDialogflowV2IntentMessageImage)
@@ -969,7 +1163,8 @@ gcdvimbcFormattedText
       (\ s a -> s{_gcdvimbcFormattedText = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageBasicCard where
+           GoogleCloudDialogflowV2IntentMessageBasicCard
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageBasicCard"
@@ -981,7 +1176,8 @@ instance FromJSON
                      <*> (o .:? "formattedText"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageBasicCard where
+           GoogleCloudDialogflowV2IntentMessageBasicCard
+         where
         toJSON
           GoogleCloudDialogflowV2IntentMessageBasicCard'{..}
           = object
@@ -995,11 +1191,14 @@ instance ToJSON
 -- | The simple response message containing speech or text.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageSimpleResponse' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse = GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse'
+data GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse =
+  GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse'
     { _gDisplayText  :: !(Maybe Text)
     , _gSsml         :: !(Maybe Text)
     , _gTextToSpeech :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse' with the minimum fields required to make a request.
 --
@@ -1013,11 +1212,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse = GoogleCloudDialog
 googleCloudDialogflowV2beta1IntentMessageSimpleResponse
     :: GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse
 googleCloudDialogflowV2beta1IntentMessageSimpleResponse =
-    GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse'
-    { _gDisplayText = Nothing
-    , _gSsml = Nothing
-    , _gTextToSpeech = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse'
+    {_gDisplayText = Nothing, _gSsml = Nothing, _gTextToSpeech = Nothing}
+
 
 -- | Optional. The text to display.
 gDisplayText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse (Maybe Text)
@@ -1038,7 +1235,7 @@ gTextToSpeech
       (\ s a -> s{_gTextToSpeech = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse
+           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse
          where
         parseJSON
           = withObject
@@ -1050,7 +1247,7 @@ instance FromJSON
                      (o .:? "textToSpeech"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse
+           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse'{..}
@@ -1065,7 +1262,8 @@ instance ToJSON
 -- sentence semantics.
 --
 -- /See:/ 'googleCloudDialogflowV2Intent' smart constructor.
-data GoogleCloudDialogflowV2Intent = GoogleCloudDialogflowV2Intent'
+data GoogleCloudDialogflowV2Intent =
+  GoogleCloudDialogflowV2Intent'
     { _gcdviDefaultResponsePlatforms :: !(Maybe [Text])
     , _gcdviWebhookState             :: !(Maybe GoogleCloudDialogflowV2IntentWebhookState)
     , _gcdviPriority                 :: !(Maybe (Textual Int32))
@@ -1084,7 +1282,9 @@ data GoogleCloudDialogflowV2Intent = GoogleCloudDialogflowV2Intent'
     , _gcdviIsFallback               :: !(Maybe Bool)
     , _gcdviMlDisabled               :: !(Maybe Bool)
     , _gcdviResetContexts            :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2Intent' with the minimum fields required to make a request.
 --
@@ -1128,7 +1328,7 @@ data GoogleCloudDialogflowV2Intent = GoogleCloudDialogflowV2Intent'
 googleCloudDialogflowV2Intent
     :: GoogleCloudDialogflowV2Intent
 googleCloudDialogflowV2Intent =
-    GoogleCloudDialogflowV2Intent'
+  GoogleCloudDialogflowV2Intent'
     { _gcdviDefaultResponsePlatforms = Nothing
     , _gcdviWebhookState = Nothing
     , _gcdviPriority = Nothing
@@ -1148,6 +1348,7 @@ googleCloudDialogflowV2Intent =
     , _gcdviMlDisabled = Nothing
     , _gcdviResetContexts = Nothing
     }
+
 
 -- | Optional. The list of platforms for which the first response will be
 -- taken from among the messages assigned to the DEFAULT_PLATFORM.
@@ -1188,8 +1389,8 @@ gcdviRootFollowupIntentName
   = lens _gcdviRootFollowupIntentName
       (\ s a -> s{_gcdviRootFollowupIntentName = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of this intent. Format:
+-- | The unique identifier of this intent. Required for Intents.UpdateIntent
+-- and Intents.BatchUpdateIntents methods. Format:
 -- \`projects\/\/agent\/intents\/\`.
 gcdviName :: Lens' GoogleCloudDialogflowV2Intent (Maybe Text)
 gcdviName
@@ -1258,8 +1459,7 @@ gcdviOutputContexts
       . _Default
       . _Coerce
 
--- | Optional. The collection of examples\/templates that the agent is
--- trained on.
+-- | Optional. The collection of examples that the agent is trained on.
 gcdviTrainingPhrases :: Lens' GoogleCloudDialogflowV2Intent [GoogleCloudDialogflowV2IntentTrainingPhrase]
 gcdviTrainingPhrases
   = lens _gcdviTrainingPhrases
@@ -1353,10 +1553,13 @@ instance ToJSON GoogleCloudDialogflowV2Intent where
 -- | The button object that appears at the bottom of a card.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageBasicCardButton' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton = GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton'
+data GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton =
+  GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton'
     { _gcdvimbcbOpenURIAction :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction)
     , _gcdvimbcbTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton' with the minimum fields required to make a request.
 --
@@ -1368,10 +1571,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton = GoogleCloudDialo
 googleCloudDialogflowV2beta1IntentMessageBasicCardButton
     :: GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
 googleCloudDialogflowV2beta1IntentMessageBasicCardButton =
-    GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton'
-    { _gcdvimbcbOpenURIAction = Nothing
-    , _gcdvimbcbTitle = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton'
+    {_gcdvimbcbOpenURIAction = Nothing, _gcdvimbcbTitle = Nothing}
+
 
 -- | Required. Action to take when a user taps on the button.
 gcdvimbcbOpenURIAction :: Lens' GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton (Maybe GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction)
@@ -1386,7 +1588,7 @@ gcdvimbcbTitle
       (\ s a -> s{_gcdvimbcbTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
+           GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
          where
         parseJSON
           = withObject
@@ -1396,7 +1598,7 @@ instance FromJSON
                    <$> (o .:? "openUriAction") <*> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
+           GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton'{..}
@@ -1405,13 +1607,65 @@ instance ToJSON
                  [("openUriAction" .=) <$> _gcdvimbcbOpenURIAction,
                   ("title" .=) <$> _gcdvimbcbTitle])
 
+-- | The result of sentiment analysis as configured by
+-- \`sentiment_analysis_request_config\`.
+--
+-- /See:/ 'googleCloudDialogflowV2SentimentAnalysisResult' smart constructor.
+newtype GoogleCloudDialogflowV2SentimentAnalysisResult =
+  GoogleCloudDialogflowV2SentimentAnalysisResult'
+    { _gcdvsarQueryTextSentiment :: Maybe GoogleCloudDialogflowV2Sentiment
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SentimentAnalysisResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvsarQueryTextSentiment'
+googleCloudDialogflowV2SentimentAnalysisResult
+    :: GoogleCloudDialogflowV2SentimentAnalysisResult
+googleCloudDialogflowV2SentimentAnalysisResult =
+  GoogleCloudDialogflowV2SentimentAnalysisResult'
+    {_gcdvsarQueryTextSentiment = Nothing}
+
+
+-- | The sentiment analysis result for \`query_text\`.
+gcdvsarQueryTextSentiment :: Lens' GoogleCloudDialogflowV2SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2Sentiment)
+gcdvsarQueryTextSentiment
+  = lens _gcdvsarQueryTextSentiment
+      (\ s a -> s{_gcdvsarQueryTextSentiment = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2SentimentAnalysisResult
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2SentimentAnalysisResult"
+              (\ o ->
+                 GoogleCloudDialogflowV2SentimentAnalysisResult' <$>
+                   (o .:? "queryTextSentiment"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2SentimentAnalysisResult
+         where
+        toJSON
+          GoogleCloudDialogflowV2SentimentAnalysisResult'{..}
+          = object
+              (catMaybes
+                 [("queryTextSentiment" .=) <$>
+                    _gcdvsarQueryTextSentiment])
+
 -- | The request message for EntityTypes.BatchCreateEntities.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchCreateEntitiesRequest' smart constructor.
-data GoogleCloudDialogflowV2BatchCreateEntitiesRequest = GoogleCloudDialogflowV2BatchCreateEntitiesRequest'
+data GoogleCloudDialogflowV2BatchCreateEntitiesRequest =
+  GoogleCloudDialogflowV2BatchCreateEntitiesRequest'
     { _gcdvbcerLanguageCode :: !(Maybe Text)
     , _gcdvbcerEntities     :: !(Maybe [GoogleCloudDialogflowV2EntityTypeEntity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchCreateEntitiesRequest' with the minimum fields required to make a request.
 --
@@ -1423,16 +1677,15 @@ data GoogleCloudDialogflowV2BatchCreateEntitiesRequest = GoogleCloudDialogflowV2
 googleCloudDialogflowV2BatchCreateEntitiesRequest
     :: GoogleCloudDialogflowV2BatchCreateEntitiesRequest
 googleCloudDialogflowV2BatchCreateEntitiesRequest =
-    GoogleCloudDialogflowV2BatchCreateEntitiesRequest'
-    { _gcdvbcerLanguageCode = Nothing
-    , _gcdvbcerEntities = Nothing
-    }
+  GoogleCloudDialogflowV2BatchCreateEntitiesRequest'
+    {_gcdvbcerLanguageCode = Nothing, _gcdvbcerEntities = Nothing}
+
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbcerLanguageCode :: Lens' GoogleCloudDialogflowV2BatchCreateEntitiesRequest (Maybe Text)
 gcdvbcerLanguageCode
   = lens _gcdvbcerLanguageCode
@@ -1447,7 +1700,7 @@ gcdvbcerEntities
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchCreateEntitiesRequest
+           GoogleCloudDialogflowV2BatchCreateEntitiesRequest
          where
         parseJSON
           = withObject
@@ -1459,7 +1712,7 @@ instance FromJSON
                      (o .:? "entities" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchCreateEntitiesRequest
+           GoogleCloudDialogflowV2BatchCreateEntitiesRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchCreateEntitiesRequest'{..}
@@ -1471,9 +1724,12 @@ instance ToJSON
 -- | The collection of suggestions.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageSuggestions' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestions = GoogleCloudDialogflowV2beta1IntentMessageSuggestions'
+newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestions =
+  GoogleCloudDialogflowV2beta1IntentMessageSuggestions'
     { _gcdvimsSuggestions :: Maybe [GoogleCloudDialogflowV2beta1IntentMessageSuggestion]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSuggestions' with the minimum fields required to make a request.
 --
@@ -1483,9 +1739,9 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestions = GoogleCloudDialog
 googleCloudDialogflowV2beta1IntentMessageSuggestions
     :: GoogleCloudDialogflowV2beta1IntentMessageSuggestions
 googleCloudDialogflowV2beta1IntentMessageSuggestions =
-    GoogleCloudDialogflowV2beta1IntentMessageSuggestions'
-    { _gcdvimsSuggestions = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageSuggestions'
+    {_gcdvimsSuggestions = Nothing}
+
 
 -- | Required. The list of suggested replies.
 gcdvimsSuggestions :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSuggestions [GoogleCloudDialogflowV2beta1IntentMessageSuggestion]
@@ -1496,7 +1752,7 @@ gcdvimsSuggestions
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSuggestions
+           GoogleCloudDialogflowV2beta1IntentMessageSuggestions
          where
         parseJSON
           = withObject
@@ -1506,7 +1762,7 @@ instance FromJSON
                    <$> (o .:? "suggestions" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSuggestions
+           GoogleCloudDialogflowV2beta1IntentMessageSuggestions
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageSuggestions'{..}
@@ -1517,9 +1773,12 @@ instance ToJSON
 -- | The request message for Intents.BatchDeleteIntents.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchDeleteIntentsRequest' smart constructor.
-newtype GoogleCloudDialogflowV2BatchDeleteIntentsRequest = GoogleCloudDialogflowV2BatchDeleteIntentsRequest'
+newtype GoogleCloudDialogflowV2BatchDeleteIntentsRequest =
+  GoogleCloudDialogflowV2BatchDeleteIntentsRequest'
     { _gcdvbdirIntents :: Maybe [GoogleCloudDialogflowV2Intent]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchDeleteIntentsRequest' with the minimum fields required to make a request.
 --
@@ -1529,9 +1788,8 @@ newtype GoogleCloudDialogflowV2BatchDeleteIntentsRequest = GoogleCloudDialogflow
 googleCloudDialogflowV2BatchDeleteIntentsRequest
     :: GoogleCloudDialogflowV2BatchDeleteIntentsRequest
 googleCloudDialogflowV2BatchDeleteIntentsRequest =
-    GoogleCloudDialogflowV2BatchDeleteIntentsRequest'
-    { _gcdvbdirIntents = Nothing
-    }
+  GoogleCloudDialogflowV2BatchDeleteIntentsRequest' {_gcdvbdirIntents = Nothing}
+
 
 -- | Required. The collection of intents to delete. Only intent \`name\` must
 -- be filled in.
@@ -1543,7 +1801,7 @@ gcdvbdirIntents
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchDeleteIntentsRequest
+           GoogleCloudDialogflowV2BatchDeleteIntentsRequest
          where
         parseJSON
           = withObject
@@ -1553,7 +1811,7 @@ instance FromJSON
                    (o .:? "intents" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchDeleteIntentsRequest
+           GoogleCloudDialogflowV2BatchDeleteIntentsRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchDeleteIntentsRequest'{..}
@@ -1563,7 +1821,8 @@ instance ToJSON
 -- | Represents the result of conversational query or event processing.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryResult' smart constructor.
-data GoogleCloudDialogflowV2QueryResult = GoogleCloudDialogflowV2QueryResult'
+data GoogleCloudDialogflowV2QueryResult =
+  GoogleCloudDialogflowV2QueryResult'
     { _gcdvqrLanguageCode                :: !(Maybe Text)
     , _gcdvqrAllRequiredParamsPresent    :: !(Maybe Bool)
     , _gcdvqrIntentDetectionConfidence   :: !(Maybe (Textual Double))
@@ -1571,6 +1830,7 @@ data GoogleCloudDialogflowV2QueryResult = GoogleCloudDialogflowV2QueryResult'
     , _gcdvqrSpeechRecognitionConfidence :: !(Maybe (Textual Double))
     , _gcdvqrAction                      :: !(Maybe Text)
     , _gcdvqrIntent                      :: !(Maybe GoogleCloudDialogflowV2Intent)
+    , _gcdvqrSentimentAnalysisResult     :: !(Maybe GoogleCloudDialogflowV2SentimentAnalysisResult)
     , _gcdvqrQueryText                   :: !(Maybe Text)
     , _gcdvqrFulfillmentText             :: !(Maybe Text)
     , _gcdvqrParameters                  :: !(Maybe GoogleCloudDialogflowV2QueryResultParameters)
@@ -1578,7 +1838,9 @@ data GoogleCloudDialogflowV2QueryResult = GoogleCloudDialogflowV2QueryResult'
     , _gcdvqrOutputContexts              :: !(Maybe [GoogleCloudDialogflowV2Context])
     , _gcdvqrWebhookSource               :: !(Maybe Text)
     , _gcdvqrDiagnosticInfo              :: !(Maybe GoogleCloudDialogflowV2QueryResultDiagnosticInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResult' with the minimum fields required to make a request.
 --
@@ -1598,6 +1860,8 @@ data GoogleCloudDialogflowV2QueryResult = GoogleCloudDialogflowV2QueryResult'
 --
 -- * 'gcdvqrIntent'
 --
+-- * 'gcdvqrSentimentAnalysisResult'
+--
 -- * 'gcdvqrQueryText'
 --
 -- * 'gcdvqrFulfillmentText'
@@ -1614,7 +1878,7 @@ data GoogleCloudDialogflowV2QueryResult = GoogleCloudDialogflowV2QueryResult'
 googleCloudDialogflowV2QueryResult
     :: GoogleCloudDialogflowV2QueryResult
 googleCloudDialogflowV2QueryResult =
-    GoogleCloudDialogflowV2QueryResult'
+  GoogleCloudDialogflowV2QueryResult'
     { _gcdvqrLanguageCode = Nothing
     , _gcdvqrAllRequiredParamsPresent = Nothing
     , _gcdvqrIntentDetectionConfidence = Nothing
@@ -1622,6 +1886,7 @@ googleCloudDialogflowV2QueryResult =
     , _gcdvqrSpeechRecognitionConfidence = Nothing
     , _gcdvqrAction = Nothing
     , _gcdvqrIntent = Nothing
+    , _gcdvqrSentimentAnalysisResult = Nothing
     , _gcdvqrQueryText = Nothing
     , _gcdvqrFulfillmentText = Nothing
     , _gcdvqrParameters = Nothing
@@ -1631,9 +1896,10 @@ googleCloudDialogflowV2QueryResult =
     , _gcdvqrDiagnosticInfo = Nothing
     }
 
+
 -- | The language that was triggered during intent detection. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/reference\/language) for a list
--- of the currently supported language codes.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes.
 gcdvqrLanguageCode :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe Text)
 gcdvqrLanguageCode
   = lens _gcdvqrLanguageCode
@@ -1692,6 +1958,13 @@ gcdvqrIntent :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe GoogleCloudDialo
 gcdvqrIntent
   = lens _gcdvqrIntent (\ s a -> s{_gcdvqrIntent = a})
 
+-- | The sentiment analysis result, which depends on the
+-- \`sentiment_analysis_request_config\` specified in the request.
+gcdvqrSentimentAnalysisResult :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe GoogleCloudDialogflowV2SentimentAnalysisResult)
+gcdvqrSentimentAnalysisResult
+  = lens _gcdvqrSentimentAnalysisResult
+      (\ s a -> s{_gcdvqrSentimentAnalysisResult = a})
+
 -- | The original conversational query text: - If natural language text was
 -- provided as input, \`query_text\` contains a copy of the input. - If
 -- natural language speech audio was provided as input, \`query_text\`
@@ -1703,7 +1976,8 @@ gcdvqrQueryText
   = lens _gcdvqrQueryText
       (\ s a -> s{_gcdvqrQueryText = a})
 
--- | The text to be pronounced to the user or shown on the screen.
+-- | The text to be pronounced to the user or shown on the screen. Note: This
+-- is a legacy field, \`fulfillment_messages\` should be preferred.
 gcdvqrFulfillmentText :: Lens' GoogleCloudDialogflowV2QueryResult (Maybe Text)
 gcdvqrFulfillmentText
   = lens _gcdvqrFulfillmentText
@@ -1760,6 +2034,7 @@ instance FromJSON GoogleCloudDialogflowV2QueryResult
                      <*> (o .:? "speechRecognitionConfidence")
                      <*> (o .:? "action")
                      <*> (o .:? "intent")
+                     <*> (o .:? "sentimentAnalysisResult")
                      <*> (o .:? "queryText")
                      <*> (o .:? "fulfillmentText")
                      <*> (o .:? "parameters")
@@ -1784,6 +2059,8 @@ instance ToJSON GoogleCloudDialogflowV2QueryResult
                     _gcdvqrSpeechRecognitionConfidence,
                   ("action" .=) <$> _gcdvqrAction,
                   ("intent" .=) <$> _gcdvqrIntent,
+                  ("sentimentAnalysisResult" .=) <$>
+                    _gcdvqrSentimentAnalysisResult,
                   ("queryText" .=) <$> _gcdvqrQueryText,
                   ("fulfillmentText" .=) <$> _gcdvqrFulfillmentText,
                   ("parameters" .=) <$> _gcdvqrParameters,
@@ -1795,13 +2072,16 @@ instance ToJSON GoogleCloudDialogflowV2QueryResult
 -- | The request message for Intents.BatchUpdateIntents.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchUpdateIntentsRequest' smart constructor.
-data GoogleCloudDialogflowV2BatchUpdateIntentsRequest = GoogleCloudDialogflowV2BatchUpdateIntentsRequest'
+data GoogleCloudDialogflowV2BatchUpdateIntentsRequest =
+  GoogleCloudDialogflowV2BatchUpdateIntentsRequest'
     { _gcdvbuirLanguageCode      :: !(Maybe Text)
     , _gcdvbuirUpdateMask        :: !(Maybe GFieldMask)
     , _gcdvbuirIntentView        :: !(Maybe GoogleCloudDialogflowV2BatchUpdateIntentsRequestIntentView)
     , _gcdvbuirIntentBatchURI    :: !(Maybe Text)
     , _gcdvbuirIntentBatchInline :: !(Maybe GoogleCloudDialogflowV2IntentBatch)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateIntentsRequest' with the minimum fields required to make a request.
 --
@@ -1819,7 +2099,7 @@ data GoogleCloudDialogflowV2BatchUpdateIntentsRequest = GoogleCloudDialogflowV2B
 googleCloudDialogflowV2BatchUpdateIntentsRequest
     :: GoogleCloudDialogflowV2BatchUpdateIntentsRequest
 googleCloudDialogflowV2BatchUpdateIntentsRequest =
-    GoogleCloudDialogflowV2BatchUpdateIntentsRequest'
+  GoogleCloudDialogflowV2BatchUpdateIntentsRequest'
     { _gcdvbuirLanguageCode = Nothing
     , _gcdvbuirUpdateMask = Nothing
     , _gcdvbuirIntentView = Nothing
@@ -1827,12 +2107,13 @@ googleCloudDialogflowV2BatchUpdateIntentsRequest =
     , _gcdvbuirIntentBatchInline = Nothing
     }
 
+
 -- | Optional. The language of training phrases, parameters and rich messages
 -- defined in \`intents\`. If not specified, the agent\'s default language
--- is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbuirLanguageCode :: Lens' GoogleCloudDialogflowV2BatchUpdateIntentsRequest (Maybe Text)
 gcdvbuirLanguageCode
   = lens _gcdvbuirLanguageCode
@@ -1865,7 +2146,7 @@ gcdvbuirIntentBatchInline
       (\ s a -> s{_gcdvbuirIntentBatchInline = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchUpdateIntentsRequest
+           GoogleCloudDialogflowV2BatchUpdateIntentsRequest
          where
         parseJSON
           = withObject
@@ -1878,7 +2159,7 @@ instance FromJSON
                      <*> (o .:? "intentBatchInline"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchUpdateIntentsRequest
+           GoogleCloudDialogflowV2BatchUpdateIntentsRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchUpdateIntentsRequest'{..}
@@ -1898,10 +2179,13 @@ instance ToJSON
 -- Values must be within normalized ranges.
 --
 -- /See:/ 'googleTypeLatLng' smart constructor.
-data GoogleTypeLatLng = GoogleTypeLatLng'
+data GoogleTypeLatLng =
+  GoogleTypeLatLng'
     { _gtllLatitude  :: !(Maybe (Textual Double))
     , _gtllLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleTypeLatLng' with the minimum fields required to make a request.
 --
@@ -1913,10 +2197,8 @@ data GoogleTypeLatLng = GoogleTypeLatLng'
 googleTypeLatLng
     :: GoogleTypeLatLng
 googleTypeLatLng =
-    GoogleTypeLatLng'
-    { _gtllLatitude = Nothing
-    , _gtllLongitude = Nothing
-    }
+  GoogleTypeLatLng' {_gtllLatitude = Nothing, _gtllLongitude = Nothing}
+
 
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 gtllLatitude :: Lens' GoogleTypeLatLng (Maybe Double)
@@ -1948,7 +2230,8 @@ instance ToJSON GoogleTypeLatLng where
 -- | The response message for a webhook call.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1WebhookResponse' smart constructor.
-data GoogleCloudDialogflowV2beta1WebhookResponse = GoogleCloudDialogflowV2beta1WebhookResponse'
+data GoogleCloudDialogflowV2beta1WebhookResponse =
+  GoogleCloudDialogflowV2beta1WebhookResponse'
     { _gcdvwrFulfillmentMessages :: !(Maybe [GoogleCloudDialogflowV2beta1IntentMessage])
     , _gcdvwrPayload             :: !(Maybe GoogleCloudDialogflowV2beta1WebhookResponsePayload)
     , _gcdvwrFulfillmentText     :: !(Maybe Text)
@@ -1956,7 +2239,9 @@ data GoogleCloudDialogflowV2beta1WebhookResponse = GoogleCloudDialogflowV2beta1W
     , _gcdvwrEndInteraction      :: !(Maybe Bool)
     , _gcdvwrOutputContexts      :: !(Maybe [GoogleCloudDialogflowV2beta1Context])
     , _gcdvwrFollowupEventInput  :: !(Maybe GoogleCloudDialogflowV2beta1EventInput)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1WebhookResponse' with the minimum fields required to make a request.
 --
@@ -1978,7 +2263,7 @@ data GoogleCloudDialogflowV2beta1WebhookResponse = GoogleCloudDialogflowV2beta1W
 googleCloudDialogflowV2beta1WebhookResponse
     :: GoogleCloudDialogflowV2beta1WebhookResponse
 googleCloudDialogflowV2beta1WebhookResponse =
-    GoogleCloudDialogflowV2beta1WebhookResponse'
+  GoogleCloudDialogflowV2beta1WebhookResponse'
     { _gcdvwrFulfillmentMessages = Nothing
     , _gcdvwrPayload = Nothing
     , _gcdvwrFulfillmentText = Nothing
@@ -1987,6 +2272,7 @@ googleCloudDialogflowV2beta1WebhookResponse =
     , _gcdvwrOutputContexts = Nothing
     , _gcdvwrFollowupEventInput = Nothing
     }
+
 
 -- | Optional. The collection of rich messages to present to the user. This
 -- value is passed directly to \`QueryResult.fulfillment_messages\`.
@@ -2063,7 +2349,8 @@ gcdvwrFollowupEventInput
       (\ s a -> s{_gcdvwrFollowupEventInput = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1WebhookResponse where
+           GoogleCloudDialogflowV2beta1WebhookResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1WebhookResponse"
@@ -2078,7 +2365,8 @@ instance FromJSON
                      <*> (o .:? "followupEventInput"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1WebhookResponse where
+           GoogleCloudDialogflowV2beta1WebhookResponse
+         where
         toJSON
           GoogleCloudDialogflowV2beta1WebhookResponse'{..}
           = object
@@ -2096,9 +2384,12 @@ instance ToJSON
 -- | Optional. The collection of parameters associated with the event.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1EventInputParameters' smart constructor.
-newtype GoogleCloudDialogflowV2beta1EventInputParameters = GoogleCloudDialogflowV2beta1EventInputParameters'
+newtype GoogleCloudDialogflowV2beta1EventInputParameters =
+  GoogleCloudDialogflowV2beta1EventInputParameters'
     { _gcdveipAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EventInputParameters' with the minimum fields required to make a request.
 --
@@ -2109,9 +2400,9 @@ googleCloudDialogflowV2beta1EventInputParameters
     :: HashMap Text JSONValue -- ^ 'gcdveipAddtional'
     -> GoogleCloudDialogflowV2beta1EventInputParameters
 googleCloudDialogflowV2beta1EventInputParameters pGcdveipAddtional_ =
-    GoogleCloudDialogflowV2beta1EventInputParameters'
-    { _gcdveipAddtional = _Coerce # pGcdveipAddtional_
-    }
+  GoogleCloudDialogflowV2beta1EventInputParameters'
+    {_gcdveipAddtional = _Coerce # pGcdveipAddtional_}
+
 
 -- | Properties of the object.
 gcdveipAddtional :: Lens' GoogleCloudDialogflowV2beta1EventInputParameters (HashMap Text JSONValue)
@@ -2121,7 +2412,7 @@ gcdveipAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1EventInputParameters
+           GoogleCloudDialogflowV2beta1EventInputParameters
          where
         parseJSON
           = withObject
@@ -2131,7 +2422,7 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1EventInputParameters
+           GoogleCloudDialogflowV2beta1EventInputParameters
          where
         toJSON = toJSON . _gcdveipAddtional
 
@@ -2153,9 +2444,12 @@ instance ToJSON
 -- agents.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload' smart constructor.
-newtype GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload = GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload'
+newtype GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload =
+  GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload'
     { _gcdvodirpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload' with the minimum fields required to make a request.
 --
@@ -2166,9 +2460,9 @@ googleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
     :: HashMap Text JSONValue -- ^ 'gcdvodirpAddtional'
     -> GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
 googleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload pGcdvodirpAddtional_ =
-    GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload'
-    { _gcdvodirpAddtional = _Coerce # pGcdvodirpAddtional_
-    }
+  GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload'
+    {_gcdvodirpAddtional = _Coerce # pGcdvodirpAddtional_}
+
 
 -- | Properties of the object.
 gcdvodirpAddtional :: Lens' GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload (HashMap Text JSONValue)
@@ -2178,7 +2472,7 @@ gcdvodirpAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
+           GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
          where
         parseJSON
           = withObject
@@ -2188,17 +2482,20 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
+           GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload
          where
         toJSON = toJSON . _gcdvodirpAddtional
 
 -- | The quick replies response message.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageQuickReplies' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageQuickReplies = GoogleCloudDialogflowV2IntentMessageQuickReplies'
+data GoogleCloudDialogflowV2IntentMessageQuickReplies =
+  GoogleCloudDialogflowV2IntentMessageQuickReplies'
     { _gcdvimqrTitle        :: !(Maybe Text)
     , _gcdvimqrQuickReplies :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageQuickReplies' with the minimum fields required to make a request.
 --
@@ -2210,10 +2507,9 @@ data GoogleCloudDialogflowV2IntentMessageQuickReplies = GoogleCloudDialogflowV2I
 googleCloudDialogflowV2IntentMessageQuickReplies
     :: GoogleCloudDialogflowV2IntentMessageQuickReplies
 googleCloudDialogflowV2IntentMessageQuickReplies =
-    GoogleCloudDialogflowV2IntentMessageQuickReplies'
-    { _gcdvimqrTitle = Nothing
-    , _gcdvimqrQuickReplies = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageQuickReplies'
+    {_gcdvimqrTitle = Nothing, _gcdvimqrQuickReplies = Nothing}
+
 
 -- | Optional. The title of the collection of quick replies.
 gcdvimqrTitle :: Lens' GoogleCloudDialogflowV2IntentMessageQuickReplies (Maybe Text)
@@ -2230,7 +2526,7 @@ gcdvimqrQuickReplies
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageQuickReplies
+           GoogleCloudDialogflowV2IntentMessageQuickReplies
          where
         parseJSON
           = withObject
@@ -2241,7 +2537,7 @@ instance FromJSON
                      (o .:? "quickReplies" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageQuickReplies
+           GoogleCloudDialogflowV2IntentMessageQuickReplies
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageQuickReplies'{..}
@@ -2253,9 +2549,12 @@ instance ToJSON
 -- | Represents the result of querying a Knowledge base.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1KnowledgeAnswers' smart constructor.
-newtype GoogleCloudDialogflowV2beta1KnowledgeAnswers = GoogleCloudDialogflowV2beta1KnowledgeAnswers'
+newtype GoogleCloudDialogflowV2beta1KnowledgeAnswers =
+  GoogleCloudDialogflowV2beta1KnowledgeAnswers'
     { _gcdvkaAnswers :: Maybe [GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1KnowledgeAnswers' with the minimum fields required to make a request.
 --
@@ -2265,9 +2564,8 @@ newtype GoogleCloudDialogflowV2beta1KnowledgeAnswers = GoogleCloudDialogflowV2be
 googleCloudDialogflowV2beta1KnowledgeAnswers
     :: GoogleCloudDialogflowV2beta1KnowledgeAnswers
 googleCloudDialogflowV2beta1KnowledgeAnswers =
-    GoogleCloudDialogflowV2beta1KnowledgeAnswers'
-    { _gcdvkaAnswers = Nothing
-    }
+  GoogleCloudDialogflowV2beta1KnowledgeAnswers' {_gcdvkaAnswers = Nothing}
+
 
 -- | A list of answers from Knowledge Connector.
 gcdvkaAnswers :: Lens' GoogleCloudDialogflowV2beta1KnowledgeAnswers [GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer]
@@ -2278,7 +2576,8 @@ gcdvkaAnswers
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1KnowledgeAnswers where
+           GoogleCloudDialogflowV2beta1KnowledgeAnswers
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1KnowledgeAnswers"
@@ -2287,7 +2586,8 @@ instance FromJSON
                    (o .:? "answers" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1KnowledgeAnswers where
+           GoogleCloudDialogflowV2beta1KnowledgeAnswers
+         where
         toJSON
           GoogleCloudDialogflowV2beta1KnowledgeAnswers'{..}
           = object
@@ -2296,10 +2596,13 @@ instance ToJSON
 -- | Optional. Contains information about a button.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageCardButton' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageCardButton = GoogleCloudDialogflowV2beta1IntentMessageCardButton'
+data GoogleCloudDialogflowV2beta1IntentMessageCardButton =
+  GoogleCloudDialogflowV2beta1IntentMessageCardButton'
     { _gcdvimcbText     :: !(Maybe Text)
     , _gcdvimcbPostback :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCardButton' with the minimum fields required to make a request.
 --
@@ -2311,10 +2614,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageCardButton = GoogleCloudDialogflow
 googleCloudDialogflowV2beta1IntentMessageCardButton
     :: GoogleCloudDialogflowV2beta1IntentMessageCardButton
 googleCloudDialogflowV2beta1IntentMessageCardButton =
-    GoogleCloudDialogflowV2beta1IntentMessageCardButton'
-    { _gcdvimcbText = Nothing
-    , _gcdvimcbPostback = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageCardButton'
+    {_gcdvimcbText = Nothing, _gcdvimcbPostback = Nothing}
+
 
 -- | Optional. The text to show on the button.
 gcdvimcbText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCardButton (Maybe Text)
@@ -2328,7 +2630,7 @@ gcdvimcbPostback
       (\ s a -> s{_gcdvimcbPostback = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCardButton
+           GoogleCloudDialogflowV2beta1IntentMessageCardButton
          where
         parseJSON
           = withObject
@@ -2338,7 +2640,7 @@ instance FromJSON
                    <$> (o .:? "text") <*> (o .:? "postback"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCardButton
+           GoogleCloudDialogflowV2beta1IntentMessageCardButton
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageCardButton'{..}
@@ -2349,12 +2651,16 @@ instance ToJSON
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1ContextParameters' smart constructor.
-newtype GoogleCloudDialogflowV2beta1ContextParameters = GoogleCloudDialogflowV2beta1ContextParameters'
+newtype GoogleCloudDialogflowV2beta1ContextParameters =
+  GoogleCloudDialogflowV2beta1ContextParameters'
     { _gcdvcpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1ContextParameters' with the minimum fields required to make a request.
 --
@@ -2365,9 +2671,9 @@ googleCloudDialogflowV2beta1ContextParameters
     :: HashMap Text JSONValue -- ^ 'gcdvcpAddtional'
     -> GoogleCloudDialogflowV2beta1ContextParameters
 googleCloudDialogflowV2beta1ContextParameters pGcdvcpAddtional_ =
-    GoogleCloudDialogflowV2beta1ContextParameters'
-    { _gcdvcpAddtional = _Coerce # pGcdvcpAddtional_
-    }
+  GoogleCloudDialogflowV2beta1ContextParameters'
+    {_gcdvcpAddtional = _Coerce # pGcdvcpAddtional_}
+
 
 -- | Properties of the object.
 gcdvcpAddtional :: Lens' GoogleCloudDialogflowV2beta1ContextParameters (HashMap Text JSONValue)
@@ -2377,7 +2683,8 @@ gcdvcpAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1ContextParameters where
+           GoogleCloudDialogflowV2beta1ContextParameters
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1ContextParameters"
@@ -2386,16 +2693,20 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1ContextParameters where
+           GoogleCloudDialogflowV2beta1ContextParameters
+         where
         toJSON = toJSON . _gcdvcpAddtional
 
 -- | Optional. This field can be used to pass custom data into the webhook
 -- associated with the agent. Arbitrary JSON objects are supported.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryParametersPayload' smart constructor.
-newtype GoogleCloudDialogflowV2QueryParametersPayload = GoogleCloudDialogflowV2QueryParametersPayload'
+newtype GoogleCloudDialogflowV2QueryParametersPayload =
+  GoogleCloudDialogflowV2QueryParametersPayload'
     { _gcdvqppAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryParametersPayload' with the minimum fields required to make a request.
 --
@@ -2406,9 +2717,9 @@ googleCloudDialogflowV2QueryParametersPayload
     :: HashMap Text JSONValue -- ^ 'gcdvqppAddtional'
     -> GoogleCloudDialogflowV2QueryParametersPayload
 googleCloudDialogflowV2QueryParametersPayload pGcdvqppAddtional_ =
-    GoogleCloudDialogflowV2QueryParametersPayload'
-    { _gcdvqppAddtional = _Coerce # pGcdvqppAddtional_
-    }
+  GoogleCloudDialogflowV2QueryParametersPayload'
+    {_gcdvqppAddtional = _Coerce # pGcdvqppAddtional_}
+
 
 -- | Properties of the object.
 gcdvqppAddtional :: Lens' GoogleCloudDialogflowV2QueryParametersPayload (HashMap Text JSONValue)
@@ -2418,7 +2729,8 @@ gcdvqppAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2QueryParametersPayload where
+           GoogleCloudDialogflowV2QueryParametersPayload
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2QueryParametersPayload"
@@ -2427,16 +2739,20 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2QueryParametersPayload where
+           GoogleCloudDialogflowV2QueryParametersPayload
+         where
         toJSON = toJSON . _gcdvqppAddtional
 
 -- | The card for presenting a list of options to select from.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageListSelect' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageListSelect = GoogleCloudDialogflowV2beta1IntentMessageListSelect'
+data GoogleCloudDialogflowV2beta1IntentMessageListSelect =
+  GoogleCloudDialogflowV2beta1IntentMessageListSelect'
     { _gcdvimlsItems :: !(Maybe [GoogleCloudDialogflowV2beta1IntentMessageListSelectItem])
     , _gcdvimlsTitle :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageListSelect' with the minimum fields required to make a request.
 --
@@ -2448,10 +2764,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageListSelect = GoogleCloudDialogflow
 googleCloudDialogflowV2beta1IntentMessageListSelect
     :: GoogleCloudDialogflowV2beta1IntentMessageListSelect
 googleCloudDialogflowV2beta1IntentMessageListSelect =
-    GoogleCloudDialogflowV2beta1IntentMessageListSelect'
-    { _gcdvimlsItems = Nothing
-    , _gcdvimlsTitle = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageListSelect'
+    {_gcdvimlsItems = Nothing, _gcdvimlsTitle = Nothing}
+
 
 -- | Required. List items.
 gcdvimlsItems :: Lens' GoogleCloudDialogflowV2beta1IntentMessageListSelect [GoogleCloudDialogflowV2beta1IntentMessageListSelectItem]
@@ -2468,7 +2783,7 @@ gcdvimlsTitle
       (\ s a -> s{_gcdvimlsTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageListSelect
+           GoogleCloudDialogflowV2beta1IntentMessageListSelect
          where
         parseJSON
           = withObject
@@ -2478,7 +2793,7 @@ instance FromJSON
                    <$> (o .:? "items" .!= mempty) <*> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageListSelect
+           GoogleCloudDialogflowV2beta1IntentMessageListSelect
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageListSelect'{..}
@@ -2490,9 +2805,12 @@ instance ToJSON
 -- | Plays audio from a file in Telephony Gateway.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio = GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio'
+newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio =
+  GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio'
     { _gcdvimtpaAudioURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio' with the minimum fields required to make a request.
 --
@@ -2502,9 +2820,9 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio = GoogleClou
 googleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
     :: GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
 googleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio =
-    GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio'
-    { _gcdvimtpaAudioURI = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio'
+    {_gcdvimtpaAudioURI = Nothing}
+
 
 -- | Required. URI to a Google Cloud Storage object containing the audio to
 -- play, e.g., \"gs:\/\/bucket\/object\". The object must contain a single
@@ -2522,7 +2840,7 @@ gcdvimtpaAudioURI
       (\ s a -> s{_gcdvimtpaAudioURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
+           GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
          where
         parseJSON
           = withObject
@@ -2532,22 +2850,75 @@ instance FromJSON
                    <$> (o .:? "audioUri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
+           GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio'{..}
           = object
               (catMaybes [("audioUri" .=) <$> _gcdvimtpaAudioURI])
 
+-- | Configures the types of sentiment analysis to perform.
+--
+-- /See:/ 'googleCloudDialogflowV2SentimentAnalysisRequestConfig' smart constructor.
+newtype GoogleCloudDialogflowV2SentimentAnalysisRequestConfig =
+  GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'
+    { _gcdvsarcAnalyzeQueryTextSentiment :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SentimentAnalysisRequestConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvsarcAnalyzeQueryTextSentiment'
+googleCloudDialogflowV2SentimentAnalysisRequestConfig
+    :: GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+googleCloudDialogflowV2SentimentAnalysisRequestConfig =
+  GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'
+    {_gcdvsarcAnalyzeQueryTextSentiment = Nothing}
+
+
+-- | Optional. Instructs the service to perform sentiment analysis on
+-- \`query_text\`. If not provided, sentiment analysis is not performed on
+-- \`query_text\`.
+gcdvsarcAnalyzeQueryTextSentiment :: Lens' GoogleCloudDialogflowV2SentimentAnalysisRequestConfig (Maybe Bool)
+gcdvsarcAnalyzeQueryTextSentiment
+  = lens _gcdvsarcAnalyzeQueryTextSentiment
+      (\ s a -> s{_gcdvsarcAnalyzeQueryTextSentiment = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2SentimentAnalysisRequestConfig"
+              (\ o ->
+                 GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'
+                   <$> (o .:? "analyzeQueryTextSentiment"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+         where
+        toJSON
+          GoogleCloudDialogflowV2SentimentAnalysisRequestConfig'{..}
+          = object
+              (catMaybes
+                 [("analyzeQueryTextSentiment" .=) <$>
+                    _gcdvsarcAnalyzeQueryTextSentiment])
+
 -- | Represents a part of a training phrase.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentTrainingPhrasePart' smart constructor.
-data GoogleCloudDialogflowV2IntentTrainingPhrasePart = GoogleCloudDialogflowV2IntentTrainingPhrasePart'
+data GoogleCloudDialogflowV2IntentTrainingPhrasePart =
+  GoogleCloudDialogflowV2IntentTrainingPhrasePart'
     { _gcdvitppText        :: !(Maybe Text)
     , _gcdvitppUserDefined :: !(Maybe Bool)
     , _gcdvitppEntityType  :: !(Maybe Text)
     , _gcdvitppAlias       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentTrainingPhrasePart' with the minimum fields required to make a request.
 --
@@ -2563,44 +2934,46 @@ data GoogleCloudDialogflowV2IntentTrainingPhrasePart = GoogleCloudDialogflowV2In
 googleCloudDialogflowV2IntentTrainingPhrasePart
     :: GoogleCloudDialogflowV2IntentTrainingPhrasePart
 googleCloudDialogflowV2IntentTrainingPhrasePart =
-    GoogleCloudDialogflowV2IntentTrainingPhrasePart'
+  GoogleCloudDialogflowV2IntentTrainingPhrasePart'
     { _gcdvitppText = Nothing
     , _gcdvitppUserDefined = Nothing
     , _gcdvitppEntityType = Nothing
     , _gcdvitppAlias = Nothing
     }
 
--- | Required. The text corresponding to the example or template, if there
--- are no annotations. For annotated examples, it is the text for one of
--- the example\'s parts.
+
+-- | Required. The text for this part.
 gcdvitppText :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppText
   = lens _gcdvitppText (\ s a -> s{_gcdvitppText = a})
 
--- | Optional. Indicates whether the text was manually annotated by the
--- developer.
+-- | Optional. Indicates whether the text was manually annotated. This field
+-- is set to true when the Dialogflow Console is used to manually annotate
+-- the part. When creating an annotated part with the API, you must set
+-- this to true.
 gcdvitppUserDefined :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Bool)
 gcdvitppUserDefined
   = lens _gcdvitppUserDefined
       (\ s a -> s{_gcdvitppUserDefined = a})
 
 -- | Optional. The entity type name prefixed with \`\'\`. This field is
--- required for the annotated part of the text and applies only to
--- examples.
+-- required for annotated parts of the training phrase.
 gcdvitppEntityType :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppEntityType
   = lens _gcdvitppEntityType
       (\ s a -> s{_gcdvitppEntityType = a})
 
 -- | Optional. The parameter name for the value extracted from the annotated
--- part of the example.
+-- part of the example. This field is required for annotated parts of the
+-- training phrase.
 gcdvitppAlias :: Lens' GoogleCloudDialogflowV2IntentTrainingPhrasePart (Maybe Text)
 gcdvitppAlias
   = lens _gcdvitppAlias
       (\ s a -> s{_gcdvitppAlias = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentTrainingPhrasePart where
+           GoogleCloudDialogflowV2IntentTrainingPhrasePart
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentTrainingPhrasePart"
@@ -2611,7 +2984,8 @@ instance FromJSON
                      <*> (o .:? "alias"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentTrainingPhrasePart where
+           GoogleCloudDialogflowV2IntentTrainingPhrasePart
+         where
         toJSON
           GoogleCloudDialogflowV2IntentTrainingPhrasePart'{..}
           = object
@@ -2629,14 +3003,16 @@ instance ToJSON
 --
 -- /See:/ 'googleProtobufEmpty' smart constructor.
 data GoogleProtobufEmpty =
-    GoogleProtobufEmpty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleProtobufEmpty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleProtobufEmpty' with the minimum fields required to make a request.
 --
 googleProtobufEmpty
     :: GoogleProtobufEmpty
 googleProtobufEmpty = GoogleProtobufEmpty'
+
 
 instance FromJSON GoogleProtobufEmpty where
         parseJSON
@@ -2670,9 +3046,12 @@ instance ToJSON GoogleProtobufEmpty where
 -- > }
 --
 -- /See:/ 'googleCloudDialogflowV2beta1WebhookResponsePayload' smart constructor.
-newtype GoogleCloudDialogflowV2beta1WebhookResponsePayload = GoogleCloudDialogflowV2beta1WebhookResponsePayload'
+newtype GoogleCloudDialogflowV2beta1WebhookResponsePayload =
+  GoogleCloudDialogflowV2beta1WebhookResponsePayload'
     { _gcdvwrpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1WebhookResponsePayload' with the minimum fields required to make a request.
 --
@@ -2683,9 +3062,9 @@ googleCloudDialogflowV2beta1WebhookResponsePayload
     :: HashMap Text JSONValue -- ^ 'gcdvwrpAddtional'
     -> GoogleCloudDialogflowV2beta1WebhookResponsePayload
 googleCloudDialogflowV2beta1WebhookResponsePayload pGcdvwrpAddtional_ =
-    GoogleCloudDialogflowV2beta1WebhookResponsePayload'
-    { _gcdvwrpAddtional = _Coerce # pGcdvwrpAddtional_
-    }
+  GoogleCloudDialogflowV2beta1WebhookResponsePayload'
+    {_gcdvwrpAddtional = _Coerce # pGcdvwrpAddtional_}
+
 
 -- | Properties of the object.
 gcdvwrpAddtional :: Lens' GoogleCloudDialogflowV2beta1WebhookResponsePayload (HashMap Text JSONValue)
@@ -2695,7 +3074,7 @@ gcdvwrpAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1WebhookResponsePayload
+           GoogleCloudDialogflowV2beta1WebhookResponsePayload
          where
         parseJSON
           = withObject
@@ -2705,17 +3084,20 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1WebhookResponsePayload
+           GoogleCloudDialogflowV2beta1WebhookResponsePayload
          where
         toJSON = toJSON . _gcdvwrpAddtional
 
 -- | The quick replies response message.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageQuickReplies' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageQuickReplies = GoogleCloudDialogflowV2beta1IntentMessageQuickReplies'
+data GoogleCloudDialogflowV2beta1IntentMessageQuickReplies =
+  GoogleCloudDialogflowV2beta1IntentMessageQuickReplies'
     { _gcdvimqrsTitle        :: !(Maybe Text)
     , _gcdvimqrsQuickReplies :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageQuickReplies' with the minimum fields required to make a request.
 --
@@ -2727,10 +3109,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageQuickReplies = GoogleCloudDialogfl
 googleCloudDialogflowV2beta1IntentMessageQuickReplies
     :: GoogleCloudDialogflowV2beta1IntentMessageQuickReplies
 googleCloudDialogflowV2beta1IntentMessageQuickReplies =
-    GoogleCloudDialogflowV2beta1IntentMessageQuickReplies'
-    { _gcdvimqrsTitle = Nothing
-    , _gcdvimqrsQuickReplies = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageQuickReplies'
+    {_gcdvimqrsTitle = Nothing, _gcdvimqrsQuickReplies = Nothing}
+
 
 -- | Optional. The title of the collection of quick replies.
 gcdvimqrsTitle :: Lens' GoogleCloudDialogflowV2beta1IntentMessageQuickReplies (Maybe Text)
@@ -2747,7 +3128,7 @@ gcdvimqrsQuickReplies
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageQuickReplies
+           GoogleCloudDialogflowV2beta1IntentMessageQuickReplies
          where
         parseJSON
           = withObject
@@ -2759,7 +3140,7 @@ instance FromJSON
                      (o .:? "quickReplies" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageQuickReplies
+           GoogleCloudDialogflowV2beta1IntentMessageQuickReplies
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageQuickReplies'{..}
@@ -2772,10 +3153,13 @@ instance ToJSON
 -- or website associated with this agent.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageLinkOutSuggestion' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion = GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion'
+data GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion =
+  GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion'
     { _gcdvimlosURI             :: !(Maybe Text)
     , _gcdvimlosDestinationName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion' with the minimum fields required to make a request.
 --
@@ -2787,10 +3171,9 @@ data GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion = GoogleCloudDialogfl
 googleCloudDialogflowV2IntentMessageLinkOutSuggestion
     :: GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion
 googleCloudDialogflowV2IntentMessageLinkOutSuggestion =
-    GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion'
-    { _gcdvimlosURI = Nothing
-    , _gcdvimlosDestinationName = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion'
+    {_gcdvimlosURI = Nothing, _gcdvimlosDestinationName = Nothing}
+
 
 -- | Required. The URI of the app or site to open when the user taps the
 -- suggestion chip.
@@ -2805,7 +3188,7 @@ gcdvimlosDestinationName
       (\ s a -> s{_gcdvimlosDestinationName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion
+           GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion
          where
         parseJSON
           = withObject
@@ -2815,7 +3198,7 @@ instance FromJSON
                    <$> (o .:? "uri") <*> (o .:? "destinationName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion
+           GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageLinkOutSuggestion'{..}
@@ -2828,10 +3211,13 @@ instance ToJSON
 -- | The request message for Agents.ImportAgent.
 --
 -- /See:/ 'googleCloudDialogflowV2ImportAgentRequest' smart constructor.
-data GoogleCloudDialogflowV2ImportAgentRequest = GoogleCloudDialogflowV2ImportAgentRequest'
+data GoogleCloudDialogflowV2ImportAgentRequest =
+  GoogleCloudDialogflowV2ImportAgentRequest'
     { _gcdviarAgentURI     :: !(Maybe Text)
     , _gcdviarAgentContent :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ImportAgentRequest' with the minimum fields required to make a request.
 --
@@ -2843,10 +3229,9 @@ data GoogleCloudDialogflowV2ImportAgentRequest = GoogleCloudDialogflowV2ImportAg
 googleCloudDialogflowV2ImportAgentRequest
     :: GoogleCloudDialogflowV2ImportAgentRequest
 googleCloudDialogflowV2ImportAgentRequest =
-    GoogleCloudDialogflowV2ImportAgentRequest'
-    { _gcdviarAgentURI = Nothing
-    , _gcdviarAgentContent = Nothing
-    }
+  GoogleCloudDialogflowV2ImportAgentRequest'
+    {_gcdviarAgentURI = Nothing, _gcdviarAgentContent = Nothing}
+
 
 -- | The URI to a Google Cloud Storage file containing the agent to import.
 -- Note: The URI must start with \"gs:\/\/\".
@@ -2876,7 +3261,8 @@ gcdviarAgentContent
       . mapping _Bytes
 
 instance FromJSON
-         GoogleCloudDialogflowV2ImportAgentRequest where
+           GoogleCloudDialogflowV2ImportAgentRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ImportAgentRequest"
@@ -2885,7 +3271,8 @@ instance FromJSON
                    (o .:? "agentUri") <*> (o .:? "agentContent"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ImportAgentRequest where
+           GoogleCloudDialogflowV2ImportAgentRequest
+         where
         toJSON GoogleCloudDialogflowV2ImportAgentRequest'{..}
           = object
               (catMaybes
@@ -2894,9 +3281,12 @@ instance ToJSON
 
 --
 -- /See:/ 'googleRpcStatusDetailsItem' smart constructor.
-newtype GoogleRpcStatusDetailsItem = GoogleRpcStatusDetailsItem'
+newtype GoogleRpcStatusDetailsItem =
+  GoogleRpcStatusDetailsItem'
     { _grsdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpcStatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2907,9 +3297,8 @@ googleRpcStatusDetailsItem
     :: HashMap Text JSONValue -- ^ 'grsdiAddtional'
     -> GoogleRpcStatusDetailsItem
 googleRpcStatusDetailsItem pGrsdiAddtional_ =
-    GoogleRpcStatusDetailsItem'
-    { _grsdiAddtional = _Coerce # pGrsdiAddtional_
-    }
+  GoogleRpcStatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpcStatusDetailsItem (HashMap Text JSONValue)
@@ -2930,9 +3319,12 @@ instance ToJSON GoogleRpcStatusDetailsItem where
 -- | The response message for EntityTypes.BatchUpdateEntityTypes.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse' smart constructor.
-newtype GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse = GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse'
+newtype GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse =
+  GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse'
     { _gcdvbuetrEntityTypes :: Maybe [GoogleCloudDialogflowV2beta1EntityType]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse' with the minimum fields required to make a request.
 --
@@ -2942,9 +3334,9 @@ newtype GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse = GoogleCloud
 googleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
     :: GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
 googleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse =
-    GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse'
-    { _gcdvbuetrEntityTypes = Nothing
-    }
+  GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse'
+    {_gcdvbuetrEntityTypes = Nothing}
+
 
 -- | The collection of updated or created entity types.
 gcdvbuetrEntityTypes :: Lens' GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse [GoogleCloudDialogflowV2beta1EntityType]
@@ -2955,7 +3347,7 @@ gcdvbuetrEntityTypes
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
+           GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
          where
         parseJSON
           = withObject
@@ -2965,7 +3357,7 @@ instance FromJSON
                    <$> (o .:? "entityTypes" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
+           GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
          where
         toJSON
           GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse'{..}
@@ -2975,12 +3367,16 @@ instance ToJSON
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 --
 -- /See:/ 'googleCloudDialogflowV2ContextParameters' smart constructor.
-newtype GoogleCloudDialogflowV2ContextParameters = GoogleCloudDialogflowV2ContextParameters'
+newtype GoogleCloudDialogflowV2ContextParameters =
+  GoogleCloudDialogflowV2ContextParameters'
     { _gAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ContextParameters' with the minimum fields required to make a request.
 --
@@ -2991,9 +3387,9 @@ googleCloudDialogflowV2ContextParameters
     :: HashMap Text JSONValue -- ^ 'gAddtional'
     -> GoogleCloudDialogflowV2ContextParameters
 googleCloudDialogflowV2ContextParameters pGAddtional_ =
-    GoogleCloudDialogflowV2ContextParameters'
-    { _gAddtional = _Coerce # pGAddtional_
-    }
+  GoogleCloudDialogflowV2ContextParameters'
+    {_gAddtional = _Coerce # pGAddtional_}
+
 
 -- | Properties of the object.
 gAddtional :: Lens' GoogleCloudDialogflowV2ContextParameters (HashMap Text JSONValue)
@@ -3002,7 +3398,8 @@ gAddtional
       _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2ContextParameters where
+           GoogleCloudDialogflowV2ContextParameters
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ContextParameters"
@@ -3011,16 +3408,20 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ContextParameters where
+           GoogleCloudDialogflowV2ContextParameters
+         where
         toJSON = toJSON . _gAddtional
 
 -- | Optional. Contains information about a button.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageCardButton' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageCardButton = GoogleCloudDialogflowV2IntentMessageCardButton'
+data GoogleCloudDialogflowV2IntentMessageCardButton =
+  GoogleCloudDialogflowV2IntentMessageCardButton'
     { _gText     :: !(Maybe Text)
     , _gPostback :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCardButton' with the minimum fields required to make a request.
 --
@@ -3032,10 +3433,9 @@ data GoogleCloudDialogflowV2IntentMessageCardButton = GoogleCloudDialogflowV2Int
 googleCloudDialogflowV2IntentMessageCardButton
     :: GoogleCloudDialogflowV2IntentMessageCardButton
 googleCloudDialogflowV2IntentMessageCardButton =
-    GoogleCloudDialogflowV2IntentMessageCardButton'
-    { _gText = Nothing
-    , _gPostback = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageCardButton'
+    {_gText = Nothing, _gPostback = Nothing}
+
 
 -- | Optional. The text to show on the button.
 gText :: Lens' GoogleCloudDialogflowV2IntentMessageCardButton (Maybe Text)
@@ -3047,7 +3447,8 @@ gPostback
   = lens _gPostback (\ s a -> s{_gPostback = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageCardButton where
+           GoogleCloudDialogflowV2IntentMessageCardButton
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageCardButton"
@@ -3056,7 +3457,8 @@ instance FromJSON
                    (o .:? "text") <*> (o .:? "postback"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageCardButton where
+           GoogleCloudDialogflowV2IntentMessageCardButton
+         where
         toJSON
           GoogleCloudDialogflowV2IntentMessageCardButton'{..}
           = object
@@ -3067,10 +3469,13 @@ instance ToJSON
 -- | The card for presenting a list of options to select from.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageListSelect' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageListSelect = GoogleCloudDialogflowV2IntentMessageListSelect'
+data GoogleCloudDialogflowV2IntentMessageListSelect =
+  GoogleCloudDialogflowV2IntentMessageListSelect'
     { _gooItems :: !(Maybe [GoogleCloudDialogflowV2IntentMessageListSelectItem])
     , _gooTitle :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageListSelect' with the minimum fields required to make a request.
 --
@@ -3082,10 +3487,9 @@ data GoogleCloudDialogflowV2IntentMessageListSelect = GoogleCloudDialogflowV2Int
 googleCloudDialogflowV2IntentMessageListSelect
     :: GoogleCloudDialogflowV2IntentMessageListSelect
 googleCloudDialogflowV2IntentMessageListSelect =
-    GoogleCloudDialogflowV2IntentMessageListSelect'
-    { _gooItems = Nothing
-    , _gooTitle = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageListSelect'
+    {_gooItems = Nothing, _gooTitle = Nothing}
+
 
 -- | Required. List items.
 gooItems :: Lens' GoogleCloudDialogflowV2IntentMessageListSelect [GoogleCloudDialogflowV2IntentMessageListSelectItem]
@@ -3099,7 +3503,8 @@ gooTitle :: Lens' GoogleCloudDialogflowV2IntentMessageListSelect (Maybe Text)
 gooTitle = lens _gooTitle (\ s a -> s{_gooTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageListSelect where
+           GoogleCloudDialogflowV2IntentMessageListSelect
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageListSelect"
@@ -3108,7 +3513,8 @@ instance FromJSON
                    (o .:? "items" .!= mempty) <*> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageListSelect where
+           GoogleCloudDialogflowV2IntentMessageListSelect
+         where
         toJSON
           GoogleCloudDialogflowV2IntentMessageListSelect'{..}
           = object
@@ -3119,12 +3525,15 @@ instance ToJSON
 -- | The card response message.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageCard' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageCard = GoogleCloudDialogflowV2beta1IntentMessageCard'
+data GoogleCloudDialogflowV2beta1IntentMessageCard =
+  GoogleCloudDialogflowV2beta1IntentMessageCard'
     { _gcdvimcButtons  :: !(Maybe [GoogleCloudDialogflowV2beta1IntentMessageCardButton])
     , _gcdvimcImageURI :: !(Maybe Text)
     , _gcdvimcSubtitle :: !(Maybe Text)
     , _gcdvimcTitle    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCard' with the minimum fields required to make a request.
 --
@@ -3140,12 +3549,13 @@ data GoogleCloudDialogflowV2beta1IntentMessageCard = GoogleCloudDialogflowV2beta
 googleCloudDialogflowV2beta1IntentMessageCard
     :: GoogleCloudDialogflowV2beta1IntentMessageCard
 googleCloudDialogflowV2beta1IntentMessageCard =
-    GoogleCloudDialogflowV2beta1IntentMessageCard'
+  GoogleCloudDialogflowV2beta1IntentMessageCard'
     { _gcdvimcButtons = Nothing
     , _gcdvimcImageURI = Nothing
     , _gcdvimcSubtitle = Nothing
     , _gcdvimcTitle = Nothing
     }
+
 
 -- | Optional. The collection of card buttons.
 gcdvimcButtons :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCard [GoogleCloudDialogflowV2beta1IntentMessageCardButton]
@@ -3173,7 +3583,8 @@ gcdvimcTitle
   = lens _gcdvimcTitle (\ s a -> s{_gcdvimcTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCard where
+           GoogleCloudDialogflowV2beta1IntentMessageCard
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1IntentMessageCard"
@@ -3184,7 +3595,8 @@ instance FromJSON
                      <*> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCard where
+           GoogleCloudDialogflowV2beta1IntentMessageCard
+         where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageCard'{..}
           = object
@@ -3197,10 +3609,13 @@ instance ToJSON
 -- | The request message for Agents.RestoreAgent.
 --
 -- /See:/ 'googleCloudDialogflowV2RestoreAgentRequest' smart constructor.
-data GoogleCloudDialogflowV2RestoreAgentRequest = GoogleCloudDialogflowV2RestoreAgentRequest'
+data GoogleCloudDialogflowV2RestoreAgentRequest =
+  GoogleCloudDialogflowV2RestoreAgentRequest'
     { _gcdvrarAgentURI     :: !(Maybe Text)
     , _gcdvrarAgentContent :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2RestoreAgentRequest' with the minimum fields required to make a request.
 --
@@ -3212,10 +3627,9 @@ data GoogleCloudDialogflowV2RestoreAgentRequest = GoogleCloudDialogflowV2Restore
 googleCloudDialogflowV2RestoreAgentRequest
     :: GoogleCloudDialogflowV2RestoreAgentRequest
 googleCloudDialogflowV2RestoreAgentRequest =
-    GoogleCloudDialogflowV2RestoreAgentRequest'
-    { _gcdvrarAgentURI = Nothing
-    , _gcdvrarAgentContent = Nothing
-    }
+  GoogleCloudDialogflowV2RestoreAgentRequest'
+    {_gcdvrarAgentURI = Nothing, _gcdvrarAgentContent = Nothing}
+
 
 -- | The URI to a Google Cloud Storage file containing the agent to restore.
 -- Note: The URI must start with \"gs:\/\/\".
@@ -3245,7 +3659,8 @@ gcdvrarAgentContent
       . mapping _Bytes
 
 instance FromJSON
-         GoogleCloudDialogflowV2RestoreAgentRequest where
+           GoogleCloudDialogflowV2RestoreAgentRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2RestoreAgentRequest"
@@ -3254,7 +3669,8 @@ instance FromJSON
                    (o .:? "agentUri") <*> (o .:? "agentContent"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2RestoreAgentRequest where
+           GoogleCloudDialogflowV2RestoreAgentRequest
+         where
         toJSON
           GoogleCloudDialogflowV2RestoreAgentRequest'{..}
           = object
@@ -3265,9 +3681,12 @@ instance ToJSON
 -- | The collection of suggestions.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageSuggestions' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessageSuggestions = GoogleCloudDialogflowV2IntentMessageSuggestions'
+newtype GoogleCloudDialogflowV2IntentMessageSuggestions =
+  GoogleCloudDialogflowV2IntentMessageSuggestions'
     { _gSuggestions :: Maybe [GoogleCloudDialogflowV2IntentMessageSuggestion]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSuggestions' with the minimum fields required to make a request.
 --
@@ -3277,9 +3696,8 @@ newtype GoogleCloudDialogflowV2IntentMessageSuggestions = GoogleCloudDialogflowV
 googleCloudDialogflowV2IntentMessageSuggestions
     :: GoogleCloudDialogflowV2IntentMessageSuggestions
 googleCloudDialogflowV2IntentMessageSuggestions =
-    GoogleCloudDialogflowV2IntentMessageSuggestions'
-    { _gSuggestions = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageSuggestions' {_gSuggestions = Nothing}
+
 
 -- | Required. The list of suggested replies.
 gSuggestions :: Lens' GoogleCloudDialogflowV2IntentMessageSuggestions [GoogleCloudDialogflowV2IntentMessageSuggestion]
@@ -3289,7 +3707,8 @@ gSuggestions
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageSuggestions where
+           GoogleCloudDialogflowV2IntentMessageSuggestions
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageSuggestions"
@@ -3298,7 +3717,8 @@ instance FromJSON
                    (o .:? "suggestions" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageSuggestions where
+           GoogleCloudDialogflowV2IntentMessageSuggestions
+         where
         toJSON
           GoogleCloudDialogflowV2IntentMessageSuggestions'{..}
           = object
@@ -3307,9 +3727,12 @@ instance ToJSON
 -- | Opens the given URI.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction = GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction'
+newtype GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction =
+  GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction'
     { _gcdvimbcbouaURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction' with the minimum fields required to make a request.
 --
@@ -3319,9 +3742,9 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction = 
 googleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
     :: GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
 googleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction =
-    GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction'
-    { _gcdvimbcbouaURI = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction'
+    {_gcdvimbcbouaURI = Nothing}
+
 
 -- | Required. The HTTP or HTTPS scheme URI.
 gcdvimbcbouaURI :: Lens' GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction (Maybe Text)
@@ -3330,7 +3753,7 @@ gcdvimbcbouaURI
       (\ s a -> s{_gcdvimbcbouaURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
+           GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
          where
         parseJSON
           = withObject
@@ -3340,7 +3763,7 @@ instance FromJSON
                    <$> (o .:? "uri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
+           GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageBasicCardButtonOpenURIAction'{..}
@@ -3350,20 +3773,26 @@ instance ToJSON
 -- | Represents the parameters of the conversational query.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryParameters' smart constructor.
-data GoogleCloudDialogflowV2QueryParameters = GoogleCloudDialogflowV2QueryParameters'
-    { _gcdvqpContexts           :: !(Maybe [GoogleCloudDialogflowV2Context])
-    , _gcdvqpPayload            :: !(Maybe GoogleCloudDialogflowV2QueryParametersPayload)
-    , _gcdvqpGeoLocation        :: !(Maybe GoogleTypeLatLng)
-    , _gcdvqpTimeZone           :: !(Maybe Text)
-    , _gcdvqpSessionEntityTypes :: !(Maybe [GoogleCloudDialogflowV2SessionEntityType])
-    , _gcdvqpResetContexts      :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudDialogflowV2QueryParameters =
+  GoogleCloudDialogflowV2QueryParameters'
+    { _gcdvqpContexts                       :: !(Maybe [GoogleCloudDialogflowV2Context])
+    , _gcdvqpSentimentAnalysisRequestConfig :: !(Maybe GoogleCloudDialogflowV2SentimentAnalysisRequestConfig)
+    , _gcdvqpPayload                        :: !(Maybe GoogleCloudDialogflowV2QueryParametersPayload)
+    , _gcdvqpGeoLocation                    :: !(Maybe GoogleTypeLatLng)
+    , _gcdvqpTimeZone                       :: !(Maybe Text)
+    , _gcdvqpSessionEntityTypes             :: !(Maybe [GoogleCloudDialogflowV2SessionEntityType])
+    , _gcdvqpResetContexts                  :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gcdvqpContexts'
+--
+-- * 'gcdvqpSentimentAnalysisRequestConfig'
 --
 -- * 'gcdvqpPayload'
 --
@@ -3377,14 +3806,16 @@ data GoogleCloudDialogflowV2QueryParameters = GoogleCloudDialogflowV2QueryParame
 googleCloudDialogflowV2QueryParameters
     :: GoogleCloudDialogflowV2QueryParameters
 googleCloudDialogflowV2QueryParameters =
-    GoogleCloudDialogflowV2QueryParameters'
+  GoogleCloudDialogflowV2QueryParameters'
     { _gcdvqpContexts = Nothing
+    , _gcdvqpSentimentAnalysisRequestConfig = Nothing
     , _gcdvqpPayload = Nothing
     , _gcdvqpGeoLocation = Nothing
     , _gcdvqpTimeZone = Nothing
     , _gcdvqpSessionEntityTypes = Nothing
     , _gcdvqpResetContexts = Nothing
     }
+
 
 -- | Optional. The collection of contexts to be activated before this query
 -- is executed.
@@ -3394,6 +3825,14 @@ gcdvqpContexts
       (\ s a -> s{_gcdvqpContexts = a})
       . _Default
       . _Coerce
+
+-- | Optional. Configures the type of sentiment analysis to perform. If not
+-- provided, sentiment analysis is not performed.
+gcdvqpSentimentAnalysisRequestConfig :: Lens' GoogleCloudDialogflowV2QueryParameters (Maybe GoogleCloudDialogflowV2SentimentAnalysisRequestConfig)
+gcdvqpSentimentAnalysisRequestConfig
+  = lens _gcdvqpSentimentAnalysisRequestConfig
+      (\ s a ->
+         s{_gcdvqpSentimentAnalysisRequestConfig = a})
 
 -- | Optional. This field can be used to pass custom data into the webhook
 -- associated with the agent. Arbitrary JSON objects are supported.
@@ -3435,23 +3874,29 @@ gcdvqpResetContexts
       (\ s a -> s{_gcdvqpResetContexts = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2QueryParameters where
+           GoogleCloudDialogflowV2QueryParameters
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2QueryParameters"
               (\ o ->
                  GoogleCloudDialogflowV2QueryParameters' <$>
-                   (o .:? "contexts" .!= mempty) <*> (o .:? "payload")
+                   (o .:? "contexts" .!= mempty) <*>
+                     (o .:? "sentimentAnalysisRequestConfig")
+                     <*> (o .:? "payload")
                      <*> (o .:? "geoLocation")
                      <*> (o .:? "timeZone")
                      <*> (o .:? "sessionEntityTypes" .!= mempty)
                      <*> (o .:? "resetContexts"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2QueryParameters where
+           GoogleCloudDialogflowV2QueryParameters
+         where
         toJSON GoogleCloudDialogflowV2QueryParameters'{..}
           = object
               (catMaybes
                  [("contexts" .=) <$> _gcdvqpContexts,
+                  ("sentimentAnalysisRequestConfig" .=) <$>
+                    _gcdvqpSentimentAnalysisRequestConfig,
                   ("payload" .=) <$> _gcdvqpPayload,
                   ("geoLocation" .=) <$> _gcdvqpGeoLocation,
                   ("timeZone" .=) <$> _gcdvqpTimeZone,
@@ -3463,9 +3908,12 @@ instance ToJSON
 -- reply to the conversation.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageSuggestion' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestion = GoogleCloudDialogflowV2beta1IntentMessageSuggestion'
+newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestion =
+  GoogleCloudDialogflowV2beta1IntentMessageSuggestion'
     { _gcdvimsTitle :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSuggestion' with the minimum fields required to make a request.
 --
@@ -3475,9 +3923,8 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageSuggestion = GoogleCloudDialogf
 googleCloudDialogflowV2beta1IntentMessageSuggestion
     :: GoogleCloudDialogflowV2beta1IntentMessageSuggestion
 googleCloudDialogflowV2beta1IntentMessageSuggestion =
-    GoogleCloudDialogflowV2beta1IntentMessageSuggestion'
-    { _gcdvimsTitle = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageSuggestion' {_gcdvimsTitle = Nothing}
+
 
 -- | Required. The text shown the in the suggestion chip.
 gcdvimsTitle :: Lens' GoogleCloudDialogflowV2beta1IntentMessageSuggestion (Maybe Text)
@@ -3485,7 +3932,7 @@ gcdvimsTitle
   = lens _gcdvimsTitle (\ s a -> s{_gcdvimsTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSuggestion
+           GoogleCloudDialogflowV2beta1IntentMessageSuggestion
          where
         parseJSON
           = withObject
@@ -3495,7 +3942,7 @@ instance FromJSON
                    <$> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSuggestion
+           GoogleCloudDialogflowV2beta1IntentMessageSuggestion
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageSuggestion'{..}
@@ -3505,11 +3952,14 @@ instance ToJSON
 -- \`[Streaming]DetectIntent\` call.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1OriginalDetectIntentRequest' smart constructor.
-data GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest = GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest'
+data GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest =
+  GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest'
     { _gcdvodirPayload :: !(Maybe GoogleCloudDialogflowV2beta1OriginalDetectIntentRequestPayload)
     , _gcdvodirVersion :: !(Maybe Text)
     , _gcdvodirSource  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest' with the minimum fields required to make a request.
 --
@@ -3523,11 +3973,12 @@ data GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest = GoogleCloudDialog
 googleCloudDialogflowV2beta1OriginalDetectIntentRequest
     :: GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest
 googleCloudDialogflowV2beta1OriginalDetectIntentRequest =
-    GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest'
+  GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest'
     { _gcdvodirPayload = Nothing
     , _gcdvodirVersion = Nothing
     , _gcdvodirSource = Nothing
     }
+
 
 -- | Optional. This field is set to the value of the
 -- \`QueryParameters.payload\` field passed in the request. Some
@@ -3565,7 +4016,7 @@ gcdvodirSource
       (\ s a -> s{_gcdvodirSource = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest
+           GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest
          where
         parseJSON
           = withObject
@@ -3577,7 +4028,7 @@ instance FromJSON
                      (o .:? "source"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest
+           GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest
          where
         toJSON
           GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest'{..}
@@ -3590,9 +4041,12 @@ instance ToJSON
 -- | Optional. The collection of parameters associated with the event.
 --
 -- /See:/ 'googleCloudDialogflowV2EventInputParameters' smart constructor.
-newtype GoogleCloudDialogflowV2EventInputParameters = GoogleCloudDialogflowV2EventInputParameters'
+newtype GoogleCloudDialogflowV2EventInputParameters =
+  GoogleCloudDialogflowV2EventInputParameters'
     { _gcdveipsAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2EventInputParameters' with the minimum fields required to make a request.
 --
@@ -3603,9 +4057,9 @@ googleCloudDialogflowV2EventInputParameters
     :: HashMap Text JSONValue -- ^ 'gcdveipsAddtional'
     -> GoogleCloudDialogflowV2EventInputParameters
 googleCloudDialogflowV2EventInputParameters pGcdveipsAddtional_ =
-    GoogleCloudDialogflowV2EventInputParameters'
-    { _gcdveipsAddtional = _Coerce # pGcdveipsAddtional_
-    }
+  GoogleCloudDialogflowV2EventInputParameters'
+    {_gcdveipsAddtional = _Coerce # pGcdveipsAddtional_}
+
 
 -- | Properties of the object.
 gcdveipsAddtional :: Lens' GoogleCloudDialogflowV2EventInputParameters (HashMap Text JSONValue)
@@ -3615,7 +4069,8 @@ gcdveipsAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2EventInputParameters where
+           GoogleCloudDialogflowV2EventInputParameters
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2EventInputParameters"
@@ -3624,23 +4079,33 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2EventInputParameters where
+           GoogleCloudDialogflowV2EventInputParameters
+         where
         toJSON = toJSON . _gcdveipsAddtional
 
 -- | The message returned from the DetectIntent method.
 --
 -- /See:/ 'googleCloudDialogflowV2DetectIntentResponse' smart constructor.
-data GoogleCloudDialogflowV2DetectIntentResponse = GoogleCloudDialogflowV2DetectIntentResponse'
-    { _gcdvdirResponseId    :: !(Maybe Text)
-    , _gcdvdirWebhookStatus :: !(Maybe GoogleRpcStatus)
-    , _gcdvdirQueryResult   :: !(Maybe GoogleCloudDialogflowV2QueryResult)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudDialogflowV2DetectIntentResponse =
+  GoogleCloudDialogflowV2DetectIntentResponse'
+    { _gcdvdirOutputAudioConfig :: !(Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+    , _gcdvdirResponseId        :: !(Maybe Text)
+    , _gcdvdirOutputAudio       :: !(Maybe Bytes)
+    , _gcdvdirWebhookStatus     :: !(Maybe GoogleRpcStatus)
+    , _gcdvdirQueryResult       :: !(Maybe GoogleCloudDialogflowV2QueryResult)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2DetectIntentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gcdvdirOutputAudioConfig'
+--
 -- * 'gcdvdirResponseId'
+--
+-- * 'gcdvdirOutputAudio'
 --
 -- * 'gcdvdirWebhookStatus'
 --
@@ -3648,11 +4113,20 @@ data GoogleCloudDialogflowV2DetectIntentResponse = GoogleCloudDialogflowV2Detect
 googleCloudDialogflowV2DetectIntentResponse
     :: GoogleCloudDialogflowV2DetectIntentResponse
 googleCloudDialogflowV2DetectIntentResponse =
-    GoogleCloudDialogflowV2DetectIntentResponse'
-    { _gcdvdirResponseId = Nothing
+  GoogleCloudDialogflowV2DetectIntentResponse'
+    { _gcdvdirOutputAudioConfig = Nothing
+    , _gcdvdirResponseId = Nothing
+    , _gcdvdirOutputAudio = Nothing
     , _gcdvdirWebhookStatus = Nothing
     , _gcdvdirQueryResult = Nothing
     }
+
+
+-- | The config used by the speech synthesizer to generate the output audio.
+gcdvdirOutputAudioConfig :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+gcdvdirOutputAudioConfig
+  = lens _gcdvdirOutputAudioConfig
+      (\ s a -> s{_gcdvdirOutputAudioConfig = a})
 
 -- | The unique identifier of the response. It can be used to locate a
 -- response in the training example set or for reporting issues.
@@ -3660,6 +4134,18 @@ gcdvdirResponseId :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe Te
 gcdvdirResponseId
   = lens _gcdvdirResponseId
       (\ s a -> s{_gcdvdirResponseId = a})
+
+-- | The audio data bytes encoded as specified in the request. Note: The
+-- output audio is generated based on the values of default platform text
+-- responses found in the \`query_result.fulfillment_messages\` field. If
+-- multiple default text responses exist, they will be concatenated when
+-- generating audio. If no default platform text responses exist, the
+-- generated audio content will be empty.
+gcdvdirOutputAudio :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe ByteString)
+gcdvdirOutputAudio
+  = lens _gcdvdirOutputAudio
+      (\ s a -> s{_gcdvdirOutputAudio = a})
+      . mapping _Bytes
 
 -- | Specifies the status of the webhook request.
 gcdvdirWebhookStatus :: Lens' GoogleCloudDialogflowV2DetectIntentResponse (Maybe GoogleRpcStatus)
@@ -3675,34 +4161,44 @@ gcdvdirQueryResult
       (\ s a -> s{_gcdvdirQueryResult = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2DetectIntentResponse where
+           GoogleCloudDialogflowV2DetectIntentResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2DetectIntentResponse"
               (\ o ->
                  GoogleCloudDialogflowV2DetectIntentResponse' <$>
-                   (o .:? "responseId") <*> (o .:? "webhookStatus") <*>
-                     (o .:? "queryResult"))
+                   (o .:? "outputAudioConfig") <*> (o .:? "responseId")
+                     <*> (o .:? "outputAudio")
+                     <*> (o .:? "webhookStatus")
+                     <*> (o .:? "queryResult"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2DetectIntentResponse where
+           GoogleCloudDialogflowV2DetectIntentResponse
+         where
         toJSON
           GoogleCloudDialogflowV2DetectIntentResponse'{..}
           = object
               (catMaybes
-                 [("responseId" .=) <$> _gcdvdirResponseId,
+                 [("outputAudioConfig" .=) <$>
+                    _gcdvdirOutputAudioConfig,
+                  ("responseId" .=) <$> _gcdvdirResponseId,
+                  ("outputAudio" .=) <$> _gcdvdirOutputAudio,
                   ("webhookStatus" .=) <$> _gcdvdirWebhookStatus,
                   ("queryResult" .=) <$> _gcdvdirQueryResult])
 
 -- | An item in the list.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageListSelectItem' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageListSelectItem = GoogleCloudDialogflowV2IntentMessageListSelectItem'
+data GoogleCloudDialogflowV2IntentMessageListSelectItem =
+  GoogleCloudDialogflowV2IntentMessageListSelectItem'
     { _gcdvimlsiImage       :: !(Maybe GoogleCloudDialogflowV2IntentMessageImage)
     , _gcdvimlsiTitle       :: !(Maybe Text)
     , _gcdvimlsiDescription :: !(Maybe Text)
     , _gcdvimlsiInfo        :: !(Maybe GoogleCloudDialogflowV2IntentMessageSelectItemInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageListSelectItem' with the minimum fields required to make a request.
 --
@@ -3718,12 +4214,13 @@ data GoogleCloudDialogflowV2IntentMessageListSelectItem = GoogleCloudDialogflowV
 googleCloudDialogflowV2IntentMessageListSelectItem
     :: GoogleCloudDialogflowV2IntentMessageListSelectItem
 googleCloudDialogflowV2IntentMessageListSelectItem =
-    GoogleCloudDialogflowV2IntentMessageListSelectItem'
+  GoogleCloudDialogflowV2IntentMessageListSelectItem'
     { _gcdvimlsiImage = Nothing
     , _gcdvimlsiTitle = Nothing
     , _gcdvimlsiDescription = Nothing
     , _gcdvimlsiInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gcdvimlsiImage :: Lens' GoogleCloudDialogflowV2IntentMessageListSelectItem (Maybe GoogleCloudDialogflowV2IntentMessageImage)
@@ -3750,7 +4247,7 @@ gcdvimlsiInfo
       (\ s a -> s{_gcdvimlsiInfo = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageListSelectItem
+           GoogleCloudDialogflowV2IntentMessageListSelectItem
          where
         parseJSON
           = withObject
@@ -3763,7 +4260,7 @@ instance FromJSON
                      <*> (o .:? "info"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageListSelectItem
+           GoogleCloudDialogflowV2IntentMessageListSelectItem
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageListSelectItem'{..}
@@ -3778,30 +4275,33 @@ instance ToJSON
 -- \`sentiment_analysis_request_config\`.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1SentimentAnalysisResult' smart constructor.
-newtype GoogleCloudDialogflowV2beta1SentimentAnalysisResult = GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
-    { _gcdvsarQueryTextSentiment :: Maybe GoogleCloudDialogflowV2beta1Sentiment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+newtype GoogleCloudDialogflowV2beta1SentimentAnalysisResult =
+  GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
+    { _gQueryTextSentiment :: Maybe GoogleCloudDialogflowV2beta1Sentiment
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1SentimentAnalysisResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcdvsarQueryTextSentiment'
+-- * 'gQueryTextSentiment'
 googleCloudDialogflowV2beta1SentimentAnalysisResult
     :: GoogleCloudDialogflowV2beta1SentimentAnalysisResult
 googleCloudDialogflowV2beta1SentimentAnalysisResult =
-    GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
-    { _gcdvsarQueryTextSentiment = Nothing
-    }
+  GoogleCloudDialogflowV2beta1SentimentAnalysisResult'
+    {_gQueryTextSentiment = Nothing}
+
 
 -- | The sentiment analysis result for \`query_text\`.
-gcdvsarQueryTextSentiment :: Lens' GoogleCloudDialogflowV2beta1SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2beta1Sentiment)
-gcdvsarQueryTextSentiment
-  = lens _gcdvsarQueryTextSentiment
-      (\ s a -> s{_gcdvsarQueryTextSentiment = a})
+gQueryTextSentiment :: Lens' GoogleCloudDialogflowV2beta1SentimentAnalysisResult (Maybe GoogleCloudDialogflowV2beta1Sentiment)
+gQueryTextSentiment
+  = lens _gQueryTextSentiment
+      (\ s a -> s{_gQueryTextSentiment = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1SentimentAnalysisResult
+           GoogleCloudDialogflowV2beta1SentimentAnalysisResult
          where
         parseJSON
           = withObject
@@ -3811,21 +4311,23 @@ instance FromJSON
                    <$> (o .:? "queryTextSentiment"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1SentimentAnalysisResult
+           GoogleCloudDialogflowV2beta1SentimentAnalysisResult
          where
         toJSON
           GoogleCloudDialogflowV2beta1SentimentAnalysisResult'{..}
           = object
               (catMaybes
-                 [("queryTextSentiment" .=) <$>
-                    _gcdvsarQueryTextSentiment])
+                 [("queryTextSentiment" .=) <$> _gQueryTextSentiment])
 
 -- | This message is a wrapper around a collection of entity types.
 --
 -- /See:/ 'googleCloudDialogflowV2EntityTypeBatch' smart constructor.
-newtype GoogleCloudDialogflowV2EntityTypeBatch = GoogleCloudDialogflowV2EntityTypeBatch'
+newtype GoogleCloudDialogflowV2EntityTypeBatch =
+  GoogleCloudDialogflowV2EntityTypeBatch'
     { _gcdvetbEntityTypes :: Maybe [GoogleCloudDialogflowV2EntityType]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2EntityTypeBatch' with the minimum fields required to make a request.
 --
@@ -3835,9 +4337,8 @@ newtype GoogleCloudDialogflowV2EntityTypeBatch = GoogleCloudDialogflowV2EntityTy
 googleCloudDialogflowV2EntityTypeBatch
     :: GoogleCloudDialogflowV2EntityTypeBatch
 googleCloudDialogflowV2EntityTypeBatch =
-    GoogleCloudDialogflowV2EntityTypeBatch'
-    { _gcdvetbEntityTypes = Nothing
-    }
+  GoogleCloudDialogflowV2EntityTypeBatch' {_gcdvetbEntityTypes = Nothing}
+
 
 -- | A collection of entity types.
 gcdvetbEntityTypes :: Lens' GoogleCloudDialogflowV2EntityTypeBatch [GoogleCloudDialogflowV2EntityType]
@@ -3848,7 +4349,8 @@ gcdvetbEntityTypes
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2EntityTypeBatch where
+           GoogleCloudDialogflowV2EntityTypeBatch
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2EntityTypeBatch"
               (\ o ->
@@ -3856,20 +4358,86 @@ instance FromJSON
                    (o .:? "entityTypes" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2EntityTypeBatch where
+           GoogleCloudDialogflowV2EntityTypeBatch
+         where
         toJSON GoogleCloudDialogflowV2EntityTypeBatch'{..}
           = object
               (catMaybes
                  [("entityTypes" .=) <$> _gcdvetbEntityTypes])
+
+-- | Description of which voice to use for speech synthesis.
+--
+-- /See:/ 'googleCloudDialogflowV2VoiceSelectionParams' smart constructor.
+data GoogleCloudDialogflowV2VoiceSelectionParams =
+  GoogleCloudDialogflowV2VoiceSelectionParams'
+    { _gcdvvspSsmlGender :: !(Maybe GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender)
+    , _gcdvvspName       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2VoiceSelectionParams' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvvspSsmlGender'
+--
+-- * 'gcdvvspName'
+googleCloudDialogflowV2VoiceSelectionParams
+    :: GoogleCloudDialogflowV2VoiceSelectionParams
+googleCloudDialogflowV2VoiceSelectionParams =
+  GoogleCloudDialogflowV2VoiceSelectionParams'
+    {_gcdvvspSsmlGender = Nothing, _gcdvvspName = Nothing}
+
+
+-- | Optional. The preferred gender of the voice. If not set, the service
+-- will choose a voice based on the other parameters such as language_code
+-- and name. Note that this is only a preference, not requirement. If a
+-- voice of the appropriate gender is not available, the synthesizer should
+-- substitute a voice with a different gender rather than failing the
+-- request.
+gcdvvspSsmlGender :: Lens' GoogleCloudDialogflowV2VoiceSelectionParams (Maybe GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender)
+gcdvvspSsmlGender
+  = lens _gcdvvspSsmlGender
+      (\ s a -> s{_gcdvvspSsmlGender = a})
+
+-- | Optional. The name of the voice. If not set, the service will choose a
+-- voice based on the other parameters such as language_code and gender.
+gcdvvspName :: Lens' GoogleCloudDialogflowV2VoiceSelectionParams (Maybe Text)
+gcdvvspName
+  = lens _gcdvvspName (\ s a -> s{_gcdvvspName = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2VoiceSelectionParams
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2VoiceSelectionParams"
+              (\ o ->
+                 GoogleCloudDialogflowV2VoiceSelectionParams' <$>
+                   (o .:? "ssmlGender") <*> (o .:? "name"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2VoiceSelectionParams
+         where
+        toJSON
+          GoogleCloudDialogflowV2VoiceSelectionParams'{..}
+          = object
+              (catMaybes
+                 [("ssmlGender" .=) <$> _gcdvvspSsmlGender,
+                  ("name" .=) <$> _gcdvvspName])
 
 -- | The free-form diagnostic info. For example, this field could contain
 -- webhook call latency. The string keys of the Struct\'s fields map can
 -- change without notice.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryResultDiagnosticInfo' smart constructor.
-newtype GoogleCloudDialogflowV2QueryResultDiagnosticInfo = GoogleCloudDialogflowV2QueryResultDiagnosticInfo'
+newtype GoogleCloudDialogflowV2QueryResultDiagnosticInfo =
+  GoogleCloudDialogflowV2QueryResultDiagnosticInfo'
     { _gcdvqrdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResultDiagnosticInfo' with the minimum fields required to make a request.
 --
@@ -3880,9 +4448,9 @@ googleCloudDialogflowV2QueryResultDiagnosticInfo
     :: HashMap Text JSONValue -- ^ 'gcdvqrdiAddtional'
     -> GoogleCloudDialogflowV2QueryResultDiagnosticInfo
 googleCloudDialogflowV2QueryResultDiagnosticInfo pGcdvqrdiAddtional_ =
-    GoogleCloudDialogflowV2QueryResultDiagnosticInfo'
-    { _gcdvqrdiAddtional = _Coerce # pGcdvqrdiAddtional_
-    }
+  GoogleCloudDialogflowV2QueryResultDiagnosticInfo'
+    {_gcdvqrdiAddtional = _Coerce # pGcdvqrdiAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrdiAddtional :: Lens' GoogleCloudDialogflowV2QueryResultDiagnosticInfo (HashMap Text JSONValue)
@@ -3892,7 +4460,7 @@ gcdvqrdiAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2QueryResultDiagnosticInfo
+           GoogleCloudDialogflowV2QueryResultDiagnosticInfo
          where
         parseJSON
           = withObject
@@ -3902,16 +4470,19 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2QueryResultDiagnosticInfo
+           GoogleCloudDialogflowV2QueryResultDiagnosticInfo
          where
         toJSON = toJSON . _gcdvqrdiAddtional
 
 -- | The text response message.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageText' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessageText = GoogleCloudDialogflowV2IntentMessageText'
+newtype GoogleCloudDialogflowV2IntentMessageText =
+  GoogleCloudDialogflowV2IntentMessageText'
     { _gcdvimtText :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageText' with the minimum fields required to make a request.
 --
@@ -3921,9 +4492,8 @@ newtype GoogleCloudDialogflowV2IntentMessageText = GoogleCloudDialogflowV2Intent
 googleCloudDialogflowV2IntentMessageText
     :: GoogleCloudDialogflowV2IntentMessageText
 googleCloudDialogflowV2IntentMessageText =
-    GoogleCloudDialogflowV2IntentMessageText'
-    { _gcdvimtText = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageText' {_gcdvimtText = Nothing}
+
 
 -- | Optional. The collection of the agent\'s responses.
 gcdvimtText :: Lens' GoogleCloudDialogflowV2IntentMessageText [Text]
@@ -3933,7 +4503,8 @@ gcdvimtText
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageText where
+           GoogleCloudDialogflowV2IntentMessageText
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageText"
@@ -3942,87 +4513,108 @@ instance FromJSON
                    (o .:? "text" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageText where
+           GoogleCloudDialogflowV2IntentMessageText
+         where
         toJSON GoogleCloudDialogflowV2IntentMessageText'{..}
           = object (catMaybes [("text" .=) <$> _gcdvimtText])
 
 -- | The request to detect user\'s intent.
 --
 -- /See:/ 'googleCloudDialogflowV2DetectIntentRequest' smart constructor.
-data GoogleCloudDialogflowV2DetectIntentRequest = GoogleCloudDialogflowV2DetectIntentRequest'
-    { _gcdvdirQueryInput  :: !(Maybe GoogleCloudDialogflowV2QueryInput)
-    , _gcdvdirInputAudio  :: !(Maybe Bytes)
-    , _gcdvdirQueryParams :: !(Maybe GoogleCloudDialogflowV2QueryParameters)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleCloudDialogflowV2DetectIntentRequest =
+  GoogleCloudDialogflowV2DetectIntentRequest'
+    { _gQueryInput        :: !(Maybe GoogleCloudDialogflowV2QueryInput)
+    , _gOutputAudioConfig :: !(Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+    , _gInputAudio        :: !(Maybe Bytes)
+    , _gQueryParams       :: !(Maybe GoogleCloudDialogflowV2QueryParameters)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2DetectIntentRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcdvdirQueryInput'
+-- * 'gQueryInput'
 --
--- * 'gcdvdirInputAudio'
+-- * 'gOutputAudioConfig'
 --
--- * 'gcdvdirQueryParams'
+-- * 'gInputAudio'
+--
+-- * 'gQueryParams'
 googleCloudDialogflowV2DetectIntentRequest
     :: GoogleCloudDialogflowV2DetectIntentRequest
 googleCloudDialogflowV2DetectIntentRequest =
-    GoogleCloudDialogflowV2DetectIntentRequest'
-    { _gcdvdirQueryInput = Nothing
-    , _gcdvdirInputAudio = Nothing
-    , _gcdvdirQueryParams = Nothing
+  GoogleCloudDialogflowV2DetectIntentRequest'
+    { _gQueryInput = Nothing
+    , _gOutputAudioConfig = Nothing
+    , _gInputAudio = Nothing
+    , _gQueryParams = Nothing
     }
+
 
 -- | Required. The input specification. It can be set to: 1. an audio config
 -- which instructs the speech recognizer how to process the speech audio,
 -- 2. a conversational query in the form of text, or 3. an event that
 -- specifies which intent to trigger.
-gcdvdirQueryInput :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryInput)
-gcdvdirQueryInput
-  = lens _gcdvdirQueryInput
-      (\ s a -> s{_gcdvdirQueryInput = a})
+gQueryInput :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryInput)
+gQueryInput
+  = lens _gQueryInput (\ s a -> s{_gQueryInput = a})
+
+-- | Optional. Instructs the speech synthesizer how to generate the output
+-- audio. If this field is not set and agent-level speech synthesizer is
+-- not configured, no output audio is generated.
+gOutputAudioConfig :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2OutputAudioConfig)
+gOutputAudioConfig
+  = lens _gOutputAudioConfig
+      (\ s a -> s{_gOutputAudioConfig = a})
 
 -- | Optional. The natural language speech audio to be processed. This field
 -- should be populated iff \`query_input\` is set to an input audio config.
 -- A single request can contain up to 1 minute of speech audio data.
-gcdvdirInputAudio :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe ByteString)
-gcdvdirInputAudio
-  = lens _gcdvdirInputAudio
-      (\ s a -> s{_gcdvdirInputAudio = a})
-      . mapping _Bytes
+gInputAudio :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe ByteString)
+gInputAudio
+  = lens _gInputAudio (\ s a -> s{_gInputAudio = a}) .
+      mapping _Bytes
 
 -- | Optional. The parameters of this query.
-gcdvdirQueryParams :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryParameters)
-gcdvdirQueryParams
-  = lens _gcdvdirQueryParams
-      (\ s a -> s{_gcdvdirQueryParams = a})
+gQueryParams :: Lens' GoogleCloudDialogflowV2DetectIntentRequest (Maybe GoogleCloudDialogflowV2QueryParameters)
+gQueryParams
+  = lens _gQueryParams (\ s a -> s{_gQueryParams = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2DetectIntentRequest where
+           GoogleCloudDialogflowV2DetectIntentRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2DetectIntentRequest"
               (\ o ->
                  GoogleCloudDialogflowV2DetectIntentRequest' <$>
-                   (o .:? "queryInput") <*> (o .:? "inputAudio") <*>
-                     (o .:? "queryParams"))
+                   (o .:? "queryInput") <*> (o .:? "outputAudioConfig")
+                     <*> (o .:? "inputAudio")
+                     <*> (o .:? "queryParams"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2DetectIntentRequest where
+           GoogleCloudDialogflowV2DetectIntentRequest
+         where
         toJSON
           GoogleCloudDialogflowV2DetectIntentRequest'{..}
           = object
               (catMaybes
-                 [("queryInput" .=) <$> _gcdvdirQueryInput,
-                  ("inputAudio" .=) <$> _gcdvdirInputAudio,
-                  ("queryParams" .=) <$> _gcdvdirQueryParams])
+                 [("queryInput" .=) <$> _gQueryInput,
+                  ("outputAudioConfig" .=) <$> _gOutputAudioConfig,
+                  ("inputAudio" .=) <$> _gInputAudio,
+                  ("queryParams" .=) <$> _gQueryParams])
 
 -- | The collection of extracted parameters.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1QueryResultParameters' smart constructor.
-newtype GoogleCloudDialogflowV2beta1QueryResultParameters = GoogleCloudDialogflowV2beta1QueryResultParameters'
+newtype GoogleCloudDialogflowV2beta1QueryResultParameters =
+  GoogleCloudDialogflowV2beta1QueryResultParameters'
     { _gcdvqrpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResultParameters' with the minimum fields required to make a request.
 --
@@ -4033,9 +4625,9 @@ googleCloudDialogflowV2beta1QueryResultParameters
     :: HashMap Text JSONValue -- ^ 'gcdvqrpAddtional'
     -> GoogleCloudDialogflowV2beta1QueryResultParameters
 googleCloudDialogflowV2beta1QueryResultParameters pGcdvqrpAddtional_ =
-    GoogleCloudDialogflowV2beta1QueryResultParameters'
-    { _gcdvqrpAddtional = _Coerce # pGcdvqrpAddtional_
-    }
+  GoogleCloudDialogflowV2beta1QueryResultParameters'
+    {_gcdvqrpAddtional = _Coerce # pGcdvqrpAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrpAddtional :: Lens' GoogleCloudDialogflowV2beta1QueryResultParameters (HashMap Text JSONValue)
@@ -4045,7 +4637,7 @@ gcdvqrpAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1QueryResultParameters
+           GoogleCloudDialogflowV2beta1QueryResultParameters
          where
         parseJSON
           = withObject
@@ -4055,20 +4647,23 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1QueryResultParameters
+           GoogleCloudDialogflowV2beta1QueryResultParameters
          where
         toJSON = toJSON . _gcdvqrpAddtional
 
 -- | The basic card message. Useful for displaying information.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageBasicCard' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageBasicCard = GoogleCloudDialogflowV2beta1IntentMessageBasicCard'
+data GoogleCloudDialogflowV2beta1IntentMessageBasicCard =
+  GoogleCloudDialogflowV2beta1IntentMessageBasicCard'
     { _gcdvimbccImage         :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
     , _gcdvimbccButtons       :: !(Maybe [GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton])
     , _gcdvimbccSubtitle      :: !(Maybe Text)
     , _gcdvimbccTitle         :: !(Maybe Text)
     , _gcdvimbccFormattedText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageBasicCard' with the minimum fields required to make a request.
 --
@@ -4086,13 +4681,14 @@ data GoogleCloudDialogflowV2beta1IntentMessageBasicCard = GoogleCloudDialogflowV
 googleCloudDialogflowV2beta1IntentMessageBasicCard
     :: GoogleCloudDialogflowV2beta1IntentMessageBasicCard
 googleCloudDialogflowV2beta1IntentMessageBasicCard =
-    GoogleCloudDialogflowV2beta1IntentMessageBasicCard'
+  GoogleCloudDialogflowV2beta1IntentMessageBasicCard'
     { _gcdvimbccImage = Nothing
     , _gcdvimbccButtons = Nothing
     , _gcdvimbccSubtitle = Nothing
     , _gcdvimbccTitle = Nothing
     , _gcdvimbccFormattedText = Nothing
     }
+
 
 -- | Optional. The image for the card.
 gcdvimbccImage :: Lens' GoogleCloudDialogflowV2beta1IntentMessageBasicCard (Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
@@ -4127,7 +4723,7 @@ gcdvimbccFormattedText
       (\ s a -> s{_gcdvimbccFormattedText = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageBasicCard
+           GoogleCloudDialogflowV2beta1IntentMessageBasicCard
          where
         parseJSON
           = withObject
@@ -4141,7 +4737,7 @@ instance FromJSON
                      <*> (o .:? "formattedText"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageBasicCard
+           GoogleCloudDialogflowV2beta1IntentMessageBasicCard
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageBasicCard'{..}
@@ -4153,15 +4749,18 @@ instance ToJSON
                   ("title" .=) <$> _gcdvimbccTitle,
                   ("formattedText" .=) <$> _gcdvimbccFormattedText])
 
--- | Represents an example or template that the agent is trained on.
+-- | Represents an example that the agent is trained on.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentTrainingPhrase' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentTrainingPhrase = GoogleCloudDialogflowV2beta1IntentTrainingPhrase'
+data GoogleCloudDialogflowV2beta1IntentTrainingPhrase =
+  GoogleCloudDialogflowV2beta1IntentTrainingPhrase'
     { _gParts           :: !(Maybe [GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart])
     , _gName            :: !(Maybe Text)
     , _gTimesAddedCount :: !(Maybe (Textual Int32))
     , _gType            :: !(Maybe GoogleCloudDialogflowV2beta1IntentTrainingPhraseType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentTrainingPhrase' with the minimum fields required to make a request.
 --
@@ -4177,16 +4776,27 @@ data GoogleCloudDialogflowV2beta1IntentTrainingPhrase = GoogleCloudDialogflowV2b
 googleCloudDialogflowV2beta1IntentTrainingPhrase
     :: GoogleCloudDialogflowV2beta1IntentTrainingPhrase
 googleCloudDialogflowV2beta1IntentTrainingPhrase =
-    GoogleCloudDialogflowV2beta1IntentTrainingPhrase'
+  GoogleCloudDialogflowV2beta1IntentTrainingPhrase'
     { _gParts = Nothing
     , _gName = Nothing
     , _gTimesAddedCount = Nothing
     , _gType = Nothing
     }
 
--- | Required. The collection of training phrase parts (can be annotated).
--- Fields: \`entity_type\`, \`alias\` and \`user_defined\` should be
--- populated only for the annotated parts of the training phrase.
+
+-- | Required. The ordered list of training phrase parts. The parts are
+-- concatenated in order to form the training phrase. Note: The API does
+-- not automatically annotate training phrases like the Dialogflow Console
+-- does. Note: Do not forget to include whitespace at part boundaries, so
+-- the training phrase is well formatted when the parts are concatenated.
+-- If the training phrase does not need to be annotated with parameters,
+-- you just need a single part with only the Part.text field set. If you
+-- want to annotate the training phrase, you must create multiple parts,
+-- where the fields of each part are populated in one of two ways: -
+-- \`Part.text\` is set to a part of the phrase that has no parameters. -
+-- \`Part.text\` is set to a part of the phrase that you want to annotate,
+-- and the \`entity_type\`, \`alias\`, and \`user_defined\` fields are all
+-- set.
 gParts :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase [GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart]
 gParts
   = lens _gParts (\ s a -> s{_gParts = a}) . _Default .
@@ -4196,9 +4806,9 @@ gParts
 gName :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase (Maybe Text)
 gName = lens _gName (\ s a -> s{_gName = a})
 
--- | Optional. Indicates how many times this example or template was added to
--- the intent. Each time a developer adds an existing sample by editing an
--- intent or training, this counter is increased.
+-- | Optional. Indicates how many times this example was added to the intent.
+-- Each time a developer adds an existing sample by editing an intent or
+-- training, this counter is increased.
 gTimesAddedCount :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase (Maybe Int32)
 gTimesAddedCount
   = lens _gTimesAddedCount
@@ -4210,7 +4820,7 @@ gType :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrase (Maybe GoogleClo
 gType = lens _gType (\ s a -> s{_gType = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentTrainingPhrase
+           GoogleCloudDialogflowV2beta1IntentTrainingPhrase
          where
         parseJSON
           = withObject
@@ -4222,7 +4832,7 @@ instance FromJSON
                      <*> (o .:? "type"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentTrainingPhrase
+           GoogleCloudDialogflowV2beta1IntentTrainingPhrase
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentTrainingPhrase'{..}
@@ -4235,13 +4845,16 @@ instance ToJSON
 -- | An answer from Knowledge Connector.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1KnowledgeAnswersAnswer' smart constructor.
-data GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer = GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer'
+data GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer =
+  GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer'
     { _gcdvkaaMatchConfidence      :: !(Maybe (Textual Double))
     , _gcdvkaaAnswer               :: !(Maybe Text)
     , _gcdvkaaSource               :: !(Maybe Text)
     , _gcdvkaaFaqQuestion          :: !(Maybe Text)
     , _gcdvkaaMatchConfidenceLevel :: !(Maybe GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer' with the minimum fields required to make a request.
 --
@@ -4259,13 +4872,14 @@ data GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer = GoogleCloudDialogflowV
 googleCloudDialogflowV2beta1KnowledgeAnswersAnswer
     :: GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer
 googleCloudDialogflowV2beta1KnowledgeAnswersAnswer =
-    GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer'
+  GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer'
     { _gcdvkaaMatchConfidence = Nothing
     , _gcdvkaaAnswer = Nothing
     , _gcdvkaaSource = Nothing
     , _gcdvkaaFaqQuestion = Nothing
     , _gcdvkaaMatchConfidenceLevel = Nothing
     }
+
 
 -- | The system\'s confidence score that this Knowledge answer is a good
 -- match for this conversational query. The range is from 0.0 (completely
@@ -4313,7 +4927,7 @@ gcdvkaaMatchConfidenceLevel
       (\ s a -> s{_gcdvkaaMatchConfidenceLevel = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer
+           GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer
          where
         parseJSON
           = withObject
@@ -4327,7 +4941,7 @@ instance FromJSON
                      <*> (o .:? "matchConfidenceLevel"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer
+           GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer
          where
         toJSON
           GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer'{..}
@@ -4343,14 +4957,18 @@ instance ToJSON
 -- | Events allow for matching intents by event name instead of the natural
 -- language input. For instance, input \`\` can trigger a personalized
 -- welcome response. The parameter \`name\` may be used by the agent in the
--- response: \`“Hello #welcome_event.name! What can I do for you today?”\`.
+-- response: \`\"Hello #welcome_event.name! What can I do for you
+-- today?\"\`.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1EventInput' smart constructor.
-data GoogleCloudDialogflowV2beta1EventInput = GoogleCloudDialogflowV2beta1EventInput'
+data GoogleCloudDialogflowV2beta1EventInput =
+  GoogleCloudDialogflowV2beta1EventInput'
     { _gooLanguageCode :: !(Maybe Text)
     , _gooName         :: !(Maybe Text)
     , _gooParameters   :: !(Maybe GoogleCloudDialogflowV2beta1EventInputParameters)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EventInput' with the minimum fields required to make a request.
 --
@@ -4364,16 +4982,15 @@ data GoogleCloudDialogflowV2beta1EventInput = GoogleCloudDialogflowV2beta1EventI
 googleCloudDialogflowV2beta1EventInput
     :: GoogleCloudDialogflowV2beta1EventInput
 googleCloudDialogflowV2beta1EventInput =
-    GoogleCloudDialogflowV2beta1EventInput'
-    { _gooLanguageCode = Nothing
-    , _gooName = Nothing
-    , _gooParameters = Nothing
-    }
+  GoogleCloudDialogflowV2beta1EventInput'
+    {_gooLanguageCode = Nothing, _gooName = Nothing, _gooParameters = Nothing}
+
 
 -- | Required. The language of this query. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gooLanguageCode :: Lens' GoogleCloudDialogflowV2beta1EventInput (Maybe Text)
 gooLanguageCode
   = lens _gooLanguageCode
@@ -4390,7 +5007,8 @@ gooParameters
       (\ s a -> s{_gooParameters = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1EventInput where
+           GoogleCloudDialogflowV2beta1EventInput
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2beta1EventInput"
               (\ o ->
@@ -4399,7 +5017,8 @@ instance FromJSON
                      (o .:? "parameters"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1EventInput where
+           GoogleCloudDialogflowV2beta1EventInput
+         where
         toJSON GoogleCloudDialogflowV2beta1EventInput'{..}
           = object
               (catMaybes
@@ -4410,11 +5029,14 @@ instance ToJSON
 -- | The request message for EntityTypes.BatchUpdateEntities.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchUpdateEntitiesRequest' smart constructor.
-data GoogleCloudDialogflowV2BatchUpdateEntitiesRequest = GoogleCloudDialogflowV2BatchUpdateEntitiesRequest'
+data GoogleCloudDialogflowV2BatchUpdateEntitiesRequest =
+  GoogleCloudDialogflowV2BatchUpdateEntitiesRequest'
     { _gcdvbuerLanguageCode :: !(Maybe Text)
     , _gcdvbuerUpdateMask   :: !(Maybe GFieldMask)
     , _gcdvbuerEntities     :: !(Maybe [GoogleCloudDialogflowV2EntityTypeEntity])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateEntitiesRequest' with the minimum fields required to make a request.
 --
@@ -4428,17 +5050,18 @@ data GoogleCloudDialogflowV2BatchUpdateEntitiesRequest = GoogleCloudDialogflowV2
 googleCloudDialogflowV2BatchUpdateEntitiesRequest
     :: GoogleCloudDialogflowV2BatchUpdateEntitiesRequest
 googleCloudDialogflowV2BatchUpdateEntitiesRequest =
-    GoogleCloudDialogflowV2BatchUpdateEntitiesRequest'
+  GoogleCloudDialogflowV2BatchUpdateEntitiesRequest'
     { _gcdvbuerLanguageCode = Nothing
     , _gcdvbuerUpdateMask = Nothing
     , _gcdvbuerEntities = Nothing
     }
 
+
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbuerLanguageCode :: Lens' GoogleCloudDialogflowV2BatchUpdateEntitiesRequest (Maybe Text)
 gcdvbuerLanguageCode
   = lens _gcdvbuerLanguageCode
@@ -4459,7 +5082,7 @@ gcdvbuerEntities
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchUpdateEntitiesRequest
+           GoogleCloudDialogflowV2BatchUpdateEntitiesRequest
          where
         parseJSON
           = withObject
@@ -4471,7 +5094,7 @@ instance FromJSON
                      (o .:? "entities" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchUpdateEntitiesRequest
+           GoogleCloudDialogflowV2BatchUpdateEntitiesRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchUpdateEntitiesRequest'{..}
@@ -4486,9 +5109,12 @@ instance ToJSON
 -- may be required for your platform.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessagePayload' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessagePayload = GoogleCloudDialogflowV2IntentMessagePayload'
+newtype GoogleCloudDialogflowV2IntentMessagePayload =
+  GoogleCloudDialogflowV2IntentMessagePayload'
     { _gooAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessagePayload' with the minimum fields required to make a request.
 --
@@ -4499,9 +5125,9 @@ googleCloudDialogflowV2IntentMessagePayload
     :: HashMap Text JSONValue -- ^ 'gooAddtional'
     -> GoogleCloudDialogflowV2IntentMessagePayload
 googleCloudDialogflowV2IntentMessagePayload pGooAddtional_ =
-    GoogleCloudDialogflowV2IntentMessagePayload'
-    { _gooAddtional = _Coerce # pGooAddtional_
-    }
+  GoogleCloudDialogflowV2IntentMessagePayload'
+    {_gooAddtional = _Coerce # pGooAddtional_}
+
 
 -- | Properties of the object.
 gooAddtional :: Lens' GoogleCloudDialogflowV2IntentMessagePayload (HashMap Text JSONValue)
@@ -4510,7 +5136,8 @@ gooAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessagePayload where
+           GoogleCloudDialogflowV2IntentMessagePayload
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessagePayload"
@@ -4519,15 +5146,19 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessagePayload where
+           GoogleCloudDialogflowV2IntentMessagePayload
+         where
         toJSON = toJSON . _gooAddtional
 
 -- | Metadata in google::longrunning::Operation for Knowledge operations.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1KnowledgeOperationMetadata' smart constructor.
-newtype GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata = GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata'
+newtype GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata =
+  GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata'
     { _gcdvkomState :: Maybe GoogleCloudDialogflowV2beta1KnowledgeOperationMetadataState
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata' with the minimum fields required to make a request.
 --
@@ -4537,9 +5168,9 @@ newtype GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata = GoogleCloudDial
 googleCloudDialogflowV2beta1KnowledgeOperationMetadata
     :: GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata
 googleCloudDialogflowV2beta1KnowledgeOperationMetadata =
-    GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata'
-    { _gcdvkomState = Nothing
-    }
+  GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata'
+    {_gcdvkomState = Nothing}
+
 
 -- | Required. The current state of this operation.
 gcdvkomState :: Lens' GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata (Maybe GoogleCloudDialogflowV2beta1KnowledgeOperationMetadataState)
@@ -4547,7 +5178,7 @@ gcdvkomState
   = lens _gcdvkomState (\ s a -> s{_gcdvkomState = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata
+           GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata
          where
         parseJSON
           = withObject
@@ -4557,7 +5188,7 @@ instance FromJSON
                    <$> (o .:? "state"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata
+           GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata
          where
         toJSON
           GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata'{..}
@@ -4566,13 +5197,16 @@ instance ToJSON
 -- | The request message for a webhook call.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1WebhookRequest' smart constructor.
-data GoogleCloudDialogflowV2beta1WebhookRequest = GoogleCloudDialogflowV2beta1WebhookRequest'
+data GoogleCloudDialogflowV2beta1WebhookRequest =
+  GoogleCloudDialogflowV2beta1WebhookRequest'
     { _gOriginalDetectIntentRequest :: !(Maybe GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest)
     , _gResponseId                  :: !(Maybe Text)
     , _gAlternativeQueryResults     :: !(Maybe [GoogleCloudDialogflowV2beta1QueryResult])
     , _gQueryResult                 :: !(Maybe GoogleCloudDialogflowV2beta1QueryResult)
     , _gSession                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1WebhookRequest' with the minimum fields required to make a request.
 --
@@ -4590,13 +5224,14 @@ data GoogleCloudDialogflowV2beta1WebhookRequest = GoogleCloudDialogflowV2beta1We
 googleCloudDialogflowV2beta1WebhookRequest
     :: GoogleCloudDialogflowV2beta1WebhookRequest
 googleCloudDialogflowV2beta1WebhookRequest =
-    GoogleCloudDialogflowV2beta1WebhookRequest'
+  GoogleCloudDialogflowV2beta1WebhookRequest'
     { _gOriginalDetectIntentRequest = Nothing
     , _gResponseId = Nothing
     , _gAlternativeQueryResults = Nothing
     , _gQueryResult = Nothing
     , _gSession = Nothing
     }
+
 
 -- | Optional. The contents of the original request that was passed to
 -- \`[Streaming]DetectIntent\` call.
@@ -4633,7 +5268,8 @@ gSession :: Lens' GoogleCloudDialogflowV2beta1WebhookRequest (Maybe Text)
 gSession = lens _gSession (\ s a -> s{_gSession = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1WebhookRequest where
+           GoogleCloudDialogflowV2beta1WebhookRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1WebhookRequest"
@@ -4646,7 +5282,8 @@ instance FromJSON
                      <*> (o .:? "session"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1WebhookRequest where
+           GoogleCloudDialogflowV2beta1WebhookRequest
+         where
         toJSON
           GoogleCloudDialogflowV2beta1WebhookRequest'{..}
           = object
@@ -4662,9 +5299,12 @@ instance ToJSON
 -- | The text response message.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageText' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageText = GoogleCloudDialogflowV2beta1IntentMessageText'
+newtype GoogleCloudDialogflowV2beta1IntentMessageText =
+  GoogleCloudDialogflowV2beta1IntentMessageText'
     { _gooText :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageText' with the minimum fields required to make a request.
 --
@@ -4674,9 +5314,8 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageText = GoogleCloudDialogflowV2b
 googleCloudDialogflowV2beta1IntentMessageText
     :: GoogleCloudDialogflowV2beta1IntentMessageText
 googleCloudDialogflowV2beta1IntentMessageText =
-    GoogleCloudDialogflowV2beta1IntentMessageText'
-    { _gooText = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageText' {_gooText = Nothing}
+
 
 -- | Optional. The collection of the agent\'s responses.
 gooText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageText [Text]
@@ -4685,7 +5324,8 @@ gooText
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageText where
+           GoogleCloudDialogflowV2beta1IntentMessageText
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1IntentMessageText"
@@ -4694,7 +5334,8 @@ instance FromJSON
                    (o .:? "text" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageText where
+           GoogleCloudDialogflowV2beta1IntentMessageText
+         where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageText'{..}
           = object (catMaybes [("text" .=) <$> _gooText])
@@ -4705,9 +5346,12 @@ instance ToJSON
 -- \`SimpleResponse\`.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageSimpleResponses' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessageSimpleResponses = GoogleCloudDialogflowV2IntentMessageSimpleResponses'
+newtype GoogleCloudDialogflowV2IntentMessageSimpleResponses =
+  GoogleCloudDialogflowV2IntentMessageSimpleResponses'
     { _gSimpleResponses :: Maybe [GoogleCloudDialogflowV2IntentMessageSimpleResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSimpleResponses' with the minimum fields required to make a request.
 --
@@ -4717,9 +5361,9 @@ newtype GoogleCloudDialogflowV2IntentMessageSimpleResponses = GoogleCloudDialogf
 googleCloudDialogflowV2IntentMessageSimpleResponses
     :: GoogleCloudDialogflowV2IntentMessageSimpleResponses
 googleCloudDialogflowV2IntentMessageSimpleResponses =
-    GoogleCloudDialogflowV2IntentMessageSimpleResponses'
-    { _gSimpleResponses = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageSimpleResponses'
+    {_gSimpleResponses = Nothing}
+
 
 -- | Required. The list of simple responses.
 gSimpleResponses :: Lens' GoogleCloudDialogflowV2IntentMessageSimpleResponses [GoogleCloudDialogflowV2IntentMessageSimpleResponse]
@@ -4730,7 +5374,7 @@ gSimpleResponses
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageSimpleResponses
+           GoogleCloudDialogflowV2IntentMessageSimpleResponses
          where
         parseJSON
           = withObject
@@ -4740,7 +5384,7 @@ instance FromJSON
                    <$> (o .:? "simpleResponses" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageSimpleResponses
+           GoogleCloudDialogflowV2IntentMessageSimpleResponses
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageSimpleResponses'{..}
@@ -4751,10 +5395,13 @@ instance ToJSON
 -- | Represents a single followup intent in the chain.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentFollowupIntentInfo' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo = GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo'
+data GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo =
+  GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo'
     { _gFollowupIntentName       :: !(Maybe Text)
     , _gParentFollowupIntentName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo' with the minimum fields required to make a request.
 --
@@ -4766,10 +5413,9 @@ data GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo = GoogleCloudDialogflo
 googleCloudDialogflowV2beta1IntentFollowupIntentInfo
     :: GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo
 googleCloudDialogflowV2beta1IntentFollowupIntentInfo =
-    GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo'
-    { _gFollowupIntentName = Nothing
-    , _gParentFollowupIntentName = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo'
+    {_gFollowupIntentName = Nothing, _gParentFollowupIntentName = Nothing}
+
 
 -- | The unique identifier of the followup intent. Format:
 -- \`projects\/\/agent\/intents\/\`.
@@ -4786,7 +5432,7 @@ gParentFollowupIntentName
       (\ s a -> s{_gParentFollowupIntentName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo
+           GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo
          where
         parseJSON
           = withObject
@@ -4798,7 +5444,7 @@ instance FromJSON
                      (o .:? "parentFollowupIntentName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo
+           GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentFollowupIntentInfo'{..}
@@ -4811,9 +5457,12 @@ instance ToJSON
 -- | The collection of extracted parameters.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryResultParameters' smart constructor.
-newtype GoogleCloudDialogflowV2QueryResultParameters = GoogleCloudDialogflowV2QueryResultParameters'
+newtype GoogleCloudDialogflowV2QueryResultParameters =
+  GoogleCloudDialogflowV2QueryResultParameters'
     { _gcdvqrpsAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResultParameters' with the minimum fields required to make a request.
 --
@@ -4824,9 +5473,9 @@ googleCloudDialogflowV2QueryResultParameters
     :: HashMap Text JSONValue -- ^ 'gcdvqrpsAddtional'
     -> GoogleCloudDialogflowV2QueryResultParameters
 googleCloudDialogflowV2QueryResultParameters pGcdvqrpsAddtional_ =
-    GoogleCloudDialogflowV2QueryResultParameters'
-    { _gcdvqrpsAddtional = _Coerce # pGcdvqrpsAddtional_
-    }
+  GoogleCloudDialogflowV2QueryResultParameters'
+    {_gcdvqrpsAddtional = _Coerce # pGcdvqrpsAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrpsAddtional :: Lens' GoogleCloudDialogflowV2QueryResultParameters (HashMap Text JSONValue)
@@ -4836,7 +5485,8 @@ gcdvqrpsAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2QueryResultParameters where
+           GoogleCloudDialogflowV2QueryResultParameters
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2QueryResultParameters"
@@ -4845,7 +5495,8 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2QueryResultParameters where
+           GoogleCloudDialogflowV2QueryResultParameters
+         where
         toJSON = toJSON . _gcdvqrpsAddtional
 
 -- | The free-form diagnostic info. For example, this field could contain
@@ -4853,9 +5504,12 @@ instance ToJSON
 -- change without notice.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1QueryResultDiagnosticInfo' smart constructor.
-newtype GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo = GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo'
+newtype GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo =
+  GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo'
     { _gcdvqrdicAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo' with the minimum fields required to make a request.
 --
@@ -4866,9 +5520,9 @@ googleCloudDialogflowV2beta1QueryResultDiagnosticInfo
     :: HashMap Text JSONValue -- ^ 'gcdvqrdicAddtional'
     -> GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo
 googleCloudDialogflowV2beta1QueryResultDiagnosticInfo pGcdvqrdicAddtional_ =
-    GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo'
-    { _gcdvqrdicAddtional = _Coerce # pGcdvqrdicAddtional_
-    }
+  GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo'
+    {_gcdvqrdicAddtional = _Coerce # pGcdvqrdicAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrdicAddtional :: Lens' GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo (HashMap Text JSONValue)
@@ -4878,7 +5532,7 @@ gcdvqrdicAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo
+           GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo
          where
         parseJSON
           = withObject
@@ -4888,17 +5542,20 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo
+           GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo
          where
         toJSON = toJSON . _gcdvqrdicAddtional
 
 -- | The request message for EntityTypes.BatchDeleteEntities.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchDeleteEntitiesRequest' smart constructor.
-data GoogleCloudDialogflowV2BatchDeleteEntitiesRequest = GoogleCloudDialogflowV2BatchDeleteEntitiesRequest'
+data GoogleCloudDialogflowV2BatchDeleteEntitiesRequest =
+  GoogleCloudDialogflowV2BatchDeleteEntitiesRequest'
     { _gcdvbderLanguageCode :: !(Maybe Text)
     , _gcdvbderEntityValues :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchDeleteEntitiesRequest' with the minimum fields required to make a request.
 --
@@ -4910,16 +5567,15 @@ data GoogleCloudDialogflowV2BatchDeleteEntitiesRequest = GoogleCloudDialogflowV2
 googleCloudDialogflowV2BatchDeleteEntitiesRequest
     :: GoogleCloudDialogflowV2BatchDeleteEntitiesRequest
 googleCloudDialogflowV2BatchDeleteEntitiesRequest =
-    GoogleCloudDialogflowV2BatchDeleteEntitiesRequest'
-    { _gcdvbderLanguageCode = Nothing
-    , _gcdvbderEntityValues = Nothing
-    }
+  GoogleCloudDialogflowV2BatchDeleteEntitiesRequest'
+    {_gcdvbderLanguageCode = Nothing, _gcdvbderEntityValues = Nothing}
+
 
 -- | Optional. The language of entity synonyms defined in \`entities\`. If
--- not specified, the agent\'s default language is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 gcdvbderLanguageCode :: Lens' GoogleCloudDialogflowV2BatchDeleteEntitiesRequest (Maybe Text)
 gcdvbderLanguageCode
   = lens _gcdvbderLanguageCode
@@ -4936,7 +5592,7 @@ gcdvbderEntityValues
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchDeleteEntitiesRequest
+           GoogleCloudDialogflowV2BatchDeleteEntitiesRequest
          where
         parseJSON
           = withObject
@@ -4948,7 +5604,7 @@ instance FromJSON
                      (o .:? "entityValues" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchDeleteEntitiesRequest
+           GoogleCloudDialogflowV2BatchDeleteEntitiesRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchDeleteEntitiesRequest'{..}
@@ -4960,9 +5616,12 @@ instance ToJSON
 -- | The response message for Intents.BatchUpdateIntents.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchUpdateIntentsResponse' smart constructor.
-newtype GoogleCloudDialogflowV2BatchUpdateIntentsResponse = GoogleCloudDialogflowV2BatchUpdateIntentsResponse'
+newtype GoogleCloudDialogflowV2BatchUpdateIntentsResponse =
+  GoogleCloudDialogflowV2BatchUpdateIntentsResponse'
     { _gIntents :: Maybe [GoogleCloudDialogflowV2Intent]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateIntentsResponse' with the minimum fields required to make a request.
 --
@@ -4972,9 +5631,8 @@ newtype GoogleCloudDialogflowV2BatchUpdateIntentsResponse = GoogleCloudDialogflo
 googleCloudDialogflowV2BatchUpdateIntentsResponse
     :: GoogleCloudDialogflowV2BatchUpdateIntentsResponse
 googleCloudDialogflowV2BatchUpdateIntentsResponse =
-    GoogleCloudDialogflowV2BatchUpdateIntentsResponse'
-    { _gIntents = Nothing
-    }
+  GoogleCloudDialogflowV2BatchUpdateIntentsResponse' {_gIntents = Nothing}
+
 
 -- | The collection of updated or created intents.
 gIntents :: Lens' GoogleCloudDialogflowV2BatchUpdateIntentsResponse [GoogleCloudDialogflowV2Intent]
@@ -4984,7 +5642,7 @@ gIntents
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchUpdateIntentsResponse
+           GoogleCloudDialogflowV2BatchUpdateIntentsResponse
          where
         parseJSON
           = withObject
@@ -4994,7 +5652,7 @@ instance FromJSON
                    <$> (o .:? "intents" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchUpdateIntentsResponse
+           GoogleCloudDialogflowV2BatchUpdateIntentsResponse
          where
         toJSON
           GoogleCloudDialogflowV2BatchUpdateIntentsResponse'{..}
@@ -5003,10 +5661,13 @@ instance ToJSON
 -- | The response message for EntityTypes.ListEntityTypes.
 --
 -- /See:/ 'googleCloudDialogflowV2ListEntityTypesResponse' smart constructor.
-data GoogleCloudDialogflowV2ListEntityTypesResponse = GoogleCloudDialogflowV2ListEntityTypesResponse'
+data GoogleCloudDialogflowV2ListEntityTypesResponse =
+  GoogleCloudDialogflowV2ListEntityTypesResponse'
     { _gcdvletrNextPageToken :: !(Maybe Text)
     , _gcdvletrEntityTypes   :: !(Maybe [GoogleCloudDialogflowV2EntityType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ListEntityTypesResponse' with the minimum fields required to make a request.
 --
@@ -5018,10 +5679,9 @@ data GoogleCloudDialogflowV2ListEntityTypesResponse = GoogleCloudDialogflowV2Lis
 googleCloudDialogflowV2ListEntityTypesResponse
     :: GoogleCloudDialogflowV2ListEntityTypesResponse
 googleCloudDialogflowV2ListEntityTypesResponse =
-    GoogleCloudDialogflowV2ListEntityTypesResponse'
-    { _gcdvletrNextPageToken = Nothing
-    , _gcdvletrEntityTypes = Nothing
-    }
+  GoogleCloudDialogflowV2ListEntityTypesResponse'
+    {_gcdvletrNextPageToken = Nothing, _gcdvletrEntityTypes = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -5040,7 +5700,8 @@ gcdvletrEntityTypes
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2ListEntityTypesResponse where
+           GoogleCloudDialogflowV2ListEntityTypesResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ListEntityTypesResponse"
@@ -5050,7 +5711,8 @@ instance FromJSON
                      (o .:? "entityTypes" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ListEntityTypesResponse where
+           GoogleCloudDialogflowV2ListEntityTypesResponse
+         where
         toJSON
           GoogleCloudDialogflowV2ListEntityTypesResponse'{..}
           = object
@@ -5061,7 +5723,8 @@ instance ToJSON
 -- | Represents a conversational agent.
 --
 -- /See:/ 'googleCloudDialogflowV2Agent' smart constructor.
-data GoogleCloudDialogflowV2Agent = GoogleCloudDialogflowV2Agent'
+data GoogleCloudDialogflowV2Agent =
+  GoogleCloudDialogflowV2Agent'
     { _gcdvaParent                  :: !(Maybe Text)
     , _gcdvaDefaultLanguageCode     :: !(Maybe Text)
     , _gcdvaEnableLogging           :: !(Maybe Bool)
@@ -5072,7 +5735,9 @@ data GoogleCloudDialogflowV2Agent = GoogleCloudDialogflowV2Agent'
     , _gcdvaMatchMode               :: !(Maybe GoogleCloudDialogflowV2AgentMatchMode)
     , _gcdvaTimeZone                :: !(Maybe Text)
     , _gcdvaDescription             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2Agent' with the minimum fields required to make a request.
 --
@@ -5100,7 +5765,7 @@ data GoogleCloudDialogflowV2Agent = GoogleCloudDialogflowV2Agent'
 googleCloudDialogflowV2Agent
     :: GoogleCloudDialogflowV2Agent
 googleCloudDialogflowV2Agent =
-    GoogleCloudDialogflowV2Agent'
+  GoogleCloudDialogflowV2Agent'
     { _gcdvaParent = Nothing
     , _gcdvaDefaultLanguageCode = Nothing
     , _gcdvaEnableLogging = Nothing
@@ -5113,13 +5778,15 @@ googleCloudDialogflowV2Agent =
     , _gcdvaDescription = Nothing
     }
 
+
 -- | Required. The project of this agent. Format: \`projects\/\`.
 gcdvaParent :: Lens' GoogleCloudDialogflowV2Agent (Maybe Text)
 gcdvaParent
   = lens _gcdvaParent (\ s a -> s{_gcdvaParent = a})
 
 -- | Required. The default language of the agent as a language tag. See
--- [Language Support](https:\/\/dialogflow.com\/docs\/reference\/language)
+-- [Language
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
 -- for a list of the currently supported language codes. This field cannot
 -- be set by the \`Update\` method.
 gcdvaDefaultLanguageCode :: Lens' GoogleCloudDialogflowV2Agent (Maybe Text)
@@ -5136,10 +5803,10 @@ gcdvaEnableLogging
 -- | Optional. To filter out false positive results and still get variety in
 -- matched natural language inputs for your agent, you can tune the machine
 -- learning classification threshold. If the returned score value is less
--- than the threshold value, then a fallback intent is be triggered or, if
--- there are no fallback intents defined, no intent will be triggered. The
--- score values range from 0.0 (completely uncertain) to 1.0 (completely
--- certain). If set to 0.0, the default of 0.3 is used.
+-- than the threshold value, then a fallback intent will be triggered or,
+-- if there are no fallback intents defined, no intent will be triggered.
+-- The score values range from 0.0 (completely uncertain) to 1.0
+-- (completely certain). If set to 0.0, the default of 0.3 is used.
 gcdvaClassificationThreshold :: Lens' GoogleCloudDialogflowV2Agent (Maybe Double)
 gcdvaClassificationThreshold
   = lens _gcdvaClassificationThreshold
@@ -5148,7 +5815,7 @@ gcdvaClassificationThreshold
 
 -- | Optional. The URI of the agent\'s avatar. Avatars are used throughout
 -- the Dialogflow console and in the self-hosted [Web
--- Demo](https:\/\/dialogflow.com\/docs\/integrations\/web-demo)
+-- Demo](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/integrations\/web-demo)
 -- integration.
 gcdvaAvatarURI :: Lens' GoogleCloudDialogflowV2Agent (Maybe Text)
 gcdvaAvatarURI
@@ -5227,7 +5894,8 @@ instance ToJSON GoogleCloudDialogflowV2Agent where
 -- | Corresponds to the \`Response\` field in the Dialogflow console.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessage' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessage = GoogleCloudDialogflowV2beta1IntentMessage'
+data GoogleCloudDialogflowV2beta1IntentMessage =
+  GoogleCloudDialogflowV2beta1IntentMessage'
     { _gcdvimCard                      :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageCard)
     , _gcdvimImage                     :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
     , _gcdvimPlatform                  :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessagePlatform)
@@ -5243,7 +5911,9 @@ data GoogleCloudDialogflowV2beta1IntentMessage = GoogleCloudDialogflowV2beta1Int
     , _gcdvimTelephonyPlayAudio        :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio)
     , _gcdvimBasicCard                 :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageBasicCard)
     , _gcdvimQuickReplies              :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageQuickReplies)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessage' with the minimum fields required to make a request.
 --
@@ -5281,7 +5951,7 @@ data GoogleCloudDialogflowV2beta1IntentMessage = GoogleCloudDialogflowV2beta1Int
 googleCloudDialogflowV2beta1IntentMessage
     :: GoogleCloudDialogflowV2beta1IntentMessage
 googleCloudDialogflowV2beta1IntentMessage =
-    GoogleCloudDialogflowV2beta1IntentMessage'
+  GoogleCloudDialogflowV2beta1IntentMessage'
     { _gcdvimCard = Nothing
     , _gcdvimImage = Nothing
     , _gcdvimPlatform = Nothing
@@ -5298,6 +5968,7 @@ googleCloudDialogflowV2beta1IntentMessage =
     , _gcdvimBasicCard = Nothing
     , _gcdvimQuickReplies = Nothing
     }
+
 
 -- | Displays a card.
 gcdvimCard :: Lens' GoogleCloudDialogflowV2beta1IntentMessage (Maybe GoogleCloudDialogflowV2beta1IntentMessageCard)
@@ -5389,7 +6060,8 @@ gcdvimQuickReplies
       (\ s a -> s{_gcdvimQuickReplies = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessage where
+           GoogleCloudDialogflowV2beta1IntentMessage
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1IntentMessage"
@@ -5411,7 +6083,8 @@ instance FromJSON
                      <*> (o .:? "quickReplies"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessage where
+           GoogleCloudDialogflowV2beta1IntentMessage
+         where
         toJSON GoogleCloudDialogflowV2beta1IntentMessage'{..}
           = object
               (catMaybes
@@ -5439,10 +6112,13 @@ instance ToJSON
 -- dialog.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageSelectItemInfo' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageSelectItemInfo = GoogleCloudDialogflowV2IntentMessageSelectItemInfo'
+data GoogleCloudDialogflowV2IntentMessageSelectItemInfo =
+  GoogleCloudDialogflowV2IntentMessageSelectItemInfo'
     { _gcdvimsiiKey      :: !(Maybe Text)
     , _gcdvimsiiSynonyms :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSelectItemInfo' with the minimum fields required to make a request.
 --
@@ -5454,10 +6130,9 @@ data GoogleCloudDialogflowV2IntentMessageSelectItemInfo = GoogleCloudDialogflowV
 googleCloudDialogflowV2IntentMessageSelectItemInfo
     :: GoogleCloudDialogflowV2IntentMessageSelectItemInfo
 googleCloudDialogflowV2IntentMessageSelectItemInfo =
-    GoogleCloudDialogflowV2IntentMessageSelectItemInfo'
-    { _gcdvimsiiKey = Nothing
-    , _gcdvimsiiSynonyms = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageSelectItemInfo'
+    {_gcdvimsiiKey = Nothing, _gcdvimsiiSynonyms = Nothing}
+
 
 -- | Required. A unique key that will be sent back to the agent if this
 -- response is given.
@@ -5475,7 +6150,7 @@ gcdvimsiiSynonyms
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageSelectItemInfo
+           GoogleCloudDialogflowV2IntentMessageSelectItemInfo
          where
         parseJSON
           = withObject
@@ -5485,7 +6160,7 @@ instance FromJSON
                    <$> (o .:? "key") <*> (o .:? "synonyms" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageSelectItemInfo
+           GoogleCloudDialogflowV2IntentMessageSelectItemInfo
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageSelectItemInfo'{..}
@@ -5498,10 +6173,13 @@ instance ToJSON
 -- unit of analysis, such as the query text.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1Sentiment' smart constructor.
-data GoogleCloudDialogflowV2beta1Sentiment = GoogleCloudDialogflowV2beta1Sentiment'
+data GoogleCloudDialogflowV2beta1Sentiment =
+  GoogleCloudDialogflowV2beta1Sentiment'
     { _gcdvsScore     :: !(Maybe (Textual Double))
     , _gcdvsMagnitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1Sentiment' with the minimum fields required to make a request.
 --
@@ -5513,10 +6191,9 @@ data GoogleCloudDialogflowV2beta1Sentiment = GoogleCloudDialogflowV2beta1Sentime
 googleCloudDialogflowV2beta1Sentiment
     :: GoogleCloudDialogflowV2beta1Sentiment
 googleCloudDialogflowV2beta1Sentiment =
-    GoogleCloudDialogflowV2beta1Sentiment'
-    { _gcdvsScore = Nothing
-    , _gcdvsMagnitude = Nothing
-    }
+  GoogleCloudDialogflowV2beta1Sentiment'
+    {_gcdvsScore = Nothing, _gcdvsMagnitude = Nothing}
+
 
 -- | Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
 -- sentiment).
@@ -5535,7 +6212,8 @@ gcdvsMagnitude
       . mapping _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1Sentiment where
+           GoogleCloudDialogflowV2beta1Sentiment
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2beta1Sentiment"
               (\ o ->
@@ -5553,9 +6231,12 @@ instance ToJSON GoogleCloudDialogflowV2beta1Sentiment
 -- | The request message for EntityTypes.BatchDeleteEntityTypes.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchDeleteEntityTypesRequest' smart constructor.
-newtype GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest = GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest'
+newtype GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest =
+  GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest'
     { _gcdvbdetrEntityTypeNames :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest' with the minimum fields required to make a request.
 --
@@ -5565,9 +6246,9 @@ newtype GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest = GoogleCloudDialog
 googleCloudDialogflowV2BatchDeleteEntityTypesRequest
     :: GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
 googleCloudDialogflowV2BatchDeleteEntityTypesRequest =
-    GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest'
-    { _gcdvbdetrEntityTypeNames = Nothing
-    }
+  GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest'
+    {_gcdvbdetrEntityTypeNames = Nothing}
+
 
 -- | Required. The names entity types to delete. All names must point to the
 -- same agent as \`parent\`.
@@ -5579,7 +6260,7 @@ gcdvbdetrEntityTypeNames
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
+           GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
          where
         parseJSON
           = withObject
@@ -5589,7 +6270,7 @@ instance FromJSON
                    <$> (o .:? "entityTypeNames" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
+           GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest'{..}
@@ -5604,11 +6285,14 @@ instance ToJSON
 -- specifies which intent to trigger.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryInput' smart constructor.
-data GoogleCloudDialogflowV2QueryInput = GoogleCloudDialogflowV2QueryInput'
+data GoogleCloudDialogflowV2QueryInput =
+  GoogleCloudDialogflowV2QueryInput'
     { _gcdvqiAudioConfig :: !(Maybe GoogleCloudDialogflowV2InputAudioConfig)
     , _gcdvqiEvent       :: !(Maybe GoogleCloudDialogflowV2EventInput)
     , _gcdvqiText        :: !(Maybe GoogleCloudDialogflowV2TextInput)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryInput' with the minimum fields required to make a request.
 --
@@ -5622,11 +6306,12 @@ data GoogleCloudDialogflowV2QueryInput = GoogleCloudDialogflowV2QueryInput'
 googleCloudDialogflowV2QueryInput
     :: GoogleCloudDialogflowV2QueryInput
 googleCloudDialogflowV2QueryInput =
-    GoogleCloudDialogflowV2QueryInput'
+  GoogleCloudDialogflowV2QueryInput'
     { _gcdvqiAudioConfig = Nothing
     , _gcdvqiEvent = Nothing
     , _gcdvqiText = Nothing
     }
+
 
 -- | Instructs the speech recognizer how to process the speech audio.
 gcdvqiAudioConfig :: Lens' GoogleCloudDialogflowV2QueryInput (Maybe GoogleCloudDialogflowV2InputAudioConfig)
@@ -5665,9 +6350,12 @@ instance ToJSON GoogleCloudDialogflowV2QueryInput
 -- | The request message for Agents.ExportAgent.
 --
 -- /See:/ 'googleCloudDialogflowV2ExportAgentRequest' smart constructor.
-newtype GoogleCloudDialogflowV2ExportAgentRequest = GoogleCloudDialogflowV2ExportAgentRequest'
+newtype GoogleCloudDialogflowV2ExportAgentRequest =
+  GoogleCloudDialogflowV2ExportAgentRequest'
     { _gcdvearAgentURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ExportAgentRequest' with the minimum fields required to make a request.
 --
@@ -5677,9 +6365,8 @@ newtype GoogleCloudDialogflowV2ExportAgentRequest = GoogleCloudDialogflowV2Expor
 googleCloudDialogflowV2ExportAgentRequest
     :: GoogleCloudDialogflowV2ExportAgentRequest
 googleCloudDialogflowV2ExportAgentRequest =
-    GoogleCloudDialogflowV2ExportAgentRequest'
-    { _gcdvearAgentURI = Nothing
-    }
+  GoogleCloudDialogflowV2ExportAgentRequest' {_gcdvearAgentURI = Nothing}
+
 
 -- | Optional. The [Google Cloud
 -- Storage](https:\/\/cloud.google.com\/storage\/docs\/) URI to export the
@@ -5691,7 +6378,8 @@ gcdvearAgentURI
       (\ s a -> s{_gcdvearAgentURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2ExportAgentRequest where
+           GoogleCloudDialogflowV2ExportAgentRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ExportAgentRequest"
@@ -5700,7 +6388,8 @@ instance FromJSON
                    (o .:? "agentUri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ExportAgentRequest where
+           GoogleCloudDialogflowV2ExportAgentRequest
+         where
         toJSON GoogleCloudDialogflowV2ExportAgentRequest'{..}
           = object
               (catMaybes [("agentUri" .=) <$> _gcdvearAgentURI])
@@ -5708,9 +6397,12 @@ instance ToJSON
 -- | The card for presenting a carousel of options to select from.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageCarouselSelect' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect = GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect'
+newtype GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect =
+  GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect'
     { _gcdvimcsItems :: Maybe [GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect' with the minimum fields required to make a request.
 --
@@ -5720,9 +6412,9 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect = GoogleCloudDia
 googleCloudDialogflowV2beta1IntentMessageCarouselSelect
     :: GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
 googleCloudDialogflowV2beta1IntentMessageCarouselSelect =
-    GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect'
-    { _gcdvimcsItems = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect'
+    {_gcdvimcsItems = Nothing}
+
 
 -- | Required. Carousel items.
 gcdvimcsItems :: Lens' GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect [GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem]
@@ -5733,7 +6425,7 @@ gcdvimcsItems
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
+           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
          where
         parseJSON
           = withObject
@@ -5743,7 +6435,7 @@ instance FromJSON
                    <$> (o .:? "items" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
+           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect'{..}
@@ -5753,11 +6445,14 @@ instance ToJSON
 -- | Represents a context.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1Context' smart constructor.
-data GoogleCloudDialogflowV2beta1Context = GoogleCloudDialogflowV2beta1Context'
+data GoogleCloudDialogflowV2beta1Context =
+  GoogleCloudDialogflowV2beta1Context'
     { _gcdvcLifespanCount :: !(Maybe (Textual Int32))
     , _gcdvcName          :: !(Maybe Text)
     , _gcdvcParameters    :: !(Maybe GoogleCloudDialogflowV2beta1ContextParameters)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1Context' with the minimum fields required to make a request.
 --
@@ -5771,16 +6466,17 @@ data GoogleCloudDialogflowV2beta1Context = GoogleCloudDialogflowV2beta1Context'
 googleCloudDialogflowV2beta1Context
     :: GoogleCloudDialogflowV2beta1Context
 googleCloudDialogflowV2beta1Context =
-    GoogleCloudDialogflowV2beta1Context'
+  GoogleCloudDialogflowV2beta1Context'
     { _gcdvcLifespanCount = Nothing
     , _gcdvcName = Nothing
     , _gcdvcParameters = Nothing
     }
 
+
 -- | Optional. The number of conversational query requests after which the
 -- context expires. If set to \`0\` (the default) the context expires
--- immediately. Contexts expire automatically after 10 minutes even if
--- there are no matching queries.
+-- immediately. Contexts expire automatically after 20 minutes if there are
+-- no matching queries.
 gcdvcLifespanCount :: Lens' GoogleCloudDialogflowV2beta1Context (Maybe Int32)
 gcdvcLifespanCount
   = lens _gcdvcLifespanCount
@@ -5801,7 +6497,8 @@ gcdvcName
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 gcdvcParameters :: Lens' GoogleCloudDialogflowV2beta1Context (Maybe GoogleCloudDialogflowV2beta1ContextParameters)
 gcdvcParameters
   = lens _gcdvcParameters
@@ -5828,12 +6525,15 @@ instance ToJSON GoogleCloudDialogflowV2beta1Context
 -- | The request message for EntityTypes.BatchUpdateEntityTypes.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchUpdateEntityTypesRequest' smart constructor.
-data GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest = GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest'
+data GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest =
+  GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest'
     { _gcdvbuetrLanguageCode          :: !(Maybe Text)
     , _gcdvbuetrUpdateMask            :: !(Maybe GFieldMask)
     , _gcdvbuetrEntityTypeBatchInline :: !(Maybe GoogleCloudDialogflowV2EntityTypeBatch)
     , _gcdvbuetrEntityTypeBatchURI    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest' with the minimum fields required to make a request.
 --
@@ -5849,17 +6549,18 @@ data GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest = GoogleCloudDialogflo
 googleCloudDialogflowV2BatchUpdateEntityTypesRequest
     :: GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest
 googleCloudDialogflowV2BatchUpdateEntityTypesRequest =
-    GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest'
+  GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest'
     { _gcdvbuetrLanguageCode = Nothing
     , _gcdvbuetrUpdateMask = Nothing
     , _gcdvbuetrEntityTypeBatchInline = Nothing
     , _gcdvbuetrEntityTypeBatchURI = Nothing
     }
 
+
 -- | Optional. The language of entity synonyms defined in \`entity_types\`.
--- If not specified, the agent\'s default language is used. [More than a
--- dozen languages](https:\/\/dialogflow.com\/docs\/reference\/language)
--- are supported. Note: languages must be enabled in the agent, before they
+-- If not specified, the agent\'s default language is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
 -- can be used.
 gcdvbuetrLanguageCode :: Lens' GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest (Maybe Text)
 gcdvbuetrLanguageCode
@@ -5888,7 +6589,7 @@ gcdvbuetrEntityTypeBatchURI
       (\ s a -> s{_gcdvbuetrEntityTypeBatchURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest
+           GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest
          where
         parseJSON
           = withObject
@@ -5901,7 +6602,7 @@ instance FromJSON
                      <*> (o .:? "entityTypeBatchUri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest
+           GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest
          where
         toJSON
           GoogleCloudDialogflowV2BatchUpdateEntityTypesRequest'{..}
@@ -5924,9 +6625,12 @@ instance ToJSON
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'googleLongrunningOperationResponse' smart constructor.
-newtype GoogleLongrunningOperationResponse = GoogleLongrunningOperationResponse'
+newtype GoogleLongrunningOperationResponse =
+  GoogleLongrunningOperationResponse'
     { _glorAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
@@ -5937,9 +6641,9 @@ googleLongrunningOperationResponse
     :: HashMap Text JSONValue -- ^ 'glorAddtional'
     -> GoogleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
-    GoogleLongrunningOperationResponse'
-    { _glorAddtional = _Coerce # pGlorAddtional_
-    }
+  GoogleLongrunningOperationResponse'
+    {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -5966,10 +6670,13 @@ instance ToJSON GoogleLongrunningOperationResponse
 -- request-level or can come from the agent-level synthesizer config.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech = GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech'
+data GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech =
+  GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech'
     { _gcdvimtssText :: !(Maybe Text)
     , _gcdvimtssSsml :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech' with the minimum fields required to make a request.
 --
@@ -5981,10 +6688,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech = Google
 googleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
     :: GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
 googleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech =
-    GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech'
-    { _gcdvimtssText = Nothing
-    , _gcdvimtssSsml = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech'
+    {_gcdvimtssText = Nothing, _gcdvimtssSsml = Nothing}
+
 
 -- | The raw text to be synthesized.
 gcdvimtssText :: Lens' GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech (Maybe Text)
@@ -6000,7 +6706,7 @@ gcdvimtssSsml
       (\ s a -> s{_gcdvimtssSsml = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
+           GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
          where
         parseJSON
           = withObject
@@ -6010,7 +6716,7 @@ instance FromJSON
                    <$> (o .:? "text") <*> (o .:? "ssml"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
+           GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech'{..}
@@ -6022,12 +6728,15 @@ instance ToJSON
 -- | An item in the list.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageListSelectItem' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageListSelectItem = GoogleCloudDialogflowV2beta1IntentMessageListSelectItem'
+data GoogleCloudDialogflowV2beta1IntentMessageListSelectItem =
+  GoogleCloudDialogflowV2beta1IntentMessageListSelectItem'
     { _gcdvimlsicImage       :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
     , _gcdvimlsicTitle       :: !(Maybe Text)
     , _gcdvimlsicDescription :: !(Maybe Text)
     , _gcdvimlsicInfo        :: !(Maybe GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageListSelectItem' with the minimum fields required to make a request.
 --
@@ -6043,12 +6752,13 @@ data GoogleCloudDialogflowV2beta1IntentMessageListSelectItem = GoogleCloudDialog
 googleCloudDialogflowV2beta1IntentMessageListSelectItem
     :: GoogleCloudDialogflowV2beta1IntentMessageListSelectItem
 googleCloudDialogflowV2beta1IntentMessageListSelectItem =
-    GoogleCloudDialogflowV2beta1IntentMessageListSelectItem'
+  GoogleCloudDialogflowV2beta1IntentMessageListSelectItem'
     { _gcdvimlsicImage = Nothing
     , _gcdvimlsicTitle = Nothing
     , _gcdvimlsicDescription = Nothing
     , _gcdvimlsicInfo = Nothing
     }
+
 
 -- | Optional. The image to display.
 gcdvimlsicImage :: Lens' GoogleCloudDialogflowV2beta1IntentMessageListSelectItem (Maybe GoogleCloudDialogflowV2beta1IntentMessageImage)
@@ -6075,7 +6785,7 @@ gcdvimlsicInfo
       (\ s a -> s{_gcdvimlsicInfo = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageListSelectItem
+           GoogleCloudDialogflowV2beta1IntentMessageListSelectItem
          where
         parseJSON
           = withObject
@@ -6088,7 +6798,7 @@ instance FromJSON
                      <*> (o .:? "info"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageListSelectItem
+           GoogleCloudDialogflowV2beta1IntentMessageListSelectItem
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageListSelectItem'{..}
@@ -6103,9 +6813,12 @@ instance ToJSON
 -- reply to the conversation.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageSuggestion' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessageSuggestion = GoogleCloudDialogflowV2IntentMessageSuggestion'
+newtype GoogleCloudDialogflowV2IntentMessageSuggestion =
+  GoogleCloudDialogflowV2IntentMessageSuggestion'
     { _gcdvimscTitle :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageSuggestion' with the minimum fields required to make a request.
 --
@@ -6115,9 +6828,8 @@ newtype GoogleCloudDialogflowV2IntentMessageSuggestion = GoogleCloudDialogflowV2
 googleCloudDialogflowV2IntentMessageSuggestion
     :: GoogleCloudDialogflowV2IntentMessageSuggestion
 googleCloudDialogflowV2IntentMessageSuggestion =
-    GoogleCloudDialogflowV2IntentMessageSuggestion'
-    { _gcdvimscTitle = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageSuggestion' {_gcdvimscTitle = Nothing}
+
 
 -- | Required. The text shown the in the suggestion chip.
 gcdvimscTitle :: Lens' GoogleCloudDialogflowV2IntentMessageSuggestion (Maybe Text)
@@ -6126,7 +6838,8 @@ gcdvimscTitle
       (\ s a -> s{_gcdvimscTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageSuggestion where
+           GoogleCloudDialogflowV2IntentMessageSuggestion
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageSuggestion"
@@ -6135,19 +6848,23 @@ instance FromJSON
                    (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageSuggestion where
+           GoogleCloudDialogflowV2IntentMessageSuggestion
+         where
         toJSON
           GoogleCloudDialogflowV2IntentMessageSuggestion'{..}
           = object
               (catMaybes [("title" .=) <$> _gcdvimscTitle])
 
--- | Optional. Represents an entity.
+-- | An **entity entry** for an associated entity type.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1EntityTypeEntity' smart constructor.
-data GoogleCloudDialogflowV2beta1EntityTypeEntity = GoogleCloudDialogflowV2beta1EntityTypeEntity'
+data GoogleCloudDialogflowV2beta1EntityTypeEntity =
+  GoogleCloudDialogflowV2beta1EntityTypeEntity'
     { _gcdveteValue    :: !(Maybe Text)
     , _gcdveteSynonyms :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EntityTypeEntity' with the minimum fields required to make a request.
 --
@@ -6159,20 +6876,24 @@ data GoogleCloudDialogflowV2beta1EntityTypeEntity = GoogleCloudDialogflowV2beta1
 googleCloudDialogflowV2beta1EntityTypeEntity
     :: GoogleCloudDialogflowV2beta1EntityTypeEntity
 googleCloudDialogflowV2beta1EntityTypeEntity =
-    GoogleCloudDialogflowV2beta1EntityTypeEntity'
-    { _gcdveteValue = Nothing
-    , _gcdveteSynonyms = Nothing
-    }
+  GoogleCloudDialogflowV2beta1EntityTypeEntity'
+    {_gcdveteValue = Nothing, _gcdveteSynonyms = Nothing}
 
--- | Required. For \`KIND_MAP\` entity types: A canonical name to be used in
--- place of synonyms. For \`KIND_LIST\` entity types: A string that can
--- contain references to other entity types (with or without aliases).
+
+-- | Required. The primary value associated with this entity entry. For
+-- example, if the entity type is *vegetable*, the value could be
+-- *scallions*. For \`KIND_MAP\` entity types: * A canonical value to be
+-- used in place of synonyms. For \`KIND_LIST\` entity types: * A string
+-- that can contain references to other entity types (with or without
+-- aliases).
 gcdveteValue :: Lens' GoogleCloudDialogflowV2beta1EntityTypeEntity (Maybe Text)
 gcdveteValue
   = lens _gcdveteValue (\ s a -> s{_gcdveteValue = a})
 
--- | Required. A collection of synonyms. For \`KIND_LIST\` entity types this
--- must contain exactly one synonym equal to \`value\`.
+-- | Required. A collection of value synonyms. For example, if the entity
+-- type is *vegetable*, and \`value\` is *scallions*, a synonym could be
+-- *green onions*. For \`KIND_LIST\` entity types: * This collection must
+-- contain exactly one synonym equal to \`value\`.
 gcdveteSynonyms :: Lens' GoogleCloudDialogflowV2beta1EntityTypeEntity [Text]
 gcdveteSynonyms
   = lens _gcdveteSynonyms
@@ -6181,7 +6902,8 @@ gcdveteSynonyms
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1EntityTypeEntity where
+           GoogleCloudDialogflowV2beta1EntityTypeEntity
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1EntityTypeEntity"
@@ -6190,7 +6912,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "synonyms" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1EntityTypeEntity where
+           GoogleCloudDialogflowV2beta1EntityTypeEntity
+         where
         toJSON
           GoogleCloudDialogflowV2beta1EntityTypeEntity'{..}
           = object
@@ -6202,13 +6925,16 @@ instance ToJSON
 -- parameter values from natural language queries.
 --
 -- /See:/ 'googleCloudDialogflowV2EntityType' smart constructor.
-data GoogleCloudDialogflowV2EntityType = GoogleCloudDialogflowV2EntityType'
+data GoogleCloudDialogflowV2EntityType =
+  GoogleCloudDialogflowV2EntityType'
     { _gcdvetEntities          :: !(Maybe [GoogleCloudDialogflowV2EntityTypeEntity])
     , _gcdvetKind              :: !(Maybe GoogleCloudDialogflowV2EntityTypeKind)
     , _gcdvetName              :: !(Maybe Text)
     , _gcdvetAutoExpansionMode :: !(Maybe GoogleCloudDialogflowV2EntityTypeAutoExpansionMode)
     , _gcdvetDisplayName       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2EntityType' with the minimum fields required to make a request.
 --
@@ -6226,7 +6952,7 @@ data GoogleCloudDialogflowV2EntityType = GoogleCloudDialogflowV2EntityType'
 googleCloudDialogflowV2EntityType
     :: GoogleCloudDialogflowV2EntityType
 googleCloudDialogflowV2EntityType =
-    GoogleCloudDialogflowV2EntityType'
+  GoogleCloudDialogflowV2EntityType'
     { _gcdvetEntities = Nothing
     , _gcdvetKind = Nothing
     , _gcdvetName = Nothing
@@ -6234,7 +6960,9 @@ googleCloudDialogflowV2EntityType =
     , _gcdvetDisplayName = Nothing
     }
 
--- | Optional. The collection of entities associated with the entity type.
+
+-- | Optional. The collection of entity entries associated with the entity
+-- type.
 gcdvetEntities :: Lens' GoogleCloudDialogflowV2EntityType [GoogleCloudDialogflowV2EntityTypeEntity]
 gcdvetEntities
   = lens _gcdvetEntities
@@ -6247,9 +6975,9 @@ gcdvetKind :: Lens' GoogleCloudDialogflowV2EntityType (Maybe GoogleCloudDialogfl
 gcdvetKind
   = lens _gcdvetKind (\ s a -> s{_gcdvetKind = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of the entity type. Format:
--- \`projects\/\/agent\/entityTypes\/\`.
+-- | The unique identifier of the entity type. Required for
+-- EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes
+-- methods. Format: \`projects\/\/agent\/entityTypes\/\`.
 gcdvetName :: Lens' GoogleCloudDialogflowV2EntityType (Maybe Text)
 gcdvetName
   = lens _gcdvetName (\ s a -> s{_gcdvetName = a})
@@ -6293,10 +7021,13 @@ instance ToJSON GoogleCloudDialogflowV2EntityType
 -- | Represents the natural language text to be processed.
 --
 -- /See:/ 'googleCloudDialogflowV2TextInput' smart constructor.
-data GoogleCloudDialogflowV2TextInput = GoogleCloudDialogflowV2TextInput'
+data GoogleCloudDialogflowV2TextInput =
+  GoogleCloudDialogflowV2TextInput'
     { _gcdvtiLanguageCode :: !(Maybe Text)
     , _gcdvtiText         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2TextInput' with the minimum fields required to make a request.
 --
@@ -6308,15 +7039,15 @@ data GoogleCloudDialogflowV2TextInput = GoogleCloudDialogflowV2TextInput'
 googleCloudDialogflowV2TextInput
     :: GoogleCloudDialogflowV2TextInput
 googleCloudDialogflowV2TextInput =
-    GoogleCloudDialogflowV2TextInput'
-    { _gcdvtiLanguageCode = Nothing
-    , _gcdvtiText = Nothing
-    }
+  GoogleCloudDialogflowV2TextInput'
+    {_gcdvtiLanguageCode = Nothing, _gcdvtiText = Nothing}
+
 
 -- | Required. The language of this conversational query. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/languages) for a list of the
--- currently supported language codes. Note that queries in the same
--- session do not necessarily need to specify the same language.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes. Note that queries
+-- in the same session do not necessarily need to specify the same
+-- language.
 gcdvtiLanguageCode :: Lens' GoogleCloudDialogflowV2TextInput (Maybe Text)
 gcdvtiLanguageCode
   = lens _gcdvtiLanguageCode
@@ -6347,9 +7078,12 @@ instance ToJSON GoogleCloudDialogflowV2TextInput
 -- | Opens the given URI.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction = GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction'
+newtype GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction =
+  GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction'
     { _gcdvimbcbouriaURI :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction' with the minimum fields required to make a request.
 --
@@ -6359,9 +7093,9 @@ newtype GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction = Googl
 googleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
     :: GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
 googleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction =
-    GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction'
-    { _gcdvimbcbouriaURI = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction'
+    {_gcdvimbcbouriaURI = Nothing}
+
 
 -- | Required. The HTTP or HTTPS scheme URI.
 gcdvimbcbouriaURI :: Lens' GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction (Maybe Text)
@@ -6370,7 +7104,7 @@ gcdvimbcbouriaURI
       (\ s a -> s{_gcdvimbcbouriaURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
+           GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
          where
         parseJSON
           = withObject
@@ -6380,7 +7114,7 @@ instance FromJSON
                    <$> (o .:? "uri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
+           GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction'{..}
@@ -6390,12 +7124,15 @@ instance ToJSON
 -- | The card response message.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageCard' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageCard = GoogleCloudDialogflowV2IntentMessageCard'
+data GoogleCloudDialogflowV2IntentMessageCard =
+  GoogleCloudDialogflowV2IntentMessageCard'
     { _gcdvimccButtons  :: !(Maybe [GoogleCloudDialogflowV2IntentMessageCardButton])
     , _gcdvimccImageURI :: !(Maybe Text)
     , _gcdvimccSubtitle :: !(Maybe Text)
     , _gcdvimccTitle    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCard' with the minimum fields required to make a request.
 --
@@ -6411,12 +7148,13 @@ data GoogleCloudDialogflowV2IntentMessageCard = GoogleCloudDialogflowV2IntentMes
 googleCloudDialogflowV2IntentMessageCard
     :: GoogleCloudDialogflowV2IntentMessageCard
 googleCloudDialogflowV2IntentMessageCard =
-    GoogleCloudDialogflowV2IntentMessageCard'
+  GoogleCloudDialogflowV2IntentMessageCard'
     { _gcdvimccButtons = Nothing
     , _gcdvimccImageURI = Nothing
     , _gcdvimccSubtitle = Nothing
     , _gcdvimccTitle = Nothing
     }
+
 
 -- | Optional. The collection of card buttons.
 gcdvimccButtons :: Lens' GoogleCloudDialogflowV2IntentMessageCard [GoogleCloudDialogflowV2IntentMessageCardButton]
@@ -6445,7 +7183,8 @@ gcdvimccTitle
       (\ s a -> s{_gcdvimccTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageCard where
+           GoogleCloudDialogflowV2IntentMessageCard
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageCard"
@@ -6456,7 +7195,8 @@ instance FromJSON
                      <*> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageCard where
+           GoogleCloudDialogflowV2IntentMessageCard
+         where
         toJSON GoogleCloudDialogflowV2IntentMessageCard'{..}
           = object
               (catMaybes
@@ -6469,11 +7209,14 @@ instance ToJSON
 -- \`[Streaming]DetectIntent\` call.
 --
 -- /See:/ 'googleCloudDialogflowV2OriginalDetectIntentRequest' smart constructor.
-data GoogleCloudDialogflowV2OriginalDetectIntentRequest = GoogleCloudDialogflowV2OriginalDetectIntentRequest'
+data GoogleCloudDialogflowV2OriginalDetectIntentRequest =
+  GoogleCloudDialogflowV2OriginalDetectIntentRequest'
     { _gPayload :: !(Maybe GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload)
     , _gVersion :: !(Maybe Text)
     , _gSource  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2OriginalDetectIntentRequest' with the minimum fields required to make a request.
 --
@@ -6487,11 +7230,9 @@ data GoogleCloudDialogflowV2OriginalDetectIntentRequest = GoogleCloudDialogflowV
 googleCloudDialogflowV2OriginalDetectIntentRequest
     :: GoogleCloudDialogflowV2OriginalDetectIntentRequest
 googleCloudDialogflowV2OriginalDetectIntentRequest =
-    GoogleCloudDialogflowV2OriginalDetectIntentRequest'
-    { _gPayload = Nothing
-    , _gVersion = Nothing
-    , _gSource = Nothing
-    }
+  GoogleCloudDialogflowV2OriginalDetectIntentRequest'
+    {_gPayload = Nothing, _gVersion = Nothing, _gSource = Nothing}
+
 
 -- | Optional. This field is set to the value of the
 -- \`QueryParameters.payload\` field passed in the request. Some
@@ -6523,7 +7264,7 @@ gSource :: Lens' GoogleCloudDialogflowV2OriginalDetectIntentRequest (Maybe Text)
 gSource = lens _gSource (\ s a -> s{_gSource = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2OriginalDetectIntentRequest
+           GoogleCloudDialogflowV2OriginalDetectIntentRequest
          where
         parseJSON
           = withObject
@@ -6535,7 +7276,7 @@ instance FromJSON
                      (o .:? "source"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2OriginalDetectIntentRequest
+           GoogleCloudDialogflowV2OriginalDetectIntentRequest
          where
         toJSON
           GoogleCloudDialogflowV2OriginalDetectIntentRequest'{..}
@@ -6548,10 +7289,13 @@ instance ToJSON
 -- | The image response message.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageImage' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageImage = GoogleCloudDialogflowV2beta1IntentMessageImage'
+data GoogleCloudDialogflowV2beta1IntentMessageImage =
+  GoogleCloudDialogflowV2beta1IntentMessageImage'
     { _gcdvimiAccessibilityText :: !(Maybe Text)
     , _gcdvimiImageURI          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageImage' with the minimum fields required to make a request.
 --
@@ -6563,10 +7307,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageImage = GoogleCloudDialogflowV2bet
 googleCloudDialogflowV2beta1IntentMessageImage
     :: GoogleCloudDialogflowV2beta1IntentMessageImage
 googleCloudDialogflowV2beta1IntentMessageImage =
-    GoogleCloudDialogflowV2beta1IntentMessageImage'
-    { _gcdvimiAccessibilityText = Nothing
-    , _gcdvimiImageURI = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageImage'
+    {_gcdvimiAccessibilityText = Nothing, _gcdvimiImageURI = Nothing}
+
 
 -- | A text description of the image to be used for accessibility, e.g.,
 -- screen readers. Required if image_uri is set for CarouselSelect.
@@ -6582,7 +7325,8 @@ gcdvimiImageURI
       (\ s a -> s{_gcdvimiImageURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageImage where
+           GoogleCloudDialogflowV2beta1IntentMessageImage
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1IntentMessageImage"
@@ -6591,7 +7335,8 @@ instance FromJSON
                    (o .:? "accessibilityText") <*> (o .:? "imageUri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageImage where
+           GoogleCloudDialogflowV2beta1IntentMessageImage
+         where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageImage'{..}
           = object
@@ -6600,13 +7345,94 @@ instance ToJSON
                     _gcdvimiAccessibilityText,
                   ("imageUri" .=) <$> _gcdvimiImageURI])
 
+-- | Instructs the speech synthesizer how to generate the output audio
+-- content.
+--
+-- /See:/ 'googleCloudDialogflowV2OutputAudioConfig' smart constructor.
+data GoogleCloudDialogflowV2OutputAudioConfig =
+  GoogleCloudDialogflowV2OutputAudioConfig'
+    { _gcdvoacSampleRateHertz        :: !(Maybe (Textual Int32))
+    , _gcdvoacSynthesizeSpeechConfig :: !(Maybe GoogleCloudDialogflowV2SynthesizeSpeechConfig)
+    , _gcdvoacAudioEncoding          :: !(Maybe GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2OutputAudioConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdvoacSampleRateHertz'
+--
+-- * 'gcdvoacSynthesizeSpeechConfig'
+--
+-- * 'gcdvoacAudioEncoding'
+googleCloudDialogflowV2OutputAudioConfig
+    :: GoogleCloudDialogflowV2OutputAudioConfig
+googleCloudDialogflowV2OutputAudioConfig =
+  GoogleCloudDialogflowV2OutputAudioConfig'
+    { _gcdvoacSampleRateHertz = Nothing
+    , _gcdvoacSynthesizeSpeechConfig = Nothing
+    , _gcdvoacAudioEncoding = Nothing
+    }
+
+
+-- | Optional. The synthesis sample rate (in hertz) for this audio. If not
+-- provided, then the synthesizer will use the default sample rate based on
+-- the audio encoding. If this is different from the voice\'s natural
+-- sample rate, then the synthesizer will honor this request by converting
+-- to the desired sample rate (which might result in worse audio quality).
+gcdvoacSampleRateHertz :: Lens' GoogleCloudDialogflowV2OutputAudioConfig (Maybe Int32)
+gcdvoacSampleRateHertz
+  = lens _gcdvoacSampleRateHertz
+      (\ s a -> s{_gcdvoacSampleRateHertz = a})
+      . mapping _Coerce
+
+-- | Optional. Configuration of how speech should be synthesized.
+gcdvoacSynthesizeSpeechConfig :: Lens' GoogleCloudDialogflowV2OutputAudioConfig (Maybe GoogleCloudDialogflowV2SynthesizeSpeechConfig)
+gcdvoacSynthesizeSpeechConfig
+  = lens _gcdvoacSynthesizeSpeechConfig
+      (\ s a -> s{_gcdvoacSynthesizeSpeechConfig = a})
+
+-- | Required. Audio encoding of the synthesized audio content.
+gcdvoacAudioEncoding :: Lens' GoogleCloudDialogflowV2OutputAudioConfig (Maybe GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding)
+gcdvoacAudioEncoding
+  = lens _gcdvoacAudioEncoding
+      (\ s a -> s{_gcdvoacAudioEncoding = a})
+
+instance FromJSON
+           GoogleCloudDialogflowV2OutputAudioConfig
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudDialogflowV2OutputAudioConfig"
+              (\ o ->
+                 GoogleCloudDialogflowV2OutputAudioConfig' <$>
+                   (o .:? "sampleRateHertz") <*>
+                     (o .:? "synthesizeSpeechConfig")
+                     <*> (o .:? "audioEncoding"))
+
+instance ToJSON
+           GoogleCloudDialogflowV2OutputAudioConfig
+         where
+        toJSON GoogleCloudDialogflowV2OutputAudioConfig'{..}
+          = object
+              (catMaybes
+                 [("sampleRateHertz" .=) <$> _gcdvoacSampleRateHertz,
+                  ("synthesizeSpeechConfig" .=) <$>
+                    _gcdvoacSynthesizeSpeechConfig,
+                  ("audioEncoding" .=) <$> _gcdvoacAudioEncoding])
+
 -- | The response message for Agents.ExportAgent.
 --
 -- /See:/ 'googleCloudDialogflowV2ExportAgentResponse' smart constructor.
-data GoogleCloudDialogflowV2ExportAgentResponse = GoogleCloudDialogflowV2ExportAgentResponse'
+data GoogleCloudDialogflowV2ExportAgentResponse =
+  GoogleCloudDialogflowV2ExportAgentResponse'
     { _gAgentURI     :: !(Maybe Text)
     , _gAgentContent :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ExportAgentResponse' with the minimum fields required to make a request.
 --
@@ -6618,10 +7444,9 @@ data GoogleCloudDialogflowV2ExportAgentResponse = GoogleCloudDialogflowV2ExportA
 googleCloudDialogflowV2ExportAgentResponse
     :: GoogleCloudDialogflowV2ExportAgentResponse
 googleCloudDialogflowV2ExportAgentResponse =
-    GoogleCloudDialogflowV2ExportAgentResponse'
-    { _gAgentURI = Nothing
-    , _gAgentContent = Nothing
-    }
+  GoogleCloudDialogflowV2ExportAgentResponse'
+    {_gAgentURI = Nothing, _gAgentContent = Nothing}
+
 
 -- | The URI to a file containing the exported agent. This field is populated
 -- only if \`agent_uri\` is specified in \`ExportAgentRequest\`.
@@ -6650,7 +7475,8 @@ gAgentContent
       . mapping _Bytes
 
 instance FromJSON
-         GoogleCloudDialogflowV2ExportAgentResponse where
+           GoogleCloudDialogflowV2ExportAgentResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ExportAgentResponse"
@@ -6659,7 +7485,8 @@ instance FromJSON
                    (o .:? "agentUri") <*> (o .:? "agentContent"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ExportAgentResponse where
+           GoogleCloudDialogflowV2ExportAgentResponse
+         where
         toJSON
           GoogleCloudDialogflowV2ExportAgentResponse'{..}
           = object
@@ -6691,9 +7518,12 @@ instance ToJSON
 -- > }
 --
 -- /See:/ 'googleCloudDialogflowV2WebhookResponsePayload' smart constructor.
-newtype GoogleCloudDialogflowV2WebhookResponsePayload = GoogleCloudDialogflowV2WebhookResponsePayload'
+newtype GoogleCloudDialogflowV2WebhookResponsePayload =
+  GoogleCloudDialogflowV2WebhookResponsePayload'
     { _gcdvwrpcAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2WebhookResponsePayload' with the minimum fields required to make a request.
 --
@@ -6704,9 +7534,9 @@ googleCloudDialogflowV2WebhookResponsePayload
     :: HashMap Text JSONValue -- ^ 'gcdvwrpcAddtional'
     -> GoogleCloudDialogflowV2WebhookResponsePayload
 googleCloudDialogflowV2WebhookResponsePayload pGcdvwrpcAddtional_ =
-    GoogleCloudDialogflowV2WebhookResponsePayload'
-    { _gcdvwrpcAddtional = _Coerce # pGcdvwrpcAddtional_
-    }
+  GoogleCloudDialogflowV2WebhookResponsePayload'
+    {_gcdvwrpcAddtional = _Coerce # pGcdvwrpcAddtional_}
+
 
 -- | Properties of the object.
 gcdvwrpcAddtional :: Lens' GoogleCloudDialogflowV2WebhookResponsePayload (HashMap Text JSONValue)
@@ -6716,7 +7546,8 @@ gcdvwrpcAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2WebhookResponsePayload where
+           GoogleCloudDialogflowV2WebhookResponsePayload
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2WebhookResponsePayload"
@@ -6725,17 +7556,21 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2WebhookResponsePayload where
+           GoogleCloudDialogflowV2WebhookResponsePayload
+         where
         toJSON = toJSON . _gcdvwrpcAddtional
 
 -- | The suggestion chip message that allows the user to jump out to the app
 -- or website associated with this agent.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion = GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion'
+data GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion =
+  GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion'
     { _gURI             :: !(Maybe Text)
     , _gDestinationName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion' with the minimum fields required to make a request.
 --
@@ -6747,10 +7582,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion = GoogleCloudDia
 googleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
     :: GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
 googleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion =
-    GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion'
-    { _gURI = Nothing
-    , _gDestinationName = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion'
+    {_gURI = Nothing, _gDestinationName = Nothing}
+
 
 -- | Required. The URI of the app or site to open when the user taps the
 -- suggestion chip.
@@ -6764,7 +7598,7 @@ gDestinationName
       (\ s a -> s{_gDestinationName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
+           GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
          where
         parseJSON
           = withObject
@@ -6774,7 +7608,7 @@ instance FromJSON
                    <$> (o .:? "uri") <*> (o .:? "destinationName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
+           GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion'{..}
@@ -6786,10 +7620,13 @@ instance ToJSON
 -- | The response message for Intents.ListIntents.
 --
 -- /See:/ 'googleCloudDialogflowV2ListIntentsResponse' smart constructor.
-data GoogleCloudDialogflowV2ListIntentsResponse = GoogleCloudDialogflowV2ListIntentsResponse'
+data GoogleCloudDialogflowV2ListIntentsResponse =
+  GoogleCloudDialogflowV2ListIntentsResponse'
     { _gcdvlirIntents       :: !(Maybe [GoogleCloudDialogflowV2Intent])
     , _gcdvlirNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ListIntentsResponse' with the minimum fields required to make a request.
 --
@@ -6801,10 +7638,9 @@ data GoogleCloudDialogflowV2ListIntentsResponse = GoogleCloudDialogflowV2ListInt
 googleCloudDialogflowV2ListIntentsResponse
     :: GoogleCloudDialogflowV2ListIntentsResponse
 googleCloudDialogflowV2ListIntentsResponse =
-    GoogleCloudDialogflowV2ListIntentsResponse'
-    { _gcdvlirIntents = Nothing
-    , _gcdvlirNextPageToken = Nothing
-    }
+  GoogleCloudDialogflowV2ListIntentsResponse'
+    {_gcdvlirIntents = Nothing, _gcdvlirNextPageToken = Nothing}
+
 
 -- | The list of agent intents. There will be a maximum number of items
 -- returned based on the page_size field in the request.
@@ -6823,7 +7659,8 @@ gcdvlirNextPageToken
       (\ s a -> s{_gcdvlirNextPageToken = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2ListIntentsResponse where
+           GoogleCloudDialogflowV2ListIntentsResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ListIntentsResponse"
@@ -6833,7 +7670,8 @@ instance FromJSON
                      (o .:? "nextPageToken"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ListIntentsResponse where
+           GoogleCloudDialogflowV2ListIntentsResponse
+         where
         toJSON
           GoogleCloudDialogflowV2ListIntentsResponse'{..}
           = object
@@ -6844,9 +7682,12 @@ instance ToJSON
 -- | The response message for EntityTypes.BatchUpdateEntityTypes.
 --
 -- /See:/ 'googleCloudDialogflowV2BatchUpdateEntityTypesResponse' smart constructor.
-newtype GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse = GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse'
+newtype GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse =
+  GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse'
     { _gEntityTypes :: Maybe [GoogleCloudDialogflowV2EntityType]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse' with the minimum fields required to make a request.
 --
@@ -6856,9 +7697,9 @@ newtype GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse = GoogleCloudDialo
 googleCloudDialogflowV2BatchUpdateEntityTypesResponse
     :: GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse
 googleCloudDialogflowV2BatchUpdateEntityTypesResponse =
-    GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse'
-    { _gEntityTypes = Nothing
-    }
+  GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse'
+    {_gEntityTypes = Nothing}
+
 
 -- | The collection of updated or created entity types.
 gEntityTypes :: Lens' GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse [GoogleCloudDialogflowV2EntityType]
@@ -6868,7 +7709,7 @@ gEntityTypes
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse
+           GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse
          where
         parseJSON
           = withObject
@@ -6878,7 +7719,7 @@ instance FromJSON
                    <$> (o .:? "entityTypes" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse
+           GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse
          where
         toJSON
           GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse'{..}
@@ -6889,9 +7730,12 @@ instance ToJSON
 -- value of the \`payload\` field returned in the webhook response.
 --
 -- /See:/ 'googleCloudDialogflowV2QueryResultWebhookPayload' smart constructor.
-newtype GoogleCloudDialogflowV2QueryResultWebhookPayload = GoogleCloudDialogflowV2QueryResultWebhookPayload'
+newtype GoogleCloudDialogflowV2QueryResultWebhookPayload =
+  GoogleCloudDialogflowV2QueryResultWebhookPayload'
     { _gcdvqrwpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2QueryResultWebhookPayload' with the minimum fields required to make a request.
 --
@@ -6902,9 +7746,9 @@ googleCloudDialogflowV2QueryResultWebhookPayload
     :: HashMap Text JSONValue -- ^ 'gcdvqrwpAddtional'
     -> GoogleCloudDialogflowV2QueryResultWebhookPayload
 googleCloudDialogflowV2QueryResultWebhookPayload pGcdvqrwpAddtional_ =
-    GoogleCloudDialogflowV2QueryResultWebhookPayload'
-    { _gcdvqrwpAddtional = _Coerce # pGcdvqrwpAddtional_
-    }
+  GoogleCloudDialogflowV2QueryResultWebhookPayload'
+    {_gcdvqrwpAddtional = _Coerce # pGcdvqrwpAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrwpAddtional :: Lens' GoogleCloudDialogflowV2QueryResultWebhookPayload (HashMap Text JSONValue)
@@ -6914,7 +7758,7 @@ gcdvqrwpAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2QueryResultWebhookPayload
+           GoogleCloudDialogflowV2QueryResultWebhookPayload
          where
         parseJSON
           = withObject
@@ -6924,14 +7768,15 @@ instance FromJSON
                    (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2QueryResultWebhookPayload
+           GoogleCloudDialogflowV2QueryResultWebhookPayload
          where
         toJSON = toJSON . _gcdvqrwpAddtional
 
 -- | Represents intent parameters.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentParameter' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentParameter = GoogleCloudDialogflowV2beta1IntentParameter'
+data GoogleCloudDialogflowV2beta1IntentParameter =
+  GoogleCloudDialogflowV2beta1IntentParameter'
     { _gcdvipValue                 :: !(Maybe Text)
     , _gcdvipName                  :: !(Maybe Text)
     , _gcdvipPrompts               :: !(Maybe [Text])
@@ -6940,7 +7785,9 @@ data GoogleCloudDialogflowV2beta1IntentParameter = GoogleCloudDialogflowV2beta1I
     , _gcdvipDefaultValue          :: !(Maybe Text)
     , _gcdvipIsList                :: !(Maybe Bool)
     , _gcdvipEntityTypeDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentParameter' with the minimum fields required to make a request.
 --
@@ -6964,7 +7811,7 @@ data GoogleCloudDialogflowV2beta1IntentParameter = GoogleCloudDialogflowV2beta1I
 googleCloudDialogflowV2beta1IntentParameter
     :: GoogleCloudDialogflowV2beta1IntentParameter
 googleCloudDialogflowV2beta1IntentParameter =
-    GoogleCloudDialogflowV2beta1IntentParameter'
+  GoogleCloudDialogflowV2beta1IntentParameter'
     { _gcdvipValue = Nothing
     , _gcdvipName = Nothing
     , _gcdvipPrompts = Nothing
@@ -6975,10 +7822,11 @@ googleCloudDialogflowV2beta1IntentParameter =
     , _gcdvipEntityTypeDisplayName = Nothing
     }
 
+
 -- | Optional. The definition of the parameter value. It can be: - a constant
--- string, - a parameter value defined as
--- \`$parameter_name\`, - an original parameter value defined as \`$parameter_name.original\`,
--- - a parameter value from some context defined as
+-- string, - a parameter value defined as \`$parameter_name\`, - an
+-- original parameter value defined as \`$parameter_name.original\`, - a
+-- parameter value from some context defined as
 -- \`#context_name.parameter_name\`.
 gcdvipValue :: Lens' GoogleCloudDialogflowV2beta1IntentParameter (Maybe Text)
 gcdvipValue
@@ -7033,7 +7881,8 @@ gcdvipEntityTypeDisplayName
       (\ s a -> s{_gcdvipEntityTypeDisplayName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentParameter where
+           GoogleCloudDialogflowV2beta1IntentParameter
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1IntentParameter"
@@ -7048,7 +7897,8 @@ instance FromJSON
                      <*> (o .:? "entityTypeDisplayName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentParameter where
+           GoogleCloudDialogflowV2beta1IntentParameter
+         where
         toJSON
           GoogleCloudDialogflowV2beta1IntentParameter'{..}
           = object
@@ -7066,7 +7916,8 @@ instance ToJSON
 -- | Represents intent parameters.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentParameter' smart constructor.
-data GoogleCloudDialogflowV2IntentParameter = GoogleCloudDialogflowV2IntentParameter'
+data GoogleCloudDialogflowV2IntentParameter =
+  GoogleCloudDialogflowV2IntentParameter'
     { _gcdvipcValue                 :: !(Maybe Text)
     , _gcdvipcName                  :: !(Maybe Text)
     , _gcdvipcPrompts               :: !(Maybe [Text])
@@ -7075,7 +7926,9 @@ data GoogleCloudDialogflowV2IntentParameter = GoogleCloudDialogflowV2IntentParam
     , _gcdvipcDefaultValue          :: !(Maybe Text)
     , _gcdvipcIsList                :: !(Maybe Bool)
     , _gcdvipcEntityTypeDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentParameter' with the minimum fields required to make a request.
 --
@@ -7099,7 +7952,7 @@ data GoogleCloudDialogflowV2IntentParameter = GoogleCloudDialogflowV2IntentParam
 googleCloudDialogflowV2IntentParameter
     :: GoogleCloudDialogflowV2IntentParameter
 googleCloudDialogflowV2IntentParameter =
-    GoogleCloudDialogflowV2IntentParameter'
+  GoogleCloudDialogflowV2IntentParameter'
     { _gcdvipcValue = Nothing
     , _gcdvipcName = Nothing
     , _gcdvipcPrompts = Nothing
@@ -7110,10 +7963,11 @@ googleCloudDialogflowV2IntentParameter =
     , _gcdvipcEntityTypeDisplayName = Nothing
     }
 
+
 -- | Optional. The definition of the parameter value. It can be: - a constant
--- string, - a parameter value defined as
--- \`$parameter_name\`, - an original parameter value defined as \`$parameter_name.original\`,
--- - a parameter value from some context defined as
+-- string, - a parameter value defined as \`$parameter_name\`, - an
+-- original parameter value defined as \`$parameter_name.original\`, - a
+-- parameter value from some context defined as
 -- \`#context_name.parameter_name\`.
 gcdvipcValue :: Lens' GoogleCloudDialogflowV2IntentParameter (Maybe Text)
 gcdvipcValue
@@ -7169,7 +8023,8 @@ gcdvipcEntityTypeDisplayName
       (\ s a -> s{_gcdvipcEntityTypeDisplayName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentParameter where
+           GoogleCloudDialogflowV2IntentParameter
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2IntentParameter"
               (\ o ->
@@ -7183,7 +8038,8 @@ instance FromJSON
                      <*> (o .:? "entityTypeDisplayName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentParameter where
+           GoogleCloudDialogflowV2IntentParameter
+         where
         toJSON GoogleCloudDialogflowV2IntentParameter'{..}
           = object
               (catMaybes
@@ -7201,9 +8057,12 @@ instance ToJSON
 -- value of the \`payload\` field returned in the webhook response.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1QueryResultWebhookPayload' smart constructor.
-newtype GoogleCloudDialogflowV2beta1QueryResultWebhookPayload = GoogleCloudDialogflowV2beta1QueryResultWebhookPayload'
+newtype GoogleCloudDialogflowV2beta1QueryResultWebhookPayload =
+  GoogleCloudDialogflowV2beta1QueryResultWebhookPayload'
     { _gcdvqrwpcAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResultWebhookPayload' with the minimum fields required to make a request.
 --
@@ -7214,9 +8073,9 @@ googleCloudDialogflowV2beta1QueryResultWebhookPayload
     :: HashMap Text JSONValue -- ^ 'gcdvqrwpcAddtional'
     -> GoogleCloudDialogflowV2beta1QueryResultWebhookPayload
 googleCloudDialogflowV2beta1QueryResultWebhookPayload pGcdvqrwpcAddtional_ =
-    GoogleCloudDialogflowV2beta1QueryResultWebhookPayload'
-    { _gcdvqrwpcAddtional = _Coerce # pGcdvqrwpcAddtional_
-    }
+  GoogleCloudDialogflowV2beta1QueryResultWebhookPayload'
+    {_gcdvqrwpcAddtional = _Coerce # pGcdvqrwpcAddtional_}
+
 
 -- | Properties of the object.
 gcdvqrwpcAddtional :: Lens' GoogleCloudDialogflowV2beta1QueryResultWebhookPayload (HashMap Text JSONValue)
@@ -7226,7 +8085,7 @@ gcdvqrwpcAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1QueryResultWebhookPayload
+           GoogleCloudDialogflowV2beta1QueryResultWebhookPayload
          where
         parseJSON
           = withObject
@@ -7236,19 +8095,22 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1QueryResultWebhookPayload
+           GoogleCloudDialogflowV2beta1QueryResultWebhookPayload
          where
         toJSON = toJSON . _gcdvqrwpcAddtional
 
 -- | Represents a part of a training phrase.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentTrainingPhrasePart' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart = GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart'
+data GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart =
+  GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart'
     { _gcdvitppcText        :: !(Maybe Text)
     , _gcdvitppcUserDefined :: !(Maybe Bool)
     , _gcdvitppcEntityType  :: !(Maybe Text)
     , _gcdvitppcAlias       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart' with the minimum fields required to make a request.
 --
@@ -7264,45 +8126,46 @@ data GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart = GoogleCloudDialogflo
 googleCloudDialogflowV2beta1IntentTrainingPhrasePart
     :: GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart
 googleCloudDialogflowV2beta1IntentTrainingPhrasePart =
-    GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart'
+  GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart'
     { _gcdvitppcText = Nothing
     , _gcdvitppcUserDefined = Nothing
     , _gcdvitppcEntityType = Nothing
     , _gcdvitppcAlias = Nothing
     }
 
--- | Required. The text corresponding to the example or template, if there
--- are no annotations. For annotated examples, it is the text for one of
--- the example\'s parts.
+
+-- | Required. The text for this part.
 gcdvitppcText :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcText
   = lens _gcdvitppcText
       (\ s a -> s{_gcdvitppcText = a})
 
--- | Optional. Indicates whether the text was manually annotated by the
--- developer.
+-- | Optional. Indicates whether the text was manually annotated. This field
+-- is set to true when the Dialogflow Console is used to manually annotate
+-- the part. When creating an annotated part with the API, you must set
+-- this to true.
 gcdvitppcUserDefined :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Bool)
 gcdvitppcUserDefined
   = lens _gcdvitppcUserDefined
       (\ s a -> s{_gcdvitppcUserDefined = a})
 
 -- | Optional. The entity type name prefixed with \`\'\`. This field is
--- required for the annotated part of the text and applies only to
--- examples.
+-- required for annotated parts of the training phrase.
 gcdvitppcEntityType :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcEntityType
   = lens _gcdvitppcEntityType
       (\ s a -> s{_gcdvitppcEntityType = a})
 
 -- | Optional. The parameter name for the value extracted from the annotated
--- part of the example.
+-- part of the example. This field is required for annotated parts of the
+-- training phrase.
 gcdvitppcAlias :: Lens' GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart (Maybe Text)
 gcdvitppcAlias
   = lens _gcdvitppcAlias
       (\ s a -> s{_gcdvitppcAlias = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart
+           GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart
          where
         parseJSON
           = withObject
@@ -7315,7 +8178,7 @@ instance FromJSON
                      <*> (o .:? "alias"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart
+           GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart'{..}
@@ -7329,10 +8192,13 @@ instance ToJSON
 -- | The response message for Contexts.ListContexts.
 --
 -- /See:/ 'googleCloudDialogflowV2ListContextsResponse' smart constructor.
-data GoogleCloudDialogflowV2ListContextsResponse = GoogleCloudDialogflowV2ListContextsResponse'
+data GoogleCloudDialogflowV2ListContextsResponse =
+  GoogleCloudDialogflowV2ListContextsResponse'
     { _gcdvlcrContexts      :: !(Maybe [GoogleCloudDialogflowV2Context])
     , _gcdvlcrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ListContextsResponse' with the minimum fields required to make a request.
 --
@@ -7344,10 +8210,9 @@ data GoogleCloudDialogflowV2ListContextsResponse = GoogleCloudDialogflowV2ListCo
 googleCloudDialogflowV2ListContextsResponse
     :: GoogleCloudDialogflowV2ListContextsResponse
 googleCloudDialogflowV2ListContextsResponse =
-    GoogleCloudDialogflowV2ListContextsResponse'
-    { _gcdvlcrContexts = Nothing
-    , _gcdvlcrNextPageToken = Nothing
-    }
+  GoogleCloudDialogflowV2ListContextsResponse'
+    {_gcdvlcrContexts = Nothing, _gcdvlcrNextPageToken = Nothing}
+
 
 -- | The list of contexts. There will be a maximum number of items returned
 -- based on the page_size field in the request.
@@ -7366,7 +8231,8 @@ gcdvlcrNextPageToken
       (\ s a -> s{_gcdvlcrNextPageToken = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2ListContextsResponse where
+           GoogleCloudDialogflowV2ListContextsResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2ListContextsResponse"
@@ -7376,7 +8242,8 @@ instance FromJSON
                      (o .:? "nextPageToken"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ListContextsResponse where
+           GoogleCloudDialogflowV2ListContextsResponse
+         where
         toJSON
           GoogleCloudDialogflowV2ListContextsResponse'{..}
           = object
@@ -7387,9 +8254,12 @@ instance ToJSON
 -- | Transfers the call in Telephony Gateway.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall' smart constructor.
-newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall = GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall'
+newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall =
+  GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall'
     { _gcdvimttcPhoneNumber :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall' with the minimum fields required to make a request.
 --
@@ -7399,9 +8269,9 @@ newtype GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall = GoogleC
 googleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
     :: GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
 googleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall =
-    GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall'
-    { _gcdvimttcPhoneNumber = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall'
+    {_gcdvimttcPhoneNumber = Nothing}
+
 
 -- | Required. The phone number to transfer the call to in [E.164
 -- format](https:\/\/en.wikipedia.org\/wiki\/E.164). We currently only
@@ -7412,7 +8282,7 @@ gcdvimttcPhoneNumber
       (\ s a -> s{_gcdvimttcPhoneNumber = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
+           GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
          where
         parseJSON
           = withObject
@@ -7422,7 +8292,7 @@ instance FromJSON
                    <$> (o .:? "phoneNumber"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
+           GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall'{..}
@@ -7433,10 +8303,13 @@ instance ToJSON
 -- | The response message for Agents.ExportAgent.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1ExportAgentResponse' smart constructor.
-data GoogleCloudDialogflowV2beta1ExportAgentResponse = GoogleCloudDialogflowV2beta1ExportAgentResponse'
+data GoogleCloudDialogflowV2beta1ExportAgentResponse =
+  GoogleCloudDialogflowV2beta1ExportAgentResponse'
     { _gooAgentURI     :: !(Maybe Text)
     , _gooAgentContent :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1ExportAgentResponse' with the minimum fields required to make a request.
 --
@@ -7448,10 +8321,9 @@ data GoogleCloudDialogflowV2beta1ExportAgentResponse = GoogleCloudDialogflowV2be
 googleCloudDialogflowV2beta1ExportAgentResponse
     :: GoogleCloudDialogflowV2beta1ExportAgentResponse
 googleCloudDialogflowV2beta1ExportAgentResponse =
-    GoogleCloudDialogflowV2beta1ExportAgentResponse'
-    { _gooAgentURI = Nothing
-    , _gooAgentContent = Nothing
-    }
+  GoogleCloudDialogflowV2beta1ExportAgentResponse'
+    {_gooAgentURI = Nothing, _gooAgentContent = Nothing}
+
 
 -- | The URI to a file containing the exported agent. This field is populated
 -- only if \`agent_uri\` is specified in \`ExportAgentRequest\`.
@@ -7480,7 +8352,8 @@ gooAgentContent
       . mapping _Bytes
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1ExportAgentResponse where
+           GoogleCloudDialogflowV2beta1ExportAgentResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1ExportAgentResponse"
@@ -7489,7 +8362,8 @@ instance FromJSON
                    (o .:? "agentUri") <*> (o .:? "agentContent"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1ExportAgentResponse where
+           GoogleCloudDialogflowV2beta1ExportAgentResponse
+         where
         toJSON
           GoogleCloudDialogflowV2beta1ExportAgentResponse'{..}
           = object
@@ -7515,9 +8389,12 @@ instance ToJSON
 -- agents.
 --
 -- /See:/ 'googleCloudDialogflowV2OriginalDetectIntentRequestPayload' smart constructor.
-newtype GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload = GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload'
+newtype GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload =
+  GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload'
     { _gcdvodirpcAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload' with the minimum fields required to make a request.
 --
@@ -7528,9 +8405,9 @@ googleCloudDialogflowV2OriginalDetectIntentRequestPayload
     :: HashMap Text JSONValue -- ^ 'gcdvodirpcAddtional'
     -> GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload
 googleCloudDialogflowV2OriginalDetectIntentRequestPayload pGcdvodirpcAddtional_ =
-    GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload'
-    { _gcdvodirpcAddtional = _Coerce # pGcdvodirpcAddtional_
-    }
+  GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload'
+    {_gcdvodirpcAddtional = _Coerce # pGcdvodirpcAddtional_}
+
 
 -- | Properties of the object.
 gcdvodirpcAddtional :: Lens' GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload (HashMap Text JSONValue)
@@ -7540,7 +8417,7 @@ gcdvodirpcAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload
+           GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload
          where
         parseJSON
           = withObject
@@ -7550,7 +8427,7 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload
+           GoogleCloudDialogflowV2OriginalDetectIntentRequestPayload
          where
         toJSON = toJSON . _gcdvodirpcAddtional
 
@@ -7560,11 +8437,14 @@ instance ToJSON
 -- types apply to all queries, regardless of the language.
 --
 -- /See:/ 'googleCloudDialogflowV2SessionEntityType' smart constructor.
-data GoogleCloudDialogflowV2SessionEntityType = GoogleCloudDialogflowV2SessionEntityType'
+data GoogleCloudDialogflowV2SessionEntityType =
+  GoogleCloudDialogflowV2SessionEntityType'
     { _gcdvSetEntityOverrideMode :: !(Maybe GoogleCloudDialogflowV2SessionEntityTypeEntityOverrideMode)
     , _gcdvSetEntities           :: !(Maybe [GoogleCloudDialogflowV2EntityTypeEntity])
     , _gcdvSetName               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2SessionEntityType' with the minimum fields required to make a request.
 --
@@ -7578,11 +8458,12 @@ data GoogleCloudDialogflowV2SessionEntityType = GoogleCloudDialogflowV2SessionEn
 googleCloudDialogflowV2SessionEntityType
     :: GoogleCloudDialogflowV2SessionEntityType
 googleCloudDialogflowV2SessionEntityType =
-    GoogleCloudDialogflowV2SessionEntityType'
+  GoogleCloudDialogflowV2SessionEntityType'
     { _gcdvSetEntityOverrideMode = Nothing
     , _gcdvSetEntities = Nothing
     , _gcdvSetName = Nothing
     }
+
 
 -- | Required. Indicates whether the additional data should override or
 -- supplement the developer entity type definition.
@@ -7609,7 +8490,8 @@ gcdvSetName
   = lens _gcdvSetName (\ s a -> s{_gcdvSetName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2SessionEntityType where
+           GoogleCloudDialogflowV2SessionEntityType
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2SessionEntityType"
@@ -7620,7 +8502,8 @@ instance FromJSON
                      <*> (o .:? "name"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2SessionEntityType where
+           GoogleCloudDialogflowV2SessionEntityType
+         where
         toJSON GoogleCloudDialogflowV2SessionEntityType'{..}
           = object
               (catMaybes
@@ -7629,13 +8512,16 @@ instance ToJSON
                   ("entities" .=) <$> _gcdvSetEntities,
                   ("name" .=) <$> _gcdvSetName])
 
--- | Optional. Represents an entity.
+-- | An **entity entry** for an associated entity type.
 --
 -- /See:/ 'googleCloudDialogflowV2EntityTypeEntity' smart constructor.
-data GoogleCloudDialogflowV2EntityTypeEntity = GoogleCloudDialogflowV2EntityTypeEntity'
+data GoogleCloudDialogflowV2EntityTypeEntity =
+  GoogleCloudDialogflowV2EntityTypeEntity'
     { _gValue    :: !(Maybe Text)
     , _gSynonyms :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2EntityTypeEntity' with the minimum fields required to make a request.
 --
@@ -7647,19 +8533,23 @@ data GoogleCloudDialogflowV2EntityTypeEntity = GoogleCloudDialogflowV2EntityType
 googleCloudDialogflowV2EntityTypeEntity
     :: GoogleCloudDialogflowV2EntityTypeEntity
 googleCloudDialogflowV2EntityTypeEntity =
-    GoogleCloudDialogflowV2EntityTypeEntity'
-    { _gValue = Nothing
-    , _gSynonyms = Nothing
-    }
+  GoogleCloudDialogflowV2EntityTypeEntity'
+    {_gValue = Nothing, _gSynonyms = Nothing}
 
--- | Required. For \`KIND_MAP\` entity types: A canonical name to be used in
--- place of synonyms. For \`KIND_LIST\` entity types: A string that can
--- contain references to other entity types (with or without aliases).
+
+-- | Required. The primary value associated with this entity entry. For
+-- example, if the entity type is *vegetable*, the value could be
+-- *scallions*. For \`KIND_MAP\` entity types: * A canonical value to be
+-- used in place of synonyms. For \`KIND_LIST\` entity types: * A string
+-- that can contain references to other entity types (with or without
+-- aliases).
 gValue :: Lens' GoogleCloudDialogflowV2EntityTypeEntity (Maybe Text)
 gValue = lens _gValue (\ s a -> s{_gValue = a})
 
--- | Required. A collection of synonyms. For \`KIND_LIST\` entity types this
--- must contain exactly one synonym equal to \`value\`.
+-- | Required. A collection of value synonyms. For example, if the entity
+-- type is *vegetable*, and \`value\` is *scallions*, a synonym could be
+-- *green onions*. For \`KIND_LIST\` entity types: * This collection must
+-- contain exactly one synonym equal to \`value\`.
 gSynonyms :: Lens' GoogleCloudDialogflowV2EntityTypeEntity [Text]
 gSynonyms
   = lens _gSynonyms (\ s a -> s{_gSynonyms = a}) .
@@ -7667,7 +8557,8 @@ gSynonyms
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2EntityTypeEntity where
+           GoogleCloudDialogflowV2EntityTypeEntity
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2EntityTypeEntity"
@@ -7676,7 +8567,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "synonyms" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2EntityTypeEntity where
+           GoogleCloudDialogflowV2EntityTypeEntity
+         where
         toJSON GoogleCloudDialogflowV2EntityTypeEntity'{..}
           = object
               (catMaybes
@@ -7686,7 +8578,8 @@ instance ToJSON
 -- | Represents the result of conversational query or event processing.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1QueryResult' smart constructor.
-data GoogleCloudDialogflowV2beta1QueryResult = GoogleCloudDialogflowV2beta1QueryResult'
+data GoogleCloudDialogflowV2beta1QueryResult =
+  GoogleCloudDialogflowV2beta1QueryResult'
     { _gLanguageCode                :: !(Maybe Text)
     , _gAllRequiredParamsPresent    :: !(Maybe Bool)
     , _gIntentDetectionConfidence   :: !(Maybe (Textual Double))
@@ -7703,7 +8596,9 @@ data GoogleCloudDialogflowV2beta1QueryResult = GoogleCloudDialogflowV2beta1Query
     , _gOutputContexts              :: !(Maybe [GoogleCloudDialogflowV2beta1Context])
     , _gWebhookSource               :: !(Maybe Text)
     , _gDiagnosticInfo              :: !(Maybe GoogleCloudDialogflowV2beta1QueryResultDiagnosticInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1QueryResult' with the minimum fields required to make a request.
 --
@@ -7743,7 +8638,7 @@ data GoogleCloudDialogflowV2beta1QueryResult = GoogleCloudDialogflowV2beta1Query
 googleCloudDialogflowV2beta1QueryResult
     :: GoogleCloudDialogflowV2beta1QueryResult
 googleCloudDialogflowV2beta1QueryResult =
-    GoogleCloudDialogflowV2beta1QueryResult'
+  GoogleCloudDialogflowV2beta1QueryResult'
     { _gLanguageCode = Nothing
     , _gAllRequiredParamsPresent = Nothing
     , _gIntentDetectionConfidence = Nothing
@@ -7762,9 +8657,10 @@ googleCloudDialogflowV2beta1QueryResult =
     , _gDiagnosticInfo = Nothing
     }
 
+
 -- | The language that was triggered during intent detection. See [Language
--- Support](https:\/\/dialogflow.com\/docs\/reference\/language) for a list
--- of the currently supported language codes.
+-- Support](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- for a list of the currently supported language codes.
 gLanguageCode :: Lens' GoogleCloudDialogflowV2beta1QueryResult (Maybe Text)
 gLanguageCode
   = lens _gLanguageCode
@@ -7845,7 +8741,8 @@ gQueryText :: Lens' GoogleCloudDialogflowV2beta1QueryResult (Maybe Text)
 gQueryText
   = lens _gQueryText (\ s a -> s{_gQueryText = a})
 
--- | The text to be pronounced to the user or shown on the screen.
+-- | The text to be pronounced to the user or shown on the screen. Note: This
+-- is a legacy field, \`fulfillment_messages\` should be preferred.
 gFulfillmentText :: Lens' GoogleCloudDialogflowV2beta1QueryResult (Maybe Text)
 gFulfillmentText
   = lens _gFulfillmentText
@@ -7889,7 +8786,8 @@ gDiagnosticInfo
       (\ s a -> s{_gDiagnosticInfo = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1QueryResult where
+           GoogleCloudDialogflowV2beta1QueryResult
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2beta1QueryResult"
@@ -7913,7 +8811,8 @@ instance FromJSON
                      <*> (o .:? "diagnosticInfo"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1QueryResult where
+           GoogleCloudDialogflowV2beta1QueryResult
+         where
         toJSON GoogleCloudDialogflowV2beta1QueryResult'{..}
           = object
               (catMaybes
@@ -7941,10 +8840,13 @@ instance ToJSON
 -- | The image response message.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageImage' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageImage = GoogleCloudDialogflowV2IntentMessageImage'
+data GoogleCloudDialogflowV2IntentMessageImage =
+  GoogleCloudDialogflowV2IntentMessageImage'
     { _gAccessibilityText :: !(Maybe Text)
     , _gImageURI          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageImage' with the minimum fields required to make a request.
 --
@@ -7956,10 +8858,9 @@ data GoogleCloudDialogflowV2IntentMessageImage = GoogleCloudDialogflowV2IntentMe
 googleCloudDialogflowV2IntentMessageImage
     :: GoogleCloudDialogflowV2IntentMessageImage
 googleCloudDialogflowV2IntentMessageImage =
-    GoogleCloudDialogflowV2IntentMessageImage'
-    { _gAccessibilityText = Nothing
-    , _gImageURI = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageImage'
+    {_gAccessibilityText = Nothing, _gImageURI = Nothing}
+
 
 -- | Optional. A text description of the image to be used for accessibility,
 -- e.g., screen readers.
@@ -7974,7 +8875,8 @@ gImageURI
   = lens _gImageURI (\ s a -> s{_gImageURI = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageImage where
+           GoogleCloudDialogflowV2IntentMessageImage
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2IntentMessageImage"
@@ -7983,7 +8885,8 @@ instance FromJSON
                    (o .:? "accessibilityText") <*> (o .:? "imageUri"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageImage where
+           GoogleCloudDialogflowV2IntentMessageImage
+         where
         toJSON GoogleCloudDialogflowV2IntentMessageImage'{..}
           = object
               (catMaybes
@@ -7993,14 +8896,17 @@ instance ToJSON
 -- | The response message for a webhook call.
 --
 -- /See:/ 'googleCloudDialogflowV2WebhookResponse' smart constructor.
-data GoogleCloudDialogflowV2WebhookResponse = GoogleCloudDialogflowV2WebhookResponse'
+data GoogleCloudDialogflowV2WebhookResponse =
+  GoogleCloudDialogflowV2WebhookResponse'
     { _gooFulfillmentMessages :: !(Maybe [GoogleCloudDialogflowV2IntentMessage])
     , _gooPayload             :: !(Maybe GoogleCloudDialogflowV2WebhookResponsePayload)
     , _gooFulfillmentText     :: !(Maybe Text)
     , _gooSource              :: !(Maybe Text)
     , _gooOutputContexts      :: !(Maybe [GoogleCloudDialogflowV2Context])
     , _gooFollowupEventInput  :: !(Maybe GoogleCloudDialogflowV2EventInput)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2WebhookResponse' with the minimum fields required to make a request.
 --
@@ -8020,7 +8926,7 @@ data GoogleCloudDialogflowV2WebhookResponse = GoogleCloudDialogflowV2WebhookResp
 googleCloudDialogflowV2WebhookResponse
     :: GoogleCloudDialogflowV2WebhookResponse
 googleCloudDialogflowV2WebhookResponse =
-    GoogleCloudDialogflowV2WebhookResponse'
+  GoogleCloudDialogflowV2WebhookResponse'
     { _gooFulfillmentMessages = Nothing
     , _gooPayload = Nothing
     , _gooFulfillmentText = Nothing
@@ -8028,6 +8934,7 @@ googleCloudDialogflowV2WebhookResponse =
     , _gooOutputContexts = Nothing
     , _gooFollowupEventInput = Nothing
     }
+
 
 -- | Optional. The collection of rich messages to present to the user. This
 -- value is passed directly to \`QueryResult.fulfillment_messages\`.
@@ -8094,7 +9001,8 @@ gooFollowupEventInput
       (\ s a -> s{_gooFollowupEventInput = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2WebhookResponse where
+           GoogleCloudDialogflowV2WebhookResponse
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2WebhookResponse"
               (\ o ->
@@ -8107,7 +9015,8 @@ instance FromJSON
                      <*> (o .:? "followupEventInput"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2WebhookResponse where
+           GoogleCloudDialogflowV2WebhookResponse
+         where
         toJSON GoogleCloudDialogflowV2WebhookResponse'{..}
           = object
               (catMaybes
@@ -8124,18 +9033,21 @@ instance ToJSON
 --
 -- /See:/ 'googleCloudDialogflowV2TrainAgentRequest' smart constructor.
 data GoogleCloudDialogflowV2TrainAgentRequest =
-    GoogleCloudDialogflowV2TrainAgentRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GoogleCloudDialogflowV2TrainAgentRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2TrainAgentRequest' with the minimum fields required to make a request.
 --
 googleCloudDialogflowV2TrainAgentRequest
     :: GoogleCloudDialogflowV2TrainAgentRequest
 googleCloudDialogflowV2TrainAgentRequest =
-    GoogleCloudDialogflowV2TrainAgentRequest'
+  GoogleCloudDialogflowV2TrainAgentRequest'
+
 
 instance FromJSON
-         GoogleCloudDialogflowV2TrainAgentRequest where
+           GoogleCloudDialogflowV2TrainAgentRequest
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2TrainAgentRequest"
@@ -8143,15 +9055,19 @@ instance FromJSON
                  pure GoogleCloudDialogflowV2TrainAgentRequest')
 
 instance ToJSON
-         GoogleCloudDialogflowV2TrainAgentRequest where
+           GoogleCloudDialogflowV2TrainAgentRequest
+         where
         toJSON = const emptyObject
 
 -- | This message is a wrapper around a collection of intents.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentBatch' smart constructor.
-newtype GoogleCloudDialogflowV2IntentBatch = GoogleCloudDialogflowV2IntentBatch'
+newtype GoogleCloudDialogflowV2IntentBatch =
+  GoogleCloudDialogflowV2IntentBatch'
     { _gcdvibIntents :: Maybe [GoogleCloudDialogflowV2Intent]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentBatch' with the minimum fields required to make a request.
 --
@@ -8161,9 +9077,8 @@ newtype GoogleCloudDialogflowV2IntentBatch = GoogleCloudDialogflowV2IntentBatch'
 googleCloudDialogflowV2IntentBatch
     :: GoogleCloudDialogflowV2IntentBatch
 googleCloudDialogflowV2IntentBatch =
-    GoogleCloudDialogflowV2IntentBatch'
-    { _gcdvibIntents = Nothing
-    }
+  GoogleCloudDialogflowV2IntentBatch' {_gcdvibIntents = Nothing}
+
 
 -- | A collection of intents.
 gcdvibIntents :: Lens' GoogleCloudDialogflowV2IntentBatch [GoogleCloudDialogflowV2Intent]
@@ -8191,13 +9106,16 @@ instance ToJSON GoogleCloudDialogflowV2IntentBatch
 -- parameter values from natural language queries.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1EntityType' smart constructor.
-data GoogleCloudDialogflowV2beta1EntityType = GoogleCloudDialogflowV2beta1EntityType'
+data GoogleCloudDialogflowV2beta1EntityType =
+  GoogleCloudDialogflowV2beta1EntityType'
     { _gcdvetcEntities          :: !(Maybe [GoogleCloudDialogflowV2beta1EntityTypeEntity])
     , _gcdvetcKind              :: !(Maybe GoogleCloudDialogflowV2beta1EntityTypeKind)
     , _gcdvetcName              :: !(Maybe Text)
     , _gcdvetcAutoExpansionMode :: !(Maybe GoogleCloudDialogflowV2beta1EntityTypeAutoExpansionMode)
     , _gcdvetcDisplayName       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1EntityType' with the minimum fields required to make a request.
 --
@@ -8215,7 +9133,7 @@ data GoogleCloudDialogflowV2beta1EntityType = GoogleCloudDialogflowV2beta1Entity
 googleCloudDialogflowV2beta1EntityType
     :: GoogleCloudDialogflowV2beta1EntityType
 googleCloudDialogflowV2beta1EntityType =
-    GoogleCloudDialogflowV2beta1EntityType'
+  GoogleCloudDialogflowV2beta1EntityType'
     { _gcdvetcEntities = Nothing
     , _gcdvetcKind = Nothing
     , _gcdvetcName = Nothing
@@ -8223,7 +9141,9 @@ googleCloudDialogflowV2beta1EntityType =
     , _gcdvetcDisplayName = Nothing
     }
 
--- | Optional. The collection of entities associated with the entity type.
+
+-- | Optional. The collection of entity entries associated with the entity
+-- type.
 gcdvetcEntities :: Lens' GoogleCloudDialogflowV2beta1EntityType [GoogleCloudDialogflowV2beta1EntityTypeEntity]
 gcdvetcEntities
   = lens _gcdvetcEntities
@@ -8236,9 +9156,9 @@ gcdvetcKind :: Lens' GoogleCloudDialogflowV2beta1EntityType (Maybe GoogleCloudDi
 gcdvetcKind
   = lens _gcdvetcKind (\ s a -> s{_gcdvetcKind = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of the entity type. Format:
--- \`projects\/\/agent\/entityTypes\/\`.
+-- | The unique identifier of the entity type. Required for
+-- EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes
+-- methods. Format: \`projects\/\/agent\/entityTypes\/\`.
 gcdvetcName :: Lens' GoogleCloudDialogflowV2beta1EntityType (Maybe Text)
 gcdvetcName
   = lens _gcdvetcName (\ s a -> s{_gcdvetcName = a})
@@ -8257,7 +9177,8 @@ gcdvetcDisplayName
       (\ s a -> s{_gcdvetcDisplayName = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1EntityType where
+           GoogleCloudDialogflowV2beta1EntityType
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2beta1EntityType"
               (\ o ->
@@ -8268,7 +9189,8 @@ instance FromJSON
                      <*> (o .:? "displayName"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1EntityType where
+           GoogleCloudDialogflowV2beta1EntityType
+         where
         toJSON GoogleCloudDialogflowV2beta1EntityType'{..}
           = object
               (catMaybes
@@ -8282,10 +9204,13 @@ instance ToJSON
 -- | The response message for Agents.SearchAgents.
 --
 -- /See:/ 'googleCloudDialogflowV2SearchAgentsResponse' smart constructor.
-data GoogleCloudDialogflowV2SearchAgentsResponse = GoogleCloudDialogflowV2SearchAgentsResponse'
+data GoogleCloudDialogflowV2SearchAgentsResponse =
+  GoogleCloudDialogflowV2SearchAgentsResponse'
     { _gcdvsarNextPageToken :: !(Maybe Text)
     , _gcdvsarAgents        :: !(Maybe [GoogleCloudDialogflowV2Agent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2SearchAgentsResponse' with the minimum fields required to make a request.
 --
@@ -8297,10 +9222,9 @@ data GoogleCloudDialogflowV2SearchAgentsResponse = GoogleCloudDialogflowV2Search
 googleCloudDialogflowV2SearchAgentsResponse
     :: GoogleCloudDialogflowV2SearchAgentsResponse
 googleCloudDialogflowV2SearchAgentsResponse =
-    GoogleCloudDialogflowV2SearchAgentsResponse'
-    { _gcdvsarNextPageToken = Nothing
-    , _gcdvsarAgents = Nothing
-    }
+  GoogleCloudDialogflowV2SearchAgentsResponse'
+    {_gcdvsarNextPageToken = Nothing, _gcdvsarAgents = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -8319,7 +9243,8 @@ gcdvsarAgents
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2SearchAgentsResponse where
+           GoogleCloudDialogflowV2SearchAgentsResponse
+         where
         parseJSON
           = withObject
               "GoogleCloudDialogflowV2SearchAgentsResponse"
@@ -8329,7 +9254,8 @@ instance FromJSON
                      (o .:? "agents" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2SearchAgentsResponse where
+           GoogleCloudDialogflowV2SearchAgentsResponse
+         where
         toJSON
           GoogleCloudDialogflowV2SearchAgentsResponse'{..}
           = object
@@ -8340,10 +9266,13 @@ instance ToJSON
 -- | The response message for SessionEntityTypes.ListSessionEntityTypes.
 --
 -- /See:/ 'googleCloudDialogflowV2ListSessionEntityTypesResponse' smart constructor.
-data GoogleCloudDialogflowV2ListSessionEntityTypesResponse = GoogleCloudDialogflowV2ListSessionEntityTypesResponse'
+data GoogleCloudDialogflowV2ListSessionEntityTypesResponse =
+  GoogleCloudDialogflowV2ListSessionEntityTypesResponse'
     { _gcdvlSetrNextPageToken      :: !(Maybe Text)
     , _gcdvlSetrSessionEntityTypes :: !(Maybe [GoogleCloudDialogflowV2SessionEntityType])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2ListSessionEntityTypesResponse' with the minimum fields required to make a request.
 --
@@ -8355,10 +9284,9 @@ data GoogleCloudDialogflowV2ListSessionEntityTypesResponse = GoogleCloudDialogfl
 googleCloudDialogflowV2ListSessionEntityTypesResponse
     :: GoogleCloudDialogflowV2ListSessionEntityTypesResponse
 googleCloudDialogflowV2ListSessionEntityTypesResponse =
-    GoogleCloudDialogflowV2ListSessionEntityTypesResponse'
-    { _gcdvlSetrNextPageToken = Nothing
-    , _gcdvlSetrSessionEntityTypes = Nothing
-    }
+  GoogleCloudDialogflowV2ListSessionEntityTypesResponse'
+    {_gcdvlSetrNextPageToken = Nothing, _gcdvlSetrSessionEntityTypes = Nothing}
+
 
 -- | Token to retrieve the next page of results, or empty if there are no
 -- more results in the list.
@@ -8377,7 +9305,7 @@ gcdvlSetrSessionEntityTypes
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2ListSessionEntityTypesResponse
+           GoogleCloudDialogflowV2ListSessionEntityTypesResponse
          where
         parseJSON
           = withObject
@@ -8389,7 +9317,7 @@ instance FromJSON
                      (o .:? "sessionEntityTypes" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2ListSessionEntityTypesResponse
+           GoogleCloudDialogflowV2ListSessionEntityTypesResponse
          where
         toJSON
           GoogleCloudDialogflowV2ListSessionEntityTypesResponse'{..}
@@ -8403,13 +9331,16 @@ instance ToJSON
 -- a network API call.
 --
 -- /See:/ 'googleLongrunningOperation' smart constructor.
-data GoogleLongrunningOperation = GoogleLongrunningOperation'
+data GoogleLongrunningOperation =
+  GoogleLongrunningOperation'
     { _gloDone     :: !(Maybe Bool)
     , _gloError    :: !(Maybe GoogleRpcStatus)
     , _gloResponse :: !(Maybe GoogleLongrunningOperationResponse)
     , _gloName     :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunningOperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
@@ -8427,13 +9358,14 @@ data GoogleLongrunningOperation = GoogleLongrunningOperation'
 googleLongrunningOperation
     :: GoogleLongrunningOperation
 googleLongrunningOperation =
-    GoogleLongrunningOperation'
+  GoogleLongrunningOperation'
     { _gloDone = Nothing
     , _gloError = Nothing
     , _gloResponse = Nothing
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -8494,7 +9426,8 @@ instance ToJSON GoogleLongrunningOperation where
 -- | Corresponds to the \`Response\` field in the Dialogflow console.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessage' smart constructor.
-data GoogleCloudDialogflowV2IntentMessage = GoogleCloudDialogflowV2IntentMessage'
+data GoogleCloudDialogflowV2IntentMessage =
+  GoogleCloudDialogflowV2IntentMessage'
     { _gcdvimcCard              :: !(Maybe GoogleCloudDialogflowV2IntentMessageCard)
     , _gcdvimcImage             :: !(Maybe GoogleCloudDialogflowV2IntentMessageImage)
     , _gcdvimcPlatform          :: !(Maybe GoogleCloudDialogflowV2IntentMessagePlatform)
@@ -8507,7 +9440,9 @@ data GoogleCloudDialogflowV2IntentMessage = GoogleCloudDialogflowV2IntentMessage
     , _gcdvimcListSelect        :: !(Maybe GoogleCloudDialogflowV2IntentMessageListSelect)
     , _gcdvimcBasicCard         :: !(Maybe GoogleCloudDialogflowV2IntentMessageBasicCard)
     , _gcdvimcQuickReplies      :: !(Maybe GoogleCloudDialogflowV2IntentMessageQuickReplies)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessage' with the minimum fields required to make a request.
 --
@@ -8539,7 +9474,7 @@ data GoogleCloudDialogflowV2IntentMessage = GoogleCloudDialogflowV2IntentMessage
 googleCloudDialogflowV2IntentMessage
     :: GoogleCloudDialogflowV2IntentMessage
 googleCloudDialogflowV2IntentMessage =
-    GoogleCloudDialogflowV2IntentMessage'
+  GoogleCloudDialogflowV2IntentMessage'
     { _gcdvimcCard = Nothing
     , _gcdvimcImage = Nothing
     , _gcdvimcPlatform = Nothing
@@ -8553,6 +9488,7 @@ googleCloudDialogflowV2IntentMessage =
     , _gcdvimcBasicCard = Nothing
     , _gcdvimcQuickReplies = Nothing
     }
+
 
 -- | The card response.
 gcdvimcCard :: Lens' GoogleCloudDialogflowV2IntentMessage (Maybe GoogleCloudDialogflowV2IntentMessageCard)
@@ -8626,7 +9562,8 @@ gcdvimcQuickReplies
       (\ s a -> s{_gcdvimcQuickReplies = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessage where
+           GoogleCloudDialogflowV2IntentMessage
+         where
         parseJSON
           = withObject "GoogleCloudDialogflowV2IntentMessage"
               (\ o ->
@@ -8665,9 +9602,12 @@ instance ToJSON GoogleCloudDialogflowV2IntentMessage
 -- | The card for presenting a carousel of options to select from.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageCarouselSelect' smart constructor.
-newtype GoogleCloudDialogflowV2IntentMessageCarouselSelect = GoogleCloudDialogflowV2IntentMessageCarouselSelect'
+newtype GoogleCloudDialogflowV2IntentMessageCarouselSelect =
+  GoogleCloudDialogflowV2IntentMessageCarouselSelect'
     { _gItems :: Maybe [GoogleCloudDialogflowV2IntentMessageCarouselSelectItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageCarouselSelect' with the minimum fields required to make a request.
 --
@@ -8677,9 +9617,8 @@ newtype GoogleCloudDialogflowV2IntentMessageCarouselSelect = GoogleCloudDialogfl
 googleCloudDialogflowV2IntentMessageCarouselSelect
     :: GoogleCloudDialogflowV2IntentMessageCarouselSelect
 googleCloudDialogflowV2IntentMessageCarouselSelect =
-    GoogleCloudDialogflowV2IntentMessageCarouselSelect'
-    { _gItems = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageCarouselSelect' {_gItems = Nothing}
+
 
 -- | Required. Carousel items.
 gItems :: Lens' GoogleCloudDialogflowV2IntentMessageCarouselSelect [GoogleCloudDialogflowV2IntentMessageCarouselSelectItem]
@@ -8688,7 +9627,7 @@ gItems
       _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageCarouselSelect
+           GoogleCloudDialogflowV2IntentMessageCarouselSelect
          where
         parseJSON
           = withObject
@@ -8698,20 +9637,79 @@ instance FromJSON
                    <$> (o .:? "items" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageCarouselSelect
+           GoogleCloudDialogflowV2IntentMessageCarouselSelect
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageCarouselSelect'{..}
           = object (catMaybes [("items" .=) <$> _gItems])
 
+-- | The sentiment, such as positive\/negative feeling or association, for a
+-- unit of analysis, such as the query text.
+--
+-- /See:/ 'googleCloudDialogflowV2Sentiment' smart constructor.
+data GoogleCloudDialogflowV2Sentiment =
+  GoogleCloudDialogflowV2Sentiment'
+    { _gScore     :: !(Maybe (Textual Double))
+    , _gMagnitude :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudDialogflowV2Sentiment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gScore'
+--
+-- * 'gMagnitude'
+googleCloudDialogflowV2Sentiment
+    :: GoogleCloudDialogflowV2Sentiment
+googleCloudDialogflowV2Sentiment =
+  GoogleCloudDialogflowV2Sentiment' {_gScore = Nothing, _gMagnitude = Nothing}
+
+
+-- | Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
+-- sentiment).
+gScore :: Lens' GoogleCloudDialogflowV2Sentiment (Maybe Double)
+gScore
+  = lens _gScore (\ s a -> s{_gScore = a}) .
+      mapping _Coerce
+
+-- | A non-negative number in the [0, +inf) range, which represents the
+-- absolute magnitude of sentiment, regardless of score (positive or
+-- negative).
+gMagnitude :: Lens' GoogleCloudDialogflowV2Sentiment (Maybe Double)
+gMagnitude
+  = lens _gMagnitude (\ s a -> s{_gMagnitude = a}) .
+      mapping _Coerce
+
+instance FromJSON GoogleCloudDialogflowV2Sentiment
+         where
+        parseJSON
+          = withObject "GoogleCloudDialogflowV2Sentiment"
+              (\ o ->
+                 GoogleCloudDialogflowV2Sentiment' <$>
+                   (o .:? "score") <*> (o .:? "magnitude"))
+
+instance ToJSON GoogleCloudDialogflowV2Sentiment
+         where
+        toJSON GoogleCloudDialogflowV2Sentiment'{..}
+          = object
+              (catMaybes
+                 [("score" .=) <$> _gScore,
+                  ("magnitude" .=) <$> _gMagnitude])
+
 -- | Additional info about the select item for when it is triggered in a
 -- dialog.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1IntentMessageSelectItemInfo' smart constructor.
-data GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo = GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo'
+data GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo =
+  GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo'
     { _gooKey      :: !(Maybe Text)
     , _gooSynonyms :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo' with the minimum fields required to make a request.
 --
@@ -8723,10 +9721,9 @@ data GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo = GoogleCloudDialog
 googleCloudDialogflowV2beta1IntentMessageSelectItemInfo
     :: GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
 googleCloudDialogflowV2beta1IntentMessageSelectItemInfo =
-    GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo'
-    { _gooKey = Nothing
-    , _gooSynonyms = Nothing
-    }
+  GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo'
+    {_gooKey = Nothing, _gooSynonyms = Nothing}
+
 
 -- | Required. A unique key that will be sent back to the agent if this
 -- response is given.
@@ -8742,7 +9739,7 @@ gooSynonyms
       . _Coerce
 
 instance FromJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
+           GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
          where
         parseJSON
           = withObject
@@ -8752,7 +9749,7 @@ instance FromJSON
                    <$> (o .:? "key") <*> (o .:? "synonyms" .!= mempty))
 
 instance ToJSON
-         GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
+           GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
          where
         toJSON
           GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo'{..}
@@ -8766,7 +9763,8 @@ instance ToJSON
 -- sentence semantics.
 --
 -- /See:/ 'googleCloudDialogflowV2beta1Intent' smart constructor.
-data GoogleCloudDialogflowV2beta1Intent = GoogleCloudDialogflowV2beta1Intent'
+data GoogleCloudDialogflowV2beta1Intent =
+  GoogleCloudDialogflowV2beta1Intent'
     { _gcdvicDefaultResponsePlatforms :: !(Maybe [Text])
     , _gcdvicWebhookState             :: !(Maybe GoogleCloudDialogflowV2beta1IntentWebhookState)
     , _gcdvicMlEnabled                :: !(Maybe Bool)
@@ -8787,7 +9785,9 @@ data GoogleCloudDialogflowV2beta1Intent = GoogleCloudDialogflowV2beta1Intent'
     , _gcdvicIsFallback               :: !(Maybe Bool)
     , _gcdvicMlDisabled               :: !(Maybe Bool)
     , _gcdvicResetContexts            :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2beta1Intent' with the minimum fields required to make a request.
 --
@@ -8835,7 +9835,7 @@ data GoogleCloudDialogflowV2beta1Intent = GoogleCloudDialogflowV2beta1Intent'
 googleCloudDialogflowV2beta1Intent
     :: GoogleCloudDialogflowV2beta1Intent
 googleCloudDialogflowV2beta1Intent =
-    GoogleCloudDialogflowV2beta1Intent'
+  GoogleCloudDialogflowV2beta1Intent'
     { _gcdvicDefaultResponsePlatforms = Nothing
     , _gcdvicWebhookState = Nothing
     , _gcdvicMlEnabled = Nothing
@@ -8857,6 +9857,7 @@ googleCloudDialogflowV2beta1Intent =
     , _gcdvicMlDisabled = Nothing
     , _gcdvicResetContexts = Nothing
     }
+
 
 -- | Optional. The list of platforms for which the first response will be
 -- taken from among the messages assigned to the DEFAULT_PLATFORM.
@@ -8911,8 +9912,8 @@ gcdvicRootFollowupIntentName
   = lens _gcdvicRootFollowupIntentName
       (\ s a -> s{_gcdvicRootFollowupIntentName = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of this intent. Format:
+-- | The unique identifier of this intent. Required for Intents.UpdateIntent
+-- and Intents.BatchUpdateIntents methods. Format:
 -- \`projects\/\/agent\/intents\/\`.
 gcdvicName :: Lens' GoogleCloudDialogflowV2beta1Intent (Maybe Text)
 gcdvicName
@@ -8990,8 +9991,7 @@ gcdvicOutputContexts
       . _Default
       . _Coerce
 
--- | Optional. The collection of examples\/templates that the agent is
--- trained on.
+-- | Optional. The collection of examples that the agent is trained on.
 gcdvicTrainingPhrases :: Lens' GoogleCloudDialogflowV2beta1Intent [GoogleCloudDialogflowV2beta1IntentTrainingPhrase]
 gcdvicTrainingPhrases
   = lens _gcdvicTrainingPhrases
@@ -9092,11 +10092,14 @@ instance ToJSON GoogleCloudDialogflowV2beta1Intent
 -- | Represents a context.
 --
 -- /See:/ 'googleCloudDialogflowV2Context' smart constructor.
-data GoogleCloudDialogflowV2Context = GoogleCloudDialogflowV2Context'
+data GoogleCloudDialogflowV2Context =
+  GoogleCloudDialogflowV2Context'
     { _gcdvccLifespanCount :: !(Maybe (Textual Int32))
     , _gcdvccName          :: !(Maybe Text)
     , _gcdvccParameters    :: !(Maybe GoogleCloudDialogflowV2ContextParameters)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2Context' with the minimum fields required to make a request.
 --
@@ -9110,16 +10113,17 @@ data GoogleCloudDialogflowV2Context = GoogleCloudDialogflowV2Context'
 googleCloudDialogflowV2Context
     :: GoogleCloudDialogflowV2Context
 googleCloudDialogflowV2Context =
-    GoogleCloudDialogflowV2Context'
+  GoogleCloudDialogflowV2Context'
     { _gcdvccLifespanCount = Nothing
     , _gcdvccName = Nothing
     , _gcdvccParameters = Nothing
     }
 
+
 -- | Optional. The number of conversational query requests after which the
 -- context expires. If set to \`0\` (the default) the context expires
--- immediately. Contexts expire automatically after 20 minutes even if
--- there are no matching queries.
+-- immediately. Contexts expire automatically after 20 minutes if there are
+-- no matching queries.
 gcdvccLifespanCount :: Lens' GoogleCloudDialogflowV2Context (Maybe Int32)
 gcdvccLifespanCount
   = lens _gcdvccLifespanCount
@@ -9136,7 +10140,8 @@ gcdvccName
 
 -- | Optional. The collection of parameters associated with this context.
 -- Refer to [this
--- doc](https:\/\/dialogflow.com\/docs\/actions-and-parameters) for syntax.
+-- doc](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/intents-actions-parameters)
+-- for syntax.
 gcdvccParameters :: Lens' GoogleCloudDialogflowV2Context (Maybe GoogleCloudDialogflowV2ContextParameters)
 gcdvccParameters
   = lens _gcdvccParameters
@@ -9162,10 +10167,13 @@ instance ToJSON GoogleCloudDialogflowV2Context where
 -- | The button object that appears at the bottom of a card.
 --
 -- /See:/ 'googleCloudDialogflowV2IntentMessageBasicCardButton' smart constructor.
-data GoogleCloudDialogflowV2IntentMessageBasicCardButton = GoogleCloudDialogflowV2IntentMessageBasicCardButton'
+data GoogleCloudDialogflowV2IntentMessageBasicCardButton =
+  GoogleCloudDialogflowV2IntentMessageBasicCardButton'
     { _gcdvimbcbcOpenURIAction :: !(Maybe GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction)
     , _gcdvimbcbcTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleCloudDialogflowV2IntentMessageBasicCardButton' with the minimum fields required to make a request.
 --
@@ -9177,10 +10185,9 @@ data GoogleCloudDialogflowV2IntentMessageBasicCardButton = GoogleCloudDialogflow
 googleCloudDialogflowV2IntentMessageBasicCardButton
     :: GoogleCloudDialogflowV2IntentMessageBasicCardButton
 googleCloudDialogflowV2IntentMessageBasicCardButton =
-    GoogleCloudDialogflowV2IntentMessageBasicCardButton'
-    { _gcdvimbcbcOpenURIAction = Nothing
-    , _gcdvimbcbcTitle = Nothing
-    }
+  GoogleCloudDialogflowV2IntentMessageBasicCardButton'
+    {_gcdvimbcbcOpenURIAction = Nothing, _gcdvimbcbcTitle = Nothing}
+
 
 -- | Required. Action to take when a user taps on the button.
 gcdvimbcbcOpenURIAction :: Lens' GoogleCloudDialogflowV2IntentMessageBasicCardButton (Maybe GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenURIAction)
@@ -9195,7 +10202,7 @@ gcdvimbcbcTitle
       (\ s a -> s{_gcdvimbcbcTitle = a})
 
 instance FromJSON
-         GoogleCloudDialogflowV2IntentMessageBasicCardButton
+           GoogleCloudDialogflowV2IntentMessageBasicCardButton
          where
         parseJSON
           = withObject
@@ -9205,7 +10212,7 @@ instance FromJSON
                    <$> (o .:? "openUriAction") <*> (o .:? "title"))
 
 instance ToJSON
-         GoogleCloudDialogflowV2IntentMessageBasicCardButton
+           GoogleCloudDialogflowV2IntentMessageBasicCardButton
          where
         toJSON
           GoogleCloudDialogflowV2IntentMessageBasicCardButton'{..}

@@ -60,14 +60,17 @@ type ShelvesBooksGetResource =
 -- | Gets a book. Returns NOT_FOUND if the book does not exist.
 --
 -- /See:/ 'shelvesBooksGet' smart constructor.
-data ShelvesBooksGet = ShelvesBooksGet'
+data ShelvesBooksGet =
+  ShelvesBooksGet'
     { _sbgXgafv          :: !(Maybe Xgafv)
     , _sbgUploadProtocol :: !(Maybe Text)
     , _sbgAccessToken    :: !(Maybe Text)
     , _sbgUploadType     :: !(Maybe Text)
     , _sbgName           :: !Text
     , _sbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShelvesBooksGet' with the minimum fields required to make a request.
 --
@@ -88,7 +91,7 @@ shelvesBooksGet
     :: Text -- ^ 'sbgName'
     -> ShelvesBooksGet
 shelvesBooksGet pSbgName_ =
-    ShelvesBooksGet'
+  ShelvesBooksGet'
     { _sbgXgafv = Nothing
     , _sbgUploadProtocol = Nothing
     , _sbgAccessToken = Nothing
@@ -96,6 +99,7 @@ shelvesBooksGet pSbgName_ =
     , _sbgName = pSbgName_
     , _sbgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sbgXgafv :: Lens' ShelvesBooksGet (Maybe Xgafv)

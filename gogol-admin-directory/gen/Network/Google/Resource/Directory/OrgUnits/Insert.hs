@@ -55,10 +55,13 @@ type OrgUnitsInsertResource =
 -- | Add organizational unit
 --
 -- /See:/ 'orgUnitsInsert' smart constructor.
-data OrgUnitsInsert = OrgUnitsInsert'
+data OrgUnitsInsert =
+  OrgUnitsInsert'
     { _ouiPayload    :: !OrgUnit
     , _ouiCustomerId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrgUnitsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ orgUnitsInsert
     -> Text -- ^ 'ouiCustomerId'
     -> OrgUnitsInsert
 orgUnitsInsert pOuiPayload_ pOuiCustomerId_ =
-    OrgUnitsInsert'
-    { _ouiPayload = pOuiPayload_
-    , _ouiCustomerId = pOuiCustomerId_
-    }
+  OrgUnitsInsert' {_ouiPayload = pOuiPayload_, _ouiCustomerId = pOuiCustomerId_}
+
 
 -- | Multipart request metadata.
 ouiPayload :: Lens' OrgUnitsInsert OrgUnit

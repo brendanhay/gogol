@@ -87,7 +87,8 @@ type UpdateLeadsResource =
 -- | Updates the specified lead.
 --
 -- /See:/ 'updateLeads' smart constructor.
-data UpdateLeads = UpdateLeads'
+data UpdateLeads =
+  UpdateLeads'
     { _ulXgafv                                       :: !(Maybe Xgafv)
     , _ulUploadProtocol                              :: !(Maybe Text)
     , _ulUpdateMask                                  :: !(Maybe GFieldMask)
@@ -102,7 +103,9 @@ data UpdateLeads = UpdateLeads'
     , _ulRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _ulRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _ulCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateLeads' with the minimum fields required to make a request.
 --
@@ -139,7 +142,7 @@ updateLeads
     :: Lead -- ^ 'ulPayload'
     -> UpdateLeads
 updateLeads pUlPayload_ =
-    UpdateLeads'
+  UpdateLeads'
     { _ulXgafv = Nothing
     , _ulUploadProtocol = Nothing
     , _ulUpdateMask = Nothing
@@ -155,6 +158,7 @@ updateLeads pUlPayload_ =
     , _ulRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _ulCallback = Nothing
     }
+
 
 -- | V1 error format.
 ulXgafv :: Lens' UpdateLeads (Maybe Xgafv)

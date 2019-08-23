@@ -79,14 +79,17 @@ type ServicesGenerateConfigReportResource =
 -- service configuration.
 --
 -- /See:/ 'servicesGenerateConfigReport' smart constructor.
-data ServicesGenerateConfigReport = ServicesGenerateConfigReport'
+data ServicesGenerateConfigReport =
+  ServicesGenerateConfigReport'
     { _sgcrXgafv          :: !(Maybe Xgafv)
     , _sgcrUploadProtocol :: !(Maybe Text)
     , _sgcrAccessToken    :: !(Maybe Text)
     , _sgcrUploadType     :: !(Maybe Text)
     , _sgcrPayload        :: !GenerateConfigReportRequest
     , _sgcrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesGenerateConfigReport' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ servicesGenerateConfigReport
     :: GenerateConfigReportRequest -- ^ 'sgcrPayload'
     -> ServicesGenerateConfigReport
 servicesGenerateConfigReport pSgcrPayload_ =
-    ServicesGenerateConfigReport'
+  ServicesGenerateConfigReport'
     { _sgcrXgafv = Nothing
     , _sgcrUploadProtocol = Nothing
     , _sgcrAccessToken = Nothing
@@ -115,6 +118,7 @@ servicesGenerateConfigReport pSgcrPayload_ =
     , _sgcrPayload = pSgcrPayload_
     , _sgcrCallback = Nothing
     }
+
 
 -- | V1 error format.
 sgcrXgafv :: Lens' ServicesGenerateConfigReport (Maybe Xgafv)

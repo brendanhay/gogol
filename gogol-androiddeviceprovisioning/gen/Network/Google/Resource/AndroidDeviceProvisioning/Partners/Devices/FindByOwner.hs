@@ -70,7 +70,8 @@ type PartnersDevicesFindByOwnerResource =
 -- appear in the results.
 --
 -- /See:/ 'partnersDevicesFindByOwner' smart constructor.
-data PartnersDevicesFindByOwner = PartnersDevicesFindByOwner'
+data PartnersDevicesFindByOwner =
+  PartnersDevicesFindByOwner'
     { _pdfboXgafv          :: !(Maybe Xgafv)
     , _pdfboUploadProtocol :: !(Maybe Text)
     , _pdfboAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data PartnersDevicesFindByOwner = PartnersDevicesFindByOwner'
     , _pdfboUploadType     :: !(Maybe Text)
     , _pdfboPayload        :: !FindDevicesByOwnerRequest
     , _pdfboCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartnersDevicesFindByOwner' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ partnersDevicesFindByOwner
     -> FindDevicesByOwnerRequest -- ^ 'pdfboPayload'
     -> PartnersDevicesFindByOwner
 partnersDevicesFindByOwner pPdfboPartnerId_ pPdfboPayload_ =
-    PartnersDevicesFindByOwner'
+  PartnersDevicesFindByOwner'
     { _pdfboXgafv = Nothing
     , _pdfboUploadProtocol = Nothing
     , _pdfboAccessToken = Nothing
@@ -111,6 +114,7 @@ partnersDevicesFindByOwner pPdfboPartnerId_ pPdfboPayload_ =
     , _pdfboPayload = pPdfboPayload_
     , _pdfboCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdfboXgafv :: Lens' PartnersDevicesFindByOwner (Maybe Xgafv)

@@ -54,10 +54,13 @@ type UsersLabelsGetResource =
 -- | Gets the specified label.
 --
 -- /See:/ 'usersLabelsGet' smart constructor.
-data UsersLabelsGet = UsersLabelsGet'
+data UsersLabelsGet =
+  UsersLabelsGet'
     { _ulgUserId :: !Text
     , _ulgId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersLabelsGet' with the minimum fields required to make a request.
 --
@@ -69,11 +72,8 @@ data UsersLabelsGet = UsersLabelsGet'
 usersLabelsGet
     :: Text -- ^ 'ulgId'
     -> UsersLabelsGet
-usersLabelsGet pUlgId_ =
-    UsersLabelsGet'
-    { _ulgUserId = "me"
-    , _ulgId = pUlgId_
-    }
+usersLabelsGet pUlgId_ = UsersLabelsGet' {_ulgUserId = "me", _ulgId = pUlgId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

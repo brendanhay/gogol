@@ -64,13 +64,16 @@ type HTTPHealthChecksListResource =
 -- specified project.
 --
 -- /See:/ 'hTTPHealthChecksList' smart constructor.
-data HTTPHealthChecksList = HTTPHealthChecksList'
+data HTTPHealthChecksList =
+  HTTPHealthChecksList'
     { _httphclOrderBy    :: !(Maybe Text)
     , _httphclProject    :: !Text
     , _httphclFilter     :: !(Maybe Text)
     , _httphclPageToken  :: !(Maybe Text)
     , _httphclMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPHealthChecksList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ hTTPHealthChecksList
     :: Text -- ^ 'httphclProject'
     -> HTTPHealthChecksList
 hTTPHealthChecksList pHttphclProject_ =
-    HTTPHealthChecksList'
+  HTTPHealthChecksList'
     { _httphclOrderBy = Nothing
     , _httphclProject = pHttphclProject_
     , _httphclFilter = Nothing
     , _httphclPageToken = Nothing
     , _httphclMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

@@ -165,12 +165,22 @@ module Network.Google.DialogFlow
     -- ** GoogleCloudDialogflowV2beta1IntentTrainingPhraseType
     , GoogleCloudDialogflowV2beta1IntentTrainingPhraseType (..)
 
+    -- ** GoogleCloudDialogflowV2SynthesizeSpeechConfig
+    , GoogleCloudDialogflowV2SynthesizeSpeechConfig
+    , googleCloudDialogflowV2SynthesizeSpeechConfig
+    , gcdvsscVolumeGainDB
+    , gcdvsscEffectsProFileId
+    , gcdvsscVoice
+    , gcdvsscSpeakingRate
+    , gcdvsscPitch
+
     -- ** GoogleCloudDialogflowV2InputAudioConfig
     , GoogleCloudDialogflowV2InputAudioConfig
     , googleCloudDialogflowV2InputAudioConfig
     , gcdviacLanguageCode
     , gcdviacPhraseHints
     , gcdviacSampleRateHertz
+    , gcdviacModelVariant
     , gcdviacAudioEncoding
 
     -- ** GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
@@ -212,6 +222,9 @@ module Network.Google.DialogFlow
     , gcdvimsrDisplayText
     , gcdvimsrSsml
     , gcdvimsrTextToSpeech
+
+    -- ** GoogleCloudDialogflowV2InputAudioConfigModelVariant
+    , GoogleCloudDialogflowV2InputAudioConfigModelVariant (..)
 
     -- ** GoogleLongrunningOperationMetadata
     , GoogleLongrunningOperationMetadata
@@ -272,11 +285,19 @@ module Network.Google.DialogFlow
     , gcdviMlDisabled
     , gcdviResetContexts
 
+    -- ** GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender
+    , GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGender (..)
+
     -- ** GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
     , GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton
     , googleCloudDialogflowV2beta1IntentMessageBasicCardButton
     , gcdvimbcbOpenURIAction
     , gcdvimbcbTitle
+
+    -- ** GoogleCloudDialogflowV2SentimentAnalysisResult
+    , GoogleCloudDialogflowV2SentimentAnalysisResult
+    , googleCloudDialogflowV2SentimentAnalysisResult
+    , gcdvsarQueryTextSentiment
 
     -- ** GoogleCloudDialogflowV2BatchCreateEntitiesRequest
     , GoogleCloudDialogflowV2BatchCreateEntitiesRequest
@@ -307,6 +328,7 @@ module Network.Google.DialogFlow
     , gcdvqrSpeechRecognitionConfidence
     , gcdvqrAction
     , gcdvqrIntent
+    , gcdvqrSentimentAnalysisResult
     , gcdvqrQueryText
     , gcdvqrFulfillmentText
     , gcdvqrParameters
@@ -388,6 +410,11 @@ module Network.Google.DialogFlow
     , GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
     , googleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio
     , gcdvimtpaAudioURI
+
+    -- ** GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+    , GoogleCloudDialogflowV2SentimentAnalysisRequestConfig
+    , googleCloudDialogflowV2SentimentAnalysisRequestConfig
+    , gcdvsarcAnalyzeQueryTextSentiment
 
     -- ** GoogleCloudDialogflowV2IntentTrainingPhrasePart
     , GoogleCloudDialogflowV2IntentTrainingPhrasePart
@@ -482,6 +509,7 @@ module Network.Google.DialogFlow
     , GoogleCloudDialogflowV2QueryParameters
     , googleCloudDialogflowV2QueryParameters
     , gcdvqpContexts
+    , gcdvqpSentimentAnalysisRequestConfig
     , gcdvqpPayload
     , gcdvqpGeoLocation
     , gcdvqpTimeZone
@@ -511,7 +539,9 @@ module Network.Google.DialogFlow
     -- ** GoogleCloudDialogflowV2DetectIntentResponse
     , GoogleCloudDialogflowV2DetectIntentResponse
     , googleCloudDialogflowV2DetectIntentResponse
+    , gcdvdirOutputAudioConfig
     , gcdvdirResponseId
+    , gcdvdirOutputAudio
     , gcdvdirWebhookStatus
     , gcdvdirQueryResult
 
@@ -526,12 +556,18 @@ module Network.Google.DialogFlow
     -- ** GoogleCloudDialogflowV2beta1SentimentAnalysisResult
     , GoogleCloudDialogflowV2beta1SentimentAnalysisResult
     , googleCloudDialogflowV2beta1SentimentAnalysisResult
-    , gcdvsarQueryTextSentiment
+    , gQueryTextSentiment
 
     -- ** GoogleCloudDialogflowV2EntityTypeBatch
     , GoogleCloudDialogflowV2EntityTypeBatch
     , googleCloudDialogflowV2EntityTypeBatch
     , gcdvetbEntityTypes
+
+    -- ** GoogleCloudDialogflowV2VoiceSelectionParams
+    , GoogleCloudDialogflowV2VoiceSelectionParams
+    , googleCloudDialogflowV2VoiceSelectionParams
+    , gcdvvspSsmlGender
+    , gcdvvspName
 
     -- ** GoogleCloudDialogflowV2QueryResultDiagnosticInfo
     , GoogleCloudDialogflowV2QueryResultDiagnosticInfo
@@ -546,9 +582,10 @@ module Network.Google.DialogFlow
     -- ** GoogleCloudDialogflowV2DetectIntentRequest
     , GoogleCloudDialogflowV2DetectIntentRequest
     , googleCloudDialogflowV2DetectIntentRequest
-    , gcdvdirQueryInput
-    , gcdvdirInputAudio
-    , gcdvdirQueryParams
+    , gQueryInput
+    , gOutputAudioConfig
+    , gInputAudio
+    , gQueryParams
 
     -- ** GoogleCloudDialogflowV2beta1QueryResultParameters
     , GoogleCloudDialogflowV2beta1QueryResultParameters
@@ -831,6 +868,13 @@ module Network.Google.DialogFlow
     , gcdvimiAccessibilityText
     , gcdvimiImageURI
 
+    -- ** GoogleCloudDialogflowV2OutputAudioConfig
+    , GoogleCloudDialogflowV2OutputAudioConfig
+    , googleCloudDialogflowV2OutputAudioConfig
+    , gcdvoacSampleRateHertz
+    , gcdvoacSynthesizeSpeechConfig
+    , gcdvoacAudioEncoding
+
     -- ** GoogleCloudDialogflowV2ExportAgentResponse
     , GoogleCloudDialogflowV2ExportAgentResponse
     , googleCloudDialogflowV2ExportAgentResponse
@@ -875,6 +919,9 @@ module Network.Google.DialogFlow
     , gcdvipDefaultValue
     , gcdvipIsList
     , gcdvipEntityTypeDisplayName
+
+    -- ** GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding
+    , GoogleCloudDialogflowV2OutputAudioConfigAudioEncoding (..)
 
     -- ** GoogleCloudDialogflowV2EntityTypeAutoExpansionMode
     , GoogleCloudDialogflowV2EntityTypeAutoExpansionMode (..)
@@ -1043,6 +1090,12 @@ module Network.Google.DialogFlow
     , GoogleCloudDialogflowV2IntentMessageCarouselSelect
     , googleCloudDialogflowV2IntentMessageCarouselSelect
     , gItems
+
+    -- ** GoogleCloudDialogflowV2Sentiment
+    , GoogleCloudDialogflowV2Sentiment
+    , googleCloudDialogflowV2Sentiment
+    , gScore
+    , gMagnitude
 
     -- ** GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
     , GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo

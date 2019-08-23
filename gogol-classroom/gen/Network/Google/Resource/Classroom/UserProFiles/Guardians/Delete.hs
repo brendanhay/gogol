@@ -85,7 +85,8 @@ type UserProFilesGuardiansDeleteResource =
 -- record exists for that student with the provided \`guardian_id\`.
 --
 -- /See:/ 'userProFilesGuardiansDelete' smart constructor.
-data UserProFilesGuardiansDelete = UserProFilesGuardiansDelete'
+data UserProFilesGuardiansDelete =
+  UserProFilesGuardiansDelete'
     { _upfgdStudentId      :: !Text
     , _upfgdXgafv          :: !(Maybe Xgafv)
     , _upfgdUploadProtocol :: !(Maybe Text)
@@ -93,7 +94,9 @@ data UserProFilesGuardiansDelete = UserProFilesGuardiansDelete'
     , _upfgdUploadType     :: !(Maybe Text)
     , _upfgdGuardianId     :: !Text
     , _upfgdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFilesGuardiansDelete' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ userProFilesGuardiansDelete
     -> Text -- ^ 'upfgdGuardianId'
     -> UserProFilesGuardiansDelete
 userProFilesGuardiansDelete pUpfgdStudentId_ pUpfgdGuardianId_ =
-    UserProFilesGuardiansDelete'
+  UserProFilesGuardiansDelete'
     { _upfgdStudentId = pUpfgdStudentId_
     , _upfgdXgafv = Nothing
     , _upfgdUploadProtocol = Nothing
@@ -126,6 +129,7 @@ userProFilesGuardiansDelete pUpfgdStudentId_ pUpfgdGuardianId_ =
     , _upfgdGuardianId = pUpfgdGuardianId_
     , _upfgdCallback = Nothing
     }
+
 
 -- | The student whose guardian is to be deleted. One of the following: * the
 -- numeric identifier for the user * the email address of the user * the

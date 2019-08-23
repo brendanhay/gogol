@@ -61,13 +61,16 @@ type EventsMoveResource =
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
 -- /See:/ 'eventsMove' smart constructor.
-data EventsMove = EventsMove'
+data EventsMove =
+  EventsMove'
     { _emDestination       :: !Text
     , _emCalendarId        :: !Text
     , _emSendNotifications :: !(Maybe Bool)
     , _emSendUpdates       :: !(Maybe EventsMoveSendUpdates)
     , _emEventId           :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsMove' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ eventsMove
     -> Text -- ^ 'emEventId'
     -> EventsMove
 eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
-    EventsMove'
+  EventsMove'
     { _emDestination = pEmDestination_
     , _emCalendarId = pEmCalendarId_
     , _emSendNotifications = Nothing
     , _emSendUpdates = Nothing
     , _emEventId = pEmEventId_
     }
+
 
 -- | Calendar identifier of the target calendar where the event is to be
 -- moved to.

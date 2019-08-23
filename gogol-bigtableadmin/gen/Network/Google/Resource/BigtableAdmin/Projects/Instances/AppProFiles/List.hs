@@ -65,7 +65,8 @@ type ProjectsInstancesAppProFilesListResource =
 -- | Lists information about app profiles in an instance.
 --
 -- /See:/ 'projectsInstancesAppProFilesList' smart constructor.
-data ProjectsInstancesAppProFilesList = ProjectsInstancesAppProFilesList'
+data ProjectsInstancesAppProFilesList =
+  ProjectsInstancesAppProFilesList'
     { _piapflParent         :: !Text
     , _piapflXgafv          :: !(Maybe Xgafv)
     , _piapflUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsInstancesAppProFilesList = ProjectsInstancesAppProFilesList'
     , _piapflPageToken      :: !(Maybe Text)
     , _piapflPageSize       :: !(Maybe (Textual Int32))
     , _piapflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesAppProFilesList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsInstancesAppProFilesList
     :: Text -- ^ 'piapflParent'
     -> ProjectsInstancesAppProFilesList
 projectsInstancesAppProFilesList pPiapflParent_ =
-    ProjectsInstancesAppProFilesList'
+  ProjectsInstancesAppProFilesList'
     { _piapflParent = pPiapflParent_
     , _piapflXgafv = Nothing
     , _piapflUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsInstancesAppProFilesList pPiapflParent_ =
     , _piapflPageSize = Nothing
     , _piapflCallback = Nothing
     }
+
 
 -- | The unique name of the instance for which a list of app profiles is
 -- requested. Values are of the form \`projects\/\/instances\/\`. Use \` =
@@ -161,7 +165,8 @@ piapflCallback
       (\ s a -> s{_piapflCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesAppProFilesList where
+           ProjectsInstancesAppProFilesList
+         where
         type Rs ProjectsInstancesAppProFilesList =
              ListAppProFilesResponse
         type Scopes ProjectsInstancesAppProFilesList =

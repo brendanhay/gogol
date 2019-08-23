@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search public activities.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.search@.
 module Network.Google.Resource.Plus.Activities.Search
@@ -56,16 +57,20 @@ type ActivitiesSearchResource =
                    QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
--- | Search public activities.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'activitiesSearch' smart constructor.
-data ActivitiesSearch = ActivitiesSearch'
+data ActivitiesSearch =
+  ActivitiesSearch'
     { _asOrderBy    :: !ActivitiesSearchOrderBy
     , _asQuery      :: !Text
     , _asLanguage   :: !Text
     , _asPageToken  :: !(Maybe Text)
     , _asMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivitiesSearch' with the minimum fields required to make a request.
 --
@@ -84,13 +89,14 @@ activitiesSearch
     :: Text -- ^ 'asQuery'
     -> ActivitiesSearch
 activitiesSearch pAsQuery_ =
-    ActivitiesSearch'
+  ActivitiesSearch'
     { _asOrderBy = ASOBRecent
     , _asQuery = pAsQuery_
     , _asLanguage = "en-US"
     , _asPageToken = Nothing
     , _asMaxResults = 10
     }
+
 
 -- | Specifies how to order search results.
 asOrderBy :: Lens' ActivitiesSearch ActivitiesSearchOrderBy

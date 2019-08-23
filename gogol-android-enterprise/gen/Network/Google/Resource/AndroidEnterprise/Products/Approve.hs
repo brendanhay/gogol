@@ -66,11 +66,14 @@ type ProductsApproveResource =
 -- Store Layout Design.
 --
 -- /See:/ 'productsApprove' smart constructor.
-data ProductsApprove = ProductsApprove'
+data ProductsApprove =
+  ProductsApprove'
     { _paEnterpriseId :: !Text
     , _paPayload      :: !ProductsApproveRequest
     , _paProductId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsApprove' with the minimum fields required to make a request.
 --
@@ -87,11 +90,12 @@ productsApprove
     -> Text -- ^ 'paProductId'
     -> ProductsApprove
 productsApprove pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
-    ProductsApprove'
+  ProductsApprove'
     { _paEnterpriseId = pPaEnterpriseId_
     , _paPayload = pPaPayload_
     , _paProductId = pPaProductId_
     }
+
 
 -- | The ID of the enterprise.
 paEnterpriseId :: Lens' ProductsApprove Text

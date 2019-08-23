@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionGroupsList' request conforms to.
 type UserRolePermissionGroupsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissionGroups" :>
@@ -53,9 +53,12 @@ type UserRolePermissionGroupsListResource =
 -- | Gets a list of all supported user role permission groups.
 --
 -- /See:/ 'userRolePermissionGroupsList' smart constructor.
-newtype UserRolePermissionGroupsList = UserRolePermissionGroupsList'
+newtype UserRolePermissionGroupsList =
+  UserRolePermissionGroupsList'
     { _urpglProFileId :: Textual Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRolePermissionGroupsList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ userRolePermissionGroupsList
     :: Int64 -- ^ 'urpglProFileId'
     -> UserRolePermissionGroupsList
 userRolePermissionGroupsList pUrpglProFileId_ =
-    UserRolePermissionGroupsList'
-    { _urpglProFileId = _Coerce # pUrpglProFileId_
-    }
+  UserRolePermissionGroupsList' {_urpglProFileId = _Coerce # pUrpglProFileId_}
+
 
 -- | User profile ID associated with this request.
 urpglProFileId :: Lens' UserRolePermissionGroupsList Int64

@@ -148,7 +148,6 @@ gamesManagementService
       (ServiceId "gamesManagement:v1management")
       "www.googleapis.com"
 
--- | Share your Google+ profile information and view and manage your game
--- activity
+-- | Create, edit, and delete your Google Play Games activity
 gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
-gamesScope = Proxy;
+gamesScope = Proxy

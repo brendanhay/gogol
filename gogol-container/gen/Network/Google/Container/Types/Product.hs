@@ -25,9 +25,12 @@ import           Network.Google.Prelude
 -- is enabled for the nodes.
 --
 -- /See:/ 'networkPolicyConfig' smart constructor.
-newtype NetworkPolicyConfig = NetworkPolicyConfig'
+newtype NetworkPolicyConfig =
+  NetworkPolicyConfig'
     { _npcDisabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworkPolicyConfig' with the minimum fields required to make a request.
 --
@@ -36,10 +39,8 @@ newtype NetworkPolicyConfig = NetworkPolicyConfig'
 -- * 'npcDisabled'
 networkPolicyConfig
     :: NetworkPolicyConfig
-networkPolicyConfig =
-    NetworkPolicyConfig'
-    { _npcDisabled = Nothing
-    }
+networkPolicyConfig = NetworkPolicyConfig' {_npcDisabled = Nothing}
+
 
 -- | Whether NetworkPolicy is enabled for this cluster.
 npcDisabled :: Lens' NetworkPolicyConfig (Maybe Bool)
@@ -56,10 +57,70 @@ instance ToJSON NetworkPolicyConfig where
           = object
               (catMaybes [("disabled" .=) <$> _npcDisabled])
 
+-- | ListUsableSubnetworksResponse is the response of
+-- ListUsableSubnetworksRequest.
+--
+-- /See:/ 'listUsableSubnetworksResponse' smart constructor.
+data ListUsableSubnetworksResponse =
+  ListUsableSubnetworksResponse'
+    { _lusrNextPageToken :: !(Maybe Text)
+    , _lusrSubnetworks   :: !(Maybe [UsableSubnetwork])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListUsableSubnetworksResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lusrNextPageToken'
+--
+-- * 'lusrSubnetworks'
+listUsableSubnetworksResponse
+    :: ListUsableSubnetworksResponse
+listUsableSubnetworksResponse =
+  ListUsableSubnetworksResponse'
+    {_lusrNextPageToken = Nothing, _lusrSubnetworks = Nothing}
+
+
+-- | This token allows you to get the next page of results for list requests.
+-- If the number of results is larger than \`page_size\`, use the
+-- \`next_page_token\` as a value for the query parameter \`page_token\` in
+-- the next request. The value will become empty when there are no more
+-- pages.
+lusrNextPageToken :: Lens' ListUsableSubnetworksResponse (Maybe Text)
+lusrNextPageToken
+  = lens _lusrNextPageToken
+      (\ s a -> s{_lusrNextPageToken = a})
+
+-- | A list of usable subnetworks in the specified network project.
+lusrSubnetworks :: Lens' ListUsableSubnetworksResponse [UsableSubnetwork]
+lusrSubnetworks
+  = lens _lusrSubnetworks
+      (\ s a -> s{_lusrSubnetworks = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListUsableSubnetworksResponse where
+        parseJSON
+          = withObject "ListUsableSubnetworksResponse"
+              (\ o ->
+                 ListUsableSubnetworksResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "subnetworks" .!= mempty))
+
+instance ToJSON ListUsableSubnetworksResponse where
+        toJSON ListUsableSubnetworksResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lusrNextPageToken,
+                  ("subnetworks" .=) <$> _lusrSubnetworks])
+
 -- | UpdateNodePoolRequests update a node pool\'s image and\/or version.
 --
 -- /See:/ 'updateNodePoolRequest' smart constructor.
-data UpdateNodePoolRequest = UpdateNodePoolRequest'
+data UpdateNodePoolRequest =
+  UpdateNodePoolRequest'
     { _unprZone        :: !(Maybe Text)
     , _unprNodePoolId  :: !(Maybe Text)
     , _unprImageType   :: !(Maybe Text)
@@ -67,7 +128,9 @@ data UpdateNodePoolRequest = UpdateNodePoolRequest'
     , _unprClusterId   :: !(Maybe Text)
     , _unprNodeVersion :: !(Maybe Text)
     , _unprProjectId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateNodePoolRequest' with the minimum fields required to make a request.
 --
@@ -89,7 +152,7 @@ data UpdateNodePoolRequest = UpdateNodePoolRequest'
 updateNodePoolRequest
     :: UpdateNodePoolRequest
 updateNodePoolRequest =
-    UpdateNodePoolRequest'
+  UpdateNodePoolRequest'
     { _unprZone = Nothing
     , _unprNodePoolId = Nothing
     , _unprImageType = Nothing
@@ -98,6 +161,7 @@ updateNodePoolRequest =
     , _unprNodeVersion = Nothing
     , _unprProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -179,13 +243,16 @@ instance ToJSON UpdateNodePoolRequest where
 -- | UpdateMasterRequest updates the master of the cluster.
 --
 -- /See:/ 'updateMasterRequest' smart constructor.
-data UpdateMasterRequest = UpdateMasterRequest'
+data UpdateMasterRequest =
+  UpdateMasterRequest'
     { _umrZone          :: !(Maybe Text)
     , _umrName          :: !(Maybe Text)
     , _umrClusterId     :: !(Maybe Text)
     , _umrProjectId     :: !(Maybe Text)
     , _umrMasterVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateMasterRequest' with the minimum fields required to make a request.
 --
@@ -203,13 +270,14 @@ data UpdateMasterRequest = UpdateMasterRequest'
 updateMasterRequest
     :: UpdateMasterRequest
 updateMasterRequest =
-    UpdateMasterRequest'
+  UpdateMasterRequest'
     { _umrZone = Nothing
     , _umrName = Nothing
     , _umrClusterId = Nothing
     , _umrProjectId = Nothing
     , _umrMasterVersion = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -270,13 +338,16 @@ instance ToJSON UpdateMasterRequest where
 -- performs a node upgrade on each node pool to point to the new IP.
 --
 -- /See:/ 'startIPRotationRequest' smart constructor.
-data StartIPRotationRequest = StartIPRotationRequest'
+data StartIPRotationRequest =
+  StartIPRotationRequest'
     { _sirrZone              :: !(Maybe Text)
     , _sirrRotateCredentials :: !(Maybe Bool)
     , _sirrName              :: !(Maybe Text)
     , _sirrClusterId         :: !(Maybe Text)
     , _sirrProjectId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StartIPRotationRequest' with the minimum fields required to make a request.
 --
@@ -294,13 +365,14 @@ data StartIPRotationRequest = StartIPRotationRequest'
 startIPRotationRequest
     :: StartIPRotationRequest
 startIPRotationRequest =
-    StartIPRotationRequest'
+  StartIPRotationRequest'
     { _sirrZone = Nothing
     , _sirrRotateCredentials = Nothing
     , _sirrName = Nothing
     , _sirrClusterId = Nothing
     , _sirrProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -359,13 +431,16 @@ instance ToJSON StartIPRotationRequest where
 -- mechanism for a cluster.
 --
 -- /See:/ 'setLegacyAbacRequest' smart constructor.
-data SetLegacyAbacRequest = SetLegacyAbacRequest'
+data SetLegacyAbacRequest =
+  SetLegacyAbacRequest'
     { _slarEnabled   :: !(Maybe Bool)
     , _slarZone      :: !(Maybe Text)
     , _slarName      :: !(Maybe Text)
     , _slarClusterId :: !(Maybe Text)
     , _slarProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetLegacyAbacRequest' with the minimum fields required to make a request.
 --
@@ -383,13 +458,14 @@ data SetLegacyAbacRequest = SetLegacyAbacRequest'
 setLegacyAbacRequest
     :: SetLegacyAbacRequest
 setLegacyAbacRequest =
-    SetLegacyAbacRequest'
+  SetLegacyAbacRequest'
     { _slarEnabled = Nothing
     , _slarZone = Nothing
     , _slarName = Nothing
     , _slarClusterId = Nothing
     , _slarProjectId = Nothing
     }
+
 
 -- | Whether ABAC authorization will be enabled in the cluster.
 slarEnabled :: Lens' SetLegacyAbacRequest (Maybe Bool)
@@ -447,9 +523,12 @@ instance ToJSON SetLegacyAbacRequest where
 -- controller has based on the resource usage of the existing pods.
 --
 -- /See:/ 'horizontalPodAutoscaling' smart constructor.
-newtype HorizontalPodAutoscaling = HorizontalPodAutoscaling'
+newtype HorizontalPodAutoscaling =
+  HorizontalPodAutoscaling'
     { _hpaDisabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HorizontalPodAutoscaling' with the minimum fields required to make a request.
 --
@@ -458,10 +537,8 @@ newtype HorizontalPodAutoscaling = HorizontalPodAutoscaling'
 -- * 'hpaDisabled'
 horizontalPodAutoscaling
     :: HorizontalPodAutoscaling
-horizontalPodAutoscaling =
-    HorizontalPodAutoscaling'
-    { _hpaDisabled = Nothing
-    }
+horizontalPodAutoscaling = HorizontalPodAutoscaling' {_hpaDisabled = Nothing}
+
 
 -- | Whether the Horizontal Pod Autoscaling feature is enabled in the
 -- cluster. When enabled, it ensures that a Heapster pod is running in the
@@ -484,14 +561,17 @@ instance ToJSON HorizontalPodAutoscaling where
 -- | SetMasterAuthRequest updates the admin password of a cluster.
 --
 -- /See:/ 'setMasterAuthRequest' smart constructor.
-data SetMasterAuthRequest = SetMasterAuthRequest'
+data SetMasterAuthRequest =
+  SetMasterAuthRequest'
     { _smarAction    :: !(Maybe SetMasterAuthRequestAction)
     , _smarZone      :: !(Maybe Text)
     , _smarName      :: !(Maybe Text)
     , _smarClusterId :: !(Maybe Text)
     , _smarProjectId :: !(Maybe Text)
     , _smarUpdate    :: !(Maybe MasterAuth)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetMasterAuthRequest' with the minimum fields required to make a request.
 --
@@ -511,7 +591,7 @@ data SetMasterAuthRequest = SetMasterAuthRequest'
 setMasterAuthRequest
     :: SetMasterAuthRequest
 setMasterAuthRequest =
-    SetMasterAuthRequest'
+  SetMasterAuthRequest'
     { _smarAction = Nothing
     , _smarZone = Nothing
     , _smarName = Nothing
@@ -519,6 +599,7 @@ setMasterAuthRequest =
     , _smarProjectId = Nothing
     , _smarUpdate = Nothing
     }
+
 
 -- | The exact form of action to be taken on the master auth.
 smarAction :: Lens' SetMasterAuthRequest (Maybe SetMasterAuthRequestAction)
@@ -580,10 +661,13 @@ instance ToJSON SetMasterAuthRequest where
 -- | ListOperationsResponse is the result of ListOperationsRequest.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorOperations   :: !(Maybe [Operation])
     , _lorMissingZones :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -595,10 +679,8 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorOperations = Nothing
-    , _lorMissingZones = Nothing
-    }
+  ListOperationsResponse' {_lorOperations = Nothing, _lorMissingZones = Nothing}
+
 
 -- | A list of operations in the project in the specified zone.
 lorOperations :: Lens' ListOperationsResponse [Operation]
@@ -635,12 +717,15 @@ instance ToJSON ListOperationsResponse where
 -- | CreateClusterRequest creates a cluster.
 --
 -- /See:/ 'createClusterRequest' smart constructor.
-data CreateClusterRequest = CreateClusterRequest'
+data CreateClusterRequest =
+  CreateClusterRequest'
     { _ccrParent    :: !(Maybe Text)
     , _ccrCluster   :: !(Maybe Cluster)
     , _ccrZone      :: !(Maybe Text)
     , _ccrProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
 --
@@ -656,12 +741,13 @@ data CreateClusterRequest = CreateClusterRequest'
 createClusterRequest
     :: CreateClusterRequest
 createClusterRequest =
-    CreateClusterRequest'
+  CreateClusterRequest'
     { _ccrParent = Nothing
     , _ccrCluster = Nothing
     , _ccrZone = Nothing
     , _ccrProjectId = Nothing
     }
+
 
 -- | The parent (project and location) where the cluster will be created.
 -- Specified in the format \'projects\/*\/locations\/*\'.
@@ -709,11 +795,13 @@ instance ToJSON CreateClusterRequest where
 -- | A Google Kubernetes Engine cluster.
 --
 -- /See:/ 'cluster' smart constructor.
-data Cluster = Cluster'
+data Cluster =
+  Cluster'
     { _cStatus                         :: !(Maybe ClusterStatus)
     , _cNodePools                      :: !(Maybe [NodePool])
     , _cEnableKubernetesAlpha          :: !(Maybe Bool)
     , _cResourceLabels                 :: !(Maybe ClusterResourceLabels)
+    , _cTpuIPv4CIdRBlock               :: !(Maybe Text)
     , _cNodeConfig                     :: !(Maybe NodeConfig)
     , _cNodeIPv4CIdRSize               :: !(Maybe (Textual Int32))
     , _cClusterIPv4CIdR                :: !(Maybe Text)
@@ -734,11 +822,13 @@ data Cluster = Cluster'
     , _cName                           :: !(Maybe Text)
     , _cCurrentMasterVersion           :: !(Maybe Text)
     , _cStatusMessage                  :: !(Maybe Text)
+    , _cDefaultMaxPodsConstraint       :: !(Maybe MaxPodsConstraint)
     , _cSubnetwork                     :: !(Maybe Text)
     , _cCurrentNodeCount               :: !(Maybe (Textual Int32))
     , _cPrivateClusterConfig           :: !(Maybe PrivateClusterConfig)
     , _cMaintenancePolicy              :: !(Maybe MaintenancePolicy)
     , _cConditions                     :: !(Maybe [StatusCondition])
+    , _cEnableTpu                      :: !(Maybe Bool)
     , _cEndpoint                       :: !(Maybe Text)
     , _cExpireTime                     :: !(Maybe Text)
     , _cNetworkPolicy                  :: !(Maybe NetworkPolicy)
@@ -749,7 +839,9 @@ data Cluster = Cluster'
     , _cInstanceGroupURLs              :: !(Maybe [Text])
     , _cMonitoringService              :: !(Maybe Text)
     , _cCreateTime                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
 --
@@ -762,6 +854,8 @@ data Cluster = Cluster'
 -- * 'cEnableKubernetesAlpha'
 --
 -- * 'cResourceLabels'
+--
+-- * 'cTpuIPv4CIdRBlock'
 --
 -- * 'cNodeConfig'
 --
@@ -803,6 +897,8 @@ data Cluster = Cluster'
 --
 -- * 'cStatusMessage'
 --
+-- * 'cDefaultMaxPodsConstraint'
+--
 -- * 'cSubnetwork'
 --
 -- * 'cCurrentNodeCount'
@@ -812,6 +908,8 @@ data Cluster = Cluster'
 -- * 'cMaintenancePolicy'
 --
 -- * 'cConditions'
+--
+-- * 'cEnableTpu'
 --
 -- * 'cEndpoint'
 --
@@ -835,11 +933,12 @@ data Cluster = Cluster'
 cluster
     :: Cluster
 cluster =
-    Cluster'
+  Cluster'
     { _cStatus = Nothing
     , _cNodePools = Nothing
     , _cEnableKubernetesAlpha = Nothing
     , _cResourceLabels = Nothing
+    , _cTpuIPv4CIdRBlock = Nothing
     , _cNodeConfig = Nothing
     , _cNodeIPv4CIdRSize = Nothing
     , _cClusterIPv4CIdR = Nothing
@@ -860,11 +959,13 @@ cluster =
     , _cName = Nothing
     , _cCurrentMasterVersion = Nothing
     , _cStatusMessage = Nothing
+    , _cDefaultMaxPodsConstraint = Nothing
     , _cSubnetwork = Nothing
     , _cCurrentNodeCount = Nothing
     , _cPrivateClusterConfig = Nothing
     , _cMaintenancePolicy = Nothing
     , _cConditions = Nothing
+    , _cEnableTpu = Nothing
     , _cEndpoint = Nothing
     , _cExpireTime = Nothing
     , _cNetworkPolicy = Nothing
@@ -876,6 +977,7 @@ cluster =
     , _cMonitoringService = Nothing
     , _cCreateTime = Nothing
     }
+
 
 -- | [Output only] The current status of this cluster.
 cStatus :: Lens' Cluster (Maybe ClusterStatus)
@@ -905,6 +1007,14 @@ cResourceLabels :: Lens' Cluster (Maybe ClusterResourceLabels)
 cResourceLabels
   = lens _cResourceLabels
       (\ s a -> s{_cResourceLabels = a})
+
+-- | [Output only] The IP address range of the Cloud TPUs in this cluster, in
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`1.2.3.4\/29\`).
+cTpuIPv4CIdRBlock :: Lens' Cluster (Maybe Text)
+cTpuIPv4CIdRBlock
+  = lens _cTpuIPv4CIdRBlock
+      (\ s a -> s{_cTpuIPv4CIdRBlock = a})
 
 -- | Parameters used in creating the cluster\'s nodes. See \`nodeConfig\` for
 -- the description of its properties. For requests, this field should only
@@ -959,7 +1069,7 @@ cInitialNodeCount
       . mapping _Coerce
 
 -- | [Output only] Deprecated, use
--- [NodePool.version](\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.zones.clusters.nodePool)
+-- [NodePools.version](\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.zones.clusters.nodePools)
 -- instead. The current version of the node software components. If they
 -- are currently at multiple versions because they\'re in the process of
 -- being upgraded, this reflects the minimum version of all nodes.
@@ -1069,6 +1179,14 @@ cStatusMessage
   = lens _cStatusMessage
       (\ s a -> s{_cStatusMessage = a})
 
+-- | The default constraint on the maximum number of pods that can be run
+-- simultaneously on a node in the node pool of this cluster. Only honored
+-- if cluster created with IP Alias support.
+cDefaultMaxPodsConstraint :: Lens' Cluster (Maybe MaxPodsConstraint)
+cDefaultMaxPodsConstraint
+  = lens _cDefaultMaxPodsConstraint
+      (\ s a -> s{_cDefaultMaxPodsConstraint = a})
+
 -- | The name of the Google Compute Engine
 -- [subnetwork](\/compute\/docs\/subnetworks) to which the cluster is
 -- connected.
@@ -1102,6 +1220,11 @@ cConditions
   = lens _cConditions (\ s a -> s{_cConditions = a}) .
       _Default
       . _Coerce
+
+-- | Enable the ability to use Cloud TPUs in this cluster.
+cEnableTpu :: Lens' Cluster (Maybe Bool)
+cEnableTpu
+  = lens _cEnableTpu (\ s a -> s{_cEnableTpu = a})
 
 -- | [Output only] The IP address of this cluster\'s master endpoint. The
 -- endpoint can be accessed from the internet at
@@ -1184,6 +1307,7 @@ instance FromJSON Cluster where
                    (o .:? "status") <*> (o .:? "nodePools" .!= mempty)
                      <*> (o .:? "enableKubernetesAlpha")
                      <*> (o .:? "resourceLabels")
+                     <*> (o .:? "tpuIpv4CidrBlock")
                      <*> (o .:? "nodeConfig")
                      <*> (o .:? "nodeIpv4CidrSize")
                      <*> (o .:? "clusterIpv4Cidr")
@@ -1204,11 +1328,13 @@ instance FromJSON Cluster where
                      <*> (o .:? "name")
                      <*> (o .:? "currentMasterVersion")
                      <*> (o .:? "statusMessage")
+                     <*> (o .:? "defaultMaxPodsConstraint")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "currentNodeCount")
                      <*> (o .:? "privateClusterConfig")
                      <*> (o .:? "maintenancePolicy")
                      <*> (o .:? "conditions" .!= mempty)
+                     <*> (o .:? "enableTpu")
                      <*> (o .:? "endpoint")
                      <*> (o .:? "expireTime")
                      <*> (o .:? "networkPolicy")
@@ -1229,6 +1355,7 @@ instance ToJSON Cluster where
                   ("enableKubernetesAlpha" .=) <$>
                     _cEnableKubernetesAlpha,
                   ("resourceLabels" .=) <$> _cResourceLabels,
+                  ("tpuIpv4CidrBlock" .=) <$> _cTpuIPv4CIdRBlock,
                   ("nodeConfig" .=) <$> _cNodeConfig,
                   ("nodeIpv4CidrSize" .=) <$> _cNodeIPv4CIdRSize,
                   ("clusterIpv4Cidr" .=) <$> _cClusterIPv4CIdR,
@@ -1252,12 +1379,15 @@ instance ToJSON Cluster where
                   ("currentMasterVersion" .=) <$>
                     _cCurrentMasterVersion,
                   ("statusMessage" .=) <$> _cStatusMessage,
+                  ("defaultMaxPodsConstraint" .=) <$>
+                    _cDefaultMaxPodsConstraint,
                   ("subnetwork" .=) <$> _cSubnetwork,
                   ("currentNodeCount" .=) <$> _cCurrentNodeCount,
                   ("privateClusterConfig" .=) <$>
                     _cPrivateClusterConfig,
                   ("maintenancePolicy" .=) <$> _cMaintenancePolicy,
                   ("conditions" .=) <$> _cConditions,
+                  ("enableTpu" .=) <$> _cEnableTpu,
                   ("endpoint" .=) <$> _cEndpoint,
                   ("expireTime" .=) <$> _cExpireTime,
                   ("networkPolicy" .=) <$> _cNetworkPolicy,
@@ -1272,12 +1402,15 @@ instance ToJSON Cluster where
 -- | CancelOperationRequest cancels a single operation.
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
-data CancelOperationRequest = CancelOperationRequest'
+data CancelOperationRequest =
+  CancelOperationRequest'
     { _corZone        :: !(Maybe Text)
     , _corName        :: !(Maybe Text)
     , _corProjectId   :: !(Maybe Text)
     , _corOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
@@ -1293,12 +1426,13 @@ data CancelOperationRequest = CancelOperationRequest'
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest =
-    CancelOperationRequest'
+  CancelOperationRequest'
     { _corZone = Nothing
     , _corName = Nothing
     , _corProjectId = Nothing
     , _corOperationId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the operation resides.
@@ -1345,13 +1479,16 @@ instance ToJSON CancelOperationRequest where
 -- | UpdateClusterRequest updates the settings of a cluster.
 --
 -- /See:/ 'updateClusterRequest' smart constructor.
-data UpdateClusterRequest = UpdateClusterRequest'
+data UpdateClusterRequest =
+  UpdateClusterRequest'
     { _ucrZone      :: !(Maybe Text)
     , _ucrName      :: !(Maybe Text)
     , _ucrClusterId :: !(Maybe Text)
     , _ucrProjectId :: !(Maybe Text)
     , _ucrUpdate    :: !(Maybe ClusterUpdate)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateClusterRequest' with the minimum fields required to make a request.
 --
@@ -1369,13 +1506,14 @@ data UpdateClusterRequest = UpdateClusterRequest'
 updateClusterRequest
     :: UpdateClusterRequest
 updateClusterRequest =
-    UpdateClusterRequest'
+  UpdateClusterRequest'
     { _ucrZone = Nothing
     , _ucrName = Nothing
     , _ucrClusterId = Nothing
     , _ucrProjectId = Nothing
     , _ucrUpdate = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -1428,13 +1566,16 @@ instance ToJSON UpdateClusterRequest where
 -- | SetAddonsConfigRequest sets the addons associated with the cluster.
 --
 -- /See:/ 'setAddonsConfigRequest' smart constructor.
-data SetAddonsConfigRequest = SetAddonsConfigRequest'
+data SetAddonsConfigRequest =
+  SetAddonsConfigRequest'
     { _sacrZone         :: !(Maybe Text)
     , _sacrAddonsConfig :: !(Maybe AddonsConfig)
     , _sacrName         :: !(Maybe Text)
     , _sacrClusterId    :: !(Maybe Text)
     , _sacrProjectId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetAddonsConfigRequest' with the minimum fields required to make a request.
 --
@@ -1452,13 +1593,14 @@ data SetAddonsConfigRequest = SetAddonsConfigRequest'
 setAddonsConfigRequest
     :: SetAddonsConfigRequest
 setAddonsConfigRequest =
-    SetAddonsConfigRequest'
+  SetAddonsConfigRequest'
     { _sacrZone = Nothing
     , _sacrAddonsConfig = Nothing
     , _sacrName = Nothing
     , _sacrClusterId = Nothing
     , _sacrProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -1516,7 +1658,8 @@ instance ToJSON SetAddonsConfigRequest where
 -- | Parameters that describe the nodes in a cluster.
 --
 -- /See:/ 'nodeConfig' smart constructor.
-data NodeConfig = NodeConfig'
+data NodeConfig =
+  NodeConfig'
     { _ncLocalSsdCount  :: !(Maybe (Textual Int32))
     , _ncDiskSizeGb     :: !(Maybe (Textual Int32))
     , _ncTaints         :: !(Maybe [NodeTaint])
@@ -1531,7 +1674,9 @@ data NodeConfig = NodeConfig'
     , _ncMinCPUPlatform :: !(Maybe Text)
     , _ncTags           :: !(Maybe [Text])
     , _ncPreemptible    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
@@ -1567,7 +1712,7 @@ data NodeConfig = NodeConfig'
 nodeConfig
     :: NodeConfig
 nodeConfig =
-    NodeConfig'
+  NodeConfig'
     { _ncLocalSsdCount = Nothing
     , _ncDiskSizeGb = Nothing
     , _ncTaints = Nothing
@@ -1583,6 +1728,7 @@ nodeConfig =
     , _ncTags = Nothing
     , _ncPreemptible = Nothing
     }
+
 
 -- | The number of local SSD disks to be attached to the node. The limit for
 -- this value is dependant upon the maximum number of disks available on a
@@ -1667,12 +1813,13 @@ ncMachineType
 -- Additionally, to avoid ambiguity, keys must not conflict with any other
 -- metadata keys for the project or be one of the reserved keys:
 -- \"cluster-location\" \"cluster-name\" \"cluster-uid\" \"configure-sh\"
--- \"enable-os-login\" \"gci-update-strategy\" \"gci-ensure-gke-docker\"
--- \"instance-template\" \"kube-env\" \"startup-script\" \"user-data\"
--- Values are free-form strings, and only have meaning as interpreted by
--- the image running in the instance. The only restriction placed on them
--- is that each value\'s size must be less than or equal to 32 KB. The
--- total size of all keys and values must be less than 512 KB.
+-- \"containerd-configure-sh\" \"enable-os-login\" \"gci-update-strategy\"
+-- \"gci-ensure-gke-docker\" \"instance-template\" \"kube-env\"
+-- \"startup-script\" \"user-data\" Values are free-form strings, and only
+-- have meaning as interpreted by the image running in the instance. The
+-- only restriction placed on them is that each value\'s size must be less
+-- than or equal to 32 KB. The total size of all keys and values must be
+-- less than 512 KB.
 ncMetadata :: Lens' NodeConfig (Maybe NodeConfigMetadata)
 ncMetadata
   = lens _ncMetadata (\ s a -> s{_ncMetadata = a})
@@ -1765,9 +1912,12 @@ instance ToJSON NodeConfig where
 -- cluster.
 --
 -- /See:/ 'hTTPLoadBalancing' smart constructor.
-newtype HTTPLoadBalancing = HTTPLoadBalancing'
+newtype HTTPLoadBalancing =
+  HTTPLoadBalancing'
     { _httplbDisabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPLoadBalancing' with the minimum fields required to make a request.
 --
@@ -1776,10 +1926,8 @@ newtype HTTPLoadBalancing = HTTPLoadBalancing'
 -- * 'httplbDisabled'
 hTTPLoadBalancing
     :: HTTPLoadBalancing
-hTTPLoadBalancing =
-    HTTPLoadBalancing'
-    { _httplbDisabled = Nothing
-    }
+hTTPLoadBalancing = HTTPLoadBalancing' {_httplbDisabled = Nothing}
+
 
 -- | Whether the HTTP Load Balancing controller is enabled in the cluster.
 -- When enabled, it runs a small pod in the cluster that manages the load
@@ -1803,7 +1951,8 @@ instance ToJSON HTTPLoadBalancing where
 -- are happening on the cluster. All fields are output only.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oNodepoolConditions :: !(Maybe [StatusCondition])
     , _oStatus             :: !(Maybe OperationStatus)
     , _oLocation           :: !(Maybe Text)
@@ -1817,7 +1966,9 @@ data Operation = Operation'
     , _oOperationType      :: !(Maybe OperationOperationType)
     , _oTargetLink         :: !(Maybe Text)
     , _oDetail             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1851,7 +2002,7 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oNodepoolConditions = Nothing
     , _oStatus = Nothing
     , _oLocation = Nothing
@@ -1866,6 +2017,7 @@ operation =
     , _oTargetLink = Nothing
     , _oDetail = Nothing
     }
+
 
 -- | Which conditions caused the current node pool state.
 oNodepoolConditions :: Lens' Operation [StatusCondition]
@@ -1983,9 +2135,12 @@ instance ToJSON Operation where
 -- Google Compute Engine resources.
 --
 -- /See:/ 'clusterResourceLabels' smart constructor.
-newtype ClusterResourceLabels = ClusterResourceLabels'
+newtype ClusterResourceLabels =
+  ClusterResourceLabels'
     { _crlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClusterResourceLabels' with the minimum fields required to make a request.
 --
@@ -1996,9 +2151,8 @@ clusterResourceLabels
     :: HashMap Text Text -- ^ 'crlAddtional'
     -> ClusterResourceLabels
 clusterResourceLabels pCrlAddtional_ =
-    ClusterResourceLabels'
-    { _crlAddtional = _Coerce # pCrlAddtional_
-    }
+  ClusterResourceLabels' {_crlAddtional = _Coerce # pCrlAddtional_}
+
 
 crlAddtional :: Lens' ClusterResourceLabels (HashMap Text Text)
 crlAddtional
@@ -2022,14 +2176,16 @@ instance ToJSON ClusterResourceLabels where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -2041,14 +2197,17 @@ instance ToJSON Empty where
 -- pool.
 --
 -- /See:/ 'setNodePoolAutoscalingRequest' smart constructor.
-data SetNodePoolAutoscalingRequest = SetNodePoolAutoscalingRequest'
+data SetNodePoolAutoscalingRequest =
+  SetNodePoolAutoscalingRequest'
     { _snparAutoscaling :: !(Maybe NodePoolAutoscaling)
     , _snparZone        :: !(Maybe Text)
     , _snparNodePoolId  :: !(Maybe Text)
     , _snparName        :: !(Maybe Text)
     , _snparClusterId   :: !(Maybe Text)
     , _snparProjectId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetNodePoolAutoscalingRequest' with the minimum fields required to make a request.
 --
@@ -2068,7 +2227,7 @@ data SetNodePoolAutoscalingRequest = SetNodePoolAutoscalingRequest'
 setNodePoolAutoscalingRequest
     :: SetNodePoolAutoscalingRequest
 setNodePoolAutoscalingRequest =
-    SetNodePoolAutoscalingRequest'
+  SetNodePoolAutoscalingRequest'
     { _snparAutoscaling = Nothing
     , _snparZone = Nothing
     , _snparNodePoolId = Nothing
@@ -2076,6 +2235,7 @@ setNodePoolAutoscalingRequest =
     , _snparClusterId = Nothing
     , _snparProjectId = Nothing
     }
+
 
 -- | Autoscaling configuration for the node pool.
 snparAutoscaling :: Lens' SetNodePoolAutoscalingRequest (Maybe NodePoolAutoscaling)
@@ -2145,12 +2305,15 @@ instance ToJSON SetNodePoolAutoscalingRequest where
 -- mode.
 --
 -- /See:/ 'completeIPRotationRequest' smart constructor.
-data CompleteIPRotationRequest = CompleteIPRotationRequest'
+data CompleteIPRotationRequest =
+  CompleteIPRotationRequest'
     { _cirrZone      :: !(Maybe Text)
     , _cirrName      :: !(Maybe Text)
     , _cirrClusterId :: !(Maybe Text)
     , _cirrProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompleteIPRotationRequest' with the minimum fields required to make a request.
 --
@@ -2166,12 +2329,13 @@ data CompleteIPRotationRequest = CompleteIPRotationRequest'
 completeIPRotationRequest
     :: CompleteIPRotationRequest
 completeIPRotationRequest =
-    CompleteIPRotationRequest'
+  CompleteIPRotationRequest'
     { _cirrZone = Nothing
     , _cirrName = Nothing
     , _cirrClusterId = Nothing
     , _cirrProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -2218,15 +2382,85 @@ instance ToJSON CompleteIPRotationRequest where
                   ("clusterId" .=) <$> _cirrClusterId,
                   ("projectId" .=) <$> _cirrProjectId])
 
+-- | Secondary IP range of a usable subnetwork.
+--
+-- /See:/ 'usableSubnetworkSecondaryRange' smart constructor.
+data UsableSubnetworkSecondaryRange =
+  UsableSubnetworkSecondaryRange'
+    { _ussrStatus      :: !(Maybe UsableSubnetworkSecondaryRangeStatus)
+    , _ussrRangeName   :: !(Maybe Text)
+    , _ussrIPCIdRRange :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UsableSubnetworkSecondaryRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ussrStatus'
+--
+-- * 'ussrRangeName'
+--
+-- * 'ussrIPCIdRRange'
+usableSubnetworkSecondaryRange
+    :: UsableSubnetworkSecondaryRange
+usableSubnetworkSecondaryRange =
+  UsableSubnetworkSecondaryRange'
+    { _ussrStatus = Nothing
+    , _ussrRangeName = Nothing
+    , _ussrIPCIdRRange = Nothing
+    }
+
+
+-- | This field is to determine the status of the secondary range
+-- programmably.
+ussrStatus :: Lens' UsableSubnetworkSecondaryRange (Maybe UsableSubnetworkSecondaryRangeStatus)
+ussrStatus
+  = lens _ussrStatus (\ s a -> s{_ussrStatus = a})
+
+-- | The name associated with this subnetwork secondary range, used when
+-- adding an alias IP range to a VM instance.
+ussrRangeName :: Lens' UsableSubnetworkSecondaryRange (Maybe Text)
+ussrRangeName
+  = lens _ussrRangeName
+      (\ s a -> s{_ussrRangeName = a})
+
+-- | The range of IP addresses belonging to this subnetwork secondary range.
+ussrIPCIdRRange :: Lens' UsableSubnetworkSecondaryRange (Maybe Text)
+ussrIPCIdRRange
+  = lens _ussrIPCIdRRange
+      (\ s a -> s{_ussrIPCIdRRange = a})
+
+instance FromJSON UsableSubnetworkSecondaryRange
+         where
+        parseJSON
+          = withObject "UsableSubnetworkSecondaryRange"
+              (\ o ->
+                 UsableSubnetworkSecondaryRange' <$>
+                   (o .:? "status") <*> (o .:? "rangeName") <*>
+                     (o .:? "ipCidrRange"))
+
+instance ToJSON UsableSubnetworkSecondaryRange where
+        toJSON UsableSubnetworkSecondaryRange'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ussrStatus,
+                  ("rangeName" .=) <$> _ussrRangeName,
+                  ("ipCidrRange" .=) <$> _ussrIPCIdRRange])
+
 -- | NodeManagement defines the set of node management services turned on for
 -- the node pool.
 --
 -- /See:/ 'nodeManagement' smart constructor.
-data NodeManagement = NodeManagement'
+data NodeManagement =
+  NodeManagement'
     { _nmAutoUpgrade    :: !(Maybe Bool)
     , _nmAutoRepair     :: !(Maybe Bool)
     , _nmUpgradeOptions :: !(Maybe AutoUpgradeOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeManagement' with the minimum fields required to make a request.
 --
@@ -2240,11 +2474,12 @@ data NodeManagement = NodeManagement'
 nodeManagement
     :: NodeManagement
 nodeManagement =
-    NodeManagement'
+  NodeManagement'
     { _nmAutoUpgrade = Nothing
     , _nmAutoRepair = Nothing
     , _nmUpgradeOptions = Nothing
     }
+
 
 -- | A flag that specifies whether node auto-upgrade is enabled for the node
 -- pool. If enabled, node auto-upgrade helps keep the nodes in your node
@@ -2291,11 +2526,14 @@ instance ToJSON NodeManagement where
 -- https:\/\/kubernetes.io\/docs\/concepts\/configuration\/taint-and-toleration\/
 --
 -- /See:/ 'nodeTaint' smart constructor.
-data NodeTaint = NodeTaint'
+data NodeTaint =
+  NodeTaint'
     { _ntEffect :: !(Maybe NodeTaintEffect)
     , _ntValue  :: !(Maybe Text)
     , _ntKey    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeTaint' with the minimum fields required to make a request.
 --
@@ -2309,11 +2547,8 @@ data NodeTaint = NodeTaint'
 nodeTaint
     :: NodeTaint
 nodeTaint =
-    NodeTaint'
-    { _ntEffect = Nothing
-    , _ntValue = Nothing
-    , _ntKey = Nothing
-    }
+  NodeTaint' {_ntEffect = Nothing, _ntValue = Nothing, _ntKey = Nothing}
+
 
 -- | Effect for taint.
 ntEffect :: Lens' NodeTaint (Maybe NodeTaintEffect)
@@ -2346,11 +2581,14 @@ instance ToJSON NodeTaint where
 -- to adjust the size of the node pool to the current cluster usage.
 --
 -- /See:/ 'nodePoolAutoscaling' smart constructor.
-data NodePoolAutoscaling = NodePoolAutoscaling'
+data NodePoolAutoscaling =
+  NodePoolAutoscaling'
     { _npaMaxNodeCount :: !(Maybe (Textual Int32))
     , _npaEnabled      :: !(Maybe Bool)
     , _npaMinNodeCount :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodePoolAutoscaling' with the minimum fields required to make a request.
 --
@@ -2364,11 +2602,12 @@ data NodePoolAutoscaling = NodePoolAutoscaling'
 nodePoolAutoscaling
     :: NodePoolAutoscaling
 nodePoolAutoscaling =
-    NodePoolAutoscaling'
+  NodePoolAutoscaling'
     { _npaMaxNodeCount = Nothing
     , _npaEnabled = Nothing
     , _npaMinNodeCount = Nothing
     }
+
 
 -- | Maximum number of nodes in the NodePool. Must be >= min_node_count.
 -- There has to enough quota to scale up the cluster.
@@ -2410,13 +2649,16 @@ instance ToJSON NodePoolAutoscaling where
 -- | SetMaintenancePolicyRequest sets the maintenance policy for a cluster.
 --
 -- /See:/ 'setMaintenancePolicyRequest' smart constructor.
-data SetMaintenancePolicyRequest = SetMaintenancePolicyRequest'
+data SetMaintenancePolicyRequest =
+  SetMaintenancePolicyRequest'
     { _smprZone              :: !(Maybe Text)
     , _smprName              :: !(Maybe Text)
     , _smprClusterId         :: !(Maybe Text)
     , _smprMaintenancePolicy :: !(Maybe MaintenancePolicy)
     , _smprProjectId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetMaintenancePolicyRequest' with the minimum fields required to make a request.
 --
@@ -2434,13 +2676,14 @@ data SetMaintenancePolicyRequest = SetMaintenancePolicyRequest'
 setMaintenancePolicyRequest
     :: SetMaintenancePolicyRequest
 setMaintenancePolicyRequest =
-    SetMaintenancePolicyRequest'
+  SetMaintenancePolicyRequest'
     { _smprZone = Nothing
     , _smprName = Nothing
     , _smprClusterId = Nothing
     , _smprMaintenancePolicy = Nothing
     , _smprProjectId = Nothing
     }
+
 
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -2493,12 +2736,110 @@ instance ToJSON SetMaintenancePolicyRequest where
                   ("maintenancePolicy" .=) <$> _smprMaintenancePolicy,
                   ("projectId" .=) <$> _smprProjectId])
 
+-- | UsableSubnetwork resource returns the subnetwork name, its associated
+-- network and the primary CIDR range.
+--
+-- /See:/ 'usableSubnetwork' smart constructor.
+data UsableSubnetwork =
+  UsableSubnetwork'
+    { _usNetwork           :: !(Maybe Text)
+    , _usStatusMessage     :: !(Maybe Text)
+    , _usSecondaryIPRanges :: !(Maybe [UsableSubnetworkSecondaryRange])
+    , _usIPCIdRRange       :: !(Maybe Text)
+    , _usSubnetwork        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UsableSubnetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usNetwork'
+--
+-- * 'usStatusMessage'
+--
+-- * 'usSecondaryIPRanges'
+--
+-- * 'usIPCIdRRange'
+--
+-- * 'usSubnetwork'
+usableSubnetwork
+    :: UsableSubnetwork
+usableSubnetwork =
+  UsableSubnetwork'
+    { _usNetwork = Nothing
+    , _usStatusMessage = Nothing
+    , _usSecondaryIPRanges = Nothing
+    , _usIPCIdRRange = Nothing
+    , _usSubnetwork = Nothing
+    }
+
+
+-- | Network Name. Example:
+-- projects\/my-project\/global\/networks\/my-network
+usNetwork :: Lens' UsableSubnetwork (Maybe Text)
+usNetwork
+  = lens _usNetwork (\ s a -> s{_usNetwork = a})
+
+-- | A human readable status message representing the reasons for cases where
+-- the caller cannot use the secondary ranges under the subnet. For example
+-- if the secondary_ip_ranges is empty due to a permission issue, an
+-- insufficient permission message will be given by status_message.
+usStatusMessage :: Lens' UsableSubnetwork (Maybe Text)
+usStatusMessage
+  = lens _usStatusMessage
+      (\ s a -> s{_usStatusMessage = a})
+
+-- | Secondary IP ranges.
+usSecondaryIPRanges :: Lens' UsableSubnetwork [UsableSubnetworkSecondaryRange]
+usSecondaryIPRanges
+  = lens _usSecondaryIPRanges
+      (\ s a -> s{_usSecondaryIPRanges = a})
+      . _Default
+      . _Coerce
+
+-- | The range of internal addresses that are owned by this subnetwork.
+usIPCIdRRange :: Lens' UsableSubnetwork (Maybe Text)
+usIPCIdRRange
+  = lens _usIPCIdRRange
+      (\ s a -> s{_usIPCIdRRange = a})
+
+-- | Subnetwork Name. Example:
+-- projects\/my-project\/regions\/us-central1\/subnetworks\/my-subnet
+usSubnetwork :: Lens' UsableSubnetwork (Maybe Text)
+usSubnetwork
+  = lens _usSubnetwork (\ s a -> s{_usSubnetwork = a})
+
+instance FromJSON UsableSubnetwork where
+        parseJSON
+          = withObject "UsableSubnetwork"
+              (\ o ->
+                 UsableSubnetwork' <$>
+                   (o .:? "network") <*> (o .:? "statusMessage") <*>
+                     (o .:? "secondaryIpRanges" .!= mempty)
+                     <*> (o .:? "ipCidrRange")
+                     <*> (o .:? "subnetwork"))
+
+instance ToJSON UsableSubnetwork where
+        toJSON UsableSubnetwork'{..}
+          = object
+              (catMaybes
+                 [("network" .=) <$> _usNetwork,
+                  ("statusMessage" .=) <$> _usStatusMessage,
+                  ("secondaryIpRanges" .=) <$> _usSecondaryIPRanges,
+                  ("ipCidrRange" .=) <$> _usIPCIdRRange,
+                  ("subnetwork" .=) <$> _usSubnetwork])
+
 -- | Configuration for the Kubernetes Dashboard.
 --
 -- /See:/ 'kubernetesDashboard' smart constructor.
-newtype KubernetesDashboard = KubernetesDashboard'
+newtype KubernetesDashboard =
+  KubernetesDashboard'
     { _kdDisabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KubernetesDashboard' with the minimum fields required to make a request.
 --
@@ -2507,10 +2848,8 @@ newtype KubernetesDashboard = KubernetesDashboard'
 -- * 'kdDisabled'
 kubernetesDashboard
     :: KubernetesDashboard
-kubernetesDashboard =
-    KubernetesDashboard'
-    { _kdDisabled = Nothing
-    }
+kubernetesDashboard = KubernetesDashboard' {_kdDisabled = Nothing}
+
 
 -- | Whether the Kubernetes Dashboard is enabled for this cluster.
 kdDisabled :: Lens' KubernetesDashboard (Maybe Bool)
@@ -2530,9 +2869,12 @@ instance ToJSON KubernetesDashboard where
 -- | Configuration for client certificates on the cluster.
 --
 -- /See:/ 'clientCertificateConfig' smart constructor.
-newtype ClientCertificateConfig = ClientCertificateConfig'
+newtype ClientCertificateConfig =
+  ClientCertificateConfig'
     { _cccIssueClientCertificate :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientCertificateConfig' with the minimum fields required to make a request.
 --
@@ -2542,9 +2884,8 @@ newtype ClientCertificateConfig = ClientCertificateConfig'
 clientCertificateConfig
     :: ClientCertificateConfig
 clientCertificateConfig =
-    ClientCertificateConfig'
-    { _cccIssueClientCertificate = Nothing
-    }
+  ClientCertificateConfig' {_cccIssueClientCertificate = Nothing}
+
 
 -- | Issue a client certificate.
 cccIssueClientCertificate :: Lens' ClientCertificateConfig (Maybe Bool)
@@ -2571,14 +2912,17 @@ instance ToJSON ClientCertificateConfig where
 -- Engine resources used by that cluster
 --
 -- /See:/ 'setLabelsRequest' smart constructor.
-data SetLabelsRequest = SetLabelsRequest'
+data SetLabelsRequest =
+  SetLabelsRequest'
     { _slrResourceLabels   :: !(Maybe SetLabelsRequestResourceLabels)
     , _slrZone             :: !(Maybe Text)
     , _slrName             :: !(Maybe Text)
     , _slrClusterId        :: !(Maybe Text)
     , _slrProjectId        :: !(Maybe Text)
     , _slrLabelFingerprint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetLabelsRequest' with the minimum fields required to make a request.
 --
@@ -2598,7 +2942,7 @@ data SetLabelsRequest = SetLabelsRequest'
 setLabelsRequest
     :: SetLabelsRequest
 setLabelsRequest =
-    SetLabelsRequest'
+  SetLabelsRequest'
     { _slrResourceLabels = Nothing
     , _slrZone = Nothing
     , _slrName = Nothing
@@ -2606,6 +2950,7 @@ setLabelsRequest =
     , _slrProjectId = Nothing
     , _slrLabelFingerprint = Nothing
     }
+
 
 -- | The labels to set for that cluster.
 slrResourceLabels :: Lens' SetLabelsRequest (Maybe SetLabelsRequestResourceLabels)
@@ -2669,13 +3014,257 @@ instance ToJSON SetLabelsRequest where
                   ("projectId" .=) <$> _slrProjectId,
                   ("labelFingerprint" .=) <$> _slrLabelFingerprint])
 
+-- | GetOpenIDConfigResponse is an OIDC discovery document for the cluster.
+-- See the OpenID Connect Discovery 1.0 specification for details.
+--
+-- /See:/ 'getOpenIdConfigResponse' smart constructor.
+data GetOpenIdConfigResponse =
+  GetOpenIdConfigResponse'
+    { _goicrIdTokenSigningAlgValuesSupported :: !(Maybe [Text])
+    , _goicrResponseTypesSupported           :: !(Maybe [Text])
+    , _goicrJWKsURI                          :: !(Maybe Text)
+    , _goicrGrantTypes                       :: !(Maybe [Text])
+    , _goicrClaimsSupported                  :: !(Maybe [Text])
+    , _goicrIssuer                           :: !(Maybe Text)
+    , _goicrSubjectTypesSupported            :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetOpenIdConfigResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'goicrIdTokenSigningAlgValuesSupported'
+--
+-- * 'goicrResponseTypesSupported'
+--
+-- * 'goicrJWKsURI'
+--
+-- * 'goicrGrantTypes'
+--
+-- * 'goicrClaimsSupported'
+--
+-- * 'goicrIssuer'
+--
+-- * 'goicrSubjectTypesSupported'
+getOpenIdConfigResponse
+    :: GetOpenIdConfigResponse
+getOpenIdConfigResponse =
+  GetOpenIdConfigResponse'
+    { _goicrIdTokenSigningAlgValuesSupported = Nothing
+    , _goicrResponseTypesSupported = Nothing
+    , _goicrJWKsURI = Nothing
+    , _goicrGrantTypes = Nothing
+    , _goicrClaimsSupported = Nothing
+    , _goicrIssuer = Nothing
+    , _goicrSubjectTypesSupported = Nothing
+    }
+
+
+-- | NOLINT
+goicrIdTokenSigningAlgValuesSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrIdTokenSigningAlgValuesSupported
+  = lens _goicrIdTokenSigningAlgValuesSupported
+      (\ s a ->
+         s{_goicrIdTokenSigningAlgValuesSupported = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrResponseTypesSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrResponseTypesSupported
+  = lens _goicrResponseTypesSupported
+      (\ s a -> s{_goicrResponseTypesSupported = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrJWKsURI :: Lens' GetOpenIdConfigResponse (Maybe Text)
+goicrJWKsURI
+  = lens _goicrJWKsURI (\ s a -> s{_goicrJWKsURI = a})
+
+-- | NOLINT
+goicrGrantTypes :: Lens' GetOpenIdConfigResponse [Text]
+goicrGrantTypes
+  = lens _goicrGrantTypes
+      (\ s a -> s{_goicrGrantTypes = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrClaimsSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrClaimsSupported
+  = lens _goicrClaimsSupported
+      (\ s a -> s{_goicrClaimsSupported = a})
+      . _Default
+      . _Coerce
+
+-- | NOLINT
+goicrIssuer :: Lens' GetOpenIdConfigResponse (Maybe Text)
+goicrIssuer
+  = lens _goicrIssuer (\ s a -> s{_goicrIssuer = a})
+
+-- | NOLINT
+goicrSubjectTypesSupported :: Lens' GetOpenIdConfigResponse [Text]
+goicrSubjectTypesSupported
+  = lens _goicrSubjectTypesSupported
+      (\ s a -> s{_goicrSubjectTypesSupported = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GetOpenIdConfigResponse where
+        parseJSON
+          = withObject "GetOpenIdConfigResponse"
+              (\ o ->
+                 GetOpenIdConfigResponse' <$>
+                   (o .:? "id_token_signing_alg_values_supported" .!=
+                      mempty)
+                     <*> (o .:? "response_types_supported" .!= mempty)
+                     <*> (o .:? "jwks_uri")
+                     <*> (o .:? "grant_types" .!= mempty)
+                     <*> (o .:? "claims_supported" .!= mempty)
+                     <*> (o .:? "issuer")
+                     <*> (o .:? "subject_types_supported" .!= mempty))
+
+instance ToJSON GetOpenIdConfigResponse where
+        toJSON GetOpenIdConfigResponse'{..}
+          = object
+              (catMaybes
+                 [("id_token_signing_alg_values_supported" .=) <$>
+                    _goicrIdTokenSigningAlgValuesSupported,
+                  ("response_types_supported" .=) <$>
+                    _goicrResponseTypesSupported,
+                  ("jwks_uri" .=) <$> _goicrJWKsURI,
+                  ("grant_types" .=) <$> _goicrGrantTypes,
+                  ("claims_supported" .=) <$> _goicrClaimsSupported,
+                  ("issuer" .=) <$> _goicrIssuer,
+                  ("subject_types_supported" .=) <$>
+                    _goicrSubjectTypesSupported])
+
+-- | Jwk is a JSON Web Key as specified in RFC 7517
+--
+-- /See:/ 'jwk' smart constructor.
+data JWK =
+  JWK'
+    { _jCrv :: !(Maybe Text)
+    , _jAlg :: !(Maybe Text)
+    , _jUse :: !(Maybe Text)
+    , _jKid :: !(Maybe Text)
+    , _jN   :: !(Maybe Text)
+    , _jE   :: !(Maybe Text)
+    , _jX   :: !(Maybe Text)
+    , _jKty :: !(Maybe Text)
+    , _jY   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'JWK' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jCrv'
+--
+-- * 'jAlg'
+--
+-- * 'jUse'
+--
+-- * 'jKid'
+--
+-- * 'jN'
+--
+-- * 'jE'
+--
+-- * 'jX'
+--
+-- * 'jKty'
+--
+-- * 'jY'
+jwk
+    :: JWK
+jwk =
+  JWK'
+    { _jCrv = Nothing
+    , _jAlg = Nothing
+    , _jUse = Nothing
+    , _jKid = Nothing
+    , _jN = Nothing
+    , _jE = Nothing
+    , _jX = Nothing
+    , _jKty = Nothing
+    , _jY = Nothing
+    }
+
+
+-- | NOLINT
+jCrv :: Lens' JWK (Maybe Text)
+jCrv = lens _jCrv (\ s a -> s{_jCrv = a})
+
+-- | NOLINT
+jAlg :: Lens' JWK (Maybe Text)
+jAlg = lens _jAlg (\ s a -> s{_jAlg = a})
+
+-- | NOLINT
+jUse :: Lens' JWK (Maybe Text)
+jUse = lens _jUse (\ s a -> s{_jUse = a})
+
+-- | NOLINT
+jKid :: Lens' JWK (Maybe Text)
+jKid = lens _jKid (\ s a -> s{_jKid = a})
+
+-- | Fields for RSA keys. NOLINT
+jN :: Lens' JWK (Maybe Text)
+jN = lens _jN (\ s a -> s{_jN = a})
+
+-- | NOLINT
+jE :: Lens' JWK (Maybe Text)
+jE = lens _jE (\ s a -> s{_jE = a})
+
+-- | Fields for ECDSA keys. NOLINT
+jX :: Lens' JWK (Maybe Text)
+jX = lens _jX (\ s a -> s{_jX = a})
+
+-- | NOLINT
+jKty :: Lens' JWK (Maybe Text)
+jKty = lens _jKty (\ s a -> s{_jKty = a})
+
+-- | NOLINT
+jY :: Lens' JWK (Maybe Text)
+jY = lens _jY (\ s a -> s{_jY = a})
+
+instance FromJSON JWK where
+        parseJSON
+          = withObject "JWK"
+              (\ o ->
+                 JWK' <$>
+                   (o .:? "crv") <*> (o .:? "alg") <*> (o .:? "use") <*>
+                     (o .:? "kid")
+                     <*> (o .:? "n")
+                     <*> (o .:? "e")
+                     <*> (o .:? "x")
+                     <*> (o .:? "kty")
+                     <*> (o .:? "y"))
+
+instance ToJSON JWK where
+        toJSON JWK'{..}
+          = object
+              (catMaybes
+                 [("crv" .=) <$> _jCrv, ("alg" .=) <$> _jAlg,
+                  ("use" .=) <$> _jUse, ("kid" .=) <$> _jKid,
+                  ("n" .=) <$> _jN, ("e" .=) <$> _jE, ("x" .=) <$> _jX,
+                  ("kty" .=) <$> _jKty, ("y" .=) <$> _jY])
+
 -- | MaintenanceWindow defines the maintenance window to be used for the
 -- cluster.
 --
 -- /See:/ 'maintenanceWindow' smart constructor.
-newtype MaintenanceWindow = MaintenanceWindow'
+newtype MaintenanceWindow =
+  MaintenanceWindow'
     { _mwDailyMaintenanceWindow :: Maybe DailyMaintenanceWindow
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
 --
@@ -2684,10 +3273,8 @@ newtype MaintenanceWindow = MaintenanceWindow'
 -- * 'mwDailyMaintenanceWindow'
 maintenanceWindow
     :: MaintenanceWindow
-maintenanceWindow =
-    MaintenanceWindow'
-    { _mwDailyMaintenanceWindow = Nothing
-    }
+maintenanceWindow = MaintenanceWindow' {_mwDailyMaintenanceWindow = Nothing}
+
 
 -- | DailyMaintenanceWindow specifies a daily maintenance operation window.
 mwDailyMaintenanceWindow :: Lens' MaintenanceWindow (Maybe DailyMaintenanceWindow)
@@ -2709,11 +3296,52 @@ instance ToJSON MaintenanceWindow where
                  [("dailyMaintenanceWindow" .=) <$>
                     _mwDailyMaintenanceWindow])
 
+-- | Constraints applied to pods.
+--
+-- /See:/ 'maxPodsConstraint' smart constructor.
+newtype MaxPodsConstraint =
+  MaxPodsConstraint'
+    { _mpcMaxPodsPerNode :: Maybe (Textual Int64)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MaxPodsConstraint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mpcMaxPodsPerNode'
+maxPodsConstraint
+    :: MaxPodsConstraint
+maxPodsConstraint = MaxPodsConstraint' {_mpcMaxPodsPerNode = Nothing}
+
+
+-- | Constraint enforced on the max num of pods per node.
+mpcMaxPodsPerNode :: Lens' MaxPodsConstraint (Maybe Int64)
+mpcMaxPodsPerNode
+  = lens _mpcMaxPodsPerNode
+      (\ s a -> s{_mpcMaxPodsPerNode = a})
+      . mapping _Coerce
+
+instance FromJSON MaxPodsConstraint where
+        parseJSON
+          = withObject "MaxPodsConstraint"
+              (\ o ->
+                 MaxPodsConstraint' <$> (o .:? "maxPodsPerNode"))
+
+instance ToJSON MaxPodsConstraint where
+        toJSON MaxPodsConstraint'{..}
+          = object
+              (catMaybes
+                 [("maxPodsPerNode" .=) <$> _mpcMaxPodsPerNode])
+
 -- | Configuration for controlling how IPs are allocated in the cluster.
 --
 -- /See:/ 'ipAllocationPolicy' smart constructor.
-data IPAllocationPolicy = IPAllocationPolicy'
+data IPAllocationPolicy =
+  IPAllocationPolicy'
     { _iapServicesSecondaryRangeName :: !(Maybe Text)
+    , _iapTpuIPv4CIdRBlock           :: !(Maybe Text)
     , _iapNodeIPv4CIdR               :: !(Maybe Text)
     , _iapUseIPAliases               :: !(Maybe Bool)
     , _iapClusterIPv4CIdR            :: !(Maybe Text)
@@ -2724,13 +3352,17 @@ data IPAllocationPolicy = IPAllocationPolicy'
     , _iapClusterIPv4CIdRBlock       :: !(Maybe Text)
     , _iapServicesIPv4CIdRBlock      :: !(Maybe Text)
     , _iapCreateSubnetwork           :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IPAllocationPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'iapServicesSecondaryRangeName'
+--
+-- * 'iapTpuIPv4CIdRBlock'
 --
 -- * 'iapNodeIPv4CIdR'
 --
@@ -2754,8 +3386,9 @@ data IPAllocationPolicy = IPAllocationPolicy'
 ipAllocationPolicy
     :: IPAllocationPolicy
 ipAllocationPolicy =
-    IPAllocationPolicy'
+  IPAllocationPolicy'
     { _iapServicesSecondaryRangeName = Nothing
+    , _iapTpuIPv4CIdRBlock = Nothing
     , _iapNodeIPv4CIdR = Nothing
     , _iapUseIPAliases = Nothing
     , _iapClusterIPv4CIdR = Nothing
@@ -2768,6 +3401,7 @@ ipAllocationPolicy =
     , _iapCreateSubnetwork = Nothing
     }
 
+
 -- | The name of the secondary range to be used as for the services CIDR
 -- block. The secondary range will be used for service ClusterIPs. This
 -- must be an existing secondary range associated with the cluster
@@ -2777,6 +3411,20 @@ iapServicesSecondaryRangeName :: Lens' IPAllocationPolicy (Maybe Text)
 iapServicesSecondaryRangeName
   = lens _iapServicesSecondaryRangeName
       (\ s a -> s{_iapServicesSecondaryRangeName = a})
+
+-- | The IP address range of the Cloud TPUs in this cluster. If unspecified,
+-- a range will be automatically chosen with the default size. This field
+-- is only applicable when \`use_ip_aliases\` is true. If unspecified, the
+-- range will use the default size. Set to \/netmask (e.g. \`\/14\`) to
+-- have a range chosen with a specific netmask. Set to a
+-- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
+-- notation (e.g. \`10.96.0.0\/14\`) from the RFC-1918 private networks
+-- (e.g. \`10.0.0.0\/8\`, \`172.16.0.0\/12\`, \`192.168.0.0\/16\`) to pick
+-- a specific range to use.
+iapTpuIPv4CIdRBlock :: Lens' IPAllocationPolicy (Maybe Text)
+iapTpuIPv4CIdRBlock
+  = lens _iapTpuIPv4CIdRBlock
+      (\ s a -> s{_iapTpuIPv4CIdRBlock = a})
 
 -- | This field is deprecated, use node_ipv4_cidr_block.
 iapNodeIPv4CIdR :: Lens' IPAllocationPolicy (Maybe Text)
@@ -2874,7 +3522,8 @@ instance FromJSON IPAllocationPolicy where
               (\ o ->
                  IPAllocationPolicy' <$>
                    (o .:? "servicesSecondaryRangeName") <*>
-                     (o .:? "nodeIpv4Cidr")
+                     (o .:? "tpuIpv4CidrBlock")
+                     <*> (o .:? "nodeIpv4Cidr")
                      <*> (o .:? "useIpAliases")
                      <*> (o .:? "clusterIpv4Cidr")
                      <*> (o .:? "subnetworkName")
@@ -2891,6 +3540,7 @@ instance ToJSON IPAllocationPolicy where
               (catMaybes
                  [("servicesSecondaryRangeName" .=) <$>
                     _iapServicesSecondaryRangeName,
+                  ("tpuIpv4CidrBlock" .=) <$> _iapTpuIPv4CIdRBlock,
                   ("nodeIpv4Cidr" .=) <$> _iapNodeIPv4CIdR,
                   ("useIpAliases" .=) <$> _iapUseIPAliases,
                   ("clusterIpv4Cidr" .=) <$> _iapClusterIPv4CIdR,
@@ -2909,12 +3559,15 @@ instance ToJSON IPAllocationPolicy where
 -- cluster, enabling additional functionality.
 --
 -- /See:/ 'addonsConfig' smart constructor.
-data AddonsConfig = AddonsConfig'
+data AddonsConfig =
+  AddonsConfig'
     { _acNetworkPolicyConfig      :: !(Maybe NetworkPolicyConfig)
     , _acHorizontalPodAutoscaling :: !(Maybe HorizontalPodAutoscaling)
     , _acHTTPLoadBalancing        :: !(Maybe HTTPLoadBalancing)
     , _acKubernetesDashboard      :: !(Maybe KubernetesDashboard)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AddonsConfig' with the minimum fields required to make a request.
 --
@@ -2930,12 +3583,13 @@ data AddonsConfig = AddonsConfig'
 addonsConfig
     :: AddonsConfig
 addonsConfig =
-    AddonsConfig'
+  AddonsConfig'
     { _acNetworkPolicyConfig = Nothing
     , _acHorizontalPodAutoscaling = Nothing
     , _acHTTPLoadBalancing = Nothing
     , _acKubernetesDashboard = Nothing
     }
+
 
 -- | Configuration for NetworkPolicy. This only tracks whether the addon is
 -- enabled or not on the Master, it does not track whether network policy
@@ -2991,10 +3645,13 @@ instance ToJSON AddonsConfig where
 -- | NetworkConfig reports the relative names of network & subnetwork.
 --
 -- /See:/ 'networkConfig' smart constructor.
-data NetworkConfig = NetworkConfig'
+data NetworkConfig =
+  NetworkConfig'
     { _ncNetwork    :: !(Maybe Text)
     , _ncSubnetwork :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworkConfig' with the minimum fields required to make a request.
 --
@@ -3005,11 +3662,8 @@ data NetworkConfig = NetworkConfig'
 -- * 'ncSubnetwork'
 networkConfig
     :: NetworkConfig
-networkConfig =
-    NetworkConfig'
-    { _ncNetwork = Nothing
-    , _ncSubnetwork = Nothing
-    }
+networkConfig = NetworkConfig' {_ncNetwork = Nothing, _ncSubnetwork = Nothing}
+
 
 -- | Output only. The relative name of the Google Compute Engine
 -- network(\/compute\/docs\/networks-and-firewalls#networks) to which the
@@ -3049,19 +3703,23 @@ instance ToJSON NetworkConfig where
 -- down, to accommodate the workload.
 --
 -- /See:/ 'nodePool' smart constructor.
-data NodePool = NodePool'
+data NodePool =
+  NodePool'
     { _npStatus            :: !(Maybe NodePoolStatus)
     , _npAutoscaling       :: !(Maybe NodePoolAutoscaling)
     , _npConfig            :: !(Maybe NodeConfig)
     , _npInitialNodeCount  :: !(Maybe (Textual Int32))
     , _npManagement        :: !(Maybe NodeManagement)
+    , _npMaxPodsConstraint :: !(Maybe MaxPodsConstraint)
     , _npSelfLink          :: !(Maybe Text)
     , _npName              :: !(Maybe Text)
     , _npStatusMessage     :: !(Maybe Text)
     , _npVersion           :: !(Maybe Text)
     , _npConditions        :: !(Maybe [StatusCondition])
     , _npInstanceGroupURLs :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodePool' with the minimum fields required to make a request.
 --
@@ -3077,6 +3735,8 @@ data NodePool = NodePool'
 --
 -- * 'npManagement'
 --
+-- * 'npMaxPodsConstraint'
+--
 -- * 'npSelfLink'
 --
 -- * 'npName'
@@ -3091,12 +3751,13 @@ data NodePool = NodePool'
 nodePool
     :: NodePool
 nodePool =
-    NodePool'
+  NodePool'
     { _npStatus = Nothing
     , _npAutoscaling = Nothing
     , _npConfig = Nothing
     , _npInitialNodeCount = Nothing
     , _npManagement = Nothing
+    , _npMaxPodsConstraint = Nothing
     , _npSelfLink = Nothing
     , _npName = Nothing
     , _npStatusMessage = Nothing
@@ -3104,6 +3765,7 @@ nodePool =
     , _npConditions = Nothing
     , _npInstanceGroupURLs = Nothing
     }
+
 
 -- | [Output only] The status of the nodes in this pool instance.
 npStatus :: Lens' NodePool (Maybe NodePoolStatus)
@@ -3134,6 +3796,13 @@ npInitialNodeCount
 npManagement :: Lens' NodePool (Maybe NodeManagement)
 npManagement
   = lens _npManagement (\ s a -> s{_npManagement = a})
+
+-- | The constraint on the maximum number of pods that can be run
+-- simultaneously on a node in the node pool.
+npMaxPodsConstraint :: Lens' NodePool (Maybe MaxPodsConstraint)
+npMaxPodsConstraint
+  = lens _npMaxPodsConstraint
+      (\ s a -> s{_npMaxPodsConstraint = a})
 
 -- | [Output only] Server-defined URL for the resource.
 npSelfLink :: Lens' NodePool (Maybe Text)
@@ -3182,6 +3851,7 @@ instance FromJSON NodePool where
                      (o .:? "config")
                      <*> (o .:? "initialNodeCount")
                      <*> (o .:? "management")
+                     <*> (o .:? "maxPodsConstraint")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "statusMessage")
@@ -3198,6 +3868,7 @@ instance ToJSON NodePool where
                   ("config" .=) <$> _npConfig,
                   ("initialNodeCount" .=) <$> _npInitialNodeCount,
                   ("management" .=) <$> _npManagement,
+                  ("maxPodsConstraint" .=) <$> _npMaxPodsConstraint,
                   ("selfLink" .=) <$> _npSelfLink,
                   ("name" .=) <$> _npName,
                   ("statusMessage" .=) <$> _npStatusMessage,
@@ -3209,14 +3880,17 @@ instance ToJSON NodePool where
 -- node pool.
 --
 -- /See:/ 'setNodePoolManagementRequest' smart constructor.
-data SetNodePoolManagementRequest = SetNodePoolManagementRequest'
+data SetNodePoolManagementRequest =
+  SetNodePoolManagementRequest'
     { _snpmrManagement :: !(Maybe NodeManagement)
     , _snpmrZone       :: !(Maybe Text)
     , _snpmrNodePoolId :: !(Maybe Text)
     , _snpmrName       :: !(Maybe Text)
     , _snpmrClusterId  :: !(Maybe Text)
     , _snpmrProjectId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetNodePoolManagementRequest' with the minimum fields required to make a request.
 --
@@ -3236,7 +3910,7 @@ data SetNodePoolManagementRequest = SetNodePoolManagementRequest'
 setNodePoolManagementRequest
     :: SetNodePoolManagementRequest
 setNodePoolManagementRequest =
-    SetNodePoolManagementRequest'
+  SetNodePoolManagementRequest'
     { _snpmrManagement = Nothing
     , _snpmrZone = Nothing
     , _snpmrNodePoolId = Nothing
@@ -3244,6 +3918,7 @@ setNodePoolManagementRequest =
     , _snpmrClusterId = Nothing
     , _snpmrProjectId = Nothing
     }
+
 
 -- | NodeManagement configuration for the node pool.
 snpmrManagement :: Lens' SetNodePoolManagementRequest (Maybe NodeManagement)
@@ -3315,10 +3990,13 @@ instance ToJSON SetNodePoolManagementRequest where
 -- CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.
 --
 -- /See:/ 'masterAuthorizedNetworksConfig' smart constructor.
-data MasterAuthorizedNetworksConfig = MasterAuthorizedNetworksConfig'
+data MasterAuthorizedNetworksConfig =
+  MasterAuthorizedNetworksConfig'
     { _mancEnabled    :: !(Maybe Bool)
     , _mancCIdRBlocks :: !(Maybe [CIdRBlock])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MasterAuthorizedNetworksConfig' with the minimum fields required to make a request.
 --
@@ -3330,10 +4008,9 @@ data MasterAuthorizedNetworksConfig = MasterAuthorizedNetworksConfig'
 masterAuthorizedNetworksConfig
     :: MasterAuthorizedNetworksConfig
 masterAuthorizedNetworksConfig =
-    MasterAuthorizedNetworksConfig'
-    { _mancEnabled = Nothing
-    , _mancCIdRBlocks = Nothing
-    }
+  MasterAuthorizedNetworksConfig'
+    {_mancEnabled = Nothing, _mancCIdRBlocks = Nothing}
+
 
 -- | Whether or not master authorized networks is enabled.
 mancEnabled :: Lens' MasterAuthorizedNetworksConfig (Maybe Bool)
@@ -3369,9 +4046,12 @@ instance ToJSON MasterAuthorizedNetworksConfig where
 -- authorization mode.
 --
 -- /See:/ 'legacyAbac' smart constructor.
-newtype LegacyAbac = LegacyAbac'
+newtype LegacyAbac =
+  LegacyAbac'
     { _laEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LegacyAbac' with the minimum fields required to make a request.
 --
@@ -3380,10 +4060,8 @@ newtype LegacyAbac = LegacyAbac'
 -- * 'laEnabled'
 legacyAbac
     :: LegacyAbac
-legacyAbac =
-    LegacyAbac'
-    { _laEnabled = Nothing
-    }
+legacyAbac = LegacyAbac' {_laEnabled = Nothing}
+
 
 -- | Whether the ABAC authorizer is enabled for this cluster. When enabled,
 -- identities in the system, including service accounts, nodes, and
@@ -3407,14 +4085,17 @@ instance ToJSON LegacyAbac where
 -- certificates.
 --
 -- /See:/ 'masterAuth' smart constructor.
-data MasterAuth = MasterAuth'
+data MasterAuth =
+  MasterAuth'
     { _maClientKey               :: !(Maybe Text)
     , _maUsername                :: !(Maybe Text)
     , _maClientCertificateConfig :: !(Maybe ClientCertificateConfig)
     , _maClientCertificate       :: !(Maybe Text)
     , _maPassword                :: !(Maybe Text)
     , _maClusterCaCertificate    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MasterAuth' with the minimum fields required to make a request.
 --
@@ -3434,7 +4115,7 @@ data MasterAuth = MasterAuth'
 masterAuth
     :: MasterAuth
 masterAuth =
-    MasterAuth'
+  MasterAuth'
     { _maClientKey = Nothing
     , _maUsername = Nothing
     , _maClientCertificateConfig = Nothing
@@ -3442,6 +4123,7 @@ masterAuth =
     , _maPassword = Nothing
     , _maClusterCaCertificate = Nothing
     }
+
 
 -- | [Output only] Base64-encoded private key used by clients to authenticate
 -- to the cluster endpoint.
@@ -3515,10 +4197,13 @@ instance ToJSON MasterAuth where
 -- status (e.g., ERROR or DEGRADED).
 --
 -- /See:/ 'statusCondition' smart constructor.
-data StatusCondition = StatusCondition'
+data StatusCondition =
+  StatusCondition'
     { _scCode    :: !(Maybe StatusConditionCode)
     , _scMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusCondition' with the minimum fields required to make a request.
 --
@@ -3529,11 +4214,8 @@ data StatusCondition = StatusCondition'
 -- * 'scMessage'
 statusCondition
     :: StatusCondition
-statusCondition =
-    StatusCondition'
-    { _scCode = Nothing
-    , _scMessage = Nothing
-    }
+statusCondition = StatusCondition' {_scCode = Nothing, _scMessage = Nothing}
+
 
 -- | Machine-friendly representation of the condition
 scCode :: Lens' StatusCondition (Maybe StatusConditionCode)
@@ -3564,17 +4246,21 @@ instance ToJSON StatusCondition where
 -- Additionally, to avoid ambiguity, keys must not conflict with any other
 -- metadata keys for the project or be one of the reserved keys:
 -- \"cluster-location\" \"cluster-name\" \"cluster-uid\" \"configure-sh\"
--- \"enable-os-login\" \"gci-update-strategy\" \"gci-ensure-gke-docker\"
--- \"instance-template\" \"kube-env\" \"startup-script\" \"user-data\"
--- Values are free-form strings, and only have meaning as interpreted by
--- the image running in the instance. The only restriction placed on them
--- is that each value\'s size must be less than or equal to 32 KB. The
--- total size of all keys and values must be less than 512 KB.
+-- \"containerd-configure-sh\" \"enable-os-login\" \"gci-update-strategy\"
+-- \"gci-ensure-gke-docker\" \"instance-template\" \"kube-env\"
+-- \"startup-script\" \"user-data\" Values are free-form strings, and only
+-- have meaning as interpreted by the image running in the instance. The
+-- only restriction placed on them is that each value\'s size must be less
+-- than or equal to 32 KB. The total size of all keys and values must be
+-- less than 512 KB.
 --
 -- /See:/ 'nodeConfigMetadata' smart constructor.
-newtype NodeConfigMetadata = NodeConfigMetadata'
+newtype NodeConfigMetadata =
+  NodeConfigMetadata'
     { _ncmAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeConfigMetadata' with the minimum fields required to make a request.
 --
@@ -3585,9 +4271,8 @@ nodeConfigMetadata
     :: HashMap Text Text -- ^ 'ncmAddtional'
     -> NodeConfigMetadata
 nodeConfigMetadata pNcmAddtional_ =
-    NodeConfigMetadata'
-    { _ncmAddtional = _Coerce # pNcmAddtional_
-    }
+  NodeConfigMetadata' {_ncmAddtional = _Coerce # pNcmAddtional_}
+
 
 ncmAddtional :: Lens' NodeConfigMetadata (HashMap Text Text)
 ncmAddtional
@@ -3611,9 +4296,12 @@ instance ToJSON NodeConfigMetadata where
 -- https:\/\/kubernetes.io\/docs\/concepts\/overview\/working-with-objects\/labels\/
 --
 -- /See:/ 'nodeConfigLabels' smart constructor.
-newtype NodeConfigLabels = NodeConfigLabels'
+newtype NodeConfigLabels =
+  NodeConfigLabels'
     { _nclAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeConfigLabels' with the minimum fields required to make a request.
 --
@@ -3624,9 +4312,8 @@ nodeConfigLabels
     :: HashMap Text Text -- ^ 'nclAddtional'
     -> NodeConfigLabels
 nodeConfigLabels pNclAddtional_ =
-    NodeConfigLabels'
-    { _nclAddtional = _Coerce # pNclAddtional_
-    }
+  NodeConfigLabels' {_nclAddtional = _Coerce # pNclAddtional_}
+
 
 nclAddtional :: Lens' NodeConfigLabels (HashMap Text Text)
 nclAddtional
@@ -3644,13 +4331,16 @@ instance ToJSON NodeConfigLabels where
 -- | Kubernetes Engine service configuration.
 --
 -- /See:/ 'serverConfig' smart constructor.
-data ServerConfig = ServerConfig'
+data ServerConfig =
+  ServerConfig'
     { _scDefaultImageType      :: !(Maybe Text)
     , _scValidNodeVersions     :: !(Maybe [Text])
     , _scValidImageTypes       :: !(Maybe [Text])
     , _scDefaultClusterVersion :: !(Maybe Text)
     , _scValidMasterVersions   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServerConfig' with the minimum fields required to make a request.
 --
@@ -3668,13 +4358,14 @@ data ServerConfig = ServerConfig'
 serverConfig
     :: ServerConfig
 serverConfig =
-    ServerConfig'
+  ServerConfig'
     { _scDefaultImageType = Nothing
     , _scValidNodeVersions = Nothing
     , _scValidImageTypes = Nothing
     , _scDefaultClusterVersion = Nothing
     , _scValidMasterVersions = Nothing
     }
+
 
 -- | Default image type.
 scDefaultImageType :: Lens' ServerConfig (Maybe Text)
@@ -3739,10 +4430,13 @@ instance ToJSON ServerConfig where
 -- how the Auto Upgrades will proceed.
 --
 -- /See:/ 'autoUpgradeOptions' smart constructor.
-data AutoUpgradeOptions = AutoUpgradeOptions'
+data AutoUpgradeOptions =
+  AutoUpgradeOptions'
     { _auoAutoUpgradeStartTime :: !(Maybe Text)
     , _auoDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AutoUpgradeOptions' with the minimum fields required to make a request.
 --
@@ -3754,10 +4448,9 @@ data AutoUpgradeOptions = AutoUpgradeOptions'
 autoUpgradeOptions
     :: AutoUpgradeOptions
 autoUpgradeOptions =
-    AutoUpgradeOptions'
-    { _auoAutoUpgradeStartTime = Nothing
-    , _auoDescription = Nothing
-    }
+  AutoUpgradeOptions'
+    {_auoAutoUpgradeStartTime = Nothing, _auoDescription = Nothing}
+
 
 -- | [Output only] This field is set when upgrades are about to commence with
 -- the approximate start time for the upgrades, in
@@ -3793,14 +4486,17 @@ instance ToJSON AutoUpgradeOptions where
 -- | SetNodePoolSizeRequest sets the size a node pool.
 --
 -- /See:/ 'setNodePoolSizeRequest' smart constructor.
-data SetNodePoolSizeRequest = SetNodePoolSizeRequest'
+data SetNodePoolSizeRequest =
+  SetNodePoolSizeRequest'
     { _snpsrNodeCount  :: !(Maybe (Textual Int32))
     , _snpsrZone       :: !(Maybe Text)
     , _snpsrNodePoolId :: !(Maybe Text)
     , _snpsrName       :: !(Maybe Text)
     , _snpsrClusterId  :: !(Maybe Text)
     , _snpsrProjectId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetNodePoolSizeRequest' with the minimum fields required to make a request.
 --
@@ -3820,7 +4516,7 @@ data SetNodePoolSizeRequest = SetNodePoolSizeRequest'
 setNodePoolSizeRequest
     :: SetNodePoolSizeRequest
 setNodePoolSizeRequest =
-    SetNodePoolSizeRequest'
+  SetNodePoolSizeRequest'
     { _snpsrNodeCount = Nothing
     , _snpsrZone = Nothing
     , _snpsrNodePoolId = Nothing
@@ -3828,6 +4524,7 @@ setNodePoolSizeRequest =
     , _snpsrClusterId = Nothing
     , _snpsrProjectId = Nothing
     }
+
 
 -- | The desired node count for the pool.
 snpsrNodeCount :: Lens' SetNodePoolSizeRequest (Maybe Int32)
@@ -3897,13 +4594,16 @@ instance ToJSON SetNodePoolSizeRequest where
 -- | SetMonitoringServiceRequest sets the monitoring service of a cluster.
 --
 -- /See:/ 'setMonitoringServiceRequest' smart constructor.
-data SetMonitoringServiceRequest = SetMonitoringServiceRequest'
+data SetMonitoringServiceRequest =
+  SetMonitoringServiceRequest'
     { _smsrZone              :: !(Maybe Text)
     , _smsrName              :: !(Maybe Text)
     , _smsrClusterId         :: !(Maybe Text)
     , _smsrProjectId         :: !(Maybe Text)
     , _smsrMonitoringService :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetMonitoringServiceRequest' with the minimum fields required to make a request.
 --
@@ -3921,13 +4621,14 @@ data SetMonitoringServiceRequest = SetMonitoringServiceRequest'
 setMonitoringServiceRequest
     :: SetMonitoringServiceRequest
 setMonitoringServiceRequest =
-    SetMonitoringServiceRequest'
+  SetMonitoringServiceRequest'
     { _smsrZone = Nothing
     , _smsrName = Nothing
     , _smsrClusterId = Nothing
     , _smsrProjectId = Nothing
     , _smsrMonitoringService = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -3987,13 +4688,16 @@ instance ToJSON SetMonitoringServiceRequest where
 -- | SetLoggingServiceRequest sets the logging service of a cluster.
 --
 -- /See:/ 'setLoggingServiceRequest' smart constructor.
-data SetLoggingServiceRequest = SetLoggingServiceRequest'
+data SetLoggingServiceRequest =
+  SetLoggingServiceRequest'
     { _slsrZone           :: !(Maybe Text)
     , _slsrName           :: !(Maybe Text)
     , _slsrClusterId      :: !(Maybe Text)
     , _slsrProjectId      :: !(Maybe Text)
     , _slsrLoggingService :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetLoggingServiceRequest' with the minimum fields required to make a request.
 --
@@ -4011,13 +4715,14 @@ data SetLoggingServiceRequest = SetLoggingServiceRequest'
 setLoggingServiceRequest
     :: SetLoggingServiceRequest
 setLoggingServiceRequest =
-    SetLoggingServiceRequest'
+  SetLoggingServiceRequest'
     { _slsrZone = Nothing
     , _slsrName = Nothing
     , _slsrClusterId = Nothing
     , _slsrProjectId = Nothing
     , _slsrLoggingService = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4078,9 +4783,12 @@ instance ToJSON SetLoggingServiceRequest where
 -- cluster.
 --
 -- /See:/ 'maintenancePolicy' smart constructor.
-newtype MaintenancePolicy = MaintenancePolicy'
+newtype MaintenancePolicy =
+  MaintenancePolicy'
     { _mpWindow :: Maybe MaintenanceWindow
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MaintenancePolicy' with the minimum fields required to make a request.
 --
@@ -4089,10 +4797,8 @@ newtype MaintenancePolicy = MaintenancePolicy'
 -- * 'mpWindow'
 maintenancePolicy
     :: MaintenancePolicy
-maintenancePolicy =
-    MaintenancePolicy'
-    { _mpWindow = Nothing
-    }
+maintenancePolicy = MaintenancePolicy' {_mpWindow = Nothing}
+
 
 -- | Specifies the maintenance window in which maintenance may be performed.
 mpWindow :: Lens' MaintenancePolicy (Maybe MaintenanceWindow)
@@ -4110,10 +4816,13 @@ instance ToJSON MaintenancePolicy where
 -- | CidrBlock contains an optional name and one CIDR block.
 --
 -- /See:/ 'cIdRBlock' smart constructor.
-data CIdRBlock = CIdRBlock'
+data CIdRBlock =
+  CIdRBlock'
     { _cirbCIdRBlock   :: !(Maybe Text)
     , _cirbDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CIdRBlock' with the minimum fields required to make a request.
 --
@@ -4124,11 +4833,8 @@ data CIdRBlock = CIdRBlock'
 -- * 'cirbDisplayName'
 cIdRBlock
     :: CIdRBlock
-cIdRBlock =
-    CIdRBlock'
-    { _cirbCIdRBlock = Nothing
-    , _cirbDisplayName = Nothing
-    }
+cIdRBlock = CIdRBlock' {_cirbCIdRBlock = Nothing, _cirbDisplayName = Nothing}
+
 
 -- | cidr_block must be specified in CIDR notation.
 cirbCIdRBlock :: Lens' CIdRBlock (Maybe Text)
@@ -4159,10 +4865,13 @@ instance ToJSON CIdRBlock where
 -- | AcceleratorConfig represents a Hardware Accelerator request.
 --
 -- /See:/ 'acceleratorConfig' smart constructor.
-data AcceleratorConfig = AcceleratorConfig'
+data AcceleratorConfig =
+  AcceleratorConfig'
     { _acAcceleratorCount :: !(Maybe (Textual Int64))
     , _acAcceleratorType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AcceleratorConfig' with the minimum fields required to make a request.
 --
@@ -4174,10 +4883,9 @@ data AcceleratorConfig = AcceleratorConfig'
 acceleratorConfig
     :: AcceleratorConfig
 acceleratorConfig =
-    AcceleratorConfig'
-    { _acAcceleratorCount = Nothing
-    , _acAcceleratorType = Nothing
-    }
+  AcceleratorConfig'
+    {_acAcceleratorCount = Nothing, _acAcceleratorType = Nothing}
+
 
 -- | The number of the accelerator cards exposed to an instance.
 acAcceleratorCount :: Lens' AcceleratorConfig (Maybe Int64)
@@ -4211,13 +4919,16 @@ instance ToJSON AcceleratorConfig where
 -- | SetLocationsRequest sets the locations of the cluster.
 --
 -- /See:/ 'setLocationsRequest' smart constructor.
-data SetLocationsRequest = SetLocationsRequest'
+data SetLocationsRequest =
+  SetLocationsRequest'
     { _sZone      :: !(Maybe Text)
     , _sName      :: !(Maybe Text)
     , _sClusterId :: !(Maybe Text)
     , _sProjectId :: !(Maybe Text)
     , _sLocations :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetLocationsRequest' with the minimum fields required to make a request.
 --
@@ -4235,13 +4946,14 @@ data SetLocationsRequest = SetLocationsRequest'
 setLocationsRequest
     :: SetLocationsRequest
 setLocationsRequest =
-    SetLocationsRequest'
+  SetLocationsRequest'
     { _sZone = Nothing
     , _sName = Nothing
     , _sClusterId = Nothing
     , _sProjectId = Nothing
     , _sLocations = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4301,13 +5013,16 @@ instance ToJSON SetLocationsRequest where
 -- | SetNetworkPolicyRequest enables\/disables network policy for a cluster.
 --
 -- /See:/ 'setNetworkPolicyRequest' smart constructor.
-data SetNetworkPolicyRequest = SetNetworkPolicyRequest'
+data SetNetworkPolicyRequest =
+  SetNetworkPolicyRequest'
     { _snprZone          :: !(Maybe Text)
     , _snprName          :: !(Maybe Text)
     , _snprClusterId     :: !(Maybe Text)
     , _snprProjectId     :: !(Maybe Text)
     , _snprNetworkPolicy :: !(Maybe NetworkPolicy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetNetworkPolicyRequest' with the minimum fields required to make a request.
 --
@@ -4325,13 +5040,14 @@ data SetNetworkPolicyRequest = SetNetworkPolicyRequest'
 setNetworkPolicyRequest
     :: SetNetworkPolicyRequest
 setNetworkPolicyRequest =
-    SetNetworkPolicyRequest'
+  SetNetworkPolicyRequest'
     { _snprZone = Nothing
     , _snprName = Nothing
     , _snprClusterId = Nothing
     , _snprProjectId = Nothing
     , _snprNetworkPolicy = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4389,13 +5105,16 @@ instance ToJSON SetNetworkPolicyRequest where
 -- | Configuration options for private clusters.
 --
 -- /See:/ 'privateClusterConfig' smart constructor.
-data PrivateClusterConfig = PrivateClusterConfig'
+data PrivateClusterConfig =
+  PrivateClusterConfig'
     { _pccEnablePrivateNodes    :: !(Maybe Bool)
     , _pccEnablePrivateEndpoint :: !(Maybe Bool)
     , _pccPublicEndpoint        :: !(Maybe Text)
     , _pccMasterIPv4CIdRBlock   :: !(Maybe Text)
     , _pccPrivateEndpoint       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PrivateClusterConfig' with the minimum fields required to make a request.
 --
@@ -4413,13 +5132,14 @@ data PrivateClusterConfig = PrivateClusterConfig'
 privateClusterConfig
     :: PrivateClusterConfig
 privateClusterConfig =
-    PrivateClusterConfig'
+  PrivateClusterConfig'
     { _pccEnablePrivateNodes = Nothing
     , _pccEnablePrivateEndpoint = Nothing
     , _pccPublicEndpoint = Nothing
     , _pccMasterIPv4CIdRBlock = Nothing
     , _pccPrivateEndpoint = Nothing
     }
+
 
 -- | Whether nodes have internal IP addresses only. If enabled, all nodes are
 -- given only RFC 1918 private addresses and communicate with the master
@@ -4484,10 +5204,13 @@ instance ToJSON PrivateClusterConfig where
 -- | Time window specified for daily maintenance operations.
 --
 -- /See:/ 'dailyMaintenanceWindow' smart constructor.
-data DailyMaintenanceWindow = DailyMaintenanceWindow'
+data DailyMaintenanceWindow =
+  DailyMaintenanceWindow'
     { _dmwStartTime :: !(Maybe Text)
     , _dmwDuration  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DailyMaintenanceWindow' with the minimum fields required to make a request.
 --
@@ -4499,10 +5222,8 @@ data DailyMaintenanceWindow = DailyMaintenanceWindow'
 dailyMaintenanceWindow
     :: DailyMaintenanceWindow
 dailyMaintenanceWindow =
-    DailyMaintenanceWindow'
-    { _dmwStartTime = Nothing
-    , _dmwDuration = Nothing
-    }
+  DailyMaintenanceWindow' {_dmwStartTime = Nothing, _dmwDuration = Nothing}
+
 
 -- | Time within the maintenance window to start the maintenance operations.
 -- Time format should be in
@@ -4536,10 +5257,13 @@ instance ToJSON DailyMaintenanceWindow where
 -- | ListClustersResponse is the result of ListClustersRequest.
 --
 -- /See:/ 'listClustersResponse' smart constructor.
-data ListClustersResponse = ListClustersResponse'
+data ListClustersResponse =
+  ListClustersResponse'
     { _lcrClusters     :: !(Maybe [Cluster])
     , _lcrMissingZones :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
@@ -4551,10 +5275,8 @@ data ListClustersResponse = ListClustersResponse'
 listClustersResponse
     :: ListClustersResponse
 listClustersResponse =
-    ListClustersResponse'
-    { _lcrClusters = Nothing
-    , _lcrMissingZones = Nothing
-    }
+  ListClustersResponse' {_lcrClusters = Nothing, _lcrMissingZones = Nothing}
+
 
 -- | A list of clusters in the project in the specified zone, or across all
 -- ones.
@@ -4593,7 +5315,8 @@ instance ToJSON ListClustersResponse where
 -- provided.
 --
 -- /See:/ 'clusterUpdate' smart constructor.
-data ClusterUpdate = ClusterUpdate'
+data ClusterUpdate =
+  ClusterUpdate'
     { _cuDesiredNodePoolAutoscaling            :: !(Maybe NodePoolAutoscaling)
     , _cuDesiredAddonsConfig                   :: !(Maybe AddonsConfig)
     , _cuDesiredNodePoolId                     :: !(Maybe Text)
@@ -4603,7 +5326,9 @@ data ClusterUpdate = ClusterUpdate'
     , _cuDesiredMasterVersion                  :: !(Maybe Text)
     , _cuDesiredLocations                      :: !(Maybe [Text])
     , _cuDesiredMonitoringService              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClusterUpdate' with the minimum fields required to make a request.
 --
@@ -4629,7 +5354,7 @@ data ClusterUpdate = ClusterUpdate'
 clusterUpdate
     :: ClusterUpdate
 clusterUpdate =
-    ClusterUpdate'
+  ClusterUpdate'
     { _cuDesiredNodePoolAutoscaling = Nothing
     , _cuDesiredAddonsConfig = Nothing
     , _cuDesiredNodePoolId = Nothing
@@ -4640,6 +5365,7 @@ clusterUpdate =
     , _cuDesiredLocations = Nothing
     , _cuDesiredMonitoringService = Nothing
     }
+
 
 -- | Autoscaler configuration for the node pool specified in
 -- desired_node_pool_id. If there is only one pool in the cluster and
@@ -4766,13 +5492,16 @@ instance ToJSON ClusterUpdate where
 -- successfully completed.
 --
 -- /See:/ 'rollbackNodePoolUpgradeRequest' smart constructor.
-data RollbackNodePoolUpgradeRequest = RollbackNodePoolUpgradeRequest'
+data RollbackNodePoolUpgradeRequest =
+  RollbackNodePoolUpgradeRequest'
     { _rnpurZone       :: !(Maybe Text)
     , _rnpurNodePoolId :: !(Maybe Text)
     , _rnpurName       :: !(Maybe Text)
     , _rnpurClusterId  :: !(Maybe Text)
     , _rnpurProjectId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RollbackNodePoolUpgradeRequest' with the minimum fields required to make a request.
 --
@@ -4790,13 +5519,14 @@ data RollbackNodePoolUpgradeRequest = RollbackNodePoolUpgradeRequest'
 rollbackNodePoolUpgradeRequest
     :: RollbackNodePoolUpgradeRequest
 rollbackNodePoolUpgradeRequest =
-    RollbackNodePoolUpgradeRequest'
+  RollbackNodePoolUpgradeRequest'
     { _rnpurZone = Nothing
     , _rnpurNodePoolId = Nothing
     , _rnpurName = Nothing
     , _rnpurClusterId = Nothing
     , _rnpurProjectId = Nothing
     }
+
 
 -- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
@@ -4859,10 +5589,13 @@ instance ToJSON RollbackNodePoolUpgradeRequest where
 -- https:\/\/kubernetes.io\/docs\/concepts\/services-networking\/networkpolicies\/
 --
 -- /See:/ 'networkPolicy' smart constructor.
-data NetworkPolicy = NetworkPolicy'
+data NetworkPolicy =
+  NetworkPolicy'
     { _npEnabled  :: !(Maybe Bool)
     , _npProvider :: !(Maybe NetworkPolicyProvider)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworkPolicy' with the minimum fields required to make a request.
 --
@@ -4873,11 +5606,8 @@ data NetworkPolicy = NetworkPolicy'
 -- * 'npProvider'
 networkPolicy
     :: NetworkPolicy
-networkPolicy =
-    NetworkPolicy'
-    { _npEnabled = Nothing
-    , _npProvider = Nothing
-    }
+networkPolicy = NetworkPolicy' {_npEnabled = Nothing, _npProvider = Nothing}
+
 
 -- | Whether network policy is enabled on the cluster.
 npEnabled :: Lens' NetworkPolicy (Maybe Bool)
@@ -4906,9 +5636,12 @@ instance ToJSON NetworkPolicy where
 -- | ListNodePoolsResponse is the result of ListNodePoolsRequest.
 --
 -- /See:/ 'listNodePoolsResponse' smart constructor.
-newtype ListNodePoolsResponse = ListNodePoolsResponse'
+newtype ListNodePoolsResponse =
+  ListNodePoolsResponse'
     { _lnprNodePools :: Maybe [NodePool]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListNodePoolsResponse' with the minimum fields required to make a request.
 --
@@ -4917,10 +5650,8 @@ newtype ListNodePoolsResponse = ListNodePoolsResponse'
 -- * 'lnprNodePools'
 listNodePoolsResponse
     :: ListNodePoolsResponse
-listNodePoolsResponse =
-    ListNodePoolsResponse'
-    { _lnprNodePools = Nothing
-    }
+listNodePoolsResponse = ListNodePoolsResponse' {_lnprNodePools = Nothing}
+
 
 -- | A list of node pools for a cluster.
 lnprNodePools :: Lens' ListNodePoolsResponse [NodePool]
@@ -4942,16 +5673,59 @@ instance ToJSON ListNodePoolsResponse where
           = object
               (catMaybes [("nodePools" .=) <$> _lnprNodePools])
 
+-- | GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc
+-- 7517
+--
+-- /See:/ 'getJSONWebKeysResponse' smart constructor.
+newtype GetJSONWebKeysResponse =
+  GetJSONWebKeysResponse'
+    { _gjwkrKeys :: Maybe [JWK]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetJSONWebKeysResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gjwkrKeys'
+getJSONWebKeysResponse
+    :: GetJSONWebKeysResponse
+getJSONWebKeysResponse = GetJSONWebKeysResponse' {_gjwkrKeys = Nothing}
+
+
+-- | The public component of the keys used by the cluster to sign token
+-- requests.
+gjwkrKeys :: Lens' GetJSONWebKeysResponse [JWK]
+gjwkrKeys
+  = lens _gjwkrKeys (\ s a -> s{_gjwkrKeys = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GetJSONWebKeysResponse where
+        parseJSON
+          = withObject "GetJSONWebKeysResponse"
+              (\ o ->
+                 GetJSONWebKeysResponse' <$>
+                   (o .:? "keys" .!= mempty))
+
+instance ToJSON GetJSONWebKeysResponse where
+        toJSON GetJSONWebKeysResponse'{..}
+          = object (catMaybes [("keys" .=) <$> _gjwkrKeys])
+
 -- | CreateNodePoolRequest creates a node pool for a cluster.
 --
 -- /See:/ 'createNodePoolRequest' smart constructor.
-data CreateNodePoolRequest = CreateNodePoolRequest'
+data CreateNodePoolRequest =
+  CreateNodePoolRequest'
     { _cnprParent    :: !(Maybe Text)
     , _cnprZone      :: !(Maybe Text)
     , _cnprNodePool  :: !(Maybe NodePool)
     , _cnprClusterId :: !(Maybe Text)
     , _cnprProjectId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateNodePoolRequest' with the minimum fields required to make a request.
 --
@@ -4969,13 +5743,14 @@ data CreateNodePoolRequest = CreateNodePoolRequest'
 createNodePoolRequest
     :: CreateNodePoolRequest
 createNodePoolRequest =
-    CreateNodePoolRequest'
+  CreateNodePoolRequest'
     { _cnprParent = Nothing
     , _cnprZone = Nothing
     , _cnprNodePool = Nothing
     , _cnprClusterId = Nothing
     , _cnprProjectId = Nothing
     }
+
 
 -- | The parent (project, location, cluster id) where the node pool will be
 -- created. Specified in the format
@@ -5033,9 +5808,12 @@ instance ToJSON CreateNodePoolRequest where
 -- | The labels to set for that cluster.
 --
 -- /See:/ 'setLabelsRequestResourceLabels' smart constructor.
-newtype SetLabelsRequestResourceLabels = SetLabelsRequestResourceLabels'
+newtype SetLabelsRequestResourceLabels =
+  SetLabelsRequestResourceLabels'
     { _slrrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetLabelsRequestResourceLabels' with the minimum fields required to make a request.
 --
@@ -5046,9 +5824,8 @@ setLabelsRequestResourceLabels
     :: HashMap Text Text -- ^ 'slrrlAddtional'
     -> SetLabelsRequestResourceLabels
 setLabelsRequestResourceLabels pSlrrlAddtional_ =
-    SetLabelsRequestResourceLabels'
-    { _slrrlAddtional = _Coerce # pSlrrlAddtional_
-    }
+  SetLabelsRequestResourceLabels' {_slrrlAddtional = _Coerce # pSlrrlAddtional_}
+
 
 slrrlAddtional :: Lens' SetLabelsRequestResourceLabels (HashMap Text Text)
 slrrlAddtional

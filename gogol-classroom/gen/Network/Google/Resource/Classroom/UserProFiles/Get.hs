@@ -66,14 +66,17 @@ type UserProFilesGetResource =
 -- access errors.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
-data UserProFilesGet = UserProFilesGet'
+data UserProFilesGet =
+  UserProFilesGet'
     { _upfgXgafv          :: !(Maybe Xgafv)
     , _upfgUploadProtocol :: !(Maybe Text)
     , _upfgAccessToken    :: !(Maybe Text)
     , _upfgUploadType     :: !(Maybe Text)
     , _upfgUserId         :: !Text
     , _upfgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ userProFilesGet
     :: Text -- ^ 'upfgUserId'
     -> UserProFilesGet
 userProFilesGet pUpfgUserId_ =
-    UserProFilesGet'
+  UserProFilesGet'
     { _upfgXgafv = Nothing
     , _upfgUploadProtocol = Nothing
     , _upfgAccessToken = Nothing
@@ -102,6 +105,7 @@ userProFilesGet pUpfgUserId_ =
     , _upfgUserId = pUpfgUserId_
     , _upfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 upfgXgafv :: Lens' UserProFilesGet (Maybe Xgafv)

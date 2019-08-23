@@ -23,11 +23,14 @@ import           Network.Google.Prelude
 -- | This is a JSON template for an app state write result.
 --
 -- /See:/ 'writeResult' smart constructor.
-data WriteResult = WriteResult'
+data WriteResult =
+  WriteResult'
     { _wrCurrentStateVersion :: !(Maybe Text)
     , _wrKind                :: !Text
     , _wrStateKey            :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
 --
@@ -41,11 +44,12 @@ data WriteResult = WriteResult'
 writeResult
     :: WriteResult
 writeResult =
-    WriteResult'
+  WriteResult'
     { _wrCurrentStateVersion = Nothing
     , _wrKind = "appstate#writeResult"
     , _wrStateKey = Nothing
     }
+
 
 -- | The version of the data for this key on the server.
 wrCurrentStateVersion :: Lens' WriteResult (Maybe Text)
@@ -85,11 +89,14 @@ instance ToJSON WriteResult where
 -- | This is a JSON template to convert a list-response for app state.
 --
 -- /See:/ 'listResponse' smart constructor.
-data ListResponse = ListResponse'
+data ListResponse =
+  ListResponse'
     { _lrMaximumKeyCount :: !(Maybe (Textual Int32))
     , _lrKind            :: !Text
     , _lrItems           :: !(Maybe [GetResponse])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
 --
@@ -103,11 +110,12 @@ data ListResponse = ListResponse'
 listResponse
     :: ListResponse
 listResponse =
-    ListResponse'
+  ListResponse'
     { _lrMaximumKeyCount = Nothing
     , _lrKind = "appstate#listResponse"
     , _lrItems = Nothing
     }
+
 
 -- | The maximum number of keys allowed for this user.
 lrMaximumKeyCount :: Lens' ListResponse (Maybe Int32)
@@ -146,12 +154,15 @@ instance ToJSON ListResponse where
 -- | This is a JSON template for an app state resource.
 --
 -- /See:/ 'getResponse' smart constructor.
-data GetResponse = GetResponse'
+data GetResponse =
+  GetResponse'
     { _grCurrentStateVersion :: !(Maybe Text)
     , _grKind                :: !Text
     , _grData                :: !(Maybe Text)
     , _grStateKey            :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetResponse' with the minimum fields required to make a request.
 --
@@ -167,12 +178,13 @@ data GetResponse = GetResponse'
 getResponse
     :: GetResponse
 getResponse =
-    GetResponse'
+  GetResponse'
     { _grCurrentStateVersion = Nothing
     , _grKind = "appstate#getResponse"
     , _grData = Nothing
     , _grStateKey = Nothing
     }
+
 
 -- | The current app state version.
 grCurrentStateVersion :: Lens' GetResponse (Maybe Text)
@@ -217,10 +229,13 @@ instance ToJSON GetResponse where
 -- | This is a JSON template for a requests which update app state
 --
 -- /See:/ 'updateRequest' smart constructor.
-data UpdateRequest = UpdateRequest'
+data UpdateRequest =
+  UpdateRequest'
     { _urKind :: !Text
     , _urData :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateRequest' with the minimum fields required to make a request.
 --
@@ -232,10 +247,8 @@ data UpdateRequest = UpdateRequest'
 updateRequest
     :: UpdateRequest
 updateRequest =
-    UpdateRequest'
-    { _urKind = "appstate#updateRequest"
-    , _urData = Nothing
-    }
+  UpdateRequest' {_urKind = "appstate#updateRequest", _urData = Nothing}
+
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string appstate#updateRequest.

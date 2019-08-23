@@ -61,7 +61,8 @@ type ProjectsLocationsRegistriesDevicesGetResource =
 -- | Gets details about a device.
 --
 -- /See:/ 'projectsLocationsRegistriesDevicesGet' smart constructor.
-data ProjectsLocationsRegistriesDevicesGet = ProjectsLocationsRegistriesDevicesGet'
+data ProjectsLocationsRegistriesDevicesGet =
+  ProjectsLocationsRegistriesDevicesGet'
     { _plrdgXgafv          :: !(Maybe Xgafv)
     , _plrdgUploadProtocol :: !(Maybe Text)
     , _plrdgAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data ProjectsLocationsRegistriesDevicesGet = ProjectsLocationsRegistriesDevicesG
     , _plrdgFieldMask      :: !(Maybe GFieldMask)
     , _plrdgName           :: !Text
     , _plrdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesDevicesGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsLocationsRegistriesDevicesGet
     :: Text -- ^ 'plrdgName'
     -> ProjectsLocationsRegistriesDevicesGet
 projectsLocationsRegistriesDevicesGet pPlrdgName_ =
-    ProjectsLocationsRegistriesDevicesGet'
+  ProjectsLocationsRegistriesDevicesGet'
     { _plrdgXgafv = Nothing
     , _plrdgUploadProtocol = Nothing
     , _plrdgAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsLocationsRegistriesDevicesGet pPlrdgName_ =
     , _plrdgName = pPlrdgName_
     , _plrdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrdgXgafv :: Lens' ProjectsLocationsRegistriesDevicesGet (Maybe Xgafv)
@@ -147,7 +151,8 @@ plrdgCallback
       (\ s a -> s{_plrdgCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesDevicesGet where
+           ProjectsLocationsRegistriesDevicesGet
+         where
         type Rs ProjectsLocationsRegistriesDevicesGet =
              Device
         type Scopes ProjectsLocationsRegistriesDevicesGet =

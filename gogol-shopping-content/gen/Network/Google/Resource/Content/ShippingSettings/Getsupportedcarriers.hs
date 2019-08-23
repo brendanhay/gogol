@@ -53,9 +53,12 @@ type ShippingSettingsGetsupportedcarriersResource =
 -- | Retrieves supported carriers and carrier services for an account.
 --
 -- /See:/ 'shippingSettingsGetsupportedcarriers' smart constructor.
-newtype ShippingSettingsGetsupportedcarriers = ShippingSettingsGetsupportedcarriers'
+newtype ShippingSettingsGetsupportedcarriers =
+  ShippingSettingsGetsupportedcarriers'
     { _sMerchantId :: Textual Word64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShippingSettingsGetsupportedcarriers' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ shippingSettingsGetsupportedcarriers
     :: Word64 -- ^ 'sMerchantId'
     -> ShippingSettingsGetsupportedcarriers
 shippingSettingsGetsupportedcarriers pSMerchantId_ =
-    ShippingSettingsGetsupportedcarriers'
-    { _sMerchantId = _Coerce # pSMerchantId_
-    }
+  ShippingSettingsGetsupportedcarriers' {_sMerchantId = _Coerce # pSMerchantId_}
+
 
 -- | The ID of the account for which to retrieve the supported carriers.
 sMerchantId :: Lens' ShippingSettingsGetsupportedcarriers Word64
@@ -77,7 +79,8 @@ sMerchantId
       _Coerce
 
 instance GoogleRequest
-         ShippingSettingsGetsupportedcarriers where
+           ShippingSettingsGetsupportedcarriers
+         where
         type Rs ShippingSettingsGetsupportedcarriers =
              ShippingSettingsGetSupportedCarriersResponse
         type Scopes ShippingSettingsGetsupportedcarriers =

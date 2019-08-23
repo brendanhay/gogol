@@ -53,10 +53,13 @@ type GroupsPatchResource =
 -- | Updates an existing resource. This method supports patch semantics.
 --
 -- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch'
+data GroupsPatch =
+  GroupsPatch'
     { _gpPayload       :: !Groups
     , _gpGroupUniqueId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupsPatch' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ groupsPatch
     -> Text -- ^ 'gpGroupUniqueId'
     -> GroupsPatch
 groupsPatch pGpPayload_ pGpGroupUniqueId_ =
-    GroupsPatch'
-    { _gpPayload = pGpPayload_
-    , _gpGroupUniqueId = pGpGroupUniqueId_
-    }
+  GroupsPatch' {_gpPayload = pGpPayload_, _gpGroupUniqueId = pGpGroupUniqueId_}
+
 
 -- | Multipart request metadata.
 gpPayload :: Lens' GroupsPatch Groups

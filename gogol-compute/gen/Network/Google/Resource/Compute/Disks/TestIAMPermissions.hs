@@ -61,12 +61,15 @@ type DisksTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'disksTestIAMPermissions' smart constructor.
-data DisksTestIAMPermissions = DisksTestIAMPermissions'
+data DisksTestIAMPermissions =
+  DisksTestIAMPermissions'
     { _dtipProject  :: !Text
     , _dtipZone     :: !Text
     , _dtipPayload  :: !TestPermissionsRequest
     , _dtipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ disksTestIAMPermissions
     -> Text -- ^ 'dtipResource'
     -> DisksTestIAMPermissions
 disksTestIAMPermissions pDtipProject_ pDtipZone_ pDtipPayload_ pDtipResource_ =
-    DisksTestIAMPermissions'
+  DisksTestIAMPermissions'
     { _dtipProject = pDtipProject_
     , _dtipZone = pDtipZone_
     , _dtipPayload = pDtipPayload_
     , _dtipResource = pDtipResource_
     }
+
 
 -- | Project ID for this request.
 dtipProject :: Lens' DisksTestIAMPermissions Text

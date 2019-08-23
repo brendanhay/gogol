@@ -55,10 +55,13 @@ type AspsDeleteResource =
 -- | Delete an ASP issued by a user.
 --
 -- /See:/ 'aspsDelete' smart constructor.
-data AspsDelete = AspsDelete'
+data AspsDelete =
+  AspsDelete'
     { _adCodeId  :: !(Textual Int32)
     , _adUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AspsDelete' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ aspsDelete
     -> Text -- ^ 'adUserKey'
     -> AspsDelete
 aspsDelete pAdCodeId_ pAdUserKey_ =
-    AspsDelete'
-    { _adCodeId = _Coerce # pAdCodeId_
-    , _adUserKey = pAdUserKey_
-    }
+  AspsDelete' {_adCodeId = _Coerce # pAdCodeId_, _adUserKey = pAdUserKey_}
+
 
 -- | The unique ID of the ASP to be deleted.
 adCodeId :: Lens' AspsDelete Int32

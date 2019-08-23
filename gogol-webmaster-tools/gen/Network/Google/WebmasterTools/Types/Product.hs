@@ -23,11 +23,14 @@ import           Network.Google.WebmasterTools.Types.Sum
 -- | Information about the various content types in the sitemap.
 --
 -- /See:/ 'wmxSitemapContent' smart constructor.
-data WmxSitemapContent = WmxSitemapContent'
+data WmxSitemapContent =
+  WmxSitemapContent'
     { _wscIndexed   :: !(Maybe (Textual Int64))
     , _wscType      :: !(Maybe Text)
     , _wscSubmitted :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WmxSitemapContent' with the minimum fields required to make a request.
 --
@@ -41,11 +44,9 @@ data WmxSitemapContent = WmxSitemapContent'
 wmxSitemapContent
     :: WmxSitemapContent
 wmxSitemapContent =
-    WmxSitemapContent'
-    { _wscIndexed = Nothing
-    , _wscType = Nothing
-    , _wscSubmitted = Nothing
-    }
+  WmxSitemapContent'
+    {_wscIndexed = Nothing, _wscType = Nothing, _wscSubmitted = Nothing}
+
 
 -- | The number of URLs from the sitemap that were indexed (of the content
 -- type).
@@ -82,10 +83,13 @@ instance ToJSON WmxSitemapContent where
 
 --
 -- /See:/ 'apidimensionFilterGroup' smart constructor.
-data APIdimensionFilterGroup = APIdimensionFilterGroup'
+data APIdimensionFilterGroup =
+  APIdimensionFilterGroup'
     { _afgFilters   :: !(Maybe [APIdimensionFilter])
     , _afgGroupType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APIdimensionFilterGroup' with the minimum fields required to make a request.
 --
@@ -97,10 +101,8 @@ data APIdimensionFilterGroup = APIdimensionFilterGroup'
 apidimensionFilterGroup
     :: APIdimensionFilterGroup
 apidimensionFilterGroup =
-    APIdimensionFilterGroup'
-    { _afgFilters = Nothing
-    , _afgGroupType = Nothing
-    }
+  APIdimensionFilterGroup' {_afgFilters = Nothing, _afgGroupType = Nothing}
+
 
 afgFilters :: Lens' APIdimensionFilterGroup [APIdimensionFilter]
 afgFilters
@@ -129,10 +131,13 @@ instance ToJSON APIdimensionFilterGroup where
 -- | Additional details about the URL, set only when calling get().
 --
 -- /See:/ 'urlSampleDetails' smart constructor.
-data URLSampleDetails = URLSampleDetails'
+data URLSampleDetails =
+  URLSampleDetails'
     { _usdLinkedFromURLs     :: !(Maybe [Text])
     , _usdContainingSitemaps :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLSampleDetails' with the minimum fields required to make a request.
 --
@@ -144,10 +149,9 @@ data URLSampleDetails = URLSampleDetails'
 urlSampleDetails
     :: URLSampleDetails
 urlSampleDetails =
-    URLSampleDetails'
-    { _usdLinkedFromURLs = Nothing
-    , _usdContainingSitemaps = Nothing
-    }
+  URLSampleDetails'
+    {_usdLinkedFromURLs = Nothing, _usdContainingSitemaps = Nothing}
+
 
 -- | A sample set of URLs linking to this URL.
 usdLinkedFromURLs :: Lens' URLSampleDetails [Text]
@@ -185,11 +189,14 @@ instance ToJSON URLSampleDetails where
 -- and category).
 --
 -- /See:/ 'urlCrawlErrorCountsPerType' smart constructor.
-data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType'
+data URLCrawlErrorCountsPerType =
+  URLCrawlErrorCountsPerType'
     { _ucecptPlatform :: !(Maybe Text)
     , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
     , _ucecptCategory :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorCountsPerType' with the minimum fields required to make a request.
 --
@@ -203,11 +210,12 @@ data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType'
 urlCrawlErrorCountsPerType
     :: URLCrawlErrorCountsPerType
 urlCrawlErrorCountsPerType =
-    URLCrawlErrorCountsPerType'
+  URLCrawlErrorCountsPerType'
     { _ucecptPlatform = Nothing
     , _ucecptEntries = Nothing
     , _ucecptCategory = Nothing
     }
+
 
 -- | The general type of Googlebot that made the request (see list of
 -- Googlebot user-agents for the user-agents used).
@@ -248,13 +256,16 @@ instance ToJSON URLCrawlErrorCountsPerType where
 
 --
 -- /See:/ 'apiDataRow' smart constructor.
-data APIDataRow = APIDataRow'
+data APIDataRow =
+  APIDataRow'
     { _adrImpressions :: !(Maybe (Textual Double))
     , _adrKeys        :: !(Maybe [Text])
     , _adrCtr         :: !(Maybe (Textual Double))
     , _adrClicks      :: !(Maybe (Textual Double))
     , _adrPosition    :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APIDataRow' with the minimum fields required to make a request.
 --
@@ -272,13 +283,14 @@ data APIDataRow = APIDataRow'
 apiDataRow
     :: APIDataRow
 apiDataRow =
-    APIDataRow'
+  APIDataRow'
     { _adrImpressions = Nothing
     , _adrKeys = Nothing
     , _adrCtr = Nothing
     , _adrClicks = Nothing
     , _adrPosition = Nothing
     }
+
 
 adrImpressions :: Lens' APIDataRow (Maybe Double)
 adrImpressions
@@ -327,11 +339,14 @@ instance ToJSON APIDataRow where
 
 --
 -- /See:/ 'apidimensionFilter' smart constructor.
-data APIdimensionFilter = APIdimensionFilter'
+data APIdimensionFilter =
+  APIdimensionFilter'
     { _afOperator   :: !(Maybe Text)
     , _afDimension  :: !(Maybe Text)
     , _afExpression :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'APIdimensionFilter' with the minimum fields required to make a request.
 --
@@ -345,11 +360,9 @@ data APIdimensionFilter = APIdimensionFilter'
 apidimensionFilter
     :: APIdimensionFilter
 apidimensionFilter =
-    APIdimensionFilter'
-    { _afOperator = Nothing
-    , _afDimension = Nothing
-    , _afExpression = Nothing
-    }
+  APIdimensionFilter'
+    {_afOperator = Nothing, _afDimension = Nothing, _afExpression = Nothing}
+
 
 afOperator :: Lens' APIdimensionFilter (Maybe Text)
 afOperator
@@ -382,10 +395,13 @@ instance ToJSON APIdimensionFilter where
 -- | An entry in a URL crawl errors time series.
 --
 -- /See:/ 'urlCrawlErrorCount' smart constructor.
-data URLCrawlErrorCount = URLCrawlErrorCount'
+data URLCrawlErrorCount =
+  URLCrawlErrorCount'
     { _ucecCount     :: !(Maybe (Textual Int64))
     , _ucecTimestamp :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorCount' with the minimum fields required to make a request.
 --
@@ -397,10 +413,8 @@ data URLCrawlErrorCount = URLCrawlErrorCount'
 urlCrawlErrorCount
     :: URLCrawlErrorCount
 urlCrawlErrorCount =
-    URLCrawlErrorCount'
-    { _ucecCount = Nothing
-    , _ucecTimestamp = Nothing
-    }
+  URLCrawlErrorCount' {_ucecCount = Nothing, _ucecTimestamp = Nothing}
+
 
 -- | The error count at the given timestamp.
 ucecCount :: Lens' URLCrawlErrorCount (Maybe Int64)
@@ -434,10 +448,13 @@ instance ToJSON URLCrawlErrorCount where
 -- as specified by the aggregation type parameter.
 --
 -- /See:/ 'searchAnalyticsQueryResponse' smart constructor.
-data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse'
+data SearchAnalyticsQueryResponse =
+  SearchAnalyticsQueryResponse'
     { _saqrRows                    :: !(Maybe [APIDataRow])
     , _saqrResponseAggregationType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchAnalyticsQueryResponse' with the minimum fields required to make a request.
 --
@@ -449,10 +466,9 @@ data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse'
 searchAnalyticsQueryResponse
     :: SearchAnalyticsQueryResponse
 searchAnalyticsQueryResponse =
-    SearchAnalyticsQueryResponse'
-    { _saqrRows = Nothing
-    , _saqrResponseAggregationType = Nothing
-    }
+  SearchAnalyticsQueryResponse'
+    {_saqrRows = Nothing, _saqrResponseAggregationType = Nothing}
+
 
 -- | A list of rows grouped by the key values in the order given in the
 -- query.
@@ -487,9 +503,12 @@ instance ToJSON SearchAnalyticsQueryResponse where
 -- | List of crawl error samples.
 --
 -- /See:/ 'urlCrawlErrorsSamplesListResponse' smart constructor.
-newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse'
+newtype URLCrawlErrorsSamplesListResponse =
+  URLCrawlErrorsSamplesListResponse'
     { _uceslrURLCrawlErrorSample :: Maybe [URLCrawlErrorsSample]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorsSamplesListResponse' with the minimum fields required to make a request.
 --
@@ -499,9 +518,8 @@ newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse'
 urlCrawlErrorsSamplesListResponse
     :: URLCrawlErrorsSamplesListResponse
 urlCrawlErrorsSamplesListResponse =
-    URLCrawlErrorsSamplesListResponse'
-    { _uceslrURLCrawlErrorSample = Nothing
-    }
+  URLCrawlErrorsSamplesListResponse' {_uceslrURLCrawlErrorSample = Nothing}
+
 
 -- | Information about the sample URL and its crawl error.
 uceslrURLCrawlErrorSample :: Lens' URLCrawlErrorsSamplesListResponse [URLCrawlErrorsSample]
@@ -531,9 +549,12 @@ instance ToJSON URLCrawlErrorsSamplesListResponse
 -- platform.
 --
 -- /See:/ 'urlCrawlErrorsCountsQueryResponse' smart constructor.
-newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse'
+newtype URLCrawlErrorsCountsQueryResponse =
+  URLCrawlErrorsCountsQueryResponse'
     { _ucecqrCountPerTypes :: Maybe [URLCrawlErrorCountsPerType]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorsCountsQueryResponse' with the minimum fields required to make a request.
 --
@@ -543,9 +564,8 @@ newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse'
 urlCrawlErrorsCountsQueryResponse
     :: URLCrawlErrorsCountsQueryResponse
 urlCrawlErrorsCountsQueryResponse =
-    URLCrawlErrorsCountsQueryResponse'
-    { _ucecqrCountPerTypes = Nothing
-    }
+  URLCrawlErrorsCountsQueryResponse' {_ucecqrCountPerTypes = Nothing}
+
 
 -- | The time series of the number of URL crawl errors per error category and
 -- platform.
@@ -574,13 +594,16 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 -- | Contains information about specific crawl errors.
 --
 -- /See:/ 'urlCrawlErrorsSample' smart constructor.
-data URLCrawlErrorsSample = URLCrawlErrorsSample'
+data URLCrawlErrorsSample =
+  URLCrawlErrorsSample'
     { _ucesResponseCode  :: !(Maybe (Textual Int32))
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
     , _ucesLastCrawled   :: !(Maybe DateTime')
     , _ucesPageURL       :: !(Maybe Text)
     , _ucesFirstDetected :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLCrawlErrorsSample' with the minimum fields required to make a request.
 --
@@ -598,13 +621,14 @@ data URLCrawlErrorsSample = URLCrawlErrorsSample'
 urlCrawlErrorsSample
     :: URLCrawlErrorsSample
 urlCrawlErrorsSample =
-    URLCrawlErrorsSample'
+  URLCrawlErrorsSample'
     { _ucesResponseCode = Nothing
     , _ucesURLDetails = Nothing
     , _ucesLastCrawled = Nothing
     , _ucesPageURL = Nothing
     , _ucesFirstDetected = Nothing
     }
+
 
 -- | The HTTP response code, if any.
 ucesResponseCode :: Lens' URLCrawlErrorsSample (Maybe Int32)
@@ -662,7 +686,8 @@ instance ToJSON URLCrawlErrorsSample where
 -- sitemap.
 --
 -- /See:/ 'wmxSitemap' smart constructor.
-data WmxSitemap = WmxSitemap'
+data WmxSitemap =
+  WmxSitemap'
     { _wsContents        :: !(Maybe [WmxSitemapContent])
     , _wsPath            :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
@@ -672,7 +697,9 @@ data WmxSitemap = WmxSitemap'
     , _wsIsPending       :: !(Maybe Bool)
     , _wsType            :: !(Maybe Text)
     , _wsErrors          :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WmxSitemap' with the minimum fields required to make a request.
 --
@@ -698,7 +725,7 @@ data WmxSitemap = WmxSitemap'
 wmxSitemap
     :: WmxSitemap
 wmxSitemap =
-    WmxSitemap'
+  WmxSitemap'
     { _wsContents = Nothing
     , _wsPath = Nothing
     , _wsIsSitemapsIndex = Nothing
@@ -709,6 +736,7 @@ wmxSitemap =
     , _wsType = Nothing
     , _wsErrors = Nothing
     }
+
 
 -- | The various content types in the sitemap.
 wsContents :: Lens' WmxSitemap [WmxSitemapContent]
@@ -797,9 +825,12 @@ instance ToJSON WmxSitemap where
 -- | List of sitemaps.
 --
 -- /See:/ 'sitemapsListResponse' smart constructor.
-newtype SitemapsListResponse = SitemapsListResponse'
+newtype SitemapsListResponse =
+  SitemapsListResponse'
     { _slrSitemap :: Maybe [WmxSitemap]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitemapsListResponse' with the minimum fields required to make a request.
 --
@@ -808,10 +839,8 @@ newtype SitemapsListResponse = SitemapsListResponse'
 -- * 'slrSitemap'
 sitemapsListResponse
     :: SitemapsListResponse
-sitemapsListResponse =
-    SitemapsListResponse'
-    { _slrSitemap = Nothing
-    }
+sitemapsListResponse = SitemapsListResponse' {_slrSitemap = Nothing}
+
 
 -- | Contains detailed information about a specific URL submitted as a
 -- sitemap.
@@ -834,7 +863,8 @@ instance ToJSON SitemapsListResponse where
 
 --
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.
-data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest'
+data SearchAnalyticsQueryRequest =
+  SearchAnalyticsQueryRequest'
     { _saqrAggregationType       :: !(Maybe Text)
     , _saqrRowLimit              :: !(Maybe (Textual Int32))
     , _saqrEndDate               :: !(Maybe Text)
@@ -843,7 +873,9 @@ data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest'
     , _saqrStartDate             :: !(Maybe Text)
     , _saqrStartRow              :: !(Maybe (Textual Int32))
     , _saqrDimensions            :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SearchAnalyticsQueryRequest' with the minimum fields required to make a request.
 --
@@ -867,7 +899,7 @@ data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest'
 searchAnalyticsQueryRequest
     :: SearchAnalyticsQueryRequest
 searchAnalyticsQueryRequest =
-    SearchAnalyticsQueryRequest'
+  SearchAnalyticsQueryRequest'
     { _saqrAggregationType = Nothing
     , _saqrRowLimit = Nothing
     , _saqrEndDate = Nothing
@@ -877,6 +909,7 @@ searchAnalyticsQueryRequest =
     , _saqrStartRow = Nothing
     , _saqrDimensions = Nothing
     }
+
 
 -- | [Optional; Default is \"auto\"] How data is aggregated. If aggregated by
 -- property, all data for the same property is aggregated; if aggregated by
@@ -981,9 +1014,12 @@ instance ToJSON SearchAnalyticsQueryRequest where
 -- | List of sites with access level information.
 --
 -- /See:/ 'sitesListResponse' smart constructor.
-newtype SitesListResponse = SitesListResponse'
+newtype SitesListResponse =
+  SitesListResponse'
     { _slrSiteEntry :: Maybe [WmxSite]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesListResponse' with the minimum fields required to make a request.
 --
@@ -992,10 +1028,8 @@ newtype SitesListResponse = SitesListResponse'
 -- * 'slrSiteEntry'
 sitesListResponse
     :: SitesListResponse
-sitesListResponse =
-    SitesListResponse'
-    { _slrSiteEntry = Nothing
-    }
+sitesListResponse = SitesListResponse' {_slrSiteEntry = Nothing}
+
 
 -- | Contains permission level information about a Search Console site. For
 -- more information, see Permissions in Search Console.
@@ -1021,10 +1055,13 @@ instance ToJSON SitesListResponse where
 -- more information, see Permissions in Search Console.
 --
 -- /See:/ 'wmxSite' smart constructor.
-data WmxSite = WmxSite'
+data WmxSite =
+  WmxSite'
     { _wsPermissionLevel :: !(Maybe Text)
     , _wsSiteURL         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'WmxSite' with the minimum fields required to make a request.
 --
@@ -1035,11 +1072,8 @@ data WmxSite = WmxSite'
 -- * 'wsSiteURL'
 wmxSite
     :: WmxSite
-wmxSite =
-    WmxSite'
-    { _wsPermissionLevel = Nothing
-    , _wsSiteURL = Nothing
-    }
+wmxSite = WmxSite' {_wsPermissionLevel = Nothing, _wsSiteURL = Nothing}
+
 
 -- | The user\'s permission level for the site.
 wsPermissionLevel :: Lens' WmxSite (Maybe Text)

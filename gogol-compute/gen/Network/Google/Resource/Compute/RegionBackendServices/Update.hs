@@ -68,13 +68,16 @@ type RegionBackendServicesUpdateResource =
 -- Guidelines for more information.
 --
 -- /See:/ 'regionBackendServicesUpdate' smart constructor.
-data RegionBackendServicesUpdate = RegionBackendServicesUpdate'
+data RegionBackendServicesUpdate =
+  RegionBackendServicesUpdate'
     { _rbsuRequestId      :: !(Maybe Text)
     , _rbsuProject        :: !Text
     , _rbsuPayload        :: !BackendService
     , _rbsuRegion         :: !Text
     , _rbsuBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionBackendServicesUpdate' with the minimum fields required to make a request.
 --
@@ -96,13 +99,14 @@ regionBackendServicesUpdate
     -> Text -- ^ 'rbsuBackendService'
     -> RegionBackendServicesUpdate
 regionBackendServicesUpdate pRbsuProject_ pRbsuPayload_ pRbsuRegion_ pRbsuBackendService_ =
-    RegionBackendServicesUpdate'
+  RegionBackendServicesUpdate'
     { _rbsuRequestId = Nothing
     , _rbsuProject = pRbsuProject_
     , _rbsuPayload = pRbsuPayload_
     , _rbsuRegion = pRbsuRegion_
     , _rbsuBackendService = pRbsuBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

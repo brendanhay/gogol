@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesInsert' request conforms to.
 type TargetingTemplatesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
@@ -55,10 +55,13 @@ type TargetingTemplatesInsertResource =
 -- | Inserts a new targeting template.
 --
 -- /See:/ 'targetingTemplatesInsert' smart constructor.
-data TargetingTemplatesInsert = TargetingTemplatesInsert'
+data TargetingTemplatesInsert =
+  TargetingTemplatesInsert'
     { _ttiProFileId :: !(Textual Int64)
     , _ttiPayload   :: !TargetingTemplate
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetingTemplatesInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ targetingTemplatesInsert
     -> TargetingTemplate -- ^ 'ttiPayload'
     -> TargetingTemplatesInsert
 targetingTemplatesInsert pTtiProFileId_ pTtiPayload_ =
-    TargetingTemplatesInsert'
-    { _ttiProFileId = _Coerce # pTtiProFileId_
-    , _ttiPayload = pTtiPayload_
-    }
+  TargetingTemplatesInsert'
+    {_ttiProFileId = _Coerce # pTtiProFileId_, _ttiPayload = pTtiPayload_}
+
 
 -- | User profile ID associated with this request.
 ttiProFileId :: Lens' TargetingTemplatesInsert Int64

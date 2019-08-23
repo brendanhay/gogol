@@ -21,14 +21,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Attach an existing project to the tenancy unit as a new tenant resource.
--- The project could be either the tenant project reserved by calling
--- AddTenantProject under tenancy unit for the producer project of service,
--- or from outside. Caller will be checked against the permission as if
--- calling AddTenantProject on the same consumer. To trigger the
--- attachement, the targeted tenant project must be in a folder. Please
--- also make sure ServiceConsumerManagement service account is the owner of
--- that project. Note that these two requirements are already met if the
--- project is reserved through AddTenantProject. Operation.
+-- The project could either be the tenant project reserved by calling
+-- \`AddTenantProject\` under a tenancy unit of a service producer\'s
+-- project of a managed service, or from a separate project. The caller is
+-- checked against a set of permissions as if calling \`AddTenantProject\`
+-- on the same service consumer. To trigger the attachment, the targeted
+-- tenant project must be in a folder. Make sure the
+-- ServiceConsumerManagement service account is the owner of that project.
+-- These two requirements are already met if the project is reserved by
+-- calling \`AddTenantProject\`. Operation.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.attachProject@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.AttachProject
@@ -68,17 +69,19 @@ type ServicesTenancyUnitsAttachProjectResource =
                        Post '[JSON] Operation
 
 -- | Attach an existing project to the tenancy unit as a new tenant resource.
--- The project could be either the tenant project reserved by calling
--- AddTenantProject under tenancy unit for the producer project of service,
--- or from outside. Caller will be checked against the permission as if
--- calling AddTenantProject on the same consumer. To trigger the
--- attachement, the targeted tenant project must be in a folder. Please
--- also make sure ServiceConsumerManagement service account is the owner of
--- that project. Note that these two requirements are already met if the
--- project is reserved through AddTenantProject. Operation.
+-- The project could either be the tenant project reserved by calling
+-- \`AddTenantProject\` under a tenancy unit of a service producer\'s
+-- project of a managed service, or from a separate project. The caller is
+-- checked against a set of permissions as if calling \`AddTenantProject\`
+-- on the same service consumer. To trigger the attachment, the targeted
+-- tenant project must be in a folder. Make sure the
+-- ServiceConsumerManagement service account is the owner of that project.
+-- These two requirements are already met if the project is reserved by
+-- calling \`AddTenantProject\`. Operation.
 --
 -- /See:/ 'servicesTenancyUnitsAttachProject' smart constructor.
-data ServicesTenancyUnitsAttachProject = ServicesTenancyUnitsAttachProject'
+data ServicesTenancyUnitsAttachProject =
+  ServicesTenancyUnitsAttachProject'
     { _stuapXgafv          :: !(Maybe Xgafv)
     , _stuapUploadProtocol :: !(Maybe Text)
     , _stuapAccessToken    :: !(Maybe Text)
@@ -86,7 +89,9 @@ data ServicesTenancyUnitsAttachProject = ServicesTenancyUnitsAttachProject'
     , _stuapPayload        :: !AttachTenantProjectRequest
     , _stuapName           :: !Text
     , _stuapCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsAttachProject' with the minimum fields required to make a request.
 --
@@ -110,7 +115,7 @@ servicesTenancyUnitsAttachProject
     -> Text -- ^ 'stuapName'
     -> ServicesTenancyUnitsAttachProject
 servicesTenancyUnitsAttachProject pStuapPayload_ pStuapName_ =
-    ServicesTenancyUnitsAttachProject'
+  ServicesTenancyUnitsAttachProject'
     { _stuapXgafv = Nothing
     , _stuapUploadProtocol = Nothing
     , _stuapAccessToken = Nothing
@@ -119,6 +124,7 @@ servicesTenancyUnitsAttachProject pStuapPayload_ pStuapName_ =
     , _stuapName = pStuapName_
     , _stuapCallback = Nothing
     }
+
 
 -- | V1 error format.
 stuapXgafv :: Lens' ServicesTenancyUnitsAttachProject (Maybe Xgafv)
@@ -148,7 +154,8 @@ stuapPayload :: Lens' ServicesTenancyUnitsAttachProject AttachTenantProjectReque
 stuapPayload
   = lens _stuapPayload (\ s a -> s{_stuapPayload = a})
 
--- | Name of the tenancy unit that project will be attached to.
+-- | Name of the tenancy unit that the project will be attached to. Such as
+-- \'services\/service.googleapis.com\/projects\/12345\/tenancyUnits\/abcd\'.
 stuapName :: Lens' ServicesTenancyUnitsAttachProject Text
 stuapName
   = lens _stuapName (\ s a -> s{_stuapName = a})
@@ -160,7 +167,8 @@ stuapCallback
       (\ s a -> s{_stuapCallback = a})
 
 instance GoogleRequest
-         ServicesTenancyUnitsAttachProject where
+           ServicesTenancyUnitsAttachProject
+         where
         type Rs ServicesTenancyUnitsAttachProject = Operation
         type Scopes ServicesTenancyUnitsAttachProject =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -88,6 +88,12 @@ module Network.Google.SQLAdmin.Types
     , awCode
     , awMessage
 
+    -- * DiskEncryptionConfiguration
+    , DiskEncryptionConfiguration
+    , diskEncryptionConfiguration
+    , decKind
+    , decKmsKeyName
+
     -- * ImportContext
     , ImportContext
     , importContext
@@ -218,6 +224,12 @@ module Network.Google.SQLAdmin.Types
     , sclrKind
     , sclrItems
 
+    -- * DiskEncryptionStatus
+    , DiskEncryptionStatus
+    , diskEncryptionStatus
+    , desKmsKeyVersionName
+    , desKind
+
     -- * SSLCertsInsertRequest
     , SSLCertsInsertRequest
     , sslCertsInsertRequest
@@ -279,12 +291,15 @@ module Network.Google.SQLAdmin.Types
     , datIPv6Address
     , datServerCaCert
     , datDatabaseVersion
+    , datDiskEncryptionConfiguration
     , datProject
     , datSettings
     , datKind
+    , datDiskEncryptionStatus
     , datConnectionName
     , datCurrentDiskSize
     , datInstanceType
+    , datRootPassword
     , datReplicaNames
     , datSelfLink
     , datFailoverReplica
@@ -308,6 +323,7 @@ module Network.Google.SQLAdmin.Types
     , Flag
     , flag
     , fMaxValue
+    , fInBeta
     , fKind
     , fAppliesTo
     , fName
@@ -523,8 +539,8 @@ sQLAdminService
 
 -- | Manage your Google SQL Service instances
 sqlServiceAdminScope :: Proxy '["https://www.googleapis.com/auth/sqlservice.admin"]
-sqlServiceAdminScope = Proxy;
+sqlServiceAdminScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

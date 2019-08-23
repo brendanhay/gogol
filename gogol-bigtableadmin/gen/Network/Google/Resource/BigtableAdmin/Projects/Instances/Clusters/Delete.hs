@@ -59,14 +59,17 @@ type ProjectsInstancesClustersDeleteResource =
 -- | Deletes a cluster from an instance.
 --
 -- /See:/ 'projectsInstancesClustersDelete' smart constructor.
-data ProjectsInstancesClustersDelete = ProjectsInstancesClustersDelete'
+data ProjectsInstancesClustersDelete =
+  ProjectsInstancesClustersDelete'
     { _picdXgafv          :: !(Maybe Xgafv)
     , _picdUploadProtocol :: !(Maybe Text)
     , _picdAccessToken    :: !(Maybe Text)
     , _picdUploadType     :: !(Maybe Text)
     , _picdName           :: !Text
     , _picdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesClustersDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsInstancesClustersDelete
     :: Text -- ^ 'picdName'
     -> ProjectsInstancesClustersDelete
 projectsInstancesClustersDelete pPicdName_ =
-    ProjectsInstancesClustersDelete'
+  ProjectsInstancesClustersDelete'
     { _picdXgafv = Nothing
     , _picdUploadProtocol = Nothing
     , _picdAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsInstancesClustersDelete pPicdName_ =
     , _picdName = pPicdName_
     , _picdCallback = Nothing
     }
+
 
 -- | V1 error format.
 picdXgafv :: Lens' ProjectsInstancesClustersDelete (Maybe Xgafv)
@@ -130,7 +134,8 @@ picdCallback
   = lens _picdCallback (\ s a -> s{_picdCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesClustersDelete where
+           ProjectsInstancesClustersDelete
+         where
         type Rs ProjectsInstancesClustersDelete = Empty
         type Scopes ProjectsInstancesClustersDelete =
              '["https://www.googleapis.com/auth/bigtable.admin",

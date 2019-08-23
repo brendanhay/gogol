@@ -66,7 +66,8 @@ type ProjectsSubscriptionsPullResource =
 -- subscription.
 --
 -- /See:/ 'projectsSubscriptionsPull' smart constructor.
-data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull'
+data ProjectsSubscriptionsPull =
+  ProjectsSubscriptionsPull'
     { _pspsXgafv          :: !(Maybe Xgafv)
     , _pspsUploadProtocol :: !(Maybe Text)
     , _pspsAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull'
     , _pspsPayload        :: !PullRequest
     , _pspsSubscription   :: !Text
     , _pspsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsPull' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsSubscriptionsPull
     -> Text -- ^ 'pspsSubscription'
     -> ProjectsSubscriptionsPull
 projectsSubscriptionsPull pPspsPayload_ pPspsSubscription_ =
-    ProjectsSubscriptionsPull'
+  ProjectsSubscriptionsPull'
     { _pspsXgafv = Nothing
     , _pspsUploadProtocol = Nothing
     , _pspsAccessToken = Nothing
@@ -107,6 +110,7 @@ projectsSubscriptionsPull pPspsPayload_ pPspsSubscription_ =
     , _pspsSubscription = pPspsSubscription_
     , _pspsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pspsXgafv :: Lens' ProjectsSubscriptionsPull (Maybe Xgafv)

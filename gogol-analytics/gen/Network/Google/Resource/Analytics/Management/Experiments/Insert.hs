@@ -61,12 +61,15 @@ type ManagementExperimentsInsertResource =
 -- | Create a new experiment.
 --
 -- /See:/ 'managementExperimentsInsert' smart constructor.
-data ManagementExperimentsInsert = ManagementExperimentsInsert'
+data ManagementExperimentsInsert =
+  ManagementExperimentsInsert'
     { _meiWebPropertyId :: !Text
     , _meiProFileId     :: !Text
     , _meiPayload       :: !Experiment
     , _meiAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementExperimentsInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ managementExperimentsInsert
     -> Text -- ^ 'meiAccountId'
     -> ManagementExperimentsInsert
 managementExperimentsInsert pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
-    ManagementExperimentsInsert'
+  ManagementExperimentsInsert'
     { _meiWebPropertyId = pMeiWebPropertyId_
     , _meiProFileId = pMeiProFileId_
     , _meiPayload = pMeiPayload_
     , _meiAccountId = pMeiAccountId_
     }
+
 
 -- | Web property ID to create the experiment for.
 meiWebPropertyId :: Lens' ManagementExperimentsInsert Text

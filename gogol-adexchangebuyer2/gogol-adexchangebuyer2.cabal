@@ -1,5 +1,5 @@
 name:                  gogol-adexchangebuyer2
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Ad Exchange Buyer API II SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -71,7 +71,6 @@ library
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Update
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.Get
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.List
-        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.Creatives.Delete
         , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
         , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponseErrors.List
         , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBids.List
@@ -106,5 +105,5 @@ library
         , Network.Google.AdExchangeBuyer2.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

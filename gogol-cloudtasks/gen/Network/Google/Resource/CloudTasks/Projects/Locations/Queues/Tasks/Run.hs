@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.run@ method which the
 -- 'ProjectsLocationsQueuesTasksRun' request conforms to.
 type ProjectsLocationsQueuesTasksRunResource =
-     "v2beta3" :>
+     "v2" :>
        CaptureMode "name" "run" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -85,7 +85,8 @@ type ProjectsLocationsQueuesTasksRunResource =
 -- has already succeeded or permanently failed.
 --
 -- /See:/ 'projectsLocationsQueuesTasksRun' smart constructor.
-data ProjectsLocationsQueuesTasksRun = ProjectsLocationsQueuesTasksRun'
+data ProjectsLocationsQueuesTasksRun =
+  ProjectsLocationsQueuesTasksRun'
     { _plqtrXgafv          :: !(Maybe Xgafv)
     , _plqtrUploadProtocol :: !(Maybe Text)
     , _plqtrAccessToken    :: !(Maybe Text)
@@ -93,7 +94,9 @@ data ProjectsLocationsQueuesTasksRun = ProjectsLocationsQueuesTasksRun'
     , _plqtrPayload        :: !RunTaskRequest
     , _plqtrName           :: !Text
     , _plqtrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesTasksRun' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ projectsLocationsQueuesTasksRun
     -> Text -- ^ 'plqtrName'
     -> ProjectsLocationsQueuesTasksRun
 projectsLocationsQueuesTasksRun pPlqtrPayload_ pPlqtrName_ =
-    ProjectsLocationsQueuesTasksRun'
+  ProjectsLocationsQueuesTasksRun'
     { _plqtrXgafv = Nothing
     , _plqtrUploadProtocol = Nothing
     , _plqtrAccessToken = Nothing
@@ -126,6 +129,7 @@ projectsLocationsQueuesTasksRun pPlqtrPayload_ pPlqtrName_ =
     , _plqtrName = pPlqtrName_
     , _plqtrCallback = Nothing
     }
+
 
 -- | V1 error format.
 plqtrXgafv :: Lens' ProjectsLocationsQueuesTasksRun (Maybe Xgafv)
@@ -168,7 +172,8 @@ plqtrCallback
       (\ s a -> s{_plqtrCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsQueuesTasksRun where
+           ProjectsLocationsQueuesTasksRun
+         where
         type Rs ProjectsLocationsQueuesTasksRun = Task
         type Scopes ProjectsLocationsQueuesTasksRun =
              '["https://www.googleapis.com/auth/cloud-platform"]

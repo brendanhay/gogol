@@ -72,7 +72,8 @@ type ObjectsComposeResource =
 -- bucket.
 --
 -- /See:/ 'objectsCompose' smart constructor.
-data ObjectsCompose = ObjectsCompose'
+data ObjectsCompose =
+  ObjectsCompose'
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
     , _oIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _oIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -81,7 +82,9 @@ data ObjectsCompose = ObjectsCompose'
     , _oDestinationBucket        :: !Text
     , _oKmsKeyName               :: !(Maybe Text)
     , _oDestinationObject        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsCompose' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ objectsCompose
     -> Text -- ^ 'oDestinationObject'
     -> ObjectsCompose
 objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
-    ObjectsCompose'
+  ObjectsCompose'
     { _oDestinationPredefinedACL = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oIfGenerationMatch = Nothing
@@ -118,6 +121,7 @@ objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
     , _oKmsKeyName = Nothing
     , _oDestinationObject = pODestinationObject_
     }
+
 
 -- | Apply a predefined set of access controls to the destination object.
 oDestinationPredefinedACL :: Lens' ObjectsCompose (Maybe ObjectsComposeDestinationPredefinedACL)

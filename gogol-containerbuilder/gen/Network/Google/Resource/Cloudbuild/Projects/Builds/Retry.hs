@@ -98,7 +98,8 @@ type ProjectsBuildsRetryResource =
 -- depending on the bucket\'s lifecycle management settings.
 --
 -- /See:/ 'projectsBuildsRetry' smart constructor.
-data ProjectsBuildsRetry = ProjectsBuildsRetry'
+data ProjectsBuildsRetry =
+  ProjectsBuildsRetry'
     { _pbrXgafv          :: !(Maybe Xgafv)
     , _pbrUploadProtocol :: !(Maybe Text)
     , _pbrAccessToken    :: !(Maybe Text)
@@ -107,7 +108,9 @@ data ProjectsBuildsRetry = ProjectsBuildsRetry'
     , _pbrId             :: !Text
     , _pbrProjectId      :: !Text
     , _pbrCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsBuildsRetry' with the minimum fields required to make a request.
 --
@@ -134,7 +137,7 @@ projectsBuildsRetry
     -> Text -- ^ 'pbrProjectId'
     -> ProjectsBuildsRetry
 projectsBuildsRetry pPbrPayload_ pPbrId_ pPbrProjectId_ =
-    ProjectsBuildsRetry'
+  ProjectsBuildsRetry'
     { _pbrXgafv = Nothing
     , _pbrUploadProtocol = Nothing
     , _pbrAccessToken = Nothing
@@ -144,6 +147,7 @@ projectsBuildsRetry pPbrPayload_ pPbrId_ pPbrProjectId_ =
     , _pbrProjectId = pPbrProjectId_
     , _pbrCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbrXgafv :: Lens' ProjectsBuildsRetry (Maybe Xgafv)

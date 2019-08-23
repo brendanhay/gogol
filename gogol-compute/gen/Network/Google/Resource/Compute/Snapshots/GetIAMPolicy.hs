@@ -58,10 +58,13 @@ type SnapshotsGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'snapshotsGetIAMPolicy' smart constructor.
-data SnapshotsGetIAMPolicy = SnapshotsGetIAMPolicy'
+data SnapshotsGetIAMPolicy =
+  SnapshotsGetIAMPolicy'
     { _sgiampProject  :: !Text
     , _sgiampResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ snapshotsGetIAMPolicy
     -> Text -- ^ 'sgiampResource'
     -> SnapshotsGetIAMPolicy
 snapshotsGetIAMPolicy pSgiampProject_ pSgiampResource_ =
-    SnapshotsGetIAMPolicy'
-    { _sgiampProject = pSgiampProject_
-    , _sgiampResource = pSgiampResource_
-    }
+  SnapshotsGetIAMPolicy'
+    {_sgiampProject = pSgiampProject_, _sgiampResource = pSgiampResource_}
+
 
 -- | Project ID for this request.
 sgiampProject :: Lens' SnapshotsGetIAMPolicy Text

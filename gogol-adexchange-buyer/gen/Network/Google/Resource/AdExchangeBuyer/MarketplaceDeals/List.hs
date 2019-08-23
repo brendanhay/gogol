@@ -55,10 +55,13 @@ type MarketplaceDealsListResource =
 -- | List all the deals for a given proposal
 --
 -- /See:/ 'marketplaceDealsList' smart constructor.
-data MarketplaceDealsList = MarketplaceDealsList'
+data MarketplaceDealsList =
+  MarketplaceDealsList'
     { _mdlProposalId :: !Text
     , _mdlPqlQuery   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MarketplaceDealsList' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ marketplaceDealsList
     :: Text -- ^ 'mdlProposalId'
     -> MarketplaceDealsList
 marketplaceDealsList pMdlProposalId_ =
-    MarketplaceDealsList'
-    { _mdlProposalId = pMdlProposalId_
-    , _mdlPqlQuery = Nothing
-    }
+  MarketplaceDealsList'
+    {_mdlProposalId = pMdlProposalId_, _mdlPqlQuery = Nothing}
+
 
 -- | The proposalId to get deals for. To search across all proposals specify
 -- order_id = \'-\' as part of the URL.

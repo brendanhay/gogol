@@ -53,10 +53,13 @@ type ProjectsGetResource =
 -- | Fetch the representation of an existing Project.
 --
 -- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet'
+data ProjectsGet =
+  ProjectsGet'
     { _pgProject           :: !Text
     , _pgClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
@@ -69,10 +72,8 @@ projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
 projectsGet pPgProject_ =
-    ProjectsGet'
-    { _pgProject = pPgProject_
-    , _pgClientOperationId = Nothing
-    }
+  ProjectsGet' {_pgProject = pPgProject_, _pgClientOperationId = Nothing}
+
 
 -- | Identifies the project addressed by this request.
 pgProject :: Lens' ProjectsGet Text

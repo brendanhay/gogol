@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsList' request conforms to.
 type AdvertiserGroupsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -69,7 +69,8 @@ type AdvertiserGroupsListResource =
 -- supports paging.
 --
 -- /See:/ 'advertiserGroupsList' smart constructor.
-data AdvertiserGroupsList = AdvertiserGroupsList'
+data AdvertiserGroupsList =
+  AdvertiserGroupsList'
     { _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe [Textual Int64])
     , _aglProFileId    :: !(Textual Int64)
@@ -77,7 +78,9 @@ data AdvertiserGroupsList = AdvertiserGroupsList'
     , _aglPageToken    :: !(Maybe Text)
     , _aglSortField    :: !AdvertiserGroupsListSortField
     , _aglMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdvertiserGroupsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ advertiserGroupsList
     :: Int64 -- ^ 'aglProFileId'
     -> AdvertiserGroupsList
 advertiserGroupsList pAglProFileId_ =
-    AdvertiserGroupsList'
+  AdvertiserGroupsList'
     { _aglSearchString = Nothing
     , _aglIds = Nothing
     , _aglProFileId = _Coerce # pAglProFileId_
@@ -109,6 +112,7 @@ advertiserGroupsList pAglProFileId_ =
     , _aglSortField = AGLSFID
     , _aglMaxResults = 1000
     }
+
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"advertiser*2015\" will return objects with names like

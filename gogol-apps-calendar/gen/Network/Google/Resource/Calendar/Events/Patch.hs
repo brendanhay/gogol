@@ -68,7 +68,8 @@ type EventsPatchResource =
 -- | Updates an event. This method supports patch semantics.
 --
 -- /See:/ 'eventsPatch' smart constructor.
-data EventsPatch = EventsPatch'
+data EventsPatch =
+  EventsPatch'
     { _epConferenceDataVersion :: !(Maybe (Textual Int32))
     , _epCalendarId            :: !Text
     , _epPayload               :: !Event
@@ -78,7 +79,9 @@ data EventsPatch = EventsPatch'
     , _epSendUpdates           :: !(Maybe EventsPatchSendUpdates)
     , _epAlwaysIncludeEmail    :: !(Maybe Bool)
     , _epEventId               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsPatch' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ eventsPatch
     -> Text -- ^ 'epEventId'
     -> EventsPatch
 eventsPatch pEpCalendarId_ pEpPayload_ pEpEventId_ =
-    EventsPatch'
+  EventsPatch'
     { _epConferenceDataVersion = Nothing
     , _epCalendarId = pEpCalendarId_
     , _epPayload = pEpPayload_
@@ -118,6 +121,7 @@ eventsPatch pEpCalendarId_ pEpPayload_ pEpEventId_ =
     , _epAlwaysIncludeEmail = Nothing
     , _epEventId = pEpEventId_
     }
+
 
 -- | Version number of conference data supported by the API client. Version 0
 -- assumes no conference data support and ignores conference data in the

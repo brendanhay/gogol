@@ -24,7 +24,7 @@
 -- transfer operations that are running already. Updating the scheduling of
 -- a job is not allowed.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     (
     -- * REST Resource
@@ -66,7 +66,8 @@ type TransferJobsPatchResource =
 -- a job is not allowed.
 --
 -- /See:/ 'transferJobsPatch' smart constructor.
-data TransferJobsPatch = TransferJobsPatch'
+data TransferJobsPatch =
+  TransferJobsPatch'
     { _tjpXgafv          :: !(Maybe Xgafv)
     , _tjpUploadProtocol :: !(Maybe Text)
     , _tjpAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data TransferJobsPatch = TransferJobsPatch'
     , _tjpUploadType     :: !(Maybe Text)
     , _tjpPayload        :: !UpdateTransferJobRequest
     , _tjpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferJobsPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ transferJobsPatch
     -> UpdateTransferJobRequest -- ^ 'tjpPayload'
     -> TransferJobsPatch
 transferJobsPatch pTjpJobName_ pTjpPayload_ =
-    TransferJobsPatch'
+  TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpUploadProtocol = Nothing
     , _tjpAccessToken = Nothing
@@ -107,6 +110,7 @@ transferJobsPatch pTjpJobName_ pTjpPayload_ =
     , _tjpPayload = pTjpPayload_
     , _tjpCallback = Nothing
     }
+
 
 -- | V1 error format.
 tjpXgafv :: Lens' TransferJobsPatch (Maybe Xgafv)

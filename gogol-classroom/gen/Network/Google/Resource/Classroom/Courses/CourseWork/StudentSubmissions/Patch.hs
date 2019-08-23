@@ -94,7 +94,8 @@ type CoursesCourseWorkStudentSubmissionsPatchResource
 -- student submission does not exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsPatch' smart constructor.
-data CoursesCourseWorkStudentSubmissionsPatch = CoursesCourseWorkStudentSubmissionsPatch'
+data CoursesCourseWorkStudentSubmissionsPatch =
+  CoursesCourseWorkStudentSubmissionsPatch'
     { _ccwsspXgafv          :: !(Maybe Xgafv)
     , _ccwsspUploadProtocol :: !(Maybe Text)
     , _ccwsspUpdateMask     :: !(Maybe GFieldMask)
@@ -105,7 +106,9 @@ data CoursesCourseWorkStudentSubmissionsPatch = CoursesCourseWorkStudentSubmissi
     , _ccwsspId             :: !Text
     , _ccwsspCallback       :: !(Maybe Text)
     , _ccwsspCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsPatch' with the minimum fields required to make a request.
 --
@@ -137,7 +140,7 @@ coursesCourseWorkStudentSubmissionsPatch
     -> Text -- ^ 'ccwsspCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsPatch
 coursesCourseWorkStudentSubmissionsPatch pCcwsspCourseId_ pCcwsspPayload_ pCcwsspId_ pCcwsspCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsPatch'
+  CoursesCourseWorkStudentSubmissionsPatch'
     { _ccwsspXgafv = Nothing
     , _ccwsspUploadProtocol = Nothing
     , _ccwsspUpdateMask = Nothing
@@ -149,6 +152,7 @@ coursesCourseWorkStudentSubmissionsPatch pCcwsspCourseId_ pCcwsspPayload_ pCcwss
     , _ccwsspCallback = Nothing
     , _ccwsspCourseWorkId = pCcwsspCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwsspXgafv :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe Xgafv)
@@ -212,7 +216,8 @@ ccwsspCourseWorkId
       (\ s a -> s{_ccwsspCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsPatch where
+           CoursesCourseWorkStudentSubmissionsPatch
+         where
         type Rs CoursesCourseWorkStudentSubmissionsPatch =
              StudentSubmission
         type Scopes CoursesCourseWorkStudentSubmissionsPatch

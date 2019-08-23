@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesDelete' request conforms to.
 type ContentCategoriesDeleteResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -54,10 +54,13 @@ type ContentCategoriesDeleteResource =
 -- | Deletes an existing content category.
 --
 -- /See:/ 'contentCategoriesDelete' smart constructor.
-data ContentCategoriesDelete = ContentCategoriesDelete'
+data ContentCategoriesDelete =
+  ContentCategoriesDelete'
     { _ccdProFileId :: !(Textual Int64)
     , _ccdId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContentCategoriesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ contentCategoriesDelete
     -> Int64 -- ^ 'ccdId'
     -> ContentCategoriesDelete
 contentCategoriesDelete pCcdProFileId_ pCcdId_ =
-    ContentCategoriesDelete'
-    { _ccdProFileId = _Coerce # pCcdProFileId_
-    , _ccdId = _Coerce # pCcdId_
-    }
+  ContentCategoriesDelete'
+    {_ccdProFileId = _Coerce # pCcdProFileId_, _ccdId = _Coerce # pCcdId_}
+
 
 -- | User profile ID associated with this request.
 ccdProFileId :: Lens' ContentCategoriesDelete Int64

@@ -59,12 +59,15 @@ type ChangesGetResource =
 -- | Fetch the representation of an existing Change.
 --
 -- /See:/ 'changesGet' smart constructor.
-data ChangesGet = ChangesGet'
+data ChangesGet =
+  ChangesGet'
     { _cgProject           :: !Text
     , _cgChangeId          :: !Text
     , _cgManagedZone       :: !Text
     , _cgClientOperationId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChangesGet' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ changesGet
     -> Text -- ^ 'cgManagedZone'
     -> ChangesGet
 changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
-    ChangesGet'
+  ChangesGet'
     { _cgProject = pCgProject_
     , _cgChangeId = pCgChangeId_
     , _cgManagedZone = pCgManagedZone_
     , _cgClientOperationId = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 cgProject :: Lens' ChangesGet Text

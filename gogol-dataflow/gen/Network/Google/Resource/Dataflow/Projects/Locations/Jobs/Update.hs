@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the state of an existing Cloud Dataflow job.
+-- Updates the state of an existing Cloud Dataflow job. To update the state
+-- of an existing job, we recommend using
+-- \`projects.locations.jobs.update\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.update\` is not recommended, as you can only
+-- update the state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.update@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
@@ -65,10 +70,16 @@ type ProjectsLocationsJobsUpdateResource =
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Job :> Put '[JSON] Job
 
--- | Updates the state of an existing Cloud Dataflow job.
+-- | Updates the state of an existing Cloud Dataflow job. To update the state
+-- of an existing job, we recommend using
+-- \`projects.locations.jobs.update\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.update\` is not recommended, as you can only
+-- update the state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsUpdate' smart constructor.
-data ProjectsLocationsJobsUpdate = ProjectsLocationsJobsUpdate'
+data ProjectsLocationsJobsUpdate =
+  ProjectsLocationsJobsUpdate'
     { _pljuXgafv          :: !(Maybe Xgafv)
     , _pljuJobId          :: !Text
     , _pljuUploadProtocol :: !(Maybe Text)
@@ -78,7 +89,9 @@ data ProjectsLocationsJobsUpdate = ProjectsLocationsJobsUpdate'
     , _pljuPayload        :: !Job
     , _pljuProjectId      :: !Text
     , _pljuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsUpdate' with the minimum fields required to make a request.
 --
@@ -108,7 +121,7 @@ projectsLocationsJobsUpdate
     -> Text -- ^ 'pljuProjectId'
     -> ProjectsLocationsJobsUpdate
 projectsLocationsJobsUpdate pPljuJobId_ pPljuLocation_ pPljuPayload_ pPljuProjectId_ =
-    ProjectsLocationsJobsUpdate'
+  ProjectsLocationsJobsUpdate'
     { _pljuXgafv = Nothing
     , _pljuJobId = pPljuJobId_
     , _pljuUploadProtocol = Nothing
@@ -119,6 +132,7 @@ projectsLocationsJobsUpdate pPljuJobId_ pPljuLocation_ pPljuPayload_ pPljuProjec
     , _pljuProjectId = pPljuProjectId_
     , _pljuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljuXgafv :: Lens' ProjectsLocationsJobsUpdate (Maybe Xgafv)
@@ -136,7 +150,9 @@ pljuUploadProtocol
   = lens _pljuUploadProtocol
       (\ s a -> s{_pljuUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pljuLocation :: Lens' ProjectsLocationsJobsUpdate Text
 pljuLocation
   = lens _pljuLocation (\ s a -> s{_pljuLocation = a})

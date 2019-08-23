@@ -73,7 +73,8 @@ type ProjectsRegionsWorkflowTemplatesTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesTestIAMPermissions' smart constructor.
-data ProjectsRegionsWorkflowTemplatesTestIAMPermissions = ProjectsRegionsWorkflowTemplatesTestIAMPermissions'
+data ProjectsRegionsWorkflowTemplatesTestIAMPermissions =
+  ProjectsRegionsWorkflowTemplatesTestIAMPermissions'
     { _prwttipXgafv          :: !(Maybe Xgafv)
     , _prwttipUploadProtocol :: !(Maybe Text)
     , _prwttipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsRegionsWorkflowTemplatesTestIAMPermissions = ProjectsRegionsWorkflo
     , _prwttipPayload        :: !TestIAMPermissionsRequest
     , _prwttipResource       :: !Text
     , _prwttipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsWorkflowTemplatesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsRegionsWorkflowTemplatesTestIAMPermissions
     -> Text -- ^ 'prwttipResource'
     -> ProjectsRegionsWorkflowTemplatesTestIAMPermissions
 projectsRegionsWorkflowTemplatesTestIAMPermissions pPrwttipPayload_ pPrwttipResource_ =
-    ProjectsRegionsWorkflowTemplatesTestIAMPermissions'
+  ProjectsRegionsWorkflowTemplatesTestIAMPermissions'
     { _prwttipXgafv = Nothing
     , _prwttipUploadProtocol = Nothing
     , _prwttipAccessToken = Nothing
@@ -114,6 +117,7 @@ projectsRegionsWorkflowTemplatesTestIAMPermissions pPrwttipPayload_ pPrwttipReso
     , _prwttipResource = pPrwttipResource_
     , _prwttipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prwttipXgafv :: Lens' ProjectsRegionsWorkflowTemplatesTestIAMPermissions (Maybe Xgafv)
@@ -159,7 +163,7 @@ prwttipCallback
       (\ s a -> s{_prwttipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsWorkflowTemplatesTestIAMPermissions
+           ProjectsRegionsWorkflowTemplatesTestIAMPermissions
          where
         type Rs
                ProjectsRegionsWorkflowTemplatesTestIAMPermissions

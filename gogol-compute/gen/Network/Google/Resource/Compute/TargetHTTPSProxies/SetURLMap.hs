@@ -60,12 +60,15 @@ type TargetHTTPSProxiesSetURLMapResource =
 -- | Changes the URL map for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetURLMap' smart constructor.
-data TargetHTTPSProxiesSetURLMap = TargetHTTPSProxiesSetURLMap'
+data TargetHTTPSProxiesSetURLMap =
+  TargetHTTPSProxiesSetURLMap'
     { _thpsumRequestId        :: !(Maybe Text)
     , _thpsumProject          :: !Text
     , _thpsumPayload          :: !URLMapReference
     , _thpsumTargetHTTPSProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetHTTPSProxiesSetURLMap' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ targetHTTPSProxiesSetURLMap
     -> Text -- ^ 'thpsumTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetURLMap
 targetHTTPSProxiesSetURLMap pThpsumProject_ pThpsumPayload_ pThpsumTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetURLMap'
+  TargetHTTPSProxiesSetURLMap'
     { _thpsumRequestId = Nothing
     , _thpsumProject = pThpsumProject_
     , _thpsumPayload = pThpsumPayload_
     , _thpsumTargetHTTPSProxy = pThpsumTargetHTTPSProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

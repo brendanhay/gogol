@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudtasks.projects.locations.queues.list@ method which the
 -- 'ProjectsLocationsQueuesList' request conforms to.
 type ProjectsLocationsQueuesListResource =
-     "v2beta3" :>
+     "v2" :>
        Capture "parent" Text :>
          "queues" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,7 +67,8 @@ type ProjectsLocationsQueuesListResource =
 -- | Lists queues. Queues are returned in lexicographical order.
 --
 -- /See:/ 'projectsLocationsQueuesList' smart constructor.
-data ProjectsLocationsQueuesList = ProjectsLocationsQueuesList'
+data ProjectsLocationsQueuesList =
+  ProjectsLocationsQueuesList'
     { _plqlParent         :: !Text
     , _plqlXgafv          :: !(Maybe Xgafv)
     , _plqlUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsLocationsQueuesList = ProjectsLocationsQueuesList'
     , _plqlPageToken      :: !(Maybe Text)
     , _plqlPageSize       :: !(Maybe (Textual Int32))
     , _plqlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsQueuesList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsLocationsQueuesList
     :: Text -- ^ 'plqlParent'
     -> ProjectsLocationsQueuesList
 projectsLocationsQueuesList pPlqlParent_ =
-    ProjectsLocationsQueuesList'
+  ProjectsLocationsQueuesList'
     { _plqlParent = pPlqlParent_
     , _plqlXgafv = Nothing
     , _plqlUploadProtocol = Nothing
@@ -115,6 +118,7 @@ projectsLocationsQueuesList pPlqlParent_ =
     , _plqlPageSize = Nothing
     , _plqlCallback = Nothing
     }
+
 
 -- | Required. The location name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\`

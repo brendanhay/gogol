@@ -59,11 +59,14 @@ type URLMapsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'urlMapsInsert' smart constructor.
-data URLMapsInsert = URLMapsInsert'
+data URLMapsInsert =
+  URLMapsInsert'
     { _umiRequestId :: !(Maybe Text)
     , _umiProject   :: !Text
     , _umiPayload   :: !URLMap
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLMapsInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ urlMapsInsert
     -> URLMap -- ^ 'umiPayload'
     -> URLMapsInsert
 urlMapsInsert pUmiProject_ pUmiPayload_ =
-    URLMapsInsert'
+  URLMapsInsert'
     { _umiRequestId = Nothing
     , _umiProject = pUmiProject_
     , _umiPayload = pUmiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

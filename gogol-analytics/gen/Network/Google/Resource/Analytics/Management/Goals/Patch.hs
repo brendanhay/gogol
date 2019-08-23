@@ -63,13 +63,16 @@ type ManagementGoalsPatchResource =
 -- | Updates an existing goal. This method supports patch semantics.
 --
 -- /See:/ 'managementGoalsPatch' smart constructor.
-data ManagementGoalsPatch = ManagementGoalsPatch'
+data ManagementGoalsPatch =
+  ManagementGoalsPatch'
     { _mgpWebPropertyId :: !Text
     , _mgpGoalId        :: !Text
     , _mgpProFileId     :: !Text
     , _mgpPayload       :: !Goal
     , _mgpAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementGoalsPatch' with the minimum fields required to make a request.
 --
@@ -92,13 +95,14 @@ managementGoalsPatch
     -> Text -- ^ 'mgpAccountId'
     -> ManagementGoalsPatch
 managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
-    ManagementGoalsPatch'
+  ManagementGoalsPatch'
     { _mgpWebPropertyId = pMgpWebPropertyId_
     , _mgpGoalId = pMgpGoalId_
     , _mgpProFileId = pMgpProFileId_
     , _mgpPayload = pMgpPayload_
     , _mgpAccountId = pMgpAccountId_
     }
+
 
 -- | Web property ID to update the goal.
 mgpWebPropertyId :: Lens' ManagementGoalsPatch Text

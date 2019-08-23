@@ -76,7 +76,8 @@ type SpreadsheetsValuesUpdateResource =
 -- spreadsheet ID, range, and a valueInputOption.
 --
 -- /See:/ 'spreadsheetsValuesUpdate' smart constructor.
-data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
+data SpreadsheetsValuesUpdate =
+  SpreadsheetsValuesUpdate'
     { _svuXgafv                        :: !(Maybe Xgafv)
     , _svuUploadProtocol               :: !(Maybe Text)
     , _svuAccessToken                  :: !(Maybe Text)
@@ -89,7 +90,9 @@ data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
     , _svuResponseDateTimeRenderOption :: !(Maybe Text)
     , _svuCallback                     :: !(Maybe Text)
     , _svuResponseValueRenderOption    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpreadsheetsValuesUpdate' with the minimum fields required to make a request.
 --
@@ -124,7 +127,7 @@ spreadsheetsValuesUpdate
     -> Text -- ^ 'svuRange'
     -> SpreadsheetsValuesUpdate
 spreadsheetsValuesUpdate pSvuSpreadsheetId_ pSvuPayload_ pSvuRange_ =
-    SpreadsheetsValuesUpdate'
+  SpreadsheetsValuesUpdate'
     { _svuXgafv = Nothing
     , _svuUploadProtocol = Nothing
     , _svuAccessToken = Nothing
@@ -138,6 +141,7 @@ spreadsheetsValuesUpdate pSvuSpreadsheetId_ pSvuPayload_ pSvuRange_ =
     , _svuCallback = Nothing
     , _svuResponseValueRenderOption = Nothing
     }
+
 
 -- | V1 error format.
 svuXgafv :: Lens' SpreadsheetsValuesUpdate (Maybe Xgafv)

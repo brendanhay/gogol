@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Transfers data from partner SaaS applications to Google BigQuery on a
--- scheduled, managed basis.
+-- Schedule queries or transfer external data from SaaS applications to
+-- Google BigQuery on a regular basis.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference>
 module Network.Google.BigQueryDataTransfer
@@ -86,6 +86,9 @@ module Network.Google.BigQueryDataTransfer
     -- ** bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
     , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
 
+    -- ** bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns
+    , module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
+
     -- ** bigquerydatatransfer.projects.transferConfigs.create
     , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
 
@@ -116,6 +119,9 @@ module Network.Google.BigQueryDataTransfer
     -- ** bigquerydatatransfer.projects.transferConfigs.scheduleRuns
     , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
 
+    -- ** bigquerydatatransfer.projects.transferConfigs.startManualRuns
+    , module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
+
     -- * Types
 
     -- ** DataSourceParameterType
@@ -134,22 +140,28 @@ module Network.Google.BigQueryDataTransfer
     , llrNextPageToken
     , llrLocations
 
+    -- ** TimeRange
+    , TimeRange
+    , timeRange
+    , trStartTime
+    , trEndTime
+
     -- ** TransferRun
     , TransferRun
     , transferRun
-    , trRunTime
-    , trErrorStatus
-    , trState
-    , trSchedule
-    , trStartTime
-    , trScheduleTime
-    , trDataSourceId
-    , trParams
-    , trUserId
-    , trUpdateTime
-    , trName
-    , trEndTime
-    , trDestinationDataSetId
+    , tRunTime
+    , tErrorStatus
+    , tState
+    , tSchedule
+    , tStartTime
+    , tScheduleTime
+    , tDataSourceId
+    , tParams
+    , tUserId
+    , tUpdateTime
+    , tName
+    , tEndTime
+    , tDestinationDataSetId
 
     -- ** CheckValidCredsRequest
     , CheckValidCredsRequest
@@ -178,6 +190,13 @@ module Network.Google.BigQueryDataTransfer
     -- ** Empty
     , Empty
     , empty
+
+    -- ** ScheduleOptions
+    , ScheduleOptions
+    , scheduleOptions
+    , soStartTime
+    , soDisableAutoScheduling
+    , soEndTime
 
     -- ** TransferRunState
     , TransferRunState (..)
@@ -239,6 +258,12 @@ module Network.Google.BigQueryDataTransfer
     , ldsrNextPageToken
     , ldsrDataSources
 
+    -- ** StartManualTransferRunsRequest
+    , StartManualTransferRunsRequest
+    , startManualTransferRunsRequest
+    , smtrrRequestedRunTime
+    , smtrrRequestedTimeRange
+
     -- ** Xgafv
     , Xgafv (..)
 
@@ -285,6 +310,11 @@ module Network.Google.BigQueryDataTransfer
     , locationLabels
     , llAddtional
 
+    -- ** StartManualTransferRunsResponse
+    , StartManualTransferRunsResponse
+    , startManualTransferRunsResponse
+    , smtrrRuns
+
     -- ** LocationMetadata
     , LocationMetadata
     , locationMetadata
@@ -307,6 +337,7 @@ module Network.Google.BigQueryDataTransfer
     , transferConfig
     , tcState
     , tcSchedule
+    , tcScheduleOptions
     , tcDisabled
     , tcDataSourceId
     , tcParams
@@ -340,6 +371,7 @@ import           Network.Google.Resource.BigQueryDataTransfer.Projects.Locations
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
+import           Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Delete
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
@@ -350,6 +382,7 @@ import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferC
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
 import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
+import           Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
 
 {- $resources
 TODO
@@ -367,6 +400,7 @@ type BigQueryDataTransferAPI =
        :<|> ProjectsTransferConfigsRunsDeleteResource
        :<|> ProjectsTransferConfigsScheduleRunsResource
        :<|> ProjectsTransferConfigsListResource
+       :<|> ProjectsTransferConfigsStartManualRunsResource
        :<|> ProjectsTransferConfigsPatchResource
        :<|> ProjectsTransferConfigsGetResource
        :<|> ProjectsTransferConfigsCreateResource
@@ -384,6 +418,8 @@ type BigQueryDataTransferAPI =
        :<|>
        ProjectsLocationsTransferConfigsScheduleRunsResource
        :<|> ProjectsLocationsTransferConfigsListResource
+       :<|>
+       ProjectsLocationsTransferConfigsStartManualRunsResource
        :<|> ProjectsLocationsTransferConfigsPatchResource
        :<|> ProjectsLocationsTransferConfigsGetResource
        :<|> ProjectsLocationsTransferConfigsCreateResource

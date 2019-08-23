@@ -59,14 +59,17 @@ type SitesDomainsGetResource =
 -- | Gets a domain mapping on the specified site.
 --
 -- /See:/ 'sitesDomainsGet' smart constructor.
-data SitesDomainsGet = SitesDomainsGet'
+data SitesDomainsGet =
+  SitesDomainsGet'
     { _sdgXgafv          :: !(Maybe Xgafv)
     , _sdgUploadProtocol :: !(Maybe Text)
     , _sdgAccessToken    :: !(Maybe Text)
     , _sdgUploadType     :: !(Maybe Text)
     , _sdgName           :: !Text
     , _sdgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesDomainsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ sitesDomainsGet
     :: Text -- ^ 'sdgName'
     -> SitesDomainsGet
 sitesDomainsGet pSdgName_ =
-    SitesDomainsGet'
+  SitesDomainsGet'
     { _sdgXgafv = Nothing
     , _sdgUploadProtocol = Nothing
     , _sdgAccessToken = Nothing
@@ -95,6 +98,7 @@ sitesDomainsGet pSdgName_ =
     , _sdgName = pSdgName_
     , _sdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdgXgafv :: Lens' SitesDomainsGet (Maybe Xgafv)

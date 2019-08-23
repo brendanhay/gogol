@@ -76,7 +76,8 @@ type AppsServicesVersionsInstancesListResource =
 -- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list).
 --
 -- /See:/ 'appsServicesVersionsInstancesList' smart constructor.
-data AppsServicesVersionsInstancesList = AppsServicesVersionsInstancesList'
+data AppsServicesVersionsInstancesList =
+  AppsServicesVersionsInstancesList'
     { _asvilXgafv          :: !(Maybe Xgafv)
     , _asvilUploadProtocol :: !(Maybe Text)
     , _asvilAccessToken    :: !(Maybe Text)
@@ -87,7 +88,9 @@ data AppsServicesVersionsInstancesList = AppsServicesVersionsInstancesList'
     , _asvilServicesId     :: !Text
     , _asvilPageSize       :: !(Maybe (Textual Int32))
     , _asvilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsServicesVersionsInstancesList' with the minimum fields required to make a request.
 --
@@ -118,7 +121,7 @@ appsServicesVersionsInstancesList
     -> Text -- ^ 'asvilServicesId'
     -> AppsServicesVersionsInstancesList
 appsServicesVersionsInstancesList pAsvilVersionsId_ pAsvilAppsId_ pAsvilServicesId_ =
-    AppsServicesVersionsInstancesList'
+  AppsServicesVersionsInstancesList'
     { _asvilXgafv = Nothing
     , _asvilUploadProtocol = Nothing
     , _asvilAccessToken = Nothing
@@ -130,6 +133,7 @@ appsServicesVersionsInstancesList pAsvilVersionsId_ pAsvilAppsId_ pAsvilServices
     , _asvilPageSize = Nothing
     , _asvilCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvilXgafv :: Lens' AppsServicesVersionsInstancesList (Maybe Xgafv)
@@ -192,7 +196,8 @@ asvilCallback
       (\ s a -> s{_asvilCallback = a})
 
 instance GoogleRequest
-         AppsServicesVersionsInstancesList where
+           AppsServicesVersionsInstancesList
+         where
         type Rs AppsServicesVersionsInstancesList =
              ListInstancesResponse
         type Scopes AppsServicesVersionsInstancesList =

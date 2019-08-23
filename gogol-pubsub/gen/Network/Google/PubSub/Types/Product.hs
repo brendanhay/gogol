@@ -23,14 +23,20 @@ import           Network.Google.PubSub.Types.Sum
 -- | Configuration for a push delivery endpoint.
 --
 -- /See:/ 'pushConfig' smart constructor.
-data PushConfig = PushConfig'
-    { _pcAttributes   :: !(Maybe PushConfigAttributes)
+data PushConfig =
+  PushConfig'
+    { _pcOidcToken    :: !(Maybe OidcToken)
+    , _pcAttributes   :: !(Maybe PushConfigAttributes)
     , _pcPushEndpoint :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcOidcToken'
 --
 -- * 'pcAttributes'
 --
@@ -38,10 +44,15 @@ data PushConfig = PushConfig'
 pushConfig
     :: PushConfig
 pushConfig =
-    PushConfig'
-    { _pcAttributes = Nothing
-    , _pcPushEndpoint = Nothing
-    }
+  PushConfig'
+    {_pcOidcToken = Nothing, _pcAttributes = Nothing, _pcPushEndpoint = Nothing}
+
+
+-- | If specified, Pub\/Sub will generate and attach an OIDC JWT token as an
+-- \`Authorization\` header in the HTTP request for every pushed message.
+pcOidcToken :: Lens' PushConfig (Maybe OidcToken)
+pcOidcToken
+  = lens _pcOidcToken (\ s a -> s{_pcOidcToken = a})
 
 -- | Endpoint configuration attributes. Every endpoint has a set of API
 -- supported attributes that can be used to control different aspects of
@@ -74,22 +85,27 @@ instance FromJSON PushConfig where
           = withObject "PushConfig"
               (\ o ->
                  PushConfig' <$>
-                   (o .:? "attributes") <*> (o .:? "pushEndpoint"))
+                   (o .:? "oidcToken") <*> (o .:? "attributes") <*>
+                     (o .:? "pushEndpoint"))
 
 instance ToJSON PushConfig where
         toJSON PushConfig'{..}
           = object
               (catMaybes
-                 [("attributes" .=) <$> _pcAttributes,
+                 [("oidcToken" .=) <$> _pcOidcToken,
+                  ("attributes" .=) <$> _pcAttributes,
                   ("pushEndpoint" .=) <$> _pcPushEndpoint])
 
 -- | A message and its corresponding acknowledgment ID.
 --
 -- /See:/ 'receivedMessage' smart constructor.
-data ReceivedMessage = ReceivedMessage'
+data ReceivedMessage =
+  ReceivedMessage'
     { _rmAckId   :: !(Maybe Text)
     , _rmMessage :: !(Maybe PubsubMessage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReceivedMessage' with the minimum fields required to make a request.
 --
@@ -100,11 +116,8 @@ data ReceivedMessage = ReceivedMessage'
 -- * 'rmMessage'
 receivedMessage
     :: ReceivedMessage
-receivedMessage =
-    ReceivedMessage'
-    { _rmAckId = Nothing
-    , _rmMessage = Nothing
-    }
+receivedMessage = ReceivedMessage' {_rmAckId = Nothing, _rmMessage = Nothing}
+
 
 -- | This ID can be used to acknowledge the received message.
 rmAckId :: Lens' ReceivedMessage (Maybe Text)
@@ -134,17 +147,17 @@ instance ToJSON ReceivedMessage where
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'snapshot' smart constructor.
-data Snapshot = Snapshot'
+data Snapshot =
+  Snapshot'
     { _sTopic      :: !(Maybe Text)
     , _sName       :: !(Maybe Text)
     , _sLabels     :: !(Maybe SnapshotLabels)
     , _sExpireTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
@@ -160,12 +173,13 @@ data Snapshot = Snapshot'
 snapshot
     :: Snapshot
 snapshot =
-    Snapshot'
+  Snapshot'
     { _sTopic = Nothing
     , _sName = Nothing
     , _sLabels = Nothing
     , _sExpireTime = Nothing
     }
+
 
 -- | The name of the topic from which this snapshot is retaining messages.
 sTopic :: Lens' Snapshot (Maybe Text)
@@ -213,15 +227,15 @@ instance ToJSON Snapshot where
                   ("expireTime" .=) <$> _sExpireTime])
 
 -- | Response for the \`ListTopicSnapshots\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'listTopicSnapshotsResponse' smart constructor.
-data ListTopicSnapshotsResponse = ListTopicSnapshotsResponse'
+data ListTopicSnapshotsResponse =
+  ListTopicSnapshotsResponse'
     { _ltsrNextPageToken :: !(Maybe Text)
     , _ltsrSnapshots     :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTopicSnapshotsResponse' with the minimum fields required to make a request.
 --
@@ -233,10 +247,9 @@ data ListTopicSnapshotsResponse = ListTopicSnapshotsResponse'
 listTopicSnapshotsResponse
     :: ListTopicSnapshotsResponse
 listTopicSnapshotsResponse =
-    ListTopicSnapshotsResponse'
-    { _ltsrNextPageToken = Nothing
-    , _ltsrSnapshots = Nothing
-    }
+  ListTopicSnapshotsResponse'
+    {_ltsrNextPageToken = Nothing, _ltsrSnapshots = Nothing}
+
 
 -- | If not empty, indicates that there may be more snapshots that match the
 -- request; this value should be passed in a new
@@ -274,12 +287,15 @@ instance ToJSON ListTopicSnapshotsResponse where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -295,12 +311,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -345,13 +362,76 @@ instance ToJSON Expr where
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
 
+-- | Contains information needed for generating an [OpenID Connect
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect).
+--
+-- /See:/ 'oidcToken' smart constructor.
+data OidcToken =
+  OidcToken'
+    { _otAudience            :: !(Maybe Text)
+    , _otServiceAccountEmail :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OidcToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'otAudience'
+--
+-- * 'otServiceAccountEmail'
+oidcToken
+    :: OidcToken
+oidcToken = OidcToken' {_otAudience = Nothing, _otServiceAccountEmail = Nothing}
+
+
+-- | Audience to be used when generating OIDC token. The audience claim
+-- identifies the recipients that the JWT is intended for. The audience
+-- value is a single case-sensitive string. Having multiple values (array)
+-- for the audience field is not supported. More info about the OIDC JWT
+-- token audience here:
+-- https:\/\/tools.ietf.org\/html\/rfc7519#section-4.1.3 Note: if not
+-- specified, the Push endpoint URL will be used.
+otAudience :: Lens' OidcToken (Maybe Text)
+otAudience
+  = lens _otAudience (\ s a -> s{_otAudience = a})
+
+-- | [Service account
+-- email](https:\/\/cloud.google.com\/iam\/docs\/service-accounts) to be
+-- used for generating the OIDC token. The caller (for CreateSubscription,
+-- UpdateSubscription, and ModifyPushConfig RPCs) must have the
+-- iam.serviceAccounts.actAs permission for the service account.
+otServiceAccountEmail :: Lens' OidcToken (Maybe Text)
+otServiceAccountEmail
+  = lens _otServiceAccountEmail
+      (\ s a -> s{_otServiceAccountEmail = a})
+
+instance FromJSON OidcToken where
+        parseJSON
+          = withObject "OidcToken"
+              (\ o ->
+                 OidcToken' <$>
+                   (o .:? "audience") <*> (o .:? "serviceAccountEmail"))
+
+instance ToJSON OidcToken where
+        toJSON OidcToken'{..}
+          = object
+              (catMaybes
+                 [("audience" .=) <$> _otAudience,
+                  ("serviceAccountEmail" .=) <$>
+                    _otServiceAccountEmail])
+
 -- | Request for the ModifyAckDeadline method.
 --
 -- /See:/ 'modifyAckDeadlineRequest' smart constructor.
-data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest'
+data ModifyAckDeadlineRequest =
+  ModifyAckDeadlineRequest'
     { _madrAckIds             :: !(Maybe [Text])
     , _madrAckDeadlineSeconds :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ModifyAckDeadlineRequest' with the minimum fields required to make a request.
 --
@@ -363,10 +443,9 @@ data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest'
 modifyAckDeadlineRequest
     :: ModifyAckDeadlineRequest
 modifyAckDeadlineRequest =
-    ModifyAckDeadlineRequest'
-    { _madrAckIds = Nothing
-    , _madrAckDeadlineSeconds = Nothing
-    }
+  ModifyAckDeadlineRequest'
+    {_madrAckIds = Nothing, _madrAckDeadlineSeconds = Nothing}
+
 
 -- | List of acknowledgment IDs.
 madrAckIds :: Lens' ModifyAckDeadlineRequest [Text]
@@ -408,9 +487,12 @@ instance ToJSON ModifyAckDeadlineRequest where
 -- | Request for the ModifyPushConfig method.
 --
 -- /See:/ 'modifyPushConfigRequest' smart constructor.
-newtype ModifyPushConfigRequest = ModifyPushConfigRequest'
+newtype ModifyPushConfigRequest =
+  ModifyPushConfigRequest'
     { _mpcrPushConfig :: Maybe PushConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ModifyPushConfigRequest' with the minimum fields required to make a request.
 --
@@ -419,10 +501,8 @@ newtype ModifyPushConfigRequest = ModifyPushConfigRequest'
 -- * 'mpcrPushConfig'
 modifyPushConfigRequest
     :: ModifyPushConfigRequest
-modifyPushConfigRequest =
-    ModifyPushConfigRequest'
-    { _mpcrPushConfig = Nothing
-    }
+modifyPushConfigRequest = ModifyPushConfigRequest' {_mpcrPushConfig = Nothing}
+
 
 -- | The push configuration for future deliveries. An empty \`pushConfig\`
 -- indicates that the Pub\/Sub system should stop pushing messages from the
@@ -453,14 +533,16 @@ instance ToJSON ModifyPushConfigRequest where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -478,12 +560,15 @@ instance ToJSON Empty where
 -- information about message limits.
 --
 -- /See:/ 'pubsubMessage' smart constructor.
-data PubsubMessage = PubsubMessage'
+data PubsubMessage =
+  PubsubMessage'
     { _pmData        :: !(Maybe Bytes)
     , _pmPublishTime :: !(Maybe DateTime')
     , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PubsubMessage' with the minimum fields required to make a request.
 --
@@ -499,12 +584,13 @@ data PubsubMessage = PubsubMessage'
 pubsubMessage
     :: PubsubMessage
 pubsubMessage =
-    PubsubMessage'
+  PubsubMessage'
     { _pmData = Nothing
     , _pmPublishTime = Nothing
     , _pmAttributes = Nothing
     , _pmMessageId = Nothing
     }
+
 
 -- | The message data field. If this field is empty, the message must contain
 -- at least one attribute.
@@ -557,10 +643,13 @@ instance ToJSON PubsubMessage where
 -- | Response for the \`ListTopicSubscriptions\` method.
 --
 -- /See:/ 'listTopicSubscriptionsResponse' smart constructor.
-data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse'
+data ListTopicSubscriptionsResponse =
+  ListTopicSubscriptionsResponse'
     { _lNextPageToken :: !(Maybe Text)
     , _lSubscriptions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTopicSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -572,10 +661,9 @@ data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse'
 listTopicSubscriptionsResponse
     :: ListTopicSubscriptionsResponse
 listTopicSubscriptionsResponse =
-    ListTopicSubscriptionsResponse'
-    { _lNextPageToken = Nothing
-    , _lSubscriptions = Nothing
-    }
+  ListTopicSubscriptionsResponse'
+    {_lNextPageToken = Nothing, _lSubscriptions = Nothing}
+
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
@@ -612,10 +700,13 @@ instance ToJSON ListTopicSubscriptionsResponse where
 -- | Response for the \`ListTopics\` method.
 --
 -- /See:/ 'listTopicsResponse' smart constructor.
-data ListTopicsResponse = ListTopicsResponse'
+data ListTopicsResponse =
+  ListTopicsResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTopics        :: !(Maybe [Topic])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListTopicsResponse' with the minimum fields required to make a request.
 --
@@ -627,10 +718,8 @@ data ListTopicsResponse = ListTopicsResponse'
 listTopicsResponse
     :: ListTopicsResponse
 listTopicsResponse =
-    ListTopicsResponse'
-    { _ltrNextPageToken = Nothing
-    , _ltrTopics = Nothing
-    }
+  ListTopicsResponse' {_ltrNextPageToken = Nothing, _ltrTopics = Nothing}
+
 
 -- | If not empty, indicates that there may be more topics that match the
 -- request; this value should be passed in a new \`ListTopicsRequest\`.
@@ -664,9 +753,12 @@ instance ToJSON ListTopicsResponse where
 -- | Response for the \`Pull\` method.
 --
 -- /See:/ 'pullResponse' smart constructor.
-newtype PullResponse = PullResponse'
+newtype PullResponse =
+  PullResponse'
     { _prReceivedMessages :: Maybe [ReceivedMessage]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PullResponse' with the minimum fields required to make a request.
 --
@@ -675,10 +767,8 @@ newtype PullResponse = PullResponse'
 -- * 'prReceivedMessages'
 pullResponse
     :: PullResponse
-pullResponse =
-    PullResponse'
-    { _prReceivedMessages = Nothing
-    }
+pullResponse = PullResponse' {_prReceivedMessages = Nothing}
+
 
 -- | Received Pub\/Sub messages. The list will be empty if there are no more
 -- messages available in the backlog. For JSON, the response can be
@@ -706,15 +796,15 @@ instance ToJSON PullResponse where
                  [("receivedMessages" .=) <$> _prReceivedMessages])
 
 -- | Response for the \`ListSnapshots\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'listSnapshotsResponse' smart constructor.
-data ListSnapshotsResponse = ListSnapshotsResponse'
+data ListSnapshotsResponse =
+  ListSnapshotsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSnapshots     :: !(Maybe [Snapshot])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSnapshotsResponse' with the minimum fields required to make a request.
 --
@@ -726,10 +816,8 @@ data ListSnapshotsResponse = ListSnapshotsResponse'
 listSnapshotsResponse
     :: ListSnapshotsResponse
 listSnapshotsResponse =
-    ListSnapshotsResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrSnapshots = Nothing
-    }
+  ListSnapshotsResponse' {_lsrNextPageToken = Nothing, _lsrSnapshots = Nothing}
+
 
 -- | If not empty, indicates that there may be more snapshot that match the
 -- request; this value should be passed in a new \`ListSnapshotsRequest\`.
@@ -763,9 +851,12 @@ instance ToJSON ListSnapshotsResponse where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
+newtype SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -774,10 +865,8 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
-setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
-    }
+setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -797,15 +886,15 @@ instance ToJSON SetIAMPolicyRequest where
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | Request for the \`CreateSnapshot\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'createSnapshotRequest' smart constructor.
-data CreateSnapshotRequest = CreateSnapshotRequest'
+data CreateSnapshotRequest =
+  CreateSnapshotRequest'
     { _csrLabels       :: !(Maybe CreateSnapshotRequestLabels)
     , _csrSubscription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateSnapshotRequest' with the minimum fields required to make a request.
 --
@@ -817,10 +906,8 @@ data CreateSnapshotRequest = CreateSnapshotRequest'
 createSnapshotRequest
     :: CreateSnapshotRequest
 createSnapshotRequest =
-    CreateSnapshotRequest'
-    { _csrLabels = Nothing
-    , _csrSubscription = Nothing
-    }
+  CreateSnapshotRequest' {_csrLabels = Nothing, _csrSubscription = Nothing}
+
 
 -- | See
 -- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
@@ -856,15 +943,15 @@ instance ToJSON CreateSnapshotRequest where
                   ("subscription" .=) <$> _csrSubscription])
 
 -- | Request for the \`Seek\` method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'seekRequest' smart constructor.
-data SeekRequest = SeekRequest'
+data SeekRequest =
+  SeekRequest'
     { _srSnapshot :: !(Maybe Text)
     , _srTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SeekRequest' with the minimum fields required to make a request.
 --
@@ -875,11 +962,8 @@ data SeekRequest = SeekRequest'
 -- * 'srTime'
 seekRequest
     :: SeekRequest
-seekRequest =
-    SeekRequest'
-    { _srSnapshot = Nothing
-    , _srTime = Nothing
-    }
+seekRequest = SeekRequest' {_srSnapshot = Nothing, _srTime = Nothing}
+
 
 -- | The snapshot to seek to. The snapshot\'s topic must be the same as that
 -- of the provided subscription. Format is
@@ -920,10 +1004,13 @@ instance ToJSON SeekRequest where
 -- | A topic resource.
 --
 -- /See:/ 'topic' smart constructor.
-data Topic = Topic'
+data Topic =
+  Topic'
     { _tName   :: !(Maybe Text)
     , _tLabels :: !(Maybe TopicLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Topic' with the minimum fields required to make a request.
 --
@@ -934,11 +1021,8 @@ data Topic = Topic'
 -- * 'tLabels'
 topic
     :: Topic
-topic =
-    Topic'
-    { _tName = Nothing
-    , _tLabels = Nothing
-    }
+topic = Topic' {_tName = Nothing, _tLabels = Nothing}
+
 
 -- | The name of the topic. It must have the format
 -- \`\"projects\/{project}\/topics\/{topic}\"\`. \`{topic}\` must start
@@ -971,9 +1055,12 @@ instance ToJSON Topic where
 -- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
 --
 -- /See:/ 'topicLabels' smart constructor.
-newtype TopicLabels = TopicLabels'
+newtype TopicLabels =
+  TopicLabels'
     { _tlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TopicLabels' with the minimum fields required to make a request.
 --
@@ -984,9 +1071,8 @@ topicLabels
     :: HashMap Text Text -- ^ 'tlAddtional'
     -> TopicLabels
 topicLabels pTlAddtional_ =
-    TopicLabels'
-    { _tlAddtional = _Coerce # pTlAddtional_
-    }
+  TopicLabels' {_tlAddtional = _Coerce # pTlAddtional_}
+
 
 tlAddtional :: Lens' TopicLabels (HashMap Text Text)
 tlAddtional
@@ -1005,9 +1091,12 @@ instance ToJSON TopicLabels where
 -- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
 --
 -- /See:/ 'createSnapshotRequestLabels' smart constructor.
-newtype CreateSnapshotRequestLabels = CreateSnapshotRequestLabels'
+newtype CreateSnapshotRequestLabels =
+  CreateSnapshotRequestLabels'
     { _csrlAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateSnapshotRequestLabels' with the minimum fields required to make a request.
 --
@@ -1018,9 +1107,8 @@ createSnapshotRequestLabels
     :: HashMap Text Text -- ^ 'csrlAddtional'
     -> CreateSnapshotRequestLabels
 createSnapshotRequestLabels pCsrlAddtional_ =
-    CreateSnapshotRequestLabels'
-    { _csrlAddtional = _Coerce # pCsrlAddtional_
-    }
+  CreateSnapshotRequestLabels' {_csrlAddtional = _Coerce # pCsrlAddtional_}
+
 
 csrlAddtional :: Lens' CreateSnapshotRequestLabels (HashMap Text Text)
 csrlAddtional
@@ -1038,15 +1126,15 @@ instance ToJSON CreateSnapshotRequestLabels where
         toJSON = toJSON . _csrlAddtional
 
 -- | Request for the UpdateSnapshot method.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'updateSnapshotRequest' smart constructor.
-data UpdateSnapshotRequest = UpdateSnapshotRequest'
+data UpdateSnapshotRequest =
+  UpdateSnapshotRequest'
     { _usrSnapshot   :: !(Maybe Snapshot)
     , _usrUpdateMask :: !(Maybe GFieldMask)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateSnapshotRequest' with the minimum fields required to make a request.
 --
@@ -1058,10 +1146,8 @@ data UpdateSnapshotRequest = UpdateSnapshotRequest'
 updateSnapshotRequest
     :: UpdateSnapshotRequest
 updateSnapshotRequest =
-    UpdateSnapshotRequest'
-    { _usrSnapshot = Nothing
-    , _usrUpdateMask = Nothing
-    }
+  UpdateSnapshotRequest' {_usrSnapshot = Nothing, _usrUpdateMask = Nothing}
+
 
 -- | The updated snapshot object.
 usrSnapshot :: Lens' UpdateSnapshotRequest (Maybe Snapshot)
@@ -1092,10 +1178,13 @@ instance ToJSON UpdateSnapshotRequest where
 -- | Request for the \`Pull\` method.
 --
 -- /See:/ 'pullRequest' smart constructor.
-data PullRequest = PullRequest'
+data PullRequest =
+  PullRequest'
     { _prMaxMessages       :: !(Maybe (Textual Int32))
     , _prReturnImmediately :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PullRequest' with the minimum fields required to make a request.
 --
@@ -1107,10 +1196,8 @@ data PullRequest = PullRequest'
 pullRequest
     :: PullRequest
 pullRequest =
-    PullRequest'
-    { _prMaxMessages = Nothing
-    , _prReturnImmediately = Nothing
-    }
+  PullRequest' {_prMaxMessages = Nothing, _prReturnImmediately = Nothing}
+
 
 -- | The maximum number of messages returned for this request. The Pub\/Sub
 -- system may return fewer than the number specified.
@@ -1147,9 +1234,12 @@ instance ToJSON PullRequest where
 -- | Optional attributes for this message.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
-newtype PubsubMessageAttributes = PubsubMessageAttributes'
+newtype PubsubMessageAttributes =
+  PubsubMessageAttributes'
     { _pmaAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
@@ -1160,9 +1250,8 @@ pubsubMessageAttributes
     :: HashMap Text Text -- ^ 'pmaAddtional'
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
-    PubsubMessageAttributes'
-    { _pmaAddtional = _Coerce # pPmaAddtional_
-    }
+  PubsubMessageAttributes' {_pmaAddtional = _Coerce # pPmaAddtional_}
+
 
 pmaAddtional :: Lens' PubsubMessageAttributes (HashMap Text Text)
 pmaAddtional
@@ -1181,9 +1270,12 @@ instance ToJSON PubsubMessageAttributes where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1193,9 +1285,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1223,9 +1314,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Response for the \`Publish\` method.
 --
 -- /See:/ 'publishResponse' smart constructor.
-newtype PublishResponse = PublishResponse'
+newtype PublishResponse =
+  PublishResponse'
     { _prMessageIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublishResponse' with the minimum fields required to make a request.
 --
@@ -1234,10 +1328,8 @@ newtype PublishResponse = PublishResponse'
 -- * 'prMessageIds'
 publishResponse
     :: PublishResponse
-publishResponse =
-    PublishResponse'
-    { _prMessageIds = Nothing
-    }
+publishResponse = PublishResponse' {_prMessageIds = Nothing}
+
 
 -- | The server-assigned ID of each published message, in the same order as
 -- the messages in the request. IDs are guaranteed to be unique within the
@@ -1262,9 +1354,12 @@ instance ToJSON PublishResponse where
 -- | Request for the Publish method.
 --
 -- /See:/ 'publishRequest' smart constructor.
-newtype PublishRequest = PublishRequest'
+newtype PublishRequest =
+  PublishRequest'
     { _prMessages :: Maybe [PubsubMessage]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublishRequest' with the minimum fields required to make a request.
 --
@@ -1273,10 +1368,8 @@ newtype PublishRequest = PublishRequest'
 -- * 'prMessages'
 publishRequest
     :: PublishRequest
-publishRequest =
-    PublishRequest'
-    { _prMessages = Nothing
-    }
+publishRequest = PublishRequest' {_prMessages = Nothing}
+
 
 -- | The messages to publish.
 prMessages :: Lens' PublishRequest [PubsubMessage]
@@ -1299,9 +1392,12 @@ instance ToJSON PublishRequest where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1311,9 +1407,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1356,11 +1451,14 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pEtag     :: !(Maybe Bytes)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1373,12 +1471,8 @@ data Policy = Policy'
 -- * 'pBindings'
 policy
     :: Policy
-policy =
-    Policy'
-    { _pEtag = Nothing
-    , _pVersion = Nothing
-    , _pBindings = Nothing
-    }
+policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1428,14 +1522,16 @@ instance ToJSON Policy where
 --
 -- /See:/ 'seekResponse' smart constructor.
 data SeekResponse =
-    SeekResponse'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  SeekResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SeekResponse' with the minimum fields required to make a request.
 --
 seekResponse
     :: SeekResponse
 seekResponse = SeekResponse'
+
 
 instance FromJSON SeekResponse where
         parseJSON
@@ -1449,9 +1545,12 @@ instance ToJSON SeekResponse where
 -- automatic resource deletion).
 --
 -- /See:/ 'expirationPolicy' smart constructor.
-newtype ExpirationPolicy = ExpirationPolicy'
+newtype ExpirationPolicy =
+  ExpirationPolicy'
     { _epTtl :: Maybe GDuration
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExpirationPolicy' with the minimum fields required to make a request.
 --
@@ -1460,10 +1559,8 @@ newtype ExpirationPolicy = ExpirationPolicy'
 -- * 'epTtl'
 expirationPolicy
     :: ExpirationPolicy
-expirationPolicy =
-    ExpirationPolicy'
-    { _epTtl = Nothing
-    }
+expirationPolicy = ExpirationPolicy' {_epTtl = Nothing}
+
 
 -- | Specifies the \"time-to-live\" duration for an associated resource. The
 -- resource expires if it is not active for a period of \`ttl\`. The
@@ -1502,9 +1599,12 @@ instance ToJSON ExpirationPolicy where
 -- uses the push format defined in the v1 Pub\/Sub API.
 --
 -- /See:/ 'pushConfigAttributes' smart constructor.
-newtype PushConfigAttributes = PushConfigAttributes'
+newtype PushConfigAttributes =
+  PushConfigAttributes'
     { _pcaAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
 --
@@ -1515,9 +1615,8 @@ pushConfigAttributes
     :: HashMap Text Text -- ^ 'pcaAddtional'
     -> PushConfigAttributes
 pushConfigAttributes pPcaAddtional_ =
-    PushConfigAttributes'
-    { _pcaAddtional = _Coerce # pPcaAddtional_
-    }
+  PushConfigAttributes' {_pcaAddtional = _Coerce # pPcaAddtional_}
+
 
 pcaAddtional :: Lens' PushConfigAttributes (HashMap Text Text)
 pcaAddtional
@@ -1536,7 +1635,8 @@ instance ToJSON PushConfigAttributes where
 -- | A subscription resource.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription'
+data Subscription =
+  Subscription'
     { _subPushConfig               :: !(Maybe PushConfig)
     , _subMessageRetentionDuration :: !(Maybe GDuration)
     , _subTopic                    :: !(Maybe Text)
@@ -1545,7 +1645,9 @@ data Subscription = Subscription'
     , _subRetainAckedMessages      :: !(Maybe Bool)
     , _subAckDeadlineSeconds       :: !(Maybe (Textual Int32))
     , _subExpirationPolicy         :: !(Maybe ExpirationPolicy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -1569,7 +1671,7 @@ data Subscription = Subscription'
 subscription
     :: Subscription
 subscription =
-    Subscription'
+  Subscription'
     { _subPushConfig = Nothing
     , _subMessageRetentionDuration = Nothing
     , _subTopic = Nothing
@@ -1579,6 +1681,7 @@ subscription =
     , _subAckDeadlineSeconds = Nothing
     , _subExpirationPolicy = Nothing
     }
+
 
 -- | If push delivery is used with this subscription, this field is used to
 -- configure it. An empty \`pushConfig\` signifies that the subscriber will
@@ -1594,9 +1697,6 @@ subPushConfig
 -- retention of acknowledged messages, and thus configures how far back in
 -- time a \`Seek\` can be done. Defaults to 7 days. Cannot be more than 7
 -- days or less than 10 minutes.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 subMessageRetentionDuration :: Lens' Subscription (Maybe Scientific)
 subMessageRetentionDuration
   = lens _subMessageRetentionDuration
@@ -1631,9 +1731,6 @@ subLabels
 -- \`message_retention_duration\` window. This must be true if you would
 -- like to
 -- <https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time Seek to a timestamp>.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 subRetainAckedMessages :: Lens' Subscription (Maybe Bool)
 subRetainAckedMessages
   = lens _subRetainAckedMessages
@@ -1706,10 +1803,13 @@ instance ToJSON Subscription where
 -- | Request for the UpdateSubscription method.
 --
 -- /See:/ 'updateSubscriptionRequest' smart constructor.
-data UpdateSubscriptionRequest = UpdateSubscriptionRequest'
+data UpdateSubscriptionRequest =
+  UpdateSubscriptionRequest'
     { _uUpdateMask   :: !(Maybe GFieldMask)
     , _uSubscription :: !(Maybe Subscription)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateSubscriptionRequest' with the minimum fields required to make a request.
 --
@@ -1721,10 +1821,8 @@ data UpdateSubscriptionRequest = UpdateSubscriptionRequest'
 updateSubscriptionRequest
     :: UpdateSubscriptionRequest
 updateSubscriptionRequest =
-    UpdateSubscriptionRequest'
-    { _uUpdateMask = Nothing
-    , _uSubscription = Nothing
-    }
+  UpdateSubscriptionRequest' {_uUpdateMask = Nothing, _uSubscription = Nothing}
+
 
 -- | Indicates which fields in the provided subscription to update. Must be
 -- specified and non-empty.
@@ -1756,9 +1854,12 @@ instance ToJSON UpdateSubscriptionRequest where
 -- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
 --
 -- /See:/ 'subscriptionLabels' smart constructor.
-newtype SubscriptionLabels = SubscriptionLabels'
+newtype SubscriptionLabels =
+  SubscriptionLabels'
     { _slAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubscriptionLabels' with the minimum fields required to make a request.
 --
@@ -1769,9 +1870,8 @@ subscriptionLabels
     :: HashMap Text Text -- ^ 'slAddtional'
     -> SubscriptionLabels
 subscriptionLabels pSlAddtional_ =
-    SubscriptionLabels'
-    { _slAddtional = _Coerce # pSlAddtional_
-    }
+  SubscriptionLabels' {_slAddtional = _Coerce # pSlAddtional_}
+
 
 slAddtional :: Lens' SubscriptionLabels (HashMap Text Text)
 slAddtional
@@ -1790,9 +1890,12 @@ instance ToJSON SubscriptionLabels where
 -- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
 --
 -- /See:/ 'snapshotLabels' smart constructor.
-newtype SnapshotLabels = SnapshotLabels'
+newtype SnapshotLabels =
+  SnapshotLabels'
     { _sAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SnapshotLabels' with the minimum fields required to make a request.
 --
@@ -1803,9 +1906,8 @@ snapshotLabels
     :: HashMap Text Text -- ^ 'sAddtional'
     -> SnapshotLabels
 snapshotLabels pSAddtional_ =
-    SnapshotLabels'
-    { _sAddtional = _Coerce # pSAddtional_
-    }
+  SnapshotLabels' {_sAddtional = _Coerce # pSAddtional_}
+
 
 sAddtional :: Lens' SnapshotLabels (HashMap Text Text)
 sAddtional
@@ -1823,10 +1925,13 @@ instance ToJSON SnapshotLabels where
 -- | Response for the \`ListSubscriptions\` method.
 --
 -- /See:/ 'listSubscriptionsResponse' smart constructor.
-data ListSubscriptionsResponse = ListSubscriptionsResponse'
+data ListSubscriptionsResponse =
+  ListSubscriptionsResponse'
     { _lisNextPageToken :: !(Maybe Text)
     , _lisSubscriptions :: !(Maybe [Subscription])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -1838,10 +1943,9 @@ data ListSubscriptionsResponse = ListSubscriptionsResponse'
 listSubscriptionsResponse
     :: ListSubscriptionsResponse
 listSubscriptionsResponse =
-    ListSubscriptionsResponse'
-    { _lisNextPageToken = Nothing
-    , _lisSubscriptions = Nothing
-    }
+  ListSubscriptionsResponse'
+    {_lisNextPageToken = Nothing, _lisSubscriptions = Nothing}
+
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
@@ -1877,11 +1981,14 @@ instance ToJSON ListSubscriptionsResponse where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1895,11 +2002,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -1912,8 +2016,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1926,10 +2030,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: An unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -1953,10 +2056,13 @@ instance ToJSON Binding where
 -- | Request for the UpdateTopic method.
 --
 -- /See:/ 'updateTopicRequest' smart constructor.
-data UpdateTopicRequest = UpdateTopicRequest'
+data UpdateTopicRequest =
+  UpdateTopicRequest'
     { _utrUpdateMask :: !(Maybe GFieldMask)
     , _utrTopic      :: !(Maybe Topic)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateTopicRequest' with the minimum fields required to make a request.
 --
@@ -1968,10 +2074,8 @@ data UpdateTopicRequest = UpdateTopicRequest'
 updateTopicRequest
     :: UpdateTopicRequest
 updateTopicRequest =
-    UpdateTopicRequest'
-    { _utrUpdateMask = Nothing
-    , _utrTopic = Nothing
-    }
+  UpdateTopicRequest' {_utrUpdateMask = Nothing, _utrTopic = Nothing}
+
 
 -- | Indicates which fields in the provided topic to update. Must be
 -- specified and non-empty. Note that if \`update_mask\` contains
@@ -2005,9 +2109,12 @@ instance ToJSON UpdateTopicRequest where
 -- | Request for the Acknowledge method.
 --
 -- /See:/ 'acknowledgeRequest' smart constructor.
-newtype AcknowledgeRequest = AcknowledgeRequest'
+newtype AcknowledgeRequest =
+  AcknowledgeRequest'
     { _arAckIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AcknowledgeRequest' with the minimum fields required to make a request.
 --
@@ -2016,10 +2123,8 @@ newtype AcknowledgeRequest = AcknowledgeRequest'
 -- * 'arAckIds'
 acknowledgeRequest
     :: AcknowledgeRequest
-acknowledgeRequest =
-    AcknowledgeRequest'
-    { _arAckIds = Nothing
-    }
+acknowledgeRequest = AcknowledgeRequest' {_arAckIds = Nothing}
+
 
 -- | The acknowledgment ID for the messages being acknowledged that was
 -- returned by the Pub\/Sub system in the \`Pull\` response. Must not be

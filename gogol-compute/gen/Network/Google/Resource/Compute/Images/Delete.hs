@@ -57,11 +57,14 @@ type ImagesDeleteResource =
 -- | Deletes the specified image.
 --
 -- /See:/ 'imagesDelete' smart constructor.
-data ImagesDelete = ImagesDelete'
+data ImagesDelete =
+  ImagesDelete'
     { _iddRequestId :: !(Maybe Text)
     , _iddImage     :: !Text
     , _iddProject   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImagesDelete' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ imagesDelete
     -> Text -- ^ 'iddProject'
     -> ImagesDelete
 imagesDelete pIddImage_ pIddProject_ =
-    ImagesDelete'
+  ImagesDelete'
     { _iddRequestId = Nothing
     , _iddImage = pIddImage_
     , _iddProject = pIddProject_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

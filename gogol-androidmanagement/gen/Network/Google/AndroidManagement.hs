@@ -87,6 +87,21 @@ module Network.Google.AndroidManagement
     -- ** androidmanagement.enterprises.policies.patch
     , module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
 
+    -- ** androidmanagement.enterprises.webApps.create
+    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Create
+
+    -- ** androidmanagement.enterprises.webApps.delete
+    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Delete
+
+    -- ** androidmanagement.enterprises.webApps.get
+    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Get
+
+    -- ** androidmanagement.enterprises.webApps.list
+    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.List
+
+    -- ** androidmanagement.enterprises.webApps.patch
+    , module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Patch
+
     -- ** androidmanagement.enterprises.webTokens.create
     , module Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
 
@@ -166,6 +181,11 @@ module Network.Google.AndroidManagement
     , PolicyOpenNetworkConfiguration
     , policyOpenNetworkConfiguration
     , poncAddtional
+
+    -- ** LaunchAppAction
+    , LaunchAppAction
+    , launchAppAction
+    , laaPackageName
 
     -- ** CommandErrorCode
     , CommandErrorCode (..)
@@ -319,6 +339,9 @@ module Network.Google.AndroidManagement
     , devEnrollmentTime
     , devDisplays
 
+    -- ** WebAppDisplayMode
+    , WebAppDisplayMode (..)
+
     -- ** ApplicationReportApplicationSource
     , ApplicationReportApplicationSource (..)
 
@@ -381,6 +404,7 @@ module Network.Google.AndroidManagement
     , arVersionName
     , arPackageName
     , arPackageSha256Hash
+    , arKeyedAppStates
     , arApplicationSource
     , arEvents
     , arDisplayName
@@ -421,12 +445,18 @@ module Network.Google.AndroidManagement
     , srsMemoryInfoEnabled
     , srsNetworkInfoEnabled
     , srsDeviceSettingsEnabled
+    , srsApplicationReportingSettings
 
     -- ** CommandType
     , CommandType (..)
 
     -- ** ApplicationPolicyDefaultPermissionPolicy
     , ApplicationPolicyDefaultPermissionPolicy (..)
+
+    -- ** WebAppIcon
+    , WebAppIcon
+    , webAppIcon
+    , waiImageData
 
     -- ** Xgafv
     , Xgafv (..)
@@ -577,6 +607,7 @@ module Network.Google.AndroidManagement
     , pEnsureVerifyAppsEnabled
     , pSetWallpaperDisabled
     , pVPNConfigDisabled
+    , pSetupActions
     , pOpenNetworkConfiguration
     , pModifyAccountsDisabled
     , pBlockApplicationsEnabled
@@ -611,6 +642,16 @@ module Network.Google.AndroidManagement
     , ncdcNonComplianceReason
     , ncdcSettingName
 
+    -- ** KeyedAppState
+    , KeyedAppState
+    , keyedAppState
+    , kasData
+    , kasSeverity
+    , kasKey
+    , kasMessage
+    , kasLastUpdateTime
+    , kasCreateTime
+
     -- ** OperationMetadata
     , OperationMetadata
     , operationMetadata
@@ -624,6 +665,9 @@ module Network.Google.AndroidManagement
     , wtName
     , wtPermissions
 
+    -- ** KeyedAppStateSeverity
+    , KeyedAppStateSeverity (..)
+
     -- ** ComplianceRule
     , ComplianceRule
     , complianceRule
@@ -631,6 +675,12 @@ module Network.Google.AndroidManagement
     , crDisableApps
     , crPackageNamesToDisable
     , crNonComplianceDetailCondition
+
+    -- ** ListWebAppsResponse
+    , ListWebAppsResponse
+    , listWebAppsResponse
+    , lwarNextPageToken
+    , lwarWebApps
 
     -- ** PasswordRequirements
     , PasswordRequirements
@@ -701,6 +751,11 @@ module Network.Google.AndroidManagement
     , siAndroidBuildNumber
     , siAndroidVersion
 
+    -- ** ApplicationReportingSettings
+    , ApplicationReportingSettings
+    , applicationReportingSettings
+    , arsIncludeRemovedApps
+
     -- ** MemoryEventEventType
     , MemoryEventEventType (..)
 
@@ -710,6 +765,23 @@ module Network.Google.AndroidManagement
     , apName
     , apDescription
     , apPermissionId
+
+    -- ** SetupAction
+    , SetupAction
+    , setupAction
+    , saLaunchApp
+    , saTitle
+    , saDescription
+
+    -- ** WebApp
+    , WebApp
+    , webApp
+    , waVersionCode
+    , waIcons
+    , waStartURL
+    , waDisplayMode
+    , waName
+    , waTitle
 
     -- ** PasswordRequirementsPasswordQuality
     , PasswordRequirementsPasswordQuality (..)
@@ -736,6 +808,11 @@ import           Network.Google.Resource.AndroidManagement.Enterprises.Policies.
 import           Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get
 import           Network.Google.Resource.AndroidManagement.Enterprises.Policies.List
 import           Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
+import           Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Create
+import           Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Delete
+import           Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Get
+import           Network.Google.Resource.AndroidManagement.Enterprises.WebApps.List
+import           Network.Google.Resource.AndroidManagement.Enterprises.WebApps.Patch
 import           Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
 import           Network.Google.Resource.AndroidManagement.SignupURLs.Create
 
@@ -747,6 +824,11 @@ TODO
 type AndroidManagementAPI =
      EnterprisesEnrollmentTokensCreateResource :<|>
        EnterprisesEnrollmentTokensDeleteResource
+       :<|> EnterprisesWebAppsListResource
+       :<|> EnterprisesWebAppsPatchResource
+       :<|> EnterprisesWebAppsGetResource
+       :<|> EnterprisesWebAppsCreateResource
+       :<|> EnterprisesWebAppsDeleteResource
        :<|> EnterprisesWebTokensCreateResource
        :<|> EnterprisesDevicesOperationsListResource
        :<|> EnterprisesDevicesOperationsGetResource

@@ -60,11 +60,14 @@ type InterconnectsInsertResource =
 -- in the request.
 --
 -- /See:/ 'interconnectsInsert' smart constructor.
-data InterconnectsInsert = InterconnectsInsert'
+data InterconnectsInsert =
+  InterconnectsInsert'
     { _intnRequestId :: !(Maybe Text)
     , _intnProject   :: !Text
     , _intnPayload   :: !Interconnect
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectsInsert' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ interconnectsInsert
     -> Interconnect -- ^ 'intnPayload'
     -> InterconnectsInsert
 interconnectsInsert pIntnProject_ pIntnPayload_ =
-    InterconnectsInsert'
+  InterconnectsInsert'
     { _intnRequestId = Nothing
     , _intnProject = pIntnProject_
     , _intnPayload = pIntnPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

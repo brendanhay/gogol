@@ -57,7 +57,7 @@ import           Network.Google.Prelude
 -- 'CampaignsList' request conforms to.
 type CampaignsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -83,7 +83,8 @@ type CampaignsListResource =
 -- paging.
 --
 -- /See:/ 'campaignsList' smart constructor.
-data CampaignsList = CampaignsList'
+data CampaignsList =
+  CampaignsList'
     { _clExcludedIds                    :: !(Maybe [Textual Int64])
     , _clSearchString                   :: !(Maybe Text)
     , _clIds                            :: !(Maybe [Textual Int64])
@@ -98,7 +99,9 @@ data CampaignsList = CampaignsList'
     , _clAdvertiserIds                  :: !(Maybe [Textual Int64])
     , _clArchived                       :: !(Maybe Bool)
     , _clMaxResults                     :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CampaignsList' with the minimum fields required to make a request.
 --
@@ -135,7 +138,7 @@ campaignsList
     :: Int64 -- ^ 'clProFileId'
     -> CampaignsList
 campaignsList pClProFileId_ =
-    CampaignsList'
+  CampaignsList'
     { _clExcludedIds = Nothing
     , _clSearchString = Nothing
     , _clIds = Nothing
@@ -151,6 +154,7 @@ campaignsList pClProFileId_ =
     , _clArchived = Nothing
     , _clMaxResults = 1000
     }
+
 
 -- | Exclude campaigns with these IDs.
 clExcludedIds :: Lens' CampaignsList [Int64]

@@ -59,11 +59,14 @@ type SecurityPoliciesAddRuleResource =
 -- | Inserts a rule into a security policy.
 --
 -- /See:/ 'securityPoliciesAddRule' smart constructor.
-data SecurityPoliciesAddRule = SecurityPoliciesAddRule'
+data SecurityPoliciesAddRule =
+  SecurityPoliciesAddRule'
     { _sparProject        :: !Text
     , _sparPayload        :: !SecurityPolicyRule
     , _sparSecurityPolicy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SecurityPoliciesAddRule' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ securityPoliciesAddRule
     -> Text -- ^ 'sparSecurityPolicy'
     -> SecurityPoliciesAddRule
 securityPoliciesAddRule pSparProject_ pSparPayload_ pSparSecurityPolicy_ =
-    SecurityPoliciesAddRule'
+  SecurityPoliciesAddRule'
     { _sparProject = pSparProject_
     , _sparPayload = pSparPayload_
     , _sparSecurityPolicy = pSparSecurityPolicy_
     }
+
 
 -- | Project ID for this request.
 sparProject :: Lens' SecurityPoliciesAddRule Text

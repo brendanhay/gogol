@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesPatch' request conforms to.
 type TargetingTemplatesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
@@ -59,11 +59,14 @@ type TargetingTemplatesPatchResource =
 -- semantics.
 --
 -- /See:/ 'targetingTemplatesPatch' smart constructor.
-data TargetingTemplatesPatch = TargetingTemplatesPatch'
+data TargetingTemplatesPatch =
+  TargetingTemplatesPatch'
     { _ttpProFileId :: !(Textual Int64)
     , _ttpPayload   :: !TargetingTemplate
     , _ttpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetingTemplatesPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ targetingTemplatesPatch
     -> Int64 -- ^ 'ttpId'
     -> TargetingTemplatesPatch
 targetingTemplatesPatch pTtpProFileId_ pTtpPayload_ pTtpId_ =
-    TargetingTemplatesPatch'
+  TargetingTemplatesPatch'
     { _ttpProFileId = _Coerce # pTtpProFileId_
     , _ttpPayload = pTtpPayload_
     , _ttpId = _Coerce # pTtpId_
     }
+
 
 -- | User profile ID associated with this request.
 ttpProFileId :: Lens' TargetingTemplatesPatch Int64

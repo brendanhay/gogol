@@ -63,12 +63,15 @@ type FirewallsPatchResource =
 -- patch format and processing rules.
 --
 -- /See:/ 'firewallsPatch' smart constructor.
-data FirewallsPatch = FirewallsPatch'
+data FirewallsPatch =
+  FirewallsPatch'
     { _fpRequestId :: !(Maybe Text)
     , _fpProject   :: !Text
     , _fpPayload   :: !Firewall
     , _fpFirewall  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FirewallsPatch' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ firewallsPatch
     -> Text -- ^ 'fpFirewall'
     -> FirewallsPatch
 firewallsPatch pFpProject_ pFpPayload_ pFpFirewall_ =
-    FirewallsPatch'
+  FirewallsPatch'
     { _fpRequestId = Nothing
     , _fpProject = pFpProject_
     , _fpPayload = pFpPayload_
     , _fpFirewall = pFpFirewall_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

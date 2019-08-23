@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsPatch' request conforms to.
 type SubAccountsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -57,11 +57,14 @@ type SubAccountsPatchResource =
 -- | Updates an existing subaccount. This method supports patch semantics.
 --
 -- /See:/ 'subAccountsPatch' smart constructor.
-data SubAccountsPatch = SubAccountsPatch'
+data SubAccountsPatch =
+  SubAccountsPatch'
     { _sapProFileId :: !(Textual Int64)
     , _sapPayload   :: !SubAccount
     , _sapId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubAccountsPatch' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ subAccountsPatch
     -> Int64 -- ^ 'sapId'
     -> SubAccountsPatch
 subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
-    SubAccountsPatch'
+  SubAccountsPatch'
     { _sapProFileId = _Coerce # pSapProFileId_
     , _sapPayload = pSapPayload_
     , _sapId = _Coerce # pSapId_
     }
+
 
 -- | User profile ID associated with this request.
 sapProFileId :: Lens' SubAccountsPatch Int64

@@ -73,7 +73,8 @@ type ProjectsRegionsClustersTestIAMPermissionsResource
 -- warning.
 --
 -- /See:/ 'projectsRegionsClustersTestIAMPermissions' smart constructor.
-data ProjectsRegionsClustersTestIAMPermissions = ProjectsRegionsClustersTestIAMPermissions'
+data ProjectsRegionsClustersTestIAMPermissions =
+  ProjectsRegionsClustersTestIAMPermissions'
     { _prctipXgafv          :: !(Maybe Xgafv)
     , _prctipUploadProtocol :: !(Maybe Text)
     , _prctipAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsRegionsClustersTestIAMPermissions = ProjectsRegionsClustersTestIAMP
     , _prctipPayload        :: !TestIAMPermissionsRequest
     , _prctipResource       :: !Text
     , _prctipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsClustersTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ projectsRegionsClustersTestIAMPermissions
     -> Text -- ^ 'prctipResource'
     -> ProjectsRegionsClustersTestIAMPermissions
 projectsRegionsClustersTestIAMPermissions pPrctipPayload_ pPrctipResource_ =
-    ProjectsRegionsClustersTestIAMPermissions'
+  ProjectsRegionsClustersTestIAMPermissions'
     { _prctipXgafv = Nothing
     , _prctipUploadProtocol = Nothing
     , _prctipAccessToken = Nothing
@@ -114,6 +117,7 @@ projectsRegionsClustersTestIAMPermissions pPrctipPayload_ pPrctipResource_ =
     , _prctipResource = pPrctipResource_
     , _prctipCallback = Nothing
     }
+
 
 -- | V1 error format.
 prctipXgafv :: Lens' ProjectsRegionsClustersTestIAMPermissions (Maybe Xgafv)
@@ -159,7 +163,8 @@ prctipCallback
       (\ s a -> s{_prctipCallback = a})
 
 instance GoogleRequest
-         ProjectsRegionsClustersTestIAMPermissions where
+           ProjectsRegionsClustersTestIAMPermissions
+         where
         type Rs ProjectsRegionsClustersTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsRegionsClustersTestIAMPermissions

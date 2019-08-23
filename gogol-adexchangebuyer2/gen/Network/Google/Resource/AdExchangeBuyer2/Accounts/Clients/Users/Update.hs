@@ -71,7 +71,8 @@ type AccountsClientsUsersUpdateResource =
 -- update.
 --
 -- /See:/ 'accountsClientsUsersUpdate' smart constructor.
-data AccountsClientsUsersUpdate = AccountsClientsUsersUpdate'
+data AccountsClientsUsersUpdate =
+  AccountsClientsUsersUpdate'
     { _acuuXgafv           :: !(Maybe Xgafv)
     , _acuuUploadProtocol  :: !(Maybe Text)
     , _acuuAccessToken     :: !(Maybe Text)
@@ -81,7 +82,9 @@ data AccountsClientsUsersUpdate = AccountsClientsUsersUpdate'
     , _acuuAccountId       :: !(Textual Int64)
     , _acuuClientAccountId :: !(Textual Int64)
     , _acuuCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsClientsUsersUpdate' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ accountsClientsUsersUpdate
     -> Int64 -- ^ 'acuuClientAccountId'
     -> AccountsClientsUsersUpdate
 accountsClientsUsersUpdate pAcuuPayload_ pAcuuUserId_ pAcuuAccountId_ pAcuuClientAccountId_ =
-    AccountsClientsUsersUpdate'
+  AccountsClientsUsersUpdate'
     { _acuuXgafv = Nothing
     , _acuuUploadProtocol = Nothing
     , _acuuAccessToken = Nothing
@@ -122,6 +125,7 @@ accountsClientsUsersUpdate pAcuuPayload_ pAcuuUserId_ pAcuuAccountId_ pAcuuClien
     , _acuuClientAccountId = _Coerce # pAcuuClientAccountId_
     , _acuuCallback = Nothing
     }
+
 
 -- | V1 error format.
 acuuXgafv :: Lens' AccountsClientsUsersUpdate (Maybe Xgafv)

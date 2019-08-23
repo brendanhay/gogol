@@ -1,5 +1,5 @@
 name:                  gogol-servicenetworking
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Service Networking SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Service Networking API provides automatic management of network
-    configurations necessary for certain services.
+    Provides automatic management of network configurations necessary for
+    certain services.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -38,6 +38,11 @@ library
         , Network.Google.Resource.ServiceNetworking.Operations.Delete
         , Network.Google.Resource.ServiceNetworking.Operations.Get
         , Network.Google.Resource.ServiceNetworking.Operations.List
+        , Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
+        , Network.Google.Resource.ServiceNetworking.Services.Connections.Create
+        , Network.Google.Resource.ServiceNetworking.Services.Connections.List
+        , Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
+        , Network.Google.Resource.ServiceNetworking.Services.SearchRange
         , Network.Google.ServiceNetworking
         , Network.Google.ServiceNetworking.Types
 
@@ -46,5 +51,5 @@ library
         , Network.Google.ServiceNetworking.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

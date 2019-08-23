@@ -64,7 +64,8 @@ type ProjectsWorkerMessagesResource =
 -- | Send a worker_message to the service.
 --
 -- /See:/ 'projectsWorkerMessages' smart constructor.
-data ProjectsWorkerMessages = ProjectsWorkerMessages'
+data ProjectsWorkerMessages =
+  ProjectsWorkerMessages'
     { _pwmXgafv          :: !(Maybe Xgafv)
     , _pwmUploadProtocol :: !(Maybe Text)
     , _pwmAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsWorkerMessages = ProjectsWorkerMessages'
     , _pwmPayload        :: !SendWorkerMessagesRequest
     , _pwmProjectId      :: !Text
     , _pwmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsWorkerMessages' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsWorkerMessages
     -> Text -- ^ 'pwmProjectId'
     -> ProjectsWorkerMessages
 projectsWorkerMessages pPwmPayload_ pPwmProjectId_ =
-    ProjectsWorkerMessages'
+  ProjectsWorkerMessages'
     { _pwmXgafv = Nothing
     , _pwmUploadProtocol = Nothing
     , _pwmAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsWorkerMessages pPwmPayload_ pPwmProjectId_ =
     , _pwmProjectId = pPwmProjectId_
     , _pwmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pwmXgafv :: Lens' ProjectsWorkerMessages (Maybe Xgafv)

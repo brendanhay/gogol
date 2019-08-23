@@ -44,7 +44,7 @@ data NodeState
       -- the \`help_description\` field.
     | Stopped
       -- ^ @STOPPED@
-      -- 7 - Reserved. Was SUSPENDED. TPU node is stopped.
+      -- TPU node is stopped.
     | Stopping
       -- ^ @STOPPING@
       -- TPU node is currently stopping.
@@ -58,6 +58,15 @@ data NodeState
       -- ^ @TERMINATED@
       -- TPU node has been terminated due to maintenance or has reached the end
       -- of its life cycle (for preemptible nodes).
+    | Hiding
+      -- ^ @HIDING@
+      -- TPU node is currently hiding.
+    | Hidden
+      -- ^ @HIDDEN@
+      -- TPU node has been hidden.
+    | Unhiding
+      -- ^ @UNHIDING@
+      -- TPU node is currently unhiding.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable NodeState
@@ -76,6 +85,9 @@ instance FromHttpApiData NodeState where
         "STARTING" -> Right Starting
         "PREEMPTED" -> Right Preempted
         "TERMINATED" -> Right Terminated
+        "HIDING" -> Right Hiding
+        "HIDDEN" -> Right Hidden
+        "UNHIDING" -> Right Unhiding
         x -> Left ("Unable to parse NodeState from: " <> x)
 
 instance ToHttpApiData NodeState where
@@ -92,6 +104,9 @@ instance ToHttpApiData NodeState where
         Starting -> "STARTING"
         Preempted -> "PREEMPTED"
         Terminated -> "TERMINATED"
+        Hiding -> "HIDING"
+        Hidden -> "HIDDEN"
+        Unhiding -> "UNHIDING"
 
 instance FromJSON NodeState where
     parseJSON = parseJSONText "NodeState"
@@ -107,12 +122,19 @@ data NodeHealth
     | Healthy
       -- ^ @HEALTHY@
       -- The resource is healthy.
-    | Unhealthy
-      -- ^ @UNHEALTHY@
+    | DeprecatedUnhealthy
+      -- ^ @DEPRECATED_UNHEALTHY@
       -- The resource is unhealthy.
     | Timeout
       -- ^ @TIMEOUT@
       -- The resource is unresponsive.
+    | UnhealthyTensorflow
+      -- ^ @UNHEALTHY_TENSORFLOW@
+      -- The in-guest ML stack is unhealthy.
+    | UnhealthyMaintenance
+      -- ^ @UNHEALTHY_MAINTENANCE@
+      -- The node is under maintenance\/priority boost caused rescheduling and
+      -- will resume running once rescheduled.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable NodeHealth
@@ -121,16 +143,20 @@ instance FromHttpApiData NodeHealth where
     parseQueryParam = \case
         "HEALTH_UNSPECIFIED" -> Right HealthUnspecified
         "HEALTHY" -> Right Healthy
-        "UNHEALTHY" -> Right Unhealthy
+        "DEPRECATED_UNHEALTHY" -> Right DeprecatedUnhealthy
         "TIMEOUT" -> Right Timeout
+        "UNHEALTHY_TENSORFLOW" -> Right UnhealthyTensorflow
+        "UNHEALTHY_MAINTENANCE" -> Right UnhealthyMaintenance
         x -> Left ("Unable to parse NodeHealth from: " <> x)
 
 instance ToHttpApiData NodeHealth where
     toQueryParam = \case
         HealthUnspecified -> "HEALTH_UNSPECIFIED"
         Healthy -> "HEALTHY"
-        Unhealthy -> "UNHEALTHY"
+        DeprecatedUnhealthy -> "DEPRECATED_UNHEALTHY"
         Timeout -> "TIMEOUT"
+        UnhealthyTensorflow -> "UNHEALTHY_TENSORFLOW"
+        UnhealthyMaintenance -> "UNHEALTHY_MAINTENANCE"
 
 instance FromJSON NodeHealth where
     parseJSON = parseJSONText "NodeHealth"

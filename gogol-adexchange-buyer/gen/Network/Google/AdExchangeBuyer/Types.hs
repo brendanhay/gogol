@@ -759,4 +759,4 @@ adExchangeBuyerService
 
 -- | Manage your Ad Exchange buyer account configuration
 adExchangeBuyerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.buyer"]
-adExchangeBuyerScope = Proxy;
+adExchangeBuyerScope = Proxy

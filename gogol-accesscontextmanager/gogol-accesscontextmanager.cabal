@@ -1,5 +1,5 @@
 name:                  gogol-accesscontextmanager
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Access Context Manager SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -51,12 +51,15 @@ library
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Get
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.List
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+        , Network.Google.Resource.AccessContextManager.Operations.Cancel
+        , Network.Google.Resource.AccessContextManager.Operations.Delete
         , Network.Google.Resource.AccessContextManager.Operations.Get
+        , Network.Google.Resource.AccessContextManager.Operations.List
 
     other-modules:
           Network.Google.AccessContextManager.Types.Product
         , Network.Google.AccessContextManager.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

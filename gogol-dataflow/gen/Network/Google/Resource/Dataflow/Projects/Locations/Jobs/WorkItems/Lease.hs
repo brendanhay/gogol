@@ -70,7 +70,8 @@ type ProjectsLocationsJobsWorkItemsLeaseResource =
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ 'projectsLocationsJobsWorkItemsLease' smart constructor.
-data ProjectsLocationsJobsWorkItemsLease = ProjectsLocationsJobsWorkItemsLease'
+data ProjectsLocationsJobsWorkItemsLease =
+  ProjectsLocationsJobsWorkItemsLease'
     { _pljwilXgafv          :: !(Maybe Xgafv)
     , _pljwilJobId          :: !Text
     , _pljwilUploadProtocol :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ProjectsLocationsJobsWorkItemsLease = ProjectsLocationsJobsWorkItemsLease'
     , _pljwilPayload        :: !LeaseWorkItemRequest
     , _pljwilProjectId      :: !Text
     , _pljwilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsWorkItemsLease' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsLocationsJobsWorkItemsLease
     -> Text -- ^ 'pljwilProjectId'
     -> ProjectsLocationsJobsWorkItemsLease
 projectsLocationsJobsWorkItemsLease pPljwilJobId_ pPljwilLocation_ pPljwilPayload_ pPljwilProjectId_ =
-    ProjectsLocationsJobsWorkItemsLease'
+  ProjectsLocationsJobsWorkItemsLease'
     { _pljwilXgafv = Nothing
     , _pljwilJobId = pPljwilJobId_
     , _pljwilUploadProtocol = Nothing
@@ -121,6 +124,7 @@ projectsLocationsJobsWorkItemsLease pPljwilJobId_ pPljwilLocation_ pPljwilPayloa
     , _pljwilProjectId = pPljwilProjectId_
     , _pljwilCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljwilXgafv :: Lens' ProjectsLocationsJobsWorkItemsLease (Maybe Xgafv)
@@ -138,7 +142,9 @@ pljwilUploadProtocol
   = lens _pljwilUploadProtocol
       (\ s a -> s{_pljwilUploadProtocol = a})
 
--- | The location which contains the WorkItem\'s job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the WorkItem\'s job.
 pljwilLocation :: Lens' ProjectsLocationsJobsWorkItemsLease Text
 pljwilLocation
   = lens _pljwilLocation
@@ -175,7 +181,8 @@ pljwilCallback
       (\ s a -> s{_pljwilCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsWorkItemsLease where
+           ProjectsLocationsJobsWorkItemsLease
+         where
         type Rs ProjectsLocationsJobsWorkItemsLease =
              LeaseWorkItemResponse
         type Scopes ProjectsLocationsJobsWorkItemsLease =

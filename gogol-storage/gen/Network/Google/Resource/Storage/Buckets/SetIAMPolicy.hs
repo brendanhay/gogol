@@ -56,11 +56,14 @@ type BucketsSetIAMPolicyResource =
 -- | Updates an IAM policy for the specified bucket.
 --
 -- /See:/ 'bucketsSetIAMPolicy' smart constructor.
-data BucketsSetIAMPolicy = BucketsSetIAMPolicy'
+data BucketsSetIAMPolicy =
+  BucketsSetIAMPolicy'
     { _bsipBucket      :: !Text
     , _bsipPayload     :: !Policy
     , _bsipUserProject :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BucketsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -76,11 +79,12 @@ bucketsSetIAMPolicy
     -> Policy -- ^ 'bsipPayload'
     -> BucketsSetIAMPolicy
 bucketsSetIAMPolicy pBsipBucket_ pBsipPayload_ =
-    BucketsSetIAMPolicy'
+  BucketsSetIAMPolicy'
     { _bsipBucket = pBsipBucket_
     , _bsipPayload = pBsipPayload_
     , _bsipUserProject = Nothing
     }
+
 
 -- | Name of a bucket.
 bsipBucket :: Lens' BucketsSetIAMPolicy Text

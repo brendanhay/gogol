@@ -61,14 +61,17 @@ type ProjectsDatabasesCollectionGroupsFieldsGetResource
 -- | Gets the metadata and configuration for a Field.
 --
 -- /See:/ 'projectsDatabasesCollectionGroupsFieldsGet' smart constructor.
-data ProjectsDatabasesCollectionGroupsFieldsGet = ProjectsDatabasesCollectionGroupsFieldsGet'
+data ProjectsDatabasesCollectionGroupsFieldsGet =
+  ProjectsDatabasesCollectionGroupsFieldsGet'
     { _pdcgfgXgafv          :: !(Maybe Xgafv)
     , _pdcgfgUploadProtocol :: !(Maybe Text)
     , _pdcgfgAccessToken    :: !(Maybe Text)
     , _pdcgfgUploadType     :: !(Maybe Text)
     , _pdcgfgName           :: !Text
     , _pdcgfgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesCollectionGroupsFieldsGet' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsDatabasesCollectionGroupsFieldsGet
     :: Text -- ^ 'pdcgfgName'
     -> ProjectsDatabasesCollectionGroupsFieldsGet
 projectsDatabasesCollectionGroupsFieldsGet pPdcgfgName_ =
-    ProjectsDatabasesCollectionGroupsFieldsGet'
+  ProjectsDatabasesCollectionGroupsFieldsGet'
     { _pdcgfgXgafv = Nothing
     , _pdcgfgUploadProtocol = Nothing
     , _pdcgfgAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsDatabasesCollectionGroupsFieldsGet pPdcgfgName_ =
     , _pdcgfgName = pPdcgfgName_
     , _pdcgfgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcgfgXgafv :: Lens' ProjectsDatabasesCollectionGroupsFieldsGet (Maybe Xgafv)
@@ -134,7 +138,8 @@ pdcgfgCallback
       (\ s a -> s{_pdcgfgCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesCollectionGroupsFieldsGet where
+           ProjectsDatabasesCollectionGroupsFieldsGet
+         where
         type Rs ProjectsDatabasesCollectionGroupsFieldsGet =
              GoogleFirestoreAdminV1Field
         type Scopes

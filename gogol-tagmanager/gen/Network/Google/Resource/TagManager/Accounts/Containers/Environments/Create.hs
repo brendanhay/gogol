@@ -54,10 +54,13 @@ type AccountsContainersEnvironmentsCreateResource =
 -- | Creates a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsCreate' smart constructor.
-data AccountsContainersEnvironmentsCreate = AccountsContainersEnvironmentsCreate'
+data AccountsContainersEnvironmentsCreate =
+  AccountsContainersEnvironmentsCreate'
     { _acecParent  :: !Text
     , _acecPayload :: !Environment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersEnvironmentsCreate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ accountsContainersEnvironmentsCreate
     -> Environment -- ^ 'acecPayload'
     -> AccountsContainersEnvironmentsCreate
 accountsContainersEnvironmentsCreate pAcecParent_ pAcecPayload_ =
-    AccountsContainersEnvironmentsCreate'
-    { _acecParent = pAcecParent_
-    , _acecPayload = pAcecPayload_
-    }
+  AccountsContainersEnvironmentsCreate'
+    {_acecParent = pAcecParent_, _acecPayload = pAcecPayload_}
+
 
 -- | GTM Container\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}
@@ -88,7 +90,8 @@ acecPayload
   = lens _acecPayload (\ s a -> s{_acecPayload = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsCreate where
+           AccountsContainersEnvironmentsCreate
+         where
         type Rs AccountsContainersEnvironmentsCreate =
              Environment
         type Scopes AccountsContainersEnvironmentsCreate =

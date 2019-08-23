@@ -85,7 +85,8 @@ type ProjectsInstancesDatabasesSessionsPartitionReadResource
 -- and the whole operation must be restarted from the beginning.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsPartitionRead' smart constructor.
-data ProjectsInstancesDatabasesSessionsPartitionRead = ProjectsInstancesDatabasesSessionsPartitionRead'
+data ProjectsInstancesDatabasesSessionsPartitionRead =
+  ProjectsInstancesDatabasesSessionsPartitionRead'
     { _pidsprXgafv          :: !(Maybe Xgafv)
     , _pidsprUploadProtocol :: !(Maybe Text)
     , _pidsprAccessToken    :: !(Maybe Text)
@@ -93,7 +94,9 @@ data ProjectsInstancesDatabasesSessionsPartitionRead = ProjectsInstancesDatabase
     , _pidsprPayload        :: !PartitionReadRequest
     , _pidsprSession        :: !Text
     , _pidsprCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsPartitionRead' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ projectsInstancesDatabasesSessionsPartitionRead
     -> Text -- ^ 'pidsprSession'
     -> ProjectsInstancesDatabasesSessionsPartitionRead
 projectsInstancesDatabasesSessionsPartitionRead pPidsprPayload_ pPidsprSession_ =
-    ProjectsInstancesDatabasesSessionsPartitionRead'
+  ProjectsInstancesDatabasesSessionsPartitionRead'
     { _pidsprXgafv = Nothing
     , _pidsprUploadProtocol = Nothing
     , _pidsprAccessToken = Nothing
@@ -126,6 +129,7 @@ projectsInstancesDatabasesSessionsPartitionRead pPidsprPayload_ pPidsprSession_ 
     , _pidsprSession = pPidsprSession_
     , _pidsprCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsprXgafv :: Lens' ProjectsInstancesDatabasesSessionsPartitionRead (Maybe Xgafv)
@@ -169,7 +173,8 @@ pidsprCallback
       (\ s a -> s{_pidsprCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsPartitionRead where
+           ProjectsInstancesDatabasesSessionsPartitionRead
+         where
         type Rs
                ProjectsInstancesDatabasesSessionsPartitionRead
              = PartitionResponse

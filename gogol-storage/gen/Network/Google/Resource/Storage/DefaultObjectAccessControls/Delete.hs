@@ -58,11 +58,14 @@ type DefaultObjectAccessControlsDeleteResource =
 -- entity on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsDelete' smart constructor.
-data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete'
+data DefaultObjectAccessControlsDelete =
+  DefaultObjectAccessControlsDelete'
     { _doacdBucket      :: !Text
     , _doacdUserProject :: !(Maybe Text)
     , _doacdEntity      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DefaultObjectAccessControlsDelete' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ defaultObjectAccessControlsDelete
     -> Text -- ^ 'doacdEntity'
     -> DefaultObjectAccessControlsDelete
 defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
-    DefaultObjectAccessControlsDelete'
+  DefaultObjectAccessControlsDelete'
     { _doacdBucket = pDoacdBucket_
     , _doacdUserProject = Nothing
     , _doacdEntity = pDoacdEntity_
     }
+
 
 -- | Name of a bucket.
 doacdBucket :: Lens' DefaultObjectAccessControlsDelete Text
@@ -104,7 +108,8 @@ doacdEntity
   = lens _doacdEntity (\ s a -> s{_doacdEntity = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsDelete where
+           DefaultObjectAccessControlsDelete
+         where
         type Rs DefaultObjectAccessControlsDelete = ()
         type Scopes DefaultObjectAccessControlsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

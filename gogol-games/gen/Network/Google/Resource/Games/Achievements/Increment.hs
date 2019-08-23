@@ -59,11 +59,14 @@ type AchievementsIncrementResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsIncrement' smart constructor.
-data AchievementsIncrement = AchievementsIncrement'
+data AchievementsIncrement =
+  AchievementsIncrement'
     { _aiRequestId        :: !(Maybe (Textual Int64))
     , _aiAchievementId    :: !Text
     , _aiStepsToIncrement :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementsIncrement' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ achievementsIncrement
     -> Int32 -- ^ 'aiStepsToIncrement'
     -> AchievementsIncrement
 achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
-    AchievementsIncrement'
+  AchievementsIncrement'
     { _aiRequestId = Nothing
     , _aiAchievementId = pAiAchievementId_
     , _aiStepsToIncrement = _Coerce # pAiStepsToIncrement_
     }
+
 
 -- | A randomly generated numeric ID for each request specified by the
 -- caller. This number is used at the server to ensure that the request is
@@ -110,7 +114,8 @@ instance GoogleRequest AchievementsIncrement where
         type Rs AchievementsIncrement =
              AchievementIncrementResponse
         type Scopes AchievementsIncrement =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient AchievementsIncrement'{..}
           = go _aiAchievementId (Just _aiStepsToIncrement)
               _aiRequestId

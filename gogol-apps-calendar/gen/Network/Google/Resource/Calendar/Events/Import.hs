@@ -61,12 +61,15 @@ type EventsImportResource =
 -- existing event to a calendar.
 --
 -- /See:/ 'eventsImport' smart constructor.
-data EventsImport = EventsImport'
+data EventsImport =
+  EventsImport'
     { _eiConferenceDataVersion :: !(Maybe (Textual Int32))
     , _eiCalendarId            :: !Text
     , _eiPayload               :: !Event
     , _eiSupportsAttachments   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsImport' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ eventsImport
     -> Event -- ^ 'eiPayload'
     -> EventsImport
 eventsImport pEiCalendarId_ pEiPayload_ =
-    EventsImport'
+  EventsImport'
     { _eiConferenceDataVersion = Nothing
     , _eiCalendarId = pEiCalendarId_
     , _eiPayload = pEiPayload_
     , _eiSupportsAttachments = Nothing
     }
+
 
 -- | Version number of conference data supported by the API client. Version 0
 -- assumes no conference data support and ignores conference data in the

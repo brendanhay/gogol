@@ -68,7 +68,8 @@ type ProjectsStoredInfoTypesCreateResource =
 -- learn more.
 --
 -- /See:/ 'projectsStoredInfoTypesCreate' smart constructor.
-data ProjectsStoredInfoTypesCreate = ProjectsStoredInfoTypesCreate'
+data ProjectsStoredInfoTypesCreate =
+  ProjectsStoredInfoTypesCreate'
     { _psitcParent         :: !Text
     , _psitcXgafv          :: !(Maybe Xgafv)
     , _psitcUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsStoredInfoTypesCreate = ProjectsStoredInfoTypesCreate'
     , _psitcUploadType     :: !(Maybe Text)
     , _psitcPayload        :: !GooglePrivacyDlpV2CreateStoredInfoTypeRequest
     , _psitcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsStoredInfoTypesCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsStoredInfoTypesCreate
     -> GooglePrivacyDlpV2CreateStoredInfoTypeRequest -- ^ 'psitcPayload'
     -> ProjectsStoredInfoTypesCreate
 projectsStoredInfoTypesCreate pPsitcParent_ pPsitcPayload_ =
-    ProjectsStoredInfoTypesCreate'
+  ProjectsStoredInfoTypesCreate'
     { _psitcParent = pPsitcParent_
     , _psitcXgafv = Nothing
     , _psitcUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsStoredInfoTypesCreate pPsitcParent_ pPsitcPayload_ =
     , _psitcPayload = pPsitcPayload_
     , _psitcCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id or
 -- organizations\/my-org-id.

@@ -32,9 +32,12 @@ import           Network.Google.Spanner.Types.Sum
 -- values.
 --
 -- /See:/ 'executeSQLRequestParams' smart constructor.
-newtype ExecuteSQLRequestParams = ExecuteSQLRequestParams'
+newtype ExecuteSQLRequestParams =
+  ExecuteSQLRequestParams'
     { _esqlrpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExecuteSQLRequestParams' with the minimum fields required to make a request.
 --
@@ -45,9 +48,8 @@ executeSQLRequestParams
     :: HashMap Text JSONValue -- ^ 'esqlrpAddtional'
     -> ExecuteSQLRequestParams
 executeSQLRequestParams pEsqlrpAddtional_ =
-    ExecuteSQLRequestParams'
-    { _esqlrpAddtional = _Coerce # pEsqlrpAddtional_
-    }
+  ExecuteSQLRequestParams' {_esqlrpAddtional = _Coerce # pEsqlrpAddtional_}
+
 
 -- | Properties of the object.
 esqlrpAddtional :: Lens' ExecuteSQLRequestParams (HashMap Text JSONValue)
@@ -85,9 +87,12 @@ instance ToJSON ExecuteSQLRequestParams where
 -- to allow \"_\" in a future release.
 --
 -- /See:/ 'instanceLabels' smart constructor.
-newtype InstanceLabels = InstanceLabels'
+newtype InstanceLabels =
+  InstanceLabels'
     { _ilAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceLabels' with the minimum fields required to make a request.
 --
@@ -98,9 +103,8 @@ instanceLabels
     :: HashMap Text Text -- ^ 'ilAddtional'
     -> InstanceLabels
 instanceLabels pIlAddtional_ =
-    InstanceLabels'
-    { _ilAddtional = _Coerce # pIlAddtional_
-    }
+  InstanceLabels' {_ilAddtional = _Coerce # pIlAddtional_}
+
 
 ilAddtional :: Lens' InstanceLabels (HashMap Text Text)
 ilAddtional
@@ -118,9 +122,12 @@ instance ToJSON InstanceLabels where
 -- | Metadata type for the operation returned by CreateDatabase.
 --
 -- /See:/ 'createDatabaseMetadata' smart constructor.
-newtype CreateDatabaseMetadata = CreateDatabaseMetadata'
+newtype CreateDatabaseMetadata =
+  CreateDatabaseMetadata'
     { _cdmDatabase :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateDatabaseMetadata' with the minimum fields required to make a request.
 --
@@ -129,10 +136,8 @@ newtype CreateDatabaseMetadata = CreateDatabaseMetadata'
 -- * 'cdmDatabase'
 createDatabaseMetadata
     :: CreateDatabaseMetadata
-createDatabaseMetadata =
-    CreateDatabaseMetadata'
-    { _cdmDatabase = Nothing
-    }
+createDatabaseMetadata = CreateDatabaseMetadata' {_cdmDatabase = Nothing}
+
 
 -- | The database being created.
 cdmDatabase :: Lens' CreateDatabaseMetadata (Maybe Text)
@@ -326,11 +331,14 @@ instance ToJSON CreateDatabaseMetadata where
 -- large table.
 --
 -- /See:/ 'transactionOptions' smart constructor.
-data TransactionOptions = TransactionOptions'
+data TransactionOptions =
+  TransactionOptions'
     { _toReadWrite      :: !(Maybe ReadWrite)
     , _toPartitionedDml :: !(Maybe PartitionedDml)
     , _toReadOnly       :: !(Maybe ReadOnly)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
 --
@@ -344,11 +352,9 @@ data TransactionOptions = TransactionOptions'
 transactionOptions
     :: TransactionOptions
 transactionOptions =
-    TransactionOptions'
-    { _toReadWrite = Nothing
-    , _toPartitionedDml = Nothing
-    , _toReadOnly = Nothing
-    }
+  TransactionOptions'
+    {_toReadWrite = Nothing, _toPartitionedDml = Nothing, _toReadOnly = Nothing}
+
 
 -- | Transaction may write. Authorization to begin a read-write transaction
 -- requires \`spanner.databases.beginOrRollbackReadWriteTransaction\`
@@ -392,9 +398,12 @@ instance ToJSON TransactionOptions where
 -- | The response for GetDatabaseDdl.
 --
 -- /See:/ 'getDatabaseDdlResponse' smart constructor.
-newtype GetDatabaseDdlResponse = GetDatabaseDdlResponse'
+newtype GetDatabaseDdlResponse =
+  GetDatabaseDdlResponse'
     { _gddrStatements :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetDatabaseDdlResponse' with the minimum fields required to make a request.
 --
@@ -403,10 +412,8 @@ newtype GetDatabaseDdlResponse = GetDatabaseDdlResponse'
 -- * 'gddrStatements'
 getDatabaseDdlResponse
     :: GetDatabaseDdlResponse
-getDatabaseDdlResponse =
-    GetDatabaseDdlResponse'
-    { _gddrStatements = Nothing
-    }
+getDatabaseDdlResponse = GetDatabaseDdlResponse' {_gddrStatements = Nothing}
+
 
 -- | A list of formatted DDL statements defining the schema of the database
 -- specified in the request.
@@ -466,11 +473,14 @@ instance ToJSON GetDatabaseDdlResponse where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -483,12 +493,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -529,10 +535,13 @@ instance ToJSON Status where
 -- | The request for CreateInstance.
 --
 -- /See:/ 'createInstanceRequest' smart constructor.
-data CreateInstanceRequest = CreateInstanceRequest'
+data CreateInstanceRequest =
+  CreateInstanceRequest'
     { _cirInstanceId :: !(Maybe Text)
     , _cirInstance   :: !(Maybe Instance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateInstanceRequest' with the minimum fields required to make a request.
 --
@@ -544,13 +553,11 @@ data CreateInstanceRequest = CreateInstanceRequest'
 createInstanceRequest
     :: CreateInstanceRequest
 createInstanceRequest =
-    CreateInstanceRequest'
-    { _cirInstanceId = Nothing
-    , _cirInstance = Nothing
-    }
+  CreateInstanceRequest' {_cirInstanceId = Nothing, _cirInstance = Nothing}
+
 
 -- | Required. The ID of the instance to create. Valid identifiers are of the
--- form \`a-z*[a-z0-9]\` and must be between 6 and 30 characters in length.
+-- form \`a-z*[a-z0-9]\` and must be between 2 and 64 characters in length.
 cirInstanceId :: Lens' CreateInstanceRequest (Maybe Text)
 cirInstanceId
   = lens _cirInstanceId
@@ -581,14 +588,16 @@ instance ToJSON CreateInstanceRequest where
 --
 -- /See:/ 'readWrite' smart constructor.
 data ReadWrite =
-    ReadWrite'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  ReadWrite'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 --
 readWrite
     :: ReadWrite
 readWrite = ReadWrite'
+
 
 instance FromJSON ReadWrite where
         parseJSON
@@ -600,9 +609,12 @@ instance ToJSON ReadWrite where
 -- | The request for Rollback.
 --
 -- /See:/ 'rollbackRequest' smart constructor.
-newtype RollbackRequest = RollbackRequest'
+newtype RollbackRequest =
+  RollbackRequest'
     { _rrTransactionId :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
@@ -611,10 +623,8 @@ newtype RollbackRequest = RollbackRequest'
 -- * 'rrTransactionId'
 rollbackRequest
     :: RollbackRequest
-rollbackRequest =
-    RollbackRequest'
-    { _rrTransactionId = Nothing
-    }
+rollbackRequest = RollbackRequest' {_rrTransactionId = Nothing}
+
 
 -- | Required. The transaction to roll back.
 rrTransactionId :: Lens' RollbackRequest (Maybe ByteString)
@@ -637,10 +647,13 @@ instance ToJSON RollbackRequest where
 -- | The response for ListDatabases.
 --
 -- /See:/ 'listDatabasesResponse' smart constructor.
-data ListDatabasesResponse = ListDatabasesResponse'
+data ListDatabasesResponse =
+  ListDatabasesResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDatabases     :: !(Maybe [Database])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListDatabasesResponse' with the minimum fields required to make a request.
 --
@@ -652,10 +665,8 @@ data ListDatabasesResponse = ListDatabasesResponse'
 listDatabasesResponse
     :: ListDatabasesResponse
 listDatabasesResponse =
-    ListDatabasesResponse'
-    { _ldrNextPageToken = Nothing
-    , _ldrDatabases = Nothing
-    }
+  ListDatabasesResponse' {_ldrNextPageToken = Nothing, _ldrDatabases = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListDatabases call to
 -- fetch more of the matching databases.
@@ -691,12 +702,15 @@ instance ToJSON ListDatabasesResponse where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -712,12 +726,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -765,10 +780,13 @@ instance ToJSON Expr where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -780,10 +798,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -818,14 +835,16 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  GetIAMPolicyRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
 getIAMPolicyRequest = GetIAMPolicyRequest'
+
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
@@ -839,11 +858,14 @@ instance ToJSON GetIAMPolicyRequest where
 -- PlanNode.
 --
 -- /See:/ 'childLink' smart constructor.
-data ChildLink = ChildLink'
+data ChildLink =
+  ChildLink'
     { _clChildIndex :: !(Maybe (Textual Int32))
     , _clVariable   :: !(Maybe Text)
     , _clType       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChildLink' with the minimum fields required to make a request.
 --
@@ -857,11 +879,8 @@ data ChildLink = ChildLink'
 childLink
     :: ChildLink
 childLink =
-    ChildLink'
-    { _clChildIndex = Nothing
-    , _clVariable = Nothing
-    , _clType = Nothing
-    }
+  ChildLink' {_clChildIndex = Nothing, _clVariable = Nothing, _clType = Nothing}
+
 
 -- | The node to which the link points.
 clChildIndex :: Lens' ChildLink (Maybe Int32)
@@ -906,9 +925,12 @@ instance ToJSON ChildLink where
 -- | The request for BeginTransaction.
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
-newtype BeginTransactionRequest = BeginTransactionRequest'
+newtype BeginTransactionRequest =
+  BeginTransactionRequest'
     { _btrOptions :: Maybe TransactionOptions
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
@@ -917,10 +939,8 @@ newtype BeginTransactionRequest = BeginTransactionRequest'
 -- * 'btrOptions'
 beginTransactionRequest
     :: BeginTransactionRequest
-beginTransactionRequest =
-    BeginTransactionRequest'
-    { _btrOptions = Nothing
-    }
+beginTransactionRequest = BeginTransactionRequest' {_btrOptions = Nothing}
+
 
 -- | Required. Options for the new transaction.
 btrOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
@@ -940,10 +960,13 @@ instance ToJSON BeginTransactionRequest where
 -- | Options for a PartitionQueryRequest and PartitionReadRequest.
 --
 -- /See:/ 'partitionOptions' smart constructor.
-data PartitionOptions = PartitionOptions'
+data PartitionOptions =
+  PartitionOptions'
     { _poMaxPartitions      :: !(Maybe (Textual Int64))
     , _poPartitionSizeBytes :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionOptions' with the minimum fields required to make a request.
 --
@@ -955,10 +978,9 @@ data PartitionOptions = PartitionOptions'
 partitionOptions
     :: PartitionOptions
 partitionOptions =
-    PartitionOptions'
-    { _poMaxPartitions = Nothing
-    , _poPartitionSizeBytes = Nothing
-    }
+  PartitionOptions'
+    {_poMaxPartitions = Nothing, _poPartitionSizeBytes = Nothing}
+
 
 -- | **Note:** This hint is currently ignored by PartitionQuery and
 -- PartitionRead requests. The desired maximum number of partitions to
@@ -1001,12 +1023,15 @@ instance ToJSON PartitionOptions where
 -- | Additional statistics about a ResultSet or PartialResultSet.
 --
 -- /See:/ 'resultSetStats' smart constructor.
-data ResultSetStats = ResultSetStats'
+data ResultSetStats =
+  ResultSetStats'
     { _rssRowCountExact      :: !(Maybe (Textual Int64))
     , _rssRowCountLowerBound :: !(Maybe (Textual Int64))
     , _rssQueryStats         :: !(Maybe ResultSetStatsQueryStats)
     , _rssQueryPlan          :: !(Maybe QueryPlan)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultSetStats' with the minimum fields required to make a request.
 --
@@ -1022,12 +1047,13 @@ data ResultSetStats = ResultSetStats'
 resultSetStats
     :: ResultSetStats
 resultSetStats =
-    ResultSetStats'
+  ResultSetStats'
     { _rssRowCountExact = Nothing
     , _rssRowCountLowerBound = Nothing
     , _rssQueryStats = Nothing
     , _rssQueryPlan = Nothing
     }
+
 
 -- | Standard DML returns an exact count of rows that were modified.
 rssRowCountExact :: Lens' ResultSetStats (Maybe Int64)
@@ -1080,10 +1106,13 @@ instance ToJSON ResultSetStats where
 -- | Message representing a single field of a struct.
 --
 -- /See:/ 'field' smart constructor.
-data Field = Field'
+data Field =
+  Field'
     { _fName :: !(Maybe Text)
     , _fType :: !(Maybe Type)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
@@ -1094,11 +1123,8 @@ data Field = Field'
 -- * 'fType'
 field
     :: Field
-field =
-    Field'
-    { _fName = Nothing
-    , _fType = Nothing
-    }
+field = Field' {_fName = Nothing, _fType = Nothing}
+
 
 -- | The name of the field. For reads, this is the column name. For SQL
 -- queries, it is the column alias (e.g., \`\"Word\"\` in the query
@@ -1127,11 +1153,14 @@ instance ToJSON Field where
 -- | Arguments to insert, update, insert_or_update, and replace operations.
 --
 -- /See:/ 'write' smart constructor.
-data Write = Write'
+data Write =
+  Write'
     { _wValues  :: !(Maybe [[JSONValue]])
     , _wColumns :: !(Maybe [Text])
     , _wTable   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Write' with the minimum fields required to make a request.
 --
@@ -1144,12 +1173,8 @@ data Write = Write'
 -- * 'wTable'
 write
     :: Write
-write =
-    Write'
-    { _wValues = Nothing
-    , _wColumns = Nothing
-    , _wTable = Nothing
-    }
+write = Write' {_wValues = Nothing, _wColumns = Nothing, _wTable = Nothing}
+
 
 -- | The values to be written. \`values\` can contain more than one list of
 -- values. If it does, then multiple rows are written, one for each entry
@@ -1201,11 +1226,14 @@ instance ToJSON Write where
 -- were only specified once.
 --
 -- /See:/ 'keySet' smart constructor.
-data KeySet = KeySet'
+data KeySet =
+  KeySet'
     { _ksAll    :: !(Maybe Bool)
     , _ksRanges :: !(Maybe [KeyRange])
     , _ksKeys   :: !(Maybe [[JSONValue]])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KeySet' with the minimum fields required to make a request.
 --
@@ -1218,12 +1246,8 @@ data KeySet = KeySet'
 -- * 'ksKeys'
 keySet
     :: KeySet
-keySet =
-    KeySet'
-    { _ksAll = Nothing
-    , _ksRanges = Nothing
-    , _ksKeys = Nothing
-    }
+keySet = KeySet' {_ksAll = Nothing, _ksRanges = Nothing, _ksKeys = Nothing}
+
 
 -- | For convenience \`all\` can be set to \`true\` to indicate that this
 -- \`KeySet\` matches all keys in the table or index. Note that any keys
@@ -1263,6 +1287,75 @@ instance ToJSON KeySet where
                  [("all" .=) <$> _ksAll, ("ranges" .=) <$> _ksRanges,
                   ("keys" .=) <$> _ksKeys])
 
+-- | A single DML statement.
+--
+-- /See:/ 'statement' smart constructor.
+data Statement =
+  Statement'
+    { _sParamTypes :: !(Maybe StatementParamTypes)
+    , _sParams     :: !(Maybe StatementParams)
+    , _sSQL        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Statement' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sParamTypes'
+--
+-- * 'sParams'
+--
+-- * 'sSQL'
+statement
+    :: Statement
+statement =
+  Statement' {_sParamTypes = Nothing, _sParams = Nothing, _sSQL = Nothing}
+
+
+-- | It is not always possible for Cloud Spanner to infer the right SQL type
+-- from a JSON value. For example, values of type \`BYTES\` and values of
+-- type \`STRING\` both appear in params as JSON strings. In these cases,
+-- \`param_types\` can be used to specify the exact SQL type for some or
+-- all of the SQL statement parameters. See the definition of Type for more
+-- information about SQL types.
+sParamTypes :: Lens' Statement (Maybe StatementParamTypes)
+sParamTypes
+  = lens _sParamTypes (\ s a -> s{_sParamTypes = a})
+
+-- | The DML string can contain parameter placeholders. A parameter
+-- placeholder consists of \`\'\'\'\` followed by the parameter name.
+-- Parameter names consist of any combination of letters, numbers, and
+-- underscores. Parameters can appear anywhere that a literal value is
+-- expected. The same parameter name can be used more than once, for
+-- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
+-- error to execute an SQL statement with unbound parameters. Parameter
+-- values are specified using \`params\`, which is a JSON object whose keys
+-- are parameter names, and whose values are the corresponding parameter
+-- values.
+sParams :: Lens' Statement (Maybe StatementParams)
+sParams = lens _sParams (\ s a -> s{_sParams = a})
+
+-- | Required. The DML string.
+sSQL :: Lens' Statement (Maybe Text)
+sSQL = lens _sSQL (\ s a -> s{_sSQL = a})
+
+instance FromJSON Statement where
+        parseJSON
+          = withObject "Statement"
+              (\ o ->
+                 Statement' <$>
+                   (o .:? "paramTypes") <*> (o .:? "params") <*>
+                     (o .:? "sql"))
+
+instance ToJSON Statement where
+        toJSON Statement'{..}
+          = object
+              (catMaybes
+                 [("paramTypes" .=) <$> _sParamTypes,
+                  ("params" .=) <$> _sParams, ("sql" .=) <$> _sSQL])
+
 -- | The SQL query string can contain parameter placeholders. A parameter
 -- placeholder consists of \`\'\'\'\` followed by the parameter name.
 -- Parameter names consist of any combination of letters, numbers, and
@@ -1275,9 +1368,12 @@ instance ToJSON KeySet where
 -- values.
 --
 -- /See:/ 'partitionQueryRequestParams' smart constructor.
-newtype PartitionQueryRequestParams = PartitionQueryRequestParams'
+newtype PartitionQueryRequestParams =
+  PartitionQueryRequestParams'
     { _pqrpAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionQueryRequestParams' with the minimum fields required to make a request.
 --
@@ -1288,9 +1384,8 @@ partitionQueryRequestParams
     :: HashMap Text JSONValue -- ^ 'pqrpAddtional'
     -> PartitionQueryRequestParams
 partitionQueryRequestParams pPqrpAddtional_ =
-    PartitionQueryRequestParams'
-    { _pqrpAddtional = _Coerce # pPqrpAddtional_
-    }
+  PartitionQueryRequestParams' {_pqrpAddtional = _Coerce # pPqrpAddtional_}
+
 
 -- | Properties of the object.
 pqrpAddtional :: Lens' PartitionQueryRequestParams (HashMap Text JSONValue)
@@ -1308,17 +1403,89 @@ instance FromJSON PartitionQueryRequestParams where
 instance ToJSON PartitionQueryRequestParams where
         toJSON = toJSON . _pqrpAddtional
 
+-- | The response for ExecuteBatchDml. Contains a list of ResultSet, one for
+-- each DML statement that has successfully executed. If a statement fails,
+-- the error is returned as part of the response payload. Clients can
+-- determine whether all DML statements have run successfully, or if a
+-- statement failed, using one of the following approaches: 1. Check if
+-- \'status\' field is OkStatus. 2. Check if result_sets_size() equals the
+-- number of statements in ExecuteBatchDmlRequest. Example 1: A request
+-- with 5 DML statements, all executed successfully. Result: A response
+-- with 5 ResultSets, one for each statement in the same order, and an OK
+-- status. Example 2: A request with 5 DML statements. The 3rd statement
+-- has a syntax error. Result: A response with 2 ResultSets, for the first
+-- 2 statements that run successfully, and a syntax error
+-- (INVALID_ARGUMENT) status. From result_set_size() client can determine
+-- that the 3rd statement has failed.
+--
+-- /See:/ 'executeBatchDmlResponse' smart constructor.
+data ExecuteBatchDmlResponse =
+  ExecuteBatchDmlResponse'
+    { _ebdrStatus     :: !(Maybe Status)
+    , _ebdrResultSets :: !(Maybe [ResultSet])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExecuteBatchDmlResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ebdrStatus'
+--
+-- * 'ebdrResultSets'
+executeBatchDmlResponse
+    :: ExecuteBatchDmlResponse
+executeBatchDmlResponse =
+  ExecuteBatchDmlResponse' {_ebdrStatus = Nothing, _ebdrResultSets = Nothing}
+
+
+-- | If all DML statements are executed successfully, status will be OK.
+-- Otherwise, the error status of the first failed statement.
+ebdrStatus :: Lens' ExecuteBatchDmlResponse (Maybe Status)
+ebdrStatus
+  = lens _ebdrStatus (\ s a -> s{_ebdrStatus = a})
+
+-- | ResultSets, one for each statement in the request that ran successfully,
+-- in the same order as the statements in the request. Each ResultSet will
+-- not contain any rows. The ResultSetStats in each ResultSet will contain
+-- the number of rows modified by the statement. Only the first ResultSet
+-- in the response contains a valid ResultSetMetadata.
+ebdrResultSets :: Lens' ExecuteBatchDmlResponse [ResultSet]
+ebdrResultSets
+  = lens _ebdrResultSets
+      (\ s a -> s{_ebdrResultSets = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ExecuteBatchDmlResponse where
+        parseJSON
+          = withObject "ExecuteBatchDmlResponse"
+              (\ o ->
+                 ExecuteBatchDmlResponse' <$>
+                   (o .:? "status") <*> (o .:? "resultSets" .!= mempty))
+
+instance ToJSON ExecuteBatchDmlResponse where
+        toJSON ExecuteBatchDmlResponse'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ebdrStatus,
+                  ("resultSets" .=) <$> _ebdrResultSets])
+
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1336,13 +1503,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1402,11 +1570,14 @@ instance ToJSON Operation where
 -- | Metadata type for the operation returned by UpdateDatabaseDdl.
 --
 -- /See:/ 'updateDatabaseDdlMetadata' smart constructor.
-data UpdateDatabaseDdlMetadata = UpdateDatabaseDdlMetadata'
+data UpdateDatabaseDdlMetadata =
+  UpdateDatabaseDdlMetadata'
     { _uddmCommitTimestamps :: !(Maybe [DateTime'])
     , _uddmDatabase         :: !(Maybe Text)
     , _uddmStatements       :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateDatabaseDdlMetadata' with the minimum fields required to make a request.
 --
@@ -1420,11 +1591,12 @@ data UpdateDatabaseDdlMetadata = UpdateDatabaseDdlMetadata'
 updateDatabaseDdlMetadata
     :: UpdateDatabaseDdlMetadata
 updateDatabaseDdlMetadata =
-    UpdateDatabaseDdlMetadata'
+  UpdateDatabaseDdlMetadata'
     { _uddmCommitTimestamps = Nothing
     , _uddmDatabase = Nothing
     , _uddmStatements = Nothing
     }
+
 
 -- | Reports the commit timestamps of all statements that have succeeded so
 -- far, where \`commit_timestamps[i]\` is the commit timestamp for the
@@ -1475,14 +1647,16 @@ instance ToJSON UpdateDatabaseDdlMetadata where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1493,10 +1667,13 @@ instance ToJSON Empty where
 -- | A Cloud Spanner database.
 --
 -- /See:/ 'database' smart constructor.
-data Database = Database'
+data Database =
+  Database'
     { _dState :: !(Maybe DatabaseState)
     , _dName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Database' with the minimum fields required to make a request.
 --
@@ -1507,11 +1684,8 @@ data Database = Database'
 -- * 'dName'
 database
     :: Database
-database =
-    Database'
-    { _dState = Nothing
-    , _dName = Nothing
-    }
+database = Database' {_dState = Nothing, _dName = Nothing}
+
 
 -- | Output only. The current database state.
 dState :: Lens' Database (Maybe DatabaseState)
@@ -1539,7 +1713,8 @@ instance ToJSON Database where
 -- | Node information for nodes appearing in a QueryPlan.plan_nodes.
 --
 -- /See:/ 'planNode' smart constructor.
-data PlanNode = PlanNode'
+data PlanNode =
+  PlanNode'
     { _pnKind                :: !(Maybe PlanNodeKind)
     , _pnShortRepresentation :: !(Maybe ShortRepresentation)
     , _pnMetadata            :: !(Maybe PlanNodeMetadata)
@@ -1547,7 +1722,9 @@ data PlanNode = PlanNode'
     , _pnExecutionStats      :: !(Maybe PlanNodeExecutionStats)
     , _pnIndex               :: !(Maybe (Textual Int32))
     , _pnChildLinks          :: !(Maybe [ChildLink])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlanNode' with the minimum fields required to make a request.
 --
@@ -1569,7 +1746,7 @@ data PlanNode = PlanNode'
 planNode
     :: PlanNode
 planNode =
-    PlanNode'
+  PlanNode'
     { _pnKind = Nothing
     , _pnShortRepresentation = Nothing
     , _pnMetadata = Nothing
@@ -1578,6 +1755,7 @@ planNode =
     , _pnIndex = Nothing
     , _pnChildLinks = Nothing
     }
+
 
 -- | Used to determine the type of node. May be needed for visualizing
 -- different kinds of nodes differently. For example, If the node is a
@@ -1656,9 +1834,12 @@ instance ToJSON PlanNode where
 -- | The request for CreateSession.
 --
 -- /See:/ 'createSessionRequest' smart constructor.
-newtype CreateSessionRequest = CreateSessionRequest'
+newtype CreateSessionRequest =
+  CreateSessionRequest'
     { _csrSession :: Maybe Session
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateSessionRequest' with the minimum fields required to make a request.
 --
@@ -1667,10 +1848,8 @@ newtype CreateSessionRequest = CreateSessionRequest'
 -- * 'csrSession'
 createSessionRequest
     :: CreateSessionRequest
-createSessionRequest =
-    CreateSessionRequest'
-    { _csrSession = Nothing
-    }
+createSessionRequest = CreateSessionRequest' {_csrSession = Nothing}
+
 
 -- | The session to create.
 csrSession :: Lens' CreateSessionRequest (Maybe Session)
@@ -1690,10 +1869,13 @@ instance ToJSON CreateSessionRequest where
 -- \`SCALAR\` PlanNode(s).
 --
 -- /See:/ 'shortRepresentation' smart constructor.
-data ShortRepresentation = ShortRepresentation'
+data ShortRepresentation =
+  ShortRepresentation'
     { _srSubqueries  :: !(Maybe ShortRepresentationSubqueries)
     , _srDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShortRepresentation' with the minimum fields required to make a request.
 --
@@ -1705,10 +1887,8 @@ data ShortRepresentation = ShortRepresentation'
 shortRepresentation
     :: ShortRepresentation
 shortRepresentation =
-    ShortRepresentation'
-    { _srSubqueries = Nothing
-    , _srDescription = Nothing
-    }
+  ShortRepresentation' {_srSubqueries = Nothing, _srDescription = Nothing}
+
 
 -- | A mapping of (subquery variable name) -> (subquery node id) for cases
 -- where the \`description\` string of this node references a \`SCALAR\`
@@ -1746,9 +1926,12 @@ instance ToJSON ShortRepresentation where
 -- this node.
 --
 -- /See:/ 'shortRepresentationSubqueries' smart constructor.
-newtype ShortRepresentationSubqueries = ShortRepresentationSubqueries'
+newtype ShortRepresentationSubqueries =
+  ShortRepresentationSubqueries'
     { _srsAddtional :: HashMap Text (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShortRepresentationSubqueries' with the minimum fields required to make a request.
 --
@@ -1759,9 +1942,8 @@ shortRepresentationSubqueries
     :: HashMap Text Int32 -- ^ 'srsAddtional'
     -> ShortRepresentationSubqueries
 shortRepresentationSubqueries pSrsAddtional_ =
-    ShortRepresentationSubqueries'
-    { _srsAddtional = _Coerce # pSrsAddtional_
-    }
+  ShortRepresentationSubqueries' {_srsAddtional = _Coerce # pSrsAddtional_}
+
 
 srsAddtional :: Lens' ShortRepresentationSubqueries (HashMap Text Int32)
 srsAddtional
@@ -1780,9 +1962,12 @@ instance ToJSON ShortRepresentationSubqueries where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1793,9 +1978,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1817,9 +2001,12 @@ instance ToJSON StatusDetailsItem where
 -- \"parameter_type\": \"array\" }
 --
 -- /See:/ 'planNodeMetadata' smart constructor.
-newtype PlanNodeMetadata = PlanNodeMetadata'
+newtype PlanNodeMetadata =
+  PlanNodeMetadata'
     { _pnmAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlanNodeMetadata' with the minimum fields required to make a request.
 --
@@ -1830,9 +2017,8 @@ planNodeMetadata
     :: HashMap Text JSONValue -- ^ 'pnmAddtional'
     -> PlanNodeMetadata
 planNodeMetadata pPnmAddtional_ =
-    PlanNodeMetadata'
-    { _pnmAddtional = _Coerce # pPnmAddtional_
-    }
+  PlanNodeMetadata' {_pnmAddtional = _Coerce # pPnmAddtional_}
+
 
 -- | Properties of the object.
 pnmAddtional :: Lens' PlanNodeMetadata (HashMap Text JSONValue)
@@ -1852,14 +2038,16 @@ instance ToJSON PlanNodeMetadata where
 --
 -- /See:/ 'partitionedDml' smart constructor.
 data PartitionedDml =
-    PartitionedDml'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  PartitionedDml'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionedDml' with the minimum fields required to make a request.
 --
 partitionedDml
     :: PartitionedDml
 partitionedDml = PartitionedDml'
+
 
 instance FromJSON PartitionedDml where
         parseJSON
@@ -1872,9 +2060,12 @@ instance ToJSON PartitionedDml where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
+newtype SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -1883,10 +2074,8 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
-setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
-    }
+setIAMPolicyRequest = SetIAMPolicyRequest' {_siprPolicy = Nothing}
+
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -1905,6 +2094,46 @@ instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
+-- | It is not always possible for Cloud Spanner to infer the right SQL type
+-- from a JSON value. For example, values of type \`BYTES\` and values of
+-- type \`STRING\` both appear in params as JSON strings. In these cases,
+-- \`param_types\` can be used to specify the exact SQL type for some or
+-- all of the SQL statement parameters. See the definition of Type for more
+-- information about SQL types.
+--
+-- /See:/ 'statementParamTypes' smart constructor.
+newtype StatementParamTypes =
+  StatementParamTypes'
+    { _sptAddtional :: HashMap Text Type
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StatementParamTypes' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sptAddtional'
+statementParamTypes
+    :: HashMap Text Type -- ^ 'sptAddtional'
+    -> StatementParamTypes
+statementParamTypes pSptAddtional_ =
+  StatementParamTypes' {_sptAddtional = _Coerce # pSptAddtional_}
+
+
+sptAddtional :: Lens' StatementParamTypes (HashMap Text Type)
+sptAddtional
+  = lens _sptAddtional (\ s a -> s{_sptAddtional = a})
+      . _Coerce
+
+instance FromJSON StatementParamTypes where
+        parseJSON
+          = withObject "StatementParamTypes"
+              (\ o -> StatementParamTypes' <$> (parseJSONObject o))
+
+instance ToJSON StatementParamTypes where
+        toJSON = toJSON . _sptAddtional
+
 -- | Enqueues the given DDL statements to be applied, in order but not
 -- necessarily all at once, to the database schema at some point (or
 -- points) in the future. The server checks that the statements are
@@ -1919,10 +2148,13 @@ instance ToJSON SetIAMPolicyRequest where
 -- operation_id field for more details.
 --
 -- /See:/ 'updateDatabaseDdlRequest' smart constructor.
-data UpdateDatabaseDdlRequest = UpdateDatabaseDdlRequest'
+data UpdateDatabaseDdlRequest =
+  UpdateDatabaseDdlRequest'
     { _uddrOperationId :: !(Maybe Text)
     , _uddrStatements  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateDatabaseDdlRequest' with the minimum fields required to make a request.
 --
@@ -1934,10 +2166,9 @@ data UpdateDatabaseDdlRequest = UpdateDatabaseDdlRequest'
 updateDatabaseDdlRequest
     :: UpdateDatabaseDdlRequest
 updateDatabaseDdlRequest =
-    UpdateDatabaseDdlRequest'
-    { _uddrOperationId = Nothing
-    , _uddrStatements = Nothing
-    }
+  UpdateDatabaseDdlRequest'
+    {_uddrOperationId = Nothing, _uddrStatements = Nothing}
+
 
 -- | If empty, the new update request is assigned an automatically-generated
 -- operation ID. Otherwise, \`operation_id\` is used to construct the name
@@ -1983,13 +2214,16 @@ instance ToJSON UpdateDatabaseDdlRequest where
 -- applied to a Cloud Spanner database by sending them in a Commit call.
 --
 -- /See:/ 'mutation' smart constructor.
-data Mutation = Mutation'
+data Mutation =
+  Mutation'
     { _mReplace        :: !(Maybe Write)
     , _mInsert         :: !(Maybe Write)
     , _mInsertOrUpdate :: !(Maybe Write)
     , _mDelete         :: !(Maybe Delete')
     , _mUpdate         :: !(Maybe Write)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Mutation' with the minimum fields required to make a request.
 --
@@ -2007,13 +2241,14 @@ data Mutation = Mutation'
 mutation
     :: Mutation
 mutation =
-    Mutation'
+  Mutation'
     { _mReplace = Nothing
     , _mInsert = Nothing
     , _mInsertOrUpdate = Nothing
     , _mDelete = Nothing
     , _mUpdate = Nothing
     }
+
 
 -- | Like insert, except that if the row already exists, it is deleted, and
 -- the column values provided are inserted instead. Unlike
@@ -2068,14 +2303,17 @@ instance ToJSON Mutation where
 -- | The request for PartitionRead
 --
 -- /See:/ 'partitionReadRequest' smart constructor.
-data PartitionReadRequest = PartitionReadRequest'
+data PartitionReadRequest =
+  PartitionReadRequest'
     { _prrPartitionOptions :: !(Maybe PartitionOptions)
     , _prrKeySet           :: !(Maybe KeySet)
     , _prrTransaction      :: !(Maybe TransactionSelector)
     , _prrColumns          :: !(Maybe [Text])
     , _prrIndex            :: !(Maybe Text)
     , _prrTable            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionReadRequest' with the minimum fields required to make a request.
 --
@@ -2095,7 +2333,7 @@ data PartitionReadRequest = PartitionReadRequest'
 partitionReadRequest
     :: PartitionReadRequest
 partitionReadRequest =
-    PartitionReadRequest'
+  PartitionReadRequest'
     { _prrPartitionOptions = Nothing
     , _prrKeySet = Nothing
     , _prrTransaction = Nothing
@@ -2103,6 +2341,7 @@ partitionReadRequest =
     , _prrIndex = Nothing
     , _prrTable = Nothing
     }
+
 
 -- | Additional options that affect how many partitions are created.
 prrPartitionOptions :: Lens' PartitionReadRequest (Maybe PartitionOptions)
@@ -2173,9 +2412,12 @@ instance ToJSON PartitionReadRequest where
 -- information about SQL types.
 --
 -- /See:/ 'executeSQLRequestParamTypes' smart constructor.
-newtype ExecuteSQLRequestParamTypes = ExecuteSQLRequestParamTypes'
+newtype ExecuteSQLRequestParamTypes =
+  ExecuteSQLRequestParamTypes'
     { _esqlrptAddtional :: HashMap Text Type
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExecuteSQLRequestParamTypes' with the minimum fields required to make a request.
 --
@@ -2186,9 +2428,9 @@ executeSQLRequestParamTypes
     :: HashMap Text Type -- ^ 'esqlrptAddtional'
     -> ExecuteSQLRequestParamTypes
 executeSQLRequestParamTypes pEsqlrptAddtional_ =
-    ExecuteSQLRequestParamTypes'
-    { _esqlrptAddtional = _Coerce # pEsqlrptAddtional_
-    }
+  ExecuteSQLRequestParamTypes'
+    {_esqlrptAddtional = _Coerce # pEsqlrptAddtional_}
+
 
 esqlrptAddtional :: Lens' ExecuteSQLRequestParamTypes (HashMap Text Type)
 esqlrptAddtional
@@ -2208,10 +2450,13 @@ instance ToJSON ExecuteSQLRequestParamTypes where
 -- | A transaction.
 --
 -- /See:/ 'transaction' smart constructor.
-data Transaction = Transaction'
+data Transaction =
+  Transaction'
     { _tReadTimestamp :: !(Maybe DateTime')
     , _tId            :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Transaction' with the minimum fields required to make a request.
 --
@@ -2222,11 +2467,8 @@ data Transaction = Transaction'
 -- * 'tId'
 transaction
     :: Transaction
-transaction =
-    Transaction'
-    { _tReadTimestamp = Nothing
-    , _tId = Nothing
-    }
+transaction = Transaction' {_tReadTimestamp = Nothing, _tId = Nothing}
+
 
 -- | For snapshot read-only transactions, the read timestamp chosen for the
 -- transaction. Not returned by default: see
@@ -2264,10 +2506,13 @@ instance ToJSON Transaction where
 -- | The response for ListSessions.
 --
 -- /See:/ 'listSessionsResponse' smart constructor.
-data ListSessionsResponse = ListSessionsResponse'
+data ListSessionsResponse =
+  ListSessionsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSessions      :: !(Maybe [Session])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
 --
@@ -2279,10 +2524,8 @@ data ListSessionsResponse = ListSessionsResponse'
 listSessionsResponse
     :: ListSessionsResponse
 listSessionsResponse =
-    ListSessionsResponse'
-    { _lsrNextPageToken = Nothing
-    , _lsrSessions = Nothing
-    }
+  ListSessionsResponse' {_lsrNextPageToken = Nothing, _lsrSessions = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListSessions call to
 -- fetch more of the matching sessions.
@@ -2313,12 +2556,90 @@ instance ToJSON ListSessionsResponse where
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("sessions" .=) <$> _lsrSessions])
 
+-- | The request for ExecuteBatchDml
+--
+-- /See:/ 'executeBatchDmlRequest' smart constructor.
+data ExecuteBatchDmlRequest =
+  ExecuteBatchDmlRequest'
+    { _ebdrSeqno       :: !(Maybe (Textual Int64))
+    , _ebdrTransaction :: !(Maybe TransactionSelector)
+    , _ebdrStatements  :: !(Maybe [Statement])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExecuteBatchDmlRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ebdrSeqno'
+--
+-- * 'ebdrTransaction'
+--
+-- * 'ebdrStatements'
+executeBatchDmlRequest
+    :: ExecuteBatchDmlRequest
+executeBatchDmlRequest =
+  ExecuteBatchDmlRequest'
+    { _ebdrSeqno = Nothing
+    , _ebdrTransaction = Nothing
+    , _ebdrStatements = Nothing
+    }
+
+
+-- | A per-transaction sequence number used to identify this request. This is
+-- used in the same space as the seqno in ExecuteSqlRequest. See more
+-- details in ExecuteSqlRequest.
+ebdrSeqno :: Lens' ExecuteBatchDmlRequest (Maybe Int64)
+ebdrSeqno
+  = lens _ebdrSeqno (\ s a -> s{_ebdrSeqno = a}) .
+      mapping _Coerce
+
+-- | The transaction to use. A ReadWrite transaction is required. Single-use
+-- transactions are not supported (to avoid replay). The caller must either
+-- supply an existing transaction ID or begin a new transaction.
+ebdrTransaction :: Lens' ExecuteBatchDmlRequest (Maybe TransactionSelector)
+ebdrTransaction
+  = lens _ebdrTransaction
+      (\ s a -> s{_ebdrTransaction = a})
+
+-- | The list of statements to execute in this batch. Statements are executed
+-- serially, such that the effects of statement i are visible to statement
+-- i+1. Each statement must be a DML statement. Execution will stop at the
+-- first failed statement; the remaining statements will not run. REQUIRES:
+-- statements_size() > 0.
+ebdrStatements :: Lens' ExecuteBatchDmlRequest [Statement]
+ebdrStatements
+  = lens _ebdrStatements
+      (\ s a -> s{_ebdrStatements = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ExecuteBatchDmlRequest where
+        parseJSON
+          = withObject "ExecuteBatchDmlRequest"
+              (\ o ->
+                 ExecuteBatchDmlRequest' <$>
+                   (o .:? "seqno") <*> (o .:? "transaction") <*>
+                     (o .:? "statements" .!= mempty))
+
+instance ToJSON ExecuteBatchDmlRequest where
+        toJSON ExecuteBatchDmlRequest'{..}
+          = object
+              (catMaybes
+                 [("seqno" .=) <$> _ebdrSeqno,
+                  ("transaction" .=) <$> _ebdrTransaction,
+                  ("statements" .=) <$> _ebdrStatements])
+
 -- | \`StructType\` defines the fields of a STRUCT type.
 --
 -- /See:/ 'structType' smart constructor.
-newtype StructType = StructType'
+newtype StructType =
+  StructType'
     { _stFields :: Maybe [Field]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StructType' with the minimum fields required to make a request.
 --
@@ -2327,10 +2648,8 @@ newtype StructType = StructType'
 -- * 'stFields'
 structType
     :: StructType
-structType =
-    StructType'
-    { _stFields = Nothing
-    }
+structType = StructType' {_stFields = Nothing}
+
 
 -- | The list of fields that make up this struct. Order is significant,
 -- because values of this struct type are represented as lists, where the
@@ -2355,9 +2674,12 @@ instance ToJSON StructType where
 -- | The response for Commit.
 --
 -- /See:/ 'commitResponse' smart constructor.
-newtype CommitResponse = CommitResponse'
+newtype CommitResponse =
+  CommitResponse'
     { _crCommitTimestamp :: Maybe DateTime'
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
@@ -2366,10 +2688,8 @@ newtype CommitResponse = CommitResponse'
 -- * 'crCommitTimestamp'
 commitResponse
     :: CommitResponse
-commitResponse =
-    CommitResponse'
-    { _crCommitTimestamp = Nothing
-    }
+commitResponse = CommitResponse' {_crCommitTimestamp = Nothing}
+
 
 -- | The Cloud Spanner timestamp at which the transaction committed.
 crCommitTimestamp :: Lens' CommitResponse (Maybe UTCTime)
@@ -2393,9 +2713,12 @@ instance ToJSON CommitResponse where
 -- | Information returned for each partition returned in a PartitionResponse.
 --
 -- /See:/ 'partition' smart constructor.
-newtype Partition = Partition'
+newtype Partition =
+  Partition'
     { _pPartitionToken :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Partition' with the minimum fields required to make a request.
 --
@@ -2404,10 +2727,8 @@ newtype Partition = Partition'
 -- * 'pPartitionToken'
 partition
     :: Partition
-partition =
-    Partition'
-    { _pPartitionToken = Nothing
-    }
+partition = Partition' {_pPartitionToken = Nothing}
+
 
 -- | This token can be passed to Read, StreamingRead, ExecuteSql, or
 -- ExecuteStreamingSql requests to restrict the results to those identified
@@ -2432,9 +2753,12 @@ instance ToJSON Partition where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -2444,9 +2768,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | REQUIRED: The set of permissions to check for \'resource\'. Permissions
 -- with wildcards (such as \'*\', \'spanner.*\', \'spanner.instances.*\')
@@ -2478,9 +2801,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- information about SQL types.
 --
 -- /See:/ 'partitionQueryRequestParamTypes' smart constructor.
-newtype PartitionQueryRequestParamTypes = PartitionQueryRequestParamTypes'
+newtype PartitionQueryRequestParamTypes =
+  PartitionQueryRequestParamTypes'
     { _pqrptAddtional :: HashMap Text Type
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionQueryRequestParamTypes' with the minimum fields required to make a request.
 --
@@ -2491,9 +2817,9 @@ partitionQueryRequestParamTypes
     :: HashMap Text Type -- ^ 'pqrptAddtional'
     -> PartitionQueryRequestParamTypes
 partitionQueryRequestParamTypes pPqrptAddtional_ =
-    PartitionQueryRequestParamTypes'
-    { _pqrptAddtional = _Coerce # pPqrptAddtional_
-    }
+  PartitionQueryRequestParamTypes'
+    {_pqrptAddtional = _Coerce # pPqrptAddtional_}
+
 
 pqrptAddtional :: Lens' PartitionQueryRequestParamTypes (HashMap Text Type)
 pqrptAddtional
@@ -2515,12 +2841,15 @@ instance ToJSON PartitionQueryRequestParamTypes where
 -- | Metadata type for the operation returned by UpdateInstance.
 --
 -- /See:/ 'updateInstanceMetadata' smart constructor.
-data UpdateInstanceMetadata = UpdateInstanceMetadata'
+data UpdateInstanceMetadata =
+  UpdateInstanceMetadata'
     { _uimStartTime  :: !(Maybe DateTime')
     , _uimCancelTime :: !(Maybe DateTime')
     , _uimEndTime    :: !(Maybe DateTime')
     , _uimInstance   :: !(Maybe Instance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateInstanceMetadata' with the minimum fields required to make a request.
 --
@@ -2536,12 +2865,13 @@ data UpdateInstanceMetadata = UpdateInstanceMetadata'
 updateInstanceMetadata
     :: UpdateInstanceMetadata
 updateInstanceMetadata =
-    UpdateInstanceMetadata'
+  UpdateInstanceMetadata'
     { _uimStartTime = Nothing
     , _uimCancelTime = Nothing
     , _uimEndTime = Nothing
     , _uimInstance = Nothing
     }
+
 
 -- | The time at which UpdateInstance request was received.
 uimStartTime :: Lens' UpdateInstanceMetadata (Maybe UTCTime)
@@ -2593,9 +2923,12 @@ instance ToJSON UpdateInstanceMetadata where
 -- per execution etc.
 --
 -- /See:/ 'planNodeExecutionStats' smart constructor.
-newtype PlanNodeExecutionStats = PlanNodeExecutionStats'
+newtype PlanNodeExecutionStats =
+  PlanNodeExecutionStats'
     { _pnesAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlanNodeExecutionStats' with the minimum fields required to make a request.
 --
@@ -2606,9 +2939,8 @@ planNodeExecutionStats
     :: HashMap Text JSONValue -- ^ 'pnesAddtional'
     -> PlanNodeExecutionStats
 planNodeExecutionStats pPnesAddtional_ =
-    PlanNodeExecutionStats'
-    { _pnesAddtional = _Coerce # pPnesAddtional_
-    }
+  PlanNodeExecutionStats' {_pnesAddtional = _Coerce # pPnesAddtional_}
+
 
 -- | Properties of the object.
 pnesAddtional :: Lens' PlanNodeExecutionStats (HashMap Text JSONValue)
@@ -2629,9 +2961,12 @@ instance ToJSON PlanNodeExecutionStats where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -2641,9 +2976,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -2672,13 +3006,16 @@ instance ToJSON TestIAMPermissionsResponse where
 -- values, but are a little trickier to consume.
 --
 -- /See:/ 'partialResultSet' smart constructor.
-data PartialResultSet = PartialResultSet'
+data PartialResultSet =
+  PartialResultSet'
     { _prsResumeToken  :: !(Maybe Bytes)
     , _prsValues       :: !(Maybe [JSONValue])
     , _prsStats        :: !(Maybe ResultSetStats)
     , _prsMetadata     :: !(Maybe ResultSetMetadata)
     , _prsChunkedValue :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartialResultSet' with the minimum fields required to make a request.
 --
@@ -2696,13 +3033,14 @@ data PartialResultSet = PartialResultSet'
 partialResultSet
     :: PartialResultSet
 partialResultSet =
-    PartialResultSet'
+  PartialResultSet'
     { _prsResumeToken = Nothing
     , _prsValues = Nothing
     , _prsStats = Nothing
     , _prsMetadata = Nothing
     , _prsChunkedValue = Nothing
     }
+
 
 -- | Streaming calls might be interrupted for a variety of reasons, such as
 -- TCP connection loss. If this occurs, the stream of results can be
@@ -2819,11 +3157,14 @@ instance ToJSON PartialResultSet where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pEtag     :: !(Maybe Bytes)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -2836,12 +3177,8 @@ data Policy = Policy'
 -- * 'pBindings'
 policy
     :: Policy
-policy =
-    Policy'
-    { _pEtag = Nothing
-    , _pVersion = Nothing
-    , _pBindings = Nothing
-    }
+policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
+
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -2890,10 +3227,13 @@ instance ToJSON Policy where
 -- | The request for CreateDatabase.
 --
 -- /See:/ 'createDatabaseRequest' smart constructor.
-data CreateDatabaseRequest = CreateDatabaseRequest'
+data CreateDatabaseRequest =
+  CreateDatabaseRequest'
     { _cdrExtraStatements :: !(Maybe [Text])
     , _cdrCreateStatement :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateDatabaseRequest' with the minimum fields required to make a request.
 --
@@ -2905,10 +3245,9 @@ data CreateDatabaseRequest = CreateDatabaseRequest'
 createDatabaseRequest
     :: CreateDatabaseRequest
 createDatabaseRequest =
-    CreateDatabaseRequest'
-    { _cdrExtraStatements = Nothing
-    , _cdrCreateStatement = Nothing
-    }
+  CreateDatabaseRequest'
+    {_cdrExtraStatements = Nothing, _cdrCreateStatement = Nothing}
+
 
 -- | An optional list of DDL statements to run inside the newly created
 -- database. Statements can create tables, indexes, etc. These statements
@@ -2949,7 +3288,8 @@ instance ToJSON CreateDatabaseRequest where
 -- | The request for ExecuteSql and ExecuteStreamingSql.
 --
 -- /See:/ 'executeSQLRequest' smart constructor.
-data ExecuteSQLRequest = ExecuteSQLRequest'
+data ExecuteSQLRequest =
+  ExecuteSQLRequest'
     { _esqlrParamTypes     :: !(Maybe ExecuteSQLRequestParamTypes)
     , _esqlrResumeToken    :: !(Maybe Bytes)
     , _esqlrSeqno          :: !(Maybe (Textual Int64))
@@ -2958,7 +3298,9 @@ data ExecuteSQLRequest = ExecuteSQLRequest'
     , _esqlrSQL            :: !(Maybe Text)
     , _esqlrPartitionToken :: !(Maybe Bytes)
     , _esqlrQueryMode      :: !(Maybe ExecuteSQLRequestQueryMode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ExecuteSQLRequest' with the minimum fields required to make a request.
 --
@@ -2982,7 +3324,7 @@ data ExecuteSQLRequest = ExecuteSQLRequest'
 executeSQLRequest
     :: ExecuteSQLRequest
 executeSQLRequest =
-    ExecuteSQLRequest'
+  ExecuteSQLRequest'
     { _esqlrParamTypes = Nothing
     , _esqlrResumeToken = Nothing
     , _esqlrSeqno = Nothing
@@ -2992,6 +3334,7 @@ executeSQLRequest =
     , _esqlrPartitionToken = Nothing
     , _esqlrQueryMode = Nothing
     }
+
 
 -- | It is not always possible for Cloud Spanner to infer the right SQL type
 -- from a JSON value. For example, values of type \`BYTES\` and values of
@@ -3107,11 +3450,14 @@ instance ToJSON ExecuteSQLRequest where
 -- | The request for Commit.
 --
 -- /See:/ 'commitRequest' smart constructor.
-data CommitRequest = CommitRequest'
+data CommitRequest =
+  CommitRequest'
     { _crMutations            :: !(Maybe [Mutation])
     , _crTransactionId        :: !(Maybe Bytes)
     , _crSingleUseTransaction :: !(Maybe TransactionOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
@@ -3125,11 +3471,12 @@ data CommitRequest = CommitRequest'
 commitRequest
     :: CommitRequest
 commitRequest =
-    CommitRequest'
+  CommitRequest'
     { _crMutations = Nothing
     , _crTransactionId = Nothing
     , _crSingleUseTransaction = Nothing
     }
+
 
 -- | The mutations to be executed when this transaction commits. All
 -- mutations are applied atomically, in the order they appear in this list.
@@ -3180,11 +3527,14 @@ instance ToJSON CommitRequest where
 -- in a table cell or returned from an SQL query.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type'
+data Type =
+  Type'
     { _tArrayElementType :: !(Maybe Type)
     , _tStructType       :: !(Maybe StructType)
     , _tCode             :: !(Maybe TypeCode)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
@@ -3198,11 +3548,8 @@ data Type = Type'
 type'
     :: Type
 type' =
-    Type'
-    { _tArrayElementType = Nothing
-    , _tStructType = Nothing
-    , _tCode = Nothing
-    }
+  Type' {_tArrayElementType = Nothing, _tStructType = Nothing, _tCode = Nothing}
+
 
 -- | If code == ARRAY, then \`array_element_type\` is the type of the array
 -- elements.
@@ -3240,12 +3587,15 @@ instance ToJSON Type where
 -- | Metadata type for the operation returned by CreateInstance.
 --
 -- /See:/ 'createInstanceMetadata' smart constructor.
-data CreateInstanceMetadata = CreateInstanceMetadata'
+data CreateInstanceMetadata =
+  CreateInstanceMetadata'
     { _cimStartTime  :: !(Maybe DateTime')
     , _cimCancelTime :: !(Maybe DateTime')
     , _cimEndTime    :: !(Maybe DateTime')
     , _cimInstance   :: !(Maybe Instance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateInstanceMetadata' with the minimum fields required to make a request.
 --
@@ -3261,12 +3611,13 @@ data CreateInstanceMetadata = CreateInstanceMetadata'
 createInstanceMetadata
     :: CreateInstanceMetadata
 createInstanceMetadata =
-    CreateInstanceMetadata'
+  CreateInstanceMetadata'
     { _cimStartTime = Nothing
     , _cimCancelTime = Nothing
     , _cimEndTime = Nothing
     , _cimInstance = Nothing
     }
+
 
 -- | The time at which the CreateInstance request was received.
 cimStartTime :: Lens' CreateInstanceMetadata (Maybe UTCTime)
@@ -3352,12 +3703,15 @@ instance ToJSON CreateInstanceMetadata where
 -- is a descending column in the schema.
 --
 -- /See:/ 'keyRange' smart constructor.
-data KeyRange = KeyRange'
+data KeyRange =
+  KeyRange'
     { _krStartClosed :: !(Maybe [JSONValue])
     , _krEndOpen     :: !(Maybe [JSONValue])
     , _krStartOpen   :: !(Maybe [JSONValue])
     , _krEndClosed   :: !(Maybe [JSONValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KeyRange' with the minimum fields required to make a request.
 --
@@ -3373,12 +3727,13 @@ data KeyRange = KeyRange'
 keyRange
     :: KeyRange
 keyRange =
-    KeyRange'
+  KeyRange'
     { _krStartClosed = Nothing
     , _krEndOpen = Nothing
     , _krStartOpen = Nothing
     , _krEndClosed = Nothing
     }
+
 
 -- | If the start is closed, then the range includes all rows whose first
 -- \`len(start_closed)\` key columns exactly match \`start_closed\`.
@@ -3438,9 +3793,12 @@ instance ToJSON KeyRange where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -3451,9 +3809,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -3473,10 +3830,13 @@ instance ToJSON OperationMetadata where
 -- define the geographic placement of nodes and their replication.
 --
 -- /See:/ 'instanceConfig' smart constructor.
-data InstanceConfig = InstanceConfig'
+data InstanceConfig =
+  InstanceConfig'
     { _icName        :: !(Maybe Text)
     , _icDisplayName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceConfig' with the minimum fields required to make a request.
 --
@@ -3487,11 +3847,8 @@ data InstanceConfig = InstanceConfig'
 -- * 'icDisplayName'
 instanceConfig
     :: InstanceConfig
-instanceConfig =
-    InstanceConfig'
-    { _icName = Nothing
-    , _icDisplayName = Nothing
-    }
+instanceConfig = InstanceConfig' {_icName = Nothing, _icDisplayName = Nothing}
+
 
 -- | A unique identifier for the instance configuration. Values are of the
 -- form \`projects\/\/instanceConfigs\/a-z*\`
@@ -3521,11 +3878,14 @@ instance ToJSON InstanceConfig where
 -- | Results from Read or ExecuteSql.
 --
 -- /See:/ 'resultSet' smart constructor.
-data ResultSet = ResultSet'
+data ResultSet =
+  ResultSet'
     { _rsStats    :: !(Maybe ResultSetStats)
     , _rsRows     :: !(Maybe [[JSONValue]])
     , _rsMetadata :: !(Maybe ResultSetMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultSet' with the minimum fields required to make a request.
 --
@@ -3539,11 +3899,8 @@ data ResultSet = ResultSet'
 resultSet
     :: ResultSet
 resultSet =
-    ResultSet'
-    { _rsStats = Nothing
-    , _rsRows = Nothing
-    , _rsMetadata = Nothing
-    }
+  ResultSet' {_rsStats = Nothing, _rsRows = Nothing, _rsMetadata = Nothing}
+
 
 -- | Query plan and execution statistics for the SQL statement that produced
 -- this result set. These can be requested by setting
@@ -3592,9 +3949,12 @@ instance ToJSON ResultSet where
 -- information on and examples of labels.
 --
 -- /See:/ 'sessionLabels' smart constructor.
-newtype SessionLabels = SessionLabels'
+newtype SessionLabels =
+  SessionLabels'
     { _slAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SessionLabels' with the minimum fields required to make a request.
 --
@@ -3605,9 +3965,8 @@ sessionLabels
     :: HashMap Text Text -- ^ 'slAddtional'
     -> SessionLabels
 sessionLabels pSlAddtional_ =
-    SessionLabels'
-    { _slAddtional = _Coerce # pSlAddtional_
-    }
+  SessionLabels' {_slAddtional = _Coerce # pSlAddtional_}
+
 
 slAddtional :: Lens' SessionLabels (HashMap Text Text)
 slAddtional
@@ -3625,10 +3984,13 @@ instance ToJSON SessionLabels where
 -- | The response for ListInstances.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
+data ListInstancesResponse =
+  ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirInstances     :: !(Maybe [Instance])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -3640,10 +4002,8 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
-    ListInstancesResponse'
-    { _lirNextPageToken = Nothing
-    , _lirInstances = Nothing
-    }
+  ListInstancesResponse' {_lirNextPageToken = Nothing, _lirInstances = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListInstances call to
 -- fetch more of the matching instances.
@@ -3677,7 +4037,8 @@ instance ToJSON ListInstancesResponse where
 -- | The request for Read and StreamingRead.
 --
 -- /See:/ 'readRequest' smart constructor.
-data ReadRequest = ReadRequest'
+data ReadRequest =
+  ReadRequest'
     { _rrResumeToken    :: !(Maybe Bytes)
     , _rrKeySet         :: !(Maybe KeySet)
     , _rrTransaction    :: !(Maybe TransactionSelector)
@@ -3686,7 +4047,9 @@ data ReadRequest = ReadRequest'
     , _rrIndex          :: !(Maybe Text)
     , _rrTable          :: !(Maybe Text)
     , _rrPartitionToken :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReadRequest' with the minimum fields required to make a request.
 --
@@ -3710,7 +4073,7 @@ data ReadRequest = ReadRequest'
 readRequest
     :: ReadRequest
 readRequest =
-    ReadRequest'
+  ReadRequest'
     { _rrResumeToken = Nothing
     , _rrKeySet = Nothing
     , _rrTransaction = Nothing
@@ -3720,6 +4083,7 @@ readRequest =
     , _rrTable = Nothing
     , _rrPartitionToken = Nothing
     }
+
 
 -- | If this request is resuming a previously interrupted read,
 -- \`resume_token\` should be copied from the last PartialResultSet yielded
@@ -3814,12 +4178,15 @@ instance ToJSON ReadRequest where
 -- | A session in the Cloud Spanner API.
 --
 -- /See:/ 'session' smart constructor.
-data Session = Session'
+data Session =
+  Session'
     { _sApproximateLastUseTime :: !(Maybe DateTime')
     , _sName                   :: !(Maybe Text)
     , _sLabels                 :: !(Maybe SessionLabels)
     , _sCreateTime             :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Session' with the minimum fields required to make a request.
 --
@@ -3835,12 +4202,13 @@ data Session = Session'
 session
     :: Session
 session =
-    Session'
+  Session'
     { _sApproximateLastUseTime = Nothing
     , _sName = Nothing
     , _sLabels = Nothing
     , _sCreateTime = Nothing
     }
+
 
 -- | Output only. The approximate timestamp when the session is last used. It
 -- is typically earlier than the actual last use time.
@@ -3899,9 +4267,12 @@ instance ToJSON Session where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -3912,9 +4283,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -3933,14 +4303,17 @@ instance ToJSON OperationResponse where
 -- | Message type to initiate a read-only transaction.
 --
 -- /See:/ 'readOnly' smart constructor.
-data ReadOnly = ReadOnly'
+data ReadOnly =
+  ReadOnly'
     { _roReadTimestamp       :: !(Maybe DateTime')
     , _roExactStaleness      :: !(Maybe GDuration)
     , _roMaxStaleness        :: !(Maybe GDuration)
     , _roStrong              :: !(Maybe Bool)
     , _roMinReadTimestamp    :: !(Maybe DateTime')
     , _roReturnReadTimestamp :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 --
@@ -3960,7 +4333,7 @@ data ReadOnly = ReadOnly'
 readOnly
     :: ReadOnly
 readOnly =
-    ReadOnly'
+  ReadOnly'
     { _roReadTimestamp = Nothing
     , _roExactStaleness = Nothing
     , _roMaxStaleness = Nothing
@@ -3968,6 +4341,7 @@ readOnly =
     , _roMinReadTimestamp = Nothing
     , _roReturnReadTimestamp = Nothing
     }
+
 
 -- | Executes all reads at the given timestamp. Unlike other modes, reads at
 -- a specific timestamp are repeatable; the same read at the same timestamp
@@ -4062,10 +4436,13 @@ instance ToJSON ReadOnly where
 -- | Metadata about a ResultSet or PartialResultSet.
 --
 -- /See:/ 'resultSetMetadata' smart constructor.
-data ResultSetMetadata = ResultSetMetadata'
+data ResultSetMetadata =
+  ResultSetMetadata'
     { _rsmRowType     :: !(Maybe StructType)
     , _rsmTransaction :: !(Maybe Transaction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultSetMetadata' with the minimum fields required to make a request.
 --
@@ -4077,10 +4454,8 @@ data ResultSetMetadata = ResultSetMetadata'
 resultSetMetadata
     :: ResultSetMetadata
 resultSetMetadata =
-    ResultSetMetadata'
-    { _rsmRowType = Nothing
-    , _rsmTransaction = Nothing
-    }
+  ResultSetMetadata' {_rsmRowType = Nothing, _rsmTransaction = Nothing}
+
 
 -- | Indicates the field names and types for the rows in the result set. For
 -- example, a SQL query like \`\"SELECT UserId, UserName FROM Users\"\`
@@ -4115,10 +4490,13 @@ instance ToJSON ResultSetMetadata where
 -- | Arguments to delete operations.
 --
 -- /See:/ 'delete'' smart constructor.
-data Delete' = Delete''
+data Delete' =
+  Delete''
     { _dKeySet :: !(Maybe KeySet)
     , _dTable  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Delete' with the minimum fields required to make a request.
 --
@@ -4129,11 +4507,8 @@ data Delete' = Delete''
 -- * 'dTable'
 delete'
     :: Delete'
-delete' =
-    Delete''
-    { _dKeySet = Nothing
-    , _dTable = Nothing
-    }
+delete' = Delete'' {_dKeySet = Nothing, _dTable = Nothing}
+
 
 -- | Required. The primary keys of the rows within table to delete. Delete is
 -- idempotent. The transaction will succeed even if some or all rows do not
@@ -4161,10 +4536,13 @@ instance ToJSON Delete' where
 -- | The request for UpdateInstance.
 --
 -- /See:/ 'updateInstanceRequest' smart constructor.
-data UpdateInstanceRequest = UpdateInstanceRequest'
+data UpdateInstanceRequest =
+  UpdateInstanceRequest'
     { _uirFieldMask :: !(Maybe GFieldMask)
     , _uirInstance  :: !(Maybe Instance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateInstanceRequest' with the minimum fields required to make a request.
 --
@@ -4176,10 +4554,8 @@ data UpdateInstanceRequest = UpdateInstanceRequest'
 updateInstanceRequest
     :: UpdateInstanceRequest
 updateInstanceRequest =
-    UpdateInstanceRequest'
-    { _uirFieldMask = Nothing
-    , _uirInstance = Nothing
-    }
+  UpdateInstanceRequest' {_uirFieldMask = Nothing, _uirInstance = Nothing}
+
 
 -- | Required. A mask specifying which fields in
 -- [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance]
@@ -4219,9 +4595,12 @@ instance ToJSON UpdateInstanceRequest where
 -- \"cpu_time\": \"1.19 secs\" }
 --
 -- /See:/ 'resultSetStatsQueryStats' smart constructor.
-newtype ResultSetStatsQueryStats = ResultSetStatsQueryStats'
+newtype ResultSetStatsQueryStats =
+  ResultSetStatsQueryStats'
     { _rssqsAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResultSetStatsQueryStats' with the minimum fields required to make a request.
 --
@@ -4232,9 +4611,8 @@ resultSetStatsQueryStats
     :: HashMap Text JSONValue -- ^ 'rssqsAddtional'
     -> ResultSetStatsQueryStats
 resultSetStatsQueryStats pRssqsAddtional_ =
-    ResultSetStatsQueryStats'
-    { _rssqsAddtional = _Coerce # pRssqsAddtional_
-    }
+  ResultSetStatsQueryStats' {_rssqsAddtional = _Coerce # pRssqsAddtional_}
+
 
 -- | Properties of the object.
 rssqsAddtional :: Lens' ResultSetStatsQueryStats (HashMap Text JSONValue)
@@ -4252,16 +4630,64 @@ instance FromJSON ResultSetStatsQueryStats where
 instance ToJSON ResultSetStatsQueryStats where
         toJSON = toJSON . _rssqsAddtional
 
+-- | The DML string can contain parameter placeholders. A parameter
+-- placeholder consists of \`\'\'\'\` followed by the parameter name.
+-- Parameter names consist of any combination of letters, numbers, and
+-- underscores. Parameters can appear anywhere that a literal value is
+-- expected. The same parameter name can be used more than once, for
+-- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
+-- error to execute an SQL statement with unbound parameters. Parameter
+-- values are specified using \`params\`, which is a JSON object whose keys
+-- are parameter names, and whose values are the corresponding parameter
+-- values.
+--
+-- /See:/ 'statementParams' smart constructor.
+newtype StatementParams =
+  StatementParams'
+    { _spAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StatementParams' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spAddtional'
+statementParams
+    :: HashMap Text JSONValue -- ^ 'spAddtional'
+    -> StatementParams
+statementParams pSpAddtional_ =
+  StatementParams' {_spAddtional = _Coerce # pSpAddtional_}
+
+
+-- | Properties of the object.
+spAddtional :: Lens' StatementParams (HashMap Text JSONValue)
+spAddtional
+  = lens _spAddtional (\ s a -> s{_spAddtional = a}) .
+      _Coerce
+
+instance FromJSON StatementParams where
+        parseJSON
+          = withObject "StatementParams"
+              (\ o -> StatementParams' <$> (parseJSONObject o))
+
+instance ToJSON StatementParams where
+        toJSON = toJSON . _spAddtional
+
 -- | This message is used to select the transaction in which a Read or
 -- ExecuteSql call runs. See TransactionOptions for more information about
 -- transactions.
 --
 -- /See:/ 'transactionSelector' smart constructor.
-data TransactionSelector = TransactionSelector'
+data TransactionSelector =
+  TransactionSelector'
     { _tsBegin     :: !(Maybe TransactionOptions)
     , _tsId        :: !(Maybe Bytes)
     , _tsSingleUse :: !(Maybe TransactionOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransactionSelector' with the minimum fields required to make a request.
 --
@@ -4275,11 +4701,9 @@ data TransactionSelector = TransactionSelector'
 transactionSelector
     :: TransactionSelector
 transactionSelector =
-    TransactionSelector'
-    { _tsBegin = Nothing
-    , _tsId = Nothing
-    , _tsSingleUse = Nothing
-    }
+  TransactionSelector'
+    {_tsBegin = Nothing, _tsId = Nothing, _tsSingleUse = Nothing}
+
 
 -- | Begin a new transaction and execute this read or SQL query in it. The
 -- transaction ID of the new transaction is returned in
@@ -4317,10 +4741,13 @@ instance ToJSON TransactionSelector where
 -- | The response for ListInstanceConfigs.
 --
 -- /See:/ 'listInstanceConfigsResponse' smart constructor.
-data ListInstanceConfigsResponse = ListInstanceConfigsResponse'
+data ListInstanceConfigsResponse =
+  ListInstanceConfigsResponse'
     { _licrNextPageToken   :: !(Maybe Text)
     , _licrInstanceConfigs :: !(Maybe [InstanceConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListInstanceConfigsResponse' with the minimum fields required to make a request.
 --
@@ -4332,10 +4759,9 @@ data ListInstanceConfigsResponse = ListInstanceConfigsResponse'
 listInstanceConfigsResponse
     :: ListInstanceConfigsResponse
 listInstanceConfigsResponse =
-    ListInstanceConfigsResponse'
-    { _licrNextPageToken = Nothing
-    , _licrInstanceConfigs = Nothing
-    }
+  ListInstanceConfigsResponse'
+    {_licrNextPageToken = Nothing, _licrInstanceConfigs = Nothing}
+
 
 -- | \`next_page_token\` can be sent in a subsequent ListInstanceConfigs call
 -- to fetch more of the matching instance configurations.
@@ -4370,11 +4796,14 @@ instance ToJSON ListInstanceConfigsResponse where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -4388,11 +4817,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -4405,8 +4831,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -4446,10 +4872,13 @@ instance ToJSON Binding where
 -- | The response for PartitionQuery or PartitionRead
 --
 -- /See:/ 'partitionResponse' smart constructor.
-data PartitionResponse = PartitionResponse'
+data PartitionResponse =
+  PartitionResponse'
     { _prPartitions  :: !(Maybe [Partition])
     , _prTransaction :: !(Maybe Transaction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionResponse' with the minimum fields required to make a request.
 --
@@ -4461,10 +4890,8 @@ data PartitionResponse = PartitionResponse'
 partitionResponse
     :: PartitionResponse
 partitionResponse =
-    PartitionResponse'
-    { _prPartitions = Nothing
-    , _prTransaction = Nothing
-    }
+  PartitionResponse' {_prPartitions = Nothing, _prTransaction = Nothing}
+
 
 -- | Partitions created by this request.
 prPartitions :: Lens' PartitionResponse [Partition]
@@ -4497,13 +4924,16 @@ instance ToJSON PartitionResponse where
 -- | The request for PartitionQuery
 --
 -- /See:/ 'partitionQueryRequest' smart constructor.
-data PartitionQueryRequest = PartitionQueryRequest'
+data PartitionQueryRequest =
+  PartitionQueryRequest'
     { _pqrParamTypes       :: !(Maybe PartitionQueryRequestParamTypes)
     , _pqrPartitionOptions :: !(Maybe PartitionOptions)
     , _pqrParams           :: !(Maybe PartitionQueryRequestParams)
     , _pqrTransaction      :: !(Maybe TransactionSelector)
     , _pqrSQL              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartitionQueryRequest' with the minimum fields required to make a request.
 --
@@ -4521,13 +4951,14 @@ data PartitionQueryRequest = PartitionQueryRequest'
 partitionQueryRequest
     :: PartitionQueryRequest
 partitionQueryRequest =
-    PartitionQueryRequest'
+  PartitionQueryRequest'
     { _pqrParamTypes = Nothing
     , _pqrPartitionOptions = Nothing
     , _pqrParams = Nothing
     , _pqrTransaction = Nothing
     , _pqrSQL = Nothing
     }
+
 
 -- | It is not always possible for Cloud Spanner to infer the right SQL type
 -- from a JSON value. For example, values of type \`BYTES\` and values of
@@ -4601,9 +5032,12 @@ instance ToJSON PartitionQueryRequest where
 -- | Contains an ordered list of nodes appearing in the query plan.
 --
 -- /See:/ 'queryPlan' smart constructor.
-newtype QueryPlan = QueryPlan'
+newtype QueryPlan =
+  QueryPlan'
     { _qpPlanNodes :: Maybe [PlanNode]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QueryPlan' with the minimum fields required to make a request.
 --
@@ -4612,10 +5046,8 @@ newtype QueryPlan = QueryPlan'
 -- * 'qpPlanNodes'
 queryPlan
     :: QueryPlan
-queryPlan =
-    QueryPlan'
-    { _qpPlanNodes = Nothing
-    }
+queryPlan = QueryPlan' {_qpPlanNodes = Nothing}
+
 
 -- | The nodes in the query plan. Plan nodes are returned in pre-order
 -- starting with the plan root. Each PlanNode\'s \`id\` corresponds to its
@@ -4641,14 +5073,17 @@ instance ToJSON QueryPlan where
 -- hosted.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance'
+data Instance =
+  Instance'
     { _iState       :: !(Maybe InstanceState)
     , _iConfig      :: !(Maybe Text)
     , _iNodeCount   :: !(Maybe (Textual Int32))
     , _iName        :: !(Maybe Text)
     , _iDisplayName :: !(Maybe Text)
     , _iLabels      :: !(Maybe InstanceLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -4668,7 +5103,7 @@ data Instance = Instance'
 instance'
     :: Instance
 instance' =
-    Instance'
+  Instance'
     { _iState = Nothing
     , _iConfig = Nothing
     , _iNodeCount = Nothing
@@ -4676,6 +5111,7 @@ instance' =
     , _iDisplayName = Nothing
     , _iLabels = Nothing
     }
+
 
 -- | Output only. The current instance state. For CreateInstance, the state
 -- must be either omitted or set to \`CREATING\`. For UpdateInstance, the
@@ -4702,7 +5138,7 @@ iNodeCount
 -- | Required. A unique identifier for the instance, which cannot be changed
 -- after the instance is created. Values are of the form
 -- \`projects\/\/instances\/a-z*[a-z0-9]\`. The final segment of the name
--- must be between 6 and 30 characters in length.
+-- must be between 2 and 64 characters in length.
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables\/Disables Network Policy for a cluster.
+-- Enables or disables Network Policy for a cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.setNetworkPolicy@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.SetNetworkPolicy
@@ -66,10 +66,11 @@ type ProjectsZonesClustersSetNetworkPolicyResource =
                                ReqBody '[JSON] SetNetworkPolicyRequest :>
                                  Post '[JSON] Operation
 
--- | Enables\/Disables Network Policy for a cluster.
+-- | Enables or disables Network Policy for a cluster.
 --
 -- /See:/ 'projectsZonesClustersSetNetworkPolicy' smart constructor.
-data ProjectsZonesClustersSetNetworkPolicy = ProjectsZonesClustersSetNetworkPolicy'
+data ProjectsZonesClustersSetNetworkPolicy =
+  ProjectsZonesClustersSetNetworkPolicy'
     { _pzcsnpXgafv          :: !(Maybe Xgafv)
     , _pzcsnpUploadProtocol :: !(Maybe Text)
     , _pzcsnpAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsZonesClustersSetNetworkPolicy = ProjectsZonesClustersSetNetworkPoli
     , _pzcsnpClusterId      :: !Text
     , _pzcsnpProjectId      :: !Text
     , _pzcsnpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersSetNetworkPolicy' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsZonesClustersSetNetworkPolicy
     -> Text -- ^ 'pzcsnpProjectId'
     -> ProjectsZonesClustersSetNetworkPolicy
 projectsZonesClustersSetNetworkPolicy pPzcsnpZone_ pPzcsnpPayload_ pPzcsnpClusterId_ pPzcsnpProjectId_ =
-    ProjectsZonesClustersSetNetworkPolicy'
+  ProjectsZonesClustersSetNetworkPolicy'
     { _pzcsnpXgafv = Nothing
     , _pzcsnpUploadProtocol = Nothing
     , _pzcsnpAccessToken = Nothing
@@ -120,6 +123,7 @@ projectsZonesClustersSetNetworkPolicy pPzcsnpZone_ pPzcsnpPayload_ pPzcsnpCluste
     , _pzcsnpProjectId = pPzcsnpProjectId_
     , _pzcsnpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsnpXgafv :: Lens' ProjectsZonesClustersSetNetworkPolicy (Maybe Xgafv)
@@ -179,7 +183,8 @@ pzcsnpCallback
       (\ s a -> s{_pzcsnpCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersSetNetworkPolicy where
+           ProjectsZonesClustersSetNetworkPolicy
+         where
         type Rs ProjectsZonesClustersSetNetworkPolicy =
              Operation
         type Scopes ProjectsZonesClustersSetNetworkPolicy =

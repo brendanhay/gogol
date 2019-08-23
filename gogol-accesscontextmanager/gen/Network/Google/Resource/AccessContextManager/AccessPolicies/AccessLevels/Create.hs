@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.create@ method which the
 -- 'AccessPoliciesAccessLevelsCreate' request conforms to.
 type AccessPoliciesAccessLevelsCreateResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "accessLevels" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -68,7 +68,8 @@ type AccessPoliciesAccessLevelsCreateResource =
 -- error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesAccessLevelsCreate' smart constructor.
-data AccessPoliciesAccessLevelsCreate = AccessPoliciesAccessLevelsCreate'
+data AccessPoliciesAccessLevelsCreate =
+  AccessPoliciesAccessLevelsCreate'
     { _apalcParent         :: !Text
     , _apalcXgafv          :: !(Maybe Xgafv)
     , _apalcUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data AccessPoliciesAccessLevelsCreate = AccessPoliciesAccessLevelsCreate'
     , _apalcUploadType     :: !(Maybe Text)
     , _apalcPayload        :: !AccessLevel
     , _apalcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsCreate' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ accessPoliciesAccessLevelsCreate
     -> AccessLevel -- ^ 'apalcPayload'
     -> AccessPoliciesAccessLevelsCreate
 accessPoliciesAccessLevelsCreate pApalcParent_ pApalcPayload_ =
-    AccessPoliciesAccessLevelsCreate'
+  AccessPoliciesAccessLevelsCreate'
     { _apalcParent = pApalcParent_
     , _apalcXgafv = Nothing
     , _apalcUploadProtocol = Nothing
@@ -109,6 +112,7 @@ accessPoliciesAccessLevelsCreate pApalcParent_ pApalcPayload_ =
     , _apalcPayload = pApalcPayload_
     , _apalcCallback = Nothing
     }
+
 
 -- | Required. Resource name for the access policy which owns this Access
 -- Level. Format: \`accessPolicies\/{policy_id}\`
@@ -151,7 +155,8 @@ apalcCallback
       (\ s a -> s{_apalcCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesAccessLevelsCreate where
+           AccessPoliciesAccessLevelsCreate
+         where
         type Rs AccessPoliciesAccessLevelsCreate = Operation
         type Scopes AccessPoliciesAccessLevelsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -139,6 +139,7 @@ module Network.Google.TPU.Types
     -- * SchedulingConfig
     , SchedulingConfig
     , schedulingConfig
+    , scReserved
     , scPreemptible
 
     -- * NodeLabels
@@ -201,4 +202,4 @@ tPUService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

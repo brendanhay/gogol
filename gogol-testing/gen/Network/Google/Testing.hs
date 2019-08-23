@@ -223,7 +223,6 @@ module Network.Google.Testing
     , tsIosTestSetup
     , tsTestTimeout
     , tsAndroidRoboTest
-    , tsAutoGoogleLogin
     , tsDisableVideoRecording
     , tsAndroidInstrumentationTest
     , tsIosXcTest
@@ -283,6 +282,7 @@ module Network.Google.Testing
     , roboStartingIntent
     , rsiLauncherActivity
     , rsiStartActivity
+    , rsiTimeout
 
     -- ** Date
     , Date
@@ -335,6 +335,7 @@ module Network.Google.Testing
     , aPKManifest
     , apkmApplicationLabel
     , apkmMinSdkVersion
+    , apkmTargetSdkVersion
     , apkmPackageName
     , apkmIntentFilters
     , apkmMaxSdkVersion

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates data source.
+-- Creates a datasource.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.create@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Create
@@ -58,17 +58,20 @@ type SettingsDatasourcesCreateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DataSource :> Post '[JSON] Operation
 
--- | Creates data source.
+-- | Creates a datasource.
 --
 -- /See:/ 'settingsDatasourcesCreate' smart constructor.
-data SettingsDatasourcesCreate = SettingsDatasourcesCreate'
+data SettingsDatasourcesCreate =
+  SettingsDatasourcesCreate'
     { _sdcXgafv          :: !(Maybe Xgafv)
     , _sdcUploadProtocol :: !(Maybe Text)
     , _sdcAccessToken    :: !(Maybe Text)
     , _sdcUploadType     :: !(Maybe Text)
     , _sdcPayload        :: !DataSource
     , _sdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsDatasourcesCreate' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ settingsDatasourcesCreate
     :: DataSource -- ^ 'sdcPayload'
     -> SettingsDatasourcesCreate
 settingsDatasourcesCreate pSdcPayload_ =
-    SettingsDatasourcesCreate'
+  SettingsDatasourcesCreate'
     { _sdcXgafv = Nothing
     , _sdcUploadProtocol = Nothing
     , _sdcAccessToken = Nothing
@@ -97,6 +100,7 @@ settingsDatasourcesCreate pSdcPayload_ =
     , _sdcPayload = pSdcPayload_
     , _sdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdcXgafv :: Lens' SettingsDatasourcesCreate (Maybe Xgafv)

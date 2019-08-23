@@ -66,14 +66,17 @@ type RegionBackendServicesListResource =
 -- specified project in the given region.
 --
 -- /See:/ 'regionBackendServicesList' smart constructor.
-data RegionBackendServicesList = RegionBackendServicesList'
+data RegionBackendServicesList =
+  RegionBackendServicesList'
     { _rbslOrderBy    :: !(Maybe Text)
     , _rbslProject    :: !Text
     , _rbslFilter     :: !(Maybe Text)
     , _rbslRegion     :: !Text
     , _rbslPageToken  :: !(Maybe Text)
     , _rbslMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionBackendServicesList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ regionBackendServicesList
     -> Text -- ^ 'rbslRegion'
     -> RegionBackendServicesList
 regionBackendServicesList pRbslProject_ pRbslRegion_ =
-    RegionBackendServicesList'
+  RegionBackendServicesList'
     { _rbslOrderBy = Nothing
     , _rbslProject = pRbslProject_
     , _rbslFilter = Nothing
@@ -103,6 +106,7 @@ regionBackendServicesList pRbslProject_ pRbslRegion_ =
     , _rbslPageToken = Nothing
     , _rbslMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

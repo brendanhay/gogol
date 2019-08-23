@@ -65,7 +65,8 @@ type AccountsClientsUpdateResource =
 -- | Updates an existing client buyer.
 --
 -- /See:/ 'accountsClientsUpdate' smart constructor.
-data AccountsClientsUpdate = AccountsClientsUpdate'
+data AccountsClientsUpdate =
+  AccountsClientsUpdate'
     { _acuXgafv           :: !(Maybe Xgafv)
     , _acuUploadProtocol  :: !(Maybe Text)
     , _acuAccessToken     :: !(Maybe Text)
@@ -74,7 +75,9 @@ data AccountsClientsUpdate = AccountsClientsUpdate'
     , _acuAccountId       :: !(Textual Int64)
     , _acuClientAccountId :: !(Textual Int64)
     , _acuCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsClientsUpdate' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ accountsClientsUpdate
     -> Int64 -- ^ 'acuClientAccountId'
     -> AccountsClientsUpdate
 accountsClientsUpdate pAcuPayload_ pAcuAccountId_ pAcuClientAccountId_ =
-    AccountsClientsUpdate'
+  AccountsClientsUpdate'
     { _acuXgafv = Nothing
     , _acuUploadProtocol = Nothing
     , _acuAccessToken = Nothing
@@ -111,6 +114,7 @@ accountsClientsUpdate pAcuPayload_ pAcuAccountId_ pAcuClientAccountId_ =
     , _acuClientAccountId = _Coerce # pAcuClientAccountId_
     , _acuCallback = Nothing
     }
+
 
 -- | V1 error format.
 acuXgafv :: Lens' AccountsClientsUpdate (Maybe Xgafv)

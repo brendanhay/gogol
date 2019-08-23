@@ -60,4 +60,4 @@ appsLicensingService
 
 -- | View and manage G Suite licenses for your domain
 appsLicensingScope :: Proxy '["https://www.googleapis.com/auth/apps.licensing"]
-appsLicensingScope = Proxy;
+appsLicensingScope = Proxy

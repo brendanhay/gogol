@@ -54,10 +54,13 @@ type InstancesDeleteResource =
 -- | Deletes a Cloud SQL instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete'
+data InstancesDelete =
+  InstancesDelete'
     { _idProject  :: !Text
     , _idInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesDelete' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdInstance_ =
-    InstancesDelete'
-    { _idProject = pIdProject_
-    , _idInstance = pIdInstance_
-    }
+  InstancesDelete' {_idProject = pIdProject_, _idInstance = pIdInstance_}
+
 
 -- | Project ID of the project that contains the instance to be deleted.
 idProject :: Lens' InstancesDelete Text

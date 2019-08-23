@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ReportsList' request conforms to.
 type ReportsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -62,14 +62,17 @@ type ReportsListResource =
 -- | Retrieves list of reports.
 --
 -- /See:/ 'reportsList' smart constructor.
-data ReportsList = ReportsList'
+data ReportsList =
+  ReportsList'
     { _rlProFileId  :: !(Textual Int64)
     , _rlSortOrder  :: !ReportsListSortOrder
     , _rlScope      :: !ReportsListScope
     , _rlPageToken  :: !(Maybe Text)
     , _rlSortField  :: !ReportsListSortField
     , _rlMaxResults :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportsList' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ reportsList
     :: Int64 -- ^ 'rlProFileId'
     -> ReportsList
 reportsList pRlProFileId_ =
-    ReportsList'
+  ReportsList'
     { _rlProFileId = _Coerce # pRlProFileId_
     , _rlSortOrder = RLSODescending
     , _rlScope = Mine
@@ -98,6 +101,7 @@ reportsList pRlProFileId_ =
     , _rlSortField = RLSFLastModifiedTime
     , _rlMaxResults = 10
     }
+
 
 -- | The DFA user profile ID.
 rlProFileId :: Lens' ReportsList Int64

@@ -25,9 +25,6 @@
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.get@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.Get
@@ -68,19 +65,19 @@ type ProjectsSnapshotsGetResource =
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsSnapshotsGet' smart constructor.
-data ProjectsSnapshotsGet = ProjectsSnapshotsGet'
+data ProjectsSnapshotsGet =
+  ProjectsSnapshotsGet'
     { _psgsXgafv          :: !(Maybe Xgafv)
     , _psgsSnapshot       :: !Text
     , _psgsUploadProtocol :: !(Maybe Text)
     , _psgsAccessToken    :: !(Maybe Text)
     , _psgsUploadType     :: !(Maybe Text)
     , _psgsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsGet' with the minimum fields required to make a request.
 --
@@ -101,7 +98,7 @@ projectsSnapshotsGet
     :: Text -- ^ 'psgsSnapshot'
     -> ProjectsSnapshotsGet
 projectsSnapshotsGet pPsgsSnapshot_ =
-    ProjectsSnapshotsGet'
+  ProjectsSnapshotsGet'
     { _psgsXgafv = Nothing
     , _psgsSnapshot = pPsgsSnapshot_
     , _psgsUploadProtocol = Nothing
@@ -109,6 +106,7 @@ projectsSnapshotsGet pPsgsSnapshot_ =
     , _psgsUploadType = Nothing
     , _psgsCallback = Nothing
     }
+
 
 -- | V1 error format.
 psgsXgafv :: Lens' ProjectsSnapshotsGet (Maybe Xgafv)

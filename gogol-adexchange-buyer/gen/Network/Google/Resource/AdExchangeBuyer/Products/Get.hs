@@ -51,9 +51,12 @@ type ProductsGetResource =
 -- | Gets the requested product by id.
 --
 -- /See:/ 'productsGet' smart constructor.
-newtype ProductsGet = ProductsGet'
+newtype ProductsGet =
+  ProductsGet'
     { _pgProductId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
@@ -63,10 +66,8 @@ newtype ProductsGet = ProductsGet'
 productsGet
     :: Text -- ^ 'pgProductId'
     -> ProductsGet
-productsGet pPgProductId_ =
-    ProductsGet'
-    { _pgProductId = pPgProductId_
-    }
+productsGet pPgProductId_ = ProductsGet' {_pgProductId = pPgProductId_}
+
 
 -- | The id for the product to get the head revision for.
 pgProductId :: Lens' ProductsGet Text

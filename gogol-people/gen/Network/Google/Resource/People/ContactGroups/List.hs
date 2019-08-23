@@ -67,7 +67,8 @@ type ContactGroupsListResource =
 -- contact groups are not populated.
 --
 -- /See:/ 'contactGroupsList' smart constructor.
-data ContactGroupsList = ContactGroupsList'
+data ContactGroupsList =
+  ContactGroupsList'
     { _cglSyncToken      :: !(Maybe Text)
     , _cglXgafv          :: !(Maybe Xgafv)
     , _cglUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ContactGroupsList = ContactGroupsList'
     , _cglPageToken      :: !(Maybe Text)
     , _cglPageSize       :: !(Maybe (Textual Int32))
     , _cglCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ data ContactGroupsList = ContactGroupsList'
 contactGroupsList
     :: ContactGroupsList
 contactGroupsList =
-    ContactGroupsList'
+  ContactGroupsList'
     { _cglSyncToken = Nothing
     , _cglXgafv = Nothing
     , _cglUploadProtocol = Nothing
@@ -110,6 +113,7 @@ contactGroupsList =
     , _cglPageSize = Nothing
     , _cglCallback = Nothing
     }
+
 
 -- | A sync token, returned by a previous call to \`contactgroups.list\`.
 -- Only resources changed since the sync token was created will be

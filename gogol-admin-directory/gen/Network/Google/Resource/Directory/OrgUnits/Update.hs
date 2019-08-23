@@ -57,11 +57,14 @@ type OrgUnitsUpdateResource =
 -- | Update organizational unit
 --
 -- /See:/ 'orgUnitsUpdate' smart constructor.
-data OrgUnitsUpdate = OrgUnitsUpdate'
+data OrgUnitsUpdate =
+  OrgUnitsUpdate'
     { _ouuPayload     :: !OrgUnit
     , _ouuOrgUnitPath :: ![Text]
     , _ouuCustomerId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrgUnitsUpdate' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ orgUnitsUpdate
     -> Text -- ^ 'ouuCustomerId'
     -> OrgUnitsUpdate
 orgUnitsUpdate pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
-    OrgUnitsUpdate'
+  OrgUnitsUpdate'
     { _ouuPayload = pOuuPayload_
     , _ouuOrgUnitPath = _Coerce # pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
     }
+
 
 -- | Multipart request metadata.
 ouuPayload :: Lens' OrgUnitsUpdate OrgUnit

@@ -69,7 +69,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchResource
 -- RestoreCryptoKeyVersion to move between other states.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch'
     { _plkrckckvpXgafv          :: !(Maybe Xgafv)
     , _plkrckckvpUploadProtocol :: !(Maybe Text)
     , _plkrckckvpUpdateMask     :: !(Maybe GFieldMask)
@@ -78,7 +79,9 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch = ProjectsLocatio
     , _plkrckckvpPayload        :: !CryptoKeyVersion
     , _plkrckckvpName           :: !Text
     , _plkrckckvpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch
     -> Text -- ^ 'plkrckckvpName'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch pPlkrckckvpPayload_ pPlkrckckvpName_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch'
     { _plkrckckvpXgafv = Nothing
     , _plkrckckvpUploadProtocol = Nothing
     , _plkrckckvpUpdateMask = Nothing
@@ -114,6 +117,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch pPlkrckckvpPayload_ pP
     , _plkrckckvpName = pPlkrckckvpName_
     , _plkrckckvpCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckckvpXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch (Maybe Xgafv)
@@ -165,14 +169,16 @@ plkrckckvpCallback
       (\ s a -> s{_plkrckckvpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch
              = CryptoKeyVersion
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch'{..}
           = go _plkrckckvpName _plkrckckvpXgafv

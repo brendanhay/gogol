@@ -25,7 +25,7 @@
 -- events in [self service
 -- tools](https:\/\/console.cloud.google.com\/talent-solution\/overview).
 -- [Learn
--- more](https:\/\/cloud.google.com\/talent-solution\/job-search\/docs\/management-tools)
+-- more](https:\/\/cloud.google.com\/talent-solution\/docs\/management-tools)
 -- about self service tools.
 --
 -- /See:/ <https://cloud.google.com/talent-solution/job-search/docs/ Cloud Talent Solution API Reference> for @jobs.projects.clientEvents.create@.
@@ -71,11 +71,12 @@ type ProjectsClientEventsCreateResource =
 -- events in [self service
 -- tools](https:\/\/console.cloud.google.com\/talent-solution\/overview).
 -- [Learn
--- more](https:\/\/cloud.google.com\/talent-solution\/job-search\/docs\/management-tools)
+-- more](https:\/\/cloud.google.com\/talent-solution\/docs\/management-tools)
 -- about self service tools.
 --
 -- /See:/ 'projectsClientEventsCreate' smart constructor.
-data ProjectsClientEventsCreate = ProjectsClientEventsCreate'
+data ProjectsClientEventsCreate =
+  ProjectsClientEventsCreate'
     { _pcecParent         :: !Text
     , _pcecXgafv          :: !(Maybe Xgafv)
     , _pcecUploadProtocol :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsClientEventsCreate = ProjectsClientEventsCreate'
     , _pcecUploadType     :: !(Maybe Text)
     , _pcecPayload        :: !CreateClientEventRequest
     , _pcecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsClientEventsCreate' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsClientEventsCreate
     -> CreateClientEventRequest -- ^ 'pcecPayload'
     -> ProjectsClientEventsCreate
 projectsClientEventsCreate pPcecParent_ pPcecPayload_ =
-    ProjectsClientEventsCreate'
+  ProjectsClientEventsCreate'
     { _pcecParent = pPcecParent_
     , _pcecXgafv = Nothing
     , _pcecUploadProtocol = Nothing
@@ -116,6 +119,7 @@ projectsClientEventsCreate pPcecParent_ pPcecPayload_ =
     , _pcecPayload = pPcecPayload_
     , _pcecCallback = Nothing
     }
+
 
 -- | Parent project name.
 pcecParent :: Lens' ProjectsClientEventsCreate Text

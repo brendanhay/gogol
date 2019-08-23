@@ -16,7 +16,7 @@
 -- Provides information about other Google APIs, such as what APIs are
 -- available, the resource, and method details for each API.
 --
--- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
+-- /See:/ <https://developers.google.com/discovery/ API Discovery Service Reference>
 module Network.Google.Discovery
     (
     -- * Service Configuration
@@ -276,6 +276,6 @@ import           Network.Google.Resource.Discovery.APIs.List
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the APIs Discovery Service service.
+-- | Represents the entirety of the methods and resources available for the API Discovery Service service.
 type DiscoveryAPI =
      APIsListResource :<|> APIsGetRestResource

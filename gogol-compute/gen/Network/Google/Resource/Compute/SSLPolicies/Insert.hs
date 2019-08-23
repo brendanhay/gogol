@@ -59,11 +59,14 @@ type SSLPoliciesInsertResource =
 -- policies by making a list() request.
 --
 -- /See:/ 'sslPoliciesInsert' smart constructor.
-data SSLPoliciesInsert = SSLPoliciesInsert'
+data SSLPoliciesInsert =
+  SSLPoliciesInsert'
     { _sslpiRequestId :: !(Maybe Text)
     , _sslpiProject   :: !Text
     , _sslpiPayload   :: !SSLPolicy
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SSLPoliciesInsert' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ sslPoliciesInsert
     -> SSLPolicy -- ^ 'sslpiPayload'
     -> SSLPoliciesInsert
 sslPoliciesInsert pSslpiProject_ pSslpiPayload_ =
-    SSLPoliciesInsert'
+  SSLPoliciesInsert'
     { _sslpiRequestId = Nothing
     , _sslpiProject = pSslpiProject_
     , _sslpiPayload = pSslpiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

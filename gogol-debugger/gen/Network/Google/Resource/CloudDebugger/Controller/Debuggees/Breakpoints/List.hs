@@ -85,7 +85,8 @@ type ControllerDebuggeesBreakpointsListResource =
 -- from the active list to avoid setting those breakpoints again.
 --
 -- /See:/ 'controllerDebuggeesBreakpointsList' smart constructor.
-data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList'
+data ControllerDebuggeesBreakpointsList =
+  ControllerDebuggeesBreakpointsList'
     { _cdblXgafv            :: !(Maybe Xgafv)
     , _cdblUploadProtocol   :: !(Maybe Text)
     , _cdblAccessToken      :: !(Maybe Text)
@@ -94,7 +95,9 @@ data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList'
     , _cdblWaitToken        :: !(Maybe Text)
     , _cdblDebuggeeId       :: !Text
     , _cdblCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ControllerDebuggeesBreakpointsList' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ controllerDebuggeesBreakpointsList
     :: Text -- ^ 'cdblDebuggeeId'
     -> ControllerDebuggeesBreakpointsList
 controllerDebuggeesBreakpointsList pCdblDebuggeeId_ =
-    ControllerDebuggeesBreakpointsList'
+  ControllerDebuggeesBreakpointsList'
     { _cdblXgafv = Nothing
     , _cdblUploadProtocol = Nothing
     , _cdblAccessToken = Nothing
@@ -129,6 +132,7 @@ controllerDebuggeesBreakpointsList pCdblDebuggeeId_ =
     , _cdblDebuggeeId = pCdblDebuggeeId_
     , _cdblCallback = Nothing
     }
+
 
 -- | V1 error format.
 cdblXgafv :: Lens' ControllerDebuggeesBreakpointsList (Maybe Xgafv)
@@ -184,7 +188,8 @@ cdblCallback
   = lens _cdblCallback (\ s a -> s{_cdblCallback = a})
 
 instance GoogleRequest
-         ControllerDebuggeesBreakpointsList where
+           ControllerDebuggeesBreakpointsList
+         where
         type Rs ControllerDebuggeesBreakpointsList =
              ListActiveBreakpointsResponse
         type Scopes ControllerDebuggeesBreakpointsList =

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PostalCodesGet' request conforms to.
 type PostalCodesGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "postalCodes" :>
@@ -54,10 +54,13 @@ type PostalCodesGetResource =
 -- | Gets one postal code by ID.
 --
 -- /See:/ 'postalCodesGet' smart constructor.
-data PostalCodesGet = PostalCodesGet'
+data PostalCodesGet =
+  PostalCodesGet'
     { _pcgProFileId :: !(Textual Int64)
     , _pcgCode      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostalCodesGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ postalCodesGet
     -> Text -- ^ 'pcgCode'
     -> PostalCodesGet
 postalCodesGet pPcgProFileId_ pPcgCode_ =
-    PostalCodesGet'
-    { _pcgProFileId = _Coerce # pPcgProFileId_
-    , _pcgCode = pPcgCode_
-    }
+  PostalCodesGet'
+    {_pcgProFileId = _Coerce # pPcgProFileId_, _pcgCode = pPcgCode_}
+
 
 -- | User profile ID associated with this request.
 pcgProFileId :: Lens' PostalCodesGet Int64

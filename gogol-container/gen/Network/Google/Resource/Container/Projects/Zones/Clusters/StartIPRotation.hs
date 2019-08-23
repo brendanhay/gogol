@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Start master IP rotation.
+-- Starts master IP rotation.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.startIpRotation@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.StartIPRotation
@@ -66,10 +66,11 @@ type ProjectsZonesClustersStartIPRotationResource =
                                ReqBody '[JSON] StartIPRotationRequest :>
                                  Post '[JSON] Operation
 
--- | Start master IP rotation.
+-- | Starts master IP rotation.
 --
 -- /See:/ 'projectsZonesClustersStartIPRotation' smart constructor.
-data ProjectsZonesClustersStartIPRotation = ProjectsZonesClustersStartIPRotation'
+data ProjectsZonesClustersStartIPRotation =
+  ProjectsZonesClustersStartIPRotation'
     { _pzcsirXgafv          :: !(Maybe Xgafv)
     , _pzcsirUploadProtocol :: !(Maybe Text)
     , _pzcsirAccessToken    :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsZonesClustersStartIPRotation = ProjectsZonesClustersStartIPRotation
     , _pzcsirClusterId      :: !Text
     , _pzcsirProjectId      :: !Text
     , _pzcsirCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersStartIPRotation' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsZonesClustersStartIPRotation
     -> Text -- ^ 'pzcsirProjectId'
     -> ProjectsZonesClustersStartIPRotation
 projectsZonesClustersStartIPRotation pPzcsirZone_ pPzcsirPayload_ pPzcsirClusterId_ pPzcsirProjectId_ =
-    ProjectsZonesClustersStartIPRotation'
+  ProjectsZonesClustersStartIPRotation'
     { _pzcsirXgafv = Nothing
     , _pzcsirUploadProtocol = Nothing
     , _pzcsirAccessToken = Nothing
@@ -120,6 +123,7 @@ projectsZonesClustersStartIPRotation pPzcsirZone_ pPzcsirPayload_ pPzcsirCluster
     , _pzcsirProjectId = pPzcsirProjectId_
     , _pzcsirCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcsirXgafv :: Lens' ProjectsZonesClustersStartIPRotation (Maybe Xgafv)
@@ -179,7 +183,8 @@ pzcsirCallback
       (\ s a -> s{_pzcsirCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersStartIPRotation where
+           ProjectsZonesClustersStartIPRotation
+         where
         type Rs ProjectsZonesClustersStartIPRotation =
              Operation
         type Scopes ProjectsZonesClustersStartIPRotation =

@@ -69,7 +69,8 @@ type ProjectsLocationsJobsSnapshotResource =
 -- | Snapshot the state of a streaming job.
 --
 -- /See:/ 'projectsLocationsJobsSnapshot' smart constructor.
-data ProjectsLocationsJobsSnapshot = ProjectsLocationsJobsSnapshot'
+data ProjectsLocationsJobsSnapshot =
+  ProjectsLocationsJobsSnapshot'
     { _pljsXgafv          :: !(Maybe Xgafv)
     , _pljsJobId          :: !Text
     , _pljsUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsLocationsJobsSnapshot = ProjectsLocationsJobsSnapshot'
     , _pljsPayload        :: !SnapshotJobRequest
     , _pljsProjectId      :: !Text
     , _pljsCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsSnapshot' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsLocationsJobsSnapshot
     -> Text -- ^ 'pljsProjectId'
     -> ProjectsLocationsJobsSnapshot
 projectsLocationsJobsSnapshot pPljsJobId_ pPljsLocation_ pPljsPayload_ pPljsProjectId_ =
-    ProjectsLocationsJobsSnapshot'
+  ProjectsLocationsJobsSnapshot'
     { _pljsXgafv = Nothing
     , _pljsJobId = pPljsJobId_
     , _pljsUploadProtocol = Nothing
@@ -120,6 +123,7 @@ projectsLocationsJobsSnapshot pPljsJobId_ pPljsLocation_ pPljsPayload_ pPljsProj
     , _pljsProjectId = pPljsProjectId_
     , _pljsCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljsXgafv :: Lens' ProjectsLocationsJobsSnapshot (Maybe Xgafv)

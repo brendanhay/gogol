@@ -64,7 +64,8 @@ type ProjectsModelsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsModelsSetIAMPolicy' smart constructor.
-data ProjectsModelsSetIAMPolicy = ProjectsModelsSetIAMPolicy'
+data ProjectsModelsSetIAMPolicy =
+  ProjectsModelsSetIAMPolicy'
     { _pmsipXgafv          :: !(Maybe Xgafv)
     , _pmsipUploadProtocol :: !(Maybe Text)
     , _pmsipAccessToken    :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsModelsSetIAMPolicy = ProjectsModelsSetIAMPolicy'
     , _pmsipPayload        :: !GoogleIAMV1__SetIAMPolicyRequest
     , _pmsipResource       :: !Text
     , _pmsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsModelsSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsModelsSetIAMPolicy
     -> Text -- ^ 'pmsipResource'
     -> ProjectsModelsSetIAMPolicy
 projectsModelsSetIAMPolicy pPmsipPayload_ pPmsipResource_ =
-    ProjectsModelsSetIAMPolicy'
+  ProjectsModelsSetIAMPolicy'
     { _pmsipXgafv = Nothing
     , _pmsipUploadProtocol = Nothing
     , _pmsipAccessToken = Nothing
@@ -105,6 +108,7 @@ projectsModelsSetIAMPolicy pPmsipPayload_ pPmsipResource_ =
     , _pmsipResource = pPmsipResource_
     , _pmsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmsipXgafv :: Lens' ProjectsModelsSetIAMPolicy (Maybe Xgafv)

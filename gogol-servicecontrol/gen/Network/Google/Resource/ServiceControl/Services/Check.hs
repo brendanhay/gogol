@@ -85,7 +85,8 @@ type ServicesCheckResource =
 -- IAM](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'servicesCheck' smart constructor.
-data ServicesCheck = ServicesCheck'
+data ServicesCheck =
+  ServicesCheck'
     { _scXgafv          :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
     , _scAccessToken    :: !(Maybe Text)
@@ -93,7 +94,9 @@ data ServicesCheck = ServicesCheck'
     , _scPayload        :: !CheckRequest
     , _scServiceName    :: !Text
     , _scCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesCheck' with the minimum fields required to make a request.
 --
@@ -117,7 +120,7 @@ servicesCheck
     -> Text -- ^ 'scServiceName'
     -> ServicesCheck
 servicesCheck pScPayload_ pScServiceName_ =
-    ServicesCheck'
+  ServicesCheck'
     { _scXgafv = Nothing
     , _scUploadProtocol = Nothing
     , _scAccessToken = Nothing
@@ -126,6 +129,7 @@ servicesCheck pScPayload_ pScServiceName_ =
     , _scServiceName = pScServiceName_
     , _scCallback = Nothing
     }
+
 
 -- | V1 error format.
 scXgafv :: Lens' ServicesCheck (Maybe Xgafv)

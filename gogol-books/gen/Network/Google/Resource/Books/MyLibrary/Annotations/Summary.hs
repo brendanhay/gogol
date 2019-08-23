@@ -56,10 +56,13 @@ type MyLibraryAnnotationsSummaryResource =
 -- | Gets the summary of specified layers.
 --
 -- /See:/ 'myLibraryAnnotationsSummary' smart constructor.
-data MyLibraryAnnotationsSummary = MyLibraryAnnotationsSummary'
+data MyLibraryAnnotationsSummary =
+  MyLibraryAnnotationsSummary'
     { _mlasLayerIds :: ![Text]
     , _mlasVolumeId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MyLibraryAnnotationsSummary' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ myLibraryAnnotationsSummary
     -> Text -- ^ 'mlasVolumeId'
     -> MyLibraryAnnotationsSummary
 myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
-    MyLibraryAnnotationsSummary'
-    { _mlasLayerIds = _Coerce # pMlasLayerIds_
-    , _mlasVolumeId = pMlasVolumeId_
-    }
+  MyLibraryAnnotationsSummary'
+    {_mlasLayerIds = _Coerce # pMlasLayerIds_, _mlasVolumeId = pMlasVolumeId_}
+
 
 -- | Array of layer IDs to get the summary for.
 mlasLayerIds :: Lens' MyLibraryAnnotationsSummary [Text]

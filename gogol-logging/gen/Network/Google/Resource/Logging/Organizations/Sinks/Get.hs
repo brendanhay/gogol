@@ -59,14 +59,17 @@ type OrganizationsSinksGetResource =
 -- | Gets a sink.
 --
 -- /See:/ 'organizationsSinksGet' smart constructor.
-data OrganizationsSinksGet = OrganizationsSinksGet'
+data OrganizationsSinksGet =
+  OrganizationsSinksGet'
     { _osgXgafv          :: !(Maybe Xgafv)
     , _osgUploadProtocol :: !(Maybe Text)
     , _osgAccessToken    :: !(Maybe Text)
     , _osgUploadType     :: !(Maybe Text)
     , _osgSinkName       :: !Text
     , _osgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsSinksGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ organizationsSinksGet
     :: Text -- ^ 'osgSinkName'
     -> OrganizationsSinksGet
 organizationsSinksGet pOsgSinkName_ =
-    OrganizationsSinksGet'
+  OrganizationsSinksGet'
     { _osgXgafv = Nothing
     , _osgUploadProtocol = Nothing
     , _osgAccessToken = Nothing
@@ -95,6 +98,7 @@ organizationsSinksGet pOsgSinkName_ =
     , _osgSinkName = pOsgSinkName_
     , _osgCallback = Nothing
     }
+
 
 -- | V1 error format.
 osgXgafv :: Lens' OrganizationsSinksGet (Maybe Xgafv)

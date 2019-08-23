@@ -57,10 +57,13 @@ type InterconnectsGetResource =
 -- interconnects by making a list() request.
 --
 -- /See:/ 'interconnectsGet' smart constructor.
-data InterconnectsGet = InterconnectsGet'
+data InterconnectsGet =
+  InterconnectsGet'
     { _iProject      :: !Text
     , _iInterconnect :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectsGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,8 @@ interconnectsGet
     -> Text -- ^ 'iInterconnect'
     -> InterconnectsGet
 interconnectsGet pIProject_ pIInterconnect_ =
-    InterconnectsGet'
-    { _iProject = pIProject_
-    , _iInterconnect = pIInterconnect_
-    }
+  InterconnectsGet' {_iProject = pIProject_, _iInterconnect = pIInterconnect_}
+
 
 -- | Project ID for this request.
 iProject :: Lens' InterconnectsGet Text

@@ -63,14 +63,17 @@ type UsersMessagesListResource =
 -- | Lists the messages in the user\'s mailbox.
 --
 -- /See:/ 'usersMessagesList' smart constructor.
-data UsersMessagesList = UsersMessagesList'
+data UsersMessagesList =
+  UsersMessagesList'
     { _umlQ                :: !(Maybe Text)
     , _umlUserId           :: !Text
     , _umlIncludeSpamTrash :: !Bool
     , _umlLabelIds         :: !(Maybe [Text])
     , _umlPageToken        :: !(Maybe Text)
     , _umlMaxResults       :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersMessagesList' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ data UsersMessagesList = UsersMessagesList'
 usersMessagesList
     :: UsersMessagesList
 usersMessagesList =
-    UsersMessagesList'
+  UsersMessagesList'
     { _umlQ = Nothing
     , _umlUserId = "me"
     , _umlIncludeSpamTrash = False
@@ -98,6 +101,7 @@ usersMessagesList =
     , _umlPageToken = Nothing
     , _umlMaxResults = 100
     }
+
 
 -- | Only return messages matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,

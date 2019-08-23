@@ -65,14 +65,17 @@ type TargetPoolsSetBackupResource =
 -- | Changes a backup target pool\'s configurations.
 --
 -- /See:/ 'targetPoolsSetBackup' smart constructor.
-data TargetPoolsSetBackup = TargetPoolsSetBackup'
+data TargetPoolsSetBackup =
+  TargetPoolsSetBackup'
     { _tpsbRequestId     :: !(Maybe Text)
     , _tpsbProject       :: !Text
     , _tpsbTargetPool    :: !Text
     , _tpsbPayload       :: !TargetReference
     , _tpsbFailoverRatio :: !(Maybe (Textual Double))
     , _tpsbRegion        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetPoolsSetBackup' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ targetPoolsSetBackup
     -> Text -- ^ 'tpsbRegion'
     -> TargetPoolsSetBackup
 targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
-    TargetPoolsSetBackup'
+  TargetPoolsSetBackup'
     { _tpsbRequestId = Nothing
     , _tpsbProject = pTpsbProject_
     , _tpsbTargetPool = pTpsbTargetPool_
@@ -104,6 +107,7 @@ targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
     , _tpsbFailoverRatio = Nothing
     , _tpsbRegion = pTpsbRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

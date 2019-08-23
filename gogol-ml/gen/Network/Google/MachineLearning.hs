@@ -29,6 +29,9 @@ module Network.Google.MachineLearning
 
     -- * Resources
 
+    -- ** ml.operations.delete
+    , module Network.Google.Resource.Ml.Operations.Delete
+
     -- ** ml.projects.getConfig
     , module Network.Google.Resource.Ml.Projects.GetConfig
 
@@ -107,9 +110,6 @@ module Network.Google.MachineLearning
     -- ** ml.projects.operations.cancel
     , module Network.Google.Resource.Ml.Projects.Operations.Cancel
 
-    -- ** ml.projects.operations.delete
-    , module Network.Google.Resource.Ml.Projects.Operations.Delete
-
     -- ** ml.projects.operations.get
     , module Network.Google.Resource.Ml.Projects.Operations.Get
 
@@ -138,10 +138,12 @@ module Network.Google.MachineLearning
     , gcmvvRuntimeVersion
     , gcmvvLastUseTime
     , gcmvvName
+    , gcmvvPackageURIs
     , gcmvvDeploymentURI
     , gcmvvManualScaling
     , gcmvvMachineType
     , gcmvvLabels
+    , gcmvvPredictionClass
     , gcmvvErrorMessage
     , gcmvvDescription
     , gcmvvCreateTime
@@ -154,6 +156,14 @@ module Network.Google.MachineLearning
     , gcmvpoErrorCount
     , gcmvpoPredictionCount
     , gcmvpoOutputPath
+
+    -- ** GoogleCloudMlV1__BuiltInAlgorithmOutput
+    , GoogleCloudMlV1__BuiltInAlgorithmOutput
+    , googleCloudMlV1__BuiltInAlgorithmOutput
+    , gcmvbiaoFramework
+    , gcmvbiaoPythonVersion
+    , gcmvbiaoRuntimeVersion
+    , gcmvbiaoModelPath
 
     -- ** GoogleCloudMlV1__HyperparameterOutputHyperparameters
     , GoogleCloudMlV1__HyperparameterOutputHyperparameters
@@ -262,6 +272,7 @@ module Network.Google.MachineLearning
     , gcmvhoHyperparameters
     , gcmvhoTrialId
     , gcmvhoFinalMetric
+    , gcmvhoBuiltInAlgorithmOutput
 
     -- ** GoogleCloudMlV1__GetConfigResponse
     , GoogleCloudMlV1__GetConfigResponse
@@ -295,6 +306,7 @@ module Network.Google.MachineLearning
     , gcmvmDefaultVersion
     , gcmvmName
     , gcmvmLabels
+    , gcmvmOnlinePredictionConsoleLogging
     , gcmvmDescription
     , gcmvmOnlinePredictionLogging
 
@@ -341,6 +353,12 @@ module Network.Google.MachineLearning
     , grsCode
     , grsMessage
 
+    -- ** GoogleCloudMlV1__ReplicaConfig
+    , GoogleCloudMlV1__ReplicaConfig
+    , googleCloudMlV1__ReplicaConfig
+    , gcmvrcImageURI
+    , gcmvrcAcceleratorConfig
+
     -- ** GoogleCloudMlV1__Config
     , GoogleCloudMlV1__Config
     , googleCloudMlV1__Config
@@ -356,6 +374,7 @@ module Network.Google.MachineLearning
     , gcmvhsMaxTrials
     , gcmvhsEnableTrialEarlyStopping
     , gcmvhsMaxParallelTrials
+    , gcmvhsMaxFailedTrials
     , gcmvhsHyperparameterMetricTag
 
     -- ** GoogleCloudMlV1__AutoScaling
@@ -412,7 +431,6 @@ module Network.Google.MachineLearning
     , gcmvpiBatchSize
     , gcmvpiMaxWorkerCount
     , gcmvpiOutputDataFormat
-    , gcmvpiAccelerator
     , gcmvpiOutputPath
     , gcmvpiRegion
     , gcmvpiInputPaths
@@ -422,6 +440,7 @@ module Network.Google.MachineLearning
     , GoogleCloudMlV1__TrainingInput
     , googleCloudMlV1__TrainingInput
     , gcmvtiMasterType
+    , gcmvtiWorkerConfig
     , gcmvtiParameterServerCount
     , gcmvtiArgs
     , gcmvtiWorkerCount
@@ -429,12 +448,14 @@ module Network.Google.MachineLearning
     , gcmvtiPythonVersion
     , gcmvtiRuntimeVersion
     , gcmvtiWorkerType
+    , gcmvtiMasterConfig
     , gcmvtiPythonModule
     , gcmvtiParameterServerType
     , gcmvtiHyperparameters
     , gcmvtiPackageURIs
     , gcmvtiScaleTier
     , gcmvtiRegion
+    , gcmvtiParameterServerConfig
 
     -- ** GoogleRpc__StatusDetailsItem
     , GoogleRpc__StatusDetailsItem
@@ -494,8 +515,10 @@ module Network.Google.MachineLearning
     , GoogleCloudMlV1__TrainingOutput
     , googleCloudMlV1__TrainingOutput
     , gcmvtoIsHyperparameterTuningJob
+    , gcmvtoIsBuiltInAlgorithmJob
     , gcmvtoCompletedTrialCount
     , gcmvtoConsumedMLUnits
+    , gcmvtoBuiltInAlgorithmOutput
     , gcmvtoTrials
 
     -- ** GoogleAPI__HTTPBody
@@ -524,6 +547,7 @@ module Network.Google.MachineLearning
 
 import           Network.Google.MachineLearning.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Ml.Operations.Delete
 import           Network.Google.Resource.Ml.Projects.GetConfig
 import           Network.Google.Resource.Ml.Projects.Jobs.Cancel
 import           Network.Google.Resource.Ml.Projects.Jobs.Create
@@ -550,7 +574,6 @@ import           Network.Google.Resource.Ml.Projects.Models.Versions.List
 import           Network.Google.Resource.Ml.Projects.Models.Versions.Patch
 import           Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
 import           Network.Google.Resource.Ml.Projects.Operations.Cancel
-import           Network.Google.Resource.Ml.Projects.Operations.Delete
 import           Network.Google.Resource.Ml.Projects.Operations.Get
 import           Network.Google.Resource.Ml.Projects.Operations.List
 import           Network.Google.Resource.Ml.Projects.Predict
@@ -561,8 +584,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud Machine Learning Engine service.
 type MachineLearningAPI =
-     ProjectsModelsVersionsListResource :<|>
-       ProjectsModelsVersionsPatchResource
+     OperationsDeleteResource :<|>
+       ProjectsModelsVersionsListResource
+       :<|> ProjectsModelsVersionsPatchResource
        :<|> ProjectsModelsVersionsGetResource
        :<|> ProjectsModelsVersionsSetDefaultResource
        :<|> ProjectsModelsVersionsCreateResource
@@ -586,7 +610,6 @@ type MachineLearningAPI =
        :<|> ProjectsOperationsListResource
        :<|> ProjectsOperationsGetResource
        :<|> ProjectsOperationsCancelResource
-       :<|> ProjectsOperationsDeleteResource
        :<|> ProjectsLocationsListResource
        :<|> ProjectsLocationsGetResource
        :<|> ProjectsGetConfigResource

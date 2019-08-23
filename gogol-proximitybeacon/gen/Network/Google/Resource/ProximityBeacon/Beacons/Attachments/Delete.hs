@@ -75,7 +75,8 @@ type BeaconsAttachmentsDeleteResource =
 -- the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsDelete' smart constructor.
-data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete'
+data BeaconsAttachmentsDelete =
+  BeaconsAttachmentsDelete'
     { _badXgafv          :: !(Maybe Xgafv)
     , _badUploadProtocol :: !(Maybe Text)
     , _badAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete'
     , _badAttachmentName :: !Text
     , _badProjectId      :: !(Maybe Text)
     , _badCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconsAttachmentsDelete' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ beaconsAttachmentsDelete
     :: Text -- ^ 'badAttachmentName'
     -> BeaconsAttachmentsDelete
 beaconsAttachmentsDelete pBadAttachmentName_ =
-    BeaconsAttachmentsDelete'
+  BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
     , _badUploadProtocol = Nothing
     , _badAccessToken = Nothing
@@ -115,6 +118,7 @@ beaconsAttachmentsDelete pBadAttachmentName_ =
     , _badProjectId = Nothing
     , _badCallback = Nothing
     }
+
 
 -- | V1 error format.
 badXgafv :: Lens' BeaconsAttachmentsDelete (Maybe Xgafv)

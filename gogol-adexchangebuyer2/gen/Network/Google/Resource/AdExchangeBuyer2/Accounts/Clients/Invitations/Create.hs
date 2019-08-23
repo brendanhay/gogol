@@ -69,7 +69,8 @@ type AccountsClientsInvitationsCreateResource =
 -- client buyer account.
 --
 -- /See:/ 'accountsClientsInvitationsCreate' smart constructor.
-data AccountsClientsInvitationsCreate = AccountsClientsInvitationsCreate'
+data AccountsClientsInvitationsCreate =
+  AccountsClientsInvitationsCreate'
     { _acicXgafv           :: !(Maybe Xgafv)
     , _acicUploadProtocol  :: !(Maybe Text)
     , _acicAccessToken     :: !(Maybe Text)
@@ -78,7 +79,9 @@ data AccountsClientsInvitationsCreate = AccountsClientsInvitationsCreate'
     , _acicAccountId       :: !(Textual Int64)
     , _acicClientAccountId :: !(Textual Int64)
     , _acicCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsClientsInvitationsCreate' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ accountsClientsInvitationsCreate
     -> Int64 -- ^ 'acicClientAccountId'
     -> AccountsClientsInvitationsCreate
 accountsClientsInvitationsCreate pAcicPayload_ pAcicAccountId_ pAcicClientAccountId_ =
-    AccountsClientsInvitationsCreate'
+  AccountsClientsInvitationsCreate'
     { _acicXgafv = Nothing
     , _acicUploadProtocol = Nothing
     , _acicAccessToken = Nothing
@@ -115,6 +118,7 @@ accountsClientsInvitationsCreate pAcicPayload_ pAcicAccountId_ pAcicClientAccoun
     , _acicClientAccountId = _Coerce # pAcicClientAccountId_
     , _acicCallback = Nothing
     }
+
 
 -- | V1 error format.
 acicXgafv :: Lens' AccountsClientsInvitationsCreate (Maybe Xgafv)
@@ -165,7 +169,8 @@ acicCallback
   = lens _acicCallback (\ s a -> s{_acicCallback = a})
 
 instance GoogleRequest
-         AccountsClientsInvitationsCreate where
+           AccountsClientsInvitationsCreate
+         where
         type Rs AccountsClientsInvitationsCreate =
              ClientUserInvitation
         type Scopes AccountsClientsInvitationsCreate =

@@ -54,10 +54,13 @@ type BlogsGetByURLResource =
 -- | Retrieve a Blog by URL.
 --
 -- /See:/ 'blogsGetByURL' smart constructor.
-data BlogsGetByURL = BlogsGetByURL'
+data BlogsGetByURL =
+  BlogsGetByURL'
     { _bgbuURL  :: !Text
     , _bgbuView :: !(Maybe BlogsGetByURLView)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BlogsGetByURL' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ blogsGetByURL
     :: Text -- ^ 'bgbuURL'
     -> BlogsGetByURL
 blogsGetByURL pBgbuURL_ =
-    BlogsGetByURL'
-    { _bgbuURL = pBgbuURL_
-    , _bgbuView = Nothing
-    }
+  BlogsGetByURL' {_bgbuURL = pBgbuURL_, _bgbuView = Nothing}
+
 
 -- | The URL of the blog to retrieve.
 bgbuURL :: Lens' BlogsGetByURL Text

@@ -63,13 +63,16 @@ type ManagementCustomMetricsUpdateResource =
 -- | Updates an existing custom metric.
 --
 -- /See:/ 'managementCustomMetricsUpdate' smart constructor.
-data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate'
+data ManagementCustomMetricsUpdate =
+  ManagementCustomMetricsUpdate'
     { _mcmuCustomMetricId              :: !Text
     , _mcmuWebPropertyId               :: !Text
     , _mcmuIgnoreCustomDataSourceLinks :: !Bool
     , _mcmuPayload                     :: !CustomMetric
     , _mcmuAccountId                   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementCustomMetricsUpdate' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ managementCustomMetricsUpdate
     -> Text -- ^ 'mcmuAccountId'
     -> ManagementCustomMetricsUpdate
 managementCustomMetricsUpdate pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ =
-    ManagementCustomMetricsUpdate'
+  ManagementCustomMetricsUpdate'
     { _mcmuCustomMetricId = pMcmuCustomMetricId_
     , _mcmuWebPropertyId = pMcmuWebPropertyId_
     , _mcmuIgnoreCustomDataSourceLinks = False
     , _mcmuPayload = pMcmuPayload_
     , _mcmuAccountId = pMcmuAccountId_
     }
+
 
 -- | Custom metric ID for the custom metric to update.
 mcmuCustomMetricId :: Lens' ManagementCustomMetricsUpdate Text

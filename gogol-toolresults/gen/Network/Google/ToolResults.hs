@@ -89,6 +89,12 @@ module Network.Google.ToolResults
     -- ** toolresults.projects.histories.executions.steps.publishXunitXmlFiles
     , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
 
+    -- ** toolresults.projects.histories.executions.steps.testCases.get
+    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
+
+    -- ** toolresults.projects.histories.executions.steps.testCases.list
+    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
+
     -- ** toolresults.projects.histories.executions.steps.thumbnails.list
     , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
 
@@ -199,6 +205,18 @@ module Network.Google.ToolResults
     -- ** TestIssueCategory
     , TestIssueCategory (..)
 
+    -- ** TestCase
+    , TestCase
+    , testCase
+    , tcStatus
+    , tcStartTime
+    , tcTestCaseReference
+    , tcToolOutputs
+    , tcStackTraces
+    , tcTestCaseId
+    , tcEndTime
+    , tcSkippedMessage
+
     -- ** GraphicsStatsBucket
     , GraphicsStatsBucket
     , graphicsStatsBucket
@@ -249,6 +267,9 @@ module Network.Google.ToolResults
     , FileReference
     , fileReference
     , frFileURI
+
+    -- ** IndividualOutcomeOutcomeSummary
+    , IndividualOutcomeOutcomeSummary (..)
 
     -- ** CPUInfo
     , CPUInfo
@@ -403,6 +424,7 @@ module Network.Google.ToolResults
     , sName
     , sOutcome
     , sLabels
+    , sMultiStep
     , sDeviceUsageDuration
     , sDescription
 
@@ -475,6 +497,20 @@ module Network.Google.ToolResults
     -- ** BasicPerfSampleSeriesSampleSeriesLabel
     , BasicPerfSampleSeriesSampleSeriesLabel (..)
 
+    -- ** ListTestCasesResponse
+    , ListTestCasesResponse
+    , listTestCasesResponse
+    , ltcrNextPageToken
+    , ltcrTestCases
+
+    -- ** IndividualOutcome
+    , IndividualOutcome
+    , individualOutcome
+    , ioRunDuration
+    , ioStepId
+    , ioMultistepNumber
+    , ioOutcomeSummary
+
     -- ** TestSuiteOverview
     , TestSuiteOverview
     , testSuiteOverview
@@ -484,6 +520,13 @@ module Network.Google.ToolResults
     , tsoName
     , tsoFailureCount
     , tsoTotalCount
+
+    -- ** MultiStep
+    , MultiStep
+    , multiStep
+    , msMultistepNumber
+    , msPrimaryStepId
+    , msPrimaryStep
 
     -- ** Duration
     , Duration
@@ -523,6 +566,18 @@ module Network.Google.ToolResults
     , bpssPerfMetricType
     , bpssSampleSeriesLabel
 
+    -- ** TestCaseStatus
+    , TestCaseStatus (..)
+
+    -- ** PrimaryStepRollUp
+    , PrimaryStepRollUp (..)
+
+    -- ** PrimaryStep
+    , PrimaryStep
+    , primaryStep
+    , psRollUp
+    , psIndividualOutcome
+
     -- ** PerfMetricsSummaryPerfMetricsItem
     , PerfMetricsSummaryPerfMetricsItem (..)
 
@@ -555,6 +610,8 @@ import           Network.Google.Resource.ToolResults.Projects.Histories.Executio
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
+import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
+import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
 import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
 import           Network.Google.Resource.ToolResults.Projects.Histories.Get
 import           Network.Google.Resource.ToolResults.Projects.Histories.List
@@ -580,6 +637,10 @@ type ToolResultsAPI =
        ProjectsHistoriesExecutionsStepsThumbnailsListResource
        :<|>
        ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreateResource
+       :<|>
+       ProjectsHistoriesExecutionsStepsTestCasesListResource
+       :<|>
+       ProjectsHistoriesExecutionsStepsTestCasesGetResource
        :<|>
        ProjectsHistoriesExecutionsStepsGetPerfMetricsSummaryResource
        :<|> ProjectsHistoriesExecutionsStepsListResource

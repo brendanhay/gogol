@@ -64,14 +64,17 @@ type ResourceRecordSetsListResource =
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
 -- /See:/ 'resourceRecordSetsList' smart constructor.
-data ResourceRecordSetsList = ResourceRecordSetsList'
+data ResourceRecordSetsList =
+  ResourceRecordSetsList'
     { _rrslProject     :: !Text
     , _rrslName        :: !(Maybe Text)
     , _rrslPageToken   :: !(Maybe Text)
     , _rrslType        :: !(Maybe Text)
     , _rrslManagedZone :: !Text
     , _rrslMaxResults  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourceRecordSetsList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ resourceRecordSetsList
     -> Text -- ^ 'rrslManagedZone'
     -> ResourceRecordSetsList
 resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
-    ResourceRecordSetsList'
+  ResourceRecordSetsList'
     { _rrslProject = pRrslProject_
     , _rrslName = Nothing
     , _rrslPageToken = Nothing
@@ -101,6 +104,7 @@ resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
     , _rrslManagedZone = pRrslManagedZone_
     , _rrslMaxResults = Nothing
     }
+
 
 -- | Identifies the project addressed by this request.
 rrslProject :: Lens' ResourceRecordSetsList Text

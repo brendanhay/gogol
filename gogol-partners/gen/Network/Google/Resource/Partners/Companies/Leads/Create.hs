@@ -64,7 +64,8 @@ type CompaniesLeadsCreateResource =
 -- | Creates an advertiser lead for the given company ID.
 --
 -- /See:/ 'companiesLeadsCreate' smart constructor.
-data CompaniesLeadsCreate = CompaniesLeadsCreate'
+data CompaniesLeadsCreate =
+  CompaniesLeadsCreate'
     { _clcXgafv          :: !(Maybe Xgafv)
     , _clcUploadProtocol :: !(Maybe Text)
     , _clcCompanyId      :: !Text
@@ -72,7 +73,9 @@ data CompaniesLeadsCreate = CompaniesLeadsCreate'
     , _clcUploadType     :: !(Maybe Text)
     , _clcPayload        :: !CreateLeadRequest
     , _clcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CompaniesLeadsCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ companiesLeadsCreate
     -> CreateLeadRequest -- ^ 'clcPayload'
     -> CompaniesLeadsCreate
 companiesLeadsCreate pClcCompanyId_ pClcPayload_ =
-    CompaniesLeadsCreate'
+  CompaniesLeadsCreate'
     { _clcXgafv = Nothing
     , _clcUploadProtocol = Nothing
     , _clcCompanyId = pClcCompanyId_
@@ -105,6 +108,7 @@ companiesLeadsCreate pClcCompanyId_ pClcPayload_ =
     , _clcPayload = pClcPayload_
     , _clcCallback = Nothing
     }
+
 
 -- | V1 error format.
 clcXgafv :: Lens' CompaniesLeadsCreate (Maybe Xgafv)

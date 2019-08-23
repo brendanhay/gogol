@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesPatch' request conforms to.
 type ContentCategoriesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -59,11 +59,14 @@ type ContentCategoriesPatchResource =
 -- semantics.
 --
 -- /See:/ 'contentCategoriesPatch' smart constructor.
-data ContentCategoriesPatch = ContentCategoriesPatch'
+data ContentCategoriesPatch =
+  ContentCategoriesPatch'
     { _ccpProFileId :: !(Textual Int64)
     , _ccpPayload   :: !ContentCategory
     , _ccpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContentCategoriesPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ contentCategoriesPatch
     -> Int64 -- ^ 'ccpId'
     -> ContentCategoriesPatch
 contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
-    ContentCategoriesPatch'
+  ContentCategoriesPatch'
     { _ccpProFileId = _Coerce # pCcpProFileId_
     , _ccpPayload = pCcpPayload_
     , _ccpId = _Coerce # pCcpId_
     }
+
 
 -- | User profile ID associated with this request.
 ccpProFileId :: Lens' ContentCategoriesPatch Int64

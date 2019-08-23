@@ -65,14 +65,17 @@ type DisksListResource =
 -- zone.
 --
 -- /See:/ 'disksList' smart constructor.
-data DisksList = DisksList'
+data DisksList =
+  DisksList'
     { _dlOrderBy    :: !(Maybe Text)
     , _dlProject    :: !Text
     , _dlZone       :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksList' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ disksList
     -> Text -- ^ 'dlZone'
     -> DisksList
 disksList pDlProject_ pDlZone_ =
-    DisksList'
+  DisksList'
     { _dlOrderBy = Nothing
     , _dlProject = pDlProject_
     , _dlZone = pDlZone_
@@ -102,6 +105,7 @@ disksList pDlProject_ pDlZone_ =
     , _dlPageToken = Nothing
     , _dlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

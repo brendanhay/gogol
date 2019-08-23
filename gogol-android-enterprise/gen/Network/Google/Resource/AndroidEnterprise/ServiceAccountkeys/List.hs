@@ -61,9 +61,12 @@ type ServiceAccountkeysListResource =
 -- service account by calling Enterprises.SetAccount.
 --
 -- /See:/ 'serviceAccountkeysList' smart constructor.
-newtype ServiceAccountkeysList = ServiceAccountkeysList'
+newtype ServiceAccountkeysList =
+  ServiceAccountkeysList'
     { _salEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServiceAccountkeysList' with the minimum fields required to make a request.
 --
@@ -74,9 +77,8 @@ serviceAccountkeysList
     :: Text -- ^ 'salEnterpriseId'
     -> ServiceAccountkeysList
 serviceAccountkeysList pSalEnterpriseId_ =
-    ServiceAccountkeysList'
-    { _salEnterpriseId = pSalEnterpriseId_
-    }
+  ServiceAccountkeysList' {_salEnterpriseId = pSalEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 salEnterpriseId :: Lens' ServiceAccountkeysList Text

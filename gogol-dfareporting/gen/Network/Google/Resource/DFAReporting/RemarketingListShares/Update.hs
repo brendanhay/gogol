@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesUpdate' request conforms to.
 type RemarketingListSharesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
@@ -55,10 +55,13 @@ type RemarketingListSharesUpdateResource =
 -- | Updates an existing remarketing list share.
 --
 -- /See:/ 'remarketingListSharesUpdate' smart constructor.
-data RemarketingListSharesUpdate = RemarketingListSharesUpdate'
+data RemarketingListSharesUpdate =
+  RemarketingListSharesUpdate'
     { _rlsuProFileId :: !(Textual Int64)
     , _rlsuPayload   :: !RemarketingListShare
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingListSharesUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ remarketingListSharesUpdate
     -> RemarketingListShare -- ^ 'rlsuPayload'
     -> RemarketingListSharesUpdate
 remarketingListSharesUpdate pRlsuProFileId_ pRlsuPayload_ =
-    RemarketingListSharesUpdate'
-    { _rlsuProFileId = _Coerce # pRlsuProFileId_
-    , _rlsuPayload = pRlsuPayload_
-    }
+  RemarketingListSharesUpdate'
+    {_rlsuProFileId = _Coerce # pRlsuProFileId_, _rlsuPayload = pRlsuPayload_}
+
 
 -- | User profile ID associated with this request.
 rlsuProFileId :: Lens' RemarketingListSharesUpdate Int64

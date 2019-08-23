@@ -55,10 +55,13 @@ type LeaderboardConfigurationsInsertResource =
 -- | Insert a new leaderboard configuration in this application.
 --
 -- /See:/ 'leaderboardConfigurationsInsert' smart constructor.
-data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert'
+data LeaderboardConfigurationsInsert =
+  LeaderboardConfigurationsInsert'
     { _lciPayload       :: !LeaderboardConfiguration
     , _lciApplicationId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardConfigurationsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ leaderboardConfigurationsInsert
     -> Text -- ^ 'lciApplicationId'
     -> LeaderboardConfigurationsInsert
 leaderboardConfigurationsInsert pLciPayload_ pLciApplicationId_ =
-    LeaderboardConfigurationsInsert'
-    { _lciPayload = pLciPayload_
-    , _lciApplicationId = pLciApplicationId_
-    }
+  LeaderboardConfigurationsInsert'
+    {_lciPayload = pLciPayload_, _lciApplicationId = pLciApplicationId_}
+
 
 -- | Multipart request metadata.
 lciPayload :: Lens' LeaderboardConfigurationsInsert LeaderboardConfiguration
@@ -89,7 +91,8 @@ lciApplicationId
       (\ s a -> s{_lciApplicationId = a})
 
 instance GoogleRequest
-         LeaderboardConfigurationsInsert where
+           LeaderboardConfigurationsInsert
+         where
         type Rs LeaderboardConfigurationsInsert =
              LeaderboardConfiguration
         type Scopes LeaderboardConfigurationsInsert =

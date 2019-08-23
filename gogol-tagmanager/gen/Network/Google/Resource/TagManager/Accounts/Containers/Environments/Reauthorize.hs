@@ -54,10 +54,13 @@ type AccountsContainersEnvironmentsReauthorizeResource
 -- | Re-generates the authorization code for a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsReauthorize' smart constructor.
-data AccountsContainersEnvironmentsReauthorize = AccountsContainersEnvironmentsReauthorize'
+data AccountsContainersEnvironmentsReauthorize =
+  AccountsContainersEnvironmentsReauthorize'
     { _acerPath    :: !Text
     , _acerPayload :: !Environment
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersEnvironmentsReauthorize' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ accountsContainersEnvironmentsReauthorize
     -> Environment -- ^ 'acerPayload'
     -> AccountsContainersEnvironmentsReauthorize
 accountsContainersEnvironmentsReauthorize pAcerPath_ pAcerPayload_ =
-    AccountsContainersEnvironmentsReauthorize'
-    { _acerPath = pAcerPath_
-    , _acerPayload = pAcerPayload_
-    }
+  AccountsContainersEnvironmentsReauthorize'
+    {_acerPath = pAcerPath_, _acerPayload = pAcerPayload_}
+
 
 -- | GTM Environment\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}
@@ -87,7 +89,8 @@ acerPayload
   = lens _acerPayload (\ s a -> s{_acerPayload = a})
 
 instance GoogleRequest
-         AccountsContainersEnvironmentsReauthorize where
+           AccountsContainersEnvironmentsReauthorize
+         where
         type Rs AccountsContainersEnvironmentsReauthorize =
              Environment
         type Scopes AccountsContainersEnvironmentsReauthorize

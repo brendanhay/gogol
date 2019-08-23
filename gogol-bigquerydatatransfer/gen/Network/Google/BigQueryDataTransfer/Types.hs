@@ -40,22 +40,28 @@ module Network.Google.BigQueryDataTransfer.Types
     , llrNextPageToken
     , llrLocations
 
+    -- * TimeRange
+    , TimeRange
+    , timeRange
+    , trStartTime
+    , trEndTime
+
     -- * TransferRun
     , TransferRun
     , transferRun
-    , trRunTime
-    , trErrorStatus
-    , trState
-    , trSchedule
-    , trStartTime
-    , trScheduleTime
-    , trDataSourceId
-    , trParams
-    , trUserId
-    , trUpdateTime
-    , trName
-    , trEndTime
-    , trDestinationDataSetId
+    , tRunTime
+    , tErrorStatus
+    , tState
+    , tSchedule
+    , tStartTime
+    , tScheduleTime
+    , tDataSourceId
+    , tParams
+    , tUserId
+    , tUpdateTime
+    , tName
+    , tEndTime
+    , tDestinationDataSetId
 
     -- * CheckValidCredsRequest
     , CheckValidCredsRequest
@@ -84,6 +90,13 @@ module Network.Google.BigQueryDataTransfer.Types
     -- * Empty
     , Empty
     , empty
+
+    -- * ScheduleOptions
+    , ScheduleOptions
+    , scheduleOptions
+    , soStartTime
+    , soDisableAutoScheduling
+    , soEndTime
 
     -- * TransferRunState
     , TransferRunState (..)
@@ -145,6 +158,12 @@ module Network.Google.BigQueryDataTransfer.Types
     , ldsrNextPageToken
     , ldsrDataSources
 
+    -- * StartManualTransferRunsRequest
+    , StartManualTransferRunsRequest
+    , startManualTransferRunsRequest
+    , smtrrRequestedRunTime
+    , smtrrRequestedTimeRange
+
     -- * Xgafv
     , Xgafv (..)
 
@@ -191,6 +210,11 @@ module Network.Google.BigQueryDataTransfer.Types
     , locationLabels
     , llAddtional
 
+    -- * StartManualTransferRunsResponse
+    , StartManualTransferRunsResponse
+    , startManualTransferRunsResponse
+    , smtrrRuns
+
     -- * LocationMetadata
     , LocationMetadata
     , locationMetadata
@@ -213,6 +237,7 @@ module Network.Google.BigQueryDataTransfer.Types
     , transferConfig
     , tcState
     , tcSchedule
+    , tcScheduleOptions
     , tcDisabled
     , tcDataSourceId
     , tcParams
@@ -239,12 +264,12 @@ bigQueryDataTransferService
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | View and manage your data in Google BigQuery
 bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigQueryScope = Proxy;
+bigQueryScope = Proxy

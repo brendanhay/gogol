@@ -66,7 +66,8 @@ type ProjectsAgentSessionsEntityTypesListResource =
 -- | Returns the list of all session entity types in the specified session.
 --
 -- /See:/ 'projectsAgentSessionsEntityTypesList' smart constructor.
-data ProjectsAgentSessionsEntityTypesList = ProjectsAgentSessionsEntityTypesList'
+data ProjectsAgentSessionsEntityTypesList =
+  ProjectsAgentSessionsEntityTypesList'
     { _paSetlParent         :: !Text
     , _paSetlXgafv          :: !(Maybe Xgafv)
     , _paSetlUploadProtocol :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsAgentSessionsEntityTypesList = ProjectsAgentSessionsEntityTypesList
     , _paSetlPageToken      :: !(Maybe Text)
     , _paSetlPageSize       :: !(Maybe (Textual Int32))
     , _paSetlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentSessionsEntityTypesList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ projectsAgentSessionsEntityTypesList
     :: Text -- ^ 'paSetlParent'
     -> ProjectsAgentSessionsEntityTypesList
 projectsAgentSessionsEntityTypesList pPaSetlParent_ =
-    ProjectsAgentSessionsEntityTypesList'
+  ProjectsAgentSessionsEntityTypesList'
     { _paSetlParent = pPaSetlParent_
     , _paSetlXgafv = Nothing
     , _paSetlUploadProtocol = Nothing
@@ -110,6 +113,7 @@ projectsAgentSessionsEntityTypesList pPaSetlParent_ =
     , _paSetlPageSize = Nothing
     , _paSetlCallback = Nothing
     }
+
 
 -- | Required. The session to list all session entity types from. Format:
 -- \`projects\/\/agent\/sessions\/\`.
@@ -162,7 +166,8 @@ paSetlCallback
       (\ s a -> s{_paSetlCallback = a})
 
 instance GoogleRequest
-         ProjectsAgentSessionsEntityTypesList where
+           ProjectsAgentSessionsEntityTypesList
+         where
         type Rs ProjectsAgentSessionsEntityTypesList =
              GoogleCloudDialogflowV2ListSessionEntityTypesResponse
         type Scopes ProjectsAgentSessionsEntityTypesList =

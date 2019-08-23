@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemsGet' request conforms to.
 type OperatingSystemsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>
@@ -55,10 +55,13 @@ type OperatingSystemsGetResource =
 -- | Gets one operating system by DART ID.
 --
 -- /See:/ 'operatingSystemsGet' smart constructor.
-data OperatingSystemsGet = OperatingSystemsGet'
+data OperatingSystemsGet =
+  OperatingSystemsGet'
     { _osgProFileId :: !(Textual Int64)
     , _osgDartId    :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperatingSystemsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,11 @@ operatingSystemsGet
     -> Int64 -- ^ 'osgDartId'
     -> OperatingSystemsGet
 operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
-    OperatingSystemsGet'
+  OperatingSystemsGet'
     { _osgProFileId = _Coerce # pOsgProFileId_
     , _osgDartId = _Coerce # pOsgDartId_
     }
+
 
 -- | User profile ID associated with this request.
 osgProFileId :: Lens' OperatingSystemsGet Int64

@@ -55,10 +55,13 @@ type LiveChatModeratorsInsertResource =
 -- | Adds a new moderator for the chat.
 --
 -- /See:/ 'liveChatModeratorsInsert' smart constructor.
-data LiveChatModeratorsInsert = LiveChatModeratorsInsert'
+data LiveChatModeratorsInsert =
+  LiveChatModeratorsInsert'
     { _lPart    :: !Text
     , _lPayload :: !LiveChatModerator
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatModeratorsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ liveChatModeratorsInsert
     -> LiveChatModerator -- ^ 'lPayload'
     -> LiveChatModeratorsInsert
 liveChatModeratorsInsert pLPart_ pLPayload_ =
-    LiveChatModeratorsInsert'
-    { _lPart = pLPart_
-    , _lPayload = pLPayload_
-    }
+  LiveChatModeratorsInsert' {_lPart = pLPart_, _lPayload = pLPayload_}
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

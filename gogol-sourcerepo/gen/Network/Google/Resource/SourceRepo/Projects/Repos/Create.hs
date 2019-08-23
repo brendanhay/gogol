@@ -64,7 +64,8 @@ type ProjectsReposCreateResource =
 -- repository already exists, \`CreateRepo\` returns \`ALREADY_EXISTS\`.
 --
 -- /See:/ 'projectsReposCreate' smart constructor.
-data ProjectsReposCreate = ProjectsReposCreate'
+data ProjectsReposCreate =
+  ProjectsReposCreate'
     { _prcParent         :: !Text
     , _prcXgafv          :: !(Maybe Xgafv)
     , _prcUploadProtocol :: !(Maybe Text)
@@ -72,7 +73,9 @@ data ProjectsReposCreate = ProjectsReposCreate'
     , _prcUploadType     :: !(Maybe Text)
     , _prcPayload        :: !Repo
     , _prcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsReposCreate' with the minimum fields required to make a request.
 --
@@ -96,7 +99,7 @@ projectsReposCreate
     -> Repo -- ^ 'prcPayload'
     -> ProjectsReposCreate
 projectsReposCreate pPrcParent_ pPrcPayload_ =
-    ProjectsReposCreate'
+  ProjectsReposCreate'
     { _prcParent = pPrcParent_
     , _prcXgafv = Nothing
     , _prcUploadProtocol = Nothing
@@ -105,6 +108,7 @@ projectsReposCreate pPrcParent_ pPrcPayload_ =
     , _prcPayload = pPrcPayload_
     , _prcCallback = Nothing
     }
+
 
 -- | The project in which to create the repo. Values are of the form
 -- \`projects\/\`.

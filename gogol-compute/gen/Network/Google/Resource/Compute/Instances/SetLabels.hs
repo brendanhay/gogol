@@ -65,13 +65,16 @@ type InstancesSetLabelsResource =
 -- Labeling Resources documentation.
 --
 -- /See:/ 'instancesSetLabels' smart constructor.
-data InstancesSetLabels = InstancesSetLabels'
+data InstancesSetLabels =
+  InstancesSetLabels'
     { _islRequestId :: !(Maybe Text)
     , _islProject   :: !Text
     , _islZone      :: !Text
     , _islPayload   :: !InstancesSetLabelsRequest
     , _islInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSetLabels' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ instancesSetLabels
     -> Text -- ^ 'islInstance'
     -> InstancesSetLabels
 instancesSetLabels pIslProject_ pIslZone_ pIslPayload_ pIslInstance_ =
-    InstancesSetLabels'
+  InstancesSetLabels'
     { _islRequestId = Nothing
     , _islProject = pIslProject_
     , _islZone = pIslZone_
     , _islPayload = pIslPayload_
     , _islInstance = pIslInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

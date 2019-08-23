@@ -62,7 +62,8 @@ type GroupItemsInsertResource =
 -- | Creates a group item.
 --
 -- /See:/ 'groupItemsInsert' smart constructor.
-data GroupItemsInsert = GroupItemsInsert'
+data GroupItemsInsert =
+  GroupItemsInsert'
     { _giiXgafv                  :: !(Maybe Xgafv)
     , _giiUploadProtocol         :: !(Maybe Text)
     , _giiAccessToken            :: !(Maybe Text)
@@ -70,7 +71,9 @@ data GroupItemsInsert = GroupItemsInsert'
     , _giiPayload                :: !GroupItem
     , _giiOnBehalfOfContentOwner :: !(Maybe Text)
     , _giiCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupItemsInsert' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ groupItemsInsert
     :: GroupItem -- ^ 'giiPayload'
     -> GroupItemsInsert
 groupItemsInsert pGiiPayload_ =
-    GroupItemsInsert'
+  GroupItemsInsert'
     { _giiXgafv = Nothing
     , _giiUploadProtocol = Nothing
     , _giiAccessToken = Nothing
@@ -102,6 +105,7 @@ groupItemsInsert pGiiPayload_ =
     , _giiOnBehalfOfContentOwner = Nothing
     , _giiCallback = Nothing
     }
+
 
 -- | V1 error format.
 giiXgafv :: Lens' GroupItemsInsert (Maybe Xgafv)

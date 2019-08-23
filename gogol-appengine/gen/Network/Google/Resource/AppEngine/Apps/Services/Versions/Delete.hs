@@ -67,7 +67,8 @@ type AppsServicesVersionsDeleteResource =
 -- | Deletes an existing Version resource.
 --
 -- /See:/ 'appsServicesVersionsDelete' smart constructor.
-data AppsServicesVersionsDelete = AppsServicesVersionsDelete'
+data AppsServicesVersionsDelete =
+  AppsServicesVersionsDelete'
     { _asvdXgafv          :: !(Maybe Xgafv)
     , _asvdUploadProtocol :: !(Maybe Text)
     , _asvdAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data AppsServicesVersionsDelete = AppsServicesVersionsDelete'
     , _asvdAppsId         :: !Text
     , _asvdServicesId     :: !Text
     , _asvdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsServicesVersionsDelete' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ appsServicesVersionsDelete
     -> Text -- ^ 'asvdServicesId'
     -> AppsServicesVersionsDelete
 appsServicesVersionsDelete pAsvdVersionsId_ pAsvdAppsId_ pAsvdServicesId_ =
-    AppsServicesVersionsDelete'
+  AppsServicesVersionsDelete'
     { _asvdXgafv = Nothing
     , _asvdUploadProtocol = Nothing
     , _asvdAccessToken = Nothing
@@ -113,6 +116,7 @@ appsServicesVersionsDelete pAsvdVersionsId_ pAsvdAppsId_ pAsvdServicesId_ =
     , _asvdServicesId = pAsvdServicesId_
     , _asvdCallback = Nothing
     }
+
 
 -- | V1 error format.
 asvdXgafv :: Lens' AppsServicesVersionsDelete (Maybe Xgafv)

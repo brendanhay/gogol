@@ -67,7 +67,8 @@ type ProjectsInstancesTablesCheckConsistencyResource
 -- and the check request.
 --
 -- /See:/ 'projectsInstancesTablesCheckConsistency' smart constructor.
-data ProjectsInstancesTablesCheckConsistency = ProjectsInstancesTablesCheckConsistency'
+data ProjectsInstancesTablesCheckConsistency =
+  ProjectsInstancesTablesCheckConsistency'
     { _pitccXgafv          :: !(Maybe Xgafv)
     , _pitccUploadProtocol :: !(Maybe Text)
     , _pitccAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsInstancesTablesCheckConsistency = ProjectsInstancesTablesCheckConsi
     , _pitccPayload        :: !CheckConsistencyRequest
     , _pitccName           :: !Text
     , _pitccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesTablesCheckConsistency' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsInstancesTablesCheckConsistency
     -> Text -- ^ 'pitccName'
     -> ProjectsInstancesTablesCheckConsistency
 projectsInstancesTablesCheckConsistency pPitccPayload_ pPitccName_ =
-    ProjectsInstancesTablesCheckConsistency'
+  ProjectsInstancesTablesCheckConsistency'
     { _pitccXgafv = Nothing
     , _pitccUploadProtocol = Nothing
     , _pitccAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsInstancesTablesCheckConsistency pPitccPayload_ pPitccName_ =
     , _pitccName = pPitccName_
     , _pitccCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitccXgafv :: Lens' ProjectsInstancesTablesCheckConsistency (Maybe Xgafv)
@@ -151,7 +155,8 @@ pitccCallback
       (\ s a -> s{_pitccCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesTablesCheckConsistency where
+           ProjectsInstancesTablesCheckConsistency
+         where
         type Rs ProjectsInstancesTablesCheckConsistency =
              CheckConsistencyResponse
         type Scopes ProjectsInstancesTablesCheckConsistency =

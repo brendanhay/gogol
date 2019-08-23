@@ -139,9 +139,11 @@ module Network.Google.FirebaseDynamicLinks.Types
     , getIosReopenAttributionResponse
     , girarIosMinAppVersion
     , girarDeepLink
+    , girarUtmContent
     , girarResolvedLink
     , girarUtmMedium
     , girarInvitationId
+    , girarUtmTerm
     , girarUtmCampaign
     , girarUtmSource
 
@@ -199,12 +201,14 @@ module Network.Google.FirebaseDynamicLinks.Types
     , gipiarAppMinimumVersion
     , gipiarAttributionConfidence
     , gipiarExternalBrowserDestinationLink
+    , gipiarUtmContent
     , gipiarResolvedLink
     , gipiarRequestedLink
     , gipiarUtmMedium
     , gipiarFallbackLink
     , gipiarInvitationId
     , gipiarIsStrongMatchExecutable
+    , gipiarUtmTerm
     , gipiarUtmCampaign
     , gipiarMatchMessage
     , gipiarUtmSource
@@ -264,4 +268,4 @@ firebaseDynamicLinksService
 
 -- | View and administer all your Firebase data and settings
 firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
-firebaseScope = Proxy;
+firebaseScope = Proxy

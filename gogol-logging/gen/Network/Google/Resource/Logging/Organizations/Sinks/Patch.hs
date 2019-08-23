@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.patch@.
@@ -66,12 +66,13 @@ type OrganizationsSinksPatchResource =
                          ReqBody '[JSON] LogSink :> Patch '[JSON] LogSink
 
 -- | Updates a sink. This method replaces the following fields in the
--- existing sink with values from the new sink: destination, and filter.
--- The updated sink might also have a new writer_identity; see the
+-- existing sink with values from the new sink: destination, and filter.The
+-- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
 -- /See:/ 'organizationsSinksPatch' smart constructor.
-data OrganizationsSinksPatch = OrganizationsSinksPatch'
+data OrganizationsSinksPatch =
+  OrganizationsSinksPatch'
     { _ospXgafv                :: !(Maybe Xgafv)
     , _ospUniqueWriterIdentity :: !(Maybe Bool)
     , _ospUploadProtocol       :: !(Maybe Text)
@@ -81,7 +82,9 @@ data OrganizationsSinksPatch = OrganizationsSinksPatch'
     , _ospPayload              :: !LogSink
     , _ospSinkName             :: !Text
     , _ospCallback             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrganizationsSinksPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ organizationsSinksPatch
     -> Text -- ^ 'ospSinkName'
     -> OrganizationsSinksPatch
 organizationsSinksPatch pOspPayload_ pOspSinkName_ =
-    OrganizationsSinksPatch'
+  OrganizationsSinksPatch'
     { _ospXgafv = Nothing
     , _ospUniqueWriterIdentity = Nothing
     , _ospUploadProtocol = Nothing
@@ -120,6 +123,7 @@ organizationsSinksPatch pOspPayload_ pOspSinkName_ =
     , _ospSinkName = pOspSinkName_
     , _ospCallback = Nothing
     }
+
 
 -- | V1 error format.
 ospXgafv :: Lens' OrganizationsSinksPatch (Maybe Xgafv)

@@ -75,7 +75,8 @@ type ProjectsTracesBatchWriteResource =
 -- created with given set of spans.
 --
 -- /See:/ 'projectsTracesBatchWrite' smart constructor.
-data ProjectsTracesBatchWrite = ProjectsTracesBatchWrite'
+data ProjectsTracesBatchWrite =
+  ProjectsTracesBatchWrite'
     { _ptbwXgafv          :: !(Maybe Xgafv)
     , _ptbwUploadProtocol :: !(Maybe Text)
     , _ptbwPp             :: !Bool
@@ -85,7 +86,9 @@ data ProjectsTracesBatchWrite = ProjectsTracesBatchWrite'
     , _ptbwBearerToken    :: !(Maybe Text)
     , _ptbwName           :: !Text
     , _ptbwCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTracesBatchWrite' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ projectsTracesBatchWrite
     -> Text -- ^ 'ptbwName'
     -> ProjectsTracesBatchWrite
 projectsTracesBatchWrite pPtbwPayload_ pPtbwName_ =
-    ProjectsTracesBatchWrite'
+  ProjectsTracesBatchWrite'
     { _ptbwXgafv = Nothing
     , _ptbwUploadProtocol = Nothing
     , _ptbwPp = True
@@ -124,6 +127,7 @@ projectsTracesBatchWrite pPtbwPayload_ pPtbwName_ =
     , _ptbwName = pPtbwName_
     , _ptbwCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptbwXgafv :: Lens' ProjectsTracesBatchWrite (Maybe Xgafv)

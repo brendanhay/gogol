@@ -68,7 +68,8 @@ type ObjectsListResource =
 -- | Retrieves a list of objects matching the criteria.
 --
 -- /See:/ 'objectsList' smart constructor.
-data ObjectsList = ObjectsList'
+data ObjectsList =
+  ObjectsList'
     { _olPrefix                   :: !(Maybe Text)
     , _olBucket                   :: !Text
     , _olVersions                 :: !(Maybe Bool)
@@ -78,7 +79,9 @@ data ObjectsList = ObjectsList'
     , _olPageToken                :: !(Maybe Text)
     , _olDelimiter                :: !(Maybe Text)
     , _olMaxResults               :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsList' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ objectsList
     :: Text -- ^ 'olBucket'
     -> ObjectsList
 objectsList pOlBucket_ =
-    ObjectsList'
+  ObjectsList'
     { _olPrefix = Nothing
     , _olBucket = pOlBucket_
     , _olVersions = Nothing
@@ -116,6 +119,7 @@ objectsList pOlBucket_ =
     , _olDelimiter = Nothing
     , _olMaxResults = 1000
     }
+
 
 -- | Filter results to objects whose names begin with this prefix.
 olPrefix :: Lens' ObjectsList (Maybe Text)

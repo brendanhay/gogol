@@ -53,9 +53,12 @@ type ProvisioningCreateAccountTreeResource =
 -- | Provision account.
 --
 -- /See:/ 'provisioningCreateAccountTree' smart constructor.
-newtype ProvisioningCreateAccountTree = ProvisioningCreateAccountTree'
+newtype ProvisioningCreateAccountTree =
+  ProvisioningCreateAccountTree'
     { _pcatPayload :: AccountTreeRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProvisioningCreateAccountTree' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ provisioningCreateAccountTree
     :: AccountTreeRequest -- ^ 'pcatPayload'
     -> ProvisioningCreateAccountTree
 provisioningCreateAccountTree pPcatPayload_ =
-    ProvisioningCreateAccountTree'
-    { _pcatPayload = pPcatPayload_
-    }
+  ProvisioningCreateAccountTree' {_pcatPayload = pPcatPayload_}
+
 
 -- | Multipart request metadata.
 pcatPayload :: Lens' ProvisioningCreateAccountTree AccountTreeRequest

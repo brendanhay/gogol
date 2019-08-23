@@ -65,11 +65,14 @@ type EditsAPKsAddexternallyhostedResource =
 -- configured to restrict distribution to the enterprise domain.
 --
 -- /See:/ 'editsAPKsAddexternallyhosted' smart constructor.
-data EditsAPKsAddexternallyhosted = EditsAPKsAddexternallyhosted'
+data EditsAPKsAddexternallyhosted =
+  EditsAPKsAddexternallyhosted'
     { _eapkaPackageName :: !Text
     , _eapkaPayload     :: !APKsAddExternallyHostedRequest
     , _eapkaEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsAPKsAddexternallyhosted' with the minimum fields required to make a request.
 --
@@ -86,11 +89,12 @@ editsAPKsAddexternallyhosted
     -> Text -- ^ 'eapkaEditId'
     -> EditsAPKsAddexternallyhosted
 editsAPKsAddexternallyhosted pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
-    EditsAPKsAddexternallyhosted'
+  EditsAPKsAddexternallyhosted'
     { _eapkaPackageName = pEapkaPackageName_
     , _eapkaPayload = pEapkaPayload_
     , _eapkaEditId = pEapkaEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

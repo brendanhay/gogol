@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesUpdate' request conforms to.
 type ContentCategoriesUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -55,10 +55,13 @@ type ContentCategoriesUpdateResource =
 -- | Updates an existing content category.
 --
 -- /See:/ 'contentCategoriesUpdate' smart constructor.
-data ContentCategoriesUpdate = ContentCategoriesUpdate'
+data ContentCategoriesUpdate =
+  ContentCategoriesUpdate'
     { _ccuProFileId :: !(Textual Int64)
     , _ccuPayload   :: !ContentCategory
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContentCategoriesUpdate' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ contentCategoriesUpdate
     -> ContentCategory -- ^ 'ccuPayload'
     -> ContentCategoriesUpdate
 contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
-    ContentCategoriesUpdate'
-    { _ccuProFileId = _Coerce # pCcuProFileId_
-    , _ccuPayload = pCcuPayload_
-    }
+  ContentCategoriesUpdate'
+    {_ccuProFileId = _Coerce # pCcuProFileId_, _ccuPayload = pCcuPayload_}
+
 
 -- | User profile ID associated with this request.
 ccuProFileId :: Lens' ContentCategoriesUpdate Int64

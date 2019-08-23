@@ -58,10 +58,13 @@ type DeploymentsGetIAMPolicyResource =
 -- policy or resource exists.
 --
 -- /See:/ 'deploymentsGetIAMPolicy' smart constructor.
-data DeploymentsGetIAMPolicy = DeploymentsGetIAMPolicy'
+data DeploymentsGetIAMPolicy =
+  DeploymentsGetIAMPolicy'
     { _dgipProject  :: !Text
     , _dgipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ deploymentsGetIAMPolicy
     -> Text -- ^ 'dgipResource'
     -> DeploymentsGetIAMPolicy
 deploymentsGetIAMPolicy pDgipProject_ pDgipResource_ =
-    DeploymentsGetIAMPolicy'
-    { _dgipProject = pDgipProject_
-    , _dgipResource = pDgipResource_
-    }
+  DeploymentsGetIAMPolicy'
+    {_dgipProject = pDgipProject_, _dgipResource = pDgipResource_}
+
 
 -- | Project ID for this request.
 dgipProject :: Lens' DeploymentsGetIAMPolicy Text

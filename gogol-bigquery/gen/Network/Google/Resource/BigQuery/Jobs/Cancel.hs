@@ -62,11 +62,14 @@ type JobsCancelResource =
 -- completed successfully. Cancelled jobs may still incur costs.
 --
 -- /See:/ 'jobsCancel' smart constructor.
-data JobsCancel = JobsCancel'
+data JobsCancel =
+  JobsCancel'
     { _jcJobId     :: !Text
     , _jcLocation  :: !(Maybe Text)
     , _jcProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsCancel' with the minimum fields required to make a request.
 --
@@ -82,11 +85,9 @@ jobsCancel
     -> Text -- ^ 'jcProjectId'
     -> JobsCancel
 jobsCancel pJcJobId_ pJcProjectId_ =
-    JobsCancel'
-    { _jcJobId = pJcJobId_
-    , _jcLocation = Nothing
-    , _jcProjectId = pJcProjectId_
-    }
+  JobsCancel'
+    {_jcJobId = pJcJobId_, _jcLocation = Nothing, _jcProjectId = pJcProjectId_}
+
 
 -- | [Required] Job ID of the job to cancel
 jcJobId :: Lens' JobsCancel Text

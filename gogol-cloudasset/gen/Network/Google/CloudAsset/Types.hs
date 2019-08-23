@@ -66,6 +66,7 @@ module Network.Google.CloudAsset.Types
     -- * GcsDestination
     , GcsDestination
     , gcsDestination
+    , gdURIPrefix
     , gdURI
 
     -- * StatusDetailsItem
@@ -161,12 +162,12 @@ import           Network.Google.CloudAsset.Types.Product
 import           Network.Google.CloudAsset.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Cloud Asset API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Asset API. This contains the host and root path used as a starting point for constructing service requests.
 cloudAssetService :: ServiceConfig
 cloudAssetService
-  = defaultService (ServiceId "cloudasset:v1beta1")
+  = defaultService (ServiceId "cloudasset:v1")
       "cloudasset.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

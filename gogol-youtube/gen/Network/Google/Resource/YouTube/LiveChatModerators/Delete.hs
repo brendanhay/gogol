@@ -52,9 +52,12 @@ type LiveChatModeratorsDeleteResource =
 -- | Removes a chat moderator.
 --
 -- /See:/ 'liveChatModeratorsDelete' smart constructor.
-newtype LiveChatModeratorsDelete = LiveChatModeratorsDelete'
+newtype LiveChatModeratorsDelete =
+  LiveChatModeratorsDelete'
     { _lcmdId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LiveChatModeratorsDelete' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ liveChatModeratorsDelete
     :: Text -- ^ 'lcmdId'
     -> LiveChatModeratorsDelete
 liveChatModeratorsDelete pLcmdId_ =
-    LiveChatModeratorsDelete'
-    { _lcmdId = pLcmdId_
-    }
+  LiveChatModeratorsDelete' {_lcmdId = pLcmdId_}
+
 
 -- | The id parameter identifies the chat moderator to remove. The value
 -- uniquely identifies both the moderator and the chat.

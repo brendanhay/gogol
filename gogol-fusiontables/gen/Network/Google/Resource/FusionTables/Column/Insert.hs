@@ -54,10 +54,13 @@ type ColumnInsertResource =
 -- | Adds a new column to the table.
 --
 -- /See:/ 'columnInsert' smart constructor.
-data ColumnInsert = ColumnInsert'
+data ColumnInsert =
+  ColumnInsert'
     { _ciPayload :: !Column
     , _ciTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ColumnInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ columnInsert
     -> Text -- ^ 'ciTableId'
     -> ColumnInsert
 columnInsert pCiPayload_ pCiTableId_ =
-    ColumnInsert'
-    { _ciPayload = pCiPayload_
-    , _ciTableId = pCiTableId_
-    }
+  ColumnInsert' {_ciPayload = pCiPayload_, _ciTableId = pCiTableId_}
+
 
 -- | Multipart request metadata.
 ciPayload :: Lens' ColumnInsert Column

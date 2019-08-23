@@ -61,7 +61,8 @@ type EnterprisesApplicationsGetResource =
 -- | Gets info about an application.
 --
 -- /See:/ 'enterprisesApplicationsGet' smart constructor.
-data EnterprisesApplicationsGet = EnterprisesApplicationsGet'
+data EnterprisesApplicationsGet =
+  EnterprisesApplicationsGet'
     { _eagXgafv          :: !(Maybe Xgafv)
     , _eagLanguageCode   :: !(Maybe Text)
     , _eagUploadProtocol :: !(Maybe Text)
@@ -69,7 +70,9 @@ data EnterprisesApplicationsGet = EnterprisesApplicationsGet'
     , _eagUploadType     :: !(Maybe Text)
     , _eagName           :: !Text
     , _eagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnterprisesApplicationsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ enterprisesApplicationsGet
     :: Text -- ^ 'eagName'
     -> EnterprisesApplicationsGet
 enterprisesApplicationsGet pEagName_ =
-    EnterprisesApplicationsGet'
+  EnterprisesApplicationsGet'
     { _eagXgafv = Nothing
     , _eagLanguageCode = Nothing
     , _eagUploadProtocol = Nothing
@@ -101,6 +104,7 @@ enterprisesApplicationsGet pEagName_ =
     , _eagName = pEagName_
     , _eagCallback = Nothing
     }
+
 
 -- | V1 error format.
 eagXgafv :: Lens' EnterprisesApplicationsGet (Maybe Xgafv)

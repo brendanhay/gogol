@@ -1,5 +1,5 @@
 name:                  gogol-bigquerydatatransfer
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google BigQuery Data Transfer SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Transfers data from partner SaaS applications to Google BigQuery on a
-    scheduled, managed basis.
+    Schedule queries or transfer external data from SaaS applications to
+    Google BigQuery on a regular basis.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -54,6 +54,7 @@ library
         , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
         , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
         , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
         , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
         , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Delete
         , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
@@ -64,11 +65,12 @@ library
         , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
         , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
         , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
 
     other-modules:
           Network.Google.BigQueryDataTransfer.Types.Product
         , Network.Google.BigQueryDataTransfer.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

@@ -22,12 +22,15 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'adClients' smart constructor.
-data AdClients = AdClients'
+data AdClients =
+  AdClients'
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
     , _acItems         :: !(Maybe [AdClient])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
 --
@@ -43,12 +46,13 @@ data AdClients = AdClients'
 adClients
     :: AdClients
 adClients =
-    AdClients'
+  AdClients'
     { _acEtag = Nothing
     , _acNextPageToken = Nothing
     , _acKind = "adexchangeseller#adClients"
     , _acItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 acEtag :: Lens' AdClients (Maybe Text)
@@ -90,7 +94,8 @@ instance ToJSON AdClients where
 
 --
 -- /See:/ 'reportingMetadataEntry' smart constructor.
-data ReportingMetadataEntry = ReportingMetadataEntry'
+data ReportingMetadataEntry =
+  ReportingMetadataEntry'
     { _rmeKind                 :: !Text
     , _rmeRequiredMetrics      :: !(Maybe [Text])
     , _rmeCompatibleMetrics    :: !(Maybe [Text])
@@ -98,7 +103,9 @@ data ReportingMetadataEntry = ReportingMetadataEntry'
     , _rmeId                   :: !(Maybe Text)
     , _rmeCompatibleDimensions :: !(Maybe [Text])
     , _rmeSupportedProducts    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportingMetadataEntry' with the minimum fields required to make a request.
 --
@@ -120,7 +127,7 @@ data ReportingMetadataEntry = ReportingMetadataEntry'
 reportingMetadataEntry
     :: ReportingMetadataEntry
 reportingMetadataEntry =
-    ReportingMetadataEntry'
+  ReportingMetadataEntry'
     { _rmeKind = "adexchangeseller#reportingMetadataEntry"
     , _rmeRequiredMetrics = Nothing
     , _rmeCompatibleMetrics = Nothing
@@ -129,6 +136,7 @@ reportingMetadataEntry =
     , _rmeCompatibleDimensions = Nothing
     , _rmeSupportedProducts = Nothing
     }
+
 
 -- | Kind of resource this is, in this case
 -- adexchangeseller#reportingMetadataEntry.
@@ -219,12 +227,15 @@ instance ToJSON ReportingMetadataEntry where
 
 --
 -- /See:/ 'accounts' smart constructor.
-data Accounts = Accounts'
+data Accounts =
+  Accounts'
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
     , _aItems         :: !(Maybe [Account])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
 --
@@ -240,12 +251,13 @@ data Accounts = Accounts'
 accounts
     :: Accounts
 accounts =
-    Accounts'
+  Accounts'
     { _aEtag = Nothing
     , _aNextPageToken = Nothing
     , _aKind = "adexchangeseller#accounts"
     , _aItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 aEtag :: Lens' Accounts (Maybe Text)
@@ -287,10 +299,13 @@ instance ToJSON Accounts where
 
 --
 -- /See:/ 'alerts' smart constructor.
-data Alerts = Alerts'
+data Alerts =
+  Alerts'
     { _aleKind  :: !Text
     , _aleItems :: !(Maybe [Alert])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Alerts' with the minimum fields required to make a request.
 --
@@ -301,11 +316,8 @@ data Alerts = Alerts'
 -- * 'aleItems'
 alerts
     :: Alerts
-alerts =
-    Alerts'
-    { _aleKind = "adexchangeseller#alerts"
-    , _aleItems = Nothing
-    }
+alerts = Alerts' {_aleKind = "adexchangeseller#alerts", _aleItems = Nothing}
+
 
 -- | Kind of list this is, in this case adexchangeseller#alerts.
 aleKind :: Lens' Alerts Text
@@ -335,12 +347,15 @@ instance ToJSON Alerts where
 
 --
 -- /See:/ 'savedReports' smart constructor.
-data SavedReports = SavedReports'
+data SavedReports =
+  SavedReports'
     { _srEtag          :: !(Maybe Text)
     , _srNextPageToken :: !(Maybe Text)
     , _srKind          :: !Text
     , _srItems         :: !(Maybe [SavedReport])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SavedReports' with the minimum fields required to make a request.
 --
@@ -356,12 +371,13 @@ data SavedReports = SavedReports'
 savedReports
     :: SavedReports
 savedReports =
-    SavedReports'
+  SavedReports'
     { _srEtag = Nothing
     , _srNextPageToken = Nothing
     , _srKind = "adexchangeseller#savedReports"
     , _srItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 srEtag :: Lens' SavedReports (Maybe Text)
@@ -404,11 +420,14 @@ instance ToJSON SavedReports where
 
 --
 -- /See:/ 'savedReport' smart constructor.
-data SavedReport = SavedReport'
+data SavedReport =
+  SavedReport'
     { _sKind :: !Text
     , _sName :: !(Maybe Text)
     , _sId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SavedReport' with the minimum fields required to make a request.
 --
@@ -422,11 +441,9 @@ data SavedReport = SavedReport'
 savedReport
     :: SavedReport
 savedReport =
-    SavedReport'
-    { _sKind = "adexchangeseller#savedReport"
-    , _sName = Nothing
-    , _sId = Nothing
-    }
+  SavedReport'
+    {_sKind = "adexchangeseller#savedReport", _sName = Nothing, _sId = Nothing}
+
 
 -- | Kind of resource this is, in this case adexchangeseller#savedReport.
 sKind :: Lens' SavedReport Text
@@ -458,12 +475,15 @@ instance ToJSON SavedReport where
 
 --
 -- /See:/ 'urlChannels' smart constructor.
-data URLChannels = URLChannels'
+data URLChannels =
+  URLChannels'
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
     , _ucItems         :: !(Maybe [URLChannel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
 --
@@ -479,12 +499,13 @@ data URLChannels = URLChannels'
 urlChannels
     :: URLChannels
 urlChannels =
-    URLChannels'
+  URLChannels'
     { _ucEtag = Nothing
     , _ucNextPageToken = Nothing
     , _ucKind = "adexchangeseller#urlChannels"
     , _ucItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 ucEtag :: Lens' URLChannels (Maybe Text)
@@ -527,12 +548,15 @@ instance ToJSON URLChannels where
 
 --
 -- /See:/ 'customChannels' smart constructor.
-data CustomChannels = CustomChannels'
+data CustomChannels =
+  CustomChannels'
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
     , _ccItems         :: !(Maybe [CustomChannel])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
 --
@@ -548,12 +572,13 @@ data CustomChannels = CustomChannels'
 customChannels
     :: CustomChannels
 customChannels =
-    CustomChannels'
+  CustomChannels'
     { _ccEtag = Nothing
     , _ccNextPageToken = Nothing
     , _ccKind = "adexchangeseller#customChannels"
     , _ccItems = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 ccEtag :: Lens' CustomChannels (Maybe Text)
@@ -596,7 +621,8 @@ instance ToJSON CustomChannels where
 
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report'
+data Report =
+  Report'
     { _rKind             :: !Text
     , _rAverages         :: !(Maybe [Text])
     , _rWarnings         :: !(Maybe [Text])
@@ -604,7 +630,9 @@ data Report = Report'
     , _rTotals           :: !(Maybe [Text])
     , _rHeaders          :: !(Maybe [ReportHeadersItem])
     , _rTotalMatchedRows :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -626,7 +654,7 @@ data Report = Report'
 report
     :: Report
 report =
-    Report'
+  Report'
     { _rKind = "adexchangeseller#report"
     , _rAverages = Nothing
     , _rWarnings = Nothing
@@ -635,6 +663,7 @@ report =
     , _rHeaders = Nothing
     , _rTotalMatchedRows = Nothing
     }
+
 
 -- | Kind this is, in this case adexchangeseller#report.
 rKind :: Lens' Report Text
@@ -715,13 +744,16 @@ instance ToJSON Report where
 
 --
 -- /See:/ 'alert' smart constructor.
-data Alert = Alert'
+data Alert =
+  Alert'
     { _aaKind     :: !Text
     , _aaSeverity :: !(Maybe Text)
     , _aaId       :: !(Maybe Text)
     , _aaType     :: !(Maybe Text)
     , _aaMessage  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Alert' with the minimum fields required to make a request.
 --
@@ -739,13 +771,14 @@ data Alert = Alert'
 alert
     :: Alert
 alert =
-    Alert'
+  Alert'
     { _aaKind = "adexchangeseller#alert"
     , _aaSeverity = Nothing
     , _aaId = Nothing
     , _aaType = Nothing
     , _aaMessage = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#alert.
 aaKind :: Lens' Alert Text
@@ -794,11 +827,14 @@ instance ToJSON Alert where
 
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account'
+data Account =
+  Account'
     { _accKind :: !Text
     , _accName :: !(Maybe Text)
     , _accId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -812,11 +848,12 @@ data Account = Account'
 account
     :: Account
 account =
-    Account'
+  Account'
     { _accKind = "adexchangeseller#account"
     , _accName = Nothing
     , _accId = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#account.
 accKind :: Lens' Account Text
@@ -848,13 +885,16 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'adClient' smart constructor.
-data AdClient = AdClient'
+data AdClient =
+  AdClient'
     { _adKind              :: !Text
     , _adArcOptIn          :: !(Maybe Bool)
     , _adSupportsReporting :: !(Maybe Bool)
     , _adId                :: !(Maybe Text)
     , _adProductCode       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdClient' with the minimum fields required to make a request.
 --
@@ -872,13 +912,14 @@ data AdClient = AdClient'
 adClient
     :: AdClient
 adClient =
-    AdClient'
+  AdClient'
     { _adKind = "adexchangeseller#adClient"
     , _adArcOptIn = Nothing
     , _adSupportsReporting = Nothing
     , _adId = Nothing
     , _adProductCode = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#adClient.
 adKind :: Lens' AdClient Text
@@ -929,11 +970,14 @@ instance ToJSON AdClient where
 
 --
 -- /See:/ 'reportHeadersItem' smart constructor.
-data ReportHeadersItem = ReportHeadersItem'
+data ReportHeadersItem =
+  ReportHeadersItem'
     { _rhiName     :: !(Maybe Text)
     , _rhiCurrency :: !(Maybe Text)
     , _rhiType     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReportHeadersItem' with the minimum fields required to make a request.
 --
@@ -947,11 +991,9 @@ data ReportHeadersItem = ReportHeadersItem'
 reportHeadersItem
     :: ReportHeadersItem
 reportHeadersItem =
-    ReportHeadersItem'
-    { _rhiName = Nothing
-    , _rhiCurrency = Nothing
-    , _rhiType = Nothing
-    }
+  ReportHeadersItem'
+    {_rhiName = Nothing, _rhiCurrency = Nothing, _rhiType = Nothing}
+
 
 -- | The name of the header.
 rhiName :: Lens' ReportHeadersItem (Maybe Text)
@@ -987,12 +1029,15 @@ instance ToJSON ReportHeadersItem where
 -- | The targeting information of this custom channel, if activated.
 --
 -- /See:/ 'customChannelTargetingInfo' smart constructor.
-data CustomChannelTargetingInfo = CustomChannelTargetingInfo'
+data CustomChannelTargetingInfo =
+  CustomChannelTargetingInfo'
     { _cctiLocation     :: !(Maybe Text)
     , _cctiSiteLanguage :: !(Maybe Text)
     , _cctiAdsAppearOn  :: !(Maybe Text)
     , _cctiDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannelTargetingInfo' with the minimum fields required to make a request.
 --
@@ -1008,12 +1053,13 @@ data CustomChannelTargetingInfo = CustomChannelTargetingInfo'
 customChannelTargetingInfo
     :: CustomChannelTargetingInfo
 customChannelTargetingInfo =
-    CustomChannelTargetingInfo'
+  CustomChannelTargetingInfo'
     { _cctiLocation = Nothing
     , _cctiSiteLanguage = Nothing
     , _cctiAdsAppearOn = Nothing
     , _cctiDescription = Nothing
     }
+
 
 -- | The locations in which ads appear. (Only valid for content and mobile
 -- content ads). Acceptable values for content ads are: TOP_LEFT,
@@ -1063,10 +1109,13 @@ instance ToJSON CustomChannelTargetingInfo where
 
 --
 -- /See:/ 'preferredDeals' smart constructor.
-data PreferredDeals = PreferredDeals'
+data PreferredDeals =
+  PreferredDeals'
     { _pdKind  :: !Text
     , _pdItems :: !(Maybe [PreferredDeal])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PreferredDeals' with the minimum fields required to make a request.
 --
@@ -1078,10 +1127,9 @@ data PreferredDeals = PreferredDeals'
 preferredDeals
     :: PreferredDeals
 preferredDeals =
-    PreferredDeals'
-    { _pdKind = "adexchangeseller#preferredDeals"
-    , _pdItems = Nothing
-    }
+  PreferredDeals'
+    {_pdKind = "adexchangeseller#preferredDeals", _pdItems = Nothing}
+
 
 -- | Kind of list this is, in this case adexchangeseller#preferredDeals.
 pdKind :: Lens' PreferredDeals Text
@@ -1110,10 +1158,13 @@ instance ToJSON PreferredDeals where
 
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata'
+data Metadata =
+  Metadata'
     { _mKind  :: !Text
     , _mItems :: !(Maybe [ReportingMetadataEntry])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -1124,11 +1175,8 @@ data Metadata = Metadata'
 -- * 'mItems'
 metadata
     :: Metadata
-metadata =
-    Metadata'
-    { _mKind = "adexchangeseller#metadata"
-    , _mItems = Nothing
-    }
+metadata = Metadata' {_mKind = "adexchangeseller#metadata", _mItems = Nothing}
+
 
 -- | Kind of list this is, in this case adexchangeseller#metadata.
 mKind :: Lens' Metadata Text
@@ -1155,13 +1203,16 @@ instance ToJSON Metadata where
 
 --
 -- /See:/ 'customChannel' smart constructor.
-data CustomChannel = CustomChannel'
+data CustomChannel =
+  CustomChannel'
     { _cTargetingInfo :: !(Maybe CustomChannelTargetingInfo)
     , _cKind          :: !Text
     , _cName          :: !(Maybe Text)
     , _cCode          :: !(Maybe Text)
     , _cId            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomChannel' with the minimum fields required to make a request.
 --
@@ -1179,13 +1230,14 @@ data CustomChannel = CustomChannel'
 customChannel
     :: CustomChannel
 customChannel =
-    CustomChannel'
+  CustomChannel'
     { _cTargetingInfo = Nothing
     , _cKind = "adexchangeseller#customChannel"
     , _cName = Nothing
     , _cCode = Nothing
     , _cId = Nothing
     }
+
 
 -- | The targeting information of this custom channel, if activated.
 cTargetingInfo :: Lens' CustomChannel (Maybe CustomChannelTargetingInfo)
@@ -1232,11 +1284,14 @@ instance ToJSON CustomChannel where
 
 --
 -- /See:/ 'urlChannel' smart constructor.
-data URLChannel = URLChannel'
+data URLChannel =
+  URLChannel'
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
     , _urlcURLPattern :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
 --
@@ -1250,11 +1305,12 @@ data URLChannel = URLChannel'
 urlChannel
     :: URLChannel
 urlChannel =
-    URLChannel'
+  URLChannel'
     { _urlcKind = "adexchangeseller#urlChannel"
     , _urlcId = Nothing
     , _urlcURLPattern = Nothing
     }
+
 
 -- | Kind of resource this is, in this case adexchangeseller#urlChannel.
 urlcKind :: Lens' URLChannel Text
@@ -1291,7 +1347,8 @@ instance ToJSON URLChannel where
 
 --
 -- /See:/ 'preferredDeal' smart constructor.
-data PreferredDeal = PreferredDeal'
+data PreferredDeal =
+  PreferredDeal'
     { _pAdvertiserName   :: !(Maybe Text)
     , _pCurrencyCode     :: !(Maybe Text)
     , _pStartTime        :: !(Maybe (Textual Word64))
@@ -1300,7 +1357,9 @@ data PreferredDeal = PreferredDeal'
     , _pEndTime          :: !(Maybe (Textual Word64))
     , _pId               :: !(Maybe (Textual Int64))
     , _pFixedCpm         :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PreferredDeal' with the minimum fields required to make a request.
 --
@@ -1324,7 +1383,7 @@ data PreferredDeal = PreferredDeal'
 preferredDeal
     :: PreferredDeal
 preferredDeal =
-    PreferredDeal'
+  PreferredDeal'
     { _pAdvertiserName = Nothing
     , _pCurrencyCode = Nothing
     , _pStartTime = Nothing
@@ -1334,6 +1393,7 @@ preferredDeal =
     , _pId = Nothing
     , _pFixedCpm = Nothing
     }
+
 
 -- | The name of the advertiser this deal is for.
 pAdvertiserName :: Lens' PreferredDeal (Maybe Text)

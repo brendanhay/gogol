@@ -68,7 +68,8 @@ type PartnersDevicesClaimResource =
 -- error.
 --
 -- /See:/ 'partnersDevicesClaim' smart constructor.
-data PartnersDevicesClaim = PartnersDevicesClaim'
+data PartnersDevicesClaim =
+  PartnersDevicesClaim'
     { _pdcXgafv          :: !(Maybe Xgafv)
     , _pdcUploadProtocol :: !(Maybe Text)
     , _pdcAccessToken    :: !(Maybe Text)
@@ -76,7 +77,9 @@ data PartnersDevicesClaim = PartnersDevicesClaim'
     , _pdcUploadType     :: !(Maybe Text)
     , _pdcPayload        :: !ClaimDeviceRequest
     , _pdcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PartnersDevicesClaim' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ partnersDevicesClaim
     -> ClaimDeviceRequest -- ^ 'pdcPayload'
     -> PartnersDevicesClaim
 partnersDevicesClaim pPdcPartnerId_ pPdcPayload_ =
-    PartnersDevicesClaim'
+  PartnersDevicesClaim'
     { _pdcXgafv = Nothing
     , _pdcUploadProtocol = Nothing
     , _pdcAccessToken = Nothing
@@ -109,6 +112,7 @@ partnersDevicesClaim pPdcPartnerId_ pPdcPayload_ =
     , _pdcPayload = pPdcPayload_
     , _pdcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdcXgafv :: Lens' PartnersDevicesClaim (Maybe Xgafv)

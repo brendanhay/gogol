@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.instances.list@ method which the
 -- 'ProjectsLocationsInstancesList' request conforms to.
 type ProjectsLocationsInstancesListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "instances" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -71,7 +71,8 @@ type ProjectsLocationsInstancesListResource =
 -- all locations.
 --
 -- /See:/ 'projectsLocationsInstancesList' smart constructor.
-data ProjectsLocationsInstancesList = ProjectsLocationsInstancesList'
+data ProjectsLocationsInstancesList =
+  ProjectsLocationsInstancesList'
     { _plilParent         :: !Text
     , _plilXgafv          :: !(Maybe Xgafv)
     , _plilUploadProtocol :: !(Maybe Text)
@@ -82,7 +83,9 @@ data ProjectsLocationsInstancesList = ProjectsLocationsInstancesList'
     , _plilPageToken      :: !(Maybe Text)
     , _plilPageSize       :: !(Maybe (Textual Int32))
     , _plilCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsInstancesList' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsLocationsInstancesList
     :: Text -- ^ 'plilParent'
     -> ProjectsLocationsInstancesList
 projectsLocationsInstancesList pPlilParent_ =
-    ProjectsLocationsInstancesList'
+  ProjectsLocationsInstancesList'
     { _plilParent = pPlilParent_
     , _plilXgafv = Nothing
     , _plilUploadProtocol = Nothing
@@ -123,6 +126,7 @@ projectsLocationsInstancesList pPlilParent_ =
     , _plilPageSize = Nothing
     , _plilCallback = Nothing
     }
+
 
 -- | The project and location for which to retrieve instance information, in
 -- the format projects\/{project_id}\/locations\/{location}. In Cloud

@@ -66,11 +66,14 @@ type RevisionsGetResource =
 -- | Gets a revision\'s metadata or content by ID.
 --
 -- /See:/ 'revisionsGet' smart constructor.
-data RevisionsGet = RevisionsGet'
+data RevisionsGet =
+  RevisionsGet'
     { _rggAcknowledgeAbuse :: !Bool
     , _rggFileId           :: !Text
     , _rggRevisionId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevisionsGet' with the minimum fields required to make a request.
 --
@@ -86,11 +89,12 @@ revisionsGet
     -> Text -- ^ 'rggRevisionId'
     -> RevisionsGet
 revisionsGet pRggFileId_ pRggRevisionId_ =
-    RevisionsGet'
+  RevisionsGet'
     { _rggAcknowledgeAbuse = False
     , _rggFileId = pRggFileId_
     , _rggRevisionId = pRggRevisionId_
     }
+
 
 -- | Whether the user is acknowledging the risk of downloading known malware
 -- or other abusive files. This is only applicable when alt=media.

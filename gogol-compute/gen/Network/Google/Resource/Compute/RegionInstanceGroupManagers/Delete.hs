@@ -61,12 +61,15 @@ type RegionInstanceGroupManagersDeleteResource =
 -- that group.
 --
 -- /See:/ 'regionInstanceGroupManagersDelete' smart constructor.
-data RegionInstanceGroupManagersDelete = RegionInstanceGroupManagersDelete'
+data RegionInstanceGroupManagersDelete =
+  RegionInstanceGroupManagersDelete'
     { _rigmdRequestId            :: !(Maybe Text)
     , _rigmdProject              :: !Text
     , _rigmdInstanceGroupManager :: !Text
     , _rigmdRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionInstanceGroupManagersDelete' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ regionInstanceGroupManagersDelete
     -> Text -- ^ 'rigmdRegion'
     -> RegionInstanceGroupManagersDelete
 regionInstanceGroupManagersDelete pRigmdProject_ pRigmdInstanceGroupManager_ pRigmdRegion_ =
-    RegionInstanceGroupManagersDelete'
+  RegionInstanceGroupManagersDelete'
     { _rigmdRequestId = Nothing
     , _rigmdProject = pRigmdProject_
     , _rigmdInstanceGroupManager = pRigmdInstanceGroupManager_
     , _rigmdRegion = pRigmdRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -124,7 +128,8 @@ rigmdRegion
   = lens _rigmdRegion (\ s a -> s{_rigmdRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersDelete where
+           RegionInstanceGroupManagersDelete
+         where
         type Rs RegionInstanceGroupManagersDelete = Operation
         type Scopes RegionInstanceGroupManagersDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -66,10 +66,13 @@ type UsersSettingsForwardingAddressesCreateResource =
 -- authority.
 --
 -- /See:/ 'usersSettingsForwardingAddressesCreate' smart constructor.
-data UsersSettingsForwardingAddressesCreate = UsersSettingsForwardingAddressesCreate'
+data UsersSettingsForwardingAddressesCreate =
+  UsersSettingsForwardingAddressesCreate'
     { _usfacPayload :: !ForwardingAddress
     , _usfacUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsForwardingAddressesCreate' with the minimum fields required to make a request.
 --
@@ -82,10 +85,9 @@ usersSettingsForwardingAddressesCreate
     :: ForwardingAddress -- ^ 'usfacPayload'
     -> UsersSettingsForwardingAddressesCreate
 usersSettingsForwardingAddressesCreate pUsfacPayload_ =
-    UsersSettingsForwardingAddressesCreate'
-    { _usfacPayload = pUsfacPayload_
-    , _usfacUserId = "me"
-    }
+  UsersSettingsForwardingAddressesCreate'
+    {_usfacPayload = pUsfacPayload_, _usfacUserId = "me"}
+
 
 -- | Multipart request metadata.
 usfacPayload :: Lens' UsersSettingsForwardingAddressesCreate ForwardingAddress
@@ -99,7 +101,8 @@ usfacUserId
   = lens _usfacUserId (\ s a -> s{_usfacUserId = a})
 
 instance GoogleRequest
-         UsersSettingsForwardingAddressesCreate where
+           UsersSettingsForwardingAddressesCreate
+         where
         type Rs UsersSettingsForwardingAddressesCreate =
              ForwardingAddress
         type Scopes UsersSettingsForwardingAddressesCreate =

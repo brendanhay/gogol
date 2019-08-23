@@ -54,10 +54,13 @@ type OrderreturnsGetResource =
 -- | Retrieves an order return from your Merchant Center account.
 --
 -- /See:/ 'orderreturnsGet' smart constructor.
-data OrderreturnsGet = OrderreturnsGet'
+data OrderreturnsGet =
+  OrderreturnsGet'
     { _oggMerchantId :: !(Textual Word64)
     , _oggReturnId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrderreturnsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ orderreturnsGet
     -> Text -- ^ 'oggReturnId'
     -> OrderreturnsGet
 orderreturnsGet pOggMerchantId_ pOggReturnId_ =
-    OrderreturnsGet'
-    { _oggMerchantId = _Coerce # pOggMerchantId_
-    , _oggReturnId = pOggReturnId_
-    }
+  OrderreturnsGet'
+    {_oggMerchantId = _Coerce # pOggMerchantId_, _oggReturnId = pOggReturnId_}
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.

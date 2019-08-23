@@ -56,11 +56,14 @@ type NotificationGetResource =
 -- | Returns notification details for a given notification id.
 --
 -- /See:/ 'notificationGet' smart constructor.
-data NotificationGet = NotificationGet'
+data NotificationGet =
+  NotificationGet'
     { _ngLocale         :: !(Maybe Text)
     , _ngNotificationId :: !Text
     , _ngSource         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NotificationGet' with the minimum fields required to make a request.
 --
@@ -75,11 +78,12 @@ notificationGet
     :: Text -- ^ 'ngNotificationId'
     -> NotificationGet
 notificationGet pNgNotificationId_ =
-    NotificationGet'
+  NotificationGet'
     { _ngLocale = Nothing
     , _ngNotificationId = pNgNotificationId_
     , _ngSource = Nothing
     }
+
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating notification title and body.

@@ -74,7 +74,8 @@ type ProjectsTemplatesLaunchResource =
 -- | Launch a template.
 --
 -- /See:/ 'projectsTemplatesLaunch' smart constructor.
-data ProjectsTemplatesLaunch = ProjectsTemplatesLaunch'
+data ProjectsTemplatesLaunch =
+  ProjectsTemplatesLaunch'
     { _ptlXgafv                          :: !(Maybe Xgafv)
     , _ptlValidateOnly                   :: !(Maybe Bool)
     , _ptlUploadProtocol                 :: !(Maybe Text)
@@ -87,7 +88,9 @@ data ProjectsTemplatesLaunch = ProjectsTemplatesLaunch'
     , _ptlProjectId                      :: !Text
     , _ptlCallback                       :: !(Maybe Text)
     , _ptlDynamicTemplateGcsPath         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTemplatesLaunch' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ projectsTemplatesLaunch
     -> Text -- ^ 'ptlProjectId'
     -> ProjectsTemplatesLaunch
 projectsTemplatesLaunch pPtlPayload_ pPtlProjectId_ =
-    ProjectsTemplatesLaunch'
+  ProjectsTemplatesLaunch'
     { _ptlXgafv = Nothing
     , _ptlValidateOnly = Nothing
     , _ptlUploadProtocol = Nothing
@@ -135,6 +138,7 @@ projectsTemplatesLaunch pPtlPayload_ pPtlProjectId_ =
     , _ptlCallback = Nothing
     , _ptlDynamicTemplateGcsPath = Nothing
     }
+
 
 -- | V1 error format.
 ptlXgafv :: Lens' ProjectsTemplatesLaunch (Maybe Xgafv)
@@ -153,7 +157,9 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | The location to which to direct the request.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- to which to direct the request.
 ptlLocation :: Lens' ProjectsTemplatesLaunch (Maybe Text)
 ptlLocation
   = lens _ptlLocation (\ s a -> s{_ptlLocation = a})

@@ -52,9 +52,12 @@ type MetadataColumnsListResource =
 -- | Lists all columns for a report type
 --
 -- /See:/ 'metadataColumnsList' smart constructor.
-newtype MetadataColumnsList = MetadataColumnsList'
+newtype MetadataColumnsList =
+  MetadataColumnsList'
     { _mclReportType :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetadataColumnsList' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ metadataColumnsList
     :: Text -- ^ 'mclReportType'
     -> MetadataColumnsList
 metadataColumnsList pMclReportType_ =
-    MetadataColumnsList'
-    { _mclReportType = pMclReportType_
-    }
+  MetadataColumnsList' {_mclReportType = pMclReportType_}
+
 
 -- | Report type. Allowed Values: \'ga\'. Where \'ga\' corresponds to the
 -- Core Reporting API

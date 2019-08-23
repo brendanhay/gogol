@@ -57,11 +57,14 @@ type InAppProductsInsertResource =
 -- | Creates a new in-app product for an app.
 --
 -- /See:/ 'inAppProductsInsert' smart constructor.
-data InAppProductsInsert = InAppProductsInsert'
+data InAppProductsInsert =
+  InAppProductsInsert'
     { _iapiAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapiPackageName              :: !Text
     , _iapiPayload                  :: !InAppProduct
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InAppProductsInsert' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ inAppProductsInsert
     -> InAppProduct -- ^ 'iapiPayload'
     -> InAppProductsInsert
 inAppProductsInsert pIapiPackageName_ pIapiPayload_ =
-    InAppProductsInsert'
+  InAppProductsInsert'
     { _iapiAutoConvertMissingPrices = Nothing
     , _iapiPackageName = pIapiPackageName_
     , _iapiPayload = pIapiPayload_
     }
+
 
 -- | If true the prices for all regions targeted by the parent app that
 -- don\'t have a price specified for this in-app product will be auto

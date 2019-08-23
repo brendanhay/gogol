@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a permission for a file or Team Drive.
+-- Creates a permission for a file or shared drive.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.create@.
 module Network.Google.Resource.Drive.Permissions.Create
@@ -36,6 +36,7 @@ module Network.Google.Resource.Drive.Permissions.Create
     , pcSendNotificationEmail
     , pcPayload
     , pcEmailMessage
+    , pcSupportsAllDrives
     , pcUseDomainAdminAccess
     , pcTransferOwnership
     , pcFileId
@@ -55,24 +56,30 @@ type PermissionsCreateResource =
              "permissions" :>
                QueryParam "sendNotificationEmail" Bool :>
                  QueryParam "emailMessage" Text :>
-                   QueryParam "useDomainAdminAccess" Bool :>
-                     QueryParam "transferOwnership" Bool :>
-                       QueryParam "supportsTeamDrives" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Permission :> Post '[JSON] Permission
+                   QueryParam "supportsAllDrives" Bool :>
+                     QueryParam "useDomainAdminAccess" Bool :>
+                       QueryParam "transferOwnership" Bool :>
+                         QueryParam "supportsTeamDrives" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Permission :>
+                               Post '[JSON] Permission
 
--- | Creates a permission for a file or Team Drive.
+-- | Creates a permission for a file or shared drive.
 --
 -- /See:/ 'permissionsCreate' smart constructor.
-data PermissionsCreate = PermissionsCreate'
+data PermissionsCreate =
+  PermissionsCreate'
     { _pcSendNotificationEmail :: !(Maybe Bool)
     , _pcPayload               :: !Permission
     , _pcEmailMessage          :: !(Maybe Text)
+    , _pcSupportsAllDrives     :: !Bool
     , _pcUseDomainAdminAccess  :: !Bool
     , _pcTransferOwnership     :: !Bool
     , _pcFileId                :: !Text
     , _pcSupportsTeamDrives    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionsCreate' with the minimum fields required to make a request.
 --
@@ -83,6 +90,8 @@ data PermissionsCreate = PermissionsCreate'
 -- * 'pcPayload'
 --
 -- * 'pcEmailMessage'
+--
+-- * 'pcSupportsAllDrives'
 --
 -- * 'pcUseDomainAdminAccess'
 --
@@ -96,15 +105,17 @@ permissionsCreate
     -> Text -- ^ 'pcFileId'
     -> PermissionsCreate
 permissionsCreate pPcPayload_ pPcFileId_ =
-    PermissionsCreate'
+  PermissionsCreate'
     { _pcSendNotificationEmail = Nothing
     , _pcPayload = pPcPayload_
     , _pcEmailMessage = Nothing
+    , _pcSupportsAllDrives = False
     , _pcUseDomainAdminAccess = False
     , _pcTransferOwnership = False
     , _pcFileId = pPcFileId_
     , _pcSupportsTeamDrives = False
     }
+
 
 -- | Whether to send a notification email when sharing to users or groups.
 -- This defaults to true for users and groups, and is not allowed for other
@@ -125,9 +136,17 @@ pcEmailMessage
   = lens _pcEmailMessage
       (\ s a -> s{_pcEmailMessage = a})
 
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+pcSupportsAllDrives :: Lens' PermissionsCreate Bool
+pcSupportsAllDrives
+  = lens _pcSupportsAllDrives
+      (\ s a -> s{_pcSupportsAllDrives = a})
+
 -- | Issue the request as a domain administrator; if set to true, then the
--- requester will be granted access if they are an administrator of the
--- domain to which the item belongs.
+-- requester will be granted access if the file ID parameter refers to a
+-- shared drive and the requester is an administrator of the domain to
+-- which the shared drive belongs.
 pcUseDomainAdminAccess :: Lens' PermissionsCreate Bool
 pcUseDomainAdminAccess
   = lens _pcUseDomainAdminAccess
@@ -141,11 +160,11 @@ pcTransferOwnership
   = lens _pcTransferOwnership
       (\ s a -> s{_pcTransferOwnership = a})
 
--- | The ID of the file or Team Drive.
+-- | The ID of the file or shared drive.
 pcFileId :: Lens' PermissionsCreate Text
 pcFileId = lens _pcFileId (\ s a -> s{_pcFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 pcSupportsTeamDrives :: Lens' PermissionsCreate Bool
 pcSupportsTeamDrives
   = lens _pcSupportsTeamDrives
@@ -159,6 +178,7 @@ instance GoogleRequest PermissionsCreate where
         requestClient PermissionsCreate'{..}
           = go _pcFileId _pcSendNotificationEmail
               _pcEmailMessage
+              (Just _pcSupportsAllDrives)
               (Just _pcUseDomainAdminAccess)
               (Just _pcTransferOwnership)
               (Just _pcSupportsTeamDrives)

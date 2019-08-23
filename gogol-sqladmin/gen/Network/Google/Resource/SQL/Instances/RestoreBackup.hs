@@ -58,11 +58,14 @@ type InstancesRestoreBackupResource =
 -- | Restores a backup of a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestoreBackup' smart constructor.
-data InstancesRestoreBackup = InstancesRestoreBackup'
+data InstancesRestoreBackup =
+  InstancesRestoreBackup'
     { _irbProject  :: !Text
     , _irbPayload  :: !InstancesRestoreBackupRequest
     , _irbInstance :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesRestoreBackup' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ instancesRestoreBackup
     -> Text -- ^ 'irbInstance'
     -> InstancesRestoreBackup
 instancesRestoreBackup pIrbProject_ pIrbPayload_ pIrbInstance_ =
-    InstancesRestoreBackup'
+  InstancesRestoreBackup'
     { _irbProject = pIrbProject_
     , _irbPayload = pIrbPayload_
     , _irbInstance = pIrbInstance_
     }
+
 
 -- | Project ID of the project that contains the instance.
 irbProject :: Lens' InstancesRestoreBackup Text

@@ -55,10 +55,13 @@ type DomainsInsertResource =
 -- | Inserts a domain of the customer.
 --
 -- /See:/ 'domainsInsert' smart constructor.
-data DomainsInsert = DomainsInsert'
+data DomainsInsert =
+  DomainsInsert'
     { _diPayload  :: !Domains
     , _diCustomer :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainsInsert' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ domainsInsert
     -> Text -- ^ 'diCustomer'
     -> DomainsInsert
 domainsInsert pDiPayload_ pDiCustomer_ =
-    DomainsInsert'
-    { _diPayload = pDiPayload_
-    , _diCustomer = pDiCustomer_
-    }
+  DomainsInsert' {_diPayload = pDiPayload_, _diCustomer = pDiCustomer_}
+
 
 -- | Multipart request metadata.
 diPayload :: Lens' DomainsInsert Domains

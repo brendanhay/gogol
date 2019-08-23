@@ -57,11 +57,14 @@ type AccountsContainersWorkspacesResolveConflictResource
 -- resolved entity passed in the request.
 --
 -- /See:/ 'accountsContainersWorkspacesResolveConflict' smart constructor.
-data AccountsContainersWorkspacesResolveConflict = AccountsContainersWorkspacesResolveConflict'
+data AccountsContainersWorkspacesResolveConflict =
+  AccountsContainersWorkspacesResolveConflict'
     { _acwrcPath        :: !Text
     , _acwrcFingerprint :: !(Maybe Text)
     , _acwrcPayload     :: !Entity
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersWorkspacesResolveConflict' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ accountsContainersWorkspacesResolveConflict
     -> Entity -- ^ 'acwrcPayload'
     -> AccountsContainersWorkspacesResolveConflict
 accountsContainersWorkspacesResolveConflict pAcwrcPath_ pAcwrcPayload_ =
-    AccountsContainersWorkspacesResolveConflict'
+  AccountsContainersWorkspacesResolveConflict'
     { _acwrcPath = pAcwrcPath_
     , _acwrcFingerprint = Nothing
     , _acwrcPayload = pAcwrcPayload_
     }
+
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
@@ -102,7 +106,8 @@ acwrcPayload
   = lens _acwrcPayload (\ s a -> s{_acwrcPayload = a})
 
 instance GoogleRequest
-         AccountsContainersWorkspacesResolveConflict where
+           AccountsContainersWorkspacesResolveConflict
+         where
         type Rs AccountsContainersWorkspacesResolveConflict =
              ()
         type Scopes

@@ -63,13 +63,16 @@ type AchievementsListResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsList' smart constructor.
-data AchievementsList = AchievementsList'
+data AchievementsList =
+  AchievementsList'
     { _alState      :: !(Maybe AchievementsListState)
     , _alLanguage   :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alPlayerId   :: !Text
     , _alMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.
 --
@@ -88,13 +91,14 @@ achievementsList
     :: Text -- ^ 'alPlayerId'
     -> AchievementsList
 achievementsList pAlPlayerId_ =
-    AchievementsList'
+  AchievementsList'
     { _alState = Nothing
     , _alLanguage = Nothing
     , _alPageToken = Nothing
     , _alPlayerId = pAlPlayerId_
     , _alMaxResults = Nothing
     }
+
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.
@@ -129,7 +133,8 @@ instance GoogleRequest AchievementsList where
         type Rs AchievementsList =
              PlayerAchievementListResponse
         type Scopes AchievementsList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient AchievementsList'{..}
           = go _alPlayerId _alState _alLanguage _alPageToken
               _alMaxResults

@@ -63,13 +63,16 @@ type AccountsAdUnitsCustomChannelsListResource =
 -- | List all custom channels which the specified ad unit belongs to.
 --
 -- /See:/ 'accountsAdUnitsCustomChannelsList' smart constructor.
-data AccountsAdUnitsCustomChannelsList = AccountsAdUnitsCustomChannelsList'
+data AccountsAdUnitsCustomChannelsList =
+  AccountsAdUnitsCustomChannelsList'
     { _aaucclAdUnitId   :: !Text
     , _aaucclAdClientId :: !Text
     , _aaucclAccountId  :: !Text
     , _aaucclPageToken  :: !(Maybe Text)
     , _aaucclMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdUnitsCustomChannelsList' with the minimum fields required to make a request.
 --
@@ -90,13 +93,14 @@ accountsAdUnitsCustomChannelsList
     -> Text -- ^ 'aaucclAccountId'
     -> AccountsAdUnitsCustomChannelsList
 accountsAdUnitsCustomChannelsList pAaucclAdUnitId_ pAaucclAdClientId_ pAaucclAccountId_ =
-    AccountsAdUnitsCustomChannelsList'
+  AccountsAdUnitsCustomChannelsList'
     { _aaucclAdUnitId = pAaucclAdUnitId_
     , _aaucclAdClientId = pAaucclAdClientId_
     , _aaucclAccountId = pAaucclAccountId_
     , _aaucclPageToken = Nothing
     , _aaucclMaxResults = Nothing
     }
+
 
 -- | Ad unit for which to list custom channels.
 aaucclAdUnitId :: Lens' AccountsAdUnitsCustomChannelsList Text
@@ -133,7 +137,8 @@ aaucclMaxResults
       . mapping _Coerce
 
 instance GoogleRequest
-         AccountsAdUnitsCustomChannelsList where
+           AccountsAdUnitsCustomChannelsList
+         where
         type Rs AccountsAdUnitsCustomChannelsList =
              CustomChannels
         type Scopes AccountsAdUnitsCustomChannelsList =

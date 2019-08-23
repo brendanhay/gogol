@@ -65,13 +65,16 @@ type InstancesSetMachineTypeResource =
 -- specified in the request.
 --
 -- /See:/ 'instancesSetMachineType' smart constructor.
-data InstancesSetMachineType = InstancesSetMachineType'
+data InstancesSetMachineType =
+  InstancesSetMachineType'
     { _ismtRequestId :: !(Maybe Text)
     , _ismtProject   :: !Text
     , _ismtZone      :: !Text
     , _ismtPayload   :: !InstancesSetMachineTypeRequest
     , _ismtInstance  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesSetMachineType' with the minimum fields required to make a request.
 --
@@ -93,13 +96,14 @@ instancesSetMachineType
     -> Text -- ^ 'ismtInstance'
     -> InstancesSetMachineType
 instancesSetMachineType pIsmtProject_ pIsmtZone_ pIsmtPayload_ pIsmtInstance_ =
-    InstancesSetMachineType'
+  InstancesSetMachineType'
     { _ismtRequestId = Nothing
     , _ismtProject = pIsmtProject_
     , _ismtZone = pIsmtZone_
     , _ismtPayload = pIsmtPayload_
     , _ismtInstance = pIsmtInstance_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

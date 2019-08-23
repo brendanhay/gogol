@@ -58,11 +58,14 @@ type NetworksSwitchToCustomModeResource =
 -- | Switches the network mode from auto subnet mode to custom subnet mode.
 --
 -- /See:/ 'networksSwitchToCustomMode' smart constructor.
-data NetworksSwitchToCustomMode = NetworksSwitchToCustomMode'
+data NetworksSwitchToCustomMode =
+  NetworksSwitchToCustomMode'
     { _nstcmRequestId :: !(Maybe Text)
     , _nstcmProject   :: !Text
     , _nstcmNetwork   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NetworksSwitchToCustomMode' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ networksSwitchToCustomMode
     -> Text -- ^ 'nstcmNetwork'
     -> NetworksSwitchToCustomMode
 networksSwitchToCustomMode pNstcmProject_ pNstcmNetwork_ =
-    NetworksSwitchToCustomMode'
+  NetworksSwitchToCustomMode'
     { _nstcmRequestId = Nothing
     , _nstcmProject = pNstcmProject_
     , _nstcmNetwork = pNstcmNetwork_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

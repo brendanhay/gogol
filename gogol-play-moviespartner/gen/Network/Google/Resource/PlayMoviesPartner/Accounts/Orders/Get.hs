@@ -69,7 +69,8 @@ type AccountsOrdersGetResource =
 -- and _Get methods rules_ for more information about this method.
 --
 -- /See:/ 'accountsOrdersGet' smart constructor.
-data AccountsOrdersGet = AccountsOrdersGet'
+data AccountsOrdersGet =
+  AccountsOrdersGet'
     { _aogXgafv          :: !(Maybe Xgafv)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -79,7 +80,9 @@ data AccountsOrdersGet = AccountsOrdersGet'
     , _aogBearerToken    :: !(Maybe Text)
     , _aogOrderId        :: !Text
     , _aogCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsOrdersGet' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ accountsOrdersGet
     -> Text -- ^ 'aogOrderId'
     -> AccountsOrdersGet
 accountsOrdersGet pAogAccountId_ pAogOrderId_ =
-    AccountsOrdersGet'
+  AccountsOrdersGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -118,6 +121,7 @@ accountsOrdersGet pAogAccountId_ pAogOrderId_ =
     , _aogOrderId = pAogOrderId_
     , _aogCallback = Nothing
     }
+
 
 -- | V1 error format.
 aogXgafv :: Lens' AccountsOrdersGet (Maybe Xgafv)

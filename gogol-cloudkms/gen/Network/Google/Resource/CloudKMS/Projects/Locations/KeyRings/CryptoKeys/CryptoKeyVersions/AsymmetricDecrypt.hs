@@ -67,7 +67,8 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecryptResour
 -- ASYMMETRIC_DECRYPT.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt' smart constructor.
-data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'
+data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt =
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'
     { _plkrckckvadXgafv          :: !(Maybe Xgafv)
     , _plkrckckvadUploadProtocol :: !(Maybe Text)
     , _plkrckckvadAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt = Pro
     , _plkrckckvadPayload        :: !AsymmetricDecryptRequest
     , _plkrckckvadName           :: !Text
     , _plkrckckvadCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
     -> Text -- ^ 'plkrckckvadName'
     -> ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
 projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt pPlkrckckvadPayload_ pPlkrckckvadName_ =
-    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'
     { _plkrckckvadXgafv = Nothing
     , _plkrckckvadUploadProtocol = Nothing
     , _plkrckckvadAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt pPlkrckckv
     , _plkrckckvadName = pPlkrckckvadName_
     , _plkrckckvadCallback = Nothing
     }
+
 
 -- | V1 error format.
 plkrckckvadXgafv :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt (Maybe Xgafv)
@@ -153,14 +157,16 @@ plkrckckvadCallback
       (\ s a -> s{_plkrckckvadCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
+           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
          where
         type Rs
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
              = AsymmetricDecryptResponse
         type Scopes
                ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt
-             = '["https://www.googleapis.com/auth/cloud-platform"]
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt'{..}
           = go _plkrckckvadName _plkrckckvadXgafv

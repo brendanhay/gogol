@@ -67,7 +67,8 @@ type BillingAccountsLogsListResource =
 -- Only logs that have entries are listed.
 --
 -- /See:/ 'billingAccountsLogsList' smart constructor.
-data BillingAccountsLogsList = BillingAccountsLogsList'
+data BillingAccountsLogsList =
+  BillingAccountsLogsList'
     { _ballParent         :: !Text
     , _ballXgafv          :: !(Maybe Xgafv)
     , _ballUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data BillingAccountsLogsList = BillingAccountsLogsList'
     , _ballPageToken      :: !(Maybe Text)
     , _ballPageSize       :: !(Maybe (Textual Int32))
     , _ballCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsLogsList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ billingAccountsLogsList
     :: Text -- ^ 'ballParent'
     -> BillingAccountsLogsList
 billingAccountsLogsList pBallParent_ =
-    BillingAccountsLogsList'
+  BillingAccountsLogsList'
     { _ballParent = pBallParent_
     , _ballXgafv = Nothing
     , _ballUploadProtocol = Nothing
@@ -111,6 +114,7 @@ billingAccountsLogsList pBallParent_ =
     , _ballPageSize = Nothing
     , _ballCallback = Nothing
     }
+
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

@@ -57,10 +57,13 @@ type GlobalOperationsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'globalOperationsGet' smart constructor.
-data GlobalOperationsGet = GlobalOperationsGet'
+data GlobalOperationsGet =
+  GlobalOperationsGet'
     { _gogProject   :: !Text
     , _gogOperation :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalOperationsGet' with the minimum fields required to make a request.
 --
@@ -74,10 +77,9 @@ globalOperationsGet
     -> Text -- ^ 'gogOperation'
     -> GlobalOperationsGet
 globalOperationsGet pGogProject_ pGogOperation_ =
-    GlobalOperationsGet'
-    { _gogProject = pGogProject_
-    , _gogOperation = pGogOperation_
-    }
+  GlobalOperationsGet'
+    {_gogProject = pGogProject_, _gogOperation = pGogOperation_}
+
 
 -- | Project ID for this request.
 gogProject :: Lens' GlobalOperationsGet Text

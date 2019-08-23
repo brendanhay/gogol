@@ -53,9 +53,12 @@ type ShippingSettingsGetsupportedholidaysResource =
 -- | Retrieves supported holidays for an account.
 --
 -- /See:/ 'shippingSettingsGetsupportedholidays' smart constructor.
-newtype ShippingSettingsGetsupportedholidays = ShippingSettingsGetsupportedholidays'
+newtype ShippingSettingsGetsupportedholidays =
+  ShippingSettingsGetsupportedholidays'
     { _ssgMerchantId :: Textual Word64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ShippingSettingsGetsupportedholidays' with the minimum fields required to make a request.
 --
@@ -66,9 +69,9 @@ shippingSettingsGetsupportedholidays
     :: Word64 -- ^ 'ssgMerchantId'
     -> ShippingSettingsGetsupportedholidays
 shippingSettingsGetsupportedholidays pSsgMerchantId_ =
-    ShippingSettingsGetsupportedholidays'
-    { _ssgMerchantId = _Coerce # pSsgMerchantId_
-    }
+  ShippingSettingsGetsupportedholidays'
+    {_ssgMerchantId = _Coerce # pSsgMerchantId_}
+
 
 -- | The ID of the account for which to retrieve the supported holidays.
 ssgMerchantId :: Lens' ShippingSettingsGetsupportedholidays Word64
@@ -78,7 +81,8 @@ ssgMerchantId
       . _Coerce
 
 instance GoogleRequest
-         ShippingSettingsGetsupportedholidays where
+           ShippingSettingsGetsupportedholidays
+         where
         type Rs ShippingSettingsGetsupportedholidays =
              ShippingSettingsGetSupportedHolidaysResponse
         type Scopes ShippingSettingsGetsupportedholidays =

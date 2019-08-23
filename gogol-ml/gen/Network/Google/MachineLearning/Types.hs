@@ -39,10 +39,12 @@ module Network.Google.MachineLearning.Types
     , gcmvvRuntimeVersion
     , gcmvvLastUseTime
     , gcmvvName
+    , gcmvvPackageURIs
     , gcmvvDeploymentURI
     , gcmvvManualScaling
     , gcmvvMachineType
     , gcmvvLabels
+    , gcmvvPredictionClass
     , gcmvvErrorMessage
     , gcmvvDescription
     , gcmvvCreateTime
@@ -55,6 +57,14 @@ module Network.Google.MachineLearning.Types
     , gcmvpoErrorCount
     , gcmvpoPredictionCount
     , gcmvpoOutputPath
+
+    -- * GoogleCloudMlV1__BuiltInAlgorithmOutput
+    , GoogleCloudMlV1__BuiltInAlgorithmOutput
+    , googleCloudMlV1__BuiltInAlgorithmOutput
+    , gcmvbiaoFramework
+    , gcmvbiaoPythonVersion
+    , gcmvbiaoRuntimeVersion
+    , gcmvbiaoModelPath
 
     -- * GoogleCloudMlV1__HyperparameterOutputHyperparameters
     , GoogleCloudMlV1__HyperparameterOutputHyperparameters
@@ -163,6 +173,7 @@ module Network.Google.MachineLearning.Types
     , gcmvhoHyperparameters
     , gcmvhoTrialId
     , gcmvhoFinalMetric
+    , gcmvhoBuiltInAlgorithmOutput
 
     -- * GoogleCloudMlV1__GetConfigResponse
     , GoogleCloudMlV1__GetConfigResponse
@@ -196,6 +207,7 @@ module Network.Google.MachineLearning.Types
     , gcmvmDefaultVersion
     , gcmvmName
     , gcmvmLabels
+    , gcmvmOnlinePredictionConsoleLogging
     , gcmvmDescription
     , gcmvmOnlinePredictionLogging
 
@@ -242,6 +254,12 @@ module Network.Google.MachineLearning.Types
     , grsCode
     , grsMessage
 
+    -- * GoogleCloudMlV1__ReplicaConfig
+    , GoogleCloudMlV1__ReplicaConfig
+    , googleCloudMlV1__ReplicaConfig
+    , gcmvrcImageURI
+    , gcmvrcAcceleratorConfig
+
     -- * GoogleCloudMlV1__Config
     , GoogleCloudMlV1__Config
     , googleCloudMlV1__Config
@@ -257,6 +275,7 @@ module Network.Google.MachineLearning.Types
     , gcmvhsMaxTrials
     , gcmvhsEnableTrialEarlyStopping
     , gcmvhsMaxParallelTrials
+    , gcmvhsMaxFailedTrials
     , gcmvhsHyperparameterMetricTag
 
     -- * GoogleCloudMlV1__AutoScaling
@@ -313,7 +332,6 @@ module Network.Google.MachineLearning.Types
     , gcmvpiBatchSize
     , gcmvpiMaxWorkerCount
     , gcmvpiOutputDataFormat
-    , gcmvpiAccelerator
     , gcmvpiOutputPath
     , gcmvpiRegion
     , gcmvpiInputPaths
@@ -323,6 +341,7 @@ module Network.Google.MachineLearning.Types
     , GoogleCloudMlV1__TrainingInput
     , googleCloudMlV1__TrainingInput
     , gcmvtiMasterType
+    , gcmvtiWorkerConfig
     , gcmvtiParameterServerCount
     , gcmvtiArgs
     , gcmvtiWorkerCount
@@ -330,12 +349,14 @@ module Network.Google.MachineLearning.Types
     , gcmvtiPythonVersion
     , gcmvtiRuntimeVersion
     , gcmvtiWorkerType
+    , gcmvtiMasterConfig
     , gcmvtiPythonModule
     , gcmvtiParameterServerType
     , gcmvtiHyperparameters
     , gcmvtiPackageURIs
     , gcmvtiScaleTier
     , gcmvtiRegion
+    , gcmvtiParameterServerConfig
 
     -- * GoogleRpc__StatusDetailsItem
     , GoogleRpc__StatusDetailsItem
@@ -395,8 +416,10 @@ module Network.Google.MachineLearning.Types
     , GoogleCloudMlV1__TrainingOutput
     , googleCloudMlV1__TrainingOutput
     , gcmvtoIsHyperparameterTuningJob
+    , gcmvtoIsBuiltInAlgorithmJob
     , gcmvtoCompletedTrialCount
     , gcmvtoConsumedMLUnits
+    , gcmvtoBuiltInAlgorithmOutput
     , gcmvtoTrials
 
     -- * GoogleAPI__HTTPBody
@@ -435,4 +458,4 @@ machineLearningService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

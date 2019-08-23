@@ -23,8 +23,8 @@
 -- Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted. Other Google Compute Engine resources that might be in
--- use by the cluster (e.g. load balancer resources) will not be deleted if
--- they weren\'t present at the initial create time.
+-- use by the cluster, such as load balancer resources, are not deleted if
+-- they weren\'t present when the cluster was initially created.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.Delete
@@ -69,11 +69,12 @@ type ProjectsLocationsClustersDeleteResource =
 -- | Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted. Other Google Compute Engine resources that might be in
--- use by the cluster (e.g. load balancer resources) will not be deleted if
--- they weren\'t present at the initial create time.
+-- use by the cluster, such as load balancer resources, are not deleted if
+-- they weren\'t present when the cluster was initially created.
 --
 -- /See:/ 'projectsLocationsClustersDelete' smart constructor.
-data ProjectsLocationsClustersDelete = ProjectsLocationsClustersDelete'
+data ProjectsLocationsClustersDelete =
+  ProjectsLocationsClustersDelete'
     { _plcdXgafv          :: !(Maybe Xgafv)
     , _plcdUploadProtocol :: !(Maybe Text)
     , _plcdAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsLocationsClustersDelete = ProjectsLocationsClustersDelete'
     , _plcdClusterId      :: !(Maybe Text)
     , _plcdProjectId      :: !(Maybe Text)
     , _plcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersDelete' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsLocationsClustersDelete
     :: Text -- ^ 'plcdName'
     -> ProjectsLocationsClustersDelete
 projectsLocationsClustersDelete pPlcdName_ =
-    ProjectsLocationsClustersDelete'
+  ProjectsLocationsClustersDelete'
     { _plcdXgafv = Nothing
     , _plcdUploadProtocol = Nothing
     , _plcdAccessToken = Nothing
@@ -121,6 +124,7 @@ projectsLocationsClustersDelete pPlcdName_ =
     , _plcdProjectId = Nothing
     , _plcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcdXgafv :: Lens' ProjectsLocationsClustersDelete (Maybe Xgafv)
@@ -177,7 +181,8 @@ plcdCallback
   = lens _plcdCallback (\ s a -> s{_plcdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersDelete where
+           ProjectsLocationsClustersDelete
+         where
         type Rs ProjectsLocationsClustersDelete = Operation
         type Scopes ProjectsLocationsClustersDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

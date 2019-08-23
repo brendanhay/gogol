@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsGet' request conforms to.
 type EventTagsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,10 +54,13 @@ type EventTagsGetResource =
 -- | Gets one event tag by ID.
 --
 -- /See:/ 'eventTagsGet' smart constructor.
-data EventTagsGet = EventTagsGet'
+data EventTagsGet =
+  EventTagsGet'
     { _etgProFileId :: !(Textual Int64)
     , _etgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventTagsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ eventTagsGet
     -> Int64 -- ^ 'etgId'
     -> EventTagsGet
 eventTagsGet pEtgProFileId_ pEtgId_ =
-    EventTagsGet'
-    { _etgProFileId = _Coerce # pEtgProFileId_
-    , _etgId = _Coerce # pEtgId_
-    }
+  EventTagsGet'
+    {_etgProFileId = _Coerce # pEtgProFileId_, _etgId = _Coerce # pEtgId_}
+
 
 -- | User profile ID associated with this request.
 etgProFileId :: Lens' EventTagsGet Int64

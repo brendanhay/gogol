@@ -53,10 +53,13 @@ type PlayListItemsDeleteResource =
 -- | Deletes a playlist item.
 --
 -- /See:/ 'playListItemsDelete' smart constructor.
-data PlayListItemsDelete = PlayListItemsDelete'
+data PlayListItemsDelete =
+  PlayListItemsDelete'
     { _plidOnBehalfOfContentOwner :: !(Maybe Text)
     , _plidId                     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayListItemsDelete' with the minimum fields required to make a request.
 --
@@ -69,10 +72,9 @@ playListItemsDelete
     :: Text -- ^ 'plidId'
     -> PlayListItemsDelete
 playListItemsDelete pPlidId_ =
-    PlayListItemsDelete'
-    { _plidOnBehalfOfContentOwner = Nothing
-    , _plidId = pPlidId_
-    }
+  PlayListItemsDelete'
+    {_plidOnBehalfOfContentOwner = Nothing, _plidId = pPlidId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

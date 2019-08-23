@@ -56,12 +56,15 @@ type EditsTestersUpdateResource =
 
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.
-data EditsTestersUpdate = EditsTestersUpdate'
+data EditsTestersUpdate =
+  EditsTestersUpdate'
     { _etutTrack       :: !Text
     , _etutPackageName :: !Text
     , _etutPayload     :: !Testers
     , _etutEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsTestersUpdate' with the minimum fields required to make a request.
 --
@@ -81,15 +84,15 @@ editsTestersUpdate
     -> Text -- ^ 'etutEditId'
     -> EditsTestersUpdate
 editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
-    EditsTestersUpdate'
+  EditsTestersUpdate'
     { _etutTrack = pEtutTrack_
     , _etutPackageName = pEtutPackageName_
     , _etutPayload = pEtutPayload_
     , _etutEditId = pEtutEditId_
     }
 
--- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
--- \"production\", \"rollout\" or \"internal\".
+
+-- | The track to read or modify.
 etutTrack :: Lens' EditsTestersUpdate Text
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})

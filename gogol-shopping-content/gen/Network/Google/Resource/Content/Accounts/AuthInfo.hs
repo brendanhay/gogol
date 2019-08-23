@@ -51,14 +51,16 @@ type AccountsAuthInfoResource =
 --
 -- /See:/ 'accountsAuthInfo' smart constructor.
 data AccountsAuthInfo =
-    AccountsAuthInfo'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  AccountsAuthInfo'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAuthInfo' with the minimum fields required to make a request.
 --
 accountsAuthInfo
     :: AccountsAuthInfo
 accountsAuthInfo = AccountsAuthInfo'
+
 
 instance GoogleRequest AccountsAuthInfo where
         type Rs AccountsAuthInfo = AccountsAuthInfoResponse

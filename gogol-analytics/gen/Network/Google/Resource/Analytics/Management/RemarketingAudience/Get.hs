@@ -59,11 +59,14 @@ type ManagementRemarketingAudienceGetResource =
 -- | Gets a remarketing audience to which the user has access.
 --
 -- /See:/ 'managementRemarketingAudienceGet' smart constructor.
-data ManagementRemarketingAudienceGet = ManagementRemarketingAudienceGet'
+data ManagementRemarketingAudienceGet =
+  ManagementRemarketingAudienceGet'
     { _mragWebPropertyId         :: !Text
     , _mragAccountId             :: !Text
     , _mragRemarketingAudienceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementRemarketingAudienceGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ managementRemarketingAudienceGet
     -> Text -- ^ 'mragRemarketingAudienceId'
     -> ManagementRemarketingAudienceGet
 managementRemarketingAudienceGet pMragWebPropertyId_ pMragAccountId_ pMragRemarketingAudienceId_ =
-    ManagementRemarketingAudienceGet'
+  ManagementRemarketingAudienceGet'
     { _mragWebPropertyId = pMragWebPropertyId_
     , _mragAccountId = pMragAccountId_
     , _mragRemarketingAudienceId = pMragRemarketingAudienceId_
     }
+
 
 -- | The web property ID of the remarketing audience to retrieve.
 mragWebPropertyId :: Lens' ManagementRemarketingAudienceGet Text
@@ -105,7 +109,8 @@ mragRemarketingAudienceId
       (\ s a -> s{_mragRemarketingAudienceId = a})
 
 instance GoogleRequest
-         ManagementRemarketingAudienceGet where
+           ManagementRemarketingAudienceGet
+         where
         type Rs ManagementRemarketingAudienceGet =
              RemarketingAudience
         type Scopes ManagementRemarketingAudienceGet =

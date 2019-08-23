@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CampaignsGet' request conforms to.
 type CampaignsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -54,10 +54,13 @@ type CampaignsGetResource =
 -- | Gets one campaign by ID.
 --
 -- /See:/ 'campaignsGet' smart constructor.
-data CampaignsGet = CampaignsGet'
+data CampaignsGet =
+  CampaignsGet'
     { _cggProFileId :: !(Textual Int64)
     , _cggId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CampaignsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ campaignsGet
     -> Int64 -- ^ 'cggId'
     -> CampaignsGet
 campaignsGet pCggProFileId_ pCggId_ =
-    CampaignsGet'
-    { _cggProFileId = _Coerce # pCggProFileId_
-    , _cggId = _Coerce # pCggId_
-    }
+  CampaignsGet'
+    {_cggProFileId = _Coerce # pCggProFileId_, _cggId = _Coerce # pCggId_}
+
 
 -- | User profile ID associated with this request.
 cggProFileId :: Lens' CampaignsGet Int64

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an activity.
+-- Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.get@.
 module Network.Google.Resource.Plus.Activities.Get
@@ -48,12 +49,16 @@ type ActivitiesGetResource =
            Capture "activityId" Text :>
              QueryParam "alt" AltJSON :> Get '[JSON] Activity
 
--- | Get an activity.
+-- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more
+-- details.
 --
 -- /See:/ 'activitiesGet' smart constructor.
-newtype ActivitiesGet = ActivitiesGet'
+newtype ActivitiesGet =
+  ActivitiesGet'
     { _agActivityId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivitiesGet' with the minimum fields required to make a request.
 --
@@ -63,10 +68,8 @@ newtype ActivitiesGet = ActivitiesGet'
 activitiesGet
     :: Text -- ^ 'agActivityId'
     -> ActivitiesGet
-activitiesGet pAgActivityId_ =
-    ActivitiesGet'
-    { _agActivityId = pAgActivityId_
-    }
+activitiesGet pAgActivityId_ = ActivitiesGet' {_agActivityId = pAgActivityId_}
+
 
 -- | The ID of the activity to get.
 agActivityId :: Lens' ActivitiesGet Text

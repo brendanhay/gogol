@@ -188,12 +188,12 @@ consumerSurveysService
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userInfoEmailScope = Proxy;
+userInfoEmailScope = Proxy
 
 -- | View the results for your surveys
 consumerSurveysReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/consumersurveys.readonly"]
-consumerSurveysReadOnlyScope = Proxy;
+consumerSurveysReadOnlyScope = Proxy
 
 -- | View and edit your surveys and results
 consumerSurveysScope :: Proxy '["https://www.googleapis.com/auth/consumersurveys"]
-consumerSurveysScope = Proxy;
+consumerSurveysScope = Proxy

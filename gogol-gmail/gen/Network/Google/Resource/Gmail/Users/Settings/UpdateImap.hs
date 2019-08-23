@@ -56,10 +56,13 @@ type UsersSettingsUpdateImapResource =
 -- | Updates IMAP settings.
 --
 -- /See:/ 'usersSettingsUpdateImap' smart constructor.
-data UsersSettingsUpdateImap = UsersSettingsUpdateImap'
+data UsersSettingsUpdateImap =
+  UsersSettingsUpdateImap'
     { _usuiPayload :: !ImapSettings
     , _usuiUserId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsUpdateImap' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ usersSettingsUpdateImap
     :: ImapSettings -- ^ 'usuiPayload'
     -> UsersSettingsUpdateImap
 usersSettingsUpdateImap pUsuiPayload_ =
-    UsersSettingsUpdateImap'
-    { _usuiPayload = pUsuiPayload_
-    , _usuiUserId = "me"
-    }
+  UsersSettingsUpdateImap' {_usuiPayload = pUsuiPayload_, _usuiUserId = "me"}
+
 
 -- | Multipart request metadata.
 usuiPayload :: Lens' UsersSettingsUpdateImap ImapSettings

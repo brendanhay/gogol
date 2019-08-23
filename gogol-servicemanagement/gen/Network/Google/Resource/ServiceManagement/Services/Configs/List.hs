@@ -68,7 +68,8 @@ type ServicesConfigsListResource =
 -- from the newest to the oldest.
 --
 -- /See:/ 'servicesConfigsList' smart constructor.
-data ServicesConfigsList = ServicesConfigsList'
+data ServicesConfigsList =
+  ServicesConfigsList'
     { _sclXgafv          :: !(Maybe Xgafv)
     , _sclUploadProtocol :: !(Maybe Text)
     , _sclAccessToken    :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ServicesConfigsList = ServicesConfigsList'
     , _sclPageToken      :: !(Maybe Text)
     , _sclPageSize       :: !(Maybe (Textual Int32))
     , _sclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesConfigsList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ servicesConfigsList
     :: Text -- ^ 'sclServiceName'
     -> ServicesConfigsList
 servicesConfigsList pSclServiceName_ =
-    ServicesConfigsList'
+  ServicesConfigsList'
     { _sclXgafv = Nothing
     , _sclUploadProtocol = Nothing
     , _sclAccessToken = Nothing
@@ -112,6 +115,7 @@ servicesConfigsList pSclServiceName_ =
     , _sclPageSize = Nothing
     , _sclCallback = Nothing
     }
+
 
 -- | V1 error format.
 sclXgafv :: Lens' ServicesConfigsList (Maybe Xgafv)
@@ -148,7 +152,8 @@ sclPageToken :: Lens' ServicesConfigsList (Maybe Text)
 sclPageToken
   = lens _sclPageToken (\ s a -> s{_sclPageToken = a})
 
--- | The max number of items to include in the response list.
+-- | The max number of items to include in the response list. Page size is 50
+-- if not specified. Maximum value is 100.
 sclPageSize :: Lens' ServicesConfigsList (Maybe Int32)
 sclPageSize
   = lens _sclPageSize (\ s a -> s{_sclPageSize = a}) .

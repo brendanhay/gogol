@@ -64,14 +64,17 @@ type BillingAccountsGetResource =
 -- account](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsGet' smart constructor.
-data BillingAccountsGet = BillingAccountsGet'
+data BillingAccountsGet =
+  BillingAccountsGet'
     { _bagXgafv          :: !(Maybe Xgafv)
     , _bagUploadProtocol :: !(Maybe Text)
     , _bagAccessToken    :: !(Maybe Text)
     , _bagUploadType     :: !(Maybe Text)
     , _bagName           :: !Text
     , _bagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingAccountsGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ billingAccountsGet
     :: Text -- ^ 'bagName'
     -> BillingAccountsGet
 billingAccountsGet pBagName_ =
-    BillingAccountsGet'
+  BillingAccountsGet'
     { _bagXgafv = Nothing
     , _bagUploadProtocol = Nothing
     , _bagAccessToken = Nothing
@@ -100,6 +103,7 @@ billingAccountsGet pBagName_ =
     , _bagName = pBagName_
     , _bagCallback = Nothing
     }
+
 
 -- | V1 error format.
 bagXgafv :: Lens' BillingAccountsGet (Maybe Xgafv)

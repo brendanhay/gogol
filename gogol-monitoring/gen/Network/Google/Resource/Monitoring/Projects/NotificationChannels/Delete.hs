@@ -61,7 +61,8 @@ type ProjectsNotificationChannelsDeleteResource =
 -- | Deletes a notification channel.
 --
 -- /See:/ 'projectsNotificationChannelsDelete' smart constructor.
-data ProjectsNotificationChannelsDelete = ProjectsNotificationChannelsDelete'
+data ProjectsNotificationChannelsDelete =
+  ProjectsNotificationChannelsDelete'
     { _pncdXgafv          :: !(Maybe Xgafv)
     , _pncdUploadProtocol :: !(Maybe Text)
     , _pncdForce          :: !(Maybe Bool)
@@ -69,7 +70,9 @@ data ProjectsNotificationChannelsDelete = ProjectsNotificationChannelsDelete'
     , _pncdUploadType     :: !(Maybe Text)
     , _pncdName           :: !Text
     , _pncdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotificationChannelsDelete' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsNotificationChannelsDelete
     :: Text -- ^ 'pncdName'
     -> ProjectsNotificationChannelsDelete
 projectsNotificationChannelsDelete pPncdName_ =
-    ProjectsNotificationChannelsDelete'
+  ProjectsNotificationChannelsDelete'
     { _pncdXgafv = Nothing
     , _pncdUploadProtocol = Nothing
     , _pncdForce = Nothing
@@ -101,6 +104,7 @@ projectsNotificationChannelsDelete pPncdName_ =
     , _pncdName = pPncdName_
     , _pncdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pncdXgafv :: Lens' ProjectsNotificationChannelsDelete (Maybe Xgafv)
@@ -144,7 +148,8 @@ pncdCallback
   = lens _pncdCallback (\ s a -> s{_pncdCallback = a})
 
 instance GoogleRequest
-         ProjectsNotificationChannelsDelete where
+           ProjectsNotificationChannelsDelete
+         where
         type Rs ProjectsNotificationChannelsDelete = Empty
         type Scopes ProjectsNotificationChannelsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -20,8 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently deletes a revision. This method is only applicable to files
--- with binary content in Drive.
+-- Permanently deletes a file version. You can only delete revisions for
+-- files with binary content in Google Drive, like images or videos.
+-- Revisions for other files, like Google Docs or Sheets, and the last
+-- remaining file version can\'t be deleted.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.delete@.
 module Network.Google.Resource.Drive.Revisions.Delete
@@ -52,14 +54,19 @@ type RevisionsDeleteResource =
                Capture "revisionId" Text :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Permanently deletes a revision. This method is only applicable to files
--- with binary content in Drive.
+-- | Permanently deletes a file version. You can only delete revisions for
+-- files with binary content in Google Drive, like images or videos.
+-- Revisions for other files, like Google Docs or Sheets, and the last
+-- remaining file version can\'t be deleted.
 --
 -- /See:/ 'revisionsDelete' smart constructor.
-data RevisionsDelete = RevisionsDelete'
+data RevisionsDelete =
+  RevisionsDelete'
     { _rFileId     :: !Text
     , _rRevisionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RevisionsDelete' with the minimum fields required to make a request.
 --
@@ -73,10 +80,8 @@ revisionsDelete
     -> Text -- ^ 'rRevisionId'
     -> RevisionsDelete
 revisionsDelete pRFileId_ pRRevisionId_ =
-    RevisionsDelete'
-    { _rFileId = pRFileId_
-    , _rRevisionId = pRRevisionId_
-    }
+  RevisionsDelete' {_rFileId = pRFileId_, _rRevisionId = pRRevisionId_}
+
 
 -- | The ID of the file.
 rFileId :: Lens' RevisionsDelete Text

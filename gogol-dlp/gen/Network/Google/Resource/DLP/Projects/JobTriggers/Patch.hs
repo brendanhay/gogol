@@ -67,7 +67,8 @@ type ProjectsJobTriggersPatchResource =
 -- more.
 --
 -- /See:/ 'projectsJobTriggersPatch' smart constructor.
-data ProjectsJobTriggersPatch = ProjectsJobTriggersPatch'
+data ProjectsJobTriggersPatch =
+  ProjectsJobTriggersPatch'
     { _pjtpXgafv          :: !(Maybe Xgafv)
     , _pjtpUploadProtocol :: !(Maybe Text)
     , _pjtpAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ProjectsJobTriggersPatch = ProjectsJobTriggersPatch'
     , _pjtpPayload        :: !GooglePrivacyDlpV2UpdateJobTriggerRequest
     , _pjtpName           :: !Text
     , _pjtpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobTriggersPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsJobTriggersPatch
     -> Text -- ^ 'pjtpName'
     -> ProjectsJobTriggersPatch
 projectsJobTriggersPatch pPjtpPayload_ pPjtpName_ =
-    ProjectsJobTriggersPatch'
+  ProjectsJobTriggersPatch'
     { _pjtpXgafv = Nothing
     , _pjtpUploadProtocol = Nothing
     , _pjtpAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsJobTriggersPatch pPjtpPayload_ pPjtpName_ =
     , _pjtpName = pPjtpName_
     , _pjtpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pjtpXgafv :: Lens' ProjectsJobTriggersPatch (Maybe Xgafv)

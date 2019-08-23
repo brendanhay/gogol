@@ -60,13 +60,16 @@ type MyLibraryAnnotationsInsertResource =
 -- | Inserts a new annotation.
 --
 -- /See:/ 'myLibraryAnnotationsInsert' smart constructor.
-data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert'
+data MyLibraryAnnotationsInsert =
+  MyLibraryAnnotationsInsert'
     { _mlaiCountry                   :: !(Maybe Text)
     , _mlaiPayload                   :: !Annotation
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
     , _mlaiAnnotationId              :: !(Maybe Text)
     , _mlaiSource                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MyLibraryAnnotationsInsert' with the minimum fields required to make a request.
 --
@@ -85,13 +88,14 @@ myLibraryAnnotationsInsert
     :: Annotation -- ^ 'mlaiPayload'
     -> MyLibraryAnnotationsInsert
 myLibraryAnnotationsInsert pMlaiPayload_ =
-    MyLibraryAnnotationsInsert'
+  MyLibraryAnnotationsInsert'
     { _mlaiCountry = Nothing
     , _mlaiPayload = pMlaiPayload_
     , _mlaiShowOnlySummaryInResponse = Nothing
     , _mlaiAnnotationId = Nothing
     , _mlaiSource = Nothing
     }
+
 
 -- | ISO-3166-1 code to override the IP-based location.
 mlaiCountry :: Lens' MyLibraryAnnotationsInsert (Maybe Text)

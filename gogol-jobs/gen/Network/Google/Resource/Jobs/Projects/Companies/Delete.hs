@@ -61,14 +61,17 @@ type ProjectsCompaniesDeleteResource =
 -- associated with it.
 --
 -- /See:/ 'projectsCompaniesDelete' smart constructor.
-data ProjectsCompaniesDelete = ProjectsCompaniesDelete'
+data ProjectsCompaniesDelete =
+  ProjectsCompaniesDelete'
     { _pcdXgafv          :: !(Maybe Xgafv)
     , _pcdUploadProtocol :: !(Maybe Text)
     , _pcdAccessToken    :: !(Maybe Text)
     , _pcdUploadType     :: !(Maybe Text)
     , _pcdName           :: !Text
     , _pcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsCompaniesDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsCompaniesDelete
     :: Text -- ^ 'pcdName'
     -> ProjectsCompaniesDelete
 projectsCompaniesDelete pPcdName_ =
-    ProjectsCompaniesDelete'
+  ProjectsCompaniesDelete'
     { _pcdXgafv = Nothing
     , _pcdUploadProtocol = Nothing
     , _pcdAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsCompaniesDelete pPcdName_ =
     , _pcdName = pPcdName_
     , _pcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcdXgafv :: Lens' ProjectsCompaniesDelete (Maybe Xgafv)

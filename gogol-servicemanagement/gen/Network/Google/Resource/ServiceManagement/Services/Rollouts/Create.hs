@@ -81,7 +81,8 @@ type ServicesRolloutsCreateResource =
 -- Operation
 --
 -- /See:/ 'servicesRolloutsCreate' smart constructor.
-data ServicesRolloutsCreate = ServicesRolloutsCreate'
+data ServicesRolloutsCreate =
+  ServicesRolloutsCreate'
     { _srcXgafv          :: !(Maybe Xgafv)
     , _srcUploadProtocol :: !(Maybe Text)
     , _srcAccessToken    :: !(Maybe Text)
@@ -89,7 +90,9 @@ data ServicesRolloutsCreate = ServicesRolloutsCreate'
     , _srcPayload        :: !Rollout
     , _srcServiceName    :: !Text
     , _srcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesRolloutsCreate' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ servicesRolloutsCreate
     -> Text -- ^ 'srcServiceName'
     -> ServicesRolloutsCreate
 servicesRolloutsCreate pSrcPayload_ pSrcServiceName_ =
-    ServicesRolloutsCreate'
+  ServicesRolloutsCreate'
     { _srcXgafv = Nothing
     , _srcUploadProtocol = Nothing
     , _srcAccessToken = Nothing
@@ -122,6 +125,7 @@ servicesRolloutsCreate pSrcPayload_ pSrcServiceName_ =
     , _srcServiceName = pSrcServiceName_
     , _srcCallback = Nothing
     }
+
 
 -- | V1 error format.
 srcXgafv :: Lens' ServicesRolloutsCreate (Maybe Xgafv)

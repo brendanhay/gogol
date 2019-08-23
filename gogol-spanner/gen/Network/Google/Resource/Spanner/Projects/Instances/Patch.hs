@@ -104,7 +104,8 @@ type ProjectsInstancesPatchResource =
 -- permission on resource name.
 --
 -- /See:/ 'projectsInstancesPatch' smart constructor.
-data ProjectsInstancesPatch = ProjectsInstancesPatch'
+data ProjectsInstancesPatch =
+  ProjectsInstancesPatch'
     { _pipXgafv          :: !(Maybe Xgafv)
     , _pipUploadProtocol :: !(Maybe Text)
     , _pipAccessToken    :: !(Maybe Text)
@@ -112,7 +113,9 @@ data ProjectsInstancesPatch = ProjectsInstancesPatch'
     , _pipPayload        :: !UpdateInstanceRequest
     , _pipName           :: !Text
     , _pipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesPatch' with the minimum fields required to make a request.
 --
@@ -136,7 +139,7 @@ projectsInstancesPatch
     -> Text -- ^ 'pipName'
     -> ProjectsInstancesPatch
 projectsInstancesPatch pPipPayload_ pPipName_ =
-    ProjectsInstancesPatch'
+  ProjectsInstancesPatch'
     { _pipXgafv = Nothing
     , _pipUploadProtocol = Nothing
     , _pipAccessToken = Nothing
@@ -145,6 +148,7 @@ projectsInstancesPatch pPipPayload_ pPipName_ =
     , _pipName = pPipName_
     , _pipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pipXgafv :: Lens' ProjectsInstancesPatch (Maybe Xgafv)
@@ -176,7 +180,7 @@ pipPayload
 -- | Required. A unique identifier for the instance, which cannot be changed
 -- after the instance is created. Values are of the form
 -- \`projects\/\/instances\/a-z*[a-z0-9]\`. The final segment of the name
--- must be between 6 and 30 characters in length.
+-- must be between 2 and 64 characters in length.
 pipName :: Lens' ProjectsInstancesPatch Text
 pipName = lens _pipName (\ s a -> s{_pipName = a})
 

@@ -60,11 +60,14 @@ type BackendBucketsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'backendBucketsInsert' smart constructor.
-data BackendBucketsInsert = BackendBucketsInsert'
+data BackendBucketsInsert =
+  BackendBucketsInsert'
     { _bbiRequestId :: !(Maybe Text)
     , _bbiProject   :: !Text
     , _bbiPayload   :: !BackendBucket
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendBucketsInsert' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ backendBucketsInsert
     -> BackendBucket -- ^ 'bbiPayload'
     -> BackendBucketsInsert
 backendBucketsInsert pBbiProject_ pBbiPayload_ =
-    BackendBucketsInsert'
+  BackendBucketsInsert'
     { _bbiRequestId = Nothing
     , _bbiProject = pBbiProject_
     , _bbiPayload = pBbiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

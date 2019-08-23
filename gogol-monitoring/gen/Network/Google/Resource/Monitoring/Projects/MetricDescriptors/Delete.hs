@@ -61,14 +61,17 @@ type ProjectsMetricDescriptorsDeleteResource =
 -- deleted.
 --
 -- /See:/ 'projectsMetricDescriptorsDelete' smart constructor.
-data ProjectsMetricDescriptorsDelete = ProjectsMetricDescriptorsDelete'
+data ProjectsMetricDescriptorsDelete =
+  ProjectsMetricDescriptorsDelete'
     { _pmddXgafv          :: !(Maybe Xgafv)
     , _pmddUploadProtocol :: !(Maybe Text)
     , _pmddAccessToken    :: !(Maybe Text)
     , _pmddUploadType     :: !(Maybe Text)
     , _pmddName           :: !Text
     , _pmddCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsMetricDescriptorsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsMetricDescriptorsDelete
     :: Text -- ^ 'pmddName'
     -> ProjectsMetricDescriptorsDelete
 projectsMetricDescriptorsDelete pPmddName_ =
-    ProjectsMetricDescriptorsDelete'
+  ProjectsMetricDescriptorsDelete'
     { _pmddXgafv = Nothing
     , _pmddUploadProtocol = Nothing
     , _pmddAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsMetricDescriptorsDelete pPmddName_ =
     , _pmddName = pPmddName_
     , _pmddCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmddXgafv :: Lens' ProjectsMetricDescriptorsDelete (Maybe Xgafv)
@@ -133,7 +137,8 @@ pmddCallback
   = lens _pmddCallback (\ s a -> s{_pmddCallback = a})
 
 instance GoogleRequest
-         ProjectsMetricDescriptorsDelete where
+           ProjectsMetricDescriptorsDelete
+         where
         type Rs ProjectsMetricDescriptorsDelete = Empty
         type Scopes ProjectsMetricDescriptorsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",

@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Find the tenancy unit for a service and consumer. This method should not
--- be used in producers\' runtime path, for example finding the tenant
--- project number when creating VMs. Producers should persist the tenant
--- project information after the project is created.
+-- Find the tenancy unit for a managed service and service consumer. This
+-- method shouldn\'t be used in a service producer\'s runtime path, for
+-- example to find the tenant project number when creating VMs. Service
+-- producers must persist the tenant project\'s information after the
+-- project is created.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.list@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.List
@@ -67,13 +68,15 @@ type ServicesTenancyUnitsListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListTenancyUnitsResponse
 
--- | Find the tenancy unit for a service and consumer. This method should not
--- be used in producers\' runtime path, for example finding the tenant
--- project number when creating VMs. Producers should persist the tenant
--- project information after the project is created.
+-- | Find the tenancy unit for a managed service and service consumer. This
+-- method shouldn\'t be used in a service producer\'s runtime path, for
+-- example to find the tenant project number when creating VMs. Service
+-- producers must persist the tenant project\'s information after the
+-- project is created.
 --
 -- /See:/ 'servicesTenancyUnitsList' smart constructor.
-data ServicesTenancyUnitsList = ServicesTenancyUnitsList'
+data ServicesTenancyUnitsList =
+  ServicesTenancyUnitsList'
     { _stulParent         :: !Text
     , _stulXgafv          :: !(Maybe Xgafv)
     , _stulUploadProtocol :: !(Maybe Text)
@@ -83,7 +86,9 @@ data ServicesTenancyUnitsList = ServicesTenancyUnitsList'
     , _stulPageToken      :: !(Maybe Text)
     , _stulPageSize       :: !(Maybe (Textual Int32))
     , _stulCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTenancyUnitsList' with the minimum fields required to make a request.
 --
@@ -110,7 +115,7 @@ servicesTenancyUnitsList
     :: Text -- ^ 'stulParent'
     -> ServicesTenancyUnitsList
 servicesTenancyUnitsList pStulParent_ =
-    ServicesTenancyUnitsList'
+  ServicesTenancyUnitsList'
     { _stulParent = pStulParent_
     , _stulXgafv = Nothing
     , _stulUploadProtocol = Nothing
@@ -122,12 +127,13 @@ servicesTenancyUnitsList pStulParent_ =
     , _stulCallback = Nothing
     }
 
--- | Service and consumer. Required. services\/{service}\/{collection
--- id}\/{resource id} {collection id} is the cloud resource collection type
--- representing the service consumer, for example \'projects\', or
--- \'organizations\'. {resource id} is the consumer numeric id, such as
--- project number: \'123456\'. {service} the name of a service, for example
--- \'service.googleapis.com\'.
+
+-- | Managed service and service consumer. Required.
+-- services\/{service}\/{collection id}\/{resource id} {collection id} is
+-- the cloud resource collection type representing the service consumer,
+-- for example \'projects\', or \'organizations\'. {resource id} is the
+-- consumer numeric id, such as project number: \'123456\'. {service} the
+-- name of a service, such as \'service.googleapis.com\'.
 stulParent :: Lens' ServicesTenancyUnitsList Text
 stulParent
   = lens _stulParent (\ s a -> s{_stulParent = a})

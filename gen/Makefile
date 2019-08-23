@@ -38,7 +38,7 @@ format:
  -exec stylish-haskell -i {} \;
 
 $(BIN)/gogol-gen: $(BIN)
-	stack build gogol-gen --copy-bins --local-bin-path $(BIN)
+	stack build gogol-gen --nix --copy-bins --local-bin-path $(BIN)
 
 $(BIN):
 	mkdir $@

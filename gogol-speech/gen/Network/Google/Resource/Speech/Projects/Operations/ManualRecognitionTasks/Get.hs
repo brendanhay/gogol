@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.projects.operations.manualRecognitionTasks.get@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.projects.operations.manualRecognitionTasks.get@.
 module Network.Google.Resource.Speech.Projects.Operations.ManualRecognitionTasks.Get
     (
     -- * REST Resource
@@ -64,14 +64,17 @@ type ProjectsOperationsManualRecognitionTasksGetResource
 -- API service.
 --
 -- /See:/ 'projectsOperationsManualRecognitionTasksGet' smart constructor.
-data ProjectsOperationsManualRecognitionTasksGet = ProjectsOperationsManualRecognitionTasksGet'
+data ProjectsOperationsManualRecognitionTasksGet =
+  ProjectsOperationsManualRecognitionTasksGet'
     { _pomrtgXgafv          :: !(Maybe Xgafv)
     , _pomrtgUploadProtocol :: !(Maybe Text)
     , _pomrtgAccessToken    :: !(Maybe Text)
     , _pomrtgUploadType     :: !(Maybe Text)
     , _pomrtgName           :: !Text
     , _pomrtgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsOperationsManualRecognitionTasksGet' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ projectsOperationsManualRecognitionTasksGet
     :: Text -- ^ 'pomrtgName'
     -> ProjectsOperationsManualRecognitionTasksGet
 projectsOperationsManualRecognitionTasksGet pPomrtgName_ =
-    ProjectsOperationsManualRecognitionTasksGet'
+  ProjectsOperationsManualRecognitionTasksGet'
     { _pomrtgXgafv = Nothing
     , _pomrtgUploadProtocol = Nothing
     , _pomrtgAccessToken = Nothing
@@ -100,6 +103,7 @@ projectsOperationsManualRecognitionTasksGet pPomrtgName_ =
     , _pomrtgName = pPomrtgName_
     , _pomrtgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pomrtgXgafv :: Lens' ProjectsOperationsManualRecognitionTasksGet (Maybe Xgafv)
@@ -136,7 +140,8 @@ pomrtgCallback
       (\ s a -> s{_pomrtgCallback = a})
 
 instance GoogleRequest
-         ProjectsOperationsManualRecognitionTasksGet where
+           ProjectsOperationsManualRecognitionTasksGet
+         where
         type Rs ProjectsOperationsManualRecognitionTasksGet =
              Operation
         type Scopes

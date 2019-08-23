@@ -70,7 +70,8 @@ type ProjectsRegionsJobsPatchResource =
 -- | Updates a job in a project.
 --
 -- /See:/ 'projectsRegionsJobsPatch' smart constructor.
-data ProjectsRegionsJobsPatch = ProjectsRegionsJobsPatch'
+data ProjectsRegionsJobsPatch =
+  ProjectsRegionsJobsPatch'
     { _prjpXgafv          :: !(Maybe Xgafv)
     , _prjpJobId          :: !Text
     , _prjpUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsRegionsJobsPatch = ProjectsRegionsJobsPatch'
     , _prjpRegion         :: !Text
     , _prjpProjectId      :: !Text
     , _prjpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsJobsPatch' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ projectsRegionsJobsPatch
     -> Text -- ^ 'prjpProjectId'
     -> ProjectsRegionsJobsPatch
 projectsRegionsJobsPatch pPrjpJobId_ pPrjpPayload_ pPrjpRegion_ pPrjpProjectId_ =
-    ProjectsRegionsJobsPatch'
+  ProjectsRegionsJobsPatch'
     { _prjpXgafv = Nothing
     , _prjpJobId = pPrjpJobId_
     , _prjpUploadProtocol = Nothing
@@ -125,6 +128,7 @@ projectsRegionsJobsPatch pPrjpJobId_ pPrjpPayload_ pPrjpRegion_ pPrjpProjectId_ 
     , _prjpProjectId = pPrjpProjectId_
     , _prjpCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjpXgafv :: Lens' ProjectsRegionsJobsPatch (Maybe Xgafv)

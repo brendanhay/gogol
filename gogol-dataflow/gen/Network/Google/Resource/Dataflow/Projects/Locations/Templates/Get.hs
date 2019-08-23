@@ -69,7 +69,8 @@ type ProjectsLocationsTemplatesGetResource =
 -- | Get the template associated with a template.
 --
 -- /See:/ 'projectsLocationsTemplatesGet' smart constructor.
-data ProjectsLocationsTemplatesGet = ProjectsLocationsTemplatesGet'
+data ProjectsLocationsTemplatesGet =
+  ProjectsLocationsTemplatesGet'
     { _pltgXgafv          :: !(Maybe Xgafv)
     , _pltgUploadProtocol :: !(Maybe Text)
     , _pltgLocation       :: !Text
@@ -79,7 +80,9 @@ data ProjectsLocationsTemplatesGet = ProjectsLocationsTemplatesGet'
     , _pltgView           :: !(Maybe Text)
     , _pltgProjectId      :: !Text
     , _pltgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTemplatesGet' with the minimum fields required to make a request.
 --
@@ -107,7 +110,7 @@ projectsLocationsTemplatesGet
     -> Text -- ^ 'pltgProjectId'
     -> ProjectsLocationsTemplatesGet
 projectsLocationsTemplatesGet pPltgLocation_ pPltgProjectId_ =
-    ProjectsLocationsTemplatesGet'
+  ProjectsLocationsTemplatesGet'
     { _pltgXgafv = Nothing
     , _pltgUploadProtocol = Nothing
     , _pltgLocation = pPltgLocation_
@@ -118,6 +121,7 @@ projectsLocationsTemplatesGet pPltgLocation_ pPltgProjectId_ =
     , _pltgProjectId = pPltgProjectId_
     , _pltgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltgXgafv :: Lens' ProjectsLocationsTemplatesGet (Maybe Xgafv)
@@ -130,7 +134,9 @@ pltgUploadProtocol
   = lens _pltgUploadProtocol
       (\ s a -> s{_pltgUploadProtocol = a})
 
--- | The location to which to direct the request.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- to which to direct the request.
 pltgLocation :: Lens' ProjectsLocationsTemplatesGet Text
 pltgLocation
   = lens _pltgLocation (\ s a -> s{_pltgLocation = a})

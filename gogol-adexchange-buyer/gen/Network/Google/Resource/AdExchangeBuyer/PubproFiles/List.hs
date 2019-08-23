@@ -53,9 +53,12 @@ type PubproFilesListResource =
 -- | Gets the requested publisher profile(s) by publisher accountId.
 --
 -- /See:/ 'pubproFilesList' smart constructor.
-newtype PubproFilesList = PubproFilesList'
+newtype PubproFilesList =
+  PubproFilesList'
     { _pflAccountId :: Textual Int32
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PubproFilesList' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ pubproFilesList
     :: Int32 -- ^ 'pflAccountId'
     -> PubproFilesList
 pubproFilesList pPflAccountId_ =
-    PubproFilesList'
-    { _pflAccountId = _Coerce # pPflAccountId_
-    }
+  PubproFilesList' {_pflAccountId = _Coerce # pPflAccountId_}
+
 
 -- | The accountId of the publisher to get profiles for.
 pflAccountId :: Lens' PubproFilesList Int32

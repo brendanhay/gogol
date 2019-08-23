@@ -59,6 +59,12 @@ module Network.Google.ContainerBuilder.Types
     , sCode
     , sMessage
 
+    -- * PullRequestFilter
+    , PullRequestFilter
+    , pullRequestFilter
+    , prfCommentControl
+    , prfBranch
+
     -- * RetryBuildRequest
     , RetryBuildRequest
     , retryBuildRequest
@@ -87,6 +93,7 @@ module Network.Google.ContainerBuilder.Types
     , rArtifactManifest
     , rBuildStepOutputs
     , rNumArtifacts
+    , rArtifactTiming
 
     -- * BuildTriggerSubstitutions
     , BuildTriggerSubstitutions
@@ -130,12 +137,29 @@ module Network.Google.ContainerBuilder.Types
     -- * BuildStepStatus
     , BuildStepStatus (..)
 
+    -- * CheckSuiteFilter
+    , CheckSuiteFilter
+    , checkSuiteFilter
+
     -- * ArtifactObjects
     , ArtifactObjects
     , artifactObjects
     , aoLocation
     , aoTiming
     , aoPaths
+
+    -- * GitHubEventsConfig
+    , GitHubEventsConfig
+    , gitHubEventsConfig
+    , ghecOwner
+    , ghecPullRequest
+    , ghecName
+    , ghecCheckSuite
+    , ghecPush
+    , ghecInstallationId
+
+    -- * PullRequestFilterCommentControl
+    , PullRequestFilterCommentControl (..)
 
     -- * Volume
     , Volume
@@ -185,6 +209,12 @@ module Network.Google.ContainerBuilder.Types
     , sKmsKeyName
     , sSecretEnv
 
+    -- * PushFilter
+    , PushFilter
+    , pushFilter
+    , pfTag
+    , pfBranch
+
     -- * CancelBuildRequest
     , CancelBuildRequest
     , cancelBuildRequest
@@ -205,6 +235,7 @@ module Network.Google.ContainerBuilder.Types
     -- * ListBuildTriggersResponse
     , ListBuildTriggersResponse
     , listBuildTriggersResponse
+    , lbtrNextPageToken
     , lbtrTriggers
 
     -- * ArtifactResult
@@ -298,6 +329,7 @@ module Network.Google.ContainerBuilder.Types
     , btBuild
     , btIgnoredFiles
     , btId
+    , btGithub
     , btDescription
     , btFilename
     , btCreateTime
@@ -322,4 +354,4 @@ containerBuilderService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

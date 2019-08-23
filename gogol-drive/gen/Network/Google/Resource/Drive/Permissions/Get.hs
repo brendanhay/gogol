@@ -33,6 +33,7 @@ module Network.Google.Resource.Drive.Permissions.Get
     , PermissionsGet
 
     -- * Request Lenses
+    , pgSupportsAllDrives
     , pgUseDomainAdminAccess
     , pgFileId
     , pgSupportsTeamDrives
@@ -51,23 +52,30 @@ type PermissionsGetResource =
            Capture "fileId" Text :>
              "permissions" :>
                Capture "permissionId" Text :>
-                 QueryParam "useDomainAdminAccess" Bool :>
-                   QueryParam "supportsTeamDrives" Bool :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Permission
+                 QueryParam "supportsAllDrives" Bool :>
+                   QueryParam "useDomainAdminAccess" Bool :>
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Permission
 
 -- | Gets a permission by ID.
 --
 -- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet'
-    { _pgUseDomainAdminAccess :: !Bool
+data PermissionsGet =
+  PermissionsGet'
+    { _pgSupportsAllDrives    :: !Bool
+    , _pgUseDomainAdminAccess :: !Bool
     , _pgFileId               :: !Text
     , _pgSupportsTeamDrives   :: !Bool
     , _pgPermissionId         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pgSupportsAllDrives'
 --
 -- * 'pgUseDomainAdminAccess'
 --
@@ -81,16 +89,26 @@ permissionsGet
     -> Text -- ^ 'pgPermissionId'
     -> PermissionsGet
 permissionsGet pPgFileId_ pPgPermissionId_ =
-    PermissionsGet'
-    { _pgUseDomainAdminAccess = False
+  PermissionsGet'
+    { _pgSupportsAllDrives = False
+    , _pgUseDomainAdminAccess = False
     , _pgFileId = pPgFileId_
     , _pgSupportsTeamDrives = False
     , _pgPermissionId = pPgPermissionId_
     }
 
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+pgSupportsAllDrives :: Lens' PermissionsGet Bool
+pgSupportsAllDrives
+  = lens _pgSupportsAllDrives
+      (\ s a -> s{_pgSupportsAllDrives = a})
+
 -- | Issue the request as a domain administrator; if set to true, then the
--- requester will be granted access if they are an administrator of the
--- domain to which the item belongs.
+-- requester will be granted access if the file ID parameter refers to a
+-- shared drive and the requester is an administrator of the domain to
+-- which the shared drive belongs.
 pgUseDomainAdminAccess :: Lens' PermissionsGet Bool
 pgUseDomainAdminAccess
   = lens _pgUseDomainAdminAccess
@@ -100,7 +118,7 @@ pgUseDomainAdminAccess
 pgFileId :: Lens' PermissionsGet Text
 pgFileId = lens _pgFileId (\ s a -> s{_pgFileId = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 pgSupportsTeamDrives :: Lens' PermissionsGet Bool
 pgSupportsTeamDrives
   = lens _pgSupportsTeamDrives
@@ -123,6 +141,7 @@ instance GoogleRequest PermissionsGet where
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient PermissionsGet'{..}
           = go _pgFileId _pgPermissionId
+              (Just _pgSupportsAllDrives)
               (Just _pgUseDomainAdminAccess)
               (Just _pgSupportsTeamDrives)
               (Just AltJSON)

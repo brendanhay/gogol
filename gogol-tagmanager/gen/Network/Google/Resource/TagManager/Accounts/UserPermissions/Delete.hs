@@ -52,9 +52,12 @@ type AccountsUserPermissionsDeleteResource =
 -- containers.
 --
 -- /See:/ 'accountsUserPermissionsDelete' smart constructor.
-newtype AccountsUserPermissionsDelete = AccountsUserPermissionsDelete'
+newtype AccountsUserPermissionsDelete =
+  AccountsUserPermissionsDelete'
     { _aupdPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsUserPermissionsDelete' with the minimum fields required to make a request.
 --
@@ -65,9 +68,8 @@ accountsUserPermissionsDelete
     :: Text -- ^ 'aupdPath'
     -> AccountsUserPermissionsDelete
 accountsUserPermissionsDelete pAupdPath_ =
-    AccountsUserPermissionsDelete'
-    { _aupdPath = pAupdPath_
-    }
+  AccountsUserPermissionsDelete' {_aupdPath = pAupdPath_}
+
 
 -- | GTM UserPermission\'s API relative path. Example:
 -- accounts\/{account_id}\/user_permissions\/{user_permission_id}

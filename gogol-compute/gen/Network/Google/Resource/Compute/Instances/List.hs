@@ -63,14 +63,17 @@ type InstancesListResource =
 -- | Retrieves the list of instances contained within the specified zone.
 --
 -- /See:/ 'instancesList' smart constructor.
-data InstancesList = InstancesList'
+data InstancesList =
+  InstancesList'
     { _il1OrderBy    :: !(Maybe Text)
     , _il1Project    :: !Text
     , _il1Zone       :: !Text
     , _il1Filter     :: !(Maybe Text)
     , _il1PageToken  :: !(Maybe Text)
     , _il1MaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesList' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ instancesList
     -> Text -- ^ 'il1Zone'
     -> InstancesList
 instancesList pIl1Project_ pIl1Zone_ =
-    InstancesList'
+  InstancesList'
     { _il1OrderBy = Nothing
     , _il1Project = pIl1Project_
     , _il1Zone = pIl1Zone_
@@ -100,6 +103,7 @@ instancesList pIl1Project_ pIl1Zone_ =
     , _il1PageToken = Nothing
     , _il1MaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

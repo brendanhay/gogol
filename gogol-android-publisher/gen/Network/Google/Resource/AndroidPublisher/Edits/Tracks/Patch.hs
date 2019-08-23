@@ -20,10 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume. This method supports patch
--- semantics.
+-- Updates the track configuration for the specified track type. This
+-- method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
@@ -59,18 +57,19 @@ type EditsTracksPatchResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Track :> Patch '[JSON] Track
 
--- | Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume. This method supports patch
--- semantics.
+-- | Updates the track configuration for the specified track type. This
+-- method supports patch semantics.
 --
 -- /See:/ 'editsTracksPatch' smart constructor.
-data EditsTracksPatch = EditsTracksPatch'
+data EditsTracksPatch =
+  EditsTracksPatch'
     { _etptTrack       :: !Text
     , _etptPackageName :: !Text
     , _etptPayload     :: !Track
     , _etptEditId      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsTracksPatch' with the minimum fields required to make a request.
 --
@@ -90,12 +89,13 @@ editsTracksPatch
     -> Text -- ^ 'etptEditId'
     -> EditsTracksPatch
 editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
-    EditsTracksPatch'
+  EditsTracksPatch'
     { _etptTrack = pEtptTrack_
     , _etptPackageName = pEtptPackageName_
     , _etptPayload = pEtptPayload_
     , _etptEditId = pEtptEditId_
     }
+
 
 -- | The track to read or modify.
 etptTrack :: Lens' EditsTracksPatch Text

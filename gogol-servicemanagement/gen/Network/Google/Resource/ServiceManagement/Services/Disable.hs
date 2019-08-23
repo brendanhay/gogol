@@ -67,7 +67,8 @@ type ServicesDisableResource =
 -- charges or security leaks. Operation
 --
 -- /See:/ 'servicesDisable' smart constructor.
-data ServicesDisable = ServicesDisable'
+data ServicesDisable =
+  ServicesDisable'
     { _sXgafv          :: !(Maybe Xgafv)
     , _sUploadProtocol :: !(Maybe Text)
     , _sAccessToken    :: !(Maybe Text)
@@ -75,7 +76,9 @@ data ServicesDisable = ServicesDisable'
     , _sPayload        :: !DisableServiceRequest
     , _sServiceName    :: !Text
     , _sCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesDisable' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ servicesDisable
     -> Text -- ^ 'sServiceName'
     -> ServicesDisable
 servicesDisable pSPayload_ pSServiceName_ =
-    ServicesDisable'
+  ServicesDisable'
     { _sXgafv = Nothing
     , _sUploadProtocol = Nothing
     , _sAccessToken = Nothing
@@ -108,6 +111,7 @@ servicesDisable pSPayload_ pSServiceName_ =
     , _sServiceName = pSServiceName_
     , _sCallback = Nothing
     }
+
 
 -- | V1 error format.
 sXgafv :: Lens' ServicesDisable (Maybe Xgafv)

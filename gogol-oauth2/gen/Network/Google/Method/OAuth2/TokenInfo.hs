@@ -52,11 +52,14 @@ type TokenInfoMethod =
 
 --
 -- /See:/ 'tokenInfo'' smart constructor.
-data TokenInfo' = TokenInfo''
+data TokenInfo' =
+  TokenInfo''
     { _tAccessToken :: !(Maybe Text)
     , _tTokenHandle :: !(Maybe Text)
     , _tIdToken     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TokenInfo'' with the minimum fields required to make a request.
 --
@@ -70,11 +73,9 @@ data TokenInfo' = TokenInfo''
 tokenInfo'
     :: TokenInfo'
 tokenInfo' =
-    TokenInfo''
-    { _tAccessToken = Nothing
-    , _tTokenHandle = Nothing
-    , _tIdToken = Nothing
-    }
+  TokenInfo''
+    {_tAccessToken = Nothing, _tTokenHandle = Nothing, _tIdToken = Nothing}
+
 
 tAccessToken :: Lens' TokenInfo' (Maybe Text)
 tAccessToken

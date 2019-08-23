@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionsList' request conforms to.
 type UserRolePermissionsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissions" :>
@@ -55,10 +55,13 @@ type UserRolePermissionsListResource =
 -- | Gets a list of user role permissions, possibly filtered.
 --
 -- /See:/ 'userRolePermissionsList' smart constructor.
-data UserRolePermissionsList = UserRolePermissionsList'
+data UserRolePermissionsList =
+  UserRolePermissionsList'
     { _urplIds       :: !(Maybe [Textual Int64])
     , _urplProFileId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRolePermissionsList' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ userRolePermissionsList
     :: Int64 -- ^ 'urplProFileId'
     -> UserRolePermissionsList
 userRolePermissionsList pUrplProFileId_ =
-    UserRolePermissionsList'
-    { _urplIds = Nothing
-    , _urplProFileId = _Coerce # pUrplProFileId_
-    }
+  UserRolePermissionsList'
+    {_urplIds = Nothing, _urplProFileId = _Coerce # pUrplProFileId_}
+
 
 -- | Select only user role permissions with these IDs.
 urplIds :: Lens' UserRolePermissionsList [Int64]

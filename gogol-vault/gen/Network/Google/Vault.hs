@@ -119,8 +119,11 @@ module Network.Google.Vault
     -- ** HeldAccount
     , HeldAccount
     , heldAccount
+    , haEmail
+    , haLastName
     , haAccountId
     , haHoldTime
+    , haFirstName
 
     -- ** HeldHangoutsChatQuery
     , HeldHangoutsChatQuery
@@ -412,6 +415,7 @@ module Network.Google.Vault
     , MailExportOptions
     , mailExportOptions
     , meoExportFormat
+    , meoShowConfidentialModeContent
 
     -- ** ListHoldsResponse
     , ListHoldsResponse

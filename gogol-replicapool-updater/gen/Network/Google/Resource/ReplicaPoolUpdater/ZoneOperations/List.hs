@@ -63,13 +63,16 @@ type ZoneOperationsListResource =
 -- zone.
 --
 -- /See:/ 'zoneOperationsList' smart constructor.
-data ZoneOperationsList = ZoneOperationsList'
+data ZoneOperationsList =
+  ZoneOperationsList'
     { _zolProject    :: !Text
     , _zolZone       :: !Text
     , _zolFilter     :: !(Maybe Text)
     , _zolPageToken  :: !(Maybe Text)
     , _zolMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ZoneOperationsList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ zoneOperationsList
     -> Text -- ^ 'zolZone'
     -> ZoneOperationsList
 zoneOperationsList pZolProject_ pZolZone_ =
-    ZoneOperationsList'
+  ZoneOperationsList'
     { _zolProject = pZolProject_
     , _zolZone = pZolZone_
     , _zolFilter = Nothing
     , _zolPageToken = Nothing
     , _zolMaxResults = 500
     }
+
 
 -- | Name of the project scoping this request.
 zolProject :: Lens' ZoneOperationsList Text

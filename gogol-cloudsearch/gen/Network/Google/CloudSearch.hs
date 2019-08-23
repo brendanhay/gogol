@@ -152,6 +152,11 @@ module Network.Google.CloudSearch
     -- ** DriveFollowUpRestrictType
     , DriveFollowUpRestrictType (..)
 
+    -- ** GmailFolderRestrict
+    , GmailFolderRestrict
+    , gmailFolderRestrict
+    , gfrType
+
     -- ** ItemContent
     , ItemContent
     , itemContent
@@ -205,6 +210,11 @@ module Network.Google.CloudSearch
 
     -- ** ItemStatusCode
     , ItemStatusCode (..)
+
+    -- ** GmailActionRestrict
+    , GmailActionRestrict
+    , gmailActionRestrict
+    , garType
 
     -- ** UnreserveItemsRequest
     , UnreserveItemsRequest
@@ -276,6 +286,9 @@ module Network.Google.CloudSearch
     , qsDisplayName
     , qsSource
     , qsOperators
+
+    -- ** GmailTimeRestrictType
+    , GmailTimeRestrictType (..)
 
     -- ** SuggestResponse
     , SuggestResponse
@@ -377,6 +390,9 @@ module Network.Google.CloudSearch
     , DoubleOperatorOptions
     , doubleOperatorOptions
     , dOperatorName
+
+    -- ** GmailIntelligentRestrictType
+    , GmailIntelligentRestrictType (..)
 
     -- ** Operation
     , Operation
@@ -514,6 +530,9 @@ module Network.Google.CloudSearch
     -- ** SourceScoringConfigSourceImportance
     , SourceScoringConfigSourceImportance (..)
 
+    -- ** GmailAttachmentRestrictType
+    , GmailAttachmentRestrictType (..)
+
     -- ** Metaline
     , Metaline
     , metaline
@@ -647,6 +666,9 @@ module Network.Google.CloudSearch
     , displayedProperty
     , dpPropertyName
 
+    -- ** GmailActionRestrictType
+    , GmailActionRestrictType (..)
+
     -- ** FacetResult
     , FacetResult
     , facetResult
@@ -685,6 +707,9 @@ module Network.Google.CloudSearch
     , DateValues
     , dateValues
     , dValues
+
+    -- ** GmailFolderRestrictType
+    , GmailFolderRestrictType (..)
 
     -- ** NamedProperty
     , NamedProperty
@@ -775,6 +800,11 @@ module Network.Google.CloudSearch
     , uploadItemRef
     , uirName
 
+    -- ** GmailTimeRestrict
+    , GmailTimeRestrict
+    , gmailTimeRestrict
+    , gtrType
+
     -- ** PushItemRequest
     , PushItemRequest
     , pushItemRequest
@@ -860,6 +890,7 @@ module Network.Google.CloudSearch
     , iirDebugOptions
     , iirConnectorName
     , iirItem
+    , iirIndexItemOptions
 
     -- ** RepositoryErrorType
     , RepositoryErrorType (..)
@@ -914,6 +945,11 @@ module Network.Google.CloudSearch
     , htmlValues
     , hvValues
 
+    -- ** GmailIntelligentRestrict
+    , GmailIntelligentRestrict
+    , gmailIntelligentRestrict
+    , girType
+
     -- ** HTMLOperatorOptions
     , HTMLOperatorOptions
     , htmlOperatorOptions
@@ -960,6 +996,7 @@ module Network.Google.CloudSearch
     , facetOptions
     , fSourceName
     , fObjectType
+    , fNumFacetBuckets
     , fOperatorName
 
     -- ** SuggestRequest
@@ -1053,6 +1090,11 @@ module Network.Google.CloudSearch
     , enumOperatorOptions
     , eooOperatorName
 
+    -- ** GmailAttachmentRestrict
+    , GmailAttachmentRestrict
+    , gmailAttachmentRestrict
+    , gType
+
     -- ** DatePropertyOptions
     , DatePropertyOptions
     , datePropertyOptions
@@ -1069,6 +1111,11 @@ module Network.Google.CloudSearch
     , gspGsuiteGroupEmail
     , gspGsuiteUserEmail
     , gspGsuiteDomain
+
+    -- ** IndexItemOptions
+    , IndexItemOptions
+    , indexItemOptions
+    , iioAllowUnknownGsuitePrincipals
 
     -- ** SearchQualityMetadata
     , SearchQualityMetadata
@@ -1121,10 +1168,15 @@ module Network.Google.CloudSearch
     -- ** RestrictItem
     , RestrictItem
     , restrictItem
+    , riGmailFolderRestrict
+    , riGmailActionRestrict
     , riDriveLocationRestrict
     , riDriveTimeSpanRestrict
     , riDriveMimeTypeRestrict
     , riDriveFollowUpRestrict
+    , riGmailTimeRestrict
+    , riGmailIntelligentRestrict
+    , riGmailAttachmentRestrict
     , riSearchOperator
 
     -- ** DriveTimeSpanRestrictType

@@ -54,10 +54,13 @@ type SitemapsGetResource =
 -- | Retrieves information about a specific sitemap.
 --
 -- /See:/ 'sitemapsGet' smart constructor.
-data SitemapsGet = SitemapsGet'
+data SitemapsGet =
+  SitemapsGet'
     { _sgFeedpath :: !Text
     , _sgSiteURL  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitemapsGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ sitemapsGet
     -> Text -- ^ 'sgSiteURL'
     -> SitemapsGet
 sitemapsGet pSgFeedpath_ pSgSiteURL_ =
-    SitemapsGet'
-    { _sgFeedpath = pSgFeedpath_
-    , _sgSiteURL = pSgSiteURL_
-    }
+  SitemapsGet' {_sgFeedpath = pSgFeedpath_, _sgSiteURL = pSgSiteURL_}
+
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml

@@ -81,7 +81,8 @@ type BeaconsAttachmentsListResource =
 -- permissions in the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsList' smart constructor.
-data BeaconsAttachmentsList = BeaconsAttachmentsList'
+data BeaconsAttachmentsList =
+  BeaconsAttachmentsList'
     { _balXgafv          :: !(Maybe Xgafv)
     , _balUploadProtocol :: !(Maybe Text)
     , _balAccessToken    :: !(Maybe Text)
@@ -90,7 +91,9 @@ data BeaconsAttachmentsList = BeaconsAttachmentsList'
     , _balNamespacedType :: !(Maybe Text)
     , _balProjectId      :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BeaconsAttachmentsList' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ beaconsAttachmentsList
     :: Text -- ^ 'balBeaconName'
     -> BeaconsAttachmentsList
 beaconsAttachmentsList pBalBeaconName_ =
-    BeaconsAttachmentsList'
+  BeaconsAttachmentsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balAccessToken = Nothing
@@ -125,6 +128,7 @@ beaconsAttachmentsList pBalBeaconName_ =
     , _balProjectId = Nothing
     , _balCallback = Nothing
     }
+
 
 -- | V1 error format.
 balXgafv :: Lens' BeaconsAttachmentsList (Maybe Xgafv)

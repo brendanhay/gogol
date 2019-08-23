@@ -110,6 +110,12 @@ module Network.Google.ContainerBuilder
     , sCode
     , sMessage
 
+    -- ** PullRequestFilter
+    , PullRequestFilter
+    , pullRequestFilter
+    , prfCommentControl
+    , prfBranch
+
     -- ** RetryBuildRequest
     , RetryBuildRequest
     , retryBuildRequest
@@ -138,6 +144,7 @@ module Network.Google.ContainerBuilder
     , rArtifactManifest
     , rBuildStepOutputs
     , rNumArtifacts
+    , rArtifactTiming
 
     -- ** BuildTriggerSubstitutions
     , BuildTriggerSubstitutions
@@ -181,12 +188,29 @@ module Network.Google.ContainerBuilder
     -- ** BuildStepStatus
     , BuildStepStatus (..)
 
+    -- ** CheckSuiteFilter
+    , CheckSuiteFilter
+    , checkSuiteFilter
+
     -- ** ArtifactObjects
     , ArtifactObjects
     , artifactObjects
     , aoLocation
     , aoTiming
     , aoPaths
+
+    -- ** GitHubEventsConfig
+    , GitHubEventsConfig
+    , gitHubEventsConfig
+    , ghecOwner
+    , ghecPullRequest
+    , ghecName
+    , ghecCheckSuite
+    , ghecPush
+    , ghecInstallationId
+
+    -- ** PullRequestFilterCommentControl
+    , PullRequestFilterCommentControl (..)
 
     -- ** Volume
     , Volume
@@ -236,6 +260,12 @@ module Network.Google.ContainerBuilder
     , sKmsKeyName
     , sSecretEnv
 
+    -- ** PushFilter
+    , PushFilter
+    , pushFilter
+    , pfTag
+    , pfBranch
+
     -- ** CancelBuildRequest
     , CancelBuildRequest
     , cancelBuildRequest
@@ -256,6 +286,7 @@ module Network.Google.ContainerBuilder
     -- ** ListBuildTriggersResponse
     , ListBuildTriggersResponse
     , listBuildTriggersResponse
+    , lbtrNextPageToken
     , lbtrTriggers
 
     -- ** ArtifactResult
@@ -349,6 +380,7 @@ module Network.Google.ContainerBuilder
     , btBuild
     , btIgnoredFiles
     , btId
+    , btGithub
     , btDescription
     , btFilename
     , btCreateTime

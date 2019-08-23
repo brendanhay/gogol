@@ -53,9 +53,12 @@ type CalendarListDeleteResource =
 -- | Removes a calendar from the user\'s calendar list.
 --
 -- /See:/ 'calendarListDelete' smart constructor.
-newtype CalendarListDelete = CalendarListDelete'
+newtype CalendarListDelete =
+  CalendarListDelete'
     { _cldCalendarId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CalendarListDelete' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ calendarListDelete
     :: Text -- ^ 'cldCalendarId'
     -> CalendarListDelete
 calendarListDelete pCldCalendarId_ =
-    CalendarListDelete'
-    { _cldCalendarId = pCldCalendarId_
-    }
+  CalendarListDelete' {_cldCalendarId = pCldCalendarId_}
+
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently

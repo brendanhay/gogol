@@ -62,10 +62,13 @@ type UsersInsertResource =
 -- displayName field can be changed.
 --
 -- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert'
+data UsersInsert =
+  UsersInsert'
     { _uiEnterpriseId :: !Text
     , _uiPayload      :: !User
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
@@ -79,10 +82,8 @@ usersInsert
     -> User -- ^ 'uiPayload'
     -> UsersInsert
 usersInsert pUiEnterpriseId_ pUiPayload_ =
-    UsersInsert'
-    { _uiEnterpriseId = pUiEnterpriseId_
-    , _uiPayload = pUiPayload_
-    }
+  UsersInsert' {_uiEnterpriseId = pUiEnterpriseId_, _uiPayload = pUiPayload_}
+
 
 -- | The ID of the enterprise.
 uiEnterpriseId :: Lens' UsersInsert Text

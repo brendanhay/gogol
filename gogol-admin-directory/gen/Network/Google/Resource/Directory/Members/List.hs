@@ -61,13 +61,16 @@ type MembersListResource =
 -- | Retrieve all members in a group (paginated)
 --
 -- /See:/ 'membersList' smart constructor.
-data MembersList = MembersList'
+data MembersList =
+  MembersList'
     { _mlRoles                    :: !(Maybe Text)
     , _mlGroupKey                 :: !Text
     , _mlPageToken                :: !(Maybe Text)
     , _mlIncludeDerivedMembership :: !(Maybe Bool)
     , _mlMaxResults               :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MembersList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ membersList
     :: Text -- ^ 'mlGroupKey'
     -> MembersList
 membersList pMlGroupKey_ =
-    MembersList'
+  MembersList'
     { _mlRoles = Nothing
     , _mlGroupKey = pMlGroupKey_
     , _mlPageToken = Nothing
     , _mlIncludeDerivedMembership = Nothing
     , _mlMaxResults = Nothing
     }
+
 
 -- | Comma separated role values to filter list results on.
 mlRoles :: Lens' MembersList (Maybe Text)

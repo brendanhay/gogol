@@ -54,10 +54,13 @@ type I18nRegionsListResource =
 -- | Returns a list of content regions that the YouTube website supports.
 --
 -- /See:/ 'i18nRegionsList' smart constructor.
-data I18nRegionsList = I18nRegionsList'
+data I18nRegionsList =
+  I18nRegionsList'
     { _irlPart :: !Text
     , _irlHl   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'I18nRegionsList' with the minimum fields required to make a request.
 --
@@ -70,10 +73,8 @@ i18nRegionsList
     :: Text -- ^ 'irlPart'
     -> I18nRegionsList
 i18nRegionsList pIrlPart_ =
-    I18nRegionsList'
-    { _irlPart = pIrlPart_
-    , _irlHl = "en_US"
-    }
+  I18nRegionsList' {_irlPart = pIrlPart_, _irlHl = "en_US"}
+
 
 -- | The part parameter specifies the i18nRegion resource properties that the
 -- API response will include. Set the parameter value to snippet.

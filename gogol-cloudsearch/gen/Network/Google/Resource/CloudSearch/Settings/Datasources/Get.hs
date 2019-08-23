@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a data source.
+-- Gets a datasource.
 --
 -- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.get@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Get
@@ -59,10 +59,11 @@ type SettingsDatasourcesGetResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
--- | Gets a data source.
+-- | Gets a datasource.
 --
 -- /See:/ 'settingsDatasourcesGet' smart constructor.
-data SettingsDatasourcesGet = SettingsDatasourcesGet'
+data SettingsDatasourcesGet =
+  SettingsDatasourcesGet'
     { _sdgXgafv                       :: !(Maybe Xgafv)
     , _sdgUploadProtocol              :: !(Maybe Text)
     , _sdgAccessToken                 :: !(Maybe Text)
@@ -70,7 +71,9 @@ data SettingsDatasourcesGet = SettingsDatasourcesGet'
     , _sdgName                        :: !Text
     , _sdgDebugOptionsEnableDebugging :: !(Maybe Bool)
     , _sdgCallback                    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SettingsDatasourcesGet' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ settingsDatasourcesGet
     :: Text -- ^ 'sdgName'
     -> SettingsDatasourcesGet
 settingsDatasourcesGet pSdgName_ =
-    SettingsDatasourcesGet'
+  SettingsDatasourcesGet'
     { _sdgXgafv = Nothing
     , _sdgUploadProtocol = Nothing
     , _sdgAccessToken = Nothing
@@ -102,6 +105,7 @@ settingsDatasourcesGet pSdgName_ =
     , _sdgDebugOptionsEnableDebugging = Nothing
     , _sdgCallback = Nothing
     }
+
 
 -- | V1 error format.
 sdgXgafv :: Lens' SettingsDatasourcesGet (Maybe Xgafv)
@@ -125,12 +129,12 @@ sdgUploadType
   = lens _sdgUploadType
       (\ s a -> s{_sdgUploadType = a})
 
--- | Name of the data source resource. Format: datasources\/{source_id}.
+-- | Name of the datasource resource. Format: datasources\/{source_id}.
 sdgName :: Lens' SettingsDatasourcesGet Text
 sdgName = lens _sdgName (\ s a -> s{_sdgName = a})
 
--- | If set, the request will enable debugging features of Cloud Search. Only
--- turn on this field, if asked by Google to help with debugging.
+-- | If you are asked by Google to help with debugging, set this field.
+-- Otherwise, ignore this field.
 sdgDebugOptionsEnableDebugging :: Lens' SettingsDatasourcesGet (Maybe Bool)
 sdgDebugOptionsEnableDebugging
   = lens _sdgDebugOptionsEnableDebugging

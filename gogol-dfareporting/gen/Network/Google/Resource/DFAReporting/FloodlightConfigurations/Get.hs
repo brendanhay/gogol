@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsGet' request conforms to.
 type FloodlightConfigurationsGetResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -55,10 +55,13 @@ type FloodlightConfigurationsGetResource =
 -- | Gets one floodlight configuration by ID.
 --
 -- /See:/ 'floodlightConfigurationsGet' smart constructor.
-data FloodlightConfigurationsGet = FloodlightConfigurationsGet'
+data FloodlightConfigurationsGet =
+  FloodlightConfigurationsGet'
     { _fcgProFileId :: !(Textual Int64)
     , _fcgId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightConfigurationsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,9 @@ floodlightConfigurationsGet
     -> Int64 -- ^ 'fcgId'
     -> FloodlightConfigurationsGet
 floodlightConfigurationsGet pFcgProFileId_ pFcgId_ =
-    FloodlightConfigurationsGet'
-    { _fcgProFileId = _Coerce # pFcgProFileId_
-    , _fcgId = _Coerce # pFcgId_
-    }
+  FloodlightConfigurationsGet'
+    {_fcgProFileId = _Coerce # pFcgProFileId_, _fcgId = _Coerce # pFcgId_}
+
 
 -- | User profile ID associated with this request.
 fcgProFileId :: Lens' FloodlightConfigurationsGet Int64

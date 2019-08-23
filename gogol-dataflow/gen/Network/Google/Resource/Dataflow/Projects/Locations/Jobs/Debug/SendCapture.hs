@@ -71,7 +71,8 @@ type ProjectsLocationsJobsDebugSendCaptureResource =
 -- | Send encoded debug capture data for component.
 --
 -- /See:/ 'projectsLocationsJobsDebugSendCapture' smart constructor.
-data ProjectsLocationsJobsDebugSendCapture = ProjectsLocationsJobsDebugSendCapture'
+data ProjectsLocationsJobsDebugSendCapture =
+  ProjectsLocationsJobsDebugSendCapture'
     { _pljdscXgafv          :: !(Maybe Xgafv)
     , _pljdscJobId          :: !Text
     , _pljdscUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsLocationsJobsDebugSendCapture = ProjectsLocationsJobsDebugSendCaptu
     , _pljdscPayload        :: !SendDebugCaptureRequest
     , _pljdscProjectId      :: !Text
     , _pljdscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsDebugSendCapture' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ projectsLocationsJobsDebugSendCapture
     -> Text -- ^ 'pljdscProjectId'
     -> ProjectsLocationsJobsDebugSendCapture
 projectsLocationsJobsDebugSendCapture pPljdscJobId_ pPljdscLocation_ pPljdscPayload_ pPljdscProjectId_ =
-    ProjectsLocationsJobsDebugSendCapture'
+  ProjectsLocationsJobsDebugSendCapture'
     { _pljdscXgafv = Nothing
     , _pljdscJobId = pPljdscJobId_
     , _pljdscUploadProtocol = Nothing
@@ -122,6 +125,7 @@ projectsLocationsJobsDebugSendCapture pPljdscJobId_ pPljdscLocation_ pPljdscPayl
     , _pljdscProjectId = pPljdscProjectId_
     , _pljdscCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljdscXgafv :: Lens' ProjectsLocationsJobsDebugSendCapture (Maybe Xgafv)
@@ -139,7 +143,9 @@ pljdscUploadProtocol
   = lens _pljdscUploadProtocol
       (\ s a -> s{_pljdscUploadProtocol = a})
 
--- | The location which contains the job specified by job_id.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains the job specified by job_id.
 pljdscLocation :: Lens' ProjectsLocationsJobsDebugSendCapture Text
 pljdscLocation
   = lens _pljdscLocation
@@ -176,7 +182,8 @@ pljdscCallback
       (\ s a -> s{_pljdscCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsJobsDebugSendCapture where
+           ProjectsLocationsJobsDebugSendCapture
+         where
         type Rs ProjectsLocationsJobsDebugSendCapture =
              SendDebugCaptureResponse
         type Scopes ProjectsLocationsJobsDebugSendCapture =

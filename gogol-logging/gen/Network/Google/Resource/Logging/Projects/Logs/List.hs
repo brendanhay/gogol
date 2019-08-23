@@ -67,7 +67,8 @@ type ProjectsLogsListResource =
 -- Only logs that have entries are listed.
 --
 -- /See:/ 'projectsLogsList' smart constructor.
-data ProjectsLogsList = ProjectsLogsList'
+data ProjectsLogsList =
+  ProjectsLogsList'
     { _pllParent         :: !Text
     , _pllXgafv          :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
@@ -76,7 +77,9 @@ data ProjectsLogsList = ProjectsLogsList'
     , _pllPageToken      :: !(Maybe Text)
     , _pllPageSize       :: !(Maybe (Textual Int32))
     , _pllCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLogsList' with the minimum fields required to make a request.
 --
@@ -101,7 +104,7 @@ projectsLogsList
     :: Text -- ^ 'pllParent'
     -> ProjectsLogsList
 projectsLogsList pPllParent_ =
-    ProjectsLogsList'
+  ProjectsLogsList'
     { _pllParent = pPllParent_
     , _pllXgafv = Nothing
     , _pllUploadProtocol = Nothing
@@ -111,6 +114,7 @@ projectsLogsList pPllParent_ =
     , _pllPageSize = Nothing
     , _pllCallback = Nothing
     }
+
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"

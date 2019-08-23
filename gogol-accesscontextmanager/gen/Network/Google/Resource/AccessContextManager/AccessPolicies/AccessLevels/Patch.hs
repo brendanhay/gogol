@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.patch@ method which the
 -- 'AccessPoliciesAccessLevelsPatch' request conforms to.
 type AccessPoliciesAccessLevelsPatchResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -70,7 +70,8 @@ type AccessPoliciesAccessLevelsPatchResource =
 -- result in an error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesAccessLevelsPatch' smart constructor.
-data AccessPoliciesAccessLevelsPatch = AccessPoliciesAccessLevelsPatch'
+data AccessPoliciesAccessLevelsPatch =
+  AccessPoliciesAccessLevelsPatch'
     { _apalpXgafv          :: !(Maybe Xgafv)
     , _apalpUploadProtocol :: !(Maybe Text)
     , _apalpUpdateMask     :: !(Maybe GFieldMask)
@@ -79,7 +80,9 @@ data AccessPoliciesAccessLevelsPatch = AccessPoliciesAccessLevelsPatch'
     , _apalpPayload        :: !AccessLevel
     , _apalpName           :: !Text
     , _apalpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccessPoliciesAccessLevelsPatch' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ accessPoliciesAccessLevelsPatch
     -> Text -- ^ 'apalpName'
     -> AccessPoliciesAccessLevelsPatch
 accessPoliciesAccessLevelsPatch pApalpPayload_ pApalpName_ =
-    AccessPoliciesAccessLevelsPatch'
+  AccessPoliciesAccessLevelsPatch'
     { _apalpXgafv = Nothing
     , _apalpUploadProtocol = Nothing
     , _apalpUpdateMask = Nothing
@@ -115,6 +118,7 @@ accessPoliciesAccessLevelsPatch pApalpPayload_ pApalpName_ =
     , _apalpName = pApalpName_
     , _apalpCallback = Nothing
     }
+
 
 -- | V1 error format.
 apalpXgafv :: Lens' AccessPoliciesAccessLevelsPatch (Maybe Xgafv)
@@ -165,7 +169,8 @@ apalpCallback
       (\ s a -> s{_apalpCallback = a})
 
 instance GoogleRequest
-         AccessPoliciesAccessLevelsPatch where
+           AccessPoliciesAccessLevelsPatch
+         where
         type Rs AccessPoliciesAccessLevelsPatch = Operation
         type Scopes AccessPoliciesAccessLevelsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]

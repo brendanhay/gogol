@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the state of the specified Cloud Dataflow job.
+-- Gets the state of the specified Cloud Dataflow job. To get the state of
+-- a job, we recommend using \`projects.locations.jobs.get\` with a
+-- [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.get\` is not recommended, as you can only get the
+-- state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.get@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
@@ -65,10 +70,16 @@ type ProjectsLocationsJobsGetResource =
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Job
 
--- | Gets the state of the specified Cloud Dataflow job.
+-- | Gets the state of the specified Cloud Dataflow job. To get the state of
+-- a job, we recommend using \`projects.locations.jobs.get\` with a
+-- [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.get\` is not recommended, as you can only get the
+-- state of jobs that are running in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsGet' smart constructor.
-data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
+data ProjectsLocationsJobsGet =
+  ProjectsLocationsJobsGet'
     { _pljgXgafv          :: !(Maybe Xgafv)
     , _pljgJobId          :: !Text
     , _pljgUploadProtocol :: !(Maybe Text)
@@ -78,7 +89,9 @@ data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
     , _pljgView           :: !(Maybe Text)
     , _pljgProjectId      :: !Text
     , _pljgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsGet' with the minimum fields required to make a request.
 --
@@ -107,7 +120,7 @@ projectsLocationsJobsGet
     -> Text -- ^ 'pljgProjectId'
     -> ProjectsLocationsJobsGet
 projectsLocationsJobsGet pPljgJobId_ pPljgLocation_ pPljgProjectId_ =
-    ProjectsLocationsJobsGet'
+  ProjectsLocationsJobsGet'
     { _pljgXgafv = Nothing
     , _pljgJobId = pPljgJobId_
     , _pljgUploadProtocol = Nothing
@@ -118,6 +131,7 @@ projectsLocationsJobsGet pPljgJobId_ pPljgLocation_ pPljgProjectId_ =
     , _pljgProjectId = pPljgProjectId_
     , _pljgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljgXgafv :: Lens' ProjectsLocationsJobsGet (Maybe Xgafv)
@@ -135,7 +149,9 @@ pljgUploadProtocol
   = lens _pljgUploadProtocol
       (\ s a -> s{_pljgUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pljgLocation :: Lens' ProjectsLocationsJobsGet Text
 pljgLocation
   = lens _pljgLocation (\ s a -> s{_pljgLocation = a})

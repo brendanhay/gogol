@@ -55,10 +55,13 @@ type UsersAliasesListResource =
 -- | List all aliases for a user
 --
 -- /See:/ 'usersAliasesList' smart constructor.
-data UsersAliasesList = UsersAliasesList'
+data UsersAliasesList =
+  UsersAliasesList'
     { _ualEvent   :: !(Maybe UsersAliasesListEvent)
     , _ualUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersAliasesList' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ usersAliasesList
     :: Text -- ^ 'ualUserKey'
     -> UsersAliasesList
 usersAliasesList pUalUserKey_ =
-    UsersAliasesList'
-    { _ualEvent = Nothing
-    , _ualUserKey = pUalUserKey_
-    }
+  UsersAliasesList' {_ualEvent = Nothing, _ualUserKey = pUalUserKey_}
+
 
 -- | Event on which subscription is intended (if subscribing)
 ualEvent :: Lens' UsersAliasesList (Maybe UsersAliasesListEvent)

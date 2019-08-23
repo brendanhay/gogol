@@ -65,7 +65,8 @@ type ProjectsLocationsRegistriesSetIAMPolicyResource
 -- existing policy.
 --
 -- /See:/ 'projectsLocationsRegistriesSetIAMPolicy' smart constructor.
-data ProjectsLocationsRegistriesSetIAMPolicy = ProjectsLocationsRegistriesSetIAMPolicy'
+data ProjectsLocationsRegistriesSetIAMPolicy =
+  ProjectsLocationsRegistriesSetIAMPolicy'
     { _plrsipXgafv          :: !(Maybe Xgafv)
     , _plrsipUploadProtocol :: !(Maybe Text)
     , _plrsipAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsRegistriesSetIAMPolicy = ProjectsLocationsRegistriesSetIAM
     , _plrsipPayload        :: !SetIAMPolicyRequest
     , _plrsipResource       :: !Text
     , _plrsipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsRegistriesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ projectsLocationsRegistriesSetIAMPolicy
     -> Text -- ^ 'plrsipResource'
     -> ProjectsLocationsRegistriesSetIAMPolicy
 projectsLocationsRegistriesSetIAMPolicy pPlrsipPayload_ pPlrsipResource_ =
-    ProjectsLocationsRegistriesSetIAMPolicy'
+  ProjectsLocationsRegistriesSetIAMPolicy'
     { _plrsipXgafv = Nothing
     , _plrsipUploadProtocol = Nothing
     , _plrsipAccessToken = Nothing
@@ -106,6 +109,7 @@ projectsLocationsRegistriesSetIAMPolicy pPlrsipPayload_ pPlrsipResource_ =
     , _plrsipResource = pPlrsipResource_
     , _plrsipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plrsipXgafv :: Lens' ProjectsLocationsRegistriesSetIAMPolicy (Maybe Xgafv)
@@ -150,7 +154,8 @@ plrsipCallback
       (\ s a -> s{_plrsipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsRegistriesSetIAMPolicy where
+           ProjectsLocationsRegistriesSetIAMPolicy
+         where
         type Rs ProjectsLocationsRegistriesSetIAMPolicy =
              Policy
         type Scopes ProjectsLocationsRegistriesSetIAMPolicy =

@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified instance template. Deleting an instance template
--- is permanent and cannot be undone. It\'s not possible to delete
--- templates which are in use by an instance group.
+-- is permanent and cannot be undone. It is not possible to delete
+-- templates that are already in use by a managed instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.delete@.
 module Network.Google.Resource.Compute.InstanceTemplates.Delete
@@ -57,15 +57,18 @@ type InstanceTemplatesDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance template. Deleting an instance template
--- is permanent and cannot be undone. It\'s not possible to delete
--- templates which are in use by an instance group.
+-- is permanent and cannot be undone. It is not possible to delete
+-- templates that are already in use by a managed instance group.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
-data InstanceTemplatesDelete = InstanceTemplatesDelete'
+data InstanceTemplatesDelete =
+  InstanceTemplatesDelete'
     { _itdRequestId        :: !(Maybe Text)
     , _itdProject          :: !Text
     , _itdInstanceTemplate :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ instanceTemplatesDelete
     -> Text -- ^ 'itdInstanceTemplate'
     -> InstanceTemplatesDelete
 instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
-    InstanceTemplatesDelete'
+  InstanceTemplatesDelete'
     { _itdRequestId = Nothing
     , _itdProject = pItdProject_
     , _itdInstanceTemplate = pItdInstanceTemplate_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

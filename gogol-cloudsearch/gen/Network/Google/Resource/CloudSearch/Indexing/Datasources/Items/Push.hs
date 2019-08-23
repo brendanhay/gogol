@@ -62,7 +62,8 @@ type IndexingDatasourcesItemsPushResource =
 -- | Pushes an item onto a queue for later polling and updating.
 --
 -- /See:/ 'indexingDatasourcesItemsPush' smart constructor.
-data IndexingDatasourcesItemsPush = IndexingDatasourcesItemsPush'
+data IndexingDatasourcesItemsPush =
+  IndexingDatasourcesItemsPush'
     { _idipXgafv          :: !(Maybe Xgafv)
     , _idipUploadProtocol :: !(Maybe Text)
     , _idipAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data IndexingDatasourcesItemsPush = IndexingDatasourcesItemsPush'
     , _idipPayload        :: !PushItemRequest
     , _idipName           :: !Text
     , _idipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesItemsPush' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ indexingDatasourcesItemsPush
     -> Text -- ^ 'idipName'
     -> IndexingDatasourcesItemsPush
 indexingDatasourcesItemsPush pIdipPayload_ pIdipName_ =
-    IndexingDatasourcesItemsPush'
+  IndexingDatasourcesItemsPush'
     { _idipXgafv = Nothing
     , _idipUploadProtocol = Nothing
     , _idipAccessToken = Nothing
@@ -103,6 +106,7 @@ indexingDatasourcesItemsPush pIdipPayload_ pIdipName_ =
     , _idipName = pIdipName_
     , _idipCallback = Nothing
     }
+
 
 -- | V1 error format.
 idipXgafv :: Lens' IndexingDatasourcesItemsPush (Maybe Xgafv)

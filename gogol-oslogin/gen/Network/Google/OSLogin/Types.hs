@@ -84,8 +84,8 @@ oSLoginService
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Proxy;
+computeScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

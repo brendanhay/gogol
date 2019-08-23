@@ -77,7 +77,8 @@ type ServicesListResource =
 -- \"project:{PROJECT-ID}\".
 --
 -- /See:/ 'servicesList' smart constructor.
-data ServicesList = ServicesList'
+data ServicesList =
+  ServicesList'
     { _slXgafv             :: !(Maybe Xgafv)
     , _slUploadProtocol    :: !(Maybe Text)
     , _slAccessToken       :: !(Maybe Text)
@@ -87,7 +88,9 @@ data ServicesList = ServicesList'
     , _slConsumerId        :: !(Maybe Text)
     , _slPageSize          :: !(Maybe (Textual Int32))
     , _slCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesList' with the minimum fields required to make a request.
 --
@@ -113,7 +116,7 @@ data ServicesList = ServicesList'
 servicesList
     :: ServicesList
 servicesList =
-    ServicesList'
+  ServicesList'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
     , _slAccessToken = Nothing
@@ -124,6 +127,7 @@ servicesList =
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
+
 
 -- | V1 error format.
 slXgafv :: Lens' ServicesList (Maybe Xgafv)
@@ -164,7 +168,8 @@ slConsumerId :: Lens' ServicesList (Maybe Text)
 slConsumerId
   = lens _slConsumerId (\ s a -> s{_slConsumerId = a})
 
--- | Requested size of the next page of data.
+-- | The max number of items to include in the response list. Page size is 50
+-- if not specified. Maximum value is 100.
 slPageSize :: Lens' ServicesList (Maybe Int32)
 slPageSize
   = lens _slPageSize (\ s a -> s{_slPageSize = a}) .

@@ -79,7 +79,8 @@ type PeopleUpdateContactResource =
 -- and re-apply their updates to the latest person.
 --
 -- /See:/ 'peopleUpdateContact' smart constructor.
-data PeopleUpdateContact = PeopleUpdateContact'
+data PeopleUpdateContact =
+  PeopleUpdateContact'
     { _pucXgafv              :: !(Maybe Xgafv)
     , _pucUploadProtocol     :: !(Maybe Text)
     , _pucResourceName       :: !Text
@@ -88,7 +89,9 @@ data PeopleUpdateContact = PeopleUpdateContact'
     , _pucUploadType         :: !(Maybe Text)
     , _pucPayload            :: !Person
     , _pucCallback           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleUpdateContact' with the minimum fields required to make a request.
 --
@@ -114,7 +117,7 @@ peopleUpdateContact
     -> Person -- ^ 'pucPayload'
     -> PeopleUpdateContact
 peopleUpdateContact pPucResourceName_ pPucPayload_ =
-    PeopleUpdateContact'
+  PeopleUpdateContact'
     { _pucXgafv = Nothing
     , _pucUploadProtocol = Nothing
     , _pucResourceName = pPucResourceName_
@@ -124,6 +127,7 @@ peopleUpdateContact pPucResourceName_ pPucPayload_ =
     , _pucPayload = pPucPayload_
     , _pucCallback = Nothing
     }
+
 
 -- | V1 error format.
 pucXgafv :: Lens' PeopleUpdateContact (Maybe Xgafv)
@@ -147,9 +151,9 @@ pucResourceName
 -- updated. Multiple fields can be specified by separating them with
 -- commas. All updated fields will be replaced. Valid values are: *
 -- addresses * biographies * birthdays * emailAddresses * events * genders
--- * imClients * interests * locales * names * nicknames * occupations *
--- organizations * phoneNumbers * relations * residences * sipAddresses *
--- urls * userDefined
+-- * imClients * interests * locales * memberships * names * nicknames *
+-- occupations * organizations * phoneNumbers * relations * residences *
+-- sipAddresses * urls * userDefined
 pucUpdatePersonFields :: Lens' PeopleUpdateContact (Maybe GFieldMask)
 pucUpdatePersonFields
   = lens _pucUpdatePersonFields

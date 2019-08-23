@@ -68,7 +68,8 @@ type BiddersAccountsFilterSetsBidResponseErrorsListResource
 -- responses affected for each reason.
 --
 -- /See:/ 'biddersAccountsFilterSetsBidResponseErrorsList' smart constructor.
-data BiddersAccountsFilterSetsBidResponseErrorsList = BiddersAccountsFilterSetsBidResponseErrorsList'
+data BiddersAccountsFilterSetsBidResponseErrorsList =
+  BiddersAccountsFilterSetsBidResponseErrorsList'
     { _bafsbrelXgafv          :: !(Maybe Xgafv)
     , _bafsbrelUploadProtocol :: !(Maybe Text)
     , _bafsbrelFilterSetName  :: !Text
@@ -77,7 +78,9 @@ data BiddersAccountsFilterSetsBidResponseErrorsList = BiddersAccountsFilterSetsB
     , _bafsbrelPageToken      :: !(Maybe Text)
     , _bafsbrelPageSize       :: !(Maybe (Textual Int32))
     , _bafsbrelCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsBidResponseErrorsList' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ biddersAccountsFilterSetsBidResponseErrorsList
     :: Text -- ^ 'bafsbrelFilterSetName'
     -> BiddersAccountsFilterSetsBidResponseErrorsList
 biddersAccountsFilterSetsBidResponseErrorsList pBafsbrelFilterSetName_ =
-    BiddersAccountsFilterSetsBidResponseErrorsList'
+  BiddersAccountsFilterSetsBidResponseErrorsList'
     { _bafsbrelXgafv = Nothing
     , _bafsbrelUploadProtocol = Nothing
     , _bafsbrelFilterSetName = pBafsbrelFilterSetName_
@@ -112,6 +115,7 @@ biddersAccountsFilterSetsBidResponseErrorsList pBafsbrelFilterSetName_ =
     , _bafsbrelPageSize = Nothing
     , _bafsbrelCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsbrelXgafv :: Lens' BiddersAccountsFilterSetsBidResponseErrorsList (Maybe Xgafv)
@@ -173,7 +177,8 @@ bafsbrelCallback
       (\ s a -> s{_bafsbrelCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsBidResponseErrorsList where
+           BiddersAccountsFilterSetsBidResponseErrorsList
+         where
         type Rs
                BiddersAccountsFilterSetsBidResponseErrorsList
              = ListBidResponseErrorsResponse

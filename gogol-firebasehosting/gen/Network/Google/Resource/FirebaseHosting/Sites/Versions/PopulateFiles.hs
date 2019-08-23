@@ -62,7 +62,8 @@ type SitesVersionsPopulateFilesResource =
 -- | Adds content files to a version.
 --
 -- /See:/ 'sitesVersionsPopulateFiles' smart constructor.
-data SitesVersionsPopulateFiles = SitesVersionsPopulateFiles'
+data SitesVersionsPopulateFiles =
+  SitesVersionsPopulateFiles'
     { _svpfParent         :: !Text
     , _svpfXgafv          :: !(Maybe Xgafv)
     , _svpfUploadProtocol :: !(Maybe Text)
@@ -70,7 +71,9 @@ data SitesVersionsPopulateFiles = SitesVersionsPopulateFiles'
     , _svpfUploadType     :: !(Maybe Text)
     , _svpfPayload        :: !PopulateVersionFilesRequest
     , _svpfCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SitesVersionsPopulateFiles' with the minimum fields required to make a request.
 --
@@ -94,7 +97,7 @@ sitesVersionsPopulateFiles
     -> PopulateVersionFilesRequest -- ^ 'svpfPayload'
     -> SitesVersionsPopulateFiles
 sitesVersionsPopulateFiles pSvpfParent_ pSvpfPayload_ =
-    SitesVersionsPopulateFiles'
+  SitesVersionsPopulateFiles'
     { _svpfParent = pSvpfParent_
     , _svpfXgafv = Nothing
     , _svpfUploadProtocol = Nothing
@@ -103,6 +106,7 @@ sitesVersionsPopulateFiles pSvpfParent_ pSvpfPayload_ =
     , _svpfPayload = pSvpfPayload_
     , _svpfCallback = Nothing
     }
+
 
 -- | Required. The version to add files to, in the format:
 -- 'sites\/site-name\/versions\/versionID'

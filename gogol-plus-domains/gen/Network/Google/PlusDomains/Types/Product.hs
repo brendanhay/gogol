@@ -22,13 +22,16 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'audience' smart constructor.
-data Audience = Audience'
+data Audience =
+  Audience'
     { _aEtag        :: !(Maybe Text)
     , _aKind        :: !Text
     , _aVisibility  :: !(Maybe Text)
     , _aItem        :: !(Maybe PlusDomainsACLentryResource)
     , _aMemberCount :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Audience' with the minimum fields required to make a request.
 --
@@ -46,13 +49,14 @@ data Audience = Audience'
 audience
     :: Audience
 audience =
-    Audience'
+  Audience'
     { _aEtag = Nothing
     , _aKind = "plus#audience"
     , _aVisibility = Nothing
     , _aItem = Nothing
     , _aMemberCount = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 aEtag :: Lens' Audience (Maybe Text)
@@ -104,9 +108,12 @@ instance ToJSON Audience where
 -- | The service provider that initially published this activity.
 --
 -- /See:/ 'activityProvider' smart constructor.
-newtype ActivityProvider = ActivityProvider'
+newtype ActivityProvider =
+  ActivityProvider'
     { _apTitle :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityProvider' with the minimum fields required to make a request.
 --
@@ -115,10 +122,8 @@ newtype ActivityProvider = ActivityProvider'
 -- * 'apTitle'
 activityProvider
     :: ActivityProvider
-activityProvider =
-    ActivityProvider'
-    { _apTitle = Nothing
-    }
+activityProvider = ActivityProvider' {_apTitle = Nothing}
+
 
 -- | Name of the service provider.
 apTitle :: Lens' ActivityProvider (Maybe Text)
@@ -136,10 +141,13 @@ instance ToJSON ActivityProvider where
 -- | If the attachment is a video, the embeddable link.
 --
 -- /See:/ 'activityObjectAttachmentsItemEmbed' smart constructor.
-data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed'
+data ActivityObjectAttachmentsItemEmbed =
+  ActivityObjectAttachmentsItemEmbed'
     { _aoaieURL  :: !(Maybe Text)
     , _aoaieType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItemEmbed' with the minimum fields required to make a request.
 --
@@ -151,10 +159,9 @@ data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed'
 activityObjectAttachmentsItemEmbed
     :: ActivityObjectAttachmentsItemEmbed
 activityObjectAttachmentsItemEmbed =
-    ActivityObjectAttachmentsItemEmbed'
-    { _aoaieURL = Nothing
-    , _aoaieType = Nothing
-    }
+  ActivityObjectAttachmentsItemEmbed'
+    {_aoaieURL = Nothing, _aoaieType = Nothing}
+
 
 -- | URL of the link.
 aoaieURL :: Lens' ActivityObjectAttachmentsItemEmbed (Maybe Text)
@@ -184,9 +191,12 @@ instance ToJSON ActivityObjectAttachmentsItemEmbed
 -- | People who +1\'d this comment.
 --
 -- /See:/ 'commentPlusoners' smart constructor.
-newtype CommentPlusoners = CommentPlusoners'
+newtype CommentPlusoners =
+  CommentPlusoners'
     { _cpTotalItems :: Maybe (Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentPlusoners' with the minimum fields required to make a request.
 --
@@ -195,10 +205,8 @@ newtype CommentPlusoners = CommentPlusoners'
 -- * 'cpTotalItems'
 commentPlusoners
     :: CommentPlusoners
-commentPlusoners =
-    CommentPlusoners'
-    { _cpTotalItems = Nothing
-    }
+commentPlusoners = CommentPlusoners' {_cpTotalItems = Nothing}
+
 
 -- | Total number of people who +1\'d this comment.
 cpTotalItems :: Lens' CommentPlusoners (Maybe Word32)
@@ -219,9 +227,12 @@ instance ToJSON CommentPlusoners where
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'commentActorClientSpecificActorInfo' smart constructor.
-newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInfo'
+newtype CommentActorClientSpecificActorInfo =
+  CommentActorClientSpecificActorInfo'
     { _cacsaiYouTubeActorInfo :: Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentActorClientSpecificActorInfo' with the minimum fields required to make a request.
 --
@@ -231,9 +242,8 @@ newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInf
 commentActorClientSpecificActorInfo
     :: CommentActorClientSpecificActorInfo
 commentActorClientSpecificActorInfo =
-    CommentActorClientSpecificActorInfo'
-    { _cacsaiYouTubeActorInfo = Nothing
-    }
+  CommentActorClientSpecificActorInfo' {_cacsaiYouTubeActorInfo = Nothing}
+
 
 -- | Actor info specific to YouTube clients.
 cacsaiYouTubeActorInfo :: Lens' CommentActorClientSpecificActorInfo (Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo)
@@ -260,9 +270,12 @@ instance ToJSON CommentActorClientSpecificActorInfo
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'activityObjectActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
+newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo =
+  ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
     { _aoacsaiytaiChannelId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
 --
@@ -272,9 +285,9 @@ newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObj
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo
     :: ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo =
-    ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
-    { _aoacsaiytaiChannelId = Nothing
-    }
+  ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
+    {_aoacsaiytaiChannelId = Nothing}
+
 
 -- | ID of the YouTube channel owned by the Actor.
 aoacsaiytaiChannelId :: Lens' ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
@@ -283,7 +296,7 @@ aoacsaiytaiChannelId
       (\ s a -> s{_aoacsaiytaiChannelId = a})
 
 instance FromJSON
-         ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+           ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
          where
         parseJSON
           = withObject
@@ -293,7 +306,7 @@ instance FromJSON
                    <$> (o .:? "channelId"))
 
 instance ToJSON
-         ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+           ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
           ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'{..}
@@ -304,10 +317,13 @@ instance ToJSON
 -- | People who +1\'d this activity.
 --
 -- /See:/ 'activityObjectPlusoners' smart constructor.
-data ActivityObjectPlusoners = ActivityObjectPlusoners'
+data ActivityObjectPlusoners =
+  ActivityObjectPlusoners'
     { _aopTotalItems :: !(Maybe (Textual Word32))
     , _aopSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectPlusoners' with the minimum fields required to make a request.
 --
@@ -319,10 +335,8 @@ data ActivityObjectPlusoners = ActivityObjectPlusoners'
 activityObjectPlusoners
     :: ActivityObjectPlusoners
 activityObjectPlusoners =
-    ActivityObjectPlusoners'
-    { _aopTotalItems = Nothing
-    , _aopSelfLink = Nothing
-    }
+  ActivityObjectPlusoners' {_aopTotalItems = Nothing, _aopSelfLink = Nothing}
+
 
 -- | Total number of people who +1\'d this activity.
 aopTotalItems :: Lens' ActivityObjectPlusoners (Maybe Word32)
@@ -352,10 +366,13 @@ instance ToJSON ActivityObjectPlusoners where
 
 --
 -- /See:/ 'personEmailsItem' smart constructor.
-data PersonEmailsItem = PersonEmailsItem'
+data PersonEmailsItem =
+  PersonEmailsItem'
     { _peiValue :: !(Maybe Text)
     , _peiType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonEmailsItem' with the minimum fields required to make a request.
 --
@@ -366,11 +383,8 @@ data PersonEmailsItem = PersonEmailsItem'
 -- * 'peiType'
 personEmailsItem
     :: PersonEmailsItem
-personEmailsItem =
-    PersonEmailsItem'
-    { _peiValue = Nothing
-    , _peiType = Nothing
-    }
+personEmailsItem = PersonEmailsItem' {_peiValue = Nothing, _peiType = Nothing}
+
 
 -- | The email address.
 peiValue :: Lens' PersonEmailsItem (Maybe Text)
@@ -400,9 +414,12 @@ instance ToJSON PersonEmailsItem where
 -- | The image representation of this actor.
 --
 -- /See:/ 'commentActorImage' smart constructor.
-newtype CommentActorImage = CommentActorImage'
+newtype CommentActorImage =
+  CommentActorImage'
     { _caiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentActorImage' with the minimum fields required to make a request.
 --
@@ -411,10 +428,8 @@ newtype CommentActorImage = CommentActorImage'
 -- * 'caiURL'
 commentActorImage
     :: CommentActorImage
-commentActorImage =
-    CommentActorImage'
-    { _caiURL = Nothing
-    }
+commentActorImage = CommentActorImage' {_caiURL = Nothing}
+
 
 -- | The URL of the actor\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -434,12 +449,15 @@ instance ToJSON CommentActorImage where
 -- | Image resource.
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItemImage' smart constructor.
-data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage'
+data ActivityObjectAttachmentsItemThumbnailsItemImage =
+  ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight :: !(Maybe (Textual Word32))
     , _aoaitiiURL    :: !(Maybe Text)
     , _aoaitiiWidth  :: !(Maybe (Textual Word32))
     , _aoaitiiType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItemThumbnailsItemImage' with the minimum fields required to make a request.
 --
@@ -455,12 +473,13 @@ data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachment
 activityObjectAttachmentsItemThumbnailsItemImage
     :: ActivityObjectAttachmentsItemThumbnailsItemImage
 activityObjectAttachmentsItemThumbnailsItemImage =
-    ActivityObjectAttachmentsItemThumbnailsItemImage'
+  ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight = Nothing
     , _aoaitiiURL = Nothing
     , _aoaitiiWidth = Nothing
     , _aoaitiiType = Nothing
     }
+
 
 -- | The height, in pixels, of the linked resource.
 aoaitiiHeight :: Lens' ActivityObjectAttachmentsItemThumbnailsItemImage (Maybe Word32)
@@ -486,7 +505,7 @@ aoaitiiType
   = lens _aoaitiiType (\ s a -> s{_aoaitiiType = a})
 
 instance FromJSON
-         ActivityObjectAttachmentsItemThumbnailsItemImage
+           ActivityObjectAttachmentsItemThumbnailsItemImage
          where
         parseJSON
           = withObject
@@ -498,7 +517,7 @@ instance FromJSON
                      <*> (o .:? "type"))
 
 instance ToJSON
-         ActivityObjectAttachmentsItemThumbnailsItemImage
+           ActivityObjectAttachmentsItemThumbnailsItemImage
          where
         toJSON
           ActivityObjectAttachmentsItemThumbnailsItemImage'{..}
@@ -512,10 +531,13 @@ instance ToJSON
 -- | The position of the place.
 --
 -- /See:/ 'placePosition' smart constructor.
-data PlacePosition = PlacePosition'
+data PlacePosition =
+  PlacePosition'
     { _ppLatitude  :: !(Maybe (Textual Double))
     , _ppLongitude :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacePosition' with the minimum fields required to make a request.
 --
@@ -526,11 +548,8 @@ data PlacePosition = PlacePosition'
 -- * 'ppLongitude'
 placePosition
     :: PlacePosition
-placePosition =
-    PlacePosition'
-    { _ppLatitude = Nothing
-    , _ppLongitude = Nothing
-    }
+placePosition = PlacePosition' {_ppLatitude = Nothing, _ppLongitude = Nothing}
+
 
 -- | The latitude of this position.
 ppLatitude :: Lens' PlacePosition (Maybe Double)
@@ -560,10 +579,13 @@ instance ToJSON PlacePosition where
 
 --
 -- /See:/ 'personPlacesLivedItem' smart constructor.
-data PersonPlacesLivedItem = PersonPlacesLivedItem'
+data PersonPlacesLivedItem =
+  PersonPlacesLivedItem'
     { _ppliValue   :: !(Maybe Text)
     , _ppliPrimary :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonPlacesLivedItem' with the minimum fields required to make a request.
 --
@@ -575,10 +597,8 @@ data PersonPlacesLivedItem = PersonPlacesLivedItem'
 personPlacesLivedItem
     :: PersonPlacesLivedItem
 personPlacesLivedItem =
-    PersonPlacesLivedItem'
-    { _ppliValue = Nothing
-    , _ppliPrimary = Nothing
-    }
+  PersonPlacesLivedItem' {_ppliValue = Nothing, _ppliPrimary = Nothing}
+
 
 -- | A place where this person has lived. For example: \"Seattle, WA\",
 -- \"Near Toronto\".
@@ -608,7 +628,8 @@ instance ToJSON PersonPlacesLivedItem where
 
 --
 -- /See:/ 'circle' smart constructor.
-data Circle = Circle'
+data Circle =
+  Circle'
     { _cEtag        :: !(Maybe Text)
     , _cKind        :: !Text
     , _cPeople      :: !(Maybe CirclePeople)
@@ -616,7 +637,9 @@ data Circle = Circle'
     , _cDisplayName :: !(Maybe Text)
     , _cId          :: !(Maybe Text)
     , _cDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Circle' with the minimum fields required to make a request.
 --
@@ -638,7 +661,7 @@ data Circle = Circle'
 circle
     :: Circle
 circle =
-    Circle'
+  Circle'
     { _cEtag = Nothing
     , _cKind = "plus#circle"
     , _cPeople = Nothing
@@ -647,6 +670,7 @@ circle =
     , _cId = Nothing
     , _cDescription = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 cEtag :: Lens' Circle (Maybe Text)
@@ -705,9 +729,12 @@ instance ToJSON Circle where
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'activityActorClientSpecificActorInfo' smart constructor.
-newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorInfo'
+newtype ActivityActorClientSpecificActorInfo =
+  ActivityActorClientSpecificActorInfo'
     { _aacsaiYouTubeActorInfo :: Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityActorClientSpecificActorInfo' with the minimum fields required to make a request.
 --
@@ -717,9 +744,8 @@ newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorI
 activityActorClientSpecificActorInfo
     :: ActivityActorClientSpecificActorInfo
 activityActorClientSpecificActorInfo =
-    ActivityActorClientSpecificActorInfo'
-    { _aacsaiYouTubeActorInfo = Nothing
-    }
+  ActivityActorClientSpecificActorInfo' {_aacsaiYouTubeActorInfo = Nothing}
+
 
 -- | Actor info specific to YouTube clients.
 aacsaiYouTubeActorInfo :: Lens' ActivityActorClientSpecificActorInfo (Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo)
@@ -728,7 +754,8 @@ aacsaiYouTubeActorInfo
       (\ s a -> s{_aacsaiYouTubeActorInfo = a})
 
 instance FromJSON
-         ActivityActorClientSpecificActorInfo where
+           ActivityActorClientSpecificActorInfo
+         where
         parseJSON
           = withObject "ActivityActorClientSpecificActorInfo"
               (\ o ->
@@ -745,7 +772,8 @@ instance ToJSON ActivityActorClientSpecificActorInfo
 
 --
 -- /See:/ 'person' smart constructor.
-data Person = Person'
+data Person =
+  Person'
     { _pCurrentLocation    :: !(Maybe Text)
     , _pEtag               :: !(Maybe Text)
     , _pImage              :: !(Maybe PersonImage)
@@ -774,7 +802,9 @@ data Person = Person'
     , _pNickname           :: !(Maybe Text)
     , _pOrganizations      :: !(Maybe [PersonOrganizationsItem])
     , _pCircledByCount     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
 --
@@ -838,7 +868,7 @@ data Person = Person'
 person
     :: Person
 person =
-    Person'
+  Person'
     { _pCurrentLocation = Nothing
     , _pEtag = Nothing
     , _pImage = Nothing
@@ -868,6 +898,7 @@ person =
     , _pOrganizations = Nothing
     , _pCircledByCount = Nothing
     }
+
 
 -- | (this field is not currently used)
 pCurrentLocation :: Lens' Person (Maybe Text)
@@ -1093,12 +1124,15 @@ instance ToJSON Person where
 
 --
 -- /See:/ 'videostream' smart constructor.
-data Videostream = Videostream'
+data Videostream =
+  Videostream'
     { _vHeight :: !(Maybe (Textual Int32))
     , _vURL    :: !(Maybe Text)
     , _vWidth  :: !(Maybe (Textual Int32))
     , _vType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Videostream' with the minimum fields required to make a request.
 --
@@ -1114,12 +1148,9 @@ data Videostream = Videostream'
 videostream
     :: Videostream
 videostream =
-    Videostream'
-    { _vHeight = Nothing
-    , _vURL = Nothing
-    , _vWidth = Nothing
-    , _vType = Nothing
-    }
+  Videostream'
+    {_vHeight = Nothing, _vURL = Nothing, _vWidth = Nothing, _vType = Nothing}
+
 
 -- | The height, in pixels, of the video resource.
 vHeight :: Lens' Videostream (Maybe Int32)
@@ -1159,7 +1190,8 @@ instance ToJSON Videostream where
 
 --
 -- /See:/ 'circleFeed' smart constructor.
-data CircleFeed = CircleFeed'
+data CircleFeed =
+  CircleFeed'
     { _cfTotalItems    :: !(Maybe (Textual Int32))
     , _cfEtag          :: !(Maybe Text)
     , _cfNextPageToken :: !(Maybe Text)
@@ -1168,7 +1200,9 @@ data CircleFeed = CircleFeed'
     , _cfItems         :: !(Maybe [Circle])
     , _cfSelfLink      :: !(Maybe Text)
     , _cfTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CircleFeed' with the minimum fields required to make a request.
 --
@@ -1192,7 +1226,7 @@ data CircleFeed = CircleFeed'
 circleFeed
     :: CircleFeed
 circleFeed =
-    CircleFeed'
+  CircleFeed'
     { _cfTotalItems = Nothing
     , _cfEtag = Nothing
     , _cfNextPageToken = Nothing
@@ -1202,6 +1236,7 @@ circleFeed =
     , _cfSelfLink = Nothing
     , _cfTitle = Nothing
     }
+
 
 -- | The total number of circles. The number of circles in this response may
 -- be smaller due to paging.
@@ -1275,12 +1310,15 @@ instance ToJSON CircleFeed where
 -- | The preview image for photos or videos.
 --
 -- /See:/ 'activityObjectAttachmentsItemImage' smart constructor.
-data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage'
+data ActivityObjectAttachmentsItemImage =
+  ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight :: !(Maybe (Textual Word32))
     , _aoaiiURL    :: !(Maybe Text)
     , _aoaiiWidth  :: !(Maybe (Textual Word32))
     , _aoaiiType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItemImage' with the minimum fields required to make a request.
 --
@@ -1296,12 +1334,13 @@ data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage'
 activityObjectAttachmentsItemImage
     :: ActivityObjectAttachmentsItemImage
 activityObjectAttachmentsItemImage =
-    ActivityObjectAttachmentsItemImage'
+  ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight = Nothing
     , _aoaiiURL = Nothing
     , _aoaiiWidth = Nothing
     , _aoaiiType = Nothing
     }
+
 
 -- | The height, in pixels, of the linked resource.
 aoaiiHeight :: Lens' ActivityObjectAttachmentsItemImage (Maybe Word32)
@@ -1347,14 +1386,17 @@ instance ToJSON ActivityObjectAttachmentsItemImage
 -- | The person who posted this comment.
 --
 -- /See:/ 'commentActor' smart constructor.
-data CommentActor = CommentActor'
+data CommentActor =
+  CommentActor'
     { _caClientSpecificActorInfo :: !(Maybe CommentActorClientSpecificActorInfo)
     , _caImage                   :: !(Maybe CommentActorImage)
     , _caURL                     :: !(Maybe Text)
     , _caDisplayName             :: !(Maybe Text)
     , _caId                      :: !(Maybe Text)
     , _caVerification            :: !(Maybe CommentActorVerification)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentActor' with the minimum fields required to make a request.
 --
@@ -1374,7 +1416,7 @@ data CommentActor = CommentActor'
 commentActor
     :: CommentActor
 commentActor =
-    CommentActor'
+  CommentActor'
     { _caClientSpecificActorInfo = Nothing
     , _caImage = Nothing
     , _caURL = Nothing
@@ -1382,6 +1424,7 @@ commentActor =
     , _caId = Nothing
     , _caVerification = Nothing
     }
+
 
 -- | Actor info specific to particular clients.
 caClientSpecificActorInfo :: Lens' CommentActor (Maybe CommentActorClientSpecificActorInfo)
@@ -1438,7 +1481,8 @@ instance ToJSON CommentActor where
 -- | The object of this activity.
 --
 -- /See:/ 'activityObject' smart constructor.
-data ActivityObject = ActivityObject'
+data ActivityObject =
+  ActivityObject'
     { _aoPlusoners       :: !(Maybe ActivityObjectPlusoners)
     , _aoAttachments     :: !(Maybe [ActivityObjectAttachmentsItem])
     , _aoObjectType      :: !(Maybe Text)
@@ -1450,7 +1494,9 @@ data ActivityObject = ActivityObject'
     , _aoId              :: !(Maybe Text)
     , _aoStatusForViewer :: !(Maybe ActivityObjectStatusForViewer)
     , _aoResharers       :: !(Maybe ActivityObjectResharers)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObject' with the minimum fields required to make a request.
 --
@@ -1480,7 +1526,7 @@ data ActivityObject = ActivityObject'
 activityObject
     :: ActivityObject
 activityObject =
-    ActivityObject'
+  ActivityObject'
     { _aoPlusoners = Nothing
     , _aoAttachments = Nothing
     , _aoObjectType = Nothing
@@ -1493,6 +1539,7 @@ activityObject =
     , _aoStatusForViewer = Nothing
     , _aoResharers = Nothing
     }
+
 
 -- | People who +1\'d this activity.
 aoPlusoners :: Lens' ActivityObject (Maybe ActivityObjectPlusoners)
@@ -1594,14 +1641,17 @@ instance ToJSON ActivityObject where
 -- activity\'s actor.
 --
 -- /See:/ 'activityObjectActor' smart constructor.
-data ActivityObjectActor = ActivityObjectActor'
+data ActivityObjectActor =
+  ActivityObjectActor'
     { _aoaClientSpecificActorInfo :: !(Maybe ActivityObjectActorClientSpecificActorInfo)
     , _aoaImage                   :: !(Maybe ActivityObjectActorImage)
     , _aoaURL                     :: !(Maybe Text)
     , _aoaDisplayName             :: !(Maybe Text)
     , _aoaId                      :: !(Maybe Text)
     , _aoaVerification            :: !(Maybe ActivityObjectActorVerification)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectActor' with the minimum fields required to make a request.
 --
@@ -1621,7 +1671,7 @@ data ActivityObjectActor = ActivityObjectActor'
 activityObjectActor
     :: ActivityObjectActor
 activityObjectActor =
-    ActivityObjectActor'
+  ActivityObjectActor'
     { _aoaClientSpecificActorInfo = Nothing
     , _aoaImage = Nothing
     , _aoaURL = Nothing
@@ -1629,6 +1679,7 @@ activityObjectActor =
     , _aoaId = Nothing
     , _aoaVerification = Nothing
     }
+
 
 -- | Actor info specific to particular clients.
 aoaClientSpecificActorInfo :: Lens' ActivityObjectActor (Maybe ActivityObjectActorClientSpecificActorInfo)
@@ -1685,12 +1736,15 @@ instance ToJSON ActivityObjectActor where
 -- | The full image URL for photo attachments.
 --
 -- /See:/ 'activityObjectAttachmentsItemFullImage' smart constructor.
-data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage'
+data ActivityObjectAttachmentsItemFullImage =
+  ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight :: !(Maybe (Textual Word32))
     , _aoaifiURL    :: !(Maybe Text)
     , _aoaifiWidth  :: !(Maybe (Textual Word32))
     , _aoaifiType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItemFullImage' with the minimum fields required to make a request.
 --
@@ -1706,12 +1760,13 @@ data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullI
 activityObjectAttachmentsItemFullImage
     :: ActivityObjectAttachmentsItemFullImage
 activityObjectAttachmentsItemFullImage =
-    ActivityObjectAttachmentsItemFullImage'
+  ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight = Nothing
     , _aoaifiURL = Nothing
     , _aoaifiWidth = Nothing
     , _aoaifiType = Nothing
     }
+
 
 -- | The height, in pixels, of the linked resource.
 aoaifiHeight :: Lens' ActivityObjectAttachmentsItemFullImage (Maybe Word32)
@@ -1736,7 +1791,8 @@ aoaifiType
   = lens _aoaifiType (\ s a -> s{_aoaifiType = a})
 
 instance FromJSON
-         ActivityObjectAttachmentsItemFullImage where
+           ActivityObjectAttachmentsItemFullImage
+         where
         parseJSON
           = withObject "ActivityObjectAttachmentsItemFullImage"
               (\ o ->
@@ -1746,7 +1802,8 @@ instance FromJSON
                      <*> (o .:? "type"))
 
 instance ToJSON
-         ActivityObjectAttachmentsItemFullImage where
+           ActivityObjectAttachmentsItemFullImage
+         where
         toJSON ActivityObjectAttachmentsItemFullImage'{..}
           = object
               (catMaybes
@@ -1758,9 +1815,12 @@ instance ToJSON
 -- | The author\'s Google profile image.
 --
 -- /See:/ 'mediaAuthorImage' smart constructor.
-newtype MediaAuthorImage = MediaAuthorImage'
+newtype MediaAuthorImage =
+  MediaAuthorImage'
     { _maiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MediaAuthorImage' with the minimum fields required to make a request.
 --
@@ -1769,10 +1829,8 @@ newtype MediaAuthorImage = MediaAuthorImage'
 -- * 'maiURL'
 mediaAuthorImage
     :: MediaAuthorImage
-mediaAuthorImage =
-    MediaAuthorImage'
-    { _maiURL = Nothing
-    }
+mediaAuthorImage = MediaAuthorImage' {_maiURL = Nothing}
+
 
 -- | The URL of the author\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -1792,9 +1850,12 @@ instance ToJSON MediaAuthorImage where
 -- | The people in this circle.
 --
 -- /See:/ 'circlePeople' smart constructor.
-newtype CirclePeople = CirclePeople'
+newtype CirclePeople =
+  CirclePeople'
     { _cTotalItems :: Maybe (Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CirclePeople' with the minimum fields required to make a request.
 --
@@ -1803,10 +1864,8 @@ newtype CirclePeople = CirclePeople'
 -- * 'cTotalItems'
 circlePeople
     :: CirclePeople
-circlePeople =
-    CirclePeople'
-    { _cTotalItems = Nothing
-    }
+circlePeople = CirclePeople' {_cTotalItems = Nothing}
+
 
 -- | The total number of people in this circle.
 cTotalItems :: Lens' CirclePeople (Maybe Word32)
@@ -1826,11 +1885,14 @@ instance ToJSON CirclePeople where
 
 --
 -- /See:/ 'plusDomainsACLentryResource' smart constructor.
-data PlusDomainsACLentryResource = PlusDomainsACLentryResource'
+data PlusDomainsACLentryResource =
+  PlusDomainsACLentryResource'
     { _pdarDisplayName :: !(Maybe Text)
     , _pdarId          :: !(Maybe Text)
     , _pdarType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlusDomainsACLentryResource' with the minimum fields required to make a request.
 --
@@ -1844,11 +1906,9 @@ data PlusDomainsACLentryResource = PlusDomainsACLentryResource'
 plusDomainsACLentryResource
     :: PlusDomainsACLentryResource
 plusDomainsACLentryResource =
-    PlusDomainsACLentryResource'
-    { _pdarDisplayName = Nothing
-    , _pdarId = Nothing
-    , _pdarType = Nothing
-    }
+  PlusDomainsACLentryResource'
+    {_pdarDisplayName = Nothing, _pdarId = Nothing, _pdarType = Nothing}
+
 
 -- | A descriptive name for this entry. Suitable for display.
 pdarDisplayName :: Lens' PlusDomainsACLentryResource (Maybe Text)
@@ -1889,9 +1949,12 @@ instance ToJSON PlusDomainsACLentryResource where
 -- | The image representation of the actor.
 --
 -- /See:/ 'activityActorImage' smart constructor.
-newtype ActivityActorImage = ActivityActorImage'
+newtype ActivityActorImage =
+  ActivityActorImage'
     { _aaiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityActorImage' with the minimum fields required to make a request.
 --
@@ -1900,10 +1963,8 @@ newtype ActivityActorImage = ActivityActorImage'
 -- * 'aaiURL'
 activityActorImage
     :: ActivityActorImage
-activityActorImage =
-    ActivityActorImage'
-    { _aaiURL = Nothing
-    }
+activityActorImage = ActivityActorImage' {_aaiURL = Nothing}
+
 
 -- | The URL of the actor\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -1922,7 +1983,8 @@ instance ToJSON ActivityActorImage where
 
 --
 -- /See:/ 'peopleFeed' smart constructor.
-data PeopleFeed = PeopleFeed'
+data PeopleFeed =
+  PeopleFeed'
     { _pfTotalItems    :: !(Maybe (Textual Int32))
     , _pfEtag          :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
@@ -1930,7 +1992,9 @@ data PeopleFeed = PeopleFeed'
     , _pfItems         :: !(Maybe [Person])
     , _pfSelfLink      :: !(Maybe Text)
     , _pfTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PeopleFeed' with the minimum fields required to make a request.
 --
@@ -1952,7 +2016,7 @@ data PeopleFeed = PeopleFeed'
 peopleFeed
     :: PeopleFeed
 peopleFeed =
-    PeopleFeed'
+  PeopleFeed'
     { _pfTotalItems = Nothing
     , _pfEtag = Nothing
     , _pfNextPageToken = Nothing
@@ -1961,6 +2025,7 @@ peopleFeed =
     , _pfSelfLink = Nothing
     , _pfTitle = Nothing
     }
+
 
 -- | The total number of people available in this list. The number of people
 -- in a response might be smaller due to paging. This might not be set for
@@ -2030,11 +2095,14 @@ instance ToJSON PeopleFeed where
 -- | The person\'s primary cover image.
 --
 -- /See:/ 'personCoverCoverPhoto' smart constructor.
-data PersonCoverCoverPhoto = PersonCoverCoverPhoto'
+data PersonCoverCoverPhoto =
+  PersonCoverCoverPhoto'
     { _pccpHeight :: !(Maybe (Textual Int32))
     , _pccpURL    :: !(Maybe Text)
     , _pccpWidth  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonCoverCoverPhoto' with the minimum fields required to make a request.
 --
@@ -2048,11 +2116,9 @@ data PersonCoverCoverPhoto = PersonCoverCoverPhoto'
 personCoverCoverPhoto
     :: PersonCoverCoverPhoto
 personCoverCoverPhoto =
-    PersonCoverCoverPhoto'
-    { _pccpHeight = Nothing
-    , _pccpURL = Nothing
-    , _pccpWidth = Nothing
-    }
+  PersonCoverCoverPhoto'
+    {_pccpHeight = Nothing, _pccpURL = Nothing, _pccpWidth = Nothing}
+
 
 -- | The height of the image.
 pccpHeight :: Lens' PersonCoverCoverPhoto (Maybe Int32)
@@ -2089,12 +2155,15 @@ instance ToJSON PersonCoverCoverPhoto where
 -- | The person who uploaded this media.
 --
 -- /See:/ 'mediaAuthor' smart constructor.
-data MediaAuthor = MediaAuthor'
+data MediaAuthor =
+  MediaAuthor'
     { _maImage       :: !(Maybe MediaAuthorImage)
     , _maURL         :: !(Maybe Text)
     , _maDisplayName :: !(Maybe Text)
     , _maId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MediaAuthor' with the minimum fields required to make a request.
 --
@@ -2110,12 +2179,13 @@ data MediaAuthor = MediaAuthor'
 mediaAuthor
     :: MediaAuthor
 mediaAuthor =
-    MediaAuthor'
+  MediaAuthor'
     { _maImage = Nothing
     , _maURL = Nothing
     , _maDisplayName = Nothing
     , _maId = Nothing
     }
+
 
 -- | The author\'s Google profile image.
 maImage :: Lens' MediaAuthor (Maybe MediaAuthorImage)
@@ -2155,9 +2225,12 @@ instance ToJSON MediaAuthor where
 -- | The image representation of the original actor.
 --
 -- /See:/ 'activityObjectActorImage' smart constructor.
-newtype ActivityObjectActorImage = ActivityObjectActorImage'
+newtype ActivityObjectActorImage =
+  ActivityObjectActorImage'
     { _aoaiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectActorImage' with the minimum fields required to make a request.
 --
@@ -2166,10 +2239,8 @@ newtype ActivityObjectActorImage = ActivityObjectActorImage'
 -- * 'aoaiURL'
 activityObjectActorImage
     :: ActivityObjectActorImage
-activityObjectActorImage =
-    ActivityObjectActorImage'
-    { _aoaiURL = Nothing
-    }
+activityObjectActorImage = ActivityObjectActorImage' {_aoaiURL = Nothing}
+
 
 -- | A URL that points to a thumbnail photo of the original actor.
 aoaiURL :: Lens' ActivityObjectActorImage (Maybe Text)
@@ -2187,9 +2258,12 @@ instance ToJSON ActivityObjectActorImage where
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'commentActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClientSpecificActorInfoYouTubeActorInfo'
+newtype CommentActorClientSpecificActorInfoYouTubeActorInfo =
+  CommentActorClientSpecificActorInfoYouTubeActorInfo'
     { _cacsaiytaiChannelId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
 --
@@ -2199,9 +2273,9 @@ newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClient
 commentActorClientSpecificActorInfoYouTubeActorInfo
     :: CommentActorClientSpecificActorInfoYouTubeActorInfo
 commentActorClientSpecificActorInfoYouTubeActorInfo =
-    CommentActorClientSpecificActorInfoYouTubeActorInfo'
-    { _cacsaiytaiChannelId = Nothing
-    }
+  CommentActorClientSpecificActorInfoYouTubeActorInfo'
+    {_cacsaiytaiChannelId = Nothing}
+
 
 -- | ID of the YouTube channel owned by the Actor.
 cacsaiytaiChannelId :: Lens' CommentActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
@@ -2210,7 +2284,7 @@ cacsaiytaiChannelId
       (\ s a -> s{_cacsaiytaiChannelId = a})
 
 instance FromJSON
-         CommentActorClientSpecificActorInfoYouTubeActorInfo
+           CommentActorClientSpecificActorInfoYouTubeActorInfo
          where
         parseJSON
           = withObject
@@ -2220,7 +2294,7 @@ instance FromJSON
                    <$> (o .:? "channelId"))
 
 instance ToJSON
-         CommentActorClientSpecificActorInfoYouTubeActorInfo
+           CommentActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
           CommentActorClientSpecificActorInfoYouTubeActorInfo'{..}
@@ -2230,7 +2304,8 @@ instance ToJSON
 
 --
 -- /See:/ 'media' smart constructor.
-data Media = Media'
+data Media =
+  Media'
     { _mSizeBytes        :: !(Maybe (Textual Int64))
     , _mSummary          :: !(Maybe Text)
     , _mEtag             :: !(Maybe Text)
@@ -2249,7 +2324,9 @@ data Media = Media'
     , _mId               :: !(Maybe Text)
     , _mUpdated          :: !(Maybe DateTime')
     , _mMediaCreatedTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Media' with the minimum fields required to make a request.
 --
@@ -2293,7 +2370,7 @@ data Media = Media'
 media
     :: Media
 media =
-    Media'
+  Media'
     { _mSizeBytes = Nothing
     , _mSummary = Nothing
     , _mEtag = Nothing
@@ -2313,6 +2390,7 @@ media =
     , _mUpdated = Nothing
     , _mMediaCreatedTime = Nothing
     }
+
 
 -- | The size in bytes of this video.
 mSizeBytes :: Lens' Media (Maybe Int64)
@@ -2463,10 +2541,13 @@ instance ToJSON Media where
 -- | Comments in reply to this activity.
 --
 -- /See:/ 'activityObjectReplies' smart constructor.
-data ActivityObjectReplies = ActivityObjectReplies'
+data ActivityObjectReplies =
+  ActivityObjectReplies'
     { _aorTotalItems :: !(Maybe (Textual Word32))
     , _aorSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectReplies' with the minimum fields required to make a request.
 --
@@ -2478,10 +2559,8 @@ data ActivityObjectReplies = ActivityObjectReplies'
 activityObjectReplies
     :: ActivityObjectReplies
 activityObjectReplies =
-    ActivityObjectReplies'
-    { _aorTotalItems = Nothing
-    , _aorSelfLink = Nothing
-    }
+  ActivityObjectReplies' {_aorTotalItems = Nothing, _aorSelfLink = Nothing}
+
 
 -- | Total number of comments on this activity.
 aorTotalItems :: Lens' ActivityObjectReplies (Maybe Word32)
@@ -2511,9 +2590,12 @@ instance ToJSON ActivityObjectReplies where
 
 --
 -- /See:/ 'activityObjectAttachmentsItemPreviewThumbnailsItem' smart constructor.
-newtype ActivityObjectAttachmentsItemPreviewThumbnailsItem = ActivityObjectAttachmentsItemPreviewThumbnailsItem'
+newtype ActivityObjectAttachmentsItemPreviewThumbnailsItem =
+  ActivityObjectAttachmentsItemPreviewThumbnailsItem'
     { _aoaiptiURL :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItemPreviewThumbnailsItem' with the minimum fields required to make a request.
 --
@@ -2523,9 +2605,8 @@ newtype ActivityObjectAttachmentsItemPreviewThumbnailsItem = ActivityObjectAttac
 activityObjectAttachmentsItemPreviewThumbnailsItem
     :: ActivityObjectAttachmentsItemPreviewThumbnailsItem
 activityObjectAttachmentsItemPreviewThumbnailsItem =
-    ActivityObjectAttachmentsItemPreviewThumbnailsItem'
-    { _aoaiptiURL = Nothing
-    }
+  ActivityObjectAttachmentsItemPreviewThumbnailsItem' {_aoaiptiURL = Nothing}
+
 
 -- | URL of the thumbnail image.
 aoaiptiURL :: Lens' ActivityObjectAttachmentsItemPreviewThumbnailsItem (Maybe Text)
@@ -2533,7 +2614,7 @@ aoaiptiURL
   = lens _aoaiptiURL (\ s a -> s{_aoaiptiURL = a})
 
 instance FromJSON
-         ActivityObjectAttachmentsItemPreviewThumbnailsItem
+           ActivityObjectAttachmentsItemPreviewThumbnailsItem
          where
         parseJSON
           = withObject
@@ -2543,7 +2624,7 @@ instance FromJSON
                    <$> (o .:? "url"))
 
 instance ToJSON
-         ActivityObjectAttachmentsItemPreviewThumbnailsItem
+           ActivityObjectAttachmentsItemPreviewThumbnailsItem
          where
         toJSON
           ActivityObjectAttachmentsItemPreviewThumbnailsItem'{..}
@@ -2552,9 +2633,12 @@ instance ToJSON
 -- | Verification status of actor.
 --
 -- /See:/ 'activityActorVerification' smart constructor.
-newtype ActivityActorVerification = ActivityActorVerification'
+newtype ActivityActorVerification =
+  ActivityActorVerification'
     { _aavAdHocVerified :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityActorVerification' with the minimum fields required to make a request.
 --
@@ -2564,9 +2648,8 @@ newtype ActivityActorVerification = ActivityActorVerification'
 activityActorVerification
     :: ActivityActorVerification
 activityActorVerification =
-    ActivityActorVerification'
-    { _aavAdHocVerified = Nothing
-    }
+  ActivityActorVerification' {_aavAdHocVerified = Nothing}
+
 
 -- | Verification for one-time or manual processes.
 aavAdHocVerified :: Lens' ActivityActorVerification (Maybe Text)
@@ -2590,9 +2673,12 @@ instance ToJSON ActivityActorVerification where
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'activityObjectActorClientSpecificActorInfo' smart constructor.
-newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSpecificActorInfo'
+newtype ActivityObjectActorClientSpecificActorInfo =
+  ActivityObjectActorClientSpecificActorInfo'
     { _aoacsaiYouTubeActorInfo :: Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectActorClientSpecificActorInfo' with the minimum fields required to make a request.
 --
@@ -2602,9 +2688,9 @@ newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSp
 activityObjectActorClientSpecificActorInfo
     :: ActivityObjectActorClientSpecificActorInfo
 activityObjectActorClientSpecificActorInfo =
-    ActivityObjectActorClientSpecificActorInfo'
-    { _aoacsaiYouTubeActorInfo = Nothing
-    }
+  ActivityObjectActorClientSpecificActorInfo'
+    {_aoacsaiYouTubeActorInfo = Nothing}
+
 
 -- | Actor info specific to YouTube clients.
 aoacsaiYouTubeActorInfo :: Lens' ActivityObjectActorClientSpecificActorInfo (Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo)
@@ -2613,7 +2699,8 @@ aoacsaiYouTubeActorInfo
       (\ s a -> s{_aoacsaiYouTubeActorInfo = a})
 
 instance FromJSON
-         ActivityObjectActorClientSpecificActorInfo where
+           ActivityObjectActorClientSpecificActorInfo
+         where
         parseJSON
           = withObject
               "ActivityObjectActorClientSpecificActorInfo"
@@ -2622,7 +2709,8 @@ instance FromJSON
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON
-         ActivityObjectActorClientSpecificActorInfo where
+           ActivityObjectActorClientSpecificActorInfo
+         where
         toJSON
           ActivityObjectActorClientSpecificActorInfo'{..}
           = object
@@ -2632,7 +2720,8 @@ instance ToJSON
 
 --
 -- /See:/ 'activityObjectAttachmentsItem' smart constructor.
-data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem'
+data ActivityObjectAttachmentsItem =
+  ActivityObjectAttachmentsItem'
     { _aFullImage         :: !(Maybe ActivityObjectAttachmentsItemFullImage)
     , _aImage             :: !(Maybe ActivityObjectAttachmentsItemImage)
     , _aObjectType        :: !(Maybe Text)
@@ -2643,7 +2732,9 @@ data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem'
     , _aThumbnails        :: !(Maybe [ActivityObjectAttachmentsItemThumbnailsItem])
     , _aDisplayName       :: !(Maybe Text)
     , _aId                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItem' with the minimum fields required to make a request.
 --
@@ -2671,7 +2762,7 @@ data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem'
 activityObjectAttachmentsItem
     :: ActivityObjectAttachmentsItem
 activityObjectAttachmentsItem =
-    ActivityObjectAttachmentsItem'
+  ActivityObjectAttachmentsItem'
     { _aFullImage = Nothing
     , _aImage = Nothing
     , _aObjectType = Nothing
@@ -2683,6 +2774,7 @@ activityObjectAttachmentsItem =
     , _aDisplayName = Nothing
     , _aId = Nothing
     }
+
 
 -- | The full image URL for photo attachments.
 aFullImage :: Lens' ActivityObjectAttachmentsItem (Maybe ActivityObjectAttachmentsItemFullImage)
@@ -2773,7 +2865,8 @@ instance ToJSON ActivityObjectAttachmentsItem where
 
 --
 -- /See:/ 'activityFeed' smart constructor.
-data ActivityFeed = ActivityFeed'
+data ActivityFeed =
+  ActivityFeed'
     { _afEtag          :: !(Maybe Text)
     , _afNextPageToken :: !(Maybe Text)
     , _afNextLink      :: !(Maybe Text)
@@ -2783,7 +2876,9 @@ data ActivityFeed = ActivityFeed'
     , _afId            :: !(Maybe Text)
     , _afUpdated       :: !(Maybe DateTime')
     , _afTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityFeed' with the minimum fields required to make a request.
 --
@@ -2809,7 +2904,7 @@ data ActivityFeed = ActivityFeed'
 activityFeed
     :: ActivityFeed
 activityFeed =
-    ActivityFeed'
+  ActivityFeed'
     { _afEtag = Nothing
     , _afNextPageToken = Nothing
     , _afNextLink = Nothing
@@ -2820,6 +2915,7 @@ activityFeed =
     , _afUpdated = Nothing
     , _afTitle = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 afEtag :: Lens' ActivityFeed (Maybe Text)
@@ -2899,9 +2995,12 @@ instance ToJSON ActivityFeed where
 -- | Verification status of actor.
 --
 -- /See:/ 'activityObjectActorVerification' smart constructor.
-newtype ActivityObjectActorVerification = ActivityObjectActorVerification'
+newtype ActivityObjectActorVerification =
+  ActivityObjectActorVerification'
     { _aoavAdHocVerified :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectActorVerification' with the minimum fields required to make a request.
 --
@@ -2911,9 +3010,8 @@ newtype ActivityObjectActorVerification = ActivityObjectActorVerification'
 activityObjectActorVerification
     :: ActivityObjectActorVerification
 activityObjectActorVerification =
-    ActivityObjectActorVerification'
-    { _aoavAdHocVerified = Nothing
-    }
+  ActivityObjectActorVerification' {_aoavAdHocVerified = Nothing}
+
 
 -- | Verification for one-time or manual processes.
 aoavAdHocVerified :: Lens' ActivityObjectActorVerification (Maybe Text)
@@ -2939,14 +3037,17 @@ instance ToJSON ActivityObjectActorVerification where
 -- name.
 --
 -- /See:/ 'personName' smart constructor.
-data PersonName = PersonName'
+data PersonName =
+  PersonName'
     { _pnGivenName       :: !(Maybe Text)
     , _pnMiddleName      :: !(Maybe Text)
     , _pnFormatted       :: !(Maybe Text)
     , _pnHonorificPrefix :: !(Maybe Text)
     , _pnFamilyName      :: !(Maybe Text)
     , _pnHonorificSuffix :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonName' with the minimum fields required to make a request.
 --
@@ -2966,7 +3067,7 @@ data PersonName = PersonName'
 personName
     :: PersonName
 personName =
-    PersonName'
+  PersonName'
     { _pnGivenName = Nothing
     , _pnMiddleName = Nothing
     , _pnFormatted = Nothing
@@ -2974,6 +3075,7 @@ personName =
     , _pnFamilyName = Nothing
     , _pnHonorificSuffix = Nothing
     }
+
 
 -- | The given name (first name) of this person.
 pnGivenName :: Lens' PersonName (Maybe Text)
@@ -3032,10 +3134,13 @@ instance ToJSON PersonName where
 -- | The representation of the person\'s profile photo.
 --
 -- /See:/ 'personImage' smart constructor.
-data PersonImage = PersonImage'
+data PersonImage =
+  PersonImage'
     { _piURL       :: !(Maybe Text)
     , _piIsDefault :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonImage' with the minimum fields required to make a request.
 --
@@ -3046,11 +3151,8 @@ data PersonImage = PersonImage'
 -- * 'piIsDefault'
 personImage
     :: PersonImage
-personImage =
-    PersonImage'
-    { _piURL = Nothing
-    , _piIsDefault = Nothing
-    }
+personImage = PersonImage' {_piURL = Nothing, _piIsDefault = Nothing}
+
 
 -- | The URL of the person\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
@@ -3080,9 +3182,12 @@ instance ToJSON PersonImage where
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'activityActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClientSpecificActorInfoYouTubeActorInfo'
+newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo =
+  ActivityActorClientSpecificActorInfoYouTubeActorInfo'
     { _aacsaiytaiChannelId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
 --
@@ -3092,9 +3197,9 @@ newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClie
 activityActorClientSpecificActorInfoYouTubeActorInfo
     :: ActivityActorClientSpecificActorInfoYouTubeActorInfo
 activityActorClientSpecificActorInfoYouTubeActorInfo =
-    ActivityActorClientSpecificActorInfoYouTubeActorInfo'
-    { _aacsaiytaiChannelId = Nothing
-    }
+  ActivityActorClientSpecificActorInfoYouTubeActorInfo'
+    {_aacsaiytaiChannelId = Nothing}
+
 
 -- | ID of the YouTube channel owned by the Actor.
 aacsaiytaiChannelId :: Lens' ActivityActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
@@ -3103,7 +3208,7 @@ aacsaiytaiChannelId
       (\ s a -> s{_aacsaiytaiChannelId = a})
 
 instance FromJSON
-         ActivityActorClientSpecificActorInfoYouTubeActorInfo
+           ActivityActorClientSpecificActorInfoYouTubeActorInfo
          where
         parseJSON
           = withObject
@@ -3113,7 +3218,7 @@ instance FromJSON
                    <$> (o .:? "channelId"))
 
 instance ToJSON
-         ActivityActorClientSpecificActorInfoYouTubeActorInfo
+           ActivityActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
           ActivityActorClientSpecificActorInfoYouTubeActorInfo'{..}
@@ -3124,13 +3229,16 @@ instance ToJSON
 -- | Status of the activity as seen by the viewer.
 --
 -- /See:/ 'activityObjectStatusForViewer' smart constructor.
-data ActivityObjectStatusForViewer = ActivityObjectStatusForViewer'
+data ActivityObjectStatusForViewer =
+  ActivityObjectStatusForViewer'
     { _aosfvCanComment        :: !(Maybe Bool)
     , _aosfvResharingDisabled :: !(Maybe Bool)
     , _aosfvCanUpdate         :: !(Maybe Bool)
     , _aosfvIsPlusOned        :: !(Maybe Bool)
     , _aosfvCanPlusone        :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectStatusForViewer' with the minimum fields required to make a request.
 --
@@ -3148,13 +3256,14 @@ data ActivityObjectStatusForViewer = ActivityObjectStatusForViewer'
 activityObjectStatusForViewer
     :: ActivityObjectStatusForViewer
 activityObjectStatusForViewer =
-    ActivityObjectStatusForViewer'
+  ActivityObjectStatusForViewer'
     { _aosfvCanComment = Nothing
     , _aosfvResharingDisabled = Nothing
     , _aosfvCanUpdate = Nothing
     , _aosfvIsPlusOned = Nothing
     , _aosfvCanPlusone = Nothing
     }
+
 
 -- | Whether the viewer can comment on the activity.
 aosfvCanComment :: Lens' ActivityObjectStatusForViewer (Maybe Bool)
@@ -3208,7 +3317,8 @@ instance ToJSON ActivityObjectStatusForViewer where
 
 --
 -- /See:/ 'activity' smart constructor.
-data Activity = Activity'
+data Activity =
+  Activity'
     { _actAccess          :: !(Maybe ACL)
     , _actPlaceName       :: !(Maybe Text)
     , _actEtag            :: !(Maybe Text)
@@ -3229,7 +3339,9 @@ data Activity = Activity'
     , _actCrosspostSource :: !(Maybe Text)
     , _actPlaceId         :: !(Maybe Text)
     , _actProvider        :: !(Maybe ActivityProvider)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
@@ -3277,7 +3389,7 @@ data Activity = Activity'
 activity
     :: Activity
 activity =
-    Activity'
+  Activity'
     { _actAccess = Nothing
     , _actPlaceName = Nothing
     , _actEtag = Nothing
@@ -3299,6 +3411,7 @@ activity =
     , _actPlaceId = Nothing
     , _actProvider = Nothing
     }
+
 
 -- | Identifies who has access to see this activity.
 actAccess :: Lens' Activity (Maybe ACL)
@@ -3456,9 +3569,12 @@ instance ToJSON Activity where
 -- | The physical address of the place.
 --
 -- /See:/ 'placeAddress' smart constructor.
-newtype PlaceAddress = PlaceAddress'
+newtype PlaceAddress =
+  PlaceAddress'
     { _paFormatted :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlaceAddress' with the minimum fields required to make a request.
 --
@@ -3467,10 +3583,8 @@ newtype PlaceAddress = PlaceAddress'
 -- * 'paFormatted'
 placeAddress
     :: PlaceAddress
-placeAddress =
-    PlaceAddress'
-    { _paFormatted = Nothing
-    }
+placeAddress = PlaceAddress' {_paFormatted = Nothing}
+
 
 -- | The formatted address for display.
 paFormatted :: Lens' PlaceAddress (Maybe Text)
@@ -3489,13 +3603,16 @@ instance ToJSON PlaceAddress where
 
 --
 -- /See:/ 'audiencesFeed' smart constructor.
-data AudiencesFeed = AudiencesFeed'
+data AudiencesFeed =
+  AudiencesFeed'
     { _audTotalItems    :: !(Maybe (Textual Int32))
     , _audEtag          :: !(Maybe Text)
     , _audNextPageToken :: !(Maybe Text)
     , _audKind          :: !Text
     , _audItems         :: !(Maybe [Audience])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AudiencesFeed' with the minimum fields required to make a request.
 --
@@ -3513,13 +3630,14 @@ data AudiencesFeed = AudiencesFeed'
 audiencesFeed
     :: AudiencesFeed
 audiencesFeed =
-    AudiencesFeed'
+  AudiencesFeed'
     { _audTotalItems = Nothing
     , _audEtag = Nothing
     , _audNextPageToken = Nothing
     , _audKind = "plus#audiencesFeed"
     , _audItems = Nothing
     }
+
 
 -- | The total number of ACL entries. The number of entries in this response
 -- may be smaller due to paging.
@@ -3575,11 +3693,14 @@ instance ToJSON AudiencesFeed where
 
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItem' smart constructor.
-data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItemThumbnailsItem'
+data ActivityObjectAttachmentsItemThumbnailsItem =
+  ActivityObjectAttachmentsItemThumbnailsItem'
     { _aoaitiImage       :: !(Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
     , _aoaitiURL         :: !(Maybe Text)
     , _aoaitiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectAttachmentsItemThumbnailsItem' with the minimum fields required to make a request.
 --
@@ -3593,11 +3714,9 @@ data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItem
 activityObjectAttachmentsItemThumbnailsItem
     :: ActivityObjectAttachmentsItemThumbnailsItem
 activityObjectAttachmentsItemThumbnailsItem =
-    ActivityObjectAttachmentsItemThumbnailsItem'
-    { _aoaitiImage = Nothing
-    , _aoaitiURL = Nothing
-    , _aoaitiDescription = Nothing
-    }
+  ActivityObjectAttachmentsItemThumbnailsItem'
+    {_aoaitiImage = Nothing, _aoaitiURL = Nothing, _aoaitiDescription = Nothing}
+
 
 -- | Image resource.
 aoaitiImage :: Lens' ActivityObjectAttachmentsItemThumbnailsItem (Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
@@ -3616,7 +3735,8 @@ aoaitiDescription
       (\ s a -> s{_aoaitiDescription = a})
 
 instance FromJSON
-         ActivityObjectAttachmentsItemThumbnailsItem where
+           ActivityObjectAttachmentsItemThumbnailsItem
+         where
         parseJSON
           = withObject
               "ActivityObjectAttachmentsItemThumbnailsItem"
@@ -3626,7 +3746,8 @@ instance FromJSON
                      (o .:? "description"))
 
 instance ToJSON
-         ActivityObjectAttachmentsItemThumbnailsItem where
+           ActivityObjectAttachmentsItemThumbnailsItem
+         where
         toJSON
           ActivityObjectAttachmentsItemThumbnailsItem'{..}
           = object
@@ -3638,11 +3759,14 @@ instance ToJSON
 -- | The cover photo content.
 --
 -- /See:/ 'personCover' smart constructor.
-data PersonCover = PersonCover'
+data PersonCover =
+  PersonCover'
     { _pcLayout     :: !(Maybe Text)
     , _pcCoverInfo  :: !(Maybe PersonCoverCoverInfo)
     , _pcCoverPhoto :: !(Maybe PersonCoverCoverPhoto)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonCover' with the minimum fields required to make a request.
 --
@@ -3656,11 +3780,9 @@ data PersonCover = PersonCover'
 personCover
     :: PersonCover
 personCover =
-    PersonCover'
-    { _pcLayout = Nothing
-    , _pcCoverInfo = Nothing
-    , _pcCoverPhoto = Nothing
-    }
+  PersonCover'
+    {_pcLayout = Nothing, _pcCoverInfo = Nothing, _pcCoverPhoto = Nothing}
+
 
 -- | The layout of the cover art. Possible values include, but are not
 -- limited to, the following values: - \"banner\" - One large image banner.
@@ -3695,10 +3817,13 @@ instance ToJSON PersonCover where
 
 --
 -- /See:/ 'commentInReplyToItem' smart constructor.
-data CommentInReplyToItem = CommentInReplyToItem'
+data CommentInReplyToItem =
+  CommentInReplyToItem'
     { _cirtiURL :: !(Maybe Text)
     , _cirtiId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentInReplyToItem' with the minimum fields required to make a request.
 --
@@ -3710,10 +3835,8 @@ data CommentInReplyToItem = CommentInReplyToItem'
 commentInReplyToItem
     :: CommentInReplyToItem
 commentInReplyToItem =
-    CommentInReplyToItem'
-    { _cirtiURL = Nothing
-    , _cirtiId = Nothing
-    }
+  CommentInReplyToItem' {_cirtiURL = Nothing, _cirtiId = Nothing}
+
 
 -- | The URL of the activity.
 cirtiURL :: Lens' CommentInReplyToItem (Maybe Text)
@@ -3738,7 +3861,8 @@ instance ToJSON CommentInReplyToItem where
 
 --
 -- /See:/ 'personOrganizationsItem' smart constructor.
-data PersonOrganizationsItem = PersonOrganizationsItem'
+data PersonOrganizationsItem =
+  PersonOrganizationsItem'
     { _poiDePartment  :: !(Maybe Text)
     , _poiLocation    :: !(Maybe Text)
     , _poiEndDate     :: !(Maybe Text)
@@ -3748,7 +3872,9 @@ data PersonOrganizationsItem = PersonOrganizationsItem'
     , _poiTitle       :: !(Maybe Text)
     , _poiType        :: !(Maybe Text)
     , _poiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonOrganizationsItem' with the minimum fields required to make a request.
 --
@@ -3774,7 +3900,7 @@ data PersonOrganizationsItem = PersonOrganizationsItem'
 personOrganizationsItem
     :: PersonOrganizationsItem
 personOrganizationsItem =
-    PersonOrganizationsItem'
+  PersonOrganizationsItem'
     { _poiDePartment = Nothing
     , _poiLocation = Nothing
     , _poiEndDate = Nothing
@@ -3785,6 +3911,7 @@ personOrganizationsItem =
     , _poiType = Nothing
     , _poiDescription = Nothing
     }
+
 
 -- | The department within the organization. Deprecated.
 poiDePartment :: Lens' PersonOrganizationsItem (Maybe Text)
@@ -3862,11 +3989,14 @@ instance ToJSON PersonOrganizationsItem where
 
 --
 -- /See:/ 'personURLsItem' smart constructor.
-data PersonURLsItem = PersonURLsItem'
+data PersonURLsItem =
+  PersonURLsItem'
     { _puiValue :: !(Maybe Text)
     , _puiType  :: !(Maybe Text)
     , _puiLabel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonURLsItem' with the minimum fields required to make a request.
 --
@@ -3880,11 +4010,8 @@ data PersonURLsItem = PersonURLsItem'
 personURLsItem
     :: PersonURLsItem
 personURLsItem =
-    PersonURLsItem'
-    { _puiValue = Nothing
-    , _puiType = Nothing
-    , _puiLabel = Nothing
-    }
+  PersonURLsItem' {_puiValue = Nothing, _puiType = Nothing, _puiLabel = Nothing}
+
 
 -- | The URL value.
 puiValue :: Lens' PersonURLsItem (Maybe Text)
@@ -3921,10 +4048,13 @@ instance ToJSON PersonURLsItem where
 -- | Extra information about the cover photo.
 --
 -- /See:/ 'personCoverCoverInfo' smart constructor.
-data PersonCoverCoverInfo = PersonCoverCoverInfo'
+data PersonCoverCoverInfo =
+  PersonCoverCoverInfo'
     { _pcciTopImageOffSet  :: !(Maybe (Textual Int32))
     , _pcciLeftImageOffSet :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonCoverCoverInfo' with the minimum fields required to make a request.
 --
@@ -3936,10 +4066,9 @@ data PersonCoverCoverInfo = PersonCoverCoverInfo'
 personCoverCoverInfo
     :: PersonCoverCoverInfo
 personCoverCoverInfo =
-    PersonCoverCoverInfo'
-    { _pcciTopImageOffSet = Nothing
-    , _pcciLeftImageOffSet = Nothing
-    }
+  PersonCoverCoverInfo'
+    {_pcciTopImageOffSet = Nothing, _pcciLeftImageOffSet = Nothing}
+
 
 -- | The difference between the top position of the cover image and the
 -- actual displayed cover image. Only valid for banner layout.
@@ -3975,10 +4104,13 @@ instance ToJSON PersonCoverCoverInfo where
 -- | People who reshared this activity.
 --
 -- /See:/ 'activityObjectResharers' smart constructor.
-data ActivityObjectResharers = ActivityObjectResharers'
+data ActivityObjectResharers =
+  ActivityObjectResharers'
     { _aTotalItems :: !(Maybe (Textual Word32))
     , _aSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityObjectResharers' with the minimum fields required to make a request.
 --
@@ -3990,10 +4122,8 @@ data ActivityObjectResharers = ActivityObjectResharers'
 activityObjectResharers
     :: ActivityObjectResharers
 activityObjectResharers =
-    ActivityObjectResharers'
-    { _aTotalItems = Nothing
-    , _aSelfLink = Nothing
-    }
+  ActivityObjectResharers' {_aTotalItems = Nothing, _aSelfLink = Nothing}
+
 
 -- | Total number of people who reshared this activity.
 aTotalItems :: Lens' ActivityObjectResharers (Maybe Word32)
@@ -4022,7 +4152,8 @@ instance ToJSON ActivityObjectResharers where
 
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment'
+data Comment =
+  Comment'
     { _comEtag      :: !(Maybe Text)
     , _comPlusoners :: !(Maybe CommentPlusoners)
     , _comKind      :: !Text
@@ -4034,7 +4165,9 @@ data Comment = Comment'
     , _comUpdated   :: !(Maybe DateTime')
     , _comVerb      :: !Text
     , _comInReplyTo :: !(Maybe [CommentInReplyToItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -4064,7 +4197,7 @@ data Comment = Comment'
 comment
     :: Comment
 comment =
-    Comment'
+  Comment'
     { _comEtag = Nothing
     , _comPlusoners = Nothing
     , _comKind = "plus#comment"
@@ -4077,6 +4210,7 @@ comment =
     , _comVerb = "post"
     , _comInReplyTo = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 comEtag :: Lens' Comment (Maybe Text)
@@ -4168,13 +4302,16 @@ instance ToJSON Comment where
 
 --
 -- /See:/ 'place' smart constructor.
-data Place = Place'
+data Place =
+  Place'
     { _plaKind        :: !Text
     , _plaAddress     :: !(Maybe PlaceAddress)
     , _plaDisplayName :: !(Maybe Text)
     , _plaId          :: !(Maybe Text)
     , _plaPosition    :: !(Maybe PlacePosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Place' with the minimum fields required to make a request.
 --
@@ -4192,13 +4329,14 @@ data Place = Place'
 place
     :: Place
 place =
-    Place'
+  Place'
     { _plaKind = "plus#place"
     , _plaAddress = Nothing
     , _plaDisplayName = Nothing
     , _plaId = Nothing
     , _plaPosition = Nothing
     }
+
 
 -- | Identifies this resource as a place. Value: \"plus#place\".
 plaKind :: Lens' Place Text
@@ -4246,12 +4384,15 @@ instance ToJSON Place where
 
 --
 -- /See:/ 'acl' smart constructor.
-data ACL = ACL'
+data ACL =
+  ACL'
     { _aclcKind             :: !Text
     , _aclcItems            :: !(Maybe [PlusDomainsACLentryResource])
     , _aclcDomainRestricted :: !(Maybe Bool)
     , _aclcDescription      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ACL' with the minimum fields required to make a request.
 --
@@ -4267,12 +4408,13 @@ data ACL = ACL'
 acl
     :: ACL
 acl =
-    ACL'
+  ACL'
     { _aclcKind = "plus#acl"
     , _aclcItems = Nothing
     , _aclcDomainRestricted = Nothing
     , _aclcDescription = Nothing
     }
+
 
 -- | Identifies this resource as a collection of access controls. Value:
 -- \"plus#acl\".
@@ -4320,9 +4462,12 @@ instance ToJSON ACL where
 -- | Exif information of the media item.
 --
 -- /See:/ 'mediaExif' smart constructor.
-newtype MediaExif = MediaExif'
+newtype MediaExif =
+  MediaExif'
     { _meTime :: Maybe DateTime'
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MediaExif' with the minimum fields required to make a request.
 --
@@ -4331,10 +4476,8 @@ newtype MediaExif = MediaExif'
 -- * 'meTime'
 mediaExif
     :: MediaExif
-mediaExif =
-    MediaExif'
-    { _meTime = Nothing
-    }
+mediaExif = MediaExif' {_meTime = Nothing}
+
 
 -- | The time the media was captured. Formatted as an RFC 3339 timestamp.
 meTime :: Lens' MediaExif (Maybe UTCTime)
@@ -4354,7 +4497,8 @@ instance ToJSON MediaExif where
 -- | The person who performed this activity.
 --
 -- /See:/ 'activityActor' smart constructor.
-data ActivityActor = ActivityActor'
+data ActivityActor =
+  ActivityActor'
     { _aaClientSpecificActorInfo :: !(Maybe ActivityActorClientSpecificActorInfo)
     , _aaImage                   :: !(Maybe ActivityActorImage)
     , _aaURL                     :: !(Maybe Text)
@@ -4362,7 +4506,9 @@ data ActivityActor = ActivityActor'
     , _aaDisplayName             :: !(Maybe Text)
     , _aaId                      :: !(Maybe Text)
     , _aaVerification            :: !(Maybe ActivityActorVerification)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
 --
@@ -4384,7 +4530,7 @@ data ActivityActor = ActivityActor'
 activityActor
     :: ActivityActor
 activityActor =
-    ActivityActor'
+  ActivityActor'
     { _aaClientSpecificActorInfo = Nothing
     , _aaImage = Nothing
     , _aaURL = Nothing
@@ -4393,6 +4539,7 @@ activityActor =
     , _aaId = Nothing
     , _aaVerification = Nothing
     }
+
 
 -- | Actor info specific to particular clients.
 aaClientSpecificActorInfo :: Lens' ActivityActor (Maybe ActivityActorClientSpecificActorInfo)
@@ -4455,11 +4602,14 @@ instance ToJSON ActivityActor where
 -- | The object of this comment.
 --
 -- /See:/ 'commentObject' smart constructor.
-data CommentObject = CommentObject'
+data CommentObject =
+  CommentObject'
     { _coObjectType      :: !Text
     , _coOriginalContent :: !(Maybe Text)
     , _coContent         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentObject' with the minimum fields required to make a request.
 --
@@ -4473,11 +4623,12 @@ data CommentObject = CommentObject'
 commentObject
     :: CommentObject
 commentObject =
-    CommentObject'
+  CommentObject'
     { _coObjectType = "comment"
     , _coOriginalContent = Nothing
     , _coContent = Nothing
     }
+
 
 -- | The object type of this comment. Possible values are: - \"comment\" - A
 -- comment in reply to an activity.
@@ -4517,7 +4668,8 @@ instance ToJSON CommentObject where
 
 --
 -- /See:/ 'commentFeed' smart constructor.
-data CommentFeed = CommentFeed'
+data CommentFeed =
+  CommentFeed'
     { _cffEtag          :: !(Maybe Text)
     , _cffNextPageToken :: !(Maybe Text)
     , _cffNextLink      :: !(Maybe Text)
@@ -4526,7 +4678,9 @@ data CommentFeed = CommentFeed'
     , _cffId            :: !(Maybe Text)
     , _cffUpdated       :: !(Maybe DateTime')
     , _cffTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentFeed' with the minimum fields required to make a request.
 --
@@ -4550,7 +4704,7 @@ data CommentFeed = CommentFeed'
 commentFeed
     :: CommentFeed
 commentFeed =
-    CommentFeed'
+  CommentFeed'
     { _cffEtag = Nothing
     , _cffNextPageToken = Nothing
     , _cffNextLink = Nothing
@@ -4560,6 +4714,7 @@ commentFeed =
     , _cffUpdated = Nothing
     , _cffTitle = Nothing
     }
+
 
 -- | ETag of this response for caching purposes.
 cffEtag :: Lens' CommentFeed (Maybe Text)
@@ -4633,9 +4788,12 @@ instance ToJSON CommentFeed where
 -- | Verification status of actor.
 --
 -- /See:/ 'commentActorVerification' smart constructor.
-newtype CommentActorVerification = CommentActorVerification'
+newtype CommentActorVerification =
+  CommentActorVerification'
     { _cavAdHocVerified :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CommentActorVerification' with the minimum fields required to make a request.
 --
@@ -4645,9 +4803,8 @@ newtype CommentActorVerification = CommentActorVerification'
 commentActorVerification
     :: CommentActorVerification
 commentActorVerification =
-    CommentActorVerification'
-    { _cavAdHocVerified = Nothing
-    }
+  CommentActorVerification' {_cavAdHocVerified = Nothing}
+
 
 -- | Verification for one-time or manual processes.
 cavAdHocVerified :: Lens' CommentActorVerification (Maybe Text)
@@ -4671,10 +4828,13 @@ instance ToJSON CommentActorVerification where
 -- | An object representation of the individual components of name.
 --
 -- /See:/ 'activityActorName' smart constructor.
-data ActivityActorName = ActivityActorName'
+data ActivityActorName =
+  ActivityActorName'
     { _aanGivenName  :: !(Maybe Text)
     , _aanFamilyName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ActivityActorName' with the minimum fields required to make a request.
 --
@@ -4686,10 +4846,8 @@ data ActivityActorName = ActivityActorName'
 activityActorName
     :: ActivityActorName
 activityActorName =
-    ActivityActorName'
-    { _aanGivenName = Nothing
-    , _aanFamilyName = Nothing
-    }
+  ActivityActorName' {_aanGivenName = Nothing, _aanFamilyName = Nothing}
+
 
 -- | The given name (\"first name\") of the actor.
 aanGivenName :: Lens' ActivityActorName (Maybe Text)

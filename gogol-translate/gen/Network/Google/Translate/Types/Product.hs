@@ -23,9 +23,12 @@ import           Network.Google.Translate.Types.Sum
 -- | The request message for language detection.
 --
 -- /See:/ 'detectLanguageRequest' smart constructor.
-newtype DetectLanguageRequest = DetectLanguageRequest'
+newtype DetectLanguageRequest =
+  DetectLanguageRequest'
     { _dlrQ :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DetectLanguageRequest' with the minimum fields required to make a request.
 --
@@ -34,10 +37,8 @@ newtype DetectLanguageRequest = DetectLanguageRequest'
 -- * 'dlrQ'
 detectLanguageRequest
     :: DetectLanguageRequest
-detectLanguageRequest =
-    DetectLanguageRequest'
-    { _dlrQ = Nothing
-    }
+detectLanguageRequest = DetectLanguageRequest' {_dlrQ = Nothing}
+
 
 -- | The input text upon which to perform language detection. Repeat this
 -- parameter to perform language detection on multiple text inputs.
@@ -58,11 +59,14 @@ instance ToJSON DetectLanguageRequest where
 
 --
 -- /See:/ 'translationsResource' smart constructor.
-data TranslationsResource = TranslationsResource'
+data TranslationsResource =
+  TranslationsResource'
     { _trDetectedSourceLanguage :: !(Maybe Text)
     , _trModel                  :: !(Maybe Text)
     , _trTranslatedText         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TranslationsResource' with the minimum fields required to make a request.
 --
@@ -76,11 +80,12 @@ data TranslationsResource = TranslationsResource'
 translationsResource
     :: TranslationsResource
 translationsResource =
-    TranslationsResource'
+  TranslationsResource'
     { _trDetectedSourceLanguage = Nothing
     , _trModel = Nothing
     , _trTranslatedText = Nothing
     }
+
 
 -- | The source language of the initial request, detected automatically, if
 -- no source language was passed within the initial request. If the source
@@ -123,13 +128,16 @@ instance ToJSON TranslationsResource where
 -- | The main translation request message for the Cloud Translation API.
 --
 -- /See:/ 'translateTextRequest' smart constructor.
-data TranslateTextRequest = TranslateTextRequest'
+data TranslateTextRequest =
+  TranslateTextRequest'
     { _ttrFormat :: !(Maybe Text)
     , _ttrQ      :: !(Maybe [Text])
     , _ttrModel  :: !(Maybe Text)
     , _ttrSource :: !(Maybe Text)
     , _ttrTarget :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TranslateTextRequest' with the minimum fields required to make a request.
 --
@@ -147,13 +155,14 @@ data TranslateTextRequest = TranslateTextRequest'
 translateTextRequest
     :: TranslateTextRequest
 translateTextRequest =
-    TranslateTextRequest'
+  TranslateTextRequest'
     { _ttrFormat = Nothing
     , _ttrQ = Nothing
     , _ttrModel = Nothing
     , _ttrSource = Nothing
     , _ttrTarget = Nothing
     }
+
 
 -- | The format of the source text, in either HTML (default) or plain-text. A
 -- value of \"html\" indicates HTML and a value of \"text\" indicates
@@ -209,9 +218,12 @@ instance ToJSON TranslateTextRequest where
 
 --
 -- /See:/ 'detectionsListResponse' smart constructor.
-newtype DetectionsListResponse = DetectionsListResponse'
+newtype DetectionsListResponse =
+  DetectionsListResponse'
     { _dlrDetections :: Maybe [[DetectionsResourceItem]]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DetectionsListResponse' with the minimum fields required to make a request.
 --
@@ -220,10 +232,8 @@ newtype DetectionsListResponse = DetectionsListResponse'
 -- * 'dlrDetections'
 detectionsListResponse
     :: DetectionsListResponse
-detectionsListResponse =
-    DetectionsListResponse'
-    { _dlrDetections = Nothing
-    }
+detectionsListResponse = DetectionsListResponse' {_dlrDetections = Nothing}
+
 
 -- | A detections contains detection results of several text
 dlrDetections :: Lens' DetectionsListResponse [[DetectionsResourceItem]]
@@ -248,9 +258,12 @@ instance ToJSON DetectionsListResponse where
 -- | The request message for discovering supported languages.
 --
 -- /See:/ 'getSupportedLanguagesRequest' smart constructor.
-newtype GetSupportedLanguagesRequest = GetSupportedLanguagesRequest'
+newtype GetSupportedLanguagesRequest =
+  GetSupportedLanguagesRequest'
     { _gslrTarget :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetSupportedLanguagesRequest' with the minimum fields required to make a request.
 --
@@ -260,9 +273,8 @@ newtype GetSupportedLanguagesRequest = GetSupportedLanguagesRequest'
 getSupportedLanguagesRequest
     :: GetSupportedLanguagesRequest
 getSupportedLanguagesRequest =
-    GetSupportedLanguagesRequest'
-    { _gslrTarget = Nothing
-    }
+  GetSupportedLanguagesRequest' {_gslrTarget = Nothing}
+
 
 -- | The language to use to return localized, human readable names of
 -- supported languages.
@@ -282,9 +294,12 @@ instance ToJSON GetSupportedLanguagesRequest where
 
 --
 -- /See:/ 'languagesListResponse' smart constructor.
-newtype LanguagesListResponse = LanguagesListResponse'
+newtype LanguagesListResponse =
+  LanguagesListResponse'
     { _llrLanguages :: Maybe [LanguagesResource]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LanguagesListResponse' with the minimum fields required to make a request.
 --
@@ -293,10 +308,8 @@ newtype LanguagesListResponse = LanguagesListResponse'
 -- * 'llrLanguages'
 languagesListResponse
     :: LanguagesListResponse
-languagesListResponse =
-    LanguagesListResponse'
-    { _llrLanguages = Nothing
-    }
+languagesListResponse = LanguagesListResponse' {_llrLanguages = Nothing}
+
 
 -- | List of source\/target languages supported by the translation API. If
 -- target parameter is unspecified, the list is sorted by the ASCII code
@@ -323,11 +336,14 @@ instance ToJSON LanguagesListResponse where
 
 --
 -- /See:/ 'detectionsResourceItem' smart constructor.
-data DetectionsResourceItem = DetectionsResourceItem'
+data DetectionsResourceItem =
+  DetectionsResourceItem'
     { _driConfidence :: !(Maybe (Textual Double))
     , _driIsReliable :: !(Maybe Bool)
     , _driLanguage   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DetectionsResourceItem' with the minimum fields required to make a request.
 --
@@ -341,11 +357,9 @@ data DetectionsResourceItem = DetectionsResourceItem'
 detectionsResourceItem
     :: DetectionsResourceItem
 detectionsResourceItem =
-    DetectionsResourceItem'
-    { _driConfidence = Nothing
-    , _driIsReliable = Nothing
-    , _driLanguage = Nothing
-    }
+  DetectionsResourceItem'
+    {_driConfidence = Nothing, _driIsReliable = Nothing, _driLanguage = Nothing}
+
 
 -- | The confidence of the detection result of this language.
 driConfidence :: Lens' DetectionsResourceItem (Maybe Double)
@@ -383,10 +397,13 @@ instance ToJSON DetectionsResourceItem where
 
 --
 -- /See:/ 'languagesResource' smart constructor.
-data LanguagesResource = LanguagesResource'
+data LanguagesResource =
+  LanguagesResource'
     { _lrName     :: !(Maybe Text)
     , _lrLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LanguagesResource' with the minimum fields required to make a request.
 --
@@ -398,10 +415,8 @@ data LanguagesResource = LanguagesResource'
 languagesResource
     :: LanguagesResource
 languagesResource =
-    LanguagesResource'
-    { _lrName = Nothing
-    , _lrLanguage = Nothing
-    }
+  LanguagesResource' {_lrName = Nothing, _lrLanguage = Nothing}
+
 
 -- | Human readable name of the language localized to the target language.
 lrName :: Lens' LanguagesResource (Maybe Text)
@@ -432,9 +447,12 @@ instance ToJSON LanguagesResource where
 -- | The main language translation response message.
 --
 -- /See:/ 'translationsListResponse' smart constructor.
-newtype TranslationsListResponse = TranslationsListResponse'
+newtype TranslationsListResponse =
+  TranslationsListResponse'
     { _tlrTranslations :: Maybe [TranslationsResource]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TranslationsListResponse' with the minimum fields required to make a request.
 --
@@ -444,9 +462,8 @@ newtype TranslationsListResponse = TranslationsListResponse'
 translationsListResponse
     :: TranslationsListResponse
 translationsListResponse =
-    TranslationsListResponse'
-    { _tlrTranslations = Nothing
-    }
+  TranslationsListResponse' {_tlrTranslations = Nothing}
+
 
 -- | Translations contains list of translation results of given text
 tlrTranslations :: Lens' TranslationsListResponse [TranslationsResource]

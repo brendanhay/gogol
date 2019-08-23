@@ -71,7 +71,8 @@ type ProjectsNotesOccurrencesListResource =
 -- referencing the specified note.
 --
 -- /See:/ 'projectsNotesOccurrencesList' smart constructor.
-data ProjectsNotesOccurrencesList = ProjectsNotesOccurrencesList'
+data ProjectsNotesOccurrencesList =
+  ProjectsNotesOccurrencesList'
     { _pnolXgafv          :: !(Maybe Xgafv)
     , _pnolUploadProtocol :: !(Maybe Text)
     , _pnolAccessToken    :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsNotesOccurrencesList = ProjectsNotesOccurrencesList'
     , _pnolPageToken      :: !(Maybe Text)
     , _pnolPageSize       :: !(Maybe (Textual Int32))
     , _pnolCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotesOccurrencesList' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsNotesOccurrencesList
     :: Text -- ^ 'pnolName'
     -> ProjectsNotesOccurrencesList
 projectsNotesOccurrencesList pPnolName_ =
-    ProjectsNotesOccurrencesList'
+  ProjectsNotesOccurrencesList'
     { _pnolXgafv = Nothing
     , _pnolUploadProtocol = Nothing
     , _pnolAccessToken = Nothing
@@ -119,6 +122,7 @@ projectsNotesOccurrencesList pPnolName_ =
     , _pnolPageSize = Nothing
     , _pnolCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnolXgafv :: Lens' ProjectsNotesOccurrencesList (Maybe Xgafv)

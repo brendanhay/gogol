@@ -1,5 +1,5 @@
 name:                  gogol-toolresults
-version:               0.4.0
+version:               0.5.0
 synopsis:              Google Cloud Tool Results SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -53,6 +53,8 @@ library
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
         , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
         , Network.Google.Resource.ToolResults.Projects.Histories.Get
         , Network.Google.Resource.ToolResults.Projects.Histories.List
@@ -65,5 +67,5 @@ library
         , Network.Google.ToolResults.Types.Sum
 
     build-depends:
-          gogol-core == 0.4.0.*
+          gogol-core == 0.5.0.*
         , base       >= 4.7 && < 5

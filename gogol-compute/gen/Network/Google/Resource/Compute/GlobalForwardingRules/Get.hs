@@ -58,10 +58,13 @@ type GlobalForwardingRulesGetResource =
 -- available forwarding rules by making a list() request.
 --
 -- /See:/ 'globalForwardingRulesGet' smart constructor.
-data GlobalForwardingRulesGet = GlobalForwardingRulesGet'
+data GlobalForwardingRulesGet =
+  GlobalForwardingRulesGet'
     { _gfrgProject        :: !Text
     , _gfrgForwardingRule :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GlobalForwardingRulesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,9 @@ globalForwardingRulesGet
     -> Text -- ^ 'gfrgForwardingRule'
     -> GlobalForwardingRulesGet
 globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
-    GlobalForwardingRulesGet'
-    { _gfrgProject = pGfrgProject_
-    , _gfrgForwardingRule = pGfrgForwardingRule_
-    }
+  GlobalForwardingRulesGet'
+    {_gfrgProject = pGfrgProject_, _gfrgForwardingRule = pGfrgForwardingRule_}
+
 
 -- | Project ID for this request.
 gfrgProject :: Lens' GlobalForwardingRulesGet Text

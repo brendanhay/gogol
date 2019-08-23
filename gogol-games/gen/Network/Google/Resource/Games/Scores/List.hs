@@ -63,14 +63,17 @@ type ScoresListResource =
 -- | Lists the scores in a leaderboard, starting from the top.
 --
 -- /See:/ 'scoresList' smart constructor.
-data ScoresList = ScoresList'
+data ScoresList =
+  ScoresList'
     { _sllCollection    :: !ScoresListCollection
     , _sllTimeSpan      :: !ScoresListTimeSpan
     , _sllLeaderboardId :: !Text
     , _sllLanguage      :: !(Maybe Text)
     , _sllPageToken     :: !(Maybe Text)
     , _sllMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ScoresList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ scoresList
     -> Text -- ^ 'sllLeaderboardId'
     -> ScoresList
 scoresList pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
-    ScoresList'
+  ScoresList'
     { _sllCollection = pSllCollection_
     , _sllTimeSpan = pSllTimeSpan_
     , _sllLeaderboardId = pSllLeaderboardId_
@@ -101,6 +104,7 @@ scoresList pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
     , _sllPageToken = Nothing
     , _sllMaxResults = Nothing
     }
+
 
 -- | The collection of scores you\'re requesting.
 sllCollection :: Lens' ScoresList ScoresListCollection
@@ -141,7 +145,8 @@ sllMaxResults
 instance GoogleRequest ScoresList where
         type Rs ScoresList = LeaderboardScores
         type Scopes ScoresList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ScoresList'{..}
           = go _sllLeaderboardId _sllCollection
               (Just _sllTimeSpan)

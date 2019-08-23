@@ -78,7 +78,8 @@ type ProjectsDlpJobsListResource =
 -- more.
 --
 -- /See:/ 'projectsDlpJobsList' smart constructor.
-data ProjectsDlpJobsList = ProjectsDlpJobsList'
+data ProjectsDlpJobsList =
+  ProjectsDlpJobsList'
     { _pdjlParent         :: !Text
     , _pdjlXgafv          :: !(Maybe Xgafv)
     , _pdjlUploadProtocol :: !(Maybe Text)
@@ -90,7 +91,9 @@ data ProjectsDlpJobsList = ProjectsDlpJobsList'
     , _pdjlType           :: !(Maybe Text)
     , _pdjlPageSize       :: !(Maybe (Textual Int32))
     , _pdjlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDlpJobsList' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ projectsDlpJobsList
     :: Text -- ^ 'pdjlParent'
     -> ProjectsDlpJobsList
 projectsDlpJobsList pPdjlParent_ =
-    ProjectsDlpJobsList'
+  ProjectsDlpJobsList'
     { _pdjlParent = pPdjlParent_
     , _pdjlXgafv = Nothing
     , _pdjlUploadProtocol = Nothing
@@ -134,6 +137,7 @@ projectsDlpJobsList pPdjlParent_ =
     , _pdjlPageSize = Nothing
     , _pdjlCallback = Nothing
     }
+
 
 -- | The parent resource name, for example projects\/my-project-id.
 pdjlParent :: Lens' ProjectsDlpJobsList Text

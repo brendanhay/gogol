@@ -71,7 +71,8 @@ type ProjectsInstancesDatabasesUpdateDdlResource =
 -- field type is UpdateDatabaseDdlMetadata. The operation has no response.
 --
 -- /See:/ 'projectsInstancesDatabasesUpdateDdl' smart constructor.
-data ProjectsInstancesDatabasesUpdateDdl = ProjectsInstancesDatabasesUpdateDdl'
+data ProjectsInstancesDatabasesUpdateDdl =
+  ProjectsInstancesDatabasesUpdateDdl'
     { _pidudXgafv          :: !(Maybe Xgafv)
     , _pidudUploadProtocol :: !(Maybe Text)
     , _pidudDatabase       :: !Text
@@ -79,7 +80,9 @@ data ProjectsInstancesDatabasesUpdateDdl = ProjectsInstancesDatabasesUpdateDdl'
     , _pidudUploadType     :: !(Maybe Text)
     , _pidudPayload        :: !UpdateDatabaseDdlRequest
     , _pidudCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesUpdateDdl' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsInstancesDatabasesUpdateDdl
     -> UpdateDatabaseDdlRequest -- ^ 'pidudPayload'
     -> ProjectsInstancesDatabasesUpdateDdl
 projectsInstancesDatabasesUpdateDdl pPidudDatabase_ pPidudPayload_ =
-    ProjectsInstancesDatabasesUpdateDdl'
+  ProjectsInstancesDatabasesUpdateDdl'
     { _pidudXgafv = Nothing
     , _pidudUploadProtocol = Nothing
     , _pidudDatabase = pPidudDatabase_
@@ -112,6 +115,7 @@ projectsInstancesDatabasesUpdateDdl pPidudDatabase_ pPidudPayload_ =
     , _pidudPayload = pPidudPayload_
     , _pidudCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidudXgafv :: Lens' ProjectsInstancesDatabasesUpdateDdl (Maybe Xgafv)
@@ -154,7 +158,8 @@ pidudCallback
       (\ s a -> s{_pidudCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesUpdateDdl where
+           ProjectsInstancesDatabasesUpdateDdl
+         where
         type Rs ProjectsInstancesDatabasesUpdateDdl =
              Operation
         type Scopes ProjectsInstancesDatabasesUpdateDdl =

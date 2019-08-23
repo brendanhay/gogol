@@ -65,7 +65,8 @@ type BiddersFilterSetsBidMetricsListResource =
 -- | Lists all metrics that are measured in terms of number of bids.
 --
 -- /See:/ 'biddersFilterSetsBidMetricsList' smart constructor.
-data BiddersFilterSetsBidMetricsList = BiddersFilterSetsBidMetricsList'
+data BiddersFilterSetsBidMetricsList =
+  BiddersFilterSetsBidMetricsList'
     { _bfsbmlXgafv          :: !(Maybe Xgafv)
     , _bfsbmlUploadProtocol :: !(Maybe Text)
     , _bfsbmlFilterSetName  :: !Text
@@ -74,7 +75,9 @@ data BiddersFilterSetsBidMetricsList = BiddersFilterSetsBidMetricsList'
     , _bfsbmlPageToken      :: !(Maybe Text)
     , _bfsbmlPageSize       :: !(Maybe (Textual Int32))
     , _bfsbmlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersFilterSetsBidMetricsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ biddersFilterSetsBidMetricsList
     :: Text -- ^ 'bfsbmlFilterSetName'
     -> BiddersFilterSetsBidMetricsList
 biddersFilterSetsBidMetricsList pBfsbmlFilterSetName_ =
-    BiddersFilterSetsBidMetricsList'
+  BiddersFilterSetsBidMetricsList'
     { _bfsbmlXgafv = Nothing
     , _bfsbmlUploadProtocol = Nothing
     , _bfsbmlFilterSetName = pBfsbmlFilterSetName_
@@ -109,6 +112,7 @@ biddersFilterSetsBidMetricsList pBfsbmlFilterSetName_ =
     , _bfsbmlPageSize = Nothing
     , _bfsbmlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bfsbmlXgafv :: Lens' BiddersFilterSetsBidMetricsList (Maybe Xgafv)
@@ -168,7 +172,8 @@ bfsbmlCallback
       (\ s a -> s{_bfsbmlCallback = a})
 
 instance GoogleRequest
-         BiddersFilterSetsBidMetricsList where
+           BiddersFilterSetsBidMetricsList
+         where
         type Rs BiddersFilterSetsBidMetricsList =
              ListBidMetricsResponse
         type Scopes BiddersFilterSetsBidMetricsList =

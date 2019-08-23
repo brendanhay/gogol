@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns configuration info about the Kubernetes Engine service.
+-- Returns configuration info about the Google Kubernetes Engine service.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.getServerConfig@.
 module Network.Google.Resource.Container.Projects.Locations.GetServerConfig
@@ -61,10 +61,11 @@ type ProjectsLocationsGetServerConfigResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ServerConfig
 
--- | Returns configuration info about the Kubernetes Engine service.
+-- | Returns configuration info about the Google Kubernetes Engine service.
 --
 -- /See:/ 'projectsLocationsGetServerConfig' smart constructor.
-data ProjectsLocationsGetServerConfig = ProjectsLocationsGetServerConfig'
+data ProjectsLocationsGetServerConfig =
+  ProjectsLocationsGetServerConfig'
     { _plgscXgafv          :: !(Maybe Xgafv)
     , _plgscUploadProtocol :: !(Maybe Text)
     , _plgscAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsLocationsGetServerConfig = ProjectsLocationsGetServerConfig'
     , _plgscName           :: !Text
     , _plgscProjectId      :: !(Maybe Text)
     , _plgscCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsGetServerConfig' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsLocationsGetServerConfig
     :: Text -- ^ 'plgscName'
     -> ProjectsLocationsGetServerConfig
 projectsLocationsGetServerConfig pPlgscName_ =
-    ProjectsLocationsGetServerConfig'
+  ProjectsLocationsGetServerConfig'
     { _plgscXgafv = Nothing
     , _plgscUploadProtocol = Nothing
     , _plgscAccessToken = Nothing
@@ -108,6 +111,7 @@ projectsLocationsGetServerConfig pPlgscName_ =
     , _plgscProjectId = Nothing
     , _plgscCallback = Nothing
     }
+
 
 -- | V1 error format.
 plgscXgafv :: Lens' ProjectsLocationsGetServerConfig (Maybe Xgafv)
@@ -139,8 +143,8 @@ plgscZone :: Lens' ProjectsLocationsGetServerConfig (Maybe Text)
 plgscZone
   = lens _plgscZone (\ s a -> s{_plgscZone = a})
 
--- | The name (project and location) of the server config to get Specified in
--- the format \'projects\/*\/locations\/*\'.
+-- | The name (project and location) of the server config to get, specified
+-- in the format \'projects\/*\/locations\/*\'.
 plgscName :: Lens' ProjectsLocationsGetServerConfig Text
 plgscName
   = lens _plgscName (\ s a -> s{_plgscName = a})
@@ -160,7 +164,8 @@ plgscCallback
       (\ s a -> s{_plgscCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsGetServerConfig where
+           ProjectsLocationsGetServerConfig
+         where
         type Rs ProjectsLocationsGetServerConfig =
              ServerConfig
         type Scopes ProjectsLocationsGetServerConfig =

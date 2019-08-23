@@ -60,13 +60,16 @@ type PagesUpdateResource =
 -- | Update a page.
 --
 -- /See:/ 'pagesUpdate' smart constructor.
-data PagesUpdate = PagesUpdate'
+data PagesUpdate =
+  PagesUpdate'
     { _puuBlogId  :: !Text
     , _puuPageId  :: !Text
     , _puuPayload :: !Page
     , _puuRevert  :: !(Maybe Bool)
     , _puuPublish :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PagesUpdate' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ pagesUpdate
     -> Page -- ^ 'puuPayload'
     -> PagesUpdate
 pagesUpdate pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
-    PagesUpdate'
+  PagesUpdate'
     { _puuBlogId = pPuuBlogId_
     , _puuPageId = pPuuPageId_
     , _puuPayload = pPuuPayload_
     , _puuRevert = Nothing
     , _puuPublish = Nothing
     }
+
 
 -- | The ID of the Blog.
 puuBlogId :: Lens' PagesUpdate Text

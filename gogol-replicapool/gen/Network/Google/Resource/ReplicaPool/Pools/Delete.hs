@@ -59,12 +59,15 @@ type PoolsDeleteResource =
 -- | Deletes a replica pool.
 --
 -- /See:/ 'poolsDelete' smart constructor.
-data PoolsDelete = PoolsDelete'
+data PoolsDelete =
+  PoolsDelete'
     { _pdPoolName    :: !Text
     , _pdZone        :: !Text
     , _pdPayload     :: !PoolsDeleteRequest
     , _pdProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PoolsDelete' with the minimum fields required to make a request.
 --
@@ -84,12 +87,13 @@ poolsDelete
     -> Text -- ^ 'pdProjectName'
     -> PoolsDelete
 poolsDelete pPdPoolName_ pPdZone_ pPdPayload_ pPdProjectName_ =
-    PoolsDelete'
+  PoolsDelete'
     { _pdPoolName = pPdPoolName_
     , _pdZone = pPdZone_
     , _pdPayload = pPdPayload_
     , _pdProjectName = pPdProjectName_
     }
+
 
 -- | The name of the replica pool for this request.
 pdPoolName :: Lens' PoolsDelete Text

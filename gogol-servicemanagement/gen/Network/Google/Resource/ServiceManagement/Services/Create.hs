@@ -63,14 +63,17 @@ type ServicesCreateResource =
 -- no more than 20 services. Operation
 --
 -- /See:/ 'servicesCreate' smart constructor.
-data ServicesCreate = ServicesCreate'
+data ServicesCreate =
+  ServicesCreate'
     { _scXgafv          :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
     , _scAccessToken    :: !(Maybe Text)
     , _scUploadType     :: !(Maybe Text)
     , _scPayload        :: !ManagedService
     , _scCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesCreate' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ servicesCreate
     :: ManagedService -- ^ 'scPayload'
     -> ServicesCreate
 servicesCreate pScPayload_ =
-    ServicesCreate'
+  ServicesCreate'
     { _scXgafv = Nothing
     , _scUploadProtocol = Nothing
     , _scAccessToken = Nothing
@@ -99,6 +102,7 @@ servicesCreate pScPayload_ =
     , _scPayload = pScPayload_
     , _scCallback = Nothing
     }
+
 
 -- | V1 error format.
 scXgafv :: Lens' ServicesCreate (Maybe Xgafv)

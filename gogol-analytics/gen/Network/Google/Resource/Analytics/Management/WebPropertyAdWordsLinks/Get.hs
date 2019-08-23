@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a web property-AdWords link to which the user has access.
+-- Returns a web property-Google Ads link to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.get@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
@@ -56,14 +56,17 @@ type ManagementWebPropertyAdWordsLinksGetResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] EntityAdWordsLink
 
--- | Returns a web property-AdWords link to which the user has access.
+-- | Returns a web property-Google Ads link to which the user has access.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksGet' smart constructor.
-data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet'
+data ManagementWebPropertyAdWordsLinksGet =
+  ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgWebPropertyId            :: !Text
     , _mwpawlgAccountId                :: !Text
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet' with the minimum fields required to make a request.
 --
@@ -80,13 +83,14 @@ managementWebPropertyAdWordsLinksGet
     -> Text -- ^ 'mwpawlgWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksGet
 managementWebPropertyAdWordsLinksGet pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksGet'
+  ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgWebPropertyId = pMwpawlgWebPropertyId_
     , _mwpawlgAccountId = pMwpawlgAccountId_
     , _mwpawlgWebPropertyAdWordsLinkId = pMwpawlgWebPropertyAdWordsLinkId_
     }
 
--- | Web property ID to retrieve the AdWords link for.
+
+-- | Web property ID to retrieve the Google Ads link for.
 mwpawlgWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksGet Text
 mwpawlgWebPropertyId
   = lens _mwpawlgWebPropertyId
@@ -98,14 +102,15 @@ mwpawlgAccountId
   = lens _mwpawlgAccountId
       (\ s a -> s{_mwpawlgAccountId = a})
 
--- | Web property-AdWords link ID.
+-- | Web property-Google Ads link ID.
 mwpawlgWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksGet Text
 mwpawlgWebPropertyAdWordsLinkId
   = lens _mwpawlgWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawlgWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksGet where
+           ManagementWebPropertyAdWordsLinksGet
+         where
         type Rs ManagementWebPropertyAdWordsLinksGet =
              EntityAdWordsLink
         type Scopes ManagementWebPropertyAdWordsLinksGet =

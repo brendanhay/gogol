@@ -57,11 +57,14 @@ type PoolsGetResource =
 -- | Gets information about a single replica pool.
 --
 -- /See:/ 'poolsGet' smart constructor.
-data PoolsGet = PoolsGet'
+data PoolsGet =
+  PoolsGet'
     { _pgPoolName    :: !Text
     , _pgZone        :: !Text
     , _pgProjectName :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PoolsGet' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ poolsGet
     -> Text -- ^ 'pgProjectName'
     -> PoolsGet
 poolsGet pPgPoolName_ pPgZone_ pPgProjectName_ =
-    PoolsGet'
+  PoolsGet'
     { _pgPoolName = pPgPoolName_
     , _pgZone = pPgZone_
     , _pgProjectName = pPgProjectName_
     }
+
 
 -- | The name of the replica pool for this request.
 pgPoolName :: Lens' PoolsGet Text

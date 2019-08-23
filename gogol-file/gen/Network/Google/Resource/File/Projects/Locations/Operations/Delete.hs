@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.operations.delete@ method which the
 -- 'ProjectsLocationsOperationsDelete' request conforms to.
 type ProjectsLocationsOperationsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,14 +65,17 @@ type ProjectsLocationsOperationsDeleteResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'projectsLocationsOperationsDelete' smart constructor.
-data ProjectsLocationsOperationsDelete = ProjectsLocationsOperationsDelete'
+data ProjectsLocationsOperationsDelete =
+  ProjectsLocationsOperationsDelete'
     { _plodXgafv          :: !(Maybe Xgafv)
     , _plodUploadProtocol :: !(Maybe Text)
     , _plodAccessToken    :: !(Maybe Text)
     , _plodUploadType     :: !(Maybe Text)
     , _plodName           :: !Text
     , _plodCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsOperationsDelete' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ projectsLocationsOperationsDelete
     :: Text -- ^ 'plodName'
     -> ProjectsLocationsOperationsDelete
 projectsLocationsOperationsDelete pPlodName_ =
-    ProjectsLocationsOperationsDelete'
+  ProjectsLocationsOperationsDelete'
     { _plodXgafv = Nothing
     , _plodUploadProtocol = Nothing
     , _plodAccessToken = Nothing
@@ -101,6 +104,7 @@ projectsLocationsOperationsDelete pPlodName_ =
     , _plodName = pPlodName_
     , _plodCallback = Nothing
     }
+
 
 -- | V1 error format.
 plodXgafv :: Lens' ProjectsLocationsOperationsDelete (Maybe Xgafv)
@@ -135,7 +139,8 @@ plodCallback
   = lens _plodCallback (\ s a -> s{_plodCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsOperationsDelete where
+           ProjectsLocationsOperationsDelete
+         where
         type Rs ProjectsLocationsOperationsDelete = Empty
         type Scopes ProjectsLocationsOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]

@@ -55,11 +55,14 @@ type RoomsListResource =
 -- | Returns invitations to join rooms.
 --
 -- /See:/ 'roomsList' smart constructor.
-data RoomsList = RoomsList'
+data RoomsList =
+  RoomsList'
     { _rLanguage   :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomsList' with the minimum fields required to make a request.
 --
@@ -73,11 +76,9 @@ data RoomsList = RoomsList'
 roomsList
     :: RoomsList
 roomsList =
-    RoomsList'
-    { _rLanguage = Nothing
-    , _rPageToken = Nothing
-    , _rMaxResults = Nothing
-    }
+  RoomsList'
+    {_rLanguage = Nothing, _rPageToken = Nothing, _rMaxResults = Nothing}
+
 
 -- | The preferred language to use for strings returned by this method.
 rLanguage :: Lens' RoomsList (Maybe Text)
@@ -100,7 +101,8 @@ rMaxResults
 instance GoogleRequest RoomsList where
         type Rs RoomsList = RoomList
         type Scopes RoomsList =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsList'{..}
           = go _rLanguage _rPageToken _rMaxResults
               (Just AltJSON)

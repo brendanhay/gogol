@@ -71,6 +71,12 @@ module Network.Google.BinaryAuthorization
 
     -- * Types
 
+    -- ** PkixPublicKey
+    , PkixPublicKey
+    , pkixPublicKey
+    , ppkPublicKeyPem
+    , ppkSignatureAlgorithm
+
     -- ** Expr
     , Expr
     , expr
@@ -93,6 +99,9 @@ module Network.Google.BinaryAuthorization
     -- ** AdmissionRuleEnforcementMode
     , AdmissionRuleEnforcementMode (..)
 
+    -- ** PolicyGlobalPolicyEvaluationMode
+    , PolicyGlobalPolicyEvaluationMode (..)
+
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
@@ -108,6 +117,9 @@ module Network.Google.BinaryAuthorization
     , AdmissionWhiteListPattern
     , admissionWhiteListPattern
     , awlpNamePattern
+
+    -- ** PkixPublicKeySignatureAlgorithm
+    , PkixPublicKeySignatureAlgorithm (..)
 
     -- ** AdmissionRule
     , AdmissionRule
@@ -137,6 +149,7 @@ module Network.Google.BinaryAuthorization
     -- ** AttestorPublicKey
     , AttestorPublicKey
     , attestorPublicKey
+    , apkPkixPublicKey
     , apkAsciiArmoredPgpPublicKey
     , apkId
     , apkComment
@@ -154,6 +167,7 @@ module Network.Google.BinaryAuthorization
     , pClusterAdmissionRules
     , pUpdateTime
     , pName
+    , pGlobalPolicyEvaluationMode
     , pDescription
 
     -- ** PolicyClusterAdmissionRules

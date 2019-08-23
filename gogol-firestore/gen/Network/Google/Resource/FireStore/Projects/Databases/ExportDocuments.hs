@@ -77,7 +77,8 @@ type ProjectsDatabasesExportDocumentsResource =
 -- data behind in Google Cloud Storage.
 --
 -- /See:/ 'projectsDatabasesExportDocuments' smart constructor.
-data ProjectsDatabasesExportDocuments = ProjectsDatabasesExportDocuments'
+data ProjectsDatabasesExportDocuments =
+  ProjectsDatabasesExportDocuments'
     { _pdedXgafv          :: !(Maybe Xgafv)
     , _pdedUploadProtocol :: !(Maybe Text)
     , _pdedAccessToken    :: !(Maybe Text)
@@ -85,7 +86,9 @@ data ProjectsDatabasesExportDocuments = ProjectsDatabasesExportDocuments'
     , _pdedPayload        :: !GoogleFirestoreAdminV1ExportDocumentsRequest
     , _pdedName           :: !Text
     , _pdedCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsDatabasesExportDocuments' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsDatabasesExportDocuments
     -> Text -- ^ 'pdedName'
     -> ProjectsDatabasesExportDocuments
 projectsDatabasesExportDocuments pPdedPayload_ pPdedName_ =
-    ProjectsDatabasesExportDocuments'
+  ProjectsDatabasesExportDocuments'
     { _pdedXgafv = Nothing
     , _pdedUploadProtocol = Nothing
     , _pdedAccessToken = Nothing
@@ -118,6 +121,7 @@ projectsDatabasesExportDocuments pPdedPayload_ pPdedName_ =
     , _pdedName = pPdedName_
     , _pdedCallback = Nothing
     }
+
 
 -- | V1 error format.
 pdedXgafv :: Lens' ProjectsDatabasesExportDocuments (Maybe Xgafv)
@@ -158,7 +162,8 @@ pdedCallback
   = lens _pdedCallback (\ s a -> s{_pdedCallback = a})
 
 instance GoogleRequest
-         ProjectsDatabasesExportDocuments where
+           ProjectsDatabasesExportDocuments
+         where
         type Rs ProjectsDatabasesExportDocuments =
              GoogleLongrunningOperation
         type Scopes ProjectsDatabasesExportDocuments =

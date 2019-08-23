@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of instance templates that are contained within the
--- specified project and zone.
+-- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.list@.
 module Network.Google.Resource.Compute.InstanceTemplates.List
@@ -61,16 +61,19 @@ type InstanceTemplatesListResource =
                            Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
--- specified project and zone.
+-- specified project.
 --
 -- /See:/ 'instanceTemplatesList' smart constructor.
-data InstanceTemplatesList = InstanceTemplatesList'
+data InstanceTemplatesList =
+  InstanceTemplatesList'
     { _itlOrderBy    :: !(Maybe Text)
     , _itlProject    :: !Text
     , _itlFilter     :: !(Maybe Text)
     , _itlPageToken  :: !(Maybe Text)
     , _itlMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceTemplatesList' with the minimum fields required to make a request.
 --
@@ -89,13 +92,14 @@ instanceTemplatesList
     :: Text -- ^ 'itlProject'
     -> InstanceTemplatesList
 instanceTemplatesList pItlProject_ =
-    InstanceTemplatesList'
+  InstanceTemplatesList'
     { _itlOrderBy = Nothing
     , _itlProject = pItlProject_
     , _itlFilter = Nothing
     , _itlPageToken = Nothing
     , _itlMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

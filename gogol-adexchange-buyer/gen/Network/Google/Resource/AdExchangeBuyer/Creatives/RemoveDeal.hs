@@ -56,11 +56,14 @@ type CreativesRemoveDealResource =
 -- | Remove a deal id associated with the creative.
 --
 -- /See:/ 'creativesRemoveDeal' smart constructor.
-data CreativesRemoveDeal = CreativesRemoveDeal'
+data CreativesRemoveDeal =
+  CreativesRemoveDeal'
     { _crdBuyerCreativeId :: !Text
     , _crdDealId          :: !(Textual Int64)
     , _crdAccountId       :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativesRemoveDeal' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ creativesRemoveDeal
     -> Int32 -- ^ 'crdAccountId'
     -> CreativesRemoveDeal
 creativesRemoveDeal pCrdBuyerCreativeId_ pCrdDealId_ pCrdAccountId_ =
-    CreativesRemoveDeal'
+  CreativesRemoveDeal'
     { _crdBuyerCreativeId = pCrdBuyerCreativeId_
     , _crdDealId = _Coerce # pCrdDealId_
     , _crdAccountId = _Coerce # pCrdAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 crdBuyerCreativeId :: Lens' CreativesRemoveDeal Text

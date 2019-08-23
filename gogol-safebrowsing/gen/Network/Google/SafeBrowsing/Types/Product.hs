@@ -25,9 +25,12 @@ import           Network.Google.SafeBrowsing.Types.Sum
 -- threat type.
 --
 -- /See:/ 'threatEntryMetadata' smart constructor.
-newtype ThreatEntryMetadata = ThreatEntryMetadata'
+newtype ThreatEntryMetadata =
+  ThreatEntryMetadata'
     { _temEntries :: Maybe [MetadataEntry]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatEntryMetadata' with the minimum fields required to make a request.
 --
@@ -36,10 +39,8 @@ newtype ThreatEntryMetadata = ThreatEntryMetadata'
 -- * 'temEntries'
 threatEntryMetadata
     :: ThreatEntryMetadata
-threatEntryMetadata =
-    ThreatEntryMetadata'
-    { _temEntries = Nothing
-    }
+threatEntryMetadata = ThreatEntryMetadata' {_temEntries = Nothing}
+
 
 -- | The metadata entries.
 temEntries :: Lens' ThreatEntryMetadata [MetadataEntry]
@@ -62,10 +63,13 @@ instance ToJSON ThreatEntryMetadata where
 -- | Details about the user that encountered the threat.
 --
 -- /See:/ 'userInfo' smart constructor.
-data UserInfo = UserInfo'
+data UserInfo =
+  UserInfo'
     { _uiRegionCode :: !(Maybe Text)
     , _uiUserId     :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 --
@@ -76,11 +80,8 @@ data UserInfo = UserInfo'
 -- * 'uiUserId'
 userInfo
     :: UserInfo
-userInfo =
-    UserInfo'
-    { _uiRegionCode = Nothing
-    , _uiUserId = Nothing
-    }
+userInfo = UserInfo' {_uiRegionCode = Nothing, _uiUserId = Nothing}
+
 
 -- | The UN M.49 region code associated with the user\'s location.
 uiRegionCode :: Lens' UserInfo (Maybe Text)
@@ -110,9 +111,12 @@ instance ToJSON UserInfo where
 -- | The expected state of a client\'s local database.
 --
 -- /See:/ 'checksum' smart constructor.
-newtype Checksum = Checksum'
+newtype Checksum =
+  Checksum'
     { _cSha256 :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Checksum' with the minimum fields required to make a request.
 --
@@ -121,10 +125,8 @@ newtype Checksum = Checksum'
 -- * 'cSha256'
 checksum
     :: Checksum
-checksum =
-    Checksum'
-    { _cSha256 = Nothing
-    }
+checksum = Checksum' {_cSha256 = Nothing}
+
 
 -- | The SHA256 hash of the client state; that is, of the sorted list of all
 -- hashes present in the database.
@@ -144,9 +146,12 @@ instance ToJSON Checksum where
 
 --
 -- /See:/ 'findThreatMatchesResponse' smart constructor.
-newtype FindThreatMatchesResponse = FindThreatMatchesResponse'
+newtype FindThreatMatchesResponse =
+  FindThreatMatchesResponse'
     { _ftmrMatches :: Maybe [ThreatMatch]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FindThreatMatchesResponse' with the minimum fields required to make a request.
 --
@@ -155,10 +160,8 @@ newtype FindThreatMatchesResponse = FindThreatMatchesResponse'
 -- * 'ftmrMatches'
 findThreatMatchesResponse
     :: FindThreatMatchesResponse
-findThreatMatchesResponse =
-    FindThreatMatchesResponse'
-    { _ftmrMatches = Nothing
-    }
+findThreatMatchesResponse = FindThreatMatchesResponse' {_ftmrMatches = Nothing}
+
 
 -- | The threat list matches.
 ftmrMatches :: Lens' FindThreatMatchesResponse [ThreatMatch]
@@ -187,14 +190,16 @@ instance ToJSON FindThreatMatchesResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -206,12 +211,15 @@ instance ToJSON Empty where
 -- checking for matches in threat lists.
 --
 -- /See:/ 'threatInfo' smart constructor.
-data ThreatInfo = ThreatInfo'
+data ThreatInfo =
+  ThreatInfo'
     { _tiThreatEntries    :: !(Maybe [ThreatEntry])
     , _tiThreatTypes      :: !(Maybe [Text])
     , _tiPlatformTypes    :: !(Maybe [Text])
     , _tiThreatEntryTypes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatInfo' with the minimum fields required to make a request.
 --
@@ -227,12 +235,13 @@ data ThreatInfo = ThreatInfo'
 threatInfo
     :: ThreatInfo
 threatInfo =
-    ThreatInfo'
+  ThreatInfo'
     { _tiThreatEntries = Nothing
     , _tiThreatTypes = Nothing
     , _tiPlatformTypes = Nothing
     , _tiThreatEntryTypes = Nothing
     }
+
 
 -- | The threat entries to be checked.
 tiThreatEntries :: Lens' ThreatInfo [ThreatEntry]
@@ -287,14 +296,17 @@ instance ToJSON ThreatInfo where
 
 --
 -- /See:/ 'threatHit' smart constructor.
-data ThreatHit = ThreatHit'
+data ThreatHit =
+  ThreatHit'
     { _thUserInfo     :: !(Maybe UserInfo)
     , _thThreatType   :: !(Maybe ThreatHitThreatType)
     , _thResources    :: !(Maybe [ThreatSource])
     , _thEntry        :: !(Maybe ThreatEntry)
     , _thClientInfo   :: !(Maybe ClientInfo)
     , _thPlatformType :: !(Maybe ThreatHitPlatformType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatHit' with the minimum fields required to make a request.
 --
@@ -314,7 +326,7 @@ data ThreatHit = ThreatHit'
 threatHit
     :: ThreatHit
 threatHit =
-    ThreatHit'
+  ThreatHit'
     { _thUserInfo = Nothing
     , _thThreatType = Nothing
     , _thResources = Nothing
@@ -322,6 +334,7 @@ threatHit =
     , _thClientInfo = Nothing
     , _thPlatformType = Nothing
     }
+
 
 -- | Details about the user that encountered the threat.
 thUserInfo :: Lens' ThreatHit (Maybe UserInfo)
@@ -383,10 +396,13 @@ instance ToJSON ThreatHit where
 -- unused. NEXT: 5
 --
 -- /See:/ 'fetchThreatListUpdatesRequest' smart constructor.
-data FetchThreatListUpdatesRequest = FetchThreatListUpdatesRequest'
+data FetchThreatListUpdatesRequest =
+  FetchThreatListUpdatesRequest'
     { _ftlurListUpdateRequests :: !(Maybe [ListUpdateRequest])
     , _ftlurClient             :: !(Maybe ClientInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FetchThreatListUpdatesRequest' with the minimum fields required to make a request.
 --
@@ -398,10 +414,9 @@ data FetchThreatListUpdatesRequest = FetchThreatListUpdatesRequest'
 fetchThreatListUpdatesRequest
     :: FetchThreatListUpdatesRequest
 fetchThreatListUpdatesRequest =
-    FetchThreatListUpdatesRequest'
-    { _ftlurListUpdateRequests = Nothing
-    , _ftlurClient = Nothing
-    }
+  FetchThreatListUpdatesRequest'
+    {_ftlurListUpdateRequests = Nothing, _ftlurClient = Nothing}
+
 
 -- | The requested threat list updates.
 ftlurListUpdateRequests :: Lens' FetchThreatListUpdatesRequest [ListUpdateRequest]
@@ -435,12 +450,15 @@ instance ToJSON FetchThreatListUpdatesRequest where
 -- | Request to return full hashes matched by the provided hash prefixes.
 --
 -- /See:/ 'findFullHashesRequest' smart constructor.
-data FindFullHashesRequest = FindFullHashesRequest'
+data FindFullHashesRequest =
+  FindFullHashesRequest'
     { _ffhrThreatInfo   :: !(Maybe ThreatInfo)
     , _ffhrAPIClient    :: !(Maybe ClientInfo)
     , _ffhrClientStates :: !(Maybe [Bytes])
     , _ffhrClient       :: !(Maybe ClientInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FindFullHashesRequest' with the minimum fields required to make a request.
 --
@@ -456,12 +474,13 @@ data FindFullHashesRequest = FindFullHashesRequest'
 findFullHashesRequest
     :: FindFullHashesRequest
 findFullHashesRequest =
-    FindFullHashesRequest'
+  FindFullHashesRequest'
     { _ffhrThreatInfo = Nothing
     , _ffhrAPIClient = Nothing
     , _ffhrClientStates = Nothing
     , _ffhrClient = Nothing
     }
+
 
 -- | The lists and hashes to be checked.
 ffhrThreatInfo :: Lens' FindFullHashesRequest (Maybe ThreatInfo)
@@ -510,14 +529,17 @@ instance ToJSON FindFullHashesRequest where
 -- | The constraints for this update.
 --
 -- /See:/ 'constraints' smart constructor.
-data Constraints = Constraints'
+data Constraints =
+  Constraints'
     { _cMaxUpdateEntries      :: !(Maybe (Textual Int32))
     , _cDeviceLocation        :: !(Maybe Text)
     , _cLanguage              :: !(Maybe Text)
     , _cRegion                :: !(Maybe Text)
     , _cSupportedCompressions :: !(Maybe [Text])
     , _cMaxDatabaseEntries    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Constraints' with the minimum fields required to make a request.
 --
@@ -537,7 +559,7 @@ data Constraints = Constraints'
 constraints
     :: Constraints
 constraints =
-    Constraints'
+  Constraints'
     { _cMaxUpdateEntries = Nothing
     , _cDeviceLocation = Nothing
     , _cLanguage = Nothing
@@ -545,6 +567,7 @@ constraints =
     , _cSupportedCompressions = Nothing
     , _cMaxDatabaseEntries = Nothing
     }
+
 
 -- | The maximum size in number of entries. The update will not contain more
 -- entries than this value. This should be a power of 2 between 2**10 and
@@ -619,12 +642,15 @@ instance ToJSON Constraints where
 -- or compressed removal indices.
 --
 -- /See:/ 'riceDeltaEncoding' smart constructor.
-data RiceDeltaEncoding = RiceDeltaEncoding'
+data RiceDeltaEncoding =
+  RiceDeltaEncoding'
     { _rdeFirstValue    :: !(Maybe (Textual Int64))
     , _rdeRiceParameter :: !(Maybe (Textual Int32))
     , _rdeNumEntries    :: !(Maybe (Textual Int32))
     , _rdeEncodedData   :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RiceDeltaEncoding' with the minimum fields required to make a request.
 --
@@ -640,12 +666,13 @@ data RiceDeltaEncoding = RiceDeltaEncoding'
 riceDeltaEncoding
     :: RiceDeltaEncoding
 riceDeltaEncoding =
-    RiceDeltaEncoding'
+  RiceDeltaEncoding'
     { _rdeFirstValue = Nothing
     , _rdeRiceParameter = Nothing
     , _rdeNumEntries = Nothing
     , _rdeEncodedData = Nothing
     }
+
 
 -- | The offset of the first entry in the encoded data, or, if only a single
 -- integer was encoded, that single integer\'s value. If the field is empty
@@ -700,9 +727,12 @@ instance ToJSON RiceDeltaEncoding where
 
 --
 -- /See:/ 'listThreatListsResponse' smart constructor.
-newtype ListThreatListsResponse = ListThreatListsResponse'
+newtype ListThreatListsResponse =
+  ListThreatListsResponse'
     { _ltlrThreatLists :: Maybe [ThreatListDescriptor]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListThreatListsResponse' with the minimum fields required to make a request.
 --
@@ -711,10 +741,8 @@ newtype ListThreatListsResponse = ListThreatListsResponse'
 -- * 'ltlrThreatLists'
 listThreatListsResponse
     :: ListThreatListsResponse
-listThreatListsResponse =
-    ListThreatListsResponse'
-    { _ltlrThreatLists = Nothing
-    }
+listThreatListsResponse = ListThreatListsResponse' {_ltlrThreatLists = Nothing}
+
 
 -- | The lists available for download by the client.
 ltlrThreatLists :: Lens' ListThreatListsResponse [ThreatListDescriptor]
@@ -741,11 +769,14 @@ instance ToJSON ListThreatListsResponse where
 -- the threat, and the type of entries in the list.
 --
 -- /See:/ 'threatListDescriptor' smart constructor.
-data ThreatListDescriptor = ThreatListDescriptor'
+data ThreatListDescriptor =
+  ThreatListDescriptor'
     { _tldThreatEntryType :: !(Maybe ThreatListDescriptorThreatEntryType)
     , _tldThreatType      :: !(Maybe ThreatListDescriptorThreatType)
     , _tldPlatformType    :: !(Maybe ThreatListDescriptorPlatformType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatListDescriptor' with the minimum fields required to make a request.
 --
@@ -759,11 +790,12 @@ data ThreatListDescriptor = ThreatListDescriptor'
 threatListDescriptor
     :: ThreatListDescriptor
 threatListDescriptor =
-    ThreatListDescriptor'
+  ThreatListDescriptor'
     { _tldThreatEntryType = Nothing
     , _tldThreatType = Nothing
     , _tldPlatformType = Nothing
     }
+
 
 -- | The entry types contained in the list.
 tldThreatEntryType :: Lens' ThreatListDescriptor (Maybe ThreatListDescriptorThreatEntryType)
@@ -802,10 +834,13 @@ instance ToJSON ThreatListDescriptor where
 -- | The client metadata associated with Safe Browsing API requests.
 --
 -- /See:/ 'clientInfo' smart constructor.
-data ClientInfo = ClientInfo'
+data ClientInfo =
+  ClientInfo'
     { _ciClientId      :: !(Maybe Text)
     , _ciClientVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientInfo' with the minimum fields required to make a request.
 --
@@ -816,11 +851,8 @@ data ClientInfo = ClientInfo'
 -- * 'ciClientVersion'
 clientInfo
     :: ClientInfo
-clientInfo =
-    ClientInfo'
-    { _ciClientId = Nothing
-    , _ciClientVersion = Nothing
-    }
+clientInfo = ClientInfo' {_ciClientId = Nothing, _ciClientVersion = Nothing}
+
 
 -- | A client ID that (hopefully) uniquely identifies the client
 -- implementation of the Safe Browsing API.
@@ -851,10 +883,13 @@ instance ToJSON ClientInfo where
 -- | Request to check entries against lists.
 --
 -- /See:/ 'findThreatMatchesRequest' smart constructor.
-data FindThreatMatchesRequest = FindThreatMatchesRequest'
+data FindThreatMatchesRequest =
+  FindThreatMatchesRequest'
     { _ftmrThreatInfo :: !(Maybe ThreatInfo)
     , _ftmrClient     :: !(Maybe ClientInfo)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FindThreatMatchesRequest' with the minimum fields required to make a request.
 --
@@ -866,10 +901,8 @@ data FindThreatMatchesRequest = FindThreatMatchesRequest'
 findThreatMatchesRequest
     :: FindThreatMatchesRequest
 findThreatMatchesRequest =
-    FindThreatMatchesRequest'
-    { _ftmrThreatInfo = Nothing
-    , _ftmrClient = Nothing
-    }
+  FindThreatMatchesRequest' {_ftmrThreatInfo = Nothing, _ftmrClient = Nothing}
+
 
 -- | The lists and entries to be checked for matches.
 ftmrThreatInfo :: Lens' FindThreatMatchesRequest (Maybe ThreatInfo)
@@ -899,13 +932,16 @@ instance ToJSON FindThreatMatchesRequest where
 -- | A single list update request.
 --
 -- /See:/ 'listUpdateRequest' smart constructor.
-data ListUpdateRequest = ListUpdateRequest'
+data ListUpdateRequest =
+  ListUpdateRequest'
     { _lurState           :: !(Maybe Bytes)
     , _lurThreatEntryType :: !(Maybe ListUpdateRequestThreatEntryType)
     , _lurConstraints     :: !(Maybe Constraints)
     , _lurThreatType      :: !(Maybe ListUpdateRequestThreatType)
     , _lurPlatformType    :: !(Maybe ListUpdateRequestPlatformType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUpdateRequest' with the minimum fields required to make a request.
 --
@@ -923,13 +959,14 @@ data ListUpdateRequest = ListUpdateRequest'
 listUpdateRequest
     :: ListUpdateRequest
 listUpdateRequest =
-    ListUpdateRequest'
+  ListUpdateRequest'
     { _lurState = Nothing
     , _lurThreatEntryType = Nothing
     , _lurConstraints = Nothing
     , _lurThreatType = Nothing
     , _lurPlatformType = Nothing
     }
+
 
 -- | The current state of the client for the requested list (the encrypted
 -- client state that was received from the last successful list update).
@@ -986,11 +1023,14 @@ instance ToJSON ListUpdateRequest where
 -- representation. Only one of these fields should be set.
 --
 -- /See:/ 'threatEntry' smart constructor.
-data ThreatEntry = ThreatEntry'
+data ThreatEntry =
+  ThreatEntry'
     { _teHash   :: !(Maybe Bytes)
     , _teURL    :: !(Maybe Text)
     , _teDigest :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatEntry' with the minimum fields required to make a request.
 --
@@ -1004,11 +1044,8 @@ data ThreatEntry = ThreatEntry'
 threatEntry
     :: ThreatEntry
 threatEntry =
-    ThreatEntry'
-    { _teHash = Nothing
-    , _teURL = Nothing
-    , _teDigest = Nothing
-    }
+  ThreatEntry' {_teHash = Nothing, _teURL = Nothing, _teDigest = Nothing}
+
 
 -- | A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
 -- hash. This field is in binary format. For JSON requests, hashes are
@@ -1047,14 +1084,17 @@ instance ToJSON ThreatEntry where
 -- | A match when checking a threat entry in the Safe Browsing threat lists.
 --
 -- /See:/ 'threatMatch' smart constructor.
-data ThreatMatch = ThreatMatch'
+data ThreatMatch =
+  ThreatMatch'
     { _tmThreatEntryMetadata :: !(Maybe ThreatEntryMetadata)
     , _tmThreatEntryType     :: !(Maybe ThreatMatchThreatEntryType)
     , _tmThreatType          :: !(Maybe ThreatMatchThreatType)
     , _tmPlatformType        :: !(Maybe ThreatMatchPlatformType)
     , _tmCacheDuration       :: !(Maybe GDuration)
     , _tmThreat              :: !(Maybe ThreatEntry)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatMatch' with the minimum fields required to make a request.
 --
@@ -1074,7 +1114,7 @@ data ThreatMatch = ThreatMatch'
 threatMatch
     :: ThreatMatch
 threatMatch =
-    ThreatMatch'
+  ThreatMatch'
     { _tmThreatEntryMetadata = Nothing
     , _tmThreatEntryType = Nothing
     , _tmThreatType = Nothing
@@ -1082,6 +1122,7 @@ threatMatch =
     , _tmCacheDuration = Nothing
     , _tmThreat = Nothing
     }
+
 
 -- | Optional metadata associated with this threat.
 tmThreatEntryMetadata :: Lens' ThreatMatch (Maybe ThreatEntryMetadata)
@@ -1150,10 +1191,13 @@ instance ToJSON ThreatMatch where
 -- hashes to clients that do support compression.
 --
 -- /See:/ 'rawHashes' smart constructor.
-data RawHashes = RawHashes'
+data RawHashes =
+  RawHashes'
     { _rhPrefixSize :: !(Maybe (Textual Int32))
     , _rhRawHashes  :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RawHashes' with the minimum fields required to make a request.
 --
@@ -1164,11 +1208,8 @@ data RawHashes = RawHashes'
 -- * 'rhRawHashes'
 rawHashes
     :: RawHashes
-rawHashes =
-    RawHashes'
-    { _rhPrefixSize = Nothing
-    , _rhRawHashes = Nothing
-    }
+rawHashes = RawHashes' {_rhPrefixSize = Nothing, _rhRawHashes = Nothing}
+
 
 -- | The number of bytes for each prefix encoded below. This field can be
 -- anywhere from 4 (shortest prefix) to 32 (full SHA256 hash).
@@ -1202,7 +1243,8 @@ instance ToJSON RawHashes where
 -- | An update to an individual list.
 --
 -- /See:/ 'listUpdateResponse' smart constructor.
-data ListUpdateResponse = ListUpdateResponse'
+data ListUpdateResponse =
+  ListUpdateResponse'
     { _lAdditions       :: !(Maybe [ThreatEntrySet])
     , _lThreatEntryType :: !(Maybe ListUpdateResponseThreatEntryType)
     , _lChecksum        :: !(Maybe Checksum)
@@ -1211,7 +1253,9 @@ data ListUpdateResponse = ListUpdateResponse'
     , _lNewClientState  :: !(Maybe Bytes)
     , _lRemovals        :: !(Maybe [ThreatEntrySet])
     , _lResponseType    :: !(Maybe ListUpdateResponseResponseType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListUpdateResponse' with the minimum fields required to make a request.
 --
@@ -1235,7 +1279,7 @@ data ListUpdateResponse = ListUpdateResponse'
 listUpdateResponse
     :: ListUpdateResponse
 listUpdateResponse =
-    ListUpdateResponse'
+  ListUpdateResponse'
     { _lAdditions = Nothing
     , _lThreatEntryType = Nothing
     , _lChecksum = Nothing
@@ -1245,6 +1289,7 @@ listUpdateResponse =
     , _lRemovals = Nothing
     , _lResponseType = Nothing
     }
+
 
 -- | A set of entries to add to a local threat type\'s list. Repeated to
 -- allow for a combination of compressed and raw data to be sent in a
@@ -1333,13 +1378,16 @@ instance ToJSON ListUpdateResponse where
 -- database.
 --
 -- /See:/ 'threatEntrySet' smart constructor.
-data ThreatEntrySet = ThreatEntrySet'
+data ThreatEntrySet =
+  ThreatEntrySet'
     { _tesRiceHashes      :: !(Maybe RiceDeltaEncoding)
     , _tesRiceIndices     :: !(Maybe RiceDeltaEncoding)
     , _tesRawHashes       :: !(Maybe RawHashes)
     , _tesRawIndices      :: !(Maybe RawIndices)
     , _tesCompressionType :: !(Maybe ThreatEntrySetCompressionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatEntrySet' with the minimum fields required to make a request.
 --
@@ -1357,13 +1405,14 @@ data ThreatEntrySet = ThreatEntrySet'
 threatEntrySet
     :: ThreatEntrySet
 threatEntrySet =
-    ThreatEntrySet'
+  ThreatEntrySet'
     { _tesRiceHashes = Nothing
     , _tesRiceIndices = Nothing
     , _tesRawHashes = Nothing
     , _tesRawIndices = Nothing
     , _tesCompressionType = Nothing
     }
+
 
 -- | The encoded 4-byte prefixes of SHA256-formatted entries, using a
 -- Golomb-Rice encoding. The hashes are converted to uint32, sorted in
@@ -1422,9 +1471,12 @@ instance ToJSON ThreatEntrySet where
 -- | A set of raw indices to remove from a local list.
 --
 -- /See:/ 'rawIndices' smart constructor.
-newtype RawIndices = RawIndices'
+newtype RawIndices =
+  RawIndices'
     { _riIndices :: Maybe [Textual Int32]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RawIndices' with the minimum fields required to make a request.
 --
@@ -1433,10 +1485,8 @@ newtype RawIndices = RawIndices'
 -- * 'riIndices'
 rawIndices
     :: RawIndices
-rawIndices =
-    RawIndices'
-    { _riIndices = Nothing
-    }
+rawIndices = RawIndices' {_riIndices = Nothing}
+
 
 -- | The indices to remove from a lexicographically-sorted local list.
 riIndices :: Lens' RawIndices [Int32]
@@ -1457,12 +1507,15 @@ instance ToJSON RawIndices where
 -- | A single resource related to a threat hit.
 --
 -- /See:/ 'threatSource' smart constructor.
-data ThreatSource = ThreatSource'
+data ThreatSource =
+  ThreatSource'
     { _tsRemoteIP :: !(Maybe Text)
     , _tsURL      :: !(Maybe Text)
     , _tsReferrer :: !(Maybe Text)
     , _tsType     :: !(Maybe ThreatSourceType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatSource' with the minimum fields required to make a request.
 --
@@ -1478,12 +1531,13 @@ data ThreatSource = ThreatSource'
 threatSource
     :: ThreatSource
 threatSource =
-    ThreatSource'
+  ThreatSource'
     { _tsRemoteIP = Nothing
     , _tsURL = Nothing
     , _tsReferrer = Nothing
     , _tsType = Nothing
     }
+
 
 -- | The remote IP of the resource in ASCII format. Either IPv4 or IPv6.
 tsRemoteIP :: Lens' ThreatSource (Maybe Text)
@@ -1523,11 +1577,14 @@ instance ToJSON ThreatSource where
 
 --
 -- /See:/ 'findFullHashesResponse' smart constructor.
-data FindFullHashesResponse = FindFullHashesResponse'
+data FindFullHashesResponse =
+  FindFullHashesResponse'
     { _ffhrMatches               :: !(Maybe [ThreatMatch])
     , _ffhrNegativeCacheDuration :: !(Maybe GDuration)
     , _ffhrMinimumWaitDuration   :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FindFullHashesResponse' with the minimum fields required to make a request.
 --
@@ -1541,11 +1598,12 @@ data FindFullHashesResponse = FindFullHashesResponse'
 findFullHashesResponse
     :: FindFullHashesResponse
 findFullHashesResponse =
-    FindFullHashesResponse'
+  FindFullHashesResponse'
     { _ffhrMatches = Nothing
     , _ffhrNegativeCacheDuration = Nothing
     , _ffhrMinimumWaitDuration = Nothing
     }
+
 
 -- | The full hashes that matched the requested prefixes.
 ffhrMatches :: Lens' FindFullHashesResponse [ThreatMatch]
@@ -1593,10 +1651,13 @@ instance ToJSON FindFullHashesResponse where
 -- | A single metadata entry.
 --
 -- /See:/ 'metadataEntry' smart constructor.
-data MetadataEntry = MetadataEntry'
+data MetadataEntry =
+  MetadataEntry'
     { _meValue :: !(Maybe Bytes)
     , _meKey   :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetadataEntry' with the minimum fields required to make a request.
 --
@@ -1607,11 +1668,8 @@ data MetadataEntry = MetadataEntry'
 -- * 'meKey'
 metadataEntry
     :: MetadataEntry
-metadataEntry =
-    MetadataEntry'
-    { _meValue = Nothing
-    , _meKey = Nothing
-    }
+metadataEntry = MetadataEntry' {_meValue = Nothing, _meKey = Nothing}
+
 
 -- | The metadata entry value. For JSON requests, the value is
 -- base64-encoded.
@@ -1640,10 +1698,13 @@ instance ToJSON MetadataEntry where
 
 --
 -- /See:/ 'fetchThreatListUpdatesResponse' smart constructor.
-data FetchThreatListUpdatesResponse = FetchThreatListUpdatesResponse'
+data FetchThreatListUpdatesResponse =
+  FetchThreatListUpdatesResponse'
     { _ftlurListUpdateResponses :: !(Maybe [ListUpdateResponse])
     , _ftlurMinimumWaitDuration :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FetchThreatListUpdatesResponse' with the minimum fields required to make a request.
 --
@@ -1655,10 +1716,9 @@ data FetchThreatListUpdatesResponse = FetchThreatListUpdatesResponse'
 fetchThreatListUpdatesResponse
     :: FetchThreatListUpdatesResponse
 fetchThreatListUpdatesResponse =
-    FetchThreatListUpdatesResponse'
-    { _ftlurListUpdateResponses = Nothing
-    , _ftlurMinimumWaitDuration = Nothing
-    }
+  FetchThreatListUpdatesResponse'
+    {_ftlurListUpdateResponses = Nothing, _ftlurMinimumWaitDuration = Nothing}
+
 
 -- | The list updates requested by the clients.
 ftlurListUpdateResponses :: Lens' FetchThreatListUpdatesResponse [ListUpdateResponse]

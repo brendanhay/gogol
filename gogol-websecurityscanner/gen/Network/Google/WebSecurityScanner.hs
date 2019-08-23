@@ -86,6 +86,15 @@ module Network.Google.WebSecurityScanner
     , StopScanRunRequest
     , stopScanRunRequest
 
+    -- ** ScanRunErrorTraceCode
+    , ScanRunErrorTraceCode (..)
+
+    -- ** ScanConfigError
+    , ScanConfigError
+    , scanConfigError
+    , sceFieldName
+    , sceCode
+
     -- ** Schedule
     , Schedule
     , schedule
@@ -108,12 +117,18 @@ module Network.Google.WebSecurityScanner
     , fFindingType
     , fVulnerableHeaders
     , fViolatingResource
+    , fForm
     , fFrameURL
     , fDescription
 
     -- ** Empty
     , Empty
     , empty
+
+    -- ** ScanRunWarningTrace
+    , ScanRunWarningTrace
+    , scanRunWarningTrace
+    , srwtCode
 
     -- ** ListFindingTypeStatsResponse
     , ListFindingTypeStatsResponse
@@ -137,9 +152,6 @@ module Network.Google.WebSecurityScanner
     , authentication
     , aGoogleAccount
     , aCustomAccount
-
-    -- ** FindingFindingType
-    , FindingFindingType (..)
 
     -- ** ListCrawledURLsResponse
     , ListCrawledURLsResponse
@@ -178,6 +190,13 @@ module Network.Google.WebSecurityScanner
     , hValue
     , hName
 
+    -- ** ScanRunErrorTrace
+    , ScanRunErrorTrace
+    , scanRunErrorTrace
+    , sretMostCommonHTTPErrorCode
+    , sretScanConfigError
+    , sretCode
+
     -- ** ListScanConfigsResponse
     , ListScanConfigsResponse
     , listScanConfigsResponse
@@ -204,15 +223,26 @@ module Network.Google.WebSecurityScanner
     -- ** ScanConfig
     , ScanConfig
     , scanConfig
+    , scLatestRun
     , scSchedule
     , scTargetPlatforms
     , scStartingURLs
     , scAuthentication
     , scMaxQps
     , scName
+    , scExportToSecurityCommandCenter
     , scDisplayName
     , scUserAgent
     , scBlackListPatterns
+
+    -- ** ScanRunWarningTraceCode
+    , ScanRunWarningTraceCode (..)
+
+    -- ** ScanConfigExportToSecurityCommandCenter
+    , ScanConfigExportToSecurityCommandCenter (..)
+
+    -- ** ScanConfigErrorCode
+    , ScanConfigErrorCode (..)
 
     -- ** ScanRunResultState
     , ScanRunResultState (..)
@@ -232,11 +262,18 @@ module Network.Google.WebSecurityScanner
     -- ** ScanRunExecutionState
     , ScanRunExecutionState (..)
 
+    -- ** Form
+    , Form
+    , form
+    , fActionURI
+    , fFields
+
     -- ** ScanRun
     , ScanRun
     , scanRun
     , srStartTime
     , srHasVulnerabilities
+    , srWarningTraces
     , srResultState
     , srProgressPercent
     , srURLsCrawledCount
@@ -244,9 +281,7 @@ module Network.Google.WebSecurityScanner
     , srName
     , srEndTime
     , srExecutionState
-
-    -- ** FindingTypeStatsFindingType
-    , FindingTypeStatsFindingType (..)
+    , srErrorTrace
     ) where
 
 import           Network.Google.Prelude

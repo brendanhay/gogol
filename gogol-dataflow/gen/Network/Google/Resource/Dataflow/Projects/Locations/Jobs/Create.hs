@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud Dataflow job.
+-- Creates a Cloud Dataflow job. To create a job, we recommend using
+-- \`projects.locations.jobs.create\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.create\` is not recommended, as your job will
+-- always start in \`us-central1\`.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.create@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
@@ -67,10 +71,15 @@ type ProjectsLocationsJobsCreateResource =
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Job :> Post '[JSON] Job
 
--- | Creates a Cloud Dataflow job.
+-- | Creates a Cloud Dataflow job. To create a job, we recommend using
+-- \`projects.locations.jobs.create\` with a [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints).
+-- Using \`projects.jobs.create\` is not recommended, as your job will
+-- always start in \`us-central1\`.
 --
 -- /See:/ 'projectsLocationsJobsCreate' smart constructor.
-data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
+data ProjectsLocationsJobsCreate =
+  ProjectsLocationsJobsCreate'
     { _pljcXgafv          :: !(Maybe Xgafv)
     , _pljcUploadProtocol :: !(Maybe Text)
     , _pljcLocation       :: !Text
@@ -81,7 +90,9 @@ data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
     , _pljcProjectId      :: !Text
     , _pljcReplaceJobId   :: !(Maybe Text)
     , _pljcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsCreate' with the minimum fields required to make a request.
 --
@@ -112,7 +123,7 @@ projectsLocationsJobsCreate
     -> Text -- ^ 'pljcProjectId'
     -> ProjectsLocationsJobsCreate
 projectsLocationsJobsCreate pPljcLocation_ pPljcPayload_ pPljcProjectId_ =
-    ProjectsLocationsJobsCreate'
+  ProjectsLocationsJobsCreate'
     { _pljcXgafv = Nothing
     , _pljcUploadProtocol = Nothing
     , _pljcLocation = pPljcLocation_
@@ -125,6 +136,7 @@ projectsLocationsJobsCreate pPljcLocation_ pPljcPayload_ pPljcProjectId_ =
     , _pljcCallback = Nothing
     }
 
+
 -- | V1 error format.
 pljcXgafv :: Lens' ProjectsLocationsJobsCreate (Maybe Xgafv)
 pljcXgafv
@@ -136,7 +148,9 @@ pljcUploadProtocol
   = lens _pljcUploadProtocol
       (\ s a -> s{_pljcUploadProtocol = a})
 
--- | The location that contains this job.
+-- | The [regional endpoint]
+-- (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints)
+-- that contains this job.
 pljcLocation :: Lens' ProjectsLocationsJobsCreate Text
 pljcLocation
   = lens _pljcLocation (\ s a -> s{_pljcLocation = a})

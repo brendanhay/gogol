@@ -40,18 +40,21 @@ import           Network.Google.RemoteBuildExecution.Types.Sum
 -- to the message in binary encoded form. To ensure consistent hashing,
 -- clients and servers MUST ensure that they serialize messages according
 -- to the following rules, even if there are alternate valid encodings for
--- the same message. - Fields are serialized in tag order. - There are no
--- unknown fields. - There are no duplicate fields. - Fields are serialized
+-- the same message: * Fields are serialized in tag order. * There are no
+-- unknown fields. * There are no duplicate fields. * Fields are serialized
 -- according to the default semantics for their type. Most protocol buffer
 -- implementations will always follow these rules when serializing, but
 -- care should be taken to avoid shortcuts. For instance, concatenating two
 -- messages to merge them may produce duplicate fields.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2Digest' smart constructor.
-data BuildBazelRemoteExecutionV2Digest = BuildBazelRemoteExecutionV2Digest'
+data BuildBazelRemoteExecutionV2Digest =
+  BuildBazelRemoteExecutionV2Digest'
     { _bbrevdSizeBytes :: !(Maybe (Textual Int64))
     , _bbrevdHash      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Digest' with the minimum fields required to make a request.
 --
@@ -63,10 +66,9 @@ data BuildBazelRemoteExecutionV2Digest = BuildBazelRemoteExecutionV2Digest'
 buildBazelRemoteExecutionV2Digest
     :: BuildBazelRemoteExecutionV2Digest
 buildBazelRemoteExecutionV2Digest =
-    BuildBazelRemoteExecutionV2Digest'
-    { _bbrevdSizeBytes = Nothing
-    , _bbrevdHash = Nothing
-    }
+  BuildBazelRemoteExecutionV2Digest'
+    {_bbrevdSizeBytes = Nothing, _bbrevdHash = Nothing}
+
 
 -- | The size of the blob, in bytes.
 bbrevdSizeBytes :: Lens' BuildBazelRemoteExecutionV2Digest (Maybe Int64)
@@ -134,11 +136,14 @@ instance ToJSON BuildBazelRemoteExecutionV2Digest
 -- security\/privacy reasons.
 --
 -- /See:/ 'googleRpcStatus' smart constructor.
-data GoogleRpcStatus = GoogleRpcStatus'
+data GoogleRpcStatus =
+  GoogleRpcStatus'
     { _grsDetails :: !(Maybe [GoogleRpcStatusDetailsItem])
     , _grsCode    :: !(Maybe (Textual Int32))
     , _grsMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpcStatus' with the minimum fields required to make a request.
 --
@@ -152,11 +157,9 @@ data GoogleRpcStatus = GoogleRpcStatus'
 googleRpcStatus
     :: GoogleRpcStatus
 googleRpcStatus =
-    GoogleRpcStatus'
-    { _grsDetails = Nothing
-    , _grsCode = Nothing
-    , _grsMessage = Nothing
-    }
+  GoogleRpcStatus'
+    {_grsDetails = Nothing, _grsCode = Nothing, _grsMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -198,9 +201,12 @@ instance ToJSON GoogleRpcStatus where
 -- | The request used for GetWorkerPool.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest'
     { _gdravgwprName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest' with the minimum fields required to make a request.
 --
@@ -210,9 +216,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest = Goo
 googleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest'
-    { _gdravgwprName = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest'
+    {_gdravgwprName = Nothing}
+
 
 -- | Name of the worker pool to retrieve. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\/workerpools\/[POOL_ID]\`.
@@ -222,7 +228,7 @@ gdravgwprName
       (\ s a -> s{_gdravgwprName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
          where
         parseJSON
           = withObject
@@ -232,7 +238,7 @@ instance FromJSON
                    <$> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest'{..}
@@ -242,11 +248,14 @@ instance ToJSON
 -- corresponding to a directory\'s full contents rather than a single file.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testOutputDirectory' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testOutputDirectory = GoogleDevtoolsRemoteexecutionV1testOutputDirectory'
+data GoogleDevtoolsRemoteexecutionV1testOutputDirectory =
+  GoogleDevtoolsRemoteexecutionV1testOutputDirectory'
     { _gdrvodPath       :: !(Maybe Text)
     , _gdrvodDigest     :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
     , _gdrvodTreeDigest :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testOutputDirectory' with the minimum fields required to make a request.
 --
@@ -260,11 +269,12 @@ data GoogleDevtoolsRemoteexecutionV1testOutputDirectory = GoogleDevtoolsRemoteex
 googleDevtoolsRemoteexecutionV1testOutputDirectory
     :: GoogleDevtoolsRemoteexecutionV1testOutputDirectory
 googleDevtoolsRemoteexecutionV1testOutputDirectory =
-    GoogleDevtoolsRemoteexecutionV1testOutputDirectory'
+  GoogleDevtoolsRemoteexecutionV1testOutputDirectory'
     { _gdrvodPath = Nothing
     , _gdrvodDigest = Nothing
     , _gdrvodTreeDigest = Nothing
     }
+
 
 -- | The full path of the directory relative to the working directory. The
 -- path separator is a forward slash \`\/\`. Since this is a relative path,
@@ -287,7 +297,7 @@ gdrvodTreeDigest
       (\ s a -> s{_gdrvodTreeDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testOutputDirectory
+           GoogleDevtoolsRemoteexecutionV1testOutputDirectory
          where
         parseJSON
           = withObject
@@ -299,7 +309,7 @@ instance FromJSON
                      (o .:? "treeDigest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testOutputDirectory
+           GoogleDevtoolsRemoteexecutionV1testOutputDirectory
          where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testOutputDirectory'{..}
@@ -314,10 +324,13 @@ instance ToJSON
 -- with \`SymlinkNode\`.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2OutputSymlink' smart constructor.
-data BuildBazelRemoteExecutionV2OutputSymlink = BuildBazelRemoteExecutionV2OutputSymlink'
+data BuildBazelRemoteExecutionV2OutputSymlink =
+  BuildBazelRemoteExecutionV2OutputSymlink'
     { _bbrevosPath   :: !(Maybe Text)
     , _bbrevosTarget :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2OutputSymlink' with the minimum fields required to make a request.
 --
@@ -329,10 +342,9 @@ data BuildBazelRemoteExecutionV2OutputSymlink = BuildBazelRemoteExecutionV2Outpu
 buildBazelRemoteExecutionV2OutputSymlink
     :: BuildBazelRemoteExecutionV2OutputSymlink
 buildBazelRemoteExecutionV2OutputSymlink =
-    BuildBazelRemoteExecutionV2OutputSymlink'
-    { _bbrevosPath = Nothing
-    , _bbrevosTarget = Nothing
-    }
+  BuildBazelRemoteExecutionV2OutputSymlink'
+    {_bbrevosPath = Nothing, _bbrevosTarget = Nothing}
+
 
 -- | The full path of the symlink relative to the working directory,
 -- including the filename. The path separator is a forward slash \`\/\`.
@@ -354,7 +366,8 @@ bbrevosTarget
       (\ s a -> s{_bbrevosTarget = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2OutputSymlink where
+           BuildBazelRemoteExecutionV2OutputSymlink
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2OutputSymlink"
@@ -363,7 +376,8 @@ instance FromJSON
                    (o .:? "path") <*> (o .:? "target"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2OutputSymlink where
+           BuildBazelRemoteExecutionV2OutputSymlink
+         where
         toJSON BuildBazelRemoteExecutionV2OutputSymlink'{..}
           = object
               (catMaybes
@@ -374,10 +388,13 @@ instance ToJSON
 -- Merkle tree, compressed into one message.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testTree' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testTree = GoogleDevtoolsRemoteexecutionV1testTree'
+data GoogleDevtoolsRemoteexecutionV1testTree =
+  GoogleDevtoolsRemoteexecutionV1testTree'
     { _gdrvtChildren :: !(Maybe [GoogleDevtoolsRemoteexecutionV1testDirectory])
     , _gdrvtRoot     :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDirectory)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testTree' with the minimum fields required to make a request.
 --
@@ -389,10 +406,9 @@ data GoogleDevtoolsRemoteexecutionV1testTree = GoogleDevtoolsRemoteexecutionV1te
 googleDevtoolsRemoteexecutionV1testTree
     :: GoogleDevtoolsRemoteexecutionV1testTree
 googleDevtoolsRemoteexecutionV1testTree =
-    GoogleDevtoolsRemoteexecutionV1testTree'
-    { _gdrvtChildren = Nothing
-    , _gdrvtRoot = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testTree'
+    {_gdrvtChildren = Nothing, _gdrvtRoot = Nothing}
+
 
 -- | All the child directories: the directories referred to by the root and,
 -- recursively, all its children. In order to reconstruct the directory
@@ -411,7 +427,8 @@ gdrvtRoot
   = lens _gdrvtRoot (\ s a -> s{_gdrvtRoot = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testTree where
+           GoogleDevtoolsRemoteexecutionV1testTree
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testTree"
@@ -420,7 +437,8 @@ instance FromJSON
                    (o .:? "children" .!= mempty) <*> (o .:? "root"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testTree where
+           GoogleDevtoolsRemoteexecutionV1testTree
+         where
         toJSON GoogleDevtoolsRemoteexecutionV1testTree'{..}
           = object
               (catMaybes
@@ -431,12 +449,15 @@ instance ToJSON
 -- Execution API.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2FileMetadata' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2FileMetadata = GoogleDevtoolsRemoteworkersV1test2FileMetadata'
+data GoogleDevtoolsRemoteworkersV1test2FileMetadata =
+  GoogleDevtoolsRemoteworkersV1test2FileMetadata'
     { _gdrvfmContents     :: !(Maybe Bytes)
     , _gdrvfmPath         :: !(Maybe Text)
     , _gdrvfmIsExecutable :: !(Maybe Bool)
     , _gdrvfmDigest       :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2FileMetadata' with the minimum fields required to make a request.
 --
@@ -452,12 +473,13 @@ data GoogleDevtoolsRemoteworkersV1test2FileMetadata = GoogleDevtoolsRemoteworker
 googleDevtoolsRemoteworkersV1test2FileMetadata
     :: GoogleDevtoolsRemoteworkersV1test2FileMetadata
 googleDevtoolsRemoteworkersV1test2FileMetadata =
-    GoogleDevtoolsRemoteworkersV1test2FileMetadata'
+  GoogleDevtoolsRemoteworkersV1test2FileMetadata'
     { _gdrvfmContents = Nothing
     , _gdrvfmPath = Nothing
     , _gdrvfmIsExecutable = Nothing
     , _gdrvfmDigest = Nothing
     }
+
 
 -- | If the file is small enough, its contents may also or alternatively be
 -- listed here.
@@ -490,7 +512,8 @@ gdrvfmDigest
   = lens _gdrvfmDigest (\ s a -> s{_gdrvfmDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2FileMetadata where
+           GoogleDevtoolsRemoteworkersV1test2FileMetadata
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteworkersV1test2FileMetadata"
@@ -501,7 +524,8 @@ instance FromJSON
                      <*> (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2FileMetadata where
+           GoogleDevtoolsRemoteworkersV1test2FileMetadata
+         where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2FileMetadata'{..}
           = object
@@ -517,9 +541,12 @@ instance ToJSON
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'googleLongrunningOperationMetadata' smart constructor.
-newtype GoogleLongrunningOperationMetadata = GoogleLongrunningOperationMetadata'
+newtype GoogleLongrunningOperationMetadata =
+  GoogleLongrunningOperationMetadata'
     { _glomAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
 --
@@ -530,9 +557,9 @@ googleLongrunningOperationMetadata
     :: HashMap Text JSONValue -- ^ 'glomAddtional'
     -> GoogleLongrunningOperationMetadata
 googleLongrunningOperationMetadata pGlomAddtional_ =
-    GoogleLongrunningOperationMetadata'
-    { _glomAddtional = _Coerce # pGlomAddtional_
-    }
+  GoogleLongrunningOperationMetadata'
+    {_glomAddtional = _Coerce # pGlomAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
@@ -563,10 +590,13 @@ instance ToJSON GoogleLongrunningOperationMetadata
 -- Directory message.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2Digest' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2Digest = GoogleDevtoolsRemoteworkersV1test2Digest'
+data GoogleDevtoolsRemoteworkersV1test2Digest =
+  GoogleDevtoolsRemoteworkersV1test2Digest'
     { _gdrvdSizeBytes :: !(Maybe (Textual Int64))
     , _gdrvdHash      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2Digest' with the minimum fields required to make a request.
 --
@@ -578,10 +608,9 @@ data GoogleDevtoolsRemoteworkersV1test2Digest = GoogleDevtoolsRemoteworkersV1tes
 googleDevtoolsRemoteworkersV1test2Digest
     :: GoogleDevtoolsRemoteworkersV1test2Digest
 googleDevtoolsRemoteworkersV1test2Digest =
-    GoogleDevtoolsRemoteworkersV1test2Digest'
-    { _gdrvdSizeBytes = Nothing
-    , _gdrvdHash = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2Digest'
+    {_gdrvdSizeBytes = Nothing, _gdrvdHash = Nothing}
+
 
 -- | The size of the contents. While this is not strictly required as part of
 -- an identifier (after all, any given hash will have exactly one canonical
@@ -600,7 +629,8 @@ gdrvdHash
   = lens _gdrvdHash (\ s a -> s{_gdrvdHash = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2Digest where
+           GoogleDevtoolsRemoteworkersV1test2Digest
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteworkersV1test2Digest"
@@ -609,7 +639,8 @@ instance FromJSON
                    (o .:? "sizeBytes") <*> (o .:? "hash"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2Digest where
+           GoogleDevtoolsRemoteworkersV1test2Digest
+         where
         toJSON GoogleDevtoolsRemoteworkersV1test2Digest'{..}
           = object
               (catMaybes
@@ -619,13 +650,16 @@ instance ToJSON
 -- | A response message for Capabilities.GetCapabilities.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ServerCapabilities' smart constructor.
-data BuildBazelRemoteExecutionV2ServerCapabilities = BuildBazelRemoteExecutionV2ServerCapabilities'
+data BuildBazelRemoteExecutionV2ServerCapabilities =
+  BuildBazelRemoteExecutionV2ServerCapabilities'
     { _bbrevscHighAPIVersion        :: !(Maybe BuildBazelSemverSemVer)
     , _bbrevscExecutionCapabilities :: !(Maybe BuildBazelRemoteExecutionV2ExecutionCapabilities)
     , _bbrevscCacheCapabilities     :: !(Maybe BuildBazelRemoteExecutionV2CacheCapabilities)
     , _bbrevscDeprecatedAPIVersion  :: !(Maybe BuildBazelSemverSemVer)
     , _bbrevscLowAPIVersion         :: !(Maybe BuildBazelSemverSemVer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ServerCapabilities' with the minimum fields required to make a request.
 --
@@ -643,13 +677,14 @@ data BuildBazelRemoteExecutionV2ServerCapabilities = BuildBazelRemoteExecutionV2
 buildBazelRemoteExecutionV2ServerCapabilities
     :: BuildBazelRemoteExecutionV2ServerCapabilities
 buildBazelRemoteExecutionV2ServerCapabilities =
-    BuildBazelRemoteExecutionV2ServerCapabilities'
+  BuildBazelRemoteExecutionV2ServerCapabilities'
     { _bbrevscHighAPIVersion = Nothing
     , _bbrevscExecutionCapabilities = Nothing
     , _bbrevscCacheCapabilities = Nothing
     , _bbrevscDeprecatedAPIVersion = Nothing
     , _bbrevscLowAPIVersion = Nothing
     }
+
 
 -- | Latest RE API version supported.
 bbrevscHighAPIVersion :: Lens' BuildBazelRemoteExecutionV2ServerCapabilities (Maybe BuildBazelSemverSemVer)
@@ -682,7 +717,8 @@ bbrevscLowAPIVersion
       (\ s a -> s{_bbrevscLowAPIVersion = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ServerCapabilities where
+           BuildBazelRemoteExecutionV2ServerCapabilities
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2ServerCapabilities"
@@ -695,7 +731,8 @@ instance FromJSON
                      <*> (o .:? "lowApiVersion"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ServerCapabilities where
+           BuildBazelRemoteExecutionV2ServerCapabilities
+         where
         toJSON
           BuildBazelRemoteExecutionV2ServerCapabilities'{..}
           = object
@@ -725,12 +762,15 @@ instance ToJSON
 -- serving a result from cache is always desirable and correct.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2Action' smart constructor.
-data BuildBazelRemoteExecutionV2Action = BuildBazelRemoteExecutionV2Action'
+data BuildBazelRemoteExecutionV2Action =
+  BuildBazelRemoteExecutionV2Action'
     { _bbrevaDoNotCache      :: !(Maybe Bool)
     , _bbrevaCommandDigest   :: !(Maybe BuildBazelRemoteExecutionV2Digest)
     , _bbrevaInputRootDigest :: !(Maybe BuildBazelRemoteExecutionV2Digest)
     , _bbrevaTimeout         :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Action' with the minimum fields required to make a request.
 --
@@ -746,12 +786,13 @@ data BuildBazelRemoteExecutionV2Action = BuildBazelRemoteExecutionV2Action'
 buildBazelRemoteExecutionV2Action
     :: BuildBazelRemoteExecutionV2Action
 buildBazelRemoteExecutionV2Action =
-    BuildBazelRemoteExecutionV2Action'
+  BuildBazelRemoteExecutionV2Action'
     { _bbrevaDoNotCache = Nothing
     , _bbrevaCommandDigest = Nothing
     , _bbrevaInputRootDigest = Nothing
     , _bbrevaTimeout = Nothing
     }
+
 
 -- | If true, then the \`Action\`\'s result cannot be cached.
 bbrevaDoNotCache :: Lens' BuildBazelRemoteExecutionV2Action (Maybe Bool)
@@ -820,10 +861,13 @@ instance ToJSON BuildBazelRemoteExecutionV2Action
 -- corresponding to a directory\'s full contents rather than a single file.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2OutputDirectory' smart constructor.
-data BuildBazelRemoteExecutionV2OutputDirectory = BuildBazelRemoteExecutionV2OutputDirectory'
+data BuildBazelRemoteExecutionV2OutputDirectory =
+  BuildBazelRemoteExecutionV2OutputDirectory'
     { _bbrevodPath       :: !(Maybe Text)
     , _bbrevodTreeDigest :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2OutputDirectory' with the minimum fields required to make a request.
 --
@@ -835,10 +879,9 @@ data BuildBazelRemoteExecutionV2OutputDirectory = BuildBazelRemoteExecutionV2Out
 buildBazelRemoteExecutionV2OutputDirectory
     :: BuildBazelRemoteExecutionV2OutputDirectory
 buildBazelRemoteExecutionV2OutputDirectory =
-    BuildBazelRemoteExecutionV2OutputDirectory'
-    { _bbrevodPath = Nothing
-    , _bbrevodTreeDigest = Nothing
-    }
+  BuildBazelRemoteExecutionV2OutputDirectory'
+    {_bbrevodPath = Nothing, _bbrevodTreeDigest = Nothing}
+
 
 -- | The full path of the directory relative to the working directory. The
 -- path separator is a forward slash \`\/\`. Since this is a relative path,
@@ -856,7 +899,8 @@ bbrevodTreeDigest
       (\ s a -> s{_bbrevodTreeDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2OutputDirectory where
+           BuildBazelRemoteExecutionV2OutputDirectory
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2OutputDirectory"
@@ -865,7 +909,8 @@ instance FromJSON
                    (o .:? "path") <*> (o .:? "treeDigest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2OutputDirectory where
+           BuildBazelRemoteExecutionV2OutputDirectory
+         where
         toJSON
           BuildBazelRemoteExecutionV2OutputDirectory'{..}
           = object
@@ -901,10 +946,13 @@ instance ToJSON
 -- messages to merge them may produce duplicate fields.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testDigest' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testDigest = GoogleDevtoolsRemoteexecutionV1testDigest'
+data GoogleDevtoolsRemoteexecutionV1testDigest =
+  GoogleDevtoolsRemoteexecutionV1testDigest'
     { _gSizeBytes :: !(Maybe (Textual Int64))
     , _gHash      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testDigest' with the minimum fields required to make a request.
 --
@@ -916,10 +964,9 @@ data GoogleDevtoolsRemoteexecutionV1testDigest = GoogleDevtoolsRemoteexecutionV1
 googleDevtoolsRemoteexecutionV1testDigest
     :: GoogleDevtoolsRemoteexecutionV1testDigest
 googleDevtoolsRemoteexecutionV1testDigest =
-    GoogleDevtoolsRemoteexecutionV1testDigest'
-    { _gSizeBytes = Nothing
-    , _gHash = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testDigest'
+    {_gSizeBytes = Nothing, _gHash = Nothing}
+
 
 -- | The size of the blob, in bytes.
 gSizeBytes :: Lens' GoogleDevtoolsRemoteexecutionV1testDigest (Maybe Int64)
@@ -933,7 +980,8 @@ gHash :: Lens' GoogleDevtoolsRemoteexecutionV1testDigest (Maybe Text)
 gHash = lens _gHash (\ s a -> s{_gHash = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testDigest where
+           GoogleDevtoolsRemoteexecutionV1testDigest
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testDigest"
@@ -942,7 +990,8 @@ instance FromJSON
                    (o .:? "sizeBytes") <*> (o .:? "hash"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testDigest where
+           GoogleDevtoolsRemoteexecutionV1testDigest
+         where
         toJSON GoogleDevtoolsRemoteexecutionV1testDigest'{..}
           = object
               (catMaybes
@@ -953,10 +1002,13 @@ instance ToJSON
 -- Merkle tree, compressed into one message.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2Tree' smart constructor.
-data BuildBazelRemoteExecutionV2Tree = BuildBazelRemoteExecutionV2Tree'
+data BuildBazelRemoteExecutionV2Tree =
+  BuildBazelRemoteExecutionV2Tree'
     { _bbrevtChildren :: !(Maybe [BuildBazelRemoteExecutionV2Directory])
     , _bbrevtRoot     :: !(Maybe BuildBazelRemoteExecutionV2Directory)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Tree' with the minimum fields required to make a request.
 --
@@ -968,10 +1020,9 @@ data BuildBazelRemoteExecutionV2Tree = BuildBazelRemoteExecutionV2Tree'
 buildBazelRemoteExecutionV2Tree
     :: BuildBazelRemoteExecutionV2Tree
 buildBazelRemoteExecutionV2Tree =
-    BuildBazelRemoteExecutionV2Tree'
-    { _bbrevtChildren = Nothing
-    , _bbrevtRoot = Nothing
-    }
+  BuildBazelRemoteExecutionV2Tree'
+    {_bbrevtChildren = Nothing, _bbrevtRoot = Nothing}
+
 
 -- | All the child directories: the directories referred to by the root and,
 -- recursively, all its children. In order to reconstruct the directory
@@ -1007,7 +1058,8 @@ instance ToJSON BuildBazelRemoteExecutionV2Tree where
 -- | An ActionResult represents the result of an Action being run.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testActionResult' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testActionResult = GoogleDevtoolsRemoteexecutionV1testActionResult'
+data GoogleDevtoolsRemoteexecutionV1testActionResult =
+  GoogleDevtoolsRemoteexecutionV1testActionResult'
     { _gdrvarOutputDirectories :: !(Maybe [GoogleDevtoolsRemoteexecutionV1testOutputDirectory])
     , _gdrvarOutputFiles       :: !(Maybe [GoogleDevtoolsRemoteexecutionV1testOutputFile])
     , _gdrvarStderrRaw         :: !(Maybe Bytes)
@@ -1015,7 +1067,9 @@ data GoogleDevtoolsRemoteexecutionV1testActionResult = GoogleDevtoolsRemoteexecu
     , _gdrvarStdoutDigest      :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
     , _gdrvarStderrDigest      :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
     , _gdrvarStdoutRaw         :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testActionResult' with the minimum fields required to make a request.
 --
@@ -1037,7 +1091,7 @@ data GoogleDevtoolsRemoteexecutionV1testActionResult = GoogleDevtoolsRemoteexecu
 googleDevtoolsRemoteexecutionV1testActionResult
     :: GoogleDevtoolsRemoteexecutionV1testActionResult
 googleDevtoolsRemoteexecutionV1testActionResult =
-    GoogleDevtoolsRemoteexecutionV1testActionResult'
+  GoogleDevtoolsRemoteexecutionV1testActionResult'
     { _gdrvarOutputDirectories = Nothing
     , _gdrvarOutputFiles = Nothing
     , _gdrvarStderrRaw = Nothing
@@ -1046,6 +1100,7 @@ googleDevtoolsRemoteexecutionV1testActionResult =
     , _gdrvarStderrDigest = Nothing
     , _gdrvarStdoutRaw = Nothing
     }
+
 
 -- | The output directories of the action. For each output directory
 -- requested in the \`output_directories\` field of the Action, if the
@@ -1135,7 +1190,8 @@ gdrvarStdoutRaw
       . mapping _Bytes
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testActionResult where
+           GoogleDevtoolsRemoteexecutionV1testActionResult
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testActionResult"
@@ -1150,7 +1206,8 @@ instance FromJSON
                      <*> (o .:? "stdoutRaw"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testActionResult where
+           GoogleDevtoolsRemoteexecutionV1testActionResult
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testActionResult'{..}
           = object
@@ -1167,10 +1224,13 @@ instance ToJSON
 -- | Supported range of priorities, including boundaries.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange' smart constructor.
-data BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange = BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange'
+data BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange =
+  BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange'
     { _bbrevpcprMinPriority :: !(Maybe (Textual Int32))
     , _bbrevpcprMaxPriority :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange' with the minimum fields required to make a request.
 --
@@ -1182,10 +1242,9 @@ data BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange = BuildBazelRe
 buildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
     :: BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
 buildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange =
-    BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange'
-    { _bbrevpcprMinPriority = Nothing
-    , _bbrevpcprMaxPriority = Nothing
-    }
+  BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange'
+    {_bbrevpcprMinPriority = Nothing, _bbrevpcprMaxPriority = Nothing}
+
 
 bbrevpcprMinPriority :: Lens' BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange (Maybe Int32)
 bbrevpcprMinPriority
@@ -1200,7 +1259,7 @@ bbrevpcprMaxPriority
       . mapping _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
+           BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
          where
         parseJSON
           = withObject
@@ -1210,7 +1269,7 @@ instance FromJSON
                    <$> (o .:? "minPriority") <*> (o .:? "maxPriority"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
+           BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
          where
         toJSON
           BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange'{..}
@@ -1224,11 +1283,14 @@ instance ToJSON
 -- name. \`OutputFile\` is binary-compatible with \`FileNode\`.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2OutputFile' smart constructor.
-data BuildBazelRemoteExecutionV2OutputFile = BuildBazelRemoteExecutionV2OutputFile'
+data BuildBazelRemoteExecutionV2OutputFile =
+  BuildBazelRemoteExecutionV2OutputFile'
     { _bbrevofPath         :: !(Maybe Text)
     , _bbrevofIsExecutable :: !(Maybe Bool)
     , _bbrevofDigest       :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2OutputFile' with the minimum fields required to make a request.
 --
@@ -1242,11 +1304,12 @@ data BuildBazelRemoteExecutionV2OutputFile = BuildBazelRemoteExecutionV2OutputFi
 buildBazelRemoteExecutionV2OutputFile
     :: BuildBazelRemoteExecutionV2OutputFile
 buildBazelRemoteExecutionV2OutputFile =
-    BuildBazelRemoteExecutionV2OutputFile'
+  BuildBazelRemoteExecutionV2OutputFile'
     { _bbrevofPath = Nothing
     , _bbrevofIsExecutable = Nothing
     , _bbrevofDigest = Nothing
     }
+
 
 -- | The full path of the file relative to the working directory, including
 -- the filename. The path separator is a forward slash \`\/\`. Since this
@@ -1268,7 +1331,8 @@ bbrevofDigest
       (\ s a -> s{_bbrevofDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2OutputFile where
+           BuildBazelRemoteExecutionV2OutputFile
+         where
         parseJSON
           = withObject "BuildBazelRemoteExecutionV2OutputFile"
               (\ o ->
@@ -1288,11 +1352,14 @@ instance ToJSON BuildBazelRemoteExecutionV2OutputFile
 -- | The request used for \`CreateInstance\`.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest' smart constructor.
-data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest'
+data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest'
     { _gdravcirParent     :: !(Maybe Text)
     , _gdravcirInstanceId :: !(Maybe Text)
     , _gdravcirInstance   :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest' with the minimum fields required to make a request.
 --
@@ -1306,11 +1373,12 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest = Googl
 googleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest'
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest'
     { _gdravcirParent = Nothing
     , _gdravcirInstanceId = Nothing
     , _gdravcirInstance = Nothing
     }
+
 
 -- | Resource name of the project containing the instance. Format:
 -- \`projects\/[PROJECT_ID]\`.
@@ -1320,7 +1388,7 @@ gdravcirParent
       (\ s a -> s{_gdravcirParent = a})
 
 -- | ID of the created instance. A valid \`instance_id\` must: be 6-50
--- characters long, contains only lowercase letters, digits, hyphens and
+-- characters long, contain only lowercase letters, digits, hyphens and
 -- underscores, start with a lowercase letter, and end with a lowercase
 -- letter or a digit.
 gdravcirInstanceId :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest (Maybe Text)
@@ -1336,7 +1404,7 @@ gdravcirInstance
       (\ s a -> s{_gdravcirInstance = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
          where
         parseJSON
           = withObject
@@ -1348,7 +1416,7 @@ instance FromJSON
                      (o .:? "instance"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest'{..}
@@ -1365,10 +1433,10 @@ instance ToJSON
 -- target, as well as possibly some metadata about the file or directory.
 -- In order to ensure that two equivalent directory trees hash to the same
 -- value, the following restrictions MUST be obeyed when constructing a a
--- \`Directory\`: - Every child in the directory must have a path of
+-- \`Directory\`: * Every child in the directory must have a path of
 -- exactly one segment. Multiple levels of directory hierarchy may not be
--- collapsed. - Each child in the directory must have a unique path segment
--- (file name). - The files, directories and symlinks in the directory must
+-- collapsed. * Each child in the directory must have a unique path segment
+-- (file name). * The files, directories and symlinks in the directory must
 -- each be sorted in lexicographical order by path. The path strings must
 -- be sorted by code point, equivalently, by UTF-8 bytes. A \`Directory\`
 -- that obeys the restrictions is said to be in canonical form. As an
@@ -1382,11 +1450,14 @@ instance ToJSON
 -- 1294, }, is_executable: true } ] } \`\`\`
 --
 -- /See:/ 'buildBazelRemoteExecutionV2Directory' smart constructor.
-data BuildBazelRemoteExecutionV2Directory = BuildBazelRemoteExecutionV2Directory'
+data BuildBazelRemoteExecutionV2Directory =
+  BuildBazelRemoteExecutionV2Directory'
     { _bbrevdDirectories :: !(Maybe [BuildBazelRemoteExecutionV2DirectoryNode])
     , _bbrevdSymlinks    :: !(Maybe [BuildBazelRemoteExecutionV2SymlinkNode])
     , _bbrevdFiles       :: !(Maybe [BuildBazelRemoteExecutionV2FileNode])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Directory' with the minimum fields required to make a request.
 --
@@ -1400,11 +1471,12 @@ data BuildBazelRemoteExecutionV2Directory = BuildBazelRemoteExecutionV2Directory
 buildBazelRemoteExecutionV2Directory
     :: BuildBazelRemoteExecutionV2Directory
 buildBazelRemoteExecutionV2Directory =
-    BuildBazelRemoteExecutionV2Directory'
+  BuildBazelRemoteExecutionV2Directory'
     { _bbrevdDirectories = Nothing
     , _bbrevdSymlinks = Nothing
     , _bbrevdFiles = Nothing
     }
+
 
 -- | The subdirectories in the directory.
 bbrevdDirectories :: Lens' BuildBazelRemoteExecutionV2Directory [BuildBazelRemoteExecutionV2DirectoryNode]
@@ -1430,7 +1502,8 @@ bbrevdFiles
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2Directory where
+           BuildBazelRemoteExecutionV2Directory
+         where
         parseJSON
           = withObject "BuildBazelRemoteExecutionV2Directory"
               (\ o ->
@@ -1452,10 +1525,13 @@ instance ToJSON BuildBazelRemoteExecutionV2Directory
 -- \`Directory\` and its associated metadata.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2DirectoryNode' smart constructor.
-data BuildBazelRemoteExecutionV2DirectoryNode = BuildBazelRemoteExecutionV2DirectoryNode'
+data BuildBazelRemoteExecutionV2DirectoryNode =
+  BuildBazelRemoteExecutionV2DirectoryNode'
     { _bbrevdnName   :: !(Maybe Text)
     , _bbrevdnDigest :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2DirectoryNode' with the minimum fields required to make a request.
 --
@@ -1467,10 +1543,9 @@ data BuildBazelRemoteExecutionV2DirectoryNode = BuildBazelRemoteExecutionV2Direc
 buildBazelRemoteExecutionV2DirectoryNode
     :: BuildBazelRemoteExecutionV2DirectoryNode
 buildBazelRemoteExecutionV2DirectoryNode =
-    BuildBazelRemoteExecutionV2DirectoryNode'
-    { _bbrevdnName = Nothing
-    , _bbrevdnDigest = Nothing
-    }
+  BuildBazelRemoteExecutionV2DirectoryNode'
+    {_bbrevdnName = Nothing, _bbrevdnDigest = Nothing}
+
 
 -- | The name of the directory.
 bbrevdnName :: Lens' BuildBazelRemoteExecutionV2DirectoryNode (Maybe Text)
@@ -1485,7 +1560,8 @@ bbrevdnDigest
       (\ s a -> s{_bbrevdnDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2DirectoryNode where
+           BuildBazelRemoteExecutionV2DirectoryNode
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2DirectoryNode"
@@ -1494,7 +1570,8 @@ instance FromJSON
                    (o .:? "name") <*> (o .:? "digest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2DirectoryNode where
+           BuildBazelRemoteExecutionV2DirectoryNode
+         where
         toJSON BuildBazelRemoteExecutionV2DirectoryNode'{..}
           = object
               (catMaybes
@@ -1504,11 +1581,14 @@ instance ToJSON
 -- | Describes the timeouts associated with this task.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandTaskTimeouts' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts = GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts'
+data GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts =
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts'
     { _gdrvcttIdle      :: !(Maybe GDuration)
     , _gdrvcttShutdown  :: !(Maybe GDuration)
     , _gdrvcttExecution :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts' with the minimum fields required to make a request.
 --
@@ -1522,11 +1602,12 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts = GoogleDevtoolsRemot
 googleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
     :: GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
 googleDevtoolsRemoteworkersV1test2CommandTaskTimeouts =
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts'
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts'
     { _gdrvcttIdle = Nothing
     , _gdrvcttShutdown = Nothing
     , _gdrvcttExecution = Nothing
     }
+
 
 -- | This specifies the maximum amount of time the task can be idle - that
 -- is, go without generating some output in either stdout or stderr. If the
@@ -1559,7 +1640,7 @@ gdrvcttExecution
       . mapping _GDuration
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
          where
         parseJSON
           = withObject
@@ -1571,7 +1652,7 @@ instance FromJSON
                      (o .:? "execution"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts'{..}
@@ -1588,11 +1669,15 @@ instance ToJSON
 -- Execution API calls are scoped to an instance.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaInstance' smart constructor.
-data GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance = GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
-    { _gdraviState    :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
-    , _gdraviLocation :: !(Maybe Text)
-    , _gdraviName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
+    { _gdraviState          :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
+    , _gdraviLocation       :: !(Maybe Text)
+    , _gdraviName           :: !(Maybe Text)
+    , _gdraviLoggingEnabled :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance' with the minimum fields required to make a request.
 --
@@ -1603,14 +1688,18 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance = GoogleDevtoolsRemo
 -- * 'gdraviLocation'
 --
 -- * 'gdraviName'
+--
+-- * 'gdraviLoggingEnabled'
 googleDevtoolsRemotebuildexecutionAdminV1alphaInstance
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
 googleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
     { _gdraviState = Nothing
     , _gdraviLocation = Nothing
     , _gdraviName = Nothing
+    , _gdraviLoggingEnabled = Nothing
     }
+
 
 -- | Output only. State of the instance.
 gdraviState :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceState)
@@ -1632,8 +1721,14 @@ gdraviName :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Mayb
 gdraviName
   = lens _gdraviName (\ s a -> s{_gdraviName = a})
 
+-- | Output only. Whether stack driver logging is enabled for the instance.
+gdraviLoggingEnabled :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance (Maybe Bool)
+gdraviLoggingEnabled
+  = lens _gdraviLoggingEnabled
+      (\ s a -> s{_gdraviLoggingEnabled = a})
+
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
          where
         parseJSON
           = withObject
@@ -1642,10 +1737,11 @@ instance FromJSON
                  GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'
                    <$>
                    (o .:? "state") <*> (o .:? "location") <*>
-                     (o .:? "name"))
+                     (o .:? "name")
+                     <*> (o .:? "loggingEnabled"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance'{..}
@@ -1653,15 +1749,19 @@ instance ToJSON
               (catMaybes
                  [("state" .=) <$> _gdraviState,
                   ("location" .=) <$> _gdraviLocation,
-                  ("name" .=) <$> _gdraviName])
+                  ("name" .=) <$> _gdraviName,
+                  ("loggingEnabled" .=) <$> _gdraviLoggingEnabled])
 
 -- | Details for the tool used to call the API.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testToolDetails' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testToolDetails = GoogleDevtoolsRemoteexecutionV1testToolDetails'
+data GoogleDevtoolsRemoteexecutionV1testToolDetails =
+  GoogleDevtoolsRemoteexecutionV1testToolDetails'
     { _gdrvtdToolName    :: !(Maybe Text)
     , _gdrvtdToolVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testToolDetails' with the minimum fields required to make a request.
 --
@@ -1673,10 +1773,9 @@ data GoogleDevtoolsRemoteexecutionV1testToolDetails = GoogleDevtoolsRemoteexecut
 googleDevtoolsRemoteexecutionV1testToolDetails
     :: GoogleDevtoolsRemoteexecutionV1testToolDetails
 googleDevtoolsRemoteexecutionV1testToolDetails =
-    GoogleDevtoolsRemoteexecutionV1testToolDetails'
-    { _gdrvtdToolName = Nothing
-    , _gdrvtdToolVersion = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testToolDetails'
+    {_gdrvtdToolName = Nothing, _gdrvtdToolVersion = Nothing}
+
 
 -- | Name of the tool, e.g. bazel.
 gdrvtdToolName :: Lens' GoogleDevtoolsRemoteexecutionV1testToolDetails (Maybe Text)
@@ -1691,7 +1790,8 @@ gdrvtdToolVersion
       (\ s a -> s{_gdrvtdToolVersion = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testToolDetails where
+           GoogleDevtoolsRemoteexecutionV1testToolDetails
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testToolDetails"
@@ -1700,7 +1800,8 @@ instance FromJSON
                    (o .:? "toolName") <*> (o .:? "toolVersion"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testToolDetails where
+           GoogleDevtoolsRemoteexecutionV1testToolDetails
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testToolDetails'{..}
           = object
@@ -1711,11 +1812,14 @@ instance ToJSON
 -- | Capabilities of the remote execution system.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecutionCapabilities' smart constructor.
-data BuildBazelRemoteExecutionV2ExecutionCapabilities = BuildBazelRemoteExecutionV2ExecutionCapabilities'
+data BuildBazelRemoteExecutionV2ExecutionCapabilities =
+  BuildBazelRemoteExecutionV2ExecutionCapabilities'
     { _bbrevecExecutionPriorityCapabilities :: !(Maybe BuildBazelRemoteExecutionV2PriorityCapabilities)
     , _bbrevecExecEnabled                   :: !(Maybe Bool)
     , _bbrevecDigestFunction                :: !(Maybe BuildBazelRemoteExecutionV2ExecutionCapabilitiesDigestFunction)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutionCapabilities' with the minimum fields required to make a request.
 --
@@ -1729,11 +1833,12 @@ data BuildBazelRemoteExecutionV2ExecutionCapabilities = BuildBazelRemoteExecutio
 buildBazelRemoteExecutionV2ExecutionCapabilities
     :: BuildBazelRemoteExecutionV2ExecutionCapabilities
 buildBazelRemoteExecutionV2ExecutionCapabilities =
-    BuildBazelRemoteExecutionV2ExecutionCapabilities'
+  BuildBazelRemoteExecutionV2ExecutionCapabilities'
     { _bbrevecExecutionPriorityCapabilities = Nothing
     , _bbrevecExecEnabled = Nothing
     , _bbrevecDigestFunction = Nothing
     }
+
 
 -- | Supported execution priority range.
 bbrevecExecutionPriorityCapabilities :: Lens' BuildBazelRemoteExecutionV2ExecutionCapabilities (Maybe BuildBazelRemoteExecutionV2PriorityCapabilities)
@@ -1755,7 +1860,7 @@ bbrevecDigestFunction
       (\ s a -> s{_bbrevecDigestFunction = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecutionCapabilities
+           BuildBazelRemoteExecutionV2ExecutionCapabilities
          where
         parseJSON
           = withObject
@@ -1767,7 +1872,7 @@ instance FromJSON
                      <*> (o .:? "digestFunction"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecutionCapabilities
+           BuildBazelRemoteExecutionV2ExecutionCapabilities
          where
         toJSON
           BuildBazelRemoteExecutionV2ExecutionCapabilities'{..}
@@ -1781,10 +1886,13 @@ instance ToJSON
 -- | The request used for UpdateWorkerPool.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest' smart constructor.
-data GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest'
+data GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest'
     { _gdravuwprUpdateMask :: !(Maybe GFieldMask)
     , _gdravuwprWorkerPool :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest' with the minimum fields required to make a request.
 --
@@ -1796,10 +1904,9 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest = Goo
 googleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest'
-    { _gdravuwprUpdateMask = Nothing
-    , _gdravuwprWorkerPool = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest'
+    {_gdravuwprUpdateMask = Nothing, _gdravuwprWorkerPool = Nothing}
+
 
 -- | The update mask applies to worker_pool. For the \`FieldMask\`
 -- definition, see
@@ -1820,7 +1927,7 @@ gdravuwprWorkerPool
       (\ s a -> s{_gdravuwprWorkerPool = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
          where
         parseJSON
           = withObject
@@ -1830,7 +1937,7 @@ instance FromJSON
                    <$> (o .:? "updateMask") <*> (o .:? "workerPool"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest'{..}
@@ -1842,9 +1949,12 @@ instance ToJSON
 -- | A request message for ContentAddressableStorage.BatchReadBlobs.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchReadBlobsRequest' smart constructor.
-newtype BuildBazelRemoteExecutionV2BatchReadBlobsRequest = BuildBazelRemoteExecutionV2BatchReadBlobsRequest'
+newtype BuildBazelRemoteExecutionV2BatchReadBlobsRequest =
+  BuildBazelRemoteExecutionV2BatchReadBlobsRequest'
     { _bbrevbrbrDigests :: Maybe [BuildBazelRemoteExecutionV2Digest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchReadBlobsRequest' with the minimum fields required to make a request.
 --
@@ -1854,9 +1964,9 @@ newtype BuildBazelRemoteExecutionV2BatchReadBlobsRequest = BuildBazelRemoteExecu
 buildBazelRemoteExecutionV2BatchReadBlobsRequest
     :: BuildBazelRemoteExecutionV2BatchReadBlobsRequest
 buildBazelRemoteExecutionV2BatchReadBlobsRequest =
-    BuildBazelRemoteExecutionV2BatchReadBlobsRequest'
-    { _bbrevbrbrDigests = Nothing
-    }
+  BuildBazelRemoteExecutionV2BatchReadBlobsRequest'
+    {_bbrevbrbrDigests = Nothing}
+
 
 -- | The individual blob digests.
 bbrevbrbrDigests :: Lens' BuildBazelRemoteExecutionV2BatchReadBlobsRequest [BuildBazelRemoteExecutionV2Digest]
@@ -1867,7 +1977,7 @@ bbrevbrbrDigests
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchReadBlobsRequest
+           BuildBazelRemoteExecutionV2BatchReadBlobsRequest
          where
         parseJSON
           = withObject
@@ -1877,7 +1987,7 @@ instance FromJSON
                    (o .:? "digests" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchReadBlobsRequest
+           BuildBazelRemoteExecutionV2BatchReadBlobsRequest
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchReadBlobsRequest'{..}
@@ -1890,12 +2000,15 @@ instance ToJSON
 -- \`OutputFile\` is binary-compatible with \`FileNode\`.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testOutputFile' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testOutputFile = GoogleDevtoolsRemoteexecutionV1testOutputFile'
+data GoogleDevtoolsRemoteexecutionV1testOutputFile =
+  GoogleDevtoolsRemoteexecutionV1testOutputFile'
     { _gdrvofPath         :: !(Maybe Text)
     , _gdrvofContent      :: !(Maybe Bytes)
     , _gdrvofIsExecutable :: !(Maybe Bool)
     , _gdrvofDigest       :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testOutputFile' with the minimum fields required to make a request.
 --
@@ -1911,12 +2024,13 @@ data GoogleDevtoolsRemoteexecutionV1testOutputFile = GoogleDevtoolsRemoteexecuti
 googleDevtoolsRemoteexecutionV1testOutputFile
     :: GoogleDevtoolsRemoteexecutionV1testOutputFile
 googleDevtoolsRemoteexecutionV1testOutputFile =
-    GoogleDevtoolsRemoteexecutionV1testOutputFile'
+  GoogleDevtoolsRemoteexecutionV1testOutputFile'
     { _gdrvofPath = Nothing
     , _gdrvofContent = Nothing
     , _gdrvofIsExecutable = Nothing
     , _gdrvofDigest = Nothing
     }
+
 
 -- | The full path of the file relative to the input root, including the
 -- filename. The path separator is a forward slash \`\/\`. Since this is a
@@ -1949,7 +2063,8 @@ gdrvofDigest
   = lens _gdrvofDigest (\ s a -> s{_gdrvofDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testOutputFile where
+           GoogleDevtoolsRemoteexecutionV1testOutputFile
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testOutputFile"
@@ -1960,7 +2075,8 @@ instance FromJSON
                      <*> (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testOutputFile where
+           GoogleDevtoolsRemoteexecutionV1testOutputFile
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testOutputFile'{..}
           = object
@@ -1973,12 +2089,15 @@ instance ToJSON
 -- | A worker pool resource in the Remote Build Execution API.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool' smart constructor.
-data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool = GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool'
+data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool'
     { _gdravwpWorkerConfig :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig)
     , _gdravwpState        :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolState)
     , _gdravwpWorkerCount  :: !(Maybe (Textual Int64))
     , _gdravwpName         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool' with the minimum fields required to make a request.
 --
@@ -1994,12 +2113,13 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool = GoogleDevtoolsRe
 googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
 googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool'
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool'
     { _gdravwpWorkerConfig = Nothing
     , _gdravwpState = Nothing
     , _gdravwpWorkerCount = Nothing
     , _gdravwpName = Nothing
     }
+
 
 -- | Specifies the properties, such as machine type and disk size, used for
 -- creating workers in a worker pool.
@@ -2030,7 +2150,7 @@ gdravwpName
   = lens _gdravwpName (\ s a -> s{_gdravwpName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
          where
         parseJSON
           = withObject
@@ -2043,7 +2163,7 @@ instance FromJSON
                      <*> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool'{..}
@@ -2057,10 +2177,13 @@ instance ToJSON
 -- | A \`SymlinkNode\` represents a symbolic link.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2SymlinkNode' smart constructor.
-data BuildBazelRemoteExecutionV2SymlinkNode = BuildBazelRemoteExecutionV2SymlinkNode'
+data BuildBazelRemoteExecutionV2SymlinkNode =
+  BuildBazelRemoteExecutionV2SymlinkNode'
     { _bbrevsnName   :: !(Maybe Text)
     , _bbrevsnTarget :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2SymlinkNode' with the minimum fields required to make a request.
 --
@@ -2072,10 +2195,9 @@ data BuildBazelRemoteExecutionV2SymlinkNode = BuildBazelRemoteExecutionV2Symlink
 buildBazelRemoteExecutionV2SymlinkNode
     :: BuildBazelRemoteExecutionV2SymlinkNode
 buildBazelRemoteExecutionV2SymlinkNode =
-    BuildBazelRemoteExecutionV2SymlinkNode'
-    { _bbrevsnName = Nothing
-    , _bbrevsnTarget = Nothing
-    }
+  BuildBazelRemoteExecutionV2SymlinkNode'
+    {_bbrevsnName = Nothing, _bbrevsnTarget = Nothing}
+
 
 -- | The name of the symlink.
 bbrevsnName :: Lens' BuildBazelRemoteExecutionV2SymlinkNode (Maybe Text)
@@ -2094,7 +2216,8 @@ bbrevsnTarget
       (\ s a -> s{_bbrevsnTarget = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2SymlinkNode where
+           BuildBazelRemoteExecutionV2SymlinkNode
+         where
         parseJSON
           = withObject "BuildBazelRemoteExecutionV2SymlinkNode"
               (\ o ->
@@ -2102,7 +2225,8 @@ instance FromJSON
                    (o .:? "name") <*> (o .:? "target"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2SymlinkNode where
+           BuildBazelRemoteExecutionV2SymlinkNode
+         where
         toJSON BuildBazelRemoteExecutionV2SymlinkNode'{..}
           = object
               (catMaybes
@@ -2111,9 +2235,12 @@ instance ToJSON
 
 --
 -- /See:/ 'googleRpcStatusDetailsItem' smart constructor.
-newtype GoogleRpcStatusDetailsItem = GoogleRpcStatusDetailsItem'
+newtype GoogleRpcStatusDetailsItem =
+  GoogleRpcStatusDetailsItem'
     { _grsdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleRpcStatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2124,9 +2251,8 @@ googleRpcStatusDetailsItem
     :: HashMap Text JSONValue -- ^ 'grsdiAddtional'
     -> GoogleRpcStatusDetailsItem
 googleRpcStatusDetailsItem pGrsdiAddtional_ =
-    GoogleRpcStatusDetailsItem'
-    { _grsdiAddtional = _Coerce # pGrsdiAddtional_
-    }
+  GoogleRpcStatusDetailsItem' {_grsdiAddtional = _Coerce # pGrsdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 grsdiAddtional :: Lens' GoogleRpcStatusDetailsItem (HashMap Text JSONValue)
@@ -2148,10 +2274,13 @@ instance ToJSON GoogleRpcStatusDetailsItem where
 -- \`Directory\` and its associated metadata.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testDirectoryNode' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testDirectoryNode = GoogleDevtoolsRemoteexecutionV1testDirectoryNode'
+data GoogleDevtoolsRemoteexecutionV1testDirectoryNode =
+  GoogleDevtoolsRemoteexecutionV1testDirectoryNode'
     { _gdrvdnName   :: !(Maybe Text)
     , _gdrvdnDigest :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testDirectoryNode' with the minimum fields required to make a request.
 --
@@ -2163,10 +2292,9 @@ data GoogleDevtoolsRemoteexecutionV1testDirectoryNode = GoogleDevtoolsRemoteexec
 googleDevtoolsRemoteexecutionV1testDirectoryNode
     :: GoogleDevtoolsRemoteexecutionV1testDirectoryNode
 googleDevtoolsRemoteexecutionV1testDirectoryNode =
-    GoogleDevtoolsRemoteexecutionV1testDirectoryNode'
-    { _gdrvdnName = Nothing
-    , _gdrvdnDigest = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testDirectoryNode'
+    {_gdrvdnName = Nothing, _gdrvdnDigest = Nothing}
+
 
 -- | The name of the directory.
 gdrvdnName :: Lens' GoogleDevtoolsRemoteexecutionV1testDirectoryNode (Maybe Text)
@@ -2180,7 +2308,7 @@ gdrvdnDigest
   = lens _gdrvdnDigest (\ s a -> s{_gdrvdnDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testDirectoryNode
+           GoogleDevtoolsRemoteexecutionV1testDirectoryNode
          where
         parseJSON
           = withObject
@@ -2190,7 +2318,7 @@ instance FromJSON
                    (o .:? "name") <*> (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testDirectoryNode
+           GoogleDevtoolsRemoteexecutionV1testDirectoryNode
          where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testDirectoryNode'{..}
@@ -2203,10 +2331,13 @@ instance ToJSON
 -- Remote Execution API.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2DirectoryMetadata' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata = GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata'
+data GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata =
+  GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata'
     { _gdrvdmPath   :: !(Maybe Text)
     , _gdrvdmDigest :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata' with the minimum fields required to make a request.
 --
@@ -2218,10 +2349,9 @@ data GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata = GoogleDevtoolsRemotew
 googleDevtoolsRemoteworkersV1test2DirectoryMetadata
     :: GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
 googleDevtoolsRemoteworkersV1test2DirectoryMetadata =
-    GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata'
-    { _gdrvdmPath = Nothing
-    , _gdrvdmDigest = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata'
+    {_gdrvdmPath = Nothing, _gdrvdmDigest = Nothing}
+
 
 -- | The path of the directory, as in FileMetadata.path.
 gdrvdmPath :: Lens' GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata (Maybe Text)
@@ -2235,7 +2365,7 @@ gdrvdmDigest
   = lens _gdrvdmDigest (\ s a -> s{_gdrvdmDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
+           GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
          where
         parseJSON
           = withObject
@@ -2245,7 +2375,7 @@ instance FromJSON
                    <$> (o .:? "path") <*> (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
+           GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata'{..}
@@ -2278,10 +2408,13 @@ instance ToJSON
 -- is_executable: true } ] } \`\`\`
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testDirectory' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testDirectory = GoogleDevtoolsRemoteexecutionV1testDirectory'
+data GoogleDevtoolsRemoteexecutionV1testDirectory =
+  GoogleDevtoolsRemoteexecutionV1testDirectory'
     { _gdrvdDirectories :: !(Maybe [GoogleDevtoolsRemoteexecutionV1testDirectoryNode])
     , _gdrvdFiles       :: !(Maybe [GoogleDevtoolsRemoteexecutionV1testFileNode])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testDirectory' with the minimum fields required to make a request.
 --
@@ -2293,10 +2426,9 @@ data GoogleDevtoolsRemoteexecutionV1testDirectory = GoogleDevtoolsRemoteexecutio
 googleDevtoolsRemoteexecutionV1testDirectory
     :: GoogleDevtoolsRemoteexecutionV1testDirectory
 googleDevtoolsRemoteexecutionV1testDirectory =
-    GoogleDevtoolsRemoteexecutionV1testDirectory'
-    { _gdrvdDirectories = Nothing
-    , _gdrvdFiles = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testDirectory'
+    {_gdrvdDirectories = Nothing, _gdrvdFiles = Nothing}
+
 
 -- | The subdirectories in the directory.
 gdrvdDirectories :: Lens' GoogleDevtoolsRemoteexecutionV1testDirectory [GoogleDevtoolsRemoteexecutionV1testDirectoryNode]
@@ -2314,7 +2446,8 @@ gdrvdFiles
       . _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testDirectory where
+           GoogleDevtoolsRemoteexecutionV1testDirectory
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testDirectory"
@@ -2324,7 +2457,8 @@ instance FromJSON
                      (o .:? "files" .!= mempty))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testDirectory where
+           GoogleDevtoolsRemoteexecutionV1testDirectory
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testDirectory'{..}
           = object
@@ -2335,7 +2469,8 @@ instance ToJSON
 -- | An ActionResult represents the result of an Action being run.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ActionResult' smart constructor.
-data BuildBazelRemoteExecutionV2ActionResult = BuildBazelRemoteExecutionV2ActionResult'
+data BuildBazelRemoteExecutionV2ActionResult =
+  BuildBazelRemoteExecutionV2ActionResult'
     { _bbrevarExecutionMetadata       :: !(Maybe BuildBazelRemoteExecutionV2ExecutedActionMetadata)
     , _bbrevarOutputDirectorySymlinks :: !(Maybe [BuildBazelRemoteExecutionV2OutputSymlink])
     , _bbrevarOutputFileSymlinks      :: !(Maybe [BuildBazelRemoteExecutionV2OutputSymlink])
@@ -2346,7 +2481,9 @@ data BuildBazelRemoteExecutionV2ActionResult = BuildBazelRemoteExecutionV2Action
     , _bbrevarStdoutDigest            :: !(Maybe BuildBazelRemoteExecutionV2Digest)
     , _bbrevarStderrDigest            :: !(Maybe BuildBazelRemoteExecutionV2Digest)
     , _bbrevarStdoutRaw               :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ActionResult' with the minimum fields required to make a request.
 --
@@ -2374,7 +2511,7 @@ data BuildBazelRemoteExecutionV2ActionResult = BuildBazelRemoteExecutionV2Action
 buildBazelRemoteExecutionV2ActionResult
     :: BuildBazelRemoteExecutionV2ActionResult
 buildBazelRemoteExecutionV2ActionResult =
-    BuildBazelRemoteExecutionV2ActionResult'
+  BuildBazelRemoteExecutionV2ActionResult'
     { _bbrevarExecutionMetadata = Nothing
     , _bbrevarOutputDirectorySymlinks = Nothing
     , _bbrevarOutputFileSymlinks = Nothing
@@ -2386,6 +2523,7 @@ buildBazelRemoteExecutionV2ActionResult =
     , _bbrevarStderrDigest = Nothing
     , _bbrevarStdoutRaw = Nothing
     }
+
 
 -- | The details of the execution that originally produced this result.
 bbrevarExecutionMetadata :: Lens' BuildBazelRemoteExecutionV2ActionResult (Maybe BuildBazelRemoteExecutionV2ExecutedActionMetadata)
@@ -2520,7 +2658,8 @@ bbrevarStdoutRaw
       . mapping _Bytes
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ActionResult where
+           BuildBazelRemoteExecutionV2ActionResult
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2ActionResult"
@@ -2538,7 +2677,8 @@ instance FromJSON
                      <*> (o .:? "stdoutRaw"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ActionResult where
+           BuildBazelRemoteExecutionV2ActionResult
+         where
         toJSON BuildBazelRemoteExecutionV2ActionResult'{..}
           = object
               (catMaybes
@@ -2560,9 +2700,12 @@ instance ToJSON
 -- | The request used for DeleteWorkerPool.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest'
     { _gdravdwprName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest' with the minimum fields required to make a request.
 --
@@ -2572,9 +2715,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest = 
 googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest'
-    { _gdravdwprName = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest'
+    {_gdravdwprName = Nothing}
+
 
 -- | Name of the worker pool to delete. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\/workerpools\/[POOL_ID]\`.
@@ -2584,7 +2727,7 @@ gdravdwprName
       (\ s a -> s{_gdravdwprName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
          where
         parseJSON
           = withObject
@@ -2594,7 +2737,7 @@ instance FromJSON
                    <$> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest'{..}
@@ -2603,10 +2746,13 @@ instance ToJSON
 -- | An environment variable required by this task.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable = GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable'
+data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable =
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable'
     { _gdrvctievValue :: !(Maybe Text)
     , _gdrvctievName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable' with the minimum fields required to make a request.
 --
@@ -2618,10 +2764,9 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable = Go
 googleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
     :: GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
 googleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable =
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable'
-    { _gdrvctievValue = Nothing
-    , _gdrvctievName = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable'
+    {_gdrvctievValue = Nothing, _gdrvctievName = Nothing}
+
 
 -- | The envvar value.
 gdrvctievValue :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable (Maybe Text)
@@ -2636,7 +2781,7 @@ gdrvctievName
       (\ s a -> s{_gdrvctievName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
          where
         parseJSON
           = withObject
@@ -2646,7 +2791,7 @@ instance FromJSON
                    <$> (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable'{..}
@@ -2659,12 +2804,15 @@ instance ToJSON
 -- the response field of the Operation.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testExecuteResponse' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testExecuteResponse = GoogleDevtoolsRemoteexecutionV1testExecuteResponse'
+data GoogleDevtoolsRemoteexecutionV1testExecuteResponse =
+  GoogleDevtoolsRemoteexecutionV1testExecuteResponse'
     { _gdrverStatus       :: !(Maybe GoogleRpcStatus)
     , _gdrverServerLogs   :: !(Maybe GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs)
     , _gdrverResult       :: !(Maybe GoogleDevtoolsRemoteexecutionV1testActionResult)
     , _gdrverCachedResult :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testExecuteResponse' with the minimum fields required to make a request.
 --
@@ -2680,12 +2828,13 @@ data GoogleDevtoolsRemoteexecutionV1testExecuteResponse = GoogleDevtoolsRemoteex
 googleDevtoolsRemoteexecutionV1testExecuteResponse
     :: GoogleDevtoolsRemoteexecutionV1testExecuteResponse
 googleDevtoolsRemoteexecutionV1testExecuteResponse =
-    GoogleDevtoolsRemoteexecutionV1testExecuteResponse'
+  GoogleDevtoolsRemoteexecutionV1testExecuteResponse'
     { _gdrverStatus = Nothing
     , _gdrverServerLogs = Nothing
     , _gdrverResult = Nothing
     , _gdrverCachedResult = Nothing
     }
+
 
 -- | If the status has a code other than \`OK\`, it indicates that the action
 -- did not finish execution. For example, if the operation times out during
@@ -2724,7 +2873,7 @@ gdrverCachedResult
       (\ s a -> s{_gdrverCachedResult = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testExecuteResponse
+           GoogleDevtoolsRemoteexecutionV1testExecuteResponse
          where
         parseJSON
           = withObject
@@ -2737,7 +2886,7 @@ instance FromJSON
                      <*> (o .:? "cachedResult"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testExecuteResponse
+           GoogleDevtoolsRemoteexecutionV1testExecuteResponse
          where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testExecuteResponse'{..}
@@ -2748,14 +2897,18 @@ instance ToJSON
                   ("result" .=) <$> _gdrverResult,
                   ("cachedResult" .=) <$> _gdrverCachedResult])
 
+-- | The full version of a given tool.
 --
 -- /See:/ 'buildBazelSemverSemVer' smart constructor.
-data BuildBazelSemverSemVer = BuildBazelSemverSemVer'
+data BuildBazelSemverSemVer =
+  BuildBazelSemverSemVer'
     { _bbssvMinor      :: !(Maybe (Textual Int32))
     , _bbssvMajor      :: !(Maybe (Textual Int32))
     , _bbssvPatch      :: !(Maybe (Textual Int32))
     , _bbssvPrerelease :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelSemverSemVer' with the minimum fields required to make a request.
 --
@@ -2771,28 +2924,35 @@ data BuildBazelSemverSemVer = BuildBazelSemverSemVer'
 buildBazelSemverSemVer
     :: BuildBazelSemverSemVer
 buildBazelSemverSemVer =
-    BuildBazelSemverSemVer'
+  BuildBazelSemverSemVer'
     { _bbssvMinor = Nothing
     , _bbssvMajor = Nothing
     , _bbssvPatch = Nothing
     , _bbssvPrerelease = Nothing
     }
 
+
+-- | The minor version, e.g. 2 for 10.2.3.
 bbssvMinor :: Lens' BuildBazelSemverSemVer (Maybe Int32)
 bbssvMinor
   = lens _bbssvMinor (\ s a -> s{_bbssvMinor = a}) .
       mapping _Coerce
 
+-- | The major version, e.g 10 for 10.2.3.
 bbssvMajor :: Lens' BuildBazelSemverSemVer (Maybe Int32)
 bbssvMajor
   = lens _bbssvMajor (\ s a -> s{_bbssvMajor = a}) .
       mapping _Coerce
 
+-- | The patch version, e.g 3 for 10.2.3.
 bbssvPatch :: Lens' BuildBazelSemverSemVer (Maybe Int32)
 bbssvPatch
   = lens _bbssvPatch (\ s a -> s{_bbssvPatch = a}) .
       mapping _Coerce
 
+-- | The pre-release version. Either this field or major\/minor\/patch fields
+-- must be filled. They are mutually exclusive. Pre-release versions are
+-- assumed to be earlier than any released versions.
 bbssvPrerelease :: Lens' BuildBazelSemverSemVer (Maybe Text)
 bbssvPrerelease
   = lens _bbssvPrerelease
@@ -2820,10 +2980,13 @@ instance ToJSON BuildBazelSemverSemVer where
 -- CompleteRequest.metadata, or are part of a more sophisticated message.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandOverhead' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandOverhead = GoogleDevtoolsRemoteworkersV1test2CommandOverhead'
+data GoogleDevtoolsRemoteworkersV1test2CommandOverhead =
+  GoogleDevtoolsRemoteworkersV1test2CommandOverhead'
     { _gdrvcoOverhead :: !(Maybe GDuration)
     , _gdrvcoDuration :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandOverhead' with the minimum fields required to make a request.
 --
@@ -2835,10 +2998,9 @@ data GoogleDevtoolsRemoteworkersV1test2CommandOverhead = GoogleDevtoolsRemotewor
 googleDevtoolsRemoteworkersV1test2CommandOverhead
     :: GoogleDevtoolsRemoteworkersV1test2CommandOverhead
 googleDevtoolsRemoteworkersV1test2CommandOverhead =
-    GoogleDevtoolsRemoteworkersV1test2CommandOverhead'
-    { _gdrvcoOverhead = Nothing
-    , _gdrvcoDuration = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2CommandOverhead'
+    {_gdrvcoOverhead = Nothing, _gdrvcoDuration = Nothing}
+
 
 -- | The amount of time *not* spent executing the command (ie
 -- uploading\/downloading files).
@@ -2858,7 +3020,7 @@ gdrvcoDuration
       . mapping _GDuration
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandOverhead
+           GoogleDevtoolsRemoteworkersV1test2CommandOverhead
          where
         parseJSON
           = withObject
@@ -2868,7 +3030,7 @@ instance FromJSON
                    <$> (o .:? "overhead") <*> (o .:? "duration"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandOverhead
+           GoogleDevtoolsRemoteworkersV1test2CommandOverhead
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandOverhead'{..}
@@ -2880,10 +3042,13 @@ instance ToJSON
 -- | A \`LogFile\` is a log stored in the CAS.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2LogFile' smart constructor.
-data BuildBazelRemoteExecutionV2LogFile = BuildBazelRemoteExecutionV2LogFile'
+data BuildBazelRemoteExecutionV2LogFile =
+  BuildBazelRemoteExecutionV2LogFile'
     { _bbrevlfHumanReadable :: !(Maybe Bool)
     , _bbrevlfDigest        :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2LogFile' with the minimum fields required to make a request.
 --
@@ -2895,10 +3060,9 @@ data BuildBazelRemoteExecutionV2LogFile = BuildBazelRemoteExecutionV2LogFile'
 buildBazelRemoteExecutionV2LogFile
     :: BuildBazelRemoteExecutionV2LogFile
 buildBazelRemoteExecutionV2LogFile =
-    BuildBazelRemoteExecutionV2LogFile'
-    { _bbrevlfHumanReadable = Nothing
-    , _bbrevlfDigest = Nothing
-    }
+  BuildBazelRemoteExecutionV2LogFile'
+    {_bbrevlfHumanReadable = Nothing, _bbrevlfDigest = Nothing}
+
 
 -- | This is a hint as to the purpose of the log, and is set to true if the
 -- log is human-readable text that can be usefully displayed to a user, and
@@ -2935,11 +3099,14 @@ instance ToJSON BuildBazelRemoteExecutionV2LogFile
 -- | The request used for \`CreateWorkerPool\`.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest' smart constructor.
-data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest'
+data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest'
     { _gdravcwprParent     :: !(Maybe Text)
     , _gdravcwprPoolId     :: !(Maybe Text)
     , _gdravcwprWorkerPool :: !(Maybe GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest' with the minimum fields required to make a request.
 --
@@ -2953,11 +3120,12 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest = Goo
 googleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest'
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest'
     { _gdravcwprParent = Nothing
     , _gdravcwprPoolId = Nothing
     , _gdravcwprWorkerPool = Nothing
     }
+
 
 -- | Resource name of the instance in which to create the new worker pool.
 -- Format: \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -2983,7 +3151,7 @@ gdravcwprWorkerPool
       (\ s a -> s{_gdravcwprWorkerPool = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
          where
         parseJSON
           = withObject
@@ -2995,7 +3163,7 @@ instance FromJSON
                      (o .:? "workerPool"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest'{..}
@@ -3009,10 +3177,13 @@ instance ToJSON
 -- program\'s environment.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable = GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable'
+data GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable =
+  GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable'
     { _gdrvcevValue :: !(Maybe Text)
     , _gdrvcevName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable' with the minimum fields required to make a request.
 --
@@ -3024,10 +3195,9 @@ data GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable = GoogleDevto
 googleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
     :: GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
 googleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable =
-    GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable'
-    { _gdrvcevValue = Nothing
-    , _gdrvcevName = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable'
+    {_gdrvcevValue = Nothing, _gdrvcevName = Nothing}
+
 
 -- | The variable value.
 gdrvcevValue :: Lens' GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable (Maybe Text)
@@ -3040,7 +3210,7 @@ gdrvcevName
   = lens _gdrvcevName (\ s a -> s{_gdrvcevName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
+           GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
          where
         parseJSON
           = withObject
@@ -3050,7 +3220,7 @@ instance FromJSON
                    <$> (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
+           GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable
          where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable'{..}
@@ -3062,9 +3232,12 @@ instance ToJSON
 -- | A response message for ContentAddressableStorage.FindMissingBlobs.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2FindMissingBlobsResponse' smart constructor.
-newtype BuildBazelRemoteExecutionV2FindMissingBlobsResponse = BuildBazelRemoteExecutionV2FindMissingBlobsResponse'
+newtype BuildBazelRemoteExecutionV2FindMissingBlobsResponse =
+  BuildBazelRemoteExecutionV2FindMissingBlobsResponse'
     { _bbrevfmbrMissingBlobDigests :: Maybe [BuildBazelRemoteExecutionV2Digest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2FindMissingBlobsResponse' with the minimum fields required to make a request.
 --
@@ -3074,9 +3247,9 @@ newtype BuildBazelRemoteExecutionV2FindMissingBlobsResponse = BuildBazelRemoteEx
 buildBazelRemoteExecutionV2FindMissingBlobsResponse
     :: BuildBazelRemoteExecutionV2FindMissingBlobsResponse
 buildBazelRemoteExecutionV2FindMissingBlobsResponse =
-    BuildBazelRemoteExecutionV2FindMissingBlobsResponse'
-    { _bbrevfmbrMissingBlobDigests = Nothing
-    }
+  BuildBazelRemoteExecutionV2FindMissingBlobsResponse'
+    {_bbrevfmbrMissingBlobDigests = Nothing}
+
 
 -- | A list of the blobs requested *not* present in the storage.
 bbrevfmbrMissingBlobDigests :: Lens' BuildBazelRemoteExecutionV2FindMissingBlobsResponse [BuildBazelRemoteExecutionV2Digest]
@@ -3087,7 +3260,7 @@ bbrevfmbrMissingBlobDigests
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2FindMissingBlobsResponse
+           BuildBazelRemoteExecutionV2FindMissingBlobsResponse
          where
         parseJSON
           = withObject
@@ -3097,7 +3270,7 @@ instance FromJSON
                    <$> (o .:? "missingBlobDigests" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2FindMissingBlobsResponse
+           BuildBazelRemoteExecutionV2FindMissingBlobsResponse
          where
         toJSON
           BuildBazelRemoteExecutionV2FindMissingBlobsResponse'{..}
@@ -3110,10 +3283,13 @@ instance ToJSON
 -- Remote Execution API.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2Directory' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2Directory = GoogleDevtoolsRemoteworkersV1test2Directory'
+data GoogleDevtoolsRemoteworkersV1test2Directory =
+  GoogleDevtoolsRemoteworkersV1test2Directory'
     { _gDirectories :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata])
     , _gFiles       :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2FileMetadata])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2Directory' with the minimum fields required to make a request.
 --
@@ -3125,10 +3301,9 @@ data GoogleDevtoolsRemoteworkersV1test2Directory = GoogleDevtoolsRemoteworkersV1
 googleDevtoolsRemoteworkersV1test2Directory
     :: GoogleDevtoolsRemoteworkersV1test2Directory
 googleDevtoolsRemoteworkersV1test2Directory =
-    GoogleDevtoolsRemoteworkersV1test2Directory'
-    { _gDirectories = Nothing
-    , _gFiles = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2Directory'
+    {_gDirectories = Nothing, _gFiles = Nothing}
+
 
 -- | Any subdirectories
 gDirectories :: Lens' GoogleDevtoolsRemoteworkersV1test2Directory [GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata]
@@ -3144,7 +3319,8 @@ gFiles
       _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2Directory where
+           GoogleDevtoolsRemoteworkersV1test2Directory
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteworkersV1test2Directory"
@@ -3154,7 +3330,8 @@ instance FromJSON
                      (o .:? "files" .!= mempty))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2Directory where
+           GoogleDevtoolsRemoteworkersV1test2Directory
+         where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2Directory'{..}
           = object
@@ -3170,12 +3347,15 @@ instance ToJSON
 -- base64 encoded binary RequestMetadata message.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testRequestMetadata' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testRequestMetadata = GoogleDevtoolsRemoteexecutionV1testRequestMetadata'
+data GoogleDevtoolsRemoteexecutionV1testRequestMetadata =
+  GoogleDevtoolsRemoteexecutionV1testRequestMetadata'
     { _gdrvrmCorrelatedInvocationsId :: !(Maybe Text)
     , _gdrvrmToolInvocationId        :: !(Maybe Text)
     , _gdrvrmActionId                :: !(Maybe Text)
     , _gdrvrmToolDetails             :: !(Maybe GoogleDevtoolsRemoteexecutionV1testToolDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testRequestMetadata' with the minimum fields required to make a request.
 --
@@ -3191,12 +3371,13 @@ data GoogleDevtoolsRemoteexecutionV1testRequestMetadata = GoogleDevtoolsRemoteex
 googleDevtoolsRemoteexecutionV1testRequestMetadata
     :: GoogleDevtoolsRemoteexecutionV1testRequestMetadata
 googleDevtoolsRemoteexecutionV1testRequestMetadata =
-    GoogleDevtoolsRemoteexecutionV1testRequestMetadata'
+  GoogleDevtoolsRemoteexecutionV1testRequestMetadata'
     { _gdrvrmCorrelatedInvocationsId = Nothing
     , _gdrvrmToolInvocationId = Nothing
     , _gdrvrmActionId = Nothing
     , _gdrvrmToolDetails = Nothing
     }
+
 
 -- | An identifier to tie multiple tool invocations together. For example,
 -- runs of foo_test, bar_test and baz_test on a post-submit of a given
@@ -3228,7 +3409,7 @@ gdrvrmToolDetails
       (\ s a -> s{_gdrvrmToolDetails = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testRequestMetadata
+           GoogleDevtoolsRemoteexecutionV1testRequestMetadata
          where
         parseJSON
           = withObject
@@ -3242,7 +3423,7 @@ instance FromJSON
                      <*> (o .:? "toolDetails"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testRequestMetadata
+           GoogleDevtoolsRemoteexecutionV1testRequestMetadata
          where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testRequestMetadata'{..}
@@ -3258,9 +3439,12 @@ instance ToJSON
 -- action.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecutionPolicy' smart constructor.
-newtype BuildBazelRemoteExecutionV2ExecutionPolicy = BuildBazelRemoteExecutionV2ExecutionPolicy'
+newtype BuildBazelRemoteExecutionV2ExecutionPolicy =
+  BuildBazelRemoteExecutionV2ExecutionPolicy'
     { _bbrevepPriority :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutionPolicy' with the minimum fields required to make a request.
 --
@@ -3270,9 +3454,8 @@ newtype BuildBazelRemoteExecutionV2ExecutionPolicy = BuildBazelRemoteExecutionV2
 buildBazelRemoteExecutionV2ExecutionPolicy
     :: BuildBazelRemoteExecutionV2ExecutionPolicy
 buildBazelRemoteExecutionV2ExecutionPolicy =
-    BuildBazelRemoteExecutionV2ExecutionPolicy'
-    { _bbrevepPriority = Nothing
-    }
+  BuildBazelRemoteExecutionV2ExecutionPolicy' {_bbrevepPriority = Nothing}
+
 
 -- | The priority (relative importance) of this action. Generally, a lower
 -- value means that the action should be run sooner than actions having a
@@ -3290,7 +3473,8 @@ bbrevepPriority
       . mapping _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecutionPolicy where
+           BuildBazelRemoteExecutionV2ExecutionPolicy
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2ExecutionPolicy"
@@ -3299,7 +3483,8 @@ instance FromJSON
                    (o .:? "priority"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecutionPolicy where
+           BuildBazelRemoteExecutionV2ExecutionPolicy
+         where
         toJSON
           BuildBazelRemoteExecutionV2ExecutionPolicy'{..}
           = object
@@ -3309,9 +3494,12 @@ instance ToJSON
 -- cache.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities' smart constructor.
-newtype BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities = BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities'
+newtype BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities =
+  BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities'
     { _bbrevacucUpdateEnabled :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities' with the minimum fields required to make a request.
 --
@@ -3321,9 +3509,9 @@ newtype BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities = BuildBazelRem
 buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
     :: BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
 buildBazelRemoteExecutionV2ActionCacheUpdateCapabilities =
-    BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities'
-    { _bbrevacucUpdateEnabled = Nothing
-    }
+  BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities'
+    {_bbrevacucUpdateEnabled = Nothing}
+
 
 bbrevacucUpdateEnabled :: Lens' BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities (Maybe Bool)
 bbrevacucUpdateEnabled
@@ -3331,7 +3519,7 @@ bbrevacucUpdateEnabled
       (\ s a -> s{_bbrevacucUpdateEnabled = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
+           BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
          where
         parseJSON
           = withObject
@@ -3341,7 +3529,7 @@ instance FromJSON
                    <$> (o .:? "updateEnabled"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
+           BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
          where
         toJSON
           BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities'{..}
@@ -3349,14 +3537,61 @@ instance ToJSON
               (catMaybes
                  [("updateEnabled" .=) <$> _bbrevacucUpdateEnabled])
 
+--
+-- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem' smart constructor.
+newtype GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem =
+  GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
+    { _gdrvcrmiAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdrvcrmiAddtional'
+googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+    :: HashMap Text JSONValue -- ^ 'gdrvcrmiAddtional'
+    -> GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+googleDevtoolsRemoteworkersV1test2CommandResultMetadataItem pGdrvcrmiAddtional_ =
+  GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
+    {_gdrvcrmiAddtional = _Coerce # pGdrvcrmiAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+gdrvcrmiAddtional :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem (HashMap Text JSONValue)
+gdrvcrmiAddtional
+  = lens _gdrvcrmiAddtional
+      (\ s a -> s{_gdrvcrmiAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+         where
+        parseJSON
+          = withObject
+              "GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem"
+              (\ o ->
+                 GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem
+         where
+        toJSON = toJSON . _gdrvcrmiAddtional
+
 -- | A request corresponding to a single blob that the client wants to
 -- upload.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest' smart constructor.
-data BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest = BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest'
+data BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest =
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest'
     { _bbrevbubrrData   :: !(Maybe Bytes)
     , _bbrevbubrrDigest :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest' with the minimum fields required to make a request.
 --
@@ -3368,10 +3603,9 @@ data BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest = BuildBazelRemot
 buildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
     :: BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
 buildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest =
-    BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest'
-    { _bbrevbubrrData = Nothing
-    , _bbrevbubrrDigest = Nothing
-    }
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest'
+    {_bbrevbubrrData = Nothing, _bbrevbubrrDigest = Nothing}
+
 
 -- | The raw binary data.
 bbrevbubrrData :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest (Maybe ByteString)
@@ -3387,7 +3621,7 @@ bbrevbubrrDigest
       (\ s a -> s{_bbrevbubrrDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
          where
         parseJSON
           = withObject
@@ -3397,7 +3631,7 @@ instance FromJSON
                    <$> (o .:? "data") <*> (o .:? "digest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest'{..}
@@ -3408,9 +3642,12 @@ instance ToJSON
 
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse = GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse'
     { _gdravlwprWorkerPools :: Maybe [GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse' with the minimum fields required to make a request.
 --
@@ -3420,9 +3657,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse = 
 googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
 googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse'
-    { _gdravlwprWorkerPools = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse'
+    {_gdravlwprWorkerPools = Nothing}
+
 
 -- | The list of worker pools in a given instance.
 gdravlwprWorkerPools :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse [GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool]
@@ -3433,7 +3670,7 @@ gdravlwprWorkerPools
       . _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
          where
         parseJSON
           = withObject
@@ -3443,7 +3680,7 @@ instance FromJSON
                    <$> (o .:? "workerPools" .!= mempty))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse'{..}
@@ -3455,14 +3692,17 @@ instance ToJSON
 -- as the Bots interface\'s \`Lease.result\` field.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandResult' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandResult = GoogleDevtoolsRemoteworkersV1test2CommandResult'
-    { _gdrvcrStatus     :: !(Maybe GoogleRpcStatus)
-    , _gdrvcrOverhead   :: !(Maybe GDuration)
-    , _gdrvcrOutputs    :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
-    , _gdrvcrExitCode   :: !(Maybe (Textual Int32))
-    , _gdrvcrStatistics :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem])
-    , _gdrvcrDuration   :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data GoogleDevtoolsRemoteworkersV1test2CommandResult =
+  GoogleDevtoolsRemoteworkersV1test2CommandResult'
+    { _gdrvcrStatus   :: !(Maybe GoogleRpcStatus)
+    , _gdrvcrOverhead :: !(Maybe GDuration)
+    , _gdrvcrOutputs  :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
+    , _gdrvcrExitCode :: !(Maybe (Textual Int32))
+    , _gdrvcrMetadata :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem])
+    , _gdrvcrDuration :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResult' with the minimum fields required to make a request.
 --
@@ -3476,20 +3716,21 @@ data GoogleDevtoolsRemoteworkersV1test2CommandResult = GoogleDevtoolsRemoteworke
 --
 -- * 'gdrvcrExitCode'
 --
--- * 'gdrvcrStatistics'
+-- * 'gdrvcrMetadata'
 --
 -- * 'gdrvcrDuration'
 googleDevtoolsRemoteworkersV1test2CommandResult
     :: GoogleDevtoolsRemoteworkersV1test2CommandResult
 googleDevtoolsRemoteworkersV1test2CommandResult =
-    GoogleDevtoolsRemoteworkersV1test2CommandResult'
+  GoogleDevtoolsRemoteworkersV1test2CommandResult'
     { _gdrvcrStatus = Nothing
     , _gdrvcrOverhead = Nothing
     , _gdrvcrOutputs = Nothing
     , _gdrvcrExitCode = Nothing
-    , _gdrvcrStatistics = Nothing
+    , _gdrvcrMetadata = Nothing
     , _gdrvcrDuration = Nothing
     }
+
 
 -- | An overall status for the command. For example, if the command timed
 -- out, this might have a code of DEADLINE_EXCEEDED; if it was killed by
@@ -3525,16 +3766,16 @@ gdrvcrExitCode
       (\ s a -> s{_gdrvcrExitCode = a})
       . mapping _Coerce
 
--- | Implementation-dependent statistics about the task. Both servers and
--- bots may define messages which can be encoded here; bots are free to
--- provide statistics in multiple formats, and servers are free to choose
--- one or more of the values to process and ignore others. In particular,
--- it is *not* considered an error for the bot to provide the server with a
--- field that it doesn\'t know about.
-gdrvcrStatistics :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResult [GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem]
-gdrvcrStatistics
-  = lens _gdrvcrStatistics
-      (\ s a -> s{_gdrvcrStatistics = a})
+-- | Implementation-dependent metadata about the task. Both servers and bots
+-- may define messages which can be encoded here; bots are free to provide
+-- metadata in multiple formats, and servers are free to choose one or more
+-- of the values to process and ignore others. In particular, it is *not*
+-- considered an error for the bot to provide the server with a field that
+-- it doesn\'t know about.
+gdrvcrMetadata :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResult [GoogleDevtoolsRemoteworkersV1test2CommandResultMetadataItem]
+gdrvcrMetadata
+  = lens _gdrvcrMetadata
+      (\ s a -> s{_gdrvcrMetadata = a})
       . _Default
       . _Coerce
 
@@ -3548,7 +3789,8 @@ gdrvcrDuration
       . mapping _GDuration
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandResult where
+           GoogleDevtoolsRemoteworkersV1test2CommandResult
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteworkersV1test2CommandResult"
@@ -3557,11 +3799,12 @@ instance FromJSON
                    (o .:? "status") <*> (o .:? "overhead") <*>
                      (o .:? "outputs")
                      <*> (o .:? "exitCode")
-                     <*> (o .:? "statistics" .!= mempty)
+                     <*> (o .:? "metadata" .!= mempty)
                      <*> (o .:? "duration"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandResult where
+           GoogleDevtoolsRemoteworkersV1test2CommandResult
+         where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandResult'{..}
           = object
@@ -3570,58 +3813,20 @@ instance ToJSON
                   ("overhead" .=) <$> _gdrvcrOverhead,
                   ("outputs" .=) <$> _gdrvcrOutputs,
                   ("exitCode" .=) <$> _gdrvcrExitCode,
-                  ("statistics" .=) <$> _gdrvcrStatistics,
+                  ("metadata" .=) <$> _gdrvcrMetadata,
                   ("duration" .=) <$> _gdrvcrDuration])
-
---
--- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem' smart constructor.
-newtype GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem = GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem'
-    { _gdrvcrsiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gdrvcrsiAddtional'
-googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-    :: HashMap Text JSONValue -- ^ 'gdrvcrsiAddtional'
-    -> GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-googleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem pGdrvcrsiAddtional_ =
-    GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem'
-    { _gdrvcrsiAddtional = _Coerce # pGdrvcrsiAddtional_
-    }
-
--- | Properties of the object. Contains field \'type with type URL.
-gdrvcrsiAddtional :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem (HashMap Text JSONValue)
-gdrvcrsiAddtional
-  = lens _gdrvcrsiAddtional
-      (\ s a -> s{_gdrvcrsiAddtional = a})
-      . _Coerce
-
-instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-         where
-        parseJSON
-          = withObject
-              "GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem"
-              (\ o ->
-                 GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem'
-                   <$> (parseJSONObject o))
-
-instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandResultStatisticsItem
-         where
-        toJSON = toJSON . _gdrvcrsiAddtional
 
 -- | A \`FileNode\` represents a single file and associated metadata.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testFileNode' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testFileNode = GoogleDevtoolsRemoteexecutionV1testFileNode'
+data GoogleDevtoolsRemoteexecutionV1testFileNode =
+  GoogleDevtoolsRemoteexecutionV1testFileNode'
     { _gdrvfnName         :: !(Maybe Text)
     , _gdrvfnIsExecutable :: !(Maybe Bool)
     , _gdrvfnDigest       :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testFileNode' with the minimum fields required to make a request.
 --
@@ -3635,11 +3840,12 @@ data GoogleDevtoolsRemoteexecutionV1testFileNode = GoogleDevtoolsRemoteexecution
 googleDevtoolsRemoteexecutionV1testFileNode
     :: GoogleDevtoolsRemoteexecutionV1testFileNode
 googleDevtoolsRemoteexecutionV1testFileNode =
-    GoogleDevtoolsRemoteexecutionV1testFileNode'
+  GoogleDevtoolsRemoteexecutionV1testFileNode'
     { _gdrvfnName = Nothing
     , _gdrvfnIsExecutable = Nothing
     , _gdrvfnDigest = Nothing
     }
+
 
 -- | The name of the file.
 gdrvfnName :: Lens' GoogleDevtoolsRemoteexecutionV1testFileNode (Maybe Text)
@@ -3658,7 +3864,8 @@ gdrvfnDigest
   = lens _gdrvfnDigest (\ s a -> s{_gdrvfnDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testFileNode where
+           GoogleDevtoolsRemoteexecutionV1testFileNode
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testFileNode"
@@ -3668,7 +3875,8 @@ instance FromJSON
                      (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testFileNode where
+           GoogleDevtoolsRemoteexecutionV1testFileNode
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testFileNode'{..}
           = object
@@ -3689,10 +3897,13 @@ instance ToJSON
 -- (http:\/\/github.com\/luci\/luci-py\/appengine\/swarming).
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2AdminTemp' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2AdminTemp = GoogleDevtoolsRemoteworkersV1test2AdminTemp'
+data GoogleDevtoolsRemoteworkersV1test2AdminTemp =
+  GoogleDevtoolsRemoteworkersV1test2AdminTemp'
     { _gdrvatCommand :: !(Maybe GoogleDevtoolsRemoteworkersV1test2AdminTempCommand)
     , _gdrvatArg     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2AdminTemp' with the minimum fields required to make a request.
 --
@@ -3704,10 +3915,9 @@ data GoogleDevtoolsRemoteworkersV1test2AdminTemp = GoogleDevtoolsRemoteworkersV1
 googleDevtoolsRemoteworkersV1test2AdminTemp
     :: GoogleDevtoolsRemoteworkersV1test2AdminTemp
 googleDevtoolsRemoteworkersV1test2AdminTemp =
-    GoogleDevtoolsRemoteworkersV1test2AdminTemp'
-    { _gdrvatCommand = Nothing
-    , _gdrvatArg = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2AdminTemp'
+    {_gdrvatCommand = Nothing, _gdrvatArg = Nothing}
+
 
 -- | The admin action; see \`Command\` for legal values.
 gdrvatCommand :: Lens' GoogleDevtoolsRemoteworkersV1test2AdminTemp (Maybe GoogleDevtoolsRemoteworkersV1test2AdminTempCommand)
@@ -3721,7 +3931,8 @@ gdrvatArg
   = lens _gdrvatArg (\ s a -> s{_gdrvatArg = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2AdminTemp where
+           GoogleDevtoolsRemoteworkersV1test2AdminTemp
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteworkersV1test2AdminTemp"
@@ -3730,7 +3941,8 @@ instance FromJSON
                    (o .:? "command") <*> (o .:? "arg"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2AdminTemp where
+           GoogleDevtoolsRemoteworkersV1test2AdminTemp
+         where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2AdminTemp'{..}
           = object
@@ -3742,7 +3954,8 @@ instance ToJSON
 -- performs a command.
 --
 -- /See:/ 'googleDevtoolsRemotebuildbotCommandDurations' smart constructor.
-data GoogleDevtoolsRemotebuildbotCommandDurations = GoogleDevtoolsRemotebuildbotCommandDurations'
+data GoogleDevtoolsRemotebuildbotCommandDurations =
+  GoogleDevtoolsRemotebuildbotCommandDurations'
     { _gdrcdStdout      :: !(Maybe GDuration)
     , _gdrcdDockerPrep  :: !(Maybe GDuration)
     , _gdrcdDownload    :: !(Maybe GDuration)
@@ -3750,7 +3963,9 @@ data GoogleDevtoolsRemotebuildbotCommandDurations = GoogleDevtoolsRemotebuildbot
     , _gdrcdExecution   :: !(Maybe GDuration)
     , _gdrcdIsoPrepDone :: !(Maybe DateTime')
     , _gdrcdUpload      :: !(Maybe GDuration)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildbotCommandDurations' with the minimum fields required to make a request.
 --
@@ -3772,7 +3987,7 @@ data GoogleDevtoolsRemotebuildbotCommandDurations = GoogleDevtoolsRemotebuildbot
 googleDevtoolsRemotebuildbotCommandDurations
     :: GoogleDevtoolsRemotebuildbotCommandDurations
 googleDevtoolsRemotebuildbotCommandDurations =
-    GoogleDevtoolsRemotebuildbotCommandDurations'
+  GoogleDevtoolsRemotebuildbotCommandDurations'
     { _gdrcdStdout = Nothing
     , _gdrcdDockerPrep = Nothing
     , _gdrcdDownload = Nothing
@@ -3781,6 +3996,7 @@ googleDevtoolsRemotebuildbotCommandDurations =
     , _gdrcdIsoPrepDone = Nothing
     , _gdrcdUpload = Nothing
     }
+
 
 -- | The time spent uploading the stdout logs.
 gdrcdStdout :: Lens' GoogleDevtoolsRemotebuildbotCommandDurations (Maybe Scientific)
@@ -3831,7 +4047,8 @@ gdrcdUpload
       mapping _GDuration
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildbotCommandDurations where
+           GoogleDevtoolsRemotebuildbotCommandDurations
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemotebuildbotCommandDurations"
@@ -3845,7 +4062,8 @@ instance FromJSON
                      <*> (o .:? "upload"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildbotCommandDurations where
+           GoogleDevtoolsRemotebuildbotCommandDurations
+         where
         toJSON
           GoogleDevtoolsRemotebuildbotCommandDurations'{..}
           = object
@@ -3873,10 +4091,13 @@ instance ToJSON
 -- available to the worker.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2PlatformProperty' smart constructor.
-data BuildBazelRemoteExecutionV2PlatformProperty = BuildBazelRemoteExecutionV2PlatformProperty'
+data BuildBazelRemoteExecutionV2PlatformProperty =
+  BuildBazelRemoteExecutionV2PlatformProperty'
     { _bbrevppValue :: !(Maybe Text)
     , _bbrevppName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2PlatformProperty' with the minimum fields required to make a request.
 --
@@ -3888,10 +4109,9 @@ data BuildBazelRemoteExecutionV2PlatformProperty = BuildBazelRemoteExecutionV2Pl
 buildBazelRemoteExecutionV2PlatformProperty
     :: BuildBazelRemoteExecutionV2PlatformProperty
 buildBazelRemoteExecutionV2PlatformProperty =
-    BuildBazelRemoteExecutionV2PlatformProperty'
-    { _bbrevppValue = Nothing
-    , _bbrevppName = Nothing
-    }
+  BuildBazelRemoteExecutionV2PlatformProperty'
+    {_bbrevppValue = Nothing, _bbrevppName = Nothing}
+
 
 -- | The property value.
 bbrevppValue :: Lens' BuildBazelRemoteExecutionV2PlatformProperty (Maybe Text)
@@ -3904,7 +4124,8 @@ bbrevppName
   = lens _bbrevppName (\ s a -> s{_bbrevppName = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2PlatformProperty where
+           BuildBazelRemoteExecutionV2PlatformProperty
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2PlatformProperty"
@@ -3913,7 +4134,8 @@ instance FromJSON
                    (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2PlatformProperty where
+           BuildBazelRemoteExecutionV2PlatformProperty
+         where
         toJSON
           BuildBazelRemoteExecutionV2PlatformProperty'{..}
           = object
@@ -3925,18 +4147,21 @@ instance ToJSON
 --
 -- /See:/ 'buildBazelRemoteExecutionV2WaitExecutionRequest' smart constructor.
 data BuildBazelRemoteExecutionV2WaitExecutionRequest =
-    BuildBazelRemoteExecutionV2WaitExecutionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  BuildBazelRemoteExecutionV2WaitExecutionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2WaitExecutionRequest' with the minimum fields required to make a request.
 --
 buildBazelRemoteExecutionV2WaitExecutionRequest
     :: BuildBazelRemoteExecutionV2WaitExecutionRequest
 buildBazelRemoteExecutionV2WaitExecutionRequest =
-    BuildBazelRemoteExecutionV2WaitExecutionRequest'
+  BuildBazelRemoteExecutionV2WaitExecutionRequest'
+
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2WaitExecutionRequest where
+           BuildBazelRemoteExecutionV2WaitExecutionRequest
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2WaitExecutionRequest"
@@ -3945,17 +4170,21 @@ instance FromJSON
                    BuildBazelRemoteExecutionV2WaitExecutionRequest')
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2WaitExecutionRequest where
+           BuildBazelRemoteExecutionV2WaitExecutionRequest
+         where
         toJSON = const emptyObject
 
 -- | DEPRECATED - use CommandResult instead. Describes the actual outputs
 -- from the task.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandOutputs' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandOutputs = GoogleDevtoolsRemoteworkersV1test2CommandOutputs'
+data GoogleDevtoolsRemoteworkersV1test2CommandOutputs =
+  GoogleDevtoolsRemoteworkersV1test2CommandOutputs'
     { _gdrvcoOutputs  :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
     , _gdrvcoExitCode :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandOutputs' with the minimum fields required to make a request.
 --
@@ -3967,10 +4196,9 @@ data GoogleDevtoolsRemoteworkersV1test2CommandOutputs = GoogleDevtoolsRemotework
 googleDevtoolsRemoteworkersV1test2CommandOutputs
     :: GoogleDevtoolsRemoteworkersV1test2CommandOutputs
 googleDevtoolsRemoteworkersV1test2CommandOutputs =
-    GoogleDevtoolsRemoteworkersV1test2CommandOutputs'
-    { _gdrvcoOutputs = Nothing
-    , _gdrvcoExitCode = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2CommandOutputs'
+    {_gdrvcoOutputs = Nothing, _gdrvcoExitCode = Nothing}
+
 
 -- | The output files. The blob referenced by the digest should contain one
 -- of the following (implementation-dependent): * A marshalled
@@ -3993,7 +4221,7 @@ gdrvcoExitCode
       . mapping _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandOutputs
+           GoogleDevtoolsRemoteworkersV1test2CommandOutputs
          where
         parseJSON
           = withObject
@@ -4003,7 +4231,7 @@ instance FromJSON
                    (o .:? "outputs") <*> (o .:? "exitCode"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandOutputs
+           GoogleDevtoolsRemoteworkersV1test2CommandOutputs
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandOutputs'{..}
@@ -4015,7 +4243,8 @@ instance ToJSON
 -- | ExecutedActionMetadata contains details about a completed execution.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecutedActionMetadata' smart constructor.
-data BuildBazelRemoteExecutionV2ExecutedActionMetadata = BuildBazelRemoteExecutionV2ExecutedActionMetadata'
+data BuildBazelRemoteExecutionV2ExecutedActionMetadata =
+  BuildBazelRemoteExecutionV2ExecutedActionMetadata'
     { _bbreveamOutputUploadCompletedTimestamp :: !(Maybe DateTime')
     , _bbreveamOutputUploadStartTimestamp     :: !(Maybe DateTime')
     , _bbreveamWorkerCompletedTimestamp       :: !(Maybe DateTime')
@@ -4026,7 +4255,9 @@ data BuildBazelRemoteExecutionV2ExecutedActionMetadata = BuildBazelRemoteExecuti
     , _bbreveamWorker                         :: !(Maybe Text)
     , _bbreveamExecutionCompletedTimestamp    :: !(Maybe DateTime')
     , _bbreveamInputFetchCompletedTimestamp   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutedActionMetadata' with the minimum fields required to make a request.
 --
@@ -4054,7 +4285,7 @@ data BuildBazelRemoteExecutionV2ExecutedActionMetadata = BuildBazelRemoteExecuti
 buildBazelRemoteExecutionV2ExecutedActionMetadata
     :: BuildBazelRemoteExecutionV2ExecutedActionMetadata
 buildBazelRemoteExecutionV2ExecutedActionMetadata =
-    BuildBazelRemoteExecutionV2ExecutedActionMetadata'
+  BuildBazelRemoteExecutionV2ExecutedActionMetadata'
     { _bbreveamOutputUploadCompletedTimestamp = Nothing
     , _bbreveamOutputUploadStartTimestamp = Nothing
     , _bbreveamWorkerCompletedTimestamp = Nothing
@@ -4066,6 +4297,7 @@ buildBazelRemoteExecutionV2ExecutedActionMetadata =
     , _bbreveamExecutionCompletedTimestamp = Nothing
     , _bbreveamInputFetchCompletedTimestamp = Nothing
     }
+
 
 -- | When the worker finished uploading action outputs.
 bbreveamOutputUploadCompletedTimestamp :: Lens' BuildBazelRemoteExecutionV2ExecutedActionMetadata (Maybe UTCTime)
@@ -4140,7 +4372,7 @@ bbreveamInputFetchCompletedTimestamp
       . mapping _DateTime
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecutedActionMetadata
+           BuildBazelRemoteExecutionV2ExecutedActionMetadata
          where
         parseJSON
           = withObject
@@ -4160,7 +4392,7 @@ instance FromJSON
                      <*> (o .:? "inputFetchCompletedTimestamp"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecutedActionMetadata
+           BuildBazelRemoteExecutionV2ExecutedActionMetadata
          where
         toJSON
           BuildBazelRemoteExecutionV2ExecutedActionMetadata'{..}
@@ -4188,10 +4420,13 @@ instance ToJSON
 -- | Describes a blob of binary content with its digest.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2Blob' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2Blob = GoogleDevtoolsRemoteworkersV1test2Blob'
+data GoogleDevtoolsRemoteworkersV1test2Blob =
+  GoogleDevtoolsRemoteworkersV1test2Blob'
     { _gdrvbContents :: !(Maybe Bytes)
     , _gdrvbDigest   :: !(Maybe GoogleDevtoolsRemoteworkersV1test2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2Blob' with the minimum fields required to make a request.
 --
@@ -4203,10 +4438,9 @@ data GoogleDevtoolsRemoteworkersV1test2Blob = GoogleDevtoolsRemoteworkersV1test2
 googleDevtoolsRemoteworkersV1test2Blob
     :: GoogleDevtoolsRemoteworkersV1test2Blob
 googleDevtoolsRemoteworkersV1test2Blob =
-    GoogleDevtoolsRemoteworkersV1test2Blob'
-    { _gdrvbContents = Nothing
-    , _gdrvbDigest = Nothing
-    }
+  GoogleDevtoolsRemoteworkersV1test2Blob'
+    {_gdrvbContents = Nothing, _gdrvbDigest = Nothing}
+
 
 -- | The contents of the blob.
 gdrvbContents :: Lens' GoogleDevtoolsRemoteworkersV1test2Blob (Maybe ByteString)
@@ -4221,7 +4455,8 @@ gdrvbDigest
   = lens _gdrvbDigest (\ s a -> s{_gdrvbDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2Blob where
+           GoogleDevtoolsRemoteworkersV1test2Blob
+         where
         parseJSON
           = withObject "GoogleDevtoolsRemoteworkersV1test2Blob"
               (\ o ->
@@ -4229,7 +4464,8 @@ instance FromJSON
                    (o .:? "contents") <*> (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2Blob where
+           GoogleDevtoolsRemoteworkersV1test2Blob
+         where
         toJSON GoogleDevtoolsRemoteworkersV1test2Blob'{..}
           = object
               (catMaybes
@@ -4239,9 +4475,12 @@ instance ToJSON
 -- | A request message for ContentAddressableStorage.FindMissingBlobs.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2FindMissingBlobsRequest' smart constructor.
-newtype BuildBazelRemoteExecutionV2FindMissingBlobsRequest = BuildBazelRemoteExecutionV2FindMissingBlobsRequest'
+newtype BuildBazelRemoteExecutionV2FindMissingBlobsRequest =
+  BuildBazelRemoteExecutionV2FindMissingBlobsRequest'
     { _bbrevfmbrBlobDigests :: Maybe [BuildBazelRemoteExecutionV2Digest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2FindMissingBlobsRequest' with the minimum fields required to make a request.
 --
@@ -4251,9 +4490,9 @@ newtype BuildBazelRemoteExecutionV2FindMissingBlobsRequest = BuildBazelRemoteExe
 buildBazelRemoteExecutionV2FindMissingBlobsRequest
     :: BuildBazelRemoteExecutionV2FindMissingBlobsRequest
 buildBazelRemoteExecutionV2FindMissingBlobsRequest =
-    BuildBazelRemoteExecutionV2FindMissingBlobsRequest'
-    { _bbrevfmbrBlobDigests = Nothing
-    }
+  BuildBazelRemoteExecutionV2FindMissingBlobsRequest'
+    {_bbrevfmbrBlobDigests = Nothing}
+
 
 -- | A list of the blobs to check.
 bbrevfmbrBlobDigests :: Lens' BuildBazelRemoteExecutionV2FindMissingBlobsRequest [BuildBazelRemoteExecutionV2Digest]
@@ -4264,7 +4503,7 @@ bbrevfmbrBlobDigests
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2FindMissingBlobsRequest
+           BuildBazelRemoteExecutionV2FindMissingBlobsRequest
          where
         parseJSON
           = withObject
@@ -4274,7 +4513,7 @@ instance FromJSON
                    <$> (o .:? "blobDigests" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2FindMissingBlobsRequest
+           BuildBazelRemoteExecutionV2FindMissingBlobsRequest
          where
         toJSON
           BuildBazelRemoteExecutionV2FindMissingBlobsRequest'{..}
@@ -4291,9 +4530,12 @@ instance ToJSON
 -- client can display them to a user.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs' smart constructor.
-newtype GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs = GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs'
+newtype GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs =
+  GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs'
     { _gdrverslAddtional :: HashMap Text GoogleDevtoolsRemoteexecutionV1testLogFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs' with the minimum fields required to make a request.
 --
@@ -4304,9 +4546,9 @@ googleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
     :: HashMap Text GoogleDevtoolsRemoteexecutionV1testLogFile -- ^ 'gdrverslAddtional'
     -> GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
 googleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs pGdrverslAddtional_ =
-    GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs'
-    { _gdrverslAddtional = _Coerce # pGdrverslAddtional_
-    }
+  GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs'
+    {_gdrverslAddtional = _Coerce # pGdrverslAddtional_}
+
 
 gdrverslAddtional :: Lens' GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs (HashMap Text GoogleDevtoolsRemoteexecutionV1testLogFile)
 gdrverslAddtional
@@ -4315,7 +4557,7 @@ gdrverslAddtional
       . _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
+           GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
          where
         parseJSON
           = withObject
@@ -4325,17 +4567,20 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
+           GoogleDevtoolsRemoteexecutionV1testExecuteResponseServerLogs
          where
         toJSON = toJSON . _gdrverslAddtional
 
 -- | A response message for ContentAddressableStorage.GetTree.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2GetTreeResponse' smart constructor.
-data BuildBazelRemoteExecutionV2GetTreeResponse = BuildBazelRemoteExecutionV2GetTreeResponse'
+data BuildBazelRemoteExecutionV2GetTreeResponse =
+  BuildBazelRemoteExecutionV2GetTreeResponse'
     { _bbrevgtrDirectories   :: !(Maybe [BuildBazelRemoteExecutionV2Directory])
     , _bbrevgtrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2GetTreeResponse' with the minimum fields required to make a request.
 --
@@ -4347,10 +4592,9 @@ data BuildBazelRemoteExecutionV2GetTreeResponse = BuildBazelRemoteExecutionV2Get
 buildBazelRemoteExecutionV2GetTreeResponse
     :: BuildBazelRemoteExecutionV2GetTreeResponse
 buildBazelRemoteExecutionV2GetTreeResponse =
-    BuildBazelRemoteExecutionV2GetTreeResponse'
-    { _bbrevgtrDirectories = Nothing
-    , _bbrevgtrNextPageToken = Nothing
-    }
+  BuildBazelRemoteExecutionV2GetTreeResponse'
+    {_bbrevgtrDirectories = Nothing, _bbrevgtrNextPageToken = Nothing}
+
 
 -- | The directories descended from the requested root.
 bbrevgtrDirectories :: Lens' BuildBazelRemoteExecutionV2GetTreeResponse [BuildBazelRemoteExecutionV2Directory]
@@ -4369,7 +4613,8 @@ bbrevgtrNextPageToken
       (\ s a -> s{_bbrevgtrNextPageToken = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2GetTreeResponse where
+           BuildBazelRemoteExecutionV2GetTreeResponse
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2GetTreeResponse"
@@ -4379,7 +4624,8 @@ instance FromJSON
                      (o .:? "nextPageToken"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2GetTreeResponse where
+           BuildBazelRemoteExecutionV2GetTreeResponse
+         where
         toJSON
           BuildBazelRemoteExecutionV2GetTreeResponse'{..}
           = object
@@ -4390,9 +4636,12 @@ instance ToJSON
 -- | The request used for \`GetInstance\`.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest'
     { _gdravgirName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest' with the minimum fields required to make a request.
 --
@@ -4402,9 +4651,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest = Googl
 googleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest'
-    { _gdravgirName = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest'
+    {_gdravgirName = Nothing}
+
 
 -- | Name of the instance to retrieve. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -4413,7 +4662,7 @@ gdravgirName
   = lens _gdravgirName (\ s a -> s{_gdravgirName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
          where
         parseJSON
           = withObject
@@ -4423,7 +4672,7 @@ instance FromJSON
                    <$> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest'{..}
@@ -4433,9 +4682,12 @@ instance ToJSON
 -- action outputs are stored in the CAS and Action Cache.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ResultsCachePolicy' smart constructor.
-newtype BuildBazelRemoteExecutionV2ResultsCachePolicy = BuildBazelRemoteExecutionV2ResultsCachePolicy'
+newtype BuildBazelRemoteExecutionV2ResultsCachePolicy =
+  BuildBazelRemoteExecutionV2ResultsCachePolicy'
     { _bbrevrcpPriority :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ResultsCachePolicy' with the minimum fields required to make a request.
 --
@@ -4445,9 +4697,8 @@ newtype BuildBazelRemoteExecutionV2ResultsCachePolicy = BuildBazelRemoteExecutio
 buildBazelRemoteExecutionV2ResultsCachePolicy
     :: BuildBazelRemoteExecutionV2ResultsCachePolicy
 buildBazelRemoteExecutionV2ResultsCachePolicy =
-    BuildBazelRemoteExecutionV2ResultsCachePolicy'
-    { _bbrevrcpPriority = Nothing
-    }
+  BuildBazelRemoteExecutionV2ResultsCachePolicy' {_bbrevrcpPriority = Nothing}
+
 
 -- | The priority (relative importance) of this content in the overall cache.
 -- Generally, a lower value means a longer retention time or other
@@ -4463,7 +4714,8 @@ bbrevrcpPriority
       . mapping _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ResultsCachePolicy where
+           BuildBazelRemoteExecutionV2ResultsCachePolicy
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2ResultsCachePolicy"
@@ -4472,7 +4724,8 @@ instance FromJSON
                    (o .:? "priority"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ResultsCachePolicy where
+           BuildBazelRemoteExecutionV2ResultsCachePolicy
+         where
         toJSON
           BuildBazelRemoteExecutionV2ResultsCachePolicy'{..}
           = object
@@ -4482,11 +4735,14 @@ instance ToJSON
 -- upload.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchReadBlobsResponseResponse' smart constructor.
-data BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse = BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse'
+data BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse =
+  BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse'
     { _bbrevbrbrrStatus :: !(Maybe GoogleRpcStatus)
     , _bbrevbrbrrData   :: !(Maybe Bytes)
     , _bbrevbrbrrDigest :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse' with the minimum fields required to make a request.
 --
@@ -4500,11 +4756,12 @@ data BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse = BuildBazelRemot
 buildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
     :: BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
 buildBazelRemoteExecutionV2BatchReadBlobsResponseResponse =
-    BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse'
+  BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse'
     { _bbrevbrbrrStatus = Nothing
     , _bbrevbrbrrData = Nothing
     , _bbrevbrbrrDigest = Nothing
     }
+
 
 -- | The result of attempting to download that blob.
 bbrevbrbrrStatus :: Lens' BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse (Maybe GoogleRpcStatus)
@@ -4526,7 +4783,7 @@ bbrevbrbrrDigest
       (\ s a -> s{_bbrevbrbrrDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
+           BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
          where
         parseJSON
           = withObject
@@ -4538,7 +4795,7 @@ instance FromJSON
                      (o .:? "digest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
+           BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse'{..}
@@ -4551,12 +4808,15 @@ instance ToJSON
 -- | A request message for Execution.Execute.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecuteRequest' smart constructor.
-data BuildBazelRemoteExecutionV2ExecuteRequest = BuildBazelRemoteExecutionV2ExecuteRequest'
+data BuildBazelRemoteExecutionV2ExecuteRequest =
+  BuildBazelRemoteExecutionV2ExecuteRequest'
     { _bbreverExecutionPolicy    :: !(Maybe BuildBazelRemoteExecutionV2ExecutionPolicy)
     , _bbreverSkipCacheLookup    :: !(Maybe Bool)
     , _bbreverResultsCachePolicy :: !(Maybe BuildBazelRemoteExecutionV2ResultsCachePolicy)
     , _bbreverActionDigest       :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteRequest' with the minimum fields required to make a request.
 --
@@ -4572,12 +4832,13 @@ data BuildBazelRemoteExecutionV2ExecuteRequest = BuildBazelRemoteExecutionV2Exec
 buildBazelRemoteExecutionV2ExecuteRequest
     :: BuildBazelRemoteExecutionV2ExecuteRequest
 buildBazelRemoteExecutionV2ExecuteRequest =
-    BuildBazelRemoteExecutionV2ExecuteRequest'
+  BuildBazelRemoteExecutionV2ExecuteRequest'
     { _bbreverExecutionPolicy = Nothing
     , _bbreverSkipCacheLookup = Nothing
     , _bbreverResultsCachePolicy = Nothing
     , _bbreverActionDigest = Nothing
     }
+
 
 -- | An optional policy for execution of the action. The server will have a
 -- default policy if this is not provided.
@@ -4609,7 +4870,8 @@ bbreverActionDigest
       (\ s a -> s{_bbreverActionDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecuteRequest where
+           BuildBazelRemoteExecutionV2ExecuteRequest
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2ExecuteRequest"
@@ -4621,7 +4883,8 @@ instance FromJSON
                      <*> (o .:? "actionDigest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecuteRequest where
+           BuildBazelRemoteExecutionV2ExecuteRequest
+         where
         toJSON BuildBazelRemoteExecutionV2ExecuteRequest'{..}
           = object
               (catMaybes
@@ -4634,9 +4897,12 @@ instance ToJSON
 -- | A response message for ContentAddressableStorage.BatchUpdateBlobs.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchUpdateBlobsResponse' smart constructor.
-newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse = BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse'
+newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse =
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse'
     { _bbrevbubrResponses :: Maybe [BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse' with the minimum fields required to make a request.
 --
@@ -4646,9 +4912,9 @@ newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse = BuildBazelRemoteEx
 buildBazelRemoteExecutionV2BatchUpdateBlobsResponse
     :: BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
 buildBazelRemoteExecutionV2BatchUpdateBlobsResponse =
-    BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse'
-    { _bbrevbubrResponses = Nothing
-    }
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse'
+    {_bbrevbubrResponses = Nothing}
+
 
 -- | The responses to the requests.
 bbrevbubrResponses :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse [BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse]
@@ -4659,7 +4925,7 @@ bbrevbubrResponses
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
          where
         parseJSON
           = withObject
@@ -4669,7 +4935,7 @@ instance FromJSON
                    <$> (o .:? "responses" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse'{..}
@@ -4686,9 +4952,12 @@ instance ToJSON
 -- client can display them to a user.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecuteResponseServerLogs' smart constructor.
-newtype BuildBazelRemoteExecutionV2ExecuteResponseServerLogs = BuildBazelRemoteExecutionV2ExecuteResponseServerLogs'
+newtype BuildBazelRemoteExecutionV2ExecuteResponseServerLogs =
+  BuildBazelRemoteExecutionV2ExecuteResponseServerLogs'
     { _bbreverslAddtional :: HashMap Text BuildBazelRemoteExecutionV2LogFile
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteResponseServerLogs' with the minimum fields required to make a request.
 --
@@ -4699,9 +4968,9 @@ buildBazelRemoteExecutionV2ExecuteResponseServerLogs
     :: HashMap Text BuildBazelRemoteExecutionV2LogFile -- ^ 'bbreverslAddtional'
     -> BuildBazelRemoteExecutionV2ExecuteResponseServerLogs
 buildBazelRemoteExecutionV2ExecuteResponseServerLogs pBbreverslAddtional_ =
-    BuildBazelRemoteExecutionV2ExecuteResponseServerLogs'
-    { _bbreverslAddtional = _Coerce # pBbreverslAddtional_
-    }
+  BuildBazelRemoteExecutionV2ExecuteResponseServerLogs'
+    {_bbreverslAddtional = _Coerce # pBbreverslAddtional_}
+
 
 bbreverslAddtional :: Lens' BuildBazelRemoteExecutionV2ExecuteResponseServerLogs (HashMap Text BuildBazelRemoteExecutionV2LogFile)
 bbreverslAddtional
@@ -4710,7 +4979,7 @@ bbreverslAddtional
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecuteResponseServerLogs
+           BuildBazelRemoteExecutionV2ExecuteResponseServerLogs
          where
         parseJSON
           = withObject
@@ -4720,7 +4989,7 @@ instance FromJSON
                    <$> (parseJSONObject o))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecuteResponseServerLogs
+           BuildBazelRemoteExecutionV2ExecuteResponseServerLogs
          where
         toJSON = toJSON . _bbreverslAddtional
 
@@ -4734,9 +5003,12 @@ instance ToJSON
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'googleLongrunningOperationResponse' smart constructor.
-newtype GoogleLongrunningOperationResponse = GoogleLongrunningOperationResponse'
+newtype GoogleLongrunningOperationResponse =
+  GoogleLongrunningOperationResponse'
     { _glorAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
 --
@@ -4747,9 +5019,9 @@ googleLongrunningOperationResponse
     :: HashMap Text JSONValue -- ^ 'glorAddtional'
     -> GoogleLongrunningOperationResponse
 googleLongrunningOperationResponse pGlorAddtional_ =
-    GoogleLongrunningOperationResponse'
-    { _glorAddtional = _Coerce # pGlorAddtional_
-    }
+  GoogleLongrunningOperationResponse'
+    {_glorAddtional = _Coerce # pGlorAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
@@ -4773,11 +5045,14 @@ instance ToJSON GoogleLongrunningOperationResponse
 -- | A \`FileNode\` represents a single file and associated metadata.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2FileNode' smart constructor.
-data BuildBazelRemoteExecutionV2FileNode = BuildBazelRemoteExecutionV2FileNode'
+data BuildBazelRemoteExecutionV2FileNode =
+  BuildBazelRemoteExecutionV2FileNode'
     { _bbrevfnName         :: !(Maybe Text)
     , _bbrevfnIsExecutable :: !(Maybe Bool)
     , _bbrevfnDigest       :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2FileNode' with the minimum fields required to make a request.
 --
@@ -4791,11 +5066,12 @@ data BuildBazelRemoteExecutionV2FileNode = BuildBazelRemoteExecutionV2FileNode'
 buildBazelRemoteExecutionV2FileNode
     :: BuildBazelRemoteExecutionV2FileNode
 buildBazelRemoteExecutionV2FileNode =
-    BuildBazelRemoteExecutionV2FileNode'
+  BuildBazelRemoteExecutionV2FileNode'
     { _bbrevfnName = Nothing
     , _bbrevfnIsExecutable = Nothing
     , _bbrevfnDigest = Nothing
     }
+
 
 -- | The name of the file.
 bbrevfnName :: Lens' BuildBazelRemoteExecutionV2FileNode (Maybe Text)
@@ -4834,9 +5110,12 @@ instance ToJSON BuildBazelRemoteExecutionV2FileNode
 
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse = GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse'
     { _gdravlirInstances :: Maybe [GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -4846,9 +5125,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse = Go
 googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
 googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse'
-    { _gdravlirInstances = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse'
+    {_gdravlirInstances = Nothing}
+
 
 -- | The list of instances in a given project.
 gdravlirInstances :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse [GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance]
@@ -4859,7 +5138,7 @@ gdravlirInstances
       . _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
          where
         parseJSON
           = withObject
@@ -4869,7 +5148,7 @@ instance FromJSON
                    <$> (o .:? "instances" .!= mempty))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse'{..}
@@ -4880,11 +5159,14 @@ instance ToJSON
 -- Bots interface\'s \`Lease.payload\` field.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandTask' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandTask = GoogleDevtoolsRemoteworkersV1test2CommandTask'
+data GoogleDevtoolsRemoteworkersV1test2CommandTask =
+  GoogleDevtoolsRemoteworkersV1test2CommandTask'
     { _gdrvctInputs          :: !(Maybe GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs)
     , _gdrvctExpectedOutputs :: !(Maybe GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs)
     , _gdrvctTimeouts        :: !(Maybe GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTask' with the minimum fields required to make a request.
 --
@@ -4898,11 +5180,12 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTask = GoogleDevtoolsRemoteworkers
 googleDevtoolsRemoteworkersV1test2CommandTask
     :: GoogleDevtoolsRemoteworkersV1test2CommandTask
 googleDevtoolsRemoteworkersV1test2CommandTask =
-    GoogleDevtoolsRemoteworkersV1test2CommandTask'
+  GoogleDevtoolsRemoteworkersV1test2CommandTask'
     { _gdrvctInputs = Nothing
     , _gdrvctExpectedOutputs = Nothing
     , _gdrvctTimeouts = Nothing
     }
+
 
 -- | The inputs to the task.
 gdrvctInputs :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandTask (Maybe GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs)
@@ -4922,7 +5205,8 @@ gdrvctTimeouts
       (\ s a -> s{_gdrvctTimeouts = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTask where
+           GoogleDevtoolsRemoteworkersV1test2CommandTask
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteworkersV1test2CommandTask"
@@ -4932,7 +5216,8 @@ instance FromJSON
                      (o .:? "timeouts"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTask where
+           GoogleDevtoolsRemoteworkersV1test2CommandTask
+         where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandTask'{..}
           = object
@@ -4948,10 +5233,13 @@ instance ToJSON
 -- remote execution API.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testCommand' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testCommand = GoogleDevtoolsRemoteexecutionV1testCommand'
+data GoogleDevtoolsRemoteexecutionV1testCommand =
+  GoogleDevtoolsRemoteexecutionV1testCommand'
     { _gdrvcArguments            :: !(Maybe [Text])
     , _gdrvcEnvironmentVariables :: !(Maybe [GoogleDevtoolsRemoteexecutionV1testCommandEnvironmentVariable])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testCommand' with the minimum fields required to make a request.
 --
@@ -4963,10 +5251,9 @@ data GoogleDevtoolsRemoteexecutionV1testCommand = GoogleDevtoolsRemoteexecutionV
 googleDevtoolsRemoteexecutionV1testCommand
     :: GoogleDevtoolsRemoteexecutionV1testCommand
 googleDevtoolsRemoteexecutionV1testCommand =
-    GoogleDevtoolsRemoteexecutionV1testCommand'
-    { _gdrvcArguments = Nothing
-    , _gdrvcEnvironmentVariables = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testCommand'
+    {_gdrvcArguments = Nothing, _gdrvcEnvironmentVariables = Nothing}
+
 
 -- | The arguments to the command. The first argument must be the path to the
 -- executable, which must be either a relative path, in which case it is
@@ -4994,7 +5281,8 @@ gdrvcEnvironmentVariables
       . _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testCommand where
+           GoogleDevtoolsRemoteexecutionV1testCommand
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testCommand"
@@ -5004,7 +5292,8 @@ instance FromJSON
                      (o .:? "environmentVariables" .!= mempty))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testCommand where
+           GoogleDevtoolsRemoteexecutionV1testCommand
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testCommand'{..}
           = object
@@ -5017,12 +5306,15 @@ instance ToJSON
 -- metadata field of the Operation.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testExecuteOperationMetadata' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata = GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata'
+data GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata =
+  GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata'
     { _gdrveomStage            :: !(Maybe GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage)
     , _gdrveomStderrStreamName :: !(Maybe Text)
     , _gdrveomStdoutStreamName :: !(Maybe Text)
     , _gdrveomActionDigest     :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata' with the minimum fields required to make a request.
 --
@@ -5038,12 +5330,13 @@ data GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata = GoogleDevtool
 googleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
     :: GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
 googleDevtoolsRemoteexecutionV1testExecuteOperationMetadata =
-    GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata'
+  GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata'
     { _gdrveomStage = Nothing
     , _gdrveomStderrStreamName = Nothing
     , _gdrveomStdoutStreamName = Nothing
     , _gdrveomActionDigest = Nothing
     }
+
 
 gdrveomStage :: Lens' GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata (Maybe GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadataStage)
 gdrveomStage
@@ -5070,7 +5363,7 @@ gdrveomActionDigest
       (\ s a -> s{_gdrveomActionDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
+           GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
          where
         parseJSON
           = withObject
@@ -5083,7 +5376,7 @@ instance FromJSON
                      <*> (o .:? "actionDigest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
+           GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata
          where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testExecuteOperationMetadata'{..}
@@ -5098,13 +5391,16 @@ instance ToJSON
 -- worker pool.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig' smart constructor.
-data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig = GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig'
+data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig'
     { _gdravwcDiskSizeGb     :: !(Maybe (Textual Int64))
     , _gdravwcReserved       :: !(Maybe Bool)
     , _gdravwcMachineType    :: !(Maybe Text)
     , _gdravwcDiskType       :: !(Maybe Text)
     , _gdravwcMinCPUPlatform :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig' with the minimum fields required to make a request.
 --
@@ -5122,13 +5418,14 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig = GoogleDevtools
 googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
 googleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig'
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig'
     { _gdravwcDiskSizeGb = Nothing
     , _gdravwcReserved = Nothing
     , _gdravwcMachineType = Nothing
     , _gdravwcDiskType = Nothing
     , _gdravwcMinCPUPlatform = Nothing
     }
+
 
 -- | Required. Size of the disk attached to the worker, in GB. See
 -- https:\/\/cloud.google.com\/compute\/docs\/disks\/
@@ -5138,16 +5435,18 @@ gdravwcDiskSizeGb
       (\ s a -> s{_gdravwcDiskSizeGb = a})
       . mapping _Coerce
 
--- | Output only. \`reserved=true\` means the worker is reserved and won\'t
--- be preempted.
+-- | Determines whether the worker is reserved (equivalent to a Compute
+-- Engine on-demand VM and therefore won\'t be preempted). See [Preemptible
+-- VMs](https:\/\/cloud.google.com\/preemptible-vms\/) for more details.
 gdravwcReserved :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig (Maybe Bool)
 gdravwcReserved
   = lens _gdravwcReserved
       (\ s a -> s{_gdravwcReserved = a})
 
--- | Required. Machine type of the worker, such as n1-standard-2. See
+-- | Required. Machine type of the worker, such as \`n1-standard-2\`. See
 -- https:\/\/cloud.google.com\/compute\/docs\/machine-types for a list of
--- supported machine types.
+-- supported machine types. Note that \`f1-micro\` and \`g1-small\` are not
+-- yet supported.
 gdravwcMachineType :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig (Maybe Text)
 gdravwcMachineType
   = lens _gdravwcMachineType
@@ -5169,7 +5468,7 @@ gdravwcMinCPUPlatform
       (\ s a -> s{_gdravwcMinCPUPlatform = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
          where
         parseJSON
           = withObject
@@ -5183,7 +5482,7 @@ instance FromJSON
                      <*> (o .:? "minCpuPlatform"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig'{..}
@@ -5199,12 +5498,16 @@ instance ToJSON
 -- the response field of the Operation.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecuteResponse' smart constructor.
-data BuildBazelRemoteExecutionV2ExecuteResponse = BuildBazelRemoteExecutionV2ExecuteResponse'
+data BuildBazelRemoteExecutionV2ExecuteResponse =
+  BuildBazelRemoteExecutionV2ExecuteResponse'
     { _bbreverStatus       :: !(Maybe GoogleRpcStatus)
     , _bbreverServerLogs   :: !(Maybe BuildBazelRemoteExecutionV2ExecuteResponseServerLogs)
     , _bbreverResult       :: !(Maybe BuildBazelRemoteExecutionV2ActionResult)
     , _bbreverCachedResult :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    , _bbreverMessage      :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteResponse' with the minimum fields required to make a request.
 --
@@ -5217,15 +5520,19 @@ data BuildBazelRemoteExecutionV2ExecuteResponse = BuildBazelRemoteExecutionV2Exe
 -- * 'bbreverResult'
 --
 -- * 'bbreverCachedResult'
+--
+-- * 'bbreverMessage'
 buildBazelRemoteExecutionV2ExecuteResponse
     :: BuildBazelRemoteExecutionV2ExecuteResponse
 buildBazelRemoteExecutionV2ExecuteResponse =
-    BuildBazelRemoteExecutionV2ExecuteResponse'
+  BuildBazelRemoteExecutionV2ExecuteResponse'
     { _bbreverStatus = Nothing
     , _bbreverServerLogs = Nothing
     , _bbreverResult = Nothing
     , _bbreverCachedResult = Nothing
+    , _bbreverMessage = Nothing
     }
+
 
 -- | If the status has a code other than \`OK\`, it indicates that the action
 -- did not finish execution. For example, if the operation times out during
@@ -5265,8 +5572,17 @@ bbreverCachedResult
   = lens _bbreverCachedResult
       (\ s a -> s{_bbreverCachedResult = a})
 
+-- | Freeform informational message with details on the execution of the
+-- action that may be displayed to the user upon failure or when requested
+-- explicitly.
+bbreverMessage :: Lens' BuildBazelRemoteExecutionV2ExecuteResponse (Maybe Text)
+bbreverMessage
+  = lens _bbreverMessage
+      (\ s a -> s{_bbreverMessage = a})
+
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecuteResponse where
+           BuildBazelRemoteExecutionV2ExecuteResponse
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2ExecuteResponse"
@@ -5274,10 +5590,12 @@ instance FromJSON
                  BuildBazelRemoteExecutionV2ExecuteResponse' <$>
                    (o .:? "status") <*> (o .:? "serverLogs") <*>
                      (o .:? "result")
-                     <*> (o .:? "cachedResult"))
+                     <*> (o .:? "cachedResult")
+                     <*> (o .:? "message"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecuteResponse where
+           BuildBazelRemoteExecutionV2ExecuteResponse
+         where
         toJSON
           BuildBazelRemoteExecutionV2ExecuteResponse'{..}
           = object
@@ -5285,14 +5603,18 @@ instance ToJSON
                  [("status" .=) <$> _bbreverStatus,
                   ("serverLogs" .=) <$> _bbreverServerLogs,
                   ("result" .=) <$> _bbreverResult,
-                  ("cachedResult" .=) <$> _bbreverCachedResult])
+                  ("cachedResult" .=) <$> _bbreverCachedResult,
+                  ("message" .=) <$> _bbreverMessage])
 
 -- | The request used for \`DeleteInstance\`.
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest'
     { _gdravdirName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest' with the minimum fields required to make a request.
 --
@@ -5302,9 +5624,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest = Go
 googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest'
-    { _gdravdirName = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest'
+    {_gdravdirName = Nothing}
+
 
 -- | Name of the instance to delete. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -5313,7 +5635,7 @@ gdravdirName
   = lens _gdravdirName (\ s a -> s{_gdravdirName = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
          where
         parseJSON
           = withObject
@@ -5323,7 +5645,7 @@ instance FromJSON
                    <$> (o .:? "name"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest'{..}
@@ -5332,16 +5654,22 @@ instance ToJSON
 -- | Describes the inputs to a shell-style task.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandTaskInputs' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs = GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
-    { _gdrvctiArguments            :: !(Maybe [Text])
+data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs =
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
+    { _gdrvctiWorkingDirectory     :: !(Maybe Text)
+    , _gdrvctiArguments            :: !(Maybe [Text])
     , _gdrvctiFiles                :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2Digest])
     , _gdrvctiEnvironmentVariables :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable])
     , _gdrvctiInlineBlobs          :: !(Maybe [GoogleDevtoolsRemoteworkersV1test2Blob])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdrvctiWorkingDirectory'
 --
 -- * 'gdrvctiArguments'
 --
@@ -5353,12 +5681,23 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs = GoogleDevtoolsRemotew
 googleDevtoolsRemoteworkersV1test2CommandTaskInputs
     :: GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
 googleDevtoolsRemoteworkersV1test2CommandTaskInputs =
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
-    { _gdrvctiArguments = Nothing
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
+    { _gdrvctiWorkingDirectory = Nothing
+    , _gdrvctiArguments = Nothing
     , _gdrvctiFiles = Nothing
     , _gdrvctiEnvironmentVariables = Nothing
     , _gdrvctiInlineBlobs = Nothing
     }
+
+
+-- | Directory from which a command is executed. It is a relative directory
+-- with respect to the bot\'s working directory (i.e., \".\/\"). If it is
+-- non-empty, then it must exist under \".\/\". Otherwise, \".\/\" will be
+-- used.
+gdrvctiWorkingDirectory :: Lens' GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs (Maybe Text)
+gdrvctiWorkingDirectory
+  = lens _gdrvctiWorkingDirectory
+      (\ s a -> s{_gdrvctiWorkingDirectory = a})
 
 -- | The command itself to run (e.g., argv). This field should be passed
 -- directly to the underlying operating system, and so it must be sensible
@@ -5409,7 +5748,7 @@ gdrvctiInlineBlobs
       . _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
          where
         parseJSON
           = withObject
@@ -5417,19 +5756,22 @@ instance FromJSON
               (\ o ->
                  GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'
                    <$>
-                   (o .:? "arguments" .!= mempty) <*>
-                     (o .:? "files" .!= mempty)
+                   (o .:? "workingDirectory") <*>
+                     (o .:? "arguments" .!= mempty)
+                     <*> (o .:? "files" .!= mempty)
                      <*> (o .:? "environmentVariables" .!= mempty)
                      <*> (o .:? "inlineBlobs" .!= mempty))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs'{..}
           = object
               (catMaybes
-                 [("arguments" .=) <$> _gdrvctiArguments,
+                 [("workingDirectory" .=) <$>
+                    _gdrvctiWorkingDirectory,
+                  ("arguments" .=) <$> _gdrvctiArguments,
                   ("files" .=) <$> _gdrvctiFiles,
                   ("environmentVariables" .=) <$>
                     _gdrvctiEnvironmentVariables,
@@ -5439,10 +5781,13 @@ instance ToJSON
 -- program\'s environment.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2CommandEnvironmentVariable' smart constructor.
-data BuildBazelRemoteExecutionV2CommandEnvironmentVariable = BuildBazelRemoteExecutionV2CommandEnvironmentVariable'
+data BuildBazelRemoteExecutionV2CommandEnvironmentVariable =
+  BuildBazelRemoteExecutionV2CommandEnvironmentVariable'
     { _bbrevcevValue :: !(Maybe Text)
     , _bbrevcevName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2CommandEnvironmentVariable' with the minimum fields required to make a request.
 --
@@ -5454,10 +5799,9 @@ data BuildBazelRemoteExecutionV2CommandEnvironmentVariable = BuildBazelRemoteExe
 buildBazelRemoteExecutionV2CommandEnvironmentVariable
     :: BuildBazelRemoteExecutionV2CommandEnvironmentVariable
 buildBazelRemoteExecutionV2CommandEnvironmentVariable =
-    BuildBazelRemoteExecutionV2CommandEnvironmentVariable'
-    { _bbrevcevValue = Nothing
-    , _bbrevcevName = Nothing
-    }
+  BuildBazelRemoteExecutionV2CommandEnvironmentVariable'
+    {_bbrevcevValue = Nothing, _bbrevcevName = Nothing}
+
 
 -- | The variable value.
 bbrevcevValue :: Lens' BuildBazelRemoteExecutionV2CommandEnvironmentVariable (Maybe Text)
@@ -5471,7 +5815,7 @@ bbrevcevName
   = lens _bbrevcevName (\ s a -> s{_bbrevcevName = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2CommandEnvironmentVariable
+           BuildBazelRemoteExecutionV2CommandEnvironmentVariable
          where
         parseJSON
           = withObject
@@ -5481,7 +5825,7 @@ instance FromJSON
                    <$> (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2CommandEnvironmentVariable
+           BuildBazelRemoteExecutionV2CommandEnvironmentVariable
          where
         toJSON
           BuildBazelRemoteExecutionV2CommandEnvironmentVariable'{..}
@@ -5492,9 +5836,12 @@ instance ToJSON
 
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest'
     { _gdravlirParent :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest' with the minimum fields required to make a request.
 --
@@ -5504,9 +5851,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest = Goo
 googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest'
-    { _gdravlirParent = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest'
+    {_gdravlirParent = Nothing}
+
 
 -- | Resource name of the project. Format: \`projects\/[PROJECT_ID]\`.
 gdravlirParent :: Lens' GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest (Maybe Text)
@@ -5515,7 +5862,7 @@ gdravlirParent
       (\ s a -> s{_gdravlirParent = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
          where
         parseJSON
           = withObject
@@ -5525,7 +5872,7 @@ instance FromJSON
                    <$> (o .:? "parent"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest'{..}
@@ -5536,9 +5883,12 @@ instance ToJSON
 -- cache and execution valid priority ranges.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2PriorityCapabilities' smart constructor.
-newtype BuildBazelRemoteExecutionV2PriorityCapabilities = BuildBazelRemoteExecutionV2PriorityCapabilities'
+newtype BuildBazelRemoteExecutionV2PriorityCapabilities =
+  BuildBazelRemoteExecutionV2PriorityCapabilities'
     { _bbrevpcPriorities :: Maybe [BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2PriorityCapabilities' with the minimum fields required to make a request.
 --
@@ -5548,9 +5898,9 @@ newtype BuildBazelRemoteExecutionV2PriorityCapabilities = BuildBazelRemoteExecut
 buildBazelRemoteExecutionV2PriorityCapabilities
     :: BuildBazelRemoteExecutionV2PriorityCapabilities
 buildBazelRemoteExecutionV2PriorityCapabilities =
-    BuildBazelRemoteExecutionV2PriorityCapabilities'
-    { _bbrevpcPriorities = Nothing
-    }
+  BuildBazelRemoteExecutionV2PriorityCapabilities'
+    {_bbrevpcPriorities = Nothing}
+
 
 bbrevpcPriorities :: Lens' BuildBazelRemoteExecutionV2PriorityCapabilities [BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange]
 bbrevpcPriorities
@@ -5560,7 +5910,8 @@ bbrevpcPriorities
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2PriorityCapabilities where
+           BuildBazelRemoteExecutionV2PriorityCapabilities
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2PriorityCapabilities"
@@ -5569,7 +5920,8 @@ instance FromJSON
                    (o .:? "priorities" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2PriorityCapabilities where
+           BuildBazelRemoteExecutionV2PriorityCapabilities
+         where
         toJSON
           BuildBazelRemoteExecutionV2PriorityCapabilities'{..}
           = object
@@ -5579,9 +5931,12 @@ instance ToJSON
 -- | A request message for ContentAddressableStorage.BatchUpdateBlobs.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchUpdateBlobsRequest' smart constructor.
-newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest = BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest'
+newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest =
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest'
     { _bbrevbubrRequests :: Maybe [BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest' with the minimum fields required to make a request.
 --
@@ -5591,9 +5946,9 @@ newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest = BuildBazelRemoteExe
 buildBazelRemoteExecutionV2BatchUpdateBlobsRequest
     :: BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
 buildBazelRemoteExecutionV2BatchUpdateBlobsRequest =
-    BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest'
-    { _bbrevbubrRequests = Nothing
-    }
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest'
+    {_bbrevbubrRequests = Nothing}
+
 
 -- | The individual upload requests.
 bbrevbubrRequests :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest [BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest]
@@ -5604,7 +5959,7 @@ bbrevbubrRequests
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
          where
         parseJSON
           = withObject
@@ -5614,7 +5969,7 @@ instance FromJSON
                    <$> (o .:? "requests" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest'{..}
@@ -5624,10 +5979,13 @@ instance ToJSON
 -- | A \`LogFile\` is a log stored in the CAS.
 --
 -- /See:/ 'googleDevtoolsRemoteexecutionV1testLogFile' smart constructor.
-data GoogleDevtoolsRemoteexecutionV1testLogFile = GoogleDevtoolsRemoteexecutionV1testLogFile'
+data GoogleDevtoolsRemoteexecutionV1testLogFile =
+  GoogleDevtoolsRemoteexecutionV1testLogFile'
     { _gdrvlfHumanReadable :: !(Maybe Bool)
     , _gdrvlfDigest        :: !(Maybe GoogleDevtoolsRemoteexecutionV1testDigest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteexecutionV1testLogFile' with the minimum fields required to make a request.
 --
@@ -5639,10 +5997,9 @@ data GoogleDevtoolsRemoteexecutionV1testLogFile = GoogleDevtoolsRemoteexecutionV
 googleDevtoolsRemoteexecutionV1testLogFile
     :: GoogleDevtoolsRemoteexecutionV1testLogFile
 googleDevtoolsRemoteexecutionV1testLogFile =
-    GoogleDevtoolsRemoteexecutionV1testLogFile'
-    { _gdrvlfHumanReadable = Nothing
-    , _gdrvlfDigest = Nothing
-    }
+  GoogleDevtoolsRemoteexecutionV1testLogFile'
+    {_gdrvlfHumanReadable = Nothing, _gdrvlfDigest = Nothing}
+
 
 -- | This is a hint as to the purpose of the log, and is set to true if the
 -- log is human-readable text that can be usefully displayed to a user, and
@@ -5660,7 +6017,8 @@ gdrvlfDigest
   = lens _gdrvlfDigest (\ s a -> s{_gdrvlfDigest = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteexecutionV1testLogFile where
+           GoogleDevtoolsRemoteexecutionV1testLogFile
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemoteexecutionV1testLogFile"
@@ -5669,7 +6027,8 @@ instance FromJSON
                    (o .:? "humanReadable") <*> (o .:? "digest"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteexecutionV1testLogFile where
+           GoogleDevtoolsRemoteexecutionV1testLogFile
+         where
         toJSON
           GoogleDevtoolsRemoteexecutionV1testLogFile'{..}
           = object
@@ -5680,17 +6039,20 @@ instance ToJSON
 -- | An optional Metadata to attach to any RPC request to tell the server
 -- about an external context of the request. The server may use this for
 -- logging or other purposes. To use it, the client attaches the header to
--- the call using the canonical proto serialization: name:
--- build.bazel.remote.execution.v2.requestmetadata-bin contents: the base64
--- encoded binary RequestMetadata message.
+-- the call using the canonical proto serialization: * name:
+-- \`build.bazel.remote.execution.v2.requestmetadata-bin\` * contents: the
+-- base64 encoded binary \`RequestMetadata\` message.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2RequestMetadata' smart constructor.
-data BuildBazelRemoteExecutionV2RequestMetadata = BuildBazelRemoteExecutionV2RequestMetadata'
+data BuildBazelRemoteExecutionV2RequestMetadata =
+  BuildBazelRemoteExecutionV2RequestMetadata'
     { _bbrevrmCorrelatedInvocationsId :: !(Maybe Text)
     , _bbrevrmToolInvocationId        :: !(Maybe Text)
     , _bbrevrmActionId                :: !(Maybe Text)
     , _bbrevrmToolDetails             :: !(Maybe BuildBazelRemoteExecutionV2ToolDetails)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2RequestMetadata' with the minimum fields required to make a request.
 --
@@ -5706,12 +6068,13 @@ data BuildBazelRemoteExecutionV2RequestMetadata = BuildBazelRemoteExecutionV2Req
 buildBazelRemoteExecutionV2RequestMetadata
     :: BuildBazelRemoteExecutionV2RequestMetadata
 buildBazelRemoteExecutionV2RequestMetadata =
-    BuildBazelRemoteExecutionV2RequestMetadata'
+  BuildBazelRemoteExecutionV2RequestMetadata'
     { _bbrevrmCorrelatedInvocationsId = Nothing
     , _bbrevrmToolInvocationId = Nothing
     , _bbrevrmActionId = Nothing
     , _bbrevrmToolDetails = Nothing
     }
+
 
 -- | An identifier to tie multiple tool invocations together. For example,
 -- runs of foo_test, bar_test and baz_test on a post-submit of a given
@@ -5743,7 +6106,8 @@ bbrevrmToolDetails
       (\ s a -> s{_bbrevrmToolDetails = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2RequestMetadata where
+           BuildBazelRemoteExecutionV2RequestMetadata
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2RequestMetadata"
@@ -5755,7 +6119,8 @@ instance FromJSON
                      <*> (o .:? "toolDetails"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2RequestMetadata where
+           BuildBazelRemoteExecutionV2RequestMetadata
+         where
         toJSON
           BuildBazelRemoteExecutionV2RequestMetadata'{..}
           = object
@@ -5772,9 +6137,12 @@ instance ToJSON
 -- the properties that are required of the platform.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2Platform' smart constructor.
-newtype BuildBazelRemoteExecutionV2Platform = BuildBazelRemoteExecutionV2Platform'
+newtype BuildBazelRemoteExecutionV2Platform =
+  BuildBazelRemoteExecutionV2Platform'
     { _bbrevpProperties :: Maybe [BuildBazelRemoteExecutionV2PlatformProperty]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Platform' with the minimum fields required to make a request.
 --
@@ -5784,9 +6152,8 @@ newtype BuildBazelRemoteExecutionV2Platform = BuildBazelRemoteExecutionV2Platfor
 buildBazelRemoteExecutionV2Platform
     :: BuildBazelRemoteExecutionV2Platform
 buildBazelRemoteExecutionV2Platform =
-    BuildBazelRemoteExecutionV2Platform'
-    { _bbrevpProperties = Nothing
-    }
+  BuildBazelRemoteExecutionV2Platform' {_bbrevpProperties = Nothing}
+
 
 -- | The properties that make up this platform. In order to ensure that
 -- equivalent \`Platform\`s always hash to the same value, the properties
@@ -5817,12 +6184,15 @@ instance ToJSON BuildBazelRemoteExecutionV2Platform
 -- metadata field of the Operation.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ExecuteOperationMetadata' smart constructor.
-data BuildBazelRemoteExecutionV2ExecuteOperationMetadata = BuildBazelRemoteExecutionV2ExecuteOperationMetadata'
+data BuildBazelRemoteExecutionV2ExecuteOperationMetadata =
+  BuildBazelRemoteExecutionV2ExecuteOperationMetadata'
     { _bbreveomStage            :: !(Maybe BuildBazelRemoteExecutionV2ExecuteOperationMetadataStage)
     , _bbreveomStderrStreamName :: !(Maybe Text)
     , _bbreveomStdoutStreamName :: !(Maybe Text)
     , _bbreveomActionDigest     :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteOperationMetadata' with the minimum fields required to make a request.
 --
@@ -5838,12 +6208,13 @@ data BuildBazelRemoteExecutionV2ExecuteOperationMetadata = BuildBazelRemoteExecu
 buildBazelRemoteExecutionV2ExecuteOperationMetadata
     :: BuildBazelRemoteExecutionV2ExecuteOperationMetadata
 buildBazelRemoteExecutionV2ExecuteOperationMetadata =
-    BuildBazelRemoteExecutionV2ExecuteOperationMetadata'
+  BuildBazelRemoteExecutionV2ExecuteOperationMetadata'
     { _bbreveomStage = Nothing
     , _bbreveomStderrStreamName = Nothing
     , _bbreveomStdoutStreamName = Nothing
     , _bbreveomActionDigest = Nothing
     }
+
 
 bbreveomStage :: Lens' BuildBazelRemoteExecutionV2ExecuteOperationMetadata (Maybe BuildBazelRemoteExecutionV2ExecuteOperationMetadataStage)
 bbreveomStage
@@ -5871,7 +6242,7 @@ bbreveomActionDigest
       (\ s a -> s{_bbreveomActionDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ExecuteOperationMetadata
+           BuildBazelRemoteExecutionV2ExecuteOperationMetadata
          where
         parseJSON
           = withObject
@@ -5884,7 +6255,7 @@ instance FromJSON
                      <*> (o .:? "actionDigest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ExecuteOperationMetadata
+           BuildBazelRemoteExecutionV2ExecuteOperationMetadata
          where
         toJSON
           BuildBazelRemoteExecutionV2ExecuteOperationMetadata'{..}
@@ -5899,9 +6270,12 @@ instance ToJSON
 
 --
 -- /See:/ 'googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest' smart constructor.
-newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest'
+newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest =
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest'
     { _gdravlwprParent :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest' with the minimum fields required to make a request.
 --
@@ -5911,9 +6285,9 @@ newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest = G
 googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
     :: GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
 googleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest =
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest'
-    { _gdravlwprParent = Nothing
-    }
+  GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest'
+    {_gdravlwprParent = Nothing}
+
 
 -- | Resource name of the instance. Format:
 -- \`projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]\`.
@@ -5923,7 +6297,7 @@ gdravlwprParent
       (\ s a -> s{_gdravlwprParent = a})
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
          where
         parseJSON
           = withObject
@@ -5933,7 +6307,7 @@ instance FromJSON
                    <$> (o .:? "parent"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
+           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
          where
         toJSON
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest'{..}
@@ -5947,14 +6321,17 @@ instance ToJSON
 -- specific to the implementation of the remote execution API.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2Command' smart constructor.
-data BuildBazelRemoteExecutionV2Command = BuildBazelRemoteExecutionV2Command'
+data BuildBazelRemoteExecutionV2Command =
+  BuildBazelRemoteExecutionV2Command'
     { _bbrevcPlatform             :: !(Maybe BuildBazelRemoteExecutionV2Platform)
     , _bbrevcOutputDirectories    :: !(Maybe [Text])
     , _bbrevcWorkingDirectory     :: !(Maybe Text)
     , _bbrevcArguments            :: !(Maybe [Text])
     , _bbrevcOutputFiles          :: !(Maybe [Text])
     , _bbrevcEnvironmentVariables :: !(Maybe [BuildBazelRemoteExecutionV2CommandEnvironmentVariable])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2Command' with the minimum fields required to make a request.
 --
@@ -5974,7 +6351,7 @@ data BuildBazelRemoteExecutionV2Command = BuildBazelRemoteExecutionV2Command'
 buildBazelRemoteExecutionV2Command
     :: BuildBazelRemoteExecutionV2Command
 buildBazelRemoteExecutionV2Command =
-    BuildBazelRemoteExecutionV2Command'
+  BuildBazelRemoteExecutionV2Command'
     { _bbrevcPlatform = Nothing
     , _bbrevcOutputDirectories = Nothing
     , _bbrevcWorkingDirectory = Nothing
@@ -5982,6 +6359,7 @@ buildBazelRemoteExecutionV2Command =
     , _bbrevcOutputFiles = Nothing
     , _bbrevcEnvironmentVariables = Nothing
     }
+
 
 -- | The platform requirements for the execution environment. The server MAY
 -- choose to execute the action on any worker satisfying the requirements,
@@ -5993,22 +6371,24 @@ bbrevcPlatform
       (\ s a -> s{_bbrevcPlatform = a})
 
 -- | A list of the output directories that the client expects to retrieve
--- from the action. Only the contents of the indicated directories
--- (recursively including the contents of their subdirectories) will be
--- returned, as well as files listed in \`output_files\`. Other files that
--- may be created during command execution are discarded. The paths are
--- relative to the working directory of the action execution. The paths are
--- specified using a single forward slash (\`\/\`) as a path separator,
--- even if the execution platform natively uses a different separator. The
--- path MUST NOT include a trailing slash, nor a leading slash, being a
--- relative path. The special value of empty string is allowed, although
--- not recommended, and can be used to capture the entire working directory
--- tree, including inputs. In order to ensure consistent hashing of the
--- same Action, the output paths MUST be sorted lexicographically by code
--- point (or, equivalently, by UTF-8 bytes). An output directory cannot be
--- duplicated, be a parent of another output directory, be a parent of a
--- listed output file, or have the same path as any of the listed output
--- files.
+-- from the action. Only the listed directories will be returned (an entire
+-- directory structure will be returned as a Tree message digest, see
+-- OutputDirectory), as well as files listed in \`output_files\`. Other
+-- files or directories that may be created during command execution are
+-- discarded. The paths are relative to the working directory of the action
+-- execution. The paths are specified using a single forward slash (\`\/\`)
+-- as a path separator, even if the execution platform natively uses a
+-- different separator. The path MUST NOT include a trailing slash, nor a
+-- leading slash, being a relative path. The special value of empty string
+-- is allowed, although not recommended, and can be used to capture the
+-- entire working directory tree, including inputs. In order to ensure
+-- consistent hashing of the same Action, the output paths MUST be sorted
+-- lexicographically by code point (or, equivalently, by UTF-8 bytes). An
+-- output directory cannot be duplicated or have the same path as any of
+-- the listed output files. Directories leading up to the output
+-- directories (but not the output directories themselves) are created by
+-- the worker prior to execution, even if they are not explicitly part of
+-- the input root.
 bbrevcOutputDirectories :: Lens' BuildBazelRemoteExecutionV2Command [Text]
 bbrevcOutputDirectories
   = lens _bbrevcOutputDirectories
@@ -6037,17 +6417,18 @@ bbrevcArguments
 -- | A list of the output files that the client expects to retrieve from the
 -- action. Only the listed files, as well as directories listed in
 -- \`output_directories\`, will be returned to the client as output. Other
--- files that may be created during command execution are discarded. The
--- paths are relative to the working directory of the action execution. The
--- paths are specified using a single forward slash (\`\/\`) as a path
--- separator, even if the execution platform natively uses a different
--- separator. The path MUST NOT include a trailing slash, nor a leading
--- slash, being a relative path. In order to ensure consistent hashing of
--- the same Action, the output paths MUST be sorted lexicographically by
--- code point (or, equivalently, by UTF-8 bytes). An output file cannot be
--- duplicated, be a parent of another output file, be a child of a listed
--- output directory, or have the same path as any of the listed output
--- directories.
+-- files or directories that may be created during command execution are
+-- discarded. The paths are relative to the working directory of the action
+-- execution. The paths are specified using a single forward slash (\`\/\`)
+-- as a path separator, even if the execution platform natively uses a
+-- different separator. The path MUST NOT include a trailing slash, nor a
+-- leading slash, being a relative path. In order to ensure consistent
+-- hashing of the same Action, the output paths MUST be sorted
+-- lexicographically by code point (or, equivalently, by UTF-8 bytes). An
+-- output file cannot be duplicated, be a parent of another output file, or
+-- have the same path as any of the listed output directories. Directories
+-- leading up to the output files are created by the worker prior to
+-- execution, even if they are not explicitly part of the input root.
 bbrevcOutputFiles :: Lens' BuildBazelRemoteExecutionV2Command [Text]
 bbrevcOutputFiles
   = lens _bbrevcOutputFiles
@@ -6058,7 +6439,7 @@ bbrevcOutputFiles
 -- | The environment variables to set when running the program. The worker
 -- may provide its own default environment variables; these defaults can be
 -- overridden using this field. Additional variables can also be specified.
--- In order to ensure that equivalent \`Command\`s always hash to the same
+-- In order to ensure that equivalent Commands always hash to the same
 -- value, the environment variables MUST be lexicographically sorted by
 -- name. Sorting of strings is done by code point, equivalently, by the
 -- UTF-8 bytes.
@@ -6099,10 +6480,13 @@ instance ToJSON BuildBazelRemoteExecutionV2Command
 -- | Details for the tool used to call the API.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2ToolDetails' smart constructor.
-data BuildBazelRemoteExecutionV2ToolDetails = BuildBazelRemoteExecutionV2ToolDetails'
+data BuildBazelRemoteExecutionV2ToolDetails =
+  BuildBazelRemoteExecutionV2ToolDetails'
     { _bbrevtdToolName    :: !(Maybe Text)
     , _bbrevtdToolVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ToolDetails' with the minimum fields required to make a request.
 --
@@ -6114,10 +6498,9 @@ data BuildBazelRemoteExecutionV2ToolDetails = BuildBazelRemoteExecutionV2ToolDet
 buildBazelRemoteExecutionV2ToolDetails
     :: BuildBazelRemoteExecutionV2ToolDetails
 buildBazelRemoteExecutionV2ToolDetails =
-    BuildBazelRemoteExecutionV2ToolDetails'
-    { _bbrevtdToolName = Nothing
-    , _bbrevtdToolVersion = Nothing
-    }
+  BuildBazelRemoteExecutionV2ToolDetails'
+    {_bbrevtdToolName = Nothing, _bbrevtdToolVersion = Nothing}
+
 
 -- | Name of the tool, e.g. bazel.
 bbrevtdToolName :: Lens' BuildBazelRemoteExecutionV2ToolDetails (Maybe Text)
@@ -6132,7 +6515,8 @@ bbrevtdToolVersion
       (\ s a -> s{_bbrevtdToolVersion = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2ToolDetails where
+           BuildBazelRemoteExecutionV2ToolDetails
+         where
         parseJSON
           = withObject "BuildBazelRemoteExecutionV2ToolDetails"
               (\ o ->
@@ -6140,7 +6524,8 @@ instance FromJSON
                    (o .:? "toolName") <*> (o .:? "toolVersion"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2ToolDetails where
+           BuildBazelRemoteExecutionV2ToolDetails
+         where
         toJSON BuildBazelRemoteExecutionV2ToolDetails'{..}
           = object
               (catMaybes
@@ -6150,13 +6535,16 @@ instance ToJSON
 -- | Capabilities of the remote cache system.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2CacheCapabilities' smart constructor.
-data BuildBazelRemoteExecutionV2CacheCapabilities = BuildBazelRemoteExecutionV2CacheCapabilities'
+data BuildBazelRemoteExecutionV2CacheCapabilities =
+  BuildBazelRemoteExecutionV2CacheCapabilities'
     { _bbrevccSymlinkAbsolutePathStrategy   :: !(Maybe BuildBazelRemoteExecutionV2CacheCapabilitiesSymlinkAbsolutePathStrategy)
     , _bbrevccMaxBatchTotalSizeBytes        :: !(Maybe (Textual Int64))
     , _bbrevccDigestFunction                :: !(Maybe [Text])
     , _bbrevccActionCacheUpdateCapabilities :: !(Maybe BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities)
     , _bbrevccCachePriorityCapabilities     :: !(Maybe BuildBazelRemoteExecutionV2PriorityCapabilities)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2CacheCapabilities' with the minimum fields required to make a request.
 --
@@ -6174,13 +6562,14 @@ data BuildBazelRemoteExecutionV2CacheCapabilities = BuildBazelRemoteExecutionV2C
 buildBazelRemoteExecutionV2CacheCapabilities
     :: BuildBazelRemoteExecutionV2CacheCapabilities
 buildBazelRemoteExecutionV2CacheCapabilities =
-    BuildBazelRemoteExecutionV2CacheCapabilities'
+  BuildBazelRemoteExecutionV2CacheCapabilities'
     { _bbrevccSymlinkAbsolutePathStrategy = Nothing
     , _bbrevccMaxBatchTotalSizeBytes = Nothing
     , _bbrevccDigestFunction = Nothing
     , _bbrevccActionCacheUpdateCapabilities = Nothing
     , _bbrevccCachePriorityCapabilities = Nothing
     }
+
 
 -- | Whether absolute symlink targets are supported.
 bbrevccSymlinkAbsolutePathStrategy :: Lens' BuildBazelRemoteExecutionV2CacheCapabilities (Maybe BuildBazelRemoteExecutionV2CacheCapabilitiesSymlinkAbsolutePathStrategy)
@@ -6221,7 +6610,8 @@ bbrevccCachePriorityCapabilities
       (\ s a -> s{_bbrevccCachePriorityCapabilities = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2CacheCapabilities where
+           BuildBazelRemoteExecutionV2CacheCapabilities
+         where
         parseJSON
           = withObject
               "BuildBazelRemoteExecutionV2CacheCapabilities"
@@ -6234,7 +6624,8 @@ instance FromJSON
                      <*> (o .:? "cachePriorityCapabilities"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2CacheCapabilities where
+           BuildBazelRemoteExecutionV2CacheCapabilities
+         where
         toJSON
           BuildBazelRemoteExecutionV2CacheCapabilities'{..}
           = object
@@ -6253,11 +6644,15 @@ instance ToJSON
 -- that occurred during the execution of a command.
 --
 -- /See:/ 'googleDevtoolsRemotebuildbotCommandEvents' smart constructor.
-data GoogleDevtoolsRemotebuildbotCommandEvents = GoogleDevtoolsRemotebuildbotCommandEvents'
+data GoogleDevtoolsRemotebuildbotCommandEvents =
+  GoogleDevtoolsRemotebuildbotCommandEvents'
     { _gdrceDockerCacheHit :: !(Maybe Bool)
     , _gdrceNumErrors      :: !(Maybe (Textual Word64))
+    , _gdrceInputCacheMiss :: !(Maybe (Textual Double))
     , _gdrceNumWarnings    :: !(Maybe (Textual Word64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildbotCommandEvents' with the minimum fields required to make a request.
 --
@@ -6267,15 +6662,19 @@ data GoogleDevtoolsRemotebuildbotCommandEvents = GoogleDevtoolsRemotebuildbotCom
 --
 -- * 'gdrceNumErrors'
 --
+-- * 'gdrceInputCacheMiss'
+--
 -- * 'gdrceNumWarnings'
 googleDevtoolsRemotebuildbotCommandEvents
     :: GoogleDevtoolsRemotebuildbotCommandEvents
 googleDevtoolsRemotebuildbotCommandEvents =
-    GoogleDevtoolsRemotebuildbotCommandEvents'
+  GoogleDevtoolsRemotebuildbotCommandEvents'
     { _gdrceDockerCacheHit = Nothing
     , _gdrceNumErrors = Nothing
+    , _gdrceInputCacheMiss = Nothing
     , _gdrceNumWarnings = Nothing
     }
+
 
 -- | Indicates whether we are using a cached Docker image (true) or had to
 -- pull the Docker image (false) for this command.
@@ -6291,6 +6690,13 @@ gdrceNumErrors
       (\ s a -> s{_gdrceNumErrors = a})
       . mapping _Coerce
 
+-- | The input cache miss ratio.
+gdrceInputCacheMiss :: Lens' GoogleDevtoolsRemotebuildbotCommandEvents (Maybe Double)
+gdrceInputCacheMiss
+  = lens _gdrceInputCacheMiss
+      (\ s a -> s{_gdrceInputCacheMiss = a})
+      . mapping _Coerce
+
 -- | The number of warnings reported.
 gdrceNumWarnings :: Lens' GoogleDevtoolsRemotebuildbotCommandEvents (Maybe Word64)
 gdrceNumWarnings
@@ -6299,33 +6705,40 @@ gdrceNumWarnings
       . mapping _Coerce
 
 instance FromJSON
-         GoogleDevtoolsRemotebuildbotCommandEvents where
+           GoogleDevtoolsRemotebuildbotCommandEvents
+         where
         parseJSON
           = withObject
               "GoogleDevtoolsRemotebuildbotCommandEvents"
               (\ o ->
                  GoogleDevtoolsRemotebuildbotCommandEvents' <$>
                    (o .:? "dockerCacheHit") <*> (o .:? "numErrors") <*>
-                     (o .:? "numWarnings"))
+                     (o .:? "inputCacheMiss")
+                     <*> (o .:? "numWarnings"))
 
 instance ToJSON
-         GoogleDevtoolsRemotebuildbotCommandEvents where
+           GoogleDevtoolsRemotebuildbotCommandEvents
+         where
         toJSON GoogleDevtoolsRemotebuildbotCommandEvents'{..}
           = object
               (catMaybes
                  [("dockerCacheHit" .=) <$> _gdrceDockerCacheHit,
                   ("numErrors" .=) <$> _gdrceNumErrors,
+                  ("inputCacheMiss" .=) <$> _gdrceInputCacheMiss,
                   ("numWarnings" .=) <$> _gdrceNumWarnings])
 
 -- | Describes the expected outputs of the command.
 --
 -- /See:/ 'googleDevtoolsRemoteworkersV1test2CommandTaskOutputs' smart constructor.
-data GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs = GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs'
+data GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs =
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs'
     { _gdrvctoDirectories       :: !(Maybe [Text])
     , _gdrvctoStderrDestination :: !(Maybe Text)
     , _gdrvctoFiles             :: !(Maybe [Text])
     , _gdrvctoStdoutDestination :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs' with the minimum fields required to make a request.
 --
@@ -6341,12 +6754,13 @@ data GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs = GoogleDevtoolsRemote
 googleDevtoolsRemoteworkersV1test2CommandTaskOutputs
     :: GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
 googleDevtoolsRemoteworkersV1test2CommandTaskOutputs =
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs'
+  GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs'
     { _gdrvctoDirectories = Nothing
     , _gdrvctoStderrDestination = Nothing
     , _gdrvctoFiles = Nothing
     , _gdrvctoStdoutDestination = Nothing
     }
+
 
 -- | A list of expected directories, relative to the execution root. All
 -- paths MUST be delimited by forward slashes.
@@ -6386,7 +6800,7 @@ gdrvctoStdoutDestination
       (\ s a -> s{_gdrvctoStdoutDestination = a})
 
 instance FromJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
          where
         parseJSON
           = withObject
@@ -6400,7 +6814,7 @@ instance FromJSON
                      <*> (o .:? "stdoutDestination"))
 
 instance ToJSON
-         GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
+           GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
          where
         toJSON
           GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs'{..}
@@ -6417,13 +6831,16 @@ instance ToJSON
 -- a network API call.
 --
 -- /See:/ 'googleLongrunningOperation' smart constructor.
-data GoogleLongrunningOperation = GoogleLongrunningOperation'
+data GoogleLongrunningOperation =
+  GoogleLongrunningOperation'
     { _gloDone     :: !(Maybe Bool)
     , _gloError    :: !(Maybe GoogleRpcStatus)
     , _gloResponse :: !(Maybe GoogleLongrunningOperationResponse)
     , _gloName     :: !(Maybe Text)
     , _gloMetadata :: !(Maybe GoogleLongrunningOperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
 --
@@ -6441,13 +6858,14 @@ data GoogleLongrunningOperation = GoogleLongrunningOperation'
 googleLongrunningOperation
     :: GoogleLongrunningOperation
 googleLongrunningOperation =
-    GoogleLongrunningOperation'
+  GoogleLongrunningOperation'
     { _gloDone = Nothing
     , _gloError = Nothing
     , _gloResponse = Nothing
     , _gloName = Nothing
     , _gloMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -6509,10 +6927,13 @@ instance ToJSON GoogleLongrunningOperation where
 -- upload.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse' smart constructor.
-data BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse = BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse'
+data BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse =
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse'
     { _bStatus :: !(Maybe GoogleRpcStatus)
     , _bDigest :: !(Maybe BuildBazelRemoteExecutionV2Digest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse' with the minimum fields required to make a request.
 --
@@ -6524,10 +6945,9 @@ data BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse = BuildBazelRem
 buildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
     :: BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
 buildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse =
-    BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse'
-    { _bStatus = Nothing
-    , _bDigest = Nothing
-    }
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse'
+    {_bStatus = Nothing, _bDigest = Nothing}
+
 
 -- | The result of attempting to upload that blob.
 bStatus :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse (Maybe GoogleRpcStatus)
@@ -6538,7 +6958,7 @@ bDigest :: Lens' BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse (Ma
 bDigest = lens _bDigest (\ s a -> s{_bDigest = a})
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
          where
         parseJSON
           = withObject
@@ -6548,7 +6968,7 @@ instance FromJSON
                    <$> (o .:? "status") <*> (o .:? "digest"))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
+           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse'{..}
@@ -6560,9 +6980,12 @@ instance ToJSON
 -- | A response message for ContentAddressableStorage.BatchReadBlobs.
 --
 -- /See:/ 'buildBazelRemoteExecutionV2BatchReadBlobsResponse' smart constructor.
-newtype BuildBazelRemoteExecutionV2BatchReadBlobsResponse = BuildBazelRemoteExecutionV2BatchReadBlobsResponse'
+newtype BuildBazelRemoteExecutionV2BatchReadBlobsResponse =
+  BuildBazelRemoteExecutionV2BatchReadBlobsResponse'
     { _bbrevbrbrResponses :: Maybe [BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2BatchReadBlobsResponse' with the minimum fields required to make a request.
 --
@@ -6572,9 +6995,9 @@ newtype BuildBazelRemoteExecutionV2BatchReadBlobsResponse = BuildBazelRemoteExec
 buildBazelRemoteExecutionV2BatchReadBlobsResponse
     :: BuildBazelRemoteExecutionV2BatchReadBlobsResponse
 buildBazelRemoteExecutionV2BatchReadBlobsResponse =
-    BuildBazelRemoteExecutionV2BatchReadBlobsResponse'
-    { _bbrevbrbrResponses = Nothing
-    }
+  BuildBazelRemoteExecutionV2BatchReadBlobsResponse'
+    {_bbrevbrbrResponses = Nothing}
+
 
 -- | The responses to the requests.
 bbrevbrbrResponses :: Lens' BuildBazelRemoteExecutionV2BatchReadBlobsResponse [BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse]
@@ -6585,7 +7008,7 @@ bbrevbrbrResponses
       . _Coerce
 
 instance FromJSON
-         BuildBazelRemoteExecutionV2BatchReadBlobsResponse
+           BuildBazelRemoteExecutionV2BatchReadBlobsResponse
          where
         parseJSON
           = withObject
@@ -6595,7 +7018,7 @@ instance FromJSON
                    <$> (o .:? "responses" .!= mempty))
 
 instance ToJSON
-         BuildBazelRemoteExecutionV2BatchReadBlobsResponse
+           BuildBazelRemoteExecutionV2BatchReadBlobsResponse
          where
         toJSON
           BuildBazelRemoteExecutionV2BatchReadBlobsResponse'{..}

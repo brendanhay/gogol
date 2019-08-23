@@ -18,22 +18,71 @@ module Network.Google.Container.Types.Sum where
 
 import           Network.Google.Prelude hiding (Bytes)
 
--- | Machine-friendly representation of the condition
-data StatusConditionCode
+-- | This field is to determine the status of the secondary range
+-- programmably.
+data UsableSubnetworkSecondaryRangeStatus
     = Unknown
       -- ^ @UNKNOWN@
+      -- UNKNOWN is the zero value of the Status enum. It\'s not a valid status.
+    | Unused
+      -- ^ @UNUSED@
+      -- UNUSED denotes that this range is unclaimed by any cluster.
+    | InUseService
+      -- ^ @IN_USE_SERVICE@
+      -- IN_USE_SERVICE denotes that this range is claimed by a cluster for
+      -- services. It cannot be used for other clusters.
+    | InUseShareablePod
+      -- ^ @IN_USE_SHAREABLE_POD@
+      -- IN_USE_SHAREABLE_POD denotes this range was created by the network admin
+      -- and is currently claimed by a cluster for pods. It can only be used by
+      -- other clusters as a pod range.
+    | InUseManagedPod
+      -- ^ @IN_USE_MANAGED_POD@
+      -- IN_USE_MANAGED_POD denotes this range was created by GKE and is claimed
+      -- for pods. It cannot be used for other clusters.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable UsableSubnetworkSecondaryRangeStatus
+
+instance FromHttpApiData UsableSubnetworkSecondaryRangeStatus where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right Unknown
+        "UNUSED" -> Right Unused
+        "IN_USE_SERVICE" -> Right InUseService
+        "IN_USE_SHAREABLE_POD" -> Right InUseShareablePod
+        "IN_USE_MANAGED_POD" -> Right InUseManagedPod
+        x -> Left ("Unable to parse UsableSubnetworkSecondaryRangeStatus from: " <> x)
+
+instance ToHttpApiData UsableSubnetworkSecondaryRangeStatus where
+    toQueryParam = \case
+        Unknown -> "UNKNOWN"
+        Unused -> "UNUSED"
+        InUseService -> "IN_USE_SERVICE"
+        InUseShareablePod -> "IN_USE_SHAREABLE_POD"
+        InUseManagedPod -> "IN_USE_MANAGED_POD"
+
+instance FromJSON UsableSubnetworkSecondaryRangeStatus where
+    parseJSON = parseJSONText "UsableSubnetworkSecondaryRangeStatus"
+
+instance ToJSON UsableSubnetworkSecondaryRangeStatus where
+    toJSON = toJSONText
+
+-- | Machine-friendly representation of the condition
+data StatusConditionCode
+    = SCCUnknown
+      -- ^ @UNKNOWN@
       -- UNKNOWN indicates a generic condition.
-    | GceStockout
+    | SCCGceStockout
       -- ^ @GCE_STOCKOUT@
       -- GCE_STOCKOUT indicates a Google Compute Engine stockout.
-    | GkeServiceAccountDeleted
+    | SCCGkeServiceAccountDeleted
       -- ^ @GKE_SERVICE_ACCOUNT_DELETED@
       -- GKE_SERVICE_ACCOUNT_DELETED indicates that the user deleted their robot
       -- service account.
-    | GceQuotaExceeded
+    | SCCGceQuotaExceeded
       -- ^ @GCE_QUOTA_EXCEEDED@
       -- Google Compute Engine quota was exceeded.
-    | SetByOperator
+    | SCCSetByOperator
       -- ^ @SET_BY_OPERATOR@
       -- Cluster state was manually changed by an SRE due to a system logic
       -- error. More codes TBA
@@ -43,20 +92,20 @@ instance Hashable StatusConditionCode
 
 instance FromHttpApiData StatusConditionCode where
     parseQueryParam = \case
-        "UNKNOWN" -> Right Unknown
-        "GCE_STOCKOUT" -> Right GceStockout
-        "GKE_SERVICE_ACCOUNT_DELETED" -> Right GkeServiceAccountDeleted
-        "GCE_QUOTA_EXCEEDED" -> Right GceQuotaExceeded
-        "SET_BY_OPERATOR" -> Right SetByOperator
+        "UNKNOWN" -> Right SCCUnknown
+        "GCE_STOCKOUT" -> Right SCCGceStockout
+        "GKE_SERVICE_ACCOUNT_DELETED" -> Right SCCGkeServiceAccountDeleted
+        "GCE_QUOTA_EXCEEDED" -> Right SCCGceQuotaExceeded
+        "SET_BY_OPERATOR" -> Right SCCSetByOperator
         x -> Left ("Unable to parse StatusConditionCode from: " <> x)
 
 instance ToHttpApiData StatusConditionCode where
     toQueryParam = \case
-        Unknown -> "UNKNOWN"
-        GceStockout -> "GCE_STOCKOUT"
-        GkeServiceAccountDeleted -> "GKE_SERVICE_ACCOUNT_DELETED"
-        GceQuotaExceeded -> "GCE_QUOTA_EXCEEDED"
-        SetByOperator -> "SET_BY_OPERATOR"
+        SCCUnknown -> "UNKNOWN"
+        SCCGceStockout -> "GCE_STOCKOUT"
+        SCCGkeServiceAccountDeleted -> "GKE_SERVICE_ACCOUNT_DELETED"
+        SCCGceQuotaExceeded -> "GCE_QUOTA_EXCEEDED"
+        SCCSetByOperator -> "SET_BY_OPERATOR"
 
 instance FromJSON StatusConditionCode where
     parseJSON = parseJSONText "StatusConditionCode"

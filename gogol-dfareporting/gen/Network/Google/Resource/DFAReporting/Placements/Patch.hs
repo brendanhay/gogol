@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'PlacementsPatch' request conforms to.
 type PlacementsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -56,11 +56,14 @@ type PlacementsPatchResource =
 -- | Updates an existing placement. This method supports patch semantics.
 --
 -- /See:/ 'placementsPatch' smart constructor.
-data PlacementsPatch = PlacementsPatch'
+data PlacementsPatch =
+  PlacementsPatch'
     { _ppProFileId :: !(Textual Int64)
     , _ppPayload   :: !Placement
     , _ppId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementsPatch' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ placementsPatch
     -> Int64 -- ^ 'ppId'
     -> PlacementsPatch
 placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
-    PlacementsPatch'
+  PlacementsPatch'
     { _ppProFileId = _Coerce # pPpProFileId_
     , _ppPayload = pPpPayload_
     , _ppId = _Coerce # pPpId_
     }
+
 
 -- | User profile ID associated with this request.
 ppProFileId :: Lens' PlacementsPatch Int64

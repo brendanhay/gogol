@@ -27,9 +27,6 @@
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot. Note that both the subscription and
 -- the snapshot must be on the same topic.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.seek@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
@@ -75,12 +72,10 @@ type ProjectsSubscriptionsSeekResource =
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot. Note that both the subscription and
 -- the snapshot must be on the same topic.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy.
 --
 -- /See:/ 'projectsSubscriptionsSeek' smart constructor.
-data ProjectsSubscriptionsSeek = ProjectsSubscriptionsSeek'
+data ProjectsSubscriptionsSeek =
+  ProjectsSubscriptionsSeek'
     { _pssXgafv          :: !(Maybe Xgafv)
     , _pssUploadProtocol :: !(Maybe Text)
     , _pssAccessToken    :: !(Maybe Text)
@@ -88,7 +83,9 @@ data ProjectsSubscriptionsSeek = ProjectsSubscriptionsSeek'
     , _pssPayload        :: !SeekRequest
     , _pssSubscription   :: !Text
     , _pssCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSubscriptionsSeek' with the minimum fields required to make a request.
 --
@@ -112,7 +109,7 @@ projectsSubscriptionsSeek
     -> Text -- ^ 'pssSubscription'
     -> ProjectsSubscriptionsSeek
 projectsSubscriptionsSeek pPssPayload_ pPssSubscription_ =
-    ProjectsSubscriptionsSeek'
+  ProjectsSubscriptionsSeek'
     { _pssXgafv = Nothing
     , _pssUploadProtocol = Nothing
     , _pssAccessToken = Nothing
@@ -121,6 +118,7 @@ projectsSubscriptionsSeek pPssPayload_ pPssSubscription_ =
     , _pssSubscription = pPssSubscription_
     , _pssCallback = Nothing
     }
+
 
 -- | V1 error format.
 pssXgafv :: Lens' ProjectsSubscriptionsSeek (Maybe Xgafv)

@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'MobileAppsList' request conforms to.
 type MobileAppsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileApps" :>
@@ -64,14 +64,17 @@ type MobileAppsListResource =
 -- | Retrieves list of available mobile apps.
 --
 -- /See:/ 'mobileAppsList' smart constructor.
-data MobileAppsList = MobileAppsList'
+data MobileAppsList =
+  MobileAppsList'
     { _malDirectories  :: !(Maybe [MobileAppsListDirectories])
     , _malSearchString :: !(Maybe Text)
     , _malIds          :: !(Maybe [Text])
     , _malProFileId    :: !(Textual Int64)
     , _malPageToken    :: !(Maybe Text)
     , _malMaxResults   :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MobileAppsList' with the minimum fields required to make a request.
 --
@@ -92,7 +95,7 @@ mobileAppsList
     :: Int64 -- ^ 'malProFileId'
     -> MobileAppsList
 mobileAppsList pMalProFileId_ =
-    MobileAppsList'
+  MobileAppsList'
     { _malDirectories = Nothing
     , _malSearchString = Nothing
     , _malIds = Nothing
@@ -100,6 +103,7 @@ mobileAppsList pMalProFileId_ =
     , _malPageToken = Nothing
     , _malMaxResults = 1000
     }
+
 
 -- | Select only apps from these directories.
 malDirectories :: Lens' MobileAppsList [MobileAppsListDirectories]

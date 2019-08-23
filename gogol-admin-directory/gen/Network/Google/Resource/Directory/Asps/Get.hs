@@ -55,10 +55,13 @@ type AspsGetResource =
 -- | Get information about an ASP issued by a user.
 --
 -- /See:/ 'aspsGet' smart constructor.
-data AspsGet = AspsGet'
+data AspsGet =
+  AspsGet'
     { _agCodeId  :: !(Textual Int32)
     , _agUserKey :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AspsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ aspsGet
     -> Text -- ^ 'agUserKey'
     -> AspsGet
 aspsGet pAgCodeId_ pAgUserKey_ =
-    AspsGet'
-    { _agCodeId = _Coerce # pAgCodeId_
-    , _agUserKey = pAgUserKey_
-    }
+  AspsGet' {_agCodeId = _Coerce # pAgCodeId_, _agUserKey = pAgUserKey_}
+
 
 -- | The unique ID of the ASP.
 agCodeId :: Lens' AspsGet Int32

@@ -60,13 +60,16 @@ type PerformanceReportListResource =
 -- | Retrieves the authenticated user\'s list of performance metrics.
 --
 -- /See:/ 'performanceReportList'' smart constructor.
-data PerformanceReportList' = PerformanceReportList''
+data PerformanceReportList' =
+  PerformanceReportList''
     { _prlAccountId     :: !(Textual Int64)
     , _prlPageToken     :: !(Maybe Text)
     , _prlEndDateTime   :: !Text
     , _prlMaxResults    :: !(Maybe (Textual Word32))
     , _prlStartDateTime :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PerformanceReportList'' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ performanceReportList'
     -> Text -- ^ 'prlStartDateTime'
     -> PerformanceReportList'
 performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
-    PerformanceReportList''
+  PerformanceReportList''
     { _prlAccountId = _Coerce # pPrlAccountId_
     , _prlPageToken = Nothing
     , _prlEndDateTime = pPrlEndDateTime_
     , _prlMaxResults = Nothing
     , _prlStartDateTime = pPrlStartDateTime_
     }
+
 
 -- | The account id to get the reports.
 prlAccountId :: Lens' PerformanceReportList' Int64

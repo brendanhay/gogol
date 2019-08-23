@@ -65,12 +65,15 @@ type DisksDeleteResource =
 -- delete snapshots.
 --
 -- /See:/ 'disksDelete' smart constructor.
-data DisksDelete = DisksDelete'
+data DisksDelete =
+  DisksDelete'
     { _ddRequestId :: !(Maybe Text)
     , _ddProject   :: !Text
     , _ddDisk      :: !Text
     , _ddZone      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DisksDelete' with the minimum fields required to make a request.
 --
@@ -89,12 +92,13 @@ disksDelete
     -> Text -- ^ 'ddZone'
     -> DisksDelete
 disksDelete pDdProject_ pDdDisk_ pDdZone_ =
-    DisksDelete'
+  DisksDelete'
     { _ddRequestId = Nothing
     , _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
     , _ddZone = pDdZone_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

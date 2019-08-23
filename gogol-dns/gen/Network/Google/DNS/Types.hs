@@ -37,6 +37,12 @@ module Network.Google.DNS.Types
     , odkcOldValue
     , odkcNewValue
 
+    -- * ManagedZonePrivateVisibilityConfigNetwork
+    , ManagedZonePrivateVisibilityConfigNetwork
+    , managedZonePrivateVisibilityConfigNetwork
+    , mzpvcnKind
+    , mzpvcnNetworkURL
+
     -- * DNSKeysListResponse
     , DNSKeysListResponse
     , dnsKeysListResponse
@@ -55,6 +61,9 @@ module Network.Google.DNS.Types
 
     -- * ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
+
+    -- * ManagedZoneVisibility
+    , ManagedZoneVisibility (..)
 
     -- * Project
     , Project
@@ -155,6 +164,12 @@ module Network.Google.DNS.Types
     -- * ChangeStatus
     , ChangeStatus (..)
 
+    -- * ManagedZonePrivateVisibilityConfig
+    , ManagedZonePrivateVisibilityConfig
+    , managedZonePrivateVisibilityConfig
+    , mzpvcNetworks
+    , mzpvcKind
+
     -- * ManagedZoneDNSSecConfig
     , ManagedZoneDNSSecConfig
     , managedZoneDNSSecConfig
@@ -179,6 +194,7 @@ module Network.Google.DNS.Types
     , mzCreationTime
     , mzKind
     , mzNameServerSet
+    , mzVisibility
     , mzName
     , mzId
     , mzLabels
@@ -186,6 +202,7 @@ module Network.Google.DNS.Types
     , mzDescription
     , mzDNSsecConfig
     , mzNameServers
+    , mzPrivateVisibilityConfig
 
     -- * ManagedZoneLabels
     , ManagedZoneLabels
@@ -200,10 +217,12 @@ module Network.Google.DNS.Types
     , qRrSetsPerManagedZone
     , qKind
     , qResourceRecordsPerRrSet
+    , qManagedZonesPerNetwork
     , qRrSetAdditionsPerChange
     , qManagedZones
     , qTotalRrDataSizePerChange
     , qDNSKeysPerManagedZone
+    , qNetworksPerManagedZone
 
     -- * DNSKeyType
     , DNSKeyType (..)
@@ -238,16 +257,16 @@ dNSService
 
 -- | View your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readonly"]
-ndevClouddnsReadOnlyScope = Proxy;
+ndevClouddnsReadOnlyScope = Proxy
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope = Proxy
 
 -- | View and manage your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadwriteScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-ndevClouddnsReadwriteScope = Proxy;
+ndevClouddnsReadwriteScope = Proxy
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

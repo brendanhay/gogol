@@ -57,10 +57,13 @@ type JobsQueryResource =
 -- query completes within a specified timeout.
 --
 -- /See:/ 'jobsQuery' smart constructor.
-data JobsQuery = JobsQuery'
+data JobsQuery =
+  JobsQuery'
     { _jqPayload   :: !QueryRequest
     , _jqProjectId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsQuery' with the minimum fields required to make a request.
 --
@@ -74,10 +77,8 @@ jobsQuery
     -> Text -- ^ 'jqProjectId'
     -> JobsQuery
 jobsQuery pJqPayload_ pJqProjectId_ =
-    JobsQuery'
-    { _jqPayload = pJqPayload_
-    , _jqProjectId = pJqProjectId_
-    }
+  JobsQuery' {_jqPayload = pJqPayload_, _jqProjectId = pJqProjectId_}
+
 
 -- | Multipart request metadata.
 jqPayload :: Lens' JobsQuery QueryRequest

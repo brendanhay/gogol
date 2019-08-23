@@ -71,7 +71,8 @@ type ObjectsDeleteResource =
 -- is used.
 --
 -- /See:/ 'objectsDelete' smart constructor.
-data ObjectsDelete = ObjectsDelete'
+data ObjectsDelete =
+  ObjectsDelete'
     { _odIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _odIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _odIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -80,7 +81,9 @@ data ObjectsDelete = ObjectsDelete'
     , _odIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _odObject                   :: !Text
     , _odGeneration               :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ObjectsDelete' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ objectsDelete
     -> Text -- ^ 'odObject'
     -> ObjectsDelete
 objectsDelete pOdBucket_ pOdObject_ =
-    ObjectsDelete'
+  ObjectsDelete'
     { _odIfMetagenerationMatch = Nothing
     , _odIfGenerationNotMatch = Nothing
     , _odIfGenerationMatch = Nothing
@@ -116,6 +119,7 @@ objectsDelete pOdBucket_ pOdObject_ =
     , _odObject = pOdObject_
     , _odGeneration = Nothing
     }
+
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.

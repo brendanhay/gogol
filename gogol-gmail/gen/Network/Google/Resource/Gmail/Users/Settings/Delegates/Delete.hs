@@ -63,10 +63,13 @@ type UsersSettingsDelegatesDeleteResource =
 -- service account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsDelegatesDelete' smart constructor.
-data UsersSettingsDelegatesDelete = UsersSettingsDelegatesDelete'
+data UsersSettingsDelegatesDelete =
+  UsersSettingsDelegatesDelete'
     { _usddUserId        :: !Text
     , _usddDelegateEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsDelegatesDelete' with the minimum fields required to make a request.
 --
@@ -79,10 +82,9 @@ usersSettingsDelegatesDelete
     :: Text -- ^ 'usddDelegateEmail'
     -> UsersSettingsDelegatesDelete
 usersSettingsDelegatesDelete pUsddDelegateEmail_ =
-    UsersSettingsDelegatesDelete'
-    { _usddUserId = "me"
-    , _usddDelegateEmail = pUsddDelegateEmail_
-    }
+  UsersSettingsDelegatesDelete'
+    {_usddUserId = "me", _usddDelegateEmail = pUsddDelegateEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

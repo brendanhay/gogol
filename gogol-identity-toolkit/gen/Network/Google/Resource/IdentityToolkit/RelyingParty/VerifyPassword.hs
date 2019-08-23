@@ -54,9 +54,12 @@ type RelyingPartyVerifyPasswordResource =
 -- | Verifies the user entered password.
 --
 -- /See:/ 'relyingPartyVerifyPassword' smart constructor.
-newtype RelyingPartyVerifyPassword = RelyingPartyVerifyPassword'
+newtype RelyingPartyVerifyPassword =
+  RelyingPartyVerifyPassword'
     { _rpvpPayload :: IdentitytoolkitRelyingPartyVerifyPasswordRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelyingPartyVerifyPassword' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ relyingPartyVerifyPassword
     :: IdentitytoolkitRelyingPartyVerifyPasswordRequest -- ^ 'rpvpPayload'
     -> RelyingPartyVerifyPassword
 relyingPartyVerifyPassword pRpvpPayload_ =
-    RelyingPartyVerifyPassword'
-    { _rpvpPayload = pRpvpPayload_
-    }
+  RelyingPartyVerifyPassword' {_rpvpPayload = pRpvpPayload_}
+
 
 -- | Multipart request metadata.
 rpvpPayload :: Lens' RelyingPartyVerifyPassword IdentitytoolkitRelyingPartyVerifyPasswordRequest

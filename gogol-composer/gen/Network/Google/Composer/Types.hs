@@ -34,6 +34,12 @@ module Network.Google.Composer.Types
     , operationSchema
     , osAddtional
 
+    -- * ListImageVersionsResponse
+    , ListImageVersionsResponse
+    , listImageVersionsResponse
+    , livrNextPageToken
+    , livrImageVersions
+
     -- * ListEnvironmentsResponse
     , ListEnvironmentsResponse
     , listEnvironmentsResponse
@@ -88,6 +94,13 @@ module Network.Google.Composer.Types
     , SoftwareConfigEnvVariables
     , softwareConfigEnvVariables
     , scevAddtional
+
+    -- * ImageVersion
+    , ImageVersion
+    , imageVersion
+    , ivImageVersionId
+    , ivSupportedPythonVersions
+    , ivIsDefault
 
     -- * Environment
     , Environment
@@ -166,4 +179,4 @@ composerService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

@@ -99,6 +99,7 @@ module Network.Google.Billing
     -- ** Service
     , Service
     , service
+    , sBusinessEntityName
     , sName
     , sDisplayName
     , sServiceId

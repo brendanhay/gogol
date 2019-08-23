@@ -64,14 +64,17 @@ type SubnetworksListResource =
 -- | Retrieves a list of subnetworks available to the specified project.
 --
 -- /See:/ 'subnetworksList' smart constructor.
-data SubnetworksList = SubnetworksList'
+data SubnetworksList =
+  SubnetworksList'
     { _slOrderBy    :: !(Maybe Text)
     , _slProject    :: !Text
     , _slFilter     :: !(Maybe Text)
     , _slRegion     :: !Text
     , _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SubnetworksList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ subnetworksList
     -> Text -- ^ 'slRegion'
     -> SubnetworksList
 subnetworksList pSlProject_ pSlRegion_ =
-    SubnetworksList'
+  SubnetworksList'
     { _slOrderBy = Nothing
     , _slProject = pSlProject_
     , _slFilter = Nothing
@@ -101,6 +104,7 @@ subnetworksList pSlProject_ pSlRegion_ =
     , _slPageToken = Nothing
     , _slMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

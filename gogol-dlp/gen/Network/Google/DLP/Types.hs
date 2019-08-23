@@ -413,6 +413,7 @@ module Network.Google.DLP.Types
     , gpdvitdName
     , gpdvitdDisplayName
     , gpdvitdSupportedBy
+    , gpdvitdDescription
 
     -- * GoogleProtobufEmpty
     , GoogleProtobufEmpty
@@ -515,6 +516,7 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Regex
     , GooglePrivacyDlpV2Regex
     , googlePrivacyDlpV2Regex
+    , gpdvrGroupIndexes
     , gpdvrPattern
 
     -- * GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
@@ -540,6 +542,10 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2LDiversityConfig
     , gpdvldcSensitiveAttribute
     , gpdvldcQuasiIds
+
+    -- * GooglePrivacyDlpV2JobNotificationEmails
+    , GooglePrivacyDlpV2JobNotificationEmails
+    , googlePrivacyDlpV2JobNotificationEmails
 
     -- * GooglePrivacyDlpV2DeidentifyContentRequest
     , GooglePrivacyDlpV2DeidentifyContentRequest
@@ -688,6 +694,10 @@ module Network.Google.DLP.Types
     , gpdvldecEquivalenceClassSize
     , gpdvldecNumDistinctSensitiveValues
     , gpdvldecQuasiIdsValues
+
+    -- * GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , googlePrivacyDlpV2ActivateJobTriggerRequest
 
     -- * GooglePrivacyDlpV2DeidentifyConfig
     , GooglePrivacyDlpV2DeidentifyConfig
@@ -890,6 +900,7 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Action
     , GooglePrivacyDlpV2Action
     , googlePrivacyDlpV2Action
+    , gpdvaJobNotificationEmails
     , gpdvaPubSub
     , gpdvaSaveFindings
     , gpdvaPublishSummaryToCscc
@@ -1082,6 +1093,7 @@ module Network.Google.DLP.Types
     , gpdvptDateShiftConfig
     , gpdvptBucketingConfig
     , gpdvptReplaceWithInfoTypeConfig
+    , gpdvptCryptoDeterministicConfig
     , gpdvptCryptoHashConfig
     , gpdvptReplaceConfig
     , gpdvptCryptoReplaceFfxFpeConfig
@@ -1112,6 +1124,13 @@ module Network.Google.DLP.Types
     , gpdvsitCurrentVersion
     , gpdvsitName
     , gpdvsitPendingVersions
+
+    -- * GooglePrivacyDlpV2CryptoDeterministicConfig
+    , GooglePrivacyDlpV2CryptoDeterministicConfig
+    , googlePrivacyDlpV2CryptoDeterministicConfig
+    , gpdvcdcContext
+    , gpdvcdcSurrogateInfoType
+    , gpdvcdcCryptoKey
 
     -- * GooglePrivacyDlpV2StatisticalTable
     , GooglePrivacyDlpV2StatisticalTable
@@ -1240,4 +1259,4 @@ dLPService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy

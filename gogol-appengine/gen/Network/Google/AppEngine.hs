@@ -171,11 +171,6 @@ module Network.Google.AppEngine
     , sCode
     , sMessage
 
-    -- ** OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
-
     -- ** LocationSchema
     , LocationSchema
     , locationSchema
@@ -272,6 +267,11 @@ module Network.Google.AppEngine
     , acId
     , acExpireTime
     , acVisibleDomainMAppings
+
+    -- ** VPCAccessConnector
+    , VPCAccessConnector
+    , vpcAccessConnector
+    , vacName
 
     -- ** APIConfigHandler
     , APIConfigHandler
@@ -432,15 +432,6 @@ module Network.Google.AppEngine
     , asMaxPendingLatency
     , asStandardSchedulerSettings
 
-    -- ** OperationMetadataV1Beta5
-    , OperationMetadataV1Beta5
-    , operationMetadataV1Beta5
-    , oInsertTime
-    , oUser
-    , oMethod
-    , oEndTime
-    , oTarget
-
     -- ** Volume
     , Volume
     , volume
@@ -467,6 +458,7 @@ module Network.Google.AppEngine
     -- ** Network
     , Network
     , network
+    , nSessionAffinity
     , nSubnetworkName
     , nForwardedPorts
     , nInstanceTag
@@ -512,6 +504,7 @@ module Network.Google.AppEngine
     -- ** FeatureSettings
     , FeatureSettings
     , featureSettings
+    , fsUseContainerOptimizedOS
     , fsSplitHealthChecks
 
     -- ** CertificateRawData
@@ -600,6 +593,7 @@ module Network.Google.AppEngine
     , verInstanceClass
     , verRuntimeChannel
     , verRuntimeMainExecutablePath
+    , verVPCAccessConnector
     , verHealthCheck
     , verEndpointsAPIService
     , verEnv
@@ -695,12 +689,7 @@ module Network.Google.AppEngine
     -- ** OperationMetadata
     , OperationMetadata
     , operationMetadata
-    , omInsertTime
-    , omUser
-    , omMethod
-    , omEndTime
-    , omOperationType
-    , omTarget
+    , omAddtional
 
     -- ** URLMapAuthFailAction
     , URLMapAuthFailAction (..)

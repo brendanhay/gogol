@@ -25,9 +25,9 @@
 -- Google Maps. Currently, the only way to set heading, pitch, and roll in
 -- CreatePhoto is through the [Photo Sphere XMP
 -- metadata](https:\/\/developers.google.com\/streetview\/spherical-metadata)
--- in the photo bytes. The \`pose.heading\`, \`pose.pitch\`, \`pose.roll\`,
--- \`pose.altitude\`, and \`pose.level\` fields in Pose are ignored for
--- CreatePhoto. This method returns the following error codes: *
+-- in the photo bytes. CreatePhoto ignores the \`pose.heading\`,
+-- \`pose.pitch\`, \`pose.roll\`, \`pose.altitude\`, and \`pose.level\`
+-- fields in Pose. This method returns the following error codes: *
 -- google.rpc.Code.INVALID_ARGUMENT if the request is malformed or if the
 -- uploaded photo is not a 360 photo. * google.rpc.Code.NOT_FOUND if the
 -- upload reference does not exist. * google.rpc.Code.RESOURCE_EXHAUSTED if
@@ -73,23 +73,26 @@ type PhotoCreateResource =
 -- Google Maps. Currently, the only way to set heading, pitch, and roll in
 -- CreatePhoto is through the [Photo Sphere XMP
 -- metadata](https:\/\/developers.google.com\/streetview\/spherical-metadata)
--- in the photo bytes. The \`pose.heading\`, \`pose.pitch\`, \`pose.roll\`,
--- \`pose.altitude\`, and \`pose.level\` fields in Pose are ignored for
--- CreatePhoto. This method returns the following error codes: *
+-- in the photo bytes. CreatePhoto ignores the \`pose.heading\`,
+-- \`pose.pitch\`, \`pose.roll\`, \`pose.altitude\`, and \`pose.level\`
+-- fields in Pose. This method returns the following error codes: *
 -- google.rpc.Code.INVALID_ARGUMENT if the request is malformed or if the
 -- uploaded photo is not a 360 photo. * google.rpc.Code.NOT_FOUND if the
 -- upload reference does not exist. * google.rpc.Code.RESOURCE_EXHAUSTED if
 -- the account has reached the storage limit.
 --
 -- /See:/ 'photoCreate' smart constructor.
-data PhotoCreate = PhotoCreate'
+data PhotoCreate =
+  PhotoCreate'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !Photo
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhotoCreate' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ photoCreate
     :: Photo -- ^ 'pcPayload'
     -> PhotoCreate
 photoCreate pPcPayload_ =
-    PhotoCreate'
+  PhotoCreate'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
     , _pcAccessToken = Nothing
@@ -118,6 +121,7 @@ photoCreate pPcPayload_ =
     , _pcPayload = pPcPayload_
     , _pcCallback = Nothing
     }
+
 
 -- | V1 error format.
 pcXgafv :: Lens' PhotoCreate (Maybe Xgafv)

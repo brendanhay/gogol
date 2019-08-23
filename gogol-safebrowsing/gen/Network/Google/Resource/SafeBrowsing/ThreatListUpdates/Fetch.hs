@@ -63,14 +63,17 @@ type ThreatListUpdatesFetchResource =
 -- updates for multiple lists at once.
 --
 -- /See:/ 'threatListUpdatesFetch' smart constructor.
-data ThreatListUpdatesFetch = ThreatListUpdatesFetch'
+data ThreatListUpdatesFetch =
+  ThreatListUpdatesFetch'
     { _tlufXgafv          :: !(Maybe Xgafv)
     , _tlufUploadProtocol :: !(Maybe Text)
     , _tlufAccessToken    :: !(Maybe Text)
     , _tlufUploadType     :: !(Maybe Text)
     , _tlufPayload        :: !FetchThreatListUpdatesRequest
     , _tlufCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ThreatListUpdatesFetch' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ threatListUpdatesFetch
     :: FetchThreatListUpdatesRequest -- ^ 'tlufPayload'
     -> ThreatListUpdatesFetch
 threatListUpdatesFetch pTlufPayload_ =
-    ThreatListUpdatesFetch'
+  ThreatListUpdatesFetch'
     { _tlufXgafv = Nothing
     , _tlufUploadProtocol = Nothing
     , _tlufAccessToken = Nothing
@@ -99,6 +102,7 @@ threatListUpdatesFetch pTlufPayload_ =
     , _tlufPayload = pTlufPayload_
     , _tlufCallback = Nothing
     }
+
 
 -- | V1 error format.
 tlufXgafv :: Lens' ThreatListUpdatesFetch (Maybe Xgafv)

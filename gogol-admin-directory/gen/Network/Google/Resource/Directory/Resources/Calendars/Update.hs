@@ -63,11 +63,14 @@ type ResourcesCalendarsUpdateResource =
 -- that are not present in the request will be preserved.
 --
 -- /See:/ 'resourcesCalendarsUpdate' smart constructor.
-data ResourcesCalendarsUpdate = ResourcesCalendarsUpdate'
+data ResourcesCalendarsUpdate =
+  ResourcesCalendarsUpdate'
     { _rcuPayload            :: !CalendarResource
     , _rcuCustomer           :: !Text
     , _rcuCalendarResourceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResourcesCalendarsUpdate' with the minimum fields required to make a request.
 --
@@ -84,11 +87,12 @@ resourcesCalendarsUpdate
     -> Text -- ^ 'rcuCalendarResourceId'
     -> ResourcesCalendarsUpdate
 resourcesCalendarsUpdate pRcuPayload_ pRcuCustomer_ pRcuCalendarResourceId_ =
-    ResourcesCalendarsUpdate'
+  ResourcesCalendarsUpdate'
     { _rcuPayload = pRcuPayload_
     , _rcuCustomer = pRcuCustomer_
     , _rcuCalendarResourceId = pRcuCalendarResourceId_
     }
+
 
 -- | Multipart request metadata.
 rcuPayload :: Lens' ResourcesCalendarsUpdate CalendarResource

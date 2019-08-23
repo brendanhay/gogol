@@ -15,7 +15,7 @@
 --
 -- Converts audio to text by applying powerful neural network models.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference>
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference>
 module Network.Google.Speech
     (
     -- * Service Configuration
@@ -97,6 +97,7 @@ module Network.Google.Speech
     , RecognizeRequest
     , recognizeRequest
     , rrConfig
+    , rrName
     , rrAudio
 
     -- ** Operation
@@ -227,7 +228,7 @@ import           Network.Google.Speech.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Cloud Speech API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Speech-to-Text API service.
 type SpeechAPI =
      SpeechRecognizeResource :<|>
        SpeechLongrunningrecognizeResource

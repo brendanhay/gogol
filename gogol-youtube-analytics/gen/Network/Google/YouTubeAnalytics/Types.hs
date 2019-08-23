@@ -141,21 +141,21 @@ youTubeAnalyticsService
 
 -- | Manage your YouTube account
 youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
-youTubeScope = Proxy;
+youTubeScope = Proxy
 
 -- | View YouTube Analytics reports for your YouTube content
 youTubeAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youTubeAnalyticsReadOnlyScope = Proxy;
+youTubeAnalyticsReadOnlyScope = Proxy
 
 -- | View and manage your assets and associated content on YouTube
 youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youTubePartnerScope = Proxy;
+youTubePartnerScope = Proxy
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
 youTubeAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youTubeAnalyticsMonetaryReadOnlyScope = Proxy;
+youTubeAnalyticsMonetaryReadOnlyScope = Proxy
 
 -- | View your YouTube account
 youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-youTubeReadOnlyScope = Proxy;
+youTubeReadOnlyScope = Proxy

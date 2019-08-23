@@ -61,13 +61,16 @@ type LayersListResource =
 -- | List the layer summaries for a volume.
 --
 -- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList'
+data LayersList =
+  LayersList'
     { _llContentVersion :: !(Maybe Text)
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
     , _llPageToken      :: !(Maybe Text)
     , _llMaxResults     :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LayersList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ layersList
     :: Text -- ^ 'llVolumeId'
     -> LayersList
 layersList pLlVolumeId_ =
-    LayersList'
+  LayersList'
     { _llContentVersion = Nothing
     , _llVolumeId = pLlVolumeId_
     , _llSource = Nothing
     , _llPageToken = Nothing
     , _llMaxResults = Nothing
     }
+
 
 -- | The content version for the requested volume.
 llContentVersion :: Lens' LayersList (Maybe Text)

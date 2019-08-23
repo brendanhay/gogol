@@ -68,7 +68,8 @@ type ProjectsRegionsJobsDeleteResource =
 -- fails, and the response returns FAILED_PRECONDITION.
 --
 -- /See:/ 'projectsRegionsJobsDelete' smart constructor.
-data ProjectsRegionsJobsDelete = ProjectsRegionsJobsDelete'
+data ProjectsRegionsJobsDelete =
+  ProjectsRegionsJobsDelete'
     { _prjdXgafv          :: !(Maybe Xgafv)
     , _prjdJobId          :: !Text
     , _prjdUploadProtocol :: !(Maybe Text)
@@ -77,7 +78,9 @@ data ProjectsRegionsJobsDelete = ProjectsRegionsJobsDelete'
     , _prjdRegion         :: !Text
     , _prjdProjectId      :: !Text
     , _prjdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsRegionsJobsDelete' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ projectsRegionsJobsDelete
     -> Text -- ^ 'prjdProjectId'
     -> ProjectsRegionsJobsDelete
 projectsRegionsJobsDelete pPrjdJobId_ pPrjdRegion_ pPrjdProjectId_ =
-    ProjectsRegionsJobsDelete'
+  ProjectsRegionsJobsDelete'
     { _prjdXgafv = Nothing
     , _prjdJobId = pPrjdJobId_
     , _prjdUploadProtocol = Nothing
@@ -114,6 +117,7 @@ projectsRegionsJobsDelete pPrjdJobId_ pPrjdRegion_ pPrjdProjectId_ =
     , _prjdProjectId = pPrjdProjectId_
     , _prjdCallback = Nothing
     }
+
 
 -- | V1 error format.
 prjdXgafv :: Lens' ProjectsRegionsJobsDelete (Maybe Xgafv)

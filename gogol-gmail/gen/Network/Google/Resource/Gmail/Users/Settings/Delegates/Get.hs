@@ -61,10 +61,13 @@ type UsersSettingsDelegatesGetResource =
 -- domain-wide authority.
 --
 -- /See:/ 'usersSettingsDelegatesGet' smart constructor.
-data UsersSettingsDelegatesGet = UsersSettingsDelegatesGet'
+data UsersSettingsDelegatesGet =
+  UsersSettingsDelegatesGet'
     { _usdgUserId        :: !Text
     , _usdgDelegateEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsDelegatesGet' with the minimum fields required to make a request.
 --
@@ -77,10 +80,9 @@ usersSettingsDelegatesGet
     :: Text -- ^ 'usdgDelegateEmail'
     -> UsersSettingsDelegatesGet
 usersSettingsDelegatesGet pUsdgDelegateEmail_ =
-    UsersSettingsDelegatesGet'
-    { _usdgUserId = "me"
-    , _usdgDelegateEmail = pUsdgDelegateEmail_
-    }
+  UsersSettingsDelegatesGet'
+    {_usdgUserId = "me", _usdgDelegateEmail = pUsdgDelegateEmail_}
+
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.

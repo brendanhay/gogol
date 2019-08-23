@@ -63,14 +63,17 @@ type AmpURLsBatchGetResource =
 -- URL(s)](\/amp\/cache\/overview#amp-cache-url-format).
 --
 -- /See:/ 'ampURLsBatchGet' smart constructor.
-data AmpURLsBatchGet = AmpURLsBatchGet'
+data AmpURLsBatchGet =
+  AmpURLsBatchGet'
     { _aubgXgafv          :: !(Maybe Xgafv)
     , _aubgUploadProtocol :: !(Maybe Text)
     , _aubgAccessToken    :: !(Maybe Text)
     , _aubgUploadType     :: !(Maybe Text)
     , _aubgPayload        :: !BatchGetAmpURLsRequest
     , _aubgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AmpURLsBatchGet' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ ampURLsBatchGet
     :: BatchGetAmpURLsRequest -- ^ 'aubgPayload'
     -> AmpURLsBatchGet
 ampURLsBatchGet pAubgPayload_ =
-    AmpURLsBatchGet'
+  AmpURLsBatchGet'
     { _aubgXgafv = Nothing
     , _aubgUploadProtocol = Nothing
     , _aubgAccessToken = Nothing
@@ -99,6 +102,7 @@ ampURLsBatchGet pAubgPayload_ =
     , _aubgPayload = pAubgPayload_
     , _aubgCallback = Nothing
     }
+
 
 -- | V1 error format.
 aubgXgafv :: Lens' AmpURLsBatchGet (Maybe Xgafv)

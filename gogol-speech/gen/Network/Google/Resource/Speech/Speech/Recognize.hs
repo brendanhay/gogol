@@ -23,7 +23,7 @@
 -- Performs synchronous speech recognition: receive results after all audio
 -- has been sent and processed.
 --
--- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech API Reference> for @speech.speech.recognize@.
+-- /See:/ <https://cloud.google.com/speech-to-text/docs/quickstart-protocol Cloud Speech-to-Text API Reference> for @speech.speech.recognize@.
 module Network.Google.Resource.Speech.Speech.Recognize
     (
     -- * REST Resource
@@ -63,14 +63,17 @@ type SpeechRecognizeResource =
 -- has been sent and processed.
 --
 -- /See:/ 'speechRecognize' smart constructor.
-data SpeechRecognize = SpeechRecognize'
+data SpeechRecognize =
+  SpeechRecognize'
     { _srXgafv          :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
     , _srAccessToken    :: !(Maybe Text)
     , _srUploadType     :: !(Maybe Text)
     , _srPayload        :: !RecognizeRequest
     , _srCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SpeechRecognize' with the minimum fields required to make a request.
 --
@@ -91,7 +94,7 @@ speechRecognize
     :: RecognizeRequest -- ^ 'srPayload'
     -> SpeechRecognize
 speechRecognize pSrPayload_ =
-    SpeechRecognize'
+  SpeechRecognize'
     { _srXgafv = Nothing
     , _srUploadProtocol = Nothing
     , _srAccessToken = Nothing
@@ -99,6 +102,7 @@ speechRecognize pSrPayload_ =
     , _srPayload = pSrPayload_
     , _srCallback = Nothing
     }
+
 
 -- | V1 error format.
 srXgafv :: Lens' SpeechRecognize (Maybe Xgafv)

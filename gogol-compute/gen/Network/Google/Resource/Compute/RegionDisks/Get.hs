@@ -57,11 +57,14 @@ type RegionDisksGetResource =
 -- | Returns a specified regional persistent disk.
 --
 -- /See:/ 'regionDisksGet' smart constructor.
-data RegionDisksGet = RegionDisksGet'
+data RegionDisksGet =
+  RegionDisksGet'
     { _rdgProject :: !Text
     , _rdgDisk    :: !Text
     , _rdgRegion  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionDisksGet' with the minimum fields required to make a request.
 --
@@ -78,11 +81,9 @@ regionDisksGet
     -> Text -- ^ 'rdgRegion'
     -> RegionDisksGet
 regionDisksGet pRdgProject_ pRdgDisk_ pRdgRegion_ =
-    RegionDisksGet'
-    { _rdgProject = pRdgProject_
-    , _rdgDisk = pRdgDisk_
-    , _rdgRegion = pRdgRegion_
-    }
+  RegionDisksGet'
+    {_rdgProject = pRdgProject_, _rdgDisk = pRdgDisk_, _rdgRegion = pRdgRegion_}
+
 
 -- | Project ID for this request.
 rdgProject :: Lens' RegionDisksGet Text

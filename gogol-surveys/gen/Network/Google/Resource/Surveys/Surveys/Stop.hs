@@ -53,9 +53,12 @@ type SurveysStopResource =
 -- | Stops a running survey.
 --
 -- /See:/ 'surveysStop' smart constructor.
-newtype SurveysStop = SurveysStop'
+newtype SurveysStop =
+  SurveysStop'
     { _sResourceId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysStop' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype SurveysStop = SurveysStop'
 surveysStop
     :: Text -- ^ 'sResourceId'
     -> SurveysStop
-surveysStop pSResourceId_ =
-    SurveysStop'
-    { _sResourceId = pSResourceId_
-    }
+surveysStop pSResourceId_ = SurveysStop' {_sResourceId = pSResourceId_}
+
 
 sResourceId :: Lens' SurveysStop Text
 sResourceId

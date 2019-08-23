@@ -60,11 +60,14 @@ type ApplicationsGetResource =
 -- the returned response will not include any instance data.
 --
 -- /See:/ 'applicationsGet' smart constructor.
-data ApplicationsGet = ApplicationsGet'
+data ApplicationsGet =
+  ApplicationsGet'
     { _agApplicationId :: !Text
     , _agPlatformType  :: !(Maybe ApplicationsGetPlatformType)
     , _agLanguage      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ applicationsGet
     :: Text -- ^ 'agApplicationId'
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
-    ApplicationsGet'
+  ApplicationsGet'
     { _agApplicationId = pAgApplicationId_
     , _agPlatformType = Nothing
     , _agLanguage = Nothing
     }
+
 
 -- | The application ID from the Google Play developer console.
 agApplicationId :: Lens' ApplicationsGet Text
@@ -105,7 +109,8 @@ agLanguage
 instance GoogleRequest ApplicationsGet where
         type Rs ApplicationsGet = Application
         type Scopes ApplicationsGet =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ApplicationsGet'{..}
           = go _agApplicationId _agPlatformType _agLanguage
               (Just AltJSON)

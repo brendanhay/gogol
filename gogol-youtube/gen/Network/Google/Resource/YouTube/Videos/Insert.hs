@@ -78,7 +78,8 @@ type VideosInsertResource =
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
 -- /See:/ 'videosInsert' smart constructor.
-data VideosInsert = VideosInsert'
+data VideosInsert =
+  VideosInsert'
     { _viPart                          :: !Text
     , _viStabilize                     :: !(Maybe Bool)
     , _viPayload                       :: !Video
@@ -86,7 +87,9 @@ data VideosInsert = VideosInsert'
     , _viOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _viNotifySubscribers             :: !Bool
     , _viAutoLevels                    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideosInsert' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ videosInsert
     -> Video -- ^ 'viPayload'
     -> VideosInsert
 videosInsert pViPart_ pViPayload_ =
-    VideosInsert'
+  VideosInsert'
     { _viPart = pViPart_
     , _viStabilize = Nothing
     , _viPayload = pViPayload_
@@ -119,6 +122,7 @@ videosInsert pViPart_ pViPayload_ =
     , _viNotifySubscribers = True
     , _viAutoLevels = Nothing
     }
+
 
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the

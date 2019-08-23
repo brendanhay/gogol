@@ -600,6 +600,7 @@ module Network.Google.Dataproc
     -- ** SoftwareConfig
     , SoftwareConfig
     , softwareConfig
+    , scOptionalComponents
     , scImageVersion
     , scProperties
 

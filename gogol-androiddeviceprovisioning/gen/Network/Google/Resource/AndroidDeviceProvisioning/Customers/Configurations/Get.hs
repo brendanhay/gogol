@@ -59,14 +59,17 @@ type CustomersConfigurationsGetResource =
 -- | Gets the details of a configuration.
 --
 -- /See:/ 'customersConfigurationsGet' smart constructor.
-data CustomersConfigurationsGet = CustomersConfigurationsGet'
+data CustomersConfigurationsGet =
+  CustomersConfigurationsGet'
     { _ccgXgafv          :: !(Maybe Xgafv)
     , _ccgUploadProtocol :: !(Maybe Text)
     , _ccgAccessToken    :: !(Maybe Text)
     , _ccgUploadType     :: !(Maybe Text)
     , _ccgName           :: !Text
     , _ccgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomersConfigurationsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ customersConfigurationsGet
     :: Text -- ^ 'ccgName'
     -> CustomersConfigurationsGet
 customersConfigurationsGet pCcgName_ =
-    CustomersConfigurationsGet'
+  CustomersConfigurationsGet'
     { _ccgXgafv = Nothing
     , _ccgUploadProtocol = Nothing
     , _ccgAccessToken = Nothing
@@ -95,6 +98,7 @@ customersConfigurationsGet pCcgName_ =
     , _ccgName = pCcgName_
     , _ccgCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccgXgafv :: Lens' CustomersConfigurationsGet (Maybe Xgafv)

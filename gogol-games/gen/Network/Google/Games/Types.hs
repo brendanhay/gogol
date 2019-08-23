@@ -22,6 +22,7 @@ module Network.Google.Games.Types
     -- * OAuth Scopes
     , gamesScope
     , driveAppDataScope
+    , plusMeScope
 
     -- * PlayersListCollection
     , PlayersListCollection (..)
@@ -944,11 +945,14 @@ gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
 
--- | Share your Google+ profile information and view and manage your game
--- activity
+-- | Create, edit, and delete your Google Play Games activity
 gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
-gamesScope = Proxy;
+gamesScope = Proxy
 
 -- | View and manage its own configuration data in your Google Drive
 driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
-driveAppDataScope = Proxy;
+driveAppDataScope = Proxy
+
+-- | Associate you with your personal info on Google
+plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
+plusMeScope = Proxy

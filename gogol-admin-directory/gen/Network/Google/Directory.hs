@@ -679,6 +679,17 @@ module Network.Google.Directory
     -- ** UsersListOrderBy
     , UsersListOrderBy (..)
 
+    -- ** BuildingAddress
+    , BuildingAddress
+    , buildingAddress
+    , baLanguageCode
+    , baRegionCode
+    , baSublocality
+    , baPostalCode
+    , baLocality
+    , baAdministrativeArea
+    , baAddressLines
+
     -- ** Tokens
     , Tokens
     , tokens
@@ -781,6 +792,9 @@ module Network.Google.Directory
     , tokAnonymous
     , tokUserKey
 
+    -- ** ResourcesBuildingsPatchCoordinatesSource
+    , ResourcesBuildingsPatchCoordinatesSource (..)
+
     -- ** UserName
     , UserName
     , userName
@@ -797,6 +811,7 @@ module Network.Google.Directory
     , buiEtags
     , buiKind
     , buiBuildingId
+    , buiAddress
     , buiCoordinates
     , buiBuildingName
     , buiFloorNames
@@ -851,6 +866,9 @@ module Network.Google.Directory
     , ChromeOSMoveDevicesToOu
     , chromeOSMoveDevicesToOu
     , comdtoDeviceIds
+
+    -- ** ResourcesBuildingsUpdateCoordinatesSource
+    , ResourcesBuildingsUpdateCoordinatesSource (..)
 
     -- ** User
     , User
@@ -960,6 +978,9 @@ module Network.Google.Directory
 
     -- ** UsersListSortOrder
     , UsersListSortOrder (..)
+
+    -- ** ResourcesBuildingsInsertCoordinatesSource
+    , ResourcesBuildingsInsertCoordinatesSource (..)
 
     -- ** OrgUnits
     , OrgUnits

@@ -87,7 +87,8 @@ type CoursesCourseWorkCreateResource =
 -- following request error: * AttachmentNotVisible
 --
 -- /See:/ 'coursesCourseWorkCreate' smart constructor.
-data CoursesCourseWorkCreate = CoursesCourseWorkCreate'
+data CoursesCourseWorkCreate =
+  CoursesCourseWorkCreate'
     { _ccwcXgafv          :: !(Maybe Xgafv)
     , _ccwcUploadProtocol :: !(Maybe Text)
     , _ccwcCourseId       :: !Text
@@ -95,7 +96,9 @@ data CoursesCourseWorkCreate = CoursesCourseWorkCreate'
     , _ccwcUploadType     :: !(Maybe Text)
     , _ccwcPayload        :: !CourseWork
     , _ccwcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesCourseWorkCreate' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ coursesCourseWorkCreate
     -> CourseWork -- ^ 'ccwcPayload'
     -> CoursesCourseWorkCreate
 coursesCourseWorkCreate pCcwcCourseId_ pCcwcPayload_ =
-    CoursesCourseWorkCreate'
+  CoursesCourseWorkCreate'
     { _ccwcXgafv = Nothing
     , _ccwcUploadProtocol = Nothing
     , _ccwcCourseId = pCcwcCourseId_
@@ -128,6 +131,7 @@ coursesCourseWorkCreate pCcwcCourseId_ pCcwcPayload_ =
     , _ccwcPayload = pCcwcPayload_
     , _ccwcCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccwcXgafv :: Lens' CoursesCourseWorkCreate (Maybe Xgafv)

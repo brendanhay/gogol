@@ -53,9 +53,12 @@ type TripsSearchResource =
 -- | Returns a list of flights.
 --
 -- /See:/ 'tripsSearch' smart constructor.
-newtype TripsSearch = TripsSearch'
+newtype TripsSearch =
+  TripsSearch'
     { _tsPayload :: TripsSearchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TripsSearch' with the minimum fields required to make a request.
 --
@@ -65,10 +68,8 @@ newtype TripsSearch = TripsSearch'
 tripsSearch
     :: TripsSearchRequest -- ^ 'tsPayload'
     -> TripsSearch
-tripsSearch pTsPayload_ =
-    TripsSearch'
-    { _tsPayload = pTsPayload_
-    }
+tripsSearch pTsPayload_ = TripsSearch' {_tsPayload = pTsPayload_}
+
 
 -- | Multipart request metadata.
 tsPayload :: Lens' TripsSearch TripsSearchRequest

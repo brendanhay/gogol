@@ -57,10 +57,13 @@ type TurnBasedMatchesLeaveResource =
 -- without canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeave' smart constructor.
-data TurnBasedMatchesLeave = TurnBasedMatchesLeave'
+data TurnBasedMatchesLeave =
+  TurnBasedMatchesLeave'
     { _tbmlLanguage :: !(Maybe Text)
     , _tbmlMatchId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TurnBasedMatchesLeave' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ turnBasedMatchesLeave
     :: Text -- ^ 'tbmlMatchId'
     -> TurnBasedMatchesLeave
 turnBasedMatchesLeave pTbmlMatchId_ =
-    TurnBasedMatchesLeave'
-    { _tbmlLanguage = Nothing
-    , _tbmlMatchId = pTbmlMatchId_
-    }
+  TurnBasedMatchesLeave' {_tbmlLanguage = Nothing, _tbmlMatchId = pTbmlMatchId_}
+
 
 -- | The preferred language to use for strings returned by this method.
 tbmlLanguage :: Lens' TurnBasedMatchesLeave (Maybe Text)
@@ -91,7 +92,8 @@ tbmlMatchId
 instance GoogleRequest TurnBasedMatchesLeave where
         type Rs TurnBasedMatchesLeave = TurnBasedMatch
         type Scopes TurnBasedMatchesLeave =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient TurnBasedMatchesLeave'{..}
           = go _tbmlMatchId _tbmlLanguage (Just AltJSON)
               gamesService

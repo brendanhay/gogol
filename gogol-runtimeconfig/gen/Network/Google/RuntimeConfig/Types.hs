@@ -84,8 +84,8 @@ runtimeConfigService
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy;
+cloudPlatformScope = Proxy
 
 -- | Manage your Google Cloud Platform services\' runtime configuration
 cloudruntimeConfigScope :: Proxy '["https://www.googleapis.com/auth/cloudruntimeconfig"]
-cloudruntimeConfigScope = Proxy;
+cloudruntimeConfigScope = Proxy

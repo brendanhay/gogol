@@ -54,10 +54,13 @@ type UsersGetResource =
 -- | Retrieves a user\'s details.
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet'
+data UsersGet =
+  UsersGet'
     { _ugEnterpriseId :: !Text
     , _ugUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ usersGet
     -> Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgEnterpriseId_ pUgUserId_ =
-    UsersGet'
-    { _ugEnterpriseId = pUgEnterpriseId_
-    , _ugUserId = pUgUserId_
-    }
+  UsersGet' {_ugEnterpriseId = pUgEnterpriseId_, _ugUserId = pUgUserId_}
+
 
 -- | The ID of the enterprise.
 ugEnterpriseId :: Lens' UsersGet Text

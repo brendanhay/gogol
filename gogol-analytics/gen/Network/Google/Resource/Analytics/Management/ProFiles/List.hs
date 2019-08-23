@@ -60,12 +60,15 @@ type ManagementProFilesListResource =
 -- | Lists views (profiles) to which the user has access.
 --
 -- /See:/ 'managementProFilesList' smart constructor.
-data ManagementProFilesList = ManagementProFilesList'
+data ManagementProFilesList =
+  ManagementProFilesList'
     { _mpflWebPropertyId :: !Text
     , _mpflAccountId     :: !Text
     , _mpflStartIndex    :: !(Maybe (Textual Int32))
     , _mpflMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFilesList' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ managementProFilesList
     -> Text -- ^ 'mpflAccountId'
     -> ManagementProFilesList
 managementProFilesList pMpflWebPropertyId_ pMpflAccountId_ =
-    ManagementProFilesList'
+  ManagementProFilesList'
     { _mpflWebPropertyId = pMpflWebPropertyId_
     , _mpflAccountId = pMpflAccountId_
     , _mpflStartIndex = Nothing
     , _mpflMaxResults = Nothing
     }
+
 
 -- | Web property ID for the views (profiles) to retrieve. Can either be a
 -- specific web property ID or \'~all\', which refers to all the web

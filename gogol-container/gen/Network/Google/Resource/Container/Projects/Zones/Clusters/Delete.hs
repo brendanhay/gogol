@@ -23,8 +23,8 @@
 -- Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted. Other Google Compute Engine resources that might be in
--- use by the cluster (e.g. load balancer resources) will not be deleted if
--- they weren\'t present at the initial create time.
+-- use by the cluster, such as load balancer resources, are not deleted if
+-- they weren\'t present when the cluster was initially created.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
@@ -73,11 +73,12 @@ type ProjectsZonesClustersDeleteResource =
 -- | Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted. Other Google Compute Engine resources that might be in
--- use by the cluster (e.g. load balancer resources) will not be deleted if
--- they weren\'t present at the initial create time.
+-- use by the cluster, such as load balancer resources, are not deleted if
+-- they weren\'t present when the cluster was initially created.
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
-data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
+data ProjectsZonesClustersDelete =
+  ProjectsZonesClustersDelete'
     { _pzcdXgafv          :: !(Maybe Xgafv)
     , _pzcdUploadProtocol :: !(Maybe Text)
     , _pzcdAccessToken    :: !(Maybe Text)
@@ -87,7 +88,9 @@ data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
     , _pzcdClusterId      :: !Text
     , _pzcdProjectId      :: !Text
     , _pzcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersDelete' with the minimum fields required to make a request.
 --
@@ -116,7 +119,7 @@ projectsZonesClustersDelete
     -> Text -- ^ 'pzcdProjectId'
     -> ProjectsZonesClustersDelete
 projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
-    ProjectsZonesClustersDelete'
+  ProjectsZonesClustersDelete'
     { _pzcdXgafv = Nothing
     , _pzcdUploadProtocol = Nothing
     , _pzcdAccessToken = Nothing
@@ -127,6 +130,7 @@ projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
     , _pzcdProjectId = pPzcdProjectId_
     , _pzcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcdXgafv :: Lens' ProjectsZonesClustersDelete (Maybe Xgafv)

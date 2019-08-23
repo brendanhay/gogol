@@ -58,11 +58,14 @@ type UsersMessagesAttachmentsGetResource =
 -- | Gets the specified message attachment.
 --
 -- /See:/ 'usersMessagesAttachmentsGet' smart constructor.
-data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet'
+data UsersMessagesAttachmentsGet =
+  UsersMessagesAttachmentsGet'
     { _umagUserId    :: !Text
     , _umagId        :: !Text
     , _umagMessageId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersMessagesAttachmentsGet' with the minimum fields required to make a request.
 --
@@ -78,11 +81,9 @@ usersMessagesAttachmentsGet
     -> Text -- ^ 'umagMessageId'
     -> UsersMessagesAttachmentsGet
 usersMessagesAttachmentsGet pUmagId_ pUmagMessageId_ =
-    UsersMessagesAttachmentsGet'
-    { _umagUserId = "me"
-    , _umagId = pUmagId_
-    , _umagMessageId = pUmagMessageId_
-    }
+  UsersMessagesAttachmentsGet'
+    {_umagUserId = "me", _umagId = pUmagId_, _umagMessageId = pUmagMessageId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesInsert' request conforms to.
 type UserRolesInsertResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -54,10 +54,13 @@ type UserRolesInsertResource =
 -- | Inserts a new user role.
 --
 -- /See:/ 'userRolesInsert' smart constructor.
-data UserRolesInsert = UserRolesInsert'
+data UserRolesInsert =
+  UserRolesInsert'
     { _uriProFileId :: !(Textual Int64)
     , _uriPayload   :: !UserRole
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserRolesInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ userRolesInsert
     -> UserRole -- ^ 'uriPayload'
     -> UserRolesInsert
 userRolesInsert pUriProFileId_ pUriPayload_ =
-    UserRolesInsert'
-    { _uriProFileId = _Coerce # pUriProFileId_
-    , _uriPayload = pUriPayload_
-    }
+  UserRolesInsert'
+    {_uriProFileId = _Coerce # pUriProFileId_, _uriPayload = pUriPayload_}
+
 
 -- | User profile ID associated with this request.
 uriProFileId :: Lens' UserRolesInsert Int64

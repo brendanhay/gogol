@@ -16,6 +16,7 @@ packages:
 # GENERATED
   - gogol-abusiveexperiencereport
   - gogol-acceleratedmobilepageurl
+  - gogol-accessapproval
   - gogol-accesscontextmanager
   - gogol-adexchange-buyer
   - gogol-adexchangebuyer2
@@ -56,12 +57,15 @@ packages:
   - gogol-cloudidentity
   - gogol-cloudiot
   - gogol-cloudkms
+  - gogol-cloudprivatecatalog
+  - gogol-cloudprivatecatalogproducer
   - gogol-cloudprofiler
   - gogol-cloudscheduler
   - gogol-cloudsearch
   - gogol-cloudshell
   - gogol-cloudtasks
   - gogol-cloudtrace
+  - gogol-commentanalyzer
   - gogol-composer
   - gogol-compute
   - gogol-consumersurveys
@@ -70,6 +74,7 @@ packages:
   - gogol-containerbuilder
   - gogol-customsearch
   - gogol-dataflow
+  - gogol-datafusion
   - gogol-dataproc
   - gogol-datastore
   - gogol-debugger
@@ -80,10 +85,12 @@ packages:
   - gogol-discovery
   - gogol-dlp
   - gogol-dns
+  - gogol-docs
   - gogol-doubleclick-bids
   - gogol-doubleclick-search
   - gogol-drive
   - gogol-driveactivity
+  - gogol-factchecktools
   - gogol-file
   - gogol-firebase-dynamiclinks
   - gogol-firebasehosting
@@ -100,6 +107,7 @@ packages:
   - gogol-gmail
   - gogol-groups-migration
   - gogol-groups-settings
+  - gogol-healthcare
   - gogol-iam
   - gogol-iamcredentials
   - gogol-iap
@@ -119,7 +127,6 @@ packages:
   - gogol-pagespeed
   - gogol-partners
   - gogol-people
-  - gogol-photoslibrary
   - gogol-playcustomapp
   - gogol-play-moviespartner
   - gogol-plus
@@ -134,10 +141,12 @@ packages:
   - gogol-replicapool
   - gogol-replicapool-updater
   - gogol-resourcemanager
+  - gogol-run
   - gogol-runtimeconfig
   - gogol-safebrowsing
   - gogol-script
   - gogol-searchconsole
+  - gogol-securitycenter
   - gogol-servicebroker
   - gogol-serviceconsumermanagement
   - gogol-servicecontrol

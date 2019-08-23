@@ -53,10 +53,13 @@ type RoomsGetResource =
 -- | Get the data for a room.
 --
 -- /See:/ 'roomsGet' smart constructor.
-data RoomsGet = RoomsGet'
+data RoomsGet =
+  RoomsGet'
     { _rgRoomId   :: !Text
     , _rgLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoomsGet' with the minimum fields required to make a request.
 --
@@ -68,11 +71,8 @@ data RoomsGet = RoomsGet'
 roomsGet
     :: Text -- ^ 'rgRoomId'
     -> RoomsGet
-roomsGet pRgRoomId_ =
-    RoomsGet'
-    { _rgRoomId = pRgRoomId_
-    , _rgLanguage = Nothing
-    }
+roomsGet pRgRoomId_ = RoomsGet' {_rgRoomId = pRgRoomId_, _rgLanguage = Nothing}
+
 
 -- | The ID of the room.
 rgRoomId :: Lens' RoomsGet Text
@@ -86,7 +86,8 @@ rgLanguage
 instance GoogleRequest RoomsGet where
         type Rs RoomsGet = Room
         type Scopes RoomsGet =
-             '["https://www.googleapis.com/auth/games"]
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient RoomsGet'{..}
           = go _rgRoomId _rgLanguage (Just AltJSON)
               gamesService

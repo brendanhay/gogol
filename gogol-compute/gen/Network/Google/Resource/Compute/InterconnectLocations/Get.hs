@@ -58,10 +58,13 @@ type InterconnectLocationsGetResource =
 -- of available interconnect locations by making a list() request.
 --
 -- /See:/ 'interconnectLocationsGet' smart constructor.
-data InterconnectLocationsGet = InterconnectLocationsGet'
+data InterconnectLocationsGet =
+  InterconnectLocationsGet'
     { _ilgProject              :: !Text
     , _ilgInterconnectLocation :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectLocationsGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,11 @@ interconnectLocationsGet
     -> Text -- ^ 'ilgInterconnectLocation'
     -> InterconnectLocationsGet
 interconnectLocationsGet pIlgProject_ pIlgInterconnectLocation_ =
-    InterconnectLocationsGet'
+  InterconnectLocationsGet'
     { _ilgProject = pIlgProject_
     , _ilgInterconnectLocation = pIlgInterconnectLocation_
     }
+
 
 -- | Project ID for this request.
 ilgProject :: Lens' InterconnectLocationsGet Text

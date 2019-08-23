@@ -58,11 +58,14 @@ type ManagementRemarketingAudienceDeleteResource =
 -- | Delete a remarketing audience.
 --
 -- /See:/ 'managementRemarketingAudienceDelete' smart constructor.
-data ManagementRemarketingAudienceDelete = ManagementRemarketingAudienceDelete'
+data ManagementRemarketingAudienceDelete =
+  ManagementRemarketingAudienceDelete'
     { _mradWebPropertyId         :: !Text
     , _mradAccountId             :: !Text
     , _mradRemarketingAudienceId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementRemarketingAudienceDelete' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementRemarketingAudienceDelete
     -> Text -- ^ 'mradRemarketingAudienceId'
     -> ManagementRemarketingAudienceDelete
 managementRemarketingAudienceDelete pMradWebPropertyId_ pMradAccountId_ pMradRemarketingAudienceId_ =
-    ManagementRemarketingAudienceDelete'
+  ManagementRemarketingAudienceDelete'
     { _mradWebPropertyId = pMradWebPropertyId_
     , _mradAccountId = pMradAccountId_
     , _mradRemarketingAudienceId = pMradRemarketingAudienceId_
     }
+
 
 -- | Web property ID to which the remarketing audience belongs.
 mradWebPropertyId :: Lens' ManagementRemarketingAudienceDelete Text
@@ -104,7 +108,8 @@ mradRemarketingAudienceId
       (\ s a -> s{_mradRemarketingAudienceId = a})
 
 instance GoogleRequest
-         ManagementRemarketingAudienceDelete where
+           ManagementRemarketingAudienceDelete
+         where
         type Rs ManagementRemarketingAudienceDelete = ()
         type Scopes ManagementRemarketingAudienceDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]

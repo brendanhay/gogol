@@ -57,10 +57,13 @@ type VideosGetRatingResource =
 -- specified videos.
 --
 -- /See:/ 'videosGetRating' smart constructor.
-data VideosGetRating = VideosGetRating'
+data VideosGetRating =
+  VideosGetRating'
     { _vgrOnBehalfOfContentOwner :: !(Maybe Text)
     , _vgrId                     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VideosGetRating' with the minimum fields required to make a request.
 --
@@ -73,10 +76,8 @@ videosGetRating
     :: Text -- ^ 'vgrId'
     -> VideosGetRating
 videosGetRating pVgrId_ =
-    VideosGetRating'
-    { _vgrOnBehalfOfContentOwner = Nothing
-    , _vgrId = pVgrId_
-    }
+  VideosGetRating' {_vgrOnBehalfOfContentOwner = Nothing, _vgrId = pVgrId_}
+
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the

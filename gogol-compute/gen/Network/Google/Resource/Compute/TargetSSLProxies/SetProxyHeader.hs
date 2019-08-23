@@ -61,12 +61,15 @@ type TargetSSLProxiesSetProxyHeaderResource =
 -- | Changes the ProxyHeaderType for TargetSslProxy.
 --
 -- /See:/ 'targetSSLProxiesSetProxyHeader' smart constructor.
-data TargetSSLProxiesSetProxyHeader = TargetSSLProxiesSetProxyHeader'
+data TargetSSLProxiesSetProxyHeader =
+  TargetSSLProxiesSetProxyHeader'
     { _tspsphRequestId      :: !(Maybe Text)
     , _tspsphProject        :: !Text
     , _tspsphPayload        :: !TargetSSLProxiesSetProxyHeaderRequest
     , _tspsphTargetSSLProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetSSLProxiesSetProxyHeader' with the minimum fields required to make a request.
 --
@@ -85,12 +88,13 @@ targetSSLProxiesSetProxyHeader
     -> Text -- ^ 'tspsphTargetSSLProxy'
     -> TargetSSLProxiesSetProxyHeader
 targetSSLProxiesSetProxyHeader pTspsphProject_ pTspsphPayload_ pTspsphTargetSSLProxy_ =
-    TargetSSLProxiesSetProxyHeader'
+  TargetSSLProxiesSetProxyHeader'
     { _tspsphRequestId = Nothing
     , _tspsphProject = pTspsphProject_
     , _tspsphPayload = pTspsphPayload_
     , _tspsphTargetSSLProxy = pTspsphTargetSSLProxy_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

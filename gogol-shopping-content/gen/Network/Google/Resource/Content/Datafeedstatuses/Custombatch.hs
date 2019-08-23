@@ -20,6 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
+-- Gets multiple Merchant Center datafeed statuses in a single request.
+--
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.custombatch@.
 module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
     (
@@ -48,11 +50,15 @@ type DatafeedstatusesCustombatchResource =
                ReqBody '[JSON] DatafeedstatusesCustomBatchRequest :>
                  Post '[JSON] DatafeedstatusesCustomBatchResponse
 
+-- | Gets multiple Merchant Center datafeed statuses in a single request.
 --
 -- /See:/ 'datafeedstatusesCustombatch' smart constructor.
-newtype DatafeedstatusesCustombatch = DatafeedstatusesCustombatch'
+newtype DatafeedstatusesCustombatch =
+  DatafeedstatusesCustombatch'
     { _dcPayload :: DatafeedstatusesCustomBatchRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedstatusesCustombatch' with the minimum fields required to make a request.
 --
@@ -63,9 +69,8 @@ datafeedstatusesCustombatch
     :: DatafeedstatusesCustomBatchRequest -- ^ 'dcPayload'
     -> DatafeedstatusesCustombatch
 datafeedstatusesCustombatch pDcPayload_ =
-    DatafeedstatusesCustombatch'
-    { _dcPayload = pDcPayload_
-    }
+  DatafeedstatusesCustombatch' {_dcPayload = pDcPayload_}
+
 
 -- | Multipart request metadata.
 dcPayload :: Lens' DatafeedstatusesCustombatch DatafeedstatusesCustomBatchRequest

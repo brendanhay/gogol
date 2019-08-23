@@ -64,13 +64,16 @@ type ManagementUnSampledReportsListResource =
 -- | Lists unsampled reports to which the user has access.
 --
 -- /See:/ 'managementUnSampledReportsList' smart constructor.
-data ManagementUnSampledReportsList = ManagementUnSampledReportsList'
+data ManagementUnSampledReportsList =
+  ManagementUnSampledReportsList'
     { _musrlWebPropertyId :: !Text
     , _musrlProFileId     :: !Text
     , _musrlAccountId     :: !Text
     , _musrlStartIndex    :: !(Maybe (Textual Int32))
     , _musrlMaxResults    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementUnSampledReportsList' with the minimum fields required to make a request.
 --
@@ -91,13 +94,14 @@ managementUnSampledReportsList
     -> Text -- ^ 'musrlAccountId'
     -> ManagementUnSampledReportsList
 managementUnSampledReportsList pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
-    ManagementUnSampledReportsList'
+  ManagementUnSampledReportsList'
     { _musrlWebPropertyId = pMusrlWebPropertyId_
     , _musrlProFileId = pMusrlProFileId_
     , _musrlAccountId = pMusrlAccountId_
     , _musrlStartIndex = Nothing
     , _musrlMaxResults = Nothing
     }
+
 
 -- | Web property ID to retrieve unsampled reports for. Must be a specific
 -- web property ID, ~all is not supported.

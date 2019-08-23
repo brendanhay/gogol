@@ -1,4 +1,17 @@
 {
   "library": "analyticsreporting",
-  "canonicalName": "AnalyticsReporting"
+  "canonicalName": "AnalyticsReporting",
+  "schemas": {
+    "User": {
+      "properties": {
+        "type": {
+          "enum": [
+            "USER_ID_TYPE_UNSPECIFIED",
+            "USER_ID_TYPE_USER_ID",
+            "USER_ID_TYPE_CLIENT_ID"
+          ]
+        }
+      }
+    }
+  }
 }

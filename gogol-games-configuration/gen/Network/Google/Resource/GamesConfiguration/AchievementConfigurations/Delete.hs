@@ -51,9 +51,12 @@ type AchievementConfigurationsDeleteResource =
 -- | Delete the achievement configuration with the given ID.
 --
 -- /See:/ 'achievementConfigurationsDelete' smart constructor.
-newtype AchievementConfigurationsDelete = AchievementConfigurationsDelete'
+newtype AchievementConfigurationsDelete =
+  AchievementConfigurationsDelete'
     { _acdAchievementId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AchievementConfigurationsDelete' with the minimum fields required to make a request.
 --
@@ -64,9 +67,8 @@ achievementConfigurationsDelete
     :: Text -- ^ 'acdAchievementId'
     -> AchievementConfigurationsDelete
 achievementConfigurationsDelete pAcdAchievementId_ =
-    AchievementConfigurationsDelete'
-    { _acdAchievementId = pAcdAchievementId_
-    }
+  AchievementConfigurationsDelete' {_acdAchievementId = pAcdAchievementId_}
+
 
 -- | The ID of the achievement used by this method.
 acdAchievementId :: Lens' AchievementConfigurationsDelete Text
@@ -75,7 +77,8 @@ acdAchievementId
       (\ s a -> s{_acdAchievementId = a})
 
 instance GoogleRequest
-         AchievementConfigurationsDelete where
+           AchievementConfigurationsDelete
+         where
         type Rs AchievementConfigurationsDelete = ()
         type Scopes AchievementConfigurationsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]

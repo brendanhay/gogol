@@ -54,9 +54,12 @@ type StorelayoutpagesListResource =
 -- | Retrieves the details of all pages in the store.
 --
 -- /See:/ 'storelayoutpagesList' smart constructor.
-newtype StorelayoutpagesList = StorelayoutpagesList'
+newtype StorelayoutpagesList =
+  StorelayoutpagesList'
     { _slEnterpriseId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StorelayoutpagesList' with the minimum fields required to make a request.
 --
@@ -67,9 +70,8 @@ storelayoutpagesList
     :: Text -- ^ 'slEnterpriseId'
     -> StorelayoutpagesList
 storelayoutpagesList pSlEnterpriseId_ =
-    StorelayoutpagesList'
-    { _slEnterpriseId = pSlEnterpriseId_
-    }
+  StorelayoutpagesList' {_slEnterpriseId = pSlEnterpriseId_}
+
 
 -- | The ID of the enterprise.
 slEnterpriseId :: Lens' StorelayoutpagesList Text

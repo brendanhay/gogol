@@ -65,7 +65,8 @@ type GroupItemsListResource =
 -- parameters.
 --
 -- /See:/ 'groupItemsList' smart constructor.
-data GroupItemsList = GroupItemsList'
+data GroupItemsList =
+  GroupItemsList'
     { _gilXgafv                  :: !(Maybe Xgafv)
     , _gilUploadProtocol         :: !(Maybe Text)
     , _gilAccessToken            :: !(Maybe Text)
@@ -73,7 +74,9 @@ data GroupItemsList = GroupItemsList'
     , _gilOnBehalfOfContentOwner :: !(Maybe Text)
     , _gilGroupId                :: !(Maybe Text)
     , _gilCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GroupItemsList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ data GroupItemsList = GroupItemsList'
 groupItemsList
     :: GroupItemsList
 groupItemsList =
-    GroupItemsList'
+  GroupItemsList'
     { _gilXgafv = Nothing
     , _gilUploadProtocol = Nothing
     , _gilAccessToken = Nothing
@@ -104,6 +107,7 @@ groupItemsList =
     , _gilGroupId = Nothing
     , _gilCallback = Nothing
     }
+
 
 -- | V1 error format.
 gilXgafv :: Lens' GroupItemsList (Maybe Xgafv)

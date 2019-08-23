@@ -86,7 +86,8 @@ type IndexingDatasourcesItemsPollResource =
 -- (unreserved) after 4 hours even if no update or push method is called.
 --
 -- /See:/ 'indexingDatasourcesItemsPoll' smart constructor.
-data IndexingDatasourcesItemsPoll = IndexingDatasourcesItemsPoll'
+data IndexingDatasourcesItemsPoll =
+  IndexingDatasourcesItemsPoll'
     { _idipdXgafv          :: !(Maybe Xgafv)
     , _idipdUploadProtocol :: !(Maybe Text)
     , _idipdAccessToken    :: !(Maybe Text)
@@ -94,7 +95,9 @@ data IndexingDatasourcesItemsPoll = IndexingDatasourcesItemsPoll'
     , _idipdPayload        :: !PollItemsRequest
     , _idipdName           :: !Text
     , _idipdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesItemsPoll' with the minimum fields required to make a request.
 --
@@ -118,7 +121,7 @@ indexingDatasourcesItemsPoll
     -> Text -- ^ 'idipdName'
     -> IndexingDatasourcesItemsPoll
 indexingDatasourcesItemsPoll pIdipdPayload_ pIdipdName_ =
-    IndexingDatasourcesItemsPoll'
+  IndexingDatasourcesItemsPoll'
     { _idipdXgafv = Nothing
     , _idipdUploadProtocol = Nothing
     , _idipdAccessToken = Nothing
@@ -127,6 +130,7 @@ indexingDatasourcesItemsPoll pIdipdPayload_ pIdipdName_ =
     , _idipdName = pIdipdName_
     , _idipdCallback = Nothing
     }
+
 
 -- | V1 error format.
 idipdXgafv :: Lens' IndexingDatasourcesItemsPoll (Maybe Xgafv)

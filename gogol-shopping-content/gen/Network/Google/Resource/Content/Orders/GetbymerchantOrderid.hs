@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves an order using merchant order id.
+-- Retrieves an order using merchant order ID.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.getbymerchantorderid@.
 module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
@@ -51,13 +51,16 @@ type OrdersGetbymerchantOrderidResource =
                QueryParam "alt" AltJSON :>
                  Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
--- | Retrieves an order using merchant order id.
+-- | Retrieves an order using merchant order ID.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
-data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid'
+data OrdersGetbymerchantOrderid =
+  OrdersGetbymerchantOrderid'
     { _ogogMerchantId      :: !(Textual Word64)
     , _ogogMerchantOrderId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersGetbymerchantOrderid' with the minimum fields required to make a request.
 --
@@ -71,10 +74,11 @@ ordersGetbymerchantOrderid
     -> Text -- ^ 'ogogMerchantOrderId'
     -> OrdersGetbymerchantOrderid
 ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
-    OrdersGetbymerchantOrderid'
+  OrdersGetbymerchantOrderid'
     { _ogogMerchantId = _Coerce # pOgogMerchantId_
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -84,7 +88,7 @@ ogogMerchantId
       (\ s a -> s{_ogogMerchantId = a})
       . _Coerce
 
--- | The merchant order id to be looked for.
+-- | The merchant order ID to be looked for.
 ogogMerchantOrderId :: Lens' OrdersGetbymerchantOrderid Text
 ogogMerchantOrderId
   = lens _ogogMerchantOrderId

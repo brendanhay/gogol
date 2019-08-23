@@ -71,7 +71,8 @@ type AccountsClientsUsersListResource =
 -- ID.
 --
 -- /See:/ 'accountsClientsUsersList' smart constructor.
-data AccountsClientsUsersList = AccountsClientsUsersList'
+data AccountsClientsUsersList =
+  AccountsClientsUsersList'
     { _aculXgafv           :: !(Maybe Xgafv)
     , _aculUploadProtocol  :: !(Maybe Text)
     , _aculAccessToken     :: !(Maybe Text)
@@ -81,7 +82,9 @@ data AccountsClientsUsersList = AccountsClientsUsersList'
     , _aculPageToken       :: !(Maybe Text)
     , _aculPageSize        :: !(Maybe (Textual Int32))
     , _aculCallback        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsClientsUsersList' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ accountsClientsUsersList
     -> Text -- ^ 'aculClientAccountId'
     -> AccountsClientsUsersList
 accountsClientsUsersList pAculAccountId_ pAculClientAccountId_ =
-    AccountsClientsUsersList'
+  AccountsClientsUsersList'
     { _aculXgafv = Nothing
     , _aculUploadProtocol = Nothing
     , _aculAccessToken = Nothing
@@ -120,6 +123,7 @@ accountsClientsUsersList pAculAccountId_ pAculClientAccountId_ =
     , _aculPageSize = Nothing
     , _aculCallback = Nothing
     }
+
 
 -- | V1 error format.
 aculXgafv :: Lens' AccountsClientsUsersList (Maybe Xgafv)

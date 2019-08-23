@@ -57,10 +57,13 @@ type UsersSettingsSendAsSmimeInfoListResource =
 -- | Lists S\/MIME configs for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoList' smart constructor.
-data UsersSettingsSendAsSmimeInfoList = UsersSettingsSendAsSmimeInfoList'
+data UsersSettingsSendAsSmimeInfoList =
+  UsersSettingsSendAsSmimeInfoList'
     { _ussasilUserId      :: !Text
     , _ussasilSendAsEmail :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersSettingsSendAsSmimeInfoList' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ usersSettingsSendAsSmimeInfoList
     :: Text -- ^ 'ussasilSendAsEmail'
     -> UsersSettingsSendAsSmimeInfoList
 usersSettingsSendAsSmimeInfoList pUssasilSendAsEmail_ =
-    UsersSettingsSendAsSmimeInfoList'
-    { _ussasilUserId = "me"
-    , _ussasilSendAsEmail = pUssasilSendAsEmail_
-    }
+  UsersSettingsSendAsSmimeInfoList'
+    {_ussasilUserId = "me", _ussasilSendAsEmail = pUssasilSendAsEmail_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -93,7 +95,8 @@ ussasilSendAsEmail
       (\ s a -> s{_ussasilSendAsEmail = a})
 
 instance GoogleRequest
-         UsersSettingsSendAsSmimeInfoList where
+           UsersSettingsSendAsSmimeInfoList
+         where
         type Rs UsersSettingsSendAsSmimeInfoList =
              ListSmimeInfoResponse
         type Scopes UsersSettingsSendAsSmimeInfoList =

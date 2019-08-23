@@ -58,11 +58,14 @@ type ManagementWebPropertyUserLinksDeleteResource =
 -- | Removes a user from the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksDelete' smart constructor.
-data ManagementWebPropertyUserLinksDelete = ManagementWebPropertyUserLinksDelete'
+data ManagementWebPropertyUserLinksDelete =
+  ManagementWebPropertyUserLinksDelete'
     { _mwpuldWebPropertyId :: !Text
     , _mwpuldAccountId     :: !Text
     , _mwpuldLinkId        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksDelete' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementWebPropertyUserLinksDelete
     -> Text -- ^ 'mwpuldLinkId'
     -> ManagementWebPropertyUserLinksDelete
 managementWebPropertyUserLinksDelete pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ =
-    ManagementWebPropertyUserLinksDelete'
+  ManagementWebPropertyUserLinksDelete'
     { _mwpuldWebPropertyId = pMwpuldWebPropertyId_
     , _mwpuldAccountId = pMwpuldAccountId_
     , _mwpuldLinkId = pMwpuldLinkId_
     }
+
 
 -- | Web Property ID to delete the user link for.
 mwpuldWebPropertyId :: Lens' ManagementWebPropertyUserLinksDelete Text
@@ -103,7 +107,8 @@ mwpuldLinkId
   = lens _mwpuldLinkId (\ s a -> s{_mwpuldLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksDelete where
+           ManagementWebPropertyUserLinksDelete
+         where
         type Rs ManagementWebPropertyUserLinksDelete = ()
         type Scopes ManagementWebPropertyUserLinksDelete =
              '["https://www.googleapis.com/auth/analytics.manage.users"]

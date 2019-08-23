@@ -20,8 +20,7 @@ import Control.Monad.Catch
 import Control.Monad.IO.Class       (MonadIO)
 import Control.Monad.Trans.Resource (MonadResource (..))
 
-import Data.Conduit (($$+-))
-import Data.Monoid  (Dual (..), Endo (..), (<>))
+import Data.Monoid (Dual (..), Endo (..), (<>))
 
 import GHC.Exts (toList)
 
@@ -34,8 +33,6 @@ import Network.HTTP.Conduit
 import Network.HTTP.Media                (RenderHeader (..))
 import Network.HTTP.Types
 
-import qualified Data.ByteString.Lazy        as LBS
-import qualified Data.Conduit.List           as Conduit
 import qualified Data.Text.Encoding          as Text
 import qualified Data.Text.Lazy              as LText
 import qualified Data.Text.Lazy.Builder      as Build
@@ -128,11 +125,11 @@ perform Env{..} x = catches go handlers
         err e = return (Left e)
 
 getContent :: MonadIO m
-           => [Body]
+           => [GBody]
            -> m ([Header] -> [Header], RequestBody)
-getContent []         = pure (id, mempty)
-getContent [Body t s] = pure (((hContentType, renderHeader t) :), s)
-getContent bs         = do
+getContent []          = pure (id, mempty)
+getContent [GBody t s] = pure (((hContentType, renderHeader t) :), s)
+getContent bs          = do
     b <- genBoundary
     pure ( (multipartHeader b :)
          , renderParts b bs

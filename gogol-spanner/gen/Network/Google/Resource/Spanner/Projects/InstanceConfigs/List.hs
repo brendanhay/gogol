@@ -65,7 +65,8 @@ type ProjectsInstanceConfigsListResource =
 -- | Lists the supported instance configurations for a given project.
 --
 -- /See:/ 'projectsInstanceConfigsList' smart constructor.
-data ProjectsInstanceConfigsList = ProjectsInstanceConfigsList'
+data ProjectsInstanceConfigsList =
+  ProjectsInstanceConfigsList'
     { _piclParent         :: !Text
     , _piclXgafv          :: !(Maybe Xgafv)
     , _piclUploadProtocol :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsInstanceConfigsList = ProjectsInstanceConfigsList'
     , _piclPageToken      :: !(Maybe Text)
     , _piclPageSize       :: !(Maybe (Textual Int32))
     , _piclCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstanceConfigsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsInstanceConfigsList
     :: Text -- ^ 'piclParent'
     -> ProjectsInstanceConfigsList
 projectsInstanceConfigsList pPiclParent_ =
-    ProjectsInstanceConfigsList'
+  ProjectsInstanceConfigsList'
     { _piclParent = pPiclParent_
     , _piclXgafv = Nothing
     , _piclUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsInstanceConfigsList pPiclParent_ =
     , _piclPageSize = Nothing
     , _piclCallback = Nothing
     }
+
 
 -- | Required. The name of the project for which a list of supported instance
 -- configurations is requested. Values are of the form \`projects\/\`.

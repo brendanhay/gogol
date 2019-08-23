@@ -59,14 +59,17 @@ type FoldersExclusionsGetResource =
 -- | Gets the description of an exclusion.
 --
 -- /See:/ 'foldersExclusionsGet' smart constructor.
-data FoldersExclusionsGet = FoldersExclusionsGet'
+data FoldersExclusionsGet =
+  FoldersExclusionsGet'
     { _fegXgafv          :: !(Maybe Xgafv)
     , _fegUploadProtocol :: !(Maybe Text)
     , _fegAccessToken    :: !(Maybe Text)
     , _fegUploadType     :: !(Maybe Text)
     , _fegName           :: !Text
     , _fegCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FoldersExclusionsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ foldersExclusionsGet
     :: Text -- ^ 'fegName'
     -> FoldersExclusionsGet
 foldersExclusionsGet pFegName_ =
-    FoldersExclusionsGet'
+  FoldersExclusionsGet'
     { _fegXgafv = Nothing
     , _fegUploadProtocol = Nothing
     , _fegAccessToken = Nothing
@@ -95,6 +98,7 @@ foldersExclusionsGet pFegName_ =
     , _fegName = pFegName_
     , _fegCallback = Nothing
     }
+
 
 -- | V1 error format.
 fegXgafv :: Lens' FoldersExclusionsGet (Maybe Xgafv)

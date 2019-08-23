@@ -68,7 +68,8 @@ type ProjectsAgentIntentsPatchResource =
 -- | Updates the specified intent.
 --
 -- /See:/ 'projectsAgentIntentsPatch' smart constructor.
-data ProjectsAgentIntentsPatch = ProjectsAgentIntentsPatch'
+data ProjectsAgentIntentsPatch =
+  ProjectsAgentIntentsPatch'
     { _paipXgafv          :: !(Maybe Xgafv)
     , _paipLanguageCode   :: !(Maybe Text)
     , _paipUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsAgentIntentsPatch = ProjectsAgentIntentsPatch'
     , _paipIntentView     :: !(Maybe Text)
     , _paipName           :: !Text
     , _paipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAgentIntentsPatch' with the minimum fields required to make a request.
 --
@@ -109,7 +112,7 @@ projectsAgentIntentsPatch
     -> Text -- ^ 'paipName'
     -> ProjectsAgentIntentsPatch
 projectsAgentIntentsPatch pPaipPayload_ pPaipName_ =
-    ProjectsAgentIntentsPatch'
+  ProjectsAgentIntentsPatch'
     { _paipXgafv = Nothing
     , _paipLanguageCode = Nothing
     , _paipUploadProtocol = Nothing
@@ -122,6 +125,7 @@ projectsAgentIntentsPatch pPaipPayload_ pPaipName_ =
     , _paipCallback = Nothing
     }
 
+
 -- | V1 error format.
 paipXgafv :: Lens' ProjectsAgentIntentsPatch (Maybe Xgafv)
 paipXgafv
@@ -129,10 +133,10 @@ paipXgafv
 
 -- | Optional. The language of training phrases, parameters and rich messages
 -- defined in \`intent\`. If not specified, the agent\'s default language
--- is used. [More than a dozen
--- languages](https:\/\/dialogflow.com\/docs\/reference\/language) are
--- supported. Note: languages must be enabled in the agent, before they can
--- be used.
+-- is used. [Many
+-- languages](https:\/\/cloud.google.com\/dialogflow-enterprise\/docs\/reference\/language)
+-- are supported. Note: languages must be enabled in the agent before they
+-- can be used.
 paipLanguageCode :: Lens' ProjectsAgentIntentsPatch (Maybe Text)
 paipLanguageCode
   = lens _paipLanguageCode
@@ -173,8 +177,8 @@ paipIntentView
   = lens _paipIntentView
       (\ s a -> s{_paipIntentView = a})
 
--- | Required for all methods except \`create\` (\`create\` populates the
--- name automatically. The unique identifier of this intent. Format:
+-- | The unique identifier of this intent. Required for Intents.UpdateIntent
+-- and Intents.BatchUpdateIntents methods. Format:
 -- \`projects\/\/agent\/intents\/\`.
 paipName :: Lens' ProjectsAgentIntentsPatch Text
 paipName = lens _paipName (\ s a -> s{_paipName = a})

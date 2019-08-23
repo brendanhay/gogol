@@ -69,7 +69,8 @@ type TableDataListResource =
 -- dataset role.
 --
 -- /See:/ 'tableDataList'' smart constructor.
-data TableDataList' = TableDataList''
+data TableDataList' =
+  TableDataList''
     { _tDataSetId      :: !Text
     , _tPageToken      :: !(Maybe Text)
     , _tProjectId      :: !Text
@@ -77,7 +78,9 @@ data TableDataList' = TableDataList''
     , _tTableId        :: !Text
     , _tStartIndex     :: !(Maybe (Textual Word64))
     , _tMaxResults     :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TableDataList'' with the minimum fields required to make a request.
 --
@@ -102,7 +105,7 @@ tableDataList'
     -> Text -- ^ 'tTableId'
     -> TableDataList'
 tableDataList' pTDataSetId_ pTProjectId_ pTTableId_ =
-    TableDataList''
+  TableDataList''
     { _tDataSetId = pTDataSetId_
     , _tPageToken = Nothing
     , _tProjectId = pTProjectId_
@@ -111,6 +114,7 @@ tableDataList' pTDataSetId_ pTProjectId_ pTTableId_ =
     , _tStartIndex = Nothing
     , _tMaxResults = Nothing
     }
+
 
 -- | Dataset ID of the table to read
 tDataSetId :: Lens' TableDataList' Text

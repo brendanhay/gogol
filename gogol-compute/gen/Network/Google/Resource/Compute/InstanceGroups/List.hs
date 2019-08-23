@@ -66,14 +66,17 @@ type InstanceGroupsListResource =
 -- project and zone.
 --
 -- /See:/ 'instanceGroupsList' smart constructor.
-data InstanceGroupsList = InstanceGroupsList'
+data InstanceGroupsList =
+  InstanceGroupsList'
     { _iglOrderBy    :: !(Maybe Text)
     , _iglProject    :: !Text
     , _iglZone       :: !Text
     , _iglFilter     :: !(Maybe Text)
     , _iglPageToken  :: !(Maybe Text)
     , _iglMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstanceGroupsList' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ instanceGroupsList
     -> Text -- ^ 'iglZone'
     -> InstanceGroupsList
 instanceGroupsList pIglProject_ pIglZone_ =
-    InstanceGroupsList'
+  InstanceGroupsList'
     { _iglOrderBy = Nothing
     , _iglProject = pIglProject_
     , _iglZone = pIglZone_
@@ -103,6 +106,7 @@ instanceGroupsList pIglProject_ pIglZone_ =
     , _iglPageToken = Nothing
     , _iglMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

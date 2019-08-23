@@ -65,7 +65,8 @@ type AccountsProposalsCreateResource =
 -- contains are assigned a unique ID by the server.
 --
 -- /See:/ 'accountsProposalsCreate' smart constructor.
-data AccountsProposalsCreate = AccountsProposalsCreate'
+data AccountsProposalsCreate =
+  AccountsProposalsCreate'
     { _apcXgafv          :: !(Maybe Xgafv)
     , _apcUploadProtocol :: !(Maybe Text)
     , _apcAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data AccountsProposalsCreate = AccountsProposalsCreate'
     , _apcPayload        :: !Proposal
     , _apcAccountId      :: !Text
     , _apcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProposalsCreate' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ accountsProposalsCreate
     -> Text -- ^ 'apcAccountId'
     -> AccountsProposalsCreate
 accountsProposalsCreate pApcPayload_ pApcAccountId_ =
-    AccountsProposalsCreate'
+  AccountsProposalsCreate'
     { _apcXgafv = Nothing
     , _apcUploadProtocol = Nothing
     , _apcAccessToken = Nothing
@@ -106,6 +109,7 @@ accountsProposalsCreate pApcPayload_ pApcAccountId_ =
     , _apcAccountId = pApcAccountId_
     , _apcCallback = Nothing
     }
+
 
 -- | V1 error format.
 apcXgafv :: Lens' AccountsProposalsCreate (Maybe Xgafv)

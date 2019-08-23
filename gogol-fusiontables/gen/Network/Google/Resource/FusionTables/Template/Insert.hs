@@ -54,10 +54,13 @@ type TemplateInsertResource =
 -- | Creates a new template for the table.
 --
 -- /See:/ 'templateInsert' smart constructor.
-data TemplateInsert = TemplateInsert'
+data TemplateInsert =
+  TemplateInsert'
     { _temPayload :: !Template
     , _temTableId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TemplateInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ templateInsert
     -> Text -- ^ 'temTableId'
     -> TemplateInsert
 templateInsert pTemPayload_ pTemTableId_ =
-    TemplateInsert'
-    { _temPayload = pTemPayload_
-    , _temTableId = pTemTableId_
-    }
+  TemplateInsert' {_temPayload = pTemPayload_, _temTableId = pTemTableId_}
+
 
 -- | Multipart request metadata.
 temPayload :: Lens' TemplateInsert Template

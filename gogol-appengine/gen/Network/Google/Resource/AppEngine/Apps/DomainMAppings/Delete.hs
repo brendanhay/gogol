@@ -67,7 +67,8 @@ type AppsDomainMAppingsDeleteResource =
 -- resource.
 --
 -- /See:/ 'appsDomainMAppingsDelete' smart constructor.
-data AppsDomainMAppingsDelete = AppsDomainMAppingsDelete'
+data AppsDomainMAppingsDelete =
+  AppsDomainMAppingsDelete'
     { _admadXgafv            :: !(Maybe Xgafv)
     , _admadUploadProtocol   :: !(Maybe Text)
     , _admadAccessToken      :: !(Maybe Text)
@@ -75,7 +76,9 @@ data AppsDomainMAppingsDelete = AppsDomainMAppingsDelete'
     , _admadAppsId           :: !Text
     , _admadDomainMAppingsId :: !Text
     , _admadCallback         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AppsDomainMAppingsDelete' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ appsDomainMAppingsDelete
     -> Text -- ^ 'admadDomainMAppingsId'
     -> AppsDomainMAppingsDelete
 appsDomainMAppingsDelete pAdmadAppsId_ pAdmadDomainMAppingsId_ =
-    AppsDomainMAppingsDelete'
+  AppsDomainMAppingsDelete'
     { _admadXgafv = Nothing
     , _admadUploadProtocol = Nothing
     , _admadAccessToken = Nothing
@@ -108,6 +111,7 @@ appsDomainMAppingsDelete pAdmadAppsId_ pAdmadDomainMAppingsId_ =
     , _admadDomainMAppingsId = pAdmadDomainMAppingsId_
     , _admadCallback = Nothing
     }
+
 
 -- | V1 error format.
 admadXgafv :: Lens' AppsDomainMAppingsDelete (Maybe Xgafv)

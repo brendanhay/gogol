@@ -56,10 +56,13 @@ type LeaderboardConfigurationsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'leaderboardConfigurationsPatch' smart constructor.
-data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch'
+data LeaderboardConfigurationsPatch =
+  LeaderboardConfigurationsPatch'
     { _lcpPayload       :: !LeaderboardConfiguration
     , _lcpLeaderboardId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LeaderboardConfigurationsPatch' with the minimum fields required to make a request.
 --
@@ -73,10 +76,9 @@ leaderboardConfigurationsPatch
     -> Text -- ^ 'lcpLeaderboardId'
     -> LeaderboardConfigurationsPatch
 leaderboardConfigurationsPatch pLcpPayload_ pLcpLeaderboardId_ =
-    LeaderboardConfigurationsPatch'
-    { _lcpPayload = pLcpPayload_
-    , _lcpLeaderboardId = pLcpLeaderboardId_
-    }
+  LeaderboardConfigurationsPatch'
+    {_lcpPayload = pLcpPayload_, _lcpLeaderboardId = pLcpLeaderboardId_}
+
 
 -- | Multipart request metadata.
 lcpPayload :: Lens' LeaderboardConfigurationsPatch LeaderboardConfiguration

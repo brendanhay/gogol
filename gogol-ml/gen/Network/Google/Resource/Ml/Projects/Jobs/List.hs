@@ -69,7 +69,8 @@ type ProjectsJobsListResource =
 -- request parameters, the list request returns an empty response body: {}.
 --
 -- /See:/ 'projectsJobsList' smart constructor.
-data ProjectsJobsList = ProjectsJobsList'
+data ProjectsJobsList =
+  ProjectsJobsList'
     { _pjlParent         :: !Text
     , _pjlXgafv          :: !(Maybe Xgafv)
     , _pjlUploadProtocol :: !(Maybe Text)
@@ -79,7 +80,9 @@ data ProjectsJobsList = ProjectsJobsList'
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlPageSize       :: !(Maybe (Textual Int32))
     , _pjlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsJobsList' with the minimum fields required to make a request.
 --
@@ -106,7 +109,7 @@ projectsJobsList
     :: Text -- ^ 'pjlParent'
     -> ProjectsJobsList
 projectsJobsList pPjlParent_ =
-    ProjectsJobsList'
+  ProjectsJobsList'
     { _pjlParent = pPjlParent_
     , _pjlXgafv = Nothing
     , _pjlUploadProtocol = Nothing
@@ -117,6 +120,7 @@ projectsJobsList pPjlParent_ =
     , _pjlPageSize = Nothing
     , _pjlCallback = Nothing
     }
+
 
 -- | Required. The name of the project for which to list jobs.
 pjlParent :: Lens' ProjectsJobsList Text

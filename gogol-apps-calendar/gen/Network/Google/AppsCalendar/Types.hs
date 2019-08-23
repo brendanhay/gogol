@@ -490,20 +490,20 @@ appsCalendarService
 -- | See, edit, share, and permanently delete all the calendars you can
 -- access using Google Calendar
 calendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
-calendarScope = Proxy;
+calendarScope = Proxy
 
 -- | View your calendars
 calendarReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
-calendarReadOnlyScope = Proxy;
+calendarReadOnlyScope = Proxy
 
 -- | View and edit events on all your calendars
 calendarEventsScope :: Proxy '["https://www.googleapis.com/auth/calendar.events"]
-calendarEventsScope = Proxy;
+calendarEventsScope = Proxy
 
 -- | View your Calendar settings
 calendarSettingsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.settings.readonly"]
-calendarSettingsReadOnlyScope = Proxy;
+calendarSettingsReadOnlyScope = Proxy
 
 -- | View events on all your calendars
 calendarEventsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.events.readonly"]
-calendarEventsReadOnlyScope = Proxy;
+calendarEventsReadOnlyScope = Proxy

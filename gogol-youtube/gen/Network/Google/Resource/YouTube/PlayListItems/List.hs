@@ -68,7 +68,8 @@ type PlayListItemsListResource =
 -- playlist or retrieve one or more playlist items by their unique IDs.
 --
 -- /See:/ 'playListItemsList' smart constructor.
-data PlayListItemsList = PlayListItemsList'
+data PlayListItemsList =
+  PlayListItemsList'
     { _plilPart                   :: !Text
     , _plilOnBehalfOfContentOwner :: !(Maybe Text)
     , _plilVideoId                :: !(Maybe Text)
@@ -76,7 +77,9 @@ data PlayListItemsList = PlayListItemsList'
     , _plilPageToken              :: !(Maybe Text)
     , _plilPlayListId             :: !(Maybe Text)
     , _plilMaxResults             :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlayListItemsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ playListItemsList
     :: Text -- ^ 'plilPart'
     -> PlayListItemsList
 playListItemsList pPlilPart_ =
-    PlayListItemsList'
+  PlayListItemsList'
     { _plilPart = pPlilPart_
     , _plilOnBehalfOfContentOwner = Nothing
     , _plilVideoId = Nothing
@@ -108,6 +111,7 @@ playListItemsList pPlilPart_ =
     , _plilPlayListId = Nothing
     , _plilMaxResults = 5
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- playlistItem resource properties that the API response will include. If

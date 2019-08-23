@@ -65,7 +65,8 @@ type ServicesConfigsGetResource =
 -- | Gets a service configuration (version) for a managed service.
 --
 -- /See:/ 'servicesConfigsGet' smart constructor.
-data ServicesConfigsGet = ServicesConfigsGet'
+data ServicesConfigsGet =
+  ServicesConfigsGet'
     { _scgXgafv          :: !(Maybe Xgafv)
     , _scgUploadProtocol :: !(Maybe Text)
     , _scgAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ServicesConfigsGet = ServicesConfigsGet'
     , _scgServiceName    :: !Text
     , _scgView           :: !(Maybe Text)
     , _scgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesConfigsGet' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ servicesConfigsGet
     -> Text -- ^ 'scgServiceName'
     -> ServicesConfigsGet
 servicesConfigsGet pScgConfigId_ pScgServiceName_ =
-    ServicesConfigsGet'
+  ServicesConfigsGet'
     { _scgXgafv = Nothing
     , _scgUploadProtocol = Nothing
     , _scgAccessToken = Nothing
@@ -110,6 +113,7 @@ servicesConfigsGet pScgConfigId_ pScgServiceName_ =
     , _scgView = Nothing
     , _scgCallback = Nothing
     }
+
 
 -- | V1 error format.
 scgXgafv :: Lens' ServicesConfigsGet (Maybe Xgafv)

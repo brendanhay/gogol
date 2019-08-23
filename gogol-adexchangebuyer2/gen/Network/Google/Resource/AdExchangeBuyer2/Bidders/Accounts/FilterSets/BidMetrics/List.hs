@@ -66,7 +66,8 @@ type BiddersAccountsFilterSetsBidMetricsListResource
 -- | Lists all metrics that are measured in terms of number of bids.
 --
 -- /See:/ 'biddersAccountsFilterSetsBidMetricsList' smart constructor.
-data BiddersAccountsFilterSetsBidMetricsList = BiddersAccountsFilterSetsBidMetricsList'
+data BiddersAccountsFilterSetsBidMetricsList =
+  BiddersAccountsFilterSetsBidMetricsList'
     { _bafsbmlXgafv          :: !(Maybe Xgafv)
     , _bafsbmlUploadProtocol :: !(Maybe Text)
     , _bafsbmlFilterSetName  :: !Text
@@ -75,7 +76,9 @@ data BiddersAccountsFilterSetsBidMetricsList = BiddersAccountsFilterSetsBidMetri
     , _bafsbmlPageToken      :: !(Maybe Text)
     , _bafsbmlPageSize       :: !(Maybe (Textual Int32))
     , _bafsbmlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsBidMetricsList' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ biddersAccountsFilterSetsBidMetricsList
     :: Text -- ^ 'bafsbmlFilterSetName'
     -> BiddersAccountsFilterSetsBidMetricsList
 biddersAccountsFilterSetsBidMetricsList pBafsbmlFilterSetName_ =
-    BiddersAccountsFilterSetsBidMetricsList'
+  BiddersAccountsFilterSetsBidMetricsList'
     { _bafsbmlXgafv = Nothing
     , _bafsbmlUploadProtocol = Nothing
     , _bafsbmlFilterSetName = pBafsbmlFilterSetName_
@@ -110,6 +113,7 @@ biddersAccountsFilterSetsBidMetricsList pBafsbmlFilterSetName_ =
     , _bafsbmlPageSize = Nothing
     , _bafsbmlCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsbmlXgafv :: Lens' BiddersAccountsFilterSetsBidMetricsList (Maybe Xgafv)
@@ -169,7 +173,8 @@ bafsbmlCallback
       (\ s a -> s{_bafsbmlCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsBidMetricsList where
+           BiddersAccountsFilterSetsBidMetricsList
+         where
         type Rs BiddersAccountsFilterSetsBidMetricsList =
              ListBidMetricsResponse
         type Scopes BiddersAccountsFilterSetsBidMetricsList =

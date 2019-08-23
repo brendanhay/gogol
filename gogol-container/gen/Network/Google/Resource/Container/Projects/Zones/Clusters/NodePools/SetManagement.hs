@@ -75,7 +75,8 @@ type ProjectsZonesClustersNodePoolsSetManagementResource
 -- | Sets the NodeManagement options for a node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsSetManagement' smart constructor.
-data ProjectsZonesClustersNodePoolsSetManagement = ProjectsZonesClustersNodePoolsSetManagement'
+data ProjectsZonesClustersNodePoolsSetManagement =
+  ProjectsZonesClustersNodePoolsSetManagement'
     { _pzcnpsmXgafv          :: !(Maybe Xgafv)
     , _pzcnpsmUploadProtocol :: !(Maybe Text)
     , _pzcnpsmAccessToken    :: !(Maybe Text)
@@ -86,7 +87,9 @@ data ProjectsZonesClustersNodePoolsSetManagement = ProjectsZonesClustersNodePool
     , _pzcnpsmClusterId      :: !Text
     , _pzcnpsmProjectId      :: !Text
     , _pzcnpsmCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsSetManagement' with the minimum fields required to make a request.
 --
@@ -119,7 +122,7 @@ projectsZonesClustersNodePoolsSetManagement
     -> Text -- ^ 'pzcnpsmProjectId'
     -> ProjectsZonesClustersNodePoolsSetManagement
 projectsZonesClustersNodePoolsSetManagement pPzcnpsmZone_ pPzcnpsmPayload_ pPzcnpsmNodePoolId_ pPzcnpsmClusterId_ pPzcnpsmProjectId_ =
-    ProjectsZonesClustersNodePoolsSetManagement'
+  ProjectsZonesClustersNodePoolsSetManagement'
     { _pzcnpsmXgafv = Nothing
     , _pzcnpsmUploadProtocol = Nothing
     , _pzcnpsmAccessToken = Nothing
@@ -131,6 +134,7 @@ projectsZonesClustersNodePoolsSetManagement pPzcnpsmZone_ pPzcnpsmPayload_ pPzcn
     , _pzcnpsmProjectId = pPzcnpsmProjectId_
     , _pzcnpsmCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpsmXgafv :: Lens' ProjectsZonesClustersNodePoolsSetManagement (Maybe Xgafv)
@@ -197,7 +201,8 @@ pzcnpsmCallback
       (\ s a -> s{_pzcnpsmCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsSetManagement where
+           ProjectsZonesClustersNodePoolsSetManagement
+         where
         type Rs ProjectsZonesClustersNodePoolsSetManagement =
              Operation
         type Scopes

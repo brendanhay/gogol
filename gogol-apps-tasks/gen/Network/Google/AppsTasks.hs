@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you manage your tasks and task lists.
+-- Manages your tasks and task lists.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference>
 module Network.Google.AppsTasks

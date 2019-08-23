@@ -63,12 +63,15 @@ type BackendServicesAddSignedURLKeyResource =
 -- service.
 --
 -- /See:/ 'backendServicesAddSignedURLKey' smart constructor.
-data BackendServicesAddSignedURLKey = BackendServicesAddSignedURLKey'
+data BackendServicesAddSignedURLKey =
+  BackendServicesAddSignedURLKey'
     { _bsasukRequestId      :: !(Maybe Text)
     , _bsasukProject        :: !Text
     , _bsasukPayload        :: !SignedURLKey
     , _bsasukBackendService :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendServicesAddSignedURLKey' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ backendServicesAddSignedURLKey
     -> Text -- ^ 'bsasukBackendService'
     -> BackendServicesAddSignedURLKey
 backendServicesAddSignedURLKey pBsasukProject_ pBsasukPayload_ pBsasukBackendService_ =
-    BackendServicesAddSignedURLKey'
+  BackendServicesAddSignedURLKey'
     { _bsasukRequestId = Nothing
     , _bsasukProject = pBsasukProject_
     , _bsasukPayload = pBsasukPayload_
     , _bsasukBackendService = pBsasukBackendService_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

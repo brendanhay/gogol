@@ -55,10 +55,13 @@ type UsersMessagesTrashResource =
 -- | Moves the specified message to the trash.
 --
 -- /See:/ 'usersMessagesTrash' smart constructor.
-data UsersMessagesTrash = UsersMessagesTrash'
+data UsersMessagesTrash =
+  UsersMessagesTrash'
     { _umtUserId :: !Text
     , _umtId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersMessagesTrash' with the minimum fields required to make a request.
 --
@@ -71,10 +74,8 @@ usersMessagesTrash
     :: Text -- ^ 'umtId'
     -> UsersMessagesTrash
 usersMessagesTrash pUmtId_ =
-    UsersMessagesTrash'
-    { _umtUserId = "me"
-    , _umtId = pUmtId_
-    }
+  UsersMessagesTrash' {_umtUserId = "me", _umtId = pUmtId_}
+
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.

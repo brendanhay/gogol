@@ -59,11 +59,14 @@ type DeploymentsTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'deploymentsTestIAMPermissions' smart constructor.
-data DeploymentsTestIAMPermissions = DeploymentsTestIAMPermissions'
+data DeploymentsTestIAMPermissions =
+  DeploymentsTestIAMPermissions'
     { _dtipProject  :: !Text
     , _dtipPayload  :: !TestPermissionsRequest
     , _dtipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DeploymentsTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ deploymentsTestIAMPermissions
     -> Text -- ^ 'dtipResource'
     -> DeploymentsTestIAMPermissions
 deploymentsTestIAMPermissions pDtipProject_ pDtipPayload_ pDtipResource_ =
-    DeploymentsTestIAMPermissions'
+  DeploymentsTestIAMPermissions'
     { _dtipProject = pDtipProject_
     , _dtipPayload = pDtipPayload_
     , _dtipResource = pDtipResource_
     }
+
 
 -- | Project ID for this request.
 dtipProject :: Lens' DeploymentsTestIAMPermissions Text

@@ -84,7 +84,8 @@ type OperationsListResource =
 -- id.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList'
+data OperationsList =
+  OperationsList'
     { _olXgafv          :: !(Maybe Xgafv)
     , _olUploadProtocol :: !(Maybe Text)
     , _olAccessToken    :: !(Maybe Text)
@@ -94,7 +95,9 @@ data OperationsList = OperationsList'
     , _olPageToken      :: !(Maybe Text)
     , _olPageSize       :: !(Maybe (Textual Int32))
     , _olCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
@@ -121,7 +124,7 @@ operationsList
     :: Text -- ^ 'olName'
     -> OperationsList
 operationsList pOlName_ =
-    OperationsList'
+  OperationsList'
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olAccessToken = Nothing
@@ -132,6 +135,7 @@ operationsList pOlName_ =
     , _olPageSize = Nothing
     , _olCallback = Nothing
     }
+
 
 -- | V1 error format.
 olXgafv :: Lens' OperationsList (Maybe Xgafv)

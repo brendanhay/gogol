@@ -277,12 +277,6 @@ module Network.Google.DFAReporting
     -- ** dfareporting.dimensionValues.query
     , module Network.Google.Resource.DFAReporting.DimensionValues.Query
 
-    -- ** dfareporting.directorySiteContacts.get
-    , module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
-
-    -- ** dfareporting.directorySiteContacts.list
-    , module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
-
     -- ** dfareporting.directorySites.get
     , module Network.Google.Resource.DFAReporting.DirectorySites.Get
 
@@ -811,11 +805,8 @@ module Network.Google.DFAReporting
     , directorySiteSettings
     , dssInterstitialPlacementAccepted
     , dssInstreamVideoPlacementAccepted
-    , dssVerificationTagOptOut
     , dssActiveViewOptOut
     , dssDfpSettings
-    , dssVideoActiveViewOptOut
-    , dssNielsenOCROptOut
 
     -- ** TargetableRemarketingListsListSortOrder
     , TargetableRemarketingListsListSortOrder (..)
@@ -838,9 +829,6 @@ module Network.Google.DFAReporting
 
     -- ** PlacementVpaidAdapterChoice
     , PlacementVpaidAdapterChoice (..)
-
-    -- ** DirectorySiteContactAssignmentVisibility
-    , DirectorySiteContactAssignmentVisibility (..)
 
     -- ** SizesListResponse
     , SizesListResponse
@@ -919,6 +907,15 @@ module Network.Google.DFAReporting
     -- ** AdSlotCompatibility
     , AdSlotCompatibility (..)
 
+    -- ** SiteVideoSettings
+    , SiteVideoSettings
+    , siteVideoSettings
+    , svsKind
+    , svsCompanionSettings
+    , svsTranscodeSettings
+    , svsOrientation
+    , svsSkippableSettings
+
     -- ** ListPopulationTerm
     , ListPopulationTerm
     , listPopulationTerm
@@ -950,20 +947,6 @@ module Network.Google.DFAReporting
     -- ** VideoSettingsOrientation
     , VideoSettingsOrientation (..)
 
-    -- ** DirectorySiteContact
-    , DirectorySiteContact
-    , directorySiteContact
-    , dscEmail
-    , dscPhone
-    , dscLastName
-    , dscKind
-    , dscAddress
-    , dscRole
-    , dscFirstName
-    , dscId
-    , dscTitle
-    , dscType
-
     -- ** RegionsListResponse
     , RegionsListResponse
     , regionsListResponse
@@ -992,7 +975,6 @@ module Network.Google.DFAReporting
     -- ** DirectorySite
     , DirectorySite
     , directorySite
-    , dsCurrencyId
     , dsSettings
     , dsInterstitialTagFormats
     , dsKind
@@ -1002,10 +984,6 @@ module Network.Google.DFAReporting
     , dsActive
     , dsName
     , dsId
-    , dsCountryId
-    , dsContactAssignments
-    , dsDescription
-    , dsParentId
 
     -- ** CreativeAssetMetadataDetectedFeaturesItem
     , CreativeAssetMetadataDetectedFeaturesItem (..)
@@ -1143,6 +1121,12 @@ module Network.Google.DFAReporting
     , cocName
     , cocOptimizationActivitys
     , cocId
+
+    -- ** SiteTranscodeSetting
+    , SiteTranscodeSetting
+    , siteTranscodeSetting
+    , stsKind
+    , stsEnabledVideoFormats
 
     -- ** CreativeClickThroughURL
     , CreativeClickThroughURL
@@ -1493,6 +1477,14 @@ module Network.Google.DFAReporting
     , llrKind
     , llrLanguages
 
+    -- ** CustomViewabilityMetricConfiguration
+    , CustomViewabilityMetricConfiguration
+    , customViewabilityMetricConfiguration
+    , cvmcViewabilityPercent
+    , cvmcTimePercent
+    , cvmcAudible
+    , cvmcTimeMillis
+
     -- ** UserRolesListSortOrder
     , UserRolesListSortOrder (..)
 
@@ -1660,7 +1652,6 @@ module Network.Google.DFAReporting
     , creLastModifiedInfo
     , creId
     , creAuthoringSource
-    , crePoliteLoadAssetId
     , creStudioAdvertiserId
     , creCreativeAssets
     , creSubAccountId
@@ -1678,6 +1669,14 @@ module Network.Google.DFAReporting
     , creAutoAdvanceImages
     , creRedirectURL
     , creCreativeFieldAssignments
+
+    -- ** SiteCompanionSetting
+    , SiteCompanionSetting
+    , siteCompanionSetting
+    , scsKind
+    , scsImageOnly
+    , scsCompanionsDisabled
+    , scsEnabledSizes
 
     -- ** SiteContact
     , SiteContact
@@ -1734,6 +1733,14 @@ module Network.Google.DFAReporting
     -- ** PlacementPaymentSource
     , PlacementPaymentSource (..)
 
+    -- ** SiteSkippableSetting
+    , SiteSkippableSetting
+    , siteSkippableSetting
+    , sssSkipOffSet
+    , sssProgressOffSet
+    , sssKind
+    , sssSkippable
+
     -- ** Rule
     , Rule
     , rule
@@ -1758,7 +1765,6 @@ module Network.Google.DFAReporting
     , camAdvertiserIdDimensionValue
     , camIdDimensionValue
     , camEventTagOverrides
-    , camLookbackConfiguration
     , camStartDate
     , camAccountId
     , camName
@@ -1797,9 +1803,6 @@ module Network.Google.DFAReporting
 
     -- ** PopupWindowPropertiesPositionType
     , PopupWindowPropertiesPositionType (..)
-
-    -- ** DirectorySiteContactRole
-    , DirectorySiteContactRole (..)
 
     -- ** ClickThroughURL
     , ClickThroughURL
@@ -1848,11 +1851,9 @@ module Network.Google.DFAReporting
     , ssDisableNewCookie
     , ssVideoActiveViewOptOutTemplate
     , ssAdBlockingOptOut
-    , ssLookbackConfiguration
     , ssTagSetting
     , ssActiveViewOptOut
     , ssVpaidAdapterChoiceTemplate
-    , ssCreativeSettings
 
     -- ** PlacementStrategiesListSortField
     , PlacementStrategiesListSortField (..)
@@ -2313,9 +2314,6 @@ module Network.Google.DFAReporting
     -- ** FloodlightActivityFloodlightActivityGroupType
     , FloodlightActivityFloodlightActivityGroupType (..)
 
-    -- ** DirectorySiteContactsListSortOrder
-    , DirectorySiteContactsListSortOrder (..)
-
     -- ** PricingGroupType
     , PricingGroupType (..)
 
@@ -2385,9 +2383,6 @@ module Network.Google.DFAReporting
 
     -- ** FloodlightActivityGroupType
     , FloodlightActivityGroupType (..)
-
-    -- ** DirectorySiteContactType
-    , DirectorySiteContactType (..)
 
     -- ** EventTagOverride
     , EventTagOverride
@@ -2686,13 +2681,6 @@ module Network.Google.DFAReporting
     -- ** SubAccountsListSortOrder
     , SubAccountsListSortOrder (..)
 
-    -- ** DirectorySiteContactsListResponse
-    , DirectorySiteContactsListResponse
-    , directorySiteContactsListResponse
-    , dsclrNextPageToken
-    , dsclrKind
-    , dsclrDirectorySiteContacts
-
     -- ** Region
     , Region
     , region
@@ -2771,6 +2759,7 @@ module Network.Google.DFAReporting
     , fcNATuralSearchConversionAttributionOption
     , fcUserDefinedVariableConfigurations
     , fcSubAccountId
+    , fcCustomViewabilityMetric
     , fcFirstDayOfWeek
     , fcOmnitureSettings
 
@@ -2841,6 +2830,13 @@ module Network.Google.DFAReporting
     -- ** AdvertisersListStatus
     , AdvertisersListStatus (..)
 
+    -- ** CustomViewabilityMetric
+    , CustomViewabilityMetric
+    , customViewabilityMetric
+    , cvmName
+    , cvmId
+    , cvmConfiguration
+
     -- ** DimensionValueMatchType
     , DimensionValueMatchType (..)
 
@@ -2893,6 +2889,7 @@ module Network.Google.DFAReporting
     , creativeAsset
     , caaZIndex
     , caaPushdown
+    , caaFrameRate
     , caaOriginalBackup
     , caaWindowMode
     , caaFlashVersion
@@ -2925,10 +2922,13 @@ module Network.Google.DFAReporting
     , caaDisplayType
     , caaChildAssetType
     , caaCollapsedSize
+    , caaAudioSampleRate
     , caaId
     , caaBitRate
+    , caaPoliteLoad
     , caaCustomStartTimeValue
     , caaStartTimeType
+    , caaAudioBitRate
     , caaDuration
     , caaOrientation
     , caaArtworkType
@@ -3034,9 +3034,6 @@ module Network.Google.DFAReporting
     -- ** TargetWindowTargetWindowOption
     , TargetWindowTargetWindowOption (..)
 
-    -- ** DirectorySiteContactsListSortField
-    , DirectorySiteContactsListSortField (..)
-
     -- ** PlacementsListPricingTypes
     , PlacementsListPricingTypes (..)
 
@@ -3052,6 +3049,7 @@ module Network.Google.DFAReporting
     -- ** Site
     , Site
     , site
+    , sitiVideoSettings
     , sitiKind
     , sitiKeyName
     , sitiSiteContacts
@@ -3154,12 +3152,6 @@ module Network.Google.DFAReporting
     , filLastModifiedTime
     , filId
     , filFileName
-
-    -- ** CreativeSettings
-    , CreativeSettings
-    , creativeSettings
-    , csIFrameHeader
-    , csIFrameFooter
 
     -- ** DynamicTargetingKeyObjectType
     , DynamicTargetingKeyObjectType (..)
@@ -3302,12 +3294,6 @@ module Network.Google.DFAReporting
     , fagtrFloodlightActivityTag
     , fagtrKind
 
-    -- ** DirectorySiteContactAssignment
-    , DirectorySiteContactAssignment
-    , directorySiteContactAssignment
-    , dscaVisibility
-    , dscaContactId
-
     -- ** AdSlot
     , AdSlot
     , adSlot
@@ -3325,6 +3311,9 @@ module Network.Google.DFAReporting
     , thirdPartyTrackingURL
     , tptuURL
     , tptuThirdPartyURLType
+
+    -- ** SiteVideoSettingsOrientation
+    , SiteVideoSettingsOrientation (..)
 
     -- ** PricingCapCostType
     , PricingCapCostType (..)
@@ -3566,8 +3555,6 @@ import           Network.Google.Resource.DFAReporting.Creatives.List
 import           Network.Google.Resource.DFAReporting.Creatives.Patch
 import           Network.Google.Resource.DFAReporting.Creatives.Update
 import           Network.Google.Resource.DFAReporting.DimensionValues.Query
-import           Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
-import           Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
 import           Network.Google.Resource.DFAReporting.DirectorySites.Get
 import           Network.Google.Resource.DFAReporting.DirectorySites.Insert
 import           Network.Google.Resource.DFAReporting.DirectorySites.List
@@ -3896,8 +3883,6 @@ type DFAReportingAPI =
        :<|> AdvertiserGroupsGetResource
        :<|> AdvertiserGroupsDeleteResource
        :<|> AdvertiserGroupsUpdateResource
-       :<|> DirectorySiteContactsListResource
-       :<|> DirectorySiteContactsGetResource
        :<|> FloodlightActivityGroupsInsertResource
        :<|> FloodlightActivityGroupsListResource
        :<|> FloodlightActivityGroupsPatchResource

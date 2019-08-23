@@ -61,14 +61,17 @@ type ProjectsInstancesDatabasesSessionsGetResource =
 -- This is mainly useful for determining whether a session is still alive.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsGet' smart constructor.
-data ProjectsInstancesDatabasesSessionsGet = ProjectsInstancesDatabasesSessionsGet'
+data ProjectsInstancesDatabasesSessionsGet =
+  ProjectsInstancesDatabasesSessionsGet'
     { _pidsgXgafv          :: !(Maybe Xgafv)
     , _pidsgUploadProtocol :: !(Maybe Text)
     , _pidsgAccessToken    :: !(Maybe Text)
     , _pidsgUploadType     :: !(Maybe Text)
     , _pidsgName           :: !Text
     , _pidsgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesDatabasesSessionsGet' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsInstancesDatabasesSessionsGet
     :: Text -- ^ 'pidsgName'
     -> ProjectsInstancesDatabasesSessionsGet
 projectsInstancesDatabasesSessionsGet pPidsgName_ =
-    ProjectsInstancesDatabasesSessionsGet'
+  ProjectsInstancesDatabasesSessionsGet'
     { _pidsgXgafv = Nothing
     , _pidsgUploadProtocol = Nothing
     , _pidsgAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsInstancesDatabasesSessionsGet pPidsgName_ =
     , _pidsgName = pPidsgName_
     , _pidsgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pidsgXgafv :: Lens' ProjectsInstancesDatabasesSessionsGet (Maybe Xgafv)
@@ -133,7 +137,8 @@ pidsgCallback
       (\ s a -> s{_pidsgCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesDatabasesSessionsGet where
+           ProjectsInstancesDatabasesSessionsGet
+         where
         type Rs ProjectsInstancesDatabasesSessionsGet =
              Session
         type Scopes ProjectsInstancesDatabasesSessionsGet =

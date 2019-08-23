@@ -58,10 +58,13 @@ type TargetHTTPProxiesGetResource =
 -- target HTTP proxies by making a list() request.
 --
 -- /See:/ 'targetHTTPProxiesGet' smart constructor.
-data TargetHTTPProxiesGet = TargetHTTPProxiesGet'
+data TargetHTTPProxiesGet =
+  TargetHTTPProxiesGet'
     { _thttppgProject         :: !Text
     , _thttppgTargetHTTPProxy :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TargetHTTPProxiesGet' with the minimum fields required to make a request.
 --
@@ -75,10 +78,11 @@ targetHTTPProxiesGet
     -> Text -- ^ 'thttppgTargetHTTPProxy'
     -> TargetHTTPProxiesGet
 targetHTTPProxiesGet pThttppgProject_ pThttppgTargetHTTPProxy_ =
-    TargetHTTPProxiesGet'
+  TargetHTTPProxiesGet'
     { _thttppgProject = pThttppgProject_
     , _thttppgTargetHTTPProxy = pThttppgTargetHTTPProxy_
     }
+
 
 -- | Project ID for this request.
 thttppgProject :: Lens' TargetHTTPProxiesGet Text

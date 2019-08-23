@@ -72,7 +72,8 @@ type TasksListResource =
 -- | Returns all tasks in the specified task list.
 --
 -- /See:/ 'tasksList' smart constructor.
-data TasksList = TasksList'
+data TasksList =
+  TasksList'
     { _tlDueMax        :: !(Maybe Text)
     , _tlShowDeleted   :: !(Maybe Bool)
     , _tlShowCompleted :: !(Maybe Bool)
@@ -84,7 +85,9 @@ data TasksList = TasksList'
     , _tlCompletedMin  :: !(Maybe Text)
     , _tlPageToken     :: !(Maybe Text)
     , _tlMaxResults    :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TasksList' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ tasksList
     :: Text -- ^ 'tlTaskList'
     -> TasksList
 tasksList pTlTaskList_ =
-    TasksList'
+  TasksList'
     { _tlDueMax = Nothing
     , _tlShowDeleted = Nothing
     , _tlShowCompleted = Nothing
@@ -128,6 +131,7 @@ tasksList pTlTaskList_ =
     , _tlPageToken = Nothing
     , _tlMaxResults = Nothing
     }
+
 
 -- | Upper bound for a task\'s due date (as a RFC 3339 timestamp) to filter
 -- by. Optional. The default is not to filter by due date.
@@ -191,7 +195,7 @@ tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | Maximum number of task lists returned on one page. Optional. The default
--- is 100.
+-- is 20 (max allowed: 100).
 tlMaxResults :: Lens' TasksList (Maybe Int64)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})

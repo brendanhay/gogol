@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Start master IP rotation.
+-- Starts master IP rotation.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.startIpRotation@.
 module Network.Google.Resource.Container.Projects.Locations.Clusters.StartIPRotation
@@ -60,10 +60,11 @@ type ProjectsLocationsClustersStartIPRotationResource
                      ReqBody '[JSON] StartIPRotationRequest :>
                        Post '[JSON] Operation
 
--- | Start master IP rotation.
+-- | Starts master IP rotation.
 --
 -- /See:/ 'projectsLocationsClustersStartIPRotation' smart constructor.
-data ProjectsLocationsClustersStartIPRotation = ProjectsLocationsClustersStartIPRotation'
+data ProjectsLocationsClustersStartIPRotation =
+  ProjectsLocationsClustersStartIPRotation'
     { _plcsirXgafv          :: !(Maybe Xgafv)
     , _plcsirUploadProtocol :: !(Maybe Text)
     , _plcsirAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsLocationsClustersStartIPRotation = ProjectsLocationsClustersStartIP
     , _plcsirPayload        :: !StartIPRotationRequest
     , _plcsirName           :: !Text
     , _plcsirCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsClustersStartIPRotation' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsLocationsClustersStartIPRotation
     -> Text -- ^ 'plcsirName'
     -> ProjectsLocationsClustersStartIPRotation
 projectsLocationsClustersStartIPRotation pPlcsirPayload_ pPlcsirName_ =
-    ProjectsLocationsClustersStartIPRotation'
+  ProjectsLocationsClustersStartIPRotation'
     { _plcsirXgafv = Nothing
     , _plcsirUploadProtocol = Nothing
     , _plcsirAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsLocationsClustersStartIPRotation pPlcsirPayload_ pPlcsirName_ =
     , _plcsirName = pPlcsirName_
     , _plcsirCallback = Nothing
     }
+
 
 -- | V1 error format.
 plcsirXgafv :: Lens' ProjectsLocationsClustersStartIPRotation (Maybe Xgafv)
@@ -148,7 +152,8 @@ plcsirCallback
       (\ s a -> s{_plcsirCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsClustersStartIPRotation where
+           ProjectsLocationsClustersStartIPRotation
+         where
         type Rs ProjectsLocationsClustersStartIPRotation =
              Operation
         type Scopes ProjectsLocationsClustersStartIPRotation

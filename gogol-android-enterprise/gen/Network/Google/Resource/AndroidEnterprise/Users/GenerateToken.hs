@@ -61,10 +61,13 @@ type UsersGenerateTokenResource =
 -- accounts.
 --
 -- /See:/ 'usersGenerateToken' smart constructor.
-data UsersGenerateToken = UsersGenerateToken'
+data UsersGenerateToken =
+  UsersGenerateToken'
     { _ugtEnterpriseId :: !Text
     , _ugtUserId       :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersGenerateToken' with the minimum fields required to make a request.
 --
@@ -78,10 +81,9 @@ usersGenerateToken
     -> Text -- ^ 'ugtUserId'
     -> UsersGenerateToken
 usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
-    UsersGenerateToken'
-    { _ugtEnterpriseId = pUgtEnterpriseId_
-    , _ugtUserId = pUgtUserId_
-    }
+  UsersGenerateToken'
+    {_ugtEnterpriseId = pUgtEnterpriseId_, _ugtUserId = pUgtUserId_}
+
 
 -- | The ID of the enterprise.
 ugtEnterpriseId :: Lens' UsersGenerateToken Text

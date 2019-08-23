@@ -67,13 +67,16 @@ type RegionInstanceGroupManagersSetInstanceTemplateResource
 -- recreating instances in this group. Existing instances are not affected.
 --
 -- /See:/ 'regionInstanceGroupManagersSetInstanceTemplate' smart constructor.
-data RegionInstanceGroupManagersSetInstanceTemplate = RegionInstanceGroupManagersSetInstanceTemplate'
+data RegionInstanceGroupManagersSetInstanceTemplate =
+  RegionInstanceGroupManagersSetInstanceTemplate'
     { _rigmsitRequestId            :: !(Maybe Text)
     , _rigmsitProject              :: !Text
     , _rigmsitInstanceGroupManager :: !Text
     , _rigmsitPayload              :: !RegionInstanceGroupManagersSetTemplateRequest
     , _rigmsitRegion               :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RegionInstanceGroupManagersSetInstanceTemplate' with the minimum fields required to make a request.
 --
@@ -95,13 +98,14 @@ regionInstanceGroupManagersSetInstanceTemplate
     -> Text -- ^ 'rigmsitRegion'
     -> RegionInstanceGroupManagersSetInstanceTemplate
 regionInstanceGroupManagersSetInstanceTemplate pRigmsitProject_ pRigmsitInstanceGroupManager_ pRigmsitPayload_ pRigmsitRegion_ =
-    RegionInstanceGroupManagersSetInstanceTemplate'
+  RegionInstanceGroupManagersSetInstanceTemplate'
     { _rigmsitRequestId = Nothing
     , _rigmsitProject = pRigmsitProject_
     , _rigmsitInstanceGroupManager = pRigmsitInstanceGroupManager_
     , _rigmsitPayload = pRigmsitPayload_
     , _rigmsitRegion = pRigmsitRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore
@@ -143,7 +147,8 @@ rigmsitRegion
       (\ s a -> s{_rigmsitRegion = a})
 
 instance GoogleRequest
-         RegionInstanceGroupManagersSetInstanceTemplate where
+           RegionInstanceGroupManagersSetInstanceTemplate
+         where
         type Rs
                RegionInstanceGroupManagersSetInstanceTemplate
              = Operation

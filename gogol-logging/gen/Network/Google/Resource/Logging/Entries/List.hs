@@ -65,14 +65,17 @@ type EntriesListResource =
 -- ways to export log entries, see Exporting Logs.
 --
 -- /See:/ 'entriesList' smart constructor.
-data EntriesList = EntriesList'
+data EntriesList =
+  EntriesList'
     { _elXgafv          :: !(Maybe Xgafv)
     , _elUploadProtocol :: !(Maybe Text)
     , _elAccessToken    :: !(Maybe Text)
     , _elUploadType     :: !(Maybe Text)
     , _elPayload        :: !ListLogEntriesRequest
     , _elCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EntriesList' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ entriesList
     :: ListLogEntriesRequest -- ^ 'elPayload'
     -> EntriesList
 entriesList pElPayload_ =
-    EntriesList'
+  EntriesList'
     { _elXgafv = Nothing
     , _elUploadProtocol = Nothing
     , _elAccessToken = Nothing
@@ -101,6 +104,7 @@ entriesList pElPayload_ =
     , _elPayload = pElPayload_
     , _elCallback = Nothing
     }
+
 
 -- | V1 error format.
 elXgafv :: Lens' EntriesList (Maybe Xgafv)

@@ -59,12 +59,15 @@ type InterconnectAttachmentsDeleteResource =
 -- | Deletes the specified interconnect attachment.
 --
 -- /See:/ 'interconnectAttachmentsDelete' smart constructor.
-data InterconnectAttachmentsDelete = InterconnectAttachmentsDelete'
+data InterconnectAttachmentsDelete =
+  InterconnectAttachmentsDelete'
     { _iadRequestId              :: !(Maybe Text)
     , _iadProject                :: !Text
     , _iadRegion                 :: !Text
     , _iadInterconnectAttachment :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InterconnectAttachmentsDelete' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ interconnectAttachmentsDelete
     -> Text -- ^ 'iadInterconnectAttachment'
     -> InterconnectAttachmentsDelete
 interconnectAttachmentsDelete pIadProject_ pIadRegion_ pIadInterconnectAttachment_ =
-    InterconnectAttachmentsDelete'
+  InterconnectAttachmentsDelete'
     { _iadRequestId = Nothing
     , _iadProject = pIadProject_
     , _iadRegion = pIadRegion_
     , _iadInterconnectAttachment = pIadInterconnectAttachment_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

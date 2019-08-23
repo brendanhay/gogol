@@ -63,7 +63,8 @@ type ProjectsNotesPatchResource =
 -- | Updates the specified note.
 --
 -- /See:/ 'projectsNotesPatch' smart constructor.
-data ProjectsNotesPatch = ProjectsNotesPatch'
+data ProjectsNotesPatch =
+  ProjectsNotesPatch'
     { _pnpXgafv          :: !(Maybe Xgafv)
     , _pnpUploadProtocol :: !(Maybe Text)
     , _pnpUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,9 @@ data ProjectsNotesPatch = ProjectsNotesPatch'
     , _pnpPayload        :: !Note
     , _pnpName           :: !Text
     , _pnpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsNotesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsNotesPatch
     -> Text -- ^ 'pnpName'
     -> ProjectsNotesPatch
 projectsNotesPatch pPnpPayload_ pPnpName_ =
-    ProjectsNotesPatch'
+  ProjectsNotesPatch'
     { _pnpXgafv = Nothing
     , _pnpUploadProtocol = Nothing
     , _pnpUpdateMask = Nothing
@@ -108,6 +111,7 @@ projectsNotesPatch pPnpPayload_ pPnpName_ =
     , _pnpName = pPnpName_
     , _pnpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pnpXgafv :: Lens' ProjectsNotesPatch (Maybe Xgafv)

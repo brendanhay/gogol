@@ -60,11 +60,14 @@ type PurchasesSubscriptionsRefundResource =
 -- valid until its expiration time and it will continue to recur.
 --
 -- /See:/ 'purchasesSubscriptionsRefund' smart constructor.
-data PurchasesSubscriptionsRefund = PurchasesSubscriptionsRefund'
+data PurchasesSubscriptionsRefund =
+  PurchasesSubscriptionsRefund'
     { _psrPackageName    :: !Text
     , _psrToken          :: !Text
     , _psrSubscriptionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PurchasesSubscriptionsRefund' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ purchasesSubscriptionsRefund
     -> Text -- ^ 'psrSubscriptionId'
     -> PurchasesSubscriptionsRefund
 purchasesSubscriptionsRefund pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
-    PurchasesSubscriptionsRefund'
+  PurchasesSubscriptionsRefund'
     { _psrPackageName = pPsrPackageName_
     , _psrToken = pPsrToken_
     , _psrSubscriptionId = pPsrSubscriptionId_
     }
+
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').

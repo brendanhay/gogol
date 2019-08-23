@@ -62,14 +62,17 @@ type ProjectsInspectTemplatesDeleteResource =
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'projectsInspectTemplatesDelete' smart constructor.
-data ProjectsInspectTemplatesDelete = ProjectsInspectTemplatesDelete'
+data ProjectsInspectTemplatesDelete =
+  ProjectsInspectTemplatesDelete'
     { _pitdXgafv          :: !(Maybe Xgafv)
     , _pitdUploadProtocol :: !(Maybe Text)
     , _pitdAccessToken    :: !(Maybe Text)
     , _pitdUploadType     :: !(Maybe Text)
     , _pitdName           :: !Text
     , _pitdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInspectTemplatesDelete' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ projectsInspectTemplatesDelete
     :: Text -- ^ 'pitdName'
     -> ProjectsInspectTemplatesDelete
 projectsInspectTemplatesDelete pPitdName_ =
-    ProjectsInspectTemplatesDelete'
+  ProjectsInspectTemplatesDelete'
     { _pitdXgafv = Nothing
     , _pitdUploadProtocol = Nothing
     , _pitdAccessToken = Nothing
@@ -98,6 +101,7 @@ projectsInspectTemplatesDelete pPitdName_ =
     , _pitdName = pPitdName_
     , _pitdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pitdXgafv :: Lens' ProjectsInspectTemplatesDelete (Maybe Xgafv)

@@ -61,11 +61,14 @@ type LicensesSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'licensesSetIAMPolicy' smart constructor.
-data LicensesSetIAMPolicy = LicensesSetIAMPolicy'
+data LicensesSetIAMPolicy =
+  LicensesSetIAMPolicy'
     { _lsipProject  :: !Text
     , _lsipPayload  :: !GlobalSetPolicyRequest
     , _lsipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicensesSetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -82,11 +85,12 @@ licensesSetIAMPolicy
     -> Text -- ^ 'lsipResource'
     -> LicensesSetIAMPolicy
 licensesSetIAMPolicy pLsipProject_ pLsipPayload_ pLsipResource_ =
-    LicensesSetIAMPolicy'
+  LicensesSetIAMPolicy'
     { _lsipProject = pLsipProject_
     , _lsipPayload = pLsipPayload_
     , _lsipResource = pLsipResource_
     }
+
 
 -- | Project ID for this request.
 lsipProject :: Lens' LicensesSetIAMPolicy Text

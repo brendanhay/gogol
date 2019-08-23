@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsUpdate' request conforms to.
 type PlacementsUpdateResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -54,10 +54,13 @@ type PlacementsUpdateResource =
 -- | Updates an existing placement.
 --
 -- /See:/ 'placementsUpdate' smart constructor.
-data PlacementsUpdate = PlacementsUpdate'
+data PlacementsUpdate =
+  PlacementsUpdate'
     { _puProFileId :: !(Textual Int64)
     , _puPayload   :: !Placement
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PlacementsUpdate' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ placementsUpdate
     -> Placement -- ^ 'puPayload'
     -> PlacementsUpdate
 placementsUpdate pPuProFileId_ pPuPayload_ =
-    PlacementsUpdate'
-    { _puProFileId = _Coerce # pPuProFileId_
-    , _puPayload = pPuPayload_
-    }
+  PlacementsUpdate'
+    {_puProFileId = _Coerce # pPuProFileId_, _puPayload = pPuPayload_}
+
 
 -- | User profile ID associated with this request.
 puProFileId :: Lens' PlacementsUpdate Int64

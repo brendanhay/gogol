@@ -72,7 +72,8 @@ type ServicesTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'servicesTestIAMPermissions' smart constructor.
-data ServicesTestIAMPermissions = ServicesTestIAMPermissions'
+data ServicesTestIAMPermissions =
+  ServicesTestIAMPermissions'
     { _stipXgafv          :: !(Maybe Xgafv)
     , _stipUploadProtocol :: !(Maybe Text)
     , _stipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ServicesTestIAMPermissions = ServicesTestIAMPermissions'
     , _stipPayload        :: !TestIAMPermissionsRequest
     , _stipResource       :: !Text
     , _stipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ servicesTestIAMPermissions
     -> Text -- ^ 'stipResource'
     -> ServicesTestIAMPermissions
 servicesTestIAMPermissions pStipPayload_ pStipResource_ =
-    ServicesTestIAMPermissions'
+  ServicesTestIAMPermissions'
     { _stipXgafv = Nothing
     , _stipUploadProtocol = Nothing
     , _stipAccessToken = Nothing
@@ -113,6 +116,7 @@ servicesTestIAMPermissions pStipPayload_ pStipResource_ =
     , _stipResource = pStipResource_
     , _stipCallback = Nothing
     }
+
 
 -- | V1 error format.
 stipXgafv :: Lens' ServicesTestIAMPermissions (Maybe Xgafv)

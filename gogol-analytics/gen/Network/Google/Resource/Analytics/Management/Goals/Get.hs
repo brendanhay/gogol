@@ -61,12 +61,15 @@ type ManagementGoalsGetResource =
 -- | Gets a goal to which the user has access.
 --
 -- /See:/ 'managementGoalsGet' smart constructor.
-data ManagementGoalsGet = ManagementGoalsGet'
+data ManagementGoalsGet =
+  ManagementGoalsGet'
     { _mggWebPropertyId :: !Text
     , _mggGoalId        :: !Text
     , _mggProFileId     :: !Text
     , _mggAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementGoalsGet' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ managementGoalsGet
     -> Text -- ^ 'mggAccountId'
     -> ManagementGoalsGet
 managementGoalsGet pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ =
-    ManagementGoalsGet'
+  ManagementGoalsGet'
     { _mggWebPropertyId = pMggWebPropertyId_
     , _mggGoalId = pMggGoalId_
     , _mggProFileId = pMggProFileId_
     , _mggAccountId = pMggAccountId_
     }
+
 
 -- | Web property ID to retrieve the goal for.
 mggWebPropertyId :: Lens' ManagementGoalsGet Text

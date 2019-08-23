@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -69,7 +69,8 @@ type ProjectsListResource =
 -- paging.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList'
+data ProjectsList =
+  ProjectsList'
     { _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe [Textual Int64])
     , _plProFileId     :: !(Textual Int64)
@@ -78,7 +79,9 @@ data ProjectsList = ProjectsList'
     , _plSortField     :: !ProjectsListSortField
     , _plAdvertiserIds :: !(Maybe [Textual Int64])
     , _plMaxResults    :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
@@ -103,7 +106,7 @@ projectsList
     :: Int64 -- ^ 'plProFileId'
     -> ProjectsList
 projectsList pPlProFileId_ =
-    ProjectsList'
+  ProjectsList'
     { _plSearchString = Nothing
     , _plIds = Nothing
     , _plProFileId = _Coerce # pPlProFileId_
@@ -113,6 +116,7 @@ projectsList pPlProFileId_ =
     , _plAdvertiserIds = Nothing
     , _plMaxResults = 1000
     }
+
 
 -- | Allows searching for projects by name or ID. Wildcards (*) are allowed.
 -- For example, \"project*2015\" will return projects with names like

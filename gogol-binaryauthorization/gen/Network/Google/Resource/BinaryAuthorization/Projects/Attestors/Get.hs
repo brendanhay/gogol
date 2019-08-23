@@ -59,14 +59,17 @@ type ProjectsAttestorsGetResource =
 -- | Gets an attestor. Returns NOT_FOUND if the attestor does not exist.
 --
 -- /See:/ 'projectsAttestorsGet' smart constructor.
-data ProjectsAttestorsGet = ProjectsAttestorsGet'
+data ProjectsAttestorsGet =
+  ProjectsAttestorsGet'
     { _pagXgafv          :: !(Maybe Xgafv)
     , _pagUploadProtocol :: !(Maybe Text)
     , _pagAccessToken    :: !(Maybe Text)
     , _pagUploadType     :: !(Maybe Text)
     , _pagName           :: !Text
     , _pagCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAttestorsGet' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ projectsAttestorsGet
     :: Text -- ^ 'pagName'
     -> ProjectsAttestorsGet
 projectsAttestorsGet pPagName_ =
-    ProjectsAttestorsGet'
+  ProjectsAttestorsGet'
     { _pagXgafv = Nothing
     , _pagUploadProtocol = Nothing
     , _pagAccessToken = Nothing
@@ -95,6 +98,7 @@ projectsAttestorsGet pPagName_ =
     , _pagName = pPagName_
     , _pagCallback = Nothing
     }
+
 
 -- | V1 error format.
 pagXgafv :: Lens' ProjectsAttestorsGet (Maybe Xgafv)

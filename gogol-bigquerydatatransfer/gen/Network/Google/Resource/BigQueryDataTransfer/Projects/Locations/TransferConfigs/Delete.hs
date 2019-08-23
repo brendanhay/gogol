@@ -61,14 +61,17 @@ type ProjectsLocationsTransferConfigsDeleteResource =
 -- runs and logs.
 --
 -- /See:/ 'projectsLocationsTransferConfigsDelete' smart constructor.
-data ProjectsLocationsTransferConfigsDelete = ProjectsLocationsTransferConfigsDelete'
+data ProjectsLocationsTransferConfigsDelete =
+  ProjectsLocationsTransferConfigsDelete'
     { _pltcdXgafv          :: !(Maybe Xgafv)
     , _pltcdUploadProtocol :: !(Maybe Text)
     , _pltcdAccessToken    :: !(Maybe Text)
     , _pltcdUploadType     :: !(Maybe Text)
     , _pltcdName           :: !Text
     , _pltcdCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsDelete' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsLocationsTransferConfigsDelete
     :: Text -- ^ 'pltcdName'
     -> ProjectsLocationsTransferConfigsDelete
 projectsLocationsTransferConfigsDelete pPltcdName_ =
-    ProjectsLocationsTransferConfigsDelete'
+  ProjectsLocationsTransferConfigsDelete'
     { _pltcdXgafv = Nothing
     , _pltcdUploadProtocol = Nothing
     , _pltcdAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsLocationsTransferConfigsDelete pPltcdName_ =
     , _pltcdName = pPltcdName_
     , _pltcdCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcdXgafv :: Lens' ProjectsLocationsTransferConfigsDelete (Maybe Xgafv)
@@ -134,7 +138,8 @@ pltcdCallback
       (\ s a -> s{_pltcdCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsDelete where
+           ProjectsLocationsTransferConfigsDelete
+         where
         type Rs ProjectsLocationsTransferConfigsDelete =
              Empty
         type Scopes ProjectsLocationsTransferConfigsDelete =

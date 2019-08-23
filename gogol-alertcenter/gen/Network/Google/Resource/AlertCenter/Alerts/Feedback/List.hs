@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the feedback for an alert.
+-- Lists all the feedback for an alert. Attempting to list feedbacks for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.feedback.list@.
 module Network.Google.Resource.AlertCenter.Alerts.Feedback.List
@@ -63,10 +64,12 @@ type AlertsFeedbackListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListAlertFeedbackResponse
 
--- | Lists all the feedback for an alert.
+-- | Lists all the feedback for an alert. Attempting to list feedbacks for a
+-- non-existent alert returns \`NOT_FOUND\` error.
 --
 -- /See:/ 'alertsFeedbackList' smart constructor.
-data AlertsFeedbackList = AlertsFeedbackList'
+data AlertsFeedbackList =
+  AlertsFeedbackList'
     { _aflXgafv          :: !(Maybe Xgafv)
     , _aflUploadProtocol :: !(Maybe Text)
     , _aflAccessToken    :: !(Maybe Text)
@@ -75,7 +78,9 @@ data AlertsFeedbackList = AlertsFeedbackList'
     , _aflCustomerId     :: !(Maybe Text)
     , _aflFilter         :: !(Maybe Text)
     , _aflCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AlertsFeedbackList' with the minimum fields required to make a request.
 --
@@ -100,7 +105,7 @@ alertsFeedbackList
     :: Text -- ^ 'aflAlertId'
     -> AlertsFeedbackList
 alertsFeedbackList pAflAlertId_ =
-    AlertsFeedbackList'
+  AlertsFeedbackList'
     { _aflXgafv = Nothing
     , _aflUploadProtocol = Nothing
     , _aflAccessToken = Nothing
@@ -110,6 +115,7 @@ alertsFeedbackList pAflAlertId_ =
     , _aflFilter = Nothing
     , _aflCallback = Nothing
     }
+
 
 -- | V1 error format.
 aflXgafv :: Lens' AlertsFeedbackList (Maybe Xgafv)
@@ -128,8 +134,7 @@ aflAccessToken
       (\ s a -> s{_aflAccessToken = a})
 
 -- | Required. The alert identifier. The \"-\" wildcard could be used to
--- represent all alerts. If alert does not exist returns a \`NOT_FOUND\`
--- error.
+-- represent all alerts.
 aflAlertId :: Lens' AlertsFeedbackList Text
 aflAlertId
   = lens _aflAlertId (\ s a -> s{_aflAlertId = a})

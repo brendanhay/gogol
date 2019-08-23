@@ -65,7 +65,8 @@ type IndexingDatasourcesItemsUploadResource =
 -- than 100 KiB, it\'s easier to embed the content inline within update.
 --
 -- /See:/ 'indexingDatasourcesItemsUpload' smart constructor.
-data IndexingDatasourcesItemsUpload = IndexingDatasourcesItemsUpload'
+data IndexingDatasourcesItemsUpload =
+  IndexingDatasourcesItemsUpload'
     { _indXgafv          :: !(Maybe Xgafv)
     , _indUploadProtocol :: !(Maybe Text)
     , _indAccessToken    :: !(Maybe Text)
@@ -73,7 +74,9 @@ data IndexingDatasourcesItemsUpload = IndexingDatasourcesItemsUpload'
     , _indPayload        :: !StartUploadItemRequest
     , _indName           :: !Text
     , _indCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'IndexingDatasourcesItemsUpload' with the minimum fields required to make a request.
 --
@@ -97,7 +100,7 @@ indexingDatasourcesItemsUpload
     -> Text -- ^ 'indName'
     -> IndexingDatasourcesItemsUpload
 indexingDatasourcesItemsUpload pIndPayload_ pIndName_ =
-    IndexingDatasourcesItemsUpload'
+  IndexingDatasourcesItemsUpload'
     { _indXgafv = Nothing
     , _indUploadProtocol = Nothing
     , _indAccessToken = Nothing
@@ -106,6 +109,7 @@ indexingDatasourcesItemsUpload pIndPayload_ pIndName_ =
     , _indName = pIndName_
     , _indCallback = Nothing
     }
+
 
 -- | V1 error format.
 indXgafv :: Lens' IndexingDatasourcesItemsUpload (Maybe Xgafv)
@@ -134,8 +138,8 @@ indPayload :: Lens' IndexingDatasourcesItemsUpload StartUploadItemRequest
 indPayload
   = lens _indPayload (\ s a -> s{_indPayload = a})
 
--- | Name of the Data Source to start a resumable upload. Format:
--- datasources\/{source_id}
+-- | Name of the Item to start a resumable upload. Format:
+-- datasources\/{source_id}\/items\/{item_id}.
 indName :: Lens' IndexingDatasourcesItemsUpload Text
 indName = lens _indName (\ s a -> s{_indName = a})
 

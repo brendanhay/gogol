@@ -56,11 +56,14 @@ type BookshelvesGetResource =
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
 -- /See:/ 'bookshelvesGet' smart constructor.
-data BookshelvesGet = BookshelvesGet'
+data BookshelvesGet =
+  BookshelvesGet'
     { _bgUserId :: !Text
     , _bgShelf  :: !Text
     , _bgSource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BookshelvesGet' with the minimum fields required to make a request.
 --
@@ -76,11 +79,9 @@ bookshelvesGet
     -> Text -- ^ 'bgShelf'
     -> BookshelvesGet
 bookshelvesGet pBgUserId_ pBgShelf_ =
-    BookshelvesGet'
-    { _bgUserId = pBgUserId_
-    , _bgShelf = pBgShelf_
-    , _bgSource = Nothing
-    }
+  BookshelvesGet'
+    {_bgUserId = pBgUserId_, _bgShelf = pBgShelf_, _bgSource = Nothing}
+
 
 -- | ID of user for whom to retrieve bookshelves.
 bgUserId :: Lens' BookshelvesGet Text

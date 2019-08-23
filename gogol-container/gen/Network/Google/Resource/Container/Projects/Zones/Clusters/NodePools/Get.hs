@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the node pool requested.
+-- Retrieves the requested node pool.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
@@ -69,10 +69,11 @@ type ProjectsZonesClustersNodePoolsGetResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] NodePool
 
--- | Retrieves the node pool requested.
+-- | Retrieves the requested node pool.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsGet' smart constructor.
-data ProjectsZonesClustersNodePoolsGet = ProjectsZonesClustersNodePoolsGet'
+data ProjectsZonesClustersNodePoolsGet =
+  ProjectsZonesClustersNodePoolsGet'
     { _pzcnpgXgafv          :: !(Maybe Xgafv)
     , _pzcnpgUploadProtocol :: !(Maybe Text)
     , _pzcnpgAccessToken    :: !(Maybe Text)
@@ -83,7 +84,9 @@ data ProjectsZonesClustersNodePoolsGet = ProjectsZonesClustersNodePoolsGet'
     , _pzcnpgClusterId      :: !Text
     , _pzcnpgProjectId      :: !Text
     , _pzcnpgCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsZonesClustersNodePoolsGet' with the minimum fields required to make a request.
 --
@@ -115,7 +118,7 @@ projectsZonesClustersNodePoolsGet
     -> Text -- ^ 'pzcnpgProjectId'
     -> ProjectsZonesClustersNodePoolsGet
 projectsZonesClustersNodePoolsGet pPzcnpgZone_ pPzcnpgNodePoolId_ pPzcnpgClusterId_ pPzcnpgProjectId_ =
-    ProjectsZonesClustersNodePoolsGet'
+  ProjectsZonesClustersNodePoolsGet'
     { _pzcnpgXgafv = Nothing
     , _pzcnpgUploadProtocol = Nothing
     , _pzcnpgAccessToken = Nothing
@@ -127,6 +130,7 @@ projectsZonesClustersNodePoolsGet pPzcnpgZone_ pPzcnpgNodePoolId_ pPzcnpgCluster
     , _pzcnpgProjectId = pPzcnpgProjectId_
     , _pzcnpgCallback = Nothing
     }
+
 
 -- | V1 error format.
 pzcnpgXgafv :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Xgafv)
@@ -194,7 +198,8 @@ pzcnpgCallback
       (\ s a -> s{_pzcnpgCallback = a})
 
 instance GoogleRequest
-         ProjectsZonesClustersNodePoolsGet where
+           ProjectsZonesClustersNodePoolsGet
+         where
         type Rs ProjectsZonesClustersNodePoolsGet = NodePool
         type Scopes ProjectsZonesClustersNodePoolsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]

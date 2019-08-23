@@ -65,7 +65,8 @@ type JobsReportsGetResource =
 -- | Gets the metadata of a specific report.
 --
 -- /See:/ 'jobsReportsGet' smart constructor.
-data JobsReportsGet = JobsReportsGet'
+data JobsReportsGet =
+  JobsReportsGet'
     { _jrgXgafv                  :: !(Maybe Xgafv)
     , _jrgJobId                  :: !Text
     , _jrgUploadProtocol         :: !(Maybe Text)
@@ -74,7 +75,9 @@ data JobsReportsGet = JobsReportsGet'
     , _jrgUploadType             :: !(Maybe Text)
     , _jrgOnBehalfOfContentOwner :: !(Maybe Text)
     , _jrgCallback               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'JobsReportsGet' with the minimum fields required to make a request.
 --
@@ -100,7 +103,7 @@ jobsReportsGet
     -> Text -- ^ 'jrgReportId'
     -> JobsReportsGet
 jobsReportsGet pJrgJobId_ pJrgReportId_ =
-    JobsReportsGet'
+  JobsReportsGet'
     { _jrgXgafv = Nothing
     , _jrgJobId = pJrgJobId_
     , _jrgUploadProtocol = Nothing
@@ -110,6 +113,7 @@ jobsReportsGet pJrgJobId_ pJrgReportId_ =
     , _jrgOnBehalfOfContentOwner = Nothing
     , _jrgCallback = Nothing
     }
+
 
 -- | V1 error format.
 jrgXgafv :: Lens' JobsReportsGet (Maybe Xgafv)

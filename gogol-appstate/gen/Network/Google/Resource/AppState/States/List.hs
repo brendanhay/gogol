@@ -51,9 +51,12 @@ type StatesListResource =
 -- | Lists all the states keys, and optionally the state data.
 --
 -- /See:/ 'statesList' smart constructor.
-newtype StatesList = StatesList'
+newtype StatesList =
+  StatesList'
     { _slIncludeData :: Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatesList' with the minimum fields required to make a request.
 --
@@ -62,10 +65,8 @@ newtype StatesList = StatesList'
 -- * 'slIncludeData'
 statesList
     :: StatesList
-statesList =
-    StatesList'
-    { _slIncludeData = False
-    }
+statesList = StatesList' {_slIncludeData = False}
+
 
 -- | Whether to include the full data in addition to the version number
 slIncludeData :: Lens' StatesList Bool

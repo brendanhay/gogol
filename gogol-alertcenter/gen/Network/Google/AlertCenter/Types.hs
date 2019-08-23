@@ -94,6 +94,22 @@ module Network.Google.AlertCenter.Types
     , notification
     , nCloudPubsubTopic
 
+    -- * ActivityRule
+    , ActivityRule
+    , activityRule
+    , arSupersededAlerts
+    , arActionNames
+    , arSupersedingAlert
+    , arTriggerSource
+    , arWindowSize
+    , arUpdateTime
+    , arName
+    , arThreshold
+    , arQuery
+    , arDisplayName
+    , arDescription
+    , arCreateTime
+
     -- * AccountWarning
     , AccountWarning
     , accountWarning
@@ -150,6 +166,7 @@ module Network.Google.AlertCenter.Types
     , aAlertId
     , aSecurityInvestigationToolLink
     , aCustomerId
+    , aUpdateTime
     , aEndTime
     , aSource
     , aDeleted
@@ -238,4 +255,4 @@ alertCenterService
 
 -- | See and delete your domain\'s G Suite alerts, and send alert feedback
 appsAlertsScope :: Proxy '["https://www.googleapis.com/auth/apps.alerts"]
-appsAlertsScope = Proxy;
+appsAlertsScope = Proxy

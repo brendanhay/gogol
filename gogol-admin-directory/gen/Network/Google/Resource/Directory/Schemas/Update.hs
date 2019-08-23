@@ -57,11 +57,14 @@ type SchemasUpdateResource =
 -- | Update schema
 --
 -- /See:/ 'schemasUpdate' smart constructor.
-data SchemasUpdate = SchemasUpdate'
+data SchemasUpdate =
+  SchemasUpdate'
     { _suPayload    :: !Schema
     , _suCustomerId :: !Text
     , _suSchemaKey  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SchemasUpdate' with the minimum fields required to make a request.
 --
@@ -78,11 +81,12 @@ schemasUpdate
     -> Text -- ^ 'suSchemaKey'
     -> SchemasUpdate
 schemasUpdate pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
-    SchemasUpdate'
+  SchemasUpdate'
     { _suPayload = pSuPayload_
     , _suCustomerId = pSuCustomerId_
     , _suSchemaKey = pSuSchemaKey_
     }
+
 
 -- | Multipart request metadata.
 suPayload :: Lens' SchemasUpdate Schema

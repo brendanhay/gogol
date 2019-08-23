@@ -60,13 +60,16 @@ type BlogsListByUserResource =
 -- | Retrieves a list of blogs, possibly filtered.
 --
 -- /See:/ 'blogsListByUser' smart constructor.
-data BlogsListByUser = BlogsListByUser'
+data BlogsListByUser =
+  BlogsListByUser'
     { _blbuStatus        :: ![BlogsListByUserStatus]
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
     , _blbuRole          :: !(Maybe [BlogsListByUserRole])
     , _blbuView          :: !(Maybe BlogsListByUserView)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BlogsListByUser' with the minimum fields required to make a request.
 --
@@ -85,13 +88,14 @@ blogsListByUser
     :: Text -- ^ 'blbuUserId'
     -> BlogsListByUser
 blogsListByUser pBlbuUserId_ =
-    BlogsListByUser'
+  BlogsListByUser'
     { _blbuStatus = [BLBUSLive]
     , _blbuFetchUserInfo = Nothing
     , _blbuUserId = pBlbuUserId_
     , _blbuRole = Nothing
     , _blbuView = Nothing
     }
+
 
 -- | Blog statuses to include in the result (default: Live blogs only). Note
 -- that ADMIN access is required to view deleted blogs.

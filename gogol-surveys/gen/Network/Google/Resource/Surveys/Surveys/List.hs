@@ -56,11 +56,14 @@ type SurveysListResource =
 -- | Lists the surveys owned by the authenticated user.
 --
 -- /See:/ 'surveysList' smart constructor.
-data SurveysList = SurveysList'
+data SurveysList =
+  SurveysList'
     { _slToken      :: !(Maybe Text)
     , _slStartIndex :: !(Maybe (Textual Word32))
     , _slMaxResults :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SurveysList' with the minimum fields required to make a request.
 --
@@ -74,11 +77,9 @@ data SurveysList = SurveysList'
 surveysList
     :: SurveysList
 surveysList =
-    SurveysList'
-    { _slToken = Nothing
-    , _slStartIndex = Nothing
-    , _slMaxResults = Nothing
-    }
+  SurveysList'
+    {_slToken = Nothing, _slStartIndex = Nothing, _slMaxResults = Nothing}
+
 
 slToken :: Lens' SurveysList (Maybe Text)
 slToken = lens _slToken (\ s a -> s{_slToken = a})

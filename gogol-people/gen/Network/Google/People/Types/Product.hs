@@ -24,12 +24,15 @@ import           Network.Google.Prelude
 -- VoIP communications to make voice or video calls over the internet.
 --
 -- /See:/ 'sipAddress' smart constructor.
-data SipAddress = SipAddress'
+data SipAddress =
+  SipAddress'
     { _saValue         :: !(Maybe Text)
     , _saMetadata      :: !(Maybe FieldMetadata)
     , _saType          :: !(Maybe Text)
     , _saFormattedType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SipAddress' with the minimum fields required to make a request.
 --
@@ -45,12 +48,13 @@ data SipAddress = SipAddress'
 sipAddress
     :: SipAddress
 sipAddress =
-    SipAddress'
+  SipAddress'
     { _saValue = Nothing
     , _saMetadata = Nothing
     , _saType = Nothing
     , _saFormattedType = Nothing
     }
+
 
 -- | The SIP address in the [RFC 3261
 -- 19.1](https:\/\/tools.ietf.org\/html\/rfc3261#section-19.1) SIP URI
@@ -97,11 +101,14 @@ instance ToJSON SipAddress where
 -- to help others recognize the person.
 --
 -- /See:/ 'photo' smart constructor.
-data Photo = Photo'
+data Photo =
+  Photo'
     { _pDefault  :: !(Maybe Bool)
     , _pURL      :: !(Maybe Text)
     , _pMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
@@ -114,12 +121,8 @@ data Photo = Photo'
 -- * 'pMetadata'
 photo
     :: Photo
-photo =
-    Photo'
-    { _pDefault = Nothing
-    , _pURL = Nothing
-    , _pMetadata = Nothing
-    }
+photo = Photo' {_pDefault = Nothing, _pURL = Nothing, _pMetadata = Nothing}
+
 
 -- | True if the photo is a default photo; false if the photo is a
 -- user-provided photo.
@@ -155,12 +158,15 @@ instance ToJSON Photo where
 -- | An event related to the person.
 --
 -- /See:/ 'event' smart constructor.
-data Event = Event'
+data Event =
+  Event'
     { _eDate          :: !(Maybe Date)
     , _eMetadata      :: !(Maybe FieldMetadata)
     , _eType          :: !(Maybe Text)
     , _eFormattedType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
@@ -176,12 +182,13 @@ data Event = Event'
 event
     :: Event
 event =
-    Event'
+  Event'
     { _eDate = Nothing
     , _eMetadata = Nothing
     , _eType = Nothing
     , _eFormattedType = Nothing
     }
+
 
 -- | The date of the event.
 eDate :: Lens' Event (Maybe Date)
@@ -224,13 +231,16 @@ instance ToJSON Event where
 
 --
 -- /See:/ 'listConnectionsResponse' smart constructor.
-data ListConnectionsResponse = ListConnectionsResponse'
+data ListConnectionsResponse =
+  ListConnectionsResponse'
     { _lcrTotalItems    :: !(Maybe (Textual Int32))
     , _lcrNextPageToken :: !(Maybe Text)
     , _lcrConnections   :: !(Maybe [Person])
     , _lcrNextSyncToken :: !(Maybe Text)
     , _lcrTotalPeople   :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListConnectionsResponse' with the minimum fields required to make a request.
 --
@@ -248,13 +258,14 @@ data ListConnectionsResponse = ListConnectionsResponse'
 listConnectionsResponse
     :: ListConnectionsResponse
 listConnectionsResponse =
-    ListConnectionsResponse'
+  ListConnectionsResponse'
     { _lcrTotalItems = Nothing
     , _lcrNextPageToken = Nothing
     , _lcrConnections = Nothing
     , _lcrNextSyncToken = Nothing
     , _lcrTotalPeople = Nothing
     }
+
 
 -- | The total number of items in the list without pagination.
 lcrTotalItems :: Lens' ListConnectionsResponse (Maybe Int32)
@@ -348,11 +359,14 @@ instance ToJSON ListConnectionsResponse where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -365,12 +379,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -411,11 +421,14 @@ instance ToJSON Status where
 -- | The response for a specific contact group.
 --
 -- /See:/ 'contactGroupResponse' smart constructor.
-data ContactGroupResponse = ContactGroupResponse'
+data ContactGroupResponse =
+  ContactGroupResponse'
     { _cgrStatus                :: !(Maybe Status)
     , _cgrContactGroup          :: !(Maybe ContactGroup)
     , _cgrRequestedResourceName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupResponse' with the minimum fields required to make a request.
 --
@@ -429,11 +442,12 @@ data ContactGroupResponse = ContactGroupResponse'
 contactGroupResponse
     :: ContactGroupResponse
 contactGroupResponse =
-    ContactGroupResponse'
+  ContactGroupResponse'
     { _cgrStatus = Nothing
     , _cgrContactGroup = Nothing
     , _cgrRequestedResourceName = Nothing
     }
+
 
 -- | The status of the response.
 cgrStatus :: Lens' ContactGroupResponse (Maybe Status)
@@ -472,7 +486,8 @@ instance ToJSON ContactGroupResponse where
 -- | A contact group.
 --
 -- /See:/ 'contactGroup' smart constructor.
-data ContactGroup = ContactGroup'
+data ContactGroup =
+  ContactGroup'
     { _cgEtag                :: !(Maybe Text)
     , _cgResourceName        :: !(Maybe Text)
     , _cgMemberResourceNames :: !(Maybe [Text])
@@ -481,7 +496,9 @@ data ContactGroup = ContactGroup'
     , _cgGroupType           :: !(Maybe ContactGroupGroupType)
     , _cgMetadata            :: !(Maybe ContactGroupMetadata)
     , _cgMemberCount         :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroup' with the minimum fields required to make a request.
 --
@@ -505,7 +522,7 @@ data ContactGroup = ContactGroup'
 contactGroup
     :: ContactGroup
 contactGroup =
-    ContactGroup'
+  ContactGroup'
     { _cgEtag = Nothing
     , _cgResourceName = Nothing
     , _cgMemberResourceNames = Nothing
@@ -515,6 +532,7 @@ contactGroup =
     , _cgMetadata = Nothing
     , _cgMemberCount = Nothing
     }
+
 
 -- | The [HTTP entity tag](https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag) of
 -- the resource. Used for web cache validation.
@@ -600,9 +618,12 @@ instance ToJSON ContactGroup where
 -- | The response to a modify contact group members request.
 --
 -- /See:/ 'modifyContactGroupMembersResponse' smart constructor.
-newtype ModifyContactGroupMembersResponse = ModifyContactGroupMembersResponse'
+newtype ModifyContactGroupMembersResponse =
+  ModifyContactGroupMembersResponse'
     { _mcgmrNotFoundResourceNames :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ModifyContactGroupMembersResponse' with the minimum fields required to make a request.
 --
@@ -612,9 +633,8 @@ newtype ModifyContactGroupMembersResponse = ModifyContactGroupMembersResponse'
 modifyContactGroupMembersResponse
     :: ModifyContactGroupMembersResponse
 modifyContactGroupMembersResponse =
-    ModifyContactGroupMembersResponse'
-    { _mcgmrNotFoundResourceNames = Nothing
-    }
+  ModifyContactGroupMembersResponse' {_mcgmrNotFoundResourceNames = Nothing}
+
 
 -- | The contact people resource names that were not found.
 mcgmrNotFoundResourceNames :: Lens' ModifyContactGroupMembersResponse [Text]
@@ -644,9 +664,12 @@ instance ToJSON ModifyContactGroupMembersResponse
 -- will be replaced.
 --
 -- /See:/ 'updateContactGroupRequest' smart constructor.
-newtype UpdateContactGroupRequest = UpdateContactGroupRequest'
+newtype UpdateContactGroupRequest =
+  UpdateContactGroupRequest'
     { _ucgrContactGroup :: Maybe ContactGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateContactGroupRequest' with the minimum fields required to make a request.
 --
@@ -656,9 +679,8 @@ newtype UpdateContactGroupRequest = UpdateContactGroupRequest'
 updateContactGroupRequest
     :: UpdateContactGroupRequest
 updateContactGroupRequest =
-    UpdateContactGroupRequest'
-    { _ucgrContactGroup = Nothing
-    }
+  UpdateContactGroupRequest' {_ucgrContactGroup = Nothing}
+
 
 -- | The contact group to update.
 ucgrContactGroup :: Lens' UpdateContactGroupRequest (Maybe ContactGroup)
@@ -679,12 +701,15 @@ instance ToJSON UpdateContactGroupRequest where
               (catMaybes
                  [("contactGroup" .=) <$> _ucgrContactGroup])
 
--- | A Google Apps Domain membership.
+-- | A read-only G Suite Domain membership.
 --
 -- /See:/ 'domainMembership' smart constructor.
-newtype DomainMembership = DomainMembership'
+newtype DomainMembership =
+  DomainMembership'
     { _dmInViewerDomain :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DomainMembership' with the minimum fields required to make a request.
 --
@@ -693,12 +718,10 @@ newtype DomainMembership = DomainMembership'
 -- * 'dmInViewerDomain'
 domainMembership
     :: DomainMembership
-domainMembership =
-    DomainMembership'
-    { _dmInViewerDomain = Nothing
-    }
+domainMembership = DomainMembership' {_dmInViewerDomain = Nothing}
 
--- | True if the person is in the viewer\'s Google Apps domain.
+
+-- | True if the person is in the viewer\'s G Suite domain.
 dmInViewerDomain :: Lens' DomainMembership (Maybe Bool)
 dmInViewerDomain
   = lens _dmInViewerDomain
@@ -719,11 +742,14 @@ instance ToJSON DomainMembership where
 -- | A person\'s read-only relationship interest .
 --
 -- /See:/ 'relationshipInterest' smart constructor.
-data RelationshipInterest = RelationshipInterest'
+data RelationshipInterest =
+  RelationshipInterest'
     { _riValue          :: !(Maybe Text)
     , _riMetadata       :: !(Maybe FieldMetadata)
     , _riFormattedValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelationshipInterest' with the minimum fields required to make a request.
 --
@@ -737,11 +763,9 @@ data RelationshipInterest = RelationshipInterest'
 relationshipInterest
     :: RelationshipInterest
 relationshipInterest =
-    RelationshipInterest'
-    { _riValue = Nothing
-    , _riMetadata = Nothing
-    , _riFormattedValue = Nothing
-    }
+  RelationshipInterest'
+    {_riValue = Nothing, _riMetadata = Nothing, _riFormattedValue = Nothing}
+
 
 -- | The kind of relationship the person is looking for. The value can be
 -- custom or one of these predefined values: * \`friend\` * \`date\` *
@@ -781,10 +805,13 @@ instance ToJSON RelationshipInterest where
 -- | A person\'s bragging rights.
 --
 -- /See:/ 'braggingRights' smart constructor.
-data BraggingRights = BraggingRights'
+data BraggingRights =
+  BraggingRights'
     { _brValue    :: !(Maybe Text)
     , _brMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BraggingRights' with the minimum fields required to make a request.
 --
@@ -795,11 +822,8 @@ data BraggingRights = BraggingRights'
 -- * 'brMetadata'
 braggingRights
     :: BraggingRights
-braggingRights =
-    BraggingRights'
-    { _brValue = Nothing
-    , _brMetadata = Nothing
-    }
+braggingRights = BraggingRights' {_brValue = Nothing, _brMetadata = Nothing}
+
 
 -- | The bragging rights; for example, \`climbed mount everest\`.
 brValue :: Lens' BraggingRights (Maybe Text)
@@ -824,14 +848,18 @@ instance ToJSON BraggingRights where
                  [("value" .=) <$> _brValue,
                   ("metadata" .=) <$> _brMetadata])
 
--- | A person\'s read-only membership in a group.
+-- | A person\'s membership in a group. Only contact group memberships can be
+-- modified.
 --
 -- /See:/ 'membership' smart constructor.
-data Membership = Membership'
+data Membership =
+  Membership'
     { _mDomainMembership       :: !(Maybe DomainMembership)
     , _mContactGroupMembership :: !(Maybe ContactGroupMembership)
     , _mMetadata               :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Membership' with the minimum fields required to make a request.
 --
@@ -845,13 +873,14 @@ data Membership = Membership'
 membership
     :: Membership
 membership =
-    Membership'
+  Membership'
     { _mDomainMembership = Nothing
     , _mContactGroupMembership = Nothing
     , _mMetadata = Nothing
     }
 
--- | The domain membership.
+
+-- | The read-only domain membership.
 mDomainMembership :: Lens' Membership (Maybe DomainMembership)
 mDomainMembership
   = lens _mDomainMembership
@@ -893,7 +922,8 @@ instance ToJSON Membership where
 -- \`metadata.primary\` set to true.
 --
 -- /See:/ 'person' smart constructor.
-data Person = Person'
+data Person =
+  Person'
     { _perEmailAddresses        :: !(Maybe [EmailAddress])
     , _perAgeRange              :: !(Maybe PersonAgeRange)
     , _perEtag                  :: !(Maybe Text)
@@ -926,7 +956,9 @@ data Person = Person'
     , _perLocales               :: !(Maybe [Locale])
     , _perMemberships           :: !(Maybe [Membership])
     , _perRelationshipInterests :: !(Maybe [RelationshipInterest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
 --
@@ -998,7 +1030,7 @@ data Person = Person'
 person
     :: Person
 person =
-    Person'
+  Person'
     { _perEmailAddresses = Nothing
     , _perAgeRange = Nothing
     , _perEtag = Nothing
@@ -1032,6 +1064,7 @@ person =
     , _perMemberships = Nothing
     , _perRelationshipInterests = Nothing
     }
+
 
 -- | The person\'s email addresses.
 perEmailAddresses :: Lens' Person [EmailAddress]
@@ -1249,7 +1282,7 @@ perLocales
       _Default
       . _Coerce
 
--- | The person\'s read-only group memberships.
+-- | The person\'s group memberships.
 perMemberships :: Lens' Person [Membership]
 perMemberships
   = lens _perMemberships
@@ -1350,14 +1383,16 @@ instance ToJSON Person where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1368,12 +1403,15 @@ instance ToJSON Empty where
 -- | The response to a list contact groups request.
 --
 -- /See:/ 'listContactGroupsResponse' smart constructor.
-data ListContactGroupsResponse = ListContactGroupsResponse'
+data ListContactGroupsResponse =
+  ListContactGroupsResponse'
     { _lcgrContactGroups :: !(Maybe [ContactGroup])
     , _lcgrTotalItems    :: !(Maybe (Textual Int32))
     , _lcgrNextPageToken :: !(Maybe Text)
     , _lcgrNextSyncToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListContactGroupsResponse' with the minimum fields required to make a request.
 --
@@ -1389,12 +1427,13 @@ data ListContactGroupsResponse = ListContactGroupsResponse'
 listContactGroupsResponse
     :: ListContactGroupsResponse
 listContactGroupsResponse =
-    ListContactGroupsResponse'
+  ListContactGroupsResponse'
     { _lcgrContactGroups = Nothing
     , _lcgrTotalItems = Nothing
     , _lcgrNextPageToken = Nothing
     , _lcgrNextSyncToken = Nothing
     }
+
 
 -- | The list of contact groups. Members of the contact groups are not
 -- populated.
@@ -1446,25 +1485,40 @@ instance ToJSON ListContactGroupsResponse where
 -- | A Google contact group membership.
 --
 -- /See:/ 'contactGroupMembership' smart constructor.
-newtype ContactGroupMembership = ContactGroupMembership'
-    { _cgmContactGroupId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ContactGroupMembership =
+  ContactGroupMembership'
+    { _cgmContactGroupResourceName :: !(Maybe Text)
+    , _cgmContactGroupId           :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupMembership' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cgmContactGroupResourceName'
+--
 -- * 'cgmContactGroupId'
 contactGroupMembership
     :: ContactGroupMembership
 contactGroupMembership =
-    ContactGroupMembership'
-    { _cgmContactGroupId = Nothing
-    }
+  ContactGroupMembership'
+    {_cgmContactGroupResourceName = Nothing, _cgmContactGroupId = Nothing}
 
--- | The contact group ID for the contact group membership. The contact group
--- ID can be custom or one of these predefined values: * \`myContacts\` *
--- \`starred\` * A numerical ID for user-created groups.
+
+-- | The resource name for the contact group, assigned by the server. An
+-- ASCII string, in the form of \`contactGroups\/\`contact_group_id. Only
+-- contact_group_resource_name can be used for modifying memberships. Any
+-- contact group membership can be removed, but only user group or
+-- \"myContacts\" or \"starred\" system groups memberships can be added. A
+-- contact must always have at least one contact group membership.
+cgmContactGroupResourceName :: Lens' ContactGroupMembership (Maybe Text)
+cgmContactGroupResourceName
+  = lens _cgmContactGroupResourceName
+      (\ s a -> s{_cgmContactGroupResourceName = a})
+
+-- | The read-only contact group ID for the contact group membership.
 cgmContactGroupId :: Lens' ContactGroupMembership (Maybe Text)
 cgmContactGroupId
   = lens _cgmContactGroupId
@@ -1474,22 +1528,29 @@ instance FromJSON ContactGroupMembership where
         parseJSON
           = withObject "ContactGroupMembership"
               (\ o ->
-                 ContactGroupMembership' <$> (o .:? "contactGroupId"))
+                 ContactGroupMembership' <$>
+                   (o .:? "contactGroupResourceName") <*>
+                     (o .:? "contactGroupId"))
 
 instance ToJSON ContactGroupMembership where
         toJSON ContactGroupMembership'{..}
           = object
               (catMaybes
-                 [("contactGroupId" .=) <$> _cgmContactGroupId])
+                 [("contactGroupResourceName" .=) <$>
+                    _cgmContactGroupResourceName,
+                  ("contactGroupId" .=) <$> _cgmContactGroupId])
 
 -- | Arbitrary user data that is populated by the end users.
 --
 -- /See:/ 'userDefined' smart constructor.
-data UserDefined = UserDefined'
+data UserDefined =
+  UserDefined'
     { _udValue    :: !(Maybe Text)
     , _udKey      :: !(Maybe Text)
     , _udMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UserDefined' with the minimum fields required to make a request.
 --
@@ -1503,11 +1564,8 @@ data UserDefined = UserDefined'
 userDefined
     :: UserDefined
 userDefined =
-    UserDefined'
-    { _udValue = Nothing
-    , _udKey = Nothing
-    , _udMetadata = Nothing
-    }
+  UserDefined' {_udValue = Nothing, _udKey = Nothing, _udMetadata = Nothing}
+
 
 -- | The end user specified value of the user defined data.
 udValue :: Lens' UserDefined (Maybe Text)
@@ -1540,10 +1598,13 @@ instance ToJSON UserDefined where
 -- | A person\'s locale preference.
 --
 -- /See:/ 'locale' smart constructor.
-data Locale = Locale'
+data Locale =
+  Locale'
     { _lValue    :: !(Maybe Text)
     , _lMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Locale' with the minimum fields required to make a request.
 --
@@ -1554,11 +1615,8 @@ data Locale = Locale'
 -- * 'lMetadata'
 locale
     :: Locale
-locale =
-    Locale'
-    { _lValue = Nothing
-    , _lMetadata = Nothing
-    }
+locale = Locale' {_lValue = Nothing, _lMetadata = Nothing}
+
 
 -- | The well-formed [IETF BCP 47](https:\/\/tools.ietf.org\/html\/bcp47)
 -- language tag representing the locale.
@@ -1586,11 +1644,14 @@ instance ToJSON Locale where
 -- | A person\'s read-only relationship status.
 --
 -- /See:/ 'relationshipStatus' smart constructor.
-data RelationshipStatus = RelationshipStatus'
+data RelationshipStatus =
+  RelationshipStatus'
     { _rsValue          :: !(Maybe Text)
     , _rsMetadata       :: !(Maybe FieldMetadata)
     , _rsFormattedValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RelationshipStatus' with the minimum fields required to make a request.
 --
@@ -1604,11 +1665,9 @@ data RelationshipStatus = RelationshipStatus'
 relationshipStatus
     :: RelationshipStatus
 relationshipStatus =
-    RelationshipStatus'
-    { _rsValue = Nothing
-    , _rsMetadata = Nothing
-    , _rsFormattedValue = Nothing
-    }
+  RelationshipStatus'
+    {_rsValue = Nothing, _rsMetadata = Nothing, _rsFormattedValue = Nothing}
+
 
 -- | The relationship status. The value can be custom or one of these
 -- predefined values: * \`single\` * \`inARelationship\` * \`engaged\` *
@@ -1649,12 +1708,15 @@ instance ToJSON RelationshipStatus where
 -- | A person\'s associated URLs.
 --
 -- /See:/ 'url' smart constructor.
-data URL = URL'
+data URL =
+  URL'
     { _uValue         :: !(Maybe Text)
     , _uMetadata      :: !(Maybe FieldMetadata)
     , _uType          :: !(Maybe Text)
     , _uFormattedType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URL' with the minimum fields required to make a request.
 --
@@ -1670,12 +1732,13 @@ data URL = URL'
 url
     :: URL
 url =
-    URL'
+  URL'
     { _uValue = Nothing
     , _uMetadata = Nothing
     , _uType = Nothing
     , _uFormattedType = Nothing
     }
+
 
 -- | The URL.
 uValue :: Lens' URL (Maybe Text)
@@ -1720,9 +1783,12 @@ instance ToJSON URL where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -1733,9 +1799,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -1755,7 +1820,8 @@ instance ToJSON StatusDetailsItem where
 -- fields are optional.
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address'
+data Address =
+  Address'
     { _aStreetAddress   :: !(Maybe Text)
     , _aPoBox           :: !(Maybe Text)
     , _aCountry         :: !(Maybe Text)
@@ -1768,7 +1834,9 @@ data Address = Address'
     , _aRegion          :: !(Maybe Text)
     , _aType            :: !(Maybe Text)
     , _aFormattedType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
@@ -1800,7 +1868,7 @@ data Address = Address'
 address
     :: Address
 address =
-    Address'
+  Address'
     { _aStreetAddress = Nothing
     , _aPoBox = Nothing
     , _aCountry = Nothing
@@ -1814,6 +1882,7 @@ address =
     , _aType = Nothing
     , _aFormattedType = Nothing
     }
+
 
 -- | The street address.
 aStreetAddress :: Lens' Address (Maybe Text)
@@ -1914,10 +1983,13 @@ instance ToJSON Address where
 -- | The read-only metadata about a profile.
 --
 -- /See:/ 'proFileMetadata' smart constructor.
-data ProFileMetadata = ProFileMetadata'
+data ProFileMetadata =
+  ProFileMetadata'
     { _pfmObjectType :: !(Maybe ProFileMetadataObjectType)
     , _pfmUserTypes  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProFileMetadata' with the minimum fields required to make a request.
 --
@@ -1929,10 +2001,8 @@ data ProFileMetadata = ProFileMetadata'
 proFileMetadata
     :: ProFileMetadata
 proFileMetadata =
-    ProFileMetadata'
-    { _pfmObjectType = Nothing
-    , _pfmUserTypes = Nothing
-    }
+  ProFileMetadata' {_pfmObjectType = Nothing, _pfmUserTypes = Nothing}
+
 
 -- | The profile object type.
 pfmObjectType :: Lens' ProFileMetadata (Maybe ProFileMetadataObjectType)
@@ -1965,12 +2035,15 @@ instance ToJSON ProFileMetadata where
 -- | A person\'s relation to another person.
 --
 -- /See:/ 'relation' smart constructor.
-data Relation = Relation'
+data Relation =
+  Relation'
     { _rPerson        :: !(Maybe Text)
     , _rMetadata      :: !(Maybe FieldMetadata)
     , _rType          :: !(Maybe Text)
     , _rFormattedType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Relation' with the minimum fields required to make a request.
 --
@@ -1986,12 +2059,13 @@ data Relation = Relation'
 relation
     :: Relation
 relation =
-    Relation'
+  Relation'
     { _rPerson = Nothing
     , _rMetadata = Nothing
     , _rType = Nothing
     , _rFormattedType = Nothing
     }
+
 
 -- | The name of the other person this relation refers to.
 rPerson :: Lens' Relation (Maybe Text)
@@ -2038,9 +2112,12 @@ instance ToJSON Relation where
 
 --
 -- /See:/ 'getPeopleResponse' smart constructor.
-newtype GetPeopleResponse = GetPeopleResponse'
+newtype GetPeopleResponse =
+  GetPeopleResponse'
     { _gprResponses :: Maybe [PersonResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetPeopleResponse' with the minimum fields required to make a request.
 --
@@ -2049,10 +2126,8 @@ newtype GetPeopleResponse = GetPeopleResponse'
 -- * 'gprResponses'
 getPeopleResponse
     :: GetPeopleResponse
-getPeopleResponse =
-    GetPeopleResponse'
-    { _gprResponses = Nothing
-    }
+getPeopleResponse = GetPeopleResponse' {_gprResponses = Nothing}
+
 
 -- | The response for each requested resource name.
 gprResponses :: Lens' GetPeopleResponse [PersonResponse]
@@ -2078,11 +2153,14 @@ instance ToJSON GetPeopleResponse where
 -- same date, but are not guaranteed to.
 --
 -- /See:/ 'birthday' smart constructor.
-data Birthday = Birthday'
+data Birthday =
+  Birthday'
     { _bText     :: !(Maybe Text)
     , _bDate     :: !(Maybe Date)
     , _bMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Birthday' with the minimum fields required to make a request.
 --
@@ -2095,12 +2173,8 @@ data Birthday = Birthday'
 -- * 'bMetadata'
 birthday
     :: Birthday
-birthday =
-    Birthday'
-    { _bText = Nothing
-    , _bDate = Nothing
-    , _bMetadata = Nothing
-    }
+birthday = Birthday' {_bText = Nothing, _bDate = Nothing, _bMetadata = Nothing}
+
 
 -- | A free-form string representing the user\'s birthday.
 bText :: Lens' Birthday (Maybe Text)
@@ -2139,11 +2213,14 @@ instance ToJSON Birthday where
 -- of year; for example, anniversary date.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date'
+data Date =
+  Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -2156,12 +2233,8 @@ data Date = Date'
 -- * 'dMonth'
 date
     :: Date
-date =
-    Date'
-    { _dDay = Nothing
-    , _dYear = Nothing
-    , _dMonth = Nothing
-    }
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year by itself or a year and month where the day is
@@ -2202,10 +2275,13 @@ instance ToJSON Date where
 -- | A read-only brief one-line description of the person.
 --
 -- /See:/ 'tagline' smart constructor.
-data Tagline = Tagline'
+data Tagline =
+  Tagline'
     { _tValue    :: !(Maybe Text)
     , _tMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Tagline' with the minimum fields required to make a request.
 --
@@ -2216,11 +2292,8 @@ data Tagline = Tagline'
 -- * 'tMetadata'
 tagline
     :: Tagline
-tagline =
-    Tagline'
-    { _tValue = Nothing
-    , _tMetadata = Nothing
-    }
+tagline = Tagline' {_tValue = Nothing, _tMetadata = Nothing}
+
 
 -- | The tagline.
 tValue :: Lens' Tagline (Maybe Text)
@@ -2247,11 +2320,14 @@ instance ToJSON Tagline where
 -- | A person\'s past or current residence.
 --
 -- /See:/ 'residence' smart constructor.
-data Residence = Residence'
+data Residence =
+  Residence'
     { _resValue    :: !(Maybe Text)
     , _resCurrent  :: !(Maybe Bool)
     , _resMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Residence' with the minimum fields required to make a request.
 --
@@ -2265,11 +2341,9 @@ data Residence = Residence'
 residence
     :: Residence
 residence =
-    Residence'
-    { _resValue = Nothing
-    , _resCurrent = Nothing
-    , _resMetadata = Nothing
-    }
+  Residence'
+    {_resValue = Nothing, _resCurrent = Nothing, _resMetadata = Nothing}
+
 
 -- | The address of the residence.
 resValue :: Lens' Residence (Maybe Text)
@@ -2305,10 +2379,13 @@ instance ToJSON Residence where
 -- | A person\'s age range.
 --
 -- /See:/ 'ageRangeType' smart constructor.
-data AgeRangeType = AgeRangeType'
+data AgeRangeType =
+  AgeRangeType'
     { _artAgeRange :: !(Maybe AgeRangeTypeAgeRange)
     , _artMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AgeRangeType' with the minimum fields required to make a request.
 --
@@ -2319,11 +2396,8 @@ data AgeRangeType = AgeRangeType'
 -- * 'artMetadata'
 ageRangeType
     :: AgeRangeType
-ageRangeType =
-    AgeRangeType'
-    { _artAgeRange = Nothing
-    , _artMetadata = Nothing
-    }
+ageRangeType = AgeRangeType' {_artAgeRange = Nothing, _artMetadata = Nothing}
+
 
 -- | The age range.
 artAgeRange :: Lens' AgeRangeType (Maybe AgeRangeTypeAgeRange)
@@ -2352,11 +2426,14 @@ instance ToJSON AgeRangeType where
 -- | A person\'s gender.
 --
 -- /See:/ 'gender' smart constructor.
-data Gender = Gender'
+data Gender =
+  Gender'
     { _gValue          :: !(Maybe Text)
     , _gMetadata       :: !(Maybe FieldMetadata)
     , _gFormattedValue :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Gender' with the minimum fields required to make a request.
 --
@@ -2370,11 +2447,8 @@ data Gender = Gender'
 gender
     :: Gender
 gender =
-    Gender'
-    { _gValue = Nothing
-    , _gMetadata = Nothing
-    , _gFormattedValue = Nothing
-    }
+  Gender' {_gValue = Nothing, _gMetadata = Nothing, _gFormattedValue = Nothing}
+
 
 -- | The gender for the person. The gender can be custom or one of these
 -- predefined values: * \`male\` * \`female\` * \`other\` * \`unknown\`
@@ -2412,7 +2486,8 @@ instance ToJSON Gender where
 -- | A person\'s name. If the name is a mononym, the family name is empty.
 --
 -- /See:/ 'name' smart constructor.
-data Name = Name'
+data Name =
+  Name'
     { _nGivenName               :: !(Maybe Text)
     , _nPhoneticHonorificSuffix :: !(Maybe Text)
     , _nMiddleName              :: !(Maybe Text)
@@ -2427,7 +2502,9 @@ data Name = Name'
     , _nPhoneticGivenName       :: !(Maybe Text)
     , _nHonorificSuffix         :: !(Maybe Text)
     , _nPhoneticFullName        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
@@ -2463,7 +2540,7 @@ data Name = Name'
 name
     :: Name
 name =
-    Name'
+  Name'
     { _nGivenName = Nothing
     , _nPhoneticHonorificSuffix = Nothing
     , _nMiddleName = Nothing
@@ -2479,6 +2556,7 @@ name =
     , _nHonorificSuffix = Nothing
     , _nPhoneticFullName = Nothing
     }
+
 
 -- | The given name.
 nGivenName :: Lens' Name (Maybe Text)
@@ -2607,11 +2685,14 @@ instance ToJSON Name where
 -- | Metadata about a field.
 --
 -- /See:/ 'fieldMetadata' smart constructor.
-data FieldMetadata = FieldMetadata'
+data FieldMetadata =
+  FieldMetadata'
     { _fmVerified :: !(Maybe Bool)
     , _fmPrimary  :: !(Maybe Bool)
     , _fmSource   :: !(Maybe Source)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FieldMetadata' with the minimum fields required to make a request.
 --
@@ -2625,11 +2706,9 @@ data FieldMetadata = FieldMetadata'
 fieldMetadata
     :: FieldMetadata
 fieldMetadata =
-    FieldMetadata'
-    { _fmVerified = Nothing
-    , _fmPrimary = Nothing
-    , _fmSource = Nothing
-    }
+  FieldMetadata'
+    {_fmVerified = Nothing, _fmPrimary = Nothing, _fmSource = Nothing}
+
 
 -- | True if the field is verified; false if the field is unverified. A
 -- verified field is typically a name, email address, phone number, or
@@ -2667,13 +2746,16 @@ instance ToJSON FieldMetadata where
 -- | A person\'s phone number.
 --
 -- /See:/ 'phoneNumber' smart constructor.
-data PhoneNumber = PhoneNumber'
+data PhoneNumber =
+  PhoneNumber'
     { _pnCanonicalForm :: !(Maybe Text)
     , _pnValue         :: !(Maybe Text)
     , _pnMetadata      :: !(Maybe FieldMetadata)
     , _pnType          :: !(Maybe Text)
     , _pnFormattedType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PhoneNumber' with the minimum fields required to make a request.
 --
@@ -2691,13 +2773,14 @@ data PhoneNumber = PhoneNumber'
 phoneNumber
     :: PhoneNumber
 phoneNumber =
-    PhoneNumber'
+  PhoneNumber'
     { _pnCanonicalForm = Nothing
     , _pnValue = Nothing
     , _pnMetadata = Nothing
     , _pnType = Nothing
     , _pnFormattedType = Nothing
     }
+
 
 -- | The read-only canonicalized [ITU-T
 -- E.164](https:\/\/law.resource.org\/pub\/us\/cfr\/ibr\/004\/itu-t.E.164.1.2008.pdf)
@@ -2753,10 +2836,13 @@ instance ToJSON PhoneNumber where
 -- | A person\'s occupation.
 --
 -- /See:/ 'occupation' smart constructor.
-data Occupation = Occupation'
+data Occupation =
+  Occupation'
     { _oValue    :: !(Maybe Text)
     , _oMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Occupation' with the minimum fields required to make a request.
 --
@@ -2767,11 +2853,8 @@ data Occupation = Occupation'
 -- * 'oMetadata'
 occupation
     :: Occupation
-occupation =
-    Occupation'
-    { _oValue = Nothing
-    , _oMetadata = Nothing
-    }
+occupation = Occupation' {_oValue = Nothing, _oMetadata = Nothing}
+
 
 -- | The occupation; for example, \`carpenter\`.
 oValue :: Lens' Occupation (Maybe Text)
@@ -2799,13 +2882,16 @@ instance ToJSON Occupation where
 -- | A person\'s email address.
 --
 -- /See:/ 'emailAddress' smart constructor.
-data EmailAddress = EmailAddress'
+data EmailAddress =
+  EmailAddress'
     { _eaValue         :: !(Maybe Text)
     , _eaMetadata      :: !(Maybe FieldMetadata)
     , _eaDisplayName   :: !(Maybe Text)
     , _eaType          :: !(Maybe Text)
     , _eaFormattedType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EmailAddress' with the minimum fields required to make a request.
 --
@@ -2823,13 +2909,14 @@ data EmailAddress = EmailAddress'
 emailAddress
     :: EmailAddress
 emailAddress =
-    EmailAddress'
+  EmailAddress'
     { _eaValue = Nothing
     , _eaMetadata = Nothing
     , _eaDisplayName = Nothing
     , _eaType = Nothing
     , _eaFormattedType = Nothing
     }
+
 
 -- | The email address.
 eaValue :: Lens' EmailAddress (Maybe Text)
@@ -2881,9 +2968,12 @@ instance ToJSON EmailAddress where
 -- | A request to create a new contact group.
 --
 -- /See:/ 'createContactGroupRequest' smart constructor.
-newtype CreateContactGroupRequest = CreateContactGroupRequest'
+newtype CreateContactGroupRequest =
+  CreateContactGroupRequest'
     { _ccgrContactGroup :: Maybe ContactGroup
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreateContactGroupRequest' with the minimum fields required to make a request.
 --
@@ -2893,9 +2983,8 @@ newtype CreateContactGroupRequest = CreateContactGroupRequest'
 createContactGroupRequest
     :: CreateContactGroupRequest
 createContactGroupRequest =
-    CreateContactGroupRequest'
-    { _ccgrContactGroup = Nothing
-    }
+  CreateContactGroupRequest' {_ccgrContactGroup = Nothing}
+
 
 -- | The contact group to create.
 ccgrContactGroup :: Lens' CreateContactGroupRequest (Maybe ContactGroup)
@@ -2919,10 +3008,13 @@ instance ToJSON CreateContactGroupRequest where
 -- | The read-only metadata about a contact group.
 --
 -- /See:/ 'contactGroupMetadata' smart constructor.
-data ContactGroupMetadata = ContactGroupMetadata'
+data ContactGroupMetadata =
+  ContactGroupMetadata'
     { _cgmUpdateTime :: !(Maybe DateTime')
     , _cgmDeleted    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContactGroupMetadata' with the minimum fields required to make a request.
 --
@@ -2934,10 +3026,8 @@ data ContactGroupMetadata = ContactGroupMetadata'
 contactGroupMetadata
     :: ContactGroupMetadata
 contactGroupMetadata =
-    ContactGroupMetadata'
-    { _cgmUpdateTime = Nothing
-    , _cgmDeleted = Nothing
-    }
+  ContactGroupMetadata' {_cgmUpdateTime = Nothing, _cgmDeleted = Nothing}
+
 
 -- | The time the group was last updated.
 cgmUpdateTime :: Lens' ContactGroupMetadata (Maybe UTCTime)
@@ -2969,13 +3059,16 @@ instance ToJSON ContactGroupMetadata where
 
 -- | A request to modify an existing contact group\'s members. Contacts can
 -- be removed from any group but they can only be added to a user group or
--- myContacts or starred system groups.
+-- \"myContacts\" or \"starred\" system groups.
 --
 -- /See:/ 'modifyContactGroupMembersRequest' smart constructor.
-data ModifyContactGroupMembersRequest = ModifyContactGroupMembersRequest'
+data ModifyContactGroupMembersRequest =
+  ModifyContactGroupMembersRequest'
     { _mcgmrResourceNamesToAdd    :: !(Maybe [Text])
     , _mcgmrResourceNamesToRemove :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ModifyContactGroupMembersRequest' with the minimum fields required to make a request.
 --
@@ -2987,10 +3080,9 @@ data ModifyContactGroupMembersRequest = ModifyContactGroupMembersRequest'
 modifyContactGroupMembersRequest
     :: ModifyContactGroupMembersRequest
 modifyContactGroupMembersRequest =
-    ModifyContactGroupMembersRequest'
-    { _mcgmrResourceNamesToAdd = Nothing
-    , _mcgmrResourceNamesToRemove = Nothing
-    }
+  ModifyContactGroupMembersRequest'
+    {_mcgmrResourceNamesToAdd = Nothing, _mcgmrResourceNamesToRemove = Nothing}
+
 
 -- | The resource names of the contact people to add in the form of in the
 -- form \`people\/\`person_id.
@@ -3032,13 +3124,16 @@ instance ToJSON ModifyContactGroupMembersRequest
 -- | The source of a field.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source'
+data Source =
+  Source'
     { _sEtag            :: !(Maybe Text)
     , _sProFileMetadata :: !(Maybe ProFileMetadata)
     , _sUpdateTime      :: !(Maybe DateTime')
     , _sId              :: !(Maybe Text)
     , _sType            :: !(Maybe SourceType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -3056,13 +3151,14 @@ data Source = Source'
 source
     :: Source
 source =
-    Source'
+  Source'
     { _sEtag = Nothing
     , _sProFileMetadata = Nothing
     , _sUpdateTime = Nothing
     , _sId = Nothing
     , _sType = Nothing
     }
+
 
 -- | **Only populated in \`person.metadata.sources\`.** The [HTTP entity
 -- tag](https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag) of the source. Used
@@ -3114,14 +3210,17 @@ instance ToJSON Source where
 -- | A person\'s instant messaging client.
 --
 -- /See:/ 'imClient' smart constructor.
-data ImClient = ImClient'
+data ImClient =
+  ImClient'
     { _icFormattedProtocol :: !(Maybe Text)
     , _icUsername          :: !(Maybe Text)
     , _icProtocol          :: !(Maybe Text)
     , _icMetadata          :: !(Maybe FieldMetadata)
     , _icType              :: !(Maybe Text)
     , _icFormattedType     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ImClient' with the minimum fields required to make a request.
 --
@@ -3141,7 +3240,7 @@ data ImClient = ImClient'
 imClient
     :: ImClient
 imClient =
-    ImClient'
+  ImClient'
     { _icFormattedProtocol = Nothing
     , _icUsername = Nothing
     , _icProtocol = Nothing
@@ -3149,6 +3248,7 @@ imClient =
     , _icType = Nothing
     , _icFormattedType = Nothing
     }
+
 
 -- | The read-only protocol of the IM client formatted in the viewer\'s
 -- account locale or the \`Accept-Language\` HTTP header locale.
@@ -3211,9 +3311,12 @@ instance ToJSON ImClient where
 -- | The response to a batch get contact groups request.
 --
 -- /See:/ 'batchGetContactGroupsResponse' smart constructor.
-newtype BatchGetContactGroupsResponse = BatchGetContactGroupsResponse'
+newtype BatchGetContactGroupsResponse =
+  BatchGetContactGroupsResponse'
     { _bgcgrResponses :: Maybe [ContactGroupResponse]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BatchGetContactGroupsResponse' with the minimum fields required to make a request.
 --
@@ -3223,9 +3326,8 @@ newtype BatchGetContactGroupsResponse = BatchGetContactGroupsResponse'
 batchGetContactGroupsResponse
     :: BatchGetContactGroupsResponse
 batchGetContactGroupsResponse =
-    BatchGetContactGroupsResponse'
-    { _bgcgrResponses = Nothing
-    }
+  BatchGetContactGroupsResponse' {_bgcgrResponses = Nothing}
+
 
 -- | The list of responses for each requested contact group resource.
 bgcgrResponses :: Lens' BatchGetContactGroupsResponse [ContactGroupResponse]
@@ -3250,13 +3352,16 @@ instance ToJSON BatchGetContactGroupsResponse where
 -- | The read-only metadata about a person.
 --
 -- /See:/ 'personMetadata' smart constructor.
-data PersonMetadata = PersonMetadata'
+data PersonMetadata =
+  PersonMetadata'
     { _pmPreviousResourceNames     :: !(Maybe [Text])
     , _pmObjectType                :: !(Maybe PersonMetadataObjectType)
     , _pmSources                   :: !(Maybe [Source])
     , _pmLinkedPeopleResourceNames :: !(Maybe [Text])
     , _pmDeleted                   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonMetadata' with the minimum fields required to make a request.
 --
@@ -3274,13 +3379,14 @@ data PersonMetadata = PersonMetadata'
 personMetadata
     :: PersonMetadata
 personMetadata =
-    PersonMetadata'
+  PersonMetadata'
     { _pmPreviousResourceNames = Nothing
     , _pmObjectType = Nothing
     , _pmSources = Nothing
     , _pmLinkedPeopleResourceNames = Nothing
     , _pmDeleted = Nothing
     }
+
 
 -- | Any former resource names this person has had. Populated only for
 -- [\`connections.list\`](\/people\/api\/rest\/v1\/people.connections\/list)
@@ -3349,11 +3455,14 @@ instance ToJSON PersonMetadata where
 -- | A person\'s nickname.
 --
 -- /See:/ 'nickname' smart constructor.
-data Nickname = Nickname'
+data Nickname =
+  Nickname'
     { _nicValue    :: !(Maybe Text)
     , _nicMetadata :: !(Maybe FieldMetadata)
     , _nicType     :: !(Maybe NicknameType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Nickname' with the minimum fields required to make a request.
 --
@@ -3367,11 +3476,8 @@ data Nickname = Nickname'
 nickname
     :: Nickname
 nickname =
-    Nickname'
-    { _nicValue = Nothing
-    , _nicMetadata = Nothing
-    , _nicType = Nothing
-    }
+  Nickname' {_nicValue = Nothing, _nicMetadata = Nothing, _nicType = Nothing}
+
 
 -- | The nickname.
 nicValue :: Lens' Nickname (Maybe Text)
@@ -3406,7 +3512,8 @@ instance ToJSON Nickname where
 -- permitted.
 --
 -- /See:/ 'organization' smart constructor.
-data Organization = Organization'
+data Organization =
+  Organization'
     { _orgDePartment     :: !(Maybe Text)
     , _orgLocation       :: !(Maybe Text)
     , _orgDomain         :: !(Maybe Text)
@@ -3421,7 +3528,9 @@ data Organization = Organization'
     , _orgTitle          :: !(Maybe Text)
     , _orgType           :: !(Maybe Text)
     , _orgFormattedType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Organization' with the minimum fields required to make a request.
 --
@@ -3457,7 +3566,7 @@ data Organization = Organization'
 organization
     :: Organization
 organization =
-    Organization'
+  Organization'
     { _orgDePartment = Nothing
     , _orgLocation = Nothing
     , _orgDomain = Nothing
@@ -3473,6 +3582,7 @@ organization =
     , _orgType = Nothing
     , _orgFormattedType = Nothing
     }
+
 
 -- | The person\'s department at the organization.
 orgDePartment :: Lens' Organization (Maybe Text)
@@ -3590,10 +3700,13 @@ instance ToJSON Organization where
 -- | One of the person\'s interests.
 --
 -- /See:/ 'interest' smart constructor.
-data Interest = Interest'
+data Interest =
+  Interest'
     { _iValue    :: !(Maybe Text)
     , _iMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Interest' with the minimum fields required to make a request.
 --
@@ -3604,11 +3717,8 @@ data Interest = Interest'
 -- * 'iMetadata'
 interest
     :: Interest
-interest =
-    Interest'
-    { _iValue = Nothing
-    , _iMetadata = Nothing
-    }
+interest = Interest' {_iValue = Nothing, _iMetadata = Nothing}
+
 
 -- | The interest; for example, \`stargazing\`.
 iValue :: Lens' Interest (Maybe Text)
@@ -3635,12 +3745,15 @@ instance ToJSON Interest where
 -- | The response for a single person
 --
 -- /See:/ 'personResponse' smart constructor.
-data PersonResponse = PersonResponse'
+data PersonResponse =
+  PersonResponse'
     { _prStatus                :: !(Maybe Status)
     , _prRequestedResourceName :: !(Maybe Text)
     , _prPerson                :: !(Maybe Person)
     , _prHTTPStatusCode        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PersonResponse' with the minimum fields required to make a request.
 --
@@ -3656,12 +3769,13 @@ data PersonResponse = PersonResponse'
 personResponse
     :: PersonResponse
 personResponse =
-    PersonResponse'
+  PersonResponse'
     { _prStatus = Nothing
     , _prRequestedResourceName = Nothing
     , _prPerson = Nothing
     , _prHTTPStatusCode = Nothing
     }
+
 
 -- | The status of the response.
 prStatus :: Lens' PersonResponse (Maybe Status)
@@ -3710,10 +3824,13 @@ instance ToJSON PersonResponse where
 -- | A skill that the person has.
 --
 -- /See:/ 'skill' smart constructor.
-data Skill = Skill'
+data Skill =
+  Skill'
     { _sValue    :: !(Maybe Text)
     , _sMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Skill' with the minimum fields required to make a request.
 --
@@ -3724,11 +3841,8 @@ data Skill = Skill'
 -- * 'sMetadata'
 skill
     :: Skill
-skill =
-    Skill'
-    { _sValue = Nothing
-    , _sMetadata = Nothing
-    }
+skill = Skill' {_sValue = Nothing, _sMetadata = Nothing}
+
 
 -- | The skill; for example, \`underwater basket weaving\`.
 sValue :: Lens' Skill (Maybe Text)
@@ -3755,11 +3869,14 @@ instance ToJSON Skill where
 -- | A person\'s short biography.
 --
 -- /See:/ 'biography' smart constructor.
-data Biography = Biography'
+data Biography =
+  Biography'
     { _bioValue       :: !(Maybe Text)
     , _bioMetadata    :: !(Maybe FieldMetadata)
     , _bioContentType :: !(Maybe BiographyContentType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Biography' with the minimum fields required to make a request.
 --
@@ -3773,11 +3890,9 @@ data Biography = Biography'
 biography
     :: Biography
 biography =
-    Biography'
-    { _bioValue = Nothing
-    , _bioMetadata = Nothing
-    , _bioContentType = Nothing
-    }
+  Biography'
+    {_bioValue = Nothing, _bioMetadata = Nothing, _bioContentType = Nothing}
+
 
 -- | The short biography.
 bioValue :: Lens' Biography (Maybe Text)
@@ -3814,11 +3929,14 @@ instance ToJSON Biography where
 -- profile page that represents who they are or what they care about.
 --
 -- /See:/ 'coverPhoto' smart constructor.
-data CoverPhoto = CoverPhoto'
+data CoverPhoto =
+  CoverPhoto'
     { _cpDefault  :: !(Maybe Bool)
     , _cpURL      :: !(Maybe Text)
     , _cpMetadata :: !(Maybe FieldMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoverPhoto' with the minimum fields required to make a request.
 --
@@ -3832,11 +3950,8 @@ data CoverPhoto = CoverPhoto'
 coverPhoto
     :: CoverPhoto
 coverPhoto =
-    CoverPhoto'
-    { _cpDefault = Nothing
-    , _cpURL = Nothing
-    , _cpMetadata = Nothing
-    }
+  CoverPhoto' {_cpDefault = Nothing, _cpURL = Nothing, _cpMetadata = Nothing}
+
 
 -- | True if the cover photo is the default cover photo; false if the cover
 -- photo is a user-provided cover photo.

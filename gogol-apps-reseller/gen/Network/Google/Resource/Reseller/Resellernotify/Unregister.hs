@@ -54,9 +54,12 @@ type ResellernotifyUnregisterResource =
 -- | Unregisters a Reseller for receiving notifications.
 --
 -- /See:/ 'resellernotifyUnregister' smart constructor.
-newtype ResellernotifyUnregister = ResellernotifyUnregister'
+newtype ResellernotifyUnregister =
+  ResellernotifyUnregister'
     { _ruServiceAccountEmailAddress :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ResellernotifyUnregister' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ newtype ResellernotifyUnregister = ResellernotifyUnregister'
 resellernotifyUnregister
     :: ResellernotifyUnregister
 resellernotifyUnregister =
-    ResellernotifyUnregister'
-    { _ruServiceAccountEmailAddress = Nothing
-    }
+  ResellernotifyUnregister' {_ruServiceAccountEmailAddress = Nothing}
+
 
 -- | The service account which owns the Cloud-PubSub topic.
 ruServiceAccountEmailAddress :: Lens' ResellernotifyUnregister (Maybe Text)

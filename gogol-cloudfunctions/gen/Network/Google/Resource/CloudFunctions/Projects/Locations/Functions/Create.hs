@@ -67,7 +67,8 @@ type ProjectsLocationsFunctionsCreateResource =
 -- \`ALREADY_EXISTS\` error.
 --
 -- /See:/ 'projectsLocationsFunctionsCreate' smart constructor.
-data ProjectsLocationsFunctionsCreate = ProjectsLocationsFunctionsCreate'
+data ProjectsLocationsFunctionsCreate =
+  ProjectsLocationsFunctionsCreate'
     { _plfcXgafv          :: !(Maybe Xgafv)
     , _plfcUploadProtocol :: !(Maybe Text)
     , _plfcLocation       :: !Text
@@ -75,7 +76,9 @@ data ProjectsLocationsFunctionsCreate = ProjectsLocationsFunctionsCreate'
     , _plfcUploadType     :: !(Maybe Text)
     , _plfcPayload        :: !CloudFunction
     , _plfcCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsFunctionsCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsLocationsFunctionsCreate
     -> CloudFunction -- ^ 'plfcPayload'
     -> ProjectsLocationsFunctionsCreate
 projectsLocationsFunctionsCreate pPlfcLocation_ pPlfcPayload_ =
-    ProjectsLocationsFunctionsCreate'
+  ProjectsLocationsFunctionsCreate'
     { _plfcXgafv = Nothing
     , _plfcUploadProtocol = Nothing
     , _plfcLocation = pPlfcLocation_
@@ -108,6 +111,7 @@ projectsLocationsFunctionsCreate pPlfcLocation_ pPlfcPayload_ =
     , _plfcPayload = pPlfcPayload_
     , _plfcCallback = Nothing
     }
+
 
 -- | V1 error format.
 plfcXgafv :: Lens' ProjectsLocationsFunctionsCreate (Maybe Xgafv)
@@ -149,7 +153,8 @@ plfcCallback
   = lens _plfcCallback (\ s a -> s{_plfcCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsFunctionsCreate where
+           ProjectsLocationsFunctionsCreate
+         where
         type Rs ProjectsLocationsFunctionsCreate = Operation
         type Scopes ProjectsLocationsFunctionsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]

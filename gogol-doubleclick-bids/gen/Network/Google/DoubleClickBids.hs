@@ -210,6 +210,7 @@ module Network.Google.DoubleClickBids
     -- ** DownloadResponse
     , DownloadResponse
     , downloadResponse
+    , drInventorySources
     , drInsertionOrders
     , drCampaigns
     , drLineItems

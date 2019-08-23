@@ -67,6 +67,27 @@ module Network.Google.Drive
     -- ** drive.comments.update
     , module Network.Google.Resource.Drive.Comments.Update
 
+    -- ** drive.drives.create
+    , module Network.Google.Resource.Drive.Drives.Create
+
+    -- ** drive.drives.delete
+    , module Network.Google.Resource.Drive.Drives.Delete
+
+    -- ** drive.drives.get
+    , module Network.Google.Resource.Drive.Drives.Get
+
+    -- ** drive.drives.hide
+    , module Network.Google.Resource.Drive.Drives.Hide
+
+    -- ** drive.drives.list
+    , module Network.Google.Resource.Drive.Drives.List
+
+    -- ** drive.drives.unhide
+    , module Network.Google.Resource.Drive.Drives.Unhide
+
+    -- ** drive.drives.update
+    , module Network.Google.Resource.Drive.Drives.Update
+
     -- ** drive.files.copy
     , module Network.Google.Resource.Drive.Files.Copy
 
@@ -164,6 +185,21 @@ module Network.Google.Drive
     , flKind
     , flFiles
 
+    -- ** Drive
+    , Drive
+    , drive
+    , dThemeId
+    , dBackgRoundImageFile
+    , dColorRgb
+    , dCreatedTime
+    , dKind
+    , dBackgRoundImageLink
+    , dName
+    , dRestrictions
+    , dHidden
+    , dId
+    , dCapabilities
+
     -- ** TeamDriveCapabilities
     , TeamDriveCapabilities
     , teamDriveCapabilities
@@ -187,6 +223,14 @@ module Network.Google.Drive
     , tdcCanCopy
     , tdcCanShare
 
+    -- ** PermissionPermissionDetailsItem
+    , PermissionPermissionDetailsItem
+    , permissionPermissionDetailsItem
+    , ppdiInherited
+    , ppdiPermissionType
+    , ppdiRole
+    , ppdiInheritedFrom
+
     -- ** FilesListCorpus
     , FilesListCorpus (..)
 
@@ -195,6 +239,28 @@ module Network.Google.Drive
     , commentQuotedFileContent
     , cqfcValue
     , cqfcMimeType
+
+    -- ** DriveCapabilities
+    , DriveCapabilities
+    , driveCapabilities
+    , dcCanRename
+    , dcCanComment
+    , dcCanChangeDriveBackgRound
+    , dcCanRenameDrive
+    , dcCanDownload
+    , dcCanChangeDomainUsersOnlyRestriction
+    , dcCanTrashChildren
+    , dcCanAddChildren
+    , dcCanChangeCopyRequiresWriterPermissionRestriction
+    , dcCanChangeDriveMembersOnlyRestriction
+    , dcCanListChildren
+    , dcCanEdit
+    , dcCanManageMembers
+    , dcCanReadRevisions
+    , dcCanDeleteChildren
+    , dcCanCopy
+    , dcCanDeleteDrive
+    , dcCanShare
 
     -- ** AboutStorageQuota
     , AboutStorageQuota
@@ -227,6 +293,7 @@ module Network.Google.Drive
     , fileCapabilities
     , fcCanRename
     , fcCanComment
+    , fcCanMoveChildrenWithinDrive
     , fcCanMoveChildrenWithinTeamDrive
     , fcCanDelete
     , fcCanMoveItemIntoTeamDrive
@@ -234,12 +301,15 @@ module Network.Google.Drive
     , fcCanTrash
     , fcCanUntrash
     , fcCanTrashChildren
+    , fcCanMoveItemOutOfDrive
     , fcCanAddChildren
     , fcCanRemoveChildren
     , fcCanMoveTeamDriveItem
     , fcCanMoveItemWithinTeamDrive
     , fcCanReadTeamDrive
+    , fcCanReadDrive
     , fcCanChangeCopyRequiresWriterPermission
+    , fcCanMoveChildrenOutOfDrive
     , fcCanListChildren
     , fcCanMoveChildrenOutOfTeamDrive
     , fcCanEdit
@@ -248,6 +318,7 @@ module Network.Google.Drive
     , fcCanDeleteChildren
     , fcCanMoveItemOutOfTeamDrive
     , fcCanCopy
+    , fcCanMoveItemWithinDrive
     , fcCanShare
 
     -- ** ReplyList
@@ -256,6 +327,14 @@ module Network.Google.Drive
     , rlNextPageToken
     , rlKind
     , rlReplies
+
+    -- ** DriveBackgRoundImageFile
+    , DriveBackgRoundImageFile
+    , driveBackgRoundImageFile
+    , dbrifXCoordinate
+    , dbrifYCoordinate
+    , dbrifWidth
+    , dbrifId
 
     -- ** FileContentHintsThumbnail
     , FileContentHintsThumbnail
@@ -322,6 +401,7 @@ module Network.Google.Drive
     -- ** Change
     , Change
     , change
+    , chaDrive
     , chaRemoved
     , chaTime
     , chaKind
@@ -330,6 +410,8 @@ module Network.Google.Drive
     , chaType
     , chaFileId
     , chaFile
+    , chaChangeType
+    , chaDriveId
 
     -- ** TeamDrive
     , TeamDrive
@@ -402,9 +484,11 @@ module Network.Google.Drive
     , aCanCreateTeamDrives
     , aImportFormats
     , aKind
+    , aDriveThemes
     , aAppInstalled
     , aUser
     , aStorageQuota
+    , aCanCreateDrives
     , aMaxUploadSize
     , aTeamDriveThemes
     , aFolderColorPalette
@@ -495,6 +579,15 @@ module Network.Google.Drive
     , pDeleted
     , pType
     , pExpirationTime
+    , pPermissionDetails
+
+    -- ** DriveRestrictions
+    , DriveRestrictions
+    , driveRestrictions
+    , drAdminManagedRestrictions
+    , drDriveMembersOnly
+    , drCopyRequiresWriterPermission
+    , drDomainUsersOnly
 
     -- ** File
     , File
@@ -549,10 +642,18 @@ module Network.Google.Drive
     , fCapabilities
     , fDescription
     , fViewersCanCopyContent
+    , fDriveId
     , fSharingUser
     , fWebContentLink
     , fContentHints
     , fProperties
+
+    -- ** AboutDriveThemesItem
+    , AboutDriveThemesItem
+    , aboutDriveThemesItem
+    , adtiColorRgb
+    , adtiBackgRoundImageLink
+    , adtiId
 
     -- ** PermissionTeamDrivePermissionDetailsItem
     , PermissionTeamDrivePermissionDetailsItem
@@ -561,6 +662,13 @@ module Network.Google.Drive
     , ptdpdiTeamDrivePermissionType
     , ptdpdiRole
     , ptdpdiInheritedFrom
+
+    -- ** DriveList
+    , DriveList
+    , driveList
+    , dlNextPageToken
+    , dlKind
+    , dlDrives
 
     -- ** GeneratedIds
     , GeneratedIds
@@ -608,6 +716,13 @@ import           Network.Google.Resource.Drive.Comments.Delete
 import           Network.Google.Resource.Drive.Comments.Get
 import           Network.Google.Resource.Drive.Comments.List
 import           Network.Google.Resource.Drive.Comments.Update
+import           Network.Google.Resource.Drive.Drives.Create
+import           Network.Google.Resource.Drive.Drives.Delete
+import           Network.Google.Resource.Drive.Drives.Get
+import           Network.Google.Resource.Drive.Drives.Hide
+import           Network.Google.Resource.Drive.Drives.List
+import           Network.Google.Resource.Drive.Drives.Unhide
+import           Network.Google.Resource.Drive.Drives.Update
 import           Network.Google.Resource.Drive.Files.Copy
 import           Network.Google.Resource.Drive.Files.Create
 import           Network.Google.Resource.Drive.Files.Delete
@@ -657,6 +772,13 @@ type DriveAPI =
        :<|> RepliesCreateResource
        :<|> RepliesDeleteResource
        :<|> RepliesUpdateResource
+       :<|> DrivesListResource
+       :<|> DrivesHideResource
+       :<|> DrivesGetResource
+       :<|> DrivesCreateResource
+       :<|> DrivesUnhideResource
+       :<|> DrivesDeleteResource
+       :<|> DrivesUpdateResource
        :<|> AboutGetResource
        :<|> FilesExportResource
        :<|> FilesListResource

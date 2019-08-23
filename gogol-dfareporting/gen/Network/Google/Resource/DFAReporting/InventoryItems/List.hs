@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -76,7 +76,8 @@ type InventoryItemsListResource =
 -- supports paging.
 --
 -- /See:/ 'inventoryItemsList' smart constructor.
-data InventoryItemsList = InventoryItemsList'
+data InventoryItemsList =
+  InventoryItemsList'
     { _iilIds        :: !(Maybe [Textual Int64])
     , _iilProFileId  :: !(Textual Int64)
     , _iilSortOrder  :: !InventoryItemsListSortOrder
@@ -88,7 +89,9 @@ data InventoryItemsList = InventoryItemsList'
     , _iilOrderId    :: !(Maybe [Textual Int64])
     , _iilSiteId     :: !(Maybe [Textual Int64])
     , _iilMaxResults :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InventoryItemsList' with the minimum fields required to make a request.
 --
@@ -120,7 +123,7 @@ inventoryItemsList
     -> Int64 -- ^ 'iilProjectId'
     -> InventoryItemsList
 inventoryItemsList pIilProFileId_ pIilProjectId_ =
-    InventoryItemsList'
+  InventoryItemsList'
     { _iilIds = Nothing
     , _iilProFileId = _Coerce # pIilProFileId_
     , _iilSortOrder = IILSOAscending
@@ -133,6 +136,7 @@ inventoryItemsList pIilProFileId_ pIilProjectId_ =
     , _iilSiteId = Nothing
     , _iilMaxResults = 1000
     }
+
 
 -- | Select only inventory items with these IDs.
 iilIds :: Lens' InventoryItemsList [Int64]

@@ -63,7 +63,8 @@ type ProjectsBeginTransactionResource =
 -- | Begins a new transaction.
 --
 -- /See:/ 'projectsBeginTransaction' smart constructor.
-data ProjectsBeginTransaction = ProjectsBeginTransaction'
+data ProjectsBeginTransaction =
+  ProjectsBeginTransaction'
     { _pbtXgafv          :: !(Maybe Xgafv)
     , _pbtUploadProtocol :: !(Maybe Text)
     , _pbtAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data ProjectsBeginTransaction = ProjectsBeginTransaction'
     , _pbtPayload        :: !BeginTransactionRequest
     , _pbtProjectId      :: !Text
     , _pbtCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsBeginTransaction' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ projectsBeginTransaction
     -> Text -- ^ 'pbtProjectId'
     -> ProjectsBeginTransaction
 projectsBeginTransaction pPbtPayload_ pPbtProjectId_ =
-    ProjectsBeginTransaction'
+  ProjectsBeginTransaction'
     { _pbtXgafv = Nothing
     , _pbtUploadProtocol = Nothing
     , _pbtAccessToken = Nothing
@@ -104,6 +107,7 @@ projectsBeginTransaction pPbtPayload_ pPbtProjectId_ =
     , _pbtProjectId = pPbtProjectId_
     , _pbtCallback = Nothing
     }
+
 
 -- | V1 error format.
 pbtXgafv :: Lens' ProjectsBeginTransaction (Maybe Xgafv)

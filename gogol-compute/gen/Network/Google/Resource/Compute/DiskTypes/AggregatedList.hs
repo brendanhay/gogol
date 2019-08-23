@@ -62,13 +62,16 @@ type DiskTypesAggregatedListResource =
 -- | Retrieves an aggregated list of disk types.
 --
 -- /See:/ 'diskTypesAggregatedList' smart constructor.
-data DiskTypesAggregatedList = DiskTypesAggregatedList'
+data DiskTypesAggregatedList =
+  DiskTypesAggregatedList'
     { _dtalOrderBy    :: !(Maybe Text)
     , _dtalProject    :: !Text
     , _dtalFilter     :: !(Maybe Text)
     , _dtalPageToken  :: !(Maybe Text)
     , _dtalMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DiskTypesAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ diskTypesAggregatedList
     :: Text -- ^ 'dtalProject'
     -> DiskTypesAggregatedList
 diskTypesAggregatedList pDtalProject_ =
-    DiskTypesAggregatedList'
+  DiskTypesAggregatedList'
     { _dtalOrderBy = Nothing
     , _dtalProject = pDtalProject_
     , _dtalFilter = Nothing
     , _dtalPageToken = Nothing
     , _dtalMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

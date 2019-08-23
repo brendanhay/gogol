@@ -72,7 +72,8 @@ type ServicesConsumersTestIAMPermissionsResource =
 -- warning.
 --
 -- /See:/ 'servicesConsumersTestIAMPermissions' smart constructor.
-data ServicesConsumersTestIAMPermissions = ServicesConsumersTestIAMPermissions'
+data ServicesConsumersTestIAMPermissions =
+  ServicesConsumersTestIAMPermissions'
     { _sctipXgafv          :: !(Maybe Xgafv)
     , _sctipUploadProtocol :: !(Maybe Text)
     , _sctipAccessToken    :: !(Maybe Text)
@@ -80,7 +81,9 @@ data ServicesConsumersTestIAMPermissions = ServicesConsumersTestIAMPermissions'
     , _sctipPayload        :: !TestIAMPermissionsRequest
     , _sctipResource       :: !Text
     , _sctipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ServicesConsumersTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ servicesConsumersTestIAMPermissions
     -> Text -- ^ 'sctipResource'
     -> ServicesConsumersTestIAMPermissions
 servicesConsumersTestIAMPermissions pSctipPayload_ pSctipResource_ =
-    ServicesConsumersTestIAMPermissions'
+  ServicesConsumersTestIAMPermissions'
     { _sctipXgafv = Nothing
     , _sctipUploadProtocol = Nothing
     , _sctipAccessToken = Nothing
@@ -113,6 +116,7 @@ servicesConsumersTestIAMPermissions pSctipPayload_ pSctipResource_ =
     , _sctipResource = pSctipResource_
     , _sctipCallback = Nothing
     }
+
 
 -- | V1 error format.
 sctipXgafv :: Lens' ServicesConsumersTestIAMPermissions (Maybe Xgafv)
@@ -157,7 +161,8 @@ sctipCallback
       (\ s a -> s{_sctipCallback = a})
 
 instance GoogleRequest
-         ServicesConsumersTestIAMPermissions where
+           ServicesConsumersTestIAMPermissions
+         where
         type Rs ServicesConsumersTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ServicesConsumersTestIAMPermissions =

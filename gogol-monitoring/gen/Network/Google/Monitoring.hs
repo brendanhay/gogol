@@ -458,7 +458,6 @@ module Network.Google.Monitoring
     , uccName
     , uccMonitoredResource
     , uccSelectedRegions
-    , uccIsInternal
     , uccDisplayName
     , uccResourceGroup
     , uccTimeout

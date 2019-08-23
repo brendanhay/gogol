@@ -60,11 +60,14 @@ type ManagedConfigurationsforUserGetResource =
 -- specified user.
 --
 -- /See:/ 'managedConfigurationsforUserGet' smart constructor.
-data ManagedConfigurationsforUserGet = ManagedConfigurationsforUserGet'
+data ManagedConfigurationsforUserGet =
+  ManagedConfigurationsforUserGet'
     { _mcugEnterpriseId                  :: !Text
     , _mcugUserId                        :: !Text
     , _mcugManagedConfigurationForUserId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagedConfigurationsforUserGet' with the minimum fields required to make a request.
 --
@@ -81,11 +84,12 @@ managedConfigurationsforUserGet
     -> Text -- ^ 'mcugManagedConfigurationForUserId'
     -> ManagedConfigurationsforUserGet
 managedConfigurationsforUserGet pMcugEnterpriseId_ pMcugUserId_ pMcugManagedConfigurationForUserId_ =
-    ManagedConfigurationsforUserGet'
+  ManagedConfigurationsforUserGet'
     { _mcugEnterpriseId = pMcugEnterpriseId_
     , _mcugUserId = pMcugUserId_
     , _mcugManagedConfigurationForUserId = pMcugManagedConfigurationForUserId_
     }
+
 
 -- | The ID of the enterprise.
 mcugEnterpriseId :: Lens' ManagedConfigurationsforUserGet Text
@@ -106,7 +110,8 @@ mcugManagedConfigurationForUserId
       (\ s a -> s{_mcugManagedConfigurationForUserId = a})
 
 instance GoogleRequest
-         ManagedConfigurationsforUserGet where
+           ManagedConfigurationsforUserGet
+         where
         type Rs ManagedConfigurationsforUserGet =
              ManagedConfiguration
         type Scopes ManagedConfigurationsforUserGet =

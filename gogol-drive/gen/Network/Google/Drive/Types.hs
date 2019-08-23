@@ -37,6 +37,21 @@ module Network.Google.Drive.Types
     , flKind
     , flFiles
 
+    -- * Drive
+    , Drive
+    , drive
+    , dThemeId
+    , dBackgRoundImageFile
+    , dColorRgb
+    , dCreatedTime
+    , dKind
+    , dBackgRoundImageLink
+    , dName
+    , dRestrictions
+    , dHidden
+    , dId
+    , dCapabilities
+
     -- * TeamDriveCapabilities
     , TeamDriveCapabilities
     , teamDriveCapabilities
@@ -60,6 +75,14 @@ module Network.Google.Drive.Types
     , tdcCanCopy
     , tdcCanShare
 
+    -- * PermissionPermissionDetailsItem
+    , PermissionPermissionDetailsItem
+    , permissionPermissionDetailsItem
+    , ppdiInherited
+    , ppdiPermissionType
+    , ppdiRole
+    , ppdiInheritedFrom
+
     -- * FilesListCorpus
     , FilesListCorpus (..)
 
@@ -68,6 +91,28 @@ module Network.Google.Drive.Types
     , commentQuotedFileContent
     , cqfcValue
     , cqfcMimeType
+
+    -- * DriveCapabilities
+    , DriveCapabilities
+    , driveCapabilities
+    , dcCanRename
+    , dcCanComment
+    , dcCanChangeDriveBackgRound
+    , dcCanRenameDrive
+    , dcCanDownload
+    , dcCanChangeDomainUsersOnlyRestriction
+    , dcCanTrashChildren
+    , dcCanAddChildren
+    , dcCanChangeCopyRequiresWriterPermissionRestriction
+    , dcCanChangeDriveMembersOnlyRestriction
+    , dcCanListChildren
+    , dcCanEdit
+    , dcCanManageMembers
+    , dcCanReadRevisions
+    , dcCanDeleteChildren
+    , dcCanCopy
+    , dcCanDeleteDrive
+    , dcCanShare
 
     -- * AboutStorageQuota
     , AboutStorageQuota
@@ -100,6 +145,7 @@ module Network.Google.Drive.Types
     , fileCapabilities
     , fcCanRename
     , fcCanComment
+    , fcCanMoveChildrenWithinDrive
     , fcCanMoveChildrenWithinTeamDrive
     , fcCanDelete
     , fcCanMoveItemIntoTeamDrive
@@ -107,12 +153,15 @@ module Network.Google.Drive.Types
     , fcCanTrash
     , fcCanUntrash
     , fcCanTrashChildren
+    , fcCanMoveItemOutOfDrive
     , fcCanAddChildren
     , fcCanRemoveChildren
     , fcCanMoveTeamDriveItem
     , fcCanMoveItemWithinTeamDrive
     , fcCanReadTeamDrive
+    , fcCanReadDrive
     , fcCanChangeCopyRequiresWriterPermission
+    , fcCanMoveChildrenOutOfDrive
     , fcCanListChildren
     , fcCanMoveChildrenOutOfTeamDrive
     , fcCanEdit
@@ -121,6 +170,7 @@ module Network.Google.Drive.Types
     , fcCanDeleteChildren
     , fcCanMoveItemOutOfTeamDrive
     , fcCanCopy
+    , fcCanMoveItemWithinDrive
     , fcCanShare
 
     -- * ReplyList
@@ -129,6 +179,14 @@ module Network.Google.Drive.Types
     , rlNextPageToken
     , rlKind
     , rlReplies
+
+    -- * DriveBackgRoundImageFile
+    , DriveBackgRoundImageFile
+    , driveBackgRoundImageFile
+    , dbrifXCoordinate
+    , dbrifYCoordinate
+    , dbrifWidth
+    , dbrifId
 
     -- * FileContentHintsThumbnail
     , FileContentHintsThumbnail
@@ -195,6 +253,7 @@ module Network.Google.Drive.Types
     -- * Change
     , Change
     , change
+    , chaDrive
     , chaRemoved
     , chaTime
     , chaKind
@@ -203,6 +262,8 @@ module Network.Google.Drive.Types
     , chaType
     , chaFileId
     , chaFile
+    , chaChangeType
+    , chaDriveId
 
     -- * TeamDrive
     , TeamDrive
@@ -275,9 +336,11 @@ module Network.Google.Drive.Types
     , aCanCreateTeamDrives
     , aImportFormats
     , aKind
+    , aDriveThemes
     , aAppInstalled
     , aUser
     , aStorageQuota
+    , aCanCreateDrives
     , aMaxUploadSize
     , aTeamDriveThemes
     , aFolderColorPalette
@@ -368,6 +431,15 @@ module Network.Google.Drive.Types
     , pDeleted
     , pType
     , pExpirationTime
+    , pPermissionDetails
+
+    -- * DriveRestrictions
+    , DriveRestrictions
+    , driveRestrictions
+    , drAdminManagedRestrictions
+    , drDriveMembersOnly
+    , drCopyRequiresWriterPermission
+    , drDomainUsersOnly
 
     -- * File
     , File
@@ -422,10 +494,18 @@ module Network.Google.Drive.Types
     , fCapabilities
     , fDescription
     , fViewersCanCopyContent
+    , fDriveId
     , fSharingUser
     , fWebContentLink
     , fContentHints
     , fProperties
+
+    -- * AboutDriveThemesItem
+    , AboutDriveThemesItem
+    , aboutDriveThemesItem
+    , adtiColorRgb
+    , adtiBackgRoundImageLink
+    , adtiId
 
     -- * PermissionTeamDrivePermissionDetailsItem
     , PermissionTeamDrivePermissionDetailsItem
@@ -434,6 +514,13 @@ module Network.Google.Drive.Types
     , ptdpdiTeamDrivePermissionType
     , ptdpdiRole
     , ptdpdiInheritedFrom
+
+    -- * DriveList
+    , DriveList
+    , driveList
+    , dlNextPageToken
+    , dlKind
+    , dlDrives
 
     -- * GeneratedIds
     , GeneratedIds
@@ -481,33 +568,33 @@ driveService
 
 -- | View metadata for files in your Google Drive
 driveMetadataReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
-driveMetadataReadOnlyScope = Proxy;
+driveMetadataReadOnlyScope = Proxy
 
 -- | View the photos, videos and albums in your Google Photos
 drivePhotosReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
-drivePhotosReadOnlyScope = Proxy;
+drivePhotosReadOnlyScope = Proxy
 
 -- | View and manage its own configuration data in your Google Drive
 driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
-driveAppDataScope = Proxy;
+driveAppDataScope = Proxy
 
 -- | See and download all your Google Drive files
 driveReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Proxy;
+driveReadOnlyScope = Proxy
 
 -- | See, edit, create, and delete all of your Google Drive files
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Proxy;
+driveScope = Proxy
 
 -- | View and manage Google Drive files and folders that you have opened or
 -- created with this app
 driveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Proxy;
+driveFileScope = Proxy
 
 -- | View and manage metadata of files in your Google Drive
 driveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
-driveMetadataScope = Proxy;
+driveMetadataScope = Proxy
 
 -- | Modify your Google Apps Script scripts\' behavior
 driveScriptsScope :: Proxy '["https://www.googleapis.com/auth/drive.scripts"]
-driveScriptsScope = Proxy;
+driveScriptsScope = Proxy

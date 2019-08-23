@@ -58,11 +58,14 @@ type ManagementProFilesDeleteResource =
 -- | Deletes a view (profile).
 --
 -- /See:/ 'managementProFilesDelete' smart constructor.
-data ManagementProFilesDelete = ManagementProFilesDelete'
+data ManagementProFilesDelete =
+  ManagementProFilesDelete'
     { _mpfdWebPropertyId :: !Text
     , _mpfdProFileId     :: !Text
     , _mpfdAccountId     :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementProFilesDelete' with the minimum fields required to make a request.
 --
@@ -79,11 +82,12 @@ managementProFilesDelete
     -> Text -- ^ 'mpfdAccountId'
     -> ManagementProFilesDelete
 managementProFilesDelete pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
-    ManagementProFilesDelete'
+  ManagementProFilesDelete'
     { _mpfdWebPropertyId = pMpfdWebPropertyId_
     , _mpfdProFileId = pMpfdProFileId_
     , _mpfdAccountId = pMpfdAccountId_
     }
+
 
 -- | Web property ID to delete the view (profile) for.
 mpfdWebPropertyId :: Lens' ManagementProFilesDelete Text

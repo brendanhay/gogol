@@ -64,7 +64,8 @@ type ProjectsExclusionsPatchResource =
 -- | Changes one or more properties of an existing exclusion.
 --
 -- /See:/ 'projectsExclusionsPatch' smart constructor.
-data ProjectsExclusionsPatch = ProjectsExclusionsPatch'
+data ProjectsExclusionsPatch =
+  ProjectsExclusionsPatch'
     { _pepXgafv          :: !(Maybe Xgafv)
     , _pepUploadProtocol :: !(Maybe Text)
     , _pepUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data ProjectsExclusionsPatch = ProjectsExclusionsPatch'
     , _pepPayload        :: !LogExclusion
     , _pepName           :: !Text
     , _pepCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsExclusionsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsExclusionsPatch
     -> Text -- ^ 'pepName'
     -> ProjectsExclusionsPatch
 projectsExclusionsPatch pPepPayload_ pPepName_ =
-    ProjectsExclusionsPatch'
+  ProjectsExclusionsPatch'
     { _pepXgafv = Nothing
     , _pepUploadProtocol = Nothing
     , _pepUpdateMask = Nothing
@@ -109,6 +112,7 @@ projectsExclusionsPatch pPepPayload_ pPepName_ =
     , _pepName = pPepName_
     , _pepCallback = Nothing
     }
+
 
 -- | V1 error format.
 pepXgafv :: Lens' ProjectsExclusionsPatch (Maybe Xgafv)

@@ -70,7 +70,8 @@ type BiddersAccountsFilterSetsBidResponsesWithoutBidsListResource
 -- reason.
 --
 -- /See:/ 'biddersAccountsFilterSetsBidResponsesWithoutBidsList' smart constructor.
-data BiddersAccountsFilterSetsBidResponsesWithoutBidsList = BiddersAccountsFilterSetsBidResponsesWithoutBidsList'
+data BiddersAccountsFilterSetsBidResponsesWithoutBidsList =
+  BiddersAccountsFilterSetsBidResponsesWithoutBidsList'
     { _bafsbrwblXgafv          :: !(Maybe Xgafv)
     , _bafsbrwblUploadProtocol :: !(Maybe Text)
     , _bafsbrwblFilterSetName  :: !Text
@@ -79,7 +80,9 @@ data BiddersAccountsFilterSetsBidResponsesWithoutBidsList = BiddersAccountsFilte
     , _bafsbrwblPageToken      :: !(Maybe Text)
     , _bafsbrwblPageSize       :: !(Maybe (Textual Int32))
     , _bafsbrwblCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BiddersAccountsFilterSetsBidResponsesWithoutBidsList' with the minimum fields required to make a request.
 --
@@ -104,7 +107,7 @@ biddersAccountsFilterSetsBidResponsesWithoutBidsList
     :: Text -- ^ 'bafsbrwblFilterSetName'
     -> BiddersAccountsFilterSetsBidResponsesWithoutBidsList
 biddersAccountsFilterSetsBidResponsesWithoutBidsList pBafsbrwblFilterSetName_ =
-    BiddersAccountsFilterSetsBidResponsesWithoutBidsList'
+  BiddersAccountsFilterSetsBidResponsesWithoutBidsList'
     { _bafsbrwblXgafv = Nothing
     , _bafsbrwblUploadProtocol = Nothing
     , _bafsbrwblFilterSetName = pBafsbrwblFilterSetName_
@@ -114,6 +117,7 @@ biddersAccountsFilterSetsBidResponsesWithoutBidsList pBafsbrwblFilterSetName_ =
     , _bafsbrwblPageSize = Nothing
     , _bafsbrwblCallback = Nothing
     }
+
 
 -- | V1 error format.
 bafsbrwblXgafv :: Lens' BiddersAccountsFilterSetsBidResponsesWithoutBidsList (Maybe Xgafv)
@@ -175,7 +179,7 @@ bafsbrwblCallback
       (\ s a -> s{_bafsbrwblCallback = a})
 
 instance GoogleRequest
-         BiddersAccountsFilterSetsBidResponsesWithoutBidsList
+           BiddersAccountsFilterSetsBidResponsesWithoutBidsList
          where
         type Rs
                BiddersAccountsFilterSetsBidResponsesWithoutBidsList

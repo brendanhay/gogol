@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsPatch' request conforms to.
 type FloodlightConfigurationsPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -59,11 +59,14 @@ type FloodlightConfigurationsPatchResource =
 -- semantics.
 --
 -- /See:/ 'floodlightConfigurationsPatch' smart constructor.
-data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch'
+data FloodlightConfigurationsPatch =
+  FloodlightConfigurationsPatch'
     { _fcpProFileId :: !(Textual Int64)
     , _fcpPayload   :: !FloodlightConfiguration
     , _fcpId        :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FloodlightConfigurationsPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ floodlightConfigurationsPatch
     -> Int64 -- ^ 'fcpId'
     -> FloodlightConfigurationsPatch
 floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
-    FloodlightConfigurationsPatch'
+  FloodlightConfigurationsPatch'
     { _fcpProFileId = _Coerce # pFcpProFileId_
     , _fcpPayload = pFcpPayload_
     , _fcpId = _Coerce # pFcpId_
     }
+
 
 -- | User profile ID associated with this request.
 fcpProFileId :: Lens' FloodlightConfigurationsPatch Int64

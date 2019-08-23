@@ -136,6 +136,9 @@ module Network.Google.DLP
     -- ** dlp.projects.inspectTemplates.patch
     , module Network.Google.Resource.DLP.Projects.InspectTemplates.Patch
 
+    -- ** dlp.projects.jobTriggers.activate
+    , module Network.Google.Resource.DLP.Projects.JobTriggers.Activate
+
     -- ** dlp.projects.jobTriggers.create
     , module Network.Google.Resource.DLP.Projects.JobTriggers.Create
 
@@ -559,6 +562,7 @@ module Network.Google.DLP
     , gpdvitdName
     , gpdvitdDisplayName
     , gpdvitdSupportedBy
+    , gpdvitdDescription
 
     -- ** GoogleProtobufEmpty
     , GoogleProtobufEmpty
@@ -661,6 +665,7 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2Regex
     , GooglePrivacyDlpV2Regex
     , googlePrivacyDlpV2Regex
+    , gpdvrGroupIndexes
     , gpdvrPattern
 
     -- ** GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
@@ -686,6 +691,10 @@ module Network.Google.DLP
     , googlePrivacyDlpV2LDiversityConfig
     , gpdvldcSensitiveAttribute
     , gpdvldcQuasiIds
+
+    -- ** GooglePrivacyDlpV2JobNotificationEmails
+    , GooglePrivacyDlpV2JobNotificationEmails
+    , googlePrivacyDlpV2JobNotificationEmails
 
     -- ** GooglePrivacyDlpV2DeidentifyContentRequest
     , GooglePrivacyDlpV2DeidentifyContentRequest
@@ -834,6 +843,10 @@ module Network.Google.DLP
     , gpdvldecEquivalenceClassSize
     , gpdvldecNumDistinctSensitiveValues
     , gpdvldecQuasiIdsValues
+
+    -- ** GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , googlePrivacyDlpV2ActivateJobTriggerRequest
 
     -- ** GooglePrivacyDlpV2DeidentifyConfig
     , GooglePrivacyDlpV2DeidentifyConfig
@@ -1036,6 +1049,7 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2Action
     , GooglePrivacyDlpV2Action
     , googlePrivacyDlpV2Action
+    , gpdvaJobNotificationEmails
     , gpdvaPubSub
     , gpdvaSaveFindings
     , gpdvaPublishSummaryToCscc
@@ -1228,6 +1242,7 @@ module Network.Google.DLP
     , gpdvptDateShiftConfig
     , gpdvptBucketingConfig
     , gpdvptReplaceWithInfoTypeConfig
+    , gpdvptCryptoDeterministicConfig
     , gpdvptCryptoHashConfig
     , gpdvptReplaceConfig
     , gpdvptCryptoReplaceFfxFpeConfig
@@ -1258,6 +1273,13 @@ module Network.Google.DLP
     , gpdvsitCurrentVersion
     , gpdvsitName
     , gpdvsitPendingVersions
+
+    -- ** GooglePrivacyDlpV2CryptoDeterministicConfig
+    , GooglePrivacyDlpV2CryptoDeterministicConfig
+    , googlePrivacyDlpV2CryptoDeterministicConfig
+    , gpdvcdcContext
+    , gpdvcdcSurrogateInfoType
+    , gpdvcdcCryptoKey
 
     -- ** GooglePrivacyDlpV2StatisticalTable
     , GooglePrivacyDlpV2StatisticalTable
@@ -1411,6 +1433,7 @@ import           Network.Google.Resource.DLP.Projects.InspectTemplates.Delete
 import           Network.Google.Resource.DLP.Projects.InspectTemplates.Get
 import           Network.Google.Resource.DLP.Projects.InspectTemplates.List
 import           Network.Google.Resource.DLP.Projects.InspectTemplates.Patch
+import           Network.Google.Resource.DLP.Projects.JobTriggers.Activate
 import           Network.Google.Resource.DLP.Projects.JobTriggers.Create
 import           Network.Google.Resource.DLP.Projects.JobTriggers.Delete
 import           Network.Google.Resource.DLP.Projects.JobTriggers.Get
@@ -1456,6 +1479,7 @@ type DLPAPI =
        :<|> ProjectsJobTriggersListResource
        :<|> ProjectsJobTriggersPatchResource
        :<|> ProjectsJobTriggersGetResource
+       :<|> ProjectsJobTriggersActivateResource
        :<|> ProjectsJobTriggersCreateResource
        :<|> ProjectsJobTriggersDeleteResource
        :<|> ProjectsInspectTemplatesListResource

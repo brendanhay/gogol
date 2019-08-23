@@ -59,12 +59,15 @@ type NodeGroupsDeleteResource =
 -- | Deletes the specified NodeGroup resource.
 --
 -- /See:/ 'nodeGroupsDelete' smart constructor.
-data NodeGroupsDelete = NodeGroupsDelete'
+data NodeGroupsDelete =
+  NodeGroupsDelete'
     { _ngdRequestId :: !(Maybe Text)
     , _ngdNodeGroup :: !Text
     , _ngdProject   :: !Text
     , _ngdZone      :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'NodeGroupsDelete' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ nodeGroupsDelete
     -> Text -- ^ 'ngdZone'
     -> NodeGroupsDelete
 nodeGroupsDelete pNgdNodeGroup_ pNgdProject_ pNgdZone_ =
-    NodeGroupsDelete'
+  NodeGroupsDelete'
     { _ngdRequestId = Nothing
     , _ngdNodeGroup = pNgdNodeGroup_
     , _ngdProject = pNgdProject_
     , _ngdZone = pNgdZone_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

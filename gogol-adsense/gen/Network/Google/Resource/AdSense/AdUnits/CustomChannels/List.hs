@@ -60,12 +60,15 @@ type AdUnitsCustomChannelsListResource =
 -- | List all custom channels which the specified ad unit belongs to.
 --
 -- /See:/ 'adUnitsCustomChannelsList' smart constructor.
-data AdUnitsCustomChannelsList = AdUnitsCustomChannelsList'
+data AdUnitsCustomChannelsList =
+  AdUnitsCustomChannelsList'
     { _aucclAdUnitId   :: !Text
     , _aucclAdClientId :: !Text
     , _aucclPageToken  :: !(Maybe Text)
     , _aucclMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdUnitsCustomChannelsList' with the minimum fields required to make a request.
 --
@@ -83,12 +86,13 @@ adUnitsCustomChannelsList
     -> Text -- ^ 'aucclAdClientId'
     -> AdUnitsCustomChannelsList
 adUnitsCustomChannelsList pAucclAdUnitId_ pAucclAdClientId_ =
-    AdUnitsCustomChannelsList'
+  AdUnitsCustomChannelsList'
     { _aucclAdUnitId = pAucclAdUnitId_
     , _aucclAdClientId = pAucclAdClientId_
     , _aucclPageToken = Nothing
     , _aucclMaxResults = Nothing
     }
+
 
 -- | Ad unit for which to list custom channels.
 aucclAdUnitId :: Lens' AdUnitsCustomChannelsList Text

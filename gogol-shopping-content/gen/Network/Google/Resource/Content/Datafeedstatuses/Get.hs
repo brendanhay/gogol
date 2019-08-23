@@ -58,12 +58,15 @@ type DatafeedstatusesGetResource =
 -- | Retrieves the status of a datafeed from your Merchant Center account.
 --
 -- /See:/ 'datafeedstatusesGet' smart constructor.
-data DatafeedstatusesGet = DatafeedstatusesGet'
+data DatafeedstatusesGet =
+  DatafeedstatusesGet'
     { _dggMerchantId :: !(Textual Word64)
     , _dggCountry    :: !(Maybe Text)
     , _dggDatafeedId :: !(Textual Word64)
     , _dggLanguage   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DatafeedstatusesGet' with the minimum fields required to make a request.
 --
@@ -81,12 +84,13 @@ datafeedstatusesGet
     -> Word64 -- ^ 'dggDatafeedId'
     -> DatafeedstatusesGet
 datafeedstatusesGet pDggMerchantId_ pDggDatafeedId_ =
-    DatafeedstatusesGet'
+  DatafeedstatusesGet'
     { _dggMerchantId = _Coerce # pDggMerchantId_
     , _dggCountry = Nothing
     , _dggDatafeedId = _Coerce # pDggDatafeedId_
     , _dggLanguage = Nothing
     }
+
 
 -- | The ID of the account that manages the datafeed. This account cannot be
 -- a multi-client account.

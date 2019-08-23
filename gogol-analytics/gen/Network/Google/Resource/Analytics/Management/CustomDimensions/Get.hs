@@ -59,11 +59,14 @@ type ManagementCustomDimensionsGetResource =
 -- | Get a custom dimension to which the user has access.
 --
 -- /See:/ 'managementCustomDimensionsGet' smart constructor.
-data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet'
+data ManagementCustomDimensionsGet =
+  ManagementCustomDimensionsGet'
     { _mcdgWebPropertyId     :: !Text
     , _mcdgAccountId         :: !Text
     , _mcdgCustomDimensionId :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ManagementCustomDimensionsGet' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ managementCustomDimensionsGet
     -> Text -- ^ 'mcdgCustomDimensionId'
     -> ManagementCustomDimensionsGet
 managementCustomDimensionsGet pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
-    ManagementCustomDimensionsGet'
+  ManagementCustomDimensionsGet'
     { _mcdgWebPropertyId = pMcdgWebPropertyId_
     , _mcdgAccountId = pMcdgAccountId_
     , _mcdgCustomDimensionId = pMcdgCustomDimensionId_
     }
+
 
 -- | Web property ID for the custom dimension to retrieve.
 mcdgWebPropertyId :: Lens' ManagementCustomDimensionsGet Text

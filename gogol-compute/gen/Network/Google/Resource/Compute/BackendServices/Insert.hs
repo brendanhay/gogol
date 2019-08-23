@@ -64,11 +64,14 @@ type BackendServicesInsertResource =
 -- Restrictions and Guidelines for more information.
 --
 -- /See:/ 'backendServicesInsert' smart constructor.
-data BackendServicesInsert = BackendServicesInsert'
+data BackendServicesInsert =
+  BackendServicesInsert'
     { _bsiRequestId :: !(Maybe Text)
     , _bsiProject   :: !Text
     , _bsiPayload   :: !BackendService
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendServicesInsert' with the minimum fields required to make a request.
 --
@@ -84,11 +87,12 @@ backendServicesInsert
     -> BackendService -- ^ 'bsiPayload'
     -> BackendServicesInsert
 backendServicesInsert pBsiProject_ pBsiPayload_ =
-    BackendServicesInsert'
+  BackendServicesInsert'
     { _bsiRequestId = Nothing
     , _bsiProject = pBsiProject_
     , _bsiPayload = pBsiPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

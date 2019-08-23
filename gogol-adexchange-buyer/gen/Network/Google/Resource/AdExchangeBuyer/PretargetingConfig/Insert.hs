@@ -54,10 +54,13 @@ type PretargetingConfigInsertResource =
 -- | Inserts a new pretargeting configuration.
 --
 -- /See:/ 'pretargetingConfigInsert' smart constructor.
-data PretargetingConfigInsert = PretargetingConfigInsert'
+data PretargetingConfigInsert =
+  PretargetingConfigInsert'
     { _pciPayload   :: !PretargetingConfig
     , _pciAccountId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PretargetingConfigInsert' with the minimum fields required to make a request.
 --
@@ -71,10 +74,9 @@ pretargetingConfigInsert
     -> Int64 -- ^ 'pciAccountId'
     -> PretargetingConfigInsert
 pretargetingConfigInsert pPciPayload_ pPciAccountId_ =
-    PretargetingConfigInsert'
-    { _pciPayload = pPciPayload_
-    , _pciAccountId = _Coerce # pPciAccountId_
-    }
+  PretargetingConfigInsert'
+    {_pciPayload = pPciPayload_, _pciAccountId = _Coerce # pPciAccountId_}
+
 
 -- | Multipart request metadata.
 pciPayload :: Lens' PretargetingConfigInsert PretargetingConfig

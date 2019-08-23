@@ -53,10 +53,13 @@ type AccountsListResource =
 -- | List all accounts available to this AdSense account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList'
+data AccountsList =
+  AccountsList'
     { _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -67,11 +70,8 @@ data AccountsList = AccountsList'
 -- * 'alMaxResults'
 accountsList
     :: AccountsList
-accountsList =
-    AccountsList'
-    { _alPageToken = Nothing
-    , _alMaxResults = Nothing
-    }
+accountsList = AccountsList' {_alPageToken = Nothing, _alMaxResults = Nothing}
+
 
 -- | A continuation token, used to page through accounts. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the

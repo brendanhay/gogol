@@ -55,10 +55,13 @@ type FirewallsGetResource =
 -- | Returns the specified firewall.
 --
 -- /See:/ 'firewallsGet' smart constructor.
-data FirewallsGet = FirewallsGet'
+data FirewallsGet =
+  FirewallsGet'
     { _fgProject  :: !Text
     , _fgFirewall :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FirewallsGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ firewallsGet
     -> Text -- ^ 'fgFirewall'
     -> FirewallsGet
 firewallsGet pFgProject_ pFgFirewall_ =
-    FirewallsGet'
-    { _fgProject = pFgProject_
-    , _fgFirewall = pFgFirewall_
-    }
+  FirewallsGet' {_fgProject = pFgProject_, _fgFirewall = pFgFirewall_}
+
 
 -- | Project ID for this request.
 fgProject :: Lens' FirewallsGet Text

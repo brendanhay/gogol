@@ -52,9 +52,12 @@ type UsersInsertResource =
 -- | create user.
 --
 -- /See:/ 'usersInsert' smart constructor.
-newtype UsersInsert = UsersInsert'
+newtype UsersInsert =
+  UsersInsert'
     { _uiPayload :: User
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype UsersInsert = UsersInsert'
 usersInsert
     :: User -- ^ 'uiPayload'
     -> UsersInsert
-usersInsert pUiPayload_ =
-    UsersInsert'
-    { _uiPayload = pUiPayload_
-    }
+usersInsert pUiPayload_ = UsersInsert' {_uiPayload = pUiPayload_}
+
 
 -- | Multipart request metadata.
 uiPayload :: Lens' UsersInsert User

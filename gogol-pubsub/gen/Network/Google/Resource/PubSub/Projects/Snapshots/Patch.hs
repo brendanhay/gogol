@@ -25,10 +25,6 @@
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy. Note
--- that certain properties of a snapshot are not modifiable.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.patch@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.Patch
@@ -72,13 +68,10 @@ type ProjectsSnapshotsPatchResource =
 -- which allow you to manage message acknowledgments in bulk. That is, you
 -- can set the acknowledgment state of messages in an existing subscription
 -- to the state captured by a snapshot.
--- __BETA:__ This feature is part of a beta release. This API might be
--- changed in backward-incompatible ways and is not recommended for
--- production use. It is not subject to any SLA or deprecation policy. Note
--- that certain properties of a snapshot are not modifiable.
 --
 -- /See:/ 'projectsSnapshotsPatch' smart constructor.
-data ProjectsSnapshotsPatch = ProjectsSnapshotsPatch'
+data ProjectsSnapshotsPatch =
+  ProjectsSnapshotsPatch'
     { _ppXgafv          :: !(Maybe Xgafv)
     , _ppUploadProtocol :: !(Maybe Text)
     , _ppAccessToken    :: !(Maybe Text)
@@ -86,7 +79,9 @@ data ProjectsSnapshotsPatch = ProjectsSnapshotsPatch'
     , _ppPayload        :: !UpdateSnapshotRequest
     , _ppName           :: !Text
     , _ppCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsSnapshotsPatch' with the minimum fields required to make a request.
 --
@@ -110,7 +105,7 @@ projectsSnapshotsPatch
     -> Text -- ^ 'ppName'
     -> ProjectsSnapshotsPatch
 projectsSnapshotsPatch pPpPayload_ pPpName_ =
-    ProjectsSnapshotsPatch'
+  ProjectsSnapshotsPatch'
     { _ppXgafv = Nothing
     , _ppUploadProtocol = Nothing
     , _ppAccessToken = Nothing
@@ -119,6 +114,7 @@ projectsSnapshotsPatch pPpPayload_ pPpName_ =
     , _ppName = pPpName_
     , _ppCallback = Nothing
     }
+
 
 -- | V1 error format.
 ppXgafv :: Lens' ProjectsSnapshotsPatch (Maybe Xgafv)

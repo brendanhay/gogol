@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the changes for a user or Team Drive.
+-- Lists the changes for a user or shared drive.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.list@.
 module Network.Google.Resource.Drive.Changes.List
@@ -38,10 +38,13 @@ module Network.Google.Resource.Drive.Changes.List
     , clTeamDriveId
     , clRestrictToMyDrive
     , clSpaces
+    , clIncludeItemsFromAllDrives
+    , clSupportsAllDrives
     , clPageToken
     , clPageSize
     , clIncludeRemoved
     , clSupportsTeamDrives
+    , clDriveId
     ) where
 
 import           Network.Google.Drive.Types
@@ -59,25 +62,35 @@ type ChangesListResource =
                  QueryParam "teamDriveId" Text :>
                    QueryParam "restrictToMyDrive" Bool :>
                      QueryParam "spaces" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "includeRemoved" Bool :>
-                           QueryParam "supportsTeamDrives" Bool :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
+                       QueryParam "includeItemsFromAllDrives" Bool :>
+                         QueryParam "supportsAllDrives" Bool :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "includeRemoved" Bool :>
+                               QueryParam "supportsTeamDrives" Bool :>
+                                 QueryParam "driveId" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ChangeList
 
--- | Lists the changes for a user or Team Drive.
+-- | Lists the changes for a user or shared drive.
 --
 -- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList'
-    { _clIncludeTeamDriveItems :: !Bool
-    , _clIncludeCorpusRemovals :: !Bool
-    , _clTeamDriveId           :: !(Maybe Text)
-    , _clRestrictToMyDrive     :: !Bool
-    , _clSpaces                :: !Text
-    , _clPageToken             :: !Text
-    , _clPageSize              :: !(Textual Int32)
-    , _clIncludeRemoved        :: !Bool
-    , _clSupportsTeamDrives    :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data ChangesList =
+  ChangesList'
+    { _clIncludeTeamDriveItems     :: !Bool
+    , _clIncludeCorpusRemovals     :: !Bool
+    , _clTeamDriveId               :: !(Maybe Text)
+    , _clRestrictToMyDrive         :: !Bool
+    , _clSpaces                    :: !Text
+    , _clIncludeItemsFromAllDrives :: !Bool
+    , _clSupportsAllDrives         :: !Bool
+    , _clPageToken                 :: !Text
+    , _clPageSize                  :: !(Textual Int32)
+    , _clIncludeRemoved            :: !Bool
+    , _clSupportsTeamDrives        :: !Bool
+    , _clDriveId                   :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
@@ -93,6 +106,10 @@ data ChangesList = ChangesList'
 --
 -- * 'clSpaces'
 --
+-- * 'clIncludeItemsFromAllDrives'
+--
+-- * 'clSupportsAllDrives'
+--
 -- * 'clPageToken'
 --
 -- * 'clPageSize'
@@ -100,23 +117,29 @@ data ChangesList = ChangesList'
 -- * 'clIncludeRemoved'
 --
 -- * 'clSupportsTeamDrives'
+--
+-- * 'clDriveId'
 changesList
     :: Text -- ^ 'clPageToken'
     -> ChangesList
 changesList pClPageToken_ =
-    ChangesList'
+  ChangesList'
     { _clIncludeTeamDriveItems = False
     , _clIncludeCorpusRemovals = False
     , _clTeamDriveId = Nothing
     , _clRestrictToMyDrive = False
     , _clSpaces = "drive"
+    , _clIncludeItemsFromAllDrives = False
+    , _clSupportsAllDrives = False
     , _clPageToken = pClPageToken_
     , _clPageSize = 100
     , _clIncludeRemoved = True
     , _clSupportsTeamDrives = False
+    , _clDriveId = Nothing
     }
 
--- | Whether Team Drive files or changes should be included in results.
+
+-- | Deprecated use includeItemsFromAllDrives instead.
 clIncludeTeamDriveItems :: Lens' ChangesList Bool
 clIncludeTeamDriveItems
   = lens _clIncludeTeamDriveItems
@@ -131,9 +154,7 @@ clIncludeCorpusRemovals
   = lens _clIncludeCorpusRemovals
       (\ s a -> s{_clIncludeCorpusRemovals = a})
 
--- | The Team Drive from which changes will be returned. If specified the
--- change IDs will be reflective of the Team Drive; use the combined Team
--- Drive ID and change ID as an identifier.
+-- | Deprecated use driveId instead.
 clTeamDriveId :: Lens' ChangesList (Maybe Text)
 clTeamDriveId
   = lens _clTeamDriveId
@@ -151,6 +172,20 @@ clRestrictToMyDrive
 -- Supported values are \'drive\', \'appDataFolder\' and \'photos\'.
 clSpaces :: Lens' ChangesList Text
 clSpaces = lens _clSpaces (\ s a -> s{_clSpaces = a})
+
+-- | Whether both My Drive and shared drive items should be included in
+-- results.
+clIncludeItemsFromAllDrives :: Lens' ChangesList Bool
+clIncludeItemsFromAllDrives
+  = lens _clIncludeItemsFromAllDrives
+      (\ s a -> s{_clIncludeItemsFromAllDrives = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+clSupportsAllDrives :: Lens' ChangesList Bool
+clSupportsAllDrives
+  = lens _clSupportsAllDrives
+      (\ s a -> s{_clSupportsAllDrives = a})
 
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous
@@ -172,11 +207,18 @@ clIncludeRemoved
   = lens _clIncludeRemoved
       (\ s a -> s{_clIncludeRemoved = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 clSupportsTeamDrives :: Lens' ChangesList Bool
 clSupportsTeamDrives
   = lens _clSupportsTeamDrives
       (\ s a -> s{_clSupportsTeamDrives = a})
+
+-- | The shared drive from which changes will be returned. If specified the
+-- change IDs will be reflective of the shared drive; use the combined
+-- drive ID and change ID as an identifier.
+clDriveId :: Lens' ChangesList (Maybe Text)
+clDriveId
+  = lens _clDriveId (\ s a -> s{_clDriveId = a})
 
 instance GoogleRequest ChangesList where
         type Rs ChangesList = ChangeList
@@ -195,9 +237,12 @@ instance GoogleRequest ChangesList where
               _clTeamDriveId
               (Just _clRestrictToMyDrive)
               (Just _clSpaces)
+              (Just _clIncludeItemsFromAllDrives)
+              (Just _clSupportsAllDrives)
               (Just _clPageSize)
               (Just _clIncludeRemoved)
               (Just _clSupportsTeamDrives)
+              _clDriveId
               (Just AltJSON)
               driveService
           where go

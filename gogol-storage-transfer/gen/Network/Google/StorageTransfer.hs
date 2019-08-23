@@ -16,7 +16,7 @@
 -- Transfers data from external data sources to a Google Cloud Storage
 -- bucket or between Google Cloud Storage buckets.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference>
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference>
 module Network.Google.StorageTransfer
     (
     -- * Service Configuration

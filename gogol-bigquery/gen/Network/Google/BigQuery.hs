@@ -214,6 +214,7 @@ module Network.Google.BigQuery
     , jsCreationTime
     , jsStartTime
     , jsCompletionRatio
+    , jsNumChildJobs
     , jsTotalSlotMs
     , jsLoad
     , jsTotalBytesProcessed
@@ -222,6 +223,7 @@ module Network.Google.BigQuery
     , jsQuery
     , jsExtract
     , jsReservationUsage
+    , jsParentJobId
 
     -- ** JobConfigurationLabels
     , JobConfigurationLabels
@@ -276,6 +278,7 @@ module Network.Google.BigQuery
     , externalDataConfiguration
     , edcBigtableOptions
     , edcIgnoreUnknownValues
+    , edcHivePartitioningMode
     , edcCompression
     , edcSourceFormat
     , edcSchema
@@ -299,6 +302,13 @@ module Network.Google.BigQuery
     , mdmoLabels
     , mdmoLossType
 
+    -- ** RoutineReference
+    , RoutineReference
+    , routineReference
+    , rrDataSetId
+    , rrProjectId
+    , rrRoutineId
+
     -- ** RangePartitioning
     , RangePartitioning
     , rangePartitioning
@@ -309,6 +319,7 @@ module Network.Google.BigQuery
     , TableFieldSchema
     , tableFieldSchema
     , tfsMode
+    , tfsCategories
     , tfsName
     , tfsType
     , tfsDescription
@@ -357,6 +368,19 @@ module Network.Google.BigQuery
     -- ** JobsListProjection
     , JobsListProjection (..)
 
+    -- ** BqmlTrainingRunTrainingOptions
+    , BqmlTrainingRunTrainingOptions
+    , bqmlTrainingRunTrainingOptions
+    , btrtoLineSearchInitLearnRate
+    , btrtoMinRelProgress
+    , btrtoL1Reg
+    , btrtoLearnRate
+    , btrtoLearnRateStrategy
+    , btrtoMaxIteration
+    , btrtoEarlyStop
+    , btrtoL2Reg
+    , btrtoWarmStart
+
     -- ** QueryParameter
     , QueryParameter
     , queryParameter
@@ -364,18 +388,10 @@ module Network.Google.BigQuery
     , qpParameterType
     , qpName
 
-    -- ** IterationResult
-    , IterationResult
-    , iterationResult
-    , irDurationMs
-    , irLearnRate
-    , irEvalLoss
-    , irTrainingLoss
-    , irIndex
-
     -- ** JobStatistics4
     , JobStatistics4
     , jobStatistics4
+    , jsInputBytes
     , jsDestinationURIFileCounts
 
     -- ** ProjectReference
@@ -416,19 +432,6 @@ module Network.Google.BigQuery
     , eqsEndMs
     , eqsWaitMsMax
 
-    -- ** TrainingRunTrainingOptions
-    , TrainingRunTrainingOptions
-    , trainingRunTrainingOptions
-    , trtoLineSearchInitLearnRate
-    , trtoMinRelProgress
-    , trtoL1Reg
-    , trtoLearnRate
-    , trtoLearnRateStrategy
-    , trtoMaxIteration
-    , trtoEarlyStop
-    , trtoL2Reg
-    , trtoWarmStart
-
     -- ** BigQueryModelTraining
     , BigQueryModelTraining
     , bigQueryModelTraining
@@ -448,6 +451,7 @@ module Network.Google.BigQuery
     , jclSchemaInline
     , jclIgnoreUnknownValues
     , jclSchemaUpdateOptions
+    , jclHivePartitioningMode
     , jclCreateDisPosition
     , jclSchemaInlineFormat
     , jclAllowQuotedNewlines
@@ -503,6 +507,15 @@ module Network.Google.BigQuery
     , plpiProjectReference
     , plpiId
     , plpiNumericId
+
+    -- ** BqmlIterationResult
+    , BqmlIterationResult
+    , bqmlIterationResult
+    , birDurationMs
+    , birLearnRate
+    , birEvalLoss
+    , birTrainingLoss
+    , birIndex
 
     -- ** BigtableColumn
     , BigtableColumn
@@ -709,6 +722,7 @@ module Network.Google.BigQuery
     , jModelTrainingExpectedTotalIteration
     , jModelTraining
     , jTotalSlotMs
+    , jDdlTargetRoutine
     , jDdlTargetTable
     , jEstimatedBytesProcessed
     , jModelTrainingCurrentIteration
@@ -728,6 +742,11 @@ module Network.Google.BigQuery
     , jDdlOperationPerformed
     , jTotalPartitionsProcessed
 
+    -- ** TableFieldSchemaCategories
+    , TableFieldSchemaCategories
+    , tableFieldSchemaCategories
+    , tfscNames
+
     -- ** JobStatus
     , JobStatus
     , jobStatus
@@ -744,6 +763,7 @@ module Network.Google.BigQuery
     , DestinationTableProperties
     , destinationTableProperties
     , dtpFriendlyName
+    , dtpLabels
     , dtpDescription
 
     -- ** DataSetAccessItem
@@ -756,6 +776,14 @@ module Network.Google.BigQuery
     , dsaiIAMMember
     , dsaiView
     , dsaiUserByEmail
+
+    -- ** BqmlTrainingRun
+    , BqmlTrainingRun
+    , bqmlTrainingRun
+    , btrState
+    , btrStartTime
+    , btrIterationResults
+    , btrTrainingOptions
 
     -- ** TableDataInsertAllResponse
     , TableDataInsertAllResponse
@@ -820,6 +848,11 @@ module Network.Google.BigQuery
     , coEncoding
     , coFieldDelimiter
 
+    -- ** DestinationTablePropertiesLabels
+    , DestinationTablePropertiesLabels
+    , destinationTablePropertiesLabels
+    , dtplAddtional
+
     -- ** JobStatistics3
     , JobStatistics3
     , jobStatistics3
@@ -848,14 +881,6 @@ module Network.Google.BigQuery
     , DataSetListDataSetsItemLabels
     , dataSetListDataSetsItemLabels
     , dsldsilAddtional
-
-    -- ** TrainingRun
-    , TrainingRun
-    , trainingRun
-    , trState
-    , trStartTime
-    , trIterationResults
-    , trTrainingOptions
 
     -- ** TableListTablesItemView
     , TableListTablesItemView

@@ -62,13 +62,16 @@ type RoutersAggregatedListResource =
 -- | Retrieves an aggregated list of routers.
 --
 -- /See:/ 'routersAggregatedList' smart constructor.
-data RoutersAggregatedList = RoutersAggregatedList'
+data RoutersAggregatedList =
+  RoutersAggregatedList'
     { _rOrderBy    :: !(Maybe Text)
     , _rProject    :: !Text
     , _rFilter     :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !(Textual Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RoutersAggregatedList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ routersAggregatedList
     :: Text -- ^ 'rProject'
     -> RoutersAggregatedList
 routersAggregatedList pRProject_ =
-    RoutersAggregatedList'
+  RoutersAggregatedList'
     { _rOrderBy = Nothing
     , _rProject = pRProject_
     , _rFilter = Nothing
     , _rPageToken = Nothing
     , _rMaxResults = 500
     }
+
 
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort

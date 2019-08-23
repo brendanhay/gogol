@@ -255,7 +255,7 @@ import           Network.Google.Discovery.Types.Product
 import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the APIs Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the API Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
 discoveryService :: ServiceConfig
 discoveryService
   = defaultService (ServiceId "discovery:v1")

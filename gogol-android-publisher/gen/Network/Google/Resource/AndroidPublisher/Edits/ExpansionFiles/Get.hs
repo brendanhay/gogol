@@ -62,12 +62,15 @@ type EditsExpansionFilesGetResource =
 -- | Fetches the Expansion File configuration for the APK specified.
 --
 -- /See:/ 'editsExpansionFilesGet' smart constructor.
-data EditsExpansionFilesGet = EditsExpansionFilesGet'
+data EditsExpansionFilesGet =
+  EditsExpansionFilesGet'
     { _eefgPackageName       :: !Text
     , _eefgAPKVersionCode    :: !(Textual Int32)
     , _eefgExpansionFileType :: !EditsExpansionFilesGetExpansionFileType
     , _eefgEditId            :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EditsExpansionFilesGet' with the minimum fields required to make a request.
 --
@@ -87,12 +90,13 @@ editsExpansionFilesGet
     -> Text -- ^ 'eefgEditId'
     -> EditsExpansionFilesGet
 editsExpansionFilesGet pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
-    EditsExpansionFilesGet'
+  EditsExpansionFilesGet'
     { _eefgPackageName = pEefgPackageName_
     , _eefgAPKVersionCode = _Coerce # pEefgAPKVersionCode_
     , _eefgExpansionFileType = pEefgExpansionFileType_
     , _eefgEditId = pEefgEditId_
     }
+
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".

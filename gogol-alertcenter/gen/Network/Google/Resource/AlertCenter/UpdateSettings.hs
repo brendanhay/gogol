@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the customer-level settings.
+-- Updates the customer-level settings.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.updateSettings@.
 module Network.Google.Resource.AlertCenter.UpdateSettings
@@ -59,10 +59,11 @@ type UpdateSettingsResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Settings :> Patch '[JSON] Settings
 
--- | Update the customer-level settings.
+-- | Updates the customer-level settings.
 --
 -- /See:/ 'updateSettings' smart constructor.
-data UpdateSettings = UpdateSettings'
+data UpdateSettings =
+  UpdateSettings'
     { _usXgafv          :: !(Maybe Xgafv)
     , _usUploadProtocol :: !(Maybe Text)
     , _usAccessToken    :: !(Maybe Text)
@@ -70,7 +71,9 @@ data UpdateSettings = UpdateSettings'
     , _usPayload        :: !Settings
     , _usCustomerId     :: !(Maybe Text)
     , _usCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateSettings' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ updateSettings
     :: Settings -- ^ 'usPayload'
     -> UpdateSettings
 updateSettings pUsPayload_ =
-    UpdateSettings'
+  UpdateSettings'
     { _usXgafv = Nothing
     , _usUploadProtocol = Nothing
     , _usAccessToken = Nothing
@@ -102,6 +105,7 @@ updateSettings pUsPayload_ =
     , _usCustomerId = Nothing
     , _usCallback = Nothing
     }
+
 
 -- | V1 error format.
 usXgafv :: Lens' UpdateSettings (Maybe Xgafv)

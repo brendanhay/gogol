@@ -61,12 +61,15 @@ type InstancesTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'instancesTestIAMPermissions' smart constructor.
-data InstancesTestIAMPermissions = InstancesTestIAMPermissions'
+data InstancesTestIAMPermissions =
+  InstancesTestIAMPermissions'
     { _itipProject  :: !Text
     , _itipZone     :: !Text
     , _itipPayload  :: !TestPermissionsRequest
     , _itipResource :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InstancesTestIAMPermissions' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ instancesTestIAMPermissions
     -> Text -- ^ 'itipResource'
     -> InstancesTestIAMPermissions
 instancesTestIAMPermissions pItipProject_ pItipZone_ pItipPayload_ pItipResource_ =
-    InstancesTestIAMPermissions'
+  InstancesTestIAMPermissions'
     { _itipProject = pItipProject_
     , _itipZone = pItipZone_
     , _itipPayload = pItipPayload_
     , _itipResource = pItipResource_
     }
+
 
 -- | Project ID for this request.
 itipProject :: Lens' InstancesTestIAMPermissions Text

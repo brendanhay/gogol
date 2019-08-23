@@ -65,7 +65,8 @@ type ProjectsTopicsSubscriptionsListResource =
 -- | Lists the names of the subscriptions on this topic.
 --
 -- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
-data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
+data ProjectsTopicsSubscriptionsList =
+  ProjectsTopicsSubscriptionsList'
     { _ptslXgafv          :: !(Maybe Xgafv)
     , _ptslUploadProtocol :: !(Maybe Text)
     , _ptslAccessToken    :: !(Maybe Text)
@@ -74,7 +75,9 @@ data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
     , _ptslPageToken      :: !(Maybe Text)
     , _ptslPageSize       :: !(Maybe (Textual Int32))
     , _ptslCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsTopicsSubscriptionsList' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsTopicsSubscriptionsList
     :: Text -- ^ 'ptslTopic'
     -> ProjectsTopicsSubscriptionsList
 projectsTopicsSubscriptionsList pPtslTopic_ =
-    ProjectsTopicsSubscriptionsList'
+  ProjectsTopicsSubscriptionsList'
     { _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
     , _ptslAccessToken = Nothing
@@ -109,6 +112,7 @@ projectsTopicsSubscriptionsList pPtslTopic_ =
     , _ptslPageSize = Nothing
     , _ptslCallback = Nothing
     }
+
 
 -- | V1 error format.
 ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Xgafv)
@@ -160,7 +164,8 @@ ptslCallback
   = lens _ptslCallback (\ s a -> s{_ptslCallback = a})
 
 instance GoogleRequest
-         ProjectsTopicsSubscriptionsList where
+           ProjectsTopicsSubscriptionsList
+         where
         type Rs ProjectsTopicsSubscriptionsList =
              ListTopicSubscriptionsResponse
         type Scopes ProjectsTopicsSubscriptionsList =

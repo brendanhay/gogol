@@ -54,14 +54,16 @@ type EventsResetAllForAllPlayersResource =
 --
 -- /See:/ 'eventsResetAllForAllPlayers' smart constructor.
 data EventsResetAllForAllPlayers =
-    EventsResetAllForAllPlayers'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  EventsResetAllForAllPlayers'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EventsResetAllForAllPlayers' with the minimum fields required to make a request.
 --
 eventsResetAllForAllPlayers
     :: EventsResetAllForAllPlayers
 eventsResetAllForAllPlayers = EventsResetAllForAllPlayers'
+
 
 instance GoogleRequest EventsResetAllForAllPlayers
          where

@@ -62,14 +62,17 @@ type ChannelSectionsListResource =
 -- | Returns channelSection resources that match the API request criteria.
 --
 -- /See:/ 'channelSectionsList' smart constructor.
-data ChannelSectionsList = ChannelSectionsList'
+data ChannelSectionsList =
+  ChannelSectionsList'
     { _cslPart                   :: !Text
     , _cslMine                   :: !(Maybe Bool)
     , _cslChannelId              :: !(Maybe Text)
     , _cslHl                     :: !(Maybe Text)
     , _cslOnBehalfOfContentOwner :: !(Maybe Text)
     , _cslId                     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ChannelSectionsList' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ channelSectionsList
     :: Text -- ^ 'cslPart'
     -> ChannelSectionsList
 channelSectionsList pCslPart_ =
-    ChannelSectionsList'
+  ChannelSectionsList'
     { _cslPart = pCslPart_
     , _cslMine = Nothing
     , _cslChannelId = Nothing
@@ -98,6 +101,7 @@ channelSectionsList pCslPart_ =
     , _cslOnBehalfOfContentOwner = Nothing
     , _cslId = Nothing
     }
+
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- channelSection resource properties that the API response will include.

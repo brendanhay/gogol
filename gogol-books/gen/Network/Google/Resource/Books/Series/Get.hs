@@ -52,9 +52,12 @@ type SeriesGetResource =
 -- | Returns Series metadata for the given series ids.
 --
 -- /See:/ 'seriesGet' smart constructor.
-newtype SeriesGet = SeriesGet'
+newtype SeriesGet =
+  SeriesGet'
     { _sgSeriesId :: [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SeriesGet' with the minimum fields required to make a request.
 --
@@ -64,10 +67,8 @@ newtype SeriesGet = SeriesGet'
 seriesGet
     :: [Text] -- ^ 'sgSeriesId'
     -> SeriesGet
-seriesGet pSgSeriesId_ =
-    SeriesGet'
-    { _sgSeriesId = _Coerce # pSgSeriesId_
-    }
+seriesGet pSgSeriesId_ = SeriesGet' {_sgSeriesId = _Coerce # pSgSeriesId_}
+
 
 -- | String that identifies the series
 sgSeriesId :: Lens' SeriesGet [Text]

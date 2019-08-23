@@ -61,13 +61,16 @@ type AccountsAdUnitsListResource =
 -- | List all ad units in the specified ad client for the specified account.
 --
 -- /See:/ 'accountsAdUnitsList' smart constructor.
-data AccountsAdUnitsList = AccountsAdUnitsList'
+data AccountsAdUnitsList =
+  AccountsAdUnitsList'
     { _aaulIncludeInactive :: !(Maybe Bool)
     , _aaulAdClientId      :: !Text
     , _aaulAccountId       :: !Text
     , _aaulPageToken       :: !(Maybe Text)
     , _aaulMaxResults      :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsAdUnitsList' with the minimum fields required to make a request.
 --
@@ -87,13 +90,14 @@ accountsAdUnitsList
     -> Text -- ^ 'aaulAccountId'
     -> AccountsAdUnitsList
 accountsAdUnitsList pAaulAdClientId_ pAaulAccountId_ =
-    AccountsAdUnitsList'
+  AccountsAdUnitsList'
     { _aaulIncludeInactive = Nothing
     , _aaulAdClientId = pAaulAdClientId_
     , _aaulAccountId = pAaulAccountId_
     , _aaulPageToken = Nothing
     , _aaulMaxResults = Nothing
     }
+
 
 -- | Whether to include inactive ad units. Default: true.
 aaulIncludeInactive :: Lens' AccountsAdUnitsList (Maybe Bool)

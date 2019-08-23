@@ -36,6 +36,11 @@ module Network.Google.CloudSearch.Types
     -- * DriveFollowUpRestrictType
     , DriveFollowUpRestrictType (..)
 
+    -- * GmailFolderRestrict
+    , GmailFolderRestrict
+    , gmailFolderRestrict
+    , gfrType
+
     -- * ItemContent
     , ItemContent
     , itemContent
@@ -89,6 +94,11 @@ module Network.Google.CloudSearch.Types
 
     -- * ItemStatusCode
     , ItemStatusCode (..)
+
+    -- * GmailActionRestrict
+    , GmailActionRestrict
+    , gmailActionRestrict
+    , garType
 
     -- * UnreserveItemsRequest
     , UnreserveItemsRequest
@@ -160,6 +170,9 @@ module Network.Google.CloudSearch.Types
     , qsDisplayName
     , qsSource
     , qsOperators
+
+    -- * GmailTimeRestrictType
+    , GmailTimeRestrictType (..)
 
     -- * SuggestResponse
     , SuggestResponse
@@ -261,6 +274,9 @@ module Network.Google.CloudSearch.Types
     , DoubleOperatorOptions
     , doubleOperatorOptions
     , dOperatorName
+
+    -- * GmailIntelligentRestrictType
+    , GmailIntelligentRestrictType (..)
 
     -- * Operation
     , Operation
@@ -398,6 +414,9 @@ module Network.Google.CloudSearch.Types
     -- * SourceScoringConfigSourceImportance
     , SourceScoringConfigSourceImportance (..)
 
+    -- * GmailAttachmentRestrictType
+    , GmailAttachmentRestrictType (..)
+
     -- * Metaline
     , Metaline
     , metaline
@@ -531,6 +550,9 @@ module Network.Google.CloudSearch.Types
     , displayedProperty
     , dpPropertyName
 
+    -- * GmailActionRestrictType
+    , GmailActionRestrictType (..)
+
     -- * FacetResult
     , FacetResult
     , facetResult
@@ -569,6 +591,9 @@ module Network.Google.CloudSearch.Types
     , DateValues
     , dateValues
     , dValues
+
+    -- * GmailFolderRestrictType
+    , GmailFolderRestrictType (..)
 
     -- * NamedProperty
     , NamedProperty
@@ -659,6 +684,11 @@ module Network.Google.CloudSearch.Types
     , uploadItemRef
     , uirName
 
+    -- * GmailTimeRestrict
+    , GmailTimeRestrict
+    , gmailTimeRestrict
+    , gtrType
+
     -- * PushItemRequest
     , PushItemRequest
     , pushItemRequest
@@ -744,6 +774,7 @@ module Network.Google.CloudSearch.Types
     , iirDebugOptions
     , iirConnectorName
     , iirItem
+    , iirIndexItemOptions
 
     -- * RepositoryErrorType
     , RepositoryErrorType (..)
@@ -798,6 +829,11 @@ module Network.Google.CloudSearch.Types
     , htmlValues
     , hvValues
 
+    -- * GmailIntelligentRestrict
+    , GmailIntelligentRestrict
+    , gmailIntelligentRestrict
+    , girType
+
     -- * HTMLOperatorOptions
     , HTMLOperatorOptions
     , htmlOperatorOptions
@@ -844,6 +880,7 @@ module Network.Google.CloudSearch.Types
     , facetOptions
     , fSourceName
     , fObjectType
+    , fNumFacetBuckets
     , fOperatorName
 
     -- * SuggestRequest
@@ -937,6 +974,11 @@ module Network.Google.CloudSearch.Types
     , enumOperatorOptions
     , eooOperatorName
 
+    -- * GmailAttachmentRestrict
+    , GmailAttachmentRestrict
+    , gmailAttachmentRestrict
+    , gType
+
     -- * DatePropertyOptions
     , DatePropertyOptions
     , datePropertyOptions
@@ -953,6 +995,11 @@ module Network.Google.CloudSearch.Types
     , gspGsuiteGroupEmail
     , gspGsuiteUserEmail
     , gspGsuiteDomain
+
+    -- * IndexItemOptions
+    , IndexItemOptions
+    , indexItemOptions
+    , iioAllowUnknownGsuitePrincipals
 
     -- * SearchQualityMetadata
     , SearchQualityMetadata
@@ -1005,10 +1052,15 @@ module Network.Google.CloudSearch.Types
     -- * RestrictItem
     , RestrictItem
     , restrictItem
+    , riGmailFolderRestrict
+    , riGmailActionRestrict
     , riDriveLocationRestrict
     , riDriveTimeSpanRestrict
     , riDriveMimeTypeRestrict
     , riDriveFollowUpRestrict
+    , riGmailTimeRestrict
+    , riGmailIntelligentRestrict
+    , riGmailAttachmentRestrict
     , riSearchOperator
 
     -- * DriveTimeSpanRestrictType
@@ -1054,38 +1106,38 @@ cloudSearchService
 -- | New Service:
 -- https:\/\/www.googleapis.com\/auth\/cloud_search.settings.query
 cloudSearchSettingsQueryScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings.query"]
-cloudSearchSettingsQueryScope = Proxy;
+cloudSearchSettingsQueryScope = Proxy
 
 -- | New Service:
 -- https:\/\/www.googleapis.com\/auth\/cloud_search.stats.indexing
 cloudSearchStatsIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.stats.indexing"]
-cloudSearchStatsIndexingScope = Proxy;
+cloudSearchStatsIndexingScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.indexing
 cloudSearchIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.indexing"]
-cloudSearchIndexingScope = Proxy;
+cloudSearchIndexingScope = Proxy
 
 -- | Index and serve your organization\'s data with Cloud Search
 cloudSearchScope :: Proxy '["https://www.googleapis.com/auth/cloud_search"]
-cloudSearchScope = Proxy;
+cloudSearchScope = Proxy
 
 -- | New Service:
 -- https:\/\/www.googleapis.com\/auth\/cloud_search.settings.indexing
 cloudSearchSettingsIndexingScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings.indexing"]
-cloudSearchSettingsIndexingScope = Proxy;
+cloudSearchSettingsIndexingScope = Proxy
 
 -- | Search your organization\'s data in the Cloud Search index
 cloudSearchQueryScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.query"]
-cloudSearchQueryScope = Proxy;
+cloudSearchQueryScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.debug
 cloudSearchDebugScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.debug"]
-cloudSearchDebugScope = Proxy;
+cloudSearchDebugScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.stats
 cloudSearchStatsScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.stats"]
-cloudSearchStatsScope = Proxy;
+cloudSearchStatsScope = Proxy
 
 -- | New Service: https:\/\/www.googleapis.com\/auth\/cloud_search.settings
 cloudSearchSettingsScope :: Proxy '["https://www.googleapis.com/auth/cloud_search.settings"]
-cloudSearchSettingsScope = Proxy;
+cloudSearchSettingsScope = Proxy

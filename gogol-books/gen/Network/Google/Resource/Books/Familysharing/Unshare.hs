@@ -58,11 +58,14 @@ type FamilysharingUnshareResource =
 -- family. Empty response indicates success.
 --
 -- /See:/ 'familysharingUnshare' smart constructor.
-data FamilysharingUnshare = FamilysharingUnshare'
+data FamilysharingUnshare =
+  FamilysharingUnshare'
     { _fuVolumeId :: !(Maybe Text)
     , _fuSource   :: !(Maybe Text)
     , _fuDocId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FamilysharingUnshare' with the minimum fields required to make a request.
 --
@@ -76,11 +79,9 @@ data FamilysharingUnshare = FamilysharingUnshare'
 familysharingUnshare
     :: FamilysharingUnshare
 familysharingUnshare =
-    FamilysharingUnshare'
-    { _fuVolumeId = Nothing
-    , _fuSource = Nothing
-    , _fuDocId = Nothing
-    }
+  FamilysharingUnshare'
+    {_fuVolumeId = Nothing, _fuSource = Nothing, _fuDocId = Nothing}
+
 
 -- | The volume to unshare.
 fuVolumeId :: Lens' FamilysharingUnshare (Maybe Text)

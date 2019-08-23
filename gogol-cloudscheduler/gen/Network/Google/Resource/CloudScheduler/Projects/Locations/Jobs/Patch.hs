@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.patch@ method which the
 -- 'ProjectsLocationsJobsPatch' request conforms to.
 type ProjectsLocationsJobsPatchResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -73,7 +73,8 @@ type ProjectsLocationsJobsPatchResource =
 -- is received.
 --
 -- /See:/ 'projectsLocationsJobsPatch' smart constructor.
-data ProjectsLocationsJobsPatch = ProjectsLocationsJobsPatch'
+data ProjectsLocationsJobsPatch =
+  ProjectsLocationsJobsPatch'
     { _pljpXgafv          :: !(Maybe Xgafv)
     , _pljpUploadProtocol :: !(Maybe Text)
     , _pljpUpdateMask     :: !(Maybe GFieldMask)
@@ -82,7 +83,9 @@ data ProjectsLocationsJobsPatch = ProjectsLocationsJobsPatch'
     , _pljpPayload        :: !Job
     , _pljpName           :: !Text
     , _pljpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsJobsPatch' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ projectsLocationsJobsPatch
     -> Text -- ^ 'pljpName'
     -> ProjectsLocationsJobsPatch
 projectsLocationsJobsPatch pPljpPayload_ pPljpName_ =
-    ProjectsLocationsJobsPatch'
+  ProjectsLocationsJobsPatch'
     { _pljpXgafv = Nothing
     , _pljpUploadProtocol = Nothing
     , _pljpUpdateMask = Nothing
@@ -118,6 +121,7 @@ projectsLocationsJobsPatch pPljpPayload_ pPljpName_ =
     , _pljpName = pPljpName_
     , _pljpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pljpXgafv :: Lens' ProjectsLocationsJobsPatch (Maybe Xgafv)
@@ -153,7 +157,8 @@ pljpPayload :: Lens' ProjectsLocationsJobsPatch Job
 pljpPayload
   = lens _pljpPayload (\ s a -> s{_pljpPayload = a})
 
--- | The job name. For example:
+-- | Optionally caller-specified in CreateJob, after which it becomes output
+-- only. The job name. For example:
 -- \`projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID\`. *
 -- \`PROJECT_ID\` can contain letters ([A-Za-z]), numbers ([0-9]), hyphens
 -- (-), colons (:), or periods (.). For more information, see [Identifying

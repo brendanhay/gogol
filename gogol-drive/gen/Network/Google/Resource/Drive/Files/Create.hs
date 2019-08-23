@@ -37,6 +37,7 @@ module Network.Google.Resource.Drive.Files.Create
     , fcUseContentAsIndexableText
     , fcOCRLanguage
     , fcKeepRevisionForever
+    , fcSupportsAllDrives
     , fcIgnoreDefaultVisibility
     , fcSupportsTeamDrives
     ) where
@@ -53,10 +54,11 @@ type FilesCreateResource =
            QueryParam "useContentAsIndexableText" Bool :>
              QueryParam "ocrLanguage" Text :>
                QueryParam "keepRevisionForever" Bool :>
-                 QueryParam "ignoreDefaultVisibility" Bool :>
-                   QueryParam "supportsTeamDrives" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] File :> Post '[JSON] File
+                 QueryParam "supportsAllDrives" Bool :>
+                   QueryParam "ignoreDefaultVisibility" Bool :>
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] File :> Post '[JSON] File
        :<|>
        "upload" :>
          "drive" :>
@@ -65,23 +67,29 @@ type FilesCreateResource =
                QueryParam "useContentAsIndexableText" Bool :>
                  QueryParam "ocrLanguage" Text :>
                    QueryParam "keepRevisionForever" Bool :>
-                     QueryParam "ignoreDefaultVisibility" Bool :>
-                       QueryParam "supportsTeamDrives" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           QueryParam "uploadType" Multipart :>
-                             MultipartRelated '[JSON] File :> Post '[JSON] File
+                     QueryParam "supportsAllDrives" Bool :>
+                       QueryParam "ignoreDefaultVisibility" Bool :>
+                         QueryParam "supportsTeamDrives" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             QueryParam "uploadType" Multipart :>
+                               MultipartRelated '[JSON] File :>
+                                 Post '[JSON] File
 
 -- | Creates a new file.
 --
 -- /See:/ 'filesCreate' smart constructor.
-data FilesCreate = FilesCreate'
+data FilesCreate =
+  FilesCreate'
     { _fcPayload                   :: !File
     , _fcUseContentAsIndexableText :: !Bool
     , _fcOCRLanguage               :: !(Maybe Text)
     , _fcKeepRevisionForever       :: !Bool
+    , _fcSupportsAllDrives         :: !Bool
     , _fcIgnoreDefaultVisibility   :: !Bool
     , _fcSupportsTeamDrives        :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FilesCreate' with the minimum fields required to make a request.
 --
@@ -95,6 +103,8 @@ data FilesCreate = FilesCreate'
 --
 -- * 'fcKeepRevisionForever'
 --
+-- * 'fcSupportsAllDrives'
+--
 -- * 'fcIgnoreDefaultVisibility'
 --
 -- * 'fcSupportsTeamDrives'
@@ -102,14 +112,16 @@ filesCreate
     :: File -- ^ 'fcPayload'
     -> FilesCreate
 filesCreate pFcPayload_ =
-    FilesCreate'
+  FilesCreate'
     { _fcPayload = pFcPayload_
     , _fcUseContentAsIndexableText = False
     , _fcOCRLanguage = Nothing
     , _fcKeepRevisionForever = False
+    , _fcSupportsAllDrives = False
     , _fcIgnoreDefaultVisibility = False
     , _fcSupportsTeamDrives = False
     }
+
 
 -- | Multipart request metadata.
 fcPayload :: Lens' FilesCreate File
@@ -129,11 +141,18 @@ fcOCRLanguage
       (\ s a -> s{_fcOCRLanguage = a})
 
 -- | Whether to set the \'keepForever\' field in the new head revision. This
--- is only applicable to files with binary content in Drive.
+-- is only applicable to files with binary content in Google Drive.
 fcKeepRevisionForever :: Lens' FilesCreate Bool
 fcKeepRevisionForever
   = lens _fcKeepRevisionForever
       (\ s a -> s{_fcKeepRevisionForever = a})
+
+-- | Whether the requesting application supports both My Drives and shared
+-- drives.
+fcSupportsAllDrives :: Lens' FilesCreate Bool
+fcSupportsAllDrives
+  = lens _fcSupportsAllDrives
+      (\ s a -> s{_fcSupportsAllDrives = a})
 
 -- | Whether to ignore the domain\'s default visibility settings for the
 -- created file. Domain administrators can choose to make all uploaded
@@ -145,7 +164,7 @@ fcIgnoreDefaultVisibility
   = lens _fcIgnoreDefaultVisibility
       (\ s a -> s{_fcIgnoreDefaultVisibility = a})
 
--- | Whether the requesting application supports Team Drives.
+-- | Deprecated use supportsAllDrives instead.
 fcSupportsTeamDrives :: Lens' FilesCreate Bool
 fcSupportsTeamDrives
   = lens _fcSupportsTeamDrives
@@ -161,6 +180,7 @@ instance GoogleRequest FilesCreate where
           = go (Just _fcUseContentAsIndexableText)
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
+              (Just _fcSupportsAllDrives)
               (Just _fcIgnoreDefaultVisibility)
               (Just _fcSupportsTeamDrives)
               (Just AltJSON)
@@ -179,6 +199,7 @@ instance GoogleRequest (MediaUpload FilesCreate)
           = go (Just _fcUseContentAsIndexableText)
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
+              (Just _fcSupportsAllDrives)
               (Just _fcIgnoreDefaultVisibility)
               (Just _fcSupportsTeamDrives)
               (Just AltJSON)

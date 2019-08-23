@@ -22,7 +22,7 @@
 --
 -- This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
+-- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     (
     -- * REST Resource
@@ -59,14 +59,17 @@ type TransferOperationsDeleteResource =
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ 'transferOperationsDelete' smart constructor.
-data TransferOperationsDelete = TransferOperationsDelete'
+data TransferOperationsDelete =
+  TransferOperationsDelete'
     { _todXgafv          :: !(Maybe Xgafv)
     , _todUploadProtocol :: !(Maybe Text)
     , _todAccessToken    :: !(Maybe Text)
     , _todUploadType     :: !(Maybe Text)
     , _todName           :: !Text
     , _todCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TransferOperationsDelete' with the minimum fields required to make a request.
 --
@@ -87,7 +90,7 @@ transferOperationsDelete
     :: Text -- ^ 'todName'
     -> TransferOperationsDelete
 transferOperationsDelete pTodName_ =
-    TransferOperationsDelete'
+  TransferOperationsDelete'
     { _todXgafv = Nothing
     , _todUploadProtocol = Nothing
     , _todAccessToken = Nothing
@@ -95,6 +98,7 @@ transferOperationsDelete pTodName_ =
     , _todName = pTodName_
     , _todCallback = Nothing
     }
+
 
 -- | V1 error format.
 todXgafv :: Lens' TransferOperationsDelete (Maybe Xgafv)

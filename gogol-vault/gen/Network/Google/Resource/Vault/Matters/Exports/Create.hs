@@ -63,7 +63,8 @@ type MattersExportsCreateResource =
 -- | Creates an Export.
 --
 -- /See:/ 'mattersExportsCreate' smart constructor.
-data MattersExportsCreate = MattersExportsCreate'
+data MattersExportsCreate =
+  MattersExportsCreate'
     { _mecXgafv          :: !(Maybe Xgafv)
     , _mecUploadProtocol :: !(Maybe Text)
     , _mecAccessToken    :: !(Maybe Text)
@@ -71,7 +72,9 @@ data MattersExportsCreate = MattersExportsCreate'
     , _mecPayload        :: !Export
     , _mecMatterId       :: !Text
     , _mecCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MattersExportsCreate' with the minimum fields required to make a request.
 --
@@ -95,7 +98,7 @@ mattersExportsCreate
     -> Text -- ^ 'mecMatterId'
     -> MattersExportsCreate
 mattersExportsCreate pMecPayload_ pMecMatterId_ =
-    MattersExportsCreate'
+  MattersExportsCreate'
     { _mecXgafv = Nothing
     , _mecUploadProtocol = Nothing
     , _mecAccessToken = Nothing
@@ -104,6 +107,7 @@ mattersExportsCreate pMecPayload_ pMecMatterId_ =
     , _mecMatterId = pMecMatterId_
     , _mecCallback = Nothing
     }
+
 
 -- | V1 error format.
 mecXgafv :: Lens' MattersExportsCreate (Maybe Xgafv)

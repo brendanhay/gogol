@@ -55,9 +55,12 @@ type PawsRegisterResource =
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsRegister' smart constructor.
-newtype PawsRegister = PawsRegister'
+newtype PawsRegister =
+  PawsRegister'
     { _prPayload :: PawsRegisterRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PawsRegister' with the minimum fields required to make a request.
 --
@@ -67,10 +70,8 @@ newtype PawsRegister = PawsRegister'
 pawsRegister
     :: PawsRegisterRequest -- ^ 'prPayload'
     -> PawsRegister
-pawsRegister pPrPayload_ =
-    PawsRegister'
-    { _prPayload = pPrPayload_
-    }
+pawsRegister pPrPayload_ = PawsRegister' {_prPayload = pPrPayload_}
+
 
 -- | Multipart request metadata.
 prPayload :: Lens' PawsRegister PawsRegisterRequest

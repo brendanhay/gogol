@@ -69,7 +69,8 @@ type AccountsProposalsAddNoteResource =
 -- when associated with a new note.
 --
 -- /See:/ 'accountsProposalsAddNote' smart constructor.
-data AccountsProposalsAddNote = AccountsProposalsAddNote'
+data AccountsProposalsAddNote =
+  AccountsProposalsAddNote'
     { _apanXgafv          :: !(Maybe Xgafv)
     , _apanUploadProtocol :: !(Maybe Text)
     , _apanAccessToken    :: !(Maybe Text)
@@ -78,7 +79,9 @@ data AccountsProposalsAddNote = AccountsProposalsAddNote'
     , _apanProposalId     :: !Text
     , _apanAccountId      :: !Text
     , _apanCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsProposalsAddNote' with the minimum fields required to make a request.
 --
@@ -105,7 +108,7 @@ accountsProposalsAddNote
     -> Text -- ^ 'apanAccountId'
     -> AccountsProposalsAddNote
 accountsProposalsAddNote pApanPayload_ pApanProposalId_ pApanAccountId_ =
-    AccountsProposalsAddNote'
+  AccountsProposalsAddNote'
     { _apanXgafv = Nothing
     , _apanUploadProtocol = Nothing
     , _apanAccessToken = Nothing
@@ -115,6 +118,7 @@ accountsProposalsAddNote pApanPayload_ pApanProposalId_ pApanAccountId_ =
     , _apanAccountId = pApanAccountId_
     , _apanCallback = Nothing
     }
+
 
 -- | V1 error format.
 apanXgafv :: Lens' AccountsProposalsAddNote (Maybe Xgafv)

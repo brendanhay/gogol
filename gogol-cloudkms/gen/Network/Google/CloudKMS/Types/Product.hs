@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | Response message for KeyManagementService.AsymmetricDecrypt.
 --
 -- /See:/ 'asymmetricDecryptResponse' smart constructor.
-newtype AsymmetricDecryptResponse = AsymmetricDecryptResponse'
+newtype AsymmetricDecryptResponse =
+  AsymmetricDecryptResponse'
     { _adrPlaintext :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AsymmetricDecryptResponse' with the minimum fields required to make a request.
 --
@@ -34,10 +37,8 @@ newtype AsymmetricDecryptResponse = AsymmetricDecryptResponse'
 -- * 'adrPlaintext'
 asymmetricDecryptResponse
     :: AsymmetricDecryptResponse
-asymmetricDecryptResponse =
-    AsymmetricDecryptResponse'
-    { _adrPlaintext = Nothing
-    }
+asymmetricDecryptResponse = AsymmetricDecryptResponse' {_adrPlaintext = Nothing}
+
 
 -- | The decrypted data originally encrypted with the matching public key.
 adrPlaintext :: Lens' AsymmetricDecryptResponse (Maybe ByteString)
@@ -59,10 +60,13 @@ instance ToJSON AsymmetricDecryptResponse where
 -- | Response message for KeyManagementService.Encrypt.
 --
 -- /See:/ 'encryptResponse' smart constructor.
-data EncryptResponse = EncryptResponse'
+data EncryptResponse =
+  EncryptResponse'
     { _erName       :: !(Maybe Text)
     , _erCiphertext :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EncryptResponse' with the minimum fields required to make a request.
 --
@@ -73,11 +77,8 @@ data EncryptResponse = EncryptResponse'
 -- * 'erCiphertext'
 encryptResponse
     :: EncryptResponse
-encryptResponse =
-    EncryptResponse'
-    { _erName = Nothing
-    , _erCiphertext = Nothing
-    }
+encryptResponse = EncryptResponse' {_erName = Nothing, _erCiphertext = Nothing}
+
 
 -- | The resource name of the CryptoKeyVersion used in encryption.
 erName :: Lens' EncryptResponse (Maybe Text)
@@ -107,9 +108,12 @@ instance ToJSON EncryptResponse where
 -- given location.
 --
 -- /See:/ 'locationSchema' smart constructor.
-newtype LocationSchema = LocationSchema'
+newtype LocationSchema =
+  LocationSchema'
     { _lsAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationSchema' with the minimum fields required to make a request.
 --
@@ -120,9 +124,8 @@ locationSchema
     :: HashMap Text JSONValue -- ^ 'lsAddtional'
     -> LocationSchema
 locationSchema pLsAddtional_ =
-    LocationSchema'
-    { _lsAddtional = _Coerce # pLsAddtional_
-    }
+  LocationSchema' {_lsAddtional = _Coerce # pLsAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 lsAddtional :: Lens' LocationSchema (HashMap Text JSONValue)
@@ -157,10 +160,13 @@ instance ToJSON LocationSchema where
 -- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
-data AuditConfig = AuditConfig'
+data AuditConfig =
+  AuditConfig'
     { _acService         :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
@@ -171,11 +177,8 @@ data AuditConfig = AuditConfig'
 -- * 'acAuditLogConfigs'
 auditConfig
     :: AuditConfig
-auditConfig =
-    AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
+
 
 -- | Specifies a service that will be enabled for audit logging. For example,
 -- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
@@ -212,12 +215,15 @@ instance ToJSON AuditConfig where
 -- expression: \"size(request.user) > 0\"
 --
 -- /See:/ 'expr' smart constructor.
-data Expr = Expr'
+data Expr =
+  Expr'
     { _eLocation    :: !(Maybe Text)
     , _eExpression  :: !(Maybe Text)
     , _eTitle       :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Expr' with the minimum fields required to make a request.
 --
@@ -233,12 +239,13 @@ data Expr = Expr'
 expr
     :: Expr
 expr =
-    Expr'
+  Expr'
     { _eLocation = Nothing
     , _eExpression = Nothing
     , _eTitle = Nothing
     , _eDescription = Nothing
     }
+
 
 -- | An optional string indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
@@ -286,10 +293,13 @@ instance ToJSON Expr where
 -- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
-data ListLocationsResponse = ListLocationsResponse'
+data ListLocationsResponse =
+  ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLocations     :: !(Maybe [Location])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
 --
@@ -301,10 +311,8 @@ data ListLocationsResponse = ListLocationsResponse'
 listLocationsResponse
     :: ListLocationsResponse
 listLocationsResponse =
-    ListLocationsResponse'
-    { _llrNextPageToken = Nothing
-    , _llrLocations = Nothing
-    }
+  ListLocationsResponse' {_llrNextPageToken = Nothing, _llrLocations = Nothing}
+
 
 -- | The standard List next-page token.
 llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
@@ -337,11 +345,14 @@ instance ToJSON ListLocationsResponse where
 -- | Response message for KeyManagementService.ListKeyRings.
 --
 -- /See:/ 'listKeyRingsResponse' smart constructor.
-data ListKeyRingsResponse = ListKeyRingsResponse'
+data ListKeyRingsResponse =
+  ListKeyRingsResponse'
     { _lkrrNextPageToken :: !(Maybe Text)
     , _lkrrTotalSize     :: !(Maybe (Textual Int32))
     , _lkrrKeyRings      :: !(Maybe [KeyRing])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListKeyRingsResponse' with the minimum fields required to make a request.
 --
@@ -355,11 +366,12 @@ data ListKeyRingsResponse = ListKeyRingsResponse'
 listKeyRingsResponse
     :: ListKeyRingsResponse
 listKeyRingsResponse =
-    ListKeyRingsResponse'
+  ListKeyRingsResponse'
     { _lkrrNextPageToken = Nothing
     , _lkrrTotalSize = Nothing
     , _lkrrKeyRings = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in
 -- ListKeyRingsRequest.page_token to retrieve the next page of results.
@@ -401,9 +413,12 @@ instance ToJSON ListKeyRingsResponse where
 -- | Response message for KeyManagementService.AsymmetricSign.
 --
 -- /See:/ 'asymmetricSignResponse' smart constructor.
-newtype AsymmetricSignResponse = AsymmetricSignResponse'
+newtype AsymmetricSignResponse =
+  AsymmetricSignResponse'
     { _asrSignature :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AsymmetricSignResponse' with the minimum fields required to make a request.
 --
@@ -412,10 +427,8 @@ newtype AsymmetricSignResponse = AsymmetricSignResponse'
 -- * 'asrSignature'
 asymmetricSignResponse
     :: AsymmetricSignResponse
-asymmetricSignResponse =
-    AsymmetricSignResponse'
-    { _asrSignature = Nothing
-    }
+asymmetricSignResponse = AsymmetricSignResponse' {_asrSignature = Nothing}
+
 
 -- | The created signature.
 asrSignature :: Lens' AsymmetricSignResponse (Maybe ByteString)
@@ -437,10 +450,13 @@ instance ToJSON AsymmetricSignResponse where
 -- | A KeyRing is a toplevel logical grouping of CryptoKeys.
 --
 -- /See:/ 'keyRing' smart constructor.
-data KeyRing = KeyRing'
+data KeyRing =
+  KeyRing'
     { _krName       :: !(Maybe Text)
     , _krCreateTime :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KeyRing' with the minimum fields required to make a request.
 --
@@ -451,11 +467,8 @@ data KeyRing = KeyRing'
 -- * 'krCreateTime'
 keyRing
     :: KeyRing
-keyRing =
-    KeyRing'
-    { _krName = Nothing
-    , _krCreateTime = Nothing
-    }
+keyRing = KeyRing' {_krName = Nothing, _krCreateTime = Nothing}
+
 
 -- | Output only. The resource name for the KeyRing in the format
 -- \`projects\/*\/locations\/*\/keyRings\/*\`.
@@ -485,14 +498,16 @@ instance ToJSON KeyRing where
 --
 -- /See:/ 'destroyCryptoKeyVersionRequest' smart constructor.
 data DestroyCryptoKeyVersionRequest =
-    DestroyCryptoKeyVersionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  DestroyCryptoKeyVersionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DestroyCryptoKeyVersionRequest' with the minimum fields required to make a request.
 --
 destroyCryptoKeyVersionRequest
     :: DestroyCryptoKeyVersionRequest
 destroyCryptoKeyVersionRequest = DestroyCryptoKeyVersionRequest'
+
 
 instance FromJSON DestroyCryptoKeyVersionRequest
          where
@@ -506,13 +521,16 @@ instance ToJSON DestroyCryptoKeyVersionRequest where
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location'
+data Location =
+  Location'
     { _lName        :: !(Maybe Text)
     , _lMetadata    :: !(Maybe LocationSchema)
     , _lDisplayName :: !(Maybe Text)
     , _lLabels      :: !(Maybe LocationLabels)
     , _lLocationId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -530,13 +548,14 @@ data Location = Location'
 location
     :: Location
 location =
-    Location'
+  Location'
     { _lName = Nothing
     , _lMetadata = Nothing
     , _lDisplayName = Nothing
     , _lLabels = Nothing
     , _lLocationId = Nothing
     }
+
 
 -- | Resource name for the location, which may vary between implementations.
 -- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
@@ -588,9 +607,12 @@ instance ToJSON Location where
 -- | Request message for KeyManagementService.AsymmetricSign.
 --
 -- /See:/ 'asymmetricSignRequest' smart constructor.
-newtype AsymmetricSignRequest = AsymmetricSignRequest'
+newtype AsymmetricSignRequest =
+  AsymmetricSignRequest'
     { _asrDigest :: Maybe Digest
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AsymmetricSignRequest' with the minimum fields required to make a request.
 --
@@ -599,10 +621,8 @@ newtype AsymmetricSignRequest = AsymmetricSignRequest'
 -- * 'asrDigest'
 asymmetricSignRequest
     :: AsymmetricSignRequest
-asymmetricSignRequest =
-    AsymmetricSignRequest'
-    { _asrDigest = Nothing
-    }
+asymmetricSignRequest = AsymmetricSignRequest' {_asrDigest = Nothing}
+
 
 -- | Required. The digest of the data to sign. The digest must be produced
 -- with the same digest algorithm as specified by the key version\'s
@@ -623,10 +643,13 @@ instance ToJSON AsymmetricSignRequest where
 -- | The public key for a given CryptoKeyVersion. Obtained via GetPublicKey.
 --
 -- /See:/ 'publicKey' smart constructor.
-data PublicKey = PublicKey'
+data PublicKey =
+  PublicKey'
     { _pkPem       :: !(Maybe Text)
     , _pkAlgorithm :: !(Maybe PublicKeyAlgorithm)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PublicKey' with the minimum fields required to make a request.
 --
@@ -637,11 +660,8 @@ data PublicKey = PublicKey'
 -- * 'pkAlgorithm'
 publicKey
     :: PublicKey
-publicKey =
-    PublicKey'
-    { _pkPem = Nothing
-    , _pkAlgorithm = Nothing
-    }
+publicKey = PublicKey' {_pkPem = Nothing, _pkAlgorithm = Nothing}
+
 
 -- | The public key, encoded in PEM format. For more information, see the
 -- [RFC 7468](https:\/\/tools.ietf.org\/html\/rfc7468) sections for
@@ -673,9 +693,12 @@ instance ToJSON PublicKey where
 -- | Response message for KeyManagementService.Decrypt.
 --
 -- /See:/ 'decryptResponse' smart constructor.
-newtype DecryptResponse = DecryptResponse'
+newtype DecryptResponse =
+  DecryptResponse'
     { _drPlaintext :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DecryptResponse' with the minimum fields required to make a request.
 --
@@ -684,10 +707,8 @@ newtype DecryptResponse = DecryptResponse'
 -- * 'drPlaintext'
 decryptResponse
     :: DecryptResponse
-decryptResponse =
-    DecryptResponse'
-    { _drPlaintext = Nothing
-    }
+decryptResponse = DecryptResponse' {_drPlaintext = Nothing}
+
 
 -- | The decrypted data originally supplied in EncryptRequest.plaintext.
 drPlaintext :: Lens' DecryptResponse (Maybe ByteString)
@@ -710,10 +731,13 @@ instance ToJSON DecryptResponse where
 -- automatically as a result of auto-rotation.
 --
 -- /See:/ 'cryptoKeyVersionTemplate' smart constructor.
-data CryptoKeyVersionTemplate = CryptoKeyVersionTemplate'
+data CryptoKeyVersionTemplate =
+  CryptoKeyVersionTemplate'
     { _ckvtAlgorithm       :: !(Maybe CryptoKeyVersionTemplateAlgorithm)
     , _ckvtProtectionLevel :: !(Maybe CryptoKeyVersionTemplateProtectionLevel)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CryptoKeyVersionTemplate' with the minimum fields required to make a request.
 --
@@ -725,10 +749,9 @@ data CryptoKeyVersionTemplate = CryptoKeyVersionTemplate'
 cryptoKeyVersionTemplate
     :: CryptoKeyVersionTemplate
 cryptoKeyVersionTemplate =
-    CryptoKeyVersionTemplate'
-    { _ckvtAlgorithm = Nothing
-    , _ckvtProtectionLevel = Nothing
-    }
+  CryptoKeyVersionTemplate'
+    {_ckvtAlgorithm = Nothing, _ckvtProtectionLevel = Nothing}
+
 
 -- | Required. Algorithm to use when creating a CryptoKeyVersion based on
 -- this template. For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION
@@ -763,10 +786,13 @@ instance ToJSON CryptoKeyVersionTemplate where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-data SetIAMPolicyRequest = SetIAMPolicyRequest'
+data SetIAMPolicyRequest =
+  SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
     , _siprPolicy     :: !(Maybe Policy)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -778,10 +804,8 @@ data SetIAMPolicyRequest = SetIAMPolicyRequest'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest'
-    { _siprUpdateMask = Nothing
-    , _siprPolicy = Nothing
-    }
+  SetIAMPolicyRequest' {_siprUpdateMask = Nothing, _siprPolicy = Nothing}
+
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
@@ -818,9 +842,12 @@ instance ToJSON SetIAMPolicyRequest where
 -- Keys](\/kms\/docs\/labeling-keys).
 --
 -- /See:/ 'cryptoKeyLabels' smart constructor.
-newtype CryptoKeyLabels = CryptoKeyLabels'
+newtype CryptoKeyLabels =
+  CryptoKeyLabels'
     { _cklAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CryptoKeyLabels' with the minimum fields required to make a request.
 --
@@ -831,9 +858,8 @@ cryptoKeyLabels
     :: HashMap Text Text -- ^ 'cklAddtional'
     -> CryptoKeyLabels
 cryptoKeyLabels pCklAddtional_ =
-    CryptoKeyLabels'
-    { _cklAddtional = _Coerce # pCklAddtional_
-    }
+  CryptoKeyLabels' {_cklAddtional = _Coerce # pCklAddtional_}
+
 
 cklAddtional :: Lens' CryptoKeyLabels (HashMap Text Text)
 cklAddtional
@@ -853,7 +879,8 @@ instance ToJSON CryptoKeyLabels where
 -- represent the actual key material used in cryptographic operations.
 --
 -- /See:/ 'cryptoKey' smart constructor.
-data CryptoKey = CryptoKey'
+data CryptoKey =
+  CryptoKey'
     { _ckVersionTemplate  :: !(Maybe CryptoKeyVersionTemplate)
     , _ckPurpose          :: !(Maybe CryptoKeyPurpose)
     , _ckRotationPeriod   :: !(Maybe GDuration)
@@ -862,7 +889,9 @@ data CryptoKey = CryptoKey'
     , _ckLabels           :: !(Maybe CryptoKeyLabels)
     , _ckNextRotationTime :: !(Maybe DateTime')
     , _ckCreateTime       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CryptoKey' with the minimum fields required to make a request.
 --
@@ -886,7 +915,7 @@ data CryptoKey = CryptoKey'
 cryptoKey
     :: CryptoKey
 cryptoKey =
-    CryptoKey'
+  CryptoKey'
     { _ckVersionTemplate = Nothing
     , _ckPurpose = Nothing
     , _ckRotationPeriod = Nothing
@@ -896,6 +925,7 @@ cryptoKey =
     , _ckNextRotationTime = Nothing
     , _ckCreateTime = Nothing
     }
+
 
 -- | A template describing settings for new CryptoKeyVersion instances. The
 -- properties of new CryptoKeyVersion instances created by either
@@ -986,10 +1016,13 @@ instance ToJSON CryptoKey where
 -- | Request message for KeyManagementService.Decrypt.
 --
 -- /See:/ 'decryptRequest' smart constructor.
-data DecryptRequest = DecryptRequest'
+data DecryptRequest =
+  DecryptRequest'
     { _drAdditionalAuthenticatedData :: !(Maybe Bytes)
     , _drCiphertext                  :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DecryptRequest' with the minimum fields required to make a request.
 --
@@ -1001,10 +1034,9 @@ data DecryptRequest = DecryptRequest'
 decryptRequest
     :: DecryptRequest
 decryptRequest =
-    DecryptRequest'
-    { _drAdditionalAuthenticatedData = Nothing
-    , _drCiphertext = Nothing
-    }
+  DecryptRequest'
+    {_drAdditionalAuthenticatedData = Nothing, _drCiphertext = Nothing}
+
 
 -- | Optional data that must match the data originally supplied in
 -- EncryptRequest.additional_authenticated_data.
@@ -1037,13 +1069,18 @@ instance ToJSON DecryptRequest where
                     _drAdditionalAuthenticatedData,
                   ("ciphertext" .=) <$> _drCiphertext])
 
--- | Contains an HSM-generated attestation about a key operation.
+-- | Contains an HSM-generated attestation about a key operation. For more
+-- information, see [Verifying attestations]
+-- (https:\/\/cloud.google.com\/kms\/docs\/attest-key).
 --
 -- /See:/ 'keyOperationAttestation' smart constructor.
-data KeyOperationAttestation = KeyOperationAttestation'
+data KeyOperationAttestation =
+  KeyOperationAttestation'
     { _koaFormat  :: !(Maybe KeyOperationAttestationFormat)
     , _koaContent :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'KeyOperationAttestation' with the minimum fields required to make a request.
 --
@@ -1055,10 +1092,8 @@ data KeyOperationAttestation = KeyOperationAttestation'
 keyOperationAttestation
     :: KeyOperationAttestation
 keyOperationAttestation =
-    KeyOperationAttestation'
-    { _koaFormat = Nothing
-    , _koaContent = Nothing
-    }
+  KeyOperationAttestation' {_koaFormat = Nothing, _koaContent = Nothing}
+
 
 -- | Output only. The format of the attestation data.
 koaFormat :: Lens' KeyOperationAttestation (Maybe KeyOperationAttestationFormat)
@@ -1089,11 +1124,14 @@ instance ToJSON KeyOperationAttestation where
 -- | Response message for KeyManagementService.ListCryptoKeyVersions.
 --
 -- /See:/ 'listCryptoKeyVersionsResponse' smart constructor.
-data ListCryptoKeyVersionsResponse = ListCryptoKeyVersionsResponse'
+data ListCryptoKeyVersionsResponse =
+  ListCryptoKeyVersionsResponse'
     { _lckvrNextPageToken     :: !(Maybe Text)
     , _lckvrTotalSize         :: !(Maybe (Textual Int32))
     , _lckvrCryptoKeyVersions :: !(Maybe [CryptoKeyVersion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListCryptoKeyVersionsResponse' with the minimum fields required to make a request.
 --
@@ -1107,11 +1145,12 @@ data ListCryptoKeyVersionsResponse = ListCryptoKeyVersionsResponse'
 listCryptoKeyVersionsResponse
     :: ListCryptoKeyVersionsResponse
 listCryptoKeyVersionsResponse =
-    ListCryptoKeyVersionsResponse'
+  ListCryptoKeyVersionsResponse'
     { _lckvrNextPageToken = Nothing
     , _lckvrTotalSize = Nothing
     , _lckvrCryptoKeyVersions = Nothing
     }
+
 
 -- | A token to retrieve next page of results. Pass this value in
 -- ListCryptoKeyVersionsRequest.page_token to retrieve the next page of
@@ -1157,14 +1196,16 @@ instance ToJSON ListCryptoKeyVersionsResponse where
 --
 -- /See:/ 'restoreCryptoKeyVersionRequest' smart constructor.
 data RestoreCryptoKeyVersionRequest =
-    RestoreCryptoKeyVersionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  RestoreCryptoKeyVersionRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RestoreCryptoKeyVersionRequest' with the minimum fields required to make a request.
 --
 restoreCryptoKeyVersionRequest
     :: RestoreCryptoKeyVersionRequest
 restoreCryptoKeyVersionRequest = RestoreCryptoKeyVersionRequest'
+
 
 instance FromJSON RestoreCryptoKeyVersionRequest
          where
@@ -1178,9 +1219,12 @@ instance ToJSON RestoreCryptoKeyVersionRequest where
 -- | Request message for KeyManagementService.UpdateCryptoKeyPrimaryVersion.
 --
 -- /See:/ 'updateCryptoKeyPrimaryVersionRequest' smart constructor.
-newtype UpdateCryptoKeyPrimaryVersionRequest = UpdateCryptoKeyPrimaryVersionRequest'
+newtype UpdateCryptoKeyPrimaryVersionRequest =
+  UpdateCryptoKeyPrimaryVersionRequest'
     { _uckpvrCryptoKeyVersionId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UpdateCryptoKeyPrimaryVersionRequest' with the minimum fields required to make a request.
 --
@@ -1190,9 +1234,8 @@ newtype UpdateCryptoKeyPrimaryVersionRequest = UpdateCryptoKeyPrimaryVersionRequ
 updateCryptoKeyPrimaryVersionRequest
     :: UpdateCryptoKeyPrimaryVersionRequest
 updateCryptoKeyPrimaryVersionRequest =
-    UpdateCryptoKeyPrimaryVersionRequest'
-    { _uckpvrCryptoKeyVersionId = Nothing
-    }
+  UpdateCryptoKeyPrimaryVersionRequest' {_uckpvrCryptoKeyVersionId = Nothing}
+
 
 -- | The id of the child CryptoKeyVersion to use as primary.
 uckpvrCryptoKeyVersionId :: Lens' UpdateCryptoKeyPrimaryVersionRequest (Maybe Text)
@@ -1201,7 +1244,8 @@ uckpvrCryptoKeyVersionId
       (\ s a -> s{_uckpvrCryptoKeyVersionId = a})
 
 instance FromJSON
-         UpdateCryptoKeyPrimaryVersionRequest where
+           UpdateCryptoKeyPrimaryVersionRequest
+         where
         parseJSON
           = withObject "UpdateCryptoKeyPrimaryVersionRequest"
               (\ o ->
@@ -1219,9 +1263,12 @@ instance ToJSON UpdateCryptoKeyPrimaryVersionRequest
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
+newtype TestIAMPermissionsRequest =
+  TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -1231,9 +1278,8 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest'
-    { _tiprPermissions = Nothing
-    }
+  TestIAMPermissionsRequest' {_tiprPermissions = Nothing}
+
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
@@ -1261,9 +1307,12 @@ instance ToJSON TestIAMPermissionsRequest where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
+newtype TestIAMPermissionsResponse =
+  TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -1273,9 +1322,8 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse'
-    { _tiamprPermissions = Nothing
-    }
+  TestIAMPermissionsResponse' {_tiamprPermissions = Nothing}
+
 
 -- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
 -- allowed.
@@ -1302,11 +1350,14 @@ instance ToJSON TestIAMPermissionsResponse where
 -- | A Digest holds a cryptographic message digest.
 --
 -- /See:/ 'digest' smart constructor.
-data Digest = Digest'
+data Digest =
+  Digest'
     { _dSha512 :: !(Maybe Bytes)
     , _dSha384 :: !(Maybe Bytes)
     , _dSha256 :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Digest' with the minimum fields required to make a request.
 --
@@ -1319,12 +1370,8 @@ data Digest = Digest'
 -- * 'dSha256'
 digest
     :: Digest
-digest =
-    Digest'
-    { _dSha512 = Nothing
-    , _dSha384 = Nothing
-    , _dSha256 = Nothing
-    }
+digest = Digest' {_dSha512 = Nothing, _dSha384 = Nothing, _dSha256 = Nothing}
+
 
 -- | A message digest produced with the SHA-512 algorithm.
 dSha512 :: Lens' Digest (Maybe ByteString)
@@ -1379,12 +1426,15 @@ instance ToJSON Digest where
 -- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy'
+data Policy =
+  Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
     , _pEtag         :: !(Maybe Bytes)
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -1400,12 +1450,13 @@ data Policy = Policy'
 policy
     :: Policy
 policy =
-    Policy'
+  Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
 
 -- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
@@ -1464,9 +1515,12 @@ instance ToJSON Policy where
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
 --
 -- /See:/ 'locationLabels' smart constructor.
-newtype LocationLabels = LocationLabels'
+newtype LocationLabels =
+  LocationLabels'
     { _llAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
 --
@@ -1477,9 +1531,8 @@ locationLabels
     :: HashMap Text Text -- ^ 'llAddtional'
     -> LocationLabels
 locationLabels pLlAddtional_ =
-    LocationLabels'
-    { _llAddtional = _Coerce # pLlAddtional_
-    }
+  LocationLabels' {_llAddtional = _Coerce # pLlAddtional_}
+
 
 llAddtional :: Lens' LocationLabels (HashMap Text Text)
 llAddtional
@@ -1497,9 +1550,12 @@ instance ToJSON LocationLabels where
 -- | Cloud KMS metadata for the given google.cloud.location.Location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
-newtype LocationMetadata = LocationMetadata'
+newtype LocationMetadata =
+  LocationMetadata'
     { _lmHSMAvailable :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 --
@@ -1508,10 +1564,8 @@ newtype LocationMetadata = LocationMetadata'
 -- * 'lmHSMAvailable'
 locationMetadata
     :: LocationMetadata
-locationMetadata =
-    LocationMetadata'
-    { _lmHSMAvailable = Nothing
-    }
+locationMetadata = LocationMetadata' {_lmHSMAvailable = Nothing}
+
 
 -- | Indicates whether CryptoKeys with protection_level HSM can be created in
 -- this location.
@@ -1537,10 +1591,13 @@ instance ToJSON LocationMetadata where
 -- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
-data AuditLogConfig = AuditLogConfig'
+data AuditLogConfig =
+  AuditLogConfig'
     { _alcLogType         :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
@@ -1552,10 +1609,8 @@ data AuditLogConfig = AuditLogConfig'
 auditLogConfig
     :: AuditLogConfig
 auditLogConfig =
-    AuditLogConfig'
-    { _alcLogType = Nothing
-    , _alcExemptedMembers = Nothing
-    }
+  AuditLogConfig' {_alcLogType = Nothing, _alcExemptedMembers = Nothing}
+
 
 -- | The log type that this config enables.
 alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
@@ -1589,11 +1644,14 @@ instance ToJSON AuditLogConfig where
 -- | Response message for KeyManagementService.ListCryptoKeys.
 --
 -- /See:/ 'listCryptoKeysResponse' smart constructor.
-data ListCryptoKeysResponse = ListCryptoKeysResponse'
+data ListCryptoKeysResponse =
+  ListCryptoKeysResponse'
     { _lckrCryptoKeys    :: !(Maybe [CryptoKey])
     , _lckrNextPageToken :: !(Maybe Text)
     , _lckrTotalSize     :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListCryptoKeysResponse' with the minimum fields required to make a request.
 --
@@ -1607,11 +1665,12 @@ data ListCryptoKeysResponse = ListCryptoKeysResponse'
 listCryptoKeysResponse
     :: ListCryptoKeysResponse
 listCryptoKeysResponse =
-    ListCryptoKeysResponse'
+  ListCryptoKeysResponse'
     { _lckrCryptoKeys = Nothing
     , _lckrNextPageToken = Nothing
     , _lckrTotalSize = Nothing
     }
+
 
 -- | The list of CryptoKeys.
 lckrCryptoKeys :: Lens' ListCryptoKeysResponse [CryptoKey]
@@ -1655,9 +1714,12 @@ instance ToJSON ListCryptoKeysResponse where
 -- | Request message for KeyManagementService.AsymmetricDecrypt.
 --
 -- /See:/ 'asymmetricDecryptRequest' smart constructor.
-newtype AsymmetricDecryptRequest = AsymmetricDecryptRequest'
+newtype AsymmetricDecryptRequest =
+  AsymmetricDecryptRequest'
     { _adrCiphertext :: Maybe Bytes
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AsymmetricDecryptRequest' with the minimum fields required to make a request.
 --
@@ -1666,10 +1728,8 @@ newtype AsymmetricDecryptRequest = AsymmetricDecryptRequest'
 -- * 'adrCiphertext'
 asymmetricDecryptRequest
     :: AsymmetricDecryptRequest
-asymmetricDecryptRequest =
-    AsymmetricDecryptRequest'
-    { _adrCiphertext = Nothing
-    }
+asymmetricDecryptRequest = AsymmetricDecryptRequest' {_adrCiphertext = Nothing}
+
 
 -- | Required. The data encrypted with the named CryptoKeyVersion\'s public
 -- key using OAEP.
@@ -1698,7 +1758,8 @@ instance ToJSON AsymmetricDecryptRequest where
 -- authorized user or application invokes Cloud KMS.
 --
 -- /See:/ 'cryptoKeyVersion' smart constructor.
-data CryptoKeyVersion = CryptoKeyVersion'
+data CryptoKeyVersion =
+  CryptoKeyVersion'
     { _ckvState            :: !(Maybe CryptoKeyVersionState)
     , _ckvAttestation      :: !(Maybe KeyOperationAttestation)
     , _ckvGenerateTime     :: !(Maybe DateTime')
@@ -1708,7 +1769,9 @@ data CryptoKeyVersion = CryptoKeyVersion'
     , _ckvProtectionLevel  :: !(Maybe CryptoKeyVersionProtectionLevel)
     , _ckvDestroyEventTime :: !(Maybe DateTime')
     , _ckvCreateTime       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CryptoKeyVersion' with the minimum fields required to make a request.
 --
@@ -1734,7 +1797,7 @@ data CryptoKeyVersion = CryptoKeyVersion'
 cryptoKeyVersion
     :: CryptoKeyVersion
 cryptoKeyVersion =
-    CryptoKeyVersion'
+  CryptoKeyVersion'
     { _ckvState = Nothing
     , _ckvAttestation = Nothing
     , _ckvGenerateTime = Nothing
@@ -1745,6 +1808,7 @@ cryptoKeyVersion =
     , _ckvDestroyEventTime = Nothing
     , _ckvCreateTime = Nothing
     }
+
 
 -- | The current state of the CryptoKeyVersion.
 ckvState :: Lens' CryptoKeyVersion (Maybe CryptoKeyVersionState)
@@ -1839,10 +1903,13 @@ instance ToJSON CryptoKeyVersion where
 -- | Request message for KeyManagementService.Encrypt.
 --
 -- /See:/ 'encryptRequest' smart constructor.
-data EncryptRequest = EncryptRequest'
+data EncryptRequest =
+  EncryptRequest'
     { _erAdditionalAuthenticatedData :: !(Maybe Bytes)
     , _erPlaintext                   :: !(Maybe Bytes)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EncryptRequest' with the minimum fields required to make a request.
 --
@@ -1854,10 +1921,9 @@ data EncryptRequest = EncryptRequest'
 encryptRequest
     :: EncryptRequest
 encryptRequest =
-    EncryptRequest'
-    { _erAdditionalAuthenticatedData = Nothing
-    , _erPlaintext = Nothing
-    }
+  EncryptRequest'
+    {_erAdditionalAuthenticatedData = Nothing, _erPlaintext = Nothing}
+
 
 -- | Optional data that, if specified, must also be provided during
 -- decryption through DecryptRequest.additional_authenticated_data. The
@@ -1900,11 +1966,14 @@ instance ToJSON EncryptRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding'
+data Binding =
+  Binding'
     { _bMembers   :: !(Maybe [Text])
     , _bRole      :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1918,11 +1987,8 @@ data Binding = Binding'
 binding
     :: Binding
 binding =
-    Binding'
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    , _bCondition = Nothing
-    }
+  Binding' {_bMembers = Nothing, _bRole = Nothing, _bCondition = Nothing}
+
 
 -- | Specifies the identities requesting access for a Cloud Platform
 -- resource. \`members\` can have the following values: * \`allUsers\`: A
@@ -1935,8 +2001,8 @@ binding =
 -- that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
+-- (primary) that represents all the users of that domain. For example,
 -- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
@@ -1949,10 +2015,9 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. NOTE: an unsatisfied
+-- condition will not allow user access via current binding. Different
+-- bindings, including their conditions, are examined independently.
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

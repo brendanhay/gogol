@@ -90,9 +90,12 @@ type ProjectsInitializeSettingsResource =
 -- by Google Cloud Storage
 --
 -- /See:/ 'projectsInitializeSettings' smart constructor.
-newtype ProjectsInitializeSettings = ProjectsInitializeSettings'
+newtype ProjectsInitializeSettings =
+  ProjectsInitializeSettings'
     { _pisProjectId :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInitializeSettings' with the minimum fields required to make a request.
 --
@@ -103,9 +106,8 @@ projectsInitializeSettings
     :: Text -- ^ 'pisProjectId'
     -> ProjectsInitializeSettings
 projectsInitializeSettings pPisProjectId_ =
-    ProjectsInitializeSettings'
-    { _pisProjectId = pPisProjectId_
-    }
+  ProjectsInitializeSettings' {_pisProjectId = pPisProjectId_}
+
 
 -- | A Project id. Required.
 pisProjectId :: Lens' ProjectsInitializeSettings Text

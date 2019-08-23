@@ -53,10 +53,13 @@ type ProductsDeleteResource =
 -- | Deletes a product from your Merchant Center account.
 --
 -- /See:/ 'productsDelete' smart constructor.
-data ProductsDelete = ProductsDelete'
+data ProductsDelete =
+  ProductsDelete'
     { _proMerchantId :: !(Textual Word64)
     , _proProductId  :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProductsDelete' with the minimum fields required to make a request.
 --
@@ -70,10 +73,9 @@ productsDelete
     -> Text -- ^ 'proProductId'
     -> ProductsDelete
 productsDelete pProMerchantId_ pProProductId_ =
-    ProductsDelete'
-    { _proMerchantId = _Coerce # pProMerchantId_
-    , _proProductId = pProProductId_
-    }
+  ProductsDelete'
+    {_proMerchantId = _Coerce # pProMerchantId_, _proProductId = pProProductId_}
+
 
 -- | The ID of the account that contains the product. This account cannot be
 -- a multi-client account.
@@ -83,7 +85,7 @@ proMerchantId
       (\ s a -> s{_proMerchantId = a})
       . _Coerce
 
--- | The REST id of the product.
+-- | The REST ID of the product.
 proProductId :: Lens' ProductsDelete Text
 proProductId
   = lens _proProductId (\ s a -> s{_proProductId = a})

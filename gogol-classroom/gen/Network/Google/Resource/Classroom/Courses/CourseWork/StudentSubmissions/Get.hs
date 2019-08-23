@@ -75,7 +75,8 @@ type CoursesCourseWorkStudentSubmissionsGetResource =
 -- work, or student submission does not exist.
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsGet' smart constructor.
-data CoursesCourseWorkStudentSubmissionsGet = CoursesCourseWorkStudentSubmissionsGet'
+data CoursesCourseWorkStudentSubmissionsGet =
+  CoursesCourseWorkStudentSubmissionsGet'
     { _ccwssgXgafv          :: !(Maybe Xgafv)
     , _ccwssgUploadProtocol :: !(Maybe Text)
     , _ccwssgCourseId       :: !Text
@@ -84,7 +85,9 @@ data CoursesCourseWorkStudentSubmissionsGet = CoursesCourseWorkStudentSubmission
     , _ccwssgId             :: !Text
     , _ccwssgCallback       :: !(Maybe Text)
     , _ccwssgCourseWorkId   :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsGet' with the minimum fields required to make a request.
 --
@@ -111,7 +114,7 @@ coursesCourseWorkStudentSubmissionsGet
     -> Text -- ^ 'ccwssgCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsGet
 coursesCourseWorkStudentSubmissionsGet pCcwssgCourseId_ pCcwssgId_ pCcwssgCourseWorkId_ =
-    CoursesCourseWorkStudentSubmissionsGet'
+  CoursesCourseWorkStudentSubmissionsGet'
     { _ccwssgXgafv = Nothing
     , _ccwssgUploadProtocol = Nothing
     , _ccwssgCourseId = pCcwssgCourseId_
@@ -121,6 +124,7 @@ coursesCourseWorkStudentSubmissionsGet pCcwssgCourseId_ pCcwssgId_ pCcwssgCourse
     , _ccwssgCallback = Nothing
     , _ccwssgCourseWorkId = pCcwssgCourseWorkId_
     }
+
 
 -- | V1 error format.
 ccwssgXgafv :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Xgafv)
@@ -169,7 +173,8 @@ ccwssgCourseWorkId
       (\ s a -> s{_ccwssgCourseWorkId = a})
 
 instance GoogleRequest
-         CoursesCourseWorkStudentSubmissionsGet where
+           CoursesCourseWorkStudentSubmissionsGet
+         where
         type Rs CoursesCourseWorkStudentSubmissionsGet =
              StudentSubmission
         type Scopes CoursesCourseWorkStudentSubmissionsGet =

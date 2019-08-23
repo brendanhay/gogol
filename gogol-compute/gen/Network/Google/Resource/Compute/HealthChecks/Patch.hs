@@ -64,12 +64,15 @@ type HealthChecksPatchResource =
 -- the JSON merge patch format and processing rules.
 --
 -- /See:/ 'healthChecksPatch' smart constructor.
-data HealthChecksPatch = HealthChecksPatch'
+data HealthChecksPatch =
+  HealthChecksPatch'
     { _hcpRequestId   :: !(Maybe Text)
     , _hcpHealthCheck :: !Text
     , _hcpProject     :: !Text
     , _hcpPayload     :: !HealthCheck
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HealthChecksPatch' with the minimum fields required to make a request.
 --
@@ -88,12 +91,13 @@ healthChecksPatch
     -> HealthCheck -- ^ 'hcpPayload'
     -> HealthChecksPatch
 healthChecksPatch pHcpHealthCheck_ pHcpProject_ pHcpPayload_ =
-    HealthChecksPatch'
+  HealthChecksPatch'
     { _hcpRequestId = Nothing
     , _hcpHealthCheck = pHcpHealthCheck_
     , _hcpProject = pHcpProject_
     , _hcpPayload = pHcpPayload_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

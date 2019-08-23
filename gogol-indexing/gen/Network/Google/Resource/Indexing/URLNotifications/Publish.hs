@@ -61,14 +61,17 @@ type URLNotificationsPublishResource =
 -- | Notifies that a URL has been updated or deleted.
 --
 -- /See:/ 'urlNotificationsPublish' smart constructor.
-data URLNotificationsPublish = URLNotificationsPublish'
+data URLNotificationsPublish =
+  URLNotificationsPublish'
     { _unpXgafv          :: !(Maybe Xgafv)
     , _unpUploadProtocol :: !(Maybe Text)
     , _unpAccessToken    :: !(Maybe Text)
     , _unpUploadType     :: !(Maybe Text)
     , _unpPayload        :: !URLNotification
     , _unpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'URLNotificationsPublish' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ urlNotificationsPublish
     :: URLNotification -- ^ 'unpPayload'
     -> URLNotificationsPublish
 urlNotificationsPublish pUnpPayload_ =
-    URLNotificationsPublish'
+  URLNotificationsPublish'
     { _unpXgafv = Nothing
     , _unpUploadProtocol = Nothing
     , _unpAccessToken = Nothing
@@ -97,6 +100,7 @@ urlNotificationsPublish pUnpPayload_ =
     , _unpPayload = pUnpPayload_
     , _unpCallback = Nothing
     }
+
 
 -- | V1 error format.
 unpXgafv :: Lens' URLNotificationsPublish (Maybe Xgafv)

@@ -56,11 +56,14 @@ type CreativesAddDealResource =
 -- | Add a deal id association for the creative.
 --
 -- /See:/ 'creativesAddDeal' smart constructor.
-data CreativesAddDeal = CreativesAddDeal'
+data CreativesAddDeal =
+  CreativesAddDeal'
     { _cadBuyerCreativeId :: !Text
     , _cadDealId          :: !(Textual Int64)
     , _cadAccountId       :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativesAddDeal' with the minimum fields required to make a request.
 --
@@ -77,11 +80,12 @@ creativesAddDeal
     -> Int32 -- ^ 'cadAccountId'
     -> CreativesAddDeal
 creativesAddDeal pCadBuyerCreativeId_ pCadDealId_ pCadAccountId_ =
-    CreativesAddDeal'
+  CreativesAddDeal'
     { _cadBuyerCreativeId = pCadBuyerCreativeId_
     , _cadDealId = _Coerce # pCadDealId_
     , _cadAccountId = _Coerce # pCadAccountId_
     }
+
 
 -- | The buyer-specific id for this creative.
 cadBuyerCreativeId :: Lens' CreativesAddDeal Text

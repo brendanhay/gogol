@@ -64,7 +64,8 @@ type ProjectsInstancesClustersCreateResource =
 -- | Creates a cluster within an instance.
 --
 -- /See:/ 'projectsInstancesClustersCreate' smart constructor.
-data ProjectsInstancesClustersCreate = ProjectsInstancesClustersCreate'
+data ProjectsInstancesClustersCreate =
+  ProjectsInstancesClustersCreate'
     { _piccParent         :: !Text
     , _piccXgafv          :: !(Maybe Xgafv)
     , _piccUploadProtocol :: !(Maybe Text)
@@ -73,7 +74,9 @@ data ProjectsInstancesClustersCreate = ProjectsInstancesClustersCreate'
     , _piccPayload        :: !Cluster
     , _piccClusterId      :: !(Maybe Text)
     , _piccCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsInstancesClustersCreate' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ projectsInstancesClustersCreate
     -> Cluster -- ^ 'piccPayload'
     -> ProjectsInstancesClustersCreate
 projectsInstancesClustersCreate pPiccParent_ pPiccPayload_ =
-    ProjectsInstancesClustersCreate'
+  ProjectsInstancesClustersCreate'
     { _piccParent = pPiccParent_
     , _piccXgafv = Nothing
     , _piccUploadProtocol = Nothing
@@ -109,6 +112,7 @@ projectsInstancesClustersCreate pPiccParent_ pPiccPayload_ =
     , _piccClusterId = Nothing
     , _piccCallback = Nothing
     }
+
 
 -- | The unique name of the instance in which to create the new cluster.
 -- Values are of the form \`projects\/\/instances\/\`.
@@ -158,7 +162,8 @@ piccCallback
   = lens _piccCallback (\ s a -> s{_piccCallback = a})
 
 instance GoogleRequest
-         ProjectsInstancesClustersCreate where
+           ProjectsInstancesClustersCreate
+         where
         type Rs ProjectsInstancesClustersCreate = Operation
         type Scopes ProjectsInstancesClustersCreate =
              '["https://www.googleapis.com/auth/bigtable.admin",

@@ -20,16 +20,105 @@ module Network.Google.ServiceNetworking.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.ServiceNetworking.Types.Sum
 
+-- | Represents a subnet that was created or discovered by a private access
+-- management service.
+--
+-- /See:/ 'googleCloudServicenetworkingV1betaSubnetwork' smart constructor.
+data GoogleCloudServicenetworkingV1betaSubnetwork =
+  GoogleCloudServicenetworkingV1betaSubnetwork'
+    { _gcsvsOutsideAllocation :: !(Maybe Bool)
+    , _gcsvsNetwork           :: !(Maybe Text)
+    , _gcsvsName              :: !(Maybe Text)
+    , _gcsvsIPCIdRRange       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudServicenetworkingV1betaSubnetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsvsOutsideAllocation'
+--
+-- * 'gcsvsNetwork'
+--
+-- * 'gcsvsName'
+--
+-- * 'gcsvsIPCIdRRange'
+googleCloudServicenetworkingV1betaSubnetwork
+    :: GoogleCloudServicenetworkingV1betaSubnetwork
+googleCloudServicenetworkingV1betaSubnetwork =
+  GoogleCloudServicenetworkingV1betaSubnetwork'
+    { _gcsvsOutsideAllocation = Nothing
+    , _gcsvsNetwork = Nothing
+    , _gcsvsName = Nothing
+    , _gcsvsIPCIdRRange = Nothing
+    }
+
+
+-- | This is a discovered subnet that is not within the current consumer
+-- allocated ranges.
+gcsvsOutsideAllocation :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Bool)
+gcsvsOutsideAllocation
+  = lens _gcsvsOutsideAllocation
+      (\ s a -> s{_gcsvsOutsideAllocation = a})
+
+-- | In the Shared VPC host project, the VPC network that\'s peered with the
+-- consumer network. For example:
+-- \`projects\/1234321\/global\/networks\/host-network\`
+gcsvsNetwork :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Text)
+gcsvsNetwork
+  = lens _gcsvsNetwork (\ s a -> s{_gcsvsNetwork = a})
+
+-- | Subnetwork name. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/
+gcsvsName :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Text)
+gcsvsName
+  = lens _gcsvsName (\ s a -> s{_gcsvsName = a})
+
+-- | Subnetwork CIDR range in \`10.x.x.x\/y\` format.
+gcsvsIPCIdRRange :: Lens' GoogleCloudServicenetworkingV1betaSubnetwork (Maybe Text)
+gcsvsIPCIdRRange
+  = lens _gcsvsIPCIdRRange
+      (\ s a -> s{_gcsvsIPCIdRRange = a})
+
+instance FromJSON
+           GoogleCloudServicenetworkingV1betaSubnetwork
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudServicenetworkingV1betaSubnetwork"
+              (\ o ->
+                 GoogleCloudServicenetworkingV1betaSubnetwork' <$>
+                   (o .:? "outsideAllocation") <*> (o .:? "network") <*>
+                     (o .:? "name")
+                     <*> (o .:? "ipCidrRange"))
+
+instance ToJSON
+           GoogleCloudServicenetworkingV1betaSubnetwork
+         where
+        toJSON
+          GoogleCloudServicenetworkingV1betaSubnetwork'{..}
+          = object
+              (catMaybes
+                 [("outsideAllocation" .=) <$>
+                    _gcsvsOutsideAllocation,
+                  ("network" .=) <$> _gcsvsNetwork,
+                  ("name" .=) <$> _gcsvsName,
+                  ("ipCidrRange" .=) <$> _gcsvsIPCIdRRange])
+
 -- | Define a parameter\'s name and location. The parameter may be passed as
 -- either an HTTP header or a URL query parameter, and if both are passed
 -- the behavior is implementation-dependent.
 --
 -- /See:/ 'systemParameter' smart constructor.
-data SystemParameter = SystemParameter'
+data SystemParameter =
+  SystemParameter'
     { _spHTTPHeader        :: !(Maybe Text)
     , _spURLQueryParameter :: !(Maybe Text)
     , _spName              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SystemParameter' with the minimum fields required to make a request.
 --
@@ -43,11 +132,9 @@ data SystemParameter = SystemParameter'
 systemParameter
     :: SystemParameter
 systemParameter =
-    SystemParameter'
-    { _spHTTPHeader = Nothing
-    , _spURLQueryParameter = Nothing
-    , _spName = Nothing
-    }
+  SystemParameter'
+    {_spHTTPHeader = Nothing, _spURLQueryParameter = Nothing, _spName = Nothing}
+
 
 -- | Define the HTTP header name to use for the parameter. It is case
 -- insensitive.
@@ -93,13 +180,16 @@ instance ToJSON SystemParameter where
 -- monitored resource descriptors used by the API.
 --
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
-data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
+data MonitoredResourceDescriptor =
+  MonitoredResourceDescriptor'
     { _mrdName        :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
     , _mrdLabels      :: !(Maybe [LabelDescriptor])
     , _mrdType        :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
@@ -117,13 +207,14 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
-    MonitoredResourceDescriptor'
+  MonitoredResourceDescriptor'
     { _mrdName = Nothing
     , _mrdDisplayName = Nothing
     , _mrdLabels = Nothing
     , _mrdType = Nothing
     , _mrdDescription = Nothing
     }
+
 
 -- | Optional. The resource name of the monitored resource descriptor:
 -- \`\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"\`
@@ -186,14 +277,58 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("type" .=) <$> _mrdType,
                   ("description" .=) <$> _mrdDescription])
 
+-- | ListConnectionsResponse is the response to list peering states for the
+-- given service and consumer project.
+--
+-- /See:/ 'listConnectionsResponse' smart constructor.
+newtype ListConnectionsResponse =
+  ListConnectionsResponse'
+    { _lcrConnections :: Maybe [Connection]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListConnectionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcrConnections'
+listConnectionsResponse
+    :: ListConnectionsResponse
+listConnectionsResponse = ListConnectionsResponse' {_lcrConnections = Nothing}
+
+
+-- | The list of Connections.
+lcrConnections :: Lens' ListConnectionsResponse [Connection]
+lcrConnections
+  = lens _lcrConnections
+      (\ s a -> s{_lcrConnections = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListConnectionsResponse where
+        parseJSON
+          = withObject "ListConnectionsResponse"
+              (\ o ->
+                 ListConnectionsResponse' <$>
+                   (o .:? "connections" .!= mempty))
+
+instance ToJSON ListConnectionsResponse where
+        toJSON ListConnectionsResponse'{..}
+          = object
+              (catMaybes [("connections" .=) <$> _lcrConnections])
+
 -- | A documentation rule provides information about individual API elements.
 --
 -- /See:/ 'documentationRule' smart constructor.
-data DocumentationRule = DocumentationRule'
+data DocumentationRule =
+  DocumentationRule'
     { _drSelector               :: !(Maybe Text)
     , _drDeprecationDescription :: !(Maybe Text)
     , _drDescription            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DocumentationRule' with the minimum fields required to make a request.
 --
@@ -207,18 +342,20 @@ data DocumentationRule = DocumentationRule'
 documentationRule
     :: DocumentationRule
 documentationRule =
-    DocumentationRule'
+  DocumentationRule'
     { _drSelector = Nothing
     , _drDeprecationDescription = Nothing
     , _drDescription = Nothing
     }
 
+
 -- | The selector is a comma-separated list of patterns. Each pattern is a
 -- qualified name of the element which may end in \"*\", indicating a
 -- wildcard. Wildcards are only allowed at the end and for a whole
 -- component of the qualified name, i.e. \"foo.*\" is ok, but not
--- \"foo.b*\" or \"foo.*.bar\". To specify a default for all applicable
--- elements, the whole pattern \"*\" is used.
+-- \"foo.b*\" or \"foo.*.bar\". A wildcard will match one or more
+-- components. To specify a default for all applicable elements, the whole
+-- pattern \"*\" is used.
 drSelector :: Lens' DocumentationRule (Maybe Text)
 drSelector
   = lens _drSelector (\ s a -> s{_drSelector = a})
@@ -291,11 +428,14 @@ instance ToJSON DocumentationRule where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status'
+data Status =
+  Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -308,12 +448,8 @@ data Status = Status'
 -- * 'sMessage'
 status
     :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
+status = Status' {_sDetails = Nothing, _sCode = Nothing, _sMessage = Nothing}
+
 
 -- | A list of messages that carry the error details. There is a common set
 -- of message types for APIs to use.
@@ -355,10 +491,13 @@ instance ToJSON Status where
 -- bill against consumer project).
 --
 -- /See:/ 'billingDestination' smart constructor.
-data BillingDestination = BillingDestination'
+data BillingDestination =
+  BillingDestination'
     { _bdMetrics           :: !(Maybe [Text])
     , _bdMonitoredResource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BillingDestination' with the minimum fields required to make a request.
 --
@@ -370,10 +509,8 @@ data BillingDestination = BillingDestination'
 billingDestination
     :: BillingDestination
 billingDestination =
-    BillingDestination'
-    { _bdMetrics = Nothing
-    , _bdMonitoredResource = Nothing
-    }
+  BillingDestination' {_bdMetrics = Nothing, _bdMonitoredResource = Nothing}
+
 
 -- | Names of the metrics to report to this billing destination. Each name
 -- must be defined in Service.metrics section.
@@ -410,9 +547,12 @@ instance ToJSON BillingDestination where
 -- monitoring, etc.
 --
 -- /See:/ 'control' smart constructor.
-newtype Control = Control'
+newtype Control =
+  Control'
     { _cEnvironment :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Control' with the minimum fields required to make a request.
 --
@@ -421,10 +561,8 @@ newtype Control = Control'
 -- * 'cEnvironment'
 control
     :: Control
-control =
-    Control'
-    { _cEnvironment = Nothing
-    }
+control = Control' {_cEnvironment = Nothing}
+
 
 -- | The service control environment to use. If empty, no control plane
 -- feature (like quota and billing) will be enabled.
@@ -447,10 +585,13 @@ instance ToJSON Control where
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
 -- /See:/ 'authRequirement' smart constructor.
-data AuthRequirement = AuthRequirement'
+data AuthRequirement =
+  AuthRequirement'
     { _arProviderId :: !(Maybe Text)
     , _arAudiences  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthRequirement' with the minimum fields required to make a request.
 --
@@ -462,10 +603,8 @@ data AuthRequirement = AuthRequirement'
 authRequirement
     :: AuthRequirement
 authRequirement =
-    AuthRequirement'
-    { _arProviderId = Nothing
-    , _arAudiences = Nothing
-    }
+  AuthRequirement' {_arProviderId = Nothing, _arAudiences = Nothing}
+
 
 -- | id from authentication provider. Example: provider_id: bookstore_auth
 arProviderId :: Lens' AuthRequirement (Maybe Text)
@@ -517,9 +656,12 @@ instance ToJSON AuthRequirement where
 -- specify extension ID instead of fully qualified extension name here.
 --
 -- /See:/ 'context' smart constructor.
-newtype Context = Context'
+newtype Context =
+  Context'
     { _cRules :: Maybe [ContextRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Context' with the minimum fields required to make a request.
 --
@@ -528,10 +670,8 @@ newtype Context = Context'
 -- * 'cRules'
 context
     :: Context
-context =
-    Context'
-    { _cRules = Nothing
-    }
+context = Context' {_cRules = Nothing}
+
 
 -- | A list of RPC context rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -554,10 +694,13 @@ instance ToJSON Context where
 -- the consumer project).
 --
 -- /See:/ 'loggingDestination' smart constructor.
-data LoggingDestination = LoggingDestination'
+data LoggingDestination =
+  LoggingDestination'
     { _ldMonitoredResource :: !(Maybe Text)
     , _ldLogs              :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LoggingDestination' with the minimum fields required to make a request.
 --
@@ -569,10 +712,8 @@ data LoggingDestination = LoggingDestination'
 loggingDestination
     :: LoggingDestination
 loggingDestination =
-    LoggingDestination'
-    { _ldMonitoredResource = Nothing
-    , _ldLogs = Nothing
-    }
+  LoggingDestination' {_ldMonitoredResource = Nothing, _ldLogs = Nothing}
+
 
 -- | The monitored resource type. The type must be defined in the
 -- Service.monitored_resources section.
@@ -610,7 +751,8 @@ instance ToJSON LoggingDestination where
 -- metric type\'s existing data unusable.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
-data MetricDescriptor = MetricDescriptor'
+data MetricDescriptor =
+  MetricDescriptor'
     { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
     , _mdName        :: !(Maybe Text)
     , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
@@ -620,7 +762,9 @@ data MetricDescriptor = MetricDescriptor'
     , _mdValueType   :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
     , _mdUnit        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
@@ -646,7 +790,7 @@ data MetricDescriptor = MetricDescriptor'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
-    MetricDescriptor'
+  MetricDescriptor'
     { _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
@@ -657,6 +801,7 @@ metricDescriptor =
     , _mdDescription = Nothing
     , _mdUnit = Nothing
     }
+
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of \`metric_kind\` and \`value_type\` might not
@@ -778,10 +923,13 @@ instance ToJSON MetricDescriptor where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
+data ListOperationsResponse =
+  ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -793,10 +941,9 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse'
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
 
 -- | The standard List next-page token.
 lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
@@ -831,14 +978,16 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
 data CancelOperationRequest =
-    CancelOperationRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
 cancelOperationRequest = CancelOperationRequest'
+
 
 instance FromJSON CancelOperationRequest where
         parseJSON
@@ -851,16 +1000,24 @@ instance ToJSON CancelOperationRequest where
 -- | A backend rule provides configuration for an individual API element.
 --
 -- /See:/ 'backendRule' smart constructor.
-data BackendRule = BackendRule'
-    { _brSelector    :: !(Maybe Text)
-    , _brMinDeadline :: !(Maybe (Textual Double))
-    , _brAddress     :: !(Maybe Text)
-    , _brDeadline    :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data BackendRule =
+  BackendRule'
+    { _brJwtAudience       :: !(Maybe Text)
+    , _brSelector          :: !(Maybe Text)
+    , _brMinDeadline       :: !(Maybe (Textual Double))
+    , _brAddress           :: !(Maybe Text)
+    , _brOperationDeadline :: !(Maybe (Textual Double))
+    , _brDeadline          :: !(Maybe (Textual Double))
+    , _brPathTranslation   :: !(Maybe BackendRulePathTranslation)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'BackendRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'brJwtAudience'
 --
 -- * 'brSelector'
 --
@@ -868,16 +1025,30 @@ data BackendRule = BackendRule'
 --
 -- * 'brAddress'
 --
+-- * 'brOperationDeadline'
+--
 -- * 'brDeadline'
+--
+-- * 'brPathTranslation'
 backendRule
     :: BackendRule
 backendRule =
-    BackendRule'
-    { _brSelector = Nothing
+  BackendRule'
+    { _brJwtAudience = Nothing
+    , _brSelector = Nothing
     , _brMinDeadline = Nothing
     , _brAddress = Nothing
+    , _brOperationDeadline = Nothing
     , _brDeadline = Nothing
+    , _brPathTranslation = Nothing
     }
+
+
+-- | The JWT audience is used when generating a JWT id token for the backend.
+brJwtAudience :: Lens' BackendRule (Maybe Text)
+brJwtAudience
+  = lens _brJwtAudience
+      (\ s a -> s{_brJwtAudience = a})
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -898,6 +1069,14 @@ brAddress :: Lens' BackendRule (Maybe Text)
 brAddress
   = lens _brAddress (\ s a -> s{_brAddress = a})
 
+-- | The number of seconds to wait for the completion of a long running
+-- operation. The default is no deadline.
+brOperationDeadline :: Lens' BackendRule (Maybe Double)
+brOperationDeadline
+  = lens _brOperationDeadline
+      (\ s a -> s{_brOperationDeadline = a})
+      . mapping _Coerce
+
 -- | The number of seconds to wait for a response from a request. The default
 -- deadline for gRPC is infinite (no deadline) and HTTP requests is 5
 -- seconds.
@@ -906,31 +1085,45 @@ brDeadline
   = lens _brDeadline (\ s a -> s{_brDeadline = a}) .
       mapping _Coerce
 
+brPathTranslation :: Lens' BackendRule (Maybe BackendRulePathTranslation)
+brPathTranslation
+  = lens _brPathTranslation
+      (\ s a -> s{_brPathTranslation = a})
+
 instance FromJSON BackendRule where
         parseJSON
           = withObject "BackendRule"
               (\ o ->
                  BackendRule' <$>
-                   (o .:? "selector") <*> (o .:? "minDeadline") <*>
-                     (o .:? "address")
-                     <*> (o .:? "deadline"))
+                   (o .:? "jwtAudience") <*> (o .:? "selector") <*>
+                     (o .:? "minDeadline")
+                     <*> (o .:? "address")
+                     <*> (o .:? "operationDeadline")
+                     <*> (o .:? "deadline")
+                     <*> (o .:? "pathTranslation"))
 
 instance ToJSON BackendRule where
         toJSON BackendRule'{..}
           = object
               (catMaybes
-                 [("selector" .=) <$> _brSelector,
+                 [("jwtAudience" .=) <$> _brJwtAudience,
+                  ("selector" .=) <$> _brSelector,
                   ("minDeadline" .=) <$> _brMinDeadline,
                   ("address" .=) <$> _brAddress,
-                  ("deadline" .=) <$> _brDeadline])
+                  ("operationDeadline" .=) <$> _brOperationDeadline,
+                  ("deadline" .=) <$> _brDeadline,
+                  ("pathTranslation" .=) <$> _brPathTranslation])
 
 -- | \`SourceContext\` represents information about the source of a protobuf
 -- element, like the file in which it is defined.
 --
 -- /See:/ 'sourceContext' smart constructor.
-newtype SourceContext = SourceContext'
+newtype SourceContext =
+  SourceContext'
     { _scFileName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
@@ -939,10 +1132,8 @@ newtype SourceContext = SourceContext'
 -- * 'scFileName'
 sourceContext
     :: SourceContext
-sourceContext =
-    SourceContext'
-    { _scFileName = Nothing
-    }
+sourceContext = SourceContext' {_scFileName = Nothing}
+
 
 -- | The path-qualified name of the .proto file that contained the associated
 -- protobuf element. For example:
@@ -964,7 +1155,8 @@ instance ToJSON SourceContext where
 -- | A single field of a message type.
 --
 -- /See:/ 'field' smart constructor.
-data Field = Field'
+data Field =
+  Field'
     { _fKind         :: !(Maybe FieldKind)
     , _fOneofIndex   :: !(Maybe (Textual Int32))
     , _fName         :: !(Maybe Text)
@@ -975,7 +1167,9 @@ data Field = Field'
     , _fDefaultValue :: !(Maybe Text)
     , _fNumber       :: !(Maybe (Textual Int32))
     , _fTypeURL      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
@@ -1003,7 +1197,7 @@ data Field = Field'
 field
     :: Field
 field =
-    Field'
+  Field'
     { _fKind = Nothing
     , _fOneofIndex = Nothing
     , _fName = Nothing
@@ -1015,6 +1209,7 @@ field =
     , _fNumber = Nothing
     , _fTypeURL = Nothing
     }
+
 
 -- | The field type.
 fKind :: Lens' Field (Maybe FieldKind)
@@ -1104,10 +1299,13 @@ instance ToJSON Field where
 -- metric\'s configured quota behaviors to apply to the method call.
 --
 -- /See:/ 'metricRule' smart constructor.
-data MetricRule = MetricRule'
+data MetricRule =
+  MetricRule'
     { _mrSelector    :: !(Maybe Text)
     , _mrMetricCosts :: !(Maybe MetricRuleMetricCosts)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 --
@@ -1118,11 +1316,8 @@ data MetricRule = MetricRule'
 -- * 'mrMetricCosts'
 metricRule
     :: MetricRule
-metricRule =
-    MetricRule'
-    { _mrSelector = Nothing
-    , _mrMetricCosts = Nothing
-    }
+metricRule = MetricRule' {_mrSelector = Nothing, _mrMetricCosts = Nothing}
+
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.
@@ -1167,7 +1362,8 @@ instance ToJSON MetricRule where
 -- provider_id: google_calendar_auth
 --
 -- /See:/ 'service' smart constructor.
-data Service = Service'
+data Service =
+  Service'
     { _sControl            :: !(Maybe Control)
     , _sMetrics            :: !(Maybe [MetricDescriptor])
     , _sContext            :: !(Maybe Context)
@@ -1196,7 +1392,9 @@ data Service = Service'
     , _sCustomError        :: !(Maybe CustomError)
     , _sLogging            :: !(Maybe Logging)
     , _sQuota              :: !(Maybe Quota)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
 --
@@ -1260,7 +1458,7 @@ data Service = Service'
 service
     :: Service
 service =
-    Service'
+  Service'
     { _sControl = Nothing
     , _sMetrics = Nothing
     , _sContext = Nothing
@@ -1290,6 +1488,7 @@ service =
     , _sLogging = Nothing
     , _sQuota = Nothing
     }
+
 
 -- | Configuration for the service control plane.
 sControl :: Lens' Service (Maybe Control)
@@ -1368,8 +1567,10 @@ sMonitoring :: Lens' Service (Maybe Monitoring)
 sMonitoring
   = lens _sMonitoring (\ s a -> s{_sMonitoring = a})
 
--- | The DNS address at which this service is available, e.g.
--- \`calendar.googleapis.com\`.
+-- | The service name, which is a DNS-like logical identifier for the
+-- service, such as \`calendar.googleapis.com\`. The service name typically
+-- goes through DNS verification to make sure the owner of the service also
+-- owns the DNS name.
 sName :: Lens' Service (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
@@ -1532,13 +1733,16 @@ instance ToJSON Service where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation'
+data Operation =
+  Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1556,13 +1760,14 @@ data Operation = Operation'
 operation
     :: Operation
 operation =
-    Operation'
+  Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
     , _oName = Nothing
     , _oMetadata = Nothing
     }
+
 
 -- | If the value is \`false\`, it means the operation is still in progress.
 -- If \`true\`, the operation is completed, and either \`error\` or
@@ -1627,14 +1832,16 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+  Empty'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
 empty = Empty'
+
 
 instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty')
@@ -1645,10 +1852,13 @@ instance ToJSON Empty where
 -- | A custom error rule.
 --
 -- /See:/ 'customErrorRule' smart constructor.
-data CustomErrorRule = CustomErrorRule'
+data CustomErrorRule =
+  CustomErrorRule'
     { _cerIsErrorType :: !(Maybe Bool)
     , _cerSelector    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomErrorRule' with the minimum fields required to make a request.
 --
@@ -1660,10 +1870,8 @@ data CustomErrorRule = CustomErrorRule'
 customErrorRule
     :: CustomErrorRule
 customErrorRule =
-    CustomErrorRule'
-    { _cerIsErrorType = Nothing
-    , _cerSelector = Nothing
-    }
+  CustomErrorRule' {_cerIsErrorType = Nothing, _cerSelector = Nothing}
+
 
 -- | Mark this message as possible payload in error response. Otherwise,
 -- objects of this type will be filtered when they appear in error payload.
@@ -1699,9 +1907,12 @@ instance ToJSON CustomErrorRule where
 -- google.protobuf.Int32Value type.
 --
 -- /See:/ 'optionValue' smart constructor.
-newtype OptionValue = OptionValue'
+newtype OptionValue =
+  OptionValue'
     { _ovAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
@@ -1712,9 +1923,8 @@ optionValue
     :: HashMap Text JSONValue -- ^ 'ovAddtional'
     -> OptionValue
 optionValue pOvAddtional_ =
-    OptionValue'
-    { _ovAddtional = _Coerce # pOvAddtional_
-    }
+  OptionValue' {_ovAddtional = _Coerce # pOvAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
@@ -1733,11 +1943,14 @@ instance ToJSON OptionValue where
 -- | Enum value definition.
 --
 -- /See:/ 'enumValue' smart constructor.
-data EnumValue = EnumValue'
+data EnumValue =
+  EnumValue'
     { _evName    :: !(Maybe Text)
     , _evOptions :: !(Maybe [Option])
     , _evNumber  :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'EnumValue' with the minimum fields required to make a request.
 --
@@ -1751,11 +1964,8 @@ data EnumValue = EnumValue'
 enumValue
     :: EnumValue
 enumValue =
-    EnumValue'
-    { _evName = Nothing
-    , _evOptions = Nothing
-    , _evNumber = Nothing
-    }
+  EnumValue' {_evName = Nothing, _evOptions = Nothing, _evNumber = Nothing}
+
 
 -- | Enum value name.
 evName :: Lens' EnumValue (Maybe Text)
@@ -1799,10 +2009,13 @@ instance ToJSON EnumValue where
 -- provider_id: google_calendar_auth
 --
 -- /See:/ 'authentication' smart constructor.
-data Authentication = Authentication'
+data Authentication =
+  Authentication'
     { _aRules     :: !(Maybe [AuthenticationRule])
     , _aProviders :: !(Maybe [AuthProvider])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Authentication' with the minimum fields required to make a request.
 --
@@ -1813,11 +2026,8 @@ data Authentication = Authentication'
 -- * 'aProviders'
 authentication
     :: Authentication
-authentication =
-    Authentication'
-    { _aRules = Nothing
-    , _aProviders = Nothing
-    }
+authentication = Authentication' {_aRules = Nothing, _aProviders = Nothing}
+
 
 -- | A list of authentication rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -1883,10 +2093,13 @@ instance ToJSON Authentication where
 -- (google.api.http).get = \"\/v2\/acls\/{resource=**}:getAcl\"; } ... }
 --
 -- /See:/ 'mixin' smart constructor.
-data Mixin = Mixin'
+data Mixin =
+  Mixin'
     { _mRoot :: !(Maybe Text)
     , _mName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Mixin' with the minimum fields required to make a request.
 --
@@ -1897,11 +2110,8 @@ data Mixin = Mixin'
 -- * 'mName'
 mixin
     :: Mixin
-mixin =
-    Mixin'
-    { _mRoot = Nothing
-    , _mName = Nothing
-    }
+mixin = Mixin' {_mRoot = Nothing, _mName = Nothing}
+
 
 -- | If non-empty specifies a path under which inherited HTTP paths are
 -- rooted.
@@ -1926,10 +2136,13 @@ instance ToJSON Mixin where
 -- | A custom pattern is used for defining custom HTTP verb.
 --
 -- /See:/ 'customHTTPPattern' smart constructor.
-data CustomHTTPPattern = CustomHTTPPattern'
+data CustomHTTPPattern =
+  CustomHTTPPattern'
     { _chttppPath :: !(Maybe Text)
     , _chttppKind :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomHTTPPattern' with the minimum fields required to make a request.
 --
@@ -1941,10 +2154,8 @@ data CustomHTTPPattern = CustomHTTPPattern'
 customHTTPPattern
     :: CustomHTTPPattern
 customHTTPPattern =
-    CustomHTTPPattern'
-    { _chttppPath = Nothing
-    , _chttppKind = Nothing
-    }
+  CustomHTTPPattern' {_chttppPath = Nothing, _chttppKind = Nothing}
+
 
 -- | The path matched by this custom verb.
 chttppPath :: Lens' CustomHTTPPattern (Maybe Text)
@@ -1984,11 +2195,14 @@ instance ToJSON CustomHTTPPattern where
 -- allow_unregistered_calls: true
 --
 -- /See:/ 'usageRule' smart constructor.
-data UsageRule = UsageRule'
+data UsageRule =
+  UsageRule'
     { _urSelector               :: !(Maybe Text)
     , _urAllowUnregisteredCalls :: !(Maybe Bool)
     , _urSkipServiceControl     :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'UsageRule' with the minimum fields required to make a request.
 --
@@ -2002,11 +2216,12 @@ data UsageRule = UsageRule'
 usageRule
     :: UsageRule
 usageRule =
-    UsageRule'
+  UsageRule'
     { _urSelector = Nothing
     , _urAllowUnregisteredCalls = Nothing
     , _urSkipServiceControl = Nothing
     }
+
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -2050,9 +2265,12 @@ instance ToJSON UsageRule where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
+newtype StatusDetailsItem =
+  StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
 --
@@ -2063,9 +2281,8 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
+  StatusDetailsItem' {_sdiAddtional = _Coerce # pSdiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
@@ -2085,11 +2302,14 @@ instance ToJSON StatusDetailsItem where
 -- represent nested documentation set structure.
 --
 -- /See:/ 'page' smart constructor.
-data Page = Page'
+data Page =
+  Page'
     { _pSubpages :: !(Maybe [Page])
     , _pContent  :: !(Maybe Text)
     , _pName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
@@ -2102,12 +2322,8 @@ data Page = Page'
 -- * 'pName'
 page
     :: Page
-page =
-    Page'
-    { _pSubpages = Nothing
-    , _pContent = Nothing
-    , _pName = Nothing
-    }
+page = Page' {_pSubpages = Nothing, _pContent = Nothing, _pName = Nothing}
+
 
 -- | Subpages of this page. The order of subpages specified here will be
 -- honored in the generated docset.
@@ -2164,12 +2380,15 @@ instance ToJSON Page where
 -- ignored.
 --
 -- /See:/ 'authenticationRule' smart constructor.
-data AuthenticationRule = AuthenticationRule'
+data AuthenticationRule =
+  AuthenticationRule'
     { _arRequirements           :: !(Maybe [AuthRequirement])
     , _arSelector               :: !(Maybe Text)
     , _arAllowWithoutCredential :: !(Maybe Bool)
     , _arOAuth                  :: !(Maybe OAuthRequirements)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthenticationRule' with the minimum fields required to make a request.
 --
@@ -2185,12 +2404,13 @@ data AuthenticationRule = AuthenticationRule'
 authenticationRule
     :: AuthenticationRule
 authenticationRule =
-    AuthenticationRule'
+  AuthenticationRule'
     { _arRequirements = Nothing
     , _arSelector = Nothing
     , _arAllowWithoutCredential = Nothing
     , _arOAuth = Nothing
     }
+
 
 -- | Requirements for additional authentication providers.
 arRequirements :: Lens' AuthenticationRule [AuthRequirement]
@@ -2236,15 +2456,108 @@ instance ToJSON AuthenticationRule where
                     _arAllowWithoutCredential,
                   ("oauth" .=) <$> _arOAuth])
 
+-- | Represents a private connection resource. A private connection is
+-- implemented as a VPC Network Peering connection between a service
+-- producer\'s VPC network and a service consumer\'s VPC network.
+--
+-- /See:/ 'connection' smart constructor.
+data Connection =
+  Connection'
+    { _cPeering               :: !(Maybe Text)
+    , _cReservedPeeringRanges :: !(Maybe [Text])
+    , _cService               :: !(Maybe Text)
+    , _cNetwork               :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Connection' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cPeering'
+--
+-- * 'cReservedPeeringRanges'
+--
+-- * 'cService'
+--
+-- * 'cNetwork'
+connection
+    :: Connection
+connection =
+  Connection'
+    { _cPeering = Nothing
+    , _cReservedPeeringRanges = Nothing
+    , _cService = Nothing
+    , _cNetwork = Nothing
+    }
+
+
+-- | Output only. The name of the VPC Network Peering connection that was
+-- created by the service producer.
+cPeering :: Lens' Connection (Maybe Text)
+cPeering = lens _cPeering (\ s a -> s{_cPeering = a})
+
+-- | The name of one or more allocated IP address ranges for this service
+-- producer of type \`PEERING\`. Note that invoking CreateConnection method
+-- with a different range when connection is already established will not
+-- modify already provisioned service producer subnetworks. If
+-- CreateConnection method is invoked repeatedly to reconnect when peering
+-- connection had been disconnected on the consumer side, leaving this
+-- field empty will restore previously allocated IP ranges.
+cReservedPeeringRanges :: Lens' Connection [Text]
+cReservedPeeringRanges
+  = lens _cReservedPeeringRanges
+      (\ s a -> s{_cReservedPeeringRanges = a})
+      . _Default
+      . _Coerce
+
+-- | Output only. The name of the peering service that\'s associated with
+-- this connection, in the following format: \`services\/{service name}\`.
+cService :: Lens' Connection (Maybe Text)
+cService = lens _cService (\ s a -> s{_cService = a})
+
+-- | The name of service consumer\'s VPC network that\'s connected with
+-- service producer network, in the following format:
+-- \`projects\/{project}\/global\/networks\/{network}\`. \`{project}\` is a
+-- project number, such as in \`12345\` that includes the VPC service
+-- consumer\'s VPC network. \`{network}\` is the name of the service
+-- consumer\'s VPC network.
+cNetwork :: Lens' Connection (Maybe Text)
+cNetwork = lens _cNetwork (\ s a -> s{_cNetwork = a})
+
+instance FromJSON Connection where
+        parseJSON
+          = withObject "Connection"
+              (\ o ->
+                 Connection' <$>
+                   (o .:? "peering") <*>
+                     (o .:? "reservedPeeringRanges" .!= mempty)
+                     <*> (o .:? "service")
+                     <*> (o .:? "network"))
+
+instance ToJSON Connection where
+        toJSON Connection'{..}
+          = object
+              (catMaybes
+                 [("peering" .=) <$> _cPeering,
+                  ("reservedPeeringRanges" .=) <$>
+                    _cReservedPeeringRanges,
+                  ("service" .=) <$> _cService,
+                  ("network" .=) <$> _cNetwork])
+
 -- | Metrics to update when the selected methods are called, and the
 -- associated cost applied to each metric. The key of the map is the metric
 -- name, and the values are the amount increased for the metric against
 -- which the quota limits are defined. The value must not be negative.
 --
 -- /See:/ 'metricRuleMetricCosts' smart constructor.
-newtype MetricRuleMetricCosts = MetricRuleMetricCosts'
+newtype MetricRuleMetricCosts =
+  MetricRuleMetricCosts'
     { _mrmcAddtional :: HashMap Text (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricRuleMetricCosts' with the minimum fields required to make a request.
 --
@@ -2255,9 +2568,8 @@ metricRuleMetricCosts
     :: HashMap Text Int64 -- ^ 'mrmcAddtional'
     -> MetricRuleMetricCosts
 metricRuleMetricCosts pMrmcAddtional_ =
-    MetricRuleMetricCosts'
-    { _mrmcAddtional = _Coerce # pMrmcAddtional_
-    }
+  MetricRuleMetricCosts' {_mrmcAddtional = _Coerce # pMrmcAddtional_}
+
 
 mrmcAddtional :: Lens' MetricRuleMetricCosts (HashMap Text Int64)
 mrmcAddtional
@@ -2280,9 +2592,12 @@ instance ToJSON MetricRuleMetricCosts where
 -- firebaserules.googleapis.com
 --
 -- /See:/ 'authorizationConfig' smart constructor.
-newtype AuthorizationConfig = AuthorizationConfig'
+newtype AuthorizationConfig =
+  AuthorizationConfig'
     { _acProvider :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthorizationConfig' with the minimum fields required to make a request.
 --
@@ -2291,10 +2606,8 @@ newtype AuthorizationConfig = AuthorizationConfig'
 -- * 'acProvider'
 authorizationConfig
     :: AuthorizationConfig
-authorizationConfig =
-    AuthorizationConfig'
-    { _acProvider = Nothing
-    }
+authorizationConfig = AuthorizationConfig' {_acProvider = Nothing}
+
 
 -- | The name of the authorization provider, such as
 -- firebaserules.googleapis.com.
@@ -2316,9 +2629,12 @@ instance ToJSON AuthorizationConfig where
 -- be used by whitelisted users.
 --
 -- /See:/ 'experimental' smart constructor.
-newtype Experimental = Experimental'
+newtype Experimental =
+  Experimental'
     { _eAuthorization :: Maybe AuthorizationConfig
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Experimental' with the minimum fields required to make a request.
 --
@@ -2327,10 +2643,8 @@ newtype Experimental = Experimental'
 -- * 'eAuthorization'
 experimental
     :: Experimental
-experimental =
-    Experimental'
-    { _eAuthorization = Nothing
-    }
+experimental = Experimental' {_eAuthorization = Nothing}
+
 
 -- | Authorization configuration.
 eAuthorization :: Lens' Experimental (Maybe AuthorizationConfig)
@@ -2352,9 +2666,12 @@ instance ToJSON Experimental where
 -- | \`Backend\` defines the backend configuration for a service.
 --
 -- /See:/ 'backend' smart constructor.
-newtype Backend = Backend'
+newtype Backend =
+  Backend'
     { _bRules :: Maybe [BackendRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
@@ -2363,10 +2680,8 @@ newtype Backend = Backend'
 -- * 'bRules'
 backend
     :: Backend
-backend =
-    Backend'
-    { _bRules = Nothing
-    }
+backend = Backend' {_bRules = Nothing}
+
 
 -- | A list of API backend rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -2407,10 +2722,13 @@ instance ToJSON Backend where
 -- library.googleapis.com\/book\/overdue_count
 --
 -- /See:/ 'monitoring' smart constructor.
-data Monitoring = Monitoring'
+data Monitoring =
+  Monitoring'
     { _mProducerDestinations :: !(Maybe [MonitoringDestination])
     , _mConsumerDestinations :: !(Maybe [MonitoringDestination])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Monitoring' with the minimum fields required to make a request.
 --
@@ -2422,15 +2740,16 @@ data Monitoring = Monitoring'
 monitoring
     :: Monitoring
 monitoring =
-    Monitoring'
-    { _mProducerDestinations = Nothing
-    , _mConsumerDestinations = Nothing
-    }
+  Monitoring'
+    {_mProducerDestinations = Nothing, _mConsumerDestinations = Nothing}
+
 
 -- | Monitoring configurations for sending metrics to the producer project.
--- There can be multiple producer destinations, each one must have a
--- different monitored resource type. A metric can be used in at most one
--- producer destination.
+-- There can be multiple producer destinations. A monitored resouce type
+-- may appear in multiple monitoring destinations if different aggregations
+-- are needed for different sets of metrics associated with that monitored
+-- resource type. A monitored resource and metric pair may only be used
+-- once in the Monitoring configuration.
 mProducerDestinations :: Lens' Monitoring [MonitoringDestination]
 mProducerDestinations
   = lens _mProducerDestinations
@@ -2439,9 +2758,11 @@ mProducerDestinations
       . _Coerce
 
 -- | Monitoring configurations for sending metrics to the consumer project.
--- There can be multiple consumer destinations, each one must have a
--- different monitored resource type. A metric can be used in at most one
--- consumer destination.
+-- There can be multiple consumer destinations. A monitored resouce type
+-- may appear in multiple monitoring destinations if different aggregations
+-- are needed for different sets of metrics associated with that monitored
+-- resource type. A monitored resource and metric pair may only be used
+-- once in the Monitoring configuration.
 mConsumerDestinations :: Lens' Monitoring [MonitoringDestination]
 mConsumerDestinations
   = lens _mConsumerDestinations
@@ -2472,12 +2793,15 @@ instance ToJSON Monitoring where
 -- key: \/customer_id description: Identifier of a library customer
 --
 -- /See:/ 'logDescriptor' smart constructor.
-data LogDescriptor = LogDescriptor'
+data LogDescriptor =
+  LogDescriptor'
     { _ldName        :: !(Maybe Text)
     , _ldDisplayName :: !(Maybe Text)
     , _ldLabels      :: !(Maybe [LabelDescriptor])
     , _ldDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LogDescriptor' with the minimum fields required to make a request.
 --
@@ -2493,12 +2817,13 @@ data LogDescriptor = LogDescriptor'
 logDescriptor
     :: LogDescriptor
 logDescriptor =
-    LogDescriptor'
+  LogDescriptor'
     { _ldName = Nothing
     , _ldDisplayName = Nothing
     , _ldLabels = Nothing
     , _ldDescription = Nothing
     }
+
 
 -- | The name of the log. It must be less than 512 characters long and can
 -- include the following characters: upper- and lower-case alphanumeric
@@ -2551,7 +2876,8 @@ instance ToJSON LogDescriptor where
 -- | Method represents a method of an API interface.
 --
 -- /See:/ 'method' smart constructor.
-data Method = Method'
+data Method =
+  Method'
     { _metRequestStreaming  :: !(Maybe Bool)
     , _metResponseTypeURL   :: !(Maybe Text)
     , _metName              :: !(Maybe Text)
@@ -2559,7 +2885,9 @@ data Method = Method'
     , _metRequestTypeURL    :: !(Maybe Text)
     , _metOptions           :: !(Maybe [Option])
     , _metSyntax            :: !(Maybe MethodSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Method' with the minimum fields required to make a request.
 --
@@ -2581,7 +2909,7 @@ data Method = Method'
 method
     :: Method
 method =
-    Method'
+  Method'
     { _metRequestStreaming = Nothing
     , _metResponseTypeURL = Nothing
     , _metName = Nothing
@@ -2590,6 +2918,7 @@ method =
     , _metOptions = Nothing
     , _metSyntax = Nothing
     }
+
 
 -- | If true, the request is streamed.
 metRequestStreaming :: Lens' Method (Maybe Bool)
@@ -2656,6 +2985,55 @@ instance ToJSON Method where
                   ("options" .=) <$> _metOptions,
                   ("syntax" .=) <$> _metSyntax])
 
+-- | Represents a found unused range.
+--
+-- /See:/ 'range' smart constructor.
+data Range =
+  Range'
+    { _rNetwork     :: !(Maybe Text)
+    , _rIPCIdRRange :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Range' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rNetwork'
+--
+-- * 'rIPCIdRRange'
+range
+    :: Range
+range = Range' {_rNetwork = Nothing, _rIPCIdRRange = Nothing}
+
+
+-- | In the Shared VPC host project, the VPC network that\'s peered with the
+-- consumer network. For example:
+-- \`projects\/1234321\/global\/networks\/host-network\`
+rNetwork :: Lens' Range (Maybe Text)
+rNetwork = lens _rNetwork (\ s a -> s{_rNetwork = a})
+
+-- | CIDR range in \"10.x.x.x\/y\" format that is within the allocated ranges
+-- and currently unused.
+rIPCIdRRange :: Lens' Range (Maybe Text)
+rIPCIdRRange
+  = lens _rIPCIdRRange (\ s a -> s{_rIPCIdRRange = a})
+
+instance FromJSON Range where
+        parseJSON
+          = withObject "Range"
+              (\ o ->
+                 Range' <$>
+                   (o .:? "network") <*> (o .:? "ipCidrRange"))
+
+instance ToJSON Range where
+        toJSON Range'{..}
+          = object
+              (catMaybes
+                 [("network" .=) <$> _rNetwork,
+                  ("ipCidrRange" .=) <$> _rIPCIdRRange])
+
 -- | ### System parameter configuration A system parameter is a special kind
 -- of parameter defined by the API system, not by an individual API. It is
 -- typically mapped to an HTTP header and\/or a URL query parameter. This
@@ -2663,9 +3041,12 @@ instance ToJSON Method where
 -- parameters.
 --
 -- /See:/ 'systemParameters' smart constructor.
-newtype SystemParameters = SystemParameters'
+newtype SystemParameters =
+  SystemParameters'
     { _spRules :: Maybe [SystemParameterRule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SystemParameters' with the minimum fields required to make a request.
 --
@@ -2674,10 +3055,8 @@ newtype SystemParameters = SystemParameters'
 -- * 'spRules'
 systemParameters
     :: SystemParameters
-systemParameters =
-    SystemParameters'
-    { _spRules = Nothing
-    }
+systemParameters = SystemParameters' {_spRules = Nothing}
+
 
 -- | Define system parameters. The parameters defined here will override the
 -- default parameters implemented by the system. If this field is missing
@@ -2763,13 +3142,16 @@ instance ToJSON SystemParameters where
 -- documentation and is documented together with service config validation.
 --
 -- /See:/ 'documentation' smart constructor.
-data Documentation = Documentation'
+data Documentation =
+  Documentation'
     { _dSummary              :: !(Maybe Text)
     , _dDocumentationRootURL :: !(Maybe Text)
     , _dRules                :: !(Maybe [DocumentationRule])
     , _dPages                :: !(Maybe [Page])
     , _dOverview             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Documentation' with the minimum fields required to make a request.
 --
@@ -2787,13 +3169,14 @@ data Documentation = Documentation'
 documentation
     :: Documentation
 documentation =
-    Documentation'
+  Documentation'
     { _dSummary = Nothing
     , _dDocumentationRootURL = Nothing
     , _dRules = Nothing
     , _dPages = Nothing
     , _dOverview = Nothing
     }
+
 
 -- | A short summary of what the service does. Can only be provided by plain
 -- text.
@@ -2862,11 +3245,14 @@ instance ToJSON Documentation where
 -- | Additional annotations that can be used to guide the usage of a metric.
 --
 -- /See:/ 'metricDescriptorMetadata' smart constructor.
-data MetricDescriptorMetadata = MetricDescriptorMetadata'
+data MetricDescriptorMetadata =
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
     , _mdmIngestDelay  :: !(Maybe GDuration)
     , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MetricDescriptorMetadata' with the minimum fields required to make a request.
 --
@@ -2880,11 +3266,12 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata'
 metricDescriptorMetadata
     :: MetricDescriptorMetadata
 metricDescriptorMetadata =
-    MetricDescriptorMetadata'
+  MetricDescriptorMetadata'
     { _mdmSamplePeriod = Nothing
     , _mdmIngestDelay = Nothing
     , _mdmLaunchStage = Nothing
     }
+
 
 -- | The sampling period of metric data points. For metrics which are written
 -- periodically, consecutive data points are stored at this time interval,
@@ -2927,17 +3314,27 @@ instance ToJSON MetricDescriptorMetadata where
                   ("ingestDelay" .=) <$> _mdmIngestDelay,
                   ("launchStage" .=) <$> _mdmLaunchStage])
 
--- | Message returning the created service subnetwork.
+-- | Represents a subnet that was created or discovered by a private access
+-- management service.
 --
 -- /See:/ 'subnetwork' smart constructor.
-data Subnetwork = Subnetwork'
-    { _subName        :: !(Maybe Text)
-    , _subIPCIdRRange :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data Subnetwork =
+  Subnetwork'
+    { _subOutsideAllocation :: !(Maybe Bool)
+    , _subNetwork           :: !(Maybe Text)
+    , _subName              :: !(Maybe Text)
+    , _subIPCIdRRange       :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Subnetwork' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'subOutsideAllocation'
+--
+-- * 'subNetwork'
 --
 -- * 'subName'
 --
@@ -2945,16 +3342,33 @@ data Subnetwork = Subnetwork'
 subnetwork
     :: Subnetwork
 subnetwork =
-    Subnetwork'
-    { _subName = Nothing
+  Subnetwork'
+    { _subOutsideAllocation = Nothing
+    , _subNetwork = Nothing
+    , _subName = Nothing
     , _subIPCIdRRange = Nothing
     }
+
+
+-- | This is a discovered subnet that is not within the current consumer
+-- allocated ranges.
+subOutsideAllocation :: Lens' Subnetwork (Maybe Bool)
+subOutsideAllocation
+  = lens _subOutsideAllocation
+      (\ s a -> s{_subOutsideAllocation = a})
+
+-- | In the Shared VPC host project, the VPC network that\'s peered with the
+-- consumer network. For example:
+-- \`projects\/1234321\/global\/networks\/host-network\`
+subNetwork :: Lens' Subnetwork (Maybe Text)
+subNetwork
+  = lens _subNetwork (\ s a -> s{_subNetwork = a})
 
 -- | Subnetwork name. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/
 subName :: Lens' Subnetwork (Maybe Text)
 subName = lens _subName (\ s a -> s{_subName = a})
 
--- | Subnetwork CIDR range in \"10.x.x.x\/y\" format.
+-- | Subnetwork CIDR range in \`10.x.x.x\/y\` format.
 subIPCIdRRange :: Lens' Subnetwork (Maybe Text)
 subIPCIdRRange
   = lens _subIPCIdRRange
@@ -2965,23 +3379,178 @@ instance FromJSON Subnetwork where
           = withObject "Subnetwork"
               (\ o ->
                  Subnetwork' <$>
-                   (o .:? "name") <*> (o .:? "ipCidrRange"))
+                   (o .:? "outsideAllocation") <*> (o .:? "network") <*>
+                     (o .:? "name")
+                     <*> (o .:? "ipCidrRange"))
 
 instance ToJSON Subnetwork where
         toJSON Subnetwork'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _subName,
+                 [("outsideAllocation" .=) <$> _subOutsideAllocation,
+                  ("network" .=) <$> _subNetwork,
+                  ("name" .=) <$> _subName,
                   ("ipCidrRange" .=) <$> _subIPCIdRRange])
+
+-- | Request to create a subnetwork in a previously peered service network.
+--
+-- /See:/ 'addSubnetworkRequest' smart constructor.
+data AddSubnetworkRequest =
+  AddSubnetworkRequest'
+    { _asrIPPrefixLength   :: !(Maybe (Textual Int32))
+    , _asrRequestedAddress :: !(Maybe Text)
+    , _asrSubnetwork       :: !(Maybe Text)
+    , _asrRegion           :: !(Maybe Text)
+    , _asrSubnetworkUsers  :: !(Maybe [Text])
+    , _asrConsumerNetwork  :: !(Maybe Text)
+    , _asrConsumer         :: !(Maybe Text)
+    , _asrDescription      :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddSubnetworkRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asrIPPrefixLength'
+--
+-- * 'asrRequestedAddress'
+--
+-- * 'asrSubnetwork'
+--
+-- * 'asrRegion'
+--
+-- * 'asrSubnetworkUsers'
+--
+-- * 'asrConsumerNetwork'
+--
+-- * 'asrConsumer'
+--
+-- * 'asrDescription'
+addSubnetworkRequest
+    :: AddSubnetworkRequest
+addSubnetworkRequest =
+  AddSubnetworkRequest'
+    { _asrIPPrefixLength = Nothing
+    , _asrRequestedAddress = Nothing
+    , _asrSubnetwork = Nothing
+    , _asrRegion = Nothing
+    , _asrSubnetworkUsers = Nothing
+    , _asrConsumerNetwork = Nothing
+    , _asrConsumer = Nothing
+    , _asrDescription = Nothing
+    }
+
+
+-- | Required. The prefix length of the subnet\'s IP address range. Use CIDR
+-- range notation, such as \`30\` to provision a subnet with an
+-- \`x.x.x.x\/30\` CIDR range. The IP address range is drawn from a pool of
+-- available ranges in the service consumer\'s allocated range.
+asrIPPrefixLength :: Lens' AddSubnetworkRequest (Maybe Int32)
+asrIPPrefixLength
+  = lens _asrIPPrefixLength
+      (\ s a -> s{_asrIPPrefixLength = a})
+      . mapping _Coerce
+
+-- | Optional. The starting address of a range. The address must be a valid
+-- IPv4 address in the x.x.x.x format. This value combined with the IP
+-- prefix range is the CIDR range for the subnet. The range must be within
+-- the allocated range that is assigned to the private connection. If the
+-- CIDR range isn\'t available, the call fails.
+asrRequestedAddress :: Lens' AddSubnetworkRequest (Maybe Text)
+asrRequestedAddress
+  = lens _asrRequestedAddress
+      (\ s a -> s{_asrRequestedAddress = a})
+
+-- | Required. A name for the new subnet. For information about the naming
+-- requirements, see
+-- [subnetwork](\/compute\/docs\/reference\/rest\/v1\/subnetworks) in the
+-- Compute API documentation.
+asrSubnetwork :: Lens' AddSubnetworkRequest (Maybe Text)
+asrSubnetwork
+  = lens _asrSubnetwork
+      (\ s a -> s{_asrSubnetwork = a})
+
+-- | Required. The name of a [region](\/compute\/docs\/regions-zones) for the
+-- subnet, such \`europe-west1\`.
+asrRegion :: Lens' AddSubnetworkRequest (Maybe Text)
+asrRegion
+  = lens _asrRegion (\ s a -> s{_asrRegion = a})
+
+-- | A list of members that are granted the \`compute.networkUser\` role on
+-- the subnet.
+asrSubnetworkUsers :: Lens' AddSubnetworkRequest [Text]
+asrSubnetworkUsers
+  = lens _asrSubnetworkUsers
+      (\ s a -> s{_asrSubnetworkUsers = a})
+      . _Default
+      . _Coerce
+
+-- | Required. The name of the service consumer\'s VPC network. The network
+-- must have an existing private connection that was provisioned through
+-- the connections.create method. The name must be in the following format:
+-- \`projects\/{project}\/global\/networks\/{network}\`, where {project} is
+-- a project number, such as \`12345\`. {network} is the name of a VPC
+-- network in the project.
+asrConsumerNetwork :: Lens' AddSubnetworkRequest (Maybe Text)
+asrConsumerNetwork
+  = lens _asrConsumerNetwork
+      (\ s a -> s{_asrConsumerNetwork = a})
+
+-- | Required. A resource that represents the service consumer, such as
+-- \`projects\/123456\`. The project number can be different from the value
+-- in the consumer network parameter. For example, the network might be
+-- part of a Shared VPC network. In those cases, Service Networking
+-- validates that this resource belongs to that Shared VPC.
+asrConsumer :: Lens' AddSubnetworkRequest (Maybe Text)
+asrConsumer
+  = lens _asrConsumer (\ s a -> s{_asrConsumer = a})
+
+-- | An optional description of the subnet.
+asrDescription :: Lens' AddSubnetworkRequest (Maybe Text)
+asrDescription
+  = lens _asrDescription
+      (\ s a -> s{_asrDescription = a})
+
+instance FromJSON AddSubnetworkRequest where
+        parseJSON
+          = withObject "AddSubnetworkRequest"
+              (\ o ->
+                 AddSubnetworkRequest' <$>
+                   (o .:? "ipPrefixLength") <*>
+                     (o .:? "requestedAddress")
+                     <*> (o .:? "subnetwork")
+                     <*> (o .:? "region")
+                     <*> (o .:? "subnetworkUsers" .!= mempty)
+                     <*> (o .:? "consumerNetwork")
+                     <*> (o .:? "consumer")
+                     <*> (o .:? "description"))
+
+instance ToJSON AddSubnetworkRequest where
+        toJSON AddSubnetworkRequest'{..}
+          = object
+              (catMaybes
+                 [("ipPrefixLength" .=) <$> _asrIPPrefixLength,
+                  ("requestedAddress" .=) <$> _asrRequestedAddress,
+                  ("subnetwork" .=) <$> _asrSubnetwork,
+                  ("region" .=) <$> _asrRegion,
+                  ("subnetworkUsers" .=) <$> _asrSubnetworkUsers,
+                  ("consumerNetwork" .=) <$> _asrConsumerNetwork,
+                  ("consumer" .=) <$> _asrConsumer,
+                  ("description" .=) <$> _asrDescription])
 
 -- | Define a system parameter rule mapping system parameter definitions to
 -- methods.
 --
 -- /See:/ 'systemParameterRule' smart constructor.
-data SystemParameterRule = SystemParameterRule'
+data SystemParameterRule =
+  SystemParameterRule'
     { _sprSelector   :: !(Maybe Text)
     , _sprParameters :: !(Maybe [SystemParameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SystemParameterRule' with the minimum fields required to make a request.
 --
@@ -2993,10 +3562,8 @@ data SystemParameterRule = SystemParameterRule'
 systemParameterRule
     :: SystemParameterRule
 systemParameterRule =
-    SystemParameterRule'
-    { _sprSelector = Nothing
-    , _sprParameters = Nothing
-    }
+  SystemParameterRule' {_sprSelector = Nothing, _sprParameters = Nothing}
+
 
 -- | Selects the methods to which this rule applies. Use \'*\' to indicate
 -- all methods in all APIs. Refer to selector for syntax details.
@@ -3033,11 +3600,14 @@ instance ToJSON SystemParameterRule where
 -- | A description of a label.
 --
 -- /See:/ 'labelDescriptor' smart constructor.
-data LabelDescriptor = LabelDescriptor'
+data LabelDescriptor =
+  LabelDescriptor'
     { _lKey         :: !(Maybe Text)
     , _lValueType   :: !(Maybe LabelDescriptorValueType)
     , _lDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
 --
@@ -3051,11 +3621,9 @@ data LabelDescriptor = LabelDescriptor'
 labelDescriptor
     :: LabelDescriptor
 labelDescriptor =
-    LabelDescriptor'
-    { _lKey = Nothing
-    , _lValueType = Nothing
-    , _lDescription = Nothing
-    }
+  LabelDescriptor'
+    {_lKey = Nothing, _lValueType = Nothing, _lDescription = Nothing}
+
 
 -- | The label key.
 lKey :: Lens' LabelDescriptor (Maybe Text)
@@ -3090,11 +3658,14 @@ instance ToJSON LabelDescriptor where
 -- | Configuration controlling usage of a service.
 --
 -- /See:/ 'usage' smart constructor.
-data Usage = Usage'
+data Usage =
+  Usage'
     { _uRequirements                :: !(Maybe [Text])
     , _uRules                       :: !(Maybe [UsageRule])
     , _uProducerNotificationChannel :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Usage' with the minimum fields required to make a request.
 --
@@ -3108,11 +3679,12 @@ data Usage = Usage'
 usage
     :: Usage
 usage =
-    Usage'
+  Usage'
     { _uRequirements = Nothing
     , _uRules = Nothing
     , _uProducerNotificationChannel = Nothing
     }
+
 
 -- | Requirements that must be satisfied before a consumer project can use
 -- the service. Each requirement is of the form \/; for example
@@ -3161,15 +3733,75 @@ instance ToJSON Usage where
                   ("producerNotificationChannel" .=) <$>
                     _uProducerNotificationChannel])
 
+-- | Request to search for an unused range within allocated ranges.
+--
+-- /See:/ 'searchRangeRequest' smart constructor.
+data SearchRangeRequest =
+  SearchRangeRequest'
+    { _srrIPPrefixLength :: !(Maybe (Textual Int32))
+    , _srrNetwork        :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SearchRangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srrIPPrefixLength'
+--
+-- * 'srrNetwork'
+searchRangeRequest
+    :: SearchRangeRequest
+searchRangeRequest =
+  SearchRangeRequest' {_srrIPPrefixLength = Nothing, _srrNetwork = Nothing}
+
+
+-- | Required. The prefix length of the IP range. Use usual CIDR range
+-- notation. For example, \'30\' to find unused x.x.x.x\/30 CIDR range.
+-- Actual range will be determined using allocated range for the consumer
+-- peered network and returned in the result.
+srrIPPrefixLength :: Lens' SearchRangeRequest (Maybe Int32)
+srrIPPrefixLength
+  = lens _srrIPPrefixLength
+      (\ s a -> s{_srrIPPrefixLength = a})
+      . mapping _Coerce
+
+-- | Network name in the consumer project. This network must have been
+-- already peered with a shared VPC network using CreateConnection method.
+-- Must be in a form \'projects\/{project}\/global\/networks\/{network}\'.
+-- {project} is a project number, as in \'12345\' {network} is network
+-- name.
+srrNetwork :: Lens' SearchRangeRequest (Maybe Text)
+srrNetwork
+  = lens _srrNetwork (\ s a -> s{_srrNetwork = a})
+
+instance FromJSON SearchRangeRequest where
+        parseJSON
+          = withObject "SearchRangeRequest"
+              (\ o ->
+                 SearchRangeRequest' <$>
+                   (o .:? "ipPrefixLength") <*> (o .:? "network"))
+
+instance ToJSON SearchRangeRequest where
+        toJSON SearchRangeRequest'{..}
+          = object
+              (catMaybes
+                 [("ipPrefixLength" .=) <$> _srrIPPrefixLength,
+                  ("network" .=) <$> _srrNetwork])
+
 -- | Defines the HTTP configuration for an API service. It contains a list of
 -- HttpRule, each specifying the mapping of an RPC method to one or more
 -- HTTP REST API methods.
 --
 -- /See:/ 'hTTP' smart constructor.
-data HTTP = HTTP'
+data HTTP =
+  HTTP'
     { _hRules                        :: !(Maybe [HTTPRule])
     , _hFullyDecodeReservedExpansion :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTP' with the minimum fields required to make a request.
 --
@@ -3180,11 +3812,8 @@ data HTTP = HTTP'
 -- * 'hFullyDecodeReservedExpansion'
 hTTP
     :: HTTP
-hTTP =
-    HTTP'
-    { _hRules = Nothing
-    , _hFullyDecodeReservedExpansion = Nothing
-    }
+hTTP = HTTP' {_hRules = Nothing, _hFullyDecodeReservedExpansion = Nothing}
+
 
 -- | A list of HTTP configuration rules that apply to individual API methods.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -3194,8 +3823,8 @@ hRules
   = lens _hRules (\ s a -> s{_hRules = a}) . _Default .
       _Coerce
 
--- | When set to true, URL path parmeters will be fully URI-decoded except in
--- cases of single segment matches in reserved expansion, where \"%2F\"
+-- | When set to true, URL path parameters will be fully URI-decoded except
+-- in cases of single segment matches in reserved expansion, where \"%2F\"
 -- will be left encoded. The default behavior is to not decode RFC 6570
 -- reserved characters in multi segment matches.
 hFullyDecodeReservedExpansion :: Lens' HTTP (Maybe Bool)
@@ -3219,64 +3848,20 @@ instance ToJSON HTTP where
                   ("fullyDecodeReservedExpansion" .=) <$>
                     _hFullyDecodeReservedExpansion])
 
--- | Message returning the name of the created service subnetwork.
---
--- /See:/ 'addSubnetworkResponse' smart constructor.
-data AddSubnetworkResponse = AddSubnetworkResponse'
-    { _asrName        :: !(Maybe Text)
-    , _asrIPCIdRRange :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AddSubnetworkResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'asrName'
---
--- * 'asrIPCIdRRange'
-addSubnetworkResponse
-    :: AddSubnetworkResponse
-addSubnetworkResponse =
-    AddSubnetworkResponse'
-    { _asrName = Nothing
-    , _asrIPCIdRRange = Nothing
-    }
-
--- | Subnetwork name. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/
-asrName :: Lens' AddSubnetworkResponse (Maybe Text)
-asrName = lens _asrName (\ s a -> s{_asrName = a})
-
--- | Subnetwork CIDR range in \"10.x.x.x\/y\" format.
-asrIPCIdRRange :: Lens' AddSubnetworkResponse (Maybe Text)
-asrIPCIdRRange
-  = lens _asrIPCIdRRange
-      (\ s a -> s{_asrIPCIdRRange = a})
-
-instance FromJSON AddSubnetworkResponse where
-        parseJSON
-          = withObject "AddSubnetworkResponse"
-              (\ o ->
-                 AddSubnetworkResponse' <$>
-                   (o .:? "name") <*> (o .:? "ipCidrRange"))
-
-instance ToJSON AddSubnetworkResponse where
-        toJSON AddSubnetworkResponse'{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _asrName,
-                  ("ipCidrRange" .=) <$> _asrIPCIdRRange])
-
 -- | A protocol buffer message type.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type'
+data Type =
+  Type'
     { _tSourceContext :: !(Maybe SourceContext)
     , _tOneofs        :: !(Maybe [Text])
     , _tName          :: !(Maybe Text)
     , _tOptions       :: !(Maybe [Option])
     , _tFields        :: !(Maybe [Field])
     , _tSyntax        :: !(Maybe TypeSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
 --
@@ -3296,7 +3881,7 @@ data Type = Type'
 type'
     :: Type
 type' =
-    Type'
+  Type'
     { _tSourceContext = Nothing
     , _tOneofs = Nothing
     , _tName = Nothing
@@ -3304,6 +3889,7 @@ type' =
     , _tFields = Nothing
     , _tSyntax = Nothing
     }
+
 
 -- | The source context.
 tSourceContext :: Lens' Type (Maybe SourceContext)
@@ -3371,7 +3957,8 @@ instance ToJSON Type where
 -- terminology.
 --
 -- /See:/ 'api' smart constructor.
-data API = API'
+data API =
+  API'
     { _aSourceContext :: !(Maybe SourceContext)
     , _aMixins        :: !(Maybe [Mixin])
     , _aMethods       :: !(Maybe [Method])
@@ -3379,7 +3966,9 @@ data API = API'
     , _aVersion       :: !(Maybe Text)
     , _aOptions       :: !(Maybe [Option])
     , _aSyntax        :: !(Maybe APISyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'API' with the minimum fields required to make a request.
 --
@@ -3401,7 +3990,7 @@ data API = API'
 api
     :: API
 api =
-    API'
+  API'
     { _aSourceContext = Nothing
     , _aMixins = Nothing
     , _aMethods = Nothing
@@ -3410,6 +3999,7 @@ api =
     , _aOptions = Nothing
     , _aSyntax = Nothing
     }
+
 
 -- | Source context for the protocol buffer service represented by this
 -- message.
@@ -3493,10 +4083,13 @@ instance ToJSON API where
 -- or the consumer project).
 --
 -- /See:/ 'monitoringDestination' smart constructor.
-data MonitoringDestination = MonitoringDestination'
+data MonitoringDestination =
+  MonitoringDestination'
     { _mdMetrics           :: !(Maybe [Text])
     , _mdMonitoredResource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MonitoringDestination' with the minimum fields required to make a request.
 --
@@ -3508,12 +4101,10 @@ data MonitoringDestination = MonitoringDestination'
 monitoringDestination
     :: MonitoringDestination
 monitoringDestination =
-    MonitoringDestination'
-    { _mdMetrics = Nothing
-    , _mdMonitoredResource = Nothing
-    }
+  MonitoringDestination' {_mdMetrics = Nothing, _mdMonitoredResource = Nothing}
 
--- | Names of the metrics to report to this monitoring destination. Each name
+
+-- | Types of the metrics to report to this monitoring destination. Each type
 -- must be defined in Service.metrics section.
 mdMetrics :: Lens' MonitoringDestination [Text]
 mdMetrics
@@ -3549,9 +4140,12 @@ instance ToJSON MonitoringDestination where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata'
+newtype OperationMetadata =
+  OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -3562,9 +4156,8 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata'
-    { _omAddtional = _Coerce # pOmAddtional_
-    }
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
@@ -3592,13 +4185,16 @@ instance ToJSON OperationMetadata where
 -- library-example.googleapis.com allow_cors: true
 --
 -- /See:/ 'endpoint' smart constructor.
-data Endpoint = Endpoint'
+data Endpoint =
+  Endpoint'
     { _eAliases   :: !(Maybe [Text])
     , _eAllowCORS :: !(Maybe Bool)
     , _eName      :: !(Maybe Text)
     , _eFeatures  :: !(Maybe [Text])
     , _eTarget    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Endpoint' with the minimum fields required to make a request.
 --
@@ -3616,13 +4212,14 @@ data Endpoint = Endpoint'
 endpoint
     :: Endpoint
 endpoint =
-    Endpoint'
+  Endpoint'
     { _eAliases = Nothing
     , _eAllowCORS = Nothing
     , _eName = Nothing
     , _eFeatures = Nothing
     , _eTarget = Nothing
     }
+
 
 -- | DEPRECATED: This field is no longer supported. Instead of using aliases,
 -- please specify multiple google.api.Endpoint for each of the intended
@@ -3698,9 +4295,12 @@ instance ToJSON Endpoint where
 -- fail due to the backend requiring additional scopes or permissions.
 --
 -- /See:/ 'oAuthRequirements' smart constructor.
-newtype OAuthRequirements = OAuthRequirements'
+newtype OAuthRequirements =
+  OAuthRequirements'
     { _oarCanonicalScopes :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 --
@@ -3709,10 +4309,8 @@ newtype OAuthRequirements = OAuthRequirements'
 -- * 'oarCanonicalScopes'
 oAuthRequirements
     :: OAuthRequirements
-oAuthRequirements =
-    OAuthRequirements'
-    { _oarCanonicalScopes = Nothing
-    }
+oAuthRequirements = OAuthRequirements' {_oarCanonicalScopes = Nothing}
+
 
 -- | The list of publicly documented OAuth scopes that are allowed access. An
 -- OAuth token containing any of these scopes will be accepted. Example:
@@ -3741,10 +4339,13 @@ instance ToJSON OAuthRequirements where
 -- google.foo.v1.AnotherError
 --
 -- /See:/ 'customError' smart constructor.
-data CustomError = CustomError'
+data CustomError =
+  CustomError'
     { _ceRules :: !(Maybe [CustomErrorRule])
     , _ceTypes :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 --
@@ -3755,11 +4356,8 @@ data CustomError = CustomError'
 -- * 'ceTypes'
 customError
     :: CustomError
-customError =
-    CustomError'
-    { _ceRules = Nothing
-    , _ceTypes = Nothing
-    }
+customError = CustomError' {_ceRules = Nothing, _ceTypes = Nothing}
+
 
 -- | The list of custom error rules that apply to individual API messages.
 -- **NOTE:** All service configuration rules follow \"last one wins\"
@@ -3796,7 +4394,8 @@ instance ToJSON CustomError where
 -- and limit type combination defined within a \`QuotaGroup\`.
 --
 -- /See:/ 'quotaLimit' smart constructor.
-data QuotaLimit = QuotaLimit'
+data QuotaLimit =
+  QuotaLimit'
     { _qlValues       :: !(Maybe QuotaLimitValues)
     , _qlFreeTier     :: !(Maybe (Textual Int64))
     , _qlMetric       :: !(Maybe Text)
@@ -3807,7 +4406,9 @@ data QuotaLimit = QuotaLimit'
     , _qlDescription  :: !(Maybe Text)
     , _qlUnit         :: !(Maybe Text)
     , _qlMaxLimit     :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaLimit' with the minimum fields required to make a request.
 --
@@ -3835,7 +4436,7 @@ data QuotaLimit = QuotaLimit'
 quotaLimit
     :: QuotaLimit
 quotaLimit =
-    QuotaLimit'
+  QuotaLimit'
     { _qlValues = Nothing
     , _qlFreeTier = Nothing
     , _qlMetric = Nothing
@@ -3847,6 +4448,7 @@ quotaLimit =
     , _qlUnit = Nothing
     , _qlMaxLimit = Nothing
     }
+
 
 -- | Tiered limit values. You must specify this as a key:value pair, with an
 -- integer value that is the maximum number of requests allowed for the
@@ -3971,10 +4573,13 @@ instance ToJSON QuotaLimit where
 -- enumeration, etc.
 --
 -- /See:/ 'option' smart constructor.
-data Option = Option'
+data Option =
+  Option'
     { _optValue :: !(Maybe OptionValue)
     , _optName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Option' with the minimum fields required to make a request.
 --
@@ -3985,11 +4590,8 @@ data Option = Option'
 -- * 'optName'
 option
     :: Option
-option =
-    Option'
-    { _optValue = Nothing
-    , _optName = Nothing
-    }
+option = Option' {_optValue = Nothing, _optName = Nothing}
+
 
 -- | The option\'s value packed in an Any message. If the value is a
 -- primitive, the corresponding wrapper type defined in
@@ -4030,9 +4632,12 @@ instance ToJSON Option where
 -- library.googleapis.com\/book\/borrowed_count
 --
 -- /See:/ 'billing' smart constructor.
-newtype Billing = Billing'
+newtype Billing =
+  Billing'
     { _bConsumerDestinations :: Maybe [BillingDestination]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Billing' with the minimum fields required to make a request.
 --
@@ -4041,10 +4646,8 @@ newtype Billing = Billing'
 -- * 'bConsumerDestinations'
 billing
     :: Billing
-billing =
-    Billing'
-    { _bConsumerDestinations = Nothing
-    }
+billing = Billing' {_bConsumerDestinations = Nothing}
+
 
 -- | Billing configurations for sending metrics to the consumer project.
 -- There can be multiple consumer destinations per service, each one must
@@ -4074,9 +4677,12 @@ instance ToJSON Billing where
 -- | Source information used to create a Service Config
 --
 -- /See:/ 'sourceInfo' smart constructor.
-newtype SourceInfo = SourceInfo'
+newtype SourceInfo =
+  SourceInfo'
     { _siSourceFiles :: Maybe [SourceInfoSourceFilesItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceInfo' with the minimum fields required to make a request.
 --
@@ -4085,10 +4691,8 @@ newtype SourceInfo = SourceInfo'
 -- * 'siSourceFiles'
 sourceInfo
     :: SourceInfo
-sourceInfo =
-    SourceInfo'
-    { _siSourceFiles = Nothing
-    }
+sourceInfo = SourceInfo' {_siSourceFiles = Nothing}
+
 
 -- | All files used during config generation.
 siSourceFiles :: Lens' SourceInfo [SourceInfoSourceFilesItem]
@@ -4114,9 +4718,12 @@ instance ToJSON SourceInfo where
 -- specified unit. Currently only STANDARD is supported.
 --
 -- /See:/ 'quotaLimitValues' smart constructor.
-newtype QuotaLimitValues = QuotaLimitValues'
+newtype QuotaLimitValues =
+  QuotaLimitValues'
     { _qlvAddtional :: HashMap Text (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'QuotaLimitValues' with the minimum fields required to make a request.
 --
@@ -4127,9 +4734,8 @@ quotaLimitValues
     :: HashMap Text Int64 -- ^ 'qlvAddtional'
     -> QuotaLimitValues
 quotaLimitValues pQlvAddtional_ =
-    QuotaLimitValues'
-    { _qlvAddtional = _Coerce # pQlvAddtional_
-    }
+  QuotaLimitValues' {_qlvAddtional = _Coerce # pQlvAddtional_}
+
 
 qlvAddtional :: Lens' QuotaLimitValues (HashMap Text Int64)
 qlvAddtional
@@ -4147,13 +4753,16 @@ instance ToJSON QuotaLimitValues where
 -- | Enum type definition.
 --
 -- /See:/ 'enum' smart constructor.
-data Enum' = Enum''
+data Enum' =
+  Enum''
     { _enuSourceContext :: !(Maybe SourceContext)
     , _enuEnumvalue     :: !(Maybe [EnumValue])
     , _enuName          :: !(Maybe Text)
     , _enuOptions       :: !(Maybe [Option])
     , _enuSyntax        :: !(Maybe EnumSyntax)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Enum' with the minimum fields required to make a request.
 --
@@ -4171,13 +4780,14 @@ data Enum' = Enum''
 enum
     :: Enum'
 enum =
-    Enum''
+  Enum''
     { _enuSourceContext = Nothing
     , _enuEnumvalue = Nothing
     , _enuName = Nothing
     , _enuOptions = Nothing
     , _enuSyntax = Nothing
     }
+
 
 -- | The source context.
 enuSourceContext :: Lens' Enum' (Maybe SourceContext)
@@ -4244,10 +4854,13 @@ instance ToJSON Enum' where
 -- activity_history
 --
 -- /See:/ 'logging' smart constructor.
-data Logging = Logging'
+data Logging =
+  Logging'
     { _lProducerDestinations :: !(Maybe [LoggingDestination])
     , _lConsumerDestinations :: !(Maybe [LoggingDestination])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Logging' with the minimum fields required to make a request.
 --
@@ -4259,10 +4872,8 @@ data Logging = Logging'
 logging
     :: Logging
 logging =
-    Logging'
-    { _lProducerDestinations = Nothing
-    , _lConsumerDestinations = Nothing
-    }
+  Logging' {_lProducerDestinations = Nothing, _lConsumerDestinations = Nothing}
+
 
 -- | Logging configurations for sending logs to the producer project. There
 -- can be multiple producer destinations, each one must have a different
@@ -4305,9 +4916,12 @@ instance ToJSON Logging where
 
 --
 -- /See:/ 'sourceInfoSourceFilesItem' smart constructor.
-newtype SourceInfoSourceFilesItem = SourceInfoSourceFilesItem'
+newtype SourceInfoSourceFilesItem =
+  SourceInfoSourceFilesItem'
     { _sisfiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SourceInfoSourceFilesItem' with the minimum fields required to make a request.
 --
@@ -4318,9 +4932,8 @@ sourceInfoSourceFilesItem
     :: HashMap Text JSONValue -- ^ 'sisfiAddtional'
     -> SourceInfoSourceFilesItem
 sourceInfoSourceFilesItem pSisfiAddtional_ =
-    SourceInfoSourceFilesItem'
-    { _sisfiAddtional = _Coerce # pSisfiAddtional_
-    }
+  SourceInfoSourceFilesItem' {_sisfiAddtional = _Coerce # pSisfiAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 sisfiAddtional :: Lens' SourceInfoSourceFilesItem (HashMap Text JSONValue)
@@ -4339,8 +4952,8 @@ instance ToJSON SourceInfoSourceFilesItem where
         toJSON = toJSON . _sisfiAddtional
 
 -- | Quota configuration helps to achieve fairness and budgeting in service
--- usage. The quota configuration works this way: - The service
--- configuration defines a set of metrics. - For API calls, the
+-- usage. The metric based quota configuration works this way: - The
+-- service configuration defines a set of metrics. - For API calls, the
 -- quota.metric_rules maps methods to metrics with corresponding costs. -
 -- The quota.limits defines limits on the metrics, which will be used for
 -- quota checks at runtime. An example quota configuration in yaml format:
@@ -4362,10 +4975,13 @@ instance ToJSON SourceInfoSourceFilesItem where
 -- metric_kind: DELTA value_type: INT64
 --
 -- /See:/ 'quota' smart constructor.
-data Quota = Quota'
+data Quota =
+  Quota'
     { _qLimits      :: !(Maybe [QuotaLimit])
     , _qMetricRules :: !(Maybe [MetricRule])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
@@ -4376,11 +4992,8 @@ data Quota = Quota'
 -- * 'qMetricRules'
 quota
     :: Quota
-quota =
-    Quota'
-    { _qLimits = Nothing
-    , _qMetricRules = Nothing
-    }
+quota = Quota' {_qLimits = Nothing, _qMetricRules = Nothing}
+
 
 -- | List of \`QuotaLimit\` definitions for the service.
 qLimits :: Lens' Quota [QuotaLimit]
@@ -4431,7 +5044,7 @@ instance ToJSON Quota where
 -- a primitive (non-message) type. The path template controls how fields of
 -- the request message are mapped to the URL path. Example: service
 -- Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option
--- (google.api.http) = { get: \"\/v1\/{name=messages\/*\"}\" }; } } message
+-- (google.api.http) = { get: \"\/v1\/{name=messages\/*}\" }; } } message
 -- GetMessageRequest { string name = 1; \/\/ Mapped to URL path. } message
 -- Message { string text = 1; \/\/ The resource content. } This enables an
 -- HTTP REST to gRPC mapping as below: HTTP | gRPC -----|----- \`GET
@@ -4563,7 +5176,8 @@ instance ToJSON Quota where
 -- feature.
 --
 -- /See:/ 'hTTPRule' smart constructor.
-data HTTPRule = HTTPRule'
+data HTTPRule =
+  HTTPRule'
     { _httprSelector           :: !(Maybe Text)
     , _httprPost               :: !(Maybe Text)
     , _httprBody               :: !(Maybe Text)
@@ -4574,7 +5188,9 @@ data HTTPRule = HTTPRule'
     , _httprAdditionalBindings :: !(Maybe [HTTPRule])
     , _httprDelete             :: !(Maybe Text)
     , _httprPut                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'HTTPRule' with the minimum fields required to make a request.
 --
@@ -4602,7 +5218,7 @@ data HTTPRule = HTTPRule'
 hTTPRule
     :: HTTPRule
 hTTPRule =
-    HTTPRule'
+  HTTPRule'
     { _httprSelector = Nothing
     , _httprPost = Nothing
     , _httprBody = Nothing
@@ -4614,6 +5230,7 @@ hTTPRule =
     , _httprDelete = Nothing
     , _httprPut = Nothing
     }
+
 
 -- | Selects a method to which this rule applies. Refer to selector for
 -- syntax details.
@@ -4723,9 +5340,12 @@ instance ToJSON HTTPRule where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse'
+newtype OperationResponse =
+  OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
 --
@@ -4736,9 +5356,8 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse'
-    { _orAddtional = _Coerce # pOrAddtional_
-    }
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
 
 -- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
@@ -4754,18 +5373,21 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | Configuration for an anthentication provider, including support for
+-- | Configuration for an authentication provider, including support for
 -- [JSON Web Token
 -- (JWT)](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32).
 --
 -- /See:/ 'authProvider' smart constructor.
-data AuthProvider = AuthProvider'
+data AuthProvider =
+  AuthProvider'
     { _apJWKsURI          :: !(Maybe Text)
     , _apAudiences        :: !(Maybe Text)
     , _apId               :: !(Maybe Text)
     , _apAuthorizationURL :: !(Maybe Text)
     , _apIssuer           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AuthProvider' with the minimum fields required to make a request.
 --
@@ -4783,13 +5405,14 @@ data AuthProvider = AuthProvider'
 authProvider
     :: AuthProvider
 authProvider =
-    AuthProvider'
+  AuthProvider'
     { _apJWKsURI = Nothing
     , _apAudiences = Nothing
     , _apId = Nothing
     , _apAuthorizationURL = Nothing
     , _apIssuer = Nothing
     }
+
 
 -- | URL of the provider\'s public key set to validate signature of the JWT.
 -- See [OpenID
@@ -4822,7 +5445,7 @@ apAudiences
 apId :: Lens' AuthProvider (Maybe Text)
 apId = lens _apId (\ s a -> s{_apId = a})
 
--- | Redirect URL if JWT token is required but no present or is expired.
+-- | Redirect URL if JWT token is required but not present or is expired.
 -- Implement authorizationUrl of securityDefinitions in OpenAPI spec.
 apAuthorizationURL :: Lens' AuthProvider (Maybe Text)
 apAuthorizationURL
@@ -4861,13 +5484,16 @@ instance ToJSON AuthProvider where
 -- API element.
 --
 -- /See:/ 'contextRule' smart constructor.
-data ContextRule = ContextRule'
+data ContextRule =
+  ContextRule'
     { _crSelector                  :: !(Maybe Text)
     , _crRequested                 :: !(Maybe [Text])
     , _crAllowedRequestExtensions  :: !(Maybe [Text])
     , _crProvided                  :: !(Maybe [Text])
     , _crAllowedResponseExtensions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContextRule' with the minimum fields required to make a request.
 --
@@ -4885,13 +5511,14 @@ data ContextRule = ContextRule'
 contextRule
     :: ContextRule
 contextRule =
-    ContextRule'
+  ContextRule'
     { _crSelector = Nothing
     , _crRequested = Nothing
     , _crAllowedRequestExtensions = Nothing
     , _crProvided = Nothing
     , _crAllowedResponseExtensions = Nothing
     }
+
 
 -- | Selects the methods to which this rule applies. Refer to selector for
 -- syntax details.

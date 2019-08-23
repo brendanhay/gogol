@@ -61,14 +61,17 @@ type ProjectsAttestorsGetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsAttestorsGetIAMPolicy' smart constructor.
-data ProjectsAttestorsGetIAMPolicy = ProjectsAttestorsGetIAMPolicy'
+data ProjectsAttestorsGetIAMPolicy =
+  ProjectsAttestorsGetIAMPolicy'
     { _pagipXgafv          :: !(Maybe Xgafv)
     , _pagipUploadProtocol :: !(Maybe Text)
     , _pagipAccessToken    :: !(Maybe Text)
     , _pagipUploadType     :: !(Maybe Text)
     , _pagipResource       :: !Text
     , _pagipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsAttestorsGetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -89,7 +92,7 @@ projectsAttestorsGetIAMPolicy
     :: Text -- ^ 'pagipResource'
     -> ProjectsAttestorsGetIAMPolicy
 projectsAttestorsGetIAMPolicy pPagipResource_ =
-    ProjectsAttestorsGetIAMPolicy'
+  ProjectsAttestorsGetIAMPolicy'
     { _pagipXgafv = Nothing
     , _pagipUploadProtocol = Nothing
     , _pagipAccessToken = Nothing
@@ -97,6 +100,7 @@ projectsAttestorsGetIAMPolicy pPagipResource_ =
     , _pagipResource = pPagipResource_
     , _pagipCallback = Nothing
     }
+
 
 -- | V1 error format.
 pagipXgafv :: Lens' ProjectsAttestorsGetIAMPolicy (Maybe Xgafv)

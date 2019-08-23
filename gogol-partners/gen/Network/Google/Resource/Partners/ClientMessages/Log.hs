@@ -65,14 +65,17 @@ type ClientMessagesLogResource =
 -- have accessed this result.\`, etc.
 --
 -- /See:/ 'clientMessagesLog' smart constructor.
-data ClientMessagesLog = ClientMessagesLog'
+data ClientMessagesLog =
+  ClientMessagesLog'
     { _cmlXgafv          :: !(Maybe Xgafv)
     , _cmlUploadProtocol :: !(Maybe Text)
     , _cmlAccessToken    :: !(Maybe Text)
     , _cmlUploadType     :: !(Maybe Text)
     , _cmlPayload        :: !LogMessageRequest
     , _cmlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ClientMessagesLog' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ clientMessagesLog
     :: LogMessageRequest -- ^ 'cmlPayload'
     -> ClientMessagesLog
 clientMessagesLog pCmlPayload_ =
-    ClientMessagesLog'
+  ClientMessagesLog'
     { _cmlXgafv = Nothing
     , _cmlUploadProtocol = Nothing
     , _cmlAccessToken = Nothing
@@ -101,6 +104,7 @@ clientMessagesLog pCmlPayload_ =
     , _cmlPayload = pCmlPayload_
     , _cmlCallback = Nothing
     }
+
 
 -- | V1 error format.
 cmlXgafv :: Lens' ClientMessagesLog (Maybe Xgafv)

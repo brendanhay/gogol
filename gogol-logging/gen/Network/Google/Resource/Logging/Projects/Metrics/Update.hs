@@ -61,7 +61,8 @@ type ProjectsMetricsUpdateResource =
 -- | Creates or updates a logs-based metric.
 --
 -- /See:/ 'projectsMetricsUpdate' smart constructor.
-data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
+data ProjectsMetricsUpdate =
+  ProjectsMetricsUpdate'
     { _pmuXgafv          :: !(Maybe Xgafv)
     , _pmuUploadProtocol :: !(Maybe Text)
     , _pmuAccessToken    :: !(Maybe Text)
@@ -69,7 +70,9 @@ data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
     , _pmuUploadType     :: !(Maybe Text)
     , _pmuPayload        :: !LogMetric
     , _pmuCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsMetricsUpdate' with the minimum fields required to make a request.
 --
@@ -93,7 +96,7 @@ projectsMetricsUpdate
     -> LogMetric -- ^ 'pmuPayload'
     -> ProjectsMetricsUpdate
 projectsMetricsUpdate pPmuMetricName_ pPmuPayload_ =
-    ProjectsMetricsUpdate'
+  ProjectsMetricsUpdate'
     { _pmuXgafv = Nothing
     , _pmuUploadProtocol = Nothing
     , _pmuAccessToken = Nothing
@@ -102,6 +105,7 @@ projectsMetricsUpdate pPmuMetricName_ pPmuPayload_ =
     , _pmuPayload = pPmuPayload_
     , _pmuCallback = Nothing
     }
+
 
 -- | V1 error format.
 pmuXgafv :: Lens' ProjectsMetricsUpdate (Maybe Xgafv)

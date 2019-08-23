@@ -83,6 +83,9 @@ module Network.Google.Spanner
     -- ** spanner.projects.instances.databases.sessions.delete
     , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Delete
 
+    -- ** spanner.projects.instances.databases.sessions.executeBatchDml
+    , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
+
     -- ** spanner.projects.instances.databases.sessions.executeSql
     , module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteSQL
 
@@ -276,10 +279,23 @@ module Network.Google.Spanner
     , ksRanges
     , ksKeys
 
+    -- ** Statement
+    , Statement
+    , statement
+    , sParamTypes
+    , sParams
+    , sSQL
+
     -- ** PartitionQueryRequestParams
     , PartitionQueryRequestParams
     , partitionQueryRequestParams
     , pqrpAddtional
+
+    -- ** ExecuteBatchDmlResponse
+    , ExecuteBatchDmlResponse
+    , executeBatchDmlResponse
+    , ebdrStatus
+    , ebdrResultSets
 
     -- ** Operation
     , Operation
@@ -356,6 +372,11 @@ module Network.Google.Spanner
     , setIAMPolicyRequest
     , siprPolicy
 
+    -- ** StatementParamTypes
+    , StatementParamTypes
+    , statementParamTypes
+    , sptAddtional
+
     -- ** UpdateDatabaseDdlRequest
     , UpdateDatabaseDdlRequest
     , updateDatabaseDdlRequest
@@ -400,6 +421,13 @@ module Network.Google.Spanner
     , listSessionsResponse
     , lsrNextPageToken
     , lsrSessions
+
+    -- ** ExecuteBatchDmlRequest
+    , ExecuteBatchDmlRequest
+    , executeBatchDmlRequest
+    , ebdrSeqno
+    , ebdrTransaction
+    , ebdrStatements
 
     -- ** StructType
     , StructType
@@ -604,6 +632,11 @@ module Network.Google.Spanner
     , resultSetStatsQueryStats
     , rssqsAddtional
 
+    -- ** StatementParams
+    , StatementParams
+    , statementParams
+    , spAddtional
+
     -- ** TransactionSelector
     , TransactionSelector
     , transactionSelector
@@ -673,6 +706,7 @@ import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Se
 import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Commit
 import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Create
 import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Delete
+import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteBatchDml
 import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteSQL
 import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSQL
 import           Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Get
@@ -722,6 +756,8 @@ type SpannerAPI =
        :<|> ProjectsInstancesDatabasesSessionsCreateResource
        :<|>
        ProjectsInstancesDatabasesSessionsPartitionReadResource
+       :<|>
+       ProjectsInstancesDatabasesSessionsExecuteBatchDmlResource
        :<|>
        ProjectsInstancesDatabasesSessionsStreamingReadResource
        :<|> ProjectsInstancesDatabasesSessionsDeleteResource

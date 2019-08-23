@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesPatch' request conforms to.
 type RemarketingListSharesPatchResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
@@ -59,11 +59,14 @@ type RemarketingListSharesPatchResource =
 -- semantics.
 --
 -- /See:/ 'remarketingListSharesPatch' smart constructor.
-data RemarketingListSharesPatch = RemarketingListSharesPatch'
+data RemarketingListSharesPatch =
+  RemarketingListSharesPatch'
     { _rlspProFileId         :: !(Textual Int64)
     , _rlspPayload           :: !RemarketingListShare
     , _rlspRemarketingListId :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RemarketingListSharesPatch' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ remarketingListSharesPatch
     -> Int64 -- ^ 'rlspRemarketingListId'
     -> RemarketingListSharesPatch
 remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
-    RemarketingListSharesPatch'
+  RemarketingListSharesPatch'
     { _rlspProFileId = _Coerce # pRlspProFileId_
     , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = _Coerce # pRlspRemarketingListId_
     }
+
 
 -- | User profile ID associated with this request.
 rlspProFileId :: Lens' RemarketingListSharesPatch Int64

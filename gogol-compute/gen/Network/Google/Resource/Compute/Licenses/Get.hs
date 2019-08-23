@@ -55,10 +55,13 @@ type LicensesGetResource =
 -- | Returns the specified License resource.
 --
 -- /See:/ 'licensesGet' smart constructor.
-data LicensesGet = LicensesGet'
+data LicensesGet =
+  LicensesGet'
     { _lgProject :: !Text
     , _lgLicense :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LicensesGet' with the minimum fields required to make a request.
 --
@@ -72,10 +75,8 @@ licensesGet
     -> Text -- ^ 'lgLicense'
     -> LicensesGet
 licensesGet pLgProject_ pLgLicense_ =
-    LicensesGet'
-    { _lgProject = pLgProject_
-    , _lgLicense = pLgLicense_
-    }
+  LicensesGet' {_lgProject = pLgProject_, _lgLicense = pLgLicense_}
+
 
 -- | Project ID for this request.
 lgProject :: Lens' LicensesGet Text

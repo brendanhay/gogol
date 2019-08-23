@@ -62,12 +62,15 @@ type ForwardingRulesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'forwardingRulesInsert' smart constructor.
-data ForwardingRulesInsert = ForwardingRulesInsert'
+data ForwardingRulesInsert =
+  ForwardingRulesInsert'
     { _friRequestId :: !(Maybe Text)
     , _friProject   :: !Text
     , _friPayload   :: !ForwardingRule
     , _friRegion    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ForwardingRulesInsert' with the minimum fields required to make a request.
 --
@@ -86,12 +89,13 @@ forwardingRulesInsert
     -> Text -- ^ 'friRegion'
     -> ForwardingRulesInsert
 forwardingRulesInsert pFriProject_ pFriPayload_ pFriRegion_ =
-    ForwardingRulesInsert'
+  ForwardingRulesInsert'
     { _friRequestId = Nothing
     , _friProject = pFriProject_
     , _friPayload = pFriPayload_
     , _friRegion = pFriRegion_
     }
+
 
 -- | An optional request ID to identify requests. Specify a unique request ID
 -- so that if you must retry your request, the server will know to ignore

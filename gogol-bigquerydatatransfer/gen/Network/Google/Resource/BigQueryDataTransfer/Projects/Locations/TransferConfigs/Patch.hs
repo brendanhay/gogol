@@ -41,6 +41,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcpUploadType
     , pltcpAuthorizationCode
     , pltcpPayload
+    , pltcpVersionInfo
     , pltcpName
     , pltcpCallback
     ) where
@@ -59,16 +60,18 @@ type ProjectsLocationsTransferConfigsPatchResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "authorizationCode" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TransferConfig :>
-                           Patch '[JSON] TransferConfig
+                     QueryParam "versionInfo" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TransferConfig :>
+                             Patch '[JSON] TransferConfig
 
 -- | Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
 --
 -- /See:/ 'projectsLocationsTransferConfigsPatch' smart constructor.
-data ProjectsLocationsTransferConfigsPatch = ProjectsLocationsTransferConfigsPatch'
+data ProjectsLocationsTransferConfigsPatch =
+  ProjectsLocationsTransferConfigsPatch'
     { _pltcpXgafv             :: !(Maybe Xgafv)
     , _pltcpUploadProtocol    :: !(Maybe Text)
     , _pltcpUpdateMask        :: !(Maybe GFieldMask)
@@ -76,9 +79,12 @@ data ProjectsLocationsTransferConfigsPatch = ProjectsLocationsTransferConfigsPat
     , _pltcpUploadType        :: !(Maybe Text)
     , _pltcpAuthorizationCode :: !(Maybe Text)
     , _pltcpPayload           :: !TransferConfig
+    , _pltcpVersionInfo       :: !(Maybe Text)
     , _pltcpName              :: !Text
     , _pltcpCallback          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTransferConfigsPatch' with the minimum fields required to make a request.
 --
@@ -98,6 +104,8 @@ data ProjectsLocationsTransferConfigsPatch = ProjectsLocationsTransferConfigsPat
 --
 -- * 'pltcpPayload'
 --
+-- * 'pltcpVersionInfo'
+--
 -- * 'pltcpName'
 --
 -- * 'pltcpCallback'
@@ -106,7 +114,7 @@ projectsLocationsTransferConfigsPatch
     -> Text -- ^ 'pltcpName'
     -> ProjectsLocationsTransferConfigsPatch
 projectsLocationsTransferConfigsPatch pPltcpPayload_ pPltcpName_ =
-    ProjectsLocationsTransferConfigsPatch'
+  ProjectsLocationsTransferConfigsPatch'
     { _pltcpXgafv = Nothing
     , _pltcpUploadProtocol = Nothing
     , _pltcpUpdateMask = Nothing
@@ -114,9 +122,11 @@ projectsLocationsTransferConfigsPatch pPltcpPayload_ pPltcpName_ =
     , _pltcpUploadType = Nothing
     , _pltcpAuthorizationCode = Nothing
     , _pltcpPayload = pPltcpPayload_
+    , _pltcpVersionInfo = Nothing
     , _pltcpName = pPltcpName_
     , _pltcpCallback = Nothing
     }
+
 
 -- | V1 error format.
 pltcpXgafv :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Xgafv)
@@ -171,6 +181,17 @@ pltcpPayload :: Lens' ProjectsLocationsTransferConfigsPatch TransferConfig
 pltcpPayload
   = lens _pltcpPayload (\ s a -> s{_pltcpPayload = a})
 
+-- | Optional version info. If users want to find a very recent access token,
+-- that is, immediately after approving access, users have to set the
+-- version_info claim in the token request. To obtain the version_info,
+-- users must use the “none+gsession” response type. which be return a
+-- version_info back in the authorization response which be be put in a JWT
+-- claim in the token request.
+pltcpVersionInfo :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Text)
+pltcpVersionInfo
+  = lens _pltcpVersionInfo
+      (\ s a -> s{_pltcpVersionInfo = a})
+
 -- | The resource name of the transfer config. Transfer config names have the
 -- form of
 -- \`projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}\`.
@@ -189,7 +210,8 @@ pltcpCallback
       (\ s a -> s{_pltcpCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTransferConfigsPatch where
+           ProjectsLocationsTransferConfigsPatch
+         where
         type Rs ProjectsLocationsTransferConfigsPatch =
              TransferConfig
         type Scopes ProjectsLocationsTransferConfigsPatch =
@@ -201,6 +223,7 @@ instance GoogleRequest
               _pltcpAccessToken
               _pltcpUploadType
               _pltcpAuthorizationCode
+              _pltcpVersionInfo
               _pltcpCallback
               (Just AltJSON)
               _pltcpPayload

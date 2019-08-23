@@ -53,9 +53,12 @@ type AccountsContainersVersionsSetLatestResource =
 -- detecting conflicts and errors.
 --
 -- /See:/ 'accountsContainersVersionsSetLatest' smart constructor.
-newtype AccountsContainersVersionsSetLatest = AccountsContainersVersionsSetLatest'
+newtype AccountsContainersVersionsSetLatest =
+  AccountsContainersVersionsSetLatest'
     { _acvslPath :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AccountsContainersVersionsSetLatest' with the minimum fields required to make a request.
 --
@@ -66,9 +69,8 @@ accountsContainersVersionsSetLatest
     :: Text -- ^ 'acvslPath'
     -> AccountsContainersVersionsSetLatest
 accountsContainersVersionsSetLatest pAcvslPath_ =
-    AccountsContainersVersionsSetLatest'
-    { _acvslPath = pAcvslPath_
-    }
+  AccountsContainersVersionsSetLatest' {_acvslPath = pAcvslPath_}
+
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
@@ -77,7 +79,8 @@ acvslPath
   = lens _acvslPath (\ s a -> s{_acvslPath = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsSetLatest where
+           AccountsContainersVersionsSetLatest
+         where
         type Rs AccountsContainersVersionsSetLatest =
              ContainerVersion
         type Scopes AccountsContainersVersionsSetLatest =

@@ -62,14 +62,17 @@ type GetIAMPolicyResource =
 -- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'getIAMPolicy' smart constructor.
-data GetIAMPolicy = GetIAMPolicy'
+data GetIAMPolicy =
+  GetIAMPolicy'
     { _gipXgafv          :: !(Maybe Xgafv)
     , _gipUploadProtocol :: !(Maybe Text)
     , _gipAccessToken    :: !(Maybe Text)
     , _gipUploadType     :: !(Maybe Text)
     , _gipResource       :: !Text
     , _gipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GetIAMPolicy' with the minimum fields required to make a request.
 --
@@ -90,7 +93,7 @@ getIAMPolicy
     :: Text -- ^ 'gipResource'
     -> GetIAMPolicy
 getIAMPolicy pGipResource_ =
-    GetIAMPolicy'
+  GetIAMPolicy'
     { _gipXgafv = Nothing
     , _gipUploadProtocol = Nothing
     , _gipAccessToken = Nothing
@@ -98,6 +101,7 @@ getIAMPolicy pGipResource_ =
     , _gipResource = pGipResource_
     , _gipCallback = Nothing
     }
+
 
 -- | V1 error format.
 gipXgafv :: Lens' GetIAMPolicy (Maybe Xgafv)

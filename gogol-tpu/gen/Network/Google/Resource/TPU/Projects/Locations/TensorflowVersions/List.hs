@@ -70,7 +70,8 @@ type ProjectsLocationsTensorflowVersionsListResource
 -- | List TensorFlow versions supported by this API.
 --
 -- /See:/ 'projectsLocationsTensorflowVersionsList' smart constructor.
-data ProjectsLocationsTensorflowVersionsList = ProjectsLocationsTensorflowVersionsList'
+data ProjectsLocationsTensorflowVersionsList =
+  ProjectsLocationsTensorflowVersionsList'
     { _pltvlParent         :: !Text
     , _pltvlXgafv          :: !(Maybe Xgafv)
     , _pltvlUploadProtocol :: !(Maybe Text)
@@ -81,7 +82,9 @@ data ProjectsLocationsTensorflowVersionsList = ProjectsLocationsTensorflowVersio
     , _pltvlPageToken      :: !(Maybe Text)
     , _pltvlPageSize       :: !(Maybe (Textual Int32))
     , _pltvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsTensorflowVersionsList' with the minimum fields required to make a request.
 --
@@ -110,7 +113,7 @@ projectsLocationsTensorflowVersionsList
     :: Text -- ^ 'pltvlParent'
     -> ProjectsLocationsTensorflowVersionsList
 projectsLocationsTensorflowVersionsList pPltvlParent_ =
-    ProjectsLocationsTensorflowVersionsList'
+  ProjectsLocationsTensorflowVersionsList'
     { _pltvlParent = pPltvlParent_
     , _pltvlXgafv = Nothing
     , _pltvlUploadProtocol = Nothing
@@ -122,6 +125,7 @@ projectsLocationsTensorflowVersionsList pPltvlParent_ =
     , _pltvlPageSize = Nothing
     , _pltvlCallback = Nothing
     }
+
 
 -- | The parent resource name.
 pltvlParent :: Lens' ProjectsLocationsTensorflowVersionsList Text
@@ -181,7 +185,8 @@ pltvlCallback
       (\ s a -> s{_pltvlCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsTensorflowVersionsList where
+           ProjectsLocationsTensorflowVersionsList
+         where
         type Rs ProjectsLocationsTensorflowVersionsList =
              ListTensorFlowVersionsResponse
         type Scopes ProjectsLocationsTensorflowVersionsList =

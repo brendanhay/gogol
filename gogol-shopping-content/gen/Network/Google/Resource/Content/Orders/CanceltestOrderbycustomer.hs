@@ -59,11 +59,14 @@ type OrdersCanceltestOrderbycustomerResource =
 -- | Sandbox only. Cancels a test order for customer-initiated cancellation.
 --
 -- /See:/ 'ordersCanceltestOrderbycustomer' smart constructor.
-data OrdersCanceltestOrderbycustomer = OrdersCanceltestOrderbycustomer'
+data OrdersCanceltestOrderbycustomer =
+  OrdersCanceltestOrderbycustomer'
     { _ocoMerchantId :: !(Textual Word64)
     , _ocoPayload    :: !OrdersCancelTestOrderByCustomerRequest
     , _ocoOrderId    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'OrdersCanceltestOrderbycustomer' with the minimum fields required to make a request.
 --
@@ -80,11 +83,12 @@ ordersCanceltestOrderbycustomer
     -> Text -- ^ 'ocoOrderId'
     -> OrdersCanceltestOrderbycustomer
 ordersCanceltestOrderbycustomer pOcoMerchantId_ pOcoPayload_ pOcoOrderId_ =
-    OrdersCanceltestOrderbycustomer'
+  OrdersCanceltestOrderbycustomer'
     { _ocoMerchantId = _Coerce # pOcoMerchantId_
     , _ocoPayload = pOcoPayload_
     , _ocoOrderId = pOcoOrderId_
     }
+
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -105,7 +109,8 @@ ocoOrderId
   = lens _ocoOrderId (\ s a -> s{_ocoOrderId = a})
 
 instance GoogleRequest
-         OrdersCanceltestOrderbycustomer where
+           OrdersCanceltestOrderbycustomer
+         where
         type Rs OrdersCanceltestOrderbycustomer =
              OrdersCancelTestOrderByCustomerResponse
         type Scopes OrdersCanceltestOrderbycustomer =

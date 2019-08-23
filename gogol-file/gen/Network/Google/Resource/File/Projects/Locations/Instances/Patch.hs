@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @file.projects.locations.instances.patch@ method which the
 -- 'ProjectsLocationsInstancesPatch' request conforms to.
 type ProjectsLocationsInstancesPatchResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,7 +63,8 @@ type ProjectsLocationsInstancesPatchResource =
 -- | Updates the settings of a specific instance.
 --
 -- /See:/ 'projectsLocationsInstancesPatch' smart constructor.
-data ProjectsLocationsInstancesPatch = ProjectsLocationsInstancesPatch'
+data ProjectsLocationsInstancesPatch =
+  ProjectsLocationsInstancesPatch'
     { _plipXgafv          :: !(Maybe Xgafv)
     , _plipUploadProtocol :: !(Maybe Text)
     , _plipUpdateMask     :: !(Maybe GFieldMask)
@@ -72,7 +73,9 @@ data ProjectsLocationsInstancesPatch = ProjectsLocationsInstancesPatch'
     , _plipPayload        :: !Instance
     , _plipName           :: !Text
     , _plipCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ProjectsLocationsInstancesPatch' with the minimum fields required to make a request.
 --
@@ -98,7 +101,7 @@ projectsLocationsInstancesPatch
     -> Text -- ^ 'plipName'
     -> ProjectsLocationsInstancesPatch
 projectsLocationsInstancesPatch pPlipPayload_ pPlipName_ =
-    ProjectsLocationsInstancesPatch'
+  ProjectsLocationsInstancesPatch'
     { _plipXgafv = Nothing
     , _plipUploadProtocol = Nothing
     , _plipUpdateMask = Nothing
@@ -108,6 +111,7 @@ projectsLocationsInstancesPatch pPlipPayload_ pPlipName_ =
     , _plipName = pPlipName_
     , _plipCallback = Nothing
     }
+
 
 -- | V1 error format.
 plipXgafv :: Lens' ProjectsLocationsInstancesPatch (Maybe Xgafv)
@@ -156,7 +160,8 @@ plipCallback
   = lens _plipCallback (\ s a -> s{_plipCallback = a})
 
 instance GoogleRequest
-         ProjectsLocationsInstancesPatch where
+           ProjectsLocationsInstancesPatch
+         where
         type Rs ProjectsLocationsInstancesPatch = Operation
         type Scopes ProjectsLocationsInstancesPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]

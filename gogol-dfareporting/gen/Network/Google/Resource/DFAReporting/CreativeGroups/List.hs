@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsList' request conforms to.
 type CreativeGroupsListResource =
      "dfareporting" :>
-       "v3.2" :>
+       "v3.3" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -71,7 +71,8 @@ type CreativeGroupsListResource =
 -- supports paging.
 --
 -- /See:/ 'creativeGroupsList' smart constructor.
-data CreativeGroupsList = CreativeGroupsList'
+data CreativeGroupsList =
+  CreativeGroupsList'
     { _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe [Textual Int64])
     , _cglProFileId     :: !(Textual Int64)
@@ -81,7 +82,9 @@ data CreativeGroupsList = CreativeGroupsList'
     , _cglSortField     :: !CreativeGroupsListSortField
     , _cglAdvertiserIds :: !(Maybe [Textual Int64])
     , _cglMaxResults    :: !(Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CreativeGroupsList' with the minimum fields required to make a request.
 --
@@ -108,7 +111,7 @@ creativeGroupsList
     :: Int64 -- ^ 'cglProFileId'
     -> CreativeGroupsList
 creativeGroupsList pCglProFileId_ =
-    CreativeGroupsList'
+  CreativeGroupsList'
     { _cglSearchString = Nothing
     , _cglIds = Nothing
     , _cglProFileId = _Coerce # pCglProFileId_
@@ -119,6 +122,7 @@ creativeGroupsList pCglProFileId_ =
     , _cglAdvertiserIds = Nothing
     , _cglMaxResults = 1000
     }
+
 
 -- | Allows searching for creative groups by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativegroup*2015\" will return creative groups

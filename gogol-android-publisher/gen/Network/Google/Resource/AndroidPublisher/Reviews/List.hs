@@ -61,13 +61,16 @@ type ReviewsListResource =
 -- | Returns a list of reviews. Only reviews from last week will be returned.
 --
 -- /See:/ 'reviewsList' smart constructor.
-data ReviewsList = ReviewsList'
+data ReviewsList =
+  ReviewsList'
     { _rlPackageName         :: !Text
     , _rlToken               :: !(Maybe Text)
     , _rlTranslationLanguage :: !(Maybe Text)
     , _rlStartIndex          :: !(Maybe (Textual Word32))
     , _rlMaxResults          :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ReviewsList' with the minimum fields required to make a request.
 --
@@ -86,13 +89,14 @@ reviewsList
     :: Text -- ^ 'rlPackageName'
     -> ReviewsList
 reviewsList pRlPackageName_ =
-    ReviewsList'
+  ReviewsList'
     { _rlPackageName = pRlPackageName_
     , _rlToken = Nothing
     , _rlTranslationLanguage = Nothing
     , _rlStartIndex = Nothing
     , _rlMaxResults = Nothing
     }
+
 
 -- | Unique identifier for the Android app for which we want reviews; for
 -- example, \"com.spiffygame\".

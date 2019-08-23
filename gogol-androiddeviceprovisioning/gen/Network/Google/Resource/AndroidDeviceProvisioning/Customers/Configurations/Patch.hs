@@ -64,7 +64,8 @@ type CustomersConfigurationsPatchResource =
 -- | Updates a configuration\'s field values.
 --
 -- /See:/ 'customersConfigurationsPatch' smart constructor.
-data CustomersConfigurationsPatch = CustomersConfigurationsPatch'
+data CustomersConfigurationsPatch =
+  CustomersConfigurationsPatch'
     { _ccpXgafv          :: !(Maybe Xgafv)
     , _ccpUploadProtocol :: !(Maybe Text)
     , _ccpUpdateMask     :: !(Maybe GFieldMask)
@@ -73,7 +74,9 @@ data CustomersConfigurationsPatch = CustomersConfigurationsPatch'
     , _ccpPayload        :: !Configuration
     , _ccpName           :: !Text
     , _ccpCallback       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'CustomersConfigurationsPatch' with the minimum fields required to make a request.
 --
@@ -99,7 +102,7 @@ customersConfigurationsPatch
     -> Text -- ^ 'ccpName'
     -> CustomersConfigurationsPatch
 customersConfigurationsPatch pCcpPayload_ pCcpName_ =
-    CustomersConfigurationsPatch'
+  CustomersConfigurationsPatch'
     { _ccpXgafv = Nothing
     , _ccpUploadProtocol = Nothing
     , _ccpUpdateMask = Nothing
@@ -109,6 +112,7 @@ customersConfigurationsPatch pCcpPayload_ pCcpName_ =
     , _ccpName = pCcpName_
     , _ccpCallback = Nothing
     }
+
 
 -- | V1 error format.
 ccpXgafv :: Lens' CustomersConfigurationsPatch (Maybe Xgafv)

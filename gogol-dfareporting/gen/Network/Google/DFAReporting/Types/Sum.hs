@@ -730,35 +730,6 @@ instance FromJSON PlacementVpaidAdapterChoice where
 instance ToJSON PlacementVpaidAdapterChoice where
     toJSON = toJSONText
 
--- | Visibility of this directory site contact assignment. When set to PUBLIC
--- this contact assignment is visible to all account and agency users; when
--- set to PRIVATE it is visible only to the site.
-data DirectorySiteContactAssignmentVisibility
-    = Private
-      -- ^ @PRIVATE@
-    | Public
-      -- ^ @PUBLIC@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable DirectorySiteContactAssignmentVisibility
-
-instance FromHttpApiData DirectorySiteContactAssignmentVisibility where
-    parseQueryParam = \case
-        "PRIVATE" -> Right Private
-        "PUBLIC" -> Right Public
-        x -> Left ("Unable to parse DirectorySiteContactAssignmentVisibility from: " <> x)
-
-instance ToHttpApiData DirectorySiteContactAssignmentVisibility where
-    toQueryParam = \case
-        Private -> "PRIVATE"
-        Public -> "PUBLIC"
-
-instance FromJSON DirectorySiteContactAssignmentVisibility where
-    parseJSON = parseJSONText "DirectorySiteContactAssignmentVisibility"
-
-instance ToJSON DirectorySiteContactAssignmentVisibility where
-    toJSON = toJSONText
-
 -- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
 -- rendering on desktop, on mobile devices or in mobile apps for regular or
 -- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
@@ -3975,37 +3946,6 @@ instance FromJSON PopupWindowPropertiesPositionType where
 instance ToJSON PopupWindowPropertiesPositionType where
     toJSON = toJSONText
 
--- | Directory site contact role.
-data DirectorySiteContactRole
-    = Admin
-      -- ^ @ADMIN@
-    | Edit
-      -- ^ @EDIT@
-    | View
-      -- ^ @VIEW@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable DirectorySiteContactRole
-
-instance FromHttpApiData DirectorySiteContactRole where
-    parseQueryParam = \case
-        "ADMIN" -> Right Admin
-        "EDIT" -> Right Edit
-        "VIEW" -> Right View
-        x -> Left ("Unable to parse DirectorySiteContactRole from: " <> x)
-
-instance ToHttpApiData DirectorySiteContactRole where
-    toQueryParam = \case
-        Admin -> "ADMIN"
-        Edit -> "EDIT"
-        View -> "VIEW"
-
-instance FromJSON DirectorySiteContactRole where
-    parseJSON = parseJSONText "DirectorySiteContactRole"
-
-instance ToJSON DirectorySiteContactRole where
-    toJSON = toJSONText
-
 -- | Option specifying how keywords are embedded in ad tags. This setting can
 -- be used to specify whether keyword placeholders are inserted in
 -- placement tags for this site. Publishers can then add keywords to those
@@ -5726,33 +5666,6 @@ instance FromJSON FloodlightActivityFloodlightActivityGroupType where
 instance ToJSON FloodlightActivityFloodlightActivityGroupType where
     toJSON = toJSONText
 
--- | Order of sorted results.
-data DirectorySiteContactsListSortOrder
-    = DSCLSOAscending
-      -- ^ @ASCENDING@
-    | DSCLSODescending
-      -- ^ @DESCENDING@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable DirectorySiteContactsListSortOrder
-
-instance FromHttpApiData DirectorySiteContactsListSortOrder where
-    parseQueryParam = \case
-        "ASCENDING" -> Right DSCLSOAscending
-        "DESCENDING" -> Right DSCLSODescending
-        x -> Left ("Unable to parse DirectorySiteContactsListSortOrder from: " <> x)
-
-instance ToHttpApiData DirectorySiteContactsListSortOrder where
-    toQueryParam = \case
-        DSCLSOAscending -> "ASCENDING"
-        DSCLSODescending -> "DESCENDING"
-
-instance FromJSON DirectorySiteContactsListSortOrder where
-    parseJSON = parseJSONText "DirectorySiteContactsListSortOrder"
-
-instance ToJSON DirectorySiteContactsListSortOrder where
-    toJSON = toJSONText
-
 -- | Group type of this inventory item if it represents a placement group. Is
 -- null otherwise. There are two type of placement groups:
 -- PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE is a simple group of inventory
@@ -6263,41 +6176,6 @@ instance FromJSON FloodlightActivityGroupType where
     parseJSON = parseJSONText "FloodlightActivityGroupType"
 
 instance ToJSON FloodlightActivityGroupType where
-    toJSON = toJSONText
-
--- | Directory site contact type.
-data DirectorySiteContactType
-    = DSCTBilling
-      -- ^ @BILLING@
-    | DSCTOther
-      -- ^ @OTHER@
-    | DSCTSales
-      -- ^ @SALES@
-    | DSCTTechnical
-      -- ^ @TECHNICAL@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable DirectorySiteContactType
-
-instance FromHttpApiData DirectorySiteContactType where
-    parseQueryParam = \case
-        "BILLING" -> Right DSCTBilling
-        "OTHER" -> Right DSCTOther
-        "SALES" -> Right DSCTSales
-        "TECHNICAL" -> Right DSCTTechnical
-        x -> Left ("Unable to parse DirectorySiteContactType from: " <> x)
-
-instance ToHttpApiData DirectorySiteContactType where
-    toQueryParam = \case
-        DSCTBilling -> "BILLING"
-        DSCTOther -> "OTHER"
-        DSCTSales -> "SALES"
-        DSCTTechnical -> "TECHNICAL"
-
-instance FromJSON DirectorySiteContactType where
-    parseJSON = parseJSONText "DirectorySiteContactType"
-
-instance ToJSON DirectorySiteContactType where
     toJSON = toJSONText
 
 -- | Tag formats to generate for these placements. Note:
@@ -8298,33 +8176,6 @@ instance FromJSON TargetWindowTargetWindowOption where
 instance ToJSON TargetWindowTargetWindowOption where
     toJSON = toJSONText
 
--- | Field by which to sort the list.
-data DirectorySiteContactsListSortField
-    = DSCLSFID
-      -- ^ @ID@
-    | DSCLSFName
-      -- ^ @NAME@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable DirectorySiteContactsListSortField
-
-instance FromHttpApiData DirectorySiteContactsListSortField where
-    parseQueryParam = \case
-        "ID" -> Right DSCLSFID
-        "NAME" -> Right DSCLSFName
-        x -> Left ("Unable to parse DirectorySiteContactsListSortField from: " <> x)
-
-instance ToHttpApiData DirectorySiteContactsListSortField where
-    toQueryParam = \case
-        DSCLSFID -> "ID"
-        DSCLSFName -> "NAME"
-
-instance FromJSON DirectorySiteContactsListSortField where
-    parseJSON = parseJSONText "DirectorySiteContactsListSortField"
-
-instance ToJSON DirectorySiteContactsListSortField where
-    toJSON = toJSONText
-
 -- | Select only placements with these pricing types.
 data PlacementsListPricingTypes
     = PLPTPricingTypeCpa
@@ -9056,6 +8907,38 @@ instance FromJSON ChangeLogsListObjectType where
     parseJSON = parseJSONText "ChangeLogsListObjectType"
 
 instance ToJSON ChangeLogsListObjectType where
+    toJSON = toJSONText
+
+-- | Orientation of a site template used for video. This will act as default
+-- for new placements created under this site.
+data SiteVideoSettingsOrientation
+    = SVSOAny
+      -- ^ @ANY@
+    | SVSOLandscape
+      -- ^ @LANDSCAPE@
+    | SVSOPortrait
+      -- ^ @PORTRAIT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SiteVideoSettingsOrientation
+
+instance FromHttpApiData SiteVideoSettingsOrientation where
+    parseQueryParam = \case
+        "ANY" -> Right SVSOAny
+        "LANDSCAPE" -> Right SVSOLandscape
+        "PORTRAIT" -> Right SVSOPortrait
+        x -> Left ("Unable to parse SiteVideoSettingsOrientation from: " <> x)
+
+instance ToHttpApiData SiteVideoSettingsOrientation where
+    toQueryParam = \case
+        SVSOAny -> "ANY"
+        SVSOLandscape -> "LANDSCAPE"
+        SVSOPortrait -> "PORTRAIT"
+
+instance FromJSON SiteVideoSettingsOrientation where
+    parseJSON = parseJSONText "SiteVideoSettingsOrientation"
+
+instance ToJSON SiteVideoSettingsOrientation where
     toJSON = toJSONText
 
 -- | Cap cost type of this inventory item.

@@ -23,9 +23,12 @@ import           Network.Google.Prelude
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoResponseDivisions' smart constructor.
-newtype RepresentativeInfoResponseDivisions = RepresentativeInfoResponseDivisions'
+newtype RepresentativeInfoResponseDivisions =
+  RepresentativeInfoResponseDivisions'
     { _rirdAddtional :: HashMap Text GeographicDivision
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
 --
@@ -36,9 +39,9 @@ representativeInfoResponseDivisions
     :: HashMap Text GeographicDivision -- ^ 'rirdAddtional'
     -> RepresentativeInfoResponseDivisions
 representativeInfoResponseDivisions pRirdAddtional_ =
-    RepresentativeInfoResponseDivisions'
-    { _rirdAddtional = _Coerce # pRirdAddtional_
-    }
+  RepresentativeInfoResponseDivisions'
+    {_rirdAddtional = _Coerce # pRirdAddtional_}
+
 
 -- | The unique Open Civic Data identifier for this division.
 rirdAddtional :: Lens' RepresentativeInfoResponseDivisions (HashMap Text GeographicDivision)
@@ -62,7 +65,8 @@ instance ToJSON RepresentativeInfoResponseDivisions
 -- | The result of a voter info lookup query.
 --
 -- /See:/ 'voterInfoResponse' smart constructor.
-data VoterInfoResponse = VoterInfoResponse'
+data VoterInfoResponse =
+  VoterInfoResponse'
     { _virOtherElections   :: !(Maybe [Election])
     , _virContests         :: !(Maybe [Contest])
     , _virState            :: !(Maybe [AdministrationRegion])
@@ -75,7 +79,9 @@ data VoterInfoResponse = VoterInfoResponse'
     , _virEarlyVoteSites   :: !(Maybe [PollingLocation])
     , _virPollingLocations :: !(Maybe [PollingLocation])
     , _virPrecinctId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoterInfoResponse' with the minimum fields required to make a request.
 --
@@ -107,7 +113,7 @@ data VoterInfoResponse = VoterInfoResponse'
 voterInfoResponse
     :: VoterInfoResponse
 voterInfoResponse =
-    VoterInfoResponse'
+  VoterInfoResponse'
     { _virOtherElections = Nothing
     , _virContests = Nothing
     , _virState = Nothing
@@ -121,6 +127,7 @@ voterInfoResponse =
     , _virPollingLocations = Nothing
     , _virPrecinctId = Nothing
     }
+
 
 -- | When there are multiple elections for a voter address, the
 -- otherElections field is populated in the API response and there are two
@@ -257,7 +264,8 @@ instance ToJSON VoterInfoResponse where
 -- ballot.
 --
 -- /See:/ 'pollingLocation' smart constructor.
-data PollingLocation = PollingLocation'
+data PollingLocation =
+  PollingLocation'
     { _plVoterServices :: !(Maybe Text)
     , _plLatitude      :: !(Maybe (Textual Double))
     , _plEndDate       :: !(Maybe Text)
@@ -269,7 +277,9 @@ data PollingLocation = PollingLocation'
     , _plId            :: !(Maybe Text)
     , _plNotes         :: !(Maybe Text)
     , _plLongitude     :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PollingLocation' with the minimum fields required to make a request.
 --
@@ -299,7 +309,7 @@ data PollingLocation = PollingLocation'
 pollingLocation
     :: PollingLocation
 pollingLocation =
-    PollingLocation'
+  PollingLocation'
     { _plVoterServices = Nothing
     , _plLatitude = Nothing
     , _plEndDate = Nothing
@@ -312,6 +322,7 @@ pollingLocation =
     , _plNotes = Nothing
     , _plLongitude = Nothing
     }
+
 
 -- | The services provided by this early vote site or drop off location. This
 -- field is not populated for polling locations.
@@ -418,11 +429,14 @@ instance ToJSON PollingLocation where
 -- | Describes a political geography.
 --
 -- /See:/ 'geographicDivision' smart constructor.
-data GeographicDivision = GeographicDivision'
+data GeographicDivision =
+  GeographicDivision'
     { _gdName          :: !(Maybe Text)
     , _gdOfficeIndices :: !(Maybe [Textual Word32])
     , _gdAlsoKnownAs   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'GeographicDivision' with the minimum fields required to make a request.
 --
@@ -436,11 +450,9 @@ data GeographicDivision = GeographicDivision'
 geographicDivision
     :: GeographicDivision
 geographicDivision =
-    GeographicDivision'
-    { _gdName = Nothing
-    , _gdOfficeIndices = Nothing
-    , _gdAlsoKnownAs = Nothing
-    }
+  GeographicDivision'
+    {_gdName = Nothing, _gdOfficeIndices = Nothing, _gdAlsoKnownAs = Nothing}
+
 
 -- | The name of the division.
 gdName :: Lens' GeographicDivision (Maybe Text)
@@ -490,7 +502,8 @@ instance ToJSON GeographicDivision where
 
 --
 -- /See:/ 'streetSegment' smart constructor.
-data StreetSegment = StreetSegment'
+data StreetSegment =
+  StreetSegment'
     { _ssOriginalId                    :: !(Maybe Text)
     , _ssPollinglocationByIds          :: !(Maybe [Text])
     , _ssStartHouseNumber              :: !(Maybe (Textual Int64))
@@ -536,7 +549,9 @@ data StreetSegment = StreetSegment'
     , _ssPrecinctName                  :: !(Maybe Text)
     , _ssCountyFips                    :: !(Maybe Text)
     , _ssPrecinctOcdId                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StreetSegment' with the minimum fields required to make a request.
 --
@@ -634,7 +649,7 @@ data StreetSegment = StreetSegment'
 streetSegment
     :: StreetSegment
 streetSegment =
-    StreetSegment'
+  StreetSegment'
     { _ssOriginalId = Nothing
     , _ssPollinglocationByIds = Nothing
     , _ssStartHouseNumber = Nothing
@@ -681,6 +696,7 @@ streetSegment =
     , _ssCountyFips = Nothing
     , _ssPrecinctOcdId = Nothing
     }
+
 
 ssOriginalId :: Lens' StreetSegment (Maybe Text)
 ssOriginalId
@@ -1023,7 +1039,8 @@ instance ToJSON StreetSegment where
 -- | Information about a candidate running for elected office.
 --
 -- /See:/ 'candidate' smart constructor.
-data Candidate = Candidate'
+data Candidate =
+  Candidate'
     { _cEmail         :: !(Maybe Text)
     , _cPhone         :: !(Maybe Text)
     , _cPhotoURL      :: !(Maybe Text)
@@ -1032,7 +1049,9 @@ data Candidate = Candidate'
     , _cOrderOnBallot :: !(Maybe (Textual Int64))
     , _cName          :: !(Maybe Text)
     , _cParty         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Candidate' with the minimum fields required to make a request.
 --
@@ -1056,7 +1075,7 @@ data Candidate = Candidate'
 candidate
     :: Candidate
 candidate =
-    Candidate'
+  Candidate'
     { _cEmail = Nothing
     , _cPhone = Nothing
     , _cPhotoURL = Nothing
@@ -1066,6 +1085,7 @@ candidate =
     , _cName = Nothing
     , _cParty = Nothing
     }
+
 
 -- | The email address for the candidate\'s campaign.
 cEmail :: Lens' Candidate (Maybe Text)
@@ -1138,14 +1158,17 @@ instance ToJSON Candidate where
 -- | Information about an Office held by one or more Officials.
 --
 -- /See:/ 'office' smart constructor.
-data Office = Office'
+data Office =
+  Office'
     { _oDivisionId      :: !(Maybe Text)
     , _oRoles           :: !(Maybe [Text])
     , _oOfficialIndices :: !(Maybe [Textual Word32])
     , _oSources         :: !(Maybe [Source])
     , _oName            :: !(Maybe Text)
     , _oLevels          :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Office' with the minimum fields required to make a request.
 --
@@ -1165,7 +1188,7 @@ data Office = Office'
 office
     :: Office
 office =
-    Office'
+  Office'
     { _oDivisionId = Nothing
     , _oRoles = Nothing
     , _oOfficialIndices = Nothing
@@ -1173,6 +1196,7 @@ office =
     , _oName = Nothing
     , _oLevels = Nothing
     }
+
 
 -- | The OCD ID of the division with which this office is associated.
 oDivisionId :: Lens' Office (Maybe Text)
@@ -1242,9 +1266,12 @@ instance ToJSON Office where
 
 --
 -- /See:/ 'streetSegmentList' smart constructor.
-newtype StreetSegmentList = StreetSegmentList'
+newtype StreetSegmentList =
+  StreetSegmentList'
     { _sslSegments :: Maybe [StreetSegment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'StreetSegmentList' with the minimum fields required to make a request.
 --
@@ -1253,10 +1280,8 @@ newtype StreetSegmentList = StreetSegmentList'
 -- * 'sslSegments'
 streetSegmentList
     :: StreetSegmentList
-streetSegmentList =
-    StreetSegmentList'
-    { _sslSegments = Nothing
-    }
+streetSegmentList = StreetSegmentList' {_sslSegments = Nothing}
+
 
 sslSegments :: Lens' StreetSegmentList [StreetSegment]
 sslSegments
@@ -1277,7 +1302,8 @@ instance ToJSON StreetSegmentList where
 
 --
 -- /See:/ 'livegraphBacktraceRecordInfo' smart constructor.
-data LivegraphBacktraceRecordInfo = LivegraphBacktraceRecordInfo'
+data LivegraphBacktraceRecordInfo =
+  LivegraphBacktraceRecordInfo'
     { _lbriDataSourcePublishMsec :: !(Maybe (Textual Int64))
     , _lbriTopicBuildStartMsec   :: !(Maybe (Textual Int64))
     , _lbriIsRecon               :: !(Maybe Bool)
@@ -1294,7 +1320,9 @@ data LivegraphBacktraceRecordInfo = LivegraphBacktraceRecordInfo'
     , _lbriIsWlmThrottled        :: !(Maybe Bool)
     , _lbriExpId                 :: !(Maybe Text)
     , _lbriSubscriberReceiveMsec :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LivegraphBacktraceRecordInfo' with the minimum fields required to make a request.
 --
@@ -1334,7 +1362,7 @@ data LivegraphBacktraceRecordInfo = LivegraphBacktraceRecordInfo'
 livegraphBacktraceRecordInfo
     :: LivegraphBacktraceRecordInfo
 livegraphBacktraceRecordInfo =
-    LivegraphBacktraceRecordInfo'
+  LivegraphBacktraceRecordInfo'
     { _lbriDataSourcePublishMsec = Nothing
     , _lbriTopicBuildStartMsec = Nothing
     , _lbriIsRecon = Nothing
@@ -1352,6 +1380,7 @@ livegraphBacktraceRecordInfo =
     , _lbriExpId = Nothing
     , _lbriSubscriberReceiveMsec = Nothing
     }
+
 
 lbriDataSourcePublishMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
 lbriDataSourcePublishMsec
@@ -1483,9 +1512,12 @@ instance ToJSON LivegraphBacktraceRecordInfo where
 
 --
 -- /See:/ 'electionsQueryRequest' smart constructor.
-newtype ElectionsQueryRequest = ElectionsQueryRequest'
+newtype ElectionsQueryRequest =
+  ElectionsQueryRequest'
     { _eqrContextParams :: Maybe ContextParams
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ElectionsQueryRequest' with the minimum fields required to make a request.
 --
@@ -1494,10 +1526,8 @@ newtype ElectionsQueryRequest = ElectionsQueryRequest'
 -- * 'eqrContextParams'
 electionsQueryRequest
     :: ElectionsQueryRequest
-electionsQueryRequest =
-    ElectionsQueryRequest'
-    { _eqrContextParams = Nothing
-    }
+electionsQueryRequest = ElectionsQueryRequest' {_eqrContextParams = Nothing}
+
 
 eqrContextParams :: Lens' ElectionsQueryRequest (Maybe ContextParams)
 eqrContextParams
@@ -1519,10 +1549,13 @@ instance ToJSON ElectionsQueryRequest where
 -- | A social media or web channel for a candidate.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel'
+data Channel =
+  Channel'
     { _cId   :: !(Maybe Text)
     , _cType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -1533,11 +1566,8 @@ data Channel = Channel'
 -- * 'cType'
 channel
     :: Channel
-channel =
-    Channel'
-    { _cId = Nothing
-    , _cType = Nothing
-    }
+channel = Channel' {_cId = Nothing, _cType = Nothing}
+
 
 -- | The unique public identifier for the candidate\'s channel.
 cId :: Lens' Channel (Maybe Text)
@@ -1563,12 +1593,15 @@ instance ToJSON Channel where
 -- | Information about the election that was queried.
 --
 -- /See:/ 'election' smart constructor.
-data Election = Election'
+data Election =
+  Election'
     { _eOcdDivisionId :: !(Maybe Text)
     , _eElectionDay   :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
     , _eId            :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Election' with the minimum fields required to make a request.
 --
@@ -1584,12 +1617,13 @@ data Election = Election'
 election
     :: Election
 election =
-    Election'
+  Election'
     { _eOcdDivisionId = Nothing
     , _eElectionDay = Nothing
     , _eName = Nothing
     , _eId = Nothing
     }
+
 
 -- | The political division of the election. Represented as an OCD Division
 -- ID. Voters within these political jurisdictions are covered by this
@@ -1635,13 +1669,16 @@ instance ToJSON Election where
 -- | The result of a representative info lookup query.
 --
 -- /See:/ 'representativeInfoResponse' smart constructor.
-data RepresentativeInfoResponse = RepresentativeInfoResponse'
+data RepresentativeInfoResponse =
+  RepresentativeInfoResponse'
     { _rirKind            :: !Text
     , _rirNormalizedInput :: !(Maybe SimpleAddressType)
     , _rirOfficials       :: !(Maybe [Official])
     , _rirDivisions       :: !(Maybe RepresentativeInfoResponseDivisions)
     , _rirOffices         :: !(Maybe [Office])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepresentativeInfoResponse' with the minimum fields required to make a request.
 --
@@ -1659,13 +1696,14 @@ data RepresentativeInfoResponse = RepresentativeInfoResponse'
 representativeInfoResponse
     :: RepresentativeInfoResponse
 representativeInfoResponse =
-    RepresentativeInfoResponse'
+  RepresentativeInfoResponse'
     { _rirKind = "civicinfo#representativeInfoResponse"
     , _rirNormalizedInput = Nothing
     , _rirOfficials = Nothing
     , _rirDivisions = Nothing
     , _rirOffices = Nothing
     }
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"civicinfo#representativeInfoResponse\".
@@ -1723,12 +1761,15 @@ instance ToJSON RepresentativeInfoResponse where
 
 --
 -- /See:/ 'voterInfoSegmentResult' smart constructor.
-data VoterInfoSegmentResult = VoterInfoSegmentResult'
+data VoterInfoSegmentResult =
+  VoterInfoSegmentResult'
     { _visrResponse        :: !(Maybe VoterInfoResponse)
     , _visrGeneratedMillis :: !(Maybe (Textual Int64))
     , _visrPostalAddress   :: !(Maybe PostalAddress)
     , _visrRequest         :: !(Maybe VoterInfoRequest)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoterInfoSegmentResult' with the minimum fields required to make a request.
 --
@@ -1744,12 +1785,13 @@ data VoterInfoSegmentResult = VoterInfoSegmentResult'
 voterInfoSegmentResult
     :: VoterInfoSegmentResult
 voterInfoSegmentResult =
-    VoterInfoSegmentResult'
+  VoterInfoSegmentResult'
     { _visrResponse = Nothing
     , _visrGeneratedMillis = Nothing
     , _visrPostalAddress = Nothing
     , _visrRequest = Nothing
     }
+
 
 visrResponse :: Lens' VoterInfoSegmentResult (Maybe VoterInfoResponse)
 visrResponse
@@ -1792,11 +1834,14 @@ instance ToJSON VoterInfoSegmentResult where
 -- query.
 --
 -- /See:/ 'divisionSearchResult' smart constructor.
-data DivisionSearchResult = DivisionSearchResult'
+data DivisionSearchResult =
+  DivisionSearchResult'
     { _dsrAliases :: !(Maybe [Text])
     , _dsrName    :: !(Maybe Text)
     , _dsrOcdId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DivisionSearchResult' with the minimum fields required to make a request.
 --
@@ -1810,11 +1855,9 @@ data DivisionSearchResult = DivisionSearchResult'
 divisionSearchResult
     :: DivisionSearchResult
 divisionSearchResult =
-    DivisionSearchResult'
-    { _dsrAliases = Nothing
-    , _dsrName = Nothing
-    , _dsrOcdId = Nothing
-    }
+  DivisionSearchResult'
+    {_dsrAliases = Nothing, _dsrName = Nothing, _dsrOcdId = Nothing}
+
 
 -- | Other Open Civic Data identifiers that refer to the same division -- for
 -- example, those that refer to other political divisions whose boundaries
@@ -1855,9 +1898,12 @@ instance ToJSON DivisionSearchResult where
 -- | A search request for political geographies.
 --
 -- /See:/ 'divisionSearchRequest' smart constructor.
-newtype DivisionSearchRequest = DivisionSearchRequest'
+newtype DivisionSearchRequest =
+  DivisionSearchRequest'
     { _dsrContextParams :: Maybe ContextParams
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DivisionSearchRequest' with the minimum fields required to make a request.
 --
@@ -1866,10 +1912,8 @@ newtype DivisionSearchRequest = DivisionSearchRequest'
 -- * 'dsrContextParams'
 divisionSearchRequest
     :: DivisionSearchRequest
-divisionSearchRequest =
-    DivisionSearchRequest'
-    { _dsrContextParams = Nothing
-    }
+divisionSearchRequest = DivisionSearchRequest' {_dsrContextParams = Nothing}
+
 
 dsrContextParams :: Lens' DivisionSearchRequest (Maybe ContextParams)
 dsrContextParams
@@ -1890,9 +1934,12 @@ instance ToJSON DivisionSearchRequest where
 
 --
 -- /See:/ 'fieldMetadataProto' smart constructor.
-newtype FieldMetadataProto = FieldMetadataProto'
+newtype FieldMetadataProto =
+  FieldMetadataProto'
     { _fmpInternal :: Maybe InternalFieldMetadataProto
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'FieldMetadataProto' with the minimum fields required to make a request.
 --
@@ -1901,10 +1948,8 @@ newtype FieldMetadataProto = FieldMetadataProto'
 -- * 'fmpInternal'
 fieldMetadataProto
     :: FieldMetadataProto
-fieldMetadataProto =
-    FieldMetadataProto'
-    { _fmpInternal = Nothing
-    }
+fieldMetadataProto = FieldMetadataProto' {_fmpInternal = Nothing}
+
 
 fmpInternal :: Lens' FieldMetadataProto (Maybe InternalFieldMetadataProto)
 fmpInternal
@@ -1922,9 +1967,12 @@ instance ToJSON FieldMetadataProto where
 
 --
 -- /See:/ 'messageSet' smart constructor.
-newtype MessageSet = MessageSet'
+newtype MessageSet =
+  MessageSet'
     { _msRecordMessageSetExt :: Maybe LivegraphBacktraceRecordInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'MessageSet' with the minimum fields required to make a request.
 --
@@ -1933,10 +1981,8 @@ newtype MessageSet = MessageSet'
 -- * 'msRecordMessageSetExt'
 messageSet
     :: MessageSet
-messageSet =
-    MessageSet'
-    { _msRecordMessageSetExt = Nothing
-    }
+messageSet = MessageSet' {_msRecordMessageSetExt = Nothing}
+
 
 msRecordMessageSetExt :: Lens' MessageSet (Maybe LivegraphBacktraceRecordInfo)
 msRecordMessageSetExt
@@ -1960,7 +2006,8 @@ instance ToJSON MessageSet where
 -- Elections).
 --
 -- /See:/ 'administrativeBody' smart constructor.
-data AdministrativeBody = AdministrativeBody'
+data AdministrativeBody =
+  AdministrativeBody'
     { _abCorrespondenceAddress               :: !(Maybe SimpleAddressType)
     , _abAbsenteeVotingInfoURL               :: !(Maybe Text)
     , _abHoursOfOperation                    :: !(Maybe Text)
@@ -1975,7 +2022,9 @@ data AdministrativeBody = AdministrativeBody'
     , _abAddressLines                        :: !(Maybe [Text])
     , _abVoterServices                       :: !(Maybe [Text])
     , _abElectionRegistrationURL             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdministrativeBody' with the minimum fields required to make a request.
 --
@@ -2011,7 +2060,7 @@ data AdministrativeBody = AdministrativeBody'
 administrativeBody
     :: AdministrativeBody
 administrativeBody =
-    AdministrativeBody'
+  AdministrativeBody'
     { _abCorrespondenceAddress = Nothing
     , _abAbsenteeVotingInfoURL = Nothing
     , _abHoursOfOperation = Nothing
@@ -2027,6 +2076,7 @@ administrativeBody =
     , _abVoterServices = Nothing
     , _abElectionRegistrationURL = Nothing
     }
+
 
 -- | The mailing address of this administrative body.
 abCorrespondenceAddress :: Lens' AdministrativeBody (Maybe SimpleAddressType)
@@ -2170,9 +2220,12 @@ instance ToJSON AdministrativeBody where
 -- address.
 --
 -- /See:/ 'representativeInfoRequest' smart constructor.
-newtype RepresentativeInfoRequest = RepresentativeInfoRequest'
+newtype RepresentativeInfoRequest =
+  RepresentativeInfoRequest'
     { _rirContextParams :: Maybe ContextParams
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepresentativeInfoRequest' with the minimum fields required to make a request.
 --
@@ -2182,9 +2235,8 @@ newtype RepresentativeInfoRequest = RepresentativeInfoRequest'
 representativeInfoRequest
     :: RepresentativeInfoRequest
 representativeInfoRequest =
-    RepresentativeInfoRequest'
-    { _rirContextParams = Nothing
-    }
+  RepresentativeInfoRequest' {_rirContextParams = Nothing}
+
 
 rirContextParams :: Lens' RepresentativeInfoRequest (Maybe ContextParams)
 rirContextParams
@@ -2207,7 +2259,8 @@ instance ToJSON RepresentativeInfoRequest where
 -- | Information about a contest that appears on a voter\'s ballot.
 --
 -- /See:/ 'contest' smart constructor.
-data Contest = Contest'
+data Contest =
+  Contest'
     { _conReferendumPassageThreshold :: !(Maybe Text)
     , _conRoles                      :: !(Maybe [Text])
     , _conReferendumURL              :: !(Maybe Text)
@@ -2233,7 +2286,9 @@ data Contest = Contest'
     , _conCandidates                 :: !(Maybe [Candidate])
     , _conReferendumTitle            :: !(Maybe Text)
     , _conBallotPlacement            :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Contest' with the minimum fields required to make a request.
 --
@@ -2291,7 +2346,7 @@ data Contest = Contest'
 contest
     :: Contest
 contest =
-    Contest'
+  Contest'
     { _conReferendumPassageThreshold = Nothing
     , _conRoles = Nothing
     , _conReferendumURL = Nothing
@@ -2318,6 +2373,7 @@ contest =
     , _conReferendumTitle = Nothing
     , _conBallotPlacement = Nothing
     }
+
 
 -- | The threshold of votes that the referendum needs in order to pass, e.g.
 -- \"two-thirds\". This field is only populated for contests of type
@@ -2570,10 +2626,13 @@ instance ToJSON Contest where
 -- | The result of a division search query.
 --
 -- /See:/ 'divisionSearchResponse' smart constructor.
-data DivisionSearchResponse = DivisionSearchResponse'
+data DivisionSearchResponse =
+  DivisionSearchResponse'
     { _dsrResults :: !(Maybe [DivisionSearchResult])
     , _dsrKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DivisionSearchResponse' with the minimum fields required to make a request.
 --
@@ -2585,10 +2644,9 @@ data DivisionSearchResponse = DivisionSearchResponse'
 divisionSearchResponse
     :: DivisionSearchResponse
 divisionSearchResponse =
-    DivisionSearchResponse'
-    { _dsrResults = Nothing
-    , _dsrKind = "civicinfo#divisionSearchResponse"
-    }
+  DivisionSearchResponse'
+    {_dsrResults = Nothing, _dsrKind = "civicinfo#divisionSearchResponse"}
+
 
 dsrResults :: Lens' DivisionSearchResponse [DivisionSearchResult]
 dsrResults
@@ -2620,9 +2678,12 @@ instance ToJSON DivisionSearchResponse where
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoDataDivisions' smart constructor.
-newtype RepresentativeInfoDataDivisions = RepresentativeInfoDataDivisions'
+newtype RepresentativeInfoDataDivisions =
+  RepresentativeInfoDataDivisions'
     { _riddAddtional :: HashMap Text GeographicDivision
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
 --
@@ -2633,9 +2694,8 @@ representativeInfoDataDivisions
     :: HashMap Text GeographicDivision -- ^ 'riddAddtional'
     -> RepresentativeInfoDataDivisions
 representativeInfoDataDivisions pRiddAddtional_ =
-    RepresentativeInfoDataDivisions'
-    { _riddAddtional = _Coerce # pRiddAddtional_
-    }
+  RepresentativeInfoDataDivisions' {_riddAddtional = _Coerce # pRiddAddtional_}
+
 
 -- | The unique Open Civic Data identifier for this division.
 riddAddtional :: Lens' RepresentativeInfoDataDivisions (HashMap Text GeographicDivision)
@@ -2658,13 +2718,16 @@ instance ToJSON RepresentativeInfoDataDivisions where
 -- | Information about individual election officials.
 --
 -- /See:/ 'electionOfficial' smart constructor.
-data ElectionOfficial = ElectionOfficial'
+data ElectionOfficial =
+  ElectionOfficial'
     { _eoFaxNumber         :: !(Maybe Text)
     , _eoName              :: !(Maybe Text)
     , _eoOfficePhoneNumber :: !(Maybe Text)
     , _eoEmailAddress      :: !(Maybe Text)
     , _eoTitle             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ElectionOfficial' with the minimum fields required to make a request.
 --
@@ -2682,13 +2745,14 @@ data ElectionOfficial = ElectionOfficial'
 electionOfficial
     :: ElectionOfficial
 electionOfficial =
-    ElectionOfficial'
+  ElectionOfficial'
     { _eoFaxNumber = Nothing
     , _eoName = Nothing
     , _eoOfficePhoneNumber = Nothing
     , _eoEmailAddress = Nothing
     , _eoTitle = Nothing
     }
+
 
 -- | The fax number of the election official.
 eoFaxNumber :: Lens' ElectionOfficial (Maybe Text)
@@ -2737,12 +2801,15 @@ instance ToJSON ElectionOfficial where
 
 --
 -- /See:/ 'pointProto' smart constructor.
-data PointProto = PointProto'
+data PointProto =
+  PointProto'
     { _ppLatE7         :: !(Maybe (Textual Word32))
     , _ppLngE7         :: !(Maybe (Textual Word32))
     , _ppMetadata      :: !(Maybe FieldMetadataProto)
     , _ppTemporaryData :: !(Maybe MessageSet)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PointProto' with the minimum fields required to make a request.
 --
@@ -2758,12 +2825,13 @@ data PointProto = PointProto'
 pointProto
     :: PointProto
 pointProto =
-    PointProto'
+  PointProto'
     { _ppLatE7 = Nothing
     , _ppLngE7 = Nothing
     , _ppMetadata = Nothing
     , _ppTemporaryData = Nothing
     }
+
 
 ppLatE7 :: Lens' PointProto (Maybe Word32)
 ppLatE7
@@ -2804,11 +2872,14 @@ instance ToJSON PointProto where
 
 --
 -- /See:/ 'representativeInfoData' smart constructor.
-data RepresentativeInfoData = RepresentativeInfoData'
+data RepresentativeInfoData =
+  RepresentativeInfoData'
     { _ridOfficials :: !(Maybe [Official])
     , _ridDivisions :: !(Maybe RepresentativeInfoDataDivisions)
     , _ridOffices   :: !(Maybe [Office])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'RepresentativeInfoData' with the minimum fields required to make a request.
 --
@@ -2822,11 +2893,9 @@ data RepresentativeInfoData = RepresentativeInfoData'
 representativeInfoData
     :: RepresentativeInfoData
 representativeInfoData =
-    RepresentativeInfoData'
-    { _ridOfficials = Nothing
-    , _ridDivisions = Nothing
-    , _ridOffices = Nothing
-    }
+  RepresentativeInfoData'
+    {_ridOfficials = Nothing, _ridDivisions = Nothing, _ridOffices = Nothing}
+
 
 -- | Officials holding the offices listed above. Will only be present if
 -- includeOffices was true in the request.
@@ -2870,10 +2939,13 @@ instance ToJSON RepresentativeInfoData where
 -- it.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source'
+data Source =
+  Source'
     { _sName     :: !(Maybe Text)
     , _sOfficial :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -2884,11 +2956,8 @@ data Source = Source'
 -- * 'sOfficial'
 source
     :: Source
-source =
-    Source'
-    { _sName = Nothing
-    , _sOfficial = Nothing
-    }
+source = Source' {_sName = Nothing, _sOfficial = Nothing}
+
 
 -- | The name of the data source.
 sName :: Lens' Source (Maybe Text)
@@ -2915,9 +2984,12 @@ instance ToJSON Source where
 -- | A request to look up representative information for a single division.
 --
 -- /See:/ 'divisionRepresentativeInfoRequest' smart constructor.
-newtype DivisionRepresentativeInfoRequest = DivisionRepresentativeInfoRequest'
+newtype DivisionRepresentativeInfoRequest =
+  DivisionRepresentativeInfoRequest'
     { _drirContextParams :: Maybe ContextParams
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'DivisionRepresentativeInfoRequest' with the minimum fields required to make a request.
 --
@@ -2927,9 +2999,8 @@ newtype DivisionRepresentativeInfoRequest = DivisionRepresentativeInfoRequest'
 divisionRepresentativeInfoRequest
     :: DivisionRepresentativeInfoRequest
 divisionRepresentativeInfoRequest =
-    DivisionRepresentativeInfoRequest'
-    { _drirContextParams = Nothing
-    }
+  DivisionRepresentativeInfoRequest' {_drirContextParams = Nothing}
+
 
 drirContextParams :: Lens' DivisionRepresentativeInfoRequest (Maybe ContextParams)
 drirContextParams
@@ -2954,12 +3025,15 @@ instance ToJSON DivisionRepresentativeInfoRequest
 -- | Describes the geographic scope of a contest.
 --
 -- /See:/ 'electoralDistrict' smart constructor.
-data ElectoralDistrict = ElectoralDistrict'
+data ElectoralDistrict =
+  ElectoralDistrict'
     { _edKgForeignKey :: !(Maybe Text)
     , _edName         :: !(Maybe Text)
     , _edScope        :: !(Maybe Text)
     , _edId           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ElectoralDistrict' with the minimum fields required to make a request.
 --
@@ -2975,12 +3049,13 @@ data ElectoralDistrict = ElectoralDistrict'
 electoralDistrict
     :: ElectoralDistrict
 electoralDistrict =
-    ElectoralDistrict'
+  ElectoralDistrict'
     { _edKgForeignKey = Nothing
     , _edName = Nothing
     , _edScope = Nothing
     , _edId = Nothing
     }
+
 
 edKgForeignKey :: Lens' ElectoralDistrict (Maybe Text)
 edKgForeignKey
@@ -3024,10 +3099,13 @@ instance ToJSON ElectoralDistrict where
 -- | A request for information about a voter.
 --
 -- /See:/ 'voterInfoRequest' smart constructor.
-data VoterInfoRequest = VoterInfoRequest'
+data VoterInfoRequest =
+  VoterInfoRequest'
     { _virVoterInfoSegmentResult :: !(Maybe VoterInfoSegmentResult)
     , _virContextParams          :: !(Maybe ContextParams)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'VoterInfoRequest' with the minimum fields required to make a request.
 --
@@ -3039,10 +3117,9 @@ data VoterInfoRequest = VoterInfoRequest'
 voterInfoRequest
     :: VoterInfoRequest
 voterInfoRequest =
-    VoterInfoRequest'
-    { _virVoterInfoSegmentResult = Nothing
-    , _virContextParams = Nothing
-    }
+  VoterInfoRequest'
+    {_virVoterInfoSegmentResult = Nothing, _virContextParams = Nothing}
+
 
 virVoterInfoSegmentResult :: Lens' VoterInfoRequest (Maybe VoterInfoSegmentResult)
 virVoterInfoSegmentResult
@@ -3073,7 +3150,8 @@ instance ToJSON VoterInfoRequest where
 -- | A simple representation of an address.
 --
 -- /See:/ 'simpleAddressType' smart constructor.
-data SimpleAddressType = SimpleAddressType'
+data SimpleAddressType =
+  SimpleAddressType'
     { _satLine2        :: !(Maybe Text)
     , _satState        :: !(Maybe Text)
     , _satLine3        :: !(Maybe Text)
@@ -3081,7 +3159,9 @@ data SimpleAddressType = SimpleAddressType'
     , _satCity         :: !(Maybe Text)
     , _satLine1        :: !(Maybe Text)
     , _satLocationName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'SimpleAddressType' with the minimum fields required to make a request.
 --
@@ -3103,7 +3183,7 @@ data SimpleAddressType = SimpleAddressType'
 simpleAddressType
     :: SimpleAddressType
 simpleAddressType =
-    SimpleAddressType'
+  SimpleAddressType'
     { _satLine2 = Nothing
     , _satState = Nothing
     , _satLine3 = Nothing
@@ -3112,6 +3192,7 @@ simpleAddressType =
     , _satLine1 = Nothing
     , _satLocationName = Nothing
     }
+
 
 -- | The second line the address, if needed.
 satLine2 :: Lens' SimpleAddressType (Maybe Text)
@@ -3167,10 +3248,13 @@ instance ToJSON SimpleAddressType where
 
 --
 -- /See:/ 'internalSourceSummaryProto' smart constructor.
-data InternalSourceSummaryProto = InternalSourceSummaryProto'
+data InternalSourceSummaryProto =
+  InternalSourceSummaryProto'
     { _isspDataSet  :: !(Maybe Text)
     , _isspProvider :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InternalSourceSummaryProto' with the minimum fields required to make a request.
 --
@@ -3182,10 +3266,8 @@ data InternalSourceSummaryProto = InternalSourceSummaryProto'
 internalSourceSummaryProto
     :: InternalSourceSummaryProto
 internalSourceSummaryProto =
-    InternalSourceSummaryProto'
-    { _isspDataSet = Nothing
-    , _isspProvider = Nothing
-    }
+  InternalSourceSummaryProto' {_isspDataSet = Nothing, _isspProvider = Nothing}
+
 
 isspDataSet :: Lens' InternalSourceSummaryProto (Maybe Text)
 isspDataSet
@@ -3211,9 +3293,12 @@ instance ToJSON InternalSourceSummaryProto where
 
 --
 -- /See:/ 'livegraphBacktraceRecordInfoExpInfo' smart constructor.
-newtype LivegraphBacktraceRecordInfoExpInfo = LivegraphBacktraceRecordInfoExpInfo'
+newtype LivegraphBacktraceRecordInfoExpInfo =
+  LivegraphBacktraceRecordInfoExpInfo'
     { _lbrieiDeletedIns :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'LivegraphBacktraceRecordInfoExpInfo' with the minimum fields required to make a request.
 --
@@ -3223,9 +3308,8 @@ newtype LivegraphBacktraceRecordInfoExpInfo = LivegraphBacktraceRecordInfoExpInf
 livegraphBacktraceRecordInfoExpInfo
     :: LivegraphBacktraceRecordInfoExpInfo
 livegraphBacktraceRecordInfoExpInfo =
-    LivegraphBacktraceRecordInfoExpInfo'
-    { _lbrieiDeletedIns = Nothing
-    }
+  LivegraphBacktraceRecordInfoExpInfo' {_lbrieiDeletedIns = Nothing}
+
 
 lbrieiDeletedIns :: Lens' LivegraphBacktraceRecordInfoExpInfo [Text]
 lbrieiDeletedIns
@@ -3250,9 +3334,12 @@ instance ToJSON LivegraphBacktraceRecordInfoExpInfo
 
 --
 -- /See:/ 'contextParams' smart constructor.
-newtype ContextParams = ContextParams'
+newtype ContextParams =
+  ContextParams'
     { _cpClientProFile :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ContextParams' with the minimum fields required to make a request.
 --
@@ -3261,10 +3348,8 @@ newtype ContextParams = ContextParams'
 -- * 'cpClientProFile'
 contextParams
     :: ContextParams
-contextParams =
-    ContextParams'
-    { _cpClientProFile = Nothing
-    }
+contextParams = ContextParams' {_cpClientProFile = Nothing}
+
 
 cpClientProFile :: Lens' ContextParams (Maybe Text)
 cpClientProFile
@@ -3284,7 +3369,8 @@ instance ToJSON ContextParams where
 
 --
 -- /See:/ 'postalAddress' smart constructor.
-data PostalAddress = PostalAddress'
+data PostalAddress =
+  PostalAddress'
     { _paAdministrativeAreaName    :: !(Maybe Text)
     , _paRecipientName             :: !(Maybe Text)
     , _paLanguageCode              :: !(Maybe Text)
@@ -3305,7 +3391,9 @@ data PostalAddress = PostalAddress'
     , _paPostalCodeNumber          :: !(Maybe Text)
     , _paThoroughfareName          :: !(Maybe Text)
     , _paSubPremiseName            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'PostalAddress' with the minimum fields required to make a request.
 --
@@ -3353,7 +3441,7 @@ data PostalAddress = PostalAddress'
 postalAddress
     :: PostalAddress
 postalAddress =
-    PostalAddress'
+  PostalAddress'
     { _paAdministrativeAreaName = Nothing
     , _paRecipientName = Nothing
     , _paLanguageCode = Nothing
@@ -3375,6 +3463,7 @@ postalAddress =
     , _paThoroughfareName = Nothing
     , _paSubPremiseName = Nothing
     }
+
 
 paAdministrativeAreaName :: Lens' PostalAddress (Maybe Text)
 paAdministrativeAreaName
@@ -3534,10 +3623,13 @@ instance ToJSON PostalAddress where
 
 --
 -- /See:/ 'internalFieldMetadataProto' smart constructor.
-data InternalFieldMetadataProto = InternalFieldMetadataProto'
+data InternalFieldMetadataProto =
+  InternalFieldMetadataProto'
     { _ifmpSourceSummary :: !(Maybe InternalSourceSummaryProto)
     , _ifmpIsAuto        :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'InternalFieldMetadataProto' with the minimum fields required to make a request.
 --
@@ -3549,10 +3641,9 @@ data InternalFieldMetadataProto = InternalFieldMetadataProto'
 internalFieldMetadataProto
     :: InternalFieldMetadataProto
 internalFieldMetadataProto =
-    InternalFieldMetadataProto'
-    { _ifmpSourceSummary = Nothing
-    , _ifmpIsAuto = Nothing
-    }
+  InternalFieldMetadataProto'
+    {_ifmpSourceSummary = Nothing, _ifmpIsAuto = Nothing}
+
 
 ifmpSourceSummary :: Lens' InternalFieldMetadataProto (Maybe InternalSourceSummaryProto)
 ifmpSourceSummary
@@ -3580,13 +3671,16 @@ instance ToJSON InternalFieldMetadataProto where
 -- | Describes information about a regional election administrative area.
 --
 -- /See:/ 'administrationRegion' smart constructor.
-data AdministrationRegion = AdministrationRegion'
+data AdministrationRegion =
+  AdministrationRegion'
     { _arLocalJurisdiction          :: !(Maybe AdministrationRegion)
     , _arSources                    :: !(Maybe [Source])
     , _arName                       :: !(Maybe Text)
     , _arElectionAdministrationBody :: !(Maybe AdministrativeBody)
     , _arId                         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'AdministrationRegion' with the minimum fields required to make a request.
 --
@@ -3604,13 +3698,14 @@ data AdministrationRegion = AdministrationRegion'
 administrationRegion
     :: AdministrationRegion
 administrationRegion =
-    AdministrationRegion'
+  AdministrationRegion'
     { _arLocalJurisdiction = Nothing
     , _arSources = Nothing
     , _arName = Nothing
     , _arElectionAdministrationBody = Nothing
     , _arId = Nothing
     }
+
 
 -- | The city or county that provides election information for this voter.
 -- This object can have the same elements as state.
@@ -3667,7 +3762,8 @@ instance ToJSON AdministrationRegion where
 
 --
 -- /See:/ 'provenance' smart constructor.
-data Provenance = Provenance'
+data Provenance =
+  Provenance'
     { _pTsStreetSegmentId     :: !(Maybe Text)
     , _pVIPStreetSegmentId    :: !(Maybe (Textual Int64))
     , _pCollidedSegmentSource :: !(Maybe StreetSegmentList)
@@ -3678,7 +3774,9 @@ data Provenance = Provenance'
     , _pVIP5PrecinctId        :: !(Maybe Text)
     , _pPrecinctSplitId       :: !(Maybe (Textual Int64))
     , _pPrecinctId            :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Provenance' with the minimum fields required to make a request.
 --
@@ -3706,7 +3804,7 @@ data Provenance = Provenance'
 provenance
     :: Provenance
 provenance =
-    Provenance'
+  Provenance'
     { _pTsStreetSegmentId = Nothing
     , _pVIPStreetSegmentId = Nothing
     , _pCollidedSegmentSource = Nothing
@@ -3718,6 +3816,7 @@ provenance =
     , _pPrecinctSplitId = Nothing
     , _pPrecinctId = Nothing
     }
+
 
 pTsStreetSegmentId :: Lens' Provenance (Maybe Text)
 pTsStreetSegmentId
@@ -3806,10 +3905,13 @@ instance ToJSON Provenance where
 -- | The list of elections available for this version of the API.
 --
 -- /See:/ 'electionsQueryResponse' smart constructor.
-data ElectionsQueryResponse = ElectionsQueryResponse'
+data ElectionsQueryResponse =
+  ElectionsQueryResponse'
     { _eqrKind      :: !Text
     , _eqrElections :: !(Maybe [Election])
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'ElectionsQueryResponse' with the minimum fields required to make a request.
 --
@@ -3821,10 +3923,9 @@ data ElectionsQueryResponse = ElectionsQueryResponse'
 electionsQueryResponse
     :: ElectionsQueryResponse
 electionsQueryResponse =
-    ElectionsQueryResponse'
-    { _eqrKind = "civicinfo#electionsQueryResponse"
-    , _eqrElections = Nothing
-    }
+  ElectionsQueryResponse'
+    {_eqrKind = "civicinfo#electionsQueryResponse", _eqrElections = Nothing}
+
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"civicinfo#electionsQueryResponse\".
@@ -3856,7 +3957,8 @@ instance ToJSON ElectionsQueryResponse where
 -- | Information about a person holding an elected office.
 --
 -- /See:/ 'official' smart constructor.
-data Official = Official'
+data Official =
+  Official'
     { _offPhotoURL :: !(Maybe Text)
     , _offURLs     :: !(Maybe [Text])
     , _offChannels :: !(Maybe [Channel])
@@ -3865,7 +3967,9 @@ data Official = Official'
     , _offName     :: !(Maybe Text)
     , _offEmails   :: !(Maybe [Text])
     , _offParty    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
 
 -- | Creates a value of 'Official' with the minimum fields required to make a request.
 --
@@ -3889,7 +3993,7 @@ data Official = Official'
 official
     :: Official
 official =
-    Official'
+  Official'
     { _offPhotoURL = Nothing
     , _offURLs = Nothing
     , _offChannels = Nothing
@@ -3899,6 +4003,7 @@ official =
     , _offEmails = Nothing
     , _offParty = Nothing
     }
+
 
 -- | A URL for a photo of the official.
 offPhotoURL :: Lens' Official (Maybe Text)
