@@ -57,7 +57,7 @@ type ProjectsDatabasesDocumentsRunQueryResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] RunQueryRequest :>
-                       Post '[JSON] RunQueryResponse
+                       Post '[JSON] [RunQueryResponse]
 
 -- | Runs a query.
 --
@@ -156,7 +156,7 @@ instance GoogleRequest
            ProjectsDatabasesDocumentsRunQuery
          where
         type Rs ProjectsDatabasesDocumentsRunQuery =
-             RunQueryResponse
+             [RunQueryResponse]
         type Scopes ProjectsDatabasesDocumentsRunQuery =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore"]
