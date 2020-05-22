@@ -16,7 +16,16 @@
 -- Google services to work with its own data rather than a specific user's data.
 --
 -- /See:/ <https://developers.google.com/identity/protocols/OAuth2ServiceAccount Service Account Documentation>.
-module Network.Google.Auth.ServiceAccount where
+module Network.Google.Auth.ServiceAccount
+    (
+      ServiceAccount(..)
+    , AuthorizedUser(..)
+    , maxTokenLifetime
+    , metadataToken
+    , authorizedUserToken
+    , serviceAccountToken
+    , encodeBearerJWT
+    ) where
 
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
