@@ -17,8 +17,8 @@
 --
 module Network.Google.CloudTasks.Types.Product where
 
-import           Network.Google.CloudTasks.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types.Sum
+import Network.Google.Prelude
 
 -- | Rate limits. This message determines the maximum rate that tasks can be
 -- dispatched by a queue, regardless of whether the dispatch is a first
@@ -29,8 +29,8 @@ import           Network.Google.Prelude
 data RateLimits =
   RateLimits'
     { _rlMaxConcurrentDispatches :: !(Maybe (Textual Int32))
-    , _rlMaxDispatchesPerSecond  :: !(Maybe (Textual Double))
-    , _rlMaxBurstSize            :: !(Maybe (Textual Int32))
+    , _rlMaxDispatchesPerSecond :: !(Maybe (Textual Double))
+    , _rlMaxBurstSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,8 +69,8 @@ rlMaxConcurrentDispatches
 
 -- | The maximum rate at which tasks are dispatched from this queue. If
 -- unspecified when the queue is created, Cloud Tasks will pick the
--- default. * For App Engine queues, the maximum allowed value is 500. This
--- field has the same meaning as [rate in
+-- default. * The maximum allowed value is 500. This field has the same
+-- meaning as [rate in
 -- queue.yaml\/xml](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/config\/queueref#rate).
 rlMaxDispatchesPerSecond :: Lens' RateLimits (Maybe Double)
 rlMaxDispatchesPerSecond
@@ -91,8 +91,8 @@ rlMaxDispatchesPerSecond
 -- The bucket will be continuously refilled with new tokens based on
 -- max_dispatches_per_second. Cloud Tasks will pick the value of
 -- \`max_burst_size\` based on the value of max_dispatches_per_second. For
--- App Engine queues that were created or updated using
--- \`queue.yaml\/xml\`, \`max_burst_size\` is equal to
+-- queues that were created or updated using \`queue.yaml\/xml\`,
+-- \`max_burst_size\` is equal to
 -- [bucket_size](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/config\/queueref#bucket_size).
 -- Since \`max_burst_size\` is output only, if UpdateQueue is called on a
 -- queue created by \`queue.yaml\/xml\`, \`max_burst_size\` will be reset
@@ -123,47 +123,77 @@ instance ToJSON RateLimits where
                     _rlMaxDispatchesPerSecond,
                   ("maxBurstSize" .=) <$> _rlMaxBurstSize])
 
+-- | Contains information needed for generating an [OAuth
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2).
+-- This type of authorization should generally only be used when calling
+-- Google APIs hosted on *.googleapis.com.
+--
+-- /See:/ 'oAuthToken' smart constructor.
+data OAuthToken =
+  OAuthToken'
+    { _oatScope :: !(Maybe Text)
+    , _oatServiceAccountEmail :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OAuthToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oatScope'
+--
+-- * 'oatServiceAccountEmail'
+oAuthToken
+    :: OAuthToken
+oAuthToken =
+  OAuthToken' {_oatScope = Nothing, _oatServiceAccountEmail = Nothing}
+
+
+-- | OAuth scope to be used for generating OAuth access token. If not
+-- specified, \"https:\/\/www.googleapis.com\/auth\/cloud-platform\" will
+-- be used.
+oatScope :: Lens' OAuthToken (Maybe Text)
+oatScope = lens _oatScope (\ s a -> s{_oatScope = a})
+
+-- | [Service account
+-- email](https:\/\/cloud.google.com\/iam\/docs\/service-accounts) to be
+-- used for generating OAuth token. The service account must be within the
+-- same project as the queue. The caller must have
+-- iam.serviceAccounts.actAs permission for the service account.
+oatServiceAccountEmail :: Lens' OAuthToken (Maybe Text)
+oatServiceAccountEmail
+  = lens _oatServiceAccountEmail
+      (\ s a -> s{_oatServiceAccountEmail = a})
+
+instance FromJSON OAuthToken where
+        parseJSON
+          = withObject "OAuthToken"
+              (\ o ->
+                 OAuthToken' <$>
+                   (o .:? "scope") <*> (o .:? "serviceAccountEmail"))
+
+instance ToJSON OAuthToken where
+        toJSON OAuthToken'{..}
+          = object
+              (catMaybes
+                 [("scope" .=) <$> _oatScope,
+                  ("serviceAccountEmail" .=) <$>
+                    _oatServiceAccountEmail])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -219,16 +249,30 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -256,26 +300,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -305,7 +348,7 @@ instance ToJSON Expr where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -354,25 +397,96 @@ instance ToJSON ListLocationsResponse where
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
-data GetIAMPolicyRequest =
+newtype GetIAMPolicyRequest =
   GetIAMPolicyRequest'
+    { _giprOptions :: Maybe GetPolicyOptions
+    }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giprOptions'
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest'
+getIAMPolicyRequest = GetIAMPolicyRequest' {_giprOptions = Nothing}
 
+
+-- | OPTIONAL: A \`GetPolicyOptions\` object for specifying options to
+-- \`GetIamPolicy\`.
+giprOptions :: Lens' GetIAMPolicyRequest (Maybe GetPolicyOptions)
+giprOptions
+  = lens _giprOptions (\ s a -> s{_giprOptions = a})
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest')
+              (\ o -> GetIAMPolicyRequest' <$> (o .:? "options"))
 
 instance ToJSON GetIAMPolicyRequest where
-        toJSON = const emptyObject
+        toJSON GetIAMPolicyRequest'{..}
+          = object
+              (catMaybes [("options" .=) <$> _giprOptions])
+
+-- | Contains information needed for generating an [OpenID Connect
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect).
+-- This type of authorization can be used for many scenarios, including
+-- calling Cloud Run, or endpoints where you intend to validate the token
+-- yourself.
+--
+-- /See:/ 'oidcToken' smart constructor.
+data OidcToken =
+  OidcToken'
+    { _otAudience :: !(Maybe Text)
+    , _otServiceAccountEmail :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OidcToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'otAudience'
+--
+-- * 'otServiceAccountEmail'
+oidcToken
+    :: OidcToken
+oidcToken = OidcToken' {_otAudience = Nothing, _otServiceAccountEmail = Nothing}
+
+
+-- | Audience to be used when generating OIDC token. If not specified, the
+-- URI specified in target will be used.
+otAudience :: Lens' OidcToken (Maybe Text)
+otAudience
+  = lens _otAudience (\ s a -> s{_otAudience = a})
+
+-- | [Service account
+-- email](https:\/\/cloud.google.com\/iam\/docs\/service-accounts) to be
+-- used for generating OIDC token. The service account must be within the
+-- same project as the queue. The caller must have
+-- iam.serviceAccounts.actAs permission for the service account.
+otServiceAccountEmail :: Lens' OidcToken (Maybe Text)
+otServiceAccountEmail
+  = lens _otServiceAccountEmail
+      (\ s a -> s{_otServiceAccountEmail = a})
+
+instance FromJSON OidcToken where
+        parseJSON
+          = withObject "OidcToken"
+              (\ o ->
+                 OidcToken' <$>
+                   (o .:? "audience") <*> (o .:? "serviceAccountEmail"))
+
+instance ToJSON OidcToken where
+        toJSON OidcToken'{..}
+          = object
+              (catMaybes
+                 [("audience" .=) <$> _otAudience,
+                  ("serviceAccountEmail" .=) <$>
+                    _otServiceAccountEmail])
 
 -- | Retry config. These settings determine when a failed task attempt is
 -- retried.
@@ -380,11 +494,11 @@ instance ToJSON GetIAMPolicyRequest where
 -- /See:/ 'retryConfig' smart constructor.
 data RetryConfig =
   RetryConfig'
-    { _rcMaxDoublings     :: !(Maybe (Textual Int32))
+    { _rcMaxDoublings :: !(Maybe (Textual Int32))
     , _rcMaxRetryDuration :: !(Maybe GDuration)
-    , _rcMaxAttempts      :: !(Maybe (Textual Int32))
-    , _rcMaxBackoff       :: !(Maybe GDuration)
-    , _rcMinBackoff       :: !(Maybe GDuration)
+    , _rcMaxAttempts :: !(Maybe (Textual Int32))
+    , _rcMaxBackoff :: !(Maybe GDuration)
+    , _rcMinBackoff :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -416,8 +530,8 @@ retryConfig =
 
 -- | The time between retries will double \`max_doublings\` times. A task\'s
 -- retry interval starts at min_backoff, then doubles \`max_doublings\`
--- times, then increases linearly, and finally retries retries at intervals
--- of max_backoff up to max_attempts times. For example, if min_backoff is
+-- times, then increases linearly, and finally retries at intervals of
+-- max_backoff up to max_attempts times. For example, if min_backoff is
 -- 10s, max_backoff is 300s, and \`max_doublings\` is 3, then the a task
 -- will first be retried in 10s. The retry interval will double three
 -- times, and then increase linearly by 2^3 * 10s. Finally, the task will
@@ -548,16 +662,66 @@ instance ToJSON RunTaskRequest where
               (catMaybes
                  [("responseView" .=) <$> _rtrResponseView])
 
+-- | HTTP request headers. This map contains the header field names and
+-- values. Headers can be set when the task is created. These headers
+-- represent a subset of the headers that will accompany the task\'s HTTP
+-- request. Some HTTP request headers will be ignored or replaced. A
+-- partial list of headers that will be ignored or replaced is: * Host:
+-- This will be computed by Cloud Tasks and derived from HttpRequest.url. *
+-- Content-Length: This will be computed by Cloud Tasks. * User-Agent: This
+-- will be set to \`\"Google-Cloud-Tasks\"\`. * X-Google-*: Google use
+-- only. * X-AppEngine-*: Google use only. \`Content-Type\` won\'t be set
+-- by Cloud Tasks. You can explicitly set \`Content-Type\` to a media type
+-- when the task is created. For example, \`Content-Type\` can be set to
+-- \`\"application\/octet-stream\"\` or \`\"application\/json\"\`. Headers
+-- which can have multiple values (according to RFC2616) can be specified
+-- using comma-separated values. The size of the headers must be less than
+-- 80KB.
+--
+-- /See:/ 'hTTPRequestHeaders' smart constructor.
+newtype HTTPRequestHeaders =
+  HTTPRequestHeaders'
+    { _httprhAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HTTPRequestHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'httprhAddtional'
+hTTPRequestHeaders
+    :: HashMap Text Text -- ^ 'httprhAddtional'
+    -> HTTPRequestHeaders
+hTTPRequestHeaders pHttprhAddtional_ =
+  HTTPRequestHeaders' {_httprhAddtional = _Coerce # pHttprhAddtional_}
+
+
+httprhAddtional :: Lens' HTTPRequestHeaders (HashMap Text Text)
+httprhAddtional
+  = lens _httprhAddtional
+      (\ s a -> s{_httprhAddtional = a})
+      . _Coerce
+
+instance FromJSON HTTPRequestHeaders where
+        parseJSON
+          = withObject "HTTPRequestHeaders"
+              (\ o -> HTTPRequestHeaders' <$> (parseJSONObject o))
+
+instance ToJSON HTTPRequestHeaders where
+        toJSON = toJSON . _httprhAddtional
+
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -665,7 +829,7 @@ instance ToJSON Empty where
 data CreateTaskRequest =
   CreateTaskRequest'
     { _ctrResponseView :: !(Maybe CreateTaskRequestResponseView)
-    , _ctrTask         :: !(Maybe Task)
+    , _ctrTask :: !(Maybe Task)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -740,7 +904,7 @@ instance ToJSON CreateTaskRequest where
 data ListQueuesResponse =
   ListQueuesResponse'
     { _lqrNextPageToken :: !(Maybe Text)
-    , _lqrQueues        :: !(Maybe [Queue])
+    , _lqrQueues :: !(Maybe [Queue])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -824,6 +988,53 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | Encapsulates settings provided to GetIamPolicy.
+--
+-- /See:/ 'getPolicyOptions' smart constructor.
+newtype GetPolicyOptions =
+  GetPolicyOptions'
+    { _gpoRequestedPolicyVersion :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpoRequestedPolicyVersion'
+getPolicyOptions
+    :: GetPolicyOptions
+getPolicyOptions = GetPolicyOptions' {_gpoRequestedPolicyVersion = Nothing}
+
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+gpoRequestedPolicyVersion :: Lens' GetPolicyOptions (Maybe Int32)
+gpoRequestedPolicyVersion
+  = lens _gpoRequestedPolicyVersion
+      (\ s a -> s{_gpoRequestedPolicyVersion = a})
+      . mapping _Coerce
+
+instance FromJSON GetPolicyOptions where
+        parseJSON
+          = withObject "GetPolicyOptions"
+              (\ o ->
+                 GetPolicyOptions' <$>
+                   (o .:? "requestedPolicyVersion"))
+
+instance ToJSON GetPolicyOptions where
+        toJSON GetPolicyOptions'{..}
+          = object
+              (catMaybes
+                 [("requestedPolicyVersion" .=) <$>
+                    _gpoRequestedPolicyVersion])
+
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
@@ -868,12 +1079,13 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'queue' smart constructor.
 data Queue =
   Queue'
-    { _qRateLimits               :: !(Maybe RateLimits)
+    { _qRateLimits :: !(Maybe RateLimits)
     , _qAppEngineRoutingOverride :: !(Maybe AppEngineRouting)
-    , _qState                    :: !(Maybe QueueState)
-    , _qRetryConfig              :: !(Maybe RetryConfig)
-    , _qName                     :: !(Maybe Text)
-    , _qPurgeTime                :: !(Maybe DateTime')
+    , _qState :: !(Maybe QueueState)
+    , _qRetryConfig :: !(Maybe RetryConfig)
+    , _qStackdriverLoggingConfig :: !(Maybe StackdriverLoggingConfig)
+    , _qName :: !(Maybe Text)
+    , _qPurgeTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -890,6 +1102,8 @@ data Queue =
 --
 -- * 'qRetryConfig'
 --
+-- * 'qStackdriverLoggingConfig'
+--
 -- * 'qName'
 --
 -- * 'qPurgeTime'
@@ -901,6 +1115,7 @@ queue =
     , _qAppEngineRoutingOverride = Nothing
     , _qState = Nothing
     , _qRetryConfig = Nothing
+    , _qStackdriverLoggingConfig = Nothing
     , _qName = Nothing
     , _qPurgeTime = Nothing
     }
@@ -924,7 +1139,7 @@ qRateLimits
   = lens _qRateLimits (\ s a -> s{_qRateLimits = a})
 
 -- | Overrides for task-level app_engine_routing. These settings apply only
--- to App Engine tasks in this queue. If set,
+-- to App Engine tasks in this queue. Http tasks are not affected. If set,
 -- \`app_engine_routing_override\` is used for all App Engine tasks in the
 -- queue, no matter what the setting is for the task-level
 -- app_engine_routing.
@@ -951,6 +1166,14 @@ qState = lens _qState (\ s a -> s{_qState = a})
 qRetryConfig :: Lens' Queue (Maybe RetryConfig)
 qRetryConfig
   = lens _qRetryConfig (\ s a -> s{_qRetryConfig = a})
+
+-- | Configuration options for writing logs to [Stackdriver
+-- Logging](https:\/\/cloud.google.com\/logging\/docs\/). If this field is
+-- unset, then no logs are written.
+qStackdriverLoggingConfig :: Lens' Queue (Maybe StackdriverLoggingConfig)
+qStackdriverLoggingConfig
+  = lens _qStackdriverLoggingConfig
+      (\ s a -> s{_qStackdriverLoggingConfig = a})
 
 -- | Caller-specified and required in CreateQueue, after which it becomes
 -- output only. The queue name. The queue name must have the following
@@ -988,6 +1211,7 @@ instance FromJSON Queue where
                      (o .:? "appEngineRoutingOverride")
                      <*> (o .:? "state")
                      <*> (o .:? "retryConfig")
+                     <*> (o .:? "stackdriverLoggingConfig")
                      <*> (o .:? "name")
                      <*> (o .:? "purgeTime"))
 
@@ -1000,8 +1224,202 @@ instance ToJSON Queue where
                     _qAppEngineRoutingOverride,
                   ("state" .=) <$> _qState,
                   ("retryConfig" .=) <$> _qRetryConfig,
+                  ("stackdriverLoggingConfig" .=) <$>
+                    _qStackdriverLoggingConfig,
                   ("name" .=) <$> _qName,
                   ("purgeTime" .=) <$> _qPurgeTime])
+
+-- | HTTP request. The task will be pushed to the worker as an HTTP request.
+-- If the worker or the redirected worker acknowledges the task by
+-- returning a successful HTTP response code ([\`200\` - \`299\`]), the
+-- task will be removed from the queue. If any other HTTP response code is
+-- returned or no response is received, the task will be retried according
+-- to the following: * User-specified throttling: retry configuration, rate
+-- limits, and the queue\'s state. * System throttling: To prevent the
+-- worker from overloading, Cloud Tasks may temporarily reduce the queue\'s
+-- effective rate. User-specified settings will not be changed. System
+-- throttling happens because: * Cloud Tasks backs off on all errors.
+-- Normally the backoff specified in rate limits will be used. But if the
+-- worker returns \`429\` (Too Many Requests), \`503\` (Service
+-- Unavailable), or the rate of errors is high, Cloud Tasks will use a
+-- higher backoff rate. The retry specified in the \`Retry-After\` HTTP
+-- response header is considered. * To prevent traffic spikes and to smooth
+-- sudden increases in traffic, dispatches ramp up slowly when the queue is
+-- newly created or idle and if large numbers of tasks suddenly become
+-- available to dispatch (due to spikes in create task rates, the queue
+-- being unpaused, or many tasks that are scheduled at the same time).
+--
+-- /See:/ 'hTTPRequest' smart constructor.
+data HTTPRequest =
+  HTTPRequest'
+    { _httprOAuthToken :: !(Maybe OAuthToken)
+    , _httprHTTPMethod :: !(Maybe HTTPRequestHTTPMethod)
+    , _httprOidcToken :: !(Maybe OidcToken)
+    , _httprBody :: !(Maybe Bytes)
+    , _httprURL :: !(Maybe Text)
+    , _httprHeaders :: !(Maybe HTTPRequestHeaders)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'httprOAuthToken'
+--
+-- * 'httprHTTPMethod'
+--
+-- * 'httprOidcToken'
+--
+-- * 'httprBody'
+--
+-- * 'httprURL'
+--
+-- * 'httprHeaders'
+hTTPRequest
+    :: HTTPRequest
+hTTPRequest =
+  HTTPRequest'
+    { _httprOAuthToken = Nothing
+    , _httprHTTPMethod = Nothing
+    , _httprOidcToken = Nothing
+    , _httprBody = Nothing
+    , _httprURL = Nothing
+    , _httprHeaders = Nothing
+    }
+
+
+-- | If specified, an [OAuth
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- will be generated and attached as an \`Authorization\` header in the
+-- HTTP request. This type of authorization should generally only be used
+-- when calling Google APIs hosted on *.googleapis.com.
+httprOAuthToken :: Lens' HTTPRequest (Maybe OAuthToken)
+httprOAuthToken
+  = lens _httprOAuthToken
+      (\ s a -> s{_httprOAuthToken = a})
+
+-- | The HTTP method to use for the request. The default is POST.
+httprHTTPMethod :: Lens' HTTPRequest (Maybe HTTPRequestHTTPMethod)
+httprHTTPMethod
+  = lens _httprHTTPMethod
+      (\ s a -> s{_httprHTTPMethod = a})
+
+-- | If specified, an
+-- [OIDC](https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect)
+-- token will be generated and attached as an \`Authorization\` header in
+-- the HTTP request. This type of authorization can be used for many
+-- scenarios, including calling Cloud Run, or endpoints where you intend to
+-- validate the token yourself.
+httprOidcToken :: Lens' HTTPRequest (Maybe OidcToken)
+httprOidcToken
+  = lens _httprOidcToken
+      (\ s a -> s{_httprOidcToken = a})
+
+-- | HTTP request body. A request body is allowed only if the HTTP method is
+-- POST, PUT, or PATCH. It is an error to set body on a task with an
+-- incompatible HttpMethod.
+httprBody :: Lens' HTTPRequest (Maybe ByteString)
+httprBody
+  = lens _httprBody (\ s a -> s{_httprBody = a}) .
+      mapping _Bytes
+
+-- | Required. The full url path that the request will be sent to. This
+-- string must begin with either \"http:\/\/\" or \"https:\/\/\". Some
+-- examples are: \`http:\/\/acme.com\` and
+-- \`https:\/\/acme.com\/sales:8080\`. Cloud Tasks will encode some
+-- characters for safety and compatibility. The maximum allowed URL length
+-- is 2083 characters after encoding. The \`Location\` header response from
+-- a redirect response [\`300\` - \`399\`] may be followed. The redirect is
+-- not counted as a separate attempt.
+httprURL :: Lens' HTTPRequest (Maybe Text)
+httprURL = lens _httprURL (\ s a -> s{_httprURL = a})
+
+-- | HTTP request headers. This map contains the header field names and
+-- values. Headers can be set when the task is created. These headers
+-- represent a subset of the headers that will accompany the task\'s HTTP
+-- request. Some HTTP request headers will be ignored or replaced. A
+-- partial list of headers that will be ignored or replaced is: * Host:
+-- This will be computed by Cloud Tasks and derived from HttpRequest.url. *
+-- Content-Length: This will be computed by Cloud Tasks. * User-Agent: This
+-- will be set to \`\"Google-Cloud-Tasks\"\`. * X-Google-*: Google use
+-- only. * X-AppEngine-*: Google use only. \`Content-Type\` won\'t be set
+-- by Cloud Tasks. You can explicitly set \`Content-Type\` to a media type
+-- when the task is created. For example, \`Content-Type\` can be set to
+-- \`\"application\/octet-stream\"\` or \`\"application\/json\"\`. Headers
+-- which can have multiple values (according to RFC2616) can be specified
+-- using comma-separated values. The size of the headers must be less than
+-- 80KB.
+httprHeaders :: Lens' HTTPRequest (Maybe HTTPRequestHeaders)
+httprHeaders
+  = lens _httprHeaders (\ s a -> s{_httprHeaders = a})
+
+instance FromJSON HTTPRequest where
+        parseJSON
+          = withObject "HTTPRequest"
+              (\ o ->
+                 HTTPRequest' <$>
+                   (o .:? "oauthToken") <*> (o .:? "httpMethod") <*>
+                     (o .:? "oidcToken")
+                     <*> (o .:? "body")
+                     <*> (o .:? "url")
+                     <*> (o .:? "headers"))
+
+instance ToJSON HTTPRequest where
+        toJSON HTTPRequest'{..}
+          = object
+              (catMaybes
+                 [("oauthToken" .=) <$> _httprOAuthToken,
+                  ("httpMethod" .=) <$> _httprHTTPMethod,
+                  ("oidcToken" .=) <$> _httprOidcToken,
+                  ("body" .=) <$> _httprBody, ("url" .=) <$> _httprURL,
+                  ("headers" .=) <$> _httprHeaders])
+
+-- | Configuration options for writing logs to [Stackdriver
+-- Logging](https:\/\/cloud.google.com\/logging\/docs\/).
+--
+-- /See:/ 'stackdriverLoggingConfig' smart constructor.
+newtype StackdriverLoggingConfig =
+  StackdriverLoggingConfig'
+    { _slcSamplingRatio :: Maybe (Textual Double)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StackdriverLoggingConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slcSamplingRatio'
+stackdriverLoggingConfig
+    :: StackdriverLoggingConfig
+stackdriverLoggingConfig =
+  StackdriverLoggingConfig' {_slcSamplingRatio = Nothing}
+
+
+-- | Specifies the fraction of operations to write to [Stackdriver
+-- Logging](https:\/\/cloud.google.com\/logging\/docs\/). This field may
+-- contain any value between 0.0 and 1.0, inclusive. 0.0 is the default and
+-- means that no operations are logged.
+slcSamplingRatio :: Lens' StackdriverLoggingConfig (Maybe Double)
+slcSamplingRatio
+  = lens _slcSamplingRatio
+      (\ s a -> s{_slcSamplingRatio = a})
+      . mapping _Coerce
+
+instance FromJSON StackdriverLoggingConfig where
+        parseJSON
+          = withObject "StackdriverLoggingConfig"
+              (\ o ->
+                 StackdriverLoggingConfig' <$>
+                   (o .:? "samplingRatio"))
+
+instance ToJSON StackdriverLoggingConfig where
+        toJSON StackdriverLoggingConfig'{..}
+          = object
+              (catMaybes
+                 [("samplingRatio" .=) <$> _slcSamplingRatio])
 
 -- | Response message for listing tasks using ListTasks.
 --
@@ -1009,7 +1427,7 @@ instance ToJSON Queue where
 data ListTasksResponse =
   ListTasksResponse'
     { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrTasks         :: !(Maybe [Task])
+    , _ltrTasks :: !(Maybe [Task])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1076,7 +1494,7 @@ instance ToJSON ListTasksResponse where
 -- \`X-AppEngine-*\` In addition, Cloud Tasks sets some headers when the
 -- task is dispatched, such as headers containing information about the
 -- task; see [request
--- headers](https:\/\/cloud.google.com\/appengine\/docs\/python\/taskqueue\/push\/creating-handlers#reading_request_headers).
+-- headers](https:\/\/cloud.google.com\/tasks\/docs\/creating-appengine-handlers#reading_request_headers).
 -- These headers are set only when the task is dispatched, so they are not
 -- visible when the task is returned in a Cloud Tasks response. Although
 -- there is no specific limit for the maximum number of headers or the
@@ -1192,9 +1610,9 @@ instance ToJSON TestIAMPermissionsRequest where
 data Attempt =
   Attempt'
     { _aResponseStatus :: !(Maybe Status)
-    , _aScheduleTime   :: !(Maybe DateTime')
-    , _aDispatchTime   :: !(Maybe DateTime')
-    , _aResponseTime   :: !(Maybe DateTime')
+    , _aScheduleTime :: !(Maybe DateTime')
+    , _aDispatchTime :: !(Maybe DateTime')
+    , _aResponseTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1299,16 +1717,17 @@ instance ToJSON PurgeQueueRequest where
 -- /See:/ 'task' smart constructor.
 data Task =
   Task'
-    { _tLastAttempt          :: !(Maybe Attempt)
-    , _tDispatchDeadline     :: !(Maybe GDuration)
-    , _tScheduleTime         :: !(Maybe DateTime')
-    , _tName                 :: !(Maybe Text)
-    , _tFirstAttempt         :: !(Maybe Attempt)
-    , _tView                 :: !(Maybe TaskView)
-    , _tResponseCount        :: !(Maybe (Textual Int32))
-    , _tDispatchCount        :: !(Maybe (Textual Int32))
+    { _tLastAttempt :: !(Maybe Attempt)
+    , _tDispatchDeadline :: !(Maybe GDuration)
+    , _tScheduleTime :: !(Maybe DateTime')
+    , _tHTTPRequest :: !(Maybe HTTPRequest)
+    , _tName :: !(Maybe Text)
+    , _tFirstAttempt :: !(Maybe Attempt)
+    , _tView :: !(Maybe TaskView)
+    , _tResponseCount :: !(Maybe (Textual Int32))
+    , _tDispatchCount :: !(Maybe (Textual Int32))
     , _tAppEngineHTTPRequest :: !(Maybe AppEngineHTTPRequest)
-    , _tCreateTime           :: !(Maybe DateTime')
+    , _tCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1322,6 +1741,8 @@ data Task =
 -- * 'tDispatchDeadline'
 --
 -- * 'tScheduleTime'
+--
+-- * 'tHTTPRequest'
 --
 -- * 'tName'
 --
@@ -1343,6 +1764,7 @@ task =
     { _tLastAttempt = Nothing
     , _tDispatchDeadline = Nothing
     , _tScheduleTime = Nothing
+    , _tHTTPRequest = Nothing
     , _tName = Nothing
     , _tFirstAttempt = Nothing
     , _tView = Nothing
@@ -1362,12 +1784,13 @@ tLastAttempt
 -- respond by this deadline then the request is cancelled and the attempt
 -- is marked as a \`DEADLINE_EXCEEDED\` failure. Cloud Tasks will retry the
 -- task according to the RetryConfig. Note that when the request is
--- cancelled, Cloud Tasks will stop listing for the response, but whether
+-- cancelled, Cloud Tasks will stop listening for the response, but whether
 -- the worker stops processing depends on the worker. For example, if the
 -- worker is stuck, it may not react to cancelled requests. The default and
--- maximum values depend on the type of request: * For App Engine tasks, 0
--- indicates that the request has the default deadline. The default
--- deadline depends on the [scaling
+-- maximum values depend on the type of request: * For HTTP tasks, the
+-- default is 10 minutes. The deadline must be in the interval [15 seconds,
+-- 30 minutes]. * For App Engine tasks, 0 indicates that the request has
+-- the default deadline. The default deadline depends on the [scaling
 -- type](https:\/\/cloud.google.com\/appengine\/docs\/standard\/go\/how-instances-are-managed#instance_scaling)
 -- of the service: 10 minutes for standard apps with automatic scaling, 24
 -- hours for standard apps with manual and basic scaling, and 60 minutes
@@ -1386,14 +1809,19 @@ tDispatchDeadline
       (\ s a -> s{_tDispatchDeadline = a})
       . mapping _GDuration
 
--- | The time when the task is scheduled to be attempted. For App Engine
--- queues, this is when the task will be attempted or retried.
+-- | The time when the task is scheduled to be attempted or retried.
 -- \`schedule_time\` will be truncated to the nearest microsecond.
 tScheduleTime :: Lens' Task (Maybe UTCTime)
 tScheduleTime
   = lens _tScheduleTime
       (\ s a -> s{_tScheduleTime = a})
       . mapping _DateTime
+
+-- | HTTP request that is sent to the worker. An HTTP task is a task that has
+-- HttpRequest set.
+tHTTPRequest :: Lens' Task (Maybe HTTPRequest)
+tHTTPRequest
+  = lens _tHTTPRequest (\ s a -> s{_tHTTPRequest = a})
 
 -- | Optionally caller-specified in CreateTask. The task name. The task name
 -- must have the following format:
@@ -1461,6 +1889,7 @@ instance FromJSON Task where
                  Task' <$>
                    (o .:? "lastAttempt") <*> (o .:? "dispatchDeadline")
                      <*> (o .:? "scheduleTime")
+                     <*> (o .:? "httpRequest")
                      <*> (o .:? "name")
                      <*> (o .:? "firstAttempt")
                      <*> (o .:? "view")
@@ -1476,6 +1905,7 @@ instance ToJSON Task where
                  [("lastAttempt" .=) <$> _tLastAttempt,
                   ("dispatchDeadline" .=) <$> _tDispatchDeadline,
                   ("scheduleTime" .=) <$> _tScheduleTime,
+                  ("httpRequest" .=) <$> _tHTTPRequest,
                   ("name" .=) <$> _tName,
                   ("firstAttempt" .=) <$> _tFirstAttempt,
                   ("view" .=) <$> _tView,
@@ -1528,29 +1958,46 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pEtag     :: !(Maybe Bytes)
-    , _pVersion  :: !(Maybe (Textual Int32))
+    { _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1577,21 +2024,40 @@ policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -1697,13 +2163,17 @@ instance ToJSON LocationMetadata where
 -- routing](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/how-requests-are-routed),
 -- and [App Engine Flex request
 -- routing](https:\/\/cloud.google.com\/appengine\/docs\/flexible\/python\/how-requests-are-routed).
+-- Using AppEngineRouting requires
+-- [\`appengine.applications.get\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/access-control)
+-- Google IAM permission for the project and the following scope:
+-- \`https:\/\/www.googleapis.com\/auth\/cloud-platform\`
 --
 -- /See:/ 'appEngineRouting' smart constructor.
 data AppEngineRouting =
   AppEngineRouting'
-    { _aerService  :: !(Maybe Text)
-    , _aerVersion  :: !(Maybe Text)
-    , _aerHost     :: !(Maybe Text)
+    { _aerService :: !(Maybe Text)
+    , _aerVersion :: !(Maybe Text)
+    , _aerHost :: !(Maybe Text)
     , _aerInstance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1794,9 +2264,8 @@ instance ToJSON AppEngineRouting where
                   ("instance" .=) <$> _aerInstance])
 
 -- | App Engine HTTP request. The message defines the HTTP request that is
--- sent to an App Engine app when the task is dispatched. This proto can
--- only be used for tasks in a queue which has app_engine_http_queue set.
--- Using AppEngineHttpRequest requires
+-- sent to an App Engine app when the task is dispatched. Using
+-- AppEngineHttpRequest requires
 -- [\`appengine.applications.get\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/access-control)
 -- Google IAM permission for the project and the following scope:
 -- \`https:\/\/www.googleapis.com\/auth\/cloud-platform\` The task will be
@@ -1811,31 +2280,35 @@ instance ToJSON AppEngineRouting where
 -- (for example, HTTP or HTTPS). The request to the handler, however, will
 -- appear to have used the HTTP protocol. The AppEngineRouting used to
 -- construct the URL that the task is delivered to can be set at the
--- queue-level or task-level: * If set, app_engine_routing_override is used
--- for all tasks in the queue, no matter what the setting is for the
--- task-level app_engine_routing. The \`url\` that the task will be sent to
--- is: * \`url =\` host \`+\` relative_uri Tasks can be dispatched to
--- secure app handlers, unsecure app handlers, and URIs restricted with
--- [\`login:
+-- queue-level or task-level: * If app_engine_routing_override is set on
+-- the queue, this value is used for all tasks in the queue, no matter what
+-- the setting is for the task-level app_engine_routing. The \`url\` that
+-- the task will be sent to is: * \`url =\` host \`+\` relative_uri Tasks
+-- can be dispatched to secure app handlers, unsecure app handlers, and
+-- URIs restricted with [\`login:
 -- admin\`](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/config\/appref).
 -- Because tasks are not run as any user, they cannot be dispatched to URIs
 -- restricted with [\`login:
 -- required\`](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/config\/appref)
 -- Task dispatches also do not follow redirects. The task attempt has
 -- succeeded if the app\'s request handler returns an HTTP response code in
--- the range [\`200\` - \`299\`]. \`503\` is considered an App Engine
--- system error instead of an application error. Requests returning error
--- \`503\` will be retried regardless of retry configuration and not
--- counted against retry counts. Any other response code or a failure to
--- receive a response before the deadline is a failed attempt.
+-- the range [\`200\` - \`299\`]. The task attempt has failed if the app\'s
+-- handler returns a non-2xx response code or Cloud Tasks does not receive
+-- response before the deadline. Failed tasks will be retried according to
+-- the retry configuration. \`503\` (Service Unavailable) is considered an
+-- App Engine system error instead of an application error and will cause
+-- Cloud Tasks\' traffic congestion control to temporarily throttle the
+-- queue\'s dispatches. Unlike other types of task targets, a \`429\` (Too
+-- Many Requests) response from an app handler does not cause traffic
+-- congestion control to throttle the queue.
 --
 -- /See:/ 'appEngineHTTPRequest' smart constructor.
 data AppEngineHTTPRequest =
   AppEngineHTTPRequest'
-    { _aehttprHTTPMethod       :: !(Maybe AppEngineHTTPRequestHTTPMethod)
-    , _aehttprRelativeURI      :: !(Maybe Text)
-    , _aehttprBody             :: !(Maybe Bytes)
-    , _aehttprHeaders          :: !(Maybe AppEngineHTTPRequestHeaders)
+    { _aehttprHTTPMethod :: !(Maybe AppEngineHTTPRequestHTTPMethod)
+    , _aehttprRelativeURI :: !(Maybe Text)
+    , _aehttprBody :: !(Maybe Bytes)
+    , _aehttprHeaders :: !(Maybe AppEngineHTTPRequestHeaders)
     , _aehttprAppEngineRouting :: !(Maybe AppEngineRouting)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1868,13 +2341,11 @@ appEngineHTTPRequest =
 
 -- | The HTTP method to use for the request. The default is POST. The app\'s
 -- request handler for the task\'s target URL must be able to handle HTTP
--- requests with this http_method, otherwise the task attempt will fail
--- with error code 405 (Method Not Allowed). See [Writing a push task
--- request
+-- requests with this http_method, otherwise the task attempt fails with
+-- error code 405 (Method Not Allowed). See [Writing a push task request
 -- handler](https:\/\/cloud.google.com\/appengine\/docs\/java\/taskqueue\/push\/creating-handlers#writing_a_push_task_request_handler)
--- and the documentation for the request handlers in the language your app
--- is written in e.g. [Python Request
--- Handler](https:\/\/cloud.google.com\/appengine\/docs\/python\/tools\/webapp\/requesthandlerclass).
+-- and the App Engine documentation for your runtime on [How Requests are
+-- Handled](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python3\/how-requests-are-handled).
 aehttprHTTPMethod :: Lens' AppEngineHTTPRequest (Maybe AppEngineHTTPRequestHTTPMethod)
 aehttprHTTPMethod
   = lens _aehttprHTTPMethod
@@ -1917,7 +2388,7 @@ aehttprBody
 -- \`X-AppEngine-*\` In addition, Cloud Tasks sets some headers when the
 -- task is dispatched, such as headers containing information about the
 -- task; see [request
--- headers](https:\/\/cloud.google.com\/appengine\/docs\/python\/taskqueue\/push\/creating-handlers#reading_request_headers).
+-- headers](https:\/\/cloud.google.com\/tasks\/docs\/creating-appengine-handlers#reading_request_headers).
 -- These headers are set only when the task is dispatched, so they are not
 -- visible when the task is returned in a Cloud Tasks response. Although
 -- there is no specific limit for the maximum number of headers or the
@@ -1928,9 +2399,10 @@ aehttprHeaders
   = lens _aehttprHeaders
       (\ s a -> s{_aehttprHeaders = a})
 
--- | Task-level setting for App Engine routing. If set,
--- app_engine_routing_override is used for all tasks in the queue, no
--- matter what the setting is for the task-level app_engine_routing.
+-- | Task-level setting for App Engine routing. * If
+-- app_engine_routing_override is set on the queue, this value is used for
+-- all tasks in the queue, no matter what the setting is for the task-level
+-- app_engine_routing.
 aehttprAppEngineRouting :: Lens' AppEngineHTTPRequest (Maybe AppEngineRouting)
 aehttprAppEngineRouting
   = lens _aehttprAppEngineRouting
@@ -1985,8 +2457,8 @@ instance ToJSON ResumeQueueRequest where
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2014,13 +2486,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -2032,9 +2521,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

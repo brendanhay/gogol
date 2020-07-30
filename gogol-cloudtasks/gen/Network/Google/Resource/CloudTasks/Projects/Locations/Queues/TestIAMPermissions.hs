@@ -46,8 +46,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.TestIAMPermi
     , plqtipCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.testIamPermissions@ method which the
 -- 'ProjectsLocationsQueuesTestIAMPermissions' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsLocationsQueuesTestIAMPermissionsResource
 -- /See:/ 'projectsLocationsQueuesTestIAMPermissions' smart constructor.
 data ProjectsLocationsQueuesTestIAMPermissions =
   ProjectsLocationsQueuesTestIAMPermissions'
-    { _plqtipXgafv          :: !(Maybe Xgafv)
+    { _plqtipXgafv :: !(Maybe Xgafv)
     , _plqtipUploadProtocol :: !(Maybe Text)
-    , _plqtipAccessToken    :: !(Maybe Text)
-    , _plqtipUploadType     :: !(Maybe Text)
-    , _plqtipPayload        :: !TestIAMPermissionsRequest
-    , _plqtipResource       :: !Text
-    , _plqtipCallback       :: !(Maybe Text)
+    , _plqtipAccessToken :: !(Maybe Text)
+    , _plqtipUploadType :: !(Maybe Text)
+    , _plqtipPayload :: !TestIAMPermissionsRequest
+    , _plqtipResource :: !Text
+    , _plqtipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

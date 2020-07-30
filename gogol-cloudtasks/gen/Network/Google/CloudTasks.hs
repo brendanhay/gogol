@@ -92,6 +92,12 @@ module Network.Google.CloudTasks
     , rlMaxDispatchesPerSecond
     , rlMaxBurstSize
 
+    -- ** OAuthToken
+    , OAuthToken
+    , oAuthToken
+    , oatScope
+    , oatServiceAccountEmail
+
     -- ** Status
     , Status
     , status
@@ -116,6 +122,13 @@ module Network.Google.CloudTasks
     -- ** GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
+
+    -- ** OidcToken
+    , OidcToken
+    , oidcToken
+    , otAudience
+    , otServiceAccountEmail
 
     -- ** RetryConfig
     , RetryConfig
@@ -130,6 +143,11 @@ module Network.Google.CloudTasks
     , RunTaskRequest
     , runTaskRequest
     , rtrResponseView
+
+    -- ** HTTPRequestHeaders
+    , HTTPRequestHeaders
+    , hTTPRequestHeaders
+    , httprhAddtional
 
     -- ** Location
     , Location
@@ -167,6 +185,11 @@ module Network.Google.CloudTasks
     -- ** QueueState
     , QueueState (..)
 
+    -- ** GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
+
     -- ** CreateTaskRequestResponseView
     , CreateTaskRequestResponseView (..)
 
@@ -182,11 +205,27 @@ module Network.Google.CloudTasks
     , qAppEngineRoutingOverride
     , qState
     , qRetryConfig
+    , qStackdriverLoggingConfig
     , qName
     , qPurgeTime
 
     -- ** AppEngineHTTPRequestHTTPMethod
     , AppEngineHTTPRequestHTTPMethod (..)
+
+    -- ** HTTPRequest
+    , HTTPRequest
+    , hTTPRequest
+    , httprOAuthToken
+    , httprHTTPMethod
+    , httprOidcToken
+    , httprBody
+    , httprURL
+    , httprHeaders
+
+    -- ** StackdriverLoggingConfig
+    , StackdriverLoggingConfig
+    , stackdriverLoggingConfig
+    , slcSamplingRatio
 
     -- ** ListTasksResponse
     , ListTasksResponse
@@ -229,6 +268,7 @@ module Network.Google.CloudTasks
     , tLastAttempt
     , tDispatchDeadline
     , tScheduleTime
+    , tHTTPRequest
     , tName
     , tFirstAttempt
     , tView
@@ -270,6 +310,9 @@ module Network.Google.CloudTasks
     , aerHost
     , aerInstance
 
+    -- ** HTTPRequestHTTPMethod
+    , HTTPRequestHTTPMethod (..)
+
     -- ** AppEngineHTTPRequest
     , AppEngineHTTPRequest
     , appEngineHTTPRequest
@@ -291,26 +334,26 @@ module Network.Google.CloudTasks
     , bCondition
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Get
-import           Network.Google.Resource.CloudTasks.Projects.Locations.List
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Create
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Delete
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Get
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.GetIAMPolicy
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.List
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Patch
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Pause
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Purge
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Resume
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.SetIAMPolicy
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Create
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Delete
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Get
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.List
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Run
-import           Network.Google.Resource.CloudTasks.Projects.Locations.Queues.TestIAMPermissions
+import Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Resource.CloudTasks.Projects.Locations.Get
+import Network.Google.Resource.CloudTasks.Projects.Locations.List
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Create
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Delete
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Get
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.GetIAMPolicy
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.List
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Patch
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Pause
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Purge
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Resume
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.SetIAMPolicy
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Create
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Delete
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Get
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.List
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Run
+import Network.Google.Resource.CloudTasks.Projects.Locations.Queues.TestIAMPermissions
 
 {- $resources
 TODO

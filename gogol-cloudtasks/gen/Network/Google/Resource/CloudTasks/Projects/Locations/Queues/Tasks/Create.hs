@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a task and adds it to a queue. Tasks cannot be updated after
--- creation; there is no UpdateTask command. * For App Engine queues, the
--- maximum task size is 100KB.
+-- creation; there is no UpdateTask command. * The maximum task size is
+-- 100KB.
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.tasks.create@.
 module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Create
@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Create
     , plqtcCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.create@ method which the
 -- 'ProjectsLocationsQueuesTasksCreate' request conforms to.
@@ -63,19 +63,19 @@ type ProjectsLocationsQueuesTasksCreateResource =
                          Post '[JSON] Task
 
 -- | Creates a task and adds it to a queue. Tasks cannot be updated after
--- creation; there is no UpdateTask command. * For App Engine queues, the
--- maximum task size is 100KB.
+-- creation; there is no UpdateTask command. * The maximum task size is
+-- 100KB.
 --
 -- /See:/ 'projectsLocationsQueuesTasksCreate' smart constructor.
 data ProjectsLocationsQueuesTasksCreate =
   ProjectsLocationsQueuesTasksCreate'
-    { _plqtcParent         :: !Text
-    , _plqtcXgafv          :: !(Maybe Xgafv)
+    { _plqtcParent :: !Text
+    , _plqtcXgafv :: !(Maybe Xgafv)
     , _plqtcUploadProtocol :: !(Maybe Text)
-    , _plqtcAccessToken    :: !(Maybe Text)
-    , _plqtcUploadType     :: !(Maybe Text)
-    , _plqtcPayload        :: !CreateTaskRequest
-    , _plqtcCallback       :: !(Maybe Text)
+    , _plqtcAccessToken :: !(Maybe Text)
+    , _plqtcUploadType :: !(Maybe Text)
+    , _plqtcPayload :: !CreateTaskRequest
+    , _plqtcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

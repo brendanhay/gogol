@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Pause
     , proCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.pause@ method which the
 -- 'ProjectsLocationsQueuesPause' request conforms to.
@@ -70,13 +70,13 @@ type ProjectsLocationsQueuesPauseResource =
 -- /See:/ 'projectsLocationsQueuesPause' smart constructor.
 data ProjectsLocationsQueuesPause =
   ProjectsLocationsQueuesPause'
-    { _proXgafv          :: !(Maybe Xgafv)
+    { _proXgafv :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
-    , _proAccessToken    :: !(Maybe Text)
-    , _proUploadType     :: !(Maybe Text)
-    , _proPayload        :: !PauseQueueRequest
-    , _proName           :: !Text
-    , _proCallback       :: !(Maybe Text)
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proPayload :: !PauseQueueRequest
+    , _proName :: !Text
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
