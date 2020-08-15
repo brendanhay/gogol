@@ -1,4 +1,5 @@
 sudo: false
+dist: bionic
 language: c
 cache:
   apt: true
@@ -6,6 +7,7 @@ cache:
     - $HOME/.ghc
     - $HOME/.cabal
     - $HOME/.stack
+    - $TRAVIS_BUILD_DIR/.stack-work
 
 env:
   global:
@@ -37,52 +39,52 @@ matrix:
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
 
     # Core
-    - env: GHCVER=8.6.3 LIBRARY=gogol-core
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-core
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-core
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-core
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.6.3 LIBRARY=gogol
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
 
     # Priority
-    - env: GHCVER=8.6.3 LIBRARY=gogol-compute
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-compute
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-compute
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-compute
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.6.3 LIBRARY=gogol-drive
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-drive
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-drive
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-drive
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.6.3 LIBRARY=gogol-appengine
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-appengine
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-appengine
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-appengine
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.6.3 LIBRARY=gogol-storage
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-storage
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-storage
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-storage
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.6.3 LIBRARY=gogol-oauth2
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-oauth2
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-oauth2
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-oauth2
       addons: { apt: { packages: [ghc-8.2.2], sources: [hvr-ghc] } }
-    - env: GHCVER=8.6.3 LIBRARY=gogol-gmail
-      addons: { apt: { packages: [ghc-8.6.3], sources: [hvr-ghc] } }
+    - env: GHCVER=8.6.5 LIBRARY=gogol-gmail
+      addons: { apt: { packages: [ghc-8.6.5], sources: [hvr-ghc] } }
     - env: GHCVER=8.4.4 LIBRARY=gogol-gmail
       addons: { apt: { packages: [ghc-8.4.4], sources: [hvr-ghc] } }
     - env: GHCVER=8.2.2 LIBRARY=gogol-gmail
