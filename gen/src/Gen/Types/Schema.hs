@@ -284,7 +284,7 @@ instance HasInfo a => HasInfo (Param a) where
 data MediaUpload = MediaUpload
     { _muAccept        :: [Text]
     , _muMaxSize       :: Maybe Text
-    , _muResumablePath :: Text
+    , _muResumablePath :: Maybe Text
     , _muSimplePath    :: Text
     } deriving (Eq, Show)
 
@@ -292,8 +292,9 @@ instance FromJSON MediaUpload where
     parseJSON = withObject "mediaUpload" $ \o -> MediaUpload
          <$>  o .:  "accept"
          <*>  o .:? "maxSize"
-         <*> (o .:  "protocols" >>= (.: "resumable") >>= (.: "path"))
+         <*> (o .:  "protocols" >>= (.:? "resumable") >>= maybe (pure Nothing) (.: "path"))
          <*> (o .:  "protocols" >>= (.: "simple")    >>= (.: "path"))
+
 
 data Method a = Method
     { _mId                    :: Global
