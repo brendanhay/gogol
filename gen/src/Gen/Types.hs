@@ -101,6 +101,7 @@ makeClassy ''Versions
 
 data Release
     = Sandbox
+    | Dev     (Maybe Int) (Maybe Char)
     | Alpha   (Maybe Int) (Maybe Char)
     | Beta    (Maybe Int) (Maybe Char)
       deriving (Eq, Ord, Show)
@@ -123,7 +124,7 @@ parseVersion x = first (mappend (Text.unpack x) . mappend " -> ") $
     empty'  = ModelVersion 0 <$> (alpha <|> beta <|> exp')
     version = ModelVersion
         <$> number
-        <*> (alpha <|> beta <|> sandbox <|> pure Nothing)
+        <*> (alpha <|> beta <|> sandbox <|> dev <|> pure Nothing)
 
     preface = A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
 
@@ -133,6 +134,10 @@ parseVersion x = first (mappend (Text.unpack x) . mappend " -> ") $
       p <- A.many1 A.digit
       return (read (n ++ "." ++ p) :: Double)
     number  = A.takeWhile  (/= 'v') *> A.char 'v' *> (protoVersionParser <|> A.double)
+
+    dev = A.string "dev"
+         *> (Dev <$> optional A.decimal <*> optional A.letter)
+        <&> Just
 
     alpha = A.string "alpha"
          *> (Alpha <$> optional A.decimal <*> optional A.letter)
