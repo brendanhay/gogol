@@ -31,7 +31,7 @@ import           Data.Monoid
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
-import           Filesystem.Path.CurrentOS hiding (FilePath, root)
+import           System.FilePath
 import           Gen.Formatting            (failure, shown)
 import qualified Gen.JSON                  as JS
 import           Gen.Types
@@ -40,21 +40,21 @@ import           System.Directory.Tree     hiding (file)
 import           Text.EDE                  hiding (failure, render)
 
 root :: AnchoredDirTree a -> Path
-root (p :/ d) = decodeString p </> decodeString (name d)
+root (p :/ d) = p </> name d
 
 fold :: MonadError Error m
      => (Path -> m ())     -- ^ Directories
      -> (Path -> a -> m b) -- ^ Files
      -> AnchoredDirTree a
      -> m (AnchoredDirTree b)
-fold g f (p :/ t) = (p :/) <$> go (decodeString p) t
+fold g f (p :/ t) = (p :/) <$> go p t
   where
     go x = \case
         Failed n e  -> failure shown e >> return (Failed n e)
-        File   n a  -> File n <$> f (x </> decodeString n) a
+        File   n a  -> File n <$> f (x </> n) a
         Dir    n cs -> g d >> Dir n <$> mapM (go d) cs
           where
-            d = x </> decodeString n
+            d = x </> n
 
 -- If Nothing, then touch the file, otherwise write the Just contents.
 type Touch = Maybe Rendered
@@ -63,7 +63,7 @@ populate :: Path
          -> Templates
          -> Library
          -> Either Error (AnchoredDirTree Touch)
-populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
+populate d Templates {..} l = (d :/) . dir lib <$> layout
   where
     layout :: Either Error [DirTree Touch]
     layout = traverse sequenceA
@@ -98,7 +98,7 @@ populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
 
     Imports {..} = serviceImports l
 
-    lib = fromText (l ^. sLibrary)
+    lib = Text.unpack (l ^. sLibrary)
 
     mod' ns is t = write . module' ns is t
 
@@ -126,26 +126,26 @@ namespaced :: ToJSON a
            -> Either Error a
            -> DirTree (Either Error Rendered)
 namespaced (unNS -> ns) t x =
-    case map fromText ns of
+    case map Text.unpack ns of
         []  -> error "Empty namespace."
         [p] -> f p
         ps  -> foldr' nest (f (last ps)) (init ps)
   where
     f p = file' (p <.> "hs") t x
 
-    nest d c = Dir (encodeString d) [c]
+    nest d c = Dir d [c]
 
 file' :: ToJSON a
       => Path
       -> Template
       -> Either Error a
       -> DirTree (Either Error Rendered)
-file' (encodeString -> p) t f = File p $
+file' p t f = File p $
     f >>= JS.objectErr p
       >>= fmapL LText.pack . eitherRender t
 
 dir :: Path -> [DirTree a] -> DirTree a
-dir p = Dir (encodeString p)
+dir p = Dir p
 
 write :: DirTree (Either e a) -> DirTree (Either e (Maybe a))
 write = fmap (second Just)

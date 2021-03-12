@@ -51,14 +51,13 @@ import qualified Data.HashSet               as Set
 import           Data.List                  (sort)
 import           Data.Maybe
 import           Data.Ord
-import           Data.Semigroup             ((<>))
 import           Data.String
 import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
 import qualified Data.Text.Lazy             as LText
 import qualified Data.Text.Lazy.Builder     as Build
 import           Data.Text.Manipulate
-import qualified Filesystem.Path.CurrentOS  as Path
+import qualified System.FilePath            as Path
 import           Formatting
 import           Gen.Orphans                ()
 import           Gen.Text
@@ -173,8 +172,8 @@ modelFromPath x = Model n p v x
       . dropWhile (/= "model")
       $ Text.split (== '/') p
 
-    p = toTextIgnore (Path.parent (Path.parent x))
-    v = either error id $ parseVersion (toTextIgnore (Path.dirname x))
+    p = toTextIgnore (Path.takeDirectory (Path.takeDirectory x))
+    v = either error id $ parseVersion (toTextIgnore (Path.takeBaseName (Path.takeDirectory x)))
 
 data Templates = Templates
     { cabalTemplate  :: Template
@@ -231,7 +230,7 @@ otherModules :: Library -> [NS]
 otherModules s = sort [prodNS s, sumNS s]
 
 toTextIgnore :: Path -> Text
-toTextIgnore = either id id . Path.toText
+toTextIgnore = Text.pack
 
 data Library = Library
     { _lVersions :: Versions

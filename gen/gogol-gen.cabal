@@ -50,10 +50,12 @@ executable gogol-gen
         , bifunctors
         , bytestring
         , case-insensitive
+        , directory
         , directory-tree
         , doclayout
         , ede
         , errors           >= 2.1.2
+        , filepath
         , formatting
         , hashable
         , haskell-src-exts == 1.23.1
@@ -64,8 +66,6 @@ executable gogol-gen
         , pandoc
         , parsec
         , semigroups
-        , system-fileio
-        , system-filepath
         , text
         , text-icu
         , text-manipulate

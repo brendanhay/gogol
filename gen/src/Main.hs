@@ -18,11 +18,10 @@ import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
-import           Data.Monoid               ((<>))
 import           Data.String
 import qualified Data.Text                 as Text
-import qualified Filesystem                as FS
-import           Filesystem.Path.CurrentOS
+import qualified System.Directory          as Dir
+import           System.FilePath
 import           Gen.AST
 import           Gen.Formatting
 import           Gen.IO
@@ -94,7 +93,7 @@ parser = Opt
              ))
 
 isPath :: ReadM Path
-isPath = eitherReader (Right . fromText . Text.dropWhileEnd (== '/') . fromString)
+isPath = eitherReader (Right . Text.unpack . Text.dropWhileEnd (== '/') . fromString)
 
 version :: ReadM (Version v)
 version = eitherReader (Right . Version . Text.pack)
@@ -116,7 +115,7 @@ validate o = flip execStateT o $ do
     check l = gets (view l) >>= canon >>= assign l
 
     canon :: MonadIO m => Path -> m Path
-    canon = liftIO . FS.canonicalizePath
+    canon = liftIO . Dir.canonicalizePath
 
 main :: IO ()
 main = do
@@ -150,7 +149,7 @@ main = do
             title ("[" % int % "/" % int % "] model:" % stext)
                   (n :: Int) i modelName
 
-            let anx = _optAnnexes </> fromText modelName <.> "json"
+            let anx = _optAnnexes </> Text.unpack modelName <.> "json"
             p <- isFile anx
             if not p
                then say ("Skipping '" % stext % "' due to missing annex configuration.")

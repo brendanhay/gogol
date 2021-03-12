@@ -15,9 +15,10 @@ import           Control.Monad.Except
 
 import           Data.Bifunctor            (first)
 import           Data.ByteString           (ByteString)
+import qualified Data.ByteString           as ByteString
 import           Data.Text.Lazy.Builder    (toLazyText)
 
-import           Filesystem.Path.CurrentOS
+import           System.FilePath
 
 import           Gen.Formatting
 import           Gen.Types
@@ -29,7 +30,7 @@ import qualified UnexceptionalIO           as UIO
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import qualified Data.Text.Lazy.IO         as LText
-import qualified Filesystem                as FS
+import qualified System.Directory          as Dir
 import qualified Text.EDE                  as EDE
 
 run :: ExceptT Error IO a -> IO a
@@ -48,21 +49,19 @@ done :: MonadIO m => ExceptT Error m ()
 done = title ""
 
 isFile :: MonadIO m => Path -> ExceptT Error m Bool
-isFile = io . FS.isFile
+isFile = io . Dir.doesFileExist
 
 readBSFile :: MonadIO m => Path -> ExceptT Error m ByteString
 readBSFile f = do
     p <- isFile f
     if p
-        then say ("Reading "  % path) f >> io (FS.readFile f)
+        then say ("Reading "  % path) f >> io (ByteString.readFile f)
         else failure ("Missing " % path) f
 
 writeLTFile :: MonadIO m => Path -> LText.Text -> ExceptT Error m ()
 writeLTFile f t = do
     say ("Writing " % path) f
-    io . FS.withFile f FS.WriteMode $ \h -> do
-        hSetEncoding  h utf8
-        LText.hPutStr h t
+    io (LText.writeFile f t)
 
 touchFile :: MonadIO m => Path -> ExceptT Error m ()
 touchFile f = do
@@ -75,23 +74,23 @@ writeOrTouch x = maybe (touchFile x) (writeLTFile x)
 
 createDir :: MonadIO m => Path -> ExceptT Error m ()
 createDir d = do
-    p <- io (FS.isDirectory d)
+    p <- io (Dir.doesDirectoryExist d)
     unless p $ do
         say ("Creating " % path) d
-        io (FS.createTree d)
+        io (Dir.createDirectory d)
 
 copyDir :: MonadIO m => Path -> Path -> ExceptT Error m ()
-copyDir src dst = io (FS.listDirectory src >>= mapM_ copy)
+copyDir src dst = io (Dir.listDirectory src >>= mapM_ copy)
   where
     copy f = do
-        let p = dst </> filename f
-        fprint (" -> Copying " % path % " to " % path % "\n") f (directory p)
-        FS.copyFile f p
+        let p = dst </> takeFileName f
+        fprint (" -> Copying " % path % " to " % path % "\n") f (takeDirectory p)
+        Dir.copyFile f p
 
 readTemplate :: MonadIO m
              => Path
              -> Path
              -> ExceptT Error m EDE.Template
 readTemplate d f =
-        liftIO (EDE.eitherParseFile (encodeString (d </> f)))
+        liftIO (EDE.eitherParseFile (d </> f))
     >>= either (throwError . LText.pack) return
