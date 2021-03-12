@@ -168,8 +168,7 @@ instance Ord Model where
 modelFromPath :: Path -> Model
 modelFromPath x = Model n p v x
   where
-    n = Text.init
-      . Text.intercalate "/"
+    n = Text.intercalate "/"
       . drop 1
       . dropWhile (/= "model")
       $ Text.split (== '/') p

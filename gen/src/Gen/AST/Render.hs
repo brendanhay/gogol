@@ -26,7 +26,6 @@ import qualified Data.ByteString.Lazy.Builder as LBB
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
-import           Data.Semigroup               ((<>))
 import           Data.String
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Encoding      as LText

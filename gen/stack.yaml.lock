@@ -12,38 +12,36 @@ packages:
   original:
     hackage: text-regex-replace-0.1.1.3
 - completed:
-    hackage: ede-0.2.9@sha256:062198b65a661f015bff53c15d53d0b63eac547d44b09d96b7fb8d27752dfc79,3561
+    hackage: ede-0.3.2.0@sha256:26796d2dfa0979b6ec532dcb113196a1d63edde5553bd019f8d05b52cc966b1a,3790
     pantry-tree:
-      size: 5392
-      sha256: ee8d76f8f1ca483f29233498833c7159774efc3c0cb14027703cefac79c41315
+      size: 5398
+      sha256: bd0dbdf4a68c9253417b8201b23c8b62c3d62dd253583e8cd6551f7d4e641961
   original:
-    hackage: ede-0.2.9
+    hackage: ede-0.3.2.0
 - completed:
-    hackage: unexceptionalio-0.3.0@sha256:cd2d74906d336c0a0b827c935d31c39a8504c4414ffc4ab30ccbe22d0ba0cf69,1126
+    hackage: prettyprinter-1.7.0@sha256:6a9569e21fa61163a7f066d23d701e23e917893e8f39733d6e617ec72787ae5f,6007
     pantry-tree:
-      size: 217
-      sha256: 810f5bb08802115d17848c2a8233f95b16f51922edf6850aa663fc1c4067f38a
+      size: 3194
+      sha256: d22f820a1f63497f7fd7e1f04b7d356d92de35582258f6ad55428c88b09e63ff
   original:
-    hackage: unexceptionalio-0.3.0
+    hackage: prettyprinter-1.7.0
 - completed:
-    size: 51114
-    url: https://github.com/chrisdone/hindent/archive/ad0c2a9f8755d37f09b356ab7e45a4e49bcda0b3.tar.gz
-    cabal-file:
-      size: 3452
-      sha256: f3243ef357ed5464c6a5b6f38cbb73a30ec170d1ed0c7beb16c05f5f0ad61833
-    name: hindent
-    version: 5.2.7
-    sha256: 19954fc7dff3d008d9c7688d1c571999c1869f86e5c115aef8b28c2ae622972f
+    hackage: unexceptionalio-0.5.1@sha256:dfa3da738047ea55825be916559083fe3f0460ec699b3b10b7337edece7f43b3,1721
     pantry-tree:
-      size: 1808
-      sha256: 25b9067b3429d448130aa1963527a8442a3f78f9198dc2a0c9b77616d2ede801
+      size: 273
+      sha256: efb406a2a61b558b72dcbd6fb127a77d0cb3b6a72a11fc31cd85be9b079ed98f
   original:
-    size: 51114
-    url: https://github.com/chrisdone/hindent/archive/ad0c2a9f8755d37f09b356ab7e45a4e49bcda0b3.tar.gz
-    sha256: 19954fc7dff3d008d9c7688d1c571999c1869f86e5c115aef8b28c2ae622972f
+    hackage: unexceptionalio-0.5.1
+- completed:
+    hackage: hindent-5.3.2@sha256:070a3622d13e6f0c44d8d189df8f780f61d0b813435a902925ef6d9386b42260,3610
+    pantry-tree:
+      size: 1027
+      sha256: 36f9c65bbe71c49741c20839606494dacd70c04e0e70649f1da0978aeaf5f77a
+  original:
+    hackage: hindent-5.3.2
 snapshots:
 - completed:
-    size: 498155
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/13/19.yaml
-    sha256: b9367a80d4393d02e58a46b8a9fdfbd7bc19f59c0c2bbf90034ba15cf52cf213
-  original: lts-13.19
+    size: 534126
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/16/31.yaml
+    sha256: 637fb77049b25560622a224845b7acfe81a09fdb6a96a3c75997a10b651667f6
+  original: lts-16.31

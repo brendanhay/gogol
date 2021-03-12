@@ -25,7 +25,6 @@ import           Control.Monad.Except
 import qualified Data.HashMap.Strict  as Map
 import qualified Data.HashSet         as Set
 import           Data.Maybe
-import           Data.Semigroup       ((<>))
 import           Gen.Formatting
 import           Gen.Types
 import           Prelude              hiding (sum)
