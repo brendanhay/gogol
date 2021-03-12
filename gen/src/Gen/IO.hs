@@ -24,7 +24,7 @@ import           Gen.Types
 
 import           System.IO
 
-import           UnexceptionalIO           (fromIO, runUIO)
+import qualified UnexceptionalIO           as UIO
 
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
@@ -36,7 +36,7 @@ run :: ExceptT Error IO a -> IO a
 run = runScript . fmapLT (Text.pack . LText.unpack)
 
 io :: MonadIO m => IO a -> ExceptT Error m a
-io = ExceptT . fmap (first (LText.pack . show)) . liftIO . runUIO . fromIO
+io = ExceptT . fmap (first (LText.pack . show)) . liftIO . UIO.run . UIO.fromIO
 
 title :: MonadIO m => Format (ExceptT Error m ()) a -> a
 title m = runFormat m (io . LText.putStrLn . toLazyText)
