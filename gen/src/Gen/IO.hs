@@ -82,8 +82,9 @@ createDir d = do
 copyDir :: MonadIO m => Path -> Path -> ExceptT Error m ()
 copyDir src dst = io (Dir.listDirectory src >>= mapM_ copy)
   where
-    copy f = do
-        let p = dst </> takeFileName f
+    copy filename = do
+        let f = src </> filename
+            p = dst </> filename
         fprint (" -> Copying " % path % " to " % path % "\n") f (takeDirectory p)
         Dir.copyFile f p
 
