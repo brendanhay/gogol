@@ -201,7 +201,7 @@ acronymPrefixes (global -> (renameSpecial -> g)) =
 
     full = CI.mk g
 
-    zs = zipWith (\n x -> Text.snoc x (head (show n))) ([1..] :: [Int]) xs
+    zs = liftA2 (\n x -> Text.snoc x (head (show n))) ([1..] :: [Int]) xs
 
     xs = catMaybes [r1, r2, r3, r4, r5, r6]
     ys = catMaybes [r1, r2, r3, r4, r6]
