@@ -36,3 +36,5 @@ tags
 
 # Certificates
 *.pem
+
+dist-newstyle

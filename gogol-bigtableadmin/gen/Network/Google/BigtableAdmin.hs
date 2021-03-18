@@ -502,7 +502,7 @@ module Network.Google.BigtableAdmin
     ) where
 
 import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Union)
 import           Network.Google.Resource.BigtableAdmin.Operations.Cancel
 import           Network.Google.Resource.BigtableAdmin.Operations.Delete
 import           Network.Google.Resource.BigtableAdmin.Operations.Get
