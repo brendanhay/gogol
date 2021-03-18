@@ -18,7 +18,7 @@
 module Network.Google.BigtableAdmin.Types.Product where
 
 import           Network.Google.BigtableAdmin.Types.Sum
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Union)
 
 -- | Unconditionally routes all read\/write requests to a specific cluster.
 -- This option preserves read-your-writes consistency, but does not improve
