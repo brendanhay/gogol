@@ -4,6 +4,7 @@
 under heavy development and not intended for public consumption, caveat emptor!
 
 [![Build Status](https://img.shields.io/travis/brendanhay/gogol/develop.svg?maxAge=2592000)](https://travis-ci.org/brendanhay/gogol)
+[![Build Status](https://github.com/brendanhay/gogol/actions/workflows/cabal.yml/badge.svg)](https://github.com/brendanhay/gogol/actions/workflows/cabal.yml)
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
 [![Gitter Chat](https://img.shields.io/gitter/room/brendanhay/gogol.js.svg?maxAge=2592000)](https://gitter.im/brendanhay/gogol)
 
