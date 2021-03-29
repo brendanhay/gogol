@@ -113,7 +113,7 @@ dot x = x == '.'
 
 renameReserved :: Text -> Text
 renameReserved x
-    | x `Set.member` xs = x <> "'"
+    | x `Set.member` xs = renameReserved(x <> "'")
     | otherwise         = x
   where
     xs = Set.fromList $
@@ -149,6 +149,9 @@ renameReserved x
         , "Right"
         , "Request"
         , "Enum"
+        , "Secure"
+        , "DateTime"
+        , "DateTime'"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text
