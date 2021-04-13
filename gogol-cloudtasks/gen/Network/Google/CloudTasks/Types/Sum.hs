@@ -16,7 +16,7 @@
 --
 module Network.Google.CloudTasks.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Output only. The view specifies which subset of the Task has been
 -- returned.
@@ -164,13 +164,11 @@ instance ToJSON CreateTaskRequestResponseView where
 
 -- | The HTTP method to use for the request. The default is POST. The app\'s
 -- request handler for the task\'s target URL must be able to handle HTTP
--- requests with this http_method, otherwise the task attempt will fail
--- with error code 405 (Method Not Allowed). See [Writing a push task
--- request
+-- requests with this http_method, otherwise the task attempt fails with
+-- error code 405 (Method Not Allowed). See [Writing a push task request
 -- handler](https:\/\/cloud.google.com\/appengine\/docs\/java\/taskqueue\/push\/creating-handlers#writing_a_push_task_request_handler)
--- and the documentation for the request handlers in the language your app
--- is written in e.g. [Python Request
--- Handler](https:\/\/cloud.google.com\/appengine\/docs\/python\/tools\/webapp\/requesthandlerclass).
+-- and the App Engine documentation for your runtime on [How Requests are
+-- Handled](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python3\/how-requests-are-handled).
 data AppEngineHTTPRequestHTTPMethod
     = HTTPMethodUnspecified
       -- ^ @HTTP_METHOD_UNSPECIFIED@
@@ -303,4 +301,63 @@ instance FromJSON RunTaskRequestResponseView where
     parseJSON = parseJSONText "RunTaskRequestResponseView"
 
 instance ToJSON RunTaskRequestResponseView where
+    toJSON = toJSONText
+
+-- | The HTTP method to use for the request. The default is POST.
+data HTTPRequestHTTPMethod
+    = HTTPRHTTPMHTTPMethodUnspecified
+      -- ^ @HTTP_METHOD_UNSPECIFIED@
+      -- HTTP method unspecified
+    | HTTPRHTTPMPost'
+      -- ^ @POST@
+      -- HTTP POST
+    | HTTPRHTTPMGet'
+      -- ^ @GET@
+      -- HTTP GET
+    | HTTPRHTTPMHead'
+      -- ^ @HEAD@
+      -- HTTP HEAD
+    | HTTPRHTTPMPut'
+      -- ^ @PUT@
+      -- HTTP PUT
+    | HTTPRHTTPMDelete'
+      -- ^ @DELETE@
+      -- HTTP DELETE
+    | HTTPRHTTPMPatch'
+      -- ^ @PATCH@
+      -- HTTP PATCH
+    | HTTPRHTTPMOptions
+      -- ^ @OPTIONS@
+      -- HTTP OPTIONS
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPRequestHTTPMethod
+
+instance FromHttpApiData HTTPRequestHTTPMethod where
+    parseQueryParam = \case
+        "HTTP_METHOD_UNSPECIFIED" -> Right HTTPRHTTPMHTTPMethodUnspecified
+        "POST" -> Right HTTPRHTTPMPost'
+        "GET" -> Right HTTPRHTTPMGet'
+        "HEAD" -> Right HTTPRHTTPMHead'
+        "PUT" -> Right HTTPRHTTPMPut'
+        "DELETE" -> Right HTTPRHTTPMDelete'
+        "PATCH" -> Right HTTPRHTTPMPatch'
+        "OPTIONS" -> Right HTTPRHTTPMOptions
+        x -> Left ("Unable to parse HTTPRequestHTTPMethod from: " <> x)
+
+instance ToHttpApiData HTTPRequestHTTPMethod where
+    toQueryParam = \case
+        HTTPRHTTPMHTTPMethodUnspecified -> "HTTP_METHOD_UNSPECIFIED"
+        HTTPRHTTPMPost' -> "POST"
+        HTTPRHTTPMGet' -> "GET"
+        HTTPRHTTPMHead' -> "HEAD"
+        HTTPRHTTPMPut' -> "PUT"
+        HTTPRHTTPMDelete' -> "DELETE"
+        HTTPRHTTPMPatch' -> "PATCH"
+        HTTPRHTTPMOptions -> "OPTIONS"
+
+instance FromJSON HTTPRequestHTTPMethod where
+    parseJSON = parseJSONText "HTTPRequestHTTPMethod"
+
+instance ToJSON HTTPRequestHTTPMethod where
     toJSON = toJSONText

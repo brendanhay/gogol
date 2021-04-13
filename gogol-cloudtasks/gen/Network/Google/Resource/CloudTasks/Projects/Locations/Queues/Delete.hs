@@ -47,8 +47,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Delete
     , plqdCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.delete@ method which the
 -- 'ProjectsLocationsQueuesDelete' request conforms to.
@@ -73,12 +73,12 @@ type ProjectsLocationsQueuesDeleteResource =
 -- /See:/ 'projectsLocationsQueuesDelete' smart constructor.
 data ProjectsLocationsQueuesDelete =
   ProjectsLocationsQueuesDelete'
-    { _plqdXgafv          :: !(Maybe Xgafv)
+    { _plqdXgafv :: !(Maybe Xgafv)
     , _plqdUploadProtocol :: !(Maybe Text)
-    , _plqdAccessToken    :: !(Maybe Text)
-    , _plqdUploadType     :: !(Maybe Text)
-    , _plqdName           :: !Text
-    , _plqdCallback       :: !(Maybe Text)
+    , _plqdAccessToken :: !(Maybe Text)
+    , _plqdUploadType :: !(Maybe Text)
+    , _plqdName :: !Text
+    , _plqdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

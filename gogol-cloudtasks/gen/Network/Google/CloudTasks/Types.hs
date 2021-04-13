@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -29,6 +29,12 @@ module Network.Google.CloudTasks.Types
     , rlMaxDispatchesPerSecond
     , rlMaxBurstSize
 
+    -- * OAuthToken
+    , OAuthToken
+    , oAuthToken
+    , oatScope
+    , oatServiceAccountEmail
+
     -- * Status
     , Status
     , status
@@ -53,6 +59,13 @@ module Network.Google.CloudTasks.Types
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
+
+    -- * OidcToken
+    , OidcToken
+    , oidcToken
+    , otAudience
+    , otServiceAccountEmail
 
     -- * RetryConfig
     , RetryConfig
@@ -67,6 +80,11 @@ module Network.Google.CloudTasks.Types
     , RunTaskRequest
     , runTaskRequest
     , rtrResponseView
+
+    -- * HTTPRequestHeaders
+    , HTTPRequestHeaders
+    , hTTPRequestHeaders
+    , httprhAddtional
 
     -- * Location
     , Location
@@ -104,6 +122,11 @@ module Network.Google.CloudTasks.Types
     -- * QueueState
     , QueueState (..)
 
+    -- * GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
+
     -- * CreateTaskRequestResponseView
     , CreateTaskRequestResponseView (..)
 
@@ -119,11 +142,27 @@ module Network.Google.CloudTasks.Types
     , qAppEngineRoutingOverride
     , qState
     , qRetryConfig
+    , qStackdriverLoggingConfig
     , qName
     , qPurgeTime
 
     -- * AppEngineHTTPRequestHTTPMethod
     , AppEngineHTTPRequestHTTPMethod (..)
+
+    -- * HTTPRequest
+    , HTTPRequest
+    , hTTPRequest
+    , httprOAuthToken
+    , httprHTTPMethod
+    , httprOidcToken
+    , httprBody
+    , httprURL
+    , httprHeaders
+
+    -- * StackdriverLoggingConfig
+    , StackdriverLoggingConfig
+    , stackdriverLoggingConfig
+    , slcSamplingRatio
 
     -- * ListTasksResponse
     , ListTasksResponse
@@ -166,6 +205,7 @@ module Network.Google.CloudTasks.Types
     , tLastAttempt
     , tDispatchDeadline
     , tScheduleTime
+    , tHTTPRequest
     , tName
     , tFirstAttempt
     , tView
@@ -207,6 +247,9 @@ module Network.Google.CloudTasks.Types
     , aerHost
     , aerInstance
 
+    -- * HTTPRequestHTTPMethod
+    , HTTPRequestHTTPMethod (..)
+
     -- * AppEngineHTTPRequest
     , AppEngineHTTPRequest
     , appEngineHTTPRequest
@@ -228,9 +271,9 @@ module Network.Google.CloudTasks.Types
     , bCondition
     ) where
 
-import           Network.Google.CloudTasks.Types.Product
-import           Network.Google.CloudTasks.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types.Product
+import Network.Google.CloudTasks.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Cloud Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 cloudTasksService :: ServiceConfig

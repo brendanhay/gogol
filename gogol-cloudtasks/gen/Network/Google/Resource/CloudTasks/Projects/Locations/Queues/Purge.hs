@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Purge
     , pCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.purge@ method which the
 -- 'ProjectsLocationsQueuesPurge' request conforms to.
@@ -70,13 +70,13 @@ type ProjectsLocationsQueuesPurgeResource =
 -- /See:/ 'projectsLocationsQueuesPurge' smart constructor.
 data ProjectsLocationsQueuesPurge =
   ProjectsLocationsQueuesPurge'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !PurgeQueueRequest
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !PurgeQueueRequest
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
